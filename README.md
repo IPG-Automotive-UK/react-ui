@@ -2,7 +2,7 @@
 
 > Generic components for use with IPG web apps
 
-[![NPM](https://img.shields.io/npm/v/@ipguk/components.svg)](https://www.npmjs.com/package/@ipguk/components) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/@ipguk/components.svg)](https://www.npmjs.com/package/@ipguk/components) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) [![Build Status](https://github.com/IPG-Automotive-UK/components/workflows/Tests/badge.svg)](https://github.com/IPG-Automotive-UK/components/actions)
 
 ## Install
 
