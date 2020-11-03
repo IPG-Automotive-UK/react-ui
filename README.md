@@ -15,10 +15,10 @@ npm install --save @ipguk/components
 ```jsx
 import React, { Component } from 'react'
 
-import { Copyright } from '@ipguk/components'
+import { Component } from '@ipguk/components'
 
 function Example() {
-  return <Coypright />
+  return <Component>Here we go</Component>
 }
 ```
 
