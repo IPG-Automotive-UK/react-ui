@@ -30,6 +30,13 @@ const theme = createMuiTheme({
           backgroundColor: "rgba(0, 95, 168, 0.04)"
         }
       }
+    },
+    MuiTableRow: {
+      root: {
+        "&$selected": {
+          backgroundColor: "rgba(0, 95, 168, 0.08)"
+        }
+      }
     }
   }
 });
