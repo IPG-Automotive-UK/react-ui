@@ -15,16 +15,17 @@ npm install --save @ipguk/components
 ```jsx
 import React, { Component } from 'react'
 
-import MyComponent from '@ipguk/components'
-import '@ipguk/components/dist/index.css'
+import { Copyright } from '@ipguk/components'
 
-class Example extends Component {
-  render() {
-    return <MyComponent />
-  }
+function Example() {
+  return <Coypright />
 }
 ```
 
+## Documentation
+
+See [storybook](https://ipguk-components.netlify.app/) for the latest implementation details and documentation.
+
 ## License
 
-MIT © [mattcorner](https://github.com/mattcorner)
+MIT © [IPG Automotive](https://ipg-automotive.com/)
