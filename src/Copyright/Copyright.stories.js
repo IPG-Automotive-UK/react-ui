@@ -7,7 +7,9 @@ export default {
   component: Copyright
 };
 
-const Template = args => <Copyright {...args} />;
+const Template = () => {
+  return <Copyright />;
+};
 
 export const Primary = Template.bind({});
 Primary.args = {};
