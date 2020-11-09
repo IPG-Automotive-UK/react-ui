@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  InputLabel,
-  MenuItem,
-  FormControl,
-  FormHelperText,
-  Select as MuiSelect
-} from "@material-ui/core";
+import { TextField, MenuItem } from "@material-ui/core";
 import PropTypes from "prop-types";
 
 /**
@@ -25,29 +19,27 @@ export default function Select({
 }) {
   // return components
   return (
-    <FormControl
+    <TextField
+      select
       required={required}
       variant={variant}
       error={required && !value}
       margin={margin}
       fullWidth
+      label={label}
+      value={value}
+      onChange={onChange}
+      labelWidth={labelWidth}
+      disabled={disabled}
+      id={label}
+      helperText={helperText}
     >
-      {label && <InputLabel id="label">{label}</InputLabel>}
-      <MuiSelect
-        id={label}
-        labelWidth={labelWidth}
-        value={value}
-        onChange={onChange}
-        disabled={disabled}
-      >
-        {options.map(option => (
-          <MenuItem value={option} key={option}>
-            {option}
-          </MenuItem>
-        ))}
-      </MuiSelect>
-      {helperText && <FormHelperText>{helperText}</FormHelperText>}
-    </FormControl>
+      {options.map(option => (
+        <MenuItem value={option} key={option}>
+          {option}
+        </MenuItem>
+      ))}
+    </TextField>
   );
 }
 

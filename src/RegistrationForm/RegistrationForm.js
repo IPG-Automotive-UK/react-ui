@@ -24,7 +24,7 @@ export default function RegistrationForm({
   onRegister
 }) {
   // form state
-  const { register, errors, handleSubmit, control, watch } = useForm({
+  const { register, errors, handleSubmit, watch, control } = useForm({
     mode: "onTouched"
   });
 
@@ -34,6 +34,11 @@ export default function RegistrationForm({
 
   // create score ref so that we avoid multiple calculations
   const score = React.useRef();
+  React.useEffect(() => {
+    if (!password.current.length) {
+      score.current = null;
+    }
+  });
 
   // return components
   return (
@@ -41,6 +46,7 @@ export default function RegistrationForm({
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <TextField
+            id="firstName"
             autoComplete="fname"
             name="firstName"
             variant="outlined"
@@ -48,30 +54,35 @@ export default function RegistrationForm({
             fullWidth
             label="First Name"
             autoFocus
+            inputProps={{ "aria-label": "firstName" }}
             inputRef={register({ required: true })}
             error={Boolean(errors.firstName)}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
+            id="lastName"
             variant="outlined"
             required
             fullWidth
             label="Last Name"
             name="lastName"
             autoComplete="lname"
+            inputProps={{ "aria-label": "lastName" }}
             inputRef={register({ required: true })}
             error={Boolean(errors.lastName)}
           />
         </Grid>
         <Grid item xs={12}>
           <TextField
+            id="email"
             variant="outlined"
             required
             fullWidth
             label="Email Address"
             name="email"
             autoComplete="email"
+            inputProps={{ "aria-label": "email" }}
             inputRef={register({
               required: true,
               pattern: {
@@ -93,7 +104,7 @@ export default function RegistrationForm({
             <InputLabel>Team</InputLabel>
             <Controller
               as={
-                <Select labelWidth={50}>
+                <Select inputProps={{ "aria-label": "team" }} labelWidth={50}>
                   {teams.map(team => (
                     <MenuItem value={team} key={team}>
                       {team}
@@ -114,9 +125,11 @@ export default function RegistrationForm({
             required
             fullWidth
             name="password"
+            id="password"
             label="Password"
             type="password"
             autoComplete="current-password"
+            inputProps={{ "aria-label": "password" }}
             inputRef={register({
               required: true,
               validate: value => {
@@ -148,9 +161,11 @@ export default function RegistrationForm({
             required
             fullWidth
             name="password_repeat"
+            id="password_repeat"
             label="Confirm Password"
             type="password"
             autoComplete="confirm-password"
+            inputProps={{ "aria-label": "password_repeat" }}
             inputRef={register({
               required: true,
               validate: value =>
@@ -165,6 +180,7 @@ export default function RegistrationForm({
         <Button
           type="submit"
           fullWidth
+          id="submit"
           variant="contained"
           color="primary"
           disabled={loading}
