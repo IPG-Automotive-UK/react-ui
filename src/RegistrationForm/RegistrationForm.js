@@ -8,10 +8,12 @@ import {
   FormControl,
   Select,
   MenuItem,
-  InputLabel
+  InputLabel,
+  FormHelperText
 } from "@material-ui/core";
 import { useForm, Controller } from "react-hook-form";
 import PropTypes from "prop-types";
+import zxcvbn from "zxcvbn";
 
 /**
  * Registration form
@@ -23,12 +25,15 @@ export default function RegistrationForm({
 }) {
   // form state
   const { register, errors, handleSubmit, control, watch } = useForm({
-    mode: "onBlur"
+    mode: "onTouched"
   });
 
   // watch password so we can validate its duplicate
   const password = React.useRef({});
   password.current = watch("password", "");
+
+  // create score ref so that we avoid multiple calculations
+  const score = React.useRef();
 
   // return components
   return (
@@ -112,9 +117,30 @@ export default function RegistrationForm({
             label="Password"
             type="password"
             autoComplete="current-password"
-            inputRef={register({ required: true })}
+            inputRef={register({
+              required: true,
+              validate: value => {
+                const result = zxcvbn(value);
+                score.current = result.score;
+                return (
+                  result.score > 2 ||
+                  result.feedback.warning ||
+                  result.feedback.suggestions[0]
+                );
+              }
+            })}
             error={Boolean(errors.password)}
+            helperText={errors?.password?.message}
           />
+          {score.current != null && (
+            <FormHelperText
+              style={{ marginLeft: 14, marginRight: 14 }}
+              error={score.current <= 2}
+            >
+              Password strength: {score.current}/4
+              {score.current <= 2 && ". Minimum required 3+."}
+            </FormHelperText>
+          )}
         </Grid>
         <Grid item xs={12}>
           <TextField

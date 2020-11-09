@@ -64,6 +64,7 @@
     "dist"
   ],
   "dependencies": {
-    "react-hook-form": "^6.10.1"
+    "react-hook-form": "^6.10.1",
+    "zxcvbn": "^4.4.2"
   }
 }
