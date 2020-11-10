@@ -57,6 +57,7 @@ export default function RegistrationForm({
             inputProps={{ "aria-label": "firstName" }}
             inputRef={register({ required: true })}
             error={Boolean(errors.firstName)}
+            disabled={loading}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -71,6 +72,7 @@ export default function RegistrationForm({
             inputProps={{ "aria-label": "lastName" }}
             inputRef={register({ required: true })}
             error={Boolean(errors.lastName)}
+            disabled={loading}
           />
         </Grid>
         <Grid item xs={12}>
@@ -92,6 +94,7 @@ export default function RegistrationForm({
             })}
             error={Boolean(errors.email)}
             helperText={errors?.email?.message}
+            disabled={loading}
           />
         </Grid>
         <Grid item xs={12}>
@@ -100,6 +103,7 @@ export default function RegistrationForm({
             variant="outlined"
             error={Boolean(errors.team)}
             fullWidth
+            disabled={loading}
           >
             <InputLabel>Team</InputLabel>
             <Controller
@@ -144,6 +148,7 @@ export default function RegistrationForm({
             })}
             error={Boolean(errors.password)}
             helperText={errors?.password?.message}
+            disabled={loading}
           />
           {score.current != null && (
             <FormHelperText
@@ -173,6 +178,7 @@ export default function RegistrationForm({
             })}
             error={Boolean(errors.passwordRepeat)}
             helperText={errors?.passwordRepeat?.message}
+            disabled={loading}
           />
         </Grid>
       </Grid>

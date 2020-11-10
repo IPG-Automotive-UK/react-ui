@@ -39,6 +39,7 @@ export default function LoginForm({ loading = false, onLogin = () => {} }) {
             })}
             error={Boolean(errors.email)}
             helperText={errors.email && errors.email.message}
+            disabled={loading}
           />
         </Grid>
         <Grid item xs={12}>
@@ -53,6 +54,7 @@ export default function LoginForm({ loading = false, onLogin = () => {} }) {
             inputProps={{ "aria-label": "password" }}
             inputRef={register({ required: true })}
             error={Boolean(errors.password)}
+            disabled={loading}
           />
         </Grid>
       </Grid>
