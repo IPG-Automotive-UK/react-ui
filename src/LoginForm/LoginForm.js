@@ -84,7 +84,7 @@ LoginForm.propTypes = {
    * function(data, event) => void
    * ```
    *
-   * _data_: Object containing form data
+   * _data_: Object containing _email, password_
    *
    * _event_: Synthetic event
    */

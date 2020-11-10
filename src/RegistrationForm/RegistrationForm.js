@@ -207,7 +207,7 @@ RegistrationForm.propTypes = {
    * function(data, event) => void
    * ```
    *
-   * _data_: Object containing form data
+   * _data_: Object containing _firstName, lastName, email, team, password, passwordRepeat_
    *
    * _event_: Synthetic event
    */
