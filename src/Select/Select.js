@@ -59,7 +59,13 @@ Select.propTypes = {
    */
   margin: PropTypes.oneOf(["none", "dense", "normal"]),
   /**
-   * Callback function fired when a menu item is selected.
+   * Callback fired when the value is changed.
+   *
+   * **Signature**
+   * ```
+   * function(event: object) => void
+   * ```
+   * _event_: The event source of the callback. You can pull out the new value by accessing `event.target.value` (string).
    */
   onChange: PropTypes.func,
   /**
