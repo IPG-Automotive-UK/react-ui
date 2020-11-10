@@ -15,9 +15,9 @@ const Template = args => {
 
 export const Default = Template.bind({});
 Default.args = {
-  options: ["Option A", "Option B", "Option C"],
-  label: "Select an option",
   helperText: "What is your selection going to be?",
+  label: "Select an option",
+  options: ["Option A", "Option B", "Option C"],
   required: true
 };
 
@@ -29,10 +29,10 @@ const TeamSelector = args => {
 
 export const Teams = TeamSelector.bind({});
 Teams.args = {
-  options: ["Team A", "Team B", "Team C"],
-  value: "Team B",
   label: "Select team",
+  labelWidth: 100,
+  options: ["Team A", "Team B", "Team C"],
   required: true,
-  variant: "outlined",
-  labelWidth: 100
+  value: "Team B",
+  variant: "outlined"
 };
