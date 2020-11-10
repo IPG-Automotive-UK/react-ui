@@ -11,5 +11,5 @@ const Template = () => {
   return <Copyright />;
 };
 
-export const Primary = Template.bind({});
-Primary.args = {};
+export const Default = Template.bind({});
+Default.args = {};

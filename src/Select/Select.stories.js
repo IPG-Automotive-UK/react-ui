@@ -13,8 +13,8 @@ const Template = args => {
   return <Select {...args} onChange={onChange} value={value} />;
 };
 
-export const Normal = Template.bind({});
-Normal.args = {
+export const Default = Template.bind({});
+Default.args = {
   options: ["Option A", "Option B", "Option C"],
   label: "Select an option",
   helperText: "What is your selection going to be?",
