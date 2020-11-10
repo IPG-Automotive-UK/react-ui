@@ -53,7 +53,7 @@ export default function RegistrationForm({
             required
             fullWidth
             label="First Name"
-            autoFocus
+            autoFocus={!loading}
             inputProps={{ "aria-label": "firstName" }}
             inputRef={register({ required: true })}
             error={Boolean(errors.firstName)}
