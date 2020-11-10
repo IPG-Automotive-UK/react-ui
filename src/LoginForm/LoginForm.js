@@ -29,6 +29,7 @@ export default function LoginForm({ loading = false, onLogin = () => {} }) {
             name="email"
             autoComplete="email"
             autoFocus={!loading}
+            inputProps={{ "aria-label": "email" }}
             inputRef={register({
               required: true,
               pattern: {
@@ -49,6 +50,7 @@ export default function LoginForm({ loading = false, onLogin = () => {} }) {
             label="Password"
             type="password"
             autoComplete="current-password"
+            inputProps={{ "aria-label": "password" }}
             inputRef={register({ required: true })}
             error={Boolean(errors.password)}
           />

@@ -51,7 +51,7 @@ function setup(inputs) {
       email: screen.getByLabelText("email"),
       team: screen.getByLabelText("team"),
       password: screen.getByLabelText("password"),
-      passwordRepeat: screen.getByLabelText("password_repeat")
+      passwordRepeat: screen.getByLabelText("passwordRepeat")
     },
     submit: screen.getByRole("button", {
       name: /register/i
@@ -63,8 +63,8 @@ function setup(inputs) {
  * Tests
  */
 describe("RegistrationForm", () => {
-  it("returns form information to parent when successfully validated", async () => {
-    const onRegister = jest.fn();
+  it("returns form information to callback when successfully validated", async () => {
+    const onRegister = jest.fn(data => data);
     const elements = setup({ onRegister });
     await act(async () => {
       await userEvent.type(elements.inputs.firstName, "Joe");
@@ -78,7 +78,25 @@ describe("RegistrationForm", () => {
       );
       fireEvent.submit(elements.submit);
     });
-    expect(onRegister).toHaveBeenCalled();
+    expect(onRegister).toHaveReturnedWith({
+      firstName: "Joe",
+      lastName: "Bloggs",
+      email: "joe.bloggs@domain.com",
+      team: teams[0],
+      password: "indigo shark wallplug",
+      passwordRepeat: "indigo shark wallplug"
+    });
+  });
+  it("doesnt call callback on validation errors", async () => {
+    const onRegister = jest.fn();
+    const elements = setup({ onRegister });
+    await act(async () => {
+      await userEvent.type(elements.inputs.email, "joe.bloggs");
+      // incorrect email format
+      // missing first, lastname, team, password + password repeat
+      fireEvent.submit(elements.submit);
+    });
+    expect(onRegister).not.toHaveBeenCalled();
   });
   describe("Password restrictions", () => {
     it("displays password complexity score", () => {

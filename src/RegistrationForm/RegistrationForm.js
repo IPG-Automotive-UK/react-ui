@@ -160,19 +160,19 @@ export default function RegistrationForm({
             variant="outlined"
             required
             fullWidth
-            name="password_repeat"
-            id="password_repeat"
+            name="passwordRepeat"
+            id="passwordRepeat"
             label="Confirm Password"
             type="password"
             autoComplete="confirm-password"
-            inputProps={{ "aria-label": "password_repeat" }}
+            inputProps={{ "aria-label": "passwordRepeat" }}
             inputRef={register({
               required: true,
               validate: value =>
                 value === password.current || "Password does not match"
             })}
-            error={Boolean(errors.password_repeat)}
-            helperText={errors?.password_repeat?.message}
+            error={Boolean(errors.passwordRepeat)}
+            helperText={errors?.passwordRepeat?.message}
           />
         </Grid>
       </Grid>
