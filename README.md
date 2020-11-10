@@ -17,7 +17,7 @@ For a list of supported components see the [documentation](https://ipguk-react-u
 ```jsx
 import React from 'react'
 
-import { Component } from '@ipguk/components'
+import { Component } from '@ipguk/react-ui'
 
 function Example() {
   return <Component>Here we go</Component>
