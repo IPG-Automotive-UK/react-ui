@@ -9,7 +9,6 @@ export default function Select({
   disabled = false,
   helperText,
   label,
-  labelWidth,
   margin = "normal",
   onChange = () => {},
   options = [],
@@ -29,7 +28,6 @@ export default function Select({
       label={label}
       value={value}
       onChange={onChange}
-      labelWidth={labelWidth}
       disabled={disabled}
       id={label}
       helperText={helperText}
@@ -45,10 +43,6 @@ export default function Select({
 
 Select.propTypes = {
   /**
-   *
-   */
-  disableMargin: PropTypes.bool,
-  /**
    * If true, the label, input and helper text should be displayed in a disabled state.
    */
   disabled: PropTypes.bool,
@@ -57,19 +51,9 @@ Select.propTypes = {
    */
   helperText: PropTypes.string,
   /**
-   * Array of options to display.
-   */
-  options: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-  ),
-  /**
    * Label to display above input.
    */
   label: PropTypes.string,
-  /**
-   * The width of the label.
-   */
-  labelWidth: PropTypes.number,
   /**
    * If dense or normal, will adjust vertical spacing of this and contained components.
    */
@@ -78,6 +62,12 @@ Select.propTypes = {
    * Callback function fired when a menu item is selected.
    */
   onChange: PropTypes.func,
+  /**
+   * Array of options to display.
+   */
+  options: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  ),
   /**
    * If true, the label will indicate that the input is required.
    */
