@@ -1,19 +1,21 @@
-# @ipguk/components
+# @ipguk/react-ui
 
-> Generic components for use with IPG web apps
+> React UI component library for IPG web applications
 
 [![NPM](https://img.shields.io/npm/v/@ipguk/components.svg)](https://www.npmjs.com/package/@ipguk/components) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) [![Build Status](https://github.com/IPG-Automotive-UK/components/workflows/Tests/badge.svg)](https://github.com/IPG-Automotive-UK/components/actions)
 
 ## Install
 
 ```bash
-npm install --save @ipguk/components
+npm install --save @ipguk/react-ui
 ```
 
 ## Usage
 
+For a list of supported components see the [documentation](#documentation). The basic syntax for usage is shown below for a generic "Component".
+
 ```jsx
-import React, { Component } from 'react'
+import React from 'react'
 
 import { Component } from '@ipguk/components'
 
