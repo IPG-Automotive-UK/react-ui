@@ -14,7 +14,7 @@ export default function Select({
   options = [],
   required = false,
   value,
-  variant = "standard"
+  variant = "outlined"
 }) {
   // return components
   return (
