@@ -18,7 +18,7 @@
     "test": "run-s test:unit test:lint test:build",
     "test:build": "run-s build",
     "test:lint": "eslint ./src",
-    "test:unit": "cross-env CI=1 react-scripts test --env=jsdom --reporters=jest-html-reporter",
+    "test:unit": "cross-env CI=1 react-scripts test --env=jsdom --reporters=jest-html-reporter --collectCoverage=true",
     "test:watch": "react-scripts test --env=jsdom",
     "storybook": "start-storybook -p 6006 --no-dll",
     "build-storybook": "build-storybook --no-dll"
@@ -69,5 +69,11 @@
   "dependencies": {
     "react-hook-form": "^6.10.1",
     "zxcvbn": "^4.4.2"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!src/**/*.stories.{js,jsx}"
+    ]
   }
 }

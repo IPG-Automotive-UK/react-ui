@@ -29,5 +29,5 @@ jobs:
         CI: true
     - uses: actions/upload-artifact@v2
       with:
-        name: test-report
-        path: test-report.html
+        name: coverage-report ${{ matrix.node-version }}
+        path: coverage/lcov-report
