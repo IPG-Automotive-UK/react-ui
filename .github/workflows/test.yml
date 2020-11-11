@@ -27,3 +27,11 @@ jobs:
     - run: npm test
       env:
         CI: true
+    - uses: actions/upload-artifact@v2
+      with:
+        name: test-report ${{ matrix.node-version }}
+        path: test-report.html
+    - uses: actions/upload-artifact@v2
+      with:
+        name: coverage-report ${{ matrix.node-version }}
+        path: coverage/lcov-report
