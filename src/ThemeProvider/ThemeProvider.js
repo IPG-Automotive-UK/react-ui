@@ -28,7 +28,8 @@ const theme = createMuiTheme({
         },
         "&:hover": {
           backgroundColor: "rgba(0, 95, 168, 0.04)"
-        }
+        },
+        "border-color": "rgb(196, 196, 196)"
       }
     },
     MuiTableRow: {
