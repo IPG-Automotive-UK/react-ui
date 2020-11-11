@@ -27,3 +27,7 @@ jobs:
     - run: npm test
       env:
         CI: true
+    - uses: actions/upload-artifact@v2
+      with:
+        name: test-report
+        path: test-report.html
