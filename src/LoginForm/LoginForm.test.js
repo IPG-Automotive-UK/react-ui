@@ -1,5 +1,5 @@
 import React from "react";
-import LoginForm from "./LoginForm";
+import LoginForm from "./";
 import { render, fireEvent, screen, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 

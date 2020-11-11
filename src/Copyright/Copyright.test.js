@@ -1,5 +1,5 @@
 import React from "react";
-import Copyright from "./Copyright";
+import Copyright from "./";
 import { render, screen } from "@testing-library/react";
 
 describe("Copyright", () => {
