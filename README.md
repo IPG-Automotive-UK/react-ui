@@ -28,6 +28,30 @@ function Example() {
 
 See [storybook](https://ipguk-react-ui.netlify.app/) for the latest implementation details and documentation.
 
+## Release
+
+To release a new version, follow these steps.
+
+1. Check that all tests pass
+
+   ```bash
+   npm test
+   ```
+2. Up version the package using
+
+   ```bash
+   npm version major|minor|patch|prerelease
+
+3. Run the publish command.
+   
+   ```bash
+   npm publish access=public
+   ```
+   Note: If publishing a prerelease ensure that it is tagged as next rather than latest 
+   ```
+   npm publish access=public tag=next
+   ```
+
 ## License
 
 MIT © [IPG Automotive](https://ipg-automotive.com/)
