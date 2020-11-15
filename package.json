@@ -61,7 +61,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-is": "^17.0.1",
-    "react-scripts": "^3.4.1"
+    "react-scripts": "^4.0.0"
   },
   "files": [
     "dist"
