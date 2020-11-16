@@ -13,6 +13,7 @@ export default function Select({
   onChange = () => {},
   options = [],
   required = false,
+  size = "medium",
   value,
   variant = "outlined"
 }) {
@@ -31,6 +32,7 @@ export default function Select({
       disabled={disabled}
       id={label}
       helperText={helperText}
+      size={size}
     >
       {options.map(option => (
         <MenuItem value={option} key={option}>
@@ -78,6 +80,10 @@ Select.propTypes = {
    * If true, the label will indicate that the input is required.
    */
   required: PropTypes.bool,
+  /**
+   * The size of the select field.
+   */
+  size: PropTypes.oneOf(["medium", "small"]),
   /**
    * The input value
    */
