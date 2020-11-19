@@ -12,6 +12,7 @@ const theme = createMuiTheme({
     }
   },
   overrides: {
+    MuiIconButton: { root: { color: "#9e9e9e" } },
     MuiTooltip: {
       tooltip: {
         fontSize: "14px",
@@ -23,11 +24,11 @@ const theme = createMuiTheme({
         "&$selected": {
           backgroundColor: "rgba(0, 95, 168, 0.08)",
           "&:hover": {
-            backgroundColor: "rgba(0, 95, 168, 0.06)"
+            backgroundColor: "rgba(0, 95, 168, 0.15)"
           }
         },
         "&:hover": {
-          backgroundColor: "rgba(0, 95, 168, 0.04)"
+          backgroundColor: "rgba(0, 95, 168, 0.15)"
         },
         "border-color": "rgb(196, 196, 196)"
       }
