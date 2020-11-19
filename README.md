@@ -45,11 +45,11 @@ To release a new version, follow these steps.
 3. Run the publish command.
    
    ```bash
-   npm publish access=public
+   npm publish --access=public
    ```
    Note: If publishing a prerelease ensure that it is tagged as next rather than latest 
    ```
-   npm publish access=public tag=next
+   npm publish --access=public --tag=next
    ```
 
 ## License
