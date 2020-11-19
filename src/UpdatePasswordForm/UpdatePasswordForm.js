@@ -14,7 +14,7 @@ import zxcvbn from "zxcvbn";
 /**
  * Password reset form
  */
-export default function PasswordResetForm({ loading, onReset }) {
+export default function UpdatePasswordForm({ loading, onReset }) {
   // form state
   const { register, errors, handleSubmit, watch } = useForm({
     mode: "onTouched"
@@ -112,7 +112,7 @@ export default function PasswordResetForm({ loading, onReset }) {
 }
 
 // prop types
-PasswordResetForm.propTypes = {
+UpdatePasswordForm.propTypes = {
   /**
    * Loading state of the login form. Disables submit button and shows loading indicator.
    */

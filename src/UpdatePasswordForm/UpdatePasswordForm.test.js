@@ -1,14 +1,13 @@
 import React from "react";
-import PasswordResetForm from "./";
+import UpdatePasswordForm from ".";
 import { render, fireEvent, screen, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { selectMaterialUiSelectOption } from "../testUtils";
 
 /**
  * Test setup function that renders component and returns elements for testing
  */
 function setup(inputs) {
-  render(<PasswordResetForm onReset={() => {}} {...inputs} />);
+  render(<UpdatePasswordForm onReset={() => {}} {...inputs} />);
   return {
     inputs: {
       password: screen.getByLabelText("password"),
@@ -23,7 +22,7 @@ function setup(inputs) {
 /**
  * Tests
  */
-describe("PasswordResetForm", () => {
+describe("UpdatePasswordForm", () => {
   it("returns form information to callback when successfully validated", async () => {
     const onReset = jest.fn(data => data);
     const elements = setup({ onReset });
