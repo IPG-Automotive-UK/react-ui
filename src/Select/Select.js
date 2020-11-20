@@ -1,6 +1,6 @@
-import React from "react";
-import { TextField, MenuItem } from "@material-ui/core";
+import { MenuItem, TextField } from "@material-ui/core";
 import PropTypes from "prop-types";
+import React from "react";
 
 /**
  * Select components are used for collecting user provided information from a list of options.

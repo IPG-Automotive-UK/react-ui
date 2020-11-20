@@ -1,18 +1,18 @@
-import React from "react";
 import {
-  Grid,
-  TextField,
   Box,
   Button,
   CircularProgress,
   FormControl,
-  Select,
-  MenuItem,
+  FormHelperText,
+  Grid,
   InputLabel,
-  FormHelperText
+  MenuItem,
+  Select,
+  TextField
 } from "@material-ui/core";
-import { useForm, Controller } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import PropTypes from "prop-types";
+import React from "react";
 import zxcvbn from "zxcvbn";
 
 /**

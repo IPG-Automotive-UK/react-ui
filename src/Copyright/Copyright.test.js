@@ -1,6 +1,6 @@
-import React from "react";
-import Copyright from "./";
 import { render, screen } from "@testing-library/react";
+import Copyright from "./";
+import React from "react";
 
 describe("Copyright", () => {
   it("display current year", () => {
