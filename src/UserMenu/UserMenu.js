@@ -20,24 +20,24 @@ import PropTypes from "prop-types";
 import React from "react";
 
 const useStyles = makeStyles(theme => ({
-  noFocus: {
-    "&:focus": {
-      outline: "none"
-    }
+  button: {
+    height: 34,
+    width: 34
+  },
+  divider: {
+    marginBottom: theme.spacing(1),
+    marginTop: theme.spacing(1)
   },
   loggedInAs: {
     padding: theme.spacing(1, 2)
   },
-  divider: {
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1)
-  },
   menu: {
     marginTop: theme.spacing(1)
   },
-  button: {
-    height: 34,
-    width: 34
+  noFocus: {
+    "&:focus": {
+      outline: "none"
+    }
   }
 }));
 
