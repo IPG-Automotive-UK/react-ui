@@ -1,6 +1,6 @@
-import React from "react";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
+import React from "react";
 
 // custom material-ui theme
 const theme = createMuiTheme({

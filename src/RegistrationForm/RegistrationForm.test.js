@@ -1,8 +1,8 @@
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
 import RegistrationForm from "./";
-import { render, fireEvent, screen, act } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { selectMaterialUiSelectOption } from "../testUtils";
+import userEvent from "@testing-library/user-event";
 
 // Team options
 const teams = ["Team A", "Team B", "Team C"];

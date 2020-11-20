@@ -1,6 +1,6 @@
+import { act, fireEvent, render, screen } from "@testing-library/react";
+import ChangePasswordForm from "./";
 import React from "react";
-import ChangePasswordForm from ".";
-import { render, fireEvent, screen, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 /**

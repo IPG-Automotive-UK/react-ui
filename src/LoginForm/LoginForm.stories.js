@@ -1,7 +1,6 @@
+import LoginForm from "./LoginForm";
 import React from "react";
 import { action } from "@storybook/addon-actions";
-
-import LoginForm from "./LoginForm";
 
 export default {
   title: "Authentication/LoginForm",

@@ -1,5 +1,5 @@
+import { Link, Typography } from "@material-ui/core";
 import React from "react";
-import { Typography, Link } from "@material-ui/core";
 
 /**
  * Displays up to date copyright text for IPG Automotive

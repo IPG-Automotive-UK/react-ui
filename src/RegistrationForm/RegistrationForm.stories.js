@@ -1,7 +1,6 @@
 import React from "react";
-import { action } from "@storybook/addon-actions";
-
 import RegistrationForm from "./RegistrationForm";
+import { action } from "@storybook/addon-actions";
 
 export default {
   title: "Authentication/RegistrationForm",

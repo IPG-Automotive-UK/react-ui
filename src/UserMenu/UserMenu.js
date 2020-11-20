@@ -1,23 +1,23 @@
-import React from "react";
-import PropTypes from "prop-types";
 import {
   Avatar,
   Divider,
   IconButton,
-  makeStyles,
   ListItemIcon,
+  ListItemText,
   Menu,
   MenuItem,
   Typography,
-  withStyles,
-  ListItemText
+  makeStyles,
+  withStyles
 } from "@material-ui/core";
-import { VpnKey, ExitToApp } from "@material-ui/icons";
+import { ExitToApp, VpnKey } from "@material-ui/icons";
 import {
-  usePopupState,
+  bindMenu,
   bindTrigger,
-  bindMenu
+  usePopupState
 } from "material-ui-popup-state/hooks";
+import PropTypes from "prop-types";
+import React from "react";
 
 const useStyles = makeStyles(theme => ({
   noFocus: {

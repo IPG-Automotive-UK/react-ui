@@ -1,6 +1,6 @@
+import { render, screen } from "@testing-library/react";
 import React from "react";
 import UserMenu from "./";
-import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 // a set of default inputs so that tests can change what theyre testing

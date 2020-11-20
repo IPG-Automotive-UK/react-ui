@@ -1,6 +1,5 @@
-import React from "react";
-
 import Copyright from "./Copyright";
+import React from "react";
 
 export default {
   title: "General/Copyright",

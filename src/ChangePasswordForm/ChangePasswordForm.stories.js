@@ -1,7 +1,6 @@
+import ChangePasswordForm from "./ChangePasswordForm";
 import React from "react";
 import { action } from "@storybook/addon-actions";
-
-import ChangePasswordForm from "./ChangePasswordForm";
 
 export default {
   title: "Authentication/ChangePasswordForm",

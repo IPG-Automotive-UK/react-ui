@@ -1,8 +1,7 @@
-import React from "react";
-import { action } from "@storybook/addon-actions";
 import { AppBar, Toolbar } from "@material-ui/core";
-
+import React from "react";
 import UserMenu from "./UserMenu";
+import { action } from "@storybook/addon-actions";
 
 export default {
   title: "Layout/UserMenu",
