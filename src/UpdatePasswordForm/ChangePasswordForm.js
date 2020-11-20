@@ -12,9 +12,9 @@ import { useForm } from "react-hook-form";
 import zxcvbn from "zxcvbn";
 
 /**
- * Password reset form
+ * Password change form
  */
-export default function UpdatePasswordForm({ loading, onReset }) {
+export default function ChangePasswordForm({ loading, onReset }) {
   // form state
   const { register, errors, handleSubmit, watch } = useForm({
     mode: "onTouched"
@@ -33,7 +33,7 @@ export default function UpdatePasswordForm({ loading, onReset }) {
   });
 
   return (
-    <form onSubmit={handleSubmit(onReset)}>
+    <form onSubmit={handleSubmit(onReset)} noValidate>
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <TextField
@@ -112,7 +112,7 @@ export default function UpdatePasswordForm({ loading, onReset }) {
 }
 
 // prop types
-UpdatePasswordForm.propTypes = {
+ChangePasswordForm.propTypes = {
   /**
    * Loading state of the login form. Disables submit button and shows loading indicator.
    */

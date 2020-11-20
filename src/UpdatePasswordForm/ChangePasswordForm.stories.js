@@ -1,15 +1,15 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
 
-import UpdatePasswordForm from "./UpdatePasswordForm";
+import ChangePasswordForm from "./ChangePasswordForm";
 
 export default {
-  title: "Authentication/UpdatePasswordForm",
-  component: UpdatePasswordForm
+  title: "Authentication/ChangePasswordForm",
+  component: ChangePasswordForm
 };
 
 const Template = args => {
-  return <UpdatePasswordForm {...args} onReset={action("password reset")} />;
+  return <ChangePasswordForm {...args} onReset={action("password reset")} />;
 };
 
 export const Default = Template.bind({});
