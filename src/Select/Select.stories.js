@@ -3,8 +3,8 @@ import React from "react";
 import Select from "./Select";
 
 export default {
-  title: "General/Select",
-  component: Select
+  component: Select,
+  title: "General/Select"
 };
 
 const Template = args => {

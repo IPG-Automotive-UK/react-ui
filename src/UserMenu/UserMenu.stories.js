@@ -4,8 +4,8 @@ import UserMenu from "./UserMenu";
 import { action } from "@storybook/addon-actions";
 
 export default {
-  title: "Layout/UserMenu",
-  component: UserMenu
+  component: UserMenu,
+  title: "Layout/UserMenu"
 };
 
 const DefaultTemplate = args => (

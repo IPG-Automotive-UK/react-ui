@@ -2,8 +2,8 @@ import Copyright from "./Copyright";
 import React from "react";
 
 export default {
-  title: "General/Copyright",
-  component: Copyright
+  component: Copyright,
+  title: "General/Copyright"
 };
 
 const Template = () => {

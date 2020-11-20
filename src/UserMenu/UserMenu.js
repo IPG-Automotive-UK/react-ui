@@ -46,7 +46,7 @@ const useStyles = makeStyles(theme => ({
  */
 export default function UserMenu({ username, onChangePassword, onLogout }) {
   const classes = useStyles();
-  const popupState = usePopupState({ variant: "popover", popupId: "userMenu" });
+  const popupState = usePopupState({ popupId: "userMenu", variant: "popover" });
   const handleClick = cb => event => {
     popupState.close();
     cb(event);
@@ -59,8 +59,8 @@ export default function UserMenu({ username, onChangePassword, onLogout }) {
       <Menu
         {...bindMenu(popupState)}
         getContentAnchorEl={null}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-        transformOrigin={{ vertical: "top", horizontal: "right" }}
+        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+        transformOrigin={{ horizontal: "right", vertical: "top" }}
         className={classes.menu}
       >
         <Typography
@@ -122,11 +122,11 @@ UserMenu.propTypes = {
  */
 const UserAvatar = withStyles(theme => ({
   root: {
+    background: "none",
     border: `2px solid ${theme.palette.background.paper}`,
-    height: 34,
-    width: 34,
     fontSize: "13px",
-    background: "none"
+    height: 34,
+    width: 34
   }
 }))(({ username, ...rest }) => {
   const allInitials = (!username ? "?" : username)

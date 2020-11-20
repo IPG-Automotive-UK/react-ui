@@ -4,28 +4,22 @@ import React from "react";
 
 // custom material-ui theme
 const theme = createMuiTheme({
-  palette: {
-    primary: { main: "#005FA8" },
-    secondary: { main: "#003063" },
-    action: {
-      selected: "rgba(0, 95, 168, 0.08)"
-    }
-  },
   overrides: {
     MuiIconButton: { root: { color: "#9e9e9e" } },
-    MuiTooltip: {
-      tooltip: {
-        fontSize: "14px",
-        fontWeight: "normal"
+    MuiTableRow: {
+      root: {
+        "&$selected": {
+          backgroundColor: "rgba(0, 95, 168, 0.08)"
+        }
       }
     },
     MuiToggleButton: {
       root: {
         "&$selected": {
-          backgroundColor: "rgba(0, 95, 168, 0.08)",
           "&:hover": {
             backgroundColor: "rgba(0, 95, 168, 0.15)"
-          }
+          },
+          backgroundColor: "rgba(0, 95, 168, 0.08)"
         },
         "&:hover": {
           backgroundColor: "rgba(0, 95, 168, 0.15)"
@@ -33,13 +27,19 @@ const theme = createMuiTheme({
         "border-color": "rgb(196, 196, 196)"
       }
     },
-    MuiTableRow: {
-      root: {
-        "&$selected": {
-          backgroundColor: "rgba(0, 95, 168, 0.08)"
-        }
+    MuiTooltip: {
+      tooltip: {
+        fontSize: "14px",
+        fontWeight: "normal"
       }
     }
+  },
+  palette: {
+    action: {
+      selected: "rgba(0, 95, 168, 0.08)"
+    },
+    primary: { main: "#005FA8" },
+    secondary: { main: "#003063" }
   }
 });
 

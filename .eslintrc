@@ -29,6 +29,7 @@
     "react/jsx-fragments": 0,
     "react/no-unused-prop-types": 0,
     "import/export": 0,
-    "sort-imports": "warn"
+    "sort-imports": "warn",
+    "sort-keys": "warn"
   }
 }

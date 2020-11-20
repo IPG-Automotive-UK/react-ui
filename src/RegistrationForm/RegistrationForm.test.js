@@ -14,12 +14,12 @@ function setup(inputs) {
   render(<RegistrationForm teams={teams} onRegister={() => {}} {...inputs} />);
   return {
     inputs: {
+      email: screen.getByLabelText("email"),
       firstName: screen.getByLabelText("firstName"),
       lastName: screen.getByLabelText("lastName"),
-      email: screen.getByLabelText("email"),
-      team: screen.getByLabelText("team"),
       password: screen.getByLabelText("password"),
-      passwordRepeat: screen.getByLabelText("passwordRepeat")
+      passwordRepeat: screen.getByLabelText("passwordRepeat"),
+      team: screen.getByLabelText("team")
     },
     submit: screen.getByRole("button", {
       name: /register/i
@@ -47,12 +47,12 @@ describe("RegistrationForm", () => {
       fireEvent.submit(elements.submit);
     });
     expect(onRegister).toHaveReturnedWith({
+      email: "joe.bloggs@domain.com",
       firstName: "Joe",
       lastName: "Bloggs",
-      email: "joe.bloggs@domain.com",
-      team: teams[0],
       password: "indigo shark wallplug",
-      passwordRepeat: "indigo shark wallplug"
+      passwordRepeat: "indigo shark wallplug",
+      team: teams[0]
     });
   });
   it("doesnt call callback on validation errors", async () => {

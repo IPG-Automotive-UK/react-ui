@@ -3,8 +3,8 @@ import React from "react";
 import { action } from "@storybook/addon-actions";
 
 export default {
-  title: "Authentication/LoginForm",
-  component: LoginForm
+  component: LoginForm,
+  title: "Authentication/LoginForm"
 };
 
 const Template = args => {

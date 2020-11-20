@@ -3,8 +3,8 @@ import RegistrationForm from "./RegistrationForm";
 import { action } from "@storybook/addon-actions";
 
 export default {
-  title: "Authentication/RegistrationForm",
-  component: RegistrationForm
+  component: RegistrationForm,
+  title: "Authentication/RegistrationForm"
 };
 
 const teams = ["Team A", "Team B", "Team C"];
@@ -18,6 +18,6 @@ Default.args = { teams };
 
 export const Loading = Template.bind({});
 Loading.args = {
-  teams,
-  loading: true
+  loading: true,
+  teams
 };

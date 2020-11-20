@@ -86,11 +86,11 @@ export default function RegistrationForm({
             autoComplete="email"
             inputProps={{ "aria-label": "email" }}
             inputRef={register({
-              required: true,
               pattern: {
-                value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                message: "Please enter a valid email address"
-              }
+                message: "Please enter a valid email address",
+                value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+              },
+              required: true
             })}
             error={Boolean(errors.email)}
             helperText={errors?.email?.message}

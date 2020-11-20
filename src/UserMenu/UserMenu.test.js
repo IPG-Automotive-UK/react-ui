@@ -5,9 +5,9 @@ import userEvent from "@testing-library/user-event";
 
 // a set of default inputs so that tests can change what theyre testing
 const defaultInputs = {
-  username: "Joe Bloggs",
+  onChangePassword: jest.fn(),
   onLogout: jest.fn(),
-  onChangePassword: jest.fn()
+  username: "Joe Bloggs"
 };
 
 /** Tests */
