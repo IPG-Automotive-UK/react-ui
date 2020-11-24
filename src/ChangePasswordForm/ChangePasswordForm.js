@@ -14,7 +14,7 @@ import zxcvbn from "zxcvbn";
 /**
  * Password change form
  */
-export default function ChangePasswordForm({ loading, onReset }) {
+export default function ChangePasswordForm({ loading, onSubmit }) {
   // form state
   const { register, errors, handleSubmit, watch } = useForm({
     mode: "onTouched"
@@ -33,7 +33,7 @@ export default function ChangePasswordForm({ loading, onReset }) {
   });
 
   return (
-    <form onSubmit={handleSubmit(onReset)} noValidate>
+    <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <TextField
@@ -129,5 +129,5 @@ ChangePasswordForm.propTypes = {
    *
    * _event_: Synthetic event
    */
-  onReset: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired
 };

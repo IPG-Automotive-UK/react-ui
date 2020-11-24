@@ -7,7 +7,7 @@ import userEvent from "@testing-library/user-event";
  * Test setup function that renders component and returns elements for testing
  */
 function setup(inputs) {
-  render(<ChangePasswordForm onReset={() => {}} {...inputs} />);
+  render(<ChangePasswordForm onSubmit={() => {}} {...inputs} />);
   return {
     inputs: {
       password: screen.getByLabelText("password"),
@@ -24,8 +24,8 @@ function setup(inputs) {
  */
 describe("ChangePasswordForm", () => {
   it("returns form information to callback when successfully validated", async () => {
-    const onReset = jest.fn(data => data);
-    const elements = setup({ onReset });
+    const onSubmit = jest.fn(data => data);
+    const elements = setup({ onSubmit });
     await act(async () => {
       await userEvent.type(elements.inputs.password, "indigo shark wallplug");
       await userEvent.type(
@@ -34,19 +34,19 @@ describe("ChangePasswordForm", () => {
       );
       fireEvent.submit(elements.submit);
     });
-    expect(onReset).toHaveReturnedWith({
+    expect(onSubmit).toHaveReturnedWith({
       password: "indigo shark wallplug",
       passwordRepeat: "indigo shark wallplug"
     });
   });
   it("doesnt call callback on validation errors", async () => {
-    const onReset = jest.fn();
-    const elements = setup({ onReset });
+    const onSubmit = jest.fn();
+    const elements = setup({ onSubmit });
     await act(async () => {
       await userEvent.type(elements.inputs.password, "abc123"); // common password
       fireEvent.submit(elements.submit);
     });
-    expect(onReset).not.toHaveBeenCalled();
+    expect(onSubmit).not.toHaveBeenCalled();
   });
   describe("Password restrictions", () => {
     it("displays password complexity score", async () => {
