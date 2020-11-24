@@ -1,4 +1,5 @@
 export { default as ChangePasswordForm } from "./ChangePasswordForm";
+export { default as ChangePasswordDialog } from "./ChangePasswordDialog";
 export { default as Copyright } from "./Copyright";
 export { default as LoginForm } from "./LoginForm";
 export { default as RegistrationForm } from "./RegistrationForm";
