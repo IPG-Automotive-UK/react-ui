@@ -1,3 +1,4 @@
+import { Button } from "@material-ui/core";
 import ChangePasswordDialog from "./ChangePasswordDialog";
 import React from "react";
 import { action } from "@storybook/addon-actions";
@@ -8,7 +9,18 @@ export default {
 };
 
 const Template = args => {
-  return <ChangePasswordDialog {...args} onSubmit={action("passwordChange")} />;
+  const [open, setOpen] = React.useState(false);
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Open dialog</Button>
+      <ChangePasswordDialog
+        {...args}
+        onSubmit={action("passwordChange")}
+        open={open}
+        onClose={() => setOpen(false)}
+      />
+    </>
+  );
 };
 
 export const Default = Template.bind({});
