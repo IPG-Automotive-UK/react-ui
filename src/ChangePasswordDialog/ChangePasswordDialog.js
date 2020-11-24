@@ -34,7 +34,7 @@ export default function ChangePasswordDialog({
 
   // watch password so we can validate its duplicate
   const password = React.useRef({});
-  password.current = watch("password", "");
+  password.current = watch("newPassword", "");
 
   // create score ref so that we avoid multiple calculations
   const score = React.useRef();
