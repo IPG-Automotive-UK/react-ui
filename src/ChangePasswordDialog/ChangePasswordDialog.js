@@ -19,13 +19,16 @@ import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import zxcvbn from "zxcvbn";
 
+/**
+ * Dialog for authenticated users to change their password. Requries reauthentication using existing password.
+ */
 export default function ChangePasswordDialog({
-  errorMessage,
+  errorMessage = "Woops, something went wrong. Please try again.",
   onClose,
   onSubmit,
   open,
-  status,
-  successMessage
+  status = "init",
+  successMessage = "Password succesfully changed."
 }) {
   // form state
   const { register, errors, handleSubmit, watch } = useForm({
@@ -43,6 +46,8 @@ export default function ChangePasswordDialog({
       score.current = null;
     }
   });
+
+  // return components
   return (
     <Dialog open={open} onClose={onClose} size="sm" fullWidth>
       <DialogTitle onClose={onClose}>Change password</DialogTitle>
@@ -160,6 +165,7 @@ export default function ChangePasswordDialog({
   );
 }
 
+// prop types
 ChangePasswordDialog.propTypes = {
   /**
    * String to display when status is "error".
