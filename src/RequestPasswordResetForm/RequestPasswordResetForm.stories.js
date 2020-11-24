@@ -8,7 +8,7 @@ export default {
 };
 
 const Template = args => {
-  return <RequestPasswordResetForm {...args} onLogin={action("reset")} />;
+  return <RequestPasswordResetForm {...args} onSubmit={action("reset")} />;
 };
 
 export const Default = Template.bind({});

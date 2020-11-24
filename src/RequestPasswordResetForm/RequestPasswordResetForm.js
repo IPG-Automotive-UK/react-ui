@@ -12,14 +12,14 @@ import { useForm } from "react-hook-form";
 /**
  * Password change form
  */
-export default function RequestPasswordResetForm({ loading, onReset }) {
+export default function RequestPasswordResetForm({ loading, onSubmit }) {
   // form state
   const { register, errors, handleSubmit } = useForm({
     mode: "onSubmit"
   });
 
   return (
-    <form onSubmit={handleSubmit(onReset)} noValidate>
+    <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <TextField
@@ -75,9 +75,9 @@ RequestPasswordResetForm.propTypes = {
    * function(data, event) => void
    * ```
    *
-   * _data_: Object containing _password, passwordRepeat_
+   * _data_: Object containing _email_
    *
    * _event_: Synthetic event
    */
-  onReset: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired
 };
