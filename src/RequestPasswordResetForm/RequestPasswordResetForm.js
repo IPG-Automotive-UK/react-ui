@@ -54,7 +54,7 @@ export default function RequestPasswordResetForm({ loading, onSubmit }) {
           disabled={loading}
           endIcon={loading ? <CircularProgress size={24} /> : null}
         >
-          Request reset
+          Reset password
         </Button>
       </Box>
     </form>
