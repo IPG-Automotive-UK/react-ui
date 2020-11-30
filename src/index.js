@@ -5,5 +5,6 @@ export { default as LoginForm } from "./LoginForm";
 export { default as RegistrationForm } from "./RegistrationForm";
 export { default as RequestPasswordResetForm } from "./RequestPasswordResetForm";
 export { default as Select } from "./Select";
+export { default as Snackbar } from "./Snackbar";
 export { default as ThemeProvider } from "./ThemeProvider";
 export { default as UserMenu } from "./UserMenu";
