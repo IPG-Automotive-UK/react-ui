@@ -91,38 +91,36 @@ export default function Snackbar({
 
   // return snackbar
   return (
-    <div>
-      <MuiSnackbar
-        autoHideDuration={autoHideDuration}
-        anchorOrigin={{
-          horizontal: "center",
-          vertical: "bottom"
-        }}
-        onClose={handleClose}
-        open={open}
-      >
-        <SnackbarContent
-          className={classes[variant]}
-          message={
-            <span className={classes.message}>
-              <Icon className={clsx([classes.icon, classes.iconVariant])} />
-              {message}
-            </span>
-          }
-          action={[
-            actionButton,
-            <IconButton
-              key="close"
-              color="inherit"
-              onClick={handleClose}
-              className={classes.action}
-            >
-              <Close className={classes.icon} />
-            </IconButton>
-          ]}
-        />
-      </MuiSnackbar>
-    </div>
+    <MuiSnackbar
+      autoHideDuration={autoHideDuration}
+      anchorOrigin={{
+        horizontal: "center",
+        vertical: "bottom"
+      }}
+      onClose={handleClose}
+      open={open}
+    >
+      <SnackbarContent
+        className={classes[variant]}
+        message={
+          <span className={classes.message}>
+            <Icon className={clsx([classes.icon, classes.iconVariant])} />
+            {message}
+          </span>
+        }
+        action={[
+          actionButton,
+          <IconButton
+            key="close"
+            color="inherit"
+            onClick={handleClose}
+            className={classes.action}
+          >
+            <Close className={classes.icon} />
+          </IconButton>
+        ]}
+      />
+    </MuiSnackbar>
   );
 }
 // prop types
