@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 /**
- * Sidebar list item with icon and tooltip.
+ * Sidebar list item with icon.
  */
 export default function SidebarItem({
   children,
