@@ -1,5 +1,5 @@
 import { act, fireEvent, render, screen } from "@testing-library/react";
-import ChangePasswordDialog from "./";
+import PasswordChangeDialog from "./";
 import React from "react";
 import userEvent from "@testing-library/user-event";
 
@@ -8,7 +8,7 @@ import userEvent from "@testing-library/user-event";
  */
 function setup(inputs) {
   render(
-    <ChangePasswordDialog
+    <PasswordChangeDialog
       open
       onClose={jest.fn()}
       onSubmit={() => {}}
@@ -29,7 +29,7 @@ function setup(inputs) {
 /**
  * Tests
  */
-describe("ChangePasswordDialog", () => {
+describe("PasswordChangeDialog", () => {
   it("returns form information to callback when successfully validated", async () => {
     const onSubmit = jest.fn(data => data);
     const elements = setup({ onSubmit });

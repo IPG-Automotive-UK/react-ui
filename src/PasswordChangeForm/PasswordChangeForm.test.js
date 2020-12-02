@@ -1,5 +1,5 @@
 import { act, fireEvent, render, screen } from "@testing-library/react";
-import ChangePasswordForm from "./";
+import PasswordChangeForm from "./";
 import React from "react";
 import userEvent from "@testing-library/user-event";
 
@@ -7,7 +7,7 @@ import userEvent from "@testing-library/user-event";
  * Test setup function that renders component and returns elements for testing
  */
 function setup(inputs) {
-  render(<ChangePasswordForm onSubmit={() => {}} {...inputs} />);
+  render(<PasswordChangeForm onSubmit={() => {}} {...inputs} />);
   return {
     inputs: {
       password: screen.getByLabelText("password"),
@@ -22,16 +22,13 @@ function setup(inputs) {
 /**
  * Tests
  */
-describe("ChangePasswordForm", () => {
+describe("PasswordChangeForm", () => {
   it("returns form information to callback when successfully validated", async () => {
     const onSubmit = jest.fn(data => data);
     const elements = setup({ onSubmit });
     await act(async () => {
-      await userEvent.type(elements.inputs.password, "indigo shark wallplug");
-      await userEvent.type(
-        elements.inputs.passwordRepeat,
-        "indigo shark wallplug"
-      );
+      userEvent.type(elements.inputs.password, "indigo shark wallplug");
+      userEvent.type(elements.inputs.passwordRepeat, "indigo shark wallplug");
       fireEvent.submit(elements.submit);
     });
     expect(onSubmit).toHaveReturnedWith({
@@ -43,7 +40,7 @@ describe("ChangePasswordForm", () => {
     const onSubmit = jest.fn();
     const elements = setup({ onSubmit });
     await act(async () => {
-      await userEvent.type(elements.inputs.password, "abc123"); // common password
+      userEvent.type(elements.inputs.password, "abc123"); // common password
       fireEvent.submit(elements.submit);
     });
     expect(onSubmit).not.toHaveBeenCalled();
@@ -52,7 +49,7 @@ describe("ChangePasswordForm", () => {
     it("displays password complexity score", async () => {
       const elements = setup();
       await act(async () => {
-        await userEvent.type(elements.inputs.password, "something");
+        userEvent.type(elements.inputs.password, "something");
       });
       expect(
         screen.findByText("Password strength: 0/4. Minimum required 3+.")
@@ -61,7 +58,7 @@ describe("ChangePasswordForm", () => {
     it("displays user feedback on password", async () => {
       const elements = setup();
       await act(async () => {
-        await userEvent.type(elements.inputs.password, "something");
+        userEvent.type(elements.inputs.password, "something");
       });
       expect(
         screen.findByText("Add another word or two. Uncommon words are better.")

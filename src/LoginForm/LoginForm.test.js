@@ -25,8 +25,8 @@ describe("LoginForm", () => {
     const onLogin = jest.fn(data => data);
     const elements = setup({ onLogin });
     await act(async () => {
-      await userEvent.type(elements.inputs.email, "joe.bloggs@domain.com");
-      await userEvent.type(elements.inputs.password, "indigo shark wallplug");
+      userEvent.type(elements.inputs.email, "joe.bloggs@domain.com");
+      userEvent.type(elements.inputs.password, "indigo shark wallplug");
       fireEvent.submit(elements.submit);
     });
     expect(onLogin).toHaveReturnedWith({
@@ -38,7 +38,7 @@ describe("LoginForm", () => {
     const onLogin = jest.fn();
     const elements = setup({ onLogin });
     await act(async () => {
-      await userEvent.type(elements.inputs.email, "joe.bloggs");
+      userEvent.type(elements.inputs.email, "joe.bloggs");
       // missing password
       fireEvent.submit(elements.submit);
     });

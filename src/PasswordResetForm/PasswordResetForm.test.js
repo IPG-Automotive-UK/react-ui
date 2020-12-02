@@ -1,13 +1,13 @@
 import { act, fireEvent, render, screen } from "@testing-library/react";
+import PasswordResetForm from "./";
 import React from "react";
-import RequestPasswordResetForm from "./";
 import userEvent from "@testing-library/user-event";
 
 /**
  * Test setup function that renders component and returns elements for testing
  */
 function setup(inputs) {
-  render(<RequestPasswordResetForm onSubmit={() => {}} {...inputs} />);
+  render(<PasswordResetForm onSubmit={() => {}} {...inputs} />);
   return {
     inputs: {
       email: screen.getByLabelText("email")
@@ -19,7 +19,7 @@ function setup(inputs) {
 /**
  * Tests
  */
-describe("RequestPasswordResetForm", () => {
+describe("PasswordResetForm", () => {
   it("returns form information to callback when successfully validated", async () => {
     const onSubmit = jest.fn(data => data);
     const elements = setup({ onSubmit });

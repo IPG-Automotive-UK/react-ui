@@ -10,9 +10,9 @@ import React from "react";
 import { useForm } from "react-hook-form";
 
 /**
- * Password change form
+ * Password reset form
  */
-export default function RequestPasswordResetForm({ loading, onSubmit }) {
+export default function PasswordResetForm({ loading, onSubmit }) {
   // form state
   const { register, errors, handleSubmit } = useForm({
     mode: "onSubmit"
@@ -62,7 +62,7 @@ export default function RequestPasswordResetForm({ loading, onSubmit }) {
 }
 
 // prop types
-RequestPasswordResetForm.propTypes = {
+PasswordResetForm.propTypes = {
   /**
    * Loading state of the login form. Disables submit button and shows loading indicator.
    */

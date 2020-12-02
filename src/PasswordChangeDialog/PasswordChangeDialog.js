@@ -22,7 +22,7 @@ import zxcvbn from "zxcvbn";
 /**
  * Dialog for authenticated users to change their password. Requries reauthentication using existing password.
  */
-export default function ChangePasswordDialog({
+export default function PasswordChangeDialog({
   errorMessage = "Woops, something went wrong. Please try again.",
   onClose,
   onSubmit,
@@ -166,7 +166,7 @@ export default function ChangePasswordDialog({
 }
 
 // prop types
-ChangePasswordDialog.propTypes = {
+PasswordChangeDialog.propTypes = {
   /**
    * String to display when status is "error".
    */

@@ -35,15 +35,14 @@ describe("RegistrationForm", () => {
     const onRegister = jest.fn(data => data);
     const elements = setup({ onRegister });
     await act(async () => {
-      await userEvent.type(elements.inputs.firstName, "Joe");
-      await userEvent.type(elements.inputs.lastName, "Bloggs");
-      await userEvent.type(elements.inputs.email, "joe.bloggs@domain.com");
-      await selectMaterialUiSelectOption(elements.inputs.team, teams[0]);
-      await userEvent.type(elements.inputs.password, "indigo shark wallplug");
-      await userEvent.type(
-        elements.inputs.passwordRepeat,
-        "indigo shark wallplug"
-      );
+      userEvent.type(elements.inputs.firstName, "Joe");
+      userEvent.type(elements.inputs.lastName, "Bloggs");
+      userEvent.type(elements.inputs.email, "joe.bloggs@domain.com");
+      userEvent.type(elements.inputs.password, "indigo shark wallplug");
+      userEvent.type(elements.inputs.passwordRepeat, "indigo shark wallplug");
+    });
+    await selectMaterialUiSelectOption(elements.inputs.team, teams[0]);
+    await act(async () => {
       fireEvent.submit(elements.submit);
     });
     expect(onRegister).toHaveReturnedWith({
@@ -59,7 +58,7 @@ describe("RegistrationForm", () => {
     const onRegister = jest.fn();
     const elements = setup({ onRegister });
     await act(async () => {
-      await userEvent.type(elements.inputs.email, "joe.bloggs");
+      userEvent.type(elements.inputs.email, "joe.bloggs");
       // incorrect email format
       // missing first, lastname, team, password + password repeat
       fireEvent.submit(elements.submit);

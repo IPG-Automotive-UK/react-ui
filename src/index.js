@@ -1,9 +1,9 @@
-export { default as ChangePasswordForm } from "./ChangePasswordForm";
-export { default as ChangePasswordDialog } from "./ChangePasswordDialog";
 export { default as Copyright } from "./Copyright";
 export { default as LoginForm } from "./LoginForm";
+export { default as PasswordChangeDialog } from "./PasswordChangeDialog";
+export { default as PasswordChangeForm } from "./PasswordChangeForm";
+export { default as PasswordResetForm } from "./PasswordResetForm";
 export { default as RegistrationForm } from "./RegistrationForm";
-export { default as RequestPasswordResetForm } from "./RequestPasswordResetForm";
 export { default as Select } from "./Select";
 export { Sidebar, SidebarDivider, SidebarItem } from "./Sidebar";
 export { default as Snackbar } from "./Snackbar";

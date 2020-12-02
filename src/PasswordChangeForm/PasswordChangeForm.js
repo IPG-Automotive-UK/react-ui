@@ -14,7 +14,7 @@ import zxcvbn from "zxcvbn";
 /**
  * Password change form
  */
-export default function ChangePasswordForm({ loading, onSubmit }) {
+export default function PasswordChangeForm({ loading, onSubmit }) {
   // form state
   const { register, errors, handleSubmit, watch } = useForm({
     mode: "onTouched"
@@ -112,7 +112,7 @@ export default function ChangePasswordForm({ loading, onSubmit }) {
 }
 
 // prop types
-ChangePasswordForm.propTypes = {
+PasswordChangeForm.propTypes = {
   /**
    * Loading state of the login form. Disables submit button and shows loading indicator.
    */

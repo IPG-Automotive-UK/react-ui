@@ -1,11 +1,11 @@
 import { Button } from "@material-ui/core";
-import ChangePasswordDialog from "./ChangePasswordDialog";
+import PasswordChangeDialog from "./PasswordChangeDialog";
 import React from "react";
 import { action } from "@storybook/addon-actions";
 
 export default {
-  component: ChangePasswordDialog,
-  title: "Authentication/ChangePasswordDialog"
+  component: PasswordChangeDialog,
+  title: "Authentication/PasswordChangeDialog"
 };
 
 const Template = args => {
@@ -13,7 +13,7 @@ const Template = args => {
   return (
     <>
       <Button onClick={() => setOpen(true)}>Open dialog</Button>
-      <ChangePasswordDialog
+      <PasswordChangeDialog
         {...args}
         onSubmit={action("passwordChange")}
         open={open}
