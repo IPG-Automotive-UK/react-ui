@@ -6,7 +6,6 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Tooltip,
   makeStyles
 } from "@material-ui/core";
 import PropTypes from "prop-types";
@@ -59,28 +58,26 @@ export default function SidebarItem({
   // define components
   return (
     <Box display="flex" flexDirection="column">
-      <Tooltip title={name} placement="right">
-        <ListItem
-          button
-          selected={selected}
-          onClick={handleClick}
-          disabled={disabled}
-          className={className}
-        >
-          <ListItemIcon>{React.cloneElement(icon, { color })}</ListItemIcon>
-          <ListItemText
-            primary={name}
-            primaryTypographyProps={primaryTypographyProps}
-          />
-          <Badge
-            badgeContent={count}
-            max={9}
-            color="primary"
-            className={classes.badge}
-          />
-          {children && (expanded ? <ArrowDropDown /> : <ArrowRight />)}
-        </ListItem>
-      </Tooltip>
+      <ListItem
+        button
+        selected={selected}
+        onClick={handleClick}
+        disabled={disabled}
+        className={className}
+      >
+        <ListItemIcon>{React.cloneElement(icon, { color })}</ListItemIcon>
+        <ListItemText
+          primary={name}
+          primaryTypographyProps={primaryTypographyProps}
+        />
+        <Badge
+          badgeContent={count}
+          max={9}
+          color="primary"
+          className={classes.badge}
+        />
+        {children && (expanded ? <ArrowDropDown /> : <ArrowRight />)}
+      </ListItem>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         {React.Children.map(children, child =>
           React.cloneElement(child, { className: classes.nested })
