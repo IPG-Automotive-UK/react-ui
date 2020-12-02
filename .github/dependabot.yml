@@ -6,3 +6,16 @@ updates:
       interval: "weekly"
       day: "sunday"
     open-pull-requests-limit: 50
+    ignore:
+      - dependency-name: microbundle-crl
+      - dependency-name: babel-eslint
+      - dependency-name: eslint
+      - dependency-name: eslint-config-prettier
+      - dependency-name: eslint-config-standard
+      - dependency-name: eslint-config-standard-react
+      - dependency-name: eslint-plugin-import
+      - dependency-name: eslint-plugin-node
+      - dependency-name: eslint-plugin-prettier
+      - dependency-name: eslint-plugin-promise
+      - dependency-name: eslint-plugin-react
+      - dependency-name: eslint-plugin-standard
