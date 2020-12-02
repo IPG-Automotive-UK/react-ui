@@ -20,8 +20,8 @@
     "test:lint": "eslint ./src",
     "test:unit": "cross-env CI=1 react-scripts test --env=jsdom --reporters=jest-html-reporter --collectCoverage=true",
     "test:watch": "react-scripts test --env=jsdom",
-    "storybook": "start-storybook -p 6006 --no-dll",
-    "build-storybook": "build-storybook --no-dll"
+    "storybook": "start-storybook -p 6006 -s ./static",
+    "build-storybook": "build-storybook -s ./public"
   },
   "peerDependencies": {
     "react": "^16.0.0",
