@@ -3,6 +3,14 @@ import SidebarDivider from "./SidebarDivider";
 
 export default {
   component: SidebarDivider,
+  parameters: {
+    actions: {
+      disabled: true
+    },
+    controls: {
+      disabled: true
+    }
+  },
   title: "Layout/SidebarDivider"
 };
 
