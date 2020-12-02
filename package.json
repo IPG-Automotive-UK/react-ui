@@ -21,7 +21,7 @@
     "test:unit": "cross-env CI=1 react-scripts test --env=jsdom --reporters=jest-html-reporter --collectCoverage=true",
     "test:watch": "react-scripts test --env=jsdom",
     "storybook": "start-storybook -p 6006 -s ./static",
-    "build-storybook": "build-storybook -s ./public"
+    "build-storybook": "build-storybook -s ./static"
   },
   "peerDependencies": {
     "react": "^16.0.0",
