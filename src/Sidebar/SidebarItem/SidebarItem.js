@@ -70,14 +70,14 @@ export default function SidebarItem({
           primary={name}
           primaryTypographyProps={primaryTypographyProps}
         />
-        {count && (
+        {count ? (
           <Badge
             badgeContent={count}
             max={9}
             color="primary"
             className={classes.badge}
           />
-        )}
+        ) : null}
         {children && (expanded ? <ArrowDropDown /> : <ArrowRight />)}
       </ListItem>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
