@@ -1,7 +1,6 @@
-import { Box, Typography, makeStyles } from "@material-ui/core";
+import { Box, Divider, Typography, makeStyles } from "@material-ui/core";
 import PropTypes from "prop-types";
 import React from "react";
-import SidebarDivider from "./SidebarDivider";
 
 // custom styling
 const useStyles = makeStyles(theme => ({
@@ -20,6 +19,9 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.text.secondary,
     display: "flex",
     padding: theme.spacing(0, 2)
+  },
+  topDivider: {
+    margin: theme.spacing(0, 0, 1, 0)
   }
 }));
 
@@ -35,7 +37,7 @@ function Sidebar({ logoSrc, children, appVersion }) {
         {logoSrc && <img src={logoSrc} className={classes.icon} />}
         <Typography>IPG Automotive</Typography>
       </Box>
-      <SidebarDivider />
+      <Divider className={classes.topDivider} />
       {children}
       <Box flexGrow={1} />
       {appVersion && (
