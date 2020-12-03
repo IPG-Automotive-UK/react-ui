@@ -24,7 +24,7 @@ export default function FormSwitch({
   // return components
   return (
     <FormControl disabled={disabled}>
-      {label ? <FormLabel>{label}</FormLabel> : null}
+      {label && <FormLabel style={{ fontSize: "0.75rem" }}>{label}</FormLabel>}
       <FormGroup>
         <Typography
           component="div"
@@ -43,7 +43,7 @@ export default function FormSwitch({
             </Grid>
           </Grid>
         </Typography>
-        {helperText ? <FormHelperText>{helperText}</FormHelperText> : null}
+        {helperText && <FormHelperText>{helperText}</FormHelperText>}
       </FormGroup>
     </FormControl>
   );
