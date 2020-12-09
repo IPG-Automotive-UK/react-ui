@@ -31,6 +31,7 @@ export default function SidebarItem({
   count,
   disabled = false,
   icon,
+  initialOpen = false,
   name,
   onClick,
   selected = false
@@ -46,7 +47,7 @@ export default function SidebarItem({
   };
 
   // expansion state
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = React.useState(initialOpen);
 
   // item click callback
   // if we have children we should set the expanded state as well
@@ -111,6 +112,10 @@ SidebarItem.propTypes = {
    * Icon to display alongside text.
    */
   icon: PropTypes.element.isRequired,
+  /**
+   * Initial open state of sidebar item with children
+   */
+  initialOpen: PropTypes.bool,
   /**
    * The text content of the sidebar item.
    */
