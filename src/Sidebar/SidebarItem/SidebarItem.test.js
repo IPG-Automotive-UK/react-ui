@@ -46,6 +46,19 @@ describe("SidebarItem", () => {
     );
     expect(screen.queryByText(/child/i)).not.toBeInTheDocument();
   });
+  it("nested children can be expanded initially", () => {
+    render(
+      <SidebarItem
+        onClick={jest.fn()}
+        name="Parent"
+        icon={<Mail />}
+        initialOpen
+      >
+        <SidebarItem onClick={jest.fn()} name="Child" icon={<Mail />} />
+      </SidebarItem>
+    );
+    expect(screen.queryByText(/child/i)).toBeInTheDocument();
+  });
   it("nested children can be expanded", () => {
     render(
       <SidebarItem onClick={jest.fn()} name="Parent" icon={<Mail />}>

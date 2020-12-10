@@ -49,3 +49,21 @@ Nested.args = {
   icon: <Settings />,
   name: "Settings"
 };
+
+export const NestedInitiallyOpen = Template.bind({});
+NestedInitiallyOpen.args = {
+  children: [
+    <SidebarItem key="default" {...Default.args} />,
+    <SidebarItem
+      key="withCount"
+      {...WithCount.args}
+      children={[
+        <SidebarItem key="default" {...Default.args} />,
+        <SidebarItem key="disabled" {...Disabled.args} />
+      ]}
+    />
+  ],
+  icon: <Settings />,
+  initialOpen: true,
+  name: "Settings"
+};
