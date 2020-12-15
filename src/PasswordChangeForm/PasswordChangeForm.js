@@ -44,7 +44,7 @@ export default function PasswordChangeForm({ loading, onSubmit }) {
             id="password"
             label="New password"
             type="password"
-            autoComplete="current-password"
+            autoComplete="new-password"
             inputProps={{ "aria-label": "password" }}
             inputRef={register({
               required: true,
@@ -81,7 +81,7 @@ export default function PasswordChangeForm({ loading, onSubmit }) {
             id="passwordRepeat"
             label="Confirm new password"
             type="password"
-            autoComplete="confirm-password"
+            autoComplete="new-password"
             inputProps={{ "aria-label": "passwordRepeat" }}
             inputRef={register({
               required: true,

@@ -64,7 +64,7 @@ export default function PasswordChangeDialog({
                   id="currentPassword"
                   label="Current password"
                   type="password"
-                  autoComplete="current-password"
+                  autoComplete="off"
                   inputProps={{ "aria-label": "currentPassword" }}
                   inputRef={register({
                     required: true
@@ -121,6 +121,7 @@ export default function PasswordChangeDialog({
                   id="newPasswordRepeat"
                   label="Confirm new password"
                   type="password"
+                  autoComplete="new-password"
                   inputProps={{ "aria-label": "newPasswordRepeat" }}
                   inputRef={register({
                     required: true,

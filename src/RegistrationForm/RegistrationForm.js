@@ -132,7 +132,7 @@ export default function RegistrationForm({
             id="password"
             label="Password"
             type="password"
-            autoComplete="current-password"
+            autoComplete="new-password"
             inputProps={{ "aria-label": "password" }}
             inputRef={register({
               required: true,
@@ -169,7 +169,7 @@ export default function RegistrationForm({
             id="passwordRepeat"
             label="Confirm Password"
             type="password"
-            autoComplete="confirm-password"
+            autoComplete="new-password"
             inputProps={{ "aria-label": "passwordRepeat" }}
             inputRef={register({
               required: true,
