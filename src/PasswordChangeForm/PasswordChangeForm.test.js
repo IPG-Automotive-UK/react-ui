@@ -56,7 +56,7 @@ describe("PasswordChangeForm", () => {
 });
 
 describe("Password restrictions", () => {
-  it.only("displays password complexity score", async () => {
+  it("displays password complexity score", async () => {
     const elements = setup();
     act(() => {
       userEvent.type(elements.inputs.password, "something");
