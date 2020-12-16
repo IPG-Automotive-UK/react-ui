@@ -49,14 +49,14 @@ describe("Select", () => {
     const inputBase = container.querySelector(".MuiInputBase-root");
     expect(inputBase).toHaveClass("Mui-error");
   });
-  test("display empty if value is not a valid option", async () => {
+  test("display empty if value is not a valid option", () => {
     const { container } = render(
       <SelectWithState options={options} value="Invalid value" />
     );
     const baseComponent = container.querySelector(".MuiSelect-nativeInput");
     expect(baseComponent.value).toBe("");
   });
-  test("display the value if it's a valid option", async () => {
+  test("display the value if it's a valid option", () => {
     const { container } = render(
       <SelectWithState options={options} value="Apple" />
     );
