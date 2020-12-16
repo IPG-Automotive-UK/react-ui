@@ -1,4 +1,10 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor
+} from "@testing-library/react";
 import PasswordChangeForm from "./";
 import React from "react";
 import userEvent from "@testing-library/user-event";
@@ -26,8 +32,10 @@ describe("PasswordChangeForm", () => {
   it("returns form information to callback when successfully validated", async () => {
     const onSubmit = jest.fn(data => data);
     const elements = setup({ onSubmit });
-    userEvent.type(elements.inputs.password, "indigo shark wallplug");
-    userEvent.type(elements.inputs.passwordRepeat, "indigo shark wallplug");
+    act(() => {
+      userEvent.type(elements.inputs.password, "indigo shark wallplug");
+      userEvent.type(elements.inputs.passwordRepeat, "indigo shark wallplug");
+    });
     fireEvent.submit(elements.submit);
     await waitFor(() =>
       expect(onSubmit).toHaveReturnedWith({
@@ -39,30 +47,39 @@ describe("PasswordChangeForm", () => {
   it("doesnt call callback on validation errors", async () => {
     const onSubmit = jest.fn();
     const elements = setup({ onSubmit });
-    userEvent.type(elements.inputs.password, "abc123"); // common password
+    act(() => {
+      userEvent.type(elements.inputs.password, "abc123"); // common password
+    });
     fireEvent.submit(elements.submit);
     await waitFor(() => expect(onSubmit).not.toHaveBeenCalled());
   });
-  describe("Password restrictions", () => {
-    it("displays password complexity score", async () => {
-      const elements = setup();
+});
+
+describe("Password restrictions", () => {
+  it.only("displays password complexity score", async () => {
+    const elements = setup();
+    act(() => {
       userEvent.type(elements.inputs.password, "something");
-      await waitFor(() =>
-        expect(
-          screen.findByText("Password strength: 0/4. Minimum required 3+.")
-        ).toBeTruthy()
-      );
+      userEvent.click(elements.inputs.passwordRepeat); // moving to next form element triggers validation
     });
-    it("displays user feedback on password", async () => {
-      const elements = setup();
+    await waitFor(() =>
+      expect(
+        screen.queryByText("Password strength: 0/4. Minimum required 3+.")
+      ).toBeInTheDocument()
+    );
+  });
+  it("displays user feedback on password", async () => {
+    const elements = setup();
+    act(() => {
       userEvent.type(elements.inputs.password, "something");
-      await waitFor(() =>
-        expect(
-          screen.findByText(
-            "Add another word or two. Uncommon words are better."
-          )
-        ).toBeTruthy()
-      );
+      userEvent.click(elements.inputs.passwordRepeat); // moving to next form element triggers validation
     });
+    await waitFor(() =>
+      expect(
+        screen.queryByText(
+          "Add another word or two. Uncommon words are better."
+        )
+      ).toBeInTheDocument()
+    );
   });
 });
