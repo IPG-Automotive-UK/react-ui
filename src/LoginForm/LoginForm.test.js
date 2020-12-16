@@ -1,10 +1,4 @@
-import {
-  act,
-  fireEvent,
-  render,
-  screen,
-  waitFor
-} from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import LoginForm from "./";
 import React from "react";
 import userEvent from "@testing-library/user-event";
@@ -43,11 +37,8 @@ describe("LoginForm", () => {
   it("doesnt call callback on validation errors", async () => {
     const onLogin = jest.fn();
     const elements = setup({ onLogin });
-    await act(async () => {
-      userEvent.type(elements.inputs.email, "joe.bloggs");
-      // missing password
-      fireEvent.submit(elements.submit);
-    });
-    expect(onLogin).not.toHaveBeenCalled();
+    userEvent.type(elements.inputs.email, "joe.bloggs"); // missing password
+    fireEvent.submit(elements.submit);
+    await waitFor(() => expect(onLogin).not.toHaveBeenCalled());
   });
 });
