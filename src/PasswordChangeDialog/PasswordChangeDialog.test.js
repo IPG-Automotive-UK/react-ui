@@ -1,4 +1,10 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor
+} from "@testing-library/react";
 import PasswordChangeDialog from "./";
 import React from "react";
 import userEvent from "@testing-library/user-event";
@@ -33,12 +39,14 @@ describe("PasswordChangeDialog", () => {
   it("returns form information to callback when successfully validated", async () => {
     const onSubmit = jest.fn(data => data);
     const elements = setup({ onSubmit });
-    userEvent.type(elements.inputs.currentPassword, "abc123");
-    userEvent.type(elements.inputs.newPassword, "coffee podium dvdplayer");
-    userEvent.type(
-      elements.inputs.newPasswordRepeat,
-      "coffee podium dvdplayer"
-    );
+    act(() => {
+      userEvent.type(elements.inputs.currentPassword, "abc123");
+      userEvent.type(elements.inputs.newPassword, "coffee podium dvdplayer");
+      userEvent.type(
+        elements.inputs.newPasswordRepeat,
+        "coffee podium dvdplayer"
+      );
+    });
     fireEvent.submit(elements.submit);
     await waitFor(() =>
       expect(onSubmit).toHaveReturnedWith({
@@ -51,7 +59,9 @@ describe("PasswordChangeDialog", () => {
   it("doesnt call callback on validation errors", async () => {
     const onSubmit = jest.fn();
     const elements = setup({ onSubmit });
-    userEvent.type(elements.inputs.newPassword, "abc123"); // top 100 password
+    act(() => {
+      userEvent.type(elements.inputs.newPassword, "abc123"); // top 100 password
+    });
     fireEvent.submit(elements.submit);
     await waitFor(() => expect(onSubmit).not.toHaveBeenCalled());
   });
