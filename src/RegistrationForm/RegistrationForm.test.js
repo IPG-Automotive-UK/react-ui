@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import React from "react";
 import RegistrationForm from "./";
 import { selectMaterialUiSelectOption } from "../testUtils";
@@ -34,36 +34,32 @@ describe("RegistrationForm", () => {
   it("returns form information to callback when successfully validated", async () => {
     const onRegister = jest.fn(data => data);
     const elements = setup({ onRegister });
-    await act(async () => {
-      userEvent.type(elements.inputs.firstName, "Joe");
-      userEvent.type(elements.inputs.lastName, "Bloggs");
-      userEvent.type(elements.inputs.email, "joe.bloggs@domain.com");
-      userEvent.type(elements.inputs.password, "indigo shark wallplug");
-      userEvent.type(elements.inputs.passwordRepeat, "indigo shark wallplug");
-    });
+    userEvent.type(elements.inputs.firstName, "Joe");
+    userEvent.type(elements.inputs.lastName, "Bloggs");
+    userEvent.type(elements.inputs.email, "joe.bloggs@domain.com");
+    userEvent.type(elements.inputs.password, "indigo shark wallplug");
+    userEvent.type(elements.inputs.passwordRepeat, "indigo shark wallplug");
     await selectMaterialUiSelectOption(elements.inputs.team, teams[0]);
-    await act(async () => {
-      fireEvent.submit(elements.submit);
-    });
-    expect(onRegister).toHaveReturnedWith({
-      email: "joe.bloggs@domain.com",
-      firstName: "Joe",
-      lastName: "Bloggs",
-      password: "indigo shark wallplug",
-      passwordRepeat: "indigo shark wallplug",
-      team: teams[0]
-    });
+    fireEvent.submit(elements.submit);
+    await waitFor(() =>
+      expect(onRegister).toHaveReturnedWith({
+        email: "joe.bloggs@domain.com",
+        firstName: "Joe",
+        lastName: "Bloggs",
+        password: "indigo shark wallplug",
+        passwordRepeat: "indigo shark wallplug",
+        team: teams[0]
+      })
+    );
   });
   it("doesnt call callback on validation errors", async () => {
     const onRegister = jest.fn();
     const elements = setup({ onRegister });
-    await act(async () => {
-      userEvent.type(elements.inputs.email, "joe.bloggs");
-      // incorrect email format
-      // missing first, lastname, team, password + password repeat
-      fireEvent.submit(elements.submit);
-    });
-    expect(onRegister).not.toHaveBeenCalled();
+    userEvent.type(elements.inputs.email, "joe.bloggs");
+    // incorrect email format
+    // missing first, lastname, team, password + password repeat
+    fireEvent.submit(elements.submit);
+    await waitFor(() => expect(onRegister).not.toHaveBeenCalled());
   });
   describe("Password restrictions", () => {
     it("displays password complexity score", () => {
