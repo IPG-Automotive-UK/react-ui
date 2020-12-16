@@ -8,7 +8,7 @@ import userEvent from "@testing-library/user-event";
 /**
  * Helper to select a material ui component
  */
-export async function selectMaterialUiSelectOption(element, optionText) {
+export function selectMaterialUiSelectOption(element, optionText) {
   return new Promise(resolve => {
     // The the button that opens the dropdown, which is a sibling of the input
     const selectButton = element.parentNode.querySelector("[role=button]");
