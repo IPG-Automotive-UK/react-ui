@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import PasswordResetForm from "./";
 import React from "react";
 import userEvent from "@testing-library/user-event";
@@ -23,21 +23,23 @@ describe("PasswordResetForm", () => {
   it("returns form information to callback when successfully validated", async () => {
     const onSubmit = jest.fn(data => data);
     const elements = setup({ onSubmit });
-    await act(async () => {
-      userEvent.type(elements.inputs.email, "joe.bloggs@domain.com");
-      fireEvent.submit(elements.submit);
-    });
-    expect(onSubmit).toHaveReturnedWith({
-      email: "joe.bloggs@domain.com"
-    });
+    userEvent.type(elements.inputs.email, "joe.bloggs@domain.com");
+    fireEvent.submit(elements.submit);
+    await waitFor(() =>
+      expect(onSubmit).toHaveLastReturnedWith({
+        email: "joe.bloggs@domain.com"
+      })
+    );
   });
-  it("doesnt call callback on validation errors", async () => {
+  it("shows error message with invalid email", async () => {
     const onSubmit = jest.fn();
     const elements = setup({ onSubmit });
-    await act(async () => {
-      userEvent.type(elements.inputs.email, "joe.bloggs"); // invalid email
-      fireEvent.submit(elements.submit);
-    });
-    expect(onSubmit).not.toHaveBeenCalled();
+    userEvent.type(elements.inputs.email, "joe.bloggs"); // invalid email
+    fireEvent.submit(elements.submit);
+    await waitFor(() =>
+      expect(
+        screen.queryByText("Please enter a valid email address")
+      ).toBeInTheDocument()
+    );
   });
 });
