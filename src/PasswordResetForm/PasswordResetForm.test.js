@@ -26,7 +26,7 @@ describe("PasswordResetForm", () => {
     userEvent.type(elements.inputs.email, "joe.bloggs@domain.com");
     fireEvent.submit(elements.submit);
     await waitFor(() =>
-      expect(onSubmit).toHaveLastReturnedWith({
+      expect(onSubmit).toHaveReturnedWith({
         email: "joe.bloggs@domain.com"
       })
     );
