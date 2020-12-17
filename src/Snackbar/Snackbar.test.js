@@ -62,7 +62,7 @@ describe("Snackbar", () => {
         autoHideDuration={100}
       />
     );
-    waitFor(() => expect(onClose).toHaveBeenCalled());
+    await waitFor(() => expect(onClose).toHaveBeenCalled());
   });
   it("shows message", () => {
     render(<Snackbar message="Hello world" open onClose={jest.fn} />);

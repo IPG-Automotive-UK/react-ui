@@ -1,4 +1,10 @@
-import { act, fireEvent, render, screen } from "@testing-library/react";
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor
+} from "@testing-library/react";
 import PasswordChangeDialog from "./";
 import React from "react";
 import userEvent from "@testing-library/user-event";
@@ -33,28 +39,45 @@ describe("PasswordChangeDialog", () => {
   it("returns form information to callback when successfully validated", async () => {
     const onSubmit = jest.fn(data => data);
     const elements = setup({ onSubmit });
-    await act(async () => {
+    act(() => {
       userEvent.type(elements.inputs.currentPassword, "abc123");
       userEvent.type(elements.inputs.newPassword, "coffee podium dvdplayer");
       userEvent.type(
         elements.inputs.newPasswordRepeat,
         "coffee podium dvdplayer"
       );
-      fireEvent.submit(elements.submit);
     });
-    expect(onSubmit).toHaveReturnedWith({
-      currentPassword: "abc123",
-      newPassword: "coffee podium dvdplayer",
-      newPasswordRepeat: "coffee podium dvdplayer"
-    });
+    fireEvent.submit(elements.submit);
+    await waitFor(() =>
+      expect(onSubmit).toHaveReturnedWith({
+        currentPassword: "abc123",
+        newPassword: "coffee podium dvdplayer",
+        newPasswordRepeat: "coffee podium dvdplayer"
+      })
+    );
   });
   it("doesnt call callback on validation errors", async () => {
     const onSubmit = jest.fn();
     const elements = setup({ onSubmit });
-    await act(async () => {
+    act(() => {
       userEvent.type(elements.inputs.newPassword, "abc123"); // top 100 password
-      fireEvent.submit(elements.submit);
     });
-    expect(onSubmit).not.toHaveBeenCalled();
+    fireEvent.submit(elements.submit);
+    await waitFor(() => expect(onSubmit).not.toHaveBeenCalled());
+  });
+  it("displays error message to user on validation fail", async () => {
+    const elements = setup();
+    act(() => {
+      userEvent.type(elements.inputs.newPassword, "abc123"); // top 100 password
+    });
+    fireEvent.submit(elements.submit);
+    await waitFor(() =>
+      expect(
+        screen.queryByText("This is a top-100 common password")
+      ).toBeInTheDocument()
+    );
+    expect(
+      screen.queryByText("Password strength: 0/4. Minimum required 3+.")
+    ).toBeInTheDocument();
   });
 });

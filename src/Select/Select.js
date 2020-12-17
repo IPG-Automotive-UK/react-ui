@@ -27,7 +27,7 @@ export default function Select({
       margin={margin}
       fullWidth
       label={label}
-      value={value}
+      value={options.includes(value) ? value : ""}
       onChange={onChange}
       disabled={disabled}
       id={label}
