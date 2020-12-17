@@ -83,7 +83,7 @@ export default function RegistrationForm({
             fullWidth
             label="Email Address"
             name="email"
-            autoComplete="email"
+            autoComplete="username"
             inputProps={{ "aria-label": "email" }}
             inputRef={register({
               pattern: {

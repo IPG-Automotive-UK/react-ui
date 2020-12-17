@@ -27,7 +27,7 @@ export default function LoginForm({ loading = false, onLogin = () => {} }) {
             fullWidth
             label="Email Address"
             name="email"
-            autoComplete="email"
+            autoComplete="username"
             autoFocus={!loading}
             inputProps={{ "aria-label": "email" }}
             inputRef={register({
