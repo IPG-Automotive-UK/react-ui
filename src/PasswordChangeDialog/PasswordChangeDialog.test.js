@@ -65,4 +65,19 @@ describe("PasswordChangeDialog", () => {
     fireEvent.submit(elements.submit);
     await waitFor(() => expect(onSubmit).not.toHaveBeenCalled());
   });
+  it("displays error message to user on validation fail", async () => {
+    const elements = setup();
+    act(() => {
+      userEvent.type(elements.inputs.newPassword, "abc123"); // top 100 password
+    });
+    fireEvent.submit(elements.submit);
+    await waitFor(() =>
+      expect(
+        screen.queryByText("This is a top-100 common password")
+      ).toBeInTheDocument()
+    );
+    expect(
+      screen.queryByText("Password strength: 0/4. Minimum required 3+.")
+    ).toBeInTheDocument();
+  });
 });

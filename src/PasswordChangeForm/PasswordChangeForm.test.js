@@ -53,33 +53,41 @@ describe("PasswordChangeForm", () => {
     fireEvent.submit(elements.submit);
     await waitFor(() => expect(onSubmit).not.toHaveBeenCalled());
   });
-});
-
-describe("Password restrictions", () => {
-  it("displays password complexity score", async () => {
-    const elements = setup();
-    act(() => {
-      userEvent.type(elements.inputs.password, "something");
-      userEvent.click(elements.inputs.passwordRepeat); // moving to next form element triggers validation
+  describe("Password restrictions", () => {
+    it("displays password complexity score", async () => {
+      const elements = setup();
+      act(() => {
+        userEvent.type(elements.inputs.password, "something");
+        userEvent.click(elements.inputs.passwordRepeat); // moving to next form element triggers validation
+      });
+      await waitFor(() =>
+        expect(
+          screen.queryByText("Password strength: 0/4. Minimum required 3+.")
+        ).toBeInTheDocument()
+      );
     });
-    await waitFor(() =>
-      expect(
-        screen.queryByText("Password strength: 0/4. Minimum required 3+.")
-      ).toBeInTheDocument()
-    );
-  });
-  it("displays user feedback on password", async () => {
-    const elements = setup();
-    act(() => {
-      userEvent.type(elements.inputs.password, "something");
-      userEvent.click(elements.inputs.passwordRepeat); // moving to next form element triggers validation
+    it("doesnt call callback on validation errors", async () => {
+      const onSubmit = jest.fn();
+      const elements = setup({ onSubmit });
+      act(() => {
+        userEvent.type(elements.inputs.password, "abc123"); // top 100 password
+      });
+      fireEvent.submit(elements.submit);
+      await waitFor(() => expect(onSubmit).not.toHaveBeenCalled());
     });
-    await waitFor(() =>
-      expect(
-        screen.queryByText(
-          "Add another word or two. Uncommon words are better."
-        )
-      ).toBeInTheDocument()
-    );
+    it("displays user feedback on password", async () => {
+      const elements = setup();
+      act(() => {
+        userEvent.type(elements.inputs.password, "something");
+        userEvent.click(elements.inputs.passwordRepeat); // moving to next form element triggers validation
+      });
+      await waitFor(() =>
+        expect(
+          screen.queryByText(
+            "Add another word or two. Uncommon words are better."
+          )
+        ).toBeInTheDocument()
+      );
+    });
   });
 });

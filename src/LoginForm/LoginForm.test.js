@@ -41,4 +41,14 @@ describe("LoginForm", () => {
     fireEvent.submit(elements.submit);
     await waitFor(() => expect(onLogin).not.toHaveBeenCalled());
   });
+  it("displays error message to user on validation fail", async () => {
+    const elements = setup();
+    userEvent.type(elements.inputs.email, "joe.bloggs"); // missing password
+    fireEvent.submit(elements.submit);
+    await waitFor(() =>
+      expect(
+        screen.queryByText("Please enter a valid email address")
+      ).toBeInTheDocument()
+    );
+  });
 });
