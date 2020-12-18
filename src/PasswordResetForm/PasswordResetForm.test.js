@@ -34,7 +34,7 @@ describe("PasswordResetForm", () => {
   it("shows error message with invalid email", async () => {
     const onSubmit = jest.fn();
     const elements = setup({ onSubmit });
-    userEvent.type(elements.inputs.email, "joe.bloggs"); // invalid email
+    userEvent.type(elements.inputs.email, "joe.bloggs"); // incorrect email address format
     fireEvent.submit(elements.submit);
     await waitFor(() =>
       expect(
@@ -44,7 +44,7 @@ describe("PasswordResetForm", () => {
   });
   it("displays error message to user on validation fail", async () => {
     const elements = setup();
-    userEvent.type(elements.inputs.email, "joe.bloggs"); // missing password
+    userEvent.type(elements.inputs.email, "joe.bloggs"); // incorrect email address format
     fireEvent.submit(elements.submit);
     await waitFor(() =>
       expect(

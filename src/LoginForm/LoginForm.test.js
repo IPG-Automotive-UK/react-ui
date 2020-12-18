@@ -37,13 +37,13 @@ describe("LoginForm", () => {
   it("doesnt call callback on validation errors", async () => {
     const onLogin = jest.fn();
     const elements = setup({ onLogin });
-    userEvent.type(elements.inputs.email, "joe.bloggs"); // missing password
+    userEvent.type(elements.inputs.email, "joe.bloggs"); // incorrect email address format
     fireEvent.submit(elements.submit);
     await waitFor(() => expect(onLogin).not.toHaveBeenCalled());
   });
   it("displays error message to user on validation fail", async () => {
     const elements = setup();
-    userEvent.type(elements.inputs.email, "joe.bloggs"); // missing password
+    userEvent.type(elements.inputs.email, "joe.bloggs"); // incorrect email address format
     fireEvent.submit(elements.submit);
     await waitFor(() =>
       expect(
