@@ -47,8 +47,13 @@ To release a new version, follow these steps.
 
 3. Push the up-versioned release & tag to Git
 
-`git push`
-`git push --tags`
+   ```
+   git push
+   ```
+
+   ```
+   git push --tags
+   ```
 
 4. Run the publish command
 
