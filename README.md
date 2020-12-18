@@ -45,33 +45,35 @@ To release a new version, follow these steps.
 
    ```
 
-3. Push the up-versioned release & tag to Git
+3. Push the release and tag to Git
 
-   ```
+   ```bash
    git push
-   ```
 
    ```
+   
+   ```bash
    git push --tags
+
    ```
 
 4. Run the publish command
 
-Note: If publishing for the first time you will first need to login to npm
+   Note: If publishing for the first time you will need to login to npm
+   ```bash
+   npm login
 
-```bash
-npm login
-```
+   ```
 
-```bash
-npm publish --access=public
-```
+   ```bash
+   npm publish --access=public
+   ```
 
-Note: If publishing a prerelease ensure that it is tagged as next rather than latest
+    Note: If publishing a prerelease ensure that it is tagged as next rather than latest
 
-```
-npm publish --access=public --tag=next
-```
+    ```
+    npm publish --access=public --tag=next
+    ```
 
 5. Publish the release on GitHub
 
