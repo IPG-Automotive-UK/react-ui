@@ -57,15 +57,23 @@ To release a new version, follow these steps.
 
 4. Run the publish command
 
-   ```bash
-   npm publish --access=public
-   ```
+Note: If publishing for the first time you will first need to login to npm
 
-   Note: If publishing a prerelease ensure that it is tagged as next rather than latest
+```bash
+npm login
+```
 
-   ```
-   npm publish --access=public --tag=next
-   ```
+```bash
+npm publish --access=public
+```
+
+Note: If publishing a prerelease ensure that it is tagged as next rather than latest
+
+```
+npm publish --access=public --tag=next
+```
+
+5. Publish the release on GitHub
 
 ## License
 
