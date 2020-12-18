@@ -15,12 +15,12 @@ npm install --save @ipguk/react-ui
 For a list of supported components see the [documentation](https://ipguk-react-ui.netlify.app/). The basic syntax for usage is shown below for a generic "Component".
 
 ```jsx
-import React from 'react'
+import React from "react";
 
-import { Component } from '@ipguk/react-ui'
+import { Component } from "@ipguk/react-ui";
 
 function Example() {
-  return <Component>Here we go</Component>
+  return <Component>Here we go</Component>;
 }
 ```
 
@@ -37,17 +37,27 @@ To release a new version, follow these steps.
    ```bash
    npm test
    ```
+
 2. Up version the package using
 
    ```bash
    npm version major|minor|patch|prerelease
 
-3. Run the publish command.
-   
+   ```
+
+3. Push the up-versioned release & tag to Git
+
+`git push`
+`git push --tags`
+
+4. Run the publish command
+
    ```bash
    npm publish --access=public
    ```
-   Note: If publishing a prerelease ensure that it is tagged as next rather than latest 
+
+   Note: If publishing a prerelease ensure that it is tagged as next rather than latest
+
    ```
    npm publish --access=public --tag=next
    ```
