@@ -10,12 +10,27 @@ export default {
 
 const Template = args => {
   const [open, setOpen] = React.useState(false);
+  const [actionText, setActionText] = React.useState(args.actionText);
+  const [autoHideDuration, setAutoHideDuration] = React.useState(
+    args.autoHideDuration
+  );
   const onClose = () => setOpen(false);
+
+  React.useEffect(() => {
+    setActionText(args.actionText);
+  }, [args.actionText]);
+
+  React.useEffect(() => {
+    setAutoHideDuration(args.autoHideDuration);
+  }, [args.autoHideDuration]);
   return (
     <>
       <Button onClick={() => setOpen(true)}>Open snackbar</Button>
       <Snackbar
         {...args}
+        autoHideDuration={autoHideDuration}
+        actionText={actionText}
+        actionCallback={action("onAction")}
         open={open}
         onClose={args => {
           onClose();
