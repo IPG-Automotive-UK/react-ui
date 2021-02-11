@@ -9,6 +9,9 @@ export default {
 
 const Template = args => {
   const [value, setValue] = React.useState(args.value);
+  React.useEffect(() => {
+    setValue(args.value);
+  }, [args.value]);
   const onChange = event => setValue(event.target.value);
   return <Select {...args} onChange={onChange} value={value} />;
 };
