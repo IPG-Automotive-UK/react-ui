@@ -10,6 +10,11 @@ export default {
 
 const Template = args => {
   const [open, setOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    setOpen(args.open);
+  }, [args.open]);
+
   return (
     <>
       <Button onClick={() => setOpen(true)}>Open dialog</Button>
