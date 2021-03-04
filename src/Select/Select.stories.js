@@ -3,6 +3,9 @@ import React from "react";
 import Select from "./Select";
 
 export default {
+  argTypes: {
+    value: { type: "string" }
+  },
   component: Select,
   title: "General/Select"
 };
