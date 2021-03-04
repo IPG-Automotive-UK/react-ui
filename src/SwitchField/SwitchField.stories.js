@@ -9,6 +9,11 @@ export default {
 
 const Template = args => {
   const [checked, setChecked] = React.useState(false);
+
+  React.useEffect(() => {
+    setChecked(args.checked);
+  }, [args.checked]);
+
   return (
     <SwitchField
       {...args}
