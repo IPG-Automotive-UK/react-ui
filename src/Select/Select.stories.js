@@ -21,6 +21,7 @@ const Template = args => {
 
 export const Default = Template.bind({});
 Default.args = {
+  error: false,
   helperText: "What is your selection going to be?",
   label: "Select an option",
   options: ["Option A", "Option B", "Option C"],

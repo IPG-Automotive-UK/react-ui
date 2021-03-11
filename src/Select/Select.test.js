@@ -42,10 +42,8 @@ describe("Select", () => {
     await selectMaterialUiSelectOption(container, value);
     expect(onChange).toHaveReturnedWith(value);
   });
-  test("shows error if no selection", () => {
-    const { container } = render(
-      <SelectWithState options={options} value="" required />
-    );
+  test("shows error state", () => {
+    const { container } = render(<SelectWithState error options={options} />);
     const inputBase = container.querySelector(".MuiInputBase-root");
     expect(inputBase).toHaveClass("Mui-error");
   });

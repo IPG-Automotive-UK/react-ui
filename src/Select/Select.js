@@ -6,6 +6,7 @@ import React from "react";
  * Select components are used for collecting user provided information from a list of options.
  */
 export default function Select({
+  error = false,
   disabled = false,
   helperText,
   label,
@@ -23,7 +24,7 @@ export default function Select({
       select
       required={required}
       variant={variant}
-      error={required && !value}
+      error={error}
       margin={margin}
       fullWidth
       label={label}
@@ -48,6 +49,10 @@ Select.propTypes = {
    * If true, the label, input and helper text should be displayed in a disabled state.
    */
   disabled: PropTypes.bool,
+  /**
+   * If true, the component will display an error state.
+   */
+  error: PropTypes.bool,
   /**
    * Helper text to display below input.
    */
