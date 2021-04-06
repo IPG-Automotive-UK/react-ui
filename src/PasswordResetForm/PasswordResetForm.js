@@ -7,14 +7,18 @@ import {
 } from "@material-ui/core";
 import PropTypes from "prop-types";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useMaterialForm } from "../utils/form";
 
 /**
  * Password reset form
  */
 export default function PasswordResetForm({ loading, onSubmit }) {
   // form state
-  const { register, errors, handleSubmit } = useForm({
+  const {
+    register,
+    formState: { errors },
+    handleSubmit
+  } = useMaterialForm({
     mode: "onSubmit"
   });
 
@@ -27,20 +31,19 @@ export default function PasswordResetForm({ loading, onSubmit }) {
             required
             fullWidth
             label="Email Address"
-            name="email"
             autoComplete="email"
             autoFocus={!loading}
             inputProps={{ "aria-label": "email" }}
-            inputRef={register({
+            error={Boolean(errors.email)}
+            helperText={errors.email && errors.email.message}
+            disabled={loading}
+            {...register("email", {
               pattern: {
                 message: "Please enter a valid email address",
                 value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
               },
               required: true
             })}
-            error={Boolean(errors.email)}
-            helperText={errors.email && errors.email.message}
-            disabled={loading}
           />
         </Grid>
       </Grid>

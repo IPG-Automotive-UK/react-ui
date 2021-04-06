@@ -10,9 +10,10 @@ import {
   Select,
   TextField
 } from "@material-ui/core";
-import { Controller, useForm } from "react-hook-form";
+import { Controller } from "react-hook-form";
 import PropTypes from "prop-types";
 import React from "react";
+import { useMaterialForm } from "../utils/form";
 import zxcvbn from "zxcvbn";
 
 /**
@@ -24,7 +25,13 @@ export default function RegistrationForm({
   onRegister
 }) {
   // form state
-  const { register, errors, handleSubmit, watch, control } = useForm({
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    watch,
+    control
+  } = useMaterialForm({
     mode: "onTouched"
   });
 
@@ -55,9 +62,9 @@ export default function RegistrationForm({
             label="First Name"
             autoFocus={!loading}
             inputProps={{ "aria-label": "firstName" }}
-            inputRef={register({ required: true })}
             error={Boolean(errors.firstName)}
             disabled={loading}
+            {...register("firstName", { required: true })}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -67,12 +74,11 @@ export default function RegistrationForm({
             required
             fullWidth
             label="Last Name"
-            name="lastName"
             autoComplete="lname"
             inputProps={{ "aria-label": "lastName" }}
-            inputRef={register({ required: true })}
             error={Boolean(errors.lastName)}
             disabled={loading}
+            {...register("lastName", { required: true })}
           />
         </Grid>
         <Grid item xs={12}>
@@ -82,19 +88,18 @@ export default function RegistrationForm({
             required
             fullWidth
             label="Email Address"
-            name="email"
             autoComplete="username"
             inputProps={{ "aria-label": "email" }}
-            inputRef={register({
+            error={Boolean(errors.email)}
+            helperText={errors?.email?.message}
+            disabled={loading}
+            {...register("email", {
               pattern: {
                 message: "Please enter a valid email address",
                 value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
               },
               required: true
             })}
-            error={Boolean(errors.email)}
-            helperText={errors?.email?.message}
-            disabled={loading}
           />
         </Grid>
         <Grid item xs={12}>
@@ -107,15 +112,19 @@ export default function RegistrationForm({
           >
             <InputLabel>Team</InputLabel>
             <Controller
-              as={
-                <Select inputProps={{ "aria-label": "team" }} labelWidth={50}>
+              render={({ field }) => (
+                <Select
+                  inputProps={{ "aria-label": "team" }}
+                  labelWidth={50}
+                  {...field}
+                >
                   {teams.map(team => (
                     <MenuItem value={team} key={team}>
                       {team}
                     </MenuItem>
                   ))}
                 </Select>
-              }
+              )}
               name="team"
               rules={{ required: true }}
               control={control}
@@ -128,13 +137,15 @@ export default function RegistrationForm({
             variant="outlined"
             required
             fullWidth
-            name="password"
             id="password"
             label="Password"
             type="password"
             autoComplete="new-password"
             inputProps={{ "aria-label": "password" }}
-            inputRef={register({
+            error={Boolean(errors.password)}
+            helperText={errors?.password?.message}
+            disabled={loading}
+            {...register("password", {
               required: true,
               validate: value => {
                 const result = zxcvbn(value);
@@ -146,9 +157,6 @@ export default function RegistrationForm({
                 );
               }
             })}
-            error={Boolean(errors.password)}
-            helperText={errors?.password?.message}
-            disabled={loading}
           />
           {score.current != null && (
             <FormHelperText
@@ -165,20 +173,19 @@ export default function RegistrationForm({
             variant="outlined"
             required
             fullWidth
-            name="passwordRepeat"
             id="passwordRepeat"
             label="Confirm Password"
             type="password"
             autoComplete="new-password"
             inputProps={{ "aria-label": "passwordRepeat" }}
-            inputRef={register({
+            error={Boolean(errors.passwordRepeat)}
+            helperText={errors?.passwordRepeat?.message}
+            disabled={loading}
+            {...register("passwordRepeat", {
               required: true,
               validate: value =>
                 value === password.current || "Password does not match"
             })}
-            error={Boolean(errors.passwordRepeat)}
-            helperText={errors?.passwordRepeat?.message}
-            disabled={loading}
           />
         </Grid>
       </Grid>
