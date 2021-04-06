@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 import PropTypes from "prop-types";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useMaterialForm } from "../utils/form";
 import zxcvbn from "zxcvbn";
 
 /**
@@ -16,7 +16,12 @@ import zxcvbn from "zxcvbn";
  */
 export default function PasswordChangeForm({ loading, onSubmit }) {
   // form state
-  const { register, errors, handleSubmit, watch } = useForm({
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    watch
+  } = useMaterialForm({
     mode: "onTouched"
   });
 
@@ -40,13 +45,15 @@ export default function PasswordChangeForm({ loading, onSubmit }) {
             variant="outlined"
             required
             fullWidth
-            name="password"
             id="password"
             label="New password"
             type="password"
             autoComplete="new-password"
             inputProps={{ "aria-label": "password" }}
-            inputRef={register({
+            error={Boolean(errors.password)}
+            helperText={errors?.password?.message}
+            disabled={loading}
+            {...register("password", {
               required: true,
               validate: value => {
                 const result = zxcvbn(value);
@@ -58,9 +65,6 @@ export default function PasswordChangeForm({ loading, onSubmit }) {
                 );
               }
             })}
-            error={Boolean(errors.password)}
-            helperText={errors?.password?.message}
-            disabled={loading}
           />
           {score.current != null && (
             <FormHelperText
@@ -83,14 +87,14 @@ export default function PasswordChangeForm({ loading, onSubmit }) {
             type="password"
             autoComplete="new-password"
             inputProps={{ "aria-label": "passwordRepeat" }}
-            inputRef={register({
+            error={Boolean(errors.passwordRepeat)}
+            helperText={errors?.passwordRepeat?.message}
+            disabled={loading}
+            {...register("passwordRepeat", {
               required: true,
               validate: value =>
                 value === password.current || "Password does not match"
             })}
-            error={Boolean(errors.passwordRepeat)}
-            helperText={errors?.passwordRepeat?.message}
-            disabled={loading}
           />
         </Grid>
       </Grid>

@@ -16,7 +16,7 @@ import {
 import { Alert } from "@material-ui/lab";
 import CloseIcon from "@material-ui/icons/Close";
 import PropTypes from "prop-types";
-import { useForm } from "react-hook-form";
+import { useMaterialForm } from "../utils/form";
 import zxcvbn from "zxcvbn";
 
 /**
@@ -31,7 +31,12 @@ export default function PasswordChangeDialog({
   successMessage = "Password succesfully changed."
 }) {
   // form state
-  const { register, errors, handleSubmit, watch } = useForm({
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    watch
+  } = useMaterialForm({
     mode: "onTouched"
   });
 
@@ -42,7 +47,7 @@ export default function PasswordChangeDialog({
   // create score ref so that we avoid multiple calculations
   const score = React.useRef();
   React.useEffect(() => {
-    if (!password.current.length) {
+    if (!password.current) {
       score.current = null;
     }
   });
@@ -60,19 +65,16 @@ export default function PasswordChangeDialog({
                   variant="outlined"
                   required
                   fullWidth
-                  name="currentPassword"
                   id="currentPassword"
                   label="Current password"
                   type="password"
                   autoComplete="off"
                   inputProps={{ "aria-label": "currentPassword" }}
-                  inputRef={register({
-                    required: true
-                  })}
                   error={Boolean(errors.currentPassword)}
                   helperText={errors?.currentPassword?.message}
                   disabled={status === "loading"}
                   style={{ marginBottom: 16 }}
+                  {...register("currentPassword", { required: true })}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -80,13 +82,15 @@ export default function PasswordChangeDialog({
                   variant="outlined"
                   required
                   fullWidth
-                  name="newPassword"
                   id="newPassword"
                   label="New password"
                   type="password"
                   autoComplete="new-password"
                   inputProps={{ "aria-label": "newPassword" }}
-                  inputRef={register({
+                  error={Boolean(errors.newPassword)}
+                  helperText={errors?.newPassword?.message}
+                  disabled={status === "loading"}
+                  {...register("newPassword", {
                     required: true,
                     validate: value => {
                       const result = zxcvbn(value);
@@ -98,9 +102,6 @@ export default function PasswordChangeDialog({
                       );
                     }
                   })}
-                  error={Boolean(errors.newPassword)}
-                  helperText={errors?.newPassword?.message}
-                  disabled={status === "loading"}
                 />
                 {score.current != null && (
                   <FormHelperText
@@ -117,20 +118,19 @@ export default function PasswordChangeDialog({
                   variant="outlined"
                   required
                   fullWidth
-                  name="newPasswordRepeat"
                   id="newPasswordRepeat"
                   label="Confirm new password"
                   type="password"
                   autoComplete="new-password"
                   inputProps={{ "aria-label": "newPasswordRepeat" }}
-                  inputRef={register({
+                  error={Boolean(errors.newPasswordRepeat)}
+                  helperText={errors?.newPasswordRepeat?.message}
+                  disabled={status === "loading"}
+                  {...register("newPasswordRepeat", {
                     required: true,
                     validate: value =>
                       value === password.current || "Password does not match"
                   })}
-                  error={Boolean(errors.newPasswordRepeat)}
-                  helperText={errors?.newPasswordRepeat?.message}
-                  disabled={status === "loading"}
                 />
               </Grid>
             </Grid>

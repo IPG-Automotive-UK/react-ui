@@ -7,14 +7,18 @@ import {
 } from "@material-ui/core";
 import PropTypes from "prop-types";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useMaterialForm } from "../utils/form";
 
 /**
  * Login form
  */
 export default function LoginForm({ loading = false, onLogin = () => {} }) {
   // form state
-  const { register, handleSubmit, errors } = useForm({ mode: "onSubmit" });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useMaterialForm({ mode: "onSubmit" });
 
   // return form
   return (
@@ -26,20 +30,19 @@ export default function LoginForm({ loading = false, onLogin = () => {} }) {
             required
             fullWidth
             label="Email Address"
-            name="email"
             autoComplete="username"
             autoFocus={!loading}
             inputProps={{ "aria-label": "email" }}
-            inputRef={register({
+            error={Boolean(errors.email)}
+            helperText={errors.email && errors.email.message}
+            disabled={loading}
+            {...register("email", {
               pattern: {
                 message: "Please enter a valid email address",
                 value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
               },
               required: true
             })}
-            error={Boolean(errors.email)}
-            helperText={errors.email && errors.email.message}
-            disabled={loading}
           />
         </Grid>
         <Grid item xs={12}>
@@ -47,14 +50,13 @@ export default function LoginForm({ loading = false, onLogin = () => {} }) {
             variant="outlined"
             required
             fullWidth
-            name="password"
             label="Password"
             type="password"
             autoComplete="current-password"
             inputProps={{ "aria-label": "password" }}
-            inputRef={register({ required: true })}
             error={Boolean(errors.password)}
             disabled={loading}
+            {...register("password", { required: true })}
           />
         </Grid>
       </Grid>
