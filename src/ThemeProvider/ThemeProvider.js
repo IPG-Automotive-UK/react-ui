@@ -1,9 +1,9 @@
-import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import { MuiThemeProvider, createTheme } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import React from "react";
 
 // custom material-ui theme
-const theme = createMuiTheme({
+const theme = createTheme({
   overrides: {
     MuiIconButton: { root: { color: "#9e9e9e" } },
     MuiTableRow: {
