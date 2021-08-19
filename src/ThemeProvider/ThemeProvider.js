@@ -5,6 +5,11 @@ import React from "react";
 // custom material-ui theme
 const theme = createTheme({
   overrides: {
+    MuiAccordionSummary: {
+      root: {
+        "&$expanded": { marginBottom: -20 }
+      }
+    },
     MuiIconButton: { root: { color: "#9e9e9e" } },
     MuiTableRow: {
       root: {
