@@ -8,7 +8,12 @@ export default function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://ipg-automotive.com/">
+      <Link
+        color="inherit"
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://ipg-automotive.com/"
+      >
         IPG Automotive
       </Link>{" "}
       {new Date().getFullYear()}
