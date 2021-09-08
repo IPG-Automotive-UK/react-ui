@@ -7,8 +7,8 @@ import React from "react";
  */
 describe("Loading", () => {
   test("can set the label", () => {
-    // const newLabel = "This is a test";
-    // render(<Loading label={newLabel} />);
-    // expect(screen.getByText(newLabel));
+    const newLabel = "This is a test";
+    render(<Loading label={newLabel} />);
+    expect(screen.getByText(newLabel));
   });
 });
