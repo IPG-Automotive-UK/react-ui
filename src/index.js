@@ -1,4 +1,5 @@
 export { default as Copyright } from "./Copyright";
+export { default as Loading } from "./Loading";
 export { default as LoginForm } from "./LoginForm";
 export { default as PasswordChangeDialog } from "./PasswordChangeDialog";
 export { default as PasswordChangeForm } from "./PasswordChangeForm";
@@ -12,4 +13,3 @@ export { SnackbarProvider, useSnackbar } from "./SnackbarProvider";
 export { default as SwitchField } from "./SwitchField";
 export { default as ThemeProvider } from "./ThemeProvider";
 export { default as UserMenu } from "./UserMenu";
-export { default as Loading } from "./Loading";
