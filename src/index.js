@@ -12,3 +12,4 @@ export { SnackbarProvider, useSnackbar } from "./SnackbarProvider";
 export { default as SwitchField } from "./SwitchField";
 export { default as ThemeProvider } from "./ThemeProvider";
 export { default as UserMenu } from "./UserMenu";
+export { default as Loading } from "./Loading";
