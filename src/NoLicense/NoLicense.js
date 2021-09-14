@@ -3,10 +3,7 @@ import LockIcon from "@material-ui/icons/Lock";
 import PropTypes from "prop-types";
 import React from "react";
 
-export default function NoLicense({
-  labelHeader = "NGD license",
-  labelBody = "No license found. Please retry."
-}) {
+export default function NoLicense({ labelHeader, labelBody }) {
   // return components
   return (
     <Box height="100%" width="100%" display="flex">
