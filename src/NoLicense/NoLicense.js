@@ -3,7 +3,7 @@ import LockIcon from "@material-ui/icons/Lock";
 import PropTypes from "prop-types";
 import React from "react";
 
-export default function NoLicensePage({
+export default function NoLicense({
   labelHeader = "NGD license",
   labelBody = "No license found. Please retry."
 }) {
@@ -30,10 +30,14 @@ export default function NoLicensePage({
 }
 
 // prop types
-NoLicensePage.propTypes = {
+NoLicense.propTypes = {
   /**
-   * Message to diplay alongside the icon
+   * Message to display below the header text
    */
   labelBody: PropTypes.string,
+
+  /**
+   * Message to diplay alongside the icon (header)
+   */
   labelHeader: PropTypes.string
 };

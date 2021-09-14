@@ -1,6 +1,7 @@
 export { default as Copyright } from "./Copyright";
 export { default as Loading } from "./Loading";
 export { default as LoginForm } from "./LoginForm";
+export { default as NoLicense } from "./NoLicense";
 export { default as PasswordChangeDialog } from "./PasswordChangeDialog";
 export { default as PasswordChangeForm } from "./PasswordChangeForm";
 export { default as PasswordResetForm } from "./PasswordResetForm";
