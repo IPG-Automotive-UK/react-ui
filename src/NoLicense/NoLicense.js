@@ -9,16 +9,14 @@ export default function NoLicense({
 }) {
   // return components
   return (
-    <Box height="100%" width="100%" display="flex" flexDirection="column">
-      <Typography color="textSecondary" display="inline" variant="h6">
-        <Box display="flex">
-          <Box display="flex" alignItems="center">
-            <LockIcon color="action" fontSize="inherit" />
-          </Box>
+    <Box height="100%" width="100%" display="flex">
+      <Box display="flex" flexDirection="column" alignItems="centre">
+        <LockIcon color="action" fontSize="medium" />
+      </Box>
+      <Box display="flex" flexDirection="column">
+        <Typography color="textSecondary" display="inline" variant="h6">
           {labelHeader}
-        </Box>
-      </Typography>
-      <Box pl={2.5}>
+        </Typography>
         {labelHeader && labelHeader.length > 0 ? (
           <Typography color="textSecondary" display="inline" variant="body1">
             {labelBody}
