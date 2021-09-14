@@ -11,4 +11,7 @@ const Template = args => {
 };
 
 export const Default = Template.bind({});
-Default.args = { label: "No license found. Please retry." };
+Default.args = {
+  labelBody: "No license found. Please retry.",
+  labelHeader: "NGD license"
+};
