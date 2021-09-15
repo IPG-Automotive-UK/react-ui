@@ -3,7 +3,7 @@ import LockIcon from "@material-ui/icons/Lock";
 import PropTypes from "prop-types";
 import React from "react";
 
-export default function NoLicense({ labelHeader, labelBody }) {
+export default function NoLicense({ title, description }) {
   // return components
   return (
     <Box height="100%" width="100%" display="flex">
@@ -12,11 +12,11 @@ export default function NoLicense({ labelHeader, labelBody }) {
       </Box>
       <Box display="flex" flexDirection="column">
         <Typography color="textSecondary" display="inline" variant="h6">
-          {labelHeader}
+          {title}
         </Typography>
-        {labelHeader && labelHeader.length > 0 ? (
+        {title && title.length > 0 ? (
           <Typography color="textSecondary" display="inline" variant="body1">
-            {labelBody}
+            {description}
           </Typography>
         ) : null}
       </Box>
@@ -27,12 +27,12 @@ export default function NoLicense({ labelHeader, labelBody }) {
 // prop types
 NoLicense.propTypes = {
   /**
-   * Message to display below the header text
+   * Message to display below the title
    */
-  labelBody: PropTypes.string,
+  description: PropTypes.string,
 
   /**
-   * Message to diplay alongside the icon (header)
+   * Message to diplay alongside the icon (title)
    */
-  labelHeader: PropTypes.string
+  title: PropTypes.string
 };

@@ -7,15 +7,15 @@ import React from "react";
  */
 describe("NoLicense", () => {
   test("can set header", () => {
-    const newHeader = "This is a test";
-    render(<NoLicense labelHeader={newHeader} />);
-    expect(screen.getByText(newHeader));
+    const newTitle = "This is a test";
+    render(<NoLicense title={newTitle} />);
+    expect(screen.getByText(newTitle));
   });
 
   test("can set labels", () => {
-    const newHeader = "This is new header label";
-    const newBody = "This is new body label";
-    render(<NoLicense labelHeader={newHeader} labelBody={newBody} />);
-    expect(screen.getByText(newHeader, newBody));
+    const newTitle = "This is new header label";
+    const newDescription = "This is new body label";
+    render(<NoLicense title={newTitle} description={newDescription} />);
+    expect(screen.getByText(newTitle, newDescription));
   });
 });
