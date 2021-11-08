@@ -1,19 +1,14 @@
 import { ArrowDropDown, ArrowRight } from "@mui/icons-material";
-import { Badge, Box, Collapse, ListItem, ListItemIcon, ListItemText } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
+import {
+  Badge,
+  Box,
+  Collapse,
+  ListItem,
+  ListItemIcon,
+  ListItemText
+} from "@mui/material";
 import PropTypes from "prop-types";
 import React from "react";
-
-// styling
-const useStyles = makeStyles(theme => ({
-  badge: {
-    marginRight: theme.spacing(2)
-  },
-  nested: {
-    paddingLeft: theme.spacing(4)
-  },
-  selectedText: { fontWeight: 500 }
-}));
 
 /**
  * Sidebar list item with icon.
@@ -30,13 +25,12 @@ export default function SidebarItem({
   selected = false
 }) {
   // use styles
-  const classes = useStyles();
   const color = selected ? "primary" : "inherit";
   const primaryTypographyProps = {
-    classes: {
-      colorPrimary: classes.selectedText
-    },
-    color
+    color,
+    sx: {
+      colorPrimary: { fontWeight: 500 }
+    }
   };
 
   // expansion state
@@ -69,14 +63,16 @@ export default function SidebarItem({
             badgeContent={count}
             max={9}
             color="primary"
-            className={classes.badge}
+            sx={{ marginRight: theme => theme.spacing(2) }}
           />
         ) : null}
         {children && (expanded ? <ArrowDropDown /> : <ArrowRight />)}
       </ListItem>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         {React.Children.map(children, child =>
-          React.cloneElement(child, { className: classes.nested })
+          React.cloneElement(child, {
+            sx: { paddingLeft: theme => theme.spacing(4) }
+          })
         )}
       </Collapse>
     </Box>

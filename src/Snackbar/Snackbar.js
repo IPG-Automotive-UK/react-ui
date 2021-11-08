@@ -1,10 +1,13 @@
-import { Button, IconButton, Snackbar as MuiSnackbar, SnackbarContent } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
+import {
+  Button,
+  IconButton,
+  Snackbar as MuiSnackbar,
+  SnackbarContent
+} from "@mui/material";
 import { CheckCircle, Close, Error, Info, Warning } from "@mui/icons-material";
 import { amber, green } from "@mui/material/colors";
 import PropTypes from "prop-types";
 import React from "react";
-import clsx from "clsx";
 
 // icon map
 const icons = {
@@ -15,24 +18,22 @@ const icons = {
 };
 
 // styling
-const useStyles = makeStyles(theme => ({
+const sx = {
   action: {
     color: "#fff"
   },
   error: {
-    backgroundColor: theme.palette.error.dark,
+    backgroundColor: theme => theme.palette.error.dark,
     color: "#fff"
   },
   icon: {
     float: "left",
-    fontSize: 20
-  },
-  iconVariant: {
-    marginRight: theme.spacing(1),
+    fontSize: 20,
+    marginRight: theme => theme.spacing(1),
     opacity: 0.9
   },
   info: {
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme => theme.palette.primary.main,
     color: "#fff"
   },
   success: {
@@ -43,7 +44,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: amber[700],
     color: "#fff"
   }
-}));
+};
 
 /**
  * Snackbars provide brief messages about app processes. The component is also known as a toast.
@@ -57,9 +58,6 @@ export default function Snackbar({
   open,
   variant = "info"
 }) {
-  // styling
-  const classes = useStyles();
-
   // icon
   const Icon = icons[variant];
 
@@ -74,11 +72,11 @@ export default function Snackbar({
     actionText && actionCallback ? (
       <Button
         key="action"
-        className={classes.action}
         onClick={event => {
           handleClose(event, "action");
           actionCallback(event);
         }}
+        sx={sx.action}
       >
         {actionText}
       </Button>
@@ -96,10 +94,10 @@ export default function Snackbar({
       open={open}
     >
       <SnackbarContent
-        className={classes[variant]}
+        sx={sx[variant]}
         message={
-          <span className={classes.message}>
-            <Icon className={clsx([classes.icon, classes.iconVariant])} />
+          <span sx={sx.message}>
+            <Icon sx={sx.icon} />
             {message}
           </span>
         }
@@ -109,9 +107,10 @@ export default function Snackbar({
             key="close"
             color="inherit"
             onClick={handleClose}
-            className={classes.action}
-            size="large">
-            <Close className={classes.icon} />
+            size="large"
+            sx={sx.action}
+          >
+            <Close sx={sx.icon} />
           </IconButton>
         ]}
       />

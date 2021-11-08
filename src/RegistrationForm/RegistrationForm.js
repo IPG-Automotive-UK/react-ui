@@ -114,11 +114,7 @@ export default function RegistrationForm({
             <InputLabel>Team</InputLabel>
             <Controller
               render={({ field }) => (
-                <Select
-                  inputProps={{ "aria-label": "team" }}
-                  labelWidth={50}
-                  {...field}
-                >
+                <Select inputProps={{ "aria-label": "team" }} {...field}>
                   {teams.map(team => (
                     <MenuItem value={team} key={team}>
                       {team}
