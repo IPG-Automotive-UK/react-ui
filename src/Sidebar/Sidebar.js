@@ -12,18 +12,19 @@ function Sidebar({ logoSrc, children, appVersion }) {
           alignItems: "center",
           color: theme => theme.palette.text.secondary,
           display: "flex",
-          padding: theme => theme.spacing(0, 2)
+          padding: theme => theme.spacing(2)
         }}
       >
         {logoSrc && (
-          <img
-            src={logoSrc}
+          <Box
             sx={{
               height: 24,
               marginRight: theme => theme.spacing(3),
               width: 30
             }}
-          />
+          >
+            <img src={logoSrc} />
+          </Box>
         )}
         <Typography>IPG Automotive</Typography>
       </Box>
