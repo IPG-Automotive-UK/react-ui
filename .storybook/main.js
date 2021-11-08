@@ -7,5 +7,5 @@ module.exports = {
     "@storybook/addon-storysource"
   ],
   features: { modernInlineRender: true },
-  staticDir: "../static"
+  staticDirs: ["../static"]
 };
