@@ -1,3 +1,4 @@
+export { default as Autocomplete } from "./Autocomplete";
 export { default as Copyright } from "./Copyright";
 export { default as Loading } from "./Loading";
 export { default as LoginForm } from "./LoginForm";

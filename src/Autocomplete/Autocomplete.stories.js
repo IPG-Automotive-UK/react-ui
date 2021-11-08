@@ -1,13 +1,13 @@
+import Autocomplete from "./Autocomplete";
 import React from "react";
-
-import Select from "./Select";
+import { action } from "@storybook/addon-actions";
 
 export default {
   argTypes: {
     value: { type: "string" }
   },
-  component: Select,
-  title: "General/Select"
+  component: Autocomplete,
+  title: "General/Autocomplete"
 };
 
 const Template = args => {
@@ -15,8 +15,11 @@ const Template = args => {
   React.useEffect(() => {
     setValue(args.value);
   }, [args.value]);
-  const onChange = event => setValue(event.target.value);
-  return <Select {...args} onChange={onChange} value={value} />;
+  const onChange = (event, value, reason) => {
+    setValue(value);
+    action("onChange")(event, value, reason);
+  };
+  return <Autocomplete {...args} onChange={onChange} value={value} />;
 };
 
 export const Default = Template.bind({});
