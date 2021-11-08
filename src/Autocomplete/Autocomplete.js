@@ -25,7 +25,7 @@ export default function Autocomplete({
       onChange={onChange}
       options={options}
       size={size}
-      value={value}
+      value={options.includes(value) ? value : undefined}
       renderInput={params => (
         <TextField
           {...params}
