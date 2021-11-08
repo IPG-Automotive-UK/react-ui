@@ -1,7 +1,6 @@
 import Autocomplete from ".";
 import React from "react";
 import { render } from "@testing-library/react";
-import { selectAutocompleteOption } from "../testUtils";
 
 // list of options to display
 const options = [
