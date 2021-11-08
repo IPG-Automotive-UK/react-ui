@@ -47,11 +47,4 @@ describe("Select", () => {
     const inputBase = container.querySelector(".MuiInputBase-root");
     expect(inputBase).toHaveClass("Mui-error");
   });
-  test("display empty if value is not a valid option", () => {
-    const { container } = render(
-      <AutocompleteWithState options={options} value="Invalid value" />
-    );
-    const baseComponent = container.querySelector(".MuiInputBase-input");
-    expect(baseComponent.value).toBe("");
-  });
 });
