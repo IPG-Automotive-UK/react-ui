@@ -1,47 +1,45 @@
-import { Box, Divider, Typography, makeStyles } from "@material-ui/core";
+import { Box, Divider, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import React from "react";
 
-// custom styling
-const useStyles = makeStyles(theme => ({
-  appVersion: {
-    color: theme.palette.text.secondary,
-    padding: theme.spacing(2)
-  },
-  icon: {
-    height: 24,
-    marginRight: theme.spacing(3),
-    width: 30
-  },
-  logoContainer: {
-    ...theme.mixins.toolbar,
-    alignItems: "center",
-    color: theme.palette.text.secondary,
-    display: "flex",
-    padding: theme.spacing(0, 2)
-  },
-  topDivider: {
-    margin: theme.spacing(0, 0, 1, 0)
-  }
-}));
-
 // sidebar component for app which displays logo, list of items and app version
 function Sidebar({ logoSrc, children, appVersion }) {
-  // use styles
-  const classes = useStyles();
-
   // define components
   return (
     <>
-      <Box className={classes.logoContainer}>
-        {logoSrc && <img src={logoSrc} className={classes.icon} />}
+      <Box
+        sx={{
+          alignItems: "center",
+          color: theme => theme.palette.text.secondary,
+          display: "flex",
+          padding: theme => theme.spacing(2)
+        }}
+      >
+        {logoSrc && (
+          <Box
+            sx={{
+              height: 24,
+              marginRight: theme => theme.spacing(3),
+              width: 30
+            }}
+          >
+            <img src={logoSrc} />
+          </Box>
+        )}
         <Typography>IPG Automotive</Typography>
       </Box>
-      <Divider className={classes.topDivider} />
+      <Divider sx={{ margin: theme => theme.spacing(0, 0, 1, 0) }} />
       {children}
       <Box flexGrow={1} />
       {appVersion && (
-        <Typography className={classes.appVersion}>{appVersion}</Typography>
+        <Typography
+          sx={{
+            color: theme => theme.palette.text.secondary,
+            padding: theme => theme.spacing(2)
+          }}
+        >
+          {appVersion}
+        </Typography>
       )}
     </>
   );

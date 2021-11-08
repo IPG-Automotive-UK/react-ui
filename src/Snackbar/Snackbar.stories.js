@@ -1,4 +1,4 @@
-import { Box, Button, LinearProgress } from "@material-ui/core";
+import { Box, Button, LinearProgress } from "@mui/material";
 import React from "react";
 import Snackbar from "./Snackbar";
 import { action } from "@storybook/addon-actions";

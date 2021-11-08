@@ -6,7 +6,7 @@ import {
   Grid,
   Switch,
   Typography
-} from "@material-ui/core";
+} from "@mui/material";
 import PropTypes from "prop-types";
 import React from "react";
 

@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import React from "react";
+import { StyledEngineProvider } from "@mui/material/styles";
 import ThemeProvider from "./";
 
 /**
@@ -8,9 +9,11 @@ import ThemeProvider from "./";
 describe("ThemeProvider", () => {
   test("renders children", () => {
     render(
-      <ThemeProvider>
-        <div data-testid="child">I'm a child</div>
-      </ThemeProvider>
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider>
+          <div data-testid="child">I'm a child</div>
+        </ThemeProvider>
+      </StyledEngineProvider>
     );
     const child = screen.getByTestId("child");
     expect(child).toBeInTheDocument();

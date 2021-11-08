@@ -6,11 +6,9 @@ import {
   ListItemText,
   Menu,
   MenuItem,
-  Typography,
-  makeStyles,
-  withStyles
-} from "@material-ui/core";
-import { ExitToApp, VpnKey } from "@material-ui/icons";
+  Typography
+} from "@mui/material";
+import { ExitToApp, VpnKey } from "@mui/icons-material";
 import {
   bindMenu,
   bindTrigger,
@@ -19,33 +17,31 @@ import {
 import PropTypes from "prop-types";
 import React from "react";
 
-const useStyles = makeStyles(theme => ({
+// styling
+const sx = {
   button: {
     height: 34,
     width: 34
   },
   divider: {
-    marginBottom: theme.spacing(1),
-    marginTop: theme.spacing(1)
+    marginBottom: theme => theme.spacing(1),
+    marginTop: theme => theme.spacing(1)
   },
   loggedInAs: {
-    padding: theme.spacing(1, 2)
-  },
-  menu: {
-    marginTop: theme.spacing(1)
-  },
-  noFocus: {
     "&:focus": {
       outline: "none"
-    }
+    },
+    padding: theme => theme.spacing(1, 2)
+  },
+  menu: {
+    marginTop: theme => theme.spacing(1)
   }
-}));
+};
 
 /**
  * User menu avatar and dropdown menu
  */
 export default function UserMenu({ username, onChangePassword, onLogout }) {
-  const classes = useStyles();
   const popupState = usePopupState({ popupId: "userMenu", variant: "popover" });
   const handleClick = cb => event => {
     popupState.close();
@@ -53,23 +49,19 @@ export default function UserMenu({ username, onChangePassword, onLogout }) {
   };
   return (
     <>
-      <IconButton className={classes.button} {...bindTrigger(popupState)}>
+      <IconButton {...bindTrigger(popupState)} size="large" sx={sx.button}>
         <UserAvatar username={username} />
       </IconButton>
       <Menu
         {...bindMenu(popupState)}
-        getContentAnchorEl={null}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
         transformOrigin={{ horizontal: "right", vertical: "top" }}
-        className={classes.menu}
+        sx={sx.menu}
       >
-        <Typography
-          className={`${classes.loggedInAs} ${classes.noFocus}`}
-          variant="body2"
-        >
+        <Typography sx={sx.loggedInAs} variant="body2">
           Logged in as <strong>{!username ? "Unknown" : username}</strong>
         </Typography>
-        <Divider className={classes.divider} />
+        <Divider sx={sx.divider} />
         <MenuItem onClick={handleClick(onChangePassword)}>
           <ListItemIcon>
             <VpnKey />
@@ -120,15 +112,7 @@ UserMenu.propTypes = {
  *
  * Provides custom styling and converts username to max 2 initials
  */
-const UserAvatar = withStyles(theme => ({
-  root: {
-    background: "none",
-    border: `2px solid ${theme.palette.background.paper}`,
-    fontSize: "13px",
-    height: 34,
-    width: 34
-  }
-}))(({ username, ...rest }) => {
+const UserAvatar = ({ username, ...rest }) => {
   const allInitials = (!username ? "?" : username)
     .split(" ")
     .map(s => s[0])
@@ -136,8 +120,21 @@ const UserAvatar = withStyles(theme => ({
     .toUpperCase();
   const initials =
     allInitials.length <= 2 ? allInitials : getFirstAndLastChars(allInitials);
-  return <Avatar {...rest}>{initials}</Avatar>;
-});
+  return (
+    <Avatar
+      {...rest}
+      sx={{
+        background: "none",
+        border: theme => `2px solid ${theme.palette.background.paper}`,
+        fontSize: "13px",
+        height: 34,
+        width: 34
+      }}
+    >
+      {initials}
+    </Avatar>
+  );
+};
 
 // returns the first and last chars of a string concatenated
 function getFirstAndLastChars(str) {

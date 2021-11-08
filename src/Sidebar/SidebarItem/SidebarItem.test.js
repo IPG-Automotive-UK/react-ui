@@ -1,5 +1,5 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import { Mail } from "@material-ui/icons";
+import { Mail } from "@mui/icons-material";
 import React from "react";
 import SidebarItem from "./";
 import UserEvent from "@testing-library/user-event";

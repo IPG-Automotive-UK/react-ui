@@ -1,5 +1,6 @@
 import * as React from "react";
 import {
+  Alert,
   Button,
   CircularProgress,
   Dialog,
@@ -10,11 +11,9 @@ import {
   IconButton,
   DialogTitle as MuiDialogTitle,
   TextField,
-  Typography,
-  withStyles
-} from "@material-ui/core";
-import { Alert } from "@material-ui/lab";
-import CloseIcon from "@material-ui/icons/Close";
+  Typography
+} from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import PropTypes from "prop-types";
 import { useMaterialForm } from "../utils/form";
 import zxcvbn from "zxcvbn";
@@ -213,35 +212,34 @@ PasswordChangeDialog.propTypes = {
 };
 
 // themeing for dialog title
-const dialogTitleStyles = theme => ({
+const dialogTitleStyles = {
   closeButton: {
-    color: theme.palette.grey[500],
+    color: theme => theme.palette.grey[500],
     position: "absolute",
-    right: theme.spacing(1),
-    top: theme.spacing(1)
+    right: theme => theme.spacing(1),
+    top: theme => theme.spacing(1)
   },
   root: {
     margin: 0,
-    padding: theme.spacing(2)
+    padding: theme => theme.spacing(2)
   }
-});
+};
 
 // Dialog title component with close button
-const DialogTitle = withStyles(dialogTitleStyles)(
-  ({ children, classes, onClose, ...other }) => {
-    return (
-      <MuiDialogTitle disableTypography className={classes.root} {...other}>
-        <Typography variant="h6">{children}</Typography>
-        {onClose ? (
-          <IconButton
-            aria-label="close"
-            className={classes.closeButton}
-            onClick={onClose}
-          >
-            <CloseIcon />
-          </IconButton>
-        ) : null}
-      </MuiDialogTitle>
-    );
-  }
-);
+const DialogTitle = ({ children, onClose, ...other }) => {
+  return (
+    <MuiDialogTitle sx={dialogTitleStyles.root} {...other}>
+      <Typography variant="h6">{children}</Typography>
+      {onClose ? (
+        <IconButton
+          aria-label="close"
+          onClick={onClose}
+          size="large"
+          sx={dialogTitleStyles.closeButton}
+        >
+          <CloseIcon />
+        </IconButton>
+      ) : null}
+    </MuiDialogTitle>
+  );
+};

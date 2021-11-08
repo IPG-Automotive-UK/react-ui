@@ -1,4 +1,7 @@
-import { MuiThemeProvider, createTheme } from "@material-ui/core/styles";
+import {
+  ThemeProvider as MuiThemeProvider,
+  createTheme
+} from "@mui/material/styles";
 import PropTypes from "prop-types";
 import React from "react";
 

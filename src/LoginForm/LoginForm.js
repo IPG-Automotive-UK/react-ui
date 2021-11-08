@@ -1,10 +1,4 @@
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Grid,
-  TextField
-} from "@material-ui/core";
+import { Box, Button, CircularProgress, Grid, TextField } from "@mui/material";
 import PropTypes from "prop-types";
 import React from "react";
 import { useMaterialForm } from "../utils/form";

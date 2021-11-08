@@ -1,5 +1,5 @@
-import { Box, Typography } from "@material-ui/core";
-import LockIcon from "@material-ui/icons/Lock";
+import { Box, Typography } from "@mui/material";
+import LockIcon from "@mui/icons-material/Lock";
 import PropTypes from "prop-types";
 import React from "react";
 
