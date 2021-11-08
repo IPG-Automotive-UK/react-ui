@@ -3,35 +3,45 @@ import PropTypes from "prop-types";
 import React from "react";
 
 // sidebar component for app which displays logo, list of items and app version
-function Sidebar({ logoSrc, children, appVersion }) {
+function Sidebar({
+  appVersion,
+  children,
+  logoSrc,
+  showLogo = true,
+  showVersion = true
+}) {
   // define components
   return (
     <>
-      <Box
-        sx={{
-          alignItems: "center",
-          color: theme => theme.palette.text.secondary,
-          display: "flex",
-          padding: theme => theme.spacing(2)
-        }}
-      >
-        {logoSrc && (
+      {showLogo ? (
+        <>
           <Box
             sx={{
-              height: 24,
-              marginRight: theme => theme.spacing(3),
-              width: 30
+              alignItems: "center",
+              color: theme => theme.palette.text.secondary,
+              display: "flex",
+              padding: theme => theme.spacing(2)
             }}
           >
-            <img src={logoSrc} />
+            {logoSrc && (
+              <Box
+                sx={{
+                  height: 24,
+                  marginRight: theme => theme.spacing(3),
+                  width: 30
+                }}
+              >
+                <img src={logoSrc} />
+              </Box>
+            )}
+            <Typography>IPG Automotive</Typography>
           </Box>
-        )}
-        <Typography>IPG Automotive</Typography>
-      </Box>
-      <Divider sx={{ margin: theme => theme.spacing(0, 0, 1, 0) }} />
+          <Divider sx={{ margin: theme => theme.spacing(0, 0, 1, 0) }} />
+        </>
+      ) : null}
       {children}
       <Box flexGrow={1} />
-      {appVersion && (
+      {showVersion ? (
         <Typography
           sx={{
             color: theme => theme.palette.text.secondary,
@@ -40,7 +50,7 @@ function Sidebar({ logoSrc, children, appVersion }) {
         >
           {appVersion}
         </Typography>
-      )}
+      ) : null}
     </>
   );
 }
@@ -57,7 +67,15 @@ Sidebar.propTypes = {
   /**
    * Image source for logo displayed at top of sidebar
    */
-  logoSrc: PropTypes.string
+  logoSrc: PropTypes.string,
+  /**
+   * Boolean to determine if logo should be displayed at the top of the sidebar
+   */
+  showLogo: PropTypes.bool,
+  /**
+   * Boolean to determine if version should be displayed at the bottom of the sidebar
+   */
+  showVersion: PropTypes.bool
 };
 
 export default Sidebar;

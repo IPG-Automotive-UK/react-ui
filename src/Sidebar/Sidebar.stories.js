@@ -1,3 +1,4 @@
+import { Home, Mail, Person, Settings } from "@mui/icons-material";
 import {
   Default as SidebarItemDefault,
   Disabled as SidebarItemDisabled,
@@ -23,15 +24,34 @@ const Template = args => (
       display: "flex",
       flexDirection: "column",
       minHeight: 500,
-      width: 240
+      width: args.width || 240
     }}
   >
     <Sidebar {...args} />
   </div>
 );
 
+// default story
 export const Default = Template.bind({});
 Default.args = {
+  appVersion: `v${version}`,
+  children: (
+    <>
+      <SidebarItem {...SidebarItemDefault.args} />
+      <SidebarItem {...SidebarItemSelected.args} />
+      <SidebarDivider />
+      <SidebarItem {...SidebarItemDisabled.args} />
+      <SidebarItem {...SidebarItemWithCount.args} />
+    </>
+  ),
+  logoSrc: "/ipgLogoNoText.png",
+  showLogo: true,
+  showVersion: true
+};
+
+// hidden logo story
+export const HiddenLogo = Template.bind({});
+HiddenLogo.args = {
   appVersion: `v${version}`,
   children: (
     <>
@@ -44,5 +64,59 @@ Default.args = {
       <SidebarItem {...SidebarItemNested.args} />
     </>
   ),
-  logoSrc: "/ipgLogoNoText.png"
+  showLogo: false,
+  showVersion: true
+};
+
+// hidden version story
+export const HiddenVersion = Template.bind({});
+HiddenVersion.args = {
+  children: (
+    <>
+      <SidebarItem {...SidebarItemDefault.args} />
+      <SidebarItem {...SidebarItemSelected.args} />
+      <SidebarDivider />
+      <SidebarItem {...SidebarItemDisabled.args} />
+      <SidebarItem {...SidebarItemWithCount.args} />
+      <SidebarDivider />
+      <SidebarItem {...SidebarItemNested.args} />
+    </>
+  ),
+  logoSrc: "/ipgLogoNoText.png",
+  showLogo: true,
+  showVersion: false
+};
+
+// items only story
+export const ItemsOnly = Template.bind({});
+ItemsOnly.args = {
+  children: (
+    <>
+      <SidebarItem {...SidebarItemDefault.args} />
+      <SidebarItem {...SidebarItemSelected.args} />
+      <SidebarDivider />
+      <SidebarItem {...SidebarItemDisabled.args} />
+      <SidebarItem {...SidebarItemWithCount.args} />
+      <SidebarDivider />
+      <SidebarItem {...SidebarItemNested.args} />
+    </>
+  ),
+  showLogo: false,
+  showVersion: false
+};
+
+// icons only story
+export const IconsOnly = Template.bind({});
+IconsOnly.args = {
+  children: (
+    <>
+      <SidebarItem icon={<Home />} />
+      <SidebarItem icon={<Mail />} selected />
+      <SidebarItem icon={<Person />} />
+      <SidebarItem icon={<Settings />} />
+    </>
+  ),
+  showLogo: false,
+  showVersion: false,
+  width: 60
 };
