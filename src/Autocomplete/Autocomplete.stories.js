@@ -29,7 +29,7 @@ Default.args = {
   helperText: "What is your selection going to be?",
   label: "Select an option",
   margin: "normal",
-  options: ["Option A", "Option B", "Option C"],
+  options: ["Apple", "Apricot", "Pear"],
   required: true,
   size: "medium",
   variant: "outlined"
