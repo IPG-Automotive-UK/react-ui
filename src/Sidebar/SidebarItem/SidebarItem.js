@@ -1,13 +1,6 @@
-import { ArrowDropDown, ArrowRight } from "@material-ui/icons";
-import {
-  Badge,
-  Box,
-  Collapse,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  makeStyles
-} from "@material-ui/core";
+import { ArrowDropDown, ArrowRight } from "@mui/icons-material";
+import { Badge, Box, Collapse, ListItem, ListItemIcon, ListItemText } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
 import PropTypes from "prop-types";
 import React from "react";
 

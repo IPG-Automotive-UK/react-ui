@@ -9,7 +9,7 @@ import {
   MenuItem,
   Select,
   TextField
-} from "@material-ui/core";
+} from "@mui/material";
 import { Controller } from "react-hook-form";
 import PropTypes from "prop-types";
 import React from "react";

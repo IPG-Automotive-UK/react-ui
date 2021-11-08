@@ -7,10 +7,10 @@ import {
   Menu,
   MenuItem,
   Typography,
-  makeStyles,
-  withStyles
-} from "@material-ui/core";
-import { ExitToApp, VpnKey } from "@material-ui/icons";
+} from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import withStyles from '@mui/styles/withStyles';
+import { ExitToApp, VpnKey } from "@mui/icons-material";
 import {
   bindMenu,
   bindTrigger,
@@ -51,40 +51,38 @@ export default function UserMenu({ username, onChangePassword, onLogout }) {
     popupState.close();
     cb(event);
   };
-  return (
-    <>
-      <IconButton className={classes.button} {...bindTrigger(popupState)}>
-        <UserAvatar username={username} />
-      </IconButton>
-      <Menu
-        {...bindMenu(popupState)}
-        getContentAnchorEl={null}
-        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-        transformOrigin={{ horizontal: "right", vertical: "top" }}
-        className={classes.menu}
+  return <>
+    <IconButton className={classes.button} {...bindTrigger(popupState)} size="large">
+      <UserAvatar username={username} />
+    </IconButton>
+    <Menu
+      {...bindMenu(popupState)}
+      getContentAnchorEl={null}
+      anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+      transformOrigin={{ horizontal: "right", vertical: "top" }}
+      className={classes.menu}
+    >
+      <Typography
+        className={`${classes.loggedInAs} ${classes.noFocus}`}
+        variant="body2"
       >
-        <Typography
-          className={`${classes.loggedInAs} ${classes.noFocus}`}
-          variant="body2"
-        >
-          Logged in as <strong>{!username ? "Unknown" : username}</strong>
-        </Typography>
-        <Divider className={classes.divider} />
-        <MenuItem onClick={handleClick(onChangePassword)}>
-          <ListItemIcon>
-            <VpnKey />
-          </ListItemIcon>
-          <ListItemText>Change password</ListItemText>
-        </MenuItem>
-        <MenuItem onClick={handleClick(onLogout)}>
-          <ListItemIcon>
-            <ExitToApp />
-          </ListItemIcon>
-          <ListItemText>Logout</ListItemText>
-        </MenuItem>
-      </Menu>
-    </>
-  );
+        Logged in as <strong>{!username ? "Unknown" : username}</strong>
+      </Typography>
+      <Divider className={classes.divider} />
+      <MenuItem onClick={handleClick(onChangePassword)}>
+        <ListItemIcon>
+          <VpnKey />
+        </ListItemIcon>
+        <ListItemText>Change password</ListItemText>
+      </MenuItem>
+      <MenuItem onClick={handleClick(onLogout)}>
+        <ListItemIcon>
+          <ExitToApp />
+        </ListItemIcon>
+        <ListItemText>Logout</ListItemText>
+      </MenuItem>
+    </Menu>
+  </>;
 }
 
 // prop types

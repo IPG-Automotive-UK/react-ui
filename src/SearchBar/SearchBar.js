@@ -1,8 +1,9 @@
-import { IconButton, InputBase, Paper, makeStyles } from "@material-ui/core";
-import CloseIcon from "@material-ui/icons/Close";
+import { IconButton, InputBase, Paper } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import CloseIcon from "@mui/icons-material/Close";
 import PropTypes from "prop-types";
 import React from "react";
-import SearchIcon from "@material-ui/icons/Search";
+import SearchIcon from "@mui/icons-material/Search";
 
 const useStyles = makeStyles(theme => ({
   iconButton: {
@@ -44,7 +45,7 @@ export default function SearchBar({
         <IconButton
           onClick={() => onChange({ target: { value: "" } })}
           className={classes.iconButton}
-        >
+          size="large">
           <CloseIcon />
         </IconButton>
       ) : (

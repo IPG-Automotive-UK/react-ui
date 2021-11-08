@@ -11,10 +11,10 @@ import {
   DialogTitle as MuiDialogTitle,
   TextField,
   Typography,
-  withStyles
-} from "@material-ui/core";
-import { Alert } from "@material-ui/lab";
-import CloseIcon from "@material-ui/icons/Close";
+} from "@mui/material";
+import withStyles from '@mui/styles/withStyles';
+import { Alert } from '@mui/material';
+import CloseIcon from "@mui/icons-material/Close";
 import PropTypes from "prop-types";
 import { useMaterialForm } from "../utils/form";
 import zxcvbn from "zxcvbn";
@@ -237,7 +237,7 @@ const DialogTitle = withStyles(dialogTitleStyles)(
             aria-label="close"
             className={classes.closeButton}
             onClick={onClose}
-          >
+            size="large">
             <CloseIcon />
           </IconButton>
         ) : null}

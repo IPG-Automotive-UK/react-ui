@@ -4,7 +4,7 @@ import {
   CircularProgress,
   Grid,
   TextField
-} from "@material-ui/core";
+} from "@mui/material";
 import PropTypes from "prop-types";
 import React from "react";
 import { useMaterialForm } from "../utils/form";

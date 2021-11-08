@@ -1,12 +1,7 @@
-import {
-  Button,
-  IconButton,
-  Snackbar as MuiSnackbar,
-  SnackbarContent,
-  makeStyles
-} from "@material-ui/core";
-import { CheckCircle, Close, Error, Info, Warning } from "@material-ui/icons";
-import { amber, green } from "@material-ui/core/colors";
+import { Button, IconButton, Snackbar as MuiSnackbar, SnackbarContent } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import { CheckCircle, Close, Error, Info, Warning } from "@mui/icons-material";
+import { amber, green } from "@mui/material/colors";
 import PropTypes from "prop-types";
 import React from "react";
 import clsx from "clsx";
@@ -115,7 +110,7 @@ export default function Snackbar({
             color="inherit"
             onClick={handleClose}
             className={classes.action}
-          >
+            size="large">
             <Close className={classes.icon} />
           </IconButton>
         ]}
