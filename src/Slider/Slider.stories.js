@@ -19,7 +19,11 @@ const Template = args => {
     setValue(value);
     action("onChange")(event, value, activeThumb);
   };
-  return <Slider {...args} onChange={onChange} value={value} />;
+  return (
+    <div style={{ width: 500 }}>
+      <Slider {...args} onChange={onChange} value={value} />;
+    </div>
+  );
 };
 
 export const Default = Template.bind({});

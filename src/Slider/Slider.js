@@ -43,7 +43,7 @@ export default function Slider({
   value
 }) {
   return (
-    <Box sx={{ padding: "20px", width: "30%" }}>
+    <Box>
       <Typography>{title}</Typography>
       <MuiSlider
         defaultValue={defaultValue}
