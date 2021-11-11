@@ -1,33 +1,6 @@
 import { Box, Slider as MuiSlider, Typography } from "@mui/material";
 import React from "react";
 
-// const marks = [
-//   {
-//     label: "Start",
-//     value: 0
-//   },
-//   {
-//     label: "Step 1",
-//     value: 1
-//   },
-//   {
-//     label: "Step 2",
-//     value: 2
-//   },
-//   {
-//     label: "Step 3",
-//     value: 3
-//   },
-//   {
-//     label: "Step 4",
-//     value: 4
-//   },
-//   {
-//     label: "Step 5",
-//     value: 5
-//   }
-// ];
-
 /**
  * Discrete slider component
  */
@@ -37,23 +10,46 @@ export default function Slider({
   minValue,
   maxValue,
   onChange = () => {},
-  stepSize,
   predefValues,
+  stepSize,
+  showLabels = true,
   title,
   value
 }) {
+  // add ticks labels if they are not pre defined
+  const range = (start, stop, step) =>
+    Array.from(
+      { length: (stop - start) / step + 1 },
+      (_, i) => start + i * step
+    );
+
+  let marks = [];
+  let step = stepSize;
+  if (typeof predefValues === "boolean" && predefValues) {
+    range(minValue, maxValue, step).map(item => {
+      const thisMark = { label: String(item), value: item };
+      marks.push(thisMark);
+    });
+  } else {
+    marks = predefValues;
+    step = null;
+  }
+  if (!showLabels) {
+    marks = !false;
+  }
   return (
     <Box>
       <Typography>{title}</Typography>
       <MuiSlider
+        name="test"
         defaultValue={defaultValue}
         valueLabelDisplay={displayCurrentValue}
-        step={stepSize}
-        marks={predefValues}
+        step={step}
+        marks={marks}
         min={minValue}
         max={maxValue}
         onChange={onChange}
-        value={value}
+        value={typeof value !== "undefined" ? value : null}
         // orientation="horizontal"
       />
     </Box>
