@@ -16,10 +16,8 @@ const Template = args => {
     setValue(args.value);
   }, [args.value]);
   const onChange = (event, value, activeThumb) => {
-    if (value < args.maxValue || value > args.minValue) {
-      setValue(value);
-      action("onChange")(event, value, activeThumb);
-    }
+    setValue(value);
+    action("onChange")(event, value, activeThumb);
   };
   return (
     <div style={{ width: 500 }}>
@@ -31,7 +29,6 @@ const Template = args => {
 // default story
 export const Default = Template.bind({});
 Default.args = {
-  defaultValue: 1,
   displayCurrentValue: "auto",
   maxValue: 10,
   minValue: 1,
@@ -43,7 +40,6 @@ Default.args = {
 // custom labels story
 export const CustomLabels = Template.bind({});
 CustomLabels.args = {
-  defaultValue: 1,
   displayCurrentValue: "auto",
   maxValue: 10,
   minValue: 1,
