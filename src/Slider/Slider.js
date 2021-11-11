@@ -1,18 +1,18 @@
 import { Box, Slider as MuiSlider, Typography } from "@mui/material";
+import PropTypes from "prop-types";
 import React from "react";
 
 /**
  * Discrete slider component
  */
 export default function Slider({
-  defaultValue,
   displayCurrentValue = "auto",
-  minValue,
   maxValue,
+  minValue,
   onChange = () => {},
   predefValues,
-  stepSize,
   showLabels = true,
+  stepSize,
   title,
   value
 }) {
@@ -42,7 +42,6 @@ export default function Slider({
       <Typography>{title}</Typography>
       <MuiSlider
         name="test"
-        defaultValue={defaultValue}
         valueLabelDisplay={displayCurrentValue}
         step={step}
         marks={marks}
@@ -50,8 +49,56 @@ export default function Slider({
         max={maxValue}
         onChange={onChange}
         value={typeof value !== "undefined" ? value : null}
-        // orientation="horizontal"
+        orientation="horizontal"
       />
     </Box>
   );
 }
+
+Slider.propTypes = {
+  /**
+   * If auto the value label will display when the thumb is hovered;
+   * if on, will diplay persistently and if off will never display
+   */
+  displayCurrentValue: PropTypes.oneOf(["auto", "off", "on"]),
+  /**
+   * The maximum allowed value of the slider
+   */
+  maxValue: PropTypes.number,
+  /**
+   * The minimum allowed value of the slider
+   */
+  minValue: PropTypes.number,
+  /**
+   * Callback fired when the value is changed.
+   *
+   * **Signature**
+   * ```
+   * function(event: object, value: number) => void
+   * ```
+   * _event_: The event source of the callback. You can pull out the new value by accessing `event.target.value` (any).
+   * _value_: The new value.
+   */
+  onChange: PropTypes.func,
+  /**
+   * Indicates predeterminated values to wich the user can move the slider.
+   * It should contain objects with "value" and optional "label" keys.
+   */
+  predefValues: PropTypes.array,
+  /**
+   * If true, thicks' labels should be displayed
+   */
+  showLabels: PropTypes.bool,
+  /**
+   * The step of slider
+   */
+  stepSize: PropTypes.number,
+  /**
+   * Slide's title
+   */
+  title: PropTypes.string,
+  /**
+   * The input value
+   */
+  value: PropTypes.number
+};
