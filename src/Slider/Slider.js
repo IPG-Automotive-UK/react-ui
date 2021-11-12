@@ -7,12 +7,15 @@ import React from "react";
  */
 export default function Slider({
   displayCurrentValue = "auto",
-  maxValue,
-  minValue,
+  max = 10,
+  min = 1,
   onChange = () => {},
-  predefValues,
-  showLabels = true,
-  stepSize,
+  onChangeComitted = () => {},
+  orientation = "horizontal",
+  predefValues = [],
+  labels = true,
+  labelPosition = "bottom",
+  step = 1,
   title,
   value
 }) {
@@ -24,33 +27,55 @@ export default function Slider({
     );
 
   let marks = [];
-  let step = stepSize;
-  if (typeof predefValues === "boolean" && predefValues) {
-    range(minValue, maxValue, step).map(item => {
-      const thisMark = { label: String(item), value: item };
-      marks.push(thisMark);
-    });
+  let stepSize = step;
+  if (labels) {
+    if (!predefValues.length) {
+      range(min, max, stepSize).map(item => {
+        const thisMark = { label: String(item), value: item };
+        marks.push(thisMark);
+      });
+    } else {
+      marks = predefValues;
+      stepSize = null;
+    }
   } else {
-    marks = predefValues;
-    step = null;
-  }
-  if (!showLabels) {
-    marks = !false;
+    marks = false;
   }
   return (
     <Box>
       <Typography>{title}</Typography>
-      <MuiSlider
-        name="test"
-        valueLabelDisplay={displayCurrentValue}
-        step={step}
-        marks={marks}
-        min={minValue}
-        max={maxValue}
-        onChange={onChange}
-        value={typeof value !== "undefined" ? value : null}
-        orientation="horizontal"
-      />
+      {labelPosition === "top" ? (
+        <MuiSlider
+          sx={{
+            "& .MuiSlider-markLabel": {
+              position: "absolute",
+              top: "-15px"
+            },
+            marginTop: "20px"
+          }}
+          valueLabelDisplay={displayCurrentValue}
+          step={stepSize}
+          marks={marks}
+          min={min}
+          max={max}
+          onChange={onChange}
+          onChangeComitted={onChangeComitted}
+          value={typeof value !== "undefined" ? value : null}
+          orientation={orientation}
+        />
+      ) : (
+        <MuiSlider
+          valueLabelDisplay={displayCurrentValue}
+          step={stepSize}
+          marks={marks}
+          min={min}
+          max={max}
+          onChange={onChange}
+          onChangeComitted={onChangeComitted}
+          value={typeof value !== "undefined" ? value : null}
+          orientation={orientation}
+        />
+      )}
     </Box>
   );
 }
@@ -62,13 +87,21 @@ Slider.propTypes = {
    */
   displayCurrentValue: PropTypes.oneOf(["auto", "off", "on"]),
   /**
+   * Tick label position respective to slide
+   */
+  labelPosition: PropTypes.oneOf(["bottom", "top"]),
+  /**
+   * If true, thick labels should be displayed
+   */
+  labels: PropTypes.bool,
+  /**
    * The maximum allowed value of the slider
    */
-  maxValue: PropTypes.number,
+  max: PropTypes.number,
   /**
    * The minimum allowed value of the slider
    */
-  minValue: PropTypes.number,
+  min: PropTypes.number,
   /**
    * Callback fired when the value is changed.
    *
@@ -81,20 +114,32 @@ Slider.propTypes = {
    */
   onChange: PropTypes.func,
   /**
+   * Callback fired when the value is changed.
+   *
+   * **Signature**
+   * ```
+   * function(event: object, value: number) => void
+   * ```
+   * _event_: The event source of the callback.
+   * _value_: The new value.
+   */
+  onChangeComitted: PropTypes.func,
+  /**
+   * Slider orientation
+   */
+  orientation: PropTypes.oneOf(["horizontal", "vertical"]),
+
+  /**
    * Indicates predeterminated values to wich the user can move the slider.
    * It should contain objects with "value" and optional "label" keys.
    */
   predefValues: PropTypes.array,
   /**
-   * If true, thicks' labels should be displayed
-   */
-  showLabels: PropTypes.bool,
-  /**
    * The step of slider
    */
-  stepSize: PropTypes.number,
+  step: PropTypes.number,
   /**
-   * Slide's title
+   * Slider title
    */
   title: PropTypes.string,
   /**

@@ -15,9 +15,9 @@ const Template = args => {
   React.useEffect(() => {
     setValue(args.value);
   }, [args.value]);
-  const onChange = (event, value, activeThumb) => {
+  const onChange = (event, value) => {
     setValue(value);
-    action("onChange")(event, value, activeThumb);
+    action("onChange")(event, value);
   };
   return (
     <div style={{ width: 500 }}>
@@ -30,10 +30,10 @@ const Template = args => {
 export const Default = Template.bind({});
 Default.args = {
   displayCurrentValue: "auto",
-  maxValue: 10,
-  minValue: 1,
-  predefValues: true,
-  stepSize: 1,
+  labels: true,
+  max: 10,
+  min: 1,
+  step: 1,
   title: "Slide example"
 };
 
@@ -41,13 +41,14 @@ Default.args = {
 export const CustomLabels = Template.bind({});
 CustomLabels.args = {
   displayCurrentValue: "auto",
-  maxValue: 10,
-  minValue: 1,
+  labels: true,
+  max: 10,
+  min: 1,
   predefValues: [
     { label: "low", value: 1 },
     { label: "mid", value: 5 },
     { label: "high", value: 10 }
   ],
-  stepSize: 1,
+  step: 1,
   title: "Slide example"
 };
