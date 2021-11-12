@@ -19,13 +19,13 @@ export default function Slider({
   title,
   value
 }) {
-  // add ticks labels if they are not pre defined
+  // get ticks labels if they are not pre defined
   const range = (start, stop, step) =>
     Array.from(
       { length: (stop - start) / step + 1 },
       (_, i) => start + i * step
     );
-
+  // show/hide labels
   let marks = [];
   let stepSize = step;
   if (labels) {
@@ -41,6 +41,7 @@ export default function Slider({
   } else {
     marks = false;
   }
+  // return components
   return (
     <Box>
       <Typography>{title}</Typography>
