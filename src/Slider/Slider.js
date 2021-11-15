@@ -6,7 +6,6 @@ import React from "react";
  * Discrete slider component
  */
 export default function Slider({
-  displayCurrentValue = "auto",
   max = 10,
   min = 1,
   onChange = () => {},
@@ -17,7 +16,8 @@ export default function Slider({
   labelPosition = "bottom",
   step = 1,
   title,
-  value
+  value,
+  valueLabelDisplay = "auto"
 }) {
   // get ticks labels if they are not pre defined
   const range = (start, stop, step) =>
@@ -54,7 +54,7 @@ export default function Slider({
             },
             marginTop: "20px"
           }}
-          valueLabelDisplay={displayCurrentValue}
+          valueLabelDisplay={valueLabelDisplay}
           step={stepSize}
           marks={marks}
           min={min}
@@ -66,7 +66,7 @@ export default function Slider({
         />
       ) : (
         <MuiSlider
-          valueLabelDisplay={displayCurrentValue}
+          valueLabelDisplay={valueLabelDisplay}
           step={stepSize}
           marks={marks}
           min={min}
@@ -82,11 +82,6 @@ export default function Slider({
 }
 
 Slider.propTypes = {
-  /**
-   * If auto the value label will display when the thumb is hovered;
-   * if on, will diplay persistently and if off will never display
-   */
-  displayCurrentValue: PropTypes.oneOf(["auto", "off", "on"]),
   /**
    * Tick label position respective to slide
    */
@@ -146,5 +141,10 @@ Slider.propTypes = {
   /**
    * The input value
    */
-  value: PropTypes.number
+  value: PropTypes.number,
+  /**
+   * If auto the value label will display when the thumb is hovered;
+   * if on, will diplay persistently and if off will never display
+   */
+  valueLabelDisplay: PropTypes.oneOf(["auto", "off", "on"])
 };
