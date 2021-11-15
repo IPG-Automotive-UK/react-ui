@@ -30,7 +30,7 @@ const Template = args => {
 export const Default = Template.bind({});
 Default.args = {
   color: "primary",
-  labelColor: "red",
+  labelColor: "primary",
   labelFont: "Sans-Serif, Helvetica",
   labelPosition: "bottom",
   labels: [],
@@ -47,10 +47,56 @@ Default.args = {
 // custom labels story
 export const CustomLabels = Template.bind({});
 CustomLabels.args = {
-  color: "red",
-  labelColor: "green",
+  color: "primary",
+  labelColor: "primary",
   labelFont: "Sans-Serif, Arial",
   labelPosition: "bottom",
+  labels: [
+    { label: "low", value: 1 },
+    { label: "mid", value: 5 },
+    { label: "high", value: 10 }
+  ],
+  max: 10,
+  min: 1,
+  orientation: "horizontal",
+  showLabels: true,
+  step: 1,
+  title: "Slider example",
+  value: 1,
+  valueLabelDisplay: "auto"
+};
+
+// styled labels
+export const StyledLabels = Template.bind({});
+StyledLabels.args = {
+  color: "primary",
+  labelPosition: "top",
+  labelStyle: {
+    color: "blue",
+    fontFamily: "Sans-Serif, Helvetica",
+    fontStyle: "italic"
+  },
+  labels: [
+    { label: "low", value: 1 },
+    { label: "mid", value: 5 },
+    { label: "high", value: 10 }
+  ],
+  max: 10,
+  min: 1,
+  orientation: "horizontal",
+  showLabels: true,
+  step: 1,
+  title: "Slider example",
+  value: 1,
+  valueLabelDisplay: "auto"
+};
+
+// styled labels
+export const StyledSlider = Template.bind({});
+StyledSlider.args = {
+  color: "green",
+  labelPosition: "bottom",
+  labelStyle: {},
   labels: [
     { label: "low", value: 1 },
     { label: "mid", value: 5 },

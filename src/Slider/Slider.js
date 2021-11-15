@@ -7,8 +7,7 @@ import React from "react";
  */
 export default function Slider({
   color = "primary",
-  labelColor = "primary",
-  labelFont = "Sans-Serif, Arial",
+  labelStyle = {},
   labelPosition = "bottom",
   labels = [],
   max = 10,
@@ -51,8 +50,7 @@ export default function Slider({
       <MuiSlider
         sx={{
           "& .MuiSlider-markLabel": {
-            color: labelColor,
-            fontFamily: labelFont,
+            ...labelStyle,
             position: "absolute",
             top: labelPosition === "top" ? "-20px" : "30px"
           },
@@ -79,17 +77,13 @@ Slider.propTypes = {
    */
   color: PropTypes.string,
   /**
-   * The color of the label
-   */
-  labelColor: PropTypes.string,
-  /**
-   * The font of the label
-   */
-  labelFont: PropTypes.string,
-  /**
    * Tick label position respective to slide
    */
   labelPosition: PropTypes.oneOf(["bottom", "top"]),
+  /**
+   * Custom style to apply to the labels
+   */
+  labelStyle: PropTypes.object,
   /**
    * Indicates predeterminated values to which the user can move the slider.
    * It should contain objects with "value" and optional "label" keys.
