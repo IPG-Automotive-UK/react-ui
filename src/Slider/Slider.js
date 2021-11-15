@@ -10,7 +10,7 @@ export default function Slider({
   max = 10,
   min = 1,
   onChange = () => {},
-  onChangeComitted = () => {},
+  onChangeCommitted = () => {},
   orientation = "horizontal",
   predefValues = [],
   labels = true,
@@ -60,7 +60,7 @@ export default function Slider({
           min={min}
           max={max}
           onChange={onChange}
-          onChangeComitted={onChangeComitted}
+          onChangeCommitted={onChangeCommitted}
           value={typeof value !== "undefined" ? value : null}
           orientation={orientation}
         />
@@ -72,7 +72,7 @@ export default function Slider({
           min={min}
           max={max}
           onChange={onChange}
-          onChangeComitted={onChangeComitted}
+          onChangeCommitted={onChangeCommitted}
           value={typeof value !== "undefined" ? value : null}
           orientation={orientation}
         />
@@ -124,7 +124,7 @@ Slider.propTypes = {
    * _event_: The event source of the callback.
    * _value_: The new value.
    */
-  onChangeComitted: PropTypes.func,
+  onChangeCommitted: PropTypes.func,
   /**
    * Slider orientation
    */
