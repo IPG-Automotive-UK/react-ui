@@ -6,7 +6,7 @@ import Slider from "./Slider";
  * Tests
  */
 describe("Slider", () => {
-  test("can renders without crashing", () => {
+  test("can render with no props", () => {
     const { container } = render(<Slider />);
     expect(container.firstChild).toBeInTheDocument();
   });
