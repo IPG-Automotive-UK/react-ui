@@ -30,11 +30,11 @@ const Template = args => {
 export const Default = Template.bind({});
 Default.args = {
   labelPosition: "bottom",
-  labels: true,
+  labels: [],
   max: 10,
   min: 1,
   orientation: "horizontal",
-  predefValues: [],
+  showLabels: true,
   step: 1,
   title: "Slider example",
   value: 1,
@@ -45,15 +45,15 @@ Default.args = {
 export const CustomLabels = Template.bind({});
 CustomLabels.args = {
   labelPosition: "bottom",
-  labels: true,
-  max: 10,
-  min: 1,
-  orientation: "horizontal",
-  predefValues: [
+  labels: [
     { label: "low", value: 1 },
     { label: "mid", value: 5 },
     { label: "high", value: 10 }
   ],
+  max: 10,
+  min: 1,
+  orientation: "horizontal",
+  showLabels: true,
   step: 1,
   title: "Slider example",
   value: 1,

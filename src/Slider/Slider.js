@@ -6,14 +6,14 @@ import React from "react";
  * Discrete slider component
  */
 export default function Slider({
+  labelPosition = "bottom",
+  labels = [],
   max = 10,
   min = 1,
   onChange = () => {},
   onChangeCommitted = () => {},
   orientation = "horizontal",
-  predefValues = [],
-  labels = true,
-  labelPosition = "bottom",
+  showLabels = true,
   step = 1,
   title,
   value,
@@ -28,14 +28,14 @@ export default function Slider({
   // show/hide labels
   let marks = [];
   let stepSize = step;
-  if (labels) {
-    if (!predefValues.length) {
+  if (showLabels) {
+    if (!labels.length) {
       range(min, max, stepSize).map(item => {
         const thisMark = { label: String(item), value: item };
         marks.push(thisMark);
       });
     } else {
-      marks = predefValues;
+      marks = labels;
       stepSize = null;
     }
   } else {
@@ -87,9 +87,10 @@ Slider.propTypes = {
    */
   labelPosition: PropTypes.oneOf(["bottom", "top"]),
   /**
-   * If true, thick labels should be displayed
+   * Indicates predeterminated values to wich the user can move the slider.
+   * It should contain objects with "value" and optional "label" keys.
    */
-  labels: PropTypes.bool,
+  labels: PropTypes.array,
   /**
    * The maximum allowed value of the slider
    */
@@ -124,12 +125,10 @@ Slider.propTypes = {
    * Slider orientation
    */
   orientation: PropTypes.oneOf(["horizontal", "vertical"]),
-
   /**
-   * Indicates predeterminated values to wich the user can move the slider.
-   * It should contain objects with "value" and optional "label" keys.
+   * If true, thick labels should be displayed
    */
-  predefValues: PropTypes.array,
+  showLabels: PropTypes.bool,
   /**
    * The step of slider
    */
