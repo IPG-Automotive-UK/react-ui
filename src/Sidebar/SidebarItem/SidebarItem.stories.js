@@ -19,6 +19,20 @@ const Template = args => <SidebarItem {...args} onClick={action("onClick")} />;
 export const Default = Template.bind({});
 Default.args = { icon: <Home />, name: "Home" };
 
+export const IconStyle = Template.bind({});
+IconStyle.args = {
+  icon: <Home />,
+  iconStyle: { border: "1px solid blue", minWidth: 20 },
+  name: "Home"
+};
+
+export const TextStyle = Template.bind({});
+TextStyle.args = {
+  icon: <Home />,
+  name: "Home",
+  textStyle: { border: "1px solid blue" }
+};
+
 export const Selected = Template.bind({});
 Selected.args = { icon: <Person />, name: "Profile", selected: true };
 
