@@ -34,7 +34,7 @@ Default.args = {
   max: 10,
   min: 1,
   step: 1,
-  title: "Slide example"
+  title: "Slider example"
 };
 
 // custom labels story
@@ -50,5 +50,5 @@ CustomLabels.args = {
     { label: "high", value: 10 }
   ],
   step: 1,
-  title: "Slide example"
+  title: "Slider example"
 };
