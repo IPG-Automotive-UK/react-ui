@@ -19,10 +19,12 @@ export default function SidebarItem({
   count,
   disabled = false,
   icon,
+  iconStyle = {},
   initialOpen = false,
   name,
   onClick,
-  selected = false
+  selected = false,
+  textStyle = {}
 }) {
   // use styles
   const color = selected ? "primary" : "inherit";
@@ -53,10 +55,13 @@ export default function SidebarItem({
         disabled={disabled}
         className={className}
       >
-        <ListItemIcon>{React.cloneElement(icon, { color })}</ListItemIcon>
+        <ListItemIcon sx={iconStyle}>
+          {React.cloneElement(icon, { color })}
+        </ListItemIcon>
         <ListItemText
           primary={name}
           primaryTypographyProps={primaryTypographyProps}
+          sx={textStyle}
         />
         {count ? (
           <Badge
@@ -102,6 +107,10 @@ SidebarItem.propTypes = {
    */
   icon: PropTypes.element.isRequired,
   /**
+   * Custom style to apply to the icon
+   */
+  iconStyle: PropTypes.object,
+  /**
    * Initial open state of sidebar item with children
    */
   initialOpen: PropTypes.bool,
@@ -122,5 +131,9 @@ SidebarItem.propTypes = {
   /**
    * Use to apply selected styling.
    */
-  selected: PropTypes.bool
+  selected: PropTypes.bool,
+  /**
+   * Custom style to apply to the text
+   */
+  textStyle: PropTypes.object
 };
