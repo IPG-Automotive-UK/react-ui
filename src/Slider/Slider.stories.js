@@ -29,18 +29,17 @@ const Template = args => {
 // default story
 export const Default = Template.bind({});
 Default.args = {
-  displayCurrentValue: "auto",
   labels: true,
   max: 10,
   min: 1,
   step: 1,
-  title: "Slider example"
+  title: "Slider example",
+  valueLabelDisplay: "auto"
 };
 
 // custom labels story
 export const CustomLabels = Template.bind({});
 CustomLabels.args = {
-  displayCurrentValue: "auto",
   labels: true,
   max: 10,
   min: 1,
@@ -50,5 +49,6 @@ CustomLabels.args = {
     { label: "high", value: 10 }
   ],
   step: 1,
-  title: "Slider example"
+  title: "Slider example",
+  valueLabelDisplay: "auto"
 };
