@@ -45,38 +45,24 @@ export default function Slider({
   return (
     <Box>
       <Typography>{title}</Typography>
-      {labelPosition === "top" ? (
-        <MuiSlider
-          sx={{
-            "& .MuiSlider-markLabel": {
-              position: "absolute",
-              top: "-15px"
-            },
-            marginTop: "20px"
-          }}
-          valueLabelDisplay={valueLabelDisplay}
-          step={stepSize}
-          marks={marks}
-          min={min}
-          max={max}
-          onChange={onChange}
-          onChangeCommitted={onChangeCommitted}
-          value={typeof value !== "undefined" ? value : null}
-          orientation={orientation}
-        />
-      ) : (
-        <MuiSlider
-          valueLabelDisplay={valueLabelDisplay}
-          step={stepSize}
-          marks={marks}
-          min={min}
-          max={max}
-          onChange={onChange}
-          onChangeCommitted={onChangeCommitted}
-          value={typeof value !== "undefined" ? value : null}
-          orientation={orientation}
-        />
-      )}
+      <MuiSlider
+        sx={{
+          "& .MuiSlider-markLabel": {
+            position: "absolute",
+            top: labelPosition === "top" ? "-20px" : "30px"
+          },
+          marginTop: labelPosition === "top" ? "20px" : "5px"
+        }}
+        valueLabelDisplay={valueLabelDisplay}
+        step={stepSize}
+        marks={marks}
+        min={min}
+        max={max}
+        onChange={onChange}
+        onChangeCommitted={onChangeCommitted}
+        value={typeof value !== "undefined" ? value : null}
+        orientation={orientation}
+      />
     </Box>
   );
 }
