@@ -18,7 +18,13 @@ describe("Slider", () => {
   test("can set min value", () => {
     const minValue = 5;
     const { container } = render(<Slider min={minValue} />);
-    const input = container.querySelector("input");
-    expect(Number(input.value)).toBe(minValue);
+    const sliderInput = container.querySelector("input");
+    expect(Number(sliderInput.min)).toBe(minValue);
+  });
+  test("can set max value", () => {
+    const maxValue = 20;
+    const { container } = render(<Slider max={maxValue} />);
+    const sliderInput = container.querySelector("input");
+    expect(Number(sliderInput.max)).toBe(maxValue);
   });
 });
