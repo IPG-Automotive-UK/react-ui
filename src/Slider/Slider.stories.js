@@ -30,9 +30,8 @@ const Template = args => {
 export const Default = Template.bind({});
 Default.args = {
   color: "primary",
-  labelColor: "primary",
-  labelFont: "Sans-Serif, Helvetica",
   labelPosition: "bottom",
+  labelStyle: {},
   labels: [],
   max: 10,
   min: 1,
@@ -48,9 +47,8 @@ Default.args = {
 export const CustomLabels = Template.bind({});
 CustomLabels.args = {
   color: "primary",
-  labelColor: "primary",
-  labelFont: "Sans-Serif, Arial",
   labelPosition: "bottom",
+  labelStyle: {},
   labels: [
     { label: "low", value: 1 },
     { label: "mid", value: 5 },
