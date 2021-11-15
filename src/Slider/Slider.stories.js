@@ -29,20 +29,26 @@ const Template = args => {
 // default story
 export const Default = Template.bind({});
 Default.args = {
+  labelPosition: "bottom",
   labels: true,
   max: 10,
   min: 1,
+  orientation: "horizontal",
+  predefValues: [],
   step: 1,
   title: "Slider example",
+  value: 1,
   valueLabelDisplay: "auto"
 };
 
 // custom labels story
 export const CustomLabels = Template.bind({});
 CustomLabels.args = {
+  labelPosition: "bottom",
   labels: true,
   max: 10,
   min: 1,
+  orientation: "horizontal",
   predefValues: [
     { label: "low", value: 1 },
     { label: "mid", value: 5 },
@@ -50,5 +56,6 @@ CustomLabels.args = {
   ],
   step: 1,
   title: "Slider example",
+  value: 1,
   valueLabelDisplay: "auto"
 };
