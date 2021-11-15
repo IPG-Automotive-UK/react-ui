@@ -29,6 +29,9 @@ const Template = args => {
 // default story
 export const Default = Template.bind({});
 Default.args = {
+  color: "primary",
+  labelColor: "red",
+  labelFont: "Sans-Serif, Helvetica",
   labelPosition: "bottom",
   labels: [],
   max: 10,
@@ -44,6 +47,9 @@ Default.args = {
 // custom labels story
 export const CustomLabels = Template.bind({});
 CustomLabels.args = {
+  color: "red",
+  labelColor: "green",
+  labelFont: "Sans-Serif, Arial",
   labelPosition: "bottom",
   labels: [
     { label: "low", value: 1 },

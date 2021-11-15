@@ -6,6 +6,9 @@ import React from "react";
  * Discrete slider component
  */
 export default function Slider({
+  color = "primary",
+  labelColor = "primary",
+  labelFont = "Sans-Serif, Arial",
   labelPosition = "bottom",
   labels = [],
   max = 10,
@@ -48,9 +51,12 @@ export default function Slider({
       <MuiSlider
         sx={{
           "& .MuiSlider-markLabel": {
+            color: labelColor,
+            fontFamily: labelFont,
             position: "absolute",
             top: labelPosition === "top" ? "-20px" : "30px"
           },
+          color: { color },
           marginTop: labelPosition === "top" ? "20px" : "5px"
         }}
         valueLabelDisplay={valueLabelDisplay}
@@ -68,6 +74,18 @@ export default function Slider({
 }
 
 Slider.propTypes = {
+  /**
+   * The color of the component
+   */
+  color: PropTypes.string,
+  /**
+   * The color of the label
+   */
+  labelColor: PropTypes.string,
+  /**
+   * The font of the label
+   */
+  labelFont: PropTypes.string,
   /**
    * Tick label position respective to slide
    */
