@@ -87,7 +87,7 @@ Slider.propTypes = {
    */
   labelPosition: PropTypes.oneOf(["bottom", "top"]),
   /**
-   * Indicates predeterminated values to wich the user can move the slider.
+   * Indicates predeterminated values to which the user can move the slider.
    * It should contain objects with "value" and optional "label" keys.
    */
   labels: PropTypes.array,
@@ -126,7 +126,7 @@ Slider.propTypes = {
    */
   orientation: PropTypes.oneOf(["horizontal", "vertical"]),
   /**
-   * If true, thick labels should be displayed
+   * If true, tick labels should be displayed
    */
   showLabels: PropTypes.bool,
   /**
