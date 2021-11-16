@@ -1,6 +1,20 @@
+import { render, screen } from "@testing-library/react";
 import Color from "./";
 import React from "react";
-import { render } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+
+function setup(inputs) {
+  render(<Color open {...inputs} />);
+  return {
+    inputs: {
+      alpha: screen.getByLabelText("Alpha (Transparency)"),
+      blue: screen.getByLabelText("Blue"),
+      green: screen.getByLabelText("Green"),
+      hex: screen.getByLabelText("Hex"),
+      red: screen.getByLabelText("Red")
+    }
+  };
+}
 
 describe("Color", () => {
   test("Color text value updates", () => {
@@ -31,5 +45,50 @@ describe("Color", () => {
     expect(
       document.querySelector(".react-colorful__alpha-pointer").style.left
     ).toBe("100%");
+  });
+  test("Red Text Updates", () => {
+    const elements = setup();
+    const input = screen.getByLabelText("Red");
+    userEvent.type(input, "{backspace}{backspace}{backspace}");
+    userEvent.type(elements.inputs.red, "201");
+    expect(document.querySelector("[id=red]").value).toBe("201");
+  });
+  test("Green Text Updates", () => {
+    const elements = setup();
+    const input = screen.getByLabelText("Green");
+    userEvent.type(input, "{backspace}{backspace}{backspace}");
+    userEvent.type(elements.inputs.green, "155");
+    expect(document.querySelector("[id=green]").value).toBe("155");
+  });
+  test("Blue Text Updates", () => {
+    const elements = setup();
+    const input = screen.getByLabelText("Blue");
+    userEvent.type(input, "{backspace}{backspace}{backspace}");
+    userEvent.type(elements.inputs.blue, "105");
+    expect(document.querySelector("[id=blue]").value).toBe("105");
+  });
+  test("Alpha Text Updates", () => {
+    const elements = setup();
+    const input = screen.getByLabelText("Alpha (Transparency)");
+    userEvent.type(input, "{backspace}");
+    userEvent.type(elements.inputs.alpha, "0.5");
+    expect(document.querySelector("[id=alpha]").value).toBe("0.5");
+  });
+  test("Hex Text Updates", () => {
+    const elements = setup();
+    const input = screen.getByLabelText("Hex");
+    userEvent.type(
+      input,
+      "{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}"
+    );
+    userEvent.type(elements.inputs.hex, "003535ff");
+    expect(document.querySelector("[id=hex]").value).toBe("003535ff");
+  });
+  test("Click swatch opens popover", () => {
+    const value = "rgba(255,55,100,1)";
+    render(<Color value={value} />);
+    const swatch = screen.getByTestId("swatch");
+    userEvent.click(swatch);
+    expect(document.querySelector("[id=red]").value).toBe("255");
   });
 });

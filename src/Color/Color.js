@@ -208,11 +208,13 @@ export default function Color({
         }
         onClick={handleClick}
         id="swatch"
+        data-testid="swatch"
         ref={buttonRef}
         variant="contained"
         disableElevation
       />
       <Popover
+        data-testid="popover"
         open={open}
         anchorEl={buttonRef.current}
         onClose={handleClose}
