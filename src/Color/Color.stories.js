@@ -18,22 +18,56 @@ const Template = args => {
   }, [args.value]);
   const onChange = color => setValue(color);
 
-  console.log(args.value);
-  console.log(value);
-
   return (
     <Color
       value={value}
       onChange={onChange}
-      height={args.height}
-      width={args.width}
+      swatchSize={args.swatchSize}
+      popoverWidth={args.popoverWidth}
+      showControls={args.showControls}
+      anchorType={args.anchorType}
+      showPicker={args.showPicker}
+      {...args}
     />
   );
 };
 
 export const Default = Template.bind({});
-Default.args = {
-  value: "rgba(255,0,0,1)",
-  height: "15px",
-  width: "30px"
+Default.args = {};
+
+export const SwatchMedium = Template.bind({});
+SwatchMedium.args = {
+  swatchSize: "medium"
+};
+
+export const SwatchLarge = Template.bind({});
+SwatchLarge.args = {
+  swatchSize: "large"
+};
+
+export const NoPicker = Template.bind({});
+NoPicker.args = {
+  showPicker: false
+};
+
+export const NoControls = Template.bind({});
+NoControls.args = {
+  showControls: false
+};
+
+export const ModifiedPopoverWidth = Template.bind({});
+ModifiedPopoverWidth.args = {
+  popoverWidth: "600px"
+};
+
+export const PopoverIntiallyOpen = Template.bind({});
+PopoverIntiallyOpen.args = {
+  open: true
+};
+
+export const PopoverWithPosition = Template.bind({});
+PopoverWithPosition.args = {
+  anchorType: "anchorPosition",
+  popoverPositionLeft: 300,
+  popoverPositionTop: 100
 };
