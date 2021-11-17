@@ -28,5 +28,19 @@ Default.args = {
   margin: "normal",
   required: false,
   size: "medium",
+  stepper: true,
+  variant: "outlined"
+};
+
+export const NoStepper = Template.bind({});
+NoStepper.args = {
+  disabled: false,
+  error: false,
+  helperText: "What Number are you going to type?",
+  label: "Enter a Number",
+  margin: "normal",
+  required: false,
+  size: "medium",
+  stepper: false,
   variant: "outlined"
 };

@@ -15,6 +15,7 @@ export default function NumberField({
   placeholder,
   required = false,
   size = "medium",
+  stepper = true,
   value,
   variant = "outlined"
 }) {
@@ -41,6 +42,16 @@ export default function NumberField({
       type="Number"
       value={value}
       variant={variant}
+      sx={
+        !stepper
+          ? {
+              "& input::-webkit-clear-button, & input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button":
+                {
+                  display: "none"
+                }
+            }
+          : { undefined }
+      }
     />
   );
 }
@@ -93,6 +104,11 @@ NumberField.propTypes = {
    * @default "medium"
    */
   size: PropTypes.oneOf(["medium", "small"]),
+  /**
+   * If true, the numberfield will have stepper arrows
+   * @default true
+   */
+  stepper: PropTypes.bool,
   /**
    * The input value
    */
