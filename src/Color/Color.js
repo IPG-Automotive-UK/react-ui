@@ -82,7 +82,8 @@ export default function Color({
   const handleChange = color => {
     const changeValue = `rgba(${color.r},${color.g},${color.b},${color.a})`;
 
-    onChange(setColor(changeValue));
+    onChange(changeValue);
+    setColor(changeValue);
     setHexValue(rgbHex(changeValue));
   };
 
@@ -92,7 +93,8 @@ export default function Color({
     const redChange = `rgba(${event.target.value},${Number(rgba[1])},${Number(
       rgba[2]
     )},${Number(rgba[3])})`;
-    onChange(setColor(redChange));
+    onChange(redChange);
+    setColor(redChange);
     setHexValue(rgbHex(redChange));
   };
 
@@ -102,7 +104,8 @@ export default function Color({
     const greenChange = `rgba(${Number(rgba[0])},${event.target.value},${Number(
       rgba[2]
     )},${Number(rgba[3])})`;
-    onChange(setColor(greenChange));
+    onChange(greenChange);
+    setColor(greenChange);
     setHexValue(rgbHex(greenChange));
   };
 
@@ -112,7 +115,8 @@ export default function Color({
     const blueChange = `rgba(${Number(rgba[0])},${Number(rgba[1])},${
       event.target.value
     },${Number(rgba[3])})`;
-    onChange(setColor(blueChange));
+    onChange(blueChange);
+    setColor(blueChange);
     setHexValue(rgbHex(blueChange));
   };
 
@@ -122,7 +126,8 @@ export default function Color({
     const alphaChange = `rgba(${Number(rgba[0])},${Number(rgba[1])},${Number(
       rgba[2]
     )},${event.target.value})`;
-    onChange(setColor(alphaChange));
+    onChange(alphaChange);
+    setColor(alphaChange);
     setHexValue(rgbHex(alphaChange));
   };
 
@@ -169,7 +174,8 @@ export default function Color({
 
     // set color as rgba string with new converted hex values
     // alpha is divied by 255 to value between 0 and 1
-    onChange(setColor(`rgba(${rHex},${gHex},${bHex},${aHex / 255})`));
+    onChange(`rgba(${rHex},${gHex},${bHex},${aHex / 255})`);
+    setColor(`rgba(${rHex},${gHex},${bHex},${aHex / 255})`);
   };
 
   // handle button / swatch size
