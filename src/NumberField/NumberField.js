@@ -9,6 +9,7 @@ export default function NumberField({
   disabled = false,
   error = false,
   helperText,
+  inputProps,
   label,
   margin = "normal",
   onChange = () => {},
@@ -42,6 +43,7 @@ export default function NumberField({
       type="Number"
       value={value}
       variant={variant}
+      inputProps={inputProps}
       sx={
         !stepper
           ? {
@@ -71,6 +73,10 @@ NumberField.propTypes = {
    * Helper text to display below input.
    */
   helperText: PropTypes.string,
+  /**
+   * Attributes applied to the input element
+   */
+  inputProps: PropTypes.object,
   /**
    * Label to display above input.
    */
