@@ -24,7 +24,7 @@ Default.args = {
   disabled: false,
   error: false,
   helperText: "What Number are you going to type?",
-  label: "Enter some a Number",
+  label: "Enter a Number",
   margin: "normal",
   required: false,
   size: "medium",
