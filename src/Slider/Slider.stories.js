@@ -30,6 +30,7 @@ const Template = args => {
 export const Default = Template.bind({});
 Default.args = {
   color: "primary",
+  disabled: false,
   labelPosition: "bottom",
   labelStyle: {},
   labels: [],
@@ -47,6 +48,7 @@ Default.args = {
 export const CustomLabels = Template.bind({});
 CustomLabels.args = {
   color: "primary",
+  disabled: false,
   labelPosition: "bottom",
   labelStyle: {},
   labels: [
@@ -68,6 +70,7 @@ CustomLabels.args = {
 export const StyledLabels = Template.bind({});
 StyledLabels.args = {
   color: "primary",
+  disabled: false,
   labelPosition: "top",
   labelStyle: {
     color: "blue",
@@ -93,6 +96,7 @@ StyledLabels.args = {
 export const StyledSlider = Template.bind({});
 StyledSlider.args = {
   color: "green",
+  disabled: false,
   labelPosition: "bottom",
   labelStyle: {},
   labels: [
@@ -100,6 +104,24 @@ StyledSlider.args = {
     { label: "mid", value: 5 },
     { label: "high", value: 10 }
   ],
+  max: 10,
+  min: 1,
+  orientation: "horizontal",
+  showLabels: true,
+  step: 1,
+  title: "Slider example",
+  value: 1,
+  valueLabelDisplay: "auto"
+};
+
+// default story
+export const Disabled = Template.bind({});
+Disabled.args = {
+  color: "primary",
+  disabled: true,
+  labelPosition: "bottom",
+  labelStyle: {},
+  labels: [],
   max: 10,
   min: 1,
   orientation: "horizontal",

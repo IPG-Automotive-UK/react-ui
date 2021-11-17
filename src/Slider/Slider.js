@@ -7,6 +7,7 @@ import React from "react";
  */
 export default function Slider({
   color = "primary",
+  disabled = false,
   labelStyle = {},
   labelPosition = "bottom",
   labels = [],
@@ -57,15 +58,16 @@ export default function Slider({
           color: { color },
           marginTop: labelPosition === "top" ? "20px" : "5px"
         }}
-        valueLabelDisplay={valueLabelDisplay}
-        step={stepSize}
+        disabled={disabled}
         marks={marks}
-        min={min}
         max={max}
+        min={min}
         onChange={onChange}
         onChangeCommitted={onChangeCommitted}
-        value={typeof value !== "undefined" ? value : null}
         orientation={orientation}
+        step={stepSize}
+        value={typeof value !== "undefined" ? value : null}
+        valueLabelDisplay={valueLabelDisplay}
       />
     </Box>
   );
@@ -76,6 +78,10 @@ Slider.propTypes = {
    * The color of the component
    */
   color: PropTypes.string,
+  /**
+   * If true, the label, input and helper text should be displayed in a disabled state.
+   */
+  disabled: PropTypes.bool,
   /**
    * Tick label position respective to slide
    */
