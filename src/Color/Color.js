@@ -63,12 +63,15 @@ export default function Color({
   const buttonRef = useRef(null);
   const [open, setOpen] = React.useState(props.open || false);
 
+  // hex edit state
+  const [hex, setHex] = React.useState(rgbHex(value));
+
   // handle color change
   const handleChange = color => {
-    console.log("handle change");
     const changeValue = `rgba(${color.r},${color.g},${color.b},${color.a})`;
 
     onChange(changeValue);
+    setHex(rgbHex(changeValue));
   };
 
   // handle red
@@ -78,6 +81,7 @@ export default function Color({
       rgba[2]
     )},${Number(rgba[3])})`;
     onChange(redChange);
+    setHex(rgbHex(redChange));
   };
 
   // handle green change
@@ -87,6 +91,7 @@ export default function Color({
       rgba[2]
     )},${Number(rgba[3])})`;
     onChange(greenChange);
+    setHex(rgbHex(greenChange));
   };
 
   // handle Blue change
@@ -96,6 +101,7 @@ export default function Color({
       event.target.value
     },${Number(rgba[3])})`;
     onChange(blueChange);
+    setHex(rgbHex(blueChange));
   };
 
   // handle alpha change
@@ -105,6 +111,7 @@ export default function Color({
       rgba[2]
     )},${event.target.value})`;
     onChange(alphaChange);
+    setHex(rgbHex(alphaChange));
   };
 
   // handle popover open
@@ -120,31 +127,64 @@ export default function Color({
   // get the red value from full rgba string
   const getRedColor = color => {
     const rgba = color.replace(/[^0-9,.]/g, "").split(",");
-    return Number(rgba[0]);
+    let red = Number(rgba[0]);
+
+    // if red value is empty, set red to empty string
+    if (rgba[0] === "") {
+      red = "";
+    }
+
+    return red;
   };
 
   // get the green value from full rgba string
   const getGreenColor = color => {
     const rgba = color.replace(/[^0-9,.]/g, "").split(",");
-    return Number(rgba[1]);
+    let green = Number(rgba[1]);
+
+    // if green value is empty, set green to empty string
+    if (rgba[1] === "") {
+      green = "";
+    }
+
+    return green;
   };
 
   // get the blue value from full rgba string
   const getBlueColor = color => {
     const rgba = color.replace(/[^0-9,.]/g, "").split(",");
-    return Number(rgba[2]);
+    let blue = Number(rgba[2]);
+
+    // if blue value is empty, set blue to empty string
+    if (rgba[2] === "") {
+      blue = "";
+    }
+
+    return blue;
   };
 
   // get the alpha value from full rgba string
   const getAlpha = color => {
     const rgba = color.replace(/[^0-9,.]/g, "").split(",");
-    return Number(rgba[3]);
+    let alpha = Number(rgba[3]);
+
+    // if alpha value is empty, set alpha to empty string
+    if (rgba[3] === "") {
+      alpha = "";
+    }
+
+    return alpha;
   };
 
-  // get the hex value from full rgba string
-  const getHexColor = color => {
-    return rgbHex(color);
-  };
+  // // get the hex value from full rgba string
+  // const getHexColor = color => {
+  //   if (!hexEdit) {
+  //     const rgbValue = rgbHex(color);
+  //     return rgbValue;
+  //   }
+  // };
+
+  // get the rgba object from the full rgba string
   const getRgbaObj = color => {
     const rgba = color.replace(/[^0-9,.]/g, "").split(",");
     return {
@@ -158,6 +198,9 @@ export default function Color({
   // handle hex change
   const handleHexChange = event => {
     const value = event.target.value;
+    setHex(value);
+
+    // determine rbga values as hex
     const rHex = parseInt(value.substring(0, 2), 16);
     const gHex = parseInt(value.substring(2, 4), 16);
     const bHex = parseInt(value.substring(4, 6), 16);
@@ -318,7 +361,7 @@ export default function Color({
                   size="small"
                   margin="dense"
                   label="Hex"
-                  value={getHexColor(value)}
+                  value={hex}
                   fullWidth
                   InputLabelProps={{
                     shrink: true

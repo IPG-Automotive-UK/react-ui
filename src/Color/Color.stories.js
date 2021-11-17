@@ -17,7 +17,6 @@ const Template = args => {
     setValue(args.value);
   }, [args.value]);
   const onChange = color => {
-    console.log("changed");
     setValue(color);
   };
 
