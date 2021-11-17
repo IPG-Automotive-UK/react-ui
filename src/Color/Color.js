@@ -33,9 +33,6 @@ const sx = {
       height: "15px",
       width: "15px"
     }
-  },
-  swatch: {
-    cursor: "pointer"
   }
 };
 
@@ -148,6 +145,7 @@ export default function Color({
     r: Number(rgba[0])
   };
 
+  // set color states when rgba object is changed
   useEffect(() => {
     setRed(rgbaObj.r);
     setGreen(rgbaObj.g);
@@ -169,6 +167,8 @@ export default function Color({
       aHex = 255;
     }
 
+    // set color as rgba string with new converted hex values
+    // alpha is divied by 255 to value between 0 and 1
     onChange(setColor(`rgba(${rHex},${gHex},${bHex},${aHex / 255})`));
   };
 
@@ -371,6 +371,16 @@ Color.propTypes = {
    * @default 'anchorEl'
    */
   anchorType: PropTypes.oneOf(["anchorEl", "anchorPosition", "none"]),
+  /**
+   * Callback fired when the value is changed.
+   *
+   * **Signature**
+   * ```
+   * function(color: string) => void
+   * ```
+   * color: This is the selected colour in a rgba string e.g "rgba(255,0,0,1)".
+   */
+  onChange: PropTypes.func,
   /**
    * This determines if the popover is open on the intial
    * render.

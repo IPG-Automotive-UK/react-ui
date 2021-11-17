@@ -33,7 +33,19 @@ const Template = args => {
 };
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  anchorOriginHorizontal: "right",
+  anchorOriginVertical: "bottom",
+  anchorType: "anchorEl",
+  open: false,
+  popoverWidth: "250px",
+  showControls: true,
+  showPicker: true,
+  swatchSize: "small",
+  transformOriginHorizontal: "right",
+  transformOriginVertical: "top",
+  value: "rgba(255,0,0,1)"
+};
 
 export const SwatchMedium = Template.bind({});
 SwatchMedium.args = {
