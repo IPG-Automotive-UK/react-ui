@@ -16,10 +16,14 @@ const Template = args => {
   React.useEffect(() => {
     setValue(args.value);
   }, [args.value]);
-  const onChange = color => setValue(color);
+  const onChange = color => {
+    console.log("changed");
+    setValue(color);
+  };
 
   return (
     <Color
+      {...args}
       value={value}
       onChange={onChange}
       swatchSize={args.swatchSize}
@@ -27,7 +31,6 @@ const Template = args => {
       showControls={args.showControls}
       anchorType={args.anchorType}
       showPicker={args.showPicker}
-      {...args}
     />
   );
 };

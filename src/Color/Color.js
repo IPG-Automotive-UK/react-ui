@@ -1,5 +1,5 @@
 import { Box, Button, InputAdornment, Popover, TextField } from "@mui/material";
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import PropTypes from "prop-types";
 import { RgbaColorPicker } from "react-colorful";
 
@@ -59,76 +59,52 @@ export default function Color({
   onChange = () => {},
   ...props
 }) {
-  // create color states
-  const [color, setColor] = React.useState(value);
-  const [red, setRed] = React.useState(0);
-  const [green, setGreen] = React.useState(0);
-  const [blue, setBlue] = React.useState(0);
-  const [alpha, setAlpha] = React.useState(1);
-
   // create popover states
   const buttonRef = useRef(null);
   const [open, setOpen] = React.useState(props.open || false);
 
-  // create hex states
-  const [hexValue, setHexValue] = React.useState(rgbHex(value));
-
-  // set color everytime value is changed
-  useEffect(() => {
-    setColor(value);
-  }, [value]);
-
   // handle color change
   const handleChange = color => {
+    console.log("handle change");
     const changeValue = `rgba(${color.r},${color.g},${color.b},${color.a})`;
 
     onChange(changeValue);
-    setColor(changeValue);
-    setHexValue(rgbHex(changeValue));
   };
 
   // handle red
   const handleRedChange = event => {
-    const rgba = color.replace(/[^0-9,.]/g, "").split(",");
+    const rgba = value.replace(/[^0-9,.]/g, "").split(",");
     const redChange = `rgba(${event.target.value},${Number(rgba[1])},${Number(
       rgba[2]
     )},${Number(rgba[3])})`;
     onChange(redChange);
-    setColor(redChange);
-    setHexValue(rgbHex(redChange));
   };
 
   // handle green change
   const handleGreenChange = event => {
-    const rgba = color.replace(/[^0-9,.]/g, "").split(",");
+    const rgba = value.replace(/[^0-9,.]/g, "").split(",");
     const greenChange = `rgba(${Number(rgba[0])},${event.target.value},${Number(
       rgba[2]
     )},${Number(rgba[3])})`;
     onChange(greenChange);
-    setColor(greenChange);
-    setHexValue(rgbHex(greenChange));
   };
 
   // handle Blue change
   const handleBlueChange = event => {
-    const rgba = color.replace(/[^0-9,.]/g, "").split(",");
+    const rgba = value.replace(/[^0-9,.]/g, "").split(",");
     const blueChange = `rgba(${Number(rgba[0])},${Number(rgba[1])},${
       event.target.value
     },${Number(rgba[3])})`;
     onChange(blueChange);
-    setColor(blueChange);
-    setHexValue(rgbHex(blueChange));
   };
 
   // handle alpha change
   const handleAlphaChange = event => {
-    const rgba = color.replace(/[^0-9,.]/g, "").split(",");
+    const rgba = value.replace(/[^0-9,.]/g, "").split(",");
     const alphaChange = `rgba(${Number(rgba[0])},${Number(rgba[1])},${Number(
       rgba[2]
     )},${event.target.value})`;
     onChange(alphaChange);
-    setColor(alphaChange);
-    setHexValue(rgbHex(alphaChange));
   };
 
   // handle popover open
@@ -141,27 +117,47 @@ export default function Color({
     setOpen(false);
   };
 
-  // convert color string to rgba object
-  const rgba = color.replace(/[^0-9,.]/g, "").split(",");
-  const rgbaObj = {
-    a: Number(rgba[3]),
-    b: Number(rgba[2]),
-    g: Number(rgba[1]),
-    r: Number(rgba[0])
+  // get the red value from full rgba string
+  const getRedColor = color => {
+    const rgba = color.replace(/[^0-9,.]/g, "").split(",");
+    return Number(rgba[0]);
   };
 
-  // set color states when rgba object is changed
-  useEffect(() => {
-    setRed(rgbaObj.r);
-    setGreen(rgbaObj.g);
-    setBlue(rgbaObj.b);
-    setAlpha(rgbaObj.a);
-  }, [rgbaObj]);
+  // get the green value from full rgba string
+  const getGreenColor = color => {
+    const rgba = color.replace(/[^0-9,.]/g, "").split(",");
+    return Number(rgba[1]);
+  };
+
+  // get the blue value from full rgba string
+  const getBlueColor = color => {
+    const rgba = color.replace(/[^0-9,.]/g, "").split(",");
+    return Number(rgba[2]);
+  };
+
+  // get the alpha value from full rgba string
+  const getAlpha = color => {
+    const rgba = color.replace(/[^0-9,.]/g, "").split(",");
+    return Number(rgba[3]);
+  };
+
+  // get the hex value from full rgba string
+  const getHexColor = color => {
+    return rgbHex(color);
+  };
+  const getRgbaObj = color => {
+    const rgba = color.replace(/[^0-9,.]/g, "").split(",");
+    return {
+      a: Number(rgba[3]),
+      b: Number(rgba[2]),
+      g: Number(rgba[1]),
+      r: Number(rgba[0])
+    };
+  };
 
   // handle hex change
   const handleHexChange = event => {
     const value = event.target.value;
-    setHexValue(value);
     const rHex = parseInt(value.substring(0, 2), 16);
     const gHex = parseInt(value.substring(2, 4), 16);
     const bHex = parseInt(value.substring(4, 6), 16);
@@ -175,7 +171,6 @@ export default function Color({
     // set color as rgba string with new converted hex values
     // alpha is divied by 255 to value between 0 and 1
     onChange(`rgba(${rHex},${gHex},${bHex},${aHex / 255})`);
-    setColor(`rgba(${rHex},${gHex},${bHex},${aHex / 255})`);
   };
 
   // handle button / swatch size
@@ -201,10 +196,10 @@ export default function Color({
           (sx.swatch,
           {
             "&:hover": {
-              backgroundColor: color,
+              backgroundColor: value,
               opacity: 0.5
             },
-            background: color,
+            background: value,
             height: swatchDimensions,
             minHeight: swatchDimensions,
             minWidth: swatchDimensions,
@@ -246,7 +241,7 @@ export default function Color({
               <Box sx={{ width: popoverWidth }}>
                 <Box sx={sx.colorPicker}>
                   <RgbaColorPicker
-                    color={rgbaObj}
+                    color={getRgbaObj(value)}
                     onChange={handleChange}
                     id="colorPicker"
                   />
@@ -263,7 +258,7 @@ export default function Color({
                     size="small"
                     margin="dense"
                     label="Red"
-                    value={red}
+                    value={getRedColor(value)}
                     sx={{ width: "33%" }}
                     InputLabelProps={{
                       shrink: true
@@ -278,7 +273,7 @@ export default function Color({
                     size="small"
                     margin="dense"
                     label="Green"
-                    value={green}
+                    value={getGreenColor(value)}
                     sx={{ width: "33%" }}
                     InputLabelProps={{
                       shrink: true
@@ -293,7 +288,7 @@ export default function Color({
                     size="small"
                     margin="dense"
                     label="Blue"
-                    value={blue}
+                    value={getBlueColor(value)}
                     sx={{ width: "33%" }}
                     InputLabelProps={{
                       shrink: true
@@ -309,7 +304,7 @@ export default function Color({
                   size="small"
                   margin="dense"
                   label="Alpha (Transparency)"
-                  value={alpha}
+                  value={getAlpha(value)}
                   fullWidth
                   InputLabelProps={{
                     shrink: true
@@ -323,7 +318,7 @@ export default function Color({
                   size="small"
                   margin="dense"
                   label="Hex"
-                  value={hexValue}
+                  value={getHexColor(value)}
                   fullWidth
                   InputLabelProps={{
                     shrink: true
