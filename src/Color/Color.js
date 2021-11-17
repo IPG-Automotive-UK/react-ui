@@ -176,14 +176,6 @@ export default function Color({
     return alpha;
   };
 
-  // // get the hex value from full rgba string
-  // const getHexColor = color => {
-  //   if (!hexEdit) {
-  //     const rgbValue = rgbHex(color);
-  //     return rgbValue;
-  //   }
-  // };
-
   // get the rgba object from the full rgba string
   const getRgbaObj = color => {
     const rgba = color.replace(/[^0-9,.]/g, "").split(",");
