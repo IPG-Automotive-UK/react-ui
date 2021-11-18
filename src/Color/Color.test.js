@@ -1,10 +1,27 @@
 import { render, screen } from "@testing-library/react";
-import Color from "./";
+import Color from ".";
 import React from "react";
 import userEvent from "@testing-library/user-event";
 
+/**
+ * Test wrapper for Color
+ * Provides state for the value
+ */
+const ColorWithState = ({
+  onChange,
+  value: valueIn = "rgba(255,55,100,1)",
+  ...rest
+}) => {
+  const [value, setValue] = React.useState(valueIn);
+  const handleChange = color => {
+    setValue(color);
+    onChange && onChange(color);
+  };
+  return <Color {...rest} onChange={handleChange} value={value} />;
+};
+
 function setup(inputs) {
-  render(<Color open {...inputs} />);
+  render(<ColorWithState open {...inputs} />);
   return {
     inputs: {
       alpha: screen.getByLabelText("Alpha (Transparency)"),
@@ -19,7 +36,7 @@ function setup(inputs) {
 describe("Color", () => {
   test("Color text value updates", () => {
     const value = "rgba(255,55,100,1)";
-    render(<Color open value={value} />);
+    render(<ColorWithState open value={value} />);
 
     // confirm RGBA and Hex values
     expect(document.querySelector("[id=red]").value).toBe("255");
@@ -30,7 +47,7 @@ describe("Color", () => {
   });
   test("Color picker values update", () => {
     const value = "rgba(255,0,0,1)";
-    render(<Color open value={value} />);
+    render(<ColorWithState open value={value} />);
 
     expect(
       document.querySelector(".react-colorful__saturation").style
@@ -86,7 +103,7 @@ describe("Color", () => {
   });
   test("Click swatch opens popover", () => {
     const value = "rgba(255,55,100,1)";
-    render(<Color value={value} />);
+    render(<ColorWithState value={value} />);
     const swatch = screen.getByTestId("swatch");
     userEvent.click(swatch);
     expect(document.querySelector("[id=red]").value).toBe("255");
