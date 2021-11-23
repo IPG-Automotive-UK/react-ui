@@ -9,7 +9,6 @@ import PropTypes from "prop-types";
  */
 export default function Checkbox({
   checked = false,
-  color = "default",
   disabled = false,
   label = "",
   onChange = () => {},
@@ -22,7 +21,6 @@ export default function Checkbox({
         control={
           <MuiCheckbox
             checked={checked}
-            color={color}
             disabled={disabled}
             onChange={onChange}
             size={size}
@@ -39,10 +37,6 @@ Checkbox.PropTypes = {
    * If true, the component is checked.
    */
   checked: PropTypes.bool,
-  /**
-   * The color of the component.
-   */
-  color: PropTypes.string,
   /**
    * If true, the component is disabled.
    */
