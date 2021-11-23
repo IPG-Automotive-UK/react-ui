@@ -46,10 +46,6 @@ export default function RadioButtons({
 
 RadioButtons.propTypes = {
   /**
-   * The default value
-   */
-  defaultValue: PropTypes.string,
-  /**
    * If true, the radio buttons group will be disabled
    */
   disabled: PropTypes.bool,

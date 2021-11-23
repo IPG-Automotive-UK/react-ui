@@ -14,12 +14,12 @@ describe("RadioButtons", () => {
     expect(container.firstChild).toBeInTheDocument();
   });
   test("can select an option", () => {
-    const value = options[2];
+    const thisValue = options[2];
     const { container } = render(
       <RadioButtons options={options} title="Test" />
     );
     const radioInput = container.querySelector("input");
-    fireEvent.change(radioInput, { target: { value: value } });
-    expect(radioInput.value).toBe(value);
+    fireEvent.change(radioInput, { target: { value: thisValue } });
+    expect(radioInput.value).toBe(thisValue);
   });
 });
