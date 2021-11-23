@@ -110,10 +110,10 @@ export const IconsOnly = Template.bind({});
 IconsOnly.args = {
   children: (
     <>
-      <SidebarItem icon={<Home />} />
-      <SidebarItem icon={<Mail />} selected />
-      <SidebarItem icon={<Person />} />
-      <SidebarItem icon={<Settings />} />
+      <SidebarItem icon={<Home />} name="" />
+      <SidebarItem icon={<Mail />} name="" selected />
+      <SidebarItem icon={<Person />} name="" />
+      <SidebarItem icon={<Settings />} name="" />
     </>
   ),
   showLogo: false,
