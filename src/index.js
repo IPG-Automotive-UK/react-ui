@@ -8,6 +8,7 @@ export { default as NumberField } from "./NumberField";
 export { default as PasswordChangeDialog } from "./PasswordChangeDialog";
 export { default as PasswordChangeForm } from "./PasswordChangeForm";
 export { default as PasswordResetForm } from "./PasswordResetForm";
+export { default as RadioButtons } from "./RadioButtons";
 export { default as RegistrationForm } from "./RegistrationForm";
 export { default as SearchBar } from "./SearchBar";
 export { default as Select } from "./Select";
