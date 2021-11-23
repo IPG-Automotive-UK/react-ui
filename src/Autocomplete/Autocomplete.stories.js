@@ -32,5 +32,6 @@ Default.args = {
   options: ["Apple", "Apricot", "Pear"],
   required: true,
   size: "medium",
+  value: "Apple",
   variant: "outlined"
 };
