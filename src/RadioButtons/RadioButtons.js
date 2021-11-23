@@ -15,8 +15,8 @@ export default function RadioButtons({
   labelPlacement = "end",
   onChange = () => {},
   row = false,
-  title,
-  values
+  title = "",
+  values = []
 }) {
   return (
     <FormControl disabled={disabled} component="fieldset">
@@ -32,7 +32,7 @@ export default function RadioButtons({
           <FormControlLabel
             key={index}
             control={<Radio />}
-            label={item.toUpperCase()}
+            label={item}
             value={item}
             labelPlacement={labelPlacement}
           />
