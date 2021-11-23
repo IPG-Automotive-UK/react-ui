@@ -10,14 +10,15 @@ import RadioGroup from "@mui/material/RadioGroup";
  * Radio buttons group component
  */
 export default function RadioButtons({
-  defaultValue,
   disabled = false,
   labelPlacement = "end",
   onChange = () => {},
+  options = [],
   radioGroupStyle = {},
   row = false,
+  size = "medium",
   title = "",
-  values = []
+  value
 }) {
   return (
     <FormControl disabled={disabled} component="fieldset">
@@ -25,15 +26,14 @@ export default function RadioButtons({
       <RadioGroup
         sx={radioGroupStyle}
         aria-label={title}
-        defaultValue={defaultValue}
         onChange={onChange}
-        name="radio-buttons-group"
         row={row}
+        value={value}
       >
-        {values.map((item, index) => (
+        {options.map((item, index) => (
           <FormControlLabel
             key={index}
-            control={<Radio />}
+            control={<Radio size={size} />}
             label={item}
             value={item}
             labelPlacement={labelPlacement}
@@ -69,6 +69,10 @@ RadioButtons.propTypes = {
    */
   onChange: PropTypes.func,
   /**
+   * The lables of the radio buttons group
+   */
+  options: PropTypes.arrayOf(PropTypes.string),
+  /**
    * Custom style to apply to the radio buttons group
    */
   radioGroupStyle: PropTypes.object,
@@ -77,11 +81,15 @@ RadioButtons.propTypes = {
    */
   row: PropTypes.bool,
   /**
+   * The size of the radio button
+   */
+  size: PropTypes.oneOf(["small", "medium"]),
+  /**
    * The title of the radio buttons group
    */
   title: PropTypes.string,
   /**
-   *
+   * Value of selected radion button
    */
-  values: PropTypes.arrayOf(PropTypes.string)
+  value: PropTypes.string
 };
