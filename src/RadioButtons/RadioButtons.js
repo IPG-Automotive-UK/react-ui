@@ -19,9 +19,14 @@ export default function RadioButtons({
   values = []
 }) {
   return (
-    <FormControl disabled={disabled} component="fieldset">
+    <FormControl
+      sx={{ border: "2px solid black" }}
+      disabled={disabled}
+      component="fieldset"
+    >
       <FormLabel component="legend">{title}</FormLabel>
       <RadioGroup
+        sx={{ border: "2px solid red" }}
         aria-label={title}
         defaultValue={defaultValue}
         onChange={onChange}
