@@ -14,19 +14,16 @@ export default function RadioButtons({
   disabled = false,
   labelPlacement = "end",
   onChange = () => {},
+  radioGroupStyle = {},
   row = false,
   title = "",
   values = []
 }) {
   return (
-    <FormControl
-      sx={{ border: "2px solid black" }}
-      disabled={disabled}
-      component="fieldset"
-    >
+    <FormControl disabled={disabled} component="fieldset">
       <FormLabel component="legend">{title}</FormLabel>
       <RadioGroup
-        sx={{ border: "2px solid red" }}
+        sx={radioGroupStyle}
         aria-label={title}
         defaultValue={defaultValue}
         onChange={onChange}
@@ -71,6 +68,10 @@ RadioButtons.propTypes = {
    * _value_: The value of the selected radio button You can pull out the new value by accessing `event.target.value` (string).
    */
   onChange: PropTypes.func,
+  /**
+   * Custom style to apply to the radio buttons group
+   */
+  radioGroupStyle: PropTypes.object,
   /**
    * The layout of the buttons
    */
