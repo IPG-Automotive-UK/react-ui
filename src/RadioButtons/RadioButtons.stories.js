@@ -3,6 +3,9 @@ import React from "react";
 import { action } from "@storybook/addon-actions";
 
 export default {
+  argTypes: {
+    value: { type: "string" }
+  },
   component: RadioButtons,
   title: "General/RadioButtons"
 };
@@ -12,22 +15,24 @@ const Template = args => {
     setValue(args.value);
   }, [args.value]);
   const onChange = (event, value) => {
-    setValue(value);
+    setValue(event.target.value);
     action("onChange")(event, value);
   };
   return (
-    <div marginLeft="500px">
-      <RadioButtons {...args} value={value} onChange={onChange} />
+    <div>
+      <RadioButtons {...args} onChange={onChange} value={value} />
     </div>
   );
 };
 
 export const Default = Template.bind({});
 Default.args = {
-  defaultValue: "A",
   disabled: false,
   labelPlacement: "end",
+  options: ["Option A", "Option B", "Option C"],
+  radioGroupStyle: {},
   row: false,
+  size: "medium",
   title: "This is an example",
-  values: ["A", "B", "C"]
+  value: "Option B"
 };
