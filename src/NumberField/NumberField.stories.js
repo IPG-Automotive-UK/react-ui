@@ -49,7 +49,6 @@ export const CustomMinMaxAndStep = Template.bind({});
 CustomMinMaxAndStep.args = {
   disabled: false,
   error: false,
-  helperText: "Enter a Number Between 0 and 1",
   inputProps: { max: 1, min: 0, step: 0.1 },
   label: "Enter a Number",
   margin: "normal",

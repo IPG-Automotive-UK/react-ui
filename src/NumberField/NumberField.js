@@ -9,7 +9,7 @@ export default function NumberField({
   disabled = false,
   error = false,
   helperText,
-  inputProps,
+  inputProps = {},
   label,
   margin = "normal",
   onChange = () => {},
@@ -20,11 +20,40 @@ export default function NumberField({
   value,
   variant = "outlined"
 }) {
+  const [valueError, setValueError] = React.useState(false);
+  const [errorMessage, setErrorMessage] = React.useState("");
+
+  let max;
+  if (inputProps.max !== undefined) {
+    max = parseFloat(inputProps.max);
+  }
+
+  let min;
+  if (inputProps.min !== undefined) {
+    min = parseFloat(inputProps.min);
+  }
+
   // handleChange
   const handleChange = event => {
     // update event.target.value so that it is a number
-    const newEventValue = { target: { value: Number(event.target.value) } };
+    const newValue = Number(event.target.value);
+    const newEventValue = { target: { value: newValue } };
     const updatedEvent = { ...event, ...newEventValue };
+
+    if (newValue < min) {
+      setValueError(true);
+      setErrorMessage(`Value must be greater than ${min}`);
+      return;
+    }
+
+    if (newValue > max) {
+      setValueError(true);
+      setErrorMessage(`Value must be less than ${max}`);
+      return;
+    }
+
+    setValueError(false);
+    setErrorMessage("");
     onChange(updatedEvent);
   };
   // return components
@@ -32,8 +61,8 @@ export default function NumberField({
     <MuiTextField
       data-testid="NumberField"
       disabled={disabled}
-      error={error}
-      helperText={helperText}
+      error={error || valueError}
+      helperText={helperText || errorMessage}
       label={label}
       margin={margin}
       onChange={handleChange}
