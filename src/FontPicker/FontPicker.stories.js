@@ -1,4 +1,4 @@
-import Autocomplete from "./Autocomplete";
+import FontPicker from "./FontPicker";
 import React from "react";
 import { action } from "@storybook/addon-actions";
 
@@ -6,8 +6,8 @@ export default {
   argTypes: {
     value: { type: "string" }
   },
-  component: Autocomplete,
-  title: "General/Autocomplete"
+  component: FontPicker,
+  title: "General/FontPicker"
 };
 
 const Template = args => {
@@ -19,19 +19,30 @@ const Template = args => {
     setValue(value);
     action("onChange")(event, value, reason);
   };
-  return <Autocomplete {...args} onChange={onChange} value={value} />;
+  return <FontPicker {...args} onChange={onChange} value={value} />;
 };
 
 export const Default = Template.bind({});
 Default.args = {
   disabled: false,
   error: false,
-  helperText: "What is your selection going to be?",
-  label: "Select an option",
+  label: "Font",
   margin: "normal",
-  options: ["Apple", "Apricot", "Pear"],
-  required: true,
+  required: false,
   size: "medium",
-  value: "Apple",
+  value: "Arial",
+  variant: "outlined"
+};
+
+export const CustomOptions = Template.bind({});
+CustomOptions.args = {
+  disabled: false,
+  error: false,
+  label: "Font",
+  margin: "normal",
+  options: ["Arial", "Helvetica", "Times New Roman"],
+  required: false,
+  size: "medium",
+  value: "Arial",
   variant: "outlined"
 };
