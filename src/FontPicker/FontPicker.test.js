@@ -22,7 +22,7 @@ const FontPickerWithState = ({ onChange, value: valueIn = "", ...rest }) => {
 /**
  * Tests
  */
-describe("Select", () => {
+describe("FontPicker", () => {
   test("can select an item", () => {
     const { container } = render(
       <FontPickerWithState options={options} value="Arial" />
