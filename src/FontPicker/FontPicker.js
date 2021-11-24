@@ -161,7 +161,7 @@ export default function FontPicker({
         fontAvailable.add(font);
       }
     }
-    return [...fontAvailable.values()];
+    return Array.from(fontAvailable.values());
   };
 
   // fetch default available options on load
