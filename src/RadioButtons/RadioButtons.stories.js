@@ -30,9 +30,9 @@ Default.args = {
   disabled: false,
   labelPlacement: "end",
   options: ["Option A", "Option B", "Option C"],
-  radioGroupStyle: {},
   row: false,
   size: "medium",
+  style: {},
   title: "This is an example",
   value: "Option B"
 };
