@@ -1,7 +1,9 @@
 import * as React from "react";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormGroup from "@mui/material/FormGroup";
-import MuiCheckbox from "@mui/material/Checkbox";
+import {
+  FormControlLabel,
+  FormGroup,
+  Checkbox as MuiCheckbox
+} from "@mui/material";
 import PropTypes from "prop-types";
 
 /**
@@ -32,7 +34,7 @@ export default function Checkbox({
   );
 }
 
-Checkbox.PropTypes = {
+Checkbox.propTypes = {
   /*
    * If true, the component is checked.
    */
