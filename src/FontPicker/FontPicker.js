@@ -196,7 +196,7 @@ export default function FontPicker({
   );
 }
 
-Autocomplete.propTypes = {
+FontPicker.propTypes = {
   /**
    * If true, the label, input and helper text should be displayed in a disabled state.
    */
