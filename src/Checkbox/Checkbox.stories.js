@@ -13,7 +13,7 @@ const Template = args => {
     setChecked(args.checked);
   }, [args.checked]);
   const onChange = event => {
-    setChecked(!checked);
+    setChecked(event.target.checked);
     action("onChange")(event);
   };
   return <Checkbox {...args} checked={checked} onChange={onChange} />;
