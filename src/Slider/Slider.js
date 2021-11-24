@@ -55,6 +55,12 @@ export default function Slider({
             position: "absolute",
             top: labelPosition === "top" ? "-20px" : "30px"
           },
+          '& input[type="range"]': {
+            WebkitAppearance:
+              orientation === "horizontal"
+                ? "slider-horizontal"
+                : "slider-vertical"
+          },
           color: { color },
           marginTop: labelPosition === "top" ? "20px" : "5px"
         }}
