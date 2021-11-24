@@ -231,8 +231,7 @@ export default function Color({
           (sx.swatch,
           {
             "&:hover": {
-              backgroundColor: value,
-              opacity: 0.5
+              backgroundColor: value
             },
             background: value,
             height: swatchDimensions,
