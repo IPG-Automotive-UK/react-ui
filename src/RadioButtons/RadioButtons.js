@@ -1,10 +1,12 @@
 import * as React from "react";
-import FormControl from "@mui/material/FormControl";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormLabel from "@mui/material/FormLabel";
+import {
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup
+} from "@mui/material";
 import PropTypes from "prop-types";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
 
 /**
  * Radio buttons group component
@@ -14,7 +16,7 @@ export default function RadioButtons({
   labelPlacement = "end",
   onChange = () => {},
   options = [],
-  radioGroupStyle = {},
+  style = {},
   row = false,
   size = "medium",
   title = "",
@@ -25,7 +27,7 @@ export default function RadioButtons({
     <FormControl disabled={disabled} component="fieldset">
       <FormLabel component="legend">{title}</FormLabel>
       <RadioGroup
-        sx={radioGroupStyle}
+        sx={style}
         aria-label={title}
         onChange={onChange}
         row={row}
@@ -47,11 +49,11 @@ export default function RadioButtons({
 
 RadioButtons.propTypes = {
   /**
-   * If true, the radio buttons group will be disabled
+   * If true, the radio buttons group will be disabled.
    */
   disabled: PropTypes.bool,
   /**
-   * The position of the label
+   * The position of the label.
    */
   labelPlacement: PropTypes.oneOf(["start", "end", "top", "bottom"]),
   /**
@@ -66,27 +68,27 @@ RadioButtons.propTypes = {
    */
   onChange: PropTypes.func,
   /**
-   * The lables of the radio buttons group
+   * The lables of the radio buttons group.
    */
   options: PropTypes.arrayOf(PropTypes.string),
   /**
-   * Custom style to apply to the radio buttons group
-   */
-  radioGroupStyle: PropTypes.object,
-  /**
-   * The layout of the buttons
+   * If true the buttons will be displayed in a row otherwise in a column.
    */
   row: PropTypes.bool,
   /**
-   * The size of the radio button
+   * The size of the radio button.
    */
   size: PropTypes.oneOf(["small", "medium"]),
   /**
-   * The title of the radio buttons group
+   * Custom style to apply to the radio buttons group.
+   */
+  style: PropTypes.object,
+  /**
+   * The title of the radio buttons group.
    */
   title: PropTypes.string,
   /**
-   * Value of selected radion button
+   * Value of selected radio button.
    */
   value: PropTypes.string
 };
