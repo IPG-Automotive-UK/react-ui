@@ -247,7 +247,6 @@ export default function Color({
         data-testid="swatch"
         ref={buttonRef}
         variant="contained"
-        disableElevation
       />
       <Popover
         data-testid="popover"
