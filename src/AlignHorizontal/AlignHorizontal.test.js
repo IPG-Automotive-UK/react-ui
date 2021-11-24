@@ -1,6 +1,6 @@
+import { render, screen } from "@testing-library/react";
 import AlignHorizontal from ".";
 import React from "react";
-import { render, screen } from "@testing-library/react";
 
 /**
  * Test wrapper for AlignHorizontal
