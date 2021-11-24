@@ -1,6 +1,6 @@
 import { Autocomplete, Box, TextField, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import React from "react";
 
 // default font options list
 const defaultFonts = new Set(
@@ -127,7 +127,10 @@ const defaultFonts = new Set(
     "Trattatello",
     "Trebuchet MS",
     "Verdana",
-    "Zapfino"
+    "Zapfino",
+
+    // Google
+    "Roboto"
   ].sort()
 );
 
@@ -144,10 +147,14 @@ export default function FontPicker({
   size = "medium",
   value,
   variant = "outlined",
-  ...other
+  ...props
 }) {
+  // state for available options
+  const [defaultOptions, setDefaultOptions] = useState([]);
+
   // get available default font options
-  const getAvailableDefaultFonts = () => {
+  const getAvailableDefaultFonts = async () => {
+    await document.fonts.ready;
     const fontAvailable = new Set();
     for (const font of defaultFonts.values()) {
       if (document.fonts.check(`12px "${font}"`)) {
@@ -157,8 +164,13 @@ export default function FontPicker({
     return [...fontAvailable.values()];
   };
 
-  // get options
-  const options = other.options || getAvailableDefaultFonts();
+  // fetch default available options on load
+  useEffect(async () => {
+    try {
+      const theseOptions = await getAvailableDefaultFonts();
+      setDefaultOptions(theseOptions);
+    } catch (e) {}
+  }, []);
 
   // return components
   return (
@@ -166,7 +178,7 @@ export default function FontPicker({
       disableClearable
       disabled={disabled}
       onChange={onChange}
-      options={options}
+      options={props.options ? props.options : defaultOptions}
       size={size}
       value={value}
       renderInput={params => (
