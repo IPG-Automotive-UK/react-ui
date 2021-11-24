@@ -231,8 +231,7 @@ export default function Color({
           (sx.swatch,
           {
             "&:hover": {
-              backgroundColor: value,
-              opacity: 0.5
+              backgroundColor: value
             },
             background: value,
             height: swatchDimensions,
@@ -247,7 +246,6 @@ export default function Color({
         data-testid="swatch"
         ref={buttonRef}
         variant="contained"
-        disableElevation
       />
       <Popover
         data-testid="popover"

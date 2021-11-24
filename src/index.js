@@ -1,7 +1,9 @@
+export { default as AlignHorizontal } from "./AlignHorizontal";
 export { default as Autocomplete } from "./Autocomplete";
 export { default as Checkbox } from "./Checkbox";
 export { default as Copyright } from "./Copyright";
 export { default as Color } from "./Color";
+export { default as FontPicker } from "./FontPicker";
 export { default as Loading } from "./Loading";
 export { default as LoginForm } from "./LoginForm";
 export { default as NoLicense } from "./NoLicense";
