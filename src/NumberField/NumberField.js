@@ -62,6 +62,7 @@ export default function NumberField({
       data-testid="NumberField"
       disabled={disabled}
       error={error || valueError}
+      fullWidth
       helperText={helperText || errorMessage}
       label={label}
       margin={margin}
