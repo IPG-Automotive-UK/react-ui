@@ -29,16 +29,32 @@ export default function AlignHorizontal({
       size={size}
       value={value}
     >
-      <ToggleButton aria-label="left aligned" value="left">
+      <ToggleButton
+        aria-label="left aligned"
+        data-testid="leftButton"
+        value="left"
+      >
         <FormatAlignLeft />
       </ToggleButton>
-      <ToggleButton aria-label="centered" value="center">
+      <ToggleButton
+        aria-label="centered"
+        data-testid="centerButton"
+        value="center"
+      >
         <FormatAlignCenter />
       </ToggleButton>
-      <ToggleButton aria-label="right aligned" value="right">
+      <ToggleButton
+        aria-label="right aligned"
+        data-testid="rightButton"
+        value="right"
+      >
         <FormatAlignRight />
       </ToggleButton>
-      <ToggleButton aria-label="justified" value="justify">
+      <ToggleButton
+        aria-label="justified"
+        data-testid="justifyButton"
+        value="justify"
+      >
         <FormatAlignJustify />
       </ToggleButton>
     </ToggleButtonGroup>
