@@ -23,11 +23,11 @@ export default function NumberField({
   const [valueError, setValueError] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState("");
 
+  // get max and min values from inputProps
   let max;
   if (inputProps.max !== undefined) {
     max = parseFloat(inputProps.max);
   }
-
   let min;
   if (inputProps.min !== undefined) {
     min = parseFloat(inputProps.min);
@@ -40,18 +40,21 @@ export default function NumberField({
     const newEventValue = { target: { value: newValue } };
     const updatedEvent = { ...event, ...newEventValue };
 
+    // if the value is less than minimum, set error
     if (newValue < min) {
       setValueError(true);
       setErrorMessage(`Value must be greater than ${min}`);
       return;
     }
 
+    // if the value is greater than maximum, set error
     if (newValue > max) {
       setValueError(true);
       setErrorMessage(`Value must be less than ${max}`);
       return;
     }
 
+    // set error to false and fire onChange
     setValueError(false);
     setErrorMessage("");
     onChange(updatedEvent);
