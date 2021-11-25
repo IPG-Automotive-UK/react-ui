@@ -50,7 +50,7 @@ export default function NumberField({
     // if the value is greater than maximum, set error
     if (newValue > max) {
       setValueError(true);
-      setErrorMessage(`Value must be less than ${max}`);
+      setErrorMessage(`Value must be less than or equal to ${max}`);
       return;
     }
 
