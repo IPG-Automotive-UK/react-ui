@@ -43,7 +43,7 @@ export default function NumberField({
     // if the value is less than minimum, set error
     if (newValue < min) {
       setValueError(true);
-      setErrorMessage(`Value must be greater than ${min}`);
+      setErrorMessage(`Value must be greater than or equal to ${min}`);
       return;
     }
 
