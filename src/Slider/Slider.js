@@ -44,9 +44,16 @@ export default function Slider({
   } else {
     marks = false;
   }
+  //
+  const preventHorizontalKeyboardNavigation = event => {
+    console.log(event);
+    if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+      event.preventDefault();
+    }
+  };
   // return components
   return (
-    <Box>
+    <Box sx={{ height: 300 }}>
       <Typography>{title}</Typography>
       <MuiSlider
         sx={{
@@ -56,10 +63,7 @@ export default function Slider({
             top: labelPosition === "top" ? "-20px" : "30px"
           },
           '& input[type="range"]': {
-            WebkitAppearance:
-              orientation === "horizontal"
-                ? "slider-horizontal"
-                : "slider-vertical"
+            WebkitAppearance: `slider-${orientation}`
           },
           color: { color },
           marginTop: labelPosition === "top" ? "20px" : "5px"
@@ -71,6 +75,7 @@ export default function Slider({
         onChange={onChange}
         onChangeCommitted={onChangeCommitted}
         orientation={orientation}
+        onKeyDown={preventHorizontalKeyboardNavigation}
         step={stepSize}
         value={typeof value !== "undefined" ? value : null}
         valueLabelDisplay={valueLabelDisplay}
