@@ -23,6 +23,7 @@ export default function TextField({
     <MuiTextField
       disabled={disabled}
       error={error}
+      fullWidth
       helperText={helperText}
       label={label}
       margin={margin}
