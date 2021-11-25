@@ -99,10 +99,6 @@ NumberField.propTypes = {
    */
   helperText: PropTypes.string,
   /**
-   * Attributes applied to the input element
-   */
-  inputProps: PropTypes.object,
-  /**
    * Label to display above input.
    */
   label: PropTypes.string,
