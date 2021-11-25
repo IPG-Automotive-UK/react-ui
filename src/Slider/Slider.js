@@ -44,42 +44,45 @@ export default function Slider({
   } else {
     marks = false;
   }
-  //
-  const preventHorizontalKeyboardNavigation = event => {
-    console.log(event);
-    if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
-      event.preventDefault();
+  // prevent horizontal keyboard navigation for vertical slider
+  const preventHorizontalKeyboardNavigation = (event, orientation) => {
+    if (orientation === "vertical") {
+      if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+        event.preventDefault();
+      }
     }
   };
   // return components
   return (
-    <Box sx={{ height: 300 }}>
+    <Box>
       <Typography>{title}</Typography>
-      <MuiSlider
-        sx={{
-          "& .MuiSlider-markLabel": {
-            ...labelStyle,
-            position: "absolute",
-            top: labelPosition === "top" ? "-20px" : "30px"
-          },
-          '& input[type="range"]': {
-            WebkitAppearance: `slider-${orientation}`
-          },
-          color: { color },
-          marginTop: labelPosition === "top" ? "20px" : "5px"
-        }}
-        disabled={disabled}
-        marks={marks}
-        max={max}
-        min={min}
-        onChange={onChange}
-        onChangeCommitted={onChangeCommitted}
-        orientation={orientation}
-        onKeyDown={preventHorizontalKeyboardNavigation}
-        step={stepSize}
-        value={typeof value !== "undefined" ? value : null}
-        valueLabelDisplay={valueLabelDisplay}
-      />
+      <Box sx={{ height: "100vh" }}>
+        <MuiSlider
+          sx={{
+            "& .MuiSlider-markLabel": {
+              ...labelStyle
+              // position: "absolute",
+              // top: labelPosition === "top" ? "-20px" : "30px"
+            },
+            '& input[type="range"]': {
+              WebkitAppearance: `slider-${orientation}`
+            },
+            color: { color },
+            marginTop: labelPosition === "top" ? "20px" : "5px"
+          }}
+          disabled={disabled}
+          marks={marks}
+          max={max}
+          min={min}
+          onChange={onChange}
+          onChangeCommitted={onChangeCommitted}
+          orientation={orientation}
+          onKeyDown={preventHorizontalKeyboardNavigation}
+          step={stepSize}
+          value={typeof value !== "undefined" ? value : null}
+          valueLabelDisplay={valueLabelDisplay}
+        />
+      </Box>
     </Box>
   );
 }
