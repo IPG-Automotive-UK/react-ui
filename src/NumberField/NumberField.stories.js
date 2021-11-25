@@ -49,10 +49,12 @@ export const CustomMinMaxAndStep = Template.bind({});
 CustomMinMaxAndStep.args = {
   disabled: false,
   error: false,
-  inputProps: { max: 1, min: 0, step: 0.1 },
   label: "Enter a Number",
   margin: "normal",
+  max: 1,
+  min: 0,
   required: false,
   size: "medium",
+  step: 0.1,
   variant: "outlined"
 };

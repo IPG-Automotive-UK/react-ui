@@ -9,29 +9,21 @@ export default function NumberField({
   disabled = false,
   error = false,
   helperText,
-  inputProps = {},
   label,
   margin = "normal",
+  max,
+  min,
   onChange = () => {},
   placeholder,
   required = false,
   size = "medium",
+  step = 1,
   stepper = true,
   value,
   variant = "outlined"
 }) {
   const [valueError, setValueError] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState("");
-
-  // get max and min values from inputProps
-  let max;
-  if (inputProps.max !== undefined) {
-    max = parseFloat(inputProps.max);
-  }
-  let min;
-  if (inputProps.min !== undefined) {
-    min = parseFloat(inputProps.min);
-  }
 
   // handleChange
   const handleChange = event => {
@@ -41,14 +33,14 @@ export default function NumberField({
     const updatedEvent = { ...event, ...newEventValue };
 
     // if the value is less than minimum, set error
-    if (newValue < min) {
+    if (newValue < min && min !== undefined) {
       setValueError(true);
       setErrorMessage(`Value must be greater than or equal to ${min}`);
       return;
     }
 
     // if the value is greater than maximum, set error
-    if (newValue > max) {
+    if (newValue > max && max !== undefined) {
       setValueError(true);
       setErrorMessage(`Value must be less than or equal to ${max}`);
       return;
@@ -76,7 +68,7 @@ export default function NumberField({
       type="Number"
       value={value}
       variant={variant}
-      inputProps={inputProps}
+      inputProps={{ max: max, min: min, step: step }}
       sx={
         !stepper
           ? {
@@ -120,6 +112,16 @@ NumberField.propTypes = {
    */
   margin: PropTypes.oneOf(["none", "dense", "normal"]),
   /**
+   * Maximum allowable value of the input, if a value is entered that is greater than the max, the value will not be updated.
+   * if the stepper is enabled this will be the maximum value of the stepper.
+   */
+  max: PropTypes.number,
+  /**
+   * Minimum allowable value of the input, if a value is entered that is less than the min, the value will not be updated.
+   * if the stepper is enabled this will be the minimum value of the stepper.
+   */
+  min: PropTypes.number,
+  /**
    * Callback fired when the value is changed.
    *
    * **Signature**
@@ -143,6 +145,11 @@ NumberField.propTypes = {
    * @default "medium"
    */
   size: PropTypes.oneOf(["medium", "small"]),
+  /**
+   * If the stepper in enabled, this is the step increment
+   * @default 1
+   */
+  step: PropTypes.number,
   /**
    * If true, the numberfield will have stepper arrows
    * @default true
