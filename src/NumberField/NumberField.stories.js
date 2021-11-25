@@ -4,7 +4,7 @@ import { action } from "@storybook/addon-actions";
 
 export default {
   component: NumberField,
-  title: "General/NumberField"
+  title: "Text/NumberField"
 };
 
 const Template = args => {
