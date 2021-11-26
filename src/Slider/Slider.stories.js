@@ -4,6 +4,10 @@ import { action } from "@storybook/addon-actions";
 
 export default {
   argTypes: {
+    orientation: {
+      control: { type: "radio" },
+      option: ["horizontal", "vertical"]
+    },
     value: { type: "number" }
   },
   component: Slider,
@@ -20,7 +24,13 @@ const Template = args => {
     action("onChange")(event, value);
   };
   return (
-    <div style={{ width: 500 }}>
+    <div
+      style={{
+        height: args.orientation === "vertical" ? 400 : 100,
+        paddingLeft: "10px",
+        width: args.orientation === "vertical" ? 120 : 400
+      }}
+    >
       <Slider {...args} onChange={onChange} value={value} />
     </div>
   );
@@ -92,7 +102,7 @@ StyledLabels.args = {
   valueLabelDisplay: "auto"
 };
 
-// styled labels
+// styled slider
 export const StyledSlider = Template.bind({});
 StyledSlider.args = {
   color: "green",
@@ -114,7 +124,7 @@ StyledSlider.args = {
   valueLabelDisplay: "auto"
 };
 
-// default story
+// disabled slider
 export const Disabled = Template.bind({});
 Disabled.args = {
   color: "primary",
@@ -128,6 +138,24 @@ Disabled.args = {
   showLabels: true,
   step: 1,
   title: "Slider example",
+  value: 1,
+  valueLabelDisplay: "auto"
+};
+
+// vertical slider
+export const VerticalSlider = Template.bind({});
+VerticalSlider.args = {
+  color: "primary",
+  disabled: false,
+  labelPosition: "right",
+  labelStyle: {},
+  labels: [],
+  max: 10,
+  min: 1,
+  orientation: "vertical",
+  showLabels: true,
+  step: 1,
+  title: "Vertical slider",
   value: 1,
   valueLabelDisplay: "auto"
 };

@@ -44,31 +44,51 @@ export default function Slider({
   } else {
     marks = false;
   }
+  // set label position based on orientation
+  let style = {};
+  if (orientation === "horizontal") {
+    style = {
+      position: "absolute",
+      top: labelPosition === "top" ? "-20px" : "30px"
+    };
+  } else {
+    style = {
+      left: labelPosition === "left" ? "-15px" : "30px",
+      position: "absolute"
+    };
+  }
   // return components
   return (
-    <Box>
+    <Box sx={{ height: "100%" }}>
       <Typography>{title}</Typography>
-      <MuiSlider
-        sx={{
-          "& .MuiSlider-markLabel": {
-            ...labelStyle,
-            position: "absolute",
-            top: labelPosition === "top" ? "-20px" : "30px"
-          },
-          color: { color },
-          marginTop: labelPosition === "top" ? "20px" : "5px"
-        }}
-        disabled={disabled}
-        marks={marks}
-        max={max}
-        min={min}
-        onChange={onChange}
-        onChangeCommitted={onChangeCommitted}
-        orientation={orientation}
-        step={stepSize}
-        value={typeof value !== "undefined" ? value : null}
-        valueLabelDisplay={valueLabelDisplay}
-      />
+      <Box sx={{ height: "100%" }}>
+        <MuiSlider
+          sx={{
+            "& .MuiSlider-markLabel": {
+              ...labelStyle,
+              ...style
+            },
+            '& input[type="range"]': {
+              WebkitAppearance: `slider-${orientation}`
+            },
+            color: { color },
+            marginTop:
+              orientation === "horizontal" && labelPosition === "top"
+                ? "20px"
+                : "5px"
+          }}
+          disabled={disabled}
+          marks={marks}
+          max={max}
+          min={min}
+          onChange={onChange}
+          onChangeCommitted={onChangeCommitted}
+          orientation={orientation}
+          step={stepSize}
+          value={typeof value !== "undefined" ? value : null}
+          valueLabelDisplay={valueLabelDisplay}
+        />
+      </Box>
     </Box>
   );
 }
@@ -85,7 +105,7 @@ Slider.propTypes = {
   /**
    * Tick label position respective to slide
    */
-  labelPosition: PropTypes.oneOf(["bottom", "top"]),
+  labelPosition: PropTypes.oneOf(["bottom", "top", "left", "right"]),
   /**
    * Custom style to apply to the labels
    */
