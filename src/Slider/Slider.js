@@ -44,14 +44,6 @@ export default function Slider({
   } else {
     marks = false;
   }
-  // prevent horizontal keyboard navigation for vertical slider
-  const preventHorizontalKeyboardNavigation = (event, orientation) => {
-    if (orientation === "vertical") {
-      if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
-        event.preventDefault();
-      }
-    }
-  };
   // set label position based on orientation
   let style = {};
   if (orientation === "horizontal") {
@@ -92,7 +84,6 @@ export default function Slider({
           onChange={onChange}
           onChangeCommitted={onChangeCommitted}
           orientation={orientation}
-          onKeyDown={preventHorizontalKeyboardNavigation}
           step={stepSize}
           value={typeof value !== "undefined" ? value : null}
           valueLabelDisplay={valueLabelDisplay}
