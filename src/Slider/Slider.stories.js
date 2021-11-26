@@ -144,7 +144,7 @@ Disabled.args = {
 
 // vertical slider
 export const VerticalSlider = Template.bind({});
-VericalSlider.args = {
+VerticalSlider.args = {
   color: "primary",
   disabled: false,
   labelPosition: "right",
