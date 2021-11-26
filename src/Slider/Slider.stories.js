@@ -4,6 +4,10 @@ import { action } from "@storybook/addon-actions";
 
 export default {
   argTypes: {
+    orientation: {
+      control: { type: "radio" },
+      option: ["horizontal", "vertical"]
+    },
     value: { type: "number" }
   },
   component: Slider,
@@ -20,7 +24,13 @@ const Template = args => {
     action("onChange")(event, value);
   };
   return (
-    <div style={{ width: 500 }}>
+    <div
+      style={{
+        height: args.orientation === "vertical" ? 400 : 100,
+        paddingLeft: "10px",
+        width: args.orientation === "vertical" ? 120 : 400
+      }}
+    >
       <Slider {...args} onChange={onChange} value={value} />
     </div>
   );
