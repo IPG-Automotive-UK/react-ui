@@ -102,7 +102,7 @@ StyledLabels.args = {
   valueLabelDisplay: "auto"
 };
 
-// styled labels
+// styled slider
 export const StyledSlider = Template.bind({});
 StyledSlider.args = {
   color: "green",
@@ -124,7 +124,7 @@ StyledSlider.args = {
   valueLabelDisplay: "auto"
 };
 
-// default story
+// disabled slider
 export const Disabled = Template.bind({});
 Disabled.args = {
   color: "primary",
@@ -138,6 +138,24 @@ Disabled.args = {
   showLabels: true,
   step: 1,
   title: "Slider example",
+  value: 1,
+  valueLabelDisplay: "auto"
+};
+
+// vertical slider
+export const VericalSlider = Template.bind({});
+VericalSlider.args = {
+  color: "primary",
+  disabled: false,
+  labelPosition: "right",
+  labelStyle: {},
+  labels: [],
+  max: 10,
+  min: 1,
+  orientation: "vertical",
+  showLabels: true,
+  step: 1,
+  title: "Vertical slider",
   value: 1,
   valueLabelDisplay: "auto"
 };
