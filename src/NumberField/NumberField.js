@@ -24,6 +24,7 @@ export default function NumberField({
 }) {
   const [valueError, setValueError] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState("");
+  const [number, setNumber] = React.useState(value);
 
   // handleChange
   const handleChange = event => {
@@ -31,6 +32,9 @@ export default function NumberField({
     const newValue = Number(event.target.value);
     const newEventValue = { target: { value: newValue } };
     const updatedEvent = { ...event, ...newEventValue };
+
+    // set the number
+    setNumber(event.target.value);
 
     // if the value is less than minimum, set error
     if (newValue < min && min !== undefined) {
@@ -66,7 +70,7 @@ export default function NumberField({
       required={required}
       size={size}
       type="Number"
-      value={value}
+      value={number}
       variant={variant}
       inputProps={{ max: max, min: min, step: step }}
       sx={
