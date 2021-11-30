@@ -1,6 +1,6 @@
 import { TextField as MuiTextField } from "@mui/material";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useEffect } from "react";
 
 /**
  * NumberField components are used for collecting user provided information as a Number.
@@ -26,6 +26,11 @@ export default function NumberField({
   const [errorMessage, setErrorMessage] = React.useState("");
   const [number, setNumber] = React.useState(value);
 
+  // update the value of the number field
+  useEffect(() => {
+    setNumber(value);
+  }, [value]);
+
   // handleChange
   const handleChange = event => {
     // update event.target.value so that it is a number
@@ -35,6 +40,15 @@ export default function NumberField({
 
     // set the number
     setNumber(event.target.value);
+
+    // if the value is an empty string, don't update the value and show error if min is set
+    if (event.target.value === "") {
+      if (min !== undefined) {
+        setValueError(true);
+        setErrorMessage(`Value must be greater than or equal to ${min}`);
+      }
+      return;
+    }
 
     // if the value is less than minimum, set error
     if (newValue < min && min !== undefined) {
