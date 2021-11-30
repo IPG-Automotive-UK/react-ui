@@ -24,5 +24,15 @@ Default.args = {
   checked: false,
   disabled: false,
   label: "Disabled",
-  size: "medium"
+  size: "medium",
+  style: {}
+};
+
+export const styledCheckbox = Template.bind({});
+styledCheckbox.args = {
+  checked: false,
+  disabled: false,
+  label: "Disabled",
+  size: "medium",
+  style: { border: "1px solid red", padding: "20px" }
 };

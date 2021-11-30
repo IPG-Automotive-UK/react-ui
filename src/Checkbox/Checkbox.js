@@ -14,7 +14,8 @@ export default function Checkbox({
   disabled = false,
   label = "",
   onChange = () => {},
-  size = "medium"
+  size = "medium",
+  style = {}
 }) {
   // return components
   return (
@@ -22,6 +23,7 @@ export default function Checkbox({
       <FormControlLabel
         control={
           <MuiCheckbox
+            sx={style}
             checked={checked}
             disabled={disabled}
             onChange={onChange}
@@ -60,5 +62,9 @@ Checkbox.propTypes = {
   /**
    * The size of the component.
    */
-  size: PropTypes.oneOf(["small", "medium"])
+  size: PropTypes.oneOf(["small", "medium"]),
+  /*
+   * Custom style to apply to the checkbox.
+   */
+  style: PropTypes.array
 };
