@@ -67,14 +67,4 @@ describe("NumberField", () => {
     const errorBase = container.querySelector(".MuiInputBase-root");
     expect(errorBase).not.toHaveClass("Mui-error");
   });
-  test("on Blur return to previous valid value", () => {
-    const { container } = render(<NumberFieldWithState max={123} />);
-    const inputBase = container.querySelector(".MuiInputBase-input");
-    userEvent.type(inputBase, "{backspace}{backspace}{backspace}");
-    userEvent.type(inputBase, "1234");
-    fireEvent.blur(inputBase);
-    expect(inputBase.value).toBe("123");
-    const errorBase = container.querySelector(".MuiInputBase-root");
-    expect(errorBase).not.toHaveClass("Mui-error");
-  });
 });
