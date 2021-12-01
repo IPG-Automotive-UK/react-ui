@@ -1,6 +1,6 @@
+import React, { useEffect } from "react";
 import { TextField as MuiTextField } from "@mui/material";
 import PropTypes from "prop-types";
-import React from "react";
 
 /**
  * NumberField components are used for collecting user provided information as a Number.
@@ -24,6 +24,26 @@ export default function NumberField({
 }) {
   const [valueError, setValueError] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState("");
+  const [number, setNumber] = React.useState(value);
+
+  // update the value of the number field
+  useEffect(() => {
+    setNumber(value);
+  }, [value]);
+
+  // validate the number field when, number, min or max changes
+  useEffect(() => {
+    if (min !== undefined && number < min) {
+      setValueError(true);
+      setErrorMessage(`Must be greater than ${min}`);
+    } else if (max !== undefined && number > max) {
+      setValueError(true);
+      setErrorMessage(`Must be less than ${max}`);
+    } else {
+      setValueError(false);
+      setErrorMessage("");
+    }
+  }, [max, min, number]);
 
   // handleChange
   const handleChange = event => {
@@ -32,25 +52,29 @@ export default function NumberField({
     const newEventValue = { target: { value: newValue } };
     const updatedEvent = { ...event, ...newEventValue };
 
-    // if the value is less than minimum, set error
-    if (newValue < min && min !== undefined) {
-      setValueError(true);
-      setErrorMessage(`Value must be greater than or equal to ${min}`);
-      return;
+    // set the number
+    setNumber(event.target.value);
+
+    // is min satisfied
+    let minSatisfied = true;
+    if (min !== undefined && newValue < min) {
+      minSatisfied = false;
     }
 
-    // if the value is greater than maximum, set error
-    if (newValue > max && max !== undefined) {
-      setValueError(true);
-      setErrorMessage(`Value must be less than or equal to ${max}`);
-      return;
+    // is max satisfied
+    let maxSatisfied = true;
+    if (max !== undefined && newValue > max) {
+      maxSatisfied = false;
     }
 
-    // set error to false and fire onChange
-    setValueError(false);
-    setErrorMessage("");
-    onChange(updatedEvent);
+    // if the value is valid, set error to false
+    if (minSatisfied && maxSatisfied && event.target.value !== "") {
+      setValueError(false);
+      setErrorMessage("");
+      onChange(updatedEvent);
+    }
   };
+
   // return components
   return (
     <MuiTextField
@@ -66,7 +90,7 @@ export default function NumberField({
       required={required}
       size={size}
       type="Number"
-      value={value}
+      value={number}
       variant={variant}
       inputProps={{ max: max, min: min, step: step }}
       sx={

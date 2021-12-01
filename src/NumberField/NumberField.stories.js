@@ -58,3 +58,18 @@ CustomMinMaxAndStep.args = {
   step: 0.1,
   variant: "outlined"
 };
+
+export const InitialError = Template.bind({});
+InitialError.args = {
+  disabled: false,
+  error: false,
+  label: "Enter a Number",
+  margin: "normal",
+  max: 1,
+  min: 0,
+  required: false,
+  size: "medium",
+  step: 0.1,
+  value: 2,
+  variant: "outlined"
+};
