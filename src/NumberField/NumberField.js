@@ -67,7 +67,7 @@ export default function NumberField({
       maxSatisfied = false;
     }
 
-    // // if the value is valid, set error to false
+    // if the value is valid, set error to false
     if (minSatisfied && maxSatisfied && event.target.value !== "") {
       setValueError(false);
       setErrorMessage("");
