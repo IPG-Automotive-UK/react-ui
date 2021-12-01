@@ -31,7 +31,7 @@ export default function NumberField({
     setNumber(value);
   }, [value]);
 
-  // validate the number field when number, min or max changes
+  // validate the number field when, number, min or max changes
   useEffect(() => {
     if (min && number < min) {
       setValueError(true);
@@ -55,8 +55,20 @@ export default function NumberField({
     // set the number
     setNumber(event.target.value);
 
+    // is min satisfied
+    let minSatisfied = true;
+    if (min && newValue < min) {
+      minSatisfied = false;
+    }
+
+    // is max satisfied
+    let maxSatisfied = true;
+    if (max && newValue > max) {
+      maxSatisfied = false;
+    }
+
     // // if the value is valid, set error to false
-    if (newValue >= min && newValue <= max && event.target.value !== "") {
+    if (minSatisfied && maxSatisfied && event.target.value !== "") {
       setValueError(false);
       setErrorMessage("");
       onChange(updatedEvent);
