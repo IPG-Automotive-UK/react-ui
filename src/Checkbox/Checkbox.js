@@ -66,5 +66,5 @@ Checkbox.propTypes = {
   /*
    * Custom style to apply to the checkbox.
    */
-  style: PropTypes.array
+  style: PropTypes.object
 };
