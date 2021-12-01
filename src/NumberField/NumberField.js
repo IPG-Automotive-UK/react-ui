@@ -1,6 +1,6 @@
+import React, { useEffect } from "react";
 import { TextField as MuiTextField } from "@mui/material";
 import PropTypes from "prop-types";
-import React, { useEffect } from "react";
 
 /**
  * NumberField components are used for collecting user provided information as a Number.
@@ -31,6 +31,20 @@ export default function NumberField({
     setNumber(value);
   }, [value]);
 
+  // validate the number field when number, min or max changes
+  useEffect(() => {
+    if (min && number < min) {
+      setValueError(true);
+      setErrorMessage(`Must be greater than ${min}`);
+    } else if (max && number > max) {
+      setValueError(true);
+      setErrorMessage(`Must be less than ${max}`);
+    } else {
+      setValueError(false);
+      setErrorMessage("");
+    }
+  }, [max, min, number]);
+
   // handleChange
   const handleChange = event => {
     // update event.target.value so that it is a number
@@ -41,34 +55,19 @@ export default function NumberField({
     // set the number
     setNumber(event.target.value);
 
-    // if the value is an empty string, don't update the value and show error if min is set
-    if (event.target.value === "") {
-      if (min !== undefined) {
-        setValueError(true);
-        setErrorMessage(`Value must be greater than or equal to ${min}`);
-      }
-      return;
+    // // if the value is valid, set error to false
+    if (newValue >= min && newValue <= max && event.target.value !== "") {
+      setValueError(false);
+      setErrorMessage("");
+      onChange(updatedEvent);
     }
-
-    // if the value is less than minimum, set error
-    if (newValue < min && min !== undefined) {
-      setValueError(true);
-      setErrorMessage(`Value must be greater than or equal to ${min}`);
-      return;
-    }
-
-    // if the value is greater than maximum, set error
-    if (newValue > max && max !== undefined) {
-      setValueError(true);
-      setErrorMessage(`Value must be less than or equal to ${max}`);
-      return;
-    }
-
-    // set error to false and fire onChange
-    setValueError(false);
-    setErrorMessage("");
-    onChange(updatedEvent);
   };
+
+  // set number to the last value, when the user clicks away from the field
+  const handleBlur = () => {
+    setNumber(value);
+  };
+
   // return components
   return (
     <MuiTextField
@@ -80,6 +79,7 @@ export default function NumberField({
       label={label}
       margin={margin}
       onChange={handleChange}
+      onBlur={handleBlur}
       placeholder={placeholder}
       required={required}
       size={size}
