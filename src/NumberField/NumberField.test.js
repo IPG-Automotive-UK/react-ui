@@ -73,7 +73,7 @@ describe("NumberField", () => {
     userEvent.type(inputBase, "{backspace}{backspace}{backspace}");
     userEvent.type(inputBase, "1234");
     fireEvent.blur(inputBase);
-    expect(inputBase.value).toBe("100");
+    expect(inputBase.value).toBe("123");
     const errorBase = container.querySelector(".MuiInputBase-root");
     expect(errorBase).not.toHaveClass("Mui-error");
   });
