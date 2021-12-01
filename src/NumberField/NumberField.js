@@ -33,10 +33,10 @@ export default function NumberField({
 
   // validate the number field when, number, min or max changes
   useEffect(() => {
-    if (min && number < min) {
+    if (min !== undefined && number < min) {
       setValueError(true);
       setErrorMessage(`Must be greater than ${min}`);
-    } else if (max && number > max) {
+    } else if (max !== undefined && number > max) {
       setValueError(true);
       setErrorMessage(`Must be less than ${max}`);
     } else {
@@ -57,13 +57,13 @@ export default function NumberField({
 
     // is min satisfied
     let minSatisfied = true;
-    if (min && newValue < min) {
+    if (min !== undefined && newValue < min) {
       minSatisfied = false;
     }
 
     // is max satisfied
     let maxSatisfied = true;
-    if (max && newValue > max) {
+    if (max !== undefined && newValue > max) {
       maxSatisfied = false;
     }
 
@@ -73,11 +73,6 @@ export default function NumberField({
       setErrorMessage("");
       onChange(updatedEvent);
     }
-  };
-
-  // set number to the last value, when the user clicks away from the field
-  const handleBlur = () => {
-    setNumber(value);
   };
 
   // return components
@@ -91,7 +86,6 @@ export default function NumberField({
       label={label}
       margin={margin}
       onChange={handleChange}
-      onBlur={handleBlur}
       placeholder={placeholder}
       required={required}
       size={size}
