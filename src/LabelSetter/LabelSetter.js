@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Box } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import { v4 as uuid } from "uuid";
+import { uuid } from "uuidv4";
 
 export default function LabelSetter({
   headerNames = ["State value", "State label"],
