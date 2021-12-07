@@ -35,10 +35,10 @@ export default function NumberField({
   useEffect(() => {
     if (min !== undefined && number < min) {
       setValueError(true);
-      setErrorMessage(`Must be greater than ${min}`);
+      setErrorMessage(`Must be greater than or equal to ${min}`);
     } else if (max !== undefined && number > max) {
       setValueError(true);
-      setErrorMessage(`Must be less than ${max}`);
+      setErrorMessage(`Must be less than or equal to ${max}`);
     } else {
       setValueError(false);
       setErrorMessage("");
