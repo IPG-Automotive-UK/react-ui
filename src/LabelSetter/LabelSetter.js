@@ -1,12 +1,13 @@
 import * as React from "react";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
 import { DataGrid } from "@mui/x-data-grid";
-import { uuid } from "uuidv4";
 
 export default function LabelSetter({
-  headerNames = ["State value", "State label"],
+  headerNames = ["Value", "Label"],
+  onClick = () => {},
   rows = [],
-  onCellDoubleClick = () => {}
+  onCellEditCommit = () => {}
 }) {
   // set column definition
   const columns = [
@@ -27,17 +28,29 @@ export default function LabelSetter({
   ];
 
   // add an id for each label/value
-  const rowsT = rows.map(item => ({ ...item, id: uuid() }));
+  const updatedRows = rows.map((item, index) => ({ ...item, id: index }));
 
   // return components
   return (
-    <Box sx={{ height: 300, width: "50%" }}>
+    <Box
+      sx={{ height: 400, width: "100%" }}
+      display="flex"
+      flexDirection="column"
+    >
       <DataGrid
         hideFooter
-        rows={rowsT}
+        rows={updatedRows}
         columns={columns}
-        onCellDoubleClick={onCellDoubleClick}
+        onCellEditCommit={onCellEditCommit}
       />
+      <Button
+        sx={{ textTransform: "none", width: "10%" }}
+        endIcon={<AddIcon />}
+        onClick={onClick}
+        variant="contained"
+      >
+        Add
+      </Button>
     </Box>
   );
 }

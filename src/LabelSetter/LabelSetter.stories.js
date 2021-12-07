@@ -1,5 +1,6 @@
 import LabelSetter from "./LabelSetter";
 import React from "react";
+import { action } from "@storybook/addon-actions";
 
 export default {
   component: LabelSetter,
@@ -7,13 +8,13 @@ export default {
 };
 
 const Template = args => {
-  return <LabelSetter {...args} />;
+  return <LabelSetter {...args} onClick={action("onClick")} />;
 };
 
 // default story
 export const Default = Template.bind({});
 Default.args = {
-  headerNames: ["State value", "State label"],
+  headerNames: ["Value", "Label"],
   rows: [
     {
       label: "Label1",
@@ -26,6 +27,10 @@ Default.args = {
     {
       label: "Label3",
       value: 2
+    },
+    {
+      label: "",
+      value: null
     }
   ]
 };
