@@ -86,9 +86,9 @@ RadioButtons.propTypes = {
   /**
    * The title of the radio buttons group.
    */
-  title: PropTypes.string,
+  title: PropTypes.string
   /**
    * Value of selected radio button.
    */
-  value: PropTypes.string
+  // value: PropTypes.string
 };

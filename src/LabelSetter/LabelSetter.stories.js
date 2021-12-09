@@ -27,10 +27,6 @@ Default.args = {
     {
       label: "Label3",
       value: 2
-    },
-    {
-      label: "",
-      value: null
     }
   ]
 };

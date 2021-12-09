@@ -33,7 +33,7 @@ export default function LabelSetter({
   // return components
   return (
     <Box
-      sx={{ height: 400, width: "100%" }}
+      sx={{ height: 250, width: "50%" }}
       display="flex"
       flexDirection="column"
     >
