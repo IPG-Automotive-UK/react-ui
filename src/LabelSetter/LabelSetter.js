@@ -7,7 +7,8 @@ export default function LabelSetter({
   headerNames = ["Value", "Label"],
   onClick = () => {},
   rows = [],
-  onCellEditCommit = () => {}
+  onCellEditCommit = () => {},
+  style = {}
 }) {
   // set column definition
   const columns = [
@@ -32,11 +33,7 @@ export default function LabelSetter({
 
   // return components
   return (
-    <Box
-      sx={{ height: 250, width: "50%" }}
-      display="flex"
-      flexDirection="column"
-    >
+    <Box sx={style} display="flex" flexDirection="column">
       <DataGrid
         hideFooter
         rows={updatedRows}
