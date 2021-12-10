@@ -4,30 +4,12 @@ import AddIcon from "@mui/icons-material/Add";
 import { DataGrid } from "@mui/x-data-grid";
 
 export default function LabelSetter({
-  headerNames = ["Value", "Label"],
+  columns = [],
   onClick = () => {},
   rows = [],
   onCellEditCommit = () => {},
   style = {}
 }) {
-  // set column definition
-  const columns = [
-    {
-      align: "center",
-      editable: true,
-      field: "value",
-      headerName: headerNames[0],
-      type: "number"
-    },
-    {
-      align: "center",
-      editable: true,
-      field: "label",
-      headerName: headerNames[1],
-      width: 200
-    }
-  ];
-
   // add an id for each label/value
   const updatedRows = rows.map((item, index) => ({ ...item, id: index }));
 
