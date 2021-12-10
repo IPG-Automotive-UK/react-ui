@@ -1,6 +1,5 @@
 import * as React from "react";
 import {
-  Box,
   FormControl,
   FormControlLabel,
   FormLabel,
@@ -25,32 +24,26 @@ export default function RadioButtons({
 }) {
   // return components
   return (
-    <Box sx={{ height: "100%", width: "100%" }}>
-      <FormControl
-        disabled={disabled}
-        component="fieldset"
-        sx={{ border: "1px solid green" }}
+    <FormControl disabled={disabled} component="fieldset">
+      <FormLabel component="legend">{title}</FormLabel>
+      <RadioGroup
+        sx={style}
+        aria-label={title}
+        onChange={onChange}
+        row={row}
+        value={value}
       >
-        <FormLabel component="legend">{title}</FormLabel>
-        <RadioGroup
-          sx={{ border: "1px solid red", ...style }}
-          aria-label={title}
-          onChange={onChange}
-          row={row}
-          value={value}
-        >
-          {options.map((item, index) => (
-            <FormControlLabel
-              key={index}
-              control={<Radio size={size} />}
-              label={item}
-              value={item}
-              labelPlacement={labelPlacement}
-            />
-          ))}
-        </RadioGroup>
-      </FormControl>
-    </Box>
+        {options.map((item, index) => (
+          <FormControlLabel
+            key={index}
+            control={<Radio size={size} />}
+            label={item}
+            value={item}
+            labelPlacement={labelPlacement}
+          />
+        ))}
+      </RadioGroup>
+    </FormControl>
   );
 }
 
