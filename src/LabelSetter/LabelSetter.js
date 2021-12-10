@@ -1,42 +1,35 @@
-import * as React from "react";
-import { Box, Button, FormControlLabel, IconButton } from "@mui/material";
+import { Box, Button, IconButton } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
+import React from "react";
 
 export default function LabelSetter({
   columns,
   onClickAdd = () => {},
-  onClickDelete,
   rows = [],
   onCellEditCommit = () => {},
   style = {}
 }) {
+  // const [isShown, setIsShown] = useState(false);
+
   // add column for row deletion
-  const DeleteButton = ({ index }) => {
-    return (
-      <FormControlLabel
-        label=""
-        control={
-          <IconButton color="primary" onClick={onClickDelete}>
-            <DeleteIcon />
-          </IconButton>
-        }
-      />
-    );
-  };
   const actionColumn = {
-    align: "right",
+    align: "center",
     disableClickEventBubbling: true,
     field: "actions",
     headerName: "Action",
-    renderCell: params => {
-      return (
-        <div style={{ cursor: "pointer" }}>
-          <DeleteButton index={params.row.id} />
-        </div>
-      );
-    },
+    renderCell: params => (
+      <IconButton
+        color="primary"
+        onClick={event => {
+          event.ignore = true;
+          // const idToDelete = params.row.id;
+        }}
+      >
+        <DeleteIcon />
+      </IconButton>
+    ),
     sortable: false,
     width: 85
   };
