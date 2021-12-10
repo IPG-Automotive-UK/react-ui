@@ -17,7 +17,7 @@ export default function LabelSetter({
   return (
     <Box sx={style} display="flex" flexDirection="column">
       <DataGrid
-        disableColumnSelector
+        disableColumnMenu
         hideFooter
         rows={updatedRows}
         columns={columns}
