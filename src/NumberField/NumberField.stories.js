@@ -27,8 +27,23 @@ Default.args = {
   label: "Enter a Number",
   margin: "normal",
   required: false,
+  showMinMaxErrorMessage: true,
   size: "medium",
   stepper: true,
+  variant: "outlined"
+};
+
+export const SmallAndDense = Template.bind({});
+SmallAndDense.args = {
+  disabled: false,
+  error: false,
+  helperText: "What Number are you going to type?",
+  label: "Enter a Number",
+  margin: "dense",
+  required: false,
+  showMinMaxErrorMessage: true,
+  size: "small",
+  stepper: false,
   variant: "outlined"
 };
 
@@ -40,6 +55,7 @@ NoStepper.args = {
   label: "Enter a Number",
   margin: "normal",
   required: false,
+  showMinMaxErrorMessage: true,
   size: "medium",
   stepper: false,
   variant: "outlined"
@@ -54,6 +70,7 @@ CustomMinMaxAndStep.args = {
   max: 1,
   min: 0,
   required: false,
+  showMinMaxErrorMessage: true,
   size: "medium",
   step: 0.1,
   variant: "outlined"
@@ -68,6 +85,23 @@ InitialError.args = {
   max: 1,
   min: 0,
   required: false,
+  showMinMaxErrorMessage: true,
+  size: "medium",
+  step: 0.1,
+  value: 2,
+  variant: "outlined"
+};
+
+export const NoMinMaxErrorMessage = Template.bind({});
+NoMinMaxErrorMessage.args = {
+  disabled: false,
+  error: false,
+  label: "Enter a Number",
+  margin: "normal",
+  max: 1,
+  min: 0,
+  required: false,
+  showMinMaxErrorMessage: false,
   size: "medium",
   step: 0.1,
   value: 2,

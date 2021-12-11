@@ -16,6 +16,7 @@ export default function NumberField({
   onChange = () => {},
   placeholder,
   required = false,
+  showMinMaxErrorMessage = true,
   size = "medium",
   step = 1,
   stepper = true,
@@ -35,10 +36,14 @@ export default function NumberField({
   useEffect(() => {
     if (min !== undefined && number < min) {
       setValueError(true);
-      setErrorMessage(`Must be greater than or equal to ${min}`);
+      if (showMinMaxErrorMessage) {
+        setErrorMessage(`Must be greater than or equal to ${min}`);
+      }
     } else if (max !== undefined && number > max) {
       setValueError(true);
-      setErrorMessage(`Must be less than or equal to ${max}`);
+      if (showMinMaxErrorMessage) {
+        setErrorMessage(`Must be less than or equal to ${max}`);
+      }
     } else {
       setValueError(false);
       setErrorMessage("");
@@ -160,6 +165,11 @@ NumberField.propTypes = {
    * @default false
    */
   required: PropTypes.bool,
+  /**
+   * If true, the component will display an error message if the value is outside of the allowable min or max values, providing a min or max value is set.
+   * @default "true"
+   */
+  showMinMaxErrorMessage: PropTypes.bool,
   /**
    * The size of the select field.
    * @default "medium"
