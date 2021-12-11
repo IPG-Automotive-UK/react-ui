@@ -33,6 +33,36 @@ Default.args = {
   variant: "outlined"
 };
 
+export const StartAdornment = Template.bind({});
+StartAdornment.args = {
+  disabled: false,
+  error: false,
+  helperText: "What Number are you going to type?",
+  label: "Enter a Number",
+  margin: "normal",
+  required: false,
+  showMinMaxErrorMessage: true,
+  size: "medium",
+  startAdornment: "$",
+  stepper: true,
+  variant: "outlined"
+};
+
+export const EndAdornment = Template.bind({});
+EndAdornment.args = {
+  disabled: false,
+  endAdornment: "px",
+  error: false,
+  helperText: "What Number are you going to type?",
+  label: "Enter a Number",
+  margin: "normal",
+  required: false,
+  showMinMaxErrorMessage: true,
+  size: "medium",
+  stepper: true,
+  variant: "outlined"
+};
+
 export const SmallAndDense = Template.bind({});
 SmallAndDense.args = {
   disabled: false,

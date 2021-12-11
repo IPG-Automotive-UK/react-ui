@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { TextField as MuiTextField } from "@mui/material";
+import { TextField as MuiTextField, InputAdornment } from "@mui/material";
 import PropTypes from "prop-types";
 
 /**
@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
  */
 export default function NumberField({
   disabled = false,
+  endAdornment = "",
   error = false,
   helperText,
   label,
@@ -18,6 +19,7 @@ export default function NumberField({
   required = false,
   showMinMaxErrorMessage = true,
   size = "medium",
+  startAdornment = "",
   step = 1,
   stepper = true,
   value,
@@ -97,7 +99,19 @@ export default function NumberField({
       type="Number"
       value={number}
       variant={variant}
-      inputProps={{ max: max, min: min, step: step }}
+      InputProps={{
+        endAdornment: (
+          <InputAdornment position="end">{endAdornment}</InputAdornment>
+        ),
+        startAdornment: (
+          <InputAdornment position="start">{startAdornment}</InputAdornment>
+        )
+      }}
+      inputProps={{
+        max: max,
+        min: min,
+        step: step
+      }}
       sx={
         !stepper
           ? {
