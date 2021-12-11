@@ -133,6 +133,11 @@ NumberField.propTypes = {
    */
   disabled: PropTypes.bool,
   /**
+   * When set this string will appear as a suffix to the input, this does not effect the value of the output.
+   * @default ""
+   */
+  endAdornment: PropTypes.string,
+  /**
    * If true, the component will display an error state.
    * @default false
    */
@@ -189,6 +194,11 @@ NumberField.propTypes = {
    * @default "medium"
    */
   size: PropTypes.oneOf(["medium", "small"]),
+  /**
+   * When set this string will appear as a prefix to the input, this does not effect the value of the output.
+   * @default ""
+   */
+  startAdornment: PropTypes.string,
   /**
    * If the stepper in enabled, this is the step increment
    * @default 1
