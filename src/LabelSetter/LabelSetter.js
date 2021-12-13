@@ -9,13 +9,50 @@ import React from "react";
  * Label setter component are used to manage a table for value-label states
  */
 export default function LabelSetter({
-  columns,
   onChange = () => {},
   rows = [],
   style = {}
 }) {
   // add an id for each label/value
   const rowsWithID = rows.map((item, index) => ({ ...item, id: index }));
+
+  // set column definition
+  const columns = [
+    {
+      align: "center",
+      editable: true,
+      field: "value",
+      headerAlign: "center",
+      headerName: "Value",
+      type: "number",
+      width: 80
+    },
+    {
+      align: "center",
+      editable: true,
+      field: "label",
+      headerAlign: "center",
+      headerName: "Label",
+      width: 150
+    },
+    {
+      align: "center",
+      disableClickEventBubbling: true,
+      field: "actions",
+      headerName: "Action",
+      renderCell: params => (
+        <IconButton
+          color="primary"
+          data-testid="deleteButton"
+          onClick={event => handleOnDeleteClick(event, params)}
+        >
+          <DeleteIcon />
+        </IconButton>
+      ),
+      sortable: false,
+      width: 85
+    }
+  ];
 
   // handle row deletion
   const handleOnDeleteClick = (event, params) => {
@@ -39,26 +76,6 @@ export default function LabelSetter({
     updatedRows[params.id][params.field] = params.value;
     onChange(updatedRows);
   };
-
-  // add column for row deletion
-  const actionColumn = {
-    align: "center",
-    disableClickEventBubbling: true,
-    field: "actions",
-    headerName: "Action",
-    renderCell: params => (
-      <IconButton
-        color="primary"
-        data-testid="deleteButton"
-        onClick={event => handleOnDeleteClick(event, params)}
-      >
-        <DeleteIcon />
-      </IconButton>
-    ),
-    sortable: false,
-    width: 85
-  };
-  columns.push(actionColumn);
 
   // return components
   return (
@@ -86,10 +103,6 @@ export default function LabelSetter({
 }
 
 LabelSetter.propTypes = {
-  /**
-   * Set of columns.
-   */
-  columns: PropTypes.array.isRequired,
   /**
    * Callback fired when the cell values are changed.
    *
