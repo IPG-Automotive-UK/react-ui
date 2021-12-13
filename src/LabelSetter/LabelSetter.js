@@ -12,10 +12,17 @@ export default function LabelSetter({
   onCellEditCommit = () => {},
   style = {}
 }) {
+  // add an id for each label/value
+  const updatedRows = rows.map((item, index) => ({ ...item, id: index }));
+
   // handle delete row
-  const handleOnDeleteClick = (event, params) => {
+  const handleOnDeleteClick = (event, params, updatedRows) => {
     event.ignore = true;
     const idToDelete = params.row.id;
+    updatedRows = updatedRows.filter(item => {
+      return item.id !== idToDelete;
+    });
+    console.log(updatedRows);
     onChange(idToDelete);
   };
 
@@ -28,7 +35,7 @@ export default function LabelSetter({
     renderCell: params => (
       <IconButton
         color="primary"
-        onClick={event => handleOnDeleteClick(event, params)}
+        onClick={event => handleOnDeleteClick(event, params, updatedRows)}
       >
         <DeleteIcon />
       </IconButton>
@@ -37,9 +44,6 @@ export default function LabelSetter({
     width: 85
   };
   columns.push(actionColumn);
-
-  // add an id for each label/value
-  const updatedRows = rows.map((item, index) => ({ ...item, id: index }));
 
   // return components
   return (
