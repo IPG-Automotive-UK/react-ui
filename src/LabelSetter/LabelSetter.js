@@ -8,10 +8,16 @@ export default function LabelSetter({
   columns,
   onClickAdd = () => {},
   rows = [],
+  onChange = () => {},
   onCellEditCommit = () => {},
   style = {}
 }) {
-  // const [isShown, setIsShown] = useState(false);
+  // handle delete row
+  const handleOnDeleteClick = (event, params) => {
+    event.ignore = true;
+    const idToDelete = params.row.id;
+    onChange(idToDelete);
+  };
 
   // add column for row deletion
   const actionColumn = {
@@ -22,10 +28,7 @@ export default function LabelSetter({
     renderCell: params => (
       <IconButton
         color="primary"
-        onClick={event => {
-          event.ignore = true;
-          // const idToDelete = params.row.id;
-        }}
+        onClick={event => handleOnDeleteClick(event, params)}
       >
         <DeleteIcon />
       </IconButton>
