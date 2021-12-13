@@ -1,5 +1,5 @@
+import { InputAdornment, TextField as MuiTextField } from "@mui/material";
 import React, { useEffect } from "react";
-import { TextField as MuiTextField } from "@mui/material";
 import PropTypes from "prop-types";
 
 /**
@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
  */
 export default function NumberField({
   disabled = false,
+  endAdornment = "",
   error = false,
   helperText,
   label,
@@ -16,7 +17,9 @@ export default function NumberField({
   onChange = () => {},
   placeholder,
   required = false,
+  showMinMaxErrorMessage = true,
   size = "medium",
+  startAdornment = "",
   step = 1,
   stepper = true,
   value,
@@ -35,10 +38,14 @@ export default function NumberField({
   useEffect(() => {
     if (min !== undefined && number < min) {
       setValueError(true);
-      setErrorMessage(`Must be greater than or equal to ${min}`);
+      if (showMinMaxErrorMessage) {
+        setErrorMessage(`Must be greater than or equal to ${min}`);
+      }
     } else if (max !== undefined && number > max) {
       setValueError(true);
-      setErrorMessage(`Must be less than or equal to ${max}`);
+      if (showMinMaxErrorMessage) {
+        setErrorMessage(`Must be less than or equal to ${max}`);
+      }
     } else {
       setValueError(false);
       setErrorMessage("");
@@ -92,7 +99,19 @@ export default function NumberField({
       type="Number"
       value={number}
       variant={variant}
-      inputProps={{ max: max, min: min, step: step }}
+      InputProps={{
+        endAdornment: (
+          <InputAdornment position="end">{endAdornment}</InputAdornment>
+        ),
+        startAdornment: (
+          <InputAdornment position="start">{startAdornment}</InputAdornment>
+        )
+      }}
+      inputProps={{
+        max: max,
+        min: min,
+        step: step
+      }}
       sx={
         !stepper
           ? {
@@ -113,6 +132,11 @@ NumberField.propTypes = {
    * @default false
    */
   disabled: PropTypes.bool,
+  /**
+   * When set this string will appear as a suffix to the input, this does not effect the value of the output.
+   * @default ""
+   */
+  endAdornment: PropTypes.string,
   /**
    * If true, the component will display an error state.
    * @default false
@@ -161,10 +185,20 @@ NumberField.propTypes = {
    */
   required: PropTypes.bool,
   /**
+   * If true, the component will display an error message if the value is outside of the allowable min or max values, providing a min or max value is set.
+   * @default "true"
+   */
+  showMinMaxErrorMessage: PropTypes.bool,
+  /**
    * The size of the select field.
    * @default "medium"
    */
   size: PropTypes.oneOf(["medium", "small"]),
+  /**
+   * When set this string will appear as a prefix to the input, this does not effect the value of the output.
+   * @default ""
+   */
+  startAdornment: PropTypes.string,
   /**
    * If the stepper in enabled, this is the step increment
    * @default 1
