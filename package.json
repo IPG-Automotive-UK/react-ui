@@ -68,6 +68,7 @@
     "@emotion/styled": "^11.3.0",
     "@mui/icons-material": "^5.0.5",
     "@mui/material": "^5.0.6",
+    "@mui/x-data-grid": "^5.1.0",
     "material-ui-popup-state": "^2.0.0",
     "react-colorful": "^5.5.0",
     "react-hook-form": "^7.0.0",
