@@ -11,7 +11,7 @@ import React from "react";
 export default function LabelSetter({
   onChange = () => {},
   rows = [],
-  style = {}
+  style = { height: 250, width: "100%" }
 }) {
   // add an id for each label/value
   const rowsWithID = rows.map((item, index) => ({ ...item, id: index }));

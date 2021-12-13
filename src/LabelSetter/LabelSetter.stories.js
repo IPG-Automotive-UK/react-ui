@@ -4,7 +4,7 @@ import { action } from "@storybook/addon-actions";
 
 export default {
   component: LabelSetter,
-  title: "General/LabelSetter"
+  title: "Text/LabelSetter"
 };
 
 const Template = args => {
@@ -21,30 +21,11 @@ const Template = args => {
 
 // default story
 export const Default = Template.bind({});
-Default.args = {
-  columns: [
-    {
-      align: "center",
-      disableClickEventBubbling: true,
-      editable: true,
-      field: "value",
-      headerAlign: "center",
-      headerName: "Value",
-      sortable: false,
-      type: "number",
-      width: 80
-    },
-    {
-      align: "center",
-      disableClickEventBubbling: true,
-      editable: true,
-      field: "label",
-      headerAlign: "center",
-      headerName: "Label",
-      sortable: false,
-      width: 150
-    }
-  ],
+Default.args = {};
+
+// custom rows
+export const CustomRows = Template.bind({});
+CustomRows.args = {
   rows: [
     {
       label: "Label1",
@@ -58,6 +39,5 @@ Default.args = {
       label: "Label3",
       value: 2
     }
-  ],
-  style: { height: 250, width: "100%" }
+  ]
 };
