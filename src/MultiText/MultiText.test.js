@@ -1,30 +1,30 @@
 import { render, screen } from "@testing-library/react";
-import LabelSetter from "./LabelSetter";
+import MultiText from "./MultiText";
 import React from "react";
 import userEvent from "@testing-library/user-event";
 
 /**
  * Tests
  */
-describe("LabelSetter", () => {
+describe("MultiText", () => {
   const rows = [
     { label: "test1", value: 2 },
     { label: "test2", value: 20 }
   ];
   test("can render with no rows", () => {
-    const { container } = render(<LabelSetter />);
+    const { container } = render(<MultiText />);
     expect(container.firstChild).toBeInTheDocument();
   });
   test("can add a row", () => {
     const onChange = jest.fn();
-    render(<LabelSetter onChange={onChange} />);
+    render(<MultiText onChange={onChange} />);
     const addButton = screen.getByTestId("addButton");
     userEvent.click(addButton);
     expect(onChange).toHaveBeenCalledWith([{ label: "", value: null }]);
   });
   test("can delete a row", () => {
     const onChange = jest.fn();
-    render(<LabelSetter onChange={onChange} rows={rows} />);
+    render(<MultiText onChange={onChange} rows={rows} />);
     const deleteButton = screen.getAllByTestId("deleteButton");
     userEvent.click(deleteButton[0]);
     expect(onChange).toHaveBeenCalledWith([

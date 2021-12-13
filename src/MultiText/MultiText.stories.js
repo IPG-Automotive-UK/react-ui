@@ -1,10 +1,10 @@
-import LabelSetter from "./LabelSetter";
+import MultiText from "./MultiText";
 import React from "react";
 import { action } from "@storybook/addon-actions";
 
 export default {
-  component: LabelSetter,
-  title: "Text/LabelSetter"
+  component: MultiText,
+  title: "Text/MultiText"
 };
 
 const Template = args => {
@@ -16,7 +16,7 @@ const Template = args => {
     setRows(newRows);
     action("onChange")(newRows);
   };
-  return <LabelSetter {...args} rows={rows} onChange={onChange} />;
+  return <MultiText {...args} rows={rows} onChange={onChange} />;
 };
 
 // default story
