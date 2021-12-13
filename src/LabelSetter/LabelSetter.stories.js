@@ -8,13 +8,44 @@ export default {
 };
 
 const Template = args => {
-  return <LabelSetter {...args} onClick={action("onClick")} />;
+  const [rows, setRows] = React.useState(args.rows);
+  React.useEffect(() => {
+    setRows(args.rows);
+  }, [args.rows]);
+  const onChange = newRows => {
+    console.log("newRows", newRows);
+    setRows(newRows);
+    action("onChange")(newRows);
+  };
+  return <LabelSetter {...args} rows={rows} onChange={onChange} />;
 };
 
 // default story
 export const Default = Template.bind({});
 Default.args = {
-  headerNames: ["Value", "Label"],
+  columns: [
+    {
+      align: "center",
+      disableClickEventBubbling: true,
+      editable: true,
+      field: "value",
+      headerAlign: "center",
+      headerName: "Value",
+      sortable: false,
+      type: "number",
+      width: 80
+    },
+    {
+      align: "center",
+      disableClickEventBubbling: true,
+      editable: true,
+      field: "label",
+      headerAlign: "center",
+      headerName: "Label",
+      sortable: false,
+      width: 150
+    }
+  ],
   rows: [
     {
       label: "Label1",
@@ -28,5 +59,6 @@ Default.args = {
       label: "Label3",
       value: 2
     }
-  ]
+  ],
+  style: { height: 250, width: "100%" }
 };

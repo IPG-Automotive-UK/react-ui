@@ -1,5 +1,5 @@
-import { Box, Button, IconButton } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
+import { Box, IconButton } from "@mui/material";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import React from "react";
@@ -8,28 +8,33 @@ export default function LabelSetter({
   columns,
   rows = [],
   onChange = () => {},
-  onCellEditCommit = () => {},
   style = {}
 }) {
   // add an id for each label/value
-  const updatedRows = rows.map((item, index) => ({ ...item, id: index }));
+  const rowsWithID = rows.map((item, index) => ({ ...item, id: index }));
 
   // handle row deletion
-  const handleOnDeleteClick = (event, params, updatedRows) => {
-    event.ignore = true;
-    const idToDelete = params.row.id;
-    updatedRows = updatedRows.filter(item => {
-      return item.id !== idToDelete;
+  const handleOnDeleteClick = (event, params) => {
+    console.log(params);
+    const updatedRows = JSON.parse(JSON.stringify(rowsWithID)).filter(item => {
+      return item.id !== params.row.id;
     });
     onChange(updatedRows);
   };
 
   // handle row addition
-  const handleOnAddClick = (event, updatedRows) => {
+  const handleOnAddClick = () => {
     const newRow = { label: "", value: null };
-    const valueToUpdate = JSON.parse(JSON.stringify(updatedRows));
-    valueToUpdate.push(newRow);
-    onChange(valueToUpdate);
+    const updatedRows = JSON.parse(JSON.stringify(rows));
+    updatedRows.push(newRow);
+    onChange(updatedRows);
+  };
+
+  // handle edit cell
+  const handleEditCell = params => {
+    const updatedRows = JSON.parse(JSON.stringify(rows));
+    updatedRows[params.id][params.field] = params.value;
+    onChange(updatedRows);
   };
 
   // add column for row deletion
@@ -41,7 +46,7 @@ export default function LabelSetter({
     renderCell: params => (
       <IconButton
         color="primary"
-        onClick={event => handleOnDeleteClick(event, params, updatedRows)}
+        onClick={event => handleOnDeleteClick(event, params)}
       >
         <DeleteIcon />
       </IconButton>
@@ -53,23 +58,20 @@ export default function LabelSetter({
 
   // return components
   return (
-    <Box sx={style} display="flex" flexDirection="column">
+    <Box sx={style} display="flex" flexDirection="column" key={rows.length}>
       <DataGrid
         disableColumnMenu
         disableColumnSelector
         hideFooter
-        rows={updatedRows}
+        rows={rowsWithID}
         columns={columns}
-        onCellEditCommit={onCellEditCommit}
+        onCellEditCommit={handleEditCell}
       />
-      <Button
-        sx={{ textTransform: "none", width: "10%" }}
-        endIcon={<AddIcon />}
-        onClick={event => handleOnAddClick(event, updatedRows)}
-        variant="contained"
-      >
-        Add
-      </Button>
+      <Box>
+        <IconButton color="primary" onClick={handleOnAddClick}>
+          <AddCircleIcon />
+        </IconButton>
+      </Box>
     </Box>
   );
 }
