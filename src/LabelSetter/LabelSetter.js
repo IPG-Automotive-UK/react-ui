@@ -6,7 +6,6 @@ import React from "react";
 
 export default function LabelSetter({
   columns,
-  onClickAdd = () => {},
   rows = [],
   onChange = () => {},
   onCellEditCommit = () => {},
@@ -15,15 +14,22 @@ export default function LabelSetter({
   // add an id for each label/value
   const updatedRows = rows.map((item, index) => ({ ...item, id: index }));
 
-  // handle delete row
+  // handle row deletion
   const handleOnDeleteClick = (event, params, updatedRows) => {
     event.ignore = true;
     const idToDelete = params.row.id;
     updatedRows = updatedRows.filter(item => {
       return item.id !== idToDelete;
     });
-    console.log(updatedRows);
-    onChange(idToDelete);
+    onChange(updatedRows);
+  };
+
+  // handle row addition
+  const handleOnAddClick = (event, updatedRows) => {
+    const newRow = { label: "", value: null };
+    const valueToUpdate = JSON.parse(JSON.stringify(updatedRows));
+    valueToUpdate.push(newRow);
+    onChange(valueToUpdate);
   };
 
   // add column for row deletion
@@ -59,7 +65,7 @@ export default function LabelSetter({
       <Button
         sx={{ textTransform: "none", width: "10%" }}
         endIcon={<AddIcon />}
-        onClick={onClickAdd}
+        onClick={event => handleOnAddClick(event, updatedRows)}
         variant="contained"
       >
         Add
