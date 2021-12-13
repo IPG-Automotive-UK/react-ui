@@ -13,7 +13,6 @@ const Template = args => {
     setRows(args.rows);
   }, [args.rows]);
   const onChange = newRows => {
-    console.log("newRows", newRows);
     setRows(newRows);
     action("onChange")(newRows);
   };

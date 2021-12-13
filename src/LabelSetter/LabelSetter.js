@@ -2,12 +2,16 @@ import { Box, IconButton } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
+import PropTypes from "prop-types";
 import React from "react";
 
+/**
+ * Label setter component are used to manage a table for value-label states
+ */
 export default function LabelSetter({
   columns,
-  rows = [],
   onChange = () => {},
+  rows = [],
   style = {}
 }) {
   // add an id for each label/value
@@ -15,7 +19,6 @@ export default function LabelSetter({
 
   // handle row deletion
   const handleOnDeleteClick = (event, params) => {
-    console.log(params);
     const updatedRows = JSON.parse(JSON.stringify(rowsWithID)).filter(item => {
       return item.id !== params.row.id;
     });
@@ -46,6 +49,7 @@ export default function LabelSetter({
     renderCell: params => (
       <IconButton
         color="primary"
+        data-testid="deleteButton"
         onClick={event => handleOnDeleteClick(event, params)}
       >
         <DeleteIcon />
@@ -60,6 +64,7 @@ export default function LabelSetter({
   return (
     <Box sx={style} display="flex" flexDirection="column" key={rows.length}>
       <DataGrid
+        data-testid="dataGrid"
         disableColumnMenu
         disableColumnSelector
         hideFooter
@@ -68,10 +73,39 @@ export default function LabelSetter({
         onCellEditCommit={handleEditCell}
       />
       <Box>
-        <IconButton color="primary" onClick={handleOnAddClick}>
+        <IconButton
+          color="primary"
+          data-testid="addButton"
+          onClick={handleOnAddClick}
+        >
           <AddCircleIcon />
         </IconButton>
       </Box>
     </Box>
   );
 }
+
+LabelSetter.propTypes = {
+  /**
+   * Set of columns.
+   */
+  columns: PropTypes.array.isRequired,
+  /**
+   * Callback fired when the cell values are changed.
+   *
+   * **Signature**
+   * ```
+   * function(event: object) => void
+   * ```
+   * _event_: The event source of the callback.
+   */
+  onChange: PropTypes.func,
+  /**
+   * Set of rows.
+   */
+  rows: PropTypes.array,
+  /**
+   * Custom style to apply to the component.
+   */
+  style: PropTypes.object
+};
