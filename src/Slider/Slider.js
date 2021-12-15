@@ -32,7 +32,7 @@ export default function Slider({
   let marks = [];
   let stepSize = step;
   if (showLabels) {
-    if (!labels.length) {
+    if (!labels.length && step !== 0) {
       range(min, max, stepSize).map(item => {
         const thisMark = { label: String(item), value: item };
         marks.push(thisMark);
