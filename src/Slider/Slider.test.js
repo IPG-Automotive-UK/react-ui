@@ -27,4 +27,12 @@ describe("Slider", () => {
     const sliderInput = container.querySelector("input");
     expect(Number(sliderInput.max)).toBe(maxValue);
   });
+  test("does not error with step size 0", () => {
+    const { container } = render(<Slider min={-1} max={1} step={0} />);
+    expect(container.firstChild).toBeInTheDocument();
+  });
+  test("does not error with negative step size", () => {
+    const { container } = render(<Slider min={-10} max={10} step={-1} />);
+    expect(container.firstChild).toBeInTheDocument();
+  });
 });
