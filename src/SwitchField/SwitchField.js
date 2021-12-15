@@ -26,7 +26,7 @@ export default function FormSwitch({
 }) {
   // return components
 
-  // color styling
+  // thumb and track color styling
   const colorStyling = {
     "& .MuiSwitch-thumb": { color: thumbColor },
     ".Mui-checked": {
