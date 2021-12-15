@@ -41,6 +41,7 @@ export default function FormSwitch({
         <Typography
           component="div"
           color={disabled ? "textSecondary" : "textPrimary"}
+          style={{ cursor: disabled ? "default" : "pointer" }}
         >
           <Grid component="label" container alignItems="center" spacing={1}>
             <Grid item>
@@ -71,7 +72,10 @@ export default function FormSwitch({
  */
 function SwitchOptionLabel({ disabled, label }) {
   return (
-    <Typography color={disabled ? "textSecondary" : "textPrimary"}>
+    <Typography
+      color={disabled ? "textSecondary" : "textPrimary"}
+      style={{ cursor: disabled ? "default" : "pointer" }}
+    >
       {label}
     </Typography>
   );
