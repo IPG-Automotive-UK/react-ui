@@ -51,7 +51,7 @@ export default function FormSwitch({
                 <Switch
                   checked={checked}
                   onChange={onChange}
-                  sx={{ ...colorStyling, ...style }}
+                  sx={{ ...colorStyling, ...switchStyle }}
                 />
               </FormControl>
             </Grid>
