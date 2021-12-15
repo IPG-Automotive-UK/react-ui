@@ -40,3 +40,13 @@ Disabled.args = {
   label: "Make a choice",
   options: ["Choice A", "Choice B"]
 };
+
+export const RgbaColor = Template.bind({});
+RgbaColor.args = {
+  checked: true,
+  helperText: "Maybe you need some help?",
+  label: "Make a choice",
+  options: ["Choice A", "Choice B"],
+  thumbColor: "rgba(241, 255, 0, 1)",
+  trackColor: "rgba(2, 0, 235, 0.8)"
+};

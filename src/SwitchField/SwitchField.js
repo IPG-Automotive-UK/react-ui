@@ -19,9 +19,21 @@ export default function FormSwitch({
   helperText,
   label,
   onChange,
-  options
+  options,
+  switchStyle,
+  thumbColor,
+  trackColor
 }) {
   // return components
+
+  // color styling
+  const colorStyling = {
+    "& .MuiSwitch-thumb": { color: thumbColor },
+    ".Mui-checked": {
+      "& + .MuiSwitch-track": { backgroundColor: trackColor }
+    }
+  };
+
   return (
     <FormControl disabled={disabled}>
       {label && <FormLabel style={{ fontSize: "0.75rem" }}>{label}</FormLabel>}
@@ -29,14 +41,19 @@ export default function FormSwitch({
         <Typography
           component="div"
           color={disabled ? "textSecondary" : "textPrimary"}
-          style={{ cursor: disabled ? "default" : "pointer" }}
         >
           <Grid component="label" container alignItems="center" spacing={1}>
             <Grid item>
               <SwitchOptionLabel disabled={disabled} label={options[0]} />
             </Grid>
             <Grid item>
-              <Switch checked={checked} onChange={onChange} />
+              <FormControl disabled={disabled}>
+                <Switch
+                  checked={checked}
+                  onChange={onChange}
+                  sx={{ ...colorStyling, ...style }}
+                />
+              </FormControl>
             </Grid>
             <Grid item>
               <SwitchOptionLabel disabled={disabled} label={options[1]} />
@@ -54,10 +71,7 @@ export default function FormSwitch({
  */
 function SwitchOptionLabel({ disabled, label }) {
   return (
-    <Typography
-      color={disabled ? "textSecondary" : "textPrimary"}
-      style={{ cursor: disabled ? "default" : "pointer" }}
-    >
+    <Typography color={disabled ? "textSecondary" : "textPrimary"}>
       {label}
     </Typography>
   );
@@ -105,5 +119,17 @@ FormSwitch.propTypes = {
         `Invalid prop ${propName} supplied to ${componentName}. Expected a string array of length 2.`
       );
     }
-  }
+  },
+  /**
+   * Custom styling for the MUI Switch component.
+   */
+  switchStyle: PropTypes.string,
+  /**
+   * The thumb color
+   */
+  thumbColor: PropTypes.string,
+  /**
+   * The track color.
+   */
+  trackColor: PropTypes.string
 };
