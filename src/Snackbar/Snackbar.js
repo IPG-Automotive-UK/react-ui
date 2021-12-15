@@ -22,6 +22,9 @@ const sx = {
   action: {
     color: "#fff"
   },
+  close: {
+    fontSize: 15
+  },
   error: {
     backgroundColor: theme => theme.palette.error.dark,
     color: "#fff"
@@ -110,7 +113,7 @@ export default function Snackbar({
             size="large"
             sx={sx.action}
           >
-            <Close sx={sx.icon} />
+            <Close sx={sx.close} />
           </IconButton>
         ]}
       />
