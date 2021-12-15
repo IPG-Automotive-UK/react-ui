@@ -28,13 +28,22 @@ export default function Slider({
       { length: (stop - start) / step + 1 },
       (_, i) => start + i * step
     );
+
+  // count decimal places in a number
+  function countDecimals(value) {
+    return value % 1 ? value.toString().split(".")[1].length : 0;
+  }
+
   // show/hide labels
   let marks = [];
   let stepSize = step;
   if (showLabels) {
     if (!labels.length && step !== 0) {
       range(min, max, stepSize).map(item => {
-        const thisMark = { label: String(item), value: item };
+        const thisMark = {
+          label: String(item.toFixed(countDecimals(step))),
+          value: item
+        };
         marks.push(thisMark);
       });
     } else {
