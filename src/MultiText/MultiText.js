@@ -11,7 +11,7 @@ import React from "react";
 export default function LabelSetter({
   onChange = () => {},
   rows = [],
-  style = { height: 250, width: "100%" }
+  style = { height: 254, width: "100%" }
 }) {
   // add an id for each label/value
   const rowsWithID = rows.map((item, index) => ({ ...item, id: index }));
@@ -81,6 +81,12 @@ export default function LabelSetter({
   return (
     <Box sx={style} display="flex" flexDirection="column" key={rows.length}>
       <DataGrid
+        sx={{
+          "& .MuiDataGrid-cell": {
+            borderBottom: 0,
+            borderTop: "1px solid rgb(224,224,224)"
+          }
+        }}
         data-testid="dataGrid"
         disableColumnMenu
         disableColumnSelector
