@@ -58,19 +58,27 @@ export default function Slider({
   if (orientation === "horizontal") {
     style = {
       position: "absolute",
-      top: labelPosition === "top" ? "-20px" : "30px"
+      top: labelPosition === "top" ? "-19px" : "30px"
     };
   } else {
     style = {
-      left: labelPosition === "left" ? "-15px" : "30px",
+      left: labelPosition === "left" ? "-11px" : "32px",
       position: "absolute"
     };
   }
   // return components
   return (
-    <Box sx={{ height: "100%" }}>
+    <Box sx={{ height: "100%" }} display="flex" flexDirection="column">
       <Typography>{title}</Typography>
-      <Box sx={{ height: "100%" }}>
+      <Box
+        sx={{
+          height: "100%",
+          paddingBottom: orientation === "vertical" ? "15px" : "0px",
+          paddingLeft: orientation === "horizontal" ? "10px" : "0px",
+          paddingRight: orientation === "horizontal" ? "10px" : "0px",
+          paddingTop: orientation === "vertical" ? "5px" : "0px"
+        }}
+      >
         <MuiSlider
           sx={{
             "& .MuiSlider-markLabel": {
@@ -81,6 +89,10 @@ export default function Slider({
               WebkitAppearance: `slider-${orientation}`
             },
             color: { color },
+            marginLeft:
+              orientation === "vertical" && labelPosition === "left"
+                ? "20px"
+                : "0px",
             marginTop:
               orientation === "horizontal" && labelPosition === "top"
                 ? "20px"
