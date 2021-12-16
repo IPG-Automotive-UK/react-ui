@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
  */
 export default function NumberField({
   disabled = false,
-  endAdornment = "",
+  endAdornment = null,
   error = false,
   helperText,
   label,
@@ -19,7 +19,7 @@ export default function NumberField({
   required = false,
   showMinMaxErrorMessage = true,
   size = "medium",
-  startAdornment = "",
+  startAdornment = null,
   step = 1,
   stepper = true,
   value,
@@ -82,6 +82,24 @@ export default function NumberField({
     }
   };
 
+  // end adornment input property
+  const endAdornmentInputProperty = endAdornment
+    ? {
+        endAdornment: (
+          <InputAdornment position="end">{endAdornment}</InputAdornment>
+        )
+      }
+    : null;
+
+  // start adornment input property
+  const startAdornmentInputProperty = startAdornment
+    ? {
+        startAdornment: (
+          <InputAdornment position="start">{startAdornment}</InputAdornment>
+        )
+      }
+    : null;
+
   // return components
   return (
     <MuiTextField
@@ -100,12 +118,8 @@ export default function NumberField({
       value={number}
       variant={variant}
       InputProps={{
-        endAdornment: (
-          <InputAdornment position="end">{endAdornment}</InputAdornment>
-        ),
-        startAdornment: (
-          <InputAdornment position="start">{startAdornment}</InputAdornment>
-        )
+        ...endAdornmentInputProperty,
+        ...startAdornmentInputProperty
       }}
       inputProps={{
         max: max,
