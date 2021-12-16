@@ -58,11 +58,11 @@ export default function Slider({
   if (orientation === "horizontal") {
     style = {
       position: "absolute",
-      top: labelPosition === "top" ? "-20px" : "30px"
+      top: labelPosition === "top" ? "-19px" : "30px"
     };
   } else {
     style = {
-      left: labelPosition === "left" ? "-15px" : "30px",
+      left: labelPosition === "left" ? "-11px" : "32px",
       position: "absolute"
     };
   }
