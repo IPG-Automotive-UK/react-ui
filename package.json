@@ -66,8 +66,8 @@
   "dependencies": {
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
-    "@mui/icons-material": "^5.0.5",
-    "@mui/material": "^5.0.6",
+    "@mui/icons-material": "^5.2.5",
+    "@mui/material": "^5.2.8",
     "@mui/x-data-grid": "^5.2.2",
     "material-ui-popup-state": "^2.0.0",
     "react-colorful": "^5.5.0",
