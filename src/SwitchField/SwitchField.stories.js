@@ -30,7 +30,8 @@ export const Default = Template.bind({});
 Default.args = {
   helperText: "Maybe you need some help?",
   label: "Make a choice",
-  options: ["Choice A", "Choice B"]
+  options: ["Choice A", "Choice B"],
+  size: "medium"
 };
 
 export const Disabled = Template.bind({});
@@ -38,5 +39,6 @@ Disabled.args = {
   disabled: true,
   helperText: "Maybe you need some help?",
   label: "Make a choice",
-  options: ["Choice A", "Choice B"]
+  options: ["Choice A", "Choice B"],
+  size: "medium"
 };

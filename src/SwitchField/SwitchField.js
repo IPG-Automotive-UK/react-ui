@@ -106,5 +106,5 @@ FormSwitch.propTypes = {
   /**
    * The size of switch.
    */
-  size: PropTypes.oneOf(["small", "medium", "large"])
+  size: PropTypes.oneOf(["small", "medium"])
 };
