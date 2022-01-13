@@ -19,7 +19,8 @@ export default function FormSwitch({
   helperText,
   label,
   onChange,
-  options
+  options,
+  size = "medium"
 }) {
   // return components
   return (
@@ -35,7 +36,7 @@ export default function FormSwitch({
               <SwitchOptionLabel disabled={disabled} label={options[0]} />
             </Grid>
             <Grid item>
-              <Switch checked={checked} onChange={onChange} />
+              <Switch checked={checked} onChange={onChange} size={size} />
             </Grid>
             <Grid item>
               <SwitchOptionLabel disabled={disabled} label={options[1]} />
@@ -101,5 +102,9 @@ FormSwitch.propTypes = {
         `Invalid prop ${propName} supplied to ${componentName}. Expected a string array of length 2.`
       );
     }
-  }
+  },
+  /**
+   * The size of switch.
+   */
+  size: PropTypes.oneOf(["small", "medium", "large"])
 };
