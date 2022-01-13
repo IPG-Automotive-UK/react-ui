@@ -24,6 +24,7 @@ export default function LabelSetter({
       field: "value",
       headerAlign: "center",
       headerName: "Value",
+      sortable: false,
       type: "number",
       width: 80
     },
@@ -33,6 +34,7 @@ export default function LabelSetter({
       field: "label",
       headerAlign: "center",
       headerName: "Label",
+      sortable: false,
       width: 150
     },
     {
