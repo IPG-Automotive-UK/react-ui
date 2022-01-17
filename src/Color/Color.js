@@ -1,5 +1,14 @@
-import { Box, Button, InputAdornment, Popover, TextField } from "@mui/material";
-import React, { useRef } from "react";
+import {
+  Box,
+  Button,
+  IconButton,
+  InputAdornment,
+  Popover,
+  SvgIcon,
+  TextField,
+  Typography
+} from "@mui/material";
+import React, { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { RgbaColorPicker } from "react-colorful";
 
@@ -33,6 +42,24 @@ const sx = {
       height: "15px",
       width: "15px"
     }
+  },
+  noColorSwatch: {
+    backgroundColor: "transparent",
+    border: "1px solid #ccc",
+    borderRadius: "4px",
+    height: "20px",
+    minHeight: "20px",
+    minWidth: "20px",
+    padding: "0",
+    width: "20px"
+  },
+  noColorSwatchBox: {
+    display: "flex",
+    flexDirection: "row",
+    mt: 1
+  },
+  noColorText: {
+    ml: 1
   }
 };
 
@@ -50,6 +77,7 @@ const rgbHex = rgba => {
 };
 
 export default function Color({
+  disabled = false,
   popoverWidth = "250px",
   showControls = true,
   showPicker = true,
@@ -66,12 +94,24 @@ export default function Color({
   // hex edit state
   const [hex, setHex] = React.useState(rgbHex(value));
 
+  // no color state
+  const [noColor, setNoColor] = React.useState(false);
+
+  // no color state use effect
+  useEffect(() => {
+    if (value === "rgba(0,0,0,0)") {
+      setNoColor(true);
+    }
+  }, [value]);
+
   // handle color change
   const handleChange = color => {
     const changeValue = `rgba(${color.r},${color.g},${color.b},${color.a})`;
-
     onChange(changeValue);
     setHex(rgbHex(changeValue));
+
+    // set no color state
+    setNoColor(false);
   };
 
   // handle red
@@ -82,6 +122,9 @@ export default function Color({
     )},${Number(rgba[3])})`;
     onChange(redChange);
     setHex(rgbHex(redChange));
+
+    // set no color state
+    setNoColor(false);
   };
 
   // handle green change
@@ -92,6 +135,9 @@ export default function Color({
     )},${Number(rgba[3])})`;
     onChange(greenChange);
     setHex(rgbHex(greenChange));
+
+    // set no color state
+    setNoColor(false);
   };
 
   // handle Blue change
@@ -102,6 +148,9 @@ export default function Color({
     },${Number(rgba[3])})`;
     onChange(blueChange);
     setHex(rgbHex(blueChange));
+
+    // set no color state
+    setNoColor(false);
   };
 
   // handle alpha change
@@ -112,6 +161,9 @@ export default function Color({
     )},${event.target.value})`;
     onChange(alphaChange);
     setHex(rgbHex(alphaChange));
+
+    // set no color state
+    setNoColor(false);
   };
 
   // handle popover open
@@ -206,22 +258,32 @@ export default function Color({
     // set color as rgba string with new converted hex values
     // alpha is divied by 255 to value between 0 and 1
     onChange(`rgba(${rHex},${gHex},${bHex},${aHex / 255})`);
+
+    // set no color state
+    setNoColor(false);
+  };
+
+  // handle no color
+  const handleNoColor = () => {
+    // set all rgb values to 0 with 100% transparency
+    onChange("rgba(0,0,0,0)");
+    setNoColor(true);
   };
 
   // handle button / swatch size
   let swatchDimensions;
   switch (swatchSize) {
     case "small":
-      swatchDimensions = "15px";
+      swatchDimensions = "15";
       break;
     case "medium":
-      swatchDimensions = "20px";
+      swatchDimensions = "20";
       break;
     case "large":
-      swatchDimensions = "30px";
+      swatchDimensions = "30";
       break;
     default:
-      swatchDimensions = "15px";
+      swatchDimensions = "15";
   }
 
   return (
@@ -234,11 +296,11 @@ export default function Color({
               backgroundColor: value
             },
             background: value,
-            height: swatchDimensions,
-            minHeight: swatchDimensions,
-            minWidth: swatchDimensions,
+            height: `${swatchDimensions}px`,
+            minHeight: `${swatchDimensions}px`,
+            minWidth: `${swatchDimensions}px`,
             padding: "0",
-            width: swatchDimensions
+            width: `${swatchDimensions}px`
           })
         }
         onClick={handleClick}
@@ -246,7 +308,19 @@ export default function Color({
         data-testid="swatch"
         ref={buttonRef}
         variant="contained"
-      />
+        disabled={disabled}
+      >
+        {noColor ? (
+          <SvgIcon>
+            <path
+              // create diagonal lines
+              d="M 3,3 L 21,21"
+              strokeWidth="2"
+              stroke="red"
+            />
+          </SvgIcon>
+        ) : null}
+      </Button>
       <Popover
         data-testid="popover"
         open={open}
@@ -281,9 +355,22 @@ export default function Color({
                 </Box>
               </Box>
             )}
+            <Box sx={sx.noColorSwatchBox}>
+              <IconButton sx={sx.noColorSwatch} onClick={handleNoColor}>
+                <SvgIcon>
+                  <path
+                    // create diagonal lines
+                    d="M 3,3 L 21,21"
+                    strokeWidth="2"
+                    stroke="red"
+                  />
+                </SvgIcon>
+              </IconButton>
+              <Typography sx={sx.noColorText}> No Color</Typography>
+            </Box>
             {showControls && (
               <div>
-                <Box sx={{ display: "flex", flexDirection: "row", mt: 1 }}>
+                <Box sx={{ display: "flex", flexDirection: "row" }}>
                   <TextField
                     data-testid="redTextField"
                     id="red"
