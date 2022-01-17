@@ -286,6 +286,14 @@ export default function Color({
       swatchDimensions = "15";
   }
 
+  // define diagonal line based on swatch dimensions
+  const diagonalLine = Number(swatchDimensions) + Number(swatchDimensions) / 3;
+  const diagonalLineOrigin = Number(swatchDimensions) / 10;
+  console.log(swatchDimensions);
+  console.log(diagonalLineOrigin);
+  console.log(diagonalLine);
+  const noColorLine = `M ${diagonalLineOrigin},${diagonalLineOrigin} L ${diagonalLine},${diagonalLine}`;
+
   return (
     <Box>
       <Button
@@ -314,7 +322,7 @@ export default function Color({
           <SvgIcon>
             <path
               // create diagonal lines
-              d="M 3,3 L 21,21"
+              d={noColorLine}
               strokeWidth="2"
               stroke="red"
             />
