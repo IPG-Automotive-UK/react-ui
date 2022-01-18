@@ -6,7 +6,7 @@ import {
   TextField,
   Typography
 } from "@mui/material";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { RgbaColorPicker } from "react-colorful";
 
@@ -102,7 +102,14 @@ export default function Color({
 
   // no color state
   const [noColor, setNoColor] = React.useState(false);
-  console.log(noColor);
+
+  // check if the color is a valid color
+  useEffect(() => {
+    if (value === "") {
+      setNoColor(true);
+      setHex("");
+    }
+  }, [value]);
 
   // handle color change
   const handleChange = color => {
@@ -316,8 +323,6 @@ export default function Color({
   const handleNoColor = () => {
     // set all rgb values and hex to empty
     onChange("");
-    setHex("");
-    setNoColor(true);
   };
 
   // handle button / swatch size
@@ -336,7 +341,7 @@ export default function Color({
       swatchDimensions = "15";
   }
 
-  // define swatch background color depending on no color state or if color is undefined
+  // define swatch background color depending on no color state or if value is undefined
   let swatchBackground;
   if (noColor) {
     swatchBackground =
