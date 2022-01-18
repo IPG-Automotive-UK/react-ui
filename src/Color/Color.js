@@ -408,7 +408,11 @@ export default function Color({
               </Box>
             )}
             <Box sx={sx.noColorSwatchBox}>
-              <Button sx={sx.noColorSwatch} onClick={handleNoColor} />
+              <Button
+                data-testid="NoColorButton"
+                sx={sx.noColorSwatch}
+                onClick={handleNoColor}
+              />
               <Typography sx={sx.noColorText}> No Color</Typography>
             </Box>
             {showControls && (
@@ -543,6 +547,11 @@ Color.propTypes = {
    * @default 'anchorEl'
    */
   anchorType: PropTypes.oneOf(["anchorEl", "anchorPosition", "none"]),
+  /**
+   * This determines if the color picker is enabled or disabled.
+   * @default 'false'
+   */
+  disabled: PropTypes.bool,
   /**
    * Callback fired when the value is changed.
    *
