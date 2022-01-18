@@ -8,7 +8,7 @@ import {
   TextField,
   Typography
 } from "@mui/material";
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import PropTypes from "prop-types";
 import { RgbaColorPicker } from "react-colorful";
 
@@ -65,6 +65,12 @@ const sx = {
 
 // function to conver rgba to hex value
 const rgbHex = rgba => {
+  // if rgba is not defined, return empty string
+  if (rgba === "") {
+    return "";
+  }
+
+  // determine the hex value from the RGBA string
   const color = rgba.replace(/[^0-9,.]/g, "").split(",");
   const rHex = Number(color[0]);
   const gHex = Number(color[1]);
@@ -97,13 +103,6 @@ export default function Color({
   // no color state
   const [noColor, setNoColor] = React.useState(false);
 
-  // no color state use effect
-  useEffect(() => {
-    if (value === "rgba(0,0,0,0)") {
-      setNoColor(true);
-    }
-  }, [value]);
-
   // handle color change
   const handleChange = color => {
     const changeValue = `rgba(${color.r},${color.g},${color.b},${color.a})`;
@@ -116,10 +115,15 @@ export default function Color({
 
   // handle red
   const handleRedChange = event => {
+    // get r,g,b,a values from rgba string
     const rgba = value.replace(/[^0-9,.]/g, "").split(",");
-    const redChange = `rgba(${event.target.value},${Number(rgba[1])},${Number(
-      rgba[2]
-    )},${Number(rgba[3])})`;
+    const r = event.target.value;
+    const g = rgba[1] || 0;
+    const b = rgba[2] || 0;
+    const a = rgba[3] || 1;
+
+    // create new rgba string and call onChange and set the hex value
+    const redChange = `rgba(${r},${Number(g)},${Number(b)},${Number(a)})`;
     onChange(redChange);
     setHex(rgbHex(redChange));
 
@@ -129,10 +133,15 @@ export default function Color({
 
   // handle green change
   const handleGreenChange = event => {
+    // get r,g,b,a values from rgba string
     const rgba = value.replace(/[^0-9,.]/g, "").split(",");
-    const greenChange = `rgba(${Number(rgba[0])},${event.target.value},${Number(
-      rgba[2]
-    )},${Number(rgba[3])})`;
+    const r = rgba[0] || 0;
+    const g = event.target.value;
+    const b = rgba[2] || 0;
+    const a = rgba[3] || 1;
+
+    // create new rgba string and call onChange and set the hex value
+    const greenChange = `rgba(${Number(r)},${g},${Number(b)},${Number(a)})`;
     onChange(greenChange);
     setHex(rgbHex(greenChange));
 
@@ -142,10 +151,15 @@ export default function Color({
 
   // handle Blue change
   const handleBlueChange = event => {
+    // get r,g,b,a values from rgba string
     const rgba = value.replace(/[^0-9,.]/g, "").split(",");
-    const blueChange = `rgba(${Number(rgba[0])},${Number(rgba[1])},${
-      event.target.value
-    },${Number(rgba[3])})`;
+    const r = rgba[0] || 0;
+    const g = rgba[1] || 0;
+    const b = event.target.value;
+    const a = rgba[3] || 1;
+
+    // create new rgba string and call onChange and set the hex value
+    const blueChange = `rgba(${Number(r)},${Number(g)},${b},${Number(a)})`;
     onChange(blueChange);
     setHex(rgbHex(blueChange));
 
@@ -155,10 +169,15 @@ export default function Color({
 
   // handle alpha change
   const handleAlphaChange = event => {
+    // get r,g,b,a values from rgba string
     const rgba = value.replace(/[^0-9,.]/g, "").split(",");
-    const alphaChange = `rgba(${Number(rgba[0])},${Number(rgba[1])},${Number(
-      rgba[2]
-    )},${event.target.value})`;
+    const r = rgba[0] || 0;
+    const g = rgba[1] || 0;
+    const b = rgba[2] || 0;
+    const a = event.target.value;
+
+    // create new rgba string and call onChange and set the hex value
+    const alphaChange = `rgba(${Number(r)},${Number(g)},${Number(b)},${a})`;
     onChange(alphaChange);
     setHex(rgbHex(alphaChange));
 
@@ -178,6 +197,12 @@ export default function Color({
 
   // get the red value from full rgba string
   const getRedColor = color => {
+    // if color is not defined, return empty string
+    if (color === "") {
+      return "";
+    }
+
+    // determine the red value from the RGBA string
     const rgba = color.replace(/[^0-9,.]/g, "").split(",");
     let red = Number(rgba[0]);
 
@@ -191,6 +216,12 @@ export default function Color({
 
   // get the green value from full rgba string
   const getGreenColor = color => {
+    // if color is not defined, return empty string
+    if (color === "") {
+      return "";
+    }
+
+    // determine the green value from the RGBA string
     const rgba = color.replace(/[^0-9,.]/g, "").split(",");
     let green = Number(rgba[1]);
 
@@ -204,6 +235,12 @@ export default function Color({
 
   // get the blue value from full rgba string
   const getBlueColor = color => {
+    // if color is not defined, return empty string
+    if (color === "") {
+      return "";
+    }
+
+    // determine the blue value from the RGBA string
     const rgba = color.replace(/[^0-9,.]/g, "").split(",");
     let blue = Number(rgba[2]);
 
@@ -217,6 +254,12 @@ export default function Color({
 
   // get the alpha value from full rgba string
   const getAlpha = color => {
+    // if color is not defined, return empty string
+    if (color === "") {
+      return "";
+    }
+
+    // determine the alpha value from the RGBA string
     const rgba = color.replace(/[^0-9,.]/g, "").split(",");
     let alpha = Number(rgba[3]);
 
@@ -230,6 +273,11 @@ export default function Color({
 
   // get the rgba object from the full rgba string
   const getRgbaObj = color => {
+    // if color is not defined, return undefined
+    if (color === "") {
+      return undefined;
+    }
+
     const rgba = color.replace(/[^0-9,.]/g, "").split(",");
     return {
       a: Number(rgba[3]),
@@ -265,8 +313,9 @@ export default function Color({
 
   // handle no color
   const handleNoColor = () => {
-    // set all rgb values to 0 with 100% transparency
-    onChange("rgba(0,0,0,0)");
+    // set all rgb values and hex to empty
+    onChange("");
+    setHex("");
     setNoColor(true);
   };
 
@@ -288,11 +337,9 @@ export default function Color({
 
   // define diagonal line based on swatch dimensions
   const diagonalLine = Number(swatchDimensions) + Number(swatchDimensions) / 3;
-  const diagonalLineOrigin = Number(swatchDimensions) / 10;
-  console.log(swatchDimensions);
-  console.log(diagonalLineOrigin);
-  console.log(diagonalLine);
+  const diagonalLineOrigin = Number(swatchDimensions) / 10 + 1;
   const noColorLine = `M ${diagonalLineOrigin},${diagonalLineOrigin} L ${diagonalLine},${diagonalLine}`;
+  console.log(noColorLine);
 
   return (
     <Box>
@@ -301,9 +348,9 @@ export default function Color({
           (sx.swatch,
           {
             "&:hover": {
-              backgroundColor: value
+              backgroundColor: value !== "" ? value : "transparent"
             },
-            background: value,
+            background: value !== "" ? value : "transparent",
             height: `${swatchDimensions}px`,
             minHeight: `${swatchDimensions}px`,
             minWidth: `${swatchDimensions}px`,
@@ -385,7 +432,9 @@ export default function Color({
                     type="number"
                     size="small"
                     margin="dense"
+                    max="255"
                     label="Red"
+                    error={getRedColor(value) > 255}
                     value={getRedColor(value)}
                     sx={{ width: "33%" }}
                     InputLabelProps={{
@@ -400,7 +449,9 @@ export default function Color({
                     type="number"
                     size="small"
                     margin="dense"
+                    max="255"
                     label="Green"
+                    error={getGreenColor(value) > 255}
                     value={getGreenColor(value)}
                     sx={{ width: "33%" }}
                     InputLabelProps={{
@@ -415,7 +466,9 @@ export default function Color({
                     type="number"
                     size="small"
                     margin="dense"
+                    max="255"
                     label="Blue"
+                    error={getBlueColor(value) > 255}
                     value={getBlueColor(value)}
                     sx={{ width: "33%" }}
                     InputLabelProps={{
@@ -431,7 +484,9 @@ export default function Color({
                   type="number"
                   size="small"
                   margin="dense"
+                  max="1"
                   label="Alpha (Transparency)"
+                  error={getAlpha(value) > 1}
                   value={getAlpha(value)}
                   fullWidth
                   InputLabelProps={{
