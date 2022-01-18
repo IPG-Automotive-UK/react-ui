@@ -1,10 +1,8 @@
 import {
   Box,
   Button,
-  IconButton,
   InputAdornment,
   Popover,
-  SvgIcon,
   TextField,
   Typography
 } from "@mui/material";
@@ -44,6 +42,8 @@ const sx = {
     }
   },
   noColorSwatch: {
+    background:
+      "linear-gradient(to top left, rgba(255,0,0,0) 0%, rgba(255,0,0,0) calc(50% - 0.8px),rgba(255,0,0,1) 50%,rgba(255,0,0,0) calc(50% + 0.8px),rgba(0,0,0,0) 100% )",
     backgroundColor: "transparent",
     border: "1px solid #ccc",
     borderRadius: "4px",
@@ -102,6 +102,7 @@ export default function Color({
 
   // no color state
   const [noColor, setNoColor] = React.useState(false);
+  console.log(noColor);
 
   // handle color change
   const handleChange = color => {
@@ -335,12 +336,14 @@ export default function Color({
       swatchDimensions = "15";
   }
 
-  // define diagonal line based on swatch dimensions
-  const diagonalLine = Number(swatchDimensions) + Number(swatchDimensions) / 3;
-  const diagonalLineOrigin = Number(swatchDimensions) / 10 + 1;
-  const noColorLine = `M ${diagonalLineOrigin},${diagonalLineOrigin} L ${diagonalLine},${diagonalLine}`;
-  console.log(noColorLine);
-
+  // define swatch background color depending on no color state or if color is undefined
+  let swatchBackground;
+  if (noColor) {
+    swatchBackground =
+      "linear-gradient(to top left, rgba(255,0,0,0) 0%, rgba(255,0,0,0) calc(50% - 0.8px),rgba(255,0,0,1) 50%,rgba(255,0,0,0) calc(50% + 0.8px),rgba(0,0,0,0) 100% )";
+  } else {
+    swatchBackground = value !== "" ? value : "transparent";
+  }
   return (
     <Box>
       <Button
@@ -350,7 +353,7 @@ export default function Color({
             "&:hover": {
               backgroundColor: value !== "" ? value : "transparent"
             },
-            background: value !== "" ? value : "transparent",
+            background: swatchBackground,
             height: `${swatchDimensions}px`,
             minHeight: `${swatchDimensions}px`,
             minWidth: `${swatchDimensions}px`,
@@ -364,18 +367,7 @@ export default function Color({
         ref={buttonRef}
         variant="contained"
         disabled={disabled}
-      >
-        {noColor ? (
-          <SvgIcon>
-            <path
-              // create diagonal lines
-              d={noColorLine}
-              strokeWidth="2"
-              stroke="red"
-            />
-          </SvgIcon>
-        ) : null}
-      </Button>
+      />
       <Popover
         data-testid="popover"
         open={open}
@@ -411,16 +403,7 @@ export default function Color({
               </Box>
             )}
             <Box sx={sx.noColorSwatchBox}>
-              <IconButton sx={sx.noColorSwatch} onClick={handleNoColor}>
-                <SvgIcon>
-                  <path
-                    // create diagonal lines
-                    d="M 3,3 L 21,21"
-                    strokeWidth="2"
-                    stroke="red"
-                  />
-                </SvgIcon>
-              </IconButton>
+              <Button sx={sx.noColorSwatch} onClick={handleNoColor} />
               <Typography sx={sx.noColorText}> No Color</Typography>
             </Box>
             {showControls && (
