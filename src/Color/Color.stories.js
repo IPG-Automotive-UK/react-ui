@@ -1,5 +1,6 @@
 import Color from "./Color";
 import React from "react";
+import { action } from "@storybook/addon-actions";
 
 export default {
   argTypes: {
@@ -18,6 +19,7 @@ const Template = args => {
   }, [args.value]);
   const onChange = color => {
     setValue(color);
+    action("onChange")(color);
   };
 
   return (
@@ -84,4 +86,14 @@ PopoverWithPosition.args = {
   anchorType: "anchorPosition",
   popoverPositionLeft: 300,
   popoverPositionTop: 100
+};
+
+export const disabled = Template.bind({});
+disabled.args = {
+  disabled: true
+};
+
+export const InitiallyNoColor = Template.bind({});
+InitiallyNoColor.args = {
+  value: ""
 };

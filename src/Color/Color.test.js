@@ -108,4 +108,34 @@ describe("Color", () => {
     userEvent.click(swatch);
     expect(document.querySelector("[id=red]").value).toBe("255");
   });
+  test("No initial color", () => {
+    const value = "";
+    render(<ColorWithState open value={value} />);
+
+    // confirm RGBA and Hex values
+    expect(document.querySelector("[id=red]").value).toBe("");
+    expect(document.querySelector("[id=green]").value).toBe("");
+    expect(document.querySelector("[id=blue]").value).toBe("");
+    expect(document.querySelector("[id=alpha]").value).toBe("");
+    expect(document.querySelector("[id=hex]").value).toBe("");
+  });
+  test("Click no color sets no color", async () => {
+    const value = "rgba(255,55,100,1)";
+    render(<ColorWithState value={value} />);
+
+    // get swatch and click swatch
+    const swatch = screen.getByTestId("swatch");
+    await userEvent.click(swatch);
+
+    // get no color button and click no color button
+    const noColor = screen.getByTestId("NoColorButton");
+    userEvent.click(noColor);
+
+    // confirm RGBA and Hex values
+    expect(document.querySelector("[id=red]").value).toBe("");
+    expect(document.querySelector("[id=green]").value).toBe("");
+    expect(document.querySelector("[id=blue]").value).toBe("");
+    expect(document.querySelector("[id=alpha]").value).toBe("");
+    expect(document.querySelector("[id=hex]").value).toBe("");
+  });
 });
