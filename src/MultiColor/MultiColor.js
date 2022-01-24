@@ -35,7 +35,10 @@ export default function MultiColor({
       field: "color",
       headerName: "Color",
       renderCell: params => (
-        <Color value={params.value} onClick={handleEditCell} />
+        <Color
+          value={params.value}
+          onChange={event => handleOnColorChange(event, params)}
+        />
       ),
       sortable: false,
       type: "actions",
@@ -59,6 +62,13 @@ export default function MultiColor({
       width: 85
     }
   ];
+
+  // handle color change
+  const handleOnColorChange = (event, params) => {
+    const updatedRows = JSON.parse(JSON.stringify(rows));
+    updatedRows[params.id][params.field] = event;
+    onChange(updatedRows);
+  };
 
   // handle row deletion
   const handleOnDeleteClick = (event, params) => {
