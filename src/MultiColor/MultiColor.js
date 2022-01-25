@@ -33,7 +33,7 @@ export default function MultiColor({
     {
       align: "center",
       field: "color",
-      headerName: "Color",
+      headerName: "Color gradient",
       renderCell: params => (
         <Color
           value={params.value}
@@ -42,7 +42,7 @@ export default function MultiColor({
       ),
       sortable: false,
       type: "actions",
-      width: 150
+      width: 130
     },
     {
       align: "center",
