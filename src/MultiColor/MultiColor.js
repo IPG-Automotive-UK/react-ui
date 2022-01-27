@@ -80,7 +80,7 @@ export default function MultiColor({
 
   // handle row addition
   const handleOnAddClick = () => {
-    const newRow = { label: "", value: null };
+    const newRow = { color: "rgba(255,1,1,1)", value: null };
     const updatedRows = JSON.parse(JSON.stringify(rows));
     updatedRows.push(newRow);
     onChange(updatedRows);
