@@ -17,7 +17,6 @@ export default function MultiColor({
 }) {
   // add an id for each label/value
   const rowsWithID = rows.map((item, index) => ({ ...item, id: index }));
-
   // set column definition
   const columns = [
     {
@@ -33,16 +32,17 @@ export default function MultiColor({
     {
       align: "center",
       field: "color",
-      headerName: "Color gradient",
+      headerName: "Color",
       renderCell: params => (
         <Color
+          key={params.id}
           value={params.value}
           onChange={event => handleOnColorChange(event, params)}
         />
       ),
       sortable: false,
       type: "actions",
-      width: 130
+      width: 80
     },
     {
       align: "center",
@@ -59,7 +59,7 @@ export default function MultiColor({
         </IconButton>
       ),
       sortable: false,
-      width: 85
+      width: 80
     }
   ];
 
