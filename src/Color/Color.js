@@ -108,6 +108,9 @@ export default function Color({
     if (value === "") {
       setNoColor(true);
       setHex("");
+    } else {
+      setNoColor(false);
+      setHex(rgbHex(value));
     }
   }, [value]);
 
@@ -115,10 +118,6 @@ export default function Color({
   const handleChange = color => {
     const changeValue = `rgba(${color.r},${color.g},${color.b},${color.a})`;
     onChange(changeValue);
-    setHex(rgbHex(changeValue));
-
-    // set no color state
-    setNoColor(false);
   };
 
   // handle red
@@ -133,10 +132,6 @@ export default function Color({
     // create new rgba string and call onChange and set the hex value
     const redChange = `rgba(${r},${Number(g)},${Number(b)},${Number(a)})`;
     onChange(redChange);
-    setHex(rgbHex(redChange));
-
-    // set no color state
-    setNoColor(false);
   };
 
   // handle green change
@@ -151,10 +146,6 @@ export default function Color({
     // create new rgba string and call onChange and set the hex value
     const greenChange = `rgba(${Number(r)},${g},${Number(b)},${Number(a)})`;
     onChange(greenChange);
-    setHex(rgbHex(greenChange));
-
-    // set no color state
-    setNoColor(false);
   };
 
   // handle Blue change
@@ -169,10 +160,6 @@ export default function Color({
     // create new rgba string and call onChange and set the hex value
     const blueChange = `rgba(${Number(r)},${Number(g)},${b},${Number(a)})`;
     onChange(blueChange);
-    setHex(rgbHex(blueChange));
-
-    // set no color state
-    setNoColor(false);
   };
 
   // handle alpha change
@@ -187,10 +174,6 @@ export default function Color({
     // create new rgba string and call onChange and set the hex value
     const alphaChange = `rgba(${Number(r)},${Number(g)},${Number(b)},${a})`;
     onChange(alphaChange);
-    setHex(rgbHex(alphaChange));
-
-    // set no color state
-    setNoColor(false);
   };
 
   // handle popover open
@@ -314,9 +297,6 @@ export default function Color({
     // set color as rgba string with new converted hex values
     // alpha is divied by 255 to value between 0 and 1
     onChange(`rgba(${rHex},${gHex},${bHex},${aHex / 255})`);
-
-    // set no color state
-    setNoColor(false);
   };
 
   // handle no color
@@ -347,7 +327,7 @@ export default function Color({
     swatchBackground =
       "linear-gradient(to top left, rgba(255,0,0,0) 0%, rgba(255,0,0,0) calc(50% - 0.8px),rgba(255,0,0,1) 50%,rgba(255,0,0,0) calc(50% + 0.8px),rgba(0,0,0,0) 100% )";
   } else {
-    swatchBackground = value !== "" ? value : "transparent";
+    swatchBackground = value;
   }
   return (
     <Box>
