@@ -69,9 +69,11 @@
     "@mui/icons-material": "^5.2.5",
     "@mui/material": "^5.4.0",
     "@mui/x-data-grid": "^5.2.2",
+    "colord": "^2.9.2",
     "material-ui-popup-state": "^2.0.0",
     "react-colorful": "^5.5.0",
     "react-hook-form": "^7.0.0",
+    "use-debouncy": "^4.2.1",
     "zxcvbn": "^4.4.2"
   },
   "jest": {

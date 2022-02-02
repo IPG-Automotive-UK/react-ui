@@ -27,7 +27,6 @@ function setup(inputs) {
       alpha: screen.getByLabelText("Alpha (Transparency)"),
       blue: screen.getByLabelText("Blue"),
       green: screen.getByLabelText("Green"),
-      hex: screen.getByLabelText("Hex"),
       red: screen.getByLabelText("Red")
     }
   };
@@ -43,7 +42,6 @@ describe("Color", () => {
     expect(document.querySelector("[id=green]").value).toBe("55");
     expect(document.querySelector("[id=blue]").value).toBe("100");
     expect(document.querySelector("[id=alpha]").value).toBe("1");
-    expect(document.querySelector("[id=hex]").value).toBe("ff3764ff");
   });
   test("Color picker values update", () => {
     const value = "rgba(255,0,0,1)";
@@ -91,16 +89,6 @@ describe("Color", () => {
     userEvent.type(elements.inputs.alpha, "0.5");
     expect(document.querySelector("[id=alpha]").value).toBe("0.5");
   });
-  test("Hex Text Updates", () => {
-    const elements = setup();
-    const input = screen.getByLabelText("Hex");
-    userEvent.type(
-      input,
-      "{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}"
-    );
-    userEvent.type(elements.inputs.hex, "003535ff");
-    expect(document.querySelector("[id=hex]").value).toBe("003535ff");
-  });
   test("Click swatch opens popover", () => {
     const value = "rgba(255,55,100,1)";
     render(<ColorWithState value={value} />);
@@ -117,7 +105,6 @@ describe("Color", () => {
     expect(document.querySelector("[id=green]").value).toBe("");
     expect(document.querySelector("[id=blue]").value).toBe("");
     expect(document.querySelector("[id=alpha]").value).toBe("");
-    expect(document.querySelector("[id=hex]").value).toBe("");
   });
   test("Click no color sets no color", async () => {
     const value = "rgba(255,55,100,1)";
@@ -127,8 +114,8 @@ describe("Color", () => {
     const swatch = screen.getByTestId("swatch");
     await userEvent.click(swatch);
 
-    // get no color button and click no color button
-    const noColor = screen.getByTestId("NoColorButton");
+    // click no color checkbox
+    const noColor = document.querySelector("[type=checkbox]");
     userEvent.click(noColor);
 
     // confirm RGBA and Hex values
@@ -136,6 +123,5 @@ describe("Color", () => {
     expect(document.querySelector("[id=green]").value).toBe("");
     expect(document.querySelector("[id=blue]").value).toBe("");
     expect(document.querySelector("[id=alpha]").value).toBe("");
-    expect(document.querySelector("[id=hex]").value).toBe("");
   });
 });
