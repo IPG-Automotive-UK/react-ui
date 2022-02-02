@@ -28,9 +28,9 @@ export const CustomRows = Template.bind({});
 CustomRows.args = {
   rows: [
     {
-      color: "rgba(253,251,1,1)",
+      color: "rgba(0,22,252,1)",
       value: 2
     },
-    { color: "rgba(150,90,1,0.5)", value: 4 }
+    { color: "rgba(240,242,10,1)", value: 4 }
   ]
 };

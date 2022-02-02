@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 import React from "react";
 
 /**
- * Multi color component is used to maage a table for number-color pairs
+ * Multi color component is used to manage a table for value-color pair
  */
 
 export default function MultiColor({
