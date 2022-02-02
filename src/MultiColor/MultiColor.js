@@ -15,7 +15,7 @@ export default function MultiColor({
   rows = [],
   style = { height: 250, width: "100%" }
 }) {
-  // add an id for each label/value
+  // add an id for each color/value
   const rowsWithID = rows.map((item, index) => ({ ...item, id: index }));
   // set column definition
   const columns = [

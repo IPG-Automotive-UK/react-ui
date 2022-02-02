@@ -1,7 +1,6 @@
-import MultiColor from "./Multicolor";
+import MultiColor from "./MultiColor";
 import React from "react";
 import { render } from "@testing-library/react";
-// import userEvent from "@testing-library/user-event";
 
 /**
  * Test wrapper for MultiColor (provides state for the value)
