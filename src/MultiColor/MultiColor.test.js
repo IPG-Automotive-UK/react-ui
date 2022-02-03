@@ -35,11 +35,11 @@ function getColumnValues(colIndex) {
  * Tests
  */
 describe("MultiColor", () => {
-  test("can select an item", () => {
+  test("can render correct values", () => {
     render(<MultiColorWithState />);
     expect(Number(getColumnValues(0))).toBe(2);
   });
-  test("can update an item", () => {
+  test("can update value", () => {
     const newRows = [{ color: "rgba(0,255,0,1)", value: 10 }];
     render(<MultiColorWithState rows={newRows} />);
     expect(Number(getColumnValues(0))).toBe(10);
