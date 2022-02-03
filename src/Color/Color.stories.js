@@ -97,3 +97,9 @@ export const InitiallyNoColor = Template.bind({});
 InitiallyNoColor.args = {
   value: ""
 };
+
+export const NoButton = Template.bind({});
+NoButton.args = {
+  showButton: false,
+  open: true
+};

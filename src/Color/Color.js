@@ -45,6 +45,7 @@ export default function Color({
   disabled = false,
   popoverWidth = "250px",
   showControls = true,
+  showButton = true,
   showPicker = true,
   swatchSize = "small",
   value = "rgba(255,0,0,1)",
@@ -161,28 +162,30 @@ export default function Color({
   // define components
   return (
     <Box>
-      <Button
-        sx={
-          (sx.swatch,
-          {
-            "&:hover": {
-              backgroundColor: value !== "" ? value : "transparent"
-            },
-            background: swatchBackground,
-            height: `${swatchDimensions}px`,
-            minHeight: `${swatchDimensions}px`,
-            minWidth: `${swatchDimensions}px`,
-            padding: "0",
-            width: `${swatchDimensions}px`
-          })
-        }
-        onClick={handleClick}
-        id="swatch"
-        data-testid="swatch"
-        ref={buttonRef}
-        variant="contained"
-        disabled={disabled}
-      />
+      {showButton && (
+        <Button
+          sx={
+            (sx.swatch,
+            {
+              "&:hover": {
+                backgroundColor: value !== "" ? value : "transparent"
+              },
+              background: swatchBackground,
+              height: `${swatchDimensions}px`,
+              minHeight: `${swatchDimensions}px`,
+              minWidth: `${swatchDimensions}px`,
+              padding: "0",
+              width: `${swatchDimensions}px`
+            })
+          }
+          onClick={handleClick}
+          id="swatch"
+          data-testid="swatch"
+          ref={buttonRef}
+          variant="contained"
+          disabled={disabled}
+        />
+      )}
       <Popover
         data-testid="popover"
         open={open}
