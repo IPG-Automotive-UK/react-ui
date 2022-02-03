@@ -45,7 +45,6 @@ export default function Color({
   disabled = false,
   popoverWidth = "250px",
   showControls = true,
-  showButton = true,
   showPicker = true,
   swatchSize = "small",
   value = "rgba(255,0,0,1)",
