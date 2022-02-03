@@ -247,7 +247,7 @@ export default function Color({
                 </Box>
               </Box>
             )}
-            <Box sx={{ width: "100px" }}>
+            <Box sx={{ width: "110px" }}>
               <Checkbox
                 checked={noColorChecked}
                 id="NoColorCheckbox"
