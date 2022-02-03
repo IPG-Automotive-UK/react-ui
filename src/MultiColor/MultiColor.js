@@ -37,7 +37,7 @@ export default function MultiColor({
         <Color
           key={params.id}
           value={params.value}
-          onChange={event => handleOnColorChange(event, params)}
+          onClose={event => handleOnColorChange(event, params)}
         />
       ),
       sortable: false,

@@ -51,36 +51,55 @@ export default function Color({
   value = "rgba(255,0,0,1)",
   anchorType = "anchorEl",
   onChange = () => {},
+  onClose = () => {},
   ...props
 }) {
   // create popover states
   const buttonRef = useRef(null);
   const [open, setOpen] = useState(props.open || false);
 
-  // store last value to return back to it when toggling no color
-  const [lastValue, setLastValue] = useState(value);
+  // color state
+  const [color, setColor] = useState(value);
   useEffect(() => {
-    if (value.length !== 0) {
-      setLastValue(value);
-    }
+    setColor(value);
   }, [value]);
+
+  // store last value to return back to it when toggling no color
+  const [lastColor, setLastColor] = useState(value);
+  useEffect(() => {
+    if (color.length !== 0) {
+      setLastColor(color);
+    }
+  }, [color]);
+
+  // debounce onChange
+  const debounceOnChange = useDebouncyFn(color => {
+    onChange(color);
+  }, 10);
+
+  // call onChange when color changes
+  useEffect(() => {
+    if (color !== value) {
+      debounceOnChange(color);
+    }
+  }, [color]);
 
   // convert rgba string to rgba object
   const rgbaObj = useMemo(() => {
-    return colord(value).toRgb();
-  }, [value]);
+    return colord(color).toRgb();
+  }, [color]);
 
   // check if no color is selected
   const noColorChecked = useMemo(() => {
-    return value.length === 0;
-  }, [value]);
+    return color.length === 0;
+  }, [color]);
 
   // convert rgba string to swatch background color
   const swatchBackground = useMemo(() => {
-    return value === ""
+    return color === ""
       ? "linear-gradient(to top left, rgba(255,0,0,0) 0%, rgba(255,0,0,0) calc(50% - 0.8px),rgba(255,0,0,1) 50%,rgba(255,0,0,0) calc(50% + 0.8px),rgba(0,0,0,0) 100% )"
-      : value;
-  }, [value]);
+      : color;
+  }, [color]);
 
   // handle button / swatch size
   const swatchDimensions = useMemo(() => {
@@ -96,57 +115,57 @@ export default function Color({
     }
   }, [swatchSize]);
 
-  // handle color change with debouncing to avoid large re-renders during drag
-  const handleChange = useDebouncyFn(color => {
-    const newValue = colord(color).toRgbString();
-    onChange(newValue);
-  }, 100);
+  // handle color picker change
+  const handleColorPickerChange = newRbgaObj => {
+    const newColor = colord(newRbgaObj).toRgbString();
+    setColor(newColor);
+  };
 
   // handle no color button click
   const handleNoColor = event => {
     // return empty string if no value is checked otherwise return last value
-    const newValue = event.target.checked
+    const newColor = event.target.checked
       ? ""
-      : lastValue.length === 0
+      : lastColor.length === 0
       ? "rgba(255,0,0,1)" // if there was no last value then return default
-      : lastValue;
-    onChange(newValue);
+      : lastColor;
+    setColor(newColor);
   };
 
   // handle red change
   const handleRedChange = event => {
-    const newValue = colord({
+    const newColor = colord({
       ...rgbaObj,
       r: event.target.value
     }).toRgbString();
-    onChange(newValue);
+    setColor(newColor);
   };
 
   // handle green change
   const handleGreenChange = event => {
-    const newValue = colord({
+    const newColor = colord({
       ...rgbaObj,
       g: event.target.value
     }).toRgbString();
-    onChange(newValue);
+    setColor(newColor);
   };
 
   // handle Blue change
   const handleBlueChange = event => {
-    const newValue = colord({
+    const newColor = colord({
       ...rgbaObj,
       b: event.target.value
     }).toRgbString();
-    onChange(newValue);
+    setColor(newColor);
   };
 
   // handle alpha change
   const handleAlphaChange = event => {
-    const newValue = colord({
+    const newColor = colord({
       ...rgbaObj,
       a: event.target.value
     }).toRgbString();
-    onChange(newValue);
+    setColor(newColor);
   };
 
   // handle popover open
@@ -156,36 +175,35 @@ export default function Color({
 
   // handle popover close
   const handleClose = () => {
+    onClose(color);
     setOpen(false);
   };
 
   // define components
   return (
     <Box>
-      {showButton && (
-        <Button
-          sx={
-            (sx.swatch,
-            {
-              "&:hover": {
-                backgroundColor: value !== "" ? value : "transparent"
-              },
-              background: swatchBackground,
-              height: `${swatchDimensions}px`,
-              minHeight: `${swatchDimensions}px`,
-              minWidth: `${swatchDimensions}px`,
-              padding: "0",
-              width: `${swatchDimensions}px`
-            })
-          }
-          onClick={handleClick}
-          id="swatch"
-          data-testid="swatch"
-          ref={buttonRef}
-          variant="contained"
-          disabled={disabled}
-        />
-      )}
+      <Button
+        sx={
+          (sx.swatch,
+          {
+            "&:hover": {
+              backgroundColor: color !== "" ? color : "transparent"
+            },
+            background: swatchBackground,
+            height: `${swatchDimensions}px`,
+            minHeight: `${swatchDimensions}px`,
+            minWidth: `${swatchDimensions}px`,
+            padding: "0",
+            width: `${swatchDimensions}px`
+          })
+        }
+        onClick={handleClick}
+        id="swatch"
+        data-testid="swatch"
+        ref={buttonRef}
+        variant="contained"
+        disabled={disabled}
+      />
       <Popover
         data-testid="popover"
         open={open}
@@ -223,14 +241,14 @@ export default function Color({
                   ) : (
                     <RgbaColorPicker
                       color={rgbaObj}
-                      onChange={handleChange}
+                      onChange={handleColorPickerChange}
                       id="colorPicker"
                     />
                   )}
                 </Box>
               </Box>
             )}
-            <Box>
+            <Box sx={{ width: "100px" }}>
               <Checkbox
                 checked={noColorChecked}
                 id="NoColorCheckbox"
@@ -378,6 +396,16 @@ Color.propTypes = {
    * color: This is the selected colour in a rgba string e.g "rgba(255,0,0,1)".
    */
   onChange: PropTypes.func,
+  /**
+   * Callback fired when the popover is closed.
+   *
+   * **Signature**
+   * ```
+   * function(color: string) => void
+   * ```
+   * color: This is the selected colour in a rgba string e.g "rgba(255,0,0,1)".
+   */
+  onClose: PropTypes.func,
   /**
    * This determines if the popover is open on the intial
    * render.

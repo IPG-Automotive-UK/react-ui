@@ -21,12 +21,16 @@ const Template = args => {
     setValue(color);
     action("onChange")(color);
   };
+  const onClose = color => {
+    action("onClose")(color);
+  };
 
   return (
     <Color
       {...args}
       value={value}
       onChange={onChange}
+      onClose={onClose}
       swatchSize={args.swatchSize}
       popoverWidth={args.popoverWidth}
       showControls={args.showControls}
