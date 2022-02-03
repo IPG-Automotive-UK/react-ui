@@ -328,7 +328,7 @@ export default function Color({
                   size="small"
                   margin="dense"
                   max="1"
-                  label="Alpha (Transparency)"
+                  label="Transparency"
                   error={rgbaObj.a > 1}
                   value={noColorChecked ? "" : rgbaObj.a}
                   fullWidth
