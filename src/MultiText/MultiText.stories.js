@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import MultiText from "./MultiText";
 import React from "react";
 import { action } from "@storybook/addon-actions";
@@ -16,7 +17,11 @@ const Template = args => {
     setRows(newRows);
     action("onChange")(newRows);
   };
-  return <MultiText {...args} rows={rows} onChange={onChange} />;
+  return (
+    <Box sx={{ height: "calc(100vh - 40px)" }}>
+      <MultiText {...args} rows={rows} onChange={onChange} />
+    </Box>
+  );
 };
 
 // default story
