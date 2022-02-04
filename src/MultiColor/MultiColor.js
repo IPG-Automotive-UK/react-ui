@@ -27,17 +27,29 @@ export default function MultiColor({ onChange = () => {}, rows = [] }) {
     },
     {
       align: "center",
+      editable: true,
       field: "color",
       headerName: "Color",
       renderCell: params => (
+        <div
+          style={{
+            backgroundColor: params.value,
+            borderRadius: "4px",
+            height: "15px",
+            width: "15px"
+          }}
+        />
+      ),
+      renderEditCell: params => (
         <Color
-          key={params.id}
           value={params.value}
-          onClose={event => handleOnColorChange(event, params)}
+          onChange={newColor => handleOnColorChange(newColor, params)}
+          onClose={newColor => handleOnColorClose(newColor, params)}
+          open
         />
       ),
       sortable: false,
-      type: "actions",
+      type: "string",
       width: 80
     },
     {
@@ -64,6 +76,11 @@ export default function MultiColor({ onChange = () => {}, rows = [] }) {
     const updatedRows = JSON.parse(JSON.stringify(rows));
     updatedRows[params.id][params.field] = event;
     onChange(updatedRows);
+  };
+
+  // handle color close
+  const handleOnColorClose = (event, params) => {
+    params.api.setCellMode(params.id, params.field, "view");
   };
 
   // handle row deletion
