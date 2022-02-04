@@ -24,7 +24,7 @@ function setup(inputs) {
   render(<ColorWithState open {...inputs} />);
   return {
     inputs: {
-      alpha: screen.getByLabelText("Alpha (Transparency)"),
+      alpha: screen.getByLabelText("Transparency"),
       blue: screen.getByLabelText("Blue"),
       green: screen.getByLabelText("Green"),
       red: screen.getByLabelText("Red")
@@ -84,7 +84,7 @@ describe("Color", () => {
   });
   test("Alpha Text Updates", () => {
     const elements = setup();
-    const input = screen.getByLabelText("Alpha (Transparency)");
+    const input = screen.getByLabelText("Transparency");
     userEvent.type(input, "{backspace}");
     userEvent.type(elements.inputs.alpha, "0.5");
     expect(document.querySelector("[id=alpha]").value).toBe("0.5");
