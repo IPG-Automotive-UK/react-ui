@@ -9,11 +9,7 @@ import React from "react";
 /**
  * Multi color component is used to manage a table for value-color pair
  */
-export default function MultiColor({
-  onChange = () => {},
-  rows = [],
-  style = { height: 250, width: "100%" }
-}) {
+export default function MultiColor({ onChange = () => {}, rows = [] }) {
   // add an id for each color/value
   const rowsWithID = rows.map((item, index) => ({ ...item, id: index }));
 
@@ -95,7 +91,12 @@ export default function MultiColor({
 
   // return components
   return (
-    <Box sx={style} display="flex" flexDirection="column" key={rows.length}>
+    <Box
+      display="flex"
+      flexDirection="column"
+      key={rows.length}
+      sx={{ height: "100%", width: "100%" }}
+    >
       <DataGrid
         data-testid="dataGrid"
         disableColumnMenu
@@ -132,9 +133,5 @@ MultiColor.propTypes = {
   /**
    * Set of rows.
    */
-  rows: PropTypes.array,
-  /**
-   * Custom style to apply to the component.
-   */
-  style: PropTypes.object
+  rows: PropTypes.array
 };
