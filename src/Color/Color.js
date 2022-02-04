@@ -59,9 +59,6 @@ export default function Color({
 
   // color state
   const [color, setColor] = useState(value);
-  useEffect(() => {
-    setColor(value);
-  }, [value]);
 
   // store last value to return back to it when toggling no color
   const [lastColor, setLastColor] = useState(value);
@@ -71,16 +68,9 @@ export default function Color({
     }
   }, [color]);
 
-  // debounce onChange
-  const debounceOnChange = useDebouncyFn(color => {
-    onChange(color);
-  }, 10);
-
-  // call onChange when color changes
+  // call on change when color changes
   useEffect(() => {
-    if (color !== value) {
-      debounceOnChange(color);
-    }
+    onChange(color);
   }, [color]);
 
   // convert rgba string to rgba object
@@ -114,11 +104,11 @@ export default function Color({
     }
   }, [swatchSize]);
 
-  // handle color picker change
-  const handleColorPickerChange = newRbgaObj => {
+  // debounce color picker change
+  const handleColorPickerChange = useDebouncyFn(newRbgaObj => {
     const newColor = colord(newRbgaObj).toRgbString();
     setColor(newColor);
-  };
+  }, 200);
 
   // handle no color button click
   const handleNoColor = event => {

@@ -8,11 +8,7 @@ import React from "react";
 /**
  * Label setter component are used to manage a table for value-label states
  */
-export default function LabelSetter({
-  onChange = () => {},
-  rows = [],
-  style = { height: 250, width: "100%" }
-}) {
+export default function LabelSetter({ onChange = () => {}, rows = [] }) {
   // add an id for each label/value
   const rowsWithID = rows.map((item, index) => ({ ...item, id: index }));
 
@@ -81,7 +77,12 @@ export default function LabelSetter({
 
   // return components
   return (
-    <Box sx={style} display="flex" flexDirection="column" key={rows.length}>
+    <Box
+      display="flex"
+      flexDirection="column"
+      key={rows.length}
+      sx={{ height: "100%", width: "100%" }}
+    >
       <DataGrid
         data-testid="dataGrid"
         disableColumnMenu
@@ -118,9 +119,5 @@ LabelSetter.propTypes = {
   /**
    * Set of rows.
    */
-  rows: PropTypes.array,
-  /**
-   * Custom style to apply to the component.
-   */
-  style: PropTypes.object
+  rows: PropTypes.array
 };
