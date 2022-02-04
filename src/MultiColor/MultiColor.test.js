@@ -25,6 +25,7 @@ const MultiColorWithState = ({
   );
 };
 
+// returns an array containing all values in a givn column
 function getColumnValues(colIndex) {
   return Array.from(
     document.querySelectorAll(`[role="cell"][data-colindex="${colIndex}"]`)

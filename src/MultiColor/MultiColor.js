@@ -9,7 +9,6 @@ import React from "react";
 /**
  * Multi color component is used to manage a table for value-color pair
  */
-
 export default function MultiColor({
   onChange = () => {},
   rows = [],
@@ -17,6 +16,7 @@ export default function MultiColor({
 }) {
   // add an id for each color/value
   const rowsWithID = rows.map((item, index) => ({ ...item, id: index }));
+
   // set column definition
   const columns = [
     {
