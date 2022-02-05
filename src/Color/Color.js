@@ -237,15 +237,13 @@ export default function Color({
                 </Box>
               </Box>
             )}
-            <Box sx={{ width: "110px" }}>
-              <Checkbox
-                checked={noColorChecked}
-                id="NoColorCheckbox"
-                label="No Color"
-                onChange={handleNoColor}
-                size="small"
-              />
-            </Box>
+            <Checkbox
+              checked={noColorChecked}
+              id="NoColorCheckbox"
+              label="No Color"
+              onChange={handleNoColor}
+              size="small"
+            />
             {showControls && (
               <div>
                 <Box sx={{ display: "flex", flexDirection: "row" }}>
