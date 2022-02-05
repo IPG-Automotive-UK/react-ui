@@ -23,7 +23,7 @@ export default function Checkbox({
       <FormControlLabel
         control={
           <MuiCheckbox
-            sx={style}
+            sx={{ ...style, pointerEvents: "auto" }}
             checked={checked}
             disabled={disabled}
             onChange={onChange}
@@ -31,6 +31,7 @@ export default function Checkbox({
           />
         }
         label={label}
+        sx={{ pointerEvents: "none" }}
       />
     </FormGroup>
   );
