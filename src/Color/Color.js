@@ -1,6 +1,6 @@
 import { Box, Button, Popover, TextField } from "@mui/material";
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Checkbox } from "..";
+import Checkbox from "../Checkbox/Checkbox";
 import PropTypes from "prop-types";
 import { RgbaColorPicker } from "react-colorful";
 import { colord } from "colord";
