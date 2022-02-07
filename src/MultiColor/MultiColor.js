@@ -42,6 +42,7 @@ export default function MultiColor({ onChange = () => {}, rows = [] }) {
             height: "15px",
             width: "15px"
           }}
+          data-testid="colorCell"
         />
       ),
       renderEditCell: params => (

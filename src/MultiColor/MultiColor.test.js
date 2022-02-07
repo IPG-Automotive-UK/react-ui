@@ -1,6 +1,6 @@
 import MultiColor from "./MultiColor";
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 
 /**
  * Test wrapper for MultiColor (provides state for the value)
@@ -48,14 +48,8 @@ describe("MultiColor", () => {
   test("can update color", () => {
     const newRows = [{ color: "rgba(0,255,0,1)", value: 10 }];
     render(<MultiColorWithState rows={newRows} />);
-    const colorCell = document
-      .querySelector(
-        `[role="row"][data-rowindex="${0}"] [role="cell"][data-colindex="${1}"]`
-      )
-      .querySelector("button");
-    const newColor = window
-      .getComputedStyle(colorCell, null)
-      .getPropertyValue("background-color");
+    const colorRows = screen.getByTestId("colorCell");
+    const newColor = colorRows.style.background;
     expect(newColor).toBe("rgb(0, 255, 0)");
   });
 });
