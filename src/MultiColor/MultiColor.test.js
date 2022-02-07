@@ -1,6 +1,6 @@
+import { render, screen } from "@testing-library/react";
 import MultiColor from "./MultiColor";
 import React from "react";
-import { render, screen } from "@testing-library/react";
 
 /**
  * Test wrapper for MultiColor (provides state for the value)
