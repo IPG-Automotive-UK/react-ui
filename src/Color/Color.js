@@ -1,19 +1,16 @@
-import {
-  Box,
-  Button,
-  InputAdornment,
-  Popover,
-  TextField,
-  Typography
-} from "@mui/material";
-import React, { useEffect, useRef } from "react";
+import { Box, Button, Popover, TextField } from "@mui/material";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import Checkbox from "../Checkbox/Checkbox";
 import PropTypes from "prop-types";
 import { RgbaColorPicker } from "react-colorful";
+import { colord } from "colord";
+import { useDebouncyFn } from "use-debouncy";
 
 // styling
 const sx = {
   colorPicker: {
     "& .react-colorful": {
+      height: "240px",
       width: "100%"
     },
     "& .react-colorful__alpha": {
@@ -40,48 +37,10 @@ const sx = {
       height: "15px",
       width: "15px"
     }
-  },
-  noColorSwatch: {
-    background:
-      "linear-gradient(to top left, rgba(255,0,0,0) 0%, rgba(255,0,0,0) calc(50% - 0.8px),rgba(255,0,0,1) 50%,rgba(255,0,0,0) calc(50% + 0.8px),rgba(0,0,0,0) 100% )",
-    backgroundColor: "transparent",
-    border: "1px solid #ccc",
-    borderRadius: "4px",
-    height: "20px",
-    minHeight: "20px",
-    minWidth: "20px",
-    padding: "0",
-    width: "20px"
-  },
-  noColorSwatchBox: {
-    display: "flex",
-    flexDirection: "row",
-    mt: 1
-  },
-  noColorText: {
-    ml: 1
   }
 };
 
-// function to conver rgba to hex value
-const rgbHex = rgba => {
-  // if rgba is not defined, return empty string
-  if (rgba === "") {
-    return "";
-  }
-
-  // determine the hex value from the RGBA string
-  const color = rgba.replace(/[^0-9,.]/g, "").split(",");
-  const rHex = Number(color[0]);
-  const gHex = Number(color[1]);
-  const bHex = Number(color[2]);
-  const aHex = ((Number(color[3]) * 255) | (1 << 8)).toString(16).slice(1);
-
-  return (
-    (bHex | (gHex << 8) | (rHex << 16) | (1 << 24)).toString(16).slice(1) + aHex
-  );
-};
-
+// component to select a color
 export default function Color({
   disabled = false,
   popoverWidth = "250px",
@@ -91,106 +50,111 @@ export default function Color({
   value = "rgba(255,0,0,1)",
   anchorType = "anchorEl",
   onChange = () => {},
+  onClose = () => {},
   ...props
 }) {
   // create popover states
   const buttonRef = useRef(null);
-  const [open, setOpen] = React.useState(props.open || false);
+  const [open, setOpen] = useState(props.open || false);
 
-  // hex edit state
-  const [hex, setHex] = React.useState(rgbHex(value));
+  // color state
+  const [color, setColor] = useState(value);
 
-  // no color state
-  const [noColor, setNoColor] = React.useState(false);
-
-  // check if the color is a valid color
+  // store last value to return back to it when toggling no color
+  const [lastColor, setLastColor] = useState(value);
   useEffect(() => {
-    if (value === "") {
-      setNoColor(true);
-      setHex("");
+    if (color.length !== 0) {
+      setLastColor(color);
     }
-  }, [value]);
+  }, [color]);
 
-  // handle color change
-  const handleChange = color => {
-    const changeValue = `rgba(${color.r},${color.g},${color.b},${color.a})`;
-    onChange(changeValue);
-    setHex(rgbHex(changeValue));
+  // call on change when color changes
+  useEffect(() => {
+    onChange(color);
+  }, [color]);
 
-    // set no color state
-    setNoColor(false);
+  // convert rgba string to rgba object
+  const rgbaObj = useMemo(() => {
+    return colord(color).toRgb();
+  }, [color]);
+
+  // check if no color is selected
+  const noColorChecked = useMemo(() => {
+    return color.length === 0;
+  }, [color]);
+
+  // convert rgba string to swatch background color
+  const swatchBackground = useMemo(() => {
+    return color === ""
+      ? "linear-gradient(to top left, rgba(255,0,0,0) 0%, rgba(255,0,0,0) calc(50% - 0.8px),rgba(255,0,0,1) 50%,rgba(255,0,0,0) calc(50% + 0.8px),rgba(0,0,0,0) 100% )"
+      : color;
+  }, [color]);
+
+  // handle button / swatch size
+  const swatchDimensions = useMemo(() => {
+    switch (swatchSize) {
+      case "small":
+        return "15";
+      case "medium":
+        return "20";
+      case "large":
+        return "30";
+      default:
+        return "15";
+    }
+  }, [swatchSize]);
+
+  // debounce color picker change
+  const handleColorPickerChange = useDebouncyFn(newRbgaObj => {
+    const newColor = colord(newRbgaObj).toRgbString();
+    setColor(newColor);
+  }, 200);
+
+  // handle no color button click
+  const handleNoColor = event => {
+    // return empty string if no value is checked otherwise return last value
+    const newColor = event.target.checked
+      ? ""
+      : lastColor.length === 0
+      ? "rgba(255,0,0,1)" // if there was no last value then return default
+      : lastColor;
+    setColor(newColor);
   };
 
-  // handle red
+  // handle red change
   const handleRedChange = event => {
-    // get r,g,b,a values from rgba string
-    const rgba = value.replace(/[^0-9,.]/g, "").split(",");
-    const r = event.target.value;
-    const g = rgba[1] || 0;
-    const b = rgba[2] || 0;
-    const a = rgba[3] || 1;
-
-    // create new rgba string and call onChange and set the hex value
-    const redChange = `rgba(${r},${Number(g)},${Number(b)},${Number(a)})`;
-    onChange(redChange);
-    setHex(rgbHex(redChange));
-
-    // set no color state
-    setNoColor(false);
+    const newColor = colord({
+      ...rgbaObj,
+      r: event.target.value
+    }).toRgbString();
+    setColor(newColor);
   };
 
   // handle green change
   const handleGreenChange = event => {
-    // get r,g,b,a values from rgba string
-    const rgba = value.replace(/[^0-9,.]/g, "").split(",");
-    const r = rgba[0] || 0;
-    const g = event.target.value;
-    const b = rgba[2] || 0;
-    const a = rgba[3] || 1;
-
-    // create new rgba string and call onChange and set the hex value
-    const greenChange = `rgba(${Number(r)},${g},${Number(b)},${Number(a)})`;
-    onChange(greenChange);
-    setHex(rgbHex(greenChange));
-
-    // set no color state
-    setNoColor(false);
+    const newColor = colord({
+      ...rgbaObj,
+      g: event.target.value
+    }).toRgbString();
+    setColor(newColor);
   };
 
   // handle Blue change
   const handleBlueChange = event => {
-    // get r,g,b,a values from rgba string
-    const rgba = value.replace(/[^0-9,.]/g, "").split(",");
-    const r = rgba[0] || 0;
-    const g = rgba[1] || 0;
-    const b = event.target.value;
-    const a = rgba[3] || 1;
-
-    // create new rgba string and call onChange and set the hex value
-    const blueChange = `rgba(${Number(r)},${Number(g)},${b},${Number(a)})`;
-    onChange(blueChange);
-    setHex(rgbHex(blueChange));
-
-    // set no color state
-    setNoColor(false);
+    const newColor = colord({
+      ...rgbaObj,
+      b: event.target.value
+    }).toRgbString();
+    setColor(newColor);
   };
 
   // handle alpha change
   const handleAlphaChange = event => {
-    // get r,g,b,a values from rgba string
-    const rgba = value.replace(/[^0-9,.]/g, "").split(",");
-    const r = rgba[0] || 0;
-    const g = rgba[1] || 0;
-    const b = rgba[2] || 0;
-    const a = event.target.value;
-
-    // create new rgba string and call onChange and set the hex value
-    const alphaChange = `rgba(${Number(r)},${Number(g)},${Number(b)},${a})`;
-    onChange(alphaChange);
-    setHex(rgbHex(alphaChange));
-
-    // set no color state
-    setNoColor(false);
+    const newColor = colord({
+      ...rgbaObj,
+      a: event.target.value
+    }).toRgbString();
+    setColor(newColor);
   };
 
   // handle popover open
@@ -200,155 +164,11 @@ export default function Color({
 
   // handle popover close
   const handleClose = () => {
+    onClose(color);
     setOpen(false);
   };
 
-  // get the red value from full rgba string
-  const getRedColor = color => {
-    // if color is not defined, return empty string
-    if (color === "") {
-      return "";
-    }
-
-    // determine the red value from the RGBA string
-    const rgba = color.replace(/[^0-9,.]/g, "").split(",");
-    let red = Number(rgba[0]);
-
-    // if red value is empty, set red to empty string
-    if (rgba[0] === "") {
-      red = "";
-    }
-
-    return red;
-  };
-
-  // get the green value from full rgba string
-  const getGreenColor = color => {
-    // if color is not defined, return empty string
-    if (color === "") {
-      return "";
-    }
-
-    // determine the green value from the RGBA string
-    const rgba = color.replace(/[^0-9,.]/g, "").split(",");
-    let green = Number(rgba[1]);
-
-    // if green value is empty, set green to empty string
-    if (rgba[1] === "") {
-      green = "";
-    }
-
-    return green;
-  };
-
-  // get the blue value from full rgba string
-  const getBlueColor = color => {
-    // if color is not defined, return empty string
-    if (color === "") {
-      return "";
-    }
-
-    // determine the blue value from the RGBA string
-    const rgba = color.replace(/[^0-9,.]/g, "").split(",");
-    let blue = Number(rgba[2]);
-
-    // if blue value is empty, set blue to empty string
-    if (rgba[2] === "") {
-      blue = "";
-    }
-
-    return blue;
-  };
-
-  // get the alpha value from full rgba string
-  const getAlpha = color => {
-    // if color is not defined, return empty string
-    if (color === "") {
-      return "";
-    }
-
-    // determine the alpha value from the RGBA string
-    const rgba = color.replace(/[^0-9,.]/g, "").split(",");
-    let alpha = Number(rgba[3]);
-
-    // if alpha value is empty, set alpha to empty string
-    if (rgba[3] === "") {
-      alpha = "";
-    }
-
-    return alpha;
-  };
-
-  // get the rgba object from the full rgba string
-  const getRgbaObj = color => {
-    // if color is not defined, return undefined
-    if (color === "") {
-      return undefined;
-    }
-
-    const rgba = color.replace(/[^0-9,.]/g, "").split(",");
-    return {
-      a: Number(rgba[3]),
-      b: Number(rgba[2]),
-      g: Number(rgba[1]),
-      r: Number(rgba[0])
-    };
-  };
-
-  // handle hex change
-  const handleHexChange = event => {
-    const value = event.target.value;
-    setHex(value);
-
-    // determine rbga values as hex
-    const rHex = parseInt(value.substring(0, 2), 16);
-    const gHex = parseInt(value.substring(2, 4), 16);
-    const bHex = parseInt(value.substring(4, 6), 16);
-    let aHex = parseInt(value.substring(6, 8), 16);
-
-    // if alpha is defined in hex set alpha to 255 (full opacity)
-    if (isNaN(aHex)) {
-      aHex = 255;
-    }
-
-    // set color as rgba string with new converted hex values
-    // alpha is divied by 255 to value between 0 and 1
-    onChange(`rgba(${rHex},${gHex},${bHex},${aHex / 255})`);
-
-    // set no color state
-    setNoColor(false);
-  };
-
-  // handle no color
-  const handleNoColor = () => {
-    // set all rgb values and hex to empty
-    onChange("");
-  };
-
-  // handle button / swatch size
-  let swatchDimensions;
-  switch (swatchSize) {
-    case "small":
-      swatchDimensions = "15";
-      break;
-    case "medium":
-      swatchDimensions = "20";
-      break;
-    case "large":
-      swatchDimensions = "30";
-      break;
-    default:
-      swatchDimensions = "15";
-  }
-
-  // define swatch background color depending on no color state or if value is undefined
-  let swatchBackground;
-  if (noColor) {
-    swatchBackground =
-      "linear-gradient(to top left, rgba(255,0,0,0) 0%, rgba(255,0,0,0) calc(50% - 0.8px),rgba(255,0,0,1) 50%,rgba(255,0,0,0) calc(50% + 0.8px),rgba(0,0,0,0) 100% )";
-  } else {
-    swatchBackground = value !== "" ? value : "transparent";
-  }
+  // define components
   return (
     <Box>
       <Button
@@ -356,7 +176,7 @@ export default function Color({
           (sx.swatch,
           {
             "&:hover": {
-              backgroundColor: value !== "" ? value : "transparent"
+              backgroundColor: color !== "" ? color : "transparent"
             },
             background: swatchBackground,
             height: `${swatchDimensions}px`,
@@ -399,36 +219,49 @@ export default function Color({
             {showPicker && (
               <Box sx={{ width: popoverWidth }}>
                 <Box sx={sx.colorPicker}>
-                  <RgbaColorPicker
-                    color={getRgbaObj(value)}
-                    onChange={handleChange}
-                    id="colorPicker"
-                  />
+                  {noColorChecked ? (
+                    <Box
+                      sx={{
+                        border: "1px solid #bdbdbd",
+                        borderRadius: "4px",
+                        height: "238px"
+                      }}
+                    />
+                  ) : (
+                    <RgbaColorPicker
+                      color={rgbaObj}
+                      onChange={handleColorPickerChange}
+                      id="colorPicker"
+                    />
+                  )}
                 </Box>
               </Box>
             )}
-            <Box sx={sx.noColorSwatchBox}>
-              <Button
-                data-testid="NoColorButton"
-                sx={sx.noColorSwatch}
-                onClick={handleNoColor}
-              />
-              <Typography sx={sx.noColorText}> No Color</Typography>
-            </Box>
+            <Checkbox
+              checked={noColorChecked}
+              id="NoColorCheckbox"
+              label="No Color"
+              onChange={handleNoColor}
+              size="small"
+            />
             {showControls && (
               <div>
                 <Box sx={{ display: "flex", flexDirection: "row" }}>
                   <TextField
                     data-testid="redTextField"
+                    disabled={noColorChecked}
                     id="red"
                     type="number"
                     size="small"
                     margin="dense"
                     max="255"
                     label="Red"
-                    error={getRedColor(value) > 255}
-                    value={getRedColor(value)}
-                    sx={{ width: "33%" }}
+                    error={rgbaObj.r > 255}
+                    value={noColorChecked ? "" : rgbaObj.r}
+                    sx={{
+                      marginRight: theme => theme.spacing(1),
+                      width: "33%"
+                    }}
                     InputLabelProps={{
                       shrink: true
                     }}
@@ -437,15 +270,19 @@ export default function Color({
                   />
                   <TextField
                     data-testid="greenTextField"
+                    disabled={noColorChecked}
                     id="green"
                     type="number"
                     size="small"
                     margin="dense"
                     max="255"
                     label="Green"
-                    error={getGreenColor(value) > 255}
-                    value={getGreenColor(value)}
-                    sx={{ width: "33%" }}
+                    error={rgbaObj.g > 255}
+                    value={noColorChecked ? "" : rgbaObj.g}
+                    sx={{
+                      marginRight: theme => theme.spacing(1),
+                      width: "33%"
+                    }}
                     InputLabelProps={{
                       shrink: true
                     }}
@@ -454,14 +291,15 @@ export default function Color({
                   />
                   <TextField
                     data-testid="blueTextField"
+                    disabled={noColorChecked}
                     id="blue"
                     type="number"
                     size="small"
                     margin="dense"
                     max="255"
                     label="Blue"
-                    error={getBlueColor(value) > 255}
-                    value={getBlueColor(value)}
+                    error={rgbaObj.b > 255}
+                    value={noColorChecked ? "" : rgbaObj.b}
                     sx={{ width: "33%" }}
                     InputLabelProps={{
                       shrink: true
@@ -472,38 +310,21 @@ export default function Color({
                 </Box>
                 <TextField
                   data-testid="alphaTextField"
+                  disabled={noColorChecked}
                   id="alpha"
                   type="number"
                   size="small"
                   margin="dense"
                   max="1"
-                  label="Alpha (Transparency)"
-                  error={getAlpha(value) > 1}
-                  value={getAlpha(value)}
+                  label="Transparency"
+                  error={rgbaObj.a > 1}
+                  value={noColorChecked ? "" : rgbaObj.a}
                   fullWidth
                   InputLabelProps={{
                     shrink: true
                   }}
                   onChange={handleAlphaChange}
                   inputProps={{ max: 1, min: 0, step: 0.1 }}
-                />
-                <TextField
-                  data-testid="hexTextField"
-                  id="hex"
-                  size="small"
-                  margin="dense"
-                  label="Hex"
-                  value={hex}
-                  fullWidth
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                  onChange={handleHexChange}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">#</InputAdornment>
-                    )
-                  }}
                 />
               </div>
             )}
@@ -562,6 +383,16 @@ Color.propTypes = {
    * color: This is the selected colour in a rgba string e.g "rgba(255,0,0,1)".
    */
   onChange: PropTypes.func,
+  /**
+   * Callback fired when the popover is closed.
+   *
+   * **Signature**
+   * ```
+   * function(color: string) => void
+   * ```
+   * color: This is the selected colour in a rgba string e.g "rgba(255,0,0,1)".
+   */
+  onClose: PropTypes.func,
   /**
    * This determines if the popover is open on the intial
    * render.

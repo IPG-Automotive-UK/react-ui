@@ -1,11 +1,11 @@
 import { Box } from "@mui/material";
-import MultiText from "./MultiText";
+import MultiColor from "./MultiColor";
 import React from "react";
 import { action } from "@storybook/addon-actions";
 
 export default {
-  component: MultiText,
-  title: "Text/MultiText"
+  component: MultiColor,
+  title: "General/MultiColor"
 };
 
 const Template = args => {
@@ -19,7 +19,7 @@ const Template = args => {
   };
   return (
     <Box sx={{ height: "calc(100vh - 40px)" }}>
-      <MultiText {...args} rows={rows} onChange={onChange} />
+      <MultiColor {...args} rows={rows} onChange={onChange} />
     </Box>
   );
 };
@@ -33,16 +33,9 @@ export const CustomRows = Template.bind({});
 CustomRows.args = {
   rows: [
     {
-      label: "Label1",
-      value: 0
-    },
-    {
-      label: "Label2",
-      value: 1
-    },
-    {
-      label: "Label3",
+      color: "rgba(0,22,252,1)",
       value: 2
-    }
+    },
+    { color: "rgba(240,242,10,1)", value: 4 }
   ]
 };

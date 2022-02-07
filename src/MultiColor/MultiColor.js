@@ -1,15 +1,16 @@
 import { Box, IconButton } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import Color from "../Color";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import PropTypes from "prop-types";
 import React from "react";
 
 /**
- * Label setter component are used to manage a table for value-label states
+ * Multi color component is used to manage a table for value-color pair
  */
-export default function LabelSetter({ onChange = () => {}, rows = [] }) {
-  // add an id for each label/value
+export default function MultiColor({ onChange = () => {}, rows = [] }) {
+  // add an id for each color/value
   const rowsWithID = rows.map((item, index) => ({ ...item, id: index }));
 
   // set column definition
@@ -27,11 +28,34 @@ export default function LabelSetter({ onChange = () => {}, rows = [] }) {
     {
       align: "center",
       editable: true,
-      field: "label",
-      headerAlign: "center",
-      headerName: "Label",
+      field: "color",
+      headerName: "Color",
+      renderCell: params => (
+        <div
+          style={{
+            background:
+              params.value === ""
+                ? "linear-gradient(to top left, rgba(255,0,0,0) 0%, rgba(255,0,0,0) calc(50% - 0.8px),rgba(255,0,0,1) 50%,rgba(255,0,0,0) calc(50% + 0.8px),rgba(0,0,0,0) 100% )"
+                : params.value,
+            borderRadius: "4px",
+            boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)",
+            height: "15px",
+            width: "15px"
+          }}
+          data-testid="colorCell"
+        />
+      ),
+      renderEditCell: params => (
+        <Color
+          value={params.value}
+          onChange={newColor => handleOnColorChange(newColor, params)}
+          onClose={newColor => handleOnColorClose(newColor, params)}
+          open
+        />
+      ),
       sortable: false,
-      width: 150
+      type: "string",
+      width: 80
     },
     {
       align: "center",
@@ -48,9 +72,21 @@ export default function LabelSetter({ onChange = () => {}, rows = [] }) {
         </IconButton>
       ),
       sortable: false,
-      width: 85
+      width: 80
     }
   ];
+
+  // handle color change
+  const handleOnColorChange = (event, params) => {
+    const updatedRows = JSON.parse(JSON.stringify(rows));
+    updatedRows[params.id][params.field] = event;
+    onChange(updatedRows);
+  };
+
+  // handle color close
+  const handleOnColorClose = (event, params) => {
+    params.api.setCellMode(params.id, params.field, "view");
+  };
 
   // handle row deletion
   const handleOnDeleteClick = (event, params) => {
@@ -62,7 +98,7 @@ export default function LabelSetter({ onChange = () => {}, rows = [] }) {
 
   // handle row addition
   const handleOnAddClick = () => {
-    const newRow = { label: "", value: null };
+    const newRow = { color: "rgba(255,0,0,1)", value: null };
     const updatedRows = JSON.parse(JSON.stringify(rows));
     updatedRows.push(newRow);
     onChange(updatedRows);
@@ -105,7 +141,7 @@ export default function LabelSetter({ onChange = () => {}, rows = [] }) {
   );
 }
 
-LabelSetter.propTypes = {
+MultiColor.propTypes = {
   /**
    * Callback fired when the cell values are changed.
    *
