@@ -33,8 +33,12 @@ export default function MultiColor({ onChange = () => {}, rows = [] }) {
       renderCell: params => (
         <div
           style={{
-            backgroundColor: params.value,
+            background:
+              params.value === ""
+                ? "linear-gradient(to top left, rgba(255,0,0,0) 0%, rgba(255,0,0,0) calc(50% - 0.8px),rgba(255,0,0,1) 50%,rgba(255,0,0,0) calc(50% + 0.8px),rgba(0,0,0,0) 100% )"
+                : params.value,
             borderRadius: "4px",
+            boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)",
             height: "15px",
             width: "15px"
           }}
