@@ -3,8 +3,7 @@ updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "weekly"
-      day: "sunday"
+      interval: "monthly"
     open-pull-requests-limit: 50
     ignore:
       - dependency-name: "microbundle-crl"
