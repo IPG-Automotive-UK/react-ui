@@ -35,7 +35,6 @@ export default function FormSwitch({
           <Stack
             alignItems="center"
             component="label"
-            container
             direction="row"
             spacing={1}
           >
