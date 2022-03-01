@@ -4,6 +4,7 @@ import {
   FormHelperText,
   FormLabel,
   Grid,
+  Stack,
   Switch,
   Typography
 } from "@mui/material";
@@ -31,7 +32,13 @@ export default function FormSwitch({
           component="div"
           color={disabled ? "textSecondary" : "textPrimary"}
         >
-          <Grid component="label" container alignItems="center" spacing={1}>
+          <Stack
+            alignItems="center"
+            component="label"
+            container
+            direction="row"
+            spacing={1}
+          >
             <Grid item>
               <SwitchOptionLabel disabled={disabled} label={options[0]} />
             </Grid>
@@ -41,7 +48,7 @@ export default function FormSwitch({
             <Grid item>
               <SwitchOptionLabel disabled={disabled} label={options[1]} />
             </Grid>
-          </Grid>
+          </Stack>
         </Typography>
         {helperText && <FormHelperText>{helperText}</FormHelperText>}
       </FormGroup>
