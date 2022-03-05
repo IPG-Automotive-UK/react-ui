@@ -32,12 +32,7 @@ export default function FormSwitch({
           component="div"
           color={disabled ? "textSecondary" : "textPrimary"}
         >
-          <Stack
-            alignItems="center"
-            component="label"
-            direction="row"
-            spacing={1}
-          >
+          <Stack alignItems="center" component="label" direction="row">
             <Grid item>
               <SwitchOptionLabel disabled={disabled} label={options[0]} />
             </Grid>
