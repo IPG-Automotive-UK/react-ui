@@ -3,7 +3,6 @@ import {
   FormGroup,
   FormHelperText,
   FormLabel,
-  Grid,
   Stack,
   Switch,
   Typography
@@ -33,15 +32,9 @@ export default function FormSwitch({
           color={disabled ? "textSecondary" : "textPrimary"}
         >
           <Stack alignItems="center" component="label" direction="row">
-            <Grid item>
-              <SwitchOptionLabel disabled={disabled} label={options[0]} />
-            </Grid>
-            <Grid item>
-              <Switch checked={checked} onChange={onChange} size={size} />
-            </Grid>
-            <Grid item>
-              <SwitchOptionLabel disabled={disabled} label={options[1]} />
-            </Grid>
+            <SwitchOptionLabel disabled={disabled} label={options[0]} />
+            <Switch checked={checked} onChange={onChange} size={size} />
+            <SwitchOptionLabel disabled={disabled} label={options[1]} />
           </Stack>
         </Typography>
         {helperText && <FormHelperText>{helperText}</FormHelperText>}
