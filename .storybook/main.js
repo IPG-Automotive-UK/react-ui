@@ -7,5 +7,6 @@ module.exports = {
     "@storybook/addon-storysource"
   ],
   features: { modernInlineRender: true },
-  staticDirs: ["../static"]
+  staticDirs: ["../static"],
+  core: { builder: "webpack5" }
 };
