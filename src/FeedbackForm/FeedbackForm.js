@@ -54,8 +54,8 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired
 };
 
-export default function FeedbackForm({ onSubmit, open }) {
-  const [openFeedback, setOpenFeedback] = React.useState(open);
+export default function FeedbackForm({ onSubmit }) {
+  const [openFeedback, setOpenFeedback] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpenFeedback(true);

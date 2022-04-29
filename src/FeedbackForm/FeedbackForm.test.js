@@ -7,7 +7,6 @@ describe("MultistepForm", () => {
   const onSubmit = jest.fn();
 
   beforeEach(() => {
-    // onSubmit.mockClear();
     render(<FeedbackForm onSubmit={onSubmit} />);
   });
 
@@ -28,8 +27,10 @@ describe("MultistepForm", () => {
     await waitFor(() => {
       expect(onSubmit).toHaveBeenLastCalledWith({
         description: "Car Maker",
-        title: "Car Maker"
+        title: "Car Maker",
+        url: window.location.href
       });
+      expect(onSubmit).toBeCalled();
       expect(onSubmit).toHaveBeenCalledTimes(1);
     });
   });
