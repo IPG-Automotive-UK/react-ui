@@ -29,222 +29,227 @@ const Dialog = styled(MuiDialog)(({ theme }) => ({
 
 // feedback form component with a button to open a dialog for users to submit feedback on an app
 export default function FeedbackForm({ onSubmit, open = false }) {
-  // state for the sentiment dialog
-  const [openFeedback, setOpenFeedback] = React.useState(open);
+  // state for the dialog
+  const [dialogOpen, setDialogOpen] = React.useState(open);
+  const [page, setPage] = useState(0);
+
+  // state for user input
+  const [description, setDescription] = useState("");
+  const [sentiment, setSentiment] = useState("");
+  const [title, setTitle] = useState("");
 
   // update dialog open state when prop changes
   React.useEffect(() => {
-    setOpenFeedback(open);
+    setDialogOpen(open);
   }, [open]);
 
-  // handle main open button click
+  // handle open button click
   const handleClickOpen = () => {
-    setOpenFeedback(true);
+    setDialogOpen(true);
   };
 
-  // handle sentiment dialog close
-  const handleClose = () => {
-    setOpenFeedback(false);
-  };
+  // handle dialog close
+  const handleDialogClose = () => {
+    // close dialog
+    setDialogOpen(false);
 
-  // child dialog
-  const [showForm, setShowForm] = useState(false);
-  const [formData, updateFormData] = React.useState({});
-  const [feedbackmessage, setFeedbackMessage] = useState("");
+    // reset form
+    handleReset();
+  };
 
   // handle sentiment selection
-  const handleFormOpen = e => {
-    setFeedbackMessage(e.target.innerText);
-    setOpenFeedback(false);
-    setShowForm(true);
-  };
+  const handleSentimentChange = sentimentSelection => {
+    // update sentiment state
+    setSentiment(sentimentSelection);
 
-  // handle title and description dialog close
-  const handleFormClose = () => {
-    setOpenFeedback(false);
-    setShowForm(false);
-  };
-
-  // handle text and description field changes
-  const handleChange = e => {
-    updateFormData({
-      ...formData,
-      [e.target.name]: e.target.value.trim(),
-      sentiment: feedbackmessage,
-      url: window.location.href
-    });
+    // move to next page in the dialog
+    setPage(page => page + 1);
   };
 
   // handle submit button click
   const handleSubmit = e => {
-    e.preventDefault();
-    setOpenFeedback(false);
-    setShowForm(false);
-    onSubmit(formData);
+    // call onSubmit with the form values
+    onSubmit({ description, sentiment, title, url: window.location.href });
+
+    // close dialog
+    setDialogOpen(false);
+
+    // reset form
+    handleReset();
+  };
+
+  // reset form
+  const handleReset = () => {
+    setDescription("");
+    setSentiment("");
+    setTitle("");
+    setPage(0);
   };
 
   // render components
   return (
     <>
       <Fab color="primary" aria-label="add" onClick={handleClickOpen}>
-        <Add />
+        <Add data-testid="open-button" />
       </Fab>
       <Dialog
-        onClose={handleClose}
+        onClose={handleDialogClose}
         aria-labelledby="customized-dialog-title"
-        open={openFeedback}
+        open={dialogOpen}
       >
         <BootstrapDialogTitle
           id="customized-dialog-title"
-          onClose={handleClose}
+          onClose={handleDialogClose}
         >
           Feedback
         </BootstrapDialogTitle>
         <DialogContent>
-          <Card
-            variant="outlined"
-            sx={{
-              "&:hover": {
-                border: "1px solid #cccccc",
-                boxShadow: "0px 4px 8px rgba(38, 38, 38, 0.5)",
-                top: "-4px",
-                transition: "all 0.2s ease-out"
-              },
-              minWidth: 275
-            }}
-            onClick={handleFormOpen}
-          >
-            <CardContent>
-              <Typography
+          {page === 0 ? (
+            <>
+              <Card
+                variant="outlined"
                 sx={{
-                  alignItems: "center",
-                  display: "flex",
-                  flexWrap: "wrap",
-                  fontSize: 18
+                  "&:hover": {
+                    border: "1px solid #cccccc",
+                    boxShadow: "0px 4px 8px rgba(38, 38, 38, 0.5)",
+                    top: "-4px",
+                    transition: "all 0.2s ease-out"
+                  },
+                  minWidth: 275
                 }}
-                color="text.primary"
-                gutterBottom
+                onClick={() => handleSentimentChange("I like something")}
+                data-testid="sentiment-card-like"
               >
-                <SentimentSatisfiedAlt sx={{ fontSize: 40, mr: 1.5 }} />
-                <span>I like Something</span>
-              </Typography>
-              <Typography sx={{ mb: 1 }} color="text.primary">
-                We like to hear what we're doing right.
-              </Typography>
-            </CardContent>
-          </Card>
-          <Card
-            variant="outlined"
-            sx={{
-              "&:hover": {
-                border: "1px solid #cccccc",
-                boxShadow: "0px 4px 8px rgba(38, 38, 38, 0.5)",
-                top: "-4px",
-                transition: "all 0.2s ease-out"
-              },
-              minWidth: 275,
-              mt: 2
-            }}
-            onClick={handleFormOpen}
-          >
-            <CardContent>
-              <Typography
+                <CardContent>
+                  <Typography
+                    sx={{
+                      alignItems: "center",
+                      display: "flex",
+                      flexWrap: "wrap",
+                      fontSize: 18
+                    }}
+                    color="text.primary"
+                    gutterBottom
+                  >
+                    <SentimentSatisfiedAlt sx={{ fontSize: 40, mr: 1.5 }} />
+                    <span>I like Something</span>
+                  </Typography>
+                  <Typography sx={{ mb: 1 }} color="text.primary">
+                    We like to hear what we're doing right.
+                  </Typography>
+                </CardContent>
+              </Card>
+              <Card
+                variant="outlined"
                 sx={{
-                  alignItems: "center",
-                  display: "flex",
-                  flexWrap: "wrap",
-                  fontSize: 18
+                  "&:hover": {
+                    border: "1px solid #cccccc",
+                    boxShadow: "0px 4px 8px rgba(38, 38, 38, 0.5)",
+                    top: "-4px",
+                    transition: "all 0.2s ease-out"
+                  },
+                  minWidth: 275,
+                  mt: 2
                 }}
-                color="text.primary"
-                gutterBottom
+                onClick={() => handleSentimentChange("I don't like Something")}
+                data-testid="sentiment-card-dislike"
               >
-                <SentimentVeryDissatisfied sx={{ fontSize: 40, mr: 1.5 }} />
-                <span>I don't like Something</span>
-              </Typography>
-              <Typography sx={{ mb: 1 }} color="text.primary">
-                If something's not right, we want to know about it.
-              </Typography>
-            </CardContent>
-          </Card>
-          <Card
-            variant="outlined"
-            sx={{
-              "&:hover": {
-                border: "1px solid #cccccc",
-                boxShadow: "0px 4px 8px rgba(38, 38, 38, 0.5)",
-                top: "-4px",
-                transition: "all 0.2s ease-out"
-              },
-              minWidth: 275,
-              mt: 2
-            }}
-            onClick={handleFormOpen}
-          >
-            <CardContent>
-              <Typography
+                <CardContent>
+                  <Typography
+                    sx={{
+                      alignItems: "center",
+                      display: "flex",
+                      flexWrap: "wrap",
+                      fontSize: 18
+                    }}
+                    color="text.primary"
+                    gutterBottom
+                  >
+                    <SentimentVeryDissatisfied sx={{ fontSize: 40, mr: 1.5 }} />
+                    <span>I don't like Something</span>
+                  </Typography>
+                  <Typography sx={{ mb: 1 }} color="text.primary">
+                    If something's not right, we want to know about it.
+                  </Typography>
+                </CardContent>
+              </Card>
+              <Card
+                variant="outlined"
                 sx={{
-                  alignItems: "center",
-                  display: "flex",
-                  flexWrap: "wrap",
-                  fontSize: 18
+                  "&:hover": {
+                    border: "1px solid #cccccc",
+                    boxShadow: "0px 4px 8px rgba(38, 38, 38, 0.5)",
+                    top: "-4px",
+                    transition: "all 0.2s ease-out"
+                  },
+                  minWidth: 275,
+                  mt: 2
                 }}
-                color="text.primary"
-                gutterBottom
+                onClick={() => handleSentimentChange("I have a suggestion")}
+                data-testid="sentiment-card-suggestion"
               >
-                <TextsmsOutlined sx={{ fontSize: 40, mr: 1.5 }} />
-                <span>I have a suggestion</span>
-              </Typography>
-              <Typography sx={{ mb: 1 }} color="text.primary">
-                share an idea or improvement
-              </Typography>
-            </CardContent>
-          </Card>
+                <CardContent>
+                  <Typography
+                    sx={{
+                      alignItems: "center",
+                      display: "flex",
+                      flexWrap: "wrap",
+                      fontSize: 18
+                    }}
+                    color="text.primary"
+                    gutterBottom
+                  >
+                    <TextsmsOutlined sx={{ fontSize: 40, mr: 1.5 }} />
+                    <span>I have a suggestion</span>
+                  </Typography>
+                  <Typography sx={{ mb: 1 }} color="text.primary">
+                    Share an idea or improvement.
+                  </Typography>
+                </CardContent>
+              </Card>
+            </>
+          ) : null}
+          {page === 1 ? (
+            <>
+              <TextField
+                required
+                autoFocus
+                margin="dense"
+                id="name"
+                label="Title"
+                type="text"
+                fullWidth
+                name="title"
+                variant="outlined"
+                value={title}
+                onChange={evt => setTitle(evt.target.value)}
+                data-testid="feedback-title-field"
+              />
+              <TextField
+                margin="dense"
+                id="standard-multiline-static"
+                label="Description"
+                multiline
+                fullWidth
+                required
+                rows={4}
+                variant="outlined"
+                name="description"
+                value={description}
+                onChange={evt => setDescription(evt.target.value)}
+                data-testid="feedback-description-field"
+              />
+            </>
+          ) : null}
         </DialogContent>
-      </Dialog>
-      {showForm && (
-        <Dialog
-          onClose={handleFormClose}
-          aria-labelledby="customized-dialog-title"
-          open={showForm}
-        >
-          <BootstrapDialogTitle
-            id="customized-dialog-title"
-            onClose={handleFormClose}
-          >
-            Please leave us a Feedback
-          </BootstrapDialogTitle>
-          <DialogContent>
-            <TextField
-              required
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Title"
-              type="text"
-              fullWidth
-              name="title"
-              variant="standard"
-              onChange={handleChange}
-            />
-            <TextField
-              margin="dense"
-              id="standard-multiline-static"
-              label="Description"
-              multiline
-              fullWidth
-              required
-              rows={4}
-              variant="standard"
-              name="description"
-              onChange={handleChange}
-            />
-          </DialogContent>
+        {page === 1 ? (
           <DialogActions>
-            <Button onClick={handleFormClose}>Cancel</Button>
-            <Button onClick={handleSubmit}>Submit</Button>
+            <Button onClick={handleSubmit} data-testid="submit-button">
+              Submit
+            </Button>
           </DialogActions>
-        </Dialog>
-      )}
+        ) : null}
+      </Dialog>
     </>
   );
 }
