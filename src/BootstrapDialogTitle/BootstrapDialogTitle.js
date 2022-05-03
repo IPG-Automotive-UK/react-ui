@@ -2,6 +2,7 @@ import * as React from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import DialogTitle from "@mui/material/DialogTitle";
 import IconButton from "@mui/material/IconButton";
+import PropTypes from "prop-types";
 
 export const BootstrapDialogTitle = props => {
   const { children, onClose, ...other } = props;
@@ -24,4 +25,9 @@ export const BootstrapDialogTitle = props => {
       ) : null}
     </DialogTitle>
   );
+};
+
+BootstrapDialogTitle.propTypes = {
+  children: PropTypes.node,
+  onClose: PropTypes.func.isRequired
 };
