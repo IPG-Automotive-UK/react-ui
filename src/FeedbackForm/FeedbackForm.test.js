@@ -3,66 +3,68 @@ import FeedbackForm from "./";
 import React from "react";
 import userEvent from "@testing-library/user-event";
 
-describe("MultistepForm", () => {
-  const onSubmit = jest.fn();
+describe("FeedbackForm", () => {
+  test.each([
+    ["sentiment-card-like", "I like something"],
+    ["sentiment-card-dislike", "I don't like Something"],
+    ["sentiment-card-suggestion", "I have a suggestion"]
+  ])(
+    "correct fields are returned for %s",
+    async (sentimentCardId, expectedSentiment) => {
+      // render component
+      const onSubmit = jest.fn();
+      render(<FeedbackForm onSubmit={onSubmit} />);
 
-  test("onSubmit is called when all fields pass Validation", async () => {
-    const { container } = render(<FeedbackForm onSubmit={onSubmit} />);
+      // click button to open dialog
+      const addButton = screen.getByTestId("open-button");
+      userEvent.click(addButton);
 
-    const floatingButton = screen.getByRole("button", { name: /add/i });
-    userEvent.click(floatingButton);
+      // select sentiment
+      const sentimentCard = screen.getByTestId(sentimentCardId);
+      userEvent.click(sentimentCard);
 
-    const feedbackLike = await screen.findByTestId("SentimentSatisfiedAltIcon");
-    userEvent.click(feedbackLike);
+      // enter title
+      const titleField = await screen.findByRole("textbox", { name: /title/i });
+      userEvent.type(titleField, "CarMaker");
 
-    const title = await screen.findByRole("textbox", { name: /title/i });
-    userEvent.type(title, "Car Maker");
-
-    const description = screen.getByRole("textbox", { name: /description/i });
-    userEvent.type(description, "Car Maker you are Good!");
-    userEvent.click(screen.getByRole("button", { name: /submit/i }));
-
-    const feedbackDislike = screen.getByTestId("SentimentVeryDissatisfiedIcon");
-    userEvent.click(feedbackDislike);
-
-    const title1 = await screen.findByRole("textbox", { name: /title/i });
-    userEvent.type(title1, "Car Maker");
-
-    const description1 = screen.getByRole("textbox", { name: /description/i });
-    userEvent.type(description1, "Car Maker you are Good!");
-    userEvent.click(screen.getByRole("button", { name: /submit/i }));
-
-    // const feedbackSuggestion = screen.getByTestId("TextsmsOutlinedIcon");
-    // userEvent.click(feedbackSuggestion);
-
-    // const title2 = await screen.findByRole("textbox", { name: /title/i });
-    // userEvent.type(title2, "Car Maker");
-
-    // const description2 = screen.getByRole("textbox", { name: /description/i });
-    // userEvent.type(description2, "Car Maker you are Good!");
-    // userEvent.click(screen.getByRole("button", { name: /submit/i }));
-
-    await waitFor(() => {
-      expect(onSubmit).toHaveBeenLastCalledWith({
-        description: "Car Maker you are Good!",
-        sentiment: "I like something",
-        title: "Car Maker",
-        url: window.location.href
+      // enter description
+      const descriptionField = screen.getByRole("textbox", {
+        name: /description/i
       });
-      expect(onSubmit).toBeCalled();
-      expect(onSubmit).toHaveBeenCalledTimes(2);
-    });
-  });
+      userEvent.type(descriptionField, "CarMaker you are Good!");
+
+      // click submit button
+      const submitButton = screen.getByTestId("submit-button");
+      userEvent.click(submitButton);
+
+      // verify onSubmit was called with correct values
+      await waitFor(() => {
+        expect(onSubmit).toHaveBeenLastCalledWith({
+          description: "CarMaker you are Good!",
+          sentiment: expectedSentiment,
+          title: "CarMaker",
+          url: window.location.href
+        });
+        expect(onSubmit).toHaveBeenCalledTimes(1);
+      });
+    }
+  );
 
   test("dialog is closed when open is false", () => {
-    const { container } = render(<FeedbackForm open={false} />);
-    const dialog = container.querySelector(".MuiDialog-container");
-    expect(dialog).toBeFalsy();
+    // render component
+    const { baseElement } = render(<FeedbackForm open={false} />);
+
+    // verify dialog is not rendered
+    const dialog = baseElement.querySelector(".MuiDialog-root");
+    expect(dialog).not.toBeInTheDocument();
   });
 
   test("dialog is open when open is true", () => {
-    const { container } = render(<FeedbackForm open />);
-    const dialog = container.querySelector(".MuiDialog-container");
-    // expect(dialog).toBeTruthy();
+    // render component
+    const { baseElement } = render(<FeedbackForm open />);
+
+    // verify dialog is opened
+    const dialog = baseElement.querySelector(".MuiDialog-root");
+    expect(dialog).toBeInTheDocument();
   });
 });
