@@ -86,7 +86,7 @@ export default function FeedbackForm({ onSubmit }) {
 
       // Trimming any whitespace
       [e.target.name]: e.target.value.trim(),
-      message: feedbackmessage,
+      sentiment: feedbackmessage,
       url: window.location.href
     });
   };
@@ -232,15 +232,15 @@ export default function FeedbackForm({ onSubmit }) {
               onChange={handleChange}
             />
             <TextField
-              required
-              autoFocus
               margin="dense"
-              id="description"
+              id="standard-multiline-static"
               label="Description"
-              type="text"
+              multiline
               fullWidth
-              name="description"
+              required
+              rows={4}
               variant="standard"
+              name="description"
               onChange={handleChange}
             />
           </DialogContent>
