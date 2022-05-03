@@ -1,35 +1,35 @@
-import * as React from "react";
-import AddIcon from "@mui/icons-material/Add";
+import {
+  Add,
+  SentimentSatisfiedAlt,
+  SentimentVeryDissatisfied,
+  TextsmsOutlined
+} from "@mui/icons-material";
+import {
+  Button,
+  Card,
+  CardContent,
+  DialogActions,
+  DialogContent,
+  Fab,
+  Dialog as MuiDialog,
+  TextField,
+  Typography,
+  styled
+} from "@mui/material";
+import React, { useState } from "react";
 import { BootstrapDialogTitle } from "../BootstrapDialogTitle/BootstrapDialogTitle";
-import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import { Fab } from "@mui/material";
 import PropTypes from "prop-types";
-import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
-import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
-import TextField from "@mui/material/TextField";
-import TextsmsOutlinedIcon from "@mui/icons-material/TextsmsOutlined";
-import Typography from "@mui/material/Typography";
-import { styled } from "@mui/material/styles";
-import { useState } from "react";
 
-// for parent dialog
-const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+// styling for the dialog
+const Dialog = styled(MuiDialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2)
   }
 }));
 
-BootstrapDialogTitle.propTypes = {
-  children: PropTypes.node,
-  onClose: PropTypes.func.isRequired
-};
-
+// feedback form component with a button to open a dialog for users to submit feedback on an app
 export default function FeedbackForm({ onSubmit, open = false }) {
+  // state for the sentiment dialog
   const [openFeedback, setOpenFeedback] = React.useState(open);
 
   // update dialog open state when prop changes
@@ -37,54 +37,59 @@ export default function FeedbackForm({ onSubmit, open = false }) {
     setOpenFeedback(open);
   }, [open]);
 
+  // handle main open button click
   const handleClickOpen = () => {
     setOpenFeedback(true);
   };
+
+  // handle sentiment dialog close
   const handleClose = () => {
     setOpenFeedback(false);
   };
 
   // child dialog
-
   const [showForm, setShowForm] = useState(false);
   const [formData, updateFormData] = React.useState({});
   const [feedbackmessage, setFeedbackMessage] = useState("");
 
+  // handle sentiment selection
   const handleFormOpen = e => {
     setFeedbackMessage(e.target.innerText);
     setOpenFeedback(false);
     setShowForm(true);
   };
 
+  // handle title and description dialog close
   const handleFormClose = () => {
     setOpenFeedback(false);
     setShowForm(false);
   };
 
+  // handle text and description field changes
   const handleChange = e => {
     updateFormData({
       ...formData,
-
-      // Trimming any whitespace
       [e.target.name]: e.target.value.trim(),
       sentiment: feedbackmessage,
       url: window.location.href
     });
   };
 
+  // handle submit button click
   const handleSubmit = e => {
     e.preventDefault();
     setOpenFeedback(false);
     setShowForm(false);
-    onSubmit({ formData, sentiment: feedbackmessage });
+    onSubmit(formData);
   };
 
+  // render components
   return (
-    <div>
+    <>
       <Fab color="primary" aria-label="add" onClick={handleClickOpen}>
-        <AddIcon />
+        <Add />
       </Fab>
-      <BootstrapDialog
+      <Dialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={openFeedback}
@@ -120,7 +125,7 @@ export default function FeedbackForm({ onSubmit, open = false }) {
                 color="text.primary"
                 gutterBottom
               >
-                <SentimentSatisfiedAltIcon sx={{ fontSize: 40, mr: 1.5 }} />
+                <SentimentSatisfiedAlt sx={{ fontSize: 40, mr: 1.5 }} />
                 <span>I like Something</span>
               </Typography>
               <Typography sx={{ mb: 1 }} color="text.primary">
@@ -153,7 +158,7 @@ export default function FeedbackForm({ onSubmit, open = false }) {
                 color="text.primary"
                 gutterBottom
               >
-                <SentimentVeryDissatisfiedIcon sx={{ fontSize: 40, mr: 1.5 }} />
+                <SentimentVeryDissatisfied sx={{ fontSize: 40, mr: 1.5 }} />
                 <span>I don't like Something</span>
               </Typography>
               <Typography sx={{ mb: 1 }} color="text.primary">
@@ -186,7 +191,7 @@ export default function FeedbackForm({ onSubmit, open = false }) {
                 color="text.primary"
                 gutterBottom
               >
-                <TextsmsOutlinedIcon sx={{ fontSize: 40, mr: 1.5 }} />
+                <TextsmsOutlined sx={{ fontSize: 40, mr: 1.5 }} />
                 <span>I have a suggestion</span>
               </Typography>
               <Typography sx={{ mb: 1 }} color="text.primary">
@@ -195,9 +200,9 @@ export default function FeedbackForm({ onSubmit, open = false }) {
             </CardContent>
           </Card>
         </DialogContent>
-      </BootstrapDialog>
+      </Dialog>
       {showForm && (
-        <BootstrapDialog
+        <Dialog
           onClose={handleFormClose}
           aria-labelledby="customized-dialog-title"
           open={showForm}
@@ -238,9 +243,9 @@ export default function FeedbackForm({ onSubmit, open = false }) {
             <Button onClick={handleFormClose}>Cancel</Button>
             <Button onClick={handleSubmit}>Submit</Button>
           </DialogActions>
-        </BootstrapDialog>
+        </Dialog>
       )}
-    </div>
+    </>
   );
 }
 
@@ -252,7 +257,11 @@ FeedbackForm.propTypes = {
    * ```
    * function(value: any) => void
    * ```
-   * value: Object containing fields for title, description, URL and feedback message
+   * value: Object containing fields for sentiment, title, description and url.
    */
-  onSubmit: PropTypes.func
+  onSubmit: PropTypes.func,
+  /**
+   * If true, the dialog will show with dialog initially open. Default is false.
+   */
+  open: PropTypes.bool
 };
