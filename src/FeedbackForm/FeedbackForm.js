@@ -1,15 +1,13 @@
 import * as React from "react";
 import AddIcon from "@mui/icons-material/Add";
+import { BootstrapDialogTitle } from "../BootstrapDialogTitle/BootstrapDialogTitle";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import CloseIcon from "@mui/icons-material/Close";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
 import { Fab } from "@mui/material";
-import IconButton from "@mui/material/IconButton";
 import PropTypes from "prop-types";
 import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
 import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
@@ -26,36 +24,18 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   }
 }));
 
-const BootstrapDialogTitle = props => {
-  const { children, onClose, ...other } = props;
-  return (
-    <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
-      {children}
-      {onClose ? (
-        <IconButton
-          aria-label="close"
-          onClick={onClose}
-          sx={{
-            color: theme => theme.palette.grey[500],
-            position: "absolute",
-            right: 8,
-            top: 8
-          }}
-        >
-          <CloseIcon />
-        </IconButton>
-      ) : null}
-    </DialogTitle>
-  );
-};
-
 BootstrapDialogTitle.propTypes = {
   children: PropTypes.node,
   onClose: PropTypes.func.isRequired
 };
 
-export default function FeedbackForm({ onSubmit }) {
-  const [openFeedback, setOpenFeedback] = React.useState(false);
+export default function FeedbackForm({ onSubmit, open = false }) {
+  const [openFeedback, setOpenFeedback] = React.useState(open);
+
+  // update dialog open state when prop changes
+  React.useEffect(() => {
+    setOpenFeedback(open);
+  }, [open]);
 
   const handleClickOpen = () => {
     setOpenFeedback(true);
@@ -72,6 +52,7 @@ export default function FeedbackForm({ onSubmit }) {
 
   const handleFormOpen = e => {
     setFeedbackMessage(e.target.innerText);
+    setOpenFeedback(false);
     setShowForm(true);
   };
 
@@ -95,7 +76,7 @@ export default function FeedbackForm({ onSubmit }) {
     e.preventDefault();
     setOpenFeedback(false);
     setShowForm(false);
-    onSubmit(formData);
+    onSubmit({ formData, sentiment: feedbackmessage });
   };
 
   return (
@@ -216,8 +197,17 @@ export default function FeedbackForm({ onSubmit }) {
         </DialogContent>
       </BootstrapDialog>
       {showForm && (
-        <Dialog open={showForm} onClose={handleFormClose}>
-          <DialogTitle>Please leave us a Feedback</DialogTitle>
+        <BootstrapDialog
+          onClose={handleFormClose}
+          aria-labelledby="customized-dialog-title"
+          open={showForm}
+        >
+          <BootstrapDialogTitle
+            id="customized-dialog-title"
+            onClose={handleFormClose}
+          >
+            Please leave us a Feedback
+          </BootstrapDialogTitle>
           <DialogContent>
             <TextField
               required
@@ -248,7 +238,7 @@ export default function FeedbackForm({ onSubmit }) {
             <Button onClick={handleFormClose}>Cancel</Button>
             <Button onClick={handleSubmit}>Submit</Button>
           </DialogActions>
-        </Dialog>
+        </BootstrapDialog>
       )}
     </div>
   );

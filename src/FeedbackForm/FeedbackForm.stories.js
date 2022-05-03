@@ -16,5 +16,5 @@ const Template = args => {
 
 export const Default = Template.bind({});
 Default.args = {
-  open: false
+  open: true
 };
