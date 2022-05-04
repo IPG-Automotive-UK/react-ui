@@ -17,7 +17,7 @@ import {
   styled
 } from "@mui/material";
 import React, { useState } from "react";
-import { BootstrapDialogTitle } from "../BootstrapDialogTitle/BootstrapDialogTitle";
+import { Dialogtitle } from "../Dialogtitle/Dialogtitle";
 import PropTypes from "prop-types";
 
 // styling for the dialog
@@ -97,12 +97,9 @@ export default function FeedbackForm({ onSubmit, open = false }) {
         aria-labelledby="customized-dialog-title"
         open={dialogOpen}
       >
-        <BootstrapDialogTitle
-          id="customized-dialog-title"
-          onClose={handleDialogClose}
-        >
+        <Dialogtitle id="customized-dialog-title" onClose={handleDialogClose}>
           Feedback
-        </BootstrapDialogTitle>
+        </Dialogtitle>
         <DialogContent>
           {page === 0 ? (
             <>
