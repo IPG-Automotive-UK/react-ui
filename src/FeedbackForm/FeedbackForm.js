@@ -17,7 +17,7 @@ import {
   styled
 } from "@mui/material";
 import React, { useState } from "react";
-import { Dialogtitle } from "../Dialogtitle/Dialogtitle";
+import { DialogeTitle } from "../DialogeTitle/DialogeTitle";
 import PropTypes from "prop-types";
 
 // styling for the dialog
@@ -38,14 +38,25 @@ export default function FeedbackForm({ onSubmit, open = false }) {
   const [sentiment, setSentiment] = useState("");
   const [title, setTitle] = useState("");
 
+  // position of the dialog based on floating button
+  const [position, setPosition] = useState({});
+
+  const bottomStart = { left: 10, m: 0, position: "fixed", top: 90 };
+  const rightTop = { left: 50, m: 0, position: "fixed", top: 0 };
+  const leftTop = { bottom: 0, m: 0, position: "fixed", right: 50 };
+  const leftBottom = { m: 0, position: "fixed", right: 50, top: 0 };
+
   // update dialog open state when prop changes
   React.useEffect(() => {
     setDialogOpen(open);
   }, [open]);
 
+  // condition to position dialog based on floadtingbutton position
+
   // handle open button click
-  const handleClickOpen = () => {
+  const handleClickOpen = position => {
     setDialogOpen(true);
+    setPosition(position);
   };
 
   // handle dialog close
@@ -89,17 +100,24 @@ export default function FeedbackForm({ onSubmit, open = false }) {
   // render components
   return (
     <>
-      <Fab color="primary" aria-label="add" onClick={handleClickOpen}>
+      <Fab
+        color="primary"
+        aria-label="add"
+        onClick={() =>
+          handleClickOpen(rightTop || bottomStart || leftTop || leftBottom)
+        }
+      >
         <Add data-testid="open-button" />
       </Fab>
       <Dialog
+        PaperProps={{ sx: { position } }}
         onClose={handleDialogClose}
         aria-labelledby="customized-dialog-title"
         open={dialogOpen}
       >
-        <Dialogtitle id="customized-dialog-title" onClose={handleDialogClose}>
+        <DialogeTitle id="customized-dialog-title" onClose={handleDialogClose}>
           Feedback
-        </Dialogtitle>
+        </DialogeTitle>
         <DialogContent>
           {page === 0 ? (
             <>

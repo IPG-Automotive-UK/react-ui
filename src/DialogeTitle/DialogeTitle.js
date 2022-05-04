@@ -4,7 +4,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import IconButton from "@mui/material/IconButton";
 import PropTypes from "prop-types";
 
-export const Dialogtitle = props => {
+export const DialogeTitle = props => {
   const { children, onClose, ...other } = props;
   return (
     <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
@@ -27,7 +27,7 @@ export const Dialogtitle = props => {
   );
 };
 
-Dialogtitle.propTypes = {
+DialogeTitle.propTypes = {
   children: PropTypes.node,
   onClose: PropTypes.func.isRequired
 };
