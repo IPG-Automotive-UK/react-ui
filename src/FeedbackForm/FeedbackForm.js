@@ -51,8 +51,6 @@ export default function FeedbackForm({ onSubmit, open = false }) {
     setDialogOpen(open);
   }, [open]);
 
-  // condition to position dialog based on floadtingbutton position
-
   // handle open button click
   const handleClickOpen = position => {
     setDialogOpen(true);
