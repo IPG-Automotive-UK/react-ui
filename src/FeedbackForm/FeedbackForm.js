@@ -17,7 +17,7 @@ import {
   styled
 } from "@mui/material";
 import React, { useState } from "react";
-import { DialogeTitle } from "../DialogeTitle/DialogeTitle";
+import { DialogTitle } from "../DialogTitle/DialogTitle";
 import PropTypes from "prop-types";
 
 // styling for the dialog
@@ -41,7 +41,7 @@ export default function FeedbackForm({ onSubmit, open = false }) {
   // position of the dialog based on floating button
   const [position, setPosition] = useState({});
 
-  const bottomStart = { left: 10, m: 0, position: "fixed", top: 90 };
+  const bottomLeft = { left: 10, m: 0, position: "fixed", top: 90 };
   const rightTop = { left: 50, m: 0, position: "fixed", top: 0 };
   const leftTop = { bottom: 0, m: 0, position: "fixed", right: 50 };
   const leftBottom = { m: 0, position: "fixed", right: 50, top: 0 };
@@ -102,7 +102,7 @@ export default function FeedbackForm({ onSubmit, open = false }) {
         color="primary"
         aria-label="add"
         onClick={() =>
-          handleClickOpen(rightTop || bottomStart || leftTop || leftBottom)
+          handleClickOpen(rightTop || bottomLeft || leftTop || leftBottom)
         }
       >
         <Add data-testid="open-button" />
@@ -113,9 +113,9 @@ export default function FeedbackForm({ onSubmit, open = false }) {
         aria-labelledby="customized-dialog-title"
         open={dialogOpen}
       >
-        <DialogeTitle id="customized-dialog-title" onClose={handleDialogClose}>
+        <DialogTitle id="customized-dialog-title" onClose={handleDialogClose}>
           Feedback
-        </DialogeTitle>
+        </DialogTitle>
         <DialogContent>
           {page === 0 ? (
             <>

@@ -1,13 +1,12 @@
 import * as React from "react";
+import { IconButton, DialogTitle as MuiDialogTitle } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import DialogTitle from "@mui/material/DialogTitle";
-import IconButton from "@mui/material/IconButton";
 import PropTypes from "prop-types";
 
-export const DialogeTitle = props => {
+export const DialogTitle = props => {
   const { children, onClose, ...other } = props;
   return (
-    <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
+    <MuiDialogTitle sx={{ m: 0, p: 2 }} {...other}>
       {children}
       {onClose ? (
         <IconButton
@@ -23,11 +22,11 @@ export const DialogeTitle = props => {
           <CloseIcon />
         </IconButton>
       ) : null}
-    </DialogTitle>
+    </MuiDialogTitle>
   );
 };
 
-DialogeTitle.propTypes = {
+DialogTitle.propTypes = {
   children: PropTypes.node,
   onClose: PropTypes.func.isRequired
 };
