@@ -1,1 +1,1 @@
-export { default } from "./BootstrapDialogTitle";
+export { default } from "./DialogTitle";

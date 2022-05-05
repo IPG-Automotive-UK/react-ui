@@ -3,7 +3,6 @@ export { default as Autocomplete } from "./Autocomplete";
 export { default as Checkbox } from "./Checkbox";
 export { default as Copyright } from "./Copyright";
 export { default as Color } from "./Color";
-export { default as DialogTitle } from "./DialogTitle";
 export { default as FeedbackForm } from "./FeedbackForm";
 export { default as FontPicker } from "./FontPicker";
 export { default as FontStyle } from "./FontStyle";
