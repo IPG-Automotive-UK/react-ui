@@ -17,7 +17,7 @@ import {
   styled
 } from "@mui/material";
 import React, { useState } from "react";
-import { DialogTitle } from "../DialogTitle/DialogTitle";
+import { DialogTitle } from "..";
 import PropTypes from "prop-types";
 
 // styling for the dialog
@@ -28,7 +28,11 @@ const Dialog = styled(MuiDialog)(({ theme }) => ({
 }));
 
 // feedback form component with a button to open a dialog for users to submit feedback on an app
-export default function FeedbackForm({ onSubmit, open = false }) {
+export default function FeedbackForm({
+  dialogPosition = "bottomLeft",
+  onSubmit,
+  open = false
+}) {
   // state for the dialog
   const [dialogOpen, setDialogOpen] = React.useState(open);
   const [page, setPage] = useState(0);
@@ -38,13 +42,13 @@ export default function FeedbackForm({ onSubmit, open = false }) {
   const [sentiment, setSentiment] = useState("");
   const [title, setTitle] = useState("");
 
-  // position of the dialog based on floating button
-  const [position, setPosition] = useState({});
-
-  const bottomLeft = { left: 10, m: 0, position: "fixed", top: 90 };
-  const rightTop = { left: 50, m: 0, position: "fixed", top: 0 };
-  const leftTop = { bottom: 0, m: 0, position: "fixed", right: 50 };
-  const leftBottom = { m: 0, position: "fixed", right: 50, top: 0 };
+  // position styling for the paper
+  const paperStyle = {
+    bottomLeft: { left: 20, m: 0, position: "fixed", top: 80 },
+    leftBottom: { m: 0, position: "fixed", right: 80, top: 20 },
+    leftTop: { bottom: 20, m: 0, position: "fixed", right: 80 },
+    rightTop: { left: 80, m: 0, position: "fixed", top: 20 }
+  };
 
   // update dialog open state when prop changes
   React.useEffect(() => {
@@ -52,9 +56,8 @@ export default function FeedbackForm({ onSubmit, open = false }) {
   }, [open]);
 
   // handle open button click
-  const handleClickOpen = position => {
+  const handleClickOpen = () => {
     setDialogOpen(true);
-    setPosition(position);
   };
 
   // handle dialog close
@@ -98,22 +101,20 @@ export default function FeedbackForm({ onSubmit, open = false }) {
   // render components
   return (
     <>
-      <Fab
-        color="primary"
-        aria-label="add"
-        onClick={() =>
-          handleClickOpen(rightTop || bottomLeft || leftTop || leftBottom)
-        }
-      >
+      <Fab color="primary" aria-label="add" onClick={() => handleClickOpen()}>
         <Add data-testid="open-button" />
       </Fab>
       <Dialog
-        PaperProps={{ sx: { position } }}
+        PaperProps={{ sx: { ...paperStyle[dialogPosition] } }}
         onClose={handleDialogClose}
         aria-labelledby="customized-dialog-title"
         open={dialogOpen}
       >
-        <DialogTitle id="customized-dialog-title" onClose={handleDialogClose}>
+        <DialogTitle
+          id="customized-dialog-title"
+          data-testid="dia-title"
+          onClose={handleDialogClose}
+        >
           Feedback
         </DialogTitle>
         <DialogContent>
@@ -268,6 +269,15 @@ export default function FeedbackForm({ onSubmit, open = false }) {
 }
 
 FeedbackForm.propTypes = {
+  /**
+   * The position of the Dialog.
+   */
+  dialogPosition: PropTypes.oneOf([
+    "rightTop",
+    "bottomLeft",
+    "leftTop",
+    "leftBottom"
+  ]),
   /**
    * Callback fired when user clicks submit button
    *
