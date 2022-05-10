@@ -126,6 +126,7 @@ export default function FeedbackForm({
                   "&:hover": {
                     border: "1px solid #cccccc",
                     boxShadow: "0px 4px 8px rgba(38, 38, 38, 0.5)",
+                    cursor: "pointer",
                     top: "-4px",
                     transition: "all 0.2s ease-out"
                   },
@@ -159,6 +160,7 @@ export default function FeedbackForm({
                   "&:hover": {
                     border: "1px solid #cccccc",
                     boxShadow: "0px 4px 8px rgba(38, 38, 38, 0.5)",
+                    cursor: "pointer",
                     top: "-4px",
                     transition: "all 0.2s ease-out"
                   },
@@ -193,6 +195,7 @@ export default function FeedbackForm({
                   "&:hover": {
                     border: "1px solid #cccccc",
                     boxShadow: "0px 4px 8px rgba(38, 38, 38, 0.5)",
+                    cursor: "pointer",
                     top: "-4px",
                     transition: "all 0.2s ease-out"
                   },
