@@ -1,10 +1,4 @@
 import {
-  Add,
-  SentimentSatisfiedAlt,
-  SentimentVeryDissatisfied,
-  TextsmsOutlined
-} from "@mui/icons-material";
-import {
   Button,
   Card,
   CardContent,
@@ -16,6 +10,12 @@ import {
   Typography,
   styled
 } from "@mui/material";
+import {
+  MessageOutlined,
+  SentimentSatisfiedAlt,
+  SentimentVeryDissatisfied,
+  TextsmsOutlined
+} from "@mui/icons-material";
 import React, { useState } from "react";
 import { DialogTitle } from "..";
 import PropTypes from "prop-types";
@@ -102,7 +102,7 @@ export default function FeedbackForm({
   return (
     <>
       <Fab color="primary" aria-label="add" onClick={() => handleClickOpen()}>
-        <Add data-testid="open-button" />
+        <MessageOutlined data-testid="open-button" />
       </Fab>
       <Dialog
         PaperProps={{ sx: { ...paperStyle[dialogPosition] } }}
