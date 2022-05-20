@@ -229,7 +229,7 @@ const dialogTitleStyles = {
 const DialogTitle = ({ children, onClose, ...other }) => {
   return (
     <MuiDialogTitle sx={dialogTitleStyles.root} {...other}>
-      <Typography variant="h6">{children}</Typography>
+      <div variant="h6">{children}</div>
       {onClose ? (
         <IconButton
           aria-label="close"
