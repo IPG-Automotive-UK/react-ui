@@ -20,7 +20,7 @@
     "test:lint": "eslint ./src",
     "test:unit": "cross-env CI=1 react-scripts test --env=jsdom --reporters=jest-html-reporter --collectCoverage=true",
     "test:watch": "react-scripts test --env=jsdom",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -s static -p 6006",
     "build-storybook": "build-storybook"
   },
   "devDependencies": {
