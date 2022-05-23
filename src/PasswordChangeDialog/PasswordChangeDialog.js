@@ -10,8 +10,7 @@ import {
   Grid,
   IconButton,
   DialogTitle as MuiDialogTitle,
-  TextField,
-  Typography
+  TextField
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import PropTypes from "prop-types";
