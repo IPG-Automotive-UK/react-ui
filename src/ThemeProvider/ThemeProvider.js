@@ -46,8 +46,8 @@ const theme = createTheme({
     action: {
       selected: "rgba(0, 95, 168, 0.08)"
     },
-    primary: { main: "#005FA8" },
-    secondary: { main: "#003063" }
+    primary: { main: "#003063" },
+    secondary: { main: "#005FA8" }
   }
 });
 
