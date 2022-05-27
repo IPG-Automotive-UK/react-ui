@@ -5,7 +5,7 @@ import React from "react";
 /**
  * UserAvatar component
  */
-export default function UserAvatar({ img, name, color = "rgb(0,0,0)" }) {
+export default function UserAvatar({ img, name = "", color = "rgb(0,0,0)" }) {
   // returns the first char of first name and first char of last name
   const getFirstAndLastChars = str => {
     return str.charAt(0) + str.charAt(str.length - 1);
