@@ -1,5 +1,5 @@
 import React from "react";
-import UserAvatar from ".";
+import UserAvatar from "./UserAvatar";
 import { render } from "@testing-library/react";
 
 /**
