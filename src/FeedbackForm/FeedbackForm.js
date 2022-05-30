@@ -17,7 +17,7 @@ import {
   TextsmsOutlined
 } from "@mui/icons-material";
 import React, { useState } from "react";
-import { DialogTitle } from "..";
+import DialogTitle from "../DialogTitle/DialogTitle";
 import PropTypes from "prop-types";
 
 // styling for the dialog
