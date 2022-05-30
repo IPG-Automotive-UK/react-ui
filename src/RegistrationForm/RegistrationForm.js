@@ -113,6 +113,7 @@ export default function RegistrationForm({
               render={({ field }) => (
                 <TextField
                   select
+                  data-testid="team"
                   id="team"
                   variant="outlined"
                   label="Team"

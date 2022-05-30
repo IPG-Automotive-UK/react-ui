@@ -25,7 +25,7 @@ function setup(inputs) {
       lastName: screen.getByLabelText("lastName"),
       password: screen.getByLabelText("password"),
       passwordRepeat: screen.getByLabelText("passwordRepeat"),
-      team: screen.getByLabelText("team")
+      team: screen.getByTestId("team")
     },
     submit: screen.getByRole("button", {
       name: /register/i
