@@ -11,7 +11,7 @@ import {
 import { useMemo } from "react";
 
 // custom hook to generate a color map for a list of options
-const useColorMap = allOptions => {
+export default function useColorMap(allOptions) {
   // generate color map from options
   const colorMap = useMemo(() => {
     // define list of colors
@@ -37,6 +37,4 @@ const useColorMap = allOptions => {
   // return function to get color for a given option
   const getColor = option => colorMap[option];
   return getColor;
-};
-
-export { useColorMap };
+}
