@@ -5,9 +5,7 @@ import {
   FormControl,
   FormHelperText,
   Grid,
-  InputLabel,
   MenuItem,
-  Select,
   TextField
 } from "@mui/material";
 import { Controller } from "react-hook-form";
@@ -122,7 +120,6 @@ export default function RegistrationForm({
                   fullWidth
                   disabled={loading}
                   value={field.value || ""}
-                  inputProps={{ "aria-label": "team" }}
                   error={Boolean(errors.team)}
                   {...field}
                 >
