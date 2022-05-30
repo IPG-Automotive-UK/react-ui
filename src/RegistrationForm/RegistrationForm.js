@@ -111,16 +111,27 @@ export default function RegistrationForm({
             fullWidth
             disabled={loading}
           >
-            <InputLabel>Team</InputLabel>
             <Controller
               render={({ field }) => (
-                <Select inputProps={{ "aria-label": "team" }} {...field}>
+                <TextField
+                  select
+                  id="team"
+                  variant="outlined"
+                  label="Team"
+                  required
+                  fullWidth
+                  disabled={loading}
+                  value={field.value || ""}
+                  inputProps={{ "aria-label": "team" }}
+                  error={Boolean(errors.team)}
+                  {...field}
+                >
                   {teams.map(team => (
                     <MenuItem value={team} key={team}>
                       {team}
                     </MenuItem>
                   ))}
-                </Select>
+                </TextField>
               )}
               name="team"
               rules={{ required: true }}
