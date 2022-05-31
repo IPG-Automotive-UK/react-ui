@@ -28,3 +28,4 @@ export { default as SwitchField } from "./SwitchField";
 export { default as TextField } from "./TextField";
 export { default as ThemeProvider } from "./ThemeProvider";
 export { default as UserMenu } from "./UserMenu";
+export { UserAvatar, useColorMap } from "./UserAvatar";
