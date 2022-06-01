@@ -25,7 +25,7 @@ function setup(inputs) {
       lastName: screen.getByLabelText("lastName"),
       password: screen.getByLabelText("password"),
       passwordRepeat: screen.getByLabelText("passwordRepeat"),
-      team: screen.getByLabelText("team")
+      team: screen.getByTestId("team")
     },
     submit: screen.getByRole("button", {
       name: /register/i
@@ -46,6 +46,7 @@ describe("RegistrationForm", () => {
       userEvent.type(elements.inputs.email, "joe.bloggs@domain.com");
       userEvent.type(elements.inputs.password, "indigo shark wallplug");
       userEvent.type(elements.inputs.passwordRepeat, "indigo shark wallplug");
+      userEvent.type(elements.inputs.team, teams[0]);
     });
     await selectMaterialUiSelectOption(elements.inputs.team, teams[0]);
     fireEvent.submit(elements.submit);
