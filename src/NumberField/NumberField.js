@@ -51,24 +51,26 @@ export default function NumberField({
     if (min !== undefined && number < min) {
       setValueError(true);
       if (showMinMaxErrorMessage) {
-        setErrorMessage(`Must be greater than or equal to ${min}`);
+        setErrorMessage(`Must be greater than or equal to ${min}.`);
       }
     } else if (max !== undefined && number > max) {
       setValueError(true);
       if (showMinMaxErrorMessage) {
-        setErrorMessage(`Must be less than or equal to ${max}`);
+        setErrorMessage(`Must be less than or equal to ${max}.`);
       }
     } else if (
       number !== undefined &&
       ((number * 100) % (step * 100)) / 100 !== 0
     ) {
+      setValueError(true);
+
       // get the number of decimal places
       const decimalPlaces = countDecimal(step);
       setErrorMessage(
         `Please enter a valid value. The nearest valid values are ${roundAccuratley(
           +number - step,
           decimalPlaces
-        )} and ${roundAccuratley(+number + step, decimalPlaces)}`
+        )} and ${roundAccuratley(+number + step, decimalPlaces)}.`
       );
     } else {
       setValueError(false);
