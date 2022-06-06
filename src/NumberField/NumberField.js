@@ -31,8 +31,13 @@ export default function NumberField({
 
   // update the value of the number field
   useEffect(() => {
+    console.log(value);
     setNumber(value);
   }, [value]);
+
+  const roundAccuratley = (number, decimalPlaces) => {
+    Number(Math.round(number + "e" + decimalPlaces) + "e-" + decimalPlaces);
+  };
 
   // validate the number field when, number, min or max changes
   useEffect(() => {
@@ -46,6 +51,17 @@ export default function NumberField({
       if (showMinMaxErrorMessage) {
         setErrorMessage(`Must be less than or equal to ${max}`);
       }
+    } else if (
+      number !== undefined &&
+      ((number * 100) % (step * 100)) / 100 !== 0
+    ) {
+      // console.log(((number * 100) % (step * 100)) / 100);
+      setErrorMessage(
+        `Please enter a valid value. The nearest valid values are ${roundAccuratley(
+          +number - step,
+          1
+        )} and ${roundAccuratley(+number + step, 1)}`
+      );
     } else {
       setValueError(false);
       setErrorMessage("");
