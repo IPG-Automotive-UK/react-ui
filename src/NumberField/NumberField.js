@@ -34,10 +34,16 @@ export default function NumberField({
     setNumber(value);
   }, [value]);
 
+  // helper function to round the number to the nearest step
   const roundAccuratley = (number, decimalPlaces) => {
     return Number(
       Math.round(number + "e" + decimalPlaces) + "e-" + decimalPlaces
     );
+  };
+
+  // helper function to get the number of decimal places
+  const countDecimal = number => {
+    return number % 1 ? number.toString().split(".")[1].length : 0;
   };
 
   // validate the number field when, number, min or max changes
@@ -56,11 +62,13 @@ export default function NumberField({
       number !== undefined &&
       ((number * 100) % (step * 100)) / 100 !== 0
     ) {
+      // get the number of decimal places
+      const decimalPlaces = countDecimal(step);
       setErrorMessage(
         `Please enter a valid value. The nearest valid values are ${roundAccuratley(
           +number - step,
-          2
-        )} and ${roundAccuratley(+number + step, 2)}`
+          decimalPlaces
+        )} and ${roundAccuratley(+number + step, decimalPlaces)}`
       );
     } else {
       setValueError(false);
