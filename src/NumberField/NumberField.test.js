@@ -58,6 +58,20 @@ describe("NumberField", () => {
     const errorBase = container.querySelector(".MuiInputBase-root");
     expect(errorBase).toHaveClass("Mui-error");
   });
+  test("shows error when value is not a multiple of step", () => {
+    const { container } = render(
+      <NumberFieldWithState min={0} max={100} step={10} />
+    );
+    const inputBase = container.querySelector(".MuiInputBase-input");
+    userEvent.type(inputBase, "{backspace}{backspace}{backspace}");
+    userEvent.type(inputBase, "5");
+    expect(inputBase.value).toBe("5");
+    const errorBase = container.querySelector(".MuiFormHelperText-root");
+    expect(errorBase).toHaveClass("Mui-error");
+    expect(errorBase.textContent).toBe(
+      "Please enter a valid value. The nearest valid values are 0 and 10."
+    );
+  });
   test("does not show error when value is valid", () => {
     const { container } = render(<NumberFieldWithState min={123} max={1234} />);
     const inputBase = container.querySelector(".MuiInputBase-input");
