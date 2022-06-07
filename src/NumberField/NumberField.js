@@ -100,8 +100,22 @@ export default function NumberField({
       maxSatisfied = false;
     }
 
+    // check if value is multiple of step
+    let stepSatisfied = true;
+    if (
+      newValue !== undefined &&
+      ((newValue * 100) % (step * 100)) / 100 !== 0
+    ) {
+      stepSatisfied = false;
+    }
+
     // if the value is valid, set error to false
-    if (minSatisfied && maxSatisfied && event.target.value !== "") {
+    if (
+      minSatisfied &&
+      maxSatisfied &&
+      stepSatisfied &&
+      event.target.value !== ""
+    ) {
       setValueError(false);
       setErrorMessage("");
       onChange(updatedEvent);
