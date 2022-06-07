@@ -62,12 +62,6 @@
   "files": [
     "dist"
   ],
-  "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx}",
-      "!src/**/*.stories.{js,jsx}"
-    ]
-  },
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
@@ -75,12 +69,18 @@
     "@mui/material": "^5.6.4",
     "@mui/x-data-grid": "^5.10.0",
     "colord": "^2.9.2",
-    "material-ui-popup-state": "^2.0.1",
+    "material-ui-popup-state": "^3.1.1",
     "react": "^18.1.0",
     "react-colorful": "^5.5.1",
     "react-dom": "^18.1.0",
     "react-hook-form": "^7.30.0",
     "use-debouncy": "^4.3.0",
     "zxcvbn": "^4.4.2"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!src/**/*.stories.{js,jsx}"
+    ]
   }
 }
