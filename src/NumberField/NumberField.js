@@ -66,11 +66,17 @@ export default function NumberField({
 
       // get the number of decimal places
       const decimalPlaces = countDecimal(step);
+      let lowerLimit = [];
+      let upperLimit = [];
+      if (step > 1) {
+        lowerLimit = Math.floor(number / step) * step;
+        upperLimit = lowerLimit + step;
+      } else {
+        lowerLimit = roundAccuratley(+number, decimalPlaces);
+        upperLimit = roundAccuratley(+number + step, decimalPlaces);
+      }
       setErrorMessage(
-        `Please enter a valid value. The nearest valid values are ${roundAccuratley(
-          +number,
-          decimalPlaces
-        )} and ${roundAccuratley(+number + step, decimalPlaces)}.`
+        `Please enter a valid value. The nearest valid values are ${lowerLimit} and ${upperLimit}.`
       );
     } else {
       setValueError(false);
