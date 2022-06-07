@@ -37,7 +37,7 @@ export default function NumberField({
   // helper function to round the number to the nearest step
   const roundAccuratley = (number, decimalPlaces) => {
     return Number(
-      Math.round(number + "e" + decimalPlaces) + "e-" + decimalPlaces
+      Math.floor(number + "e" + decimalPlaces) + "e-" + decimalPlaces
     );
   };
 
@@ -68,7 +68,7 @@ export default function NumberField({
       const decimalPlaces = countDecimal(step);
       setErrorMessage(
         `Please enter a valid value. The nearest valid values are ${roundAccuratley(
-          +number - step,
+          +number,
           decimalPlaces
         )} and ${roundAccuratley(+number + step, decimalPlaces)}.`
       );
