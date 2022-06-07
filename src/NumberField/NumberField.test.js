@@ -81,4 +81,26 @@ describe("NumberField", () => {
     const errorBase = container.querySelector(".MuiInputBase-root");
     expect(errorBase).not.toHaveClass("Mui-error");
   });
+  test("does not call callback when value is not valid", () => {
+    const onChange = jest.fn();
+    const { container } = render(
+      <NumberField min={0} max={100} step={10} onChange={onChange} />
+    );
+    const inputBase = container.querySelector(".MuiInputBase-input");
+    userEvent.type(inputBase, "{backspace}{backspace}{backspace}");
+    userEvent.type(inputBase, "5");
+    expect(inputBase.value).toBe("5");
+    expect(onChange).not.toHaveBeenCalled();
+  });
+  test("calls callback when value is valid", () => {
+    const onChange = jest.fn();
+    const { container } = render(
+      <NumberField min={0} max={100} step={10} onChange={onChange} />
+    );
+    const inputBase = container.querySelector(".MuiInputBase-input");
+    userEvent.type(inputBase, "{backspace}{backspace}{backspace}");
+    userEvent.type(inputBase, "10");
+    expect(inputBase.value).toBe("10");
+    expect(onChange).toHaveBeenCalled();
+  });
 });
