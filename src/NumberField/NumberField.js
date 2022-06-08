@@ -49,11 +49,13 @@ export default function NumberField({
   // validate the number field when, number, min or max changes
   useEffect(() => {
     if (min !== undefined && number < min) {
+      // value is less than min
       setValueError(true);
       if (showMinMaxErrorMessage) {
         setErrorMessage(`Must be greater than or equal to ${min}.`);
       }
     } else if (max !== undefined && number > max) {
+      // value is greater than max
       setValueError(true);
       if (showMinMaxErrorMessage) {
         setErrorMessage(`Must be less than or equal to ${max}.`);
@@ -62,9 +64,8 @@ export default function NumberField({
       number !== undefined &&
       ((number * 100) % (step * 100)) / 100 !== 0
     ) {
+      // value is not a multiple of step
       setValueError(true);
-
-      // get the number of decimal places
       const decimalPlaces = countDecimal(step);
       let lowerLimit = [];
       let upperLimit = [];
@@ -79,6 +80,7 @@ export default function NumberField({
         `Please enter a valid value. The nearest valid values are ${lowerLimit} and ${upperLimit}.`
       );
     } else {
+      // value is valid
       setValueError(false);
       setErrorMessage("");
     }
