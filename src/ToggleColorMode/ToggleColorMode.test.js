@@ -28,13 +28,15 @@ describe("ToggleColorMode", () => {
   test("Brightness4Icon is shown for light mode", () => {
     render(<ColorModeWithState mode="light" />);
 
-    // verify dark mode icon is shown
+    // verify light mode icon is shown
     const lightmode = screen.getByTestId("Brightness4Icon");
     expect(lightmode).toBeInTheDocument();
   });
 
   test("onClick switch change from light to dark mode", () => {
-    render(<ColorModeWithState mode="light" />);
+    const onChange = jest.fn();
+
+    render(<ColorModeWithState onChange={onChange} />);
     const button = screen.getByRole("button");
 
     fireEvent.click(button);
