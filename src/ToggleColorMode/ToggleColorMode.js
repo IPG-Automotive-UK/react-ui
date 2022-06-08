@@ -1,7 +1,6 @@
-import * as React from "react";
-import { Box } from "@mui/system";
+import { Box, Switch } from "@mui/material";
 import PropTypes from "prop-types";
-import Switch from "@mui/material/Switch";
+import React from "react";
 import { styled } from "@mui/material/styles";
 
 export default function ToggleColorMode({ mode, onChange }) {
@@ -73,18 +72,19 @@ export default function ToggleColorMode({ mode, onChange }) {
 }
 ToggleColorMode.propTypes = {
   /**
-   * The position of the Dialog.
+   * The color mode selection
+   * @default "light"
    */
   mode: PropTypes.oneOf(["light", "dark"]),
   /**
-   * Callback fired when the mode is changed.
+   * Callback fired when the color mode is changed.
    *
    * **Signature**
    * ```
    * function(newMode) => void
    * ```
    *
-   * _newMode_: The new mode that has been selected
+   * _newMode_: The new color mode that has been selected
    */
   onChange: PropTypes.func.isRequired
 };
