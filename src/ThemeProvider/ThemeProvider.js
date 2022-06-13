@@ -5,8 +5,8 @@ import {
 import PropTypes from "prop-types";
 import React from "react";
 
-// custom material-ui theme
-const theme = createTheme({
+// custom material-ui theme for light mode
+const LightTheme = createTheme({
   overrides: {
     MuiAccordionSummary: {
       root: {
@@ -51,11 +51,22 @@ const theme = createTheme({
   }
 });
 
+// custom theme for dark mode
+const DarkTheme = createTheme({
+  palette: {
+    mode: "dark"
+  }
+});
+
 /**
  * IPG Material-ui theme provider
  */
-export default function ThemeProvider({ children }) {
-  return <MuiThemeProvider theme={theme}>{children}</MuiThemeProvider>;
+export default function ThemeProvider({ children, mode = "light" }) {
+  return (
+    <MuiThemeProvider theme={mode === "light" ? LightTheme : DarkTheme}>
+      {children}
+    </MuiThemeProvider>
+  );
 }
 
 // prop types
