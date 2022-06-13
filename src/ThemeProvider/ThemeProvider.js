@@ -61,7 +61,7 @@ const DarkTheme = createTheme({
 /**
  * IPG Material-ui theme provider
  */
-export default function ThemeProvider({ children, mode }) {
+export default function ThemeProvider({ children, mode = "light" }) {
   return (
     <MuiThemeProvider theme={mode === "light" ? LightTheme : DarkTheme}>
       {children}
