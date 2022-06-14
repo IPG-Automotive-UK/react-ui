@@ -4,9 +4,10 @@ import {
 } from "@mui/material/styles";
 import PropTypes from "prop-types";
 import React from "react";
+import ThemeContext from "./ThemeContext";
 
 // custom material-ui theme for light mode
-const LightTheme = createTheme({
+const lightTheme = createTheme({
   overrides: {
     MuiAccordionSummary: {
       root: {
@@ -52,7 +53,7 @@ const LightTheme = createTheme({
 });
 
 // custom theme for dark mode
-const DarkTheme = createTheme({
+const darkTheme = createTheme({
   palette: {
     mode: "dark"
   }
@@ -61,11 +62,20 @@ const DarkTheme = createTheme({
 /**
  * IPG Material-ui theme provider
  */
-export default function ThemeProvider({ children, mode = "light" }) {
+export default function ThemeProvider({ children }) {
+  // theme state
+  const [theme, setTheme] = React.useState("light");
+
+  // define context value
+  const value = [theme, setTheme];
+
+  // wrap mui theme provider and children in theme context
   return (
-    <MuiThemeProvider theme={mode === "light" ? LightTheme : DarkTheme}>
-      {children}
-    </MuiThemeProvider>
+    <ThemeContext.Provider value={value}>
+      <MuiThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+        {children}
+      </MuiThemeProvider>
+    </ThemeContext.Provider>
   );
 }
 
