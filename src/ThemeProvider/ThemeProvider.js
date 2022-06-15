@@ -79,7 +79,9 @@ export default function ThemeProvider({ children }) {
     }
   }, []);
 
-  console.log(theme);
+  useEffect(() => {
+    localStorage.setItem("mode", theme);
+  }, [theme]);
 
   // define context value
   const value = [theme, setTheme];
