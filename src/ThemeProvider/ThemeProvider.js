@@ -1,9 +1,11 @@
+/* eslint-disable no-undef */
 import {
   ThemeProvider as MuiThemeProvider,
   createTheme
 } from "@mui/material/styles";
+import React, { useEffect } from "react";
+
 import PropTypes from "prop-types";
-import React from "react";
 import ThemeContext from "./ThemeContext";
 
 // custom material-ui theme for light mode
@@ -65,6 +67,19 @@ const darkTheme = createTheme({
 export default function ThemeProvider({ children }) {
   // theme state
   const [theme, setTheme] = React.useState("light");
+
+  useEffect(() => {
+    // get theme mode from local storage or set default to light
+    const storedThemeMode = localStorage.getItem("theme");
+    if (storedThemeMode) {
+      setTheme(storedThemeMode);
+    } else {
+      setTheme("light");
+      localStorage.setItem("theme", "light");
+    }
+  }, []);
+
+  console.log(theme);
 
   // define context value
   const value = [theme, setTheme];
