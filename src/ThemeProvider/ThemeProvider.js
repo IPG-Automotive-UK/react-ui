@@ -4,7 +4,6 @@ import {
   createTheme
 } from "@mui/material/styles";
 import React, { useEffect } from "react";
-
 import PropTypes from "prop-types";
 import ThemeContext from "./ThemeContext";
 
@@ -80,7 +79,7 @@ export default function ThemeProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("mode", theme);
+    localStorage.setItem("theme", theme);
   }, [theme]);
 
   // define context value
