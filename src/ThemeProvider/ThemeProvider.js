@@ -61,14 +61,14 @@ const darkTheme = createTheme({
 });
 
 /**
- * IPG Material-ui theme provider
+ * IPG Material-ui theme provider and hook.
  */
 export default function ThemeProvider({ children }) {
   // theme state
   const [theme, setTheme] = React.useState("light");
 
+  // on first render get theme from local storage or set default to light if not set
   useEffect(() => {
-    // get theme mode from local storage or set default to light
     const storedThemeMode = localStorage.getItem("theme");
     if (storedThemeMode) {
       setTheme(storedThemeMode);
@@ -78,6 +78,7 @@ export default function ThemeProvider({ children }) {
     }
   }, []);
 
+  // on theme change update local storage
   useEffect(() => {
     localStorage.setItem("theme", theme);
   }, [theme]);
