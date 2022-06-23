@@ -2,17 +2,17 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { Mail } from "@mui/icons-material";
 import React from "react";
 import SidebarItem from "./";
-import UserEvent from "@testing-library/user-event";
+import userEvent from "@testing-library/user-event";
 
 describe("SidebarItem", () => {
   it("renders name", () => {
     render(<SidebarItem onClick={jest.fn()} name="Inbox" icon={<Mail />} />);
     expect(screen.getByText(/inbox/i)).toBeInTheDocument();
   });
-  it("calls callback onClick", () => {
+  it("calls callback onClick", async () => {
     const onClick = jest.fn();
     render(<SidebarItem onClick={onClick} name="Inbox" icon={<Mail />} />);
-    UserEvent.click(screen.getByRole("button"));
+    await userEvent.click(screen.getByRole("button"));
     expect(onClick).toHaveBeenCalled();
   });
   it("displays count when present", () => {
@@ -59,13 +59,13 @@ describe("SidebarItem", () => {
     );
     expect(screen.queryByText(/child/i)).toBeInTheDocument();
   });
-  it("nested children can be expanded", () => {
+  it("nested children can be expanded", async () => {
     render(
       <SidebarItem onClick={jest.fn()} name="Parent" icon={<Mail />}>
         <SidebarItem onClick={jest.fn()} name="Child" icon={<Mail />} />
       </SidebarItem>
     );
-    UserEvent.click(screen.getByRole("button"));
+    await userEvent.click(screen.getByRole("button"));
     expect(screen.getByText(/child/i)).toBeInTheDocument();
   });
   it("nested children can be collapsed", async () => {
@@ -74,8 +74,8 @@ describe("SidebarItem", () => {
         <SidebarItem onClick={jest.fn()} name="Child" icon={<Mail />} />
       </SidebarItem>
     );
-    UserEvent.click(screen.getByRole("button", { name: "Parent" })); // open
-    UserEvent.click(screen.getByRole("button", { name: "Parent" })); // close
+    userEvent.click(screen.getByRole("button", { name: "Parent" })); // open
+    userEvent.click(screen.getByRole("button", { name: "Parent" })); // close
     await waitFor(() => {
       expect(screen.queryByText(/child/i)).not.toBeInTheDocument();
     });

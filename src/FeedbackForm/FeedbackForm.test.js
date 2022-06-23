@@ -17,25 +17,25 @@ describe("FeedbackForm", () => {
 
       // click button to open dialog
       const addButton = screen.getByTestId("open-button");
-      userEvent.click(addButton);
+      await userEvent.click(addButton);
 
       // select sentiment
       const sentimentCard = screen.getByTestId(sentimentCardId);
-      userEvent.click(sentimentCard);
+      await userEvent.click(sentimentCard);
 
       // enter title
       const titleField = await screen.findByRole("textbox", { name: /title/i });
-      userEvent.type(titleField, "CarMaker");
+      await userEvent.type(titleField, "CarMaker");
 
       // enter description
       const descriptionField = screen.getByRole("textbox", {
         name: /description/i
       });
-      userEvent.type(descriptionField, "CarMaker you are Good!");
+      await userEvent.type(descriptionField, "CarMaker you are Good!");
 
       // click submit button
       const submitButton = screen.getByTestId("submit-button");
-      userEvent.click(submitButton);
+      await userEvent.click(submitButton);
 
       // verify onSubmit was called with correct values
       await waitFor(() => {
