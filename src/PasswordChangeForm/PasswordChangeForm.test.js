@@ -32,10 +32,11 @@ describe("PasswordChangeForm", () => {
   it("returns form information to callback when successfully validated", async () => {
     const onSubmit = jest.fn(data => data);
     const elements = setup({ onSubmit });
-    act(() => {
-      userEvent.type(elements.inputs.password, "indigo shark wallplug");
-      userEvent.type(elements.inputs.passwordRepeat, "indigo shark wallplug");
-    });
+    await userEvent.type(elements.inputs.password, "indigo shark wallplug");
+    await userEvent.type(
+      elements.inputs.passwordRepeat,
+      "indigo shark wallplug"
+    );
     fireEvent.submit(elements.submit);
     await waitFor(() =>
       expect(onSubmit).toHaveReturnedWith({

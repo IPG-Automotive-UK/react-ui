@@ -39,14 +39,15 @@ describe("PasswordChangeDialog", () => {
   it("returns form information to callback when successfully validated", async () => {
     const onSubmit = jest.fn(data => data);
     const elements = setup({ onSubmit });
-    act(() => {
-      userEvent.type(elements.inputs.currentPassword, "abc123");
-      userEvent.type(elements.inputs.newPassword, "coffee podium dvdplayer");
-      userEvent.type(
-        elements.inputs.newPasswordRepeat,
-        "coffee podium dvdplayer"
-      );
-    });
+    await userEvent.type(elements.inputs.currentPassword, "abc123");
+    await userEvent.type(
+      elements.inputs.newPassword,
+      "coffee podium dvdplayer"
+    );
+    await userEvent.type(
+      elements.inputs.newPasswordRepeat,
+      "coffee podium dvdplayer"
+    );
     fireEvent.submit(elements.submit);
     await waitFor(() =>
       expect(onSubmit).toHaveReturnedWith({
@@ -59,17 +60,13 @@ describe("PasswordChangeDialog", () => {
   it("doesnt call callback on validation errors", async () => {
     const onSubmit = jest.fn();
     const elements = setup({ onSubmit });
-    act(() => {
-      userEvent.type(elements.inputs.newPassword, "abc123"); // top 100 password
-    });
+    await userEvent.type(elements.inputs.newPassword, "abc123"); // top 100 password
     fireEvent.submit(elements.submit);
     await waitFor(() => expect(onSubmit).not.toHaveBeenCalled());
   });
   it("displays error message to user on validation fail", async () => {
     const elements = setup();
-    act(() => {
-      userEvent.type(elements.inputs.newPassword, "abc123"); // top 100 password
-    });
+    await userEvent.type(elements.inputs.newPassword, "abc123"); // top 100 password
     fireEvent.submit(elements.submit);
     await waitFor(() =>
       expect(

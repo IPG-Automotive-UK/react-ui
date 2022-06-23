@@ -40,14 +40,15 @@ describe("RegistrationForm", () => {
   it("returns form information to callback when successfully validated", async () => {
     const onRegister = jest.fn(data => data);
     const elements = setup({ onRegister });
-    act(() => {
-      userEvent.type(elements.inputs.firstName, "Joe");
-      userEvent.type(elements.inputs.lastName, "Bloggs");
-      userEvent.type(elements.inputs.email, "joe.bloggs@domain.com");
-      userEvent.type(elements.inputs.password, "indigo shark wallplug");
-      userEvent.type(elements.inputs.passwordRepeat, "indigo shark wallplug");
-      userEvent.type(elements.inputs.team, teams[0]);
-    });
+    await userEvent.type(elements.inputs.firstName, "Joe");
+    await userEvent.type(elements.inputs.lastName, "Bloggs");
+    await userEvent.type(elements.inputs.email, "joe.bloggs@domain.com");
+    await userEvent.type(elements.inputs.password, "indigo shark wallplug");
+    await userEvent.type(
+      elements.inputs.passwordRepeat,
+      "indigo shark wallplug"
+    );
+    await userEvent.type(elements.inputs.team, teams[0]);
     await selectMaterialUiSelectOption(elements.inputs.team, teams[0]);
     fireEvent.submit(elements.submit);
     await waitFor(() =>
