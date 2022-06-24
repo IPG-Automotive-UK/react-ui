@@ -28,6 +28,7 @@ const Template = args => {
 
 export const Default = Template.bind({});
 Default.args = {
+  checked: false,
   helperText: "Maybe you need some help?",
   label: "Make a choice",
   options: ["Choice A", "Choice B"],
