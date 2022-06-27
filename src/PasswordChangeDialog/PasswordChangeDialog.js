@@ -228,8 +228,10 @@ const dialogTitleStyles = {
 // Dialog title component with close button
 const DialogTitle = ({ children, onClose, ...other }) => {
   return (
-    <MuiDialogTitle disableTypography sx={dialogTitleStyles.root} {...other}>
-      <Typography variant="h6">{children}</Typography>
+    <MuiDialogTitle sx={dialogTitleStyles.root} {...other}>
+      <div>
+        <Typography variant="h6">{children}</Typography>
+      </div>
       {onClose ? (
         <IconButton
           aria-label="close"
