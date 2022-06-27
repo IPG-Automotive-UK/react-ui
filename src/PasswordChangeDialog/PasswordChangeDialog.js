@@ -10,7 +10,8 @@ import {
   Grid,
   IconButton,
   DialogTitle as MuiDialogTitle,
-  TextField
+  TextField,
+  Typography
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import PropTypes from "prop-types";
@@ -227,8 +228,8 @@ const dialogTitleStyles = {
 // Dialog title component with close button
 const DialogTitle = ({ children, onClose, ...other }) => {
   return (
-    <MuiDialogTitle sx={dialogTitleStyles.root} {...other}>
-      <div variant="h6">{children}</div>
+    <MuiDialogTitle disableTypography sx={dialogTitleStyles.root} {...other}>
+      <Typography variant="h6">{children}</Typography>
       {onClose ? (
         <IconButton
           aria-label="close"
