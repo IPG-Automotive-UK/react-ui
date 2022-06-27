@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import PasswordChangeDialog from "./";
 import React from "react";
 import userEvent from "@testing-library/user-event";
@@ -31,18 +31,16 @@ function setup(inputs) {
  */
 describe("PasswordChangeDialog", () => {
   it("returns form information to callback when successfully validated", async () => {
+    const user = userEvent.setup();
     const onSubmit = jest.fn(data => data);
     const elements = setup({ onSubmit });
-    await userEvent.type(elements.inputs.currentPassword, "abc123");
-    await userEvent.type(
-      elements.inputs.newPassword,
-      "coffee podium dvdplayer"
-    );
-    await userEvent.type(
+    await user.type(elements.inputs.currentPassword, "abc123");
+    await user.type(elements.inputs.newPassword, "coffee podium dvdplayer");
+    await user.type(
       elements.inputs.newPasswordRepeat,
       "coffee podium dvdplayer"
     );
-    fireEvent.submit(elements.submit);
+    userEvent.click(elements.submit);
     await waitFor(() =>
       expect(onSubmit).toHaveReturnedWith({
         currentPassword: "abc123",
@@ -52,23 +50,25 @@ describe("PasswordChangeDialog", () => {
     );
   });
   it("doesnt call callback on validation errors", async () => {
+    const user = userEvent.setup();
     const onSubmit = jest.fn();
     const elements = setup({ onSubmit });
-    await userEvent.type(elements.inputs.newPassword, "abc123"); // top 100 password
-    fireEvent.submit(elements.submit);
-    await waitFor(() => expect(onSubmit).not.toHaveBeenCalled());
+    await user.type(elements.inputs.newPassword, "abc123"); // top 100 password))
+    userEvent.click(elements.submit);
+    await waitFor(() => expect(onSubmit).toHaveBeenCalledTimes(0));
   });
   it("displays error message to user on validation fail", async () => {
+    const user = userEvent.setup();
     const elements = setup();
-    await userEvent.type(elements.inputs.newPassword, "abc123"); // top 100 password
-    fireEvent.submit(elements.submit);
-    await waitFor(() =>
+    await user.type(elements.inputs.newPassword, "abc123"); // top 100 password
+    userEvent.click(elements.submit);
+    await waitFor(() => {
       expect(
         screen.queryByText("This is a top-100 common password")
-      ).toBeInTheDocument()
-    );
-    expect(
-      screen.queryByText("Password strength: 0/4. Minimum required 3+.")
-    ).toBeInTheDocument();
+      ).toBeInTheDocument();
+      expect(
+        screen.queryByText("Password strength: 0/4. Minimum required 3+.")
+      ).toBeInTheDocument();
+    });
   });
 });
