@@ -37,6 +37,7 @@ Default.args = {
 
 export const Disabled = Template.bind({});
 Disabled.args = {
+  checked: false,
   disabled: true,
   helperText: "Maybe you need some help?",
   label: "Make a choice",

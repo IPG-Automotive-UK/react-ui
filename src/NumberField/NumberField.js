@@ -170,9 +170,9 @@ export default function NumberField({
         ...startAdornmentInputProperty
       }}
       inputProps={{
-        max: max,
-        min: min,
-        step: step
+        max,
+        min,
+        step
       }}
       sx={
         !stepper

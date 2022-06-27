@@ -54,6 +54,7 @@ Nested.args = {
     <SidebarItem
       key="withCount"
       {...WithCount.args}
+      // eslint-disable-next-line react/no-children-prop
       children={[
         <SidebarItem key="default" {...Default.args} />,
         <SidebarItem key="disabled" {...Disabled.args} />
@@ -71,6 +72,7 @@ NestedInitiallyOpen.args = {
     <SidebarItem
       key="withCount"
       {...WithCount.args}
+      // eslint-disable-next-line react/no-children-prop
       children={[
         <SidebarItem key="default" {...Default.args} />,
         <SidebarItem key="disabled" {...Disabled.args} />

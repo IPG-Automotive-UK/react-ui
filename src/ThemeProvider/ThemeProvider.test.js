@@ -11,7 +11,7 @@ describe("ThemeProvider", () => {
     render(
       <StyledEngineProvider injectFirst>
         <ThemeProvider>
-          <div data-testid="child">I'm a child</div>
+          <div data-testid="child">{"I'm a child"}</div>
         </ThemeProvider>
       </StyledEngineProvider>
     );

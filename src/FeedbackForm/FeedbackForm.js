@@ -150,7 +150,7 @@ export default function FeedbackForm({
                     <span>I like Something</span>
                   </Typography>
                   <Typography sx={{ mb: 1 }} color="text.primary">
-                    We like to hear what we're doing right.
+                    {"We like to hear what we're doing right."}
                   </Typography>
                 </CardContent>
               </Card>
@@ -182,10 +182,10 @@ export default function FeedbackForm({
                     gutterBottom
                   >
                     <SentimentVeryDissatisfied sx={{ fontSize: 40, mr: 1.5 }} />
-                    <span>I don't like Something</span>
+                    <span>{"I don't like Something"}</span>
                   </Typography>
                   <Typography sx={{ mb: 1 }} color="text.primary">
-                    If something's not right, we want to know about it.
+                    {"If something's not right, we want to know about it."}
                   </Typography>
                 </CardContent>
               </Card>

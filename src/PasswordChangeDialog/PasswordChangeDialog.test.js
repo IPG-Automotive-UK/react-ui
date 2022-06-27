@@ -1,10 +1,4 @@
-import {
-  act,
-  fireEvent,
-  render,
-  screen,
-  waitFor
-} from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import PasswordChangeDialog from "./";
 import React from "react";
 import userEvent from "@testing-library/user-event";
