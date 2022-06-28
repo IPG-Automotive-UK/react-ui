@@ -26,7 +26,7 @@ function Example() {
 
 ## Documentation
 
-Run storbyook to explore all of the components and documentation.
+Run storybook to explore all of the components and documentation.
 ```
 npm run storybook
 ```
