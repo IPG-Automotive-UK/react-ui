@@ -1,7 +1,6 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import React from "react";
 import RegistrationForm from "./";
-import { selectMaterialUiSelectOption } from "../testUtils";
 import userEvent from "@testing-library/user-event";
 
 // Team options
@@ -39,7 +38,20 @@ describe("RegistrationForm", () => {
     await user.type(elements.inputs.password, "indigo shark wallplug");
     await user.type(elements.inputs.passwordRepeat, "indigo shark wallplug");
     await user.type(elements.inputs.team, teams[0]);
-    await selectMaterialUiSelectOption(elements.inputs.team, teams[0], user);
+
+    // get the button that opens the dropdown, which is a sibling of the input
+    const selectButton =
+      elements.inputs.team.parentNode.querySelector("[role=button]");
+
+    // open the select dropdown
+    await user.click(selectButton);
+
+    // click the list item
+    const listItem = screen.getByText(teams[0]);
+    if (!listItem) throw new Error("No listItem");
+    await user.click(listItem);
+
+    // click register
     await user.click(elements.submit);
     await waitFor(() =>
       expect(onRegister).toHaveReturnedWith({
