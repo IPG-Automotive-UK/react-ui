@@ -26,7 +26,10 @@ function Example() {
 
 ## Documentation
 
-See [storybook](https://ipguk-react-ui.netlify.app/) for the latest implementation details and documentation.
+Run storbyook to explore all of the components and documentation.
+```
+npm run storybook
+```
 
 ## Release
 
