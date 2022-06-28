@@ -21,9 +21,10 @@ function setup(inputs) {
  */
 describe("PasswordResetForm", () => {
   it("returns form information to callback when successfully validated", async () => {
+    const user = userEvent.setup();
     const onSubmit = jest.fn(data => data);
     const elements = setup({ onSubmit });
-    await userEvent.type(elements.inputs.email, "joe.bloggs@domain.com");
+    await user.type(elements.inputs.email, "joe.bloggs@domain.com");
     fireEvent.submit(elements.submit);
     await waitFor(() =>
       expect(onSubmit).toHaveReturnedWith({
@@ -32,9 +33,10 @@ describe("PasswordResetForm", () => {
     );
   });
   it("shows error message with invalid email", async () => {
+    const user = userEvent.setup();
     const onSubmit = jest.fn();
     const elements = setup({ onSubmit });
-    await userEvent.type(elements.inputs.email, "joe.bloggs"); // incorrect email address format
+    await user.type(elements.inputs.email, "joe.bloggs"); // incorrect email address format
     fireEvent.submit(elements.submit);
     await waitFor(() =>
       expect(
@@ -43,8 +45,9 @@ describe("PasswordResetForm", () => {
     );
   });
   it("displays error message to user on validation fail", async () => {
+    const user = userEvent.setup();
     const elements = setup();
-    await userEvent.type(elements.inputs.email, "joe.bloggs"); // incorrect email address format
+    await user.type(elements.inputs.email, "joe.bloggs"); // incorrect email address format
     fireEvent.submit(elements.submit);
     await waitFor(() =>
       expect(

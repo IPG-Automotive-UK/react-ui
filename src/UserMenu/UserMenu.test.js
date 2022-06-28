@@ -24,18 +24,21 @@ describe("User Menu", () => {
   });
   describe("Menu header", () => {
     test("shows full username", async () => {
+      const user = userEvent.setup();
       render(<UserMenu {...defaultInputs} username="Jane Doe" />);
-      await userEvent.click(screen.getByRole("button", { name: /jd/i }));
+      await user.click(screen.getByRole("button", { name: /jd/i }));
       expect(screen.getByText(/Jane Doe/i)).toBeInTheDocument();
     });
     test("shows Unknown if falsy username", async () => {
+      const user = userEvent.setup();
       render(<UserMenu {...defaultInputs} username="" />);
-      await userEvent.click(screen.getByRole("button", { name: /\?/i }));
+      await user.click(screen.getByRole("button", { name: /\?/i }));
       expect(screen.getByText(/Unknown/i)).toBeInTheDocument();
     });
   });
   describe("Menu item", () => {
     test("onLogout called on user click", async () => {
+      const user = userEvent.setup();
       const onLogout = jest.fn();
       render(
         <UserMenu
@@ -44,11 +47,12 @@ describe("User Menu", () => {
           onLogout={onLogout}
         />
       );
-      await userEvent.click(screen.getByRole("button", { name: /JS/i }));
-      await userEvent.click(screen.getByRole("menuitem", { name: /Logout/i }));
+      await user.click(screen.getByRole("button", { name: /JS/i }));
+      await user.click(screen.getByRole("menuitem", { name: /Logout/i }));
       expect(onLogout).toHaveBeenCalled();
     });
     test("onChangePassword called on user click", async () => {
+      const user = userEvent.setup();
       const onChangePassword = jest.fn();
       render(
         <UserMenu
@@ -57,8 +61,8 @@ describe("User Menu", () => {
           onChangePassword={onChangePassword}
         />
       );
-      await userEvent.click(screen.getByRole("button", { name: /JS/i }));
-      await userEvent.click(
+      await user.click(screen.getByRole("button", { name: /JS/i }));
+      await user.click(
         screen.getByRole("menuitem", { name: /Change password/i })
       );
       expect(onChangePassword).toHaveBeenCalled();

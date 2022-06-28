@@ -16,17 +16,19 @@ describe("MultiText", () => {
     expect(container.firstChild).toBeInTheDocument();
   });
   test("can add a row", async () => {
+    const user = userEvent.setup();
     const onChange = jest.fn();
     render(<MultiText onChange={onChange} />);
     const addButton = screen.getByTestId("addButton");
-    await userEvent.click(addButton);
+    await user.click(addButton);
     expect(onChange).toHaveBeenCalledWith([{ label: "", value: null }]);
   });
   test("can delete a row", async () => {
+    const user = userEvent.setup();
     const onChange = jest.fn();
     render(<MultiText onChange={onChange} rows={rows} />);
     const deleteButton = screen.getAllByTestId("deleteButton");
-    await userEvent.click(deleteButton[0]);
+    await user.click(deleteButton[0]);
     expect(onChange).toHaveBeenCalledWith([
       { id: 1, label: "test2", value: 20 }
     ]);

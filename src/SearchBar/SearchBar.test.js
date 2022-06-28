@@ -11,20 +11,22 @@ describe("SearchBar", () => {
     expect(inputBase.value).toBe(message);
   });
   test("onChange works as expected", async () => {
+    const user = userEvent.setup();
     const onChange = jest.fn();
     const message = "another search query";
     const { container } = render(<SearchBar onChange={onChange} />);
     const inputBase = container.querySelector(".MuiInputBase-input");
-    await userEvent.type(inputBase, message);
+    await user.type(inputBase, message);
     expect(onChange).toBeCalled();
   });
   test("onBlur works as expected", async () => {
+    const user = userEvent.setup();
     const onBlur = jest.fn();
     const message = "another search query";
     const { container } = render(<SearchBar onBlur={onBlur} />);
     const inputBase = container.querySelector(".MuiInputBase-input");
-    await userEvent.type(inputBase, message);
-    await userEvent.tab();
+    await user.type(inputBase, message);
+    await user.tab();
     expect(onBlur).toBeCalled();
   });
 });

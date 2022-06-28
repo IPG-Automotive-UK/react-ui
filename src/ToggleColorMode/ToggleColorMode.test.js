@@ -32,22 +32,24 @@ describe("ToggleColorMode", () => {
   });
 
   test("onClick switch change from light to dark mode", async () => {
+    const user = userEvent.setup();
     const onChange = jest.fn();
 
     render(<ColorModeWithState onChange={onChange} mode="light" />);
     const button = screen.getByRole("checkbox");
 
-    await userEvent.click(button);
+    await user.click(button);
     expect(onChange).toHaveBeenCalledWith("dark");
   });
 
   test("onClick switch change from dark to light mode", async () => {
+    const user = userEvent.setup();
     const onChange = jest.fn();
 
     render(<ColorModeWithState onChange={onChange} mode="dark" />);
     const button = screen.getByRole("checkbox");
 
-    await userEvent.click(button);
+    await user.click(button);
     expect(onChange).toHaveBeenCalledWith("light");
   });
 });

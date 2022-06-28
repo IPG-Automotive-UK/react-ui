@@ -5,6 +5,7 @@ import userEvent from "@testing-library/user-event";
 
 describe("SwitchField", () => {
   it.each([true, false])("can be checked = %s", async expected => {
+    const user = userEvent.setup();
     const onChange = jest.fn(event => event.target.checked);
     render(
       <SwitchField
@@ -13,7 +14,7 @@ describe("SwitchField", () => {
         checked={!expected}
       />
     );
-    await userEvent.click(screen.getByRole("checkbox"));
+    await user.click(screen.getByRole("checkbox"));
     expect(onChange).toHaveReturnedWith(expected);
   });
   it("renders helper text when provided", () => {

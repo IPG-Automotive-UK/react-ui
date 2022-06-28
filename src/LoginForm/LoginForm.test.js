@@ -22,10 +22,11 @@ function setup(inputs) {
  */
 describe("LoginForm", () => {
   it("returns form information to callback when successfully validated", async () => {
+    const user = userEvent.setup();
     const onLogin = jest.fn(data => data);
     const elements = setup({ onLogin });
-    await userEvent.type(elements.inputs.email, "joe.bloggs@domain.com");
-    await userEvent.type(elements.inputs.password, "indigo shark wallplug");
+    await user.type(elements.inputs.email, "joe.bloggs@domain.com");
+    await user.type(elements.inputs.password, "indigo shark wallplug");
     fireEvent.submit(elements.submit);
     await waitFor(() =>
       expect(onLogin).toHaveReturnedWith({
@@ -35,15 +36,17 @@ describe("LoginForm", () => {
     );
   });
   it("doesnt call callback on validation errors", async () => {
+    const user = userEvent.setup();
     const onLogin = jest.fn();
     const elements = setup({ onLogin });
-    await userEvent.type(elements.inputs.email, "joe.bloggs"); // incorrect email address format
+    await user.type(elements.inputs.email, "joe.bloggs"); // incorrect email address format
     fireEvent.submit(elements.submit);
     await waitFor(() => expect(onLogin).not.toHaveBeenCalled());
   });
   it("displays error message to user on validation fail", async () => {
+    const user = userEvent.setup();
     const elements = setup();
-    await userEvent.type(elements.inputs.email, "joe.bloggs"); // incorrect email address format
+    await user.type(elements.inputs.email, "joe.bloggs"); // incorrect email address format
     fireEvent.submit(elements.submit);
     await waitFor(() =>
       expect(

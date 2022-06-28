@@ -17,12 +17,14 @@ describe("Snackbar", () => {
     expect(container.querySelector(".MuiSnackbar-root")).toBeTruthy();
   });
   it("calls onClose when user clicks x", async () => {
+    const user = userEvent.setup();
     const onClose = jest.fn();
     render(<Snackbar message="Hello world" open onClose={onClose} />);
-    await userEvent.click(screen.getByRole("button"));
+    await user.click(screen.getByRole("button"));
     expect(onClose).toHaveBeenCalled();
   });
   it("calls onClose when user clicks action button", async () => {
+    const user = userEvent.setup();
     const onClose = jest.fn();
     render(
       <Snackbar
@@ -33,10 +35,11 @@ describe("Snackbar", () => {
         actionCallback={jest.fn()}
       />
     );
-    await userEvent.click(screen.getByRole("button", { name: "Action" }));
+    await user.click(screen.getByRole("button", { name: "Action" }));
     expect(onClose).toHaveBeenCalled();
   });
   it("calls actionCallback when user clicks action button", async () => {
+    const user = userEvent.setup();
     const onAction = jest.fn();
     render(
       <Snackbar
@@ -47,7 +50,7 @@ describe("Snackbar", () => {
         actionCallback={onAction}
       />
     );
-    await userEvent.click(screen.getByRole("button", { name: "Action" }));
+    await user.click(screen.getByRole("button", { name: "Action" }));
     expect(onAction).toHaveBeenCalled();
   });
   it("calls onClose after autohide duration", async () => {

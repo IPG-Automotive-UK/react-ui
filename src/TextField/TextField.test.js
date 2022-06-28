@@ -8,9 +8,10 @@ import userEvent from "@testing-library/user-event";
  */
 describe("TextField", () => {
   test("can type value in textfield", async () => {
+    const user = userEvent.setup();
     const { container } = render(<TextField />);
     const inputBase = container.querySelector(".MuiInputBase-input");
-    await userEvent.type(inputBase, "Hello World");
+    await user.type(inputBase, "Hello World");
     expect(inputBase.value).toBe("Hello World");
   });
   test("shows error state", () => {

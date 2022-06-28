@@ -11,31 +11,32 @@ describe("FeedbackForm", () => {
   ])(
     "correct fields are returned for %s",
     async (sentimentCardId, expectedSentiment) => {
+      const user = userEvent.setup();
       // render component
       const onSubmit = jest.fn();
       render(<FeedbackForm onSubmit={onSubmit} />);
 
       // click button to open dialog
       const addButton = screen.getByTestId("open-button");
-      await userEvent.click(addButton);
+      await user.click(addButton);
 
       // select sentiment
       const sentimentCard = screen.getByTestId(sentimentCardId);
-      await userEvent.click(sentimentCard);
+      await user.click(sentimentCard);
 
       // enter title
       const titleField = await screen.findByRole("textbox", { name: /title/i });
-      await userEvent.type(titleField, "CarMaker");
+      await user.type(titleField, "CarMaker");
 
       // enter description
       const descriptionField = screen.getByRole("textbox", {
         name: /description/i
       });
-      await userEvent.type(descriptionField, "CarMaker you are Good!");
+      await user.type(descriptionField, "CarMaker you are Good!");
 
       // click submit button
       const submitButton = screen.getByTestId("submit-button");
-      await userEvent.click(submitButton);
+      await user.click(submitButton);
 
       // verify onSubmit was called with correct values
       await waitFor(() => {
