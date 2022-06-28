@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import LoginForm from "./";
 import React from "react";
 import userEvent from "@testing-library/user-event";
@@ -27,7 +27,7 @@ describe("LoginForm", () => {
     const elements = setup({ onLogin });
     await user.type(elements.inputs.email, "joe.bloggs@domain.com");
     await user.type(elements.inputs.password, "indigo shark wallplug");
-    fireEvent.submit(elements.submit);
+    user.click(elements.submit);
     await waitFor(() =>
       expect(onLogin).toHaveReturnedWith({
         email: "joe.bloggs@domain.com",
@@ -40,14 +40,14 @@ describe("LoginForm", () => {
     const onLogin = jest.fn();
     const elements = setup({ onLogin });
     await user.type(elements.inputs.email, "joe.bloggs"); // incorrect email address format
-    fireEvent.submit(elements.submit);
+    user.click(elements.submit);
     await waitFor(() => expect(onLogin).not.toHaveBeenCalled());
   });
   it("displays error message to user on validation fail", async () => {
     const user = userEvent.setup();
     const elements = setup();
     await user.type(elements.inputs.email, "joe.bloggs"); // incorrect email address format
-    fireEvent.submit(elements.submit);
+    user.click(elements.submit);
     await waitFor(() =>
       expect(
         screen.queryByText("Please enter a valid email address")

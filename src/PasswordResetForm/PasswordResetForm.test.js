@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import PasswordResetForm from "./";
 import React from "react";
 import userEvent from "@testing-library/user-event";
@@ -25,7 +25,7 @@ describe("PasswordResetForm", () => {
     const onSubmit = jest.fn(data => data);
     const elements = setup({ onSubmit });
     await user.type(elements.inputs.email, "joe.bloggs@domain.com");
-    fireEvent.submit(elements.submit);
+    user.click(elements.submit);
     await waitFor(() =>
       expect(onSubmit).toHaveReturnedWith({
         email: "joe.bloggs@domain.com"
@@ -37,7 +37,7 @@ describe("PasswordResetForm", () => {
     const onSubmit = jest.fn();
     const elements = setup({ onSubmit });
     await user.type(elements.inputs.email, "joe.bloggs"); // incorrect email address format
-    fireEvent.submit(elements.submit);
+    user.click(elements.submit);
     await waitFor(() =>
       expect(
         screen.queryByText("Please enter a valid email address")
@@ -48,7 +48,7 @@ describe("PasswordResetForm", () => {
     const user = userEvent.setup();
     const elements = setup();
     await user.type(elements.inputs.email, "joe.bloggs"); // incorrect email address format
-    fireEvent.submit(elements.submit);
+    user.click(elements.submit);
     await waitFor(() =>
       expect(
         screen.queryByText("Please enter a valid email address")
