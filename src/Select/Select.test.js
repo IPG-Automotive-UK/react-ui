@@ -2,6 +2,7 @@ import React from "react";
 import Select from "./";
 import { render } from "@testing-library/react";
 import { selectMaterialUiSelectOption } from "../testUtils";
+import userEvent from "@testing-library/user-event";
 
 // list of options to display
 const options = [
@@ -34,12 +35,13 @@ const SelectWithState = ({ onChange, value: valueIn = "", ...rest }) => {
  */
 describe("Select", () => {
   test("can select an item", async () => {
+    const user = userEvent.setup();
     const onChange = jest.fn(event => event.target.value);
     const { container } = render(
       <SelectWithState options={options} onChange={onChange} />
     );
     const value = options[3];
-    await selectMaterialUiSelectOption(container, value);
+    await selectMaterialUiSelectOption(container, value, user);
     expect(onChange).toHaveReturnedWith(value);
   });
   test("shows error state", () => {

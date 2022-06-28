@@ -3,12 +3,11 @@ import {
   waitForElementToBeRemoved,
   within
 } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 
 /**
  * Helper to select a material ui component
  */
-export function selectMaterialUiSelectOption(element, optionText) {
+export function selectMaterialUiSelectOption(element, optionText, user) {
   return new Promise(resolve => {
     // The the button that opens the dropdown, which is a sibling of the input
     const selectButton = element.parentNode.querySelector("[role=button]");
@@ -23,7 +22,7 @@ export function selectMaterialUiSelectOption(element, optionText) {
     const listItem = within(listbox).getByText(optionText);
 
     if (!listItem) throw new Error("No listItem");
-    userEvent.click(listItem);
+    user.click(listItem);
 
     // Wait for the listbox to be removed, so it isn't visible in subsequent calls
     waitForElementToBeRemoved(() =>

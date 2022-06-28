@@ -1,10 +1,4 @@
-import {
-  act,
-  fireEvent,
-  render,
-  screen,
-  waitFor
-} from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import React from "react";
 import RegistrationForm from "./";
 import { selectMaterialUiSelectOption } from "../testUtils";
@@ -27,9 +21,7 @@ function setup(inputs) {
       passwordRepeat: screen.getByLabelText("passwordRepeat"),
       team: screen.getByTestId("team")
     },
-    submit: screen.getByRole("button", {
-      name: /register/i
-    })
+    submit: screen.getByRole("button", { name: /register/i })
   };
 }
 
@@ -38,19 +30,17 @@ function setup(inputs) {
  */
 describe("RegistrationForm", () => {
   it("returns form information to callback when successfully validated", async () => {
+    const user = userEvent.setup();
     const onRegister = jest.fn(data => data);
     const elements = setup({ onRegister });
-    await userEvent.type(elements.inputs.firstName, "Joe");
-    await userEvent.type(elements.inputs.lastName, "Bloggs");
-    await userEvent.type(elements.inputs.email, "joe.bloggs@domain.com");
-    await userEvent.type(elements.inputs.password, "indigo shark wallplug");
-    await userEvent.type(
-      elements.inputs.passwordRepeat,
-      "indigo shark wallplug"
-    );
-    await userEvent.type(elements.inputs.team, teams[0]);
-    await selectMaterialUiSelectOption(elements.inputs.team, teams[0]);
-    fireEvent.submit(elements.submit);
+    await user.type(elements.inputs.firstName, "Joe");
+    await user.type(elements.inputs.lastName, "Bloggs");
+    await user.type(elements.inputs.email, "joe.bloggs@domain.com");
+    await user.type(elements.inputs.password, "indigo shark wallplug");
+    await user.type(elements.inputs.passwordRepeat, "indigo shark wallplug");
+    await user.type(elements.inputs.team, teams[0]);
+    await selectMaterialUiSelectOption(elements.inputs.team, teams[0], user);
+    await user.click(elements.submit);
     await waitFor(() =>
       expect(onRegister).toHaveReturnedWith({
         email: "joe.bloggs@domain.com",
@@ -63,24 +53,22 @@ describe("RegistrationForm", () => {
     );
   });
   it("doesnt call callback on validation errors", async () => {
+    const user = userEvent.setup();
     const onRegister = jest.fn();
     const elements = setup({ onRegister });
-    act(() => {
-      userEvent.type(elements.inputs.email, "joe.bloggs");
-    });
+    await user.type(elements.inputs.email, "joe.bloggs");
     // incorrect email format
     // missing first, lastname, team, password + password repeat
-    fireEvent.submit(elements.submit);
+    user.click(elements.submit);
     await waitFor(() => expect(onRegister).not.toHaveBeenCalled());
   });
   describe("Password restrictions", () => {
     it("displays password complexity score", async () => {
+      const user = userEvent.setup();
       const onRegister = jest.fn();
       const elements = setup({ onRegister });
-      act(() => {
-        userEvent.type(elements.inputs.password, "something");
-        userEvent.click(elements.inputs.passwordRepeat); // moving to next form element triggers validation
-      });
+      await user.type(elements.inputs.password, "something");
+      await user.click(elements.inputs.passwordRepeat); // moving to next form element triggers validation
       await waitFor(() =>
         expect(
           screen.queryByText("Password strength: 0/4. Minimum required 3+.")
@@ -88,12 +76,11 @@ describe("RegistrationForm", () => {
       );
     });
     it("displays user feedback on password", async () => {
+      const user = userEvent.setup();
       const onRegister = jest.fn();
       const elements = setup({ onRegister });
-      act(() => {
-        userEvent.type(elements.inputs.password, "something");
-        userEvent.click(elements.inputs.passwordRepeat); // moving to next form element triggers validation
-      });
+      await user.type(elements.inputs.password, "something");
+      await user.click(elements.inputs.passwordRepeat); // moving to next form element triggers validation
       await waitFor(() =>
         expect(
           screen.queryByText(
