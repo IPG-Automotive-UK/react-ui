@@ -12,7 +12,7 @@ npm install --save @ipguk/react-ui
 
 ## Usage
 
-For a list of supported components see the [documentation](https://ipguk-react-ui.netlify.app/). The basic syntax for usage is shown below for a generic "Component".
+For a list of supported components run storybook. The basic syntax for usage is shown below for a generic "Component".
 
 ```jsx
 import React from "react";
