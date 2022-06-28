@@ -165,11 +165,14 @@ export default function FontPicker({
   };
 
   // fetch default available options on load
-  useEffect(async () => {
-    try {
-      const theseOptions = await getAvailableDefaultFonts();
-      setDefaultOptions(theseOptions);
-    } catch (e) {}
+  useEffect(() => {
+    const getOptions = async () => {
+      try {
+        const theseOptions = await getAvailableDefaultFonts();
+        setDefaultOptions(theseOptions);
+      } catch (e) {}
+    };
+    getOptions();
   }, []);
 
   // return components

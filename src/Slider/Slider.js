@@ -45,6 +45,7 @@ export default function Slider({
           value: item
         };
         marks.push(thisMark);
+        return marks;
       });
     } else {
       marks = labels;

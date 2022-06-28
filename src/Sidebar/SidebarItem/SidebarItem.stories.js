@@ -51,14 +51,10 @@ export const Nested = Template.bind({});
 Nested.args = {
   children: [
     <SidebarItem key="default" {...Default.args} />,
-    <SidebarItem
-      key="withCount"
-      {...WithCount.args}
-      children={[
-        <SidebarItem key="default" {...Default.args} />,
-        <SidebarItem key="disabled" {...Disabled.args} />
-      ]}
-    />
+    <SidebarItem key="withCount" {...WithCount.args}>
+      <SidebarItem key="default" {...Default.args} />
+      <SidebarItem key="disabled" {...Disabled.args} />
+    </SidebarItem>
   ],
   icon: <Settings />,
   name: "Settings"
@@ -68,14 +64,10 @@ export const NestedInitiallyOpen = Template.bind({});
 NestedInitiallyOpen.args = {
   children: [
     <SidebarItem key="default" {...Default.args} />,
-    <SidebarItem
-      key="withCount"
-      {...WithCount.args}
-      children={[
-        <SidebarItem key="default" {...Default.args} />,
-        <SidebarItem key="disabled" {...Disabled.args} />
-      ]}
-    />
+    <SidebarItem key="withCount" {...WithCount.args}>
+      <SidebarItem key="default" {...Default.args} />
+      <SidebarItem key="disabled" {...Disabled.args} />
+    </SidebarItem>
   ],
   icon: <Settings />,
   initialOpen: true,

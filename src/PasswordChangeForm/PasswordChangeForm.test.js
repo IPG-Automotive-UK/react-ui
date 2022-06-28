@@ -1,10 +1,4 @@
-import {
-  act,
-  fireEvent,
-  render,
-  screen,
-  waitFor
-} from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import PasswordChangeForm from "./";
 import React from "react";
 import userEvent from "@testing-library/user-event";
@@ -30,13 +24,12 @@ function setup(inputs) {
  */
 describe("PasswordChangeForm", () => {
   it("returns form information to callback when successfully validated", async () => {
+    const user = userEvent.setup();
     const onSubmit = jest.fn(data => data);
     const elements = setup({ onSubmit });
-    act(() => {
-      userEvent.type(elements.inputs.password, "indigo shark wallplug");
-      userEvent.type(elements.inputs.passwordRepeat, "indigo shark wallplug");
-    });
-    fireEvent.submit(elements.submit);
+    await user.type(elements.inputs.password, "indigo shark wallplug");
+    await user.type(elements.inputs.passwordRepeat, "indigo shark wallplug");
+    user.click(elements.submit);
     await waitFor(() =>
       expect(onSubmit).toHaveReturnedWith({
         password: "indigo shark wallplug",
@@ -45,21 +38,19 @@ describe("PasswordChangeForm", () => {
     );
   });
   it("doesnt call callback on validation errors", async () => {
+    const user = userEvent.setup();
     const onSubmit = jest.fn();
     const elements = setup({ onSubmit });
-    act(() => {
-      userEvent.type(elements.inputs.password, "abc123"); // common password
-    });
-    fireEvent.submit(elements.submit);
+    await user.type(elements.inputs.password, "abc123"); // common password
+    await user.click(elements.submit);
     await waitFor(() => expect(onSubmit).not.toHaveBeenCalled());
   });
   describe("Password restrictions", () => {
     it("displays password complexity score", async () => {
+      const user = userEvent.setup();
       const elements = setup();
-      act(() => {
-        userEvent.type(elements.inputs.password, "something");
-        userEvent.click(elements.inputs.passwordRepeat); // moving to next form element triggers validation
-      });
+      await user.type(elements.inputs.password, "something");
+      await user.click(elements.inputs.passwordRepeat); // moving to next form element triggers validation
       await waitFor(() =>
         expect(
           screen.queryByText("Password strength: 0/4. Minimum required 3+.")
@@ -67,20 +58,18 @@ describe("PasswordChangeForm", () => {
       );
     });
     it("doesnt call callback on validation errors", async () => {
+      const user = userEvent.setup();
       const onSubmit = jest.fn();
       const elements = setup({ onSubmit });
-      act(() => {
-        userEvent.type(elements.inputs.password, "abc123"); // top 100 password
-      });
-      fireEvent.submit(elements.submit);
+      await user.type(elements.inputs.password, "abc123"); // top 100 password
+      user.click(elements.submit);
       await waitFor(() => expect(onSubmit).not.toHaveBeenCalled());
     });
     it("displays user feedback on password", async () => {
+      const user = userEvent.setup();
       const elements = setup();
-      act(() => {
-        userEvent.type(elements.inputs.password, "something");
-        userEvent.click(elements.inputs.passwordRepeat); // moving to next form element triggers validation
-      });
+      await user.type(elements.inputs.password, "something");
+      await user.click(elements.inputs.passwordRepeat); // moving to next form element triggers validation
       await waitFor(() =>
         expect(
           screen.queryByText(
