@@ -1,4 +1,5 @@
 import { Box, Divider, Typography } from "@mui/material";
+import Link from "@mui/material/Link";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -15,27 +16,29 @@ function Sidebar({
     <>
       {showLogo ? (
         <>
-          <Box
-            sx={{
-              alignItems: "center",
-              color: theme => theme.palette.text.secondary,
-              display: "flex",
-              padding: theme => theme.spacing(2)
-            }}
-          >
-            {logoSrc && (
-              <Box
-                sx={{
-                  height: 24,
-                  marginRight: theme => theme.spacing(3),
-                  width: 30
-                }}
-              >
-                <img src={logoSrc} />
-              </Box>
-            )}
-            <Typography>IPG Automotive</Typography>
-          </Box>
+          <Link href={process.env.REACT_APP_APPSTORE_URL} underline="none">
+            <Box
+              sx={{
+                alignItems: "center",
+                color: theme => theme.palette.text.secondary,
+                display: "flex",
+                padding: theme => theme.spacing(2)
+              }}
+            >
+              {logoSrc && (
+                <Box
+                  sx={{
+                    height: 24,
+                    marginRight: theme => theme.spacing(3),
+                    width: 30
+                  }}
+                >
+                  <img src={logoSrc} />
+                </Box>
+              )}
+              <Typography>IPG Automotive</Typography>
+            </Box>
+          </Link>
           <Divider sx={{ margin: theme => theme.spacing(0, 0, 1, 0) }} />
         </>
       ) : null}
