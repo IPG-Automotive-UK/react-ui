@@ -1,7 +1,7 @@
+import { render, screen } from "@testing-library/react";
 import React from "react";
 import Select from "./";
-import { render } from "@testing-library/react";
-import { selectMaterialUiSelectOption } from "../testUtils";
+import userEvent from "@testing-library/user-event";
 
 // list of options to display
 const options = [
@@ -34,12 +34,23 @@ const SelectWithState = ({ onChange, value: valueIn = "", ...rest }) => {
  */
 describe("Select", () => {
   test("can select an item", async () => {
+    const user = userEvent.setup();
     const onChange = jest.fn(event => event.target.value);
     const { container } = render(
       <SelectWithState options={options} onChange={onChange} />
     );
     const value = options[3];
-    await selectMaterialUiSelectOption(container, value);
+
+    // get the button that opens the dropdown, which is a sibling of the input
+    const selectButton = container.parentNode.querySelector("[role=button]");
+
+    // open the select dropdown
+    await user.click(selectButton);
+
+    // click the list item
+    const listItem = screen.getByText(value);
+    if (!listItem) throw new Error("No listItem");
+    await user.click(listItem);
     expect(onChange).toHaveReturnedWith(value);
   });
   test("shows error state", () => {

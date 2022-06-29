@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import PasswordResetForm from "./";
 import React from "react";
 import userEvent from "@testing-library/user-event";
@@ -21,10 +21,11 @@ function setup(inputs) {
  */
 describe("PasswordResetForm", () => {
   it("returns form information to callback when successfully validated", async () => {
+    const user = userEvent.setup();
     const onSubmit = jest.fn(data => data);
     const elements = setup({ onSubmit });
-    userEvent.type(elements.inputs.email, "joe.bloggs@domain.com");
-    fireEvent.submit(elements.submit);
+    await user.type(elements.inputs.email, "joe.bloggs@domain.com");
+    user.click(elements.submit);
     await waitFor(() =>
       expect(onSubmit).toHaveReturnedWith({
         email: "joe.bloggs@domain.com"
@@ -32,10 +33,11 @@ describe("PasswordResetForm", () => {
     );
   });
   it("shows error message with invalid email", async () => {
+    const user = userEvent.setup();
     const onSubmit = jest.fn();
     const elements = setup({ onSubmit });
-    userEvent.type(elements.inputs.email, "joe.bloggs"); // incorrect email address format
-    fireEvent.submit(elements.submit);
+    await user.type(elements.inputs.email, "joe.bloggs"); // incorrect email address format
+    user.click(elements.submit);
     await waitFor(() =>
       expect(
         screen.queryByText("Please enter a valid email address")
@@ -43,9 +45,10 @@ describe("PasswordResetForm", () => {
     );
   });
   it("displays error message to user on validation fail", async () => {
+    const user = userEvent.setup();
     const elements = setup();
-    userEvent.type(elements.inputs.email, "joe.bloggs"); // incorrect email address format
-    fireEvent.submit(elements.submit);
+    await user.type(elements.inputs.email, "joe.bloggs"); // incorrect email address format
+    user.click(elements.submit);
     await waitFor(() =>
       expect(
         screen.queryByText("Please enter a valid email address")

@@ -61,39 +61,44 @@ describe("Color", () => {
       document.querySelector(".react-colorful__alpha-pointer").style.left
     ).toBe("100%");
   });
-  test("Red Text Updates", () => {
+  test("Red Text Updates", async () => {
+    const user = userEvent.setup();
     const elements = setup();
     const input = screen.getByLabelText("Red");
-    userEvent.type(input, "{backspace}{backspace}{backspace}");
-    userEvent.type(elements.inputs.red, "201");
+    await user.type(input, "{backspace}{backspace}{backspace}");
+    await user.type(elements.inputs.red, "201");
     expect(document.querySelector("[id=red]").value).toBe("201");
   });
-  test("Green Text Updates", () => {
+  test("Green Text Updates", async () => {
+    const user = userEvent.setup();
     const elements = setup();
     const input = screen.getByLabelText("Green");
-    userEvent.type(input, "{backspace}{backspace}{backspace}");
-    userEvent.type(elements.inputs.green, "155");
+    await user.type(input, "{backspace}{backspace}{backspace}");
+    await user.type(elements.inputs.green, "155");
     expect(document.querySelector("[id=green]").value).toBe("155");
   });
-  test("Blue Text Updates", () => {
+  test("Blue Text Updates", async () => {
+    const user = userEvent.setup();
     const elements = setup();
     const input = screen.getByLabelText("Blue");
-    userEvent.type(input, "{backspace}{backspace}{backspace}");
-    userEvent.type(elements.inputs.blue, "105");
+    await user.type(input, "{backspace}{backspace}{backspace}");
+    await user.type(elements.inputs.blue, "105");
     expect(document.querySelector("[id=blue]").value).toBe("105");
   });
-  test("Alpha Text Updates", () => {
+  test("Alpha Text Updates", async () => {
+    const user = userEvent.setup();
     const elements = setup();
     const input = screen.getByLabelText("Transparency");
-    userEvent.type(input, "{backspace}");
-    userEvent.type(elements.inputs.alpha, "0.5");
+    await user.type(input, "{backspace}");
+    await user.type(elements.inputs.alpha, "0.5");
     expect(document.querySelector("[id=alpha]").value).toBe("0.5");
   });
-  test("Click swatch opens popover", () => {
+  test("Click swatch opens popover", async () => {
+    const user = userEvent.setup();
     const value = "rgba(255,55,100,1)";
     render(<ColorWithState value={value} />);
     const swatch = screen.getByTestId("swatch");
-    userEvent.click(swatch);
+    await user.click(swatch);
     expect(document.querySelector("[id=red]").value).toBe("255");
   });
   test("No initial color", () => {
@@ -107,16 +112,17 @@ describe("Color", () => {
     expect(document.querySelector("[id=alpha]").value).toBe("");
   });
   test("Click no color sets no color", async () => {
+    const user = userEvent.setup();
     const value = "rgba(255,55,100,1)";
     render(<ColorWithState value={value} />);
 
     // get swatch and click swatch
     const swatch = screen.getByTestId("swatch");
-    await userEvent.click(swatch);
+    await user.click(swatch);
 
     // click no color checkbox
     const noColor = document.querySelector("[type=checkbox]");
-    userEvent.click(noColor);
+    await user.click(noColor);
 
     // confirm RGBA and Hex values
     expect(document.querySelector("[id=red]").value).toBe("");

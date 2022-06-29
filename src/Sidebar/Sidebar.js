@@ -22,7 +22,7 @@ function Sidebar({
                 alignItems: "center",
                 color: theme => theme.palette.text.secondary,
                 display: "flex",
-                padding: theme => theme.spacing(2)
+                padding: theme => theme.spacing(2.5)
               }}
             >
               {logoSrc && (

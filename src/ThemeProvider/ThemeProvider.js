@@ -1,12 +1,14 @@
+/* eslint-disable no-undef */
 import {
   ThemeProvider as MuiThemeProvider,
   createTheme
 } from "@mui/material/styles";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import React from "react";
+import ThemeContext from "./ThemeContext";
 
-// custom material-ui theme
-const theme = createTheme({
+// custom material-ui theme for light mode
+const lightTheme = createTheme({
   overrides: {
     MuiAccordionSummary: {
       root: {
@@ -46,16 +48,52 @@ const theme = createTheme({
     action: {
       selected: "rgba(0, 95, 168, 0.08)"
     },
-    primary: { main: "#005FA8" },
-    secondary: { main: "#003063" }
+    primary: { main: "#003063" },
+    secondary: { main: "#005FA8" }
+  }
+});
+
+// custom theme for dark mode
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark"
   }
 });
 
 /**
- * IPG Material-ui theme provider
+ * IPG Material-ui theme provider and hook.
  */
 export default function ThemeProvider({ children }) {
-  return <MuiThemeProvider theme={theme}>{children}</MuiThemeProvider>;
+  // theme state
+  const [theme, setTheme] = React.useState("light");
+
+  // on first render get theme from local storage or set default to light if not set
+  useEffect(() => {
+    const storedThemeMode = localStorage.getItem("theme");
+    if (storedThemeMode) {
+      setTheme(storedThemeMode);
+    } else {
+      setTheme("light");
+      localStorage.setItem("theme", "light");
+    }
+  }, []);
+
+  // on theme change update local storage
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  // define context value
+  const value = [theme, setTheme];
+
+  // wrap mui theme provider and children in theme context
+  return (
+    <ThemeContext.Provider value={value}>
+      <MuiThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+        {children}
+      </MuiThemeProvider>
+    </ThemeContext.Provider>
+  );
 }
 
 // prop types

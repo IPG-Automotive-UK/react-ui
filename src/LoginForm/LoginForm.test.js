@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import LoginForm from "./";
 import React from "react";
 import userEvent from "@testing-library/user-event";
@@ -22,11 +22,12 @@ function setup(inputs) {
  */
 describe("LoginForm", () => {
   it("returns form information to callback when successfully validated", async () => {
+    const user = userEvent.setup();
     const onLogin = jest.fn(data => data);
     const elements = setup({ onLogin });
-    userEvent.type(elements.inputs.email, "joe.bloggs@domain.com");
-    userEvent.type(elements.inputs.password, "indigo shark wallplug");
-    fireEvent.submit(elements.submit);
+    await user.type(elements.inputs.email, "joe.bloggs@domain.com");
+    await user.type(elements.inputs.password, "indigo shark wallplug");
+    user.click(elements.submit);
     await waitFor(() =>
       expect(onLogin).toHaveReturnedWith({
         email: "joe.bloggs@domain.com",
@@ -35,16 +36,18 @@ describe("LoginForm", () => {
     );
   });
   it("doesnt call callback on validation errors", async () => {
+    const user = userEvent.setup();
     const onLogin = jest.fn();
     const elements = setup({ onLogin });
-    userEvent.type(elements.inputs.email, "joe.bloggs"); // incorrect email address format
-    fireEvent.submit(elements.submit);
+    await user.type(elements.inputs.email, "joe.bloggs"); // incorrect email address format
+    user.click(elements.submit);
     await waitFor(() => expect(onLogin).not.toHaveBeenCalled());
   });
   it("displays error message to user on validation fail", async () => {
+    const user = userEvent.setup();
     const elements = setup();
-    userEvent.type(elements.inputs.email, "joe.bloggs"); // incorrect email address format
-    fireEvent.submit(elements.submit);
+    await user.type(elements.inputs.email, "joe.bloggs"); // incorrect email address format
+    user.click(elements.submit);
     await waitFor(() =>
       expect(
         screen.queryByText("Please enter a valid email address")

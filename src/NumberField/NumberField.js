@@ -34,19 +34,53 @@ export default function NumberField({
     setNumber(value);
   }, [value]);
 
+  // helper function to round the number to the nearest step
+  const roundAccuratley = (number, decimalPlaces) => {
+    return Number(
+      Math.floor(number + "e" + decimalPlaces) + "e-" + decimalPlaces
+    );
+  };
+
+  // helper function to get the number of decimal places
+  const countDecimal = number => {
+    return number % 1 ? number.toString().split(".")[1].length : 0;
+  };
+
   // validate the number field when, number, min or max changes
   useEffect(() => {
     if (min !== undefined && number < min) {
+      // value is less than min
       setValueError(true);
       if (showMinMaxErrorMessage) {
-        setErrorMessage(`Must be greater than or equal to ${min}`);
+        setErrorMessage(`Must be greater than or equal to ${min}.`);
       }
     } else if (max !== undefined && number > max) {
+      // value is greater than max
       setValueError(true);
       if (showMinMaxErrorMessage) {
-        setErrorMessage(`Must be less than or equal to ${max}`);
+        setErrorMessage(`Must be less than or equal to ${max}.`);
       }
+    } else if (
+      number !== undefined &&
+      ((number * 100) % (step * 100)) / 100 !== 0
+    ) {
+      // value is not a multiple of step
+      setValueError(true);
+      const decimalPlaces = countDecimal(step);
+      let lowerLimit = [];
+      let upperLimit = [];
+      if (step > 1) {
+        lowerLimit = Math.floor(number / step) * step;
+        upperLimit = lowerLimit + step;
+      } else {
+        lowerLimit = roundAccuratley(+number, decimalPlaces);
+        upperLimit = roundAccuratley(+number + step, decimalPlaces);
+      }
+      setErrorMessage(
+        `Please enter a valid value. The nearest valid values are ${lowerLimit} and ${upperLimit}.`
+      );
     } else {
+      // value is valid
       setValueError(false);
       setErrorMessage("");
     }
@@ -74,8 +108,22 @@ export default function NumberField({
       maxSatisfied = false;
     }
 
+    // check if value is multiple of step
+    let stepSatisfied = true;
+    if (
+      newValue !== undefined &&
+      ((newValue * 100) % (step * 100)) / 100 !== 0
+    ) {
+      stepSatisfied = false;
+    }
+
     // if the value is valid, set error to false
-    if (minSatisfied && maxSatisfied && event.target.value !== "") {
+    if (
+      minSatisfied &&
+      maxSatisfied &&
+      stepSatisfied &&
+      event.target.value !== ""
+    ) {
       setValueError(false);
       setErrorMessage("");
       onChange(updatedEvent);
@@ -115,16 +163,16 @@ export default function NumberField({
       required={required}
       size={size}
       type="Number"
-      value={number}
+      value={number || ""}
       variant={variant}
       InputProps={{
         ...endAdornmentInputProperty,
         ...startAdornmentInputProperty
       }}
       inputProps={{
-        max: max,
-        min: min,
-        step: step
+        max,
+        min,
+        step
       }}
       sx={
         !stepper
