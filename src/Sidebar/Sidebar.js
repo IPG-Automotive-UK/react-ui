@@ -6,39 +6,49 @@ import React from "react";
 function Sidebar({
   appVersion,
   children,
-  logoLinkUrl = "#",
+  logoLinkUrl = null,
   logoSrc,
   showLogo = true,
   showVersion = true
 }) {
   // define components
+  const logoBox = (
+    <>
+      <Box
+        sx={{
+          alignItems: "center",
+          color: theme => theme.palette.text.secondary,
+          display: "flex",
+          padding: theme => theme.spacing(2.5)
+        }}
+      >
+        {logoSrc && (
+          <Box
+            sx={{
+              height: 24,
+              marginRight: theme => theme.spacing(3),
+              width: 30
+            }}
+          >
+            <img src={logoSrc} />
+          </Box>
+        )}
+        <Typography>IPG Automotive</Typography>
+      </Box>
+    </>
+  );
+
   return (
     <>
       {showLogo ? (
         <>
-          <Link href={logoLinkUrl} underline="none">
-            <Box
-              sx={{
-                alignItems: "center",
-                color: theme => theme.palette.text.secondary,
-                display: "flex",
-                padding: theme => theme.spacing(2.5)
-              }}
-            >
-              {logoSrc && (
-                <Box
-                  sx={{
-                    height: 24,
-                    marginRight: theme => theme.spacing(3),
-                    width: 30
-                  }}
-                >
-                  <img src={logoSrc} />
-                </Box>
-              )}
-              <Typography>IPG Automotive</Typography>
-            </Box>
-          </Link>
+          {logoLinkUrl ? (
+            <Link href={logoLinkUrl} underline="none">
+              {logoBox}
+            </Link>
+          ) : (
+            logoBox
+          )}
           <Divider sx={{ margin: theme => theme.spacing(0, 0, 1, 0) }} />
         </>
       ) : null}
@@ -68,7 +78,7 @@ Sidebar.propTypes = {
    */
   children: PropTypes.node,
   /**
-   * A String of the href URL for the Link of the IPG Logo, default is '#'
+   * A String of the href URL for the Link of the IPG Logo, default is null (link disabled)
    */
   logoLinkUrl: PropTypes.string,
   /**

@@ -31,7 +31,7 @@ describe("Sidebar", () => {
   });
   it("has empty logo link href on default", () => {
     const { container } = render(<Sidebar />);
-    expect(container.querySelector("a[href='#']")).toBeInTheDocument();
+    expect(container.querySelector("a")).not.toBeInTheDocument();
   });
   it("has a valid logo link href if a string is provided", () => {
     const { container } = render(
