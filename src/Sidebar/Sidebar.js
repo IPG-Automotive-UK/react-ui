@@ -1,4 +1,4 @@
-import { Box, Divider, Typography, Link } from "@mui/material";
+import { Box, Divider, Link, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -6,10 +6,10 @@ import React from "react";
 function Sidebar({
   appVersion,
   children,
+  logoLinkUrl = "#",
   logoSrc,
   showLogo = true,
-  showVersion = true,
-  logoLinkUrl = '#'
+  showVersion = true
 }) {
   // define components
   return (
@@ -68,6 +68,10 @@ Sidebar.propTypes = {
    */
   children: PropTypes.node,
   /**
+   * A String of the href URL for the Link of the IPG Logo, default is '#'
+   */
+  logoLinkUrl: PropTypes.string,
+  /**
    * Image source for logo displayed at top of sidebar
    */
   logoSrc: PropTypes.string,
@@ -78,11 +82,7 @@ Sidebar.propTypes = {
   /**
    * Boolean to determine if version should be displayed at the bottom of the sidebar
    */
-  showVersion: PropTypes.bool,
-  /**
-   * A String of the href URL for the Link of the IPG Logo, default is '#'
-   */
-  logoLinkUrl: PropTypes.string
+  showVersion: PropTypes.bool
 };
 
 export default Sidebar;
