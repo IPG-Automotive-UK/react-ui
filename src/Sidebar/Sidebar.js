@@ -9,14 +9,14 @@ function Sidebar({
   logoSrc,
   showLogo = true,
   showVersion = true,
-  logoLinkUrl = null
+  logoLinkUrl = '#'
 }) {
   // define components
   return (
     <>
       {showLogo ? (
         <>
-          <Link {...logoLinkUrl ? (href={logoLinkUrl}) : null} underline="none">
+          <Link href={logoLinkUrl} underline="none">
             <Box
               sx={{
                 alignItems: "center",
@@ -78,7 +78,11 @@ Sidebar.propTypes = {
   /**
    * Boolean to determine if version should be displayed at the bottom of the sidebar
    */
-  showVersion: PropTypes.bool
+  showVersion: PropTypes.bool,
+  /**
+   * A String of the href URL for the Link of the IPG Logo, default is '#'
+   */
+  logoLinkUrl: PropTypes.string
 };
 
 export default Sidebar;
