@@ -29,4 +29,10 @@ describe("Sidebar", () => {
       container.querySelector("img[src='/path/img.png']")
     ).not.toBeInTheDocument();
   });
+  it("has no 'back to' link on default", () => {
+    const { container } = render(
+      <Sidebar />
+    );
+    expect(container.querySelector("href")).not.toBeInTheDocument();
+  });
 });

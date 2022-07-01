@@ -1,5 +1,4 @@
-import { Box, Divider, Typography } from "@mui/material";
-import Link from "@mui/material/Link";
+import { Box, Divider, Typography, Link } from "@mui/material";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -9,14 +8,15 @@ function Sidebar({
   children,
   logoSrc,
   showLogo = true,
-  showVersion = true
+  showVersion = true,
+  logoLinkUrl = null
 }) {
   // define components
   return (
     <>
       {showLogo ? (
         <>
-          <Link href={process.env.REACT_APP_APPSTORE_URL} underline="none">
+          <Link {...logoLinkUrl ? (href={logoLinkUrl}) : null} underline="none">
             <Box
               sx={{
                 alignItems: "center",
