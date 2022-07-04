@@ -29,4 +29,16 @@ describe("Sidebar", () => {
       container.querySelector("img[src='/path/img.png']")
     ).not.toBeInTheDocument();
   });
+  it("has empty logo link href on default", () => {
+    const { container } = render(<Sidebar />);
+    expect(container.querySelector("a")).not.toBeInTheDocument();
+  });
+  it("has a valid logo link href if a string is provided", () => {
+    const { container } = render(
+      <Sidebar logoLinkUrl={"https://www.some.url/"} />
+    );
+    expect(
+      container.querySelector("a[href='https://www.some.url/']")
+    ).toBeInTheDocument();
+  });
 });

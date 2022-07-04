@@ -120,3 +120,22 @@ IconsOnly.args = {
   showVersion: false,
   width: 60
 };
+
+// Custom Logo Link story
+export const CustomLogoLink = Template.bind({});
+CustomLogoLink.args = {
+  appVersion: `v${version}`,
+  children: (
+    <>
+      <SidebarItem {...SidebarItemDefault.args} />
+      <SidebarItem {...SidebarItemSelected.args} />
+      <SidebarDivider />
+      <SidebarItem {...SidebarItemDisabled.args} />
+      <SidebarItem {...SidebarItemWithCount.args} />
+    </>
+  ),
+  logoLinkUrl: "https://ipg-automotive.com",
+  logoSrc: "/ipgLogoNoText.png",
+  showLogo: true,
+  showVersion: true
+};
