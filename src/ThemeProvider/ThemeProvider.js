@@ -70,7 +70,8 @@ const darkTheme = createTheme({
   overrides: {
     MuiPaper: {
       root: {
-        borderColor: theme => theme.palette.text.secondary
+        // "border-color": theme => theme.palette.text.secondary
+        "border-color": "theme => theme.palette.text.secondary"
       }
     }
   }
