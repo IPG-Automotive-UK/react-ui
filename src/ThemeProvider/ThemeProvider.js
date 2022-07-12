@@ -63,8 +63,16 @@ const darkTheme = createTheme({
       })
     }
   },
+
   palette: {
     mode: "dark"
+  },
+  overrides: {
+    MuiPaper: {
+      root: {
+        borderColor: theme => theme.palette.text.secondary
+      }
+    }
   }
 });
 
