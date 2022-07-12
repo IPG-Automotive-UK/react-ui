@@ -71,7 +71,7 @@ const darkTheme = createTheme({
     MuiPaper: {
       root: {
         // "border-color": theme => theme.palette.text.secondary
-        "border-color": "theme => theme.palette.text.secondary"
+        "border-color": "grey"
       }
     }
   }
