@@ -18,7 +18,7 @@ export default function SearchBar({
         alignItems: "center",
         borderColor: theme =>
           theme.palette.mode === "light"
-            ? "rgba(0, 0, 0, 0.23)"
+            ? "theme=>theme.palette.divider"
             : "theme => theme.palette.text.secondary",
         display: "flex",
         marginBottom: theme => theme.spacing(2),
