@@ -16,7 +16,6 @@ export default function SearchBar({
       variant="outlined"
       sx={{
         alignItems: "center",
-        borderColor: "rgba(0, 0, 0, 0.23)",
         display: "flex",
         marginBottom: theme => theme.spacing(2),
         marginTop: theme => theme.spacing(2)
