@@ -16,10 +16,6 @@ export default function SearchBar({
       variant="outlined"
       sx={{
         alignItems: "center",
-        borderColor: theme =>
-          theme.palette.mode === "light"
-            ? "theme=>theme.palette.divider"
-            : "theme => theme.palette.text.secondary",
         display: "flex",
         marginBottom: theme => theme.spacing(2),
         marginTop: theme => theme.spacing(2)
