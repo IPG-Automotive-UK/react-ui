@@ -26,6 +26,7 @@ export { default as Snackbar } from "./Snackbar";
 export { SnackbarProvider, useSnackbar } from "./SnackbarProvider";
 export { default as SwitchField } from "./SwitchField";
 export { default as TextField } from "./TextField";
+export { default as TransferList } from "./TransferList";
 export { ThemeProvider, useTheme } from "./ThemeProvider";
 export { default as ToggleColorMode } from "./ToggleColorMode";
 export { default as UserMenu } from "./UserMenu";
