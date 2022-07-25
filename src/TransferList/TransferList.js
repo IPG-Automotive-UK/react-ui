@@ -114,7 +114,7 @@ export default function TransferList({
               return (
                 <ListItem
                   key={value}
-                  role="listitem"
+                  role="listitem1"
                   button
                   onClick={() => handleToggle(value)}
                   disablePadding
@@ -152,13 +152,16 @@ export default function TransferList({
           }}
         >
           {selectedItems.length === 0 ? (
-            <Typography sx={{ pl: 1, pt: 1 }}>None Selected</Typography>
+            <Typography data-testid="none-selected" sx={{ pl: 1, pt: 1 }}>
+              None Selected
+            </Typography>
           ) : (
             <>
               <Typography sx={{ pl: 1, pt: 1 }}>
                 {`${selectedItems.length} selected`}
               </Typography>
               <Button
+                data-testid="clear-all"
                 variant="text"
                 sx={{ position: "absolute", right: 2, top: 2 }}
                 onClick={() => onChange([])}
@@ -174,16 +177,16 @@ export default function TransferList({
             width: "100%"
           }}
         >
-          <List dense component="div" role="list">
+          <List dense component="div" role="sortedlist">
             {selectedItems.map(value => {
               return (
                 <ListItem
                   key={value}
-                  role="listitem"
+                  role="listitem2"
                   onClick={() => handleToggle(value)}
                   secondaryAction={
                     <IconButton edge="end">
-                      <CloseIcon />
+                      <CloseIcon data-testid="close" />
                     </IconButton>
                   }
                 >
