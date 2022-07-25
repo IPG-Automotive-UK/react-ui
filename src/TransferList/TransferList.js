@@ -1,7 +1,9 @@
 import {
+  Box,
   Button,
   Checkbox,
   IconButton,
+  InputBase,
   List,
   ListItem,
   ListItemIcon,
@@ -9,9 +11,7 @@ import {
   Typography
 } from "@mui/material";
 import { React, useEffect, useState } from "react";
-import Box from "@mui/material/Box";
 import CloseIcon from "@mui/icons-material/Close";
-import InputBase from "@mui/material/InputBase";
 import PropTypes from "prop-types";
 import SearchIcon from "@mui/icons-material/Search";
 
@@ -216,7 +216,7 @@ TransferList.propTypes = {
    * function(newItems) => void
    * ```
    *
-   * _newItems_: The new item that has been selected
+   * _newItems_: The new items that have been selected
    */
   onChange: PropTypes.func,
   /**
