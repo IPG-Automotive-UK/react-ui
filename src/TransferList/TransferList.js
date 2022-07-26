@@ -206,7 +206,7 @@ TransferList.propTypes = {
    * Array of Items.
    */
   items: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object])
   ),
   /**
    * Callback fired when the new item is selected.
@@ -223,6 +223,6 @@ TransferList.propTypes = {
    * Array of selectedItems.
    */
   selectedItems: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object])
   )
 };
