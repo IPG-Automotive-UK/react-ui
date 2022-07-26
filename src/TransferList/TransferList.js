@@ -10,7 +10,7 @@ import {
   ListItemText,
   Typography
 } from "@mui/material";
-import { React, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import PropTypes from "prop-types";
 import SearchIcon from "@mui/icons-material/Search";
