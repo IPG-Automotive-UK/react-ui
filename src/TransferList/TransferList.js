@@ -106,6 +106,7 @@ export default function TransferList({
           sx={{
             borderRight: theme => `1px solid ${theme.palette.divider}`,
             height: "100%",
+            overflowY: "auto",
             width: "100%"
           }}
         >
@@ -174,6 +175,7 @@ export default function TransferList({
         <Box
           sx={{
             height: "100%",
+            overflowY: "auto",
             width: "100%"
           }}
         >
@@ -206,7 +208,7 @@ TransferList.propTypes = {
    * Array of Items.
    */
   items: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object])
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   ),
   /**
    * Callback fired when the new item is selected.
@@ -223,6 +225,6 @@ TransferList.propTypes = {
    * Array of selectedItems.
    */
   selectedItems: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object])
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   )
 };
