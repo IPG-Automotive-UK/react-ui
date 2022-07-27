@@ -76,7 +76,7 @@ export default function TransferList({
             borderBottom: theme => `1px solid ${theme.palette.divider}`,
             borderRight: theme => `1px solid ${theme.palette.divider}`,
             display: "flex",
-            height: "40px",
+            height: "35px",
             width: "100%"
           }}
         >
@@ -102,41 +102,41 @@ export default function TransferList({
         </Box>
         <Box
           sx={{
-            borderRight: theme => `1px solid ${theme.palette.divider}`,
             height: "100%",
+            overflowX: "hidden",
+            overflowY: "auto",
             width: "100%"
           }}
         >
-          <List
-            dense
-            component="div"
-            role="list"
+          <Box
             sx={{
-              maxHeight: "calc(100vh - 300px)",
-              overflow: "auto"
+              borderRight: theme => `1px solid ${theme.palette.divider}`,
+              width: "100%"
             }}
           >
-            {filteredItems.map(value => {
-              return (
-                <ListItem
-                  key={value}
-                  role="listitem1"
-                  button
-                  onClick={() => handleToggle(value)}
-                  disablePadding
-                >
-                  <ListItemIcon>
-                    <Checkbox
-                      checked={selectedItems.indexOf(value) !== -1}
-                      disableRipple
-                    />
-                  </ListItemIcon>
-                  <ListItemText primary={value} />
-                </ListItem>
-              );
-            })}
-            <ListItem />
-          </List>
+            <List dense component="div" role="list">
+              {filteredItems.map(value => {
+                return (
+                  <ListItem
+                    key={value}
+                    role="listitem1"
+                    button
+                    onClick={() => handleToggle(value)}
+                    disablePadding
+                  >
+                    <ListItemIcon>
+                      <Checkbox
+                        checked={selectedItems.indexOf(value) !== -1}
+                        disableRipple
+                      />
+                    </ListItemIcon>
+                    <ListItemText primary={value} />
+                  </ListItem>
+                );
+              })}
+              <ListItem />
+            </List>
+          </Box>
         </Box>
       </Box>
       <Box
@@ -180,36 +180,36 @@ export default function TransferList({
         <Box
           sx={{
             height: "100%",
+            overflowX: "hidden",
+            overflowY: "auto",
             width: "100%"
           }}
         >
-          <List
-            dense
-            component="div"
-            role="sortedlist"
+          <Box
             sx={{
-              maxHeight: "calc(100vh - 300px)",
-              overflow: "auto"
+              width: "100%"
             }}
           >
-            {selectedItems.map(value => {
-              return (
-                <ListItem
-                  key={value}
-                  role="listitem2"
-                  onClick={() => handleToggle(value)}
-                  secondaryAction={
-                    <IconButton edge="end">
-                      <CloseIcon data-testid="close" />
-                    </IconButton>
-                  }
-                >
-                  <ListItemText primary={value} />
-                </ListItem>
-              );
-            })}
-            <ListItem />
-          </List>
+            <List dense component="div" role="sortedlist">
+              {selectedItems.map(value => {
+                return (
+                  <ListItem
+                    key={value}
+                    role="listitem2"
+                    onClick={() => handleToggle(value)}
+                    secondaryAction={
+                      <IconButton edge="end">
+                        <CloseIcon data-testid="close" />
+                      </IconButton>
+                    }
+                  >
+                    <ListItemText primary={value} />
+                  </ListItem>
+                );
+              })}
+              <ListItem />
+            </List>
+          </Box>
         </Box>
       </Box>
     </Box>

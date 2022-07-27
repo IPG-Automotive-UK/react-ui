@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import React from "react";
 import TransferList from "./TransferList";
 import { action } from "@storybook/addon-actions";
@@ -7,7 +8,7 @@ export default {
   title: "General/TransferList"
 };
 const Template = args => {
-  const items = ["Apples", "Pears", "Oranges"];
+  const items = ["Apples", "Pears", "Oranges", "Grapes", "Berries", "Peaches"];
   // local state for selected items
   const [selectedItems, setSelectedItems] = React.useState(["Apples"]);
   React.useEffect(
@@ -22,12 +23,14 @@ const Template = args => {
   };
 
   return (
-    <TransferList
-      {...args}
-      items={items}
-      selectedItems={selectedItems}
-      onChange={onChange}
-    />
+    <Box sx={{ height: 200 }}>
+      <TransferList
+        {...args}
+        items={items}
+        selectedItems={selectedItems}
+        onChange={onChange}
+      />
+    </Box>
   );
 };
 
