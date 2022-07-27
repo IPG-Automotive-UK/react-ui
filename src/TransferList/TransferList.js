@@ -53,7 +53,6 @@ export default function TransferList({
     }
     onChange(newSelectedItems.sort());
   };
-
   // define list components
   return (
     <Box
@@ -102,15 +101,22 @@ export default function TransferList({
           )}
         </Box>
         <Box
-          minHeight={items.length * 50}
+          minHeight={items.length * 20}
           sx={{
             borderRight: theme => `1px solid ${theme.palette.divider}`,
             height: "100%",
-            overflowY: "auto",
             width: "100%"
           }}
         >
-          <List dense component="div" role="list">
+          <List
+            dense
+            component="div"
+            role="list"
+            sx={{
+              maxHeight: "calc(100vh - 200px)",
+              overflow: "auto"
+            }}
+          >
             {filteredItems.map(value => {
               return (
                 <ListItem
@@ -175,11 +181,18 @@ export default function TransferList({
         <Box
           sx={{
             height: "100%",
-            overflowY: "auto",
             width: "100%"
           }}
         >
-          <List dense component="div" role="sortedlist">
+          <List
+            dense
+            component="div"
+            role="sortedlist"
+            sx={{
+              maxHeight: "calc(100vh - 200px)",
+              overflow: "auto"
+            }}
+          >
             {selectedItems.map(value => {
               return (
                 <ListItem
