@@ -101,7 +101,6 @@ export default function TransferList({
           )}
         </Box>
         <Box
-          minHeight={items.length * 20}
           sx={{
             borderRight: theme => `1px solid ${theme.palette.divider}`,
             height: "100%",
