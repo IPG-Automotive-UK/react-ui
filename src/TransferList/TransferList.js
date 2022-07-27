@@ -112,7 +112,7 @@ export default function TransferList({
             component="div"
             role="list"
             sx={{
-              maxHeight: "calc(100vh - 200px)",
+              maxHeight: "calc(100vh - 300px)",
               overflow: "auto"
             }}
           >
@@ -188,7 +188,7 @@ export default function TransferList({
             component="div"
             role="sortedlist"
             sx={{
-              maxHeight: "calc(100vh - 200px)",
+              maxHeight: "calc(100vh - 300px)",
               overflow: "auto"
             }}
           >
