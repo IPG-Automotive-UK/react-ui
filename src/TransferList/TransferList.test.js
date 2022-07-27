@@ -30,16 +30,17 @@ const SelectedItemsWithState = ({
 
 describe("TransferList", () => {
   test("On click clearAll button should has text 'None Selected'", () => {
+    // render component
     const user = userEvent.setup();
     const onChange = jest.fn();
-    // render component
     const { container } = render(
-      <SelectedItemsWithState onChange={onChange} selectedItem={[]} />
+      <SelectedItemsWithState onChange={onChange} />
     );
 
-    // click button Clear All
+    // click clear button
     user.click(screen.queryByTestId("clear-all"));
 
+    // check selections have been cleared
     expect(container.querySelector(".MuiTypography-body1").textContent).toBe(
       "None Selected"
     );
@@ -47,27 +48,26 @@ describe("TransferList", () => {
   });
 
   test("on search filter the list items", async () => {
-    const user = userEvent.setup();
     // render component
+    const user = userEvent.setup();
     const { container } = render(<SelectedItemsWithState />);
 
+    // type in search input
     const inputBase = container.querySelector(".MuiInputBase-input");
     await user.type(inputBase, "p");
 
-    // get items list
+    // check if the list has been filtered
     const list = screen.getByRole("list");
     const { getAllByRole } = within(list);
     const items = getAllByRole("listitem1");
-
     expect(items[0].textContent).toBe("Apples");
     expect(items[1].textContent).toBe("Pears");
   });
 
   test("test selected item in the list", async () => {
+    // render component
     const user = userEvent.setup();
     const onChange = jest.fn();
-
-    // render component
     render(
       <SelectedItemsWithState
         onChange={onChange}
@@ -76,27 +76,28 @@ describe("TransferList", () => {
       />
     );
 
-    // get items list
+    // select item
     const list = screen.getByRole("list");
     const { getAllByRole } = within(list);
     const items = getAllByRole("listitem1");
-
     await user.click(items[1]);
+
+    // check if the item has been selected
     expect(onChange).toHaveBeenCalledWith(["Pears"]);
   });
 
   test("On cancel selected item should show text 'None Selected'", () => {
+    // render component
     const user = userEvent.setup();
     const onChange = jest.fn();
-
-    // render component
     const { container } = render(
       <SelectedItemsWithState onChange={onChange} selectedItem={[]} />
     );
 
-    // click close icon
+    // click close button
     user.click(screen.queryByTestId("close"));
 
+    // check selections have been cleared
     expect(container.querySelector(".MuiTypography-body1").textContent).toBe(
       "None Selected"
     );
