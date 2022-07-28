@@ -167,7 +167,7 @@ export default function TransferList({
                 {`${selectedItems.length} selected`}
               </Typography>
               <Button
-                data-testid="clear-all"
+                data-testid="clear-all-button"
                 variant="text"
                 sx={{ position: "absolute", right: 2, top: 2 }}
                 onClick={() => onChange([])}

@@ -14,9 +14,9 @@ const SelectedItemsWithState = ({
   ...rest
 }) => {
   const [selectedItems, setSelectedItems] = React.useState(selectedItemsIn);
-  const handleChange = selectedItem => {
-    setSelectedItems(selectedItems);
-    onChange && onChange(selectedItems);
+  const handleChange = newSelections => {
+    setSelectedItems(newSelections);
+    onChange && onChange(newSelections);
   };
   return (
     <TransferList
@@ -29,7 +29,7 @@ const SelectedItemsWithState = ({
 };
 
 describe("TransferList", () => {
-  test("On click clearAll button should has text 'None Selected'", () => {
+  test("Clicking clear all button clears selections", async () => {
     // render component
     const user = userEvent.setup();
     const onChange = jest.fn();
@@ -38,7 +38,8 @@ describe("TransferList", () => {
     );
 
     // click clear button
-    user.click(screen.queryByTestId("clear-all"));
+    const button = screen.getByTestId("clear-all-button");
+    await user.click(button);
 
     // check selections have been cleared
     expect(container.querySelector(".MuiTypography-body1").textContent).toBe(
@@ -47,7 +48,7 @@ describe("TransferList", () => {
     expect(onChange).toHaveBeenCalledWith([]);
   });
 
-  test("on search filter the list items", async () => {
+  test("Search filters the list items", async () => {
     // render component
     const user = userEvent.setup();
     const { container } = render(<SelectedItemsWithState />);
@@ -56,7 +57,7 @@ describe("TransferList", () => {
     const inputBase = container.querySelector(".MuiInputBase-input");
     await user.type(inputBase, "p");
 
-    // check if the list has been filtered
+    // check if the left list has been filtered
     const list = screen.getByRole("list");
     const { getAllByRole } = within(list);
     const items = getAllByRole("listitem1");
@@ -64,7 +65,7 @@ describe("TransferList", () => {
     expect(items[1].textContent).toBe("Pears");
   });
 
-  test("test selected item in the list", async () => {
+  test("Can select a list item", async () => {
     // render component
     const user = userEvent.setup();
     const onChange = jest.fn();
@@ -86,16 +87,17 @@ describe("TransferList", () => {
     expect(onChange).toHaveBeenCalledWith(["Pears"]);
   });
 
-  test("On cancel selected item should show text 'None Selected'", () => {
+  test("Can remove a list item selection", async () => {
     // render component
     const user = userEvent.setup();
     const onChange = jest.fn();
     const { container } = render(
-      <SelectedItemsWithState onChange={onChange} selectedItem={[]} />
+      <SelectedItemsWithState onChange={onChange} />
     );
 
-    // click close button
-    user.click(screen.queryByTestId("close"));
+    // remove selected item
+    const listItem = screen.getByRole("listitem2");
+    await user.click(listItem);
 
     // check selections have been cleared
     expect(container.querySelector(".MuiTypography-body1").textContent).toBe(
