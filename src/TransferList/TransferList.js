@@ -76,7 +76,7 @@ export default function TransferList({
             borderBottom: theme => `1px solid ${theme.palette.divider}`,
             borderRight: theme => `1px solid ${theme.palette.divider}`,
             display: "flex",
-            height: "35px",
+            height: "33px",
             width: "100%"
           }}
         >
@@ -102,6 +102,7 @@ export default function TransferList({
         </Box>
         <Box
           sx={{
+            borderRight: theme => `1px solid ${theme.palette.divider}`,
             height: "100%",
             overflowX: "hidden",
             overflowY: "auto",
@@ -110,7 +111,6 @@ export default function TransferList({
         >
           <Box
             sx={{
-              borderRight: theme => `1px solid ${theme.palette.divider}`,
               width: "100%"
             }}
           >
@@ -187,6 +187,7 @@ export default function TransferList({
         >
           <Box
             sx={{
+              // borderLeft: theme => `1px solid ${theme.palette.divider}`,
               width: "100%"
             }}
           >

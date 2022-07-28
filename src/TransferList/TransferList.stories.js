@@ -8,7 +8,6 @@ export default {
   title: "General/TransferList"
 };
 const Template = args => {
-  const items = ["Apples", "Pears", "Oranges", "Grapes", "Berries", "Peaches"];
   // local state for selected items
   const [selectedItems, setSelectedItems] = React.useState(["Apples"]);
   React.useEffect(
@@ -26,7 +25,6 @@ const Template = args => {
     <Box sx={{ height: 200 }}>
       <TransferList
         {...args}
-        items={items}
         selectedItems={selectedItems}
         onChange={onChange}
       />
@@ -36,6 +34,6 @@ const Template = args => {
 
 export const Default = Template.bind({});
 Default.args = {
-  items: ["Apples", "Pears", "Oranges"],
+  items: ["Apples", "Pears", "Oranges", "Banana", "Mangoes"],
   selectedItems: ["Apples"]
 };
