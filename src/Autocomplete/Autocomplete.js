@@ -22,7 +22,6 @@ export default function Autocomplete({
   return (
     <MuiAutocomplete
       disabled={disabled}
-      isOptionEqualToValue={(option, value) => option.value === value.value}
       onChange={onChange}
       options={options}
       size={size}

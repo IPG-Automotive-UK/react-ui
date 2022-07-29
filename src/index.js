@@ -28,5 +28,6 @@ export { default as SwitchField } from "./SwitchField";
 export { default as TextField } from "./TextField";
 export { ThemeProvider, useTheme } from "./ThemeProvider";
 export { default as ToggleColorMode } from "./ToggleColorMode";
+export { default as TransferList } from "./TransferList";
 export { default as UserMenu } from "./UserMenu";
 export { UserAvatar, useColorMap } from "./UserAvatar";
