@@ -76,7 +76,7 @@ export default function TransferList({
             borderBottom: theme => `1px solid ${theme.palette.divider}`,
             borderRight: theme => `1px solid ${theme.palette.divider}`,
             display: "flex",
-            height: "33px",
+            height: "50px",
             width: "100%"
           }}
         >
@@ -152,7 +152,7 @@ export default function TransferList({
             borderBottom: theme => `1px solid ${theme.palette.divider}`,
             disply: "flex",
             flexDirection: "column",
-            height: "40px",
+            height: "50px",
             position: "relative",
             width: "100%"
           }}
