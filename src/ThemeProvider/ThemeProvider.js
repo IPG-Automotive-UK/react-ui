@@ -7,9 +7,27 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import ThemeContext from "./ThemeContext";
 import darkScrollbar from "@mui/material/darkScrollbar";
+import { grey } from "@mui/material/colors";
 
 // custom material-ui theme for light mode
 const lightTheme = createTheme({
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: themeParam => ({
+        body: {
+          ...darkScrollbar(
+            themeParam.palette.mode === "light"
+              ? {
+                  active: grey[400],
+                  thumb: grey[400],
+                  track: grey[200]
+                }
+              : undefined
+          )
+        }
+      })
+    }
+  },
   overrides: {
     MuiAccordionSummary: {
       root: {
