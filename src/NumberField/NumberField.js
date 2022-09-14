@@ -20,7 +20,7 @@ export default function NumberField({
   showMinMaxErrorMessage = true,
   size = "medium",
   startAdornment = null,
-  step = 1,
+  step,
   stepper = true,
   value,
   variant = "outlined"
@@ -62,6 +62,7 @@ export default function NumberField({
       }
     } else if (
       number !== undefined &&
+      step !== undefined &&
       ((number * 100) % (step * 100)) / 100 !== 0
     ) {
       // value is not a multiple of step
