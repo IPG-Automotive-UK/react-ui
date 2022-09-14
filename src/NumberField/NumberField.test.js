@@ -111,7 +111,7 @@ describe("NumberField", () => {
     expect(inputBase.value).toBe("10");
     expect(onChange).toHaveBeenCalled();
   });
-  test("can create component with an initial value of 0", async () => {
+  test("can create component with an initial value of 0", () => {
     const { container } = render(
       <NumberField min={0} max={100} step={10} value={0} />
     );
@@ -120,7 +120,7 @@ describe("NumberField", () => {
     const inputBase = container.querySelector(".MuiInputBase-input");
     expect(inputBase.value).toBe("0");
   });
-  test("does not show error when value is not an integer and no step has been provided", async () => {
+  test("does not show error when value is not an integer and no step has been provided", () => {
     const { container } = render(
       <NumberFieldWithState min={0} max={100} value={0.2} />
     );
