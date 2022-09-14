@@ -163,7 +163,7 @@ export default function NumberField({
       required={required}
       size={size}
       type="Number"
-      value={number || ""}
+      value={number}
       variant={variant}
       InputProps={{
         ...endAdornmentInputProperty,
