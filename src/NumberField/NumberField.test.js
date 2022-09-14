@@ -115,6 +115,8 @@ describe("NumberField", () => {
     const { container } = render(
       <NumberField min={0} max={100} step={10} value={0} />
     );
+
+    // the value should be 0
     const inputBase = container.querySelector(".MuiInputBase-input");
     expect(inputBase.value).toBe("0");
   });
@@ -123,6 +125,7 @@ describe("NumberField", () => {
       <NumberFieldWithState min={0} max={100} value={0.2} />
     );
 
+    // there should be no helper text (which parents the error message)
     const errorBase = container.querySelector(".MuiFormHelperText-root");
     expect(errorBase).toBe(null);
   });
