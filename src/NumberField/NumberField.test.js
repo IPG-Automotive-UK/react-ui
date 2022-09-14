@@ -111,4 +111,19 @@ describe("NumberField", () => {
     expect(inputBase.value).toBe("10");
     expect(onChange).toHaveBeenCalled();
   });
+  test("can create component with an initial value of 0", async () => {
+    const { container } = render(
+      <NumberField min={0} max={100} step={10} value={0} />
+    );
+    const inputBase = container.querySelector(".MuiInputBase-input");
+    expect(inputBase.value).toBe("0");
+  });
+  test("does not show error when value is not an integer and no step has been provided", async () => {
+    const { container } = render(
+      <NumberFieldWithState min={0} max={100} value={0.2} />
+    );
+
+    const errorBase = container.querySelector(".MuiFormHelperText-root");
+    expect(errorBase).toBe(null);
+  });
 });
