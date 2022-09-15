@@ -139,7 +139,7 @@ describe("NumberField", () => {
     // onChange should have been called
     expect(onChange).toHaveBeenCalled();
   });
-  test("onChange is called when a value is enterd to component with no step set", async () => {
+  test("onChange is called when a value is entered to component with no step set", async () => {
     const onChange = jest.fn();
     const user = userEvent.setup();
     const { container } = render(<NumberField onChange={onChange} />);
@@ -149,7 +149,7 @@ describe("NumberField", () => {
     // onChange should have been called
     expect(onChange).toHaveBeenCalled();
   });
-  test("onChange is called when a value is enterd to component with step set and value is valid", async () => {
+  test("onChange is called when a value is entered to component with step set and value is valid", async () => {
     const onChange = jest.fn();
     const user = userEvent.setup();
     const { container } = render(<NumberField onChange={onChange} step={1} />);
@@ -159,7 +159,7 @@ describe("NumberField", () => {
     // onChange should have been called
     expect(onChange).toHaveBeenCalled();
   });
-  test("onChange is not called when a value is entered to a  component with step set and value is invalid", async () => {
+  test("onChange is not called when a value is entered to a component with step set and value is invalid", async () => {
     const onChange = jest.fn();
     const user = userEvent.setup();
     const { container } = render(<NumberField onChange={onChange} step={10} />);
@@ -169,7 +169,7 @@ describe("NumberField", () => {
     // onChange should not be called
     expect(onChange).not.toHaveBeenCalled();
   });
-  test("onChange is called when value is to a component with a max value set and entered value is valid", async () => {
+  test("onChange is called when a value is entered to a component with a max value set and entered value is valid", async () => {
     const onChange = jest.fn();
     const user = userEvent.setup();
     const { container } = render(<NumberField onChange={onChange} max={10} />);
@@ -179,17 +179,17 @@ describe("NumberField", () => {
     // onChange should have been called
     expect(onChange).toHaveBeenCalled();
   });
-  test("onChange is not called when value is to a component with a max value set and entered value is invalid", async () => {
+  test("onChange is not called when a value is entered to a component with a max value set and entered value is invalid", async () => {
     const onChange = jest.fn();
     const user = userEvent.setup();
     const { container } = render(<NumberField onChange={onChange} max={10} />);
     const inputBase = container.querySelector(".MuiInputBase-input");
-    await user.type(inputBase, "42");
+    await user.type(inputBase, "24");
 
-    // onChange should have been called
-    expect(onChange).not.toHaveBeenCalled();
+    // onChange should have been called only once
+    expect(onChange).toHaveBeenCalledTimes(1);
   });
-  test("onChange is called when value is to a component with a min value set and entered value is valid", async () => {
+  test("onChange is called when a value is entered to a component with a min value set and entered value is valid", async () => {
     const onChange = jest.fn();
     const user = userEvent.setup();
     const { container } = render(<NumberField onChange={onChange} min={10} />);
@@ -199,7 +199,7 @@ describe("NumberField", () => {
     // onChange should have been called
     expect(onChange).toHaveBeenCalled();
   });
-  test("onChange is not called when value is to a component with a min value set and entered value is invalid", async () => {
+  test("onChange is not called when a value is entered to a component with a min value set and entered value is invalid", async () => {
     const onChange = jest.fn();
     const user = userEvent.setup();
     const { container } = render(<NumberField onChange={onChange} min={10} />);
