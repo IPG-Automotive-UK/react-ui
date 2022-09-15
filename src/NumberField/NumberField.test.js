@@ -129,4 +129,84 @@ describe("NumberField", () => {
     const errorBase = container.querySelector(".MuiFormHelperText-root");
     expect(errorBase).toBe(null);
   });
+  test("onChange is called when a value deleted from component and the new value is still valid", async () => {
+    const onChange = jest.fn();
+    const user = userEvent.setup();
+    const { container } = render(<NumberFieldWithState onChange={onChange} />);
+    const inputBase = container.querySelector(".MuiInputBase-input");
+    await user.type(inputBase, "{backspace}");
+
+    // onChange should have been called
+    expect(onChange).toHaveBeenCalled();
+  });
+  test("onChange is called when a value is enterd to component with no step set", async () => {
+    const onChange = jest.fn();
+    const user = userEvent.setup();
+    const { container } = render(<NumberField onChange={onChange} />);
+    const inputBase = container.querySelector(".MuiInputBase-input");
+    await user.type(inputBase, "1");
+
+    // onChange should have been called
+    expect(onChange).toHaveBeenCalled();
+  });
+  test("onChange is called when a value is enterd to component with step set and value is valid", async () => {
+    const onChange = jest.fn();
+    const user = userEvent.setup();
+    const { container } = render(<NumberField onChange={onChange} step={1} />);
+    const inputBase = container.querySelector(".MuiInputBase-input");
+    await user.type(inputBase, "2");
+
+    // onChange should have been called
+    expect(onChange).toHaveBeenCalled();
+  });
+  test("onChange is not called when a value is entered to a  component with step set and value is invalid", async () => {
+    const onChange = jest.fn();
+    const user = userEvent.setup();
+    const { container } = render(<NumberField onChange={onChange} step={10} />);
+    const inputBase = container.querySelector(".MuiInputBase-input");
+    await user.type(inputBase, "1");
+
+    // onChange should not be called
+    expect(onChange).not.toHaveBeenCalled();
+  });
+  test("onChange is called when value is to a component with a max value set and entered value is valid", async () => {
+    const onChange = jest.fn();
+    const user = userEvent.setup();
+    const { container } = render(<NumberField onChange={onChange} max={10} />);
+    const inputBase = container.querySelector(".MuiInputBase-input");
+    await user.type(inputBase, "8");
+
+    // onChange should have been called
+    expect(onChange).toHaveBeenCalled();
+  });
+  test("onChange is not called when value is to a component with a max value set and entered value is invalid", async () => {
+    const onChange = jest.fn();
+    const user = userEvent.setup();
+    const { container } = render(<NumberField onChange={onChange} max={10} />);
+    const inputBase = container.querySelector(".MuiInputBase-input");
+    await user.type(inputBase, "42");
+
+    // onChange should have been called
+    expect(onChange).not.toHaveBeenCalled();
+  });
+  test("onChange is called when value is to a component with a min value set and entered value is valid", async () => {
+    const onChange = jest.fn();
+    const user = userEvent.setup();
+    const { container } = render(<NumberField onChange={onChange} min={10} />);
+    const inputBase = container.querySelector(".MuiInputBase-input");
+    await user.type(inputBase, "42");
+
+    // onChange should have been called
+    expect(onChange).toHaveBeenCalled();
+  });
+  test("onChange is not called when value is to a component with a min value set and entered value is invalid", async () => {
+    const onChange = jest.fn();
+    const user = userEvent.setup();
+    const { container } = render(<NumberField onChange={onChange} min={10} />);
+    const inputBase = container.querySelector(".MuiInputBase-input");
+    await user.type(inputBase, "2");
+
+    // onChange should have been called
+    expect(onChange).not.toHaveBeenCalled();
+  });
 });
