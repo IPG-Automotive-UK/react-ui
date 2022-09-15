@@ -112,6 +112,7 @@ export default function NumberField({
     // check if value is multiple of step
     let stepSatisfied = true;
     if (
+      step !== undefined &&
       newValue !== undefined &&
       ((newValue * 100) % (step * 100)) / 100 !== 0
     ) {
