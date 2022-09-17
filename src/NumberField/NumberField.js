@@ -5,27 +5,26 @@ import PropTypes from "prop-types";
 /**
  * Number fields let users enter and edit numbers.
  */
-export default function NumberField(props) {
-  const {
-    disabled = false,
-    endAdornment = null,
-    error = false,
-    helperText,
-    label,
-    margin = "normal",
-    max = +Infinity,
-    min = -Infinity,
-    onChange = () => {},
-    placeholder,
-    required = false,
-    size = "medium",
-    startAdornment = null,
-    step,
-    stepper = true,
-    value,
-    variant = "outlined"
-  } = props;
-
+export default function NumberField({
+  disabled = false,
+  endAdornment = null,
+  error = false,
+  helperText,
+  label,
+  margin = "normal",
+  max = +Infinity,
+  min = -Infinity,
+  onChange = () => {},
+  placeholder,
+  required = false,
+  showMinMaxErrorMessage = true,
+  size = "medium",
+  startAdornment = null,
+  step,
+  stepper = true,
+  value,
+  variant = "outlined"
+}) {
   // state to keep track of the value of the number field even when invalid
   const [currentValue, setCurrentValue] = useState(value);
   useEffect(() => {
@@ -39,10 +38,16 @@ export default function NumberField(props) {
       return [true, ""];
     } else if (value < min) {
       // check if value meets min requirement
-      return [false, `Must be greater than or equal to ${min}.`];
+      return [
+        false,
+        showMinMaxErrorMessage ? `Must be greater than or equal to ${min}.` : ""
+      ];
     } else if (value > max) {
       // check if value meets max requirement
-      return [false, `Must be less than or equal to ${max}.`];
+      return [
+        false,
+        showMinMaxErrorMessage ? `Must be less than or equal to ${max}.` : ""
+      ];
     } else if (step !== undefined && value % step !== 0) {
       // check if value meets step requirement
       const options = getNearestSteps(value, step);
@@ -88,25 +93,25 @@ export default function NumberField(props) {
       value={currentValue}
       variant={variant}
       InputProps={{
-        ...(endAdornment && (
-          <InputAdornment position="end">{endAdornment}</InputAdornment>
-        )),
-        ...(startAdornment && (
-          <InputAdornment position="start">{startAdornment}</InputAdornment>
-        )),
+        ...(endAdornment && {
+          endAdornment: (
+            <InputAdornment position="end">{endAdornment}</InputAdornment>
+          )
+        }),
+        ...(startAdornment && {
+          startAdornment: (
+            <InputAdornment position="start">{startAdornment}</InputAdornment>
+          )
+        }),
         max,
         min,
         step
       }}
       sx={
-        !stepper
-          ? {
-              "& input::-webkit-clear-button, & input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button":
-                {
-                  display: "none"
-                }
-            }
-          : { undefined }
+        !stepper && {
+          "& input::-webkit-clear-button, & input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button":
+            { display: "none" }
+        }
       }
     />
   );
