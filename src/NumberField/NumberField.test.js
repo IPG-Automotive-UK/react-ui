@@ -74,7 +74,7 @@ describe("NumberField", () => {
     const errorBase = container.querySelector(".MuiFormHelperText-root");
     expect(errorBase).toHaveClass("Mui-error");
     expect(errorBase.textContent).toBe(
-      "Please enter a valid value. The nearest valid values are 0 and 10."
+      "Must be a multiple of 10. Try 0 or 10."
     );
   });
   test("does not show error when value is valid", async () => {
