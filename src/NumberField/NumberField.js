@@ -1,9 +1,9 @@
-import { InputAdornment, TextField as MuiTextField } from "@mui/material";
-import React, { useEffect } from "react";
+import { InputAdornment, TextField } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 /**
- * NumberField components are used for collecting user provided information as a Number.
+ * Number fields let users enter and edit numbers.
  */
 export default function NumberField({
   disabled = false,
@@ -12,8 +12,8 @@ export default function NumberField({
   helperText,
   label,
   margin = "normal",
-  max,
-  min,
+  max = +Infinity,
+  min = -Infinity,
   onChange = () => {},
   placeholder,
   required = false,
@@ -25,151 +25,84 @@ export default function NumberField({
   value,
   variant = "outlined"
 }) {
-  const [valueError, setValueError] = React.useState(false);
-  const [errorMessage, setErrorMessage] = React.useState("");
-  const [number, setNumber] = React.useState(value);
-
-  // update the value of the number field
+  // state to keep track of the value of the number field even when invalid
+  const [currentValue, setCurrentValue] = useState(value);
   useEffect(() => {
-    setNumber(value);
-  }, [value]);
+    setCurrentValue(value);
+  }, [value, min, max]);
 
-  // helper function to round the number to the nearest step
-  const roundAccuratley = (number, decimalPlaces) => {
-    return Number(
-      Math.floor(number + "e" + decimalPlaces) + "e-" + decimalPlaces
-    );
-  };
-
-  // helper function to get the number of decimal places
-  const countDecimal = number => {
-    return number % 1 ? number.toString().split(".")[1].length : 0;
-  };
-
-  // validate the number field when, number, min or max changes
-  useEffect(() => {
-    if (min !== undefined && number < min) {
-      // value is less than min
-      setValueError(true);
-      if (showMinMaxErrorMessage) {
-        setErrorMessage(`Must be greater than or equal to ${min}.`);
-      }
-    } else if (max !== undefined && number > max) {
-      // value is greater than max
-      setValueError(true);
-      if (showMinMaxErrorMessage) {
-        setErrorMessage(`Must be less than or equal to ${max}.`);
-      }
-    } else if (
-      number !== undefined &&
-      step !== undefined &&
-      ((number * 100) % (step * 100)) / 100 !== 0
-    ) {
-      // value is not a multiple of step
-      setValueError(true);
-      const decimalPlaces = countDecimal(step);
-      let lowerLimit = [];
-      let upperLimit = [];
-      if (step > 1) {
-        lowerLimit = Math.floor(number / step) * step;
-        upperLimit = lowerLimit + step;
-      } else {
-        lowerLimit = roundAccuratley(+number, decimalPlaces);
-        upperLimit = roundAccuratley(+number + step, decimalPlaces);
-      }
-      setErrorMessage(
-        `Please enter a valid value. The nearest valid values are ${lowerLimit} and ${upperLimit}.`
-      );
+  // method to return value validitity and error message
+  const isValidValue = value => {
+    if (value === undefined) {
+      // accept empty string as undefined
+      return [true, ""];
+    } else if (value < min) {
+      // check if value meets min requirement
+      return [
+        false,
+        showMinMaxErrorMessage ? `Must be greater than or equal to ${min}.` : ""
+      ];
+    } else if (value > max) {
+      // check if value meets max requirement
+      return [
+        false,
+        showMinMaxErrorMessage ? `Must be less than or equal to ${max}.` : ""
+      ];
+    } else if (step !== undefined && value % step !== 0) {
+      // check if value meets step requirement
+      const options = getNearestSteps(value, step);
+      return [
+        false,
+        `Must be a multiple of ${step}. Try ${options[0]} or ${options[1]}.`
+      ];
     } else {
-      // value is valid
-      setValueError(false);
-      setErrorMessage("");
-    }
-  }, [max, min, number]);
-
-  // handleChange
-  const handleChange = event => {
-    // update event.target.value so that it is a number
-    const newValue = Number(event.target.value);
-    const newEventValue = { target: { value: newValue } };
-    const updatedEvent = { ...event, ...newEventValue };
-
-    // set the number
-    setNumber(event.target.value);
-
-    // is min satisfied
-    let minSatisfied = true;
-    if (min !== undefined && newValue < min) {
-      minSatisfied = false;
-    }
-
-    // is max satisfied
-    let maxSatisfied = true;
-    if (max !== undefined && newValue > max) {
-      maxSatisfied = false;
-    }
-
-    // check if value is multiple of step
-    let stepSatisfied = true;
-    if (
-      step !== undefined &&
-      newValue !== undefined &&
-      ((newValue * 100) % (step * 100)) / 100 !== 0
-    ) {
-      stepSatisfied = false;
-    }
-
-    // if the value is valid, set error to false
-    if (
-      minSatisfied &&
-      maxSatisfied &&
-      stepSatisfied &&
-      event.target.value !== ""
-    ) {
-      setValueError(false);
-      setErrorMessage("");
-      onChange(updatedEvent);
+      // otherwise value is valid
+      return [true, undefined];
     }
   };
 
-  // end adornment input property
-  const endAdornmentInputProperty = endAdornment
-    ? {
-        endAdornment: (
-          <InputAdornment position="end">{endAdornment}</InputAdornment>
-        )
-      }
-    : null;
+  // check the validity of the current value
+  const [isValid, validationText] = isValidValue(currentValue);
 
-  // start adornment input property
-  const startAdornmentInputProperty = startAdornment
-    ? {
-        startAdornment: (
-          <InputAdornment position="start">{startAdornment}</InputAdornment>
-        )
-      }
-    : null;
+  // callback for value changing
+  const handleChange = event => {
+    // get the new value
+    const newValue = string2number(event.target.value);
+    const [isValid] = isValidValue(newValue);
+    // update the current value
+    setCurrentValue(newValue);
+    // call the onChange callback if the value is valid
+    isValid &&
+      onChange({ ...event, target: { ...event.target, value: newValue } });
+  };
 
-  // return components
   return (
-    <MuiTextField
+    <TextField
       data-testid="NumberField"
       disabled={disabled}
-      error={error || valueError}
+      error={!isValid || error}
       fullWidth
-      helperText={helperText || errorMessage}
+      helperText={validationText || helperText}
       label={label}
       margin={margin}
       onChange={handleChange}
       placeholder={placeholder}
       required={required}
       size={size}
-      type="Number"
-      value={number}
+      type="number"
+      value={currentValue}
       variant={variant}
       InputProps={{
-        ...endAdornmentInputProperty,
-        ...startAdornmentInputProperty
+        ...(endAdornment && {
+          endAdornment: (
+            <InputAdornment position="end">{endAdornment}</InputAdornment>
+          )
+        }),
+        ...(startAdornment && {
+          startAdornment: (
+            <InputAdornment position="start">{startAdornment}</InputAdornment>
+          )
+        })
       }}
       inputProps={{
         max,
@@ -177,19 +110,41 @@ export default function NumberField({
         step
       }}
       sx={
-        !stepper
-          ? {
-              "& input::-webkit-clear-button, & input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button":
-                {
-                  display: "none"
-                }
-            }
-          : { undefined }
+        !stepper && {
+          "& input::-webkit-clear-button, & input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button":
+            { display: "none" }
+        }
       }
     />
   );
 }
 
+/**
+ * Converts a string to a number.
+ * @param {*} value - The value to convert.
+ * @returns {number} - The converted value.
+ */
+const string2number = value => {
+  if (value === "") {
+    return undefined;
+  } else {
+    return Number(value);
+  }
+};
+
+/**
+ * Returns the two nearest steps to a value.
+ * @param {*} value - The value to get the nearest steps for.
+ * @param {*} step - The step size.
+ * @returns {number[]} - The two nearest steps.
+ */
+const getNearestSteps = (value, step) => {
+  const lower = Math.floor(value / step) * step;
+  const upper = Math.ceil(value / step) * step;
+  return [lower, upper];
+};
+
+// prop types
 NumberField.propTypes = {
   /**
    * If true, the label, input and helper text should be displayed in a disabled state.
