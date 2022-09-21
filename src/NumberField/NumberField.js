@@ -102,7 +102,9 @@ export default function NumberField({
           startAdornment: (
             <InputAdornment position="start">{startAdornment}</InputAdornment>
           )
-        }),
+        })
+      }}
+      inputProps={{
         max,
         min,
         step
