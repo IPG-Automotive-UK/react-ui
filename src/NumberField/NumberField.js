@@ -33,8 +33,8 @@ export default function NumberField({
 
   // method to return value validitity and error message
   const isValidValue = value => {
-    if (value === undefined) {
-      // accept empty string as undefined
+    if (value === null) {
+      // accept empty string as null
       return [true, ""];
     } else if (value < min) {
       // check if value meets min requirement
