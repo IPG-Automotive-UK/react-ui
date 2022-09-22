@@ -42,7 +42,7 @@ describe("Select", () => {
   });
   test("shows error state", () => {
     const { container } = render(
-      <AutocompleteWithState error options={options} />
+      <AutocompleteWithState error options={options} value={options[3]} />
     );
     const inputBase = container.querySelector(".MuiInputBase-root");
     expect(inputBase).toHaveClass("Mui-error");
