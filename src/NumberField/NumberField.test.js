@@ -21,6 +21,13 @@ const NumberFieldWithState = ({ onChange, valueIn = 100, ...rest }) => {
  * Tests
  */
 describe("NumberField", () => {
+  test("can have null as a value", () => {
+    const { getByLabelText } = render(
+      <NumberFieldWithState label="NumberField" valueIn={null} />
+    );
+    const input = getByLabelText("NumberField");
+    expect(input.value).toBe("");
+  });
   test("can type value in Numberfield", async () => {
     const user = userEvent.setup();
     const { container } = render(<NumberFieldWithState />);
