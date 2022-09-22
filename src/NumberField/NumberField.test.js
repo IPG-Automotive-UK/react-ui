@@ -21,6 +21,13 @@ const NumberFieldWithState = ({ onChange, valueIn = 100, ...rest }) => {
  * Tests
  */
 describe("NumberField", () => {
+  test("can have null as a value", () => {
+    const { getByLabelText } = render(
+      <NumberFieldWithState label="NumberField" valueIn={null} />
+    );
+    const input = getByLabelText("NumberField");
+    expect(input.value).toBe("");
+  });
   test("can type value in Numberfield", async () => {
     const user = userEvent.setup();
     const { container } = render(<NumberFieldWithState />);
@@ -208,5 +215,17 @@ describe("NumberField", () => {
 
     // onChange should have been called
     expect(onChange).not.toHaveBeenCalled();
+  });
+  test("can handle floating point math", async () => {
+    const user = userEvent.setup();
+    const { container } = render(<NumberFieldWithState step={0.2} />);
+    const inputBase = container.querySelector(".MuiInputBase-input");
+    await user.type(inputBase, "{backspace}{backspace}{backspace}");
+    await user.type(inputBase, "0.6");
+    expect(inputBase.value).toBe("0.6");
+
+    // there should be no helper text (which parents the error message)
+    const errorBase = container.querySelector(".MuiFormHelperText-root");
+    expect(errorBase).toBe(null);
   });
 });

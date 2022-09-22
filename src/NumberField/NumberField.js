@@ -1,5 +1,6 @@
 import { InputAdornment, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
+
 import PropTypes from "prop-types";
 
 /**
@@ -22,7 +23,7 @@ export default function NumberField({
   startAdornment = null,
   step,
   stepper = true,
-  value,
+  value = null,
   variant = "outlined"
 }) {
   // state to keep track of the value of the number field even when invalid
@@ -33,8 +34,8 @@ export default function NumberField({
 
   // method to return value validitity and error message
   const isValidValue = value => {
-    if (value === undefined) {
-      // accept empty string as undefined
+    if (value === null) {
+      // accept empty string as null
       return [true, ""];
     } else if (value < min) {
       // check if value meets min requirement
@@ -48,7 +49,7 @@ export default function NumberField({
         false,
         showMinMaxErrorMessage ? `Must be less than or equal to ${max}.` : ""
       ];
-    } else if (step !== undefined && value % step !== 0) {
+    } else if (step !== undefined && !isStep(value, step)) {
       // check if value meets step requirement
       const options = getNearestSteps(value, step);
       return [
@@ -69,8 +70,10 @@ export default function NumberField({
     // get the new value
     const newValue = string2number(event.target.value);
     const [isValid] = isValidValue(newValue);
+
     // update the current value
     setCurrentValue(newValue);
+
     // call the onChange callback if the value is valid
     isValid &&
       onChange({ ...event, target: { ...event.target, value: newValue } });
@@ -90,7 +93,7 @@ export default function NumberField({
       required={required}
       size={size}
       type="number"
-      value={currentValue}
+      value={currentValue ?? ""}
       variant={variant}
       InputProps={{
         ...(endAdornment && {
@@ -102,18 +105,20 @@ export default function NumberField({
           startAdornment: (
             <InputAdornment position="start">{startAdornment}</InputAdornment>
           )
-        })
-      }}
-      inputProps={{
-        max,
-        min,
-        step
+        }),
+        inputProps: {
+          max,
+          min,
+          step
+        }
       }}
       sx={
-        !stepper && {
-          "& input::-webkit-clear-button, & input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button":
-            { display: "none" }
-        }
+        !stepper
+          ? {
+              "& input::-webkit-clear-button, & input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button":
+                { display: "none" }
+            }
+          : {}
       }
     />
   );
@@ -126,22 +131,48 @@ export default function NumberField({
  */
 const string2number = value => {
   if (value === "") {
-    return undefined;
+    return null;
   } else {
     return Number(value);
   }
 };
 
 /**
+ * Returns the precision of a number.
+ * @param {number} value - The value to get the precision of.
+ * @returns {number} - The precision of the value.
+ */
+const precision = value => {
+  if (Math.floor(value) === value) return 0;
+  return value.toString().split(".")[1].length || 0;
+};
+
+/**
  * Returns the two nearest steps to a value.
- * @param {*} value - The value to get the nearest steps for.
- * @param {*} step - The step size.
+ * @param {number} value - The value to get the nearest steps for.
+ * @param {number} step - The step size.
  * @returns {number[]} - The two nearest steps.
  */
 const getNearestSteps = (value, step) => {
-  const lower = Math.floor(value / step) * step;
-  const upper = Math.ceil(value / step) * step;
-  return [lower, upper];
+  // handle floating point math with a conversion to integer math
+  const precisionValue = precision(step);
+  const m = Math.pow(10, precisionValue);
+  const lower = Math.floor(value / step) * step * m;
+  const upper = lower + step * m;
+  return [lower, upper].map(v => v / m);
+};
+
+/**
+ * Returns whether a value is a step.
+ * @param {number} value - The value to check.
+ * @param {number} step - The step size.
+ * @returns {boolean} - Whether the value is a step.
+ */
+const isStep = (value, step) => {
+  // handle floating point math with a conversion to integer math
+  const precisionValue = precision(step);
+  const m = Math.pow(10, precisionValue);
+  return ((value * m) % (step * m)) / m === 0;
 };
 
 // prop types
@@ -231,7 +262,7 @@ NumberField.propTypes = {
   /**
    * The input value
    */
-  value: PropTypes.number,
+  value: PropTypes.number || null,
   /**
    * The variant to use.
    * @default "outlined"

@@ -25,5 +25,4 @@ yarn-error.log*
 storybook-static
 
 # test reports
-test-report.html
 coverage
