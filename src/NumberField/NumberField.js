@@ -48,7 +48,7 @@ export default function NumberField({
         false,
         showMinMaxErrorMessage ? `Must be less than or equal to ${max}.` : ""
       ];
-    } else if (step !== undefined && value % step !== 0) {
+    } else if (step !== undefined && !isStep(value, step)) {
       // check if value meets step requirement
       const options = getNearestSteps(value, step);
       return [
@@ -128,22 +128,48 @@ export default function NumberField({
  */
 const string2number = value => {
   if (value === "") {
-    return undefined;
+    return null;
   } else {
     return Number(value);
   }
 };
 
 /**
+ * Returns the precision of a number.
+ * @param {number} value - The value to get the precision of.
+ * @returns {number} - The precision of the value.
+ */
+const precision = value => {
+  if (Math.floor(value) === value) return 0;
+  return value.toString().split(".")[1].length || 0;
+};
+
+/**
  * Returns the two nearest steps to a value.
- * @param {*} value - The value to get the nearest steps for.
- * @param {*} step - The step size.
+ * @param {number} value - The value to get the nearest steps for.
+ * @param {number} step - The step size.
  * @returns {number[]} - The two nearest steps.
  */
 const getNearestSteps = (value, step) => {
-  const lower = Math.floor(value / step) * step;
-  const upper = Math.ceil(value / step) * step;
-  return [lower, upper];
+  // handle floating point math with a conversion to integer math
+  const precisionValue = precision(step);
+  const m = Math.pow(10, precisionValue);
+  const lower = Math.floor(value / step) * step * m;
+  const upper = lower + step * m;
+  return [lower, upper].map(v => v / m);
+};
+
+/**
+ * Returns whether a value is a step.
+ * @param {number} value - The value to check.
+ * @param {number} step - The step size.
+ * @returns {boolean} - Whether the value is a step.
+ */
+const isStep = (value, step) => {
+  // handle floating point math with a conversion to integer math
+  const precisionValue = precision(step);
+  const m = Math.pow(10, precisionValue);
+  return ((value * m) % (step * m)) / m === 0;
 };
 
 // prop types
