@@ -110,10 +110,12 @@ export default function NumberField({
         step
       }}
       sx={
-        !stepper && {
-          "& input::-webkit-clear-button, & input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button":
-            { display: "none" }
-        }
+        !stepper
+          ? {
+              "& input::-webkit-clear-button, & input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button":
+                { display: "none" }
+            }
+          : {}
       }
     />
   );
