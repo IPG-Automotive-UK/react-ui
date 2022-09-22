@@ -1,5 +1,6 @@
 import { InputAdornment, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
+
 import PropTypes from "prop-types";
 
 /**
@@ -69,8 +70,10 @@ export default function NumberField({
     // get the new value
     const newValue = string2number(event.target.value);
     const [isValid] = isValidValue(newValue);
+
     // update the current value
     setCurrentValue(newValue);
+
     // call the onChange callback if the value is valid
     isValid &&
       onChange({ ...event, target: { ...event.target, value: newValue } });
