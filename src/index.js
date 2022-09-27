@@ -1,4 +1,5 @@
 export { default as AlignHorizontal } from "./AlignHorizontal";
+export { default as AlignVertical } from "./AlignVertical";
 export { default as Autocomplete } from "./Autocomplete";
 export { default as Checkbox } from "./Checkbox";
 export { default as Copyright } from "./Copyright";
