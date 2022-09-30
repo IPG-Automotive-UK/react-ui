@@ -8,23 +8,30 @@ import {
   TextField,
   Typography
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Color from "../Color";
 import DialogTitle from "../DialogTitle";
 import LabelChip from "./LabelChip";
 
 //  allows admins to add a new label
-export default function AddNewLabelDialog({
+export default function EditLabelDialog({
   isOpen = false,
   options = [],
-  onNewLabel = () => {},
-  onClose = () => {}
+  onNew = () => {},
+  onEdit = () => {},
+  onClose = () => {},
+  labelDialogTitle = "Label Title",
+  label = { color: "#005FA8", description: "", id: "", name: "" }
 }) {
   // define state
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [color, setColor] = useState("#005FA8");
+  const [thisLabel, setThisLabel] = useState(label);
+
+  // check if label is new
+  const isNew = thisLabel.id === "" && thisLabel.name === "";
 
   // handle cancel
   const handleCancel = () => {
@@ -35,12 +42,37 @@ export default function AddNewLabelDialog({
     onClose();
   };
 
+  // if the label is defined, set the states
+  useEffect(() => {
+    if (label) {
+      setName(label.name);
+      setDescription(label.description);
+      setColor(label.color);
+      setThisLabel(label);
+    }
+  }, [label, thisLabel]);
+
+  // check if any of the fields have changed if label is defined
+  let hasChanged = true;
+  if (thisLabel) {
+    hasChanged =
+      name !== thisLabel.name ||
+      description !== thisLabel.description ||
+      color !== thisLabel.color;
+  }
+
   // is label name valid
-  const isLabelNameValid = !options.includes(name.trim());
+  const optionNames = options.map(option => option.name);
+  const isLabelNameValid = !optionNames?.includes(name.trim());
 
   // handle save
   const handleSave = () => {
-    onNewLabel({ color, description, name });
+    // if label is new, call onNew otherwise call onEdit
+    if (isNew) {
+      onNew({ color, description, name });
+    } else {
+      onEdit({ ...label, color, description, name });
+    }
 
     // reset all the states
     setName("");
@@ -49,10 +81,21 @@ export default function AddNewLabelDialog({
     onClose();
   };
 
+  // handleClose
+  const handleClose = (_event, reason) => {
+    // dont close if the user clicks outside the dialog
+    if (reason === "backdropClick") {
+      return;
+    }
+
+    // close the dialog
+    onClose();
+  };
+
   // return add new label dialog
   return (
-    <Dialog maxWidth="sm" fullWidth onClose={onClose} open={isOpen}>
-      <DialogTitle onClose={onClose}>Add A New Label</DialogTitle>
+    <Dialog maxWidth="sm" fullWidth onClose={handleClose} open={isOpen}>
+      <DialogTitle onClose={handleClose}>{labelDialogTitle}</DialogTitle>
       <DialogContent dividers>
         <Grid container spacing={2}>
           <Grid item xs={12}>
@@ -66,9 +109,9 @@ export default function AddNewLabelDialog({
               }}
               value={name}
               onChange={event => setName(event.target.value)}
-              error={!isLabelNameValid}
+              error={!isLabelNameValid && hasChanged}
               helperText={
-                !isLabelNameValid
+                !isLabelNameValid && hasChanged
                   ? "Label name already exists please select a new name"
                   : ""
               }
@@ -122,6 +165,7 @@ export default function AddNewLabelDialog({
           Cancel
         </Button>
         <Button
+          variant="contained"
           onClick={handleSave}
           color="primary"
           disabled={
