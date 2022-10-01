@@ -1,3 +1,4 @@
+import "./colorSelector.css";
 import {
   Box,
   Button,
@@ -10,9 +11,26 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
-import Color from "../Color";
+import ColorPicker from "react-best-gradient-color-picker";
 import DialogTitle from "../DialogTitle";
 import LabelChip from "./LabelChip";
+import { useTheme } from "@mui/material/styles";
+
+// colour selector component
+const ColorSelector = props => {
+  const theme = useTheme();
+  return (
+    <Box
+      className={
+        theme.palette.mode === "light"
+          ? "color-picker-wrapper-light"
+          : "color-picker-wrapper-dark"
+      }
+    >
+      <ColorPicker {...props} />
+    </Box>
+  );
+};
 
 //  allows admins to add a new label
 export default function EditLabelDialog({
@@ -61,8 +79,12 @@ export default function EditLabelDialog({
       color !== thisLabel.color;
   }
 
-  // is label name valid
-  const optionNames = options.map(option => option.name);
+  // get all option names except the current label
+  const optionNames = options
+    .filter(option => option.name !== thisLabel.name)
+    .map(option => option.name);
+
+  // check if name already exists
   const isLabelNameValid = !optionNames?.includes(name.trim());
 
   // handle save
@@ -97,7 +119,7 @@ export default function EditLabelDialog({
     <Dialog maxWidth="sm" fullWidth onClose={handleClose} open={isOpen}>
       <DialogTitle onClose={handleClose}>{labelDialogTitle}</DialogTitle>
       <DialogContent dividers>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} id={"new-label-dialog"}>
           <Grid item xs={12}>
             <TextField
               label="Label Name"
@@ -109,9 +131,9 @@ export default function EditLabelDialog({
               }}
               value={name}
               onChange={event => setName(event.target.value)}
-              error={!isLabelNameValid && hasChanged}
+              error={!isLabelNameValid}
               helperText={
-                !isLabelNameValid && hasChanged
+                !isLabelNameValid
                   ? "Label name already exists please select a new name"
                   : ""
               }
@@ -143,11 +165,16 @@ export default function EditLabelDialog({
           </Grid>
           <Grid item xs={12}>
             <Box display="flex" alignItems="center">
-              <Color
-                swatchSize="large"
-                onChange={color => setColor(color)}
-                colorPickerWidth="550px"
+              <ColorSelector
+                width={
+                  document.getElementById("new-label-dialog")?.offsetWidth -
+                    18 || 400
+                }
+                height={150}
+                hideControls
+                hidePresets
                 value={color}
+                onChange={color => setColor(color)}
               />
             </Box>
           </Grid>
@@ -169,7 +196,10 @@ export default function EditLabelDialog({
           onClick={handleSave}
           color="primary"
           disabled={
-            name.length === 0 || color.length === 0 || !isLabelNameValid
+            name.length === 0 ||
+            color.length === 0 ||
+            !isLabelNameValid ||
+            !hasChanged
           }
         >
           Save

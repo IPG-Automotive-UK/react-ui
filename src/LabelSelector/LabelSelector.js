@@ -44,7 +44,7 @@ const CustomPaper = ({
   ...props
 }) => {
   // click handler for add new label button
-  const handleClick = () => {
+  const handleClick = event => {
     // set dialog title
     setLabelDialogTitle("Add a new label");
 
@@ -62,7 +62,7 @@ const CustomPaper = ({
     <Paper {...props} onMouseDown={handleMouseDown}>
       {props.children}
       {addEnabled && (
-        <Box marginLeft={"30px"} marginBottom={"10px"} marginTop={"10px"}>
+        <Box marginLeft={2} marginBottom={1}>
           <Button
             size="small"
             color="primary"
@@ -178,7 +178,7 @@ function LabelSelector({
           );
         }}
         renderOption={(props, option, { selected }) => (
-          <Box component="li" {...props}>
+          <Box key={option._id} component="li" {...props}>
             <Checkbox
               checked={selected}
               style={{
