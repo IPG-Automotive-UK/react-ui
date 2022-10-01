@@ -9,14 +9,14 @@ import {
   TextField,
   Typography
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 import ColorPicker from "react-best-gradient-color-picker";
 import DialogTitle from "../DialogTitle";
 import LabelChip from "./LabelChip";
 import { useTheme } from "@mui/material/styles";
 
-// colour selector component
+// themed color selector component
 const ColorSelector = props => {
   const theme = useTheme();
   return (
@@ -32,7 +32,7 @@ const ColorSelector = props => {
   );
 };
 
-//  allows admins to add a new label
+//  edit label dialog allows for the editing and creating new specific label objects
 export default function EditLabelDialog({
   isOpen = false,
   options = [],
@@ -42,16 +42,24 @@ export default function EditLabelDialog({
   labelDialogTitle = "Label Title",
   label = { color: "#005FA8", description: "", id: "", name: "" }
 }) {
-  // define state
+  // define label states for user input
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [color, setColor] = useState("#005FA8");
+
+  // the label that is being edited
   const [thisLabel, setThisLabel] = useState(label);
 
-  // check if label is new
+  // color width
+  const [colorWidth, setColorWidth] = useState(300);
+
+  // ref for the dialog grid
+  const dialogGridRef = useRef();
+
+  // check if label is new and not being edited
   const isNew = thisLabel.id === "" && thisLabel.name === "";
 
-  // handle cancel
+  // reset label states when cancel or close button is clicked
   const handleCancel = () => {
     // reset all the states
     setName("");
@@ -60,9 +68,9 @@ export default function EditLabelDialog({
     onClose();
   };
 
-  // if the label is defined, set the states
+  // if the label is being edited, set the states to the label's values
   useEffect(() => {
-    if (label) {
+    if (!isNew) {
       setName(label.name);
       setDescription(label.description);
       setColor(label.color);
@@ -70,9 +78,10 @@ export default function EditLabelDialog({
     }
   }, [label, thisLabel]);
 
-  // check if any of the fields have changed if label is defined
+  // check that if a label is being edited,
+  // changes have been made to the label
   let hasChanged = true;
-  if (thisLabel) {
+  if (!isNew) {
     hasChanged =
       name !== thisLabel.name ||
       description !== thisLabel.description ||
@@ -84,10 +93,10 @@ export default function EditLabelDialog({
     .filter(option => option.name !== thisLabel.name)
     .map(option => option.name);
 
-  // check if name already exists
+  // check if name already exists (except for the current label)
   const isLabelNameValid = !optionNames?.includes(name.trim());
 
-  // handle save
+  // handle save button click and save the label
   const handleSave = () => {
     // if label is new, call onNew otherwise call onEdit
     if (isNew) {
@@ -103,7 +112,7 @@ export default function EditLabelDialog({
     onClose();
   };
 
-  // handleClose
+  // handle close button click and close the dialog box
   const handleClose = (_event, reason) => {
     // dont close if the user clicks outside the dialog
     if (reason === "backdropClick") {
@@ -114,12 +123,23 @@ export default function EditLabelDialog({
     onClose();
   };
 
-  // return add new label dialog
+  // return the label dialog
   return (
     <Dialog maxWidth="sm" fullWidth onClose={handleClose} open={isOpen}>
       <DialogTitle onClose={handleClose}>{labelDialogTitle}</DialogTitle>
       <DialogContent dividers>
-        <Grid container spacing={2} id={"new-label-dialog"}>
+        <Grid
+          container
+          spacing={2}
+          ref={node => {
+            dialogGridRef.current = node;
+
+            // if the node is not null, set the color width
+            if (node !== null) {
+              setColorWidth(node.offsetWidth - 16);
+            }
+          }}
+        >
           <Grid item xs={12}>
             <TextField
               label="Label Name"
@@ -166,10 +186,7 @@ export default function EditLabelDialog({
           <Grid item xs={12}>
             <Box display="flex" alignItems="center">
               <ColorSelector
-                width={
-                  document.getElementById("new-label-dialog")?.offsetWidth -
-                    18 || 400
-                }
+                width={colorWidth}
                 height={150}
                 hideControls
                 hidePresets

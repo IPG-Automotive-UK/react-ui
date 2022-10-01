@@ -9,15 +9,13 @@ import {
 import DialogTitle from "../DialogTitle";
 import React from "react";
 
-//  allows admins to add a new label
-export default function EditLabelDialog({
+//  delete label dialog allows for the deleting of specific label objects
+export default function DeleteLabelDialog({
   isOpen = false,
   onDelete = () => {},
   onClose = () => {},
   label = { color: "#005FA8", description: "", id: "", name: "" }
 }) {
-  // define state
-
   // return add new label dialog
   return (
     <Dialog maxWidth="sm" fullWidth onClose={onClose} open={isOpen}>
