@@ -15,12 +15,12 @@ export default function SelectionRectangle({
     <Box
       sx={{
         cursor: "crosshair",
-        height,
+        height: `${height}px`,
         left,
         outline: theme => `1px solid ${theme.palette.primary.main}`,
         position: "absolute",
         top,
-        width
+        width: `${width}px`
       }}
     />
   );

@@ -26,8 +26,13 @@ export default function Canvas({
   ...boxProps
 }) {
   // selection rectangle
-  const [isSelecting, rectangle, onMouseDown] =
-    useSelectionRectangle(onSelectionRectangle);
+  const [isSelecting, rectangle, onMouseDown] = useSelectionRectangle(
+    onSelectionRectangle,
+    {
+      maxHeight: Math.max(height, minHeight),
+      maxWidth: Math.max(width, minWidth)
+    }
+  );
 
   return (
     <Box

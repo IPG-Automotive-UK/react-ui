@@ -4,7 +4,12 @@ import { useRef, useState } from "react";
  * Hook to handle user selection rectangle on a canvas
  * @param {*} onSelectionRectangle Function to call on selection rectangle change
  */
-export default function useSelectionRectangle(onSelectionRectangle) {
+export default function useSelectionRectangle(
+  onSelectionRectangle,
+  options = {}
+) {
+  const { maxWidth = Infinity, maxHeight = Infinity } = options;
+
   const ref = useRef();
   const startRef = useRef();
 
@@ -18,6 +23,8 @@ export default function useSelectionRectangle(onSelectionRectangle) {
 
   // start selection (for use with onMouseDown)
   const startSelection = event => {
+    event.stopPropagation();
+
     ref.current = event.target;
     const bounds = ref.current.getBoundingClientRect();
 
@@ -26,10 +33,10 @@ export default function useSelectionRectangle(onSelectionRectangle) {
     startRef.current = { left, top };
 
     setRectangle({
-      height: 10,
+      height: 1,
       left,
       top,
-      width: 10
+      width: 1
     });
 
     // handle users mouse off canvas and releasing
@@ -52,18 +59,20 @@ export default function useSelectionRectangle(onSelectionRectangle) {
   // move selection (for use with onMouseMove)
   const moveSelection = event => {
     const bounds = ref.current.getBoundingClientRect();
-    const left = event.clientX - bounds.left;
-    const top = event.clientY - bounds.top;
+    // clamp selection rectangle to canvas
+    const left = Math.min(Math.max(event.clientX - bounds.left, 0), maxWidth);
+    const top = Math.min(Math.max(event.clientY - bounds.top, 0), maxHeight);
+
     const start = startRef.current;
 
     const width = start.left - left;
     const height = start.top - top;
 
     const newRectangle = {
-      height: Math.max(Math.abs(height), 10),
+      height: Math.abs(height),
       left: width < 0 ? start.left : left,
       top: height < 0 ? start.top : top,
-      width: Math.max(Math.abs(width), 10)
+      width: Math.abs(width)
     };
     setRectangle(newRectangle);
     onSelectionRectangle(newRectangle);
