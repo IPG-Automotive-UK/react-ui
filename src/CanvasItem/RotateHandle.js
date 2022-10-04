@@ -6,33 +6,33 @@ export default function RotateHandle({ onRotate }) {
   return (
     <Box
       sx={{
-        position: "absolute",
-        width: "10px",
         height: "30px",
+        left: "calc(50% - 5px)",
+        position: "absolute",
         top: "-30px ",
-        left: "calc(50% - 5px)"
+        width: "10px"
       }}
     >
       <Box
         sx={{
-          position: "absolute",
-          left: "50%",
+          background: theme => theme.palette.primary.main,
           height: "100%",
-          width: "1px",
-          background: theme => theme.palette.primary.main
+          left: "50%",
+          position: "absolute",
+          width: "1px"
         }}
       ></Box>
       <Box
         sx={{
-          position: "absolute",
-          width: "10px",
-          height: "10px",
-          top: "0px",
-          left: "0px",
           background: theme => theme.palette.primary.main,
+          borderRadius: "50%",
           cursor: "grab",
+          height: "10px",
+          left: "0px",
           outline: theme => `2px solid ${theme.palette.background.paper}`,
-          borderRadius: "50%"
+          position: "absolute",
+          top: "0px",
+          width: "10px"
         }}
         onMouseDown={onRotate}
       ></Box>

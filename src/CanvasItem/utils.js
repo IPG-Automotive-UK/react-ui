@@ -20,7 +20,10 @@ const setWidthAndDeltaW = (width, deltaW, minWidth) => {
     deltaW = minWidth - width;
     width = minWidth;
   }
-  return { width, deltaW };
+  return {
+    deltaW,
+    width
+  };
 };
 
 const setHeightAndDeltaH = (height, deltaH, minHeight) => {
@@ -31,7 +34,10 @@ const setHeightAndDeltaH = (height, deltaH, minHeight) => {
     deltaH = minHeight - height;
     height = minHeight;
   }
-  return { height, deltaH };
+  return {
+    deltaH,
+    height
+  };
 };
 
 export const getNewStyle = (
@@ -206,13 +212,22 @@ export const getNewStyle = (
       centerY
     },
     size: {
-      width: width * widthFlag,
-      height: height * heightFlag
+      height: height * heightFlag,
+      width: width * widthFlag
     }
   };
 };
 
-const cursorStartMap = { n: 0, ne: 1, e: 2, se: 3, s: 4, sw: 5, w: 6, nw: 7 };
+const cursorStartMap = {
+  e: 2,
+  n: 0,
+  ne: 1,
+  nw: 7,
+  s: 4,
+  se: 3,
+  sw: 5,
+  w: 6
+};
 const cursorDirectionArray = [
   "ns",
   "nesw",
@@ -226,6 +241,8 @@ const cursorDirectionArray = [
 const cursorMap = {
   0: 0,
   1: 1,
+  10: 7,
+  11: 8,
   2: 2,
   3: 2,
   4: 3,
@@ -233,9 +250,7 @@ const cursorMap = {
   6: 4,
   7: 5,
   8: 6,
-  9: 6,
-  10: 7,
-  11: 8
+  9: 6
 };
 export const getCursor = (rotateAngle, d) => {
   const increment = cursorMap[Math.floor(rotateAngle / 30)];
@@ -251,11 +266,11 @@ export const centerToTL = ({
   height,
   rotateAngle
 }) => ({
-  top: centerY - height / 2,
-  left: centerX - width / 2,
-  width,
   height,
-  rotateAngle
+  left: centerX - width / 2,
+  rotateAngle,
+  top: centerY - height / 2,
+  width
 });
 
 export const tLToCenter = ({ top, left, width, height, rotateAngle }) => ({
@@ -264,8 +279,8 @@ export const tLToCenter = ({ top, left, width, height, rotateAngle }) => ({
     centerY: top + height / 2
   },
   size: {
-    width,
-    height
+    height,
+    width
   },
   transform: {
     rotateAngle
