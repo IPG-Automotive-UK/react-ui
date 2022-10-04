@@ -260,6 +260,7 @@ function LabelSelector({
 
 export default LabelSelector;
 
+// Label Selector Proptypes
 LabelSelector.propTypes = {
   /**
    * If true, add new label button will be shown in the list of labels
@@ -360,7 +361,7 @@ LabelSelector.propTypes = {
    */
   onNew: PropTypes.func,
   /**
-   * The array of options to render in the listbox.
+   * The array of label objects that are options to render in the listbox.
    * @default []
    * @type {array}
    *
@@ -382,7 +383,7 @@ LabelSelector.propTypes = {
    */
   options: PropTypes.array,
   /**
-   * The array of labels that are currently selected.
+   * The array of label objects that are currently selected.
    * @default []
    * @type {array}
    *
