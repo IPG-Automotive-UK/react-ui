@@ -90,6 +90,7 @@ const Template = args => {
   );
 };
 
+// default
 export const Default = Template.bind({});
 Default.args = {
   addEnabled: false,
@@ -106,21 +107,28 @@ Default.args = {
   values: []
 };
 
-export const WithOptions = Template.bind({});
-WithOptions.args = {
-  addEnabled: false,
-  autocompleteLabel: "",
-  deleteEnabled: false,
-  editEnabled: false,
-  limitTags: -1,
-  multiple: true,
-  onChange: () => {},
-  onDelete: () => {},
-  onEdit: () => {},
-  onNew: () => {},
+// with label options
+export const WithLabelOptions = Template.bind({});
+WithLabelOptions.args = {
+  ...Default.args,
   options: [
     { _id: 1, color: "#005FA8", description: "first label", name: "label 1" },
     { _id: 2, color: "#f542e0", description: "second label", name: "label 2" }
-  ],
-  values: []
+  ]
+};
+
+// with initial values
+export const WithInitialValues = Template.bind({});
+WithInitialValues.args = {
+  ...WithLabelOptions.args,
+  values: [WithLabelOptions.args.options[0]]
+};
+
+// with add new label enabled
+export const WithAddingEditingAndDeleteEnabled = Template.bind({});
+WithAddingEditingAndDeleteEnabled.args = {
+  ...WithLabelOptions.args,
+  addEnabled: true,
+  deleteEnabled: true,
+  editEnabled: true
 };

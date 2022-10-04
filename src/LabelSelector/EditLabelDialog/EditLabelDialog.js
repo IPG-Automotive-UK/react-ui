@@ -13,8 +13,8 @@ import {
 import React, { useEffect, useRef, useState } from "react";
 
 import ColorPicker from "react-best-gradient-color-picker";
-import DialogTitle from "../DialogTitle";
-import LabelChip from "./LabelChip";
+import DialogTitle from "../../DialogTitle";
+import LabelChip from "../LabelChip/LabelChip";
 import PropTypes from "prop-types";
 import { useTheme } from "@mui/material/styles";
 

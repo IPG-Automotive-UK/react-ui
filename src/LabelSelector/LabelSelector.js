@@ -5,8 +5,8 @@ import React, { useState } from "react";
 
 import Checkbox from "../Checkbox";
 import DeleteLabelDialog from "./DeleteLabelDialog";
-import EditLabelDialog from "./EditLabelDialog";
-import LabelChip from "./LabelChip";
+import EditLabelDialog from "./EditLabelDialog/EditLabelDialog";
+import LabelChip from "./LabelChip/LabelChip";
 import PropTypes from "prop-types";
 
 // custom styling
