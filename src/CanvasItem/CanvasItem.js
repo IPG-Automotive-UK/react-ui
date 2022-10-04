@@ -17,6 +17,7 @@ export default function CanvasItem({
   zoomable = "",
   onRotate,
   onResize,
+  onDrag,
   aspectRatio,
   children
 }) {
@@ -73,6 +74,10 @@ export default function CanvasItem({
     );
   };
 
+  const handleDrag = (deltaX, deltaY) => {
+    onDrag && onDrag(deltaX, deltaY);
+  };
+
   const styles = tLToCenter({
     height,
     left,
@@ -88,6 +93,7 @@ export default function CanvasItem({
       rotatable={Boolean(rotatable && onRotate)}
       onResize={handleResize}
       onRotate={handleRotate}
+      onDrag={handleDrag}
     >
       {children}
     </Rect>
@@ -100,6 +106,7 @@ CanvasItem.propTypes = {
   left: PropTypes.number.isRequired,
   minHeight: PropTypes.number,
   minWidth: PropTypes.number,
+  onDrag: PropTypes.func,
   onResize: PropTypes.func,
   onRotate: PropTypes.func,
   rotatable: PropTypes.bool,

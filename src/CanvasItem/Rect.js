@@ -16,6 +16,7 @@ export default function Rect({
     transform: { rotateAngle }
   },
   zoomable,
+  onDrag,
   onRotate,
   onResize
 }) {
@@ -95,6 +96,29 @@ export default function Rect({
     document.addEventListener("mouseup", onUp);
   };
 
+  const startDrag = e => {
+    let { clientX: startX, clientY: startY } = e;
+    isMouseDown.current = true;
+    const onMove = e => {
+      if (!isMouseDown.current) return; // patch: fix windows press win key during mouseup issue
+      e.stopImmediatePropagation();
+      const { clientX, clientY } = e;
+      const deltaX = clientX - startX;
+      const deltaY = clientY - startY;
+      onDrag(deltaX, deltaY);
+      startX = clientX;
+      startY = clientY;
+    };
+    const onUp = () => {
+      document.removeEventListener("mousemove", onMove);
+      document.removeEventListener("mouseup", onUp);
+      if (!isMouseDown.current) return;
+      isMouseDown.current = false;
+    };
+    document.addEventListener("mousemove", onMove);
+    document.addEventListener("mouseup", onUp);
+  };
+
   const direction = zoomable
     .split(",")
     .map(d => d.trim())
@@ -123,6 +147,7 @@ export default function Rect({
         transform: `rotate(${rotateAngle}deg)`,
         width: Math.abs(width)
       }}
+      onMouseDown={startDrag}
     >
       {children}
       {rotatable && <RotateHandle onRotate={startRotate} />}

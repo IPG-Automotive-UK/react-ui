@@ -11,8 +11,8 @@ const Template = args => {
   const [rectangle, setRectangle] = React.useState({
     height: 200,
     left: 100,
-    top: 100,
     rotateAngle: 0,
+    top: 100,
     width: 200
   });
   const onResize = (style, isShiftKey, type) => {
@@ -35,12 +35,20 @@ const Template = args => {
       rotateAngle
     }));
   };
+  const onDrag = (deltaX, deltaY) => {
+    setRectangle(previous => ({
+      ...previous,
+      left: previous.left + deltaX,
+      top: previous.top + deltaY
+    }));
+  };
   return (
     <CanvasItem
       {...args}
       {...rectangle}
       onResize={onResize}
       onRotate={onRotate}
+      onDrag={onDrag}
     >
       <Box sx={{ background: "grey" }}></Box>
     </CanvasItem>
