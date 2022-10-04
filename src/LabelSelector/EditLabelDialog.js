@@ -1,4 +1,5 @@
 import "./colorSelector.css";
+
 import {
   Box,
   Button,
@@ -9,7 +10,7 @@ import {
   TextField,
   Typography
 } from "@mui/material";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import ColorPicker from "react-best-gradient-color-picker";
 import DialogTitle from "../DialogTitle";
