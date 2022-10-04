@@ -48,7 +48,7 @@ describe("LabelChip", () => {
     expect(onClick).toHaveBeenCalled();
   });
   // test that on click, the callback is not called when not clickable
-  it("does not call callback onClick when not clickable", async () => {
+  it("does not call callback onClick when not clickable", () => {
     render(<LabelChip label="Label" onClick={() => {}} />);
 
     // there shouldn't be a button role
