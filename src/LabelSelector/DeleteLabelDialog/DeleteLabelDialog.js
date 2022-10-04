@@ -6,7 +6,7 @@ import {
   DialogContentText
 } from "@mui/material";
 
-import DialogTitle from "../DialogTitle";
+import DialogTitle from "../../DialogTitle";
 import PropTypes from "prop-types";
 import React from "react";
 
