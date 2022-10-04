@@ -53,12 +53,12 @@ const Canvas = React.forwardRef(
             backgroundRepeat: "no-repeat",
             backgroundSize: `${width}px ${height}px`,
             border: border ? `1px solid ${gridColor}` : "none",
-            height,
+            height: `${height}px`,
             minHeight,
             minWidth,
             outline: "none",
             position: "relative",
-            width
+            width: `${width}px`
           },
           ...(Array.isArray(sx) ? sx : [sx]) // combine user provided sx with default
         ]}

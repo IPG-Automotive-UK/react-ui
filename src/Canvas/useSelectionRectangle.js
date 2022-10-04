@@ -58,6 +58,8 @@ export default function useSelectionRectangle(
 
   // move selection (for use with onMouseMove)
   const moveSelection = event => {
+    event.stopPropagation();
+
     const bounds = ref.current.getBoundingClientRect();
     // clamp selection rectangle to canvas
     const left = Math.min(Math.max(event.clientX - bounds.left, 0), maxWidth);
