@@ -28,6 +28,7 @@ export default function Rect({
   // Rotate
   const startRotate = e => {
     if (e.button !== 0) return;
+    e.stopPropagation();
     const { clientX, clientY } = e;
     const rect = ref.current.getBoundingClientRect();
     const startAngle = rotateAngle;
@@ -42,7 +43,7 @@ export default function Rect({
     isMouseDown.current = true;
     const onMove = e => {
       if (!isMouseDown.current) return; // patch: fix windows press win key during mouseup issue
-      e.stopImmediatePropagation();
+      e.stopPropagation();
       const { clientX, clientY } = e;
       const rotateVector = {
         x: clientX - center.x,
@@ -64,6 +65,7 @@ export default function Rect({
   // Resize
   const startResize = (e, cursor, type) => {
     document.body.style.cursor = cursor;
+    e.stopPropagation();
     const { clientX: startX, clientY: startY } = e;
     const rect = {
       centerX,
@@ -75,7 +77,7 @@ export default function Rect({
     isMouseDown.current = true;
     const onMove = e => {
       if (!isMouseDown.current) return; // patch: fix windows press win key during mouseup issue
-      e.stopImmediatePropagation();
+      e.stopPropagation();
       const { clientX, clientY } = e;
       const deltaX = clientX - startX;
       const deltaY = clientY - startY;
