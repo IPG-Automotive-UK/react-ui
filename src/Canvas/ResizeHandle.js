@@ -7,8 +7,8 @@ import useResize from "./useResize";
 /**
  * Diagonal resize handle for the bottom right corner of a box.
  */
-export default function ResizeHandle({ sx = [], onResize }) {
-  const onMouseDown = useResize(onResize);
+export default function ResizeHandle({ sx = [], onResize, canvasSize }) {
+  const onMouseDown = useResize(onResize, canvasSize);
   return (
     <Box
       sx={[

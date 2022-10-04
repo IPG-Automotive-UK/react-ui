@@ -4,7 +4,7 @@ import { useRef } from "react";
  * Hook to handle resizing of a canvas
  * @param {*} onResize Function to call on resize
  */
-export default function useResize(onResize) {
+export default function useResize(onResize, canvasSize) {
   // state to track initial mouse position
   const start = useRef({
     height: 0,
@@ -17,11 +17,8 @@ export default function useResize(onResize) {
   const startResize = event => {
     document.addEventListener("mouseup", endResize);
     document.addEventListener("mousemove", resize);
-    const { width, height } =
-      event.currentTarget.parentElement.getBoundingClientRect();
     start.current = {
-      height,
-      width,
+      ...canvasSize,
       x: event.clientX,
       y: event.clientY
     };
@@ -38,7 +35,12 @@ export default function useResize(onResize) {
 
   // function to end resizing
   const endResize = () => {
-    start.current = { x: 0, y: 0 };
+    start.current = {
+      height: 0,
+      width: 0,
+      x: 0,
+      y: 0
+    };
 
     document.removeEventListener("mouseup", endResize);
     document.removeEventListener("mousemove", resize);

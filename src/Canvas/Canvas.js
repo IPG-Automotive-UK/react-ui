@@ -75,7 +75,15 @@ const Canvas = React.forwardRef(
         {grid && <Grid size={gridSize} color={gridColor} />}
         {children}
         {isSelecting && <SelectionRectangle {...rectangle} />}
-        {resizeable && <ResizeHandle onResize={handleResize} />}
+        {resizeable && (
+          <ResizeHandle
+            onResize={handleResize}
+            canvasSize={{
+              height,
+              width
+            }}
+          />
+        )}
       </Box>
     );
   }
