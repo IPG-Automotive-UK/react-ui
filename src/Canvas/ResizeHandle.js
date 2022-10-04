@@ -27,13 +27,16 @@ export default function ResizeHandle({ sx = [], onResize }) {
       <SvgIcon
         sx={{
           bottom: 2,
+          height: 8,
+          opacity: 0.7,
           position: "absolute",
-          right: 2
+          right: 2,
+          width: 8
         }}
-        viewBox="0 0 24 24"
+        viewBox="0 0 6 6"
         color="action"
       >
-        <path d="M22,22H20V20H22V22M22,18H20V16H22V18M18,22H16V20H18V22M18,18H16V16H18V18M14,22H12V20H14V22M22,14H20V12H22V14Z" />
+        <path d="M 6 6 L 0 6 L 0 4.2 L 4 4.2 L 4.2 4.2 L 4.2 0 L 6 0 L 6 6 L 6 6 Z" />
       </SvgIcon>
     </Box>
   );
