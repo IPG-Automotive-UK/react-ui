@@ -18,7 +18,9 @@ export default function Rect({
   zoomable,
   onDrag,
   onRotate,
-  onResize
+  onResize,
+  selected,
+  onSelection
 }) {
   const ref = React.useRef();
   const isMouseDown = React.useRef(false);
@@ -99,9 +101,15 @@ export default function Rect({
   const startDrag = e => {
     let { clientX: startX, clientY: startY } = e;
     isMouseDown.current = true;
+    e.stopPropagation();
+    if (!selected) {
+      onSelection(true);
+    } else if (e.ctrlKey) {
+      onSelection(false);
+    }
     const onMove = e => {
       if (!isMouseDown.current) return; // patch: fix windows press win key during mouseup issue
-      e.stopImmediatePropagation();
+      e.stopPropagation();
       const { clientX, clientY } = e;
       const deltaX = clientX - startX;
       const deltaY = clientY - startY;
@@ -139,7 +147,8 @@ export default function Rect({
           top: "-26px",
           width: "18px"
         },
-        border: theme => `1px solid ${theme.palette.primary.main}`,
+        border: theme =>
+          selected ? `1px solid ${theme.palette.primary.main}` : 0,
         height: Math.abs(height),
         left: centerX - Math.abs(width) / 2,
         position: "absolute",
@@ -150,17 +159,18 @@ export default function Rect({
       onMouseDown={startDrag}
     >
       {children}
-      {rotatable && <RotateHandle onRotate={startRotate} />}
-      {direction.map(d => {
-        return (
-          <ResizeHandle
-            key={d}
-            direction={d}
-            onResize={startResize}
-            rotateAngle={rotateAngle}
-          />
-        );
-      })}
+      {selected && rotatable && <RotateHandle onRotate={startRotate} />}
+      {selected &&
+        direction.map(d => {
+          return (
+            <ResizeHandle
+              key={d}
+              direction={d}
+              onResize={startResize}
+              rotateAngle={rotateAngle}
+            />
+          );
+        })}
     </Box>
   );
 }

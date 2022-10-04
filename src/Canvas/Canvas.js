@@ -23,16 +23,22 @@ export default function Canvas({
   resizeable = true,
   width = 500,
   sx = [],
+  onMouseDown = () => {},
   ...boxProps
 }) {
   // selection rectangle
-  const [isSelecting, rectangle, onMouseDown] = useSelectionRectangle(
+  const [isSelecting, rectangle, startSelection] = useSelectionRectangle(
     onSelectionRectangle,
     {
       maxHeight: Math.max(height, minHeight),
       maxWidth: Math.max(width, minWidth)
     }
   );
+
+  const handleMouseDown = e => {
+    onMouseDown(e);
+    startSelection(e);
+  };
 
   return (
     <Box
@@ -52,7 +58,7 @@ export default function Canvas({
         },
         ...(Array.isArray(sx) ? sx : [sx]) // combine user provided sx with default
       ]}
-      onMouseDown={onMouseDown}
+      onMouseDown={handleMouseDown}
       {...boxProps}
     >
       {grid && <Grid size={gridSize} color={gridColor} />}
@@ -108,6 +114,10 @@ Canvas.propTypes = {
    * Callback function to be called on key press
    */
   onKeyPress: PropTypes.func,
+  /**
+   * Callback function to be called on mouse down
+   */
+  onMouseDown: PropTypes.func,
   /**
    * Callback function to be called when the canvas is resized
    */

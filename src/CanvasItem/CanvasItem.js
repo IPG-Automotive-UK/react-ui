@@ -18,8 +18,10 @@ export default function CanvasItem({
   onRotate,
   onResize,
   onDrag,
+  onSelection,
   aspectRatio,
-  children
+  children,
+  selected
 }) {
   const handleRotate = (angle, startAngle) => {
     if (!onRotate) return;
@@ -88,12 +90,14 @@ export default function CanvasItem({
 
   return (
     <Rect
+      selected={selected}
       styles={styles}
       zoomable={zoomable}
       rotatable={Boolean(rotatable && onRotate)}
       onResize={handleResize}
       onRotate={handleRotate}
       onDrag={handleDrag}
+      onSelection={onSelection}
     >
       {children}
     </Rect>
@@ -109,8 +113,10 @@ CanvasItem.propTypes = {
   onDrag: PropTypes.func,
   onResize: PropTypes.func,
   onRotate: PropTypes.func,
+  onSelection: PropTypes.func,
   rotatable: PropTypes.bool,
   rotateAngle: PropTypes.number,
+  selected: PropTypes.bool,
   top: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
   zoomable: PropTypes.string
