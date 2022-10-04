@@ -27,7 +27,7 @@ const LabelSelectorWithState = ({ onChange, value: valueIn = [], ...rest }) => {
     onChange(selectedValues);
   };
 
-  return <LabelSelector {...rest} onChange={handleChange} values={value} />;
+  return <LabelSelector {...rest} onChange={handleChange} value={value} />;
 };
 
 /**
@@ -65,7 +65,7 @@ describe("LabelSelector", () => {
     ];
 
     // render the label selector
-    render(<LabelSelector options={options} values={options} />);
+    render(<LabelSelector options={options} value={options} />);
 
     // find the chip
     const chip = screen.getByText("label 1").parentElement;

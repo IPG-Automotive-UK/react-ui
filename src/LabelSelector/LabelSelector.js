@@ -97,7 +97,7 @@ function LabelSelector({
   onEdit = () => {},
   onNew = () => {},
   options = [],
-  values = []
+  value = []
 }) {
   // default label object
   const defaultLabel = {
@@ -125,11 +125,11 @@ function LabelSelector({
   // remove label from selected labels when
   // user clicks on the x icon in the label chip
   const handleLabelRemove = id => {
-    // remove label from values
-    values = values.filter(label => label._id !== id);
+    // remove label from value
+    value = value.filter(label => label._id !== id);
 
-    // pass on the event with the new values
-    onChange(values);
+    // pass on the event with the new value
+    onChange(value);
   };
 
   // open dialog when user clicks on edit icon in list item
@@ -243,7 +243,7 @@ function LabelSelector({
         getOptionLabel={option => option.name}
         size="small"
         style={{ minWidth: 150 }}
-        value={values || null}
+        value={value || null}
       />
       <EditLabelDialog
         isOpen={isLabelDialogOpen !== false}
@@ -410,5 +410,5 @@ LabelSelector.propTypes = {
    * }
    * ]
    */
-  values: PropTypes.array
+  value: PropTypes.array
 };

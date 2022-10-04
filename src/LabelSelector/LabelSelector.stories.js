@@ -15,15 +15,15 @@ export default {
     onEdit: { type: "function" },
     onNew: { type: "function" },
     options: { type: "array" },
-    values: { type: "array" }
+    value: { type: "array" }
   },
   component: LabelSelector,
   title: "General/LabelSelector"
 };
 
 const Template = args => {
-  // values state
-  const [values, setValues] = React.useState(args.values);
+  // value state
+  const [value, setValue] = React.useState(args.values);
 
   // options state
   const [options, setOptions] = React.useState(args.options);
@@ -32,13 +32,13 @@ const Template = args => {
     <LabelSelector
       {...args}
       onChange={selectedValues => {
-        setValues(selectedValues);
+        setValue(selectedValues);
 
         // fire action
         action("onChange")(selectedValues);
       }}
       options={options}
-      values={values}
+      value={value}
       onNew={newLabel => {
         // append id to new label
         newLabel._id = options.length + 1;
@@ -46,8 +46,8 @@ const Template = args => {
         // add new label to options
         setOptions([...options, newLabel]);
 
-        // add new label to current values
-        setValues([...values, newLabel]);
+        // add new label to current value
+        setValue([...value, newLabel]);
 
         // fire action
         action("onNew")(newLabel);
@@ -63,9 +63,9 @@ const Template = args => {
           })
         );
 
-        // replace edited label in current values
-        setValues(
-          values.map(value => {
+        // replace edited label in current value
+        setValue(
+          value.map(value => {
             if (value._id === editedLabel._id) {
               return editedLabel;
             }
@@ -80,8 +80,8 @@ const Template = args => {
         // remove deleted label from options
         setOptions(options.filter(option => option._id !== deletedLabel._id));
 
-        // remove deleted label from current values
-        setValues(values.filter(value => value._id !== deletedLabel._id));
+        // remove deleted label from current value
+        setValue(value.filter(value => value._id !== deletedLabel._id));
 
         // fire action
         action("onDelete")(deletedLabel);
@@ -104,7 +104,7 @@ Default.args = {
   onEdit: () => {},
   onNew: () => {},
   options: [],
-  values: []
+  value: []
 };
 
 // with label options
@@ -117,11 +117,11 @@ WithLabelOptions.args = {
   ]
 };
 
-// with initial values
+// with initial value
 export const WithInitialValues = Template.bind({});
 WithInitialValues.args = {
   ...WithLabelOptions.args,
-  values: [WithLabelOptions.args.options[0]]
+  value: [WithLabelOptions.args.options[0]]
 };
 
 // with add new label enabled
