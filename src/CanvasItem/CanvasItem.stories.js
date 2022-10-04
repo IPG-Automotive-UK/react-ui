@@ -47,7 +47,7 @@ const Template = args => {
       top: previous.top + deltaY
     }));
   };
-  const onSelection = value => setSelected(value);
+  const onMouseDown = e => setSelected(true);
   return (
     <Box width="100%" height="100%" onMouseDown={() => setSelected(false)}>
       <CanvasItem
@@ -57,7 +57,7 @@ const Template = args => {
         onRotate={onRotate}
         onDrag={onDrag}
         selected={selected}
-        onSelection={onSelection}
+        onMouseDown={onMouseDown}
       >
         <Box
           sx={{ background: theme => theme.palette.grey[100] }}

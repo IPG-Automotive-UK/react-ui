@@ -20,7 +20,7 @@ export default function Rect({
   onRotate,
   onResize,
   selected,
-  onSelection
+  onMouseDown
 }) {
   const ref = React.useRef();
   const isMouseDown = React.useRef(false);
@@ -102,11 +102,7 @@ export default function Rect({
     let { clientX: startX, clientY: startY } = e;
     isMouseDown.current = true;
     e.stopPropagation();
-    if (!selected) {
-      onSelection(true);
-    } else if (e.ctrlKey) {
-      onSelection(false);
-    }
+    onMouseDown(e);
     const onMove = e => {
       if (!isMouseDown.current) return; // patch: fix windows press win key during mouseup issue
       e.stopPropagation();
