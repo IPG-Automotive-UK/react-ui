@@ -7,6 +7,7 @@ import {
 } from "@mui/material";
 
 import DialogTitle from "../DialogTitle";
+import PropTypes from "prop-types";
 import React from "react";
 
 //  delete label dialog allows for the deleting of specific label objects
@@ -16,7 +17,7 @@ export default function DeleteLabelDialog({
   onClose = () => {},
   label = { color: "#005FA8", description: "", id: "", name: "" }
 }) {
-  // return add new label dialog
+  // return delete label dialog
   return (
     <Dialog maxWidth="sm" fullWidth onClose={onClose} open={isOpen}>
       <DialogTitle
@@ -46,3 +47,51 @@ export default function DeleteLabelDialog({
     </Dialog>
   );
 }
+
+// DeleteLabelDialog PropTypes
+DeleteLabelDialog.propTypes = {
+  /**
+   * If true, the component is shown.
+   * @default false
+   * @type {boolean}
+   */
+  isOpen: PropTypes.bool,
+  /**
+   * The label to delete.
+   * @default { color: "#005FA8", description: "", id: "", name: "" }
+   * @type {object}
+   * @property {string} color - The color of the label.
+   * @property {string} description - The description of the label.
+   * @property {string} id - The id of the label.
+   * @property {string} name - The name of the label.
+   *
+   */
+  label: PropTypes.object,
+  /**
+   * Callback fired when the component requests to be closed.
+   *
+   * **Signature:**
+   * ```
+   * function(event: object, string: reason) => void
+   * ```
+   *
+   * - `event`: The event source of the callback.
+   * - `reason`: Can be: `"escapeKeyDown"`, `"backdropClick"`.
+   *
+   * @type {function}
+   */
+  onClose: PropTypes.func,
+  /**
+   * Callback fired when the delete button is clicked.
+   *
+   * **Signature:**
+   * ```
+   * function(object: label) => void
+   * ```
+   *
+   * - `label`: The label object to be deleted.
+   *
+   * @type {function}
+   */
+  onDelete: PropTypes.func
+};
