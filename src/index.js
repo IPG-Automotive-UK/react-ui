@@ -7,7 +7,7 @@ export { default as Color } from "./Color";
 export { default as DialogTitle } from "./DialogTitle";
 export { default as FeedbackForm } from "./FeedbackForm";
 export { default as FontPicker } from "./FontPicker";
-export { default as LabelSelector } from "./LabelSelector";
+export { LabelChip, LabelSelector } from "./LabelSelector";
 export { default as FontStyle } from "./FontStyle";
 export { default as Loading } from "./Loading";
 export { default as LoginForm } from "./LoginForm";
