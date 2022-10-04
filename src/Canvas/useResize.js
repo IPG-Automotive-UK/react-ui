@@ -6,13 +6,25 @@ import { useRef } from "react";
  */
 export default function useResize(onResize) {
   // state to track initial mouse position
-  const start = useRef({ x: 0, y: 0 });
+  const start = useRef({
+    height: 0,
+    width: 0,
+    x: 0,
+    y: 0
+  });
 
   // function to initialise resizing
   const startResize = event => {
     document.addEventListener("mouseup", endResize);
     document.addEventListener("mousemove", resize);
-    start.current = { x: event.clientX, y: event.clientY };
+    const { width, height } =
+      event.currentTarget.parentElement.getBoundingClientRect();
+    start.current = {
+      height,
+      width,
+      x: event.clientX,
+      y: event.clientY
+    };
     event.stopPropagation();
   };
 
@@ -20,9 +32,8 @@ export default function useResize(onResize) {
   const resize = event => {
     const deltaX = event.clientX - start.current.x;
     const deltaY = event.clientY - start.current.y;
-    start.current = { x: event.clientX, y: event.clientY };
 
-    onResize(deltaX, deltaY);
+    onResize(start.current.width + deltaX, start.current.height + deltaY);
   };
 
   // function to end resizing

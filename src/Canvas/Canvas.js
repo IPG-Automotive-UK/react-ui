@@ -44,6 +44,12 @@ const Canvas = React.forwardRef(
       startSelection(e);
     };
 
+    const handleResize = (width, height) => {
+      width = Math.max(width, minWidth);
+      height = Math.max(height, minHeight);
+      onResize(width, height);
+    };
+
     return (
       <Box
         sx={[
@@ -69,7 +75,7 @@ const Canvas = React.forwardRef(
         {grid && <Grid size={gridSize} color={gridColor} />}
         {children}
         {isSelecting && <SelectionRectangle {...rectangle} />}
-        {resizeable && <ResizeHandle onResize={onResize} />}
+        {resizeable && <ResizeHandle onResize={handleResize} />}
       </Box>
     );
   }

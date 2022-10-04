@@ -9,9 +9,9 @@ export default {
 const Template = args => {
   const [width, setWidth] = React.useState(500);
   const [height, setHeight] = React.useState(500);
-  const onResize = (deltaX, deltaY) => {
-    setWidth(previous => Math.max(args.minWidth || 0, previous + deltaX));
-    setHeight(previous => Math.max(args.minHeight || 0, previous + deltaY));
+  const onResize = (width, height) => {
+    setWidth(width);
+    setHeight(height);
   };
   return (
     <Canvas
