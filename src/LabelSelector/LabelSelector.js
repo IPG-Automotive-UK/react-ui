@@ -1,5 +1,12 @@
 import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
-import { Box, Button, IconButton, Paper, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  Paper,
+  TextField,
+  Tooltip
+} from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
 import React, { useState } from "react";
 
@@ -193,20 +200,26 @@ function LabelSelector({
             </div>
             <>
               {editEnabled && (
-                <IconButton
-                  size="small"
-                  onClick={event => onEditClick(event, option)}
-                >
-                  <Edit sx={styles.editIcon} />
-                </IconButton>
+                <Tooltip title="Edit">
+                  <IconButton
+                    data-testid={`edit-label-${option._id}`}
+                    size="small"
+                    onClick={event => onEditClick(event, option)}
+                  >
+                    <Edit sx={styles.editIcon} />
+                  </IconButton>
+                </Tooltip>
               )}
               {deleteEnabled && (
-                <IconButton
-                  size="small"
-                  onClick={event => onDeleteClick(event, option)}
-                >
-                  <Delete sx={styles.deleteIcon} />
-                </IconButton>
+                <Tooltip title="Delete">
+                  <IconButton
+                    data-testid={`delete-label-${option._id}`}
+                    size="small"
+                    onClick={event => onDeleteClick(event, option)}
+                  >
+                    <Delete sx={styles.deleteIcon} />
+                  </IconButton>
+                </Tooltip>
               )}
             </>
           </Box>
@@ -326,7 +339,7 @@ LabelSelector.propTypes = {
    *
    * **Signature**
    * ```
-   * function(label: object) => void
+   * function(selectedLabels: array) => void
    * ```
    *
    * _label_: The label that is deleted.
