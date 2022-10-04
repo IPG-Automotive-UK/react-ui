@@ -15,6 +15,7 @@ import React, { useEffect, useRef, useState } from "react";
 import ColorPicker from "react-best-gradient-color-picker";
 import DialogTitle from "../DialogTitle";
 import LabelChip from "./LabelChip";
+import PropTypes from "prop-types";
 import { useTheme } from "@mui/material/styles";
 
 // themed color selector component
@@ -40,7 +41,7 @@ export default function EditLabelDialog({
   onNew = () => {},
   onEdit = () => {},
   onClose = () => {},
-  labelDialogTitle = "Label Title",
+  labelDialogTitle = "Edit Label",
   label = { color: "#005FA8", description: "", id: "", name: "" }
 }) {
   // define label states for user input
@@ -68,6 +69,11 @@ export default function EditLabelDialog({
     setColor("#005FA8");
     onClose();
   };
+
+  // update thisLabel when label changes
+  useEffect(() => {
+    setThisLabel(label);
+  }, [label]);
 
   // if the label is being edited, set the states to the label's values
   useEffect(() => {
@@ -98,7 +104,7 @@ export default function EditLabelDialog({
   const isLabelNameValid = !optionNames?.includes(name.trim());
 
   // handle save button click and save the label
-  const handleSave = () => {
+  const handleSave = event => {
     // if label is new, call onNew otherwise call onEdit
     if (isNew) {
       onNew({ color, description, name });
@@ -110,18 +116,18 @@ export default function EditLabelDialog({
     setName("");
     setDescription("");
     setColor("#005FA8");
-    onClose();
+    onClose(event, "save");
   };
 
   // handle close button click and close the dialog box
-  const handleClose = (_event, reason) => {
+  const handleClose = (event, reason) => {
     // dont close if the user clicks outside the dialog
     if (reason === "backdropClick") {
       return;
     }
 
     // close the dialog
-    onClose();
+    onClose(event, reason);
   };
 
   // return the label dialog
@@ -197,7 +203,7 @@ export default function EditLabelDialog({
             </Box>
           </Grid>
           <Grid item xs={12}>
-            <Box width="550px" display="flex" justifyContent="center">
+            <Box width="100%" display="flex" justifyContent="center">
               {name ? (
                 <LabelChip label={name} color={color} size="small" />
               ) : null}
@@ -226,3 +232,92 @@ export default function EditLabelDialog({
     </Dialog>
   );
 }
+
+// EditLabelDialog Proptypes
+EditLabelDialog.propTypes = {
+  /**
+   * If true, the component is shown.
+   * @default false
+   * @type {boolean}
+   */
+  isOpen: PropTypes.bool,
+  /**
+   * The label to be edited.
+   * @default { color: "#005FA8", description: "", id: "", name: "" }
+   * @type {object}
+   * @property {string} color The color of the label.
+   * @property {string} description The description of the label.
+   * @property {string} id The id of the label.
+   * @property {string} name The name of the label.
+   *
+   */
+  label: PropTypes.object,
+  /**
+   * The title of the dialog.
+   * @default "Edit Label"
+   * @type {string}
+   */
+  labelDialogTitle: PropTypes.string,
+  /**
+   * Callback fired when the component requests to be closed.
+   *
+   * **Signature:**
+   * ```
+   * function(event: object, string: reason) => void
+   * ```
+   *
+   * - `event`: The event source of the callback.
+   * - `reason`: Can be: `"escapeKeyDown"`, `"backdropClick"`.
+   *
+   * @type {function}
+   */
+  onClose: PropTypes.func,
+  /**
+   * Callback fired when a label is edited.
+   *
+   * **Signature**
+   * ```
+   * function(label: object) => void
+   * ```
+   *
+   * _label_: The label that is edited.
+   * @default () => {}
+   * @type {function}
+   */
+  onEdit: PropTypes.func,
+  /**
+   * Callback fired when a new label is added.
+   *
+   * **Signature**
+   * ```
+   * function(label: object) => void
+   * ```
+   *
+   * _label_: The label that is added.
+   * @default () => {}
+   * @type {function}
+   */
+  onNew: PropTypes.func,
+  /**
+   * The array of label objects that are options to render in the listbox.
+   * @default []
+   * @type {array}
+   *
+   * @example
+   * [
+   *  {
+   *   _id: "5f9f1b9b0b5b9c0b8c8b4567",
+   *  name: "Label 1",
+   * description: "Description 1",
+   * color: "#ff0000"
+   * },
+   * {
+   *  _id: "5f9f1b9b0b5b9c0b8c8b4568",
+   * name: "Label 2",
+   * description: "Description 2",
+   * color: "#00ff00"
+   * }
+   * ]
+   */
+  options: PropTypes.array
+};
