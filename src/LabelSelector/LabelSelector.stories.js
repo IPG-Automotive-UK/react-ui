@@ -23,7 +23,7 @@ export default {
 
 const Template = args => {
   // value state
-  const [value, setValue] = React.useState(args.values);
+  const [value, setValue] = React.useState(args.value);
 
   // options state
   const [options, setOptions] = React.useState(args.options);
