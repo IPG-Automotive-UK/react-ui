@@ -17,11 +17,21 @@ export default function DeleteLabelDialog({
   onClose = () => {},
   label = { color: "#005FA8", description: "", id: "", name: "" }
 }) {
+  // handle close button click and close the dialog box
+  const handleClose = (event, reason) => {
+    // dont close if the user clicks outside the dialog
+    if (reason === "backdropClick") {
+      return;
+    }
+
+    // close the dialog
+    onClose(event, reason);
+  };
   // return delete label dialog
   return (
-    <Dialog maxWidth="sm" fullWidth onClose={onClose} open={isOpen}>
+    <Dialog maxWidth="sm" fullWidth onClose={handleClose} open={isOpen}>
       <DialogTitle
-        onClose={onClose}
+        onClose={handleClose}
       >{` Are you sure you want to delete ${label.name}?`}</DialogTitle>
       <DialogContent dividers>
         <DialogContentText>
