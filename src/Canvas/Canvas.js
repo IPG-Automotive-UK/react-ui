@@ -7,67 +7,77 @@ import ResizeHandle from "./ResizeHandle";
 import SelectionRectangle from "./SelectionRectangle";
 import useSelectionRectangle from "./useSelectionRectangle";
 
-export default function Canvas({
-  backgroundColor = "white",
-  backgroundImage = "",
-  border = true,
-  children,
-  grid = true,
-  gridColor = "rgba(0, 0, 0, 0.1)",
-  gridSize = 25,
-  height = 500,
-  minHeight = 100,
-  minWidth = 100,
-  onResize = () => {},
-  onSelectionRectangle = () => {},
-  resizeable = true,
-  width = 500,
-  sx = [],
-  onMouseDown = () => {},
-  ...boxProps
-}) {
-  // selection rectangle
-  const [isSelecting, rectangle, startSelection] = useSelectionRectangle(
-    onSelectionRectangle,
+const Canvas = React.forwardRef(
+  (
     {
-      maxHeight: Math.max(height, minHeight),
-      maxWidth: Math.max(width, minWidth)
-    }
-  );
+      backgroundColor = "white",
+      backgroundImage = "",
+      border = true,
+      children,
+      grid = true,
+      gridColor = "rgba(0, 0, 0, 0.1)",
+      gridSize = 25,
+      height = 500,
+      minHeight = 100,
+      minWidth = 100,
+      onResize = () => {},
+      onSelectionRectangle = () => {},
+      resizeable = true,
+      width = 500,
+      sx = [],
+      onMouseDown = () => {},
+      ...boxProps
+    },
+    ref
+  ) => {
+    // selection rectangle
+    const [isSelecting, rectangle, startSelection] = useSelectionRectangle(
+      onSelectionRectangle,
+      {
+        maxHeight: Math.max(height, minHeight),
+        maxWidth: Math.max(width, minWidth)
+      }
+    );
 
-  const handleMouseDown = e => {
-    onMouseDown(e);
-    startSelection(e);
-  };
+    const handleMouseDown = e => {
+      onMouseDown(e);
+      startSelection(e);
+    };
 
-  return (
-    <Box
-      sx={[
-        {
-          backgroundColor,
-          backgroundImage: `url(${backgroundImage})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: `${width}px ${height}px`,
-          border: border ? `1px solid ${gridColor}` : "none",
-          height,
-          minHeight,
-          minWidth,
-          outline: "none",
-          position: "relative",
-          width
-        },
-        ...(Array.isArray(sx) ? sx : [sx]) // combine user provided sx with default
-      ]}
-      onMouseDown={handleMouseDown}
-      {...boxProps}
-    >
-      {grid && <Grid size={gridSize} color={gridColor} />}
-      {children}
-      {isSelecting && <SelectionRectangle {...rectangle} />}
-      {resizeable && <ResizeHandle onResize={onResize} />}
-    </Box>
-  );
-}
+    return (
+      <Box
+        sx={[
+          {
+            backgroundColor,
+            backgroundImage: `url(${backgroundImage})`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: `${width}px ${height}px`,
+            border: border ? `1px solid ${gridColor}` : "none",
+            height,
+            minHeight,
+            minWidth,
+            outline: "none",
+            position: "relative",
+            width
+          },
+          ...(Array.isArray(sx) ? sx : [sx]) // combine user provided sx with default
+        ]}
+        onMouseDown={handleMouseDown}
+        {...boxProps}
+        ref={ref}
+      >
+        {grid && <Grid size={gridSize} color={gridColor} />}
+        {children}
+        {isSelecting && <SelectionRectangle {...rectangle} />}
+        {resizeable && <ResizeHandle onResize={onResize} />}
+      </Box>
+    );
+  }
+);
+
+Canvas.displayName = "Canvas";
+
+export default Canvas;
 
 Canvas.propTypes = {
   /**
