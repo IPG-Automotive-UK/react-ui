@@ -50,18 +50,12 @@ export default function MultiColor({ onChange = () => {}, rows = [] }) {
         />
       ),
       renderEditCell: params => (
-        <Popover
-          anchorEl={popperRef.current}
-          onClose={newColor => handleOnColorClose(newColor, params)}
-          open
-        >
-          <Paper sx={{ height: 380, padding: 1, width: 300 }} elevation={3}>
-            <Color
-              value={params.value}
-              onChange={newColor => handleOnColorChange(newColor, params)}
-            />
-          </Paper>
-        </Popover>
+        <EditCell
+          ref={popperRef}
+          params={params}
+          handleOnColorChange={handleOnColorChange}
+          handleOnColorClose={handleOnColorClose}
+        />
       ),
       sortable: false,
       type: "string",
@@ -151,6 +145,29 @@ export default function MultiColor({ onChange = () => {}, rows = [] }) {
     </Box>
   );
 }
+
+const EditCell = React.forwardRef(
+  ({ params, handleOnColorChange, handleOnColorClose }, ref) => {
+    return (
+      <>
+        <div ref={ref}></div>
+        <Popover
+          anchorEl={ref.current}
+          onClose={newColor => handleOnColorClose(newColor, params)}
+          open
+        >
+          <Paper sx={{ height: 380, padding: 1, width: 300 }} elevation={3}>
+            <Color
+              value={params.value}
+              onChange={newColor => handleOnColorChange(newColor, params)}
+            />
+          </Paper>
+        </Popover>
+      </>
+    );
+  }
+);
+EditCell.displayName = "EditCell";
 
 MultiColor.propTypes = {
   /**
