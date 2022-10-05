@@ -1,0 +1,25 @@
+.color-picker-wrapper-light input {
+  color: rgba(0, 0, 0, 0.87) !important;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+}
+.color-picker-wrapper-light input + div {
+  color: rgba(0, 0, 0, 0.6) !important;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: normal !important;
+}
+
+.color-picker-wrapper-dark input {
+  background-color: #414141 !important;
+  border-color: #727272 !important;
+  color: rgb(255, 255, 255) !important;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+}
+.color-picker-wrapper-dark input + div {
+  color: #b0b0b0 !important;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: normal !important;
+}
