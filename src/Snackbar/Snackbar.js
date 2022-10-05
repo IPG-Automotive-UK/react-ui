@@ -6,6 +6,7 @@ import {
 } from "@mui/material";
 import { CheckCircle, Close, Error, Info, Warning } from "@mui/icons-material";
 import { amber, green } from "@mui/material/colors";
+
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -99,7 +100,7 @@ export default function Snackbar({
       <SnackbarContent
         sx={sx[variant]}
         message={
-          <span sx={sx.message}>
+          <span>
             <Icon sx={sx.icon} />
             {message}
           </span>
