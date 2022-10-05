@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 
 import { Box } from "@mui/material";
 import CanvasItem from "./CanvasItem";
+import { action } from "@storybook/addon-actions";
 
 export default {
   component: CanvasItem,
@@ -33,19 +34,22 @@ const Template = args => {
       top,
       width
     }));
+    action("onChange")(style, isShiftKey, type);
   };
   const onRotate = rotateAngle => {
     setRectangle(previous => ({
       ...previous,
       rotateAngle
     }));
+    action("onRotate")(rotateAngle);
   };
-  const onDrag = (deltaX, deltaY) => {
+  const onDrag = (top, left) => {
     setRectangle(previous => ({
       ...previous,
-      left: previous.left + deltaX,
-      top: previous.top + deltaY
+      left,
+      top
     }));
+    action("onDrag")(top, left);
   };
   const onMouseDown = e => setSelected(true);
   return (

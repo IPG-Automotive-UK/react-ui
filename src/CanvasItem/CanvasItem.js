@@ -76,8 +76,15 @@ export default function CanvasItem({
     );
   };
 
-  const handleDrag = (deltaX, deltaY) => {
-    onDrag && onDrag(deltaX, deltaY);
+  const handleDrag = (centerX, centerY) => {
+    const { top, left } = centerToTL({
+      centerX,
+      centerY,
+      height,
+      rotateAngle,
+      width
+    });
+    onDrag && onDrag(top, left);
   };
 
   const styles = tLToCenter({

@@ -101,19 +101,23 @@ export default function Rect({
   };
 
   const startDrag = e => {
-    let { clientX: startX, clientY: startY } = e;
+    const { clientX: startX, clientY: startY } = e;
+    const startCenterX = centerX;
+    const startCenterY = centerY;
+
     isMouseDown.current = true;
     e.stopPropagation();
     onMouseDown(e);
+
     const onMove = e => {
       if (!isMouseDown.current) return; // patch: fix windows press win key during mouseup issue
       e.stopPropagation();
       const { clientX, clientY } = e;
       const deltaX = clientX - startX;
       const deltaY = clientY - startY;
-      onDrag(deltaX, deltaY);
-      startX = clientX;
-      startY = clientY;
+      const newCenterX = startCenterX + deltaX;
+      const newCenterY = startCenterY + deltaY;
+      onDrag(newCenterX, newCenterY);
     };
     const onUp = () => {
       document.removeEventListener("mousemove", onMove);
