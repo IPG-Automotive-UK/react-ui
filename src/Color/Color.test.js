@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+
 import Color from ".";
 import React from "react";
 import userEvent from "@testing-library/user-event";
@@ -93,14 +94,6 @@ describe("Color", () => {
     await user.type(elements.inputs.alpha, "0.5");
     expect(document.querySelector("[id=alpha]").value).toBe("0.5");
   });
-  test("Click swatch opens popover", async () => {
-    const user = userEvent.setup();
-    const value = "rgba(255,55,100,1)";
-    render(<ColorWithState value={value} />);
-    const swatch = screen.getByTestId("swatch");
-    await user.click(swatch);
-    expect(document.querySelector("[id=red]").value).toBe("255");
-  });
   test("No initial color", () => {
     const value = "";
     render(<ColorWithState open value={value} />);
@@ -115,10 +108,6 @@ describe("Color", () => {
     const user = userEvent.setup();
     const value = "rgba(255,55,100,1)";
     render(<ColorWithState value={value} />);
-
-    // get swatch and click swatch
-    const swatch = screen.getByTestId("swatch");
-    await user.click(swatch);
 
     // click no color checkbox
     const noColor = document.querySelector("[type=checkbox]");
