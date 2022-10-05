@@ -4,6 +4,16 @@ import { action } from "@storybook/addon-actions";
 
 export default {
   argTypes: {
+    showControls: {
+      control: {
+        type: "boolean"
+      }
+    },
+    showPicker: {
+      control: {
+        type: "boolean"
+      }
+    },
     value: {
       control: { type: "color" }
     }
@@ -21,83 +31,42 @@ const Template = args => {
     setValue(color);
     action("onChange")(color);
   };
-  const onClose = color => {
-    action("onClose")(color);
-  };
 
   return (
     <Color
       {...args}
-      value={value}
       onChange={onChange}
-      onClose={onClose}
-      swatchSize={args.swatchSize}
-      popoverWidth={args.popoverWidth}
       showControls={args.showControls}
-      anchorType={args.anchorType}
       showPicker={args.showPicker}
+      value={value}
     />
   );
 };
 
 export const Default = Template.bind({});
 Default.args = {
-  anchorOriginHorizontal: "right",
-  anchorOriginVertical: "bottom",
-  anchorType: "anchorEl",
-  open: false,
-  popoverWidth: "250px",
   showControls: true,
   showPicker: true,
-  swatchSize: "small",
-  transformOriginHorizontal: "right",
-  transformOriginVertical: "top",
   value: "rgba(255,0,0,1)"
 };
 
-export const SwatchMedium = Template.bind({});
-SwatchMedium.args = {
-  swatchSize: "medium"
-};
-
-export const SwatchLarge = Template.bind({});
-SwatchLarge.args = {
-  swatchSize: "large"
-};
-
-export const NoPicker = Template.bind({});
-NoPicker.args = {
-  showPicker: false
+export const NoColor = Template.bind({});
+NoColor.args = {
+  showControls: true,
+  showPicker: true,
+  value: ""
 };
 
 export const NoControls = Template.bind({});
 NoControls.args = {
-  showControls: false
+  showControls: false,
+  showPicker: true,
+  value: "rgba(255,0,0,1)"
 };
 
-export const ModifiedPopoverWidth = Template.bind({});
-ModifiedPopoverWidth.args = {
-  popoverWidth: "600px"
-};
-
-export const PopoverIntiallyOpen = Template.bind({});
-PopoverIntiallyOpen.args = {
-  open: true
-};
-
-export const PopoverWithPosition = Template.bind({});
-PopoverWithPosition.args = {
-  anchorType: "anchorPosition",
-  popoverPositionLeft: 300,
-  popoverPositionTop: 100
-};
-
-export const disabled = Template.bind({});
-disabled.args = {
-  disabled: true
-};
-
-export const InitiallyNoColor = Template.bind({});
-InitiallyNoColor.args = {
-  value: ""
+export const NoPicker = Template.bind({});
+NoPicker.args = {
+  showControls: true,
+  showPicker: false,
+  value: "rgba(255,0,0,1)"
 };

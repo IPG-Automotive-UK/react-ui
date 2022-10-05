@@ -1,10 +1,11 @@
-import { Box, IconButton } from "@mui/material";
+import { Box, IconButton, Paper, Popover } from "@mui/material";
+import React, { useRef } from "react";
+
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Color from "../Color";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import PropTypes from "prop-types";
-import React from "react";
 
 /**
  * Multi color component is used to manage a table for value-color pair
@@ -12,6 +13,9 @@ import React from "react";
 export default function MultiColor({ onChange = () => {}, rows = [] }) {
   // add an id for each color/value
   const rowsWithID = rows.map((item, index) => ({ ...item, id: index }));
+
+  // ref for the popover
+  const popperRef = useRef();
 
   // set column definition
   const columns = [
@@ -46,12 +50,18 @@ export default function MultiColor({ onChange = () => {}, rows = [] }) {
         />
       ),
       renderEditCell: params => (
-        <Color
-          value={params.value}
-          onChange={newColor => handleOnColorChange(newColor, params)}
+        <Popover
+          anchorEl={popperRef.current}
           onClose={newColor => handleOnColorClose(newColor, params)}
           open
-        />
+        >
+          <Paper sx={{ height: 380, padding: 1, width: 300 }} elevation={3}>
+            <Color
+              value={params.value}
+              onChange={newColor => handleOnColorChange(newColor, params)}
+            />
+          </Paper>
+        </Popover>
       ),
       sortable: false,
       type: "string",
@@ -117,6 +127,7 @@ export default function MultiColor({ onChange = () => {}, rows = [] }) {
       display="flex"
       flexDirection="column"
       key={rows.length}
+      ref={popperRef}
       sx={{ height: "100%", width: "100%" }}
     >
       <DataGrid
