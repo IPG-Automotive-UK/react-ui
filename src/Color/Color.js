@@ -129,123 +129,117 @@ export default function Color({
 
   // define components
   return (
-    <Box>
-      <Box sx={{ display: "flex", flexDirection: "column" }}>
-        <Box>
-          {showPicker && (
-            <Box>
-              <Box sx={sx.colorPicker}>
-                {noColorChecked ? (
-                  <Box
-                    sx={{
-                      border: "1px solid #bdbdbd",
-                      borderRadius: "4px",
-                      height: "238px"
-                    }}
-                  />
-                ) : (
-                  <RgbaColorPicker
-                    color={rgbaObj}
-                    onChange={handleColorPickerChange}
-                    id="colorPicker"
-                  />
-                )}
-              </Box>
-            </Box>
-          )}
-          {showControls && (
-            <div>
-              <Checkbox
-                checked={noColorChecked}
-                id="NoColorCheckbox"
-                label="No Color"
-                onChange={handleNoColor}
-                size="small"
-              />
-              <Box sx={{ display: "flex", flexDirection: "row" }}>
-                <TextField
-                  data-testid="redTextField"
-                  disabled={noColorChecked}
-                  id="red"
-                  type="number"
-                  size="small"
-                  margin="dense"
-                  max="255"
-                  label="Red"
-                  error={rgbaObj.r > 255}
-                  value={noColorChecked ? "" : rgbaObj.r}
-                  sx={{
-                    marginRight: theme => theme.spacing(1),
-                    width: "33%"
-                  }}
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                  onChange={handleRedChange}
-                  inputProps={{ max: 255, min: 0 }}
-                />
-                <TextField
-                  data-testid="greenTextField"
-                  disabled={noColorChecked}
-                  id="green"
-                  type="number"
-                  size="small"
-                  margin="dense"
-                  max="255"
-                  label="Green"
-                  error={rgbaObj.g > 255}
-                  value={noColorChecked ? "" : rgbaObj.g}
-                  sx={{
-                    marginRight: theme => theme.spacing(1),
-                    width: "33%"
-                  }}
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                  onChange={handleGreenChange}
-                  inputProps={{ max: 255, min: 0 }}
-                />
-                <TextField
-                  data-testid="blueTextField"
-                  disabled={noColorChecked}
-                  id="blue"
-                  type="number"
-                  size="small"
-                  margin="dense"
-                  max="255"
-                  label="Blue"
-                  error={rgbaObj.b > 255}
-                  value={noColorChecked ? "" : rgbaObj.b}
-                  sx={{ width: "33%" }}
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                  onChange={handleBlueChange}
-                  inputProps={{ max: 255, min: 0 }}
-                />
-              </Box>
-              <TextField
-                data-testid="alphaTextField"
-                disabled={noColorChecked}
-                id="alpha"
-                type="number"
-                size="small"
-                margin="dense"
-                max="1"
-                label="Transparency"
-                error={rgbaObj.a > 1}
-                value={noColorChecked ? "" : rgbaObj.a}
-                fullWidth
-                InputLabelProps={{
-                  shrink: true
-                }}
-                onChange={handleAlphaChange}
-                inputProps={{ max: 1, min: 0, step: 0.1 }}
-              />
-            </div>
+    <Box sx={{ display: "flex", flexDirection: "column" }}>
+      {showPicker && (
+        <Box sx={sx.colorPicker}>
+          {noColorChecked ? (
+            <Box
+              sx={{
+                border: "1px solid #bdbdbd",
+                borderRadius: "4px",
+                height: "238px"
+              }}
+            />
+          ) : (
+            <RgbaColorPicker
+              color={rgbaObj}
+              onChange={handleColorPickerChange}
+              id="colorPicker"
+            />
           )}
         </Box>
-      </Box>
+      )}
+      {showControls && (
+        <div>
+          <Checkbox
+            checked={noColorChecked}
+            id="NoColorCheckbox"
+            label="No Color"
+            onChange={handleNoColor}
+            size="small"
+          />
+          <Box sx={{ display: "flex", flexDirection: "row" }}>
+            <TextField
+              data-testid="redTextField"
+              disabled={noColorChecked}
+              id="red"
+              type="number"
+              size="small"
+              margin="dense"
+              max="255"
+              label="Red"
+              error={rgbaObj.r > 255}
+              value={noColorChecked ? "" : rgbaObj.r}
+              sx={{
+                marginRight: theme => theme.spacing(1),
+                width: "33%"
+              }}
+              InputLabelProps={{
+                shrink: true
+              }}
+              onChange={handleRedChange}
+              inputProps={{ max: 255, min: 0 }}
+            />
+            <TextField
+              data-testid="greenTextField"
+              disabled={noColorChecked}
+              id="green"
+              type="number"
+              size="small"
+              margin="dense"
+              max="255"
+              label="Green"
+              error={rgbaObj.g > 255}
+              value={noColorChecked ? "" : rgbaObj.g}
+              sx={{
+                marginRight: theme => theme.spacing(1),
+                width: "33%"
+              }}
+              InputLabelProps={{
+                shrink: true
+              }}
+              onChange={handleGreenChange}
+              inputProps={{ max: 255, min: 0 }}
+            />
+            <TextField
+              data-testid="blueTextField"
+              disabled={noColorChecked}
+              id="blue"
+              type="number"
+              size="small"
+              margin="dense"
+              max="255"
+              label="Blue"
+              error={rgbaObj.b > 255}
+              value={noColorChecked ? "" : rgbaObj.b}
+              sx={{ width: "33%" }}
+              InputLabelProps={{
+                shrink: true
+              }}
+              onChange={handleBlueChange}
+              inputProps={{ max: 255, min: 0 }}
+            />
+          </Box>
+          <TextField
+            data-testid="alphaTextField"
+            disabled={noColorChecked}
+            id="alpha"
+            type="number"
+            size="small"
+            margin="dense"
+            max="1"
+            label="Transparency"
+            error={rgbaObj.a > 1}
+            value={noColorChecked ? "" : rgbaObj.a}
+            fullWidth
+            InputLabelProps={{
+              shrink: true
+            }}
+            onChange={handleAlphaChange}
+            inputProps={{ max: 1, min: 0, step: 0.1 }}
+          />
+        </div>
+      )}
     </Box>
   );
 }
@@ -262,7 +256,7 @@ Color.propTypes = {
    */
   onChange: PropTypes.func,
   /**
-   * This determines if the RGB and HEX controls are shown.
+   * This determines if the rgba controls are shown.
    * @default true
    */
   showControls: PropTypes.bool,
