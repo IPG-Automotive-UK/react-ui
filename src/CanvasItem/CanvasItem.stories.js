@@ -51,9 +51,13 @@ const Template = args => {
     }));
     action("onDrag")(top, left);
   };
-  const onMouseDown = e => setSelected(true);
+  const onClick = e => {
+    e.stopPropagation();
+    setSelected(true);
+    action("onClick")(e);
+  };
   return (
-    <Box width="100%" height="100%" onMouseDown={() => setSelected(false)}>
+    <Box width="100%" height="100%" onClick={() => setSelected(false)}>
       <CanvasItem
         {...args}
         {...rectangle}
@@ -61,7 +65,7 @@ const Template = args => {
         onRotate={onRotate}
         onDrag={onDrag}
         selected={selected}
-        onMouseDown={onMouseDown}
+        onClick={onClick}
       >
         <Box
           sx={{ background: theme => theme.palette.grey[100] }}

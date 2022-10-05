@@ -18,7 +18,7 @@ export default function CanvasItem({
   onRotate,
   onResize,
   onDrag,
-  onMouseDown,
+  onClick,
   aspectRatio,
   children,
   selected
@@ -104,7 +104,7 @@ export default function CanvasItem({
       onResize={handleResize}
       onRotate={handleRotate}
       onDrag={handleDrag}
-      onMouseDown={onMouseDown}
+      onClick={onClick}
     >
       {children}
     </Rect>
@@ -117,8 +117,8 @@ CanvasItem.propTypes = {
   left: PropTypes.number.isRequired,
   minHeight: PropTypes.number,
   minWidth: PropTypes.number,
+  onClick: PropTypes.func,
   onDrag: PropTypes.func,
-  onMouseDown: PropTypes.func,
   onResize: PropTypes.func,
   onRotate: PropTypes.func,
   rotatable: PropTypes.bool,

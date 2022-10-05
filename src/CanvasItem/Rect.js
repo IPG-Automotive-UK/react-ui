@@ -9,18 +9,18 @@ import RotateHandle from "./RotateHandle";
 
 export default function Rect({
   children,
+  onClick,
+  onDrag,
+  onResize,
+  onRotate,
   rotatable,
+  selected,
   styles: {
     position: { centerX, centerY },
     size: { height, width },
     transform: { rotateAngle }
   },
-  zoomable,
-  onDrag,
-  onRotate,
-  onResize,
-  selected,
-  onMouseDown
+  zoomable
 }) {
   const ref = React.useRef();
   const isMouseDown = React.useRef(false);
@@ -107,7 +107,6 @@ export default function Rect({
 
     isMouseDown.current = true;
     e.stopPropagation();
-    onMouseDown(e);
 
     const onMove = e => {
       if (!isMouseDown.current) return; // patch: fix windows press win key during mouseup issue
@@ -159,6 +158,7 @@ export default function Rect({
         width: Math.abs(width)
       }}
       onMouseDown={startDrag}
+      onClick={onClick}
     >
       {children}
       {selected && rotatable && <RotateHandle onRotate={startRotate} />}
