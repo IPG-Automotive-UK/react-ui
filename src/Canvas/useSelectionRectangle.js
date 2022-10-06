@@ -21,6 +21,10 @@ export default function useSelectionRectangle(
     width: 0
   });
 
+  if (!onSelectionRectangle) {
+    return [false, rectangle, () => {}];
+  }
+
   // start selection (for use with onMouseDown)
   const startSelection = event => {
     event.stopPropagation();

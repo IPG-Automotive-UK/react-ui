@@ -84,8 +84,6 @@ export default function Rect({
       const alpha = Math.atan2(deltaY, deltaX);
       const deltaL = getLength(deltaX, deltaY);
       const isShiftKey = e.shiftKey;
-      console.log(deltaX, deltaY);
-      console.log(type);
       onResize(deltaL, alpha, rect, type, isShiftKey);
     };
 

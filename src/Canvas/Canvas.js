@@ -20,12 +20,12 @@ const Canvas = React.forwardRef(
       height = 500,
       minHeight = 100,
       minWidth = 100,
-      onResize = () => {},
-      onSelectionRectangle = () => {},
-      resizeable = true,
+      onResize,
+      onSelectionRectangle,
+      resizable = true,
       width = 500,
       sx = [],
-      onMouseDown = () => {},
+      onMouseDown,
       ...boxProps
     },
     ref
@@ -40,7 +40,7 @@ const Canvas = React.forwardRef(
     );
 
     const handleMouseDown = e => {
-      onMouseDown(e);
+      onMouseDown && onMouseDown(e);
       startSelection(e);
     };
 
@@ -76,7 +76,7 @@ const Canvas = React.forwardRef(
         {grid && <Grid size={gridSize} color={gridColor} />}
         {children}
         {isSelecting && <SelectionRectangle {...rectangle} />}
-        {resizeable && (
+        {onResize && (
           <ResizeHandle
             onResize={handleResize}
             canvasSize={{
@@ -155,10 +155,6 @@ Canvas.propTypes = {
    * Reference to the canvas
    */
   ref: PropTypes.func,
-  /**
-   * Is the canvas resizable
-   */
-  resizeable: PropTypes.bool,
   /**
    * Style object to be applied to the canvas
    */

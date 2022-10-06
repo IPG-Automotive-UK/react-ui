@@ -6,7 +6,7 @@ export default {
   title: "Canvas/Canvas"
 };
 
-const Template = args => {
+const TemplateWithState = args => {
   const [width, setWidth] = React.useState(500);
   const [height, setHeight] = React.useState(500);
   const onResize = (width, height) => {
@@ -24,5 +24,17 @@ const Template = args => {
   );
 };
 
-export const Default = Template.bind({});
-Default.args = {};
+const TemplateWithoutState = args => {
+  return <Canvas {...args} />;
+};
+
+export const Interactive = TemplateWithState.bind({});
+Interactive.args = {};
+
+export const Viewer = TemplateWithoutState.bind({});
+Viewer.args = {
+  grid: false,
+  onMouseDown: undefined,
+  onResize: undefined,
+  onSelectionRectangle: undefined
+};
