@@ -71,6 +71,7 @@ const Canvas = React.forwardRef(
         onMouseDown={handleMouseDown}
         {...boxProps}
         ref={ref}
+        id="canvas"
       >
         {grid && <Grid size={gridSize} color={gridColor} />}
         {children}
