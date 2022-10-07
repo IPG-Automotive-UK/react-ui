@@ -97,7 +97,7 @@ function LabelSelector({
   onEdit = () => {},
   onNew = () => {},
   options = [],
-  size = "medium",
+  size = "small",
   value = []
 }) {
   // default label object
