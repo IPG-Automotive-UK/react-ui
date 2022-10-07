@@ -51,7 +51,7 @@ const CustomPaper = ({
   ...props
 }) => {
   // click handler for add new label button
-  const handleClick = event => {
+  const handleClick = () => {
     // set dialog title
     setLabelDialogTitle("Add a new label");
 
@@ -71,7 +71,7 @@ const CustomPaper = ({
       {addEnabled && (
         <Box marginLeft={2} marginBottom={1}>
           <Button
-            size="small"
+            size={props.size}
             color="primary"
             variant="outlined"
             onClick={handleClick}
@@ -97,6 +97,7 @@ function LabelSelector({
   onEdit = () => {},
   onNew = () => {},
   options = [],
+  size = "small",
   value = []
 }) {
   // default label object
@@ -162,6 +163,7 @@ function LabelSelector({
   return (
     <>
       <Autocomplete
+        size={size}
         disableCloseOnSelect
         limitTags={limitTags}
         multiple={multiple}
@@ -188,6 +190,7 @@ function LabelSelector({
           <Box key={option._id} component="li" {...props}>
             <Checkbox
               checked={selected}
+              size={size}
               style={{
                 "&.Mui-checked": { color: option.color },
                 color: option.color
@@ -203,7 +206,7 @@ function LabelSelector({
                 <Tooltip title="Edit">
                   <IconButton
                     data-testid={`edit-label-${option._id}`}
-                    size="small"
+                    size={size}
                     onClick={event => onEditClick(event, option)}
                   >
                     <Edit sx={styles.editIcon} />
@@ -214,7 +217,7 @@ function LabelSelector({
                 <Tooltip title="Delete">
                   <IconButton
                     data-testid={`delete-label-${option._id}`}
-                    size="small"
+                    size={size}
                     onClick={event => onDeleteClick(event, option)}
                   >
                     <Delete sx={styles.deleteIcon} />
@@ -230,7 +233,7 @@ function LabelSelector({
               key={index}
               label={option.name}
               color={option.color}
-              size="small"
+              size={size}
               style={{ marginLeft: 2 }}
               onDelete={_e => {
                 handleLabelRemove(option._id);
@@ -241,8 +244,6 @@ function LabelSelector({
         }
         noOptionsText="No labels found"
         getOptionLabel={option => option.name}
-        size="small"
-        style={{ minWidth: 150 }}
         value={value || null}
       />
       <EditLabelDialog
@@ -395,6 +396,16 @@ LabelSelector.propTypes = {
    * ]
    */
   options: PropTypes.array,
+  /**
+   * The size of the component.
+   * @default "small"
+   * @type {string}
+   *
+   * Can be one of:
+   * - "small"
+   * - "medium"
+   */
+  size: PropTypes.oneOf(["small", "medium"]),
   /**
    * The array of label objects that are currently selected.
    * @default []
