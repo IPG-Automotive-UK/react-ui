@@ -10,7 +10,7 @@ export default function useSelectionRectangle(
 ) {
   const { maxWidth = Infinity, maxHeight = Infinity } = options;
 
-  const ref = useRef();
+  const canvasRef = useRef();
   const startRef = useRef();
 
   // state
@@ -29,8 +29,8 @@ export default function useSelectionRectangle(
   const startSelection = event => {
     event.stopPropagation();
 
-    ref.current = event.target;
-    const bounds = ref.current.getBoundingClientRect();
+    canvasRef.current = event.target.closest("#canvas");
+    const bounds = canvasRef.current.getBoundingClientRect();
 
     const left = event.clientX - bounds.left;
     const top = event.clientY - bounds.top;
@@ -64,7 +64,7 @@ export default function useSelectionRectangle(
   const moveSelection = event => {
     event.stopPropagation();
 
-    const bounds = ref.current.getBoundingClientRect();
+    const bounds = canvasRef.current.getBoundingClientRect();
     // clamp selection rectangle to canvas
     const left = Math.min(Math.max(event.clientX - bounds.left, 0), maxWidth);
     const top = Math.min(Math.max(event.clientY - bounds.top, 0), maxHeight);
