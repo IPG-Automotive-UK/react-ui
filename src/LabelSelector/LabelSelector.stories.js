@@ -15,6 +15,8 @@ export default {
     onEdit: { type: "function" },
     onNew: { type: "function" },
     options: { type: "array" },
+    size: { type: "string" },
+    sx: { type: "array" },
     value: { type: "array" }
   },
   component: LabelSelector,
@@ -104,6 +106,7 @@ Default.args = {
   onEdit: () => {},
   onNew: () => {},
   options: [],
+  size: "small",
   value: []
 };
 
@@ -115,6 +118,16 @@ WithLabelOptions.args = {
     { _id: 1, color: "#005FA8", description: "first label", name: "label 1" },
     { _id: 2, color: "#f542e0", description: "second label", name: "label 2" }
   ]
+};
+
+export const MediumSizeWithOptions = Template.bind({});
+MediumSizeWithOptions.args = {
+  ...Default.args,
+  options: [
+    { _id: 1, color: "#005FA8", description: "first label", name: "label 1" },
+    { _id: 2, color: "#f542e0", description: "second label", name: "label 2" }
+  ],
+  size: "medium"
 };
 
 // with initial value
