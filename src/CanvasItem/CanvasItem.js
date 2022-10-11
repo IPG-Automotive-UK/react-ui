@@ -5,6 +5,9 @@ import { centerToTL, degToRadian, getNewStyle, tLToCenter } from "./utils";
 import PropTypes from "prop-types";
 import Rect from "./Rect";
 
+/**
+ * CanvasItem is a component that can be used for as part of a drawing application. It includes features such as resize, rotate, and drag.
+ */
 export default function CanvasItem({
   top,
   left,
@@ -112,19 +115,111 @@ export default function CanvasItem({
 }
 
 CanvasItem.propTypes = {
+  /**
+   * Aspect ratio of the item. If set, the item will be resized to keep the aspect ratio when resizing. If not set, the item will be resized freely.
+   */
   aspectRatio: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
+
+  /**
+   * The height of the item.
+   */
   height: PropTypes.number.isRequired,
+
+  /**
+   * The left position of the item.
+   */
   left: PropTypes.number.isRequired,
+
+  /**
+   * The minimum height of the item.
+   */
   minHeight: PropTypes.number,
+  /**
+   * The minimum width of the item.
+   */
   minWidth: PropTypes.number,
+  /**
+   * Callback function when the item is clicked.
+   *
+   * **Signature**
+   *
+   * ```
+   * function(event: ReactMouseEvent<HTMLDivElement>) => void
+   * ```
+   * event: The event source of the callback.
+   */
   onClick: PropTypes.func,
+  /**
+   * Callback function when the item is dragged.
+   *
+   * **Signature**
+   *
+   * ```
+   * function(top: number, left: number) => void
+   * ```
+   *
+   * top: The new top position of the item.
+   *
+   * left: The new left position of the item.
+   */
   onDrag: PropTypes.func,
+  /**
+   * Callback function when the item is resized.
+   *
+   * **Signature**
+   * ```
+   * function({top: number, left: number, width: number, height: number, rotateAngle: number}, isShiftKey: boolean, type: string) => void
+   * ```
+   *
+   * top: The new top position of the item.
+   *
+   * left: The new left position of the item.
+   *
+   * width: The new width of the item.
+   *
+   * height: The new height of the item.
+   *
+   * rotateAngle: The new rotate angle of the item.
+   *
+   * isShiftKey: Whether the shift key is pressed.
+   *
+   * type: The type of the resize handle.
+   */
   onResize: PropTypes.func,
+  /**
+   * Callback function when the item is rotated.
+   *
+   * **Signature**
+   *
+   * ```
+   * function(rotateAngle: number) => void
+   * ```
+   *
+   * rotateAngle: The new rotate angle of the item.
+   */
   onRotate: PropTypes.func,
+  /**
+   * Defines whether the item can be rotated.
+   */
   rotatable: PropTypes.bool,
+  /**
+   * The rotation angle of the item.
+   */
   rotateAngle: PropTypes.number,
+  /**
+   * Defines whether the item is selected. When the item is selected, the resize and rotate handles will be shown.
+   */
   selected: PropTypes.bool,
+  /**
+   * The top position of the item.
+   */
   top: PropTypes.number.isRequired,
+  /**
+   * The width of the item.
+   */
   width: PropTypes.number.isRequired,
+  /**
+   * The zoomable direction of the item. It can be any subset of "n, ne, e, se, s, sw, w, nw" and is provides as a comma delimited string.
+   */
   zoomable: PropTypes.string
 };

@@ -7,6 +7,9 @@ import ResizeHandle from "./ResizeHandle";
 import SelectionRectangle from "./SelectionRectangle";
 import useSelectionRectangle from "./useSelectionRectangle";
 
+/**
+ * A canvas component that can be used for as part of a drawing application. It includes features such as resize, grid, and selection rectangle.
+ */
 const Canvas = React.forwardRef(
   (
     {
@@ -136,19 +139,59 @@ Canvas.propTypes = {
    */
   minWidth: PropTypes.number,
   /**
-   * Callback function to be called on key press
+   * Callback function to be called on key down
+   *
+   * **Signature**
+   *
+   * ```
+   * function(event: React.KeyboardEvent<HTMLDivElement>) => void
+   * ```
+   *
+   * event: The event source of the callback.
    */
-  onKeyPress: PropTypes.func,
+  onKeyDown: PropTypes.func,
   /**
    * Callback function to be called on mouse down
+   *
+   * **Signature**
+   *
+   * ```
+   * function(event: React.MouseEvent<HTMLDivElement>) => void
+   * ```
+   *
+   * event: The event source of the callback.
    */
   onMouseDown: PropTypes.func,
   /**
    * Callback function to be called when the canvas is resized
+   *
+   * **Signature**
+   *
+   * ```
+   * function(newWidth: number, newHeight:number) => void
+   * ```
+   *
+   * newWidth: The new width of the canvas
+   *
+   * newHeight: The new height of the canvas
    */
   onResize: PropTypes.func,
   /**
    * Callback function to be called when the user is selecting via rectangle
+   *
+   * **Signature**
+   *
+   * ```
+   * function({top: number, left: number, width:number, height:number}) => void
+   * ```
+   *
+   * top: Top position of the selection rectangle
+   *
+   * left: Left position of the selection rectangle
+   *
+   * width: Width of the selection rectangle
+   *
+   * height: Height of the selection rectangle
    */
   onSelectionRectangle: PropTypes.func,
   /**
