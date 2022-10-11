@@ -82,6 +82,8 @@ export default function ResizeHandle({
       ]}
       {...props}
       onMouseDown={handleResize}
+      onDragStart={e => e.preventDefault()}
+      onDrag={e => e.preventDefault()}
     />
   );
 }

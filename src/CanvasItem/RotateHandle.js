@@ -35,6 +35,8 @@ export default function RotateHandle({ onRotate }) {
           width: "10px"
         }}
         onMouseDown={onRotate}
+        onDragStart={e => e.preventDefault()}
+        onDrag={e => e.preventDefault()}
       ></Box>
     </Box>
   );
