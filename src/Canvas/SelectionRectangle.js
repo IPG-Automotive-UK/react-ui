@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { Box } from "@mui/material";
+import PropTypes from "prop-types";
 
 /**
  * Rectangle that is drawn when the user is selecting a region of the canvas.
@@ -25,3 +26,24 @@ export default function SelectionRectangle({
     />
   );
 }
+
+SelectionRectangle.propTypes = {
+  /**
+   * Height of the selection rectangle
+   */
+  height: PropTypes.number,
+  /**
+   * Left position of the selection rectangle
+   * relative to the canvas
+   */
+  left: PropTypes.number,
+  /**
+   * Top position of the selection rectangle
+   * relative to the canvas
+   */
+  top: PropTypes.number,
+  /**
+   * Width of the selection rectangle
+   */
+  width: PropTypes.number
+};

@@ -29,7 +29,6 @@ export default function useResize(onResize, canvasSize) {
   const resize = event => {
     const deltaX = event.clientX - start.current.x;
     const deltaY = event.clientY - start.current.y;
-
     onResize(start.current.width + deltaX, start.current.height + deltaY);
   };
 
@@ -41,7 +40,6 @@ export default function useResize(onResize, canvasSize) {
       x: 0,
       y: 0
     };
-
     document.removeEventListener("mouseup", endResize);
     document.removeEventListener("mousemove", resize);
   };

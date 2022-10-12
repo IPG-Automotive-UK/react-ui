@@ -1,7 +1,11 @@
 import * as React from "react";
 
 import { Box } from "@mui/material";
+import PropTypes from "prop-types";
 
+/**
+ * Rotation handle for rotating a rectangle.
+ */
 export default function RotateHandle({ onRotate }) {
   return (
     <Box
@@ -41,3 +45,10 @@ export default function RotateHandle({ onRotate }) {
     </Box>
   );
 }
+
+RotateHandle.propTypes = {
+  /**
+   * Callback for when the user starts rotating the rectangle
+   */
+  onRotate: PropTypes.func
+};

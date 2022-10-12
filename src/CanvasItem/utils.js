@@ -1,5 +1,17 @@
+/**
+ * Calculates the hypotenuse of a right triangle
+ * @param {number} x Length of one side
+ * @param {number} y Length of the other side
+ * @returns {number} Length of the hypotenuse
+ */
 export const getLength = (x, y) => Math.sqrt(x * x + y * y);
 
+/**
+ * Calculates the angle between two points
+ * @param {object} position1 First point (x, y)
+ * @param {object} position2 Second point (x, y)
+ * @returns {number} Angle in degrees
+ */
 export const getAngle = ({ x: x1, y: y1 }, { x: x2, y: y2 }) => {
   const dot = x1 * x2 + y1 * y2;
   const det = x1 * y2 - y1 * x2;
@@ -7,11 +19,31 @@ export const getAngle = ({ x: x1, y: y1 }, { x: x2, y: y2 }) => {
   return (angle + 360) % 360;
 };
 
+/**
+ * Converts degrees to radians
+ * @param {number} deg Angle in degrees
+ * @returns {number} Angle in radians
+ */
 export const degToRadian = deg => (deg * Math.PI) / 180;
 
+/**
+ * cos(x) in degrees
+ */
 const cos = deg => Math.cos(degToRadian(deg));
+
+/**
+ * sin(x) in degrees
+ * @param {*} deg Angle in degrees
+ */
 const sin = deg => Math.sin(degToRadian(deg));
 
+/**
+ * Resolves a change in width with regards to a minWidth
+ * @param {number} width Current width
+ * @param {number} deltaW Change in width
+ * @param {number} minWidth Minimum width
+ * @returns {object} New width and change in width
+ */
 const setWidthAndDeltaW = (width, deltaW, minWidth) => {
   const expectedWidth = width + deltaW;
   if (expectedWidth > minWidth) {
@@ -26,6 +58,13 @@ const setWidthAndDeltaW = (width, deltaW, minWidth) => {
   };
 };
 
+/**
+ * Resolves a change in height with regards to a minHeight
+ * @param {number} height Current height
+ * @param {number} deltaH Change in height
+ * @param {number} minHeight Minimum height
+ * @returns {object} New height and change in height
+ */
 const setHeightAndDeltaH = (height, deltaH, minHeight) => {
   const expectedHeight = height + deltaH;
   if (expectedHeight > minHeight) {
@@ -40,6 +79,17 @@ const setHeightAndDeltaH = (height, deltaH, minHeight) => {
   };
 };
 
+/**
+ * Defines the new style of an item after a resize or rotate
+ * @param {string} type Resize handle type
+ * @param {object} rect Original rectangle
+ * @param {number} deltaW Change in width
+ * @param {number} deltaH Change in height
+ * @param {number} ratio Aspect ratio
+ * @param {number} minWidth Minimum width
+ * @param {number} minHeight Minimum height
+ * @returns {object} New style
+ */
 export const getNewStyle = (
   type,
   rect,
@@ -218,6 +268,7 @@ export const getNewStyle = (
   };
 };
 
+// map of resize direction to clockwise index
 const cursorStartMap = {
   e: 2,
   n: 0,
@@ -228,6 +279,8 @@ const cursorStartMap = {
   sw: 5,
   w: 6
 };
+
+// array of css cursor resize directions in a clockwise order forn 0 - 360 degrees in 45 degree increments
 const cursorDirectionArray = [
   "ns",
   "nesw",
@@ -238,6 +291,8 @@ const cursorDirectionArray = [
   "ew",
   "nwse"
 ];
+
+// map of normalized 30 degree segment to cursor direction
 const cursorMap = {
   0: 0,
   1: 1,
@@ -252,6 +307,13 @@ const cursorMap = {
   8: 6,
   9: 6
 };
+
+/**
+ * Returns the css cursor name for the given angle and resize direction
+ * @param {number} rotateAngle Rotation angle of the rectangle
+ * @param {string} d Resize handle direction
+ * @returns {string} css cursor name
+ */
 export const getCursor = (rotateAngle, d) => {
   const increment = cursorMap[Math.floor(rotateAngle / 30)];
   const index = cursorStartMap[d];
@@ -259,6 +321,11 @@ export const getCursor = (rotateAngle, d) => {
   return cursorDirectionArray[newIndex];
 };
 
+/**
+ * Transforms a rectangle layout from center origin to top left origin
+ * @param {object} layout Layout object with centerX, centerY, width, height, rotateAngle
+ * @returns {object} Layout object with top, left, width, height, rotateAngle
+ */
 export const centerToTL = ({
   centerX,
   centerY,
@@ -273,6 +340,11 @@ export const centerToTL = ({
   width
 });
 
+/**
+ * Transforms a rectangle layout from top left origin to center origin
+ * @param {object} layout Layout object with top, left, width, height, rotateAngle
+ * @returns {object} Layout object with centerX, centerY, width, height, rotateAngle
+ */
 export const tLToCenter = ({ top, left, width, height, rotateAngle }) => ({
   position: {
     centerX: left + width / 2,

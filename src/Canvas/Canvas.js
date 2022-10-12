@@ -15,9 +15,7 @@ const Canvas = React.forwardRef(
     {
       backgroundColor = "white",
       backgroundImage = "",
-      border = true,
       children,
-      grid = true,
       gridColor = "rgba(0, 0, 0, 0.1)",
       gridSize = 25,
       height = 500,
@@ -27,13 +25,15 @@ const Canvas = React.forwardRef(
       onSelectionRectangle,
       resizable = true,
       width = 500,
-      sx = [],
+      showBorder = true,
+      showGrid = true,
       onMouseDown,
+      tabIndex,
       ...boxProps
     },
     ref
   ) => {
-    // selection rectangle
+    // selection rectangle logic
     const [isSelecting, rectangle, startSelection] = useSelectionRectangle(
       onSelectionRectangle,
       {
@@ -42,11 +42,20 @@ const Canvas = React.forwardRef(
       }
     );
 
+    /**
+     * Callback for mouse down on the canvas. Handles user callback and selection rectangle.
+     * @param {React.MouseEvent} e Mouse event
+     */
     const handleMouseDown = e => {
       onMouseDown && onMouseDown(e);
       startSelection(e);
     };
 
+    /**
+     * Callback for canvas being resized. Applies limits and calls user callback.
+     * @param {number} width Proposed new width
+     * @param {number} height Proposed new height
+     */
     const handleResize = (width, height) => {
       width = Math.max(width, minWidth);
       height = Math.max(height, minHeight);
@@ -55,28 +64,26 @@ const Canvas = React.forwardRef(
 
     return (
       <Box
-        sx={[
-          {
-            backgroundColor,
-            backgroundImage: `url(${backgroundImage})`,
-            backgroundRepeat: "no-repeat",
-            backgroundSize: `${width}px ${height}px`,
-            border: border ? `1px solid ${gridColor}` : "none",
-            height: `${height}px`,
-            minHeight,
-            minWidth,
-            outline: "none",
-            position: "relative",
-            width: `${width}px`
-          },
-          ...(Array.isArray(sx) ? sx : [sx]) // combine user provided sx with default
-        ]}
+        sx={{
+          backgroundColor,
+          backgroundImage: `url(${backgroundImage})`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: `${width}px ${height}px`,
+          border: showBorder ? `1px solid ${gridColor}` : "none",
+          height: `${height}px`,
+          minHeight,
+          minWidth,
+          outline: "none",
+          position: "relative",
+          width: `${width}px`
+        }}
         onMouseDown={handleMouseDown}
         {...boxProps}
+        tabIndex={tabIndex}
         ref={ref}
         id="canvas"
       >
-        {grid && <Grid size={gridSize} color={gridColor} />}
+        {showGrid && <Grid size={gridSize} color={gridColor} />}
         {children}
         {isSelecting && <SelectionRectangle {...rectangle} />}
         {onResize && (
@@ -106,18 +113,6 @@ Canvas.propTypes = {
    * Background image of the canvas
    */
   backgroundImage: PropTypes.string,
-  /**
-   * Show a border around the canvas
-   */
-  border: PropTypes.bool,
-  /**
-   * Child components to be rendered inside the canvas
-   */
-  children: PropTypes.node,
-  /**
-   * Show a grid on the canvas
-   */
-  grid: PropTypes.bool,
   /**
    * Color of the grid
    */
@@ -198,6 +193,14 @@ Canvas.propTypes = {
    * Reference to the canvas
    */
   ref: PropTypes.func,
+  /**
+   * Show a border around the canvas
+   */
+  showBorder: PropTypes.bool,
+  /**
+   * Show a grid on the canvas
+   */
+  showGrid: PropTypes.bool,
   /**
    * Style object to be applied to the canvas
    */

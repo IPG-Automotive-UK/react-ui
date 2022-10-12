@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { Box } from "@mui/material";
+import PropTypes from "prop-types";
 
 /**
  * Grid that is drawn on the canvas.
@@ -21,3 +22,14 @@ export default function Grid({ color = "rgba(0,0,0,0.1)", size = 25 }) {
     />
   );
 }
+
+Grid.propTypes = {
+  /**
+   * Color of the grid lines
+   */
+  color: PropTypes.string,
+  /**
+   * Size of the grid
+   */
+  size: PropTypes.number
+};
