@@ -88,7 +88,7 @@ export default function Color({
   const handleRedChange = event => {
     const newColor = colord({
       ...rgbaObj,
-      r: event.target.value
+      r: event.target.value.length === 0 ? 0 : event.target.value
     }).toRgbString();
     setColor(newColor);
   };
@@ -97,7 +97,7 @@ export default function Color({
   const handleGreenChange = event => {
     const newColor = colord({
       ...rgbaObj,
-      g: event.target.value
+      g: event.target.value.length === 0 ? 0 : event.target.value
     }).toRgbString();
     setColor(newColor);
   };
@@ -106,7 +106,7 @@ export default function Color({
   const handleBlueChange = event => {
     const newColor = colord({
       ...rgbaObj,
-      b: event.target.value
+      b: event.target.value.length === 0 ? 0 : event.target.value
     }).toRgbString();
     setColor(newColor);
   };
@@ -115,7 +115,7 @@ export default function Color({
   const handleAlphaChange = event => {
     const newColor = colord({
       ...rgbaObj,
-      a: event.target.value
+      a: event.target.value.length === 0 ? 0 : event.target.value
     }).toRgbString();
     setColor(newColor);
   };
