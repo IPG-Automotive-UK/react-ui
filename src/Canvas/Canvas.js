@@ -28,8 +28,7 @@ const Canvas = React.forwardRef(
       showBorder = true,
       showGrid = true,
       onMouseDown,
-      tabIndex,
-      ...boxProps
+      tabIndex
     },
     ref
   ) => {
@@ -78,7 +77,6 @@ const Canvas = React.forwardRef(
           width: `${width}px`
         }}
         onMouseDown={handleMouseDown}
-        {...boxProps}
         tabIndex={tabIndex}
         ref={ref}
         id="canvas"
