@@ -253,12 +253,12 @@ export default function Rect({
         },
         border: theme =>
           selected ? `1px solid ${theme.palette.primary.main}` : 0,
-        height: Math.abs(height),
-        left: centerX - Math.abs(width) / 2,
+        height: `${Math.abs(height)}px`,
+        left: `${centerX - Math.abs(width) / 2}px`,
         position: "absolute",
-        top: centerY - Math.abs(height) / 2,
+        top: `${centerY - Math.abs(height) / 2}px`,
         transform: `rotate(${rotateAngle}deg)`,
-        width: Math.abs(width)
+        width: `${Math.abs(width)}px`
       }}
       onMouseDown={startDrag}
       onClick={onClick}

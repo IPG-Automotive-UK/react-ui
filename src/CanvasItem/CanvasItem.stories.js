@@ -17,10 +17,34 @@ const Template = args => {
     top: 100,
     width: 200
   });
+  useEffect(
+    () => setRectangle(previous => ({ ...previous, top: args.top })),
+    [args.top]
+  );
+  useEffect(
+    () => setRectangle(previous => ({ ...previous, left: args.left })),
+    [args.left]
+  );
+  useEffect(
+    () => setRectangle(previous => ({ ...previous, width: args.width })),
+    [args.width]
+  );
+  useEffect(
+    () => setRectangle(previous => ({ ...previous, height: args.height })),
+    [args.height]
+  );
+  useEffect(
+    () =>
+      setRectangle(previous => ({
+        ...previous,
+        rotateAngle: args.rotateAngle
+      })),
+    [args.rotateAngle]
+  );
+
   const [selected, setSelected] = React.useState(args.selected);
-  useEffect(() => {
-    setSelected(args.selected);
-  }, [args.selected]);
+  useEffect(() => setSelected(args.selected), [args.selected]);
+
   const onResize = (style, isShiftKey, type) => {
     let { top, left, width, height } = style;
     top = Math.round(top);
@@ -36,6 +60,7 @@ const Template = args => {
     }));
     action("onChange")(style, isShiftKey, type);
   };
+
   const onRotate = rotateAngle => {
     setRectangle(previous => ({
       ...previous,
@@ -43,6 +68,7 @@ const Template = args => {
     }));
     action("onRotate")(rotateAngle);
   };
+
   const onDrag = (top, left) => {
     setRectangle(previous => ({
       ...previous,
@@ -51,11 +77,13 @@ const Template = args => {
     }));
     action("onDrag")(top, left);
   };
+
   const onClick = e => {
     e.stopPropagation();
     setSelected(true);
     action("onClick")(e);
   };
+
   return (
     <Box width="100%" height="100%" onClick={() => setSelected(false)}>
       <CanvasItem
@@ -77,7 +105,23 @@ const Template = args => {
   );
 };
 
+const defaultArgs = {
+  height: 200,
+  left: 100,
+  minHeight: 30,
+  minWidth: 30,
+  onClick: action("onClick"),
+  onDrag: action("onDrag"),
+  onResize: action("onResize"),
+  onRotate: action("onRotate"),
+  rotateAngle: 0,
+  selected: false,
+  top: 100,
+  width: 200,
+  zoomable: "n, e, s, w, ne, se, sw, nw"
+};
+
 export const Default = Template.bind({});
 Default.args = {
-  zoomable: "n, ne, e, se, s, sw, w, nw"
+  ...defaultArgs
 };

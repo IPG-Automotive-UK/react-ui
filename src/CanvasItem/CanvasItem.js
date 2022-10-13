@@ -15,7 +15,6 @@ export default function CanvasItem({
   height,
   minHeight = 30,
   minWidth = 30,
-  rotatable = true,
   rotateAngle = 0,
   zoomable = "",
   onRotate,
@@ -134,7 +133,7 @@ export default function CanvasItem({
       selected={selected}
       styles={styles}
       zoomable={zoomable}
-      rotatable={Boolean(rotatable && onRotate)}
+      rotatable={Boolean(onRotate)}
       onResize={handleResize}
       onRotate={handleRotate}
       onDrag={handleDrag}
@@ -229,10 +228,6 @@ CanvasItem.propTypes = {
    * rotateAngle: The new rotate angle of the item.
    */
   onRotate: PropTypes.func,
-  /**
-   * Defines whether the item can be rotated.
-   */
-  rotatable: PropTypes.bool,
   /**
    * The rotation angle of the item.
    */
