@@ -1,6 +1,7 @@
 import * as React from "react";
 
-import { Box } from "@mui/material";
+import { Box, alpha } from "@mui/material";
+
 import PropTypes from "prop-types";
 
 /**
@@ -15,6 +16,7 @@ export default function SelectionRectangle({
   return (
     <Box
       sx={{
+        backgroundColor: theme => alpha(theme.palette.primary.light, 0.1),
         cursor: "crosshair",
         height: `${height}px`,
         left,
