@@ -10,10 +10,10 @@ export default function RotateHandle({ onRotate }) {
   return (
     <Box
       sx={{
-        height: "30px",
+        height: "22px",
         left: "calc(50% - 5px)",
         position: "absolute",
-        top: "-30px ",
+        top: "-22px ",
         width: "10px"
       }}
     >
