@@ -1,5 +1,7 @@
+import React, { useEffect } from "react";
+
 import Canvas from "./Canvas";
-import React from "react";
+import { action } from "@storybook/addon-actions";
 
 export default {
   component: Canvas,
@@ -7,9 +9,12 @@ export default {
 };
 
 const TemplateWithState = args => {
-  const [width, setWidth] = React.useState(500);
-  const [height, setHeight] = React.useState(500);
+  const [width, setWidth] = React.useState(args.width ?? 500);
+  const [height, setHeight] = React.useState(args.width ?? 500);
+  useEffect(() => setWidth(args.width), [args.width]);
+  useEffect(() => setHeight(args.height), [args.height]);
   const onResize = (width, height) => {
+    action("onResize")(width, height);
     setWidth(width);
     setHeight(height);
   };
@@ -19,7 +24,7 @@ const TemplateWithState = args => {
       height={height}
       width={width}
       onResize={onResize}
-      onSelectionRectangle={() => {}}
+      onSelectionRectangle={action("onSelectionRectangle")}
     />
   );
 };
@@ -28,11 +33,32 @@ const TemplateWithoutState = args => {
   return <Canvas {...args} />;
 };
 
+const defaultArgs = {
+  backgroundColor: "#ffffff",
+  backgroundImage: "",
+  gridColor: "rgba(0, 0, 0, 0.1)",
+  gridSize: 25,
+  height: 500,
+  minHeight: 100,
+  minWidth: 100,
+  onMouseDown: action("onMouseDown"),
+  onResize: action("onResize"),
+  onSelectionRectangle: action("onSelectionRectangle"),
+  showBorder: true,
+  showGrid: true,
+  tabIndex: 0,
+  width: 500
+};
+
+export const Default = TemplateWithState.bind({});
+Default.args = defaultArgs;
+
 export const Interactive = TemplateWithState.bind({});
-Interactive.args = {};
+Interactive.args = defaultArgs;
 
 export const Viewer = TemplateWithoutState.bind({});
 Viewer.args = {
+  ...defaultArgs,
   grid: false,
   onMouseDown: undefined,
   onResize: undefined,

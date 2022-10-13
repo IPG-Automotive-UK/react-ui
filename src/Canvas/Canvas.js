@@ -13,7 +13,7 @@ import useSelectionRectangle from "./useSelectionRectangle";
 const Canvas = React.forwardRef(
   (
     {
-      backgroundColor = "white",
+      backgroundColor = "#ffffff",
       backgroundImage = "",
       children,
       gridColor = "rgba(0, 0, 0, 0.1)",
@@ -23,7 +23,6 @@ const Canvas = React.forwardRef(
       minWidth = 100,
       onResize,
       onSelectionRectangle,
-      resizable = true,
       width = 500,
       showBorder = true,
       showGrid = true,
