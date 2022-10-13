@@ -230,11 +230,12 @@ export default function Rect({
     document.addEventListener("mouseup", onUp);
   };
 
-  // convert the singel string format to array of resize handle types
+  // convert the single string format to array of resize handle types
+  const allowableDirection = ["n", "e", "s", "w", "nw", "ne", "se", "sw"];
   const direction = zoomable
     .split(",")
     .map(d => d.trim())
-    .filter(d => d); // TODO: may be speed up
+    .filter(d => allowableDirection.includes(d)); // TODO: may be speed up
 
   return (
     <Box
