@@ -118,7 +118,7 @@ const defaultArgs = {
   selected: false,
   top: 100,
   width: 200,
-  zoomable: "n, e, s, w, ne, se, sw, nw"
+  zoomable: ["nw", "n", "ne", "e", "se", "s", "sw", "w"]
 };
 
 export const Default = Template.bind({});

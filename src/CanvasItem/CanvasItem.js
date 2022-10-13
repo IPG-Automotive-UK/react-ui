@@ -245,7 +245,9 @@ CanvasItem.propTypes = {
    */
   width: PropTypes.number.isRequired,
   /**
-   * The zoomable direction of the item. It can be any subset of "n, ne, e, se, s, sw, w, nw" and is provides as a comma delimited string.
+   * The zoomable direction of the item. Array of 'n', 's', 'e', 'w', 'ne', 'nw', 'se', 'sw'.
    */
-  zoomable: PropTypes.string
+  zoomable: PropTypes.arrayOf(
+    PropTypes.oneOf(["n", "ne", "e", "se", "s", "sw", "w", "nw"])
+  )
 };

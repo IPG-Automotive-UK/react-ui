@@ -232,10 +232,7 @@ export default function Rect({
 
   // convert the single string format to array of resize handle types
   const allowableDirection = ["n", "e", "s", "w", "nw", "ne", "se", "sw"];
-  const direction = zoomable
-    .split(",")
-    .map(d => d.trim())
-    .filter(d => allowableDirection.includes(d)); // TODO: may be speed up
+  const direction = zoomable.filter(d => allowableDirection.includes(d));
 
   return (
     <Box
