@@ -239,7 +239,6 @@ export default function Rect({
       ref={ref}
       sx={{
         " .rotate": {
-          cursor: "pointer",
           display: "flex",
           height: "18px",
           justifyContent: "center",
@@ -251,6 +250,7 @@ export default function Rect({
         },
         border: theme =>
           selected ? `1px solid ${theme.palette.primary.main}` : 0,
+        cursor: selected && onDrag ? "move" : "pointer",
         height: `${Math.abs(height)}px`,
         left: `${centerX - Math.abs(width) / 2}px`,
         position: "absolute",
@@ -296,7 +296,9 @@ Rect.propTypes = {
    */
   styles: PropTypes.object,
   /**
-   * Comma separated list of resize handles to show
+   * The zoomable direction of the item. Array of 'n', 's', 'e', 'w', 'ne', 'nw', 'se', 'sw'.
    */
-  zoomable: PropTypes.string
+  zoomable: PropTypes.arrayOf(
+    PropTypes.oneOf(["n", "ne", "e", "se", "s", "sw", "w", "nw"])
+  )
 };

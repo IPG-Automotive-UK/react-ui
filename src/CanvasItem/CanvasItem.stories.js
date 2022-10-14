@@ -84,8 +84,12 @@ const Template = args => {
     action("onClick")(e);
   };
 
+  const onCanvasClick = e => {
+    setSelected(false);
+  };
+
   return (
-    <Box width="100%" height="100%" onClick={() => setSelected(false)}>
+    <Box width="100%" height="100%" onClick={onCanvasClick}>
       <CanvasItem
         {...args}
         {...rectangle}
