@@ -1,5 +1,5 @@
 import { Box, TextField } from "@mui/material";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Checkbox from "../Checkbox/Checkbox";
 import PropTypes from "prop-types";
@@ -48,37 +48,30 @@ export default function Color({
   showPicker = true,
   value = "rgba(255,0,0,1)"
 }) {
-  // color state
-  const [color, setColor] = useState(value);
-
   // store last value to return back to it when toggling no color
   const [lastColor, setLastColor] = useState(value);
   useEffect(() => {
-    if (color.length !== 0) {
-      setLastColor(color);
+    if (value.length !== 0) {
+      setLastColor(value);
     }
-  }, [color]);
-
-  // call on change when color changes
-  useEffect(() => {
-    onChange(color);
-  }, [color]);
+  }, [value]);
 
   // convert rgba string to rgba object
-  const rgbaObj = useMemo(() => {
-    return colord(color).toRgb();
-  }, [color]);
+  const rgbaObj = colord(value).toRgb();
 
   // check if no color is selected
-  const noColorChecked = useMemo(() => {
-    return color.length === 0;
-  }, [color]);
+  const noColorChecked = value.length === 0;
 
   // debounce color picker change
   const handleColorPickerChange = useDebouncyFn(newRbgaObj => {
     const newColor = colord(newRbgaObj).toRgbString();
     setColor(newColor);
   }, 200);
+
+  // handle color change
+  const setColor = newColor => {
+    onChange(newColor);
+  };
 
   // handle no color button click
   const handleNoColor = event => {
@@ -95,7 +88,7 @@ export default function Color({
   const handleRedChange = event => {
     const newColor = colord({
       ...rgbaObj,
-      r: event.target.value
+      r: event.target.value.length === 0 ? 0 : event.target.value
     }).toRgbString();
     setColor(newColor);
   };
@@ -104,7 +97,7 @@ export default function Color({
   const handleGreenChange = event => {
     const newColor = colord({
       ...rgbaObj,
-      g: event.target.value
+      g: event.target.value.length === 0 ? 0 : event.target.value
     }).toRgbString();
     setColor(newColor);
   };
@@ -113,7 +106,7 @@ export default function Color({
   const handleBlueChange = event => {
     const newColor = colord({
       ...rgbaObj,
-      b: event.target.value
+      b: event.target.value.length === 0 ? 0 : event.target.value
     }).toRgbString();
     setColor(newColor);
   };
@@ -122,7 +115,7 @@ export default function Color({
   const handleAlphaChange = event => {
     const newColor = colord({
       ...rgbaObj,
-      a: event.target.value
+      a: event.target.value.length === 0 ? 0 : event.target.value
     }).toRgbString();
     setColor(newColor);
   };
