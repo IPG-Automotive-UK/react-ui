@@ -238,16 +238,6 @@ export default function Rect({
     <Box
       ref={ref}
       sx={{
-        " .rotate": {
-          display: "flex",
-          height: "18px",
-          justifyContent: "center",
-          left: "50%",
-          marginLeft: "-9px",
-          position: "absolute",
-          top: "-26px",
-          width: "18px"
-        },
         border: theme =>
           selected ? `1px solid ${theme.palette.primary.main}` : 0,
         cursor: selected && onDrag ? "move" : "pointer",
@@ -260,6 +250,7 @@ export default function Rect({
       }}
       onMouseDown={startDrag}
       onClick={onClick}
+      className="canvas-item"
     >
       {children}
       {selected && onRotate && <RotateHandle onRotate={startRotate} />}

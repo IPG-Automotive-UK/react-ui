@@ -10,12 +10,16 @@ export default function RotateHandle({ onRotate }) {
   return (
     <Box
       sx={{
+        cursor: "default",
         height: "22px",
         left: "calc(50% - 5px)",
         position: "absolute",
         top: "-22px ",
         width: "10px"
       }}
+      onMouseDown={e => e.stopPropagation()}
+      onDragStart={e => e.preventDefault()}
+      onClick-={e => e.stopPropagation()}
     >
       <Box
         sx={{

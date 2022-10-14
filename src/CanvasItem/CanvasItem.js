@@ -16,7 +16,7 @@ export default function CanvasItem({
   minHeight = 30,
   minWidth = 30,
   rotateAngle = 0,
-  zoomable = "",
+  zoomable = [],
   onRotate,
   onResize,
   onDrag,
