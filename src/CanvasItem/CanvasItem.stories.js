@@ -118,11 +118,11 @@ const defaultArgs = {
   onDrag: action("onDrag"),
   onResize: action("onResize"),
   onRotate: action("onRotate"),
+  resizeDirection: ["nw", "n", "ne", "e", "se", "s", "sw", "w"],
   rotateAngle: 0,
   selected: false,
   top: 100,
-  width: 200,
-  zoomable: ["nw", "n", "ne", "e", "se", "s", "sw", "w"]
+  width: 200
 };
 
 export const Default = Template.bind({});

@@ -16,7 +16,7 @@ export default function CanvasItem({
   minHeight = 30,
   minWidth = 30,
   rotateAngle = 0,
-  zoomable = [],
+  resizeDirection = [],
   onRotate,
   onResize,
   onDrag,
@@ -132,7 +132,7 @@ export default function CanvasItem({
     <Rect
       selected={selected}
       styles={styles}
-      zoomable={zoomable}
+      resizeDirection={resizeDirection}
       rotatable={Boolean(onRotate)}
       onResize={handleResize}
       onRotate={handleRotate}
@@ -229,6 +229,12 @@ CanvasItem.propTypes = {
    */
   onRotate: PropTypes.func,
   /**
+   * The allowable resize directions of the item. Array of 'n', 's', 'e', 'w', 'ne', 'nw', 'se', 'sw'.
+   */
+  resizeDirection: PropTypes.arrayOf(
+    PropTypes.oneOf(["n", "ne", "e", "se", "s", "sw", "w", "nw"])
+  ),
+  /**
    * The rotation angle of the item.
    */
   rotateAngle: PropTypes.number,
@@ -243,11 +249,5 @@ CanvasItem.propTypes = {
   /**
    * The width of the item.
    */
-  width: PropTypes.number.isRequired,
-  /**
-   * The zoomable direction of the item. Array of 'n', 's', 'e', 'w', 'ne', 'nw', 'se', 'sw'.
-   */
-  zoomable: PropTypes.arrayOf(
-    PropTypes.oneOf(["n", "ne", "e", "se", "s", "sw", "w", "nw"])
-  )
+  width: PropTypes.number.isRequired
 };

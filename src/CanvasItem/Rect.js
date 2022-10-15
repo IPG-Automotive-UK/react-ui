@@ -19,7 +19,7 @@ export default function Rect({
     size: { height, width },
     transform: { rotateAngle }
   },
-  zoomable
+  resizeDirection
 }) {
   // ref to the element
   const ref = React.useRef();
@@ -232,7 +232,7 @@ export default function Rect({
 
   // convert the single string format to array of resize handle types
   const allowableDirection = ["n", "e", "s", "w", "nw", "ne", "se", "sw"];
-  const direction = zoomable.filter(d => allowableDirection.includes(d));
+  resizeDirection = resizeDirection.filter(d => allowableDirection.includes(d));
 
   return (
     <Box
@@ -255,7 +255,7 @@ export default function Rect({
       {children}
       {selected && onRotate && <RotateHandle onRotate={startRotate} />}
       {selected &&
-        direction.map(d => {
+        resizeDirection.map(d => {
           return (
             <ResizeHandle
               key={d}
@@ -283,13 +283,13 @@ Rect.propTypes = {
    */
   onRotate: PropTypes.func,
   /**
+   * The allowable resize directions of the item. Array of 'n', 's', 'e', 'w', 'ne', 'nw', 'se', 'sw'.
+   */
+  resizeDirection: PropTypes.arrayOf(
+    PropTypes.oneOf(["n", "ne", "e", "se", "s", "sw", "w", "nw"])
+  ),
+  /**
    * Styles object
    */
-  styles: PropTypes.object,
-  /**
-   * The zoomable direction of the item. Array of 'n', 's', 'e', 'w', 'ne', 'nw', 'se', 'sw'.
-   */
-  zoomable: PropTypes.arrayOf(
-    PropTypes.oneOf(["n", "ne", "e", "se", "s", "sw", "w", "nw"])
-  )
+  styles: PropTypes.object
 };
