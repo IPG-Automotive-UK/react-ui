@@ -110,6 +110,7 @@ const Template = args => {
 };
 
 const defaultArgs = {
+  aspectRatio: false,
   height: 200,
   left: 100,
   minHeight: 30,
@@ -122,7 +123,8 @@ const defaultArgs = {
   rotateAngle: 0,
   selected: false,
   top: 100,
-  width: 200
+  width: 200,
+  zIndex: 1
 };
 
 export const Default = Template.bind({});

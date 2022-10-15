@@ -23,7 +23,8 @@ export default function CanvasItem({
   onClick,
   aspectRatio,
   children,
-  selected
+  selected,
+  zIndex = 0
 }) {
   /**
    * Callback for item being rotated. Handles snapping to major angles within 4 degrees, and normalizes angle to be between 0 and 360.
@@ -138,6 +139,7 @@ export default function CanvasItem({
       onRotate={handleRotate}
       onDrag={handleDrag}
       onClick={onClick}
+      zIndex={zIndex}
     >
       {children}
     </Rect>
@@ -249,5 +251,9 @@ CanvasItem.propTypes = {
   /**
    * The width of the item.
    */
-  width: PropTypes.number.isRequired
+  width: PropTypes.number.isRequired,
+  /**
+   * Z-index of the rectangle
+   */
+  zIndex: PropTypes.number
 };

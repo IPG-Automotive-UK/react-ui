@@ -19,7 +19,8 @@ export default function Rect({
     size: { height, width },
     transform: { rotateAngle }
   },
-  resizeDirection
+  resizeDirection,
+  zIndex
 }) {
   // ref to the element
   const ref = React.useRef();
@@ -246,7 +247,8 @@ export default function Rect({
         position: "absolute",
         top: `${centerY - Math.abs(height) / 2}px`,
         transform: `rotate(${rotateAngle}deg)`,
-        width: `${Math.abs(width)}px`
+        width: `${Math.abs(width)}px`,
+        zIndex
       }}
       onMouseDown={startDrag}
       onClick={onClick}
@@ -291,5 +293,9 @@ Rect.propTypes = {
   /**
    * Styles object
    */
-  styles: PropTypes.object
+  styles: PropTypes.object,
+  /**
+   * Z-index of the rectangle
+   */
+  zIndex: PropTypes.number
 };

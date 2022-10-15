@@ -19,7 +19,7 @@ export default function RotateHandle({ onRotate }) {
       }}
       onMouseDown={e => e.stopPropagation()}
       onDragStart={e => e.preventDefault()}
-      onClick-={e => e.stopPropagation()}
+      onClick={e => e.stopPropagation()}
     >
       <Box
         sx={{
