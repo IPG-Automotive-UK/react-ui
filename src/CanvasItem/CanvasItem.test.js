@@ -90,7 +90,7 @@ const CanvasItemWithState = args => {
 /**
  * Tests
  */
-describe("Select", () => {
+describe("CanvasItem", () => {
   test("can render with state", () => {
     const { container } = render(
       <CanvasItemWithState width={300} height={300} left={10} top={10} />

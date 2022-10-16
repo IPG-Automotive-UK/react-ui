@@ -26,7 +26,7 @@ const CanvasWithState = args => {
 /**
  * Tests
  */
-describe("Select", () => {
+describe("Canvas", () => {
   test("can render with state", () => {
     const { container } = render(<CanvasWithState width={300} height={300} />);
     expect(container.querySelector("#canvas")).toBeInTheDocument();

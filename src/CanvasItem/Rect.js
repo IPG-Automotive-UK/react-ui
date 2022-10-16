@@ -239,11 +239,11 @@ export default function Rect({
     <Box
       ref={ref}
       sx={{
-        border: theme =>
-          selected ? `1px solid ${theme.palette.primary.main}` : 0,
         cursor: selected && onDrag ? "move" : "pointer",
         height: `${Math.abs(height)}px`,
         left: `${centerX - Math.abs(width) / 2}px`,
+        outline: theme =>
+          selected ? `1px solid ${theme.palette.primary.main}` : 0,
         position: "absolute",
         top: `${centerY - Math.abs(height) / 2}px`,
         transform: `rotate(${rotateAngle}deg)`,
