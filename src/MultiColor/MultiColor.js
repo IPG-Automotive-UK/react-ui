@@ -166,7 +166,7 @@ const EditCell = ({ params, handleOnColorChange, handleOnColorClose }) => {
       <div id="edit-cell-popper-ref" />
       {anchorEl !== null ? (
         <Popover
-          anchorEl={() => document.querySelector("[id=edit-cell-popper-ref]")}
+          anchorEl={anchorEl}
           onClose={newColor => handleOnColorClose(newColor, params)}
           open
         >
