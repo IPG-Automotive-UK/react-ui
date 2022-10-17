@@ -1,11 +1,11 @@
 import { Box, IconButton, Paper, Popover } from "@mui/material";
-import React, { useRef } from "react";
+import { DataGrid, useGridApiContext } from "@mui/x-data-grid";
 
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Color from "../Color";
-import { DataGrid } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import PropTypes from "prop-types";
+import React from "react";
 
 /**
  * Multi color component is used to manage a table for value-color pair
@@ -13,9 +13,6 @@ import PropTypes from "prop-types";
 export default function MultiColor({ onChange = () => {}, rows = [] }) {
   // add an id for each color/value
   const rowsWithID = rows.map((item, index) => ({ ...item, id: index }));
-
-  // ref for the popover
-  const popperRef = useRef();
 
   // set column definition
   const columns = [
@@ -34,29 +31,32 @@ export default function MultiColor({ onChange = () => {}, rows = [] }) {
       editable: true,
       field: "color",
       headerName: "Color",
-      renderCell: params => (
-        <div
-          style={{
-            background:
-              params.value === ""
-                ? "linear-gradient(to top left, rgba(255,0,0,0) 0%, rgba(255,0,0,0) calc(50% - 0.8px),rgba(255,0,0,1) 50%,rgba(255,0,0,0) calc(50% + 0.8px),rgba(0,0,0,0) 100% )"
-                : params.value,
-            borderRadius: "4px",
-            boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)",
-            height: "15px",
-            width: "15px"
-          }}
-          data-testid="colorCell"
-        />
-      ),
-      renderEditCell: params => (
-        <EditCell
-          ref={popperRef}
-          params={params}
-          handleOnColorChange={handleOnColorChange}
-          handleOnColorClose={handleOnColorClose}
-        />
-      ),
+      renderCell: params => {
+        return (
+          <div
+            style={{
+              background:
+                params.value === ""
+                  ? "linear-gradient(to top left, rgba(255,0,0,0) 0%, rgba(255,0,0,0) calc(50% - 0.8px),rgba(255,0,0,1) 50%,rgba(255,0,0,0) calc(50% + 0.8px),rgba(0,0,0,0) 100% )"
+                  : params.value,
+              borderRadius: "4px",
+              boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)",
+              height: "15px",
+              width: "15px"
+            }}
+            data-testid="colorCell"
+          />
+        );
+      },
+      renderEditCell: params => {
+        return (
+          <EditCell
+            params={params}
+            handleOnColorChange={handleOnColorChange}
+            handleOnColorClose={handleOnColorClose}
+          />
+        );
+      },
       sortable: false,
       type: "string",
       width: 80
@@ -121,7 +121,6 @@ export default function MultiColor({ onChange = () => {}, rows = [] }) {
       display="flex"
       flexDirection="column"
       key={rows.length}
-      ref={popperRef}
       sx={{ height: "100%", width: "100%" }}
     >
       <DataGrid
@@ -146,28 +145,42 @@ export default function MultiColor({ onChange = () => {}, rows = [] }) {
   );
 }
 
-const EditCell = React.forwardRef(
-  ({ params, handleOnColorChange, handleOnColorClose }, ref) => {
-    return (
-      <>
-        <div ref={ref}></div>
+const EditCell = ({ params, handleOnColorChange, handleOnColorClose }) => {
+  // update internal data grid state when color is changed to keep value in synch
+  const { id, value, field } = params;
+  const apiRef = useGridApiContext();
+  const handleValueChange = newColor => {
+    apiRef.current.setEditCellValue({ field, id, value: newColor });
+    handleOnColorChange(newColor, { field, id, value: newColor });
+  };
+
+  // define a ref for the popover to anchor to
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  React.useEffect(() => {
+    setAnchorEl(document.querySelector("[id=edit-cell-popper-ref]"));
+  }, []);
+
+  // create a color picker inside popper
+  return (
+    <>
+      <div id="edit-cell-popper-ref" />
+      {anchorEl !== null ? (
         <Popover
-          anchorEl={ref.current}
+          anchorEl={() => document.querySelector("[id=edit-cell-popper-ref]")}
           onClose={newColor => handleOnColorClose(newColor, params)}
           open
         >
           <Paper sx={{ height: 380, padding: 1, width: 300 }} elevation={3}>
             <Color
-              value={params.value}
-              onChange={newColor => handleOnColorChange(newColor, params)}
+              value={value}
+              onChange={newColor => handleValueChange(newColor)}
             />
           </Paper>
         </Popover>
-      </>
-    );
-  }
-);
-EditCell.displayName = "EditCell";
+      ) : null}
+    </>
+  );
+};
 
 MultiColor.propTypes = {
   /**
