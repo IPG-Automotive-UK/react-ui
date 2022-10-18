@@ -5,7 +5,6 @@ import { Typography } from "@mui/material";
 import statuses from "../statuses";
 
 export default function StatusTypography({ status }) {
-  console.log(status);
   const {
     label: { text, color }
   } = statuses[status];
