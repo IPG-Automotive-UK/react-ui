@@ -2,9 +2,12 @@ import * as React from "react";
 
 import { Box } from "@mui/material";
 import PropTypes from "prop-types";
-import StatusIcon from "../StatusIcon/StatusIcon";
-import StatusTypography from "../StatusTypography/StatusTypography";
+import StatusIcon from "../StatusIcon";
+import StatusMessage from "../StatusMessage";
 
+/**
+ * Displays a status icon and text label.
+ */
 export default function StatusLabel({ status }) {
   return (
     <Box
@@ -17,12 +20,15 @@ export default function StatusLabel({ status }) {
       }}
     >
       <StatusIcon status={status} height={24} width={24} />
-      <StatusTypography status={status} />
+      <StatusMessage status={status} />
     </Box>
   );
 }
 
 StatusLabel.propTypes = {
+  /**
+   * The status type.
+   */
   status: PropTypes.oneOf([
     "cancelled",
     "completed",

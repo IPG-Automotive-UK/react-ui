@@ -3,15 +3,15 @@ import * as React from "react";
 import { render, screen } from "@testing-library/react";
 import statuses, { statusTypes } from "../statuses";
 
-import StatusTypography from "./StatusTypography";
+import StatusMessage from "./StatusMessage";
 
-describe("StatusTypography", () => {
+describe("StatusMessage", () => {
   test.each(statusTypes)("renders correct text for %s", statusType => {
-    render(<StatusTypography status={statusType} />);
+    render(<StatusMessage status={statusType} />);
     expect(screen.getByText(statuses[statusType].label.text)).toBeTruthy();
   });
   test.each(statusTypes)("renders correct color for %s", statusType => {
-    render(<StatusTypography status={statusType} />);
+    render(<StatusMessage status={statusType} />);
     expect(screen.getByText(statuses[statusType].label.text)).toHaveStyle({
       color: statuses[statusType].label.color
     });

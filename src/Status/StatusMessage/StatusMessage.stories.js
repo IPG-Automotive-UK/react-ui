@@ -1,14 +1,14 @@
 import React from "react";
-import StatusTypography from "./StatusTypography";
+import StatusMessage from "./StatusMessage";
 import { statusTypes } from "../statuses";
 
 export default {
-  component: StatusTypography,
-  title: "Status/StatusTypography"
+  component: StatusMessage,
+  title: "Status/StatusMessage"
 };
 
 const Template = args => {
-  return <StatusTypography {...args} />;
+  return <StatusMessage {...args} />;
 };
 
 export const Default = Template.bind({});

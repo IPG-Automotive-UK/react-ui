@@ -28,7 +28,7 @@ export { Sidebar, SidebarDivider, SidebarItem } from "./Sidebar";
 export { default as Slider } from "./Slider";
 export { default as Snackbar } from "./Snackbar";
 export { SnackbarProvider, useSnackbar } from "./SnackbarProvider";
-export { StatusIcon, StatusLabel, StatusTypography } from "./Status";
+export { StatusIcon, StatusLabel, StatusMessage } from "./Status";
 export { default as SwitchField } from "./SwitchField";
 export { default as TextField } from "./TextField";
 export { ThemeProvider, useTheme } from "./ThemeProvider";

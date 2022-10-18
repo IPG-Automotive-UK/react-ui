@@ -4,6 +4,9 @@ import { Avatar } from "@mui/material";
 import PropTypes from "prop-types";
 import statuses from "../statuses";
 
+/**
+ * Displays a status icon.
+ */
 export default function StatusIcon({ status, width = 40, height = 40 }) {
   const {
     icon: { type: Icon, color }
@@ -27,7 +30,13 @@ export default function StatusIcon({ status, width = 40, height = 40 }) {
 }
 
 StatusIcon.propTypes = {
+  /**
+   * Component height
+   */
   height: PropTypes.number,
+  /**
+   * The status type.
+   */
   status: PropTypes.oneOf([
     "cancelled",
     "completed",
@@ -37,5 +46,8 @@ StatusIcon.propTypes = {
     "running",
     "submitted"
   ]).isRequired,
+  /**
+   * Component width
+   */
   width: PropTypes.number
 };

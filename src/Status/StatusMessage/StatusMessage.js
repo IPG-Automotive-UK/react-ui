@@ -4,7 +4,10 @@ import PropTypes from "prop-types";
 import { Typography } from "@mui/material";
 import statuses from "../statuses";
 
-export default function StatusTypography({ status }) {
+/**
+ * Displays a coloured status message.
+ */
+export default function StatusMessage({ status }) {
   const {
     label: { text, color }
   } = statuses[status];
@@ -15,7 +18,10 @@ export default function StatusTypography({ status }) {
   );
 }
 
-StatusTypography.propTypes = {
+StatusMessage.propTypes = {
+  /**
+   * The status type.
+   */
   status: PropTypes.oneOf([
     "cancelled",
     "completed",
