@@ -1,8 +1,26 @@
+import { DARK_MODE_EVENT_NAME } from "storybook-dark-mode";
 import React from "react";
-import { addDecorator } from "@storybook/react";
 import ThemeProvider from "../src/ThemeProvider/ThemeProvider";
+import { addDecorator } from "@storybook/react";
+import addons from "@storybook/addons";
 
-addDecorator(story => <ThemeProvider>{story()}</ThemeProvider>);
+// get channel to listen to event emitter
+const channel = addons.getChannel();
+
+addDecorator(story => {
+  // this example uses hook but you can also use class component as well
+  const [isDark, setDark] = React.useState(false);
+
+  React.useEffect(() => {
+    // listen to DARK_MODE event
+    channel.on(DARK_MODE_EVENT_NAME, setDark);
+    return () => channel.off(DARK_MODE_EVENT_NAME, setDark);
+  }, [channel, setDark]);
+
+  return (
+    <ThemeProvider theme={isDark ? "dark" : "light"}>{story()}</ThemeProvider>
+  );
+});
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
