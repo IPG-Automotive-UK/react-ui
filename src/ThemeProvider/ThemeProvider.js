@@ -4,6 +4,7 @@ import {
   createTheme
 } from "@mui/material/styles";
 import React, { useEffect } from "react";
+
 import PropTypes from "prop-types";
 import ThemeContext from "./ThemeContext";
 import darkScrollbar from "@mui/material/darkScrollbar";
@@ -89,9 +90,12 @@ const darkTheme = createTheme({
 /**
  * IPG Material-ui theme provider and hook.
  */
-export default function ThemeProvider({ children }) {
+export default function ThemeProvider({
+  children,
+  theme: controlledTheme = "light"
+}) {
   // theme state
-  const [theme, setTheme] = React.useState("light");
+  const [theme, setTheme] = React.useState(controlledTheme);
 
   // on first render get theme from local storage or set default to light if not set
   useEffect(() => {
@@ -99,10 +103,16 @@ export default function ThemeProvider({ children }) {
     if (storedThemeMode) {
       setTheme(storedThemeMode);
     } else {
-      setTheme("light");
-      localStorage.setItem("theme", "light");
+      setTheme(controlledTheme);
+      localStorage.setItem("theme", controlledTheme);
     }
   }, []);
+
+  useEffect(() => {
+    if (theme !== controlledTheme) {
+      setTheme(controlledTheme);
+    }
+  }, [controlledTheme]);
 
   // on theme change update local storage
   useEffect(() => {
