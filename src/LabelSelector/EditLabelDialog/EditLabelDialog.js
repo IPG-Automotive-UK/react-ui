@@ -42,15 +42,13 @@ export default function EditLabelDialog({
   onEdit = () => {},
   onClose = () => {},
   labelDialogTitle = "Edit Label",
-  label = { color: "#005FA8", description: "", id: "", name: "" }
+  label = { color: "#005FA8", description: "", id: "", name: "" },
+  maxLabelLength = 50
 }) {
   // define label states for user input
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [color, setColor] = useState("#005FA8");
-
-  // the label that is being edited
-  const [thisLabel, setThisLabel] = useState(label);
 
   // color width
   const [colorWidth, setColorWidth] = useState(300);
@@ -59,7 +57,7 @@ export default function EditLabelDialog({
   const dialogGridRef = useRef();
 
   // check if label is new and not being edited
-  const isNew = thisLabel.id === "" && thisLabel.name === "";
+  const isNew = label.id === "" && label.name === "";
 
   // reset label states when cancel or close button is clicked
   const handleCancel = () => {
@@ -70,34 +68,28 @@ export default function EditLabelDialog({
     onClose();
   };
 
-  // update thisLabel when label changes
-  useEffect(() => {
-    setThisLabel(label);
-  }, [label]);
-
   // if the label is being edited, set the states to the label's values
   useEffect(() => {
     if (!isNew) {
       setName(label.name);
       setDescription(label.description);
       setColor(label.color);
-      setThisLabel(label);
     }
-  }, [label, thisLabel]);
+  }, [label]);
 
   // check that if a label is being edited,
   // changes have been made to the label
   let hasChanged = true;
   if (!isNew) {
     hasChanged =
-      name !== thisLabel.name ||
-      description !== thisLabel.description ||
-      color !== thisLabel.color;
+      name !== label.name ||
+      description !== label.description ||
+      color !== label.color;
   }
 
   // get all option names except the current label
   const optionNames = options
-    .filter(option => option.name !== thisLabel.name)
+    .filter(option => option.name !== label.name)
     .map(option => option.name);
 
   // check if name already exists (except for the current label)
@@ -156,6 +148,7 @@ export default function EditLabelDialog({
               InputLabelProps={{
                 shrink: true
               }}
+              inputProps={{ maxLength: maxLabelLength }}
               value={name}
               onChange={event => setName(event.target.value)}
               error={!isLabelNameValid}

@@ -91,6 +91,7 @@ function LabelSelector({
   deleteEnabled = false,
   editEnabled = false,
   limitTags = -1,
+  maxLabelLength = 50,
   multiple = true,
   onChange = () => {},
   onDelete = () => {},
@@ -256,6 +257,7 @@ function LabelSelector({
         options={options}
         labelDialogTitle={labelDialogTitle}
         label={selectedLabel}
+        maxLabelLength={maxLabelLength}
         onNew={onNew}
         onEdit={onEdit}
       />
