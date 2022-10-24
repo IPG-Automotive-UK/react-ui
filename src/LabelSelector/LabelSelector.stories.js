@@ -9,6 +9,7 @@ export default {
     deleteEnabled: { type: "boolean" },
     editEnabled: { type: "boolean" },
     limitTags: { type: "number" },
+    maxLabelLength: { type: "number" },
     multiple: { type: "boolean" },
     onChange: { type: "function" },
     onDelete: { type: "function" },
@@ -144,4 +145,14 @@ WithAddingEditingAndDeleteEnabled.args = {
   addEnabled: true,
   deleteEnabled: true,
   editEnabled: true
+};
+
+// custom max label lentgh
+export const CustomMaxLabelLength = Template.bind({});
+CustomMaxLabelLength.args = {
+  ...WithLabelOptions.args,
+  addEnabled: true,
+  deleteEnabled: true,
+  editEnabled: true,
+  maxLabelLength: 5
 };

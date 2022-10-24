@@ -61,11 +61,13 @@ export default function EditLabelDialog({
 
   // reset label states when cancel or close button is clicked
   const handleCancel = () => {
+    // close the dialog
+    onClose();
+
     // reset all the states
     setName("");
     setDescription("");
     setColor("#005FA8");
-    onClose();
   };
 
   // if the label is being edited, set the states to the label's values
@@ -95,6 +97,20 @@ export default function EditLabelDialog({
   // check if name already exists (except for the current label)
   const isLabelNameValid = !optionNames?.includes(name.trim());
 
+  // variable for label name length
+  const isLabelLengthValid = name.trim().length <= maxLabelLength;
+
+  // name error message helper function
+  const nameErrorMessage = () => {
+    if (!isLabelNameValid) {
+      return "Label name already exists";
+    }
+    if (!isLabelLengthValid) {
+      return `Label name must be ${maxLabelLength} characters or less`;
+    }
+    return "";
+  };
+
   // handle save button click and save the label
   const handleSave = event => {
     // if label is new, call onNew otherwise call onEdit
@@ -117,9 +133,14 @@ export default function EditLabelDialog({
     if (reason === "backdropClick") {
       return;
     }
-
     // close the dialog
     onClose(event, reason);
+
+    // reset all the states
+    setName("");
+    setDescription("");
+    setColor("#005FA8");
+    onClose();
   };
 
   // return the label dialog
@@ -148,15 +169,10 @@ export default function EditLabelDialog({
               InputLabelProps={{
                 shrink: true
               }}
-              inputProps={{ maxLength: maxLabelLength }}
               value={name}
               onChange={event => setName(event.target.value)}
-              error={!isLabelNameValid}
-              helperText={
-                !isLabelNameValid
-                  ? "Label name already exists please select a new name"
-                  : ""
-              }
+              error={!isLabelNameValid || !isLabelLengthValid}
+              helperText={nameErrorMessage()}
             />
           </Grid>
           <Grid item xs={12}>
@@ -216,10 +232,11 @@ export default function EditLabelDialog({
             name.length === 0 ||
             color.length === 0 ||
             !isLabelNameValid ||
-            !hasChanged
+            !hasChanged ||
+            !isLabelLengthValid
           }
         >
-          Save
+          {isNew ? "Add" : "Save"}
         </Button>
       </DialogActions>
     </Dialog>
