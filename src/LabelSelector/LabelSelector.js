@@ -316,12 +316,6 @@ LabelSelector.propTypes = {
    */
   limitTags: PropTypes.number,
   /**
-   * The maximum length of a label name.
-   * @default 50
-   * @type {number}
-   */
-  nameMaxLength: PropTypes.number,
-  /**
    * If true, value must be an array and the menu will support
    * multiple selections.
    * @default true
@@ -329,6 +323,12 @@ LabelSelector.propTypes = {
    * @see https://material-ui.com/components/autocomplete/#multiple-values
    */
   multiple: PropTypes.bool,
+  /**
+   * The maximum length of a label name.
+   * @default 50
+   * @type {number}
+   */
+  nameMaxLength: PropTypes.number,
   /**
    * Callback fired when the value is changed.
    *
