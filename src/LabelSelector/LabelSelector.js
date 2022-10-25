@@ -53,7 +53,7 @@ const CustomPaper = ({
   // click handler for add new label button
   const handleClick = () => {
     // set dialog title
-    setLabelDialogTitle("Add a new label");
+    setLabelDialogTitle("Add New Label");
 
     // open new label dialog
     setIsLabelDialogOpen(true);
@@ -91,6 +91,7 @@ function LabelSelector({
   deleteEnabled = false,
   editEnabled = false,
   limitTags = -1,
+  nameMaxLength = 50,
   multiple = true,
   onChange = () => {},
   onDelete = () => {},
@@ -112,7 +113,7 @@ function LabelSelector({
   const [isLabelDialogOpen, setIsLabelDialogOpen] = useState(false);
 
   // label dialog title state
-  const [labelDialogTitle, setLabelDialogTitle] = useState("Add a new label");
+  const [labelDialogTitle, setLabelDialogTitle] = useState("Add New Label");
 
   // delete dialog open state
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
@@ -251,11 +252,11 @@ function LabelSelector({
         onClose={() => {
           setIsLabelDialogOpen(false);
           setSelectedLabel(defaultLabel);
-          setLabelDialogTitle("Add a new label");
         }}
         options={options}
         labelDialogTitle={labelDialogTitle}
         label={selectedLabel}
+        nameMaxLength={nameMaxLength}
         onNew={onNew}
         onEdit={onEdit}
       />
@@ -322,6 +323,12 @@ LabelSelector.propTypes = {
    * @see https://material-ui.com/components/autocomplete/#multiple-values
    */
   multiple: PropTypes.bool,
+  /**
+   * The maximum length of a label name.
+   * @default 50
+   * @type {number}
+   */
+  nameMaxLength: PropTypes.number,
   /**
    * Callback fired when the value is changed.
    *
