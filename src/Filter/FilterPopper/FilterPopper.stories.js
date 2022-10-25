@@ -87,8 +87,11 @@ const SingleCheckboxTemplate = args => {
     setValue(newValue);
   };
 
+  // calculate count
+  const stateCount = value.length;
+
   return (
-    <FilterPopper {...args}>
+    <FilterPopper {...args} count={args.count || stateCount}>
       <CheckboxFilter
         name="filter1"
         label="Checkbox"
@@ -117,8 +120,11 @@ const SingleLabelTemplate = args => {
     setValue(newValue);
   };
 
+  // calculate count
+  const stateCount = value.length;
+
   return (
-    <FilterPopper {...args}>
+    <FilterPopper {...args} count={args.count || stateCount}>
       <LabelFilter
         name="filter1"
         label="Labels"

@@ -11,6 +11,7 @@ export { default as FeedbackForm } from "./FeedbackForm";
 export {
   CheckboxFilter,
   FilterPopper,
+  FilterStack,
   LabelFilter,
   RangeFilter
 } from "./Filter";
