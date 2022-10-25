@@ -4,17 +4,6 @@ import { LabelSelector } from "./";
 import React from "react";
 import userEvent from "@testing-library/user-event";
 
-// mock the color picker component
-jest.mock("react-best-gradient-color-picker", () => {
-  const React = require("react");
-  const ColorPicker = jest.createMockFromModule(
-    "react-best-gradient-color-picker"
-  );
-
-  ColorPicker.ColourPicker = jest.fn(() => <div>ColorPicker</div>);
-  return ColorPicker;
-});
-
 /**
  * Test wrapper for LabelSelector
  *
