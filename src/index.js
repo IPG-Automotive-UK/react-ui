@@ -8,7 +8,7 @@ export { default as Copyright } from "./Copyright";
 export { default as Color } from "./Color";
 export { default as DialogTitle } from "./DialogTitle";
 export { default as FeedbackForm } from "./FeedbackForm";
-export { CheckboxFilter, LabelFilter } from "./Filter";
+export { CheckboxFilter, LabelFilter, RangeFilter } from "./Filter";
 export { default as FontPicker } from "./FontPicker";
 export { LabelChip, LabelSelector } from "./LabelSelector";
 export { default as FontStyle } from "./FontStyle";
