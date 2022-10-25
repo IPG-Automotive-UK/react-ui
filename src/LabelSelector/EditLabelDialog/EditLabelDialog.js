@@ -12,27 +12,10 @@ import {
 } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 
-import ColorPicker from "react-best-gradient-color-picker";
+import Color from "../../Color";
 import DialogTitle from "../../DialogTitle";
 import LabelChip from "../LabelChip/LabelChip";
 import PropTypes from "prop-types";
-import { useTheme } from "@mui/material/styles";
-
-// themed color selector component
-const ColorSelector = props => {
-  const theme = useTheme();
-  return (
-    <Box
-      className={
-        theme.palette.mode === "light"
-          ? "color-picker-wrapper-light"
-          : "color-picker-wrapper-dark"
-      }
-    >
-      <ColorPicker {...props} />
-    </Box>
-  );
-};
 
 //  edit label dialog allows for the editing and creating new specific label objects
 export default function EditLabelDialog({
@@ -49,12 +32,6 @@ export default function EditLabelDialog({
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [color, setColor] = useState("#005FA8");
-
-  // color width
-  const [colorWidth, setColorWidth] = useState(300);
-
-  // ref for the dialog grid
-  const dialogGridRef = useRef();
 
   // check if label is new and not being edited
   const isNew = label.id === "" && label.name === "";
@@ -148,18 +125,7 @@ export default function EditLabelDialog({
     <Dialog maxWidth="sm" fullWidth onClose={handleClose} open={isOpen}>
       <DialogTitle onClose={handleClose}>{labelDialogTitle}</DialogTitle>
       <DialogContent dividers>
-        <Grid
-          container
-          spacing={2}
-          ref={node => {
-            dialogGridRef.current = node;
-
-            // if the node is not null, set the color width
-            if (node !== null) {
-              setColorWidth(node.offsetWidth - 16);
-            }
-          }}
-        >
+        <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
               label="Label Name"
@@ -200,16 +166,11 @@ export default function EditLabelDialog({
             </Typography>
           </Grid>
           <Grid item xs={12}>
-            <Box display="flex" alignItems="center">
-              <ColorSelector
-                width={colorWidth}
-                height={150}
-                hideControls
-                hidePresets
-                value={color}
-                onChange={color => setColor(color)}
-              />
-            </Box>
+            <Color
+              value={color}
+              onChange={color => setColor(color)}
+              showNoColor={false}
+            />
           </Grid>
           <Grid item xs={12}>
             <Box width="100%" display="flex" justifyContent="center">
