@@ -155,11 +155,11 @@ export default function EditLabelDialog({
           </Grid>
           <Grid item xs={12}>
             <Typography
-              style={{
-                color: "rgba(0,0,0,0.54)",
+              sx={{
+                color: theme => theme.palette.text.secondary,
                 fontSize: "12px",
                 fontWeight: 400,
-                marginLeft: "16px"
+                marginLeft: "14px"
               }}
             >
               Label Color *
