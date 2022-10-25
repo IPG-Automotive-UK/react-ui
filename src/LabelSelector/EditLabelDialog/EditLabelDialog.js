@@ -43,7 +43,7 @@ export default function EditLabelDialog({
   onClose = () => {},
   labelDialogTitle = "Edit Label",
   label = { color: "#005FA8", description: "", id: "", name: "" },
-  maxLabelLength = 50
+  nameMaxLength = 50
 }) {
   // define label states for user input
   const [name, setName] = useState("");
@@ -98,7 +98,7 @@ export default function EditLabelDialog({
   const isLabelNameValid = !optionNames?.includes(name.trim());
 
   // variable for label name length
-  const isLabelLengthValid = name.trim().length <= maxLabelLength;
+  const isLabelLengthValid = name.trim().length <= nameMaxLength;
 
   // name error message helper function
   const nameErrorMessage = () => {
@@ -106,7 +106,7 @@ export default function EditLabelDialog({
       return "Label name already exists";
     }
     if (!isLabelLengthValid) {
-      return `Label name must be ${maxLabelLength} characters or less`;
+      return `Label name must be ${nameMaxLength} characters or less`;
     }
     return "";
   };

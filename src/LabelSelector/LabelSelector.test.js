@@ -255,7 +255,7 @@ describe("LabelSelector", () => {
 
     // render the label selector
     render(
-      <LabelSelectorWithState onNew={onNew} addEnabled maxLabelLength={5} />
+      <LabelSelectorWithState onNew={onNew} addEnabled nameMaxLength={5} />
     );
 
     // click the label selector down arrow

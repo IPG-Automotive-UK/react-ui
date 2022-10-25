@@ -91,7 +91,7 @@ function LabelSelector({
   deleteEnabled = false,
   editEnabled = false,
   limitTags = -1,
-  maxLabelLength = 50,
+  nameMaxLength = 50,
   multiple = true,
   onChange = () => {},
   onDelete = () => {},
@@ -256,7 +256,7 @@ function LabelSelector({
         options={options}
         labelDialogTitle={labelDialogTitle}
         label={selectedLabel}
-        maxLabelLength={maxLabelLength}
+        nameMaxLength={nameMaxLength}
         onNew={onNew}
         onEdit={onEdit}
       />
@@ -320,7 +320,7 @@ LabelSelector.propTypes = {
    * @default 50
    * @type {number}
    */
-  maxLabelLength: PropTypes.number,
+  nameMaxLength: PropTypes.number,
   /**
    * If true, value must be an array and the menu will support
    * multiple selections.

@@ -9,7 +9,7 @@ export default {
     deleteEnabled: { type: "boolean" },
     editEnabled: { type: "boolean" },
     limitTags: { type: "number" },
-    maxLabelLength: { type: "number" },
+    nameMaxLength: { type: "number" },
     multiple: { type: "boolean" },
     onChange: { type: "function" },
     onDelete: { type: "function" },
@@ -17,7 +17,6 @@ export default {
     onNew: { type: "function" },
     options: { type: "array" },
     size: { type: "string" },
-    sx: { type: "array" },
     value: { type: "array" }
   },
   component: LabelSelector,
@@ -148,11 +147,11 @@ WithAddingEditingAndDeleteEnabled.args = {
 };
 
 // custom max label lentgh
-export const CustomMaxLabelLength = Template.bind({});
-CustomMaxLabelLength.args = {
+export const CustomNameMaxLength = Template.bind({});
+CustomNameMaxLength.args = {
   ...WithLabelOptions.args,
   addEnabled: true,
   deleteEnabled: true,
   editEnabled: true,
-  maxLabelLength: 5
+  nameMaxLength: 5
 };
