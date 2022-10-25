@@ -32,6 +32,7 @@ export default function FilterPopper({ children, label, count }) {
           open={popperOpen}
           placement="bottom-start"
           sx={{
+            maxWidth: "100%",
             width: 350,
             zIndex: 1
           }}
