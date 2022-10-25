@@ -119,7 +119,7 @@ describe("Color", () => {
     expect(document.querySelector("[id=blue]").value).toBe("");
     expect(document.querySelector("[id=alpha]").value).toBe("");
   });
-  test("Click no color is not rendered when showNoColor is false", async () => {
+  test("Click no color is not rendered when showNoColor is false", () => {
     const value = "rgba(255,55,100,1)";
     render(<ColorWithState value={value} showNoColor={false} />);
 
