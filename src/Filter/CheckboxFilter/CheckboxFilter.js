@@ -119,13 +119,13 @@ CheckboxFilter.propTypes = {
   /**
    * Input name
    */
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   /**
    * Callback function to handle changes
    * @param {Array} value - The new value
    * @returns {void}
    */
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
   /**
    * The options to select from
    * @type {Array}

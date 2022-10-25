@@ -30,9 +30,9 @@ Default.args = {
   variant: "popper"
 };
 
-// inline story
-export const Inline = Template.bind({});
-Inline.args = {
+// AlwaysOpen story
+export const AlwaysOpen = Template.bind({});
+AlwaysOpen.args = {
   ...Default.args,
-  variant: "in-line"
+  variant: "always-open"
 };
