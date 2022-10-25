@@ -5,6 +5,7 @@ import {
   Box,
   Checkbox,
   TextField,
+  Typography,
   autocompleteClasses
 } from "@mui/material";
 import { CheckBox, CheckBoxOutlineBlank } from "@mui/icons-material";
@@ -100,7 +101,7 @@ function Option(props, option, { selected }) {
         checked={selected}
         value={option}
       />
-      {option}
+      <Typography>{option}</Typography>
     </Box>
   );
 }
