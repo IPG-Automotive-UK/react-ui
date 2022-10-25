@@ -10,7 +10,7 @@ import {
   TextField,
   Typography
 } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Color from "../../Color";
 import DialogTitle from "../../DialogTitle";
