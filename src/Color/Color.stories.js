@@ -64,6 +64,13 @@ NoControls.args = {
   value: "rgba(255,0,0,1)"
 };
 
+export const NoNoColor = Template.bind({});
+NoNoColor.args = {
+  showControls: true,
+  showNoColor: false,
+  value: "rgba(255,0,0,1)"
+};
+
 export const NoPicker = Template.bind({});
 NoPicker.args = {
   showControls: true,
