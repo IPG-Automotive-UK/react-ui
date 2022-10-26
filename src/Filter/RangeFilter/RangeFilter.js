@@ -38,6 +38,7 @@ export default function RangeFilter({
     value
   }));
 
+  // return component
   return (
     <Box px={2} mb={-0.5}>
       <InputLabel
