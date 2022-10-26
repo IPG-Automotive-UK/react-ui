@@ -24,6 +24,7 @@ const Template = args => {
 export const Default = Template.bind({});
 Default.args = {
   label: "Select options",
+  limitTags: -1,
   name: "checkbox-filter",
   options: ["Option 1", "Option 2", "Option 3"],
   value: ["Option 1"],

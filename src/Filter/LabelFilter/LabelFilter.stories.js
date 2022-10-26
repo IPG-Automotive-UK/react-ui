@@ -30,6 +30,7 @@ const Template = args => {
 export const Default = Template.bind({});
 Default.args = {
   label: "Select options",
+  limitTags: -1,
   name: "label-filter",
   options,
   value: [options[0]],
