@@ -4,18 +4,10 @@ import { action } from "@storybook/addon-actions";
 
 export default {
   argTypes: {
-    showControls: {
-      control: {
-        type: "boolean"
-      }
-    },
-    showPicker: {
-      control: {
-        type: "boolean"
-      }
-    },
     value: {
-      control: { type: "color" }
+      control: {
+        type: "color"
+      }
     }
   },
   component: Color,

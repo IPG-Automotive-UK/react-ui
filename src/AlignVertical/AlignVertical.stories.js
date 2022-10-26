@@ -1,11 +1,9 @@
 import * as React from "react";
+
 import AlignVertical from "./AlignVertical";
 import { action } from "@storybook/addon-actions";
 
 export default {
-  argTypes: {
-    value: { type: "string" }
-  },
   component: AlignVertical,
   title: "Text/AlignVertical"
 };

@@ -3,9 +3,6 @@ import React from "react";
 import { action } from "@storybook/addon-actions";
 
 export default {
-  argTypes: {
-    value: { type: "string" }
-  },
   component: AlignHorizontal,
   title: "Text/AlignHorizontal"
 };
