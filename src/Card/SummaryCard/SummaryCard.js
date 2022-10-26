@@ -8,11 +8,6 @@ import {
   Divider,
   IconButton,
   Stack,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableRow,
   Tooltip,
   Typography
 } from "@mui/material";
@@ -20,71 +15,14 @@ import React, { useEffect, useRef, useState } from "react";
 
 import LabelChip from "../../LabelSelector/LabelChip/LabelChip";
 import { MoreVert } from "@mui/icons-material";
+import PropTypes from "prop-types";
 
 function SummaryCard({
-  title = "Expressway_3Lanes",
-  subtitle = "Uploaded 2 hours ago by Jega Sriskantha ",
-  labels = [
-    {
-      _id: 1,
-      color: "#174713",
-      description: "National Highways",
-      name: "National Highways"
-    },
-    {
-      _id: 2,
-      color: "#1D9586",
-      description: "Wet Surface",
-      name: "Wet Surface"
-    },
-    {
-      _id: 3,
-      color: "#fcba03",
-      description: "Test Label 1",
-      name: "Test Label 1"
-    },
-    {
-      _id: 4,
-      color: "#47357a",
-      description: "Test Label 2",
-      name: "Test Label 2"
-    },
-    {
-      _id: 5,
-      color: "#1D9586",
-      description: "Test Label 3",
-      name: "Test Label 3"
-    }
-  ],
-  src = "https://picsum.photos/400/200",
-  content = (
-    <TableContainer>
-      <Table size="small">
-        <TableBody>
-          <TableRow>
-            <TableCell>Description</TableCell>
-            <TableCell>Some Description of a road</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Country</TableCell>
-            <TableCell>Germany</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Scenario</TableCell>
-            <TableCell>Expressway</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Road Length (m)</TableCell>
-            <TableCell>3000</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Road Format</TableCell>
-            <TableCell>.rd5</TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-    </TableContainer>
-  )
+  title = "title",
+  subtitle = "subtitle",
+  labels = [],
+  media = "",
+  content = null
 }) {
   const titleRef = useRef();
   const subtitleRef = useRef();
@@ -117,22 +55,21 @@ function SummaryCard({
       labelStackRef.current.scrollWidth > labelStackRef.current.clientWidth
     );
 
-    // find which children are overflowing the 350px width
+    // find the overflowing labels
     let sum = 0;
     const overFlowLabels = [];
-    for (
-      let thisLabel = 0;
-      thisLabel < labelStackRef.current.children.length;
-      thisLabel++
-    ) {
-      // add the width of the current label and 8px of space between labels to the sum
-      sum += labelStackRef.current.children[thisLabel].offsetWidth + 8;
 
-      // if the sum is greater than the header content width, then the label is overflowing
+    // for each of the labels in the label stack
+    labelStackRef.current.childNodes.forEach(child => {
+      // add the width of the child plus 8px of space between each child to the sum
+      sum += child.offsetWidth + 8;
+
+      // if the sum is greater than the header contend width, then them this child is overflowing
+      // the header content width
       if (sum > headerContentWidth) {
-        overFlowLabels.push(labelStackRef.current.children[thisLabel]);
+        overFlowLabels.push(child);
       }
-    }
+    });
 
     // set the overflowing labels
     setOverFlowingLabels(overFlowLabels);
@@ -162,6 +99,7 @@ function SummaryCard({
   return (
     <Card sx={{ height: 613, width: 436 }}>
       <CardHeader
+        sx={{ height: 51 }}
         action={
           <IconButton aria-label="settings">
             <MoreVert />
@@ -191,7 +129,7 @@ function SummaryCard({
           </Tooltip>
         }
       />
-      <Box ml={2} sx={{ maxWidth: 400, overflowX: "hidden" }}>
+      <Box ml={2} sx={{ maxWidth: 400, height: 24, overflowX: "hidden" }}>
         <Stack ref={labelStackRef} direction="row" spacing={1}>
           {!isLabelStackOverflow ? (
             <>
@@ -223,7 +161,7 @@ function SummaryCard({
       </Box>
       <CardMedia
         component="img"
-        src={src}
+        src={media}
         sx={{ height: 200, objectFit: "contain", padding: 2, width: 400 }}
       />
       <CardContent sx={{ height: 216, overflowY: "hidden", padding: 1 }}>
@@ -248,3 +186,19 @@ function SummaryCard({
 }
 
 export default SummaryCard;
+
+// summary card prop types
+SummaryCard.propTypes = {
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string.isRequired,
+  labels: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      description: PropTypes.string,
+      color: PropTypes.string.isRequired
+    })
+  ),
+  media: PropTypes.string,
+  content: PropTypes.node.isRequired
+};
