@@ -4,17 +4,6 @@ import { LabelSelector } from "./";
 import React from "react";
 import userEvent from "@testing-library/user-event";
 
-// mock the color picker component
-jest.mock("react-best-gradient-color-picker", () => {
-  const React = require("react");
-  const ColorPicker = jest.createMockFromModule(
-    "react-best-gradient-color-picker"
-  );
-
-  ColorPicker.ColourPicker = jest.fn(() => <div>ColorPicker</div>);
-  return ColorPicker;
-});
-
 /**
  * Test wrapper for LabelSelector
  *
@@ -170,7 +159,7 @@ describe("LabelSelector", () => {
     await userEvent.type(labelName, "new label");
 
     // find the save button and click it
-    const saveButton = screen.getByRole("button", { name: "Save" });
+    const saveButton = screen.getByRole("button", { name: "Add" });
     await userEvent.click(saveButton);
 
     // check that the onChange event is fired
@@ -247,5 +236,30 @@ describe("LabelSelector", () => {
       description: "first label",
       name: "label 1"
     });
+  });
+  // cannot save a new label that exceeds the max length
+  it("cannot save a new label that exceeds the max length", async () => {
+    // mock the onChange event
+    const onNew = jest.fn();
+
+    // render the label selector
+    render(
+      <LabelSelectorWithState onNew={onNew} addEnabled nameMaxLength={5} />
+    );
+
+    // click the label selector down arrow
+    await userEvent.click(screen.getByTestId("ArrowDropDownIcon"));
+
+    // click the add new label button in the menu
+    await userEvent.click(
+      screen.getByRole("button", { name: "+ Add New Label" })
+    );
+
+    // find the input with the label "Label Name" and type "new label"
+    const labelName = screen.getByText("Label Name");
+    await userEvent.type(labelName, "new label");
+
+    // expect the add button to be disabled
+    expect(screen.getByRole("button", { name: "Add" })).toBeDisabled();
   });
 });
