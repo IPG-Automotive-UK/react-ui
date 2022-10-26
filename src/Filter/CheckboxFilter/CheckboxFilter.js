@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { CheckBox, CheckBoxOutlineBlank } from "@mui/icons-material";
 
-import OpenAutocomplete from "../OpenAutocomplete";
+import AlwaysOpenAutocomplete from "../AlwaysOpenAutocomplete";
 import PropTypes from "prop-types";
 
 /**
@@ -24,16 +24,16 @@ export default function CheckboxFilter({
 }) {
   const defaults = { limitTags, value };
   return variant === "popper" ? (
-    <CheckboxFilterInput {...props} {...defaults} />
+    <CheckboxFilterPopper {...props} {...defaults} />
   ) : (
-    <CheckboxFilterInline {...props} {...defaults} />
+    <CheckboxFilterAlwaysOpen {...props} {...defaults} />
   );
 }
 
 /**
  * An inline checkbox filter is always open and the popper does not sit above other elements.
  */
-function CheckboxFilterInline({
+function CheckboxFilterAlwaysOpen({
   label,
   limitTags,
   name,
@@ -42,7 +42,7 @@ function CheckboxFilterInline({
   value
 }) {
   return (
-    <OpenAutocomplete
+    <AlwaysOpenAutocomplete
       limitTags={limitTags}
       multiple
       onChange={(e, newValue) => onChange(newValue)}
@@ -68,7 +68,7 @@ function CheckboxFilterInline({
 /**
  * A checkbox filter that opens a popper above other elements.
  */
-function CheckboxFilterInput({
+function CheckboxFilterPopper({
   label,
   limitTags,
   name,
@@ -145,7 +145,7 @@ CheckboxFilter.propTypes = {
    * The variant of the filter
    * @type {string}
    * @default "popper"
-   * @enum {"popper", "inline"}
+   * @enum {"popper", "always-open"}
    */
   variant: PropTypes.oneOf(["popper", "always-open"])
 };

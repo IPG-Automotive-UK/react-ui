@@ -5,7 +5,7 @@ import { Autocomplete, Stack } from "@mui/material";
 /**
  * An overriden Autocomplete component that is always open
  */
-export default function OpenAutocomplete(props) {
+export default function AlwaysOpenAutocomplete(props) {
   // NOTE: The stack is required because the Autocomplete component inserts the "PopperComponent" as a sibling.
   return (
     <Stack direction="column">

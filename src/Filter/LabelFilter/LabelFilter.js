@@ -9,8 +9,8 @@ import {
   autocompleteClasses
 } from "@mui/material";
 
+import AlwaysOpenAutocomplete from "../AlwaysOpenAutocomplete";
 import LabelChip from "../../LabelSelector/LabelChip/LabelChip";
-import OpenAutocomplete from "../OpenAutocomplete";
 import PropTypes from "prop-types";
 
 /**
@@ -24,16 +24,16 @@ export default function LabelFilter({
 }) {
   const defaults = { limitTags, value };
   return variant === "popper" ? (
-    <LabelFilterInput {...props} {...defaults} />
+    <LabelFilterPopper {...props} {...defaults} />
   ) : (
-    <LabeFilterInline {...props} {...defaults} />
+    <LabelFilterAlwaysOpen {...props} {...defaults} />
   );
 }
 
 /**
  * A label filter that opens a popper above other elements.
  */
-function LabelFilterInput({
+function LabelFilterPopper({
   label,
   name,
   onChange,
@@ -63,7 +63,7 @@ function LabelFilterInput({
 /**
  * An inline label filter is always open and the popper does not sit above other elements.
  */
-function LabeFilterInline({
+function LabelFilterAlwaysOpen({
   name,
   label,
   options,
@@ -72,7 +72,7 @@ function LabeFilterInline({
   onChange
 }) {
   return (
-    <OpenAutocomplete
+    <AlwaysOpenAutocomplete
       getOptionLabel={option => option.name}
       isOptionEqualToValue={(option, value) => option._id === value._id}
       limitTags={limitTags}
@@ -187,7 +187,7 @@ LabelFilter.propTypes = {
    * The variant of the filter
    * @type {string}
    * @default "popper"
-   * @enum {"popper", "inline"}
+   * @enum {"popper", "always-open"}
    */
   variant: PropTypes.oneOf(["popper", "always-open"])
 };
