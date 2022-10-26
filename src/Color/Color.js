@@ -45,6 +45,7 @@ const sx = {
 export default function Color({
   onChange = () => {},
   showControls = true,
+  showNoColor = true,
   showPicker = true,
   value = "rgba(255,0,0,1)"
 }) {
@@ -144,13 +145,15 @@ export default function Color({
       )}
       {showControls && (
         <div>
-          <Checkbox
-            checked={noColorChecked}
-            id="NoColorCheckbox"
-            label="No Color"
-            onChange={handleNoColor}
-            size="small"
-          />
+          {showNoColor && (
+            <Checkbox
+              checked={noColorChecked}
+              id="NoColorCheckbox"
+              label="No Color"
+              onChange={handleNoColor}
+              size="small"
+            />
+          )}
           <Box sx={{ display: "flex", flexDirection: "row" }}>
             <TextField
               data-testid="redTextField"
@@ -253,6 +256,12 @@ Color.propTypes = {
    * @default true
    */
   showControls: PropTypes.bool,
+  /**
+   * This determines if the No Color control is shown.
+   * This is only shown if showControls is true.
+   * @default true
+   */
+  showNoColor: PropTypes.bool,
   /**
    * This determines if the colorpicker is shown.
    * @default true

@@ -85,6 +85,7 @@ Default.args = {
   editEnabled: false,
   limitTags: -1,
   multiple: true,
+  nameMaxLength: 50,
   onChange: () => {},
   onDelete: () => {},
   onEdit: () => {},
@@ -128,4 +129,14 @@ WithAddingEditingAndDeleteEnabled.args = {
   addEnabled: true,
   deleteEnabled: true,
   editEnabled: true
+};
+
+// custom max label lentgh
+export const CustomNameMaxLength = Template.bind({});
+CustomNameMaxLength.args = {
+  ...WithLabelOptions.args,
+  addEnabled: true,
+  deleteEnabled: true,
+  editEnabled: true,
+  nameMaxLength: 5
 };
