@@ -1,6 +1,17 @@
 import * as React from "react";
 
-import { Autocomplete, Stack } from "@mui/material";
+import { Autocomplete, Box, Stack } from "@mui/material";
+
+/**
+ * A replacement for the PopperComponent which is just a div.
+ */
+function PopperComponent(props) {
+  // remove the unwanted props
+  // disablePortal, anchorEl and open because we aren't a Popper
+  // style because it contains width, but it doesn't recalc often enough and we always want it to be 100%
+  const { disablePortal, anchorEl, open, style, ...other } = props;
+  return <Box {...other} width="100%" />;
+}
 
 /**
  * An overriden Autocomplete component that is always open
@@ -12,9 +23,8 @@ export default function AlwaysOpenAutocomplete(props) {
       <Autocomplete
         open
         disableCloseOnSelect
-        disablePortal
-        PopperComponent={({ children }) => children} // no popper required
-        PaperComponent={({ children }) => children} // no paper required
+        PopperComponent={PopperComponent} // no popper required
+        PaperComponent={Box} // no paper required
         {...props}
       />
     </Stack>

@@ -26,7 +26,7 @@ Default.args = {
   label: "Select options",
   limitTags: -1,
   name: "checkbox-filter",
-  options: ["Option 1", "Option 2", "Option 3"],
+  options: Array.from(Array(20).keys()).map(i => `Option ${i}`),
   value: ["Option 1"],
   variant: "popper"
 };
