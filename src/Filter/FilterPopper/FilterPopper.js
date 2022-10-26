@@ -34,7 +34,7 @@ export default function FilterPopper({ children, label, count }) {
           sx={{
             maxWidth: "100%",
             width: 350,
-            zIndex: 1
+            zIndex: theme => theme.zIndex.modal
           }}
         >
           <Paper
