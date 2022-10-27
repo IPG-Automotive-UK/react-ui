@@ -3,15 +3,6 @@ import React from "react";
 import { action } from "@storybook/addon-actions";
 
 export default {
-  argTypes: {
-    clickable: { type: "boolean" },
-    color: { type: "string" },
-    label: { type: "string" },
-    onClick: { type: "function" },
-    onDelete: { type: "function" },
-    size: { type: "string" },
-    variant: { type: "string" }
-  },
   component: LabelChip,
   title: "General/LabelChip"
 };

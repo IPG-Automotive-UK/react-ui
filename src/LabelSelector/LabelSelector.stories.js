@@ -3,22 +3,6 @@ import React from "react";
 import { action } from "@storybook/addon-actions";
 
 export default {
-  argTypes: {
-    addEnabled: { type: "boolean" },
-    autocompleteLabel: { type: "string" },
-    deleteEnabled: { type: "boolean" },
-    editEnabled: { type: "boolean" },
-    limitTags: { type: "number" },
-    multiple: { type: "boolean" },
-    nameMaxLength: { type: "number" },
-    onChange: { type: "function" },
-    onDelete: { type: "function" },
-    onEdit: { type: "function" },
-    onNew: { type: "function" },
-    options: { type: "array" },
-    size: { type: "string" },
-    value: { type: "array" }
-  },
   component: LabelSelector,
   title: "General/LabelSelector"
 };

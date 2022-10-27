@@ -3,13 +3,6 @@ import Slider from "./Slider";
 import { action } from "@storybook/addon-actions";
 
 export default {
-  argTypes: {
-    orientation: {
-      control: { type: "radio" },
-      option: ["horizontal", "vertical"]
-    },
-    value: { type: "number" }
-  },
   component: Slider,
   title: "General/Slider"
 };
