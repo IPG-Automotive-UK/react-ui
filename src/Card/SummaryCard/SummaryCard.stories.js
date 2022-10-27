@@ -25,14 +25,14 @@ const Template = args => {
   return (
     <SummaryCard
       {...args}
-      onLabelClick={label => {
+      onClickLabel={label => {
         action("onLabelClick")(label);
       }}
-      onMoreDetailsClick={() => {
-        action("onMoreDetailsClick")();
+      onClickMoreDetails={event => {
+        action("onMoreDetailsClick")({ event });
       }}
-      onViewFilesClick={() => {
-        action("onViewFilesClick")();
+      onClickViewFiles={event => {
+        action("onViewFilesClick")({ event });
       }}
     />
   );
@@ -40,21 +40,50 @@ const Template = args => {
 
 export const Default = Template.bind({});
 Default.args = {
-  height: 613,
+  height: 600,
+  labels: [],
+  media: "",
+  mediaHeight: 200,
+  mediaWidth: 400,
+  onClickLabel: () => {},
+  onClickMoreDetails: () => {},
+  onClickViewFiles: () => {},
   subtitle: "subtitle",
   title: "title",
-  width: 436,
-  mediaHeight: 200,
-  mediaWidth: 400
+  width: 450
 };
 
 export const ScenarioExample = Template.bind({});
 ScenarioExample.args = {
-  mediaHeight: 200,
-  mediaWidth: 400,
-  height: 613,
-  title: "Expressway_3Lanes ",
-  subtitle: "Uploaded 2 hours ago by Jega Sriskantha ",
+  ...Default.args,
+  content: (
+    <TableContainer>
+      <Table size="small">
+        <TableBody>
+          <TableRow>
+            <TableCell>Description</TableCell>
+            <TableCell>Some Description of a road</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Country</TableCell>
+            <TableCell>Germany</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Scenario</TableCell>
+            <TableCell>Expressway</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Road Length (m)</TableCell>
+            <TableCell>3000</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Road Format</TableCell>
+            <TableCell>.rd5</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </TableContainer>
+  ),
   labels: [
     {
       _id: "1",
@@ -88,36 +117,7 @@ ScenarioExample.args = {
     }
   ],
   media: "https://picsum.photos/400/200",
-  content: (
-    <TableContainer>
-      <Table size="small">
-        <TableBody>
-          <TableRow>
-            <TableCell>Description</TableCell>
-            <TableCell>Some Description of a road</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Country</TableCell>
-            <TableCell>Germany</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Scenario</TableCell>
-            <TableCell>Expressway</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Road Length (m)</TableCell>
-            <TableCell>3000</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Road Format</TableCell>
-            <TableCell>.rd5</TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-    </TableContainer>
-  ),
-  width: 436,
-  moreOptionsList: (
+  moreOptionsPopover: (
     <List>
       <ListItem disablePadding>
         <ListItemButton>
@@ -136,5 +136,7 @@ ScenarioExample.args = {
         </ListItemButton>
       </ListItem>
     </List>
-  )
+  ),
+  subtitle: "Uploaded 2 hours ago by Jega Sriskantha ",
+  title: "Expressway_3Lanes "
 };

@@ -20,19 +20,19 @@ import { MoreVert } from "@mui/icons-material";
 import PropTypes from "prop-types";
 
 function SummaryCard({
-  title = "title",
-  subtitle = "subtitle",
+  content = null,
+  height = 600,
   labels = [],
   media = "",
-  content = null,
-  moreOptionsList = null,
-  width = 436,
-  height = 613,
-  mediaWidth = 400,
   mediaHeight = 200,
+  mediaWidth = 400,
+  moreOptionsPopover = null,
   onClickLabel = () => {},
   onClickMoreDetails = () => {},
-  onClickViewFiles = () => {}
+  onClickViewFiles = () => {},
+  subtitle = "subtitle",
+  title = "title",
+  width = 450
 }) {
   const titleRef = useRef();
   const subtitleRef = useRef();
@@ -46,6 +46,8 @@ function SummaryCard({
 
   // header content width
   const headerContentWidth = width - 65;
+
+  // label spacing
   const labelSpacing = 8;
 
   // overflow button width
@@ -97,18 +99,22 @@ function SummaryCard({
     labels.length - overFlowingLabels.length
   );
 
+  // handle the click of the label overflow button by setting the label anchor element
   const handleLabelOverflowClick = event => {
     setLabelAnchorEl(event.currentTarget);
   };
 
+  // handle the close of the label overflow popover by setting the label anchor element to null
   const handleLabelOverflowClose = () => {
     setLabelAnchorEl(null);
   };
 
+  // handle the click of the more options button by setting the more options anchor element
   const handleMoreOptionsClick = event => {
     setMoreOptionsAnchorEl(event.currentTarget);
   };
 
+  // handle the close of the more options popover by setting the more options anchor element to null
   const handleMoreOptionsClose = () => {
     setMoreOptionsAnchorEl(null);
   };
@@ -130,7 +136,7 @@ function SummaryCard({
         <CardHeader
           sx={{ height: 50 }}
           action={
-            moreOptionsList ? (
+            moreOptionsPopover ? (
               <IconButton
                 aria-label="settings"
                 onClick={handleMoreOptionsClick}
@@ -226,16 +232,23 @@ function SummaryCard({
             )}
           </Stack>
         </Box>
-        <CardMedia
-          component="img"
-          src={media}
+        <Box
           sx={{
-            height: mediaHeight,
-            objectFit: "contain",
-            padding: 2,
-            width: mediaWidth
+            display: "flex",
+            justifyContent: "center"
           }}
-        />
+        >
+          <CardMedia
+            component="img"
+            src={media}
+            sx={{
+              height: mediaHeight,
+              objectFit: "contain",
+              padding: 2,
+              width: mediaWidth
+            }}
+          />
+        </Box>
         <CardContent
           sx={{
             height: height - mediaHeight - 196,
@@ -275,8 +288,8 @@ function SummaryCard({
         anchorEl={labelAnchorEl}
         onClose={handleLabelOverflowClose}
         anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left"
+          horizontal: "left",
+          vertical: "bottom"
         }}
       >
         <Stack
@@ -308,11 +321,11 @@ function SummaryCard({
         anchorEl={moreOptionsAnchorEl}
         onClose={handleMoreOptionsClose}
         anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left"
+          horizontal: "left",
+          vertical: "bottom"
         }}
       >
-        {moreOptionsList}
+        {moreOptionsPopover}
       </Popover>
     </>
   );
@@ -322,8 +335,35 @@ export default SummaryCard;
 
 // summary card prop types
 SummaryCard.propTypes = {
-  content: PropTypes.node.isRequired,
+  /**
+   * The content of the card to be displayed under the media.
+   * @type {ReactNode}
+   * @required
+   *
+   */
+  content: PropTypes.node,
+  /**
+   * The height of the card.
+   * @type {number}
+   * @default 600
+   *
+   */
   height: PropTypes.number,
+  /**
+   * The labels to be displayed on the card.
+   * labels should be an array of objects with the following properties:
+   * @type {Array}
+   * @default []
+   * @example
+   * [
+   * {
+   *  _id: "5f9f1b9b9c9c1c0017a5f1b5",
+   * color: "#ff0000"
+   * description: "This is a label"
+   * name: "Label 1"
+   * }]
+   *
+   */
   labels: PropTypes.arrayOf(
     PropTypes.shape({
       _id: PropTypes.string.isRequired,
@@ -332,11 +372,88 @@ SummaryCard.propTypes = {
       name: PropTypes.string.isRequired
     })
   ),
+  /**
+   * An alias for image property. Available only with media
+   * components. Media components: video, audio, picture, iframe, img.
+   * @type {string}
+   * @required
+   *
+   */
   media: PropTypes.string,
-  subtitle: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  width: PropTypes.number,
+  /**
+   * The height of the media.
+   * @type {number}
+   * @default 200
+   *
+   */
+  mediaHeight: PropTypes.number,
+  /**
+   * The width of the media.
+   * @type {number}
+   * @default 200
+   *
+   */
+  mediaWidth: PropTypes.number,
+  /**
+   * The content of the more options popover.
+   * @type {ReactNode}
+   *
+   */
+  moreOptionsPopover: PropTypes.node,
+  /**
+   * Callback fired when the label is clicked.
+   *
+   *
+   * **Signature**
+   * ```
+   * function(color: string) => void
+   * ```
+   *
+   * _label_: The clicked label object.
+   */
   onClickLabel: PropTypes.func,
+  /**
+   * Callback fired when the more details button is clicked.
+   *
+   * **Signature**
+   * ```
+   * function(event: React.SyntheticEvent<HTMLElement>) => void
+   * ```
+   *
+   * _event_: The event source of the callback.
+   */
   onClickMoreDetails: PropTypes.func,
-  onClickViewFiles: PropTypes.func
+  /**
+   * Callback fired when the more options button is clicked.
+   *
+   * **Signature**
+   * ```
+   * function(event: React.SyntheticEvent<HTMLElement>) => void
+   * ```
+   *
+   * _event_: The event source of the callback.
+   */
+  onClickViewFiles: PropTypes.func,
+  /**
+   * The subheader of the card.
+   * @type {string}
+   * @required
+   * @default subtitle
+   */
+  subtitle: PropTypes.string.isRequired,
+  /**
+   * The title of the card.
+   * @type {string}
+   * @required
+   * @default title
+   *
+   */
+  title: PropTypes.string.isRequired,
+  /**
+   * The width of the card.
+   * @type {number}
+   * @default 450
+   * @default
+   */
+  width: PropTypes.number
 };
