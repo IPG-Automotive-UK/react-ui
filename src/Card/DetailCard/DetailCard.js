@@ -23,10 +23,9 @@ function DetailCard({
   media = "",
   mediaHeight = 200,
   mediaWidth = 1100,
-  moreOptionsPopover = null,
   onClickLabel = () => {},
-  onClickMoreDetails = () => {},
-  onClickViewFiles = () => {},
+  onClickDelete = () => {},
+  onClickEdit = () => {},
   subtitle = "subtitle",
   title = "title",
   width = 1150
@@ -39,7 +38,6 @@ function DetailCard({
   const [isLabelStackOverflow, setIsLabelStackOverflow] = useState(false);
   const [overFlowingLabels, setOverFlowingLabels] = useState([]);
   const [labelAnchorEl, setLabelAnchorEl] = useState(null);
-  const [moreOptionsAnchorEl, setMoreOptionsAnchorEl] = useState(null);
 
   // label content width
   const labelContentWidth = width - 65;
@@ -109,16 +107,8 @@ function DetailCard({
     setLabelAnchorEl(null);
   };
 
-  // handle the close of the more options popover by setting the more options anchor element to null
-  const handleMoreOptionsClose = () => {
-    setMoreOptionsAnchorEl(null);
-  };
-
   // determine if the label overflow popover is open
   const isLabelOverflowOpen = Boolean(labelAnchorEl);
-
-  // determine if the more options popover is open
-  const isMoreOptionsOpen = Boolean(moreOptionsAnchorEl);
 
   // handle label click by calling the onClickLabel prop
   const handleLabelClick = label => {
@@ -132,10 +122,19 @@ function DetailCard({
           sx={{ height: 50 }}
           action={
             <Stack direction="row" spacing={2} mt={1}>
-              <Button variant="outlined" startIcon={<Edit />}>
+              <Button
+                variant="outlined"
+                startIcon={<Edit />}
+                onClick={onClickEdit}
+              >
                 Edit
               </Button>
-              <Button variant="outlined" color="error" endIcon={<Delete />}>
+              <Button
+                variant="outlined"
+                color="error"
+                endIcon={<Delete />}
+                onClick={onClickDelete}
+              >
                 Delete
               </Button>
             </Stack>
@@ -188,6 +187,7 @@ function DetailCard({
               <>
                 {labels.map(label => (
                   <LabelChip
+                    clickable
                     key={label._id}
                     label={label.name}
                     color={label.color}
@@ -246,7 +246,7 @@ function DetailCard({
         </Box>
         <CardContent
           sx={{
-            height: height - mediaHeight - 196,
+            height: height - mediaHeight - 156,
             overflowY: "hidden",
             padding: 1
           }}
@@ -286,17 +286,6 @@ function DetailCard({
             }
           })}
         </Stack>
-      </Popover>
-      <Popover
-        open={isMoreOptionsOpen}
-        anchorEl={moreOptionsAnchorEl}
-        onClose={handleMoreOptionsClose}
-        anchorOrigin={{
-          horizontal: "left",
-          vertical: "bottom"
-        }}
-      >
-        {moreOptionsPopover}
       </Popover>
     </>
   );
@@ -365,12 +354,6 @@ DetailCard.propTypes = {
    *
    */
   mediaWidth: PropTypes.number,
-  /**
-   * The content of the more options popover.
-   * @type {ReactNode}
-   *
-   */
-  moreOptionsPopover: PropTypes.node,
   /**
    * Callback fired when the label is clicked.
    *

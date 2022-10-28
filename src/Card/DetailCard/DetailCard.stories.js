@@ -1,10 +1,5 @@
-import { Delete, Edit } from "@mui/icons-material";
 import {
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
+  Box,
   Table,
   TableBody,
   TableCell,
@@ -28,11 +23,11 @@ const Template = args => {
       onClickLabel={label => {
         action("onLabelClick")(label);
       }}
-      onClickMoreDetails={event => {
-        action("onMoreDetailsClick")({ event });
+      onClickEdit={event => {
+        action("onClickEdit")({ event });
       }}
-      onClickViewFiles={event => {
-        action("onViewFilesClick")({ event });
+      onClickDelete={event => {
+        action("onClickDelete")({ event });
       }}
     />
   );
@@ -45,9 +40,9 @@ Default.args = {
   media: "",
   mediaHeight: 200,
   mediaWidth: 1100,
+  onClickDelete: () => {},
+  onClickEdit: () => {},
   onClickLabel: () => {},
-  onClickMoreDetails: () => {},
-  onClickViewFiles: () => {},
   subtitle: "subtitle",
   title: "title",
   width: 1150
@@ -57,32 +52,34 @@ export const ScenarioExample = Template.bind({});
 ScenarioExample.args = {
   ...Default.args,
   content: (
-    <TableContainer>
-      <Table size="small">
-        <TableBody>
-          <TableRow>
-            <TableCell>Description</TableCell>
-            <TableCell>Some Description of a road</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Country</TableCell>
-            <TableCell>Germany</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Scenario</TableCell>
-            <TableCell>Expressway</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Road Length (m)</TableCell>
-            <TableCell>3000</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Road Format</TableCell>
-            <TableCell>.rd5</TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <>
+      <TableContainer sx={{ maxHeight: "100%" }} component={Box}>
+        <Table size="small">
+          <TableBody>
+            <TableRow>
+              <TableCell>Description</TableCell>
+              <TableCell>Some Description of a road</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Country</TableCell>
+              <TableCell>Germany</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Scenario</TableCell>
+              <TableCell>Expressway</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Road Length (m)</TableCell>
+              <TableCell>3000</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Road Format</TableCell>
+              <TableCell>.rd5</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </>
   ),
   labels: [
     {
@@ -117,26 +114,6 @@ ScenarioExample.args = {
     }
   ],
   media: "https://picsum.photos/400/200",
-  moreOptionsPopover: (
-    <List>
-      <ListItem disablePadding>
-        <ListItemButton>
-          <ListItemIcon>
-            <Edit />
-          </ListItemIcon>
-          <ListItemText primary="Edit" />
-        </ListItemButton>
-      </ListItem>
-      <ListItem disablePadding>
-        <ListItemButton>
-          <ListItemIcon>
-            <Delete />
-          </ListItemIcon>
-          <ListItemText primary="Delete" />
-        </ListItemButton>
-      </ListItem>
-    </List>
-  ),
   subtitle: "Uploaded 2 hours ago by Jega Sriskantha ",
   title: "Expressway_3Lanes "
 };
