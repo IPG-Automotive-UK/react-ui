@@ -34,6 +34,7 @@ function SummaryCard({
   title = "title",
   width = 450
 }) {
+  // title, subtitle and label refs and overflow states
   const titleRef = useRef();
   const subtitleRef = useRef();
   const labelStackRef = useRef();
@@ -41,7 +42,11 @@ function SummaryCard({
   const [isSubtitleOverflow, setIsSubtitleOverflow] = useState(false);
   const [isLabelStackOverflow, setIsLabelStackOverflow] = useState(false);
   const [overFlowingLabels, setOverFlowingLabels] = useState([]);
+
+  // label popover anchor state
   const [labelAnchorEl, setLabelAnchorEl] = useState(null);
+
+  // more options popover anchor state
   const [moreOptionsAnchorEl, setMoreOptionsAnchorEl] = useState(null);
 
   // header content width
@@ -130,6 +135,7 @@ function SummaryCard({
     onClickLabel(label);
   };
 
+  // render the summary card
   return (
     <>
       <Card sx={{ height, width }}>
@@ -332,6 +338,7 @@ function SummaryCard({
   );
 }
 
+// export the summary card
 export default SummaryCard;
 
 // summary card prop types

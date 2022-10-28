@@ -39,7 +39,7 @@ Default.args = {
   labels: [],
   media: "",
   mediaHeight: 200,
-  mediaWidth: 1100,
+  mediaWidth: 400,
   onClickDelete: () => {},
   onClickEdit: () => {},
   onClickLabel: () => {},

@@ -23,9 +23,14 @@ function FileCard({
   title = "All Files",
   width = 460
 }) {
+  // title ref and overflow state
   const titleRef = useRef();
   const [isTitleOverflow, setIsTitleOverflow] = useState(false);
+
+  // file state
   const [files, setFiles] = useState(filesIn);
+
+  // search state
   const [search, setSearch] = useState("");
 
   // header content width
@@ -38,7 +43,7 @@ function FileCard({
     );
   }, []);
 
-  // on search
+  // handle search by searching file headers and filenames
   const handleSearch = event => {
     const search = event.target.value.toLowerCase();
     const newFiles = filesIn.map(file => {
@@ -54,14 +59,17 @@ function FileCard({
         );
       }
 
+      // retrun new file object with filtered files
       return newFile;
     });
+
+    // set search and files
     setFiles(newFiles);
     setSearch(search);
   };
 
-  // on download
-  const handleDownloadAll = () => {
+  // when the donwnload button is clicked return the file paths
+  const handleDownload = () => {
     // extract file paths
     const paths = files.map(file => file.files.map(file => file.path)).flat();
 
@@ -69,6 +77,7 @@ function FileCard({
     onClickDownload(paths);
   };
 
+  // render the file card
   return (
     <>
       <Card sx={{ height, width }}>
@@ -79,7 +88,7 @@ function FileCard({
               <Button
                 variant="outlined"
                 startIcon={<Download />}
-                onClick={handleDownloadAll}
+                onClick={handleDownload}
               >
                 {search === "" ? "Download all Files" : "Download Search Files"}
               </Button>
@@ -171,6 +180,7 @@ function FileCard({
   );
 }
 
+// export the file card
 export default FileCard;
 
 // detail card prop types

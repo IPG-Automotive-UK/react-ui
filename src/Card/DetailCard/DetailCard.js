@@ -23,13 +23,14 @@ function DetailCard({
   media = "",
   mediaHeight = 200,
   mediaWidth = 1100,
-  onClickLabel = () => {},
   onClickDelete = () => {},
   onClickEdit = () => {},
+  onClickLabel = () => {},
   subtitle = "subtitle",
   title = "title",
   width = 1150
 }) {
+  // title, subtitle, and label refs and overflow states
   const titleRef = useRef();
   const subtitleRef = useRef();
   const labelStackRef = useRef();
@@ -37,16 +38,24 @@ function DetailCard({
   const [isSubtitleOverflow, setIsSubtitleOverflow] = useState(false);
   const [isLabelStackOverflow, setIsLabelStackOverflow] = useState(false);
   const [overFlowingLabels, setOverFlowingLabels] = useState([]);
-  const [labelAnchorEl, setLabelAnchorEl] = useState(null);
 
-  // label content width
-  const labelContentWidth = width - 65;
+  /// label popover anchor state
+  const [labelAnchorEl, setLabelAnchorEl] = useState(null);
 
   // header content width
   const headerContentWidth = width - 350;
 
+  // header content height
+  const headerContentHeight = 50;
+
+  // label content width
+  const labelContentWidth = width - 65;
+
   // label spacing
   const labelSpacing = 8;
+
+  // label stack height
+  const labelStackHeight = 24;
 
   // overflow button width
   const overflowButtonWidth = 40;
@@ -115,25 +124,26 @@ function DetailCard({
     onClickLabel(label);
   };
 
+  // render the detail card
   return (
     <>
       <Card sx={{ height, width }}>
         <CardHeader
-          sx={{ height: 50 }}
+          sx={{ height: headerContentHeight }}
           action={
             <Stack direction="row" spacing={2} mt={1}>
               <Button
-                variant="outlined"
-                startIcon={<Edit />}
                 onClick={onClickEdit}
+                startIcon={<Edit />}
+                variant="outlined"
               >
                 Edit
               </Button>
               <Button
-                variant="outlined"
                 color="error"
                 endIcon={<Delete />}
                 onClick={onClickDelete}
+                variant="outlined"
               >
                 Delete
               </Button>
@@ -176,7 +186,11 @@ function DetailCard({
         />
         <Box
           ml={2}
-          sx={{ height: 24, maxWidth: labelContentWidth, overflowX: "hidden" }}
+          sx={{
+            height: labelStackHeight,
+            maxWidth: labelContentWidth,
+            overflowX: "hidden"
+          }}
         >
           <Stack
             ref={labelStackRef}
@@ -188,9 +202,9 @@ function DetailCard({
                 {labels.map(label => (
                   <LabelChip
                     clickable
+                    color={label.color}
                     key={label._id}
                     label={label.name}
-                    color={label.color}
                     onClick={() => handleLabelClick(label)}
                     size="small"
                   />
@@ -201,9 +215,9 @@ function DetailCard({
                 {notOverflowingLabels.map(label => (
                   <LabelChip
                     clickable
+                    color={label.color}
                     key={label._id}
                     label={label.name}
-                    color={label.color}
                     onClick={() => handleLabelClick(label)}
                     size="small"
                   />
@@ -238,7 +252,6 @@ function DetailCard({
             src={media}
             sx={{
               height: mediaHeight,
-
               padding: 2,
               width: mediaWidth
             }}
@@ -246,7 +259,12 @@ function DetailCard({
         </Box>
         <CardContent
           sx={{
-            height: height - mediaHeight - 156,
+            height:
+              height -
+              mediaHeight -
+              headerContentHeight -
+              labelStackHeight -
+              82,
             overflowY: "hidden",
             padding: 1
           }}
@@ -291,6 +309,7 @@ function DetailCard({
   );
 }
 
+// export the detail card
 export default DetailCard;
 
 // detail card prop types
