@@ -193,6 +193,7 @@ function SummaryCard({
               <>
                 {labels.map(label => (
                   <LabelChip
+                    clickable
                     key={label._id}
                     label={label.name}
                     color={label.color}
