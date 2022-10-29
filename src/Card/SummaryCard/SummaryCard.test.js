@@ -21,12 +21,12 @@ describe("SummaryCard", () => {
   });
 
   // test that summary card renders with label that can be clicked
-  it("renders label and can be clicked", () => {
+  it("renders label and can be clicked", async () => {
     const labels = [
       {
         _id: "1",
         color: "#174713",
-        description: "National Highways",
+        description: "",
         name: "National Highways"
       }
     ];
@@ -48,7 +48,9 @@ describe("SummaryCard", () => {
     expect(screen.getByText("National Highways")).toBeInTheDocument();
 
     // find the nearest button to the label and click it
-    userEvent.click(screen.getByRole("button", { name: "National Highways" }));
+    await userEvent.click(
+      screen.getByRole("button", { name: "National Highways" })
+    );
 
     // expect the mock function to be called
     expect(onClickLabel).toHaveBeenCalled();
