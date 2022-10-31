@@ -35,6 +35,7 @@ const Template = args => {
 
 export const Default = Template.bind({});
 Default.args = {
+  content: null,
   height: 950,
   labels: [],
   media: "",

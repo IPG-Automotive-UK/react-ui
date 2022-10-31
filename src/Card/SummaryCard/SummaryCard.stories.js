@@ -40,11 +40,13 @@ const Template = args => {
 
 export const Default = Template.bind({});
 Default.args = {
+  content: null,
   height: 600,
   labels: [],
   media: "",
   mediaHeight: 200,
   mediaWidth: 400,
+  moreOptionsPopover: null,
   onClickLabel: () => {},
   onClickMoreDetails: () => {},
   onClickViewFiles: () => {},

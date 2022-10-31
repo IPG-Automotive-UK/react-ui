@@ -23,6 +23,7 @@ const Template = args => {
 
 export const Default = Template.bind({});
 Default.args = {
+  files: [],
   height: 950,
   subtitle: "subtitle",
   title: "All Files",
