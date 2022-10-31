@@ -252,6 +252,14 @@ FileCard.propTypes = {
    */
   onClickFile: PropTypes.func,
   /**
+   * An optional inital search term
+   * @type {string}
+   * @default ""
+   * @optional
+   *
+   */
+  search: PropTypes.string,
+  /**
    * The title of the card.
    * @type {string}
    * @required
