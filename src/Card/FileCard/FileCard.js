@@ -1,4 +1,4 @@
-import { AttachFile, Download, Search } from "@mui/icons-material";
+import { AttachFile, Download } from "@mui/icons-material";
 import {
   Box,
   Button,
@@ -6,20 +6,20 @@ import {
   CardContent,
   CardHeader,
   Chip,
-  InputAdornment,
-  TextField,
   Tooltip,
   Typography
 } from "@mui/material";
 import React, { useLayoutEffect, useRef, useState } from "react";
 
 import PropTypes from "prop-types";
+import SearchBar from "../../SearchBar/SearchBar";
 
 function FileCard({
   files: filesIn = [],
   height = 950,
   onClickDownload = () => {},
   onClickFile = () => {},
+  search: searchIn = "",
   title = "All Files",
   width = 460
 }) {
@@ -56,7 +56,7 @@ function FileCard({
   const [files, setFiles] = useState(filesIn);
 
   // search state
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(searchIn);
 
   // header content width
   const headerContentWidth = width - 271;
@@ -139,24 +139,19 @@ function FileCard({
           }
         />
         <Box pl={2} pr={2}>
-          <TextField
-            fullWidth
-            placeholder="Search"
-            size="small"
+          <SearchBar
+            value={search}
+            onBlur={handleSearch}
             onChange={handleSearch}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <Search />
-                </InputAdornment>
-              )
-            }}
+            placeholder="Search"
+            sx={{ width: headerContentWidth }}
           />
         </Box>
         <CardContent
           sx={{
             height: height - 156,
-            overflowY: "hidden"
+            overflowY: "hidden",
+            paddingTop: 0 // override default padding from CardContent
           }}
         >
           {files.map(({ header, files }, index) => (
