@@ -55,6 +55,77 @@ Default.args = {
   width: 450
 };
 
+export const TruncatedTitleAndSubtitle = Template.bind({});
+TruncatedTitleAndSubtitle.args = {
+  ...Default.args,
+  subtitle:
+    "This is a very long subtitle that will be truncated, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged",
+  title:
+    "This is a very long title that will be truncated, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged "
+};
+
+export const TruncatedLabels = Template.bind({});
+TruncatedLabels.args = {
+  ...Default.args,
+  labels: [
+    {
+      _id: "1",
+      color: "#fcba03",
+      description: "Test Label 1",
+      name: "Test Label 1"
+    },
+    {
+      _id: "2",
+      color: "#47357a",
+      description: "Test Label 2",
+      name: "Test Label 2"
+    },
+    {
+      _id: "3",
+      color: "#fcba03",
+      description: "Test Label 3",
+      name: "Test Label 3"
+    },
+    {
+      _id: "4",
+      color: "#47357a",
+      description: "Test Label 4",
+      name: "Test Label 4"
+    },
+    {
+      _id: "5",
+      color: "#fcba03",
+      description: "Test Label 5",
+      name: "Test Label 5"
+    }
+  ]
+};
+
+export const withMoreOptionsPopover = Template.bind({});
+withMoreOptionsPopover.args = {
+  ...Default.args,
+  moreOptionsPopover: (
+    <List>
+      <ListItem disablePadding>
+        <ListItemButton onClick={action("onEditClick")}>
+          <ListItemIcon>
+            <Edit />
+          </ListItemIcon>
+          <ListItemText primary="Edit" />
+        </ListItemButton>
+      </ListItem>
+      <ListItem disablePadding>
+        <ListItemButton onClick={action("onDeleteClick")}>
+          <ListItemIcon>
+            <Delete />
+          </ListItemIcon>
+          <ListItemText primary="Delete" />
+        </ListItemButton>
+      </ListItem>
+    </List>
+  )
+};
+
 export const ScenarioExample = Template.bind({});
 ScenarioExample.args = {
   ...Default.args,
