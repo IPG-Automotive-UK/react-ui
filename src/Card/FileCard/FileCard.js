@@ -23,6 +23,31 @@ function FileCard({
   title = "All Files",
   width = 460
 }) {
+  // check that filesIn is an array of objects with files and header properties
+  if (!Array.isArray(filesIn)) {
+    throw new Error("files must be an array");
+  }
+
+  // check that filesIn is an array of objects with files and header properties
+  if (!filesIn.every(file => file.files && file.header)) {
+    throw new Error(
+      "files must be an array of objects with files and header properties"
+    );
+  }
+
+  // check that files.files is an array of objects with filename and path properties
+  if (
+    !filesIn.every(
+      file =>
+        Array.isArray(file.files) &&
+        file.files.every(file => file.filename && file.path)
+    ) // check that files.files is an array of objects with filename and path properties
+  ) {
+    throw new Error(
+      "files.files must be an array of objects with filename and path properties"
+    );
+  }
+
   // title ref and overflow state
   const titleRef = useRef();
   const [isTitleOverflow, setIsTitleOverflow] = useState(false);
@@ -86,6 +111,7 @@ function FileCard({
           action={
             <Box mt={1} mr={1}>
               <Button
+                disabled={!files.some(file => file.files.length)}
                 variant="outlined"
                 startIcon={<Download />}
                 onClick={handleDownload}
@@ -133,8 +159,8 @@ function FileCard({
             overflowY: "hidden"
           }}
         >
-          {files.map(({ header, files }) => (
-            <>
+          {files.map(({ header, files }, index) => (
+            <React.Fragment key={index}>
               {files.length > 0 ? (
                 <Box key={header} mb={1}>
                   <Typography
@@ -172,7 +198,7 @@ function FileCard({
                   </Box>
                 </Box>
               ) : null}
-            </>
+            </React.Fragment>
           ))}
         </CardContent>
       </Card>

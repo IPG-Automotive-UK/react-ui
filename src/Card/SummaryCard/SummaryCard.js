@@ -221,6 +221,7 @@ function SummaryCard({
                   />
                 ))}
                 <Button
+                  name="label-overflow-button"
                   variant="text"
                   size="large"
                   onClick={handleLabelOverflowClick}
