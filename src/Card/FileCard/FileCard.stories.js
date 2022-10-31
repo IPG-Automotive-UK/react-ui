@@ -25,9 +25,52 @@ export const Default = Template.bind({});
 Default.args = {
   files: [],
   height: 950,
+  search: "",
   subtitle: "subtitle",
   title: "All Files",
   width: 460
+};
+
+export const InitialSearch = Template.bind({});
+InitialSearch.args = {
+  ...Default.args,
+  files: [
+    {
+      files: [
+        {
+          filename: "file1.txt",
+          path: "path/to/file1.txt"
+        },
+        {
+          filename: "file2.txt",
+          path: "path/to/file2.txt"
+        },
+        {
+          filename: "file3.txt",
+          path: "path/to/file3.txt"
+        }
+      ],
+      header: "Header 1"
+    },
+    {
+      files: [
+        {
+          filename: "file4.txt",
+          path: "path/to/file4.txt"
+        },
+        {
+          filename: "file5.txt",
+          path: "path/to/file5.txt"
+        },
+        {
+          filename: "file6.txt",
+          path: "path/to/file6.txt"
+        }
+      ],
+      header: "Group 2"
+    }
+  ],
+  search: "file"
 };
 
 export const ScenarioExample = Template.bind({});
