@@ -49,7 +49,7 @@ function DetailCard({
   const headerContentHeight = 50;
 
   // label content width
-  const labelContentWidth = width - 65;
+  const labelContentWidth = width - 45;
 
   // label spacing
   const labelSpacing = 8;
