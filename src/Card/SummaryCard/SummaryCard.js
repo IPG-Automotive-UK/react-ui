@@ -188,7 +188,11 @@ function SummaryCard({
         />
         <Box
           ml={2}
-          sx={{ height: 24, maxWidth: headerContentWidth, overflowX: "hidden" }}
+          sx={{
+            height: 24,
+            maxWidth: headerContentWidth,
+            overflowX: "hidden"
+          }}
         >
           <Stack
             ref={labelStackRef}
