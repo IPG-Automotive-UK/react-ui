@@ -20,10 +20,11 @@ import PropTypes from "prop-types";
 
 function DetailCard({
   content = null,
-  files = [],
   height = 950,
   labels = [],
   media = "",
+  mediaHeight = 200,
+  mediaWidth = 1100,
   onClickDelete = () => {},
   onClickEdit = () => {},
   onClickLabel = () => {},
@@ -44,7 +45,7 @@ function DetailCard({
   const [labelAnchorEl, setLabelAnchorEl] = useState(null);
 
   // header content width
-  const headerContentWidth = width - 250;
+  const headerContentWidth = width - 350;
 
   // header content height
   const headerContentHeight = 50;
@@ -128,22 +129,30 @@ function DetailCard({
   // render the detail card
   return (
     <>
-      <Box
-        mt={1}
-        sx={{
-          width,
-          height
-        }}
-      >
-        <Box
-          m={1}
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between"
-          }}
-        >
-          <Box>
+      <Card sx={{ height, width }}>
+        <CardHeader
+          sx={{ height: headerContentHeight }}
+          action={
+            <Stack direction="row" spacing={2} mt={1}>
+              <Button
+                onClick={onClickEdit}
+                startIcon={<Edit />}
+                variant="outlined"
+              >
+                Edit
+              </Button>
+              <Button
+                color="error"
+                endIcon={<Delete />}
+                onClick={onClickDelete}
+                variant="outlined"
+              >
+                Delete
+              </Button>
+            </Stack>
+          }
+          disableTypography
+          title={
             <Tooltip title={title} disableHoverListener={!isTitleOverflow}>
               <Typography
                 ref={titleRef}
@@ -157,12 +166,13 @@ function DetailCard({
                 {title}
               </Typography>
             </Tooltip>
+          }
+          subheader={
             <Tooltip
               title={subtitle}
               disableHoverListener={!isSubtitleOverflow}
             >
               <Typography
-                mt={1}
                 ref={subtitleRef}
                 sx={{
                   fontSize: 14,
@@ -174,32 +184,10 @@ function DetailCard({
                 {subtitle}
               </Typography>
             </Tooltip>
-          </Box>
-          <Stack direction="row" spacing={2} mt={1}>
-            <Button
-              sx={{ height: 42 }}
-              onClick={onClickEdit}
-              startIcon={<Edit />}
-              variant="outlined"
-            >
-              Edit
-            </Button>
-            <Button
-              sx={{ height: 42 }}
-              color="error"
-              endIcon={<Delete />}
-              onClick={onClickDelete}
-              variant="outlined"
-            >
-              Delete
-            </Button>
-          </Stack>
-        </Box>
-
+          }
+        />
         <Box
-          mt={2}
-          mb={2}
-          ml={1}
+          ml={2}
           sx={{
             height: labelStackHeight,
             maxWidth: labelContentWidth,
@@ -255,21 +243,71 @@ function DetailCard({
             )}
           </Stack>
         </Box>
-        <Divider />
+        <Divider sx={{ marginTop: 2 }} />
         <Box
           sx={{
-            width,
-            display: "flex"
+            display: "flex",
+            justifyContent: "center"
           }}
         >
-          <Box mt={1} ml={0.5} mb={1}>
-            <FileCard media={media} width={368} height={756} files={files} />
-          </Box>
-          <Box mt={1} ml={2} sx={{ height, width: 760, overflowY: "auto" }}>
-            <Stack spacing={2}>{content}</Stack>
-          </Box>
+          <CardMedia
+            component="img"
+            src={media}
+            sx={{
+              height: mediaHeight,
+              padding: 2,
+              width: mediaWidth
+            }}
+          />
         </Box>
-      </Box>
+        <CardContent
+          sx={{
+            height:
+              height -
+              mediaHeight -
+              headerContentHeight -
+              labelStackHeight -
+              82,
+            overflowY: "hidden",
+            padding: 1
+          }}
+        >
+          {content}
+        </CardContent>
+      </Card>
+      <Popover
+        open={isLabelOverflowOpen}
+        anchorEl={labelAnchorEl}
+        onClose={handleLabelOverflowClose}
+        anchorOrigin={{
+          horizontal: "left",
+          vertical: "bottom"
+        }}
+      >
+        <Stack
+          sx={{}}
+          m={`${labelSpacing}px`}
+          direction="column"
+          spacing={`${labelSpacing}px`}
+        >
+          {labels.map(label => {
+            if (!notOverflowingLabels.includes(label)) {
+              return (
+                <LabelChip
+                  clickable
+                  key={label._id}
+                  label={label.name}
+                  color={label.color}
+                  size="small"
+                  onClick={() => handleLabelClick(label)}
+                />
+              );
+            } else {
+              return null;
+            }
+          })}
+        </Stack>
+      </Popover>
     </>
   );
 }

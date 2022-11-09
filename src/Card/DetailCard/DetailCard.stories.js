@@ -1,14 +1,6 @@
-import {
-  Box,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableRow
-} from "@mui/material";
-
 import DetailCard from "./DetailCard";
 import React from "react";
+import TableCard from "../TableCard";
 import { action } from "@storybook/addon-actions";
 
 export default {
@@ -140,36 +132,58 @@ TruncatedLabels.args = {
 export const ScenarioExample = Template.bind({});
 ScenarioExample.args = {
   ...Default.args,
-  content: (
-    <>
-      <TableContainer sx={{ maxHeight: "100%" }} component={Box}>
-        <Table size="small">
-          <TableBody>
-            <TableRow>
-              <TableCell>Description</TableCell>
-              <TableCell>Some Description of a road</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>Country</TableCell>
-              <TableCell>Germany</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>Scenario</TableCell>
-              <TableCell>Expressway</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>Road Length (m)</TableCell>
-              <TableCell>3000</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>Road Format</TableCell>
-              <TableCell>.rd5</TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </>
-  ),
+  content: [
+    <TableCard
+      key={"scenario"}
+      title="Scenario"
+      tableContent={[
+        ["Scenario name", "Example Name"],
+        ["Description", "Example Description"],
+        ["CarMaker version", 11.0],
+        ["OpenScenario version", 1.0],
+        ["Requires external scenario files", "No"],
+        ["Requires external Road Files", "No"],
+        ["Active Routes", "Test Route 1, Test Route 2"]
+      ]}
+    />,
+    <TableCard
+      key={"Road"}
+      title="Road"
+      tableContent={[
+        ["CarMaker version", "11"],
+        ["Country", "Germany"],
+        ["Data source type", "Example Data Source Type"],
+        ["Description", "Example Description"],
+        ["Elevation profile", "Some profile"],
+        ["File references", "Some file references"],
+        ["Maximum Friction Coefficient", 0.8],
+        ["Junctions Present", "Yes"],
+        ["Lane Width", 2],
+        ["Max. Number of lanes in any lane section", 3],
+        ["Max lane width", 2],
+        ["Markings present", "Yes"],
+        ["Name", "Example Name"],
+        ["Number of lanes", 2],
+        ["Number of links", 2],
+        ["Number of junctions", 10],
+        ["Number of routes", 10],
+        ["Road format", "Example Road Format"],
+        ["Road gradiant", 0.1],
+        ["Route names", "Test Route 1, Test Route 2"],
+        ["Route lenghts", "100m, 200m"],
+        ["Road network length", 1000],
+        ["Road network width", 100],
+        ["Road type mix", "Example Road Type Mix"],
+        ["Speed Limits", 100],
+        ["Test Track", "Lommel"],
+        ["Traffic Barriers", 1],
+        ["Traffic Signs", 10],
+        ["Traffic Lights", 21]
+      ]}
+    />,
+    <TableCard key={"Maneuver"} title="Maneuver" />,
+    <TableCard key={"Misc"} title="Misc" />
+  ],
   labels: [
     {
       _id: "1",
@@ -204,5 +218,48 @@ ScenarioExample.args = {
   ],
   media: "https://picsum.photos/400/200",
   subtitle: "Uploaded 2 hours ago by Jega Sriskantha ",
-  title: "Expressway_3Lanes "
+  title: "Expressway_3Lanes ",
+  files: [
+    {
+      files: [{ filename: "roadFile.rd5", path: "/somepath/path/file" }],
+      header: "Road Files"
+    },
+    {
+      files: [
+        { filename: "roadInfographic1.png", path: "/somepath/path/file" },
+        {
+          filename: "someOtherRoadInfographic.gif",
+          path: "/somepath/path/file"
+        },
+        { filename: "coolRoadInfographic.jpg", path: "/somepath/path/file" }
+      ],
+      header: "Road Infographics"
+    },
+    {
+      files: [
+        {
+          filename:
+            "veryveryverylongroadtexturefilenamethatexceedsthewidthofthecard.png",
+          path: "/somepath/path/file"
+        },
+        { filename: "anotherRoadTextureFile.png", path: "/somepath/path/file" },
+        { filename: "roadTextureFile.jpg", path: "/somepath/path/file" },
+        { filename: "roadTextureFile2.jpg", path: "/somepath/path/file" },
+        { filename: "roadTextureFile3.png", path: "/somepath/path/file" },
+        { filename: "roadTextureFile4.jfif", path: "/somepath/path/file" }
+      ],
+      header: "Road Texture Files"
+    },
+    {
+      files: [{ filename: "ScenarioFile", path: "/somepath/path/file" }],
+      header: "Scenario Files"
+    },
+    {
+      files: [
+        { filename: "scenarioInfographic1.jpg", path: "/somepath/path/file" },
+        { filename: "scenarioInfographic2.png", path: "/somepath/path/file" }
+      ],
+      header: "Scenario Infographics"
+    }
+  ]
 };
