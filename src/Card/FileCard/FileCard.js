@@ -5,6 +5,7 @@ import {
   Card,
   CardContent,
   CardHeader,
+  CardMedia,
   Chip,
   Tooltip,
   Typography
@@ -16,12 +17,13 @@ import SearchBar from "../../SearchBar/SearchBar";
 
 function FileCard({
   files: filesIn = [],
-  height = 950,
+  media = "",
   onClickDownload = () => {},
   onClickFile = () => {},
   search: searchIn = "",
-  title = "All Files",
-  width = 460
+  title = "Files",
+  width = 368,
+  height = 796
 }) {
   // check that filesIn is an array of objects with files and header properties
   if (!Array.isArray(filesIn)) {
@@ -105,39 +107,39 @@ function FileCard({
   // render the file card
   return (
     <>
-      <Card sx={{ height, width }}>
-        <CardHeader
-          sx={{ height: 50 }}
-          action={
-            <Box mt={1} mr={1}>
-              <Button
-                disabled={!files.some(file => file.files.length)}
-                variant="outlined"
-                startIcon={<Download />}
-                onClick={handleDownload}
-              >
-                {search === "" ? "Download all Files" : "Download Search Files"}
-              </Button>
-            </Box>
-          }
-          disableTypography
-          title={
-            <Tooltip title={title} disableHoverListener={!isTitleOverflow}>
-              <Typography
-                ref={titleRef}
-                ml={0.5}
-                sx={{
-                  fontSize: 20,
-                  fontWeight: 500,
-                  width: headerContentWidth
-                }}
-                noWrap
-              >
-                {title}
-              </Typography>
-            </Tooltip>
-          }
-        />
+      <Card sx={{ width, height }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center"
+          }}
+        >
+          <CardMedia
+            component="img"
+            src={media}
+            sx={{
+              height: 192,
+              padding: 2,
+              width: 336
+            }}
+          />
+        </Box>
+        <Box>
+          <Tooltip title={title} disableHoverListener={!isTitleOverflow}>
+            <Typography
+              ref={titleRef}
+              ml={2}
+              sx={{
+                fontSize: 20,
+                fontWeight: 500,
+                width: headerContentWidth
+              }}
+              noWrap
+            >
+              {title}
+            </Typography>
+          </Tooltip>
+        </Box>
         <Box pl={2} pr={2}>
           <SearchBar
             value={search}
@@ -149,53 +151,65 @@ function FileCard({
         </Box>
         <CardContent
           sx={{
-            height: height - 156,
             overflowY: "hidden",
             paddingTop: 0 // override default padding from CardContent
           }}
         >
-          {files.map(({ header, files }, index) => (
-            <React.Fragment key={index}>
-              {files.length > 0 ? (
-                <Box key={header} mb={1}>
-                  <Typography
-                    sx={{ fontSize: 14, fontWeight: 500 }}
-                    m={1}
-                    mt={1}
-                  >
-                    {header}
-                  </Typography>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexWrap: "wrap",
-                      maxWidth: "100%"
-                    }}
-                  >
-                    {files.map((file, index) => (
-                      <Tooltip
-                        title={file.filename}
-                        key={index}
-                        disableHoverListener={file.filename.length < 34}
-                      >
-                        <Chip
-                          clickable
-                          onClick={() => onClickFile(file)}
-                          sx={{ m: 0.5, maxWidth: 250 }}
-                          icon={<AttachFile />}
-                          size="small"
-                          variant="outlined"
+          <Box height={height - 400} sx={{ overflowY: "auto" }}>
+            {files.map(({ header, files }, index) => (
+              <React.Fragment key={index}>
+                {files.length > 0 ? (
+                  <Box key={header} mb={1}>
+                    <Typography
+                      sx={{ fontSize: 14, fontWeight: 500 }}
+                      m={1}
+                      mt={1}
+                    >
+                      {header}
+                    </Typography>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        maxWidth: "100%"
+                      }}
+                    >
+                      {files.map((file, index) => (
+                        <Tooltip
+                          title={file.filename}
                           key={index}
-                          label={file.filename}
-                        />
-                      </Tooltip>
-                    ))}
+                          disableHoverListener={file.filename.length < 34}
+                        >
+                          <Chip
+                            clickable
+                            onClick={() => onClickFile(file)}
+                            sx={{ m: 0.5, maxWidth: 250 }}
+                            icon={<AttachFile />}
+                            size="small"
+                            variant="outlined"
+                            key={index}
+                            label={file.filename}
+                          />
+                        </Tooltip>
+                      ))}
+                    </Box>
                   </Box>
-                </Box>
-              ) : null}
-            </React.Fragment>
-          ))}
+                ) : null}
+              </React.Fragment>
+            ))}
+          </Box>
         </CardContent>
+        <Box m={1}>
+          <Button
+            disabled={!files.some(file => file.files.length)}
+            sx={{ width: width - 16 }}
+            variant="outlined"
+            startIcon={<Download />}
+            onClick={handleDownload}
+          >
+            {search === "" ? "Download all Files" : "Download Search Files"}
+          </Button>
+        </Box>
       </Card>
     </>
   );
