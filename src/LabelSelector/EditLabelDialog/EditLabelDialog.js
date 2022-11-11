@@ -47,7 +47,7 @@ export default function EditLabelDialog({
     setColor("#005FA8");
   };
 
-  // if the label changs, update the states
+  // if the label changes, update the dependent states
   useEffect(() => {
     setName(label.name);
     setDescription(label.description);
