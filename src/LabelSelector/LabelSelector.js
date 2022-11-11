@@ -245,6 +245,7 @@ function LabelSelector({
         }
         noOptionsText="No labels found"
         getOptionLabel={option => option.name}
+        isOptionEqualToValue={(option, value) => option._id === value._id}
         value={value || null}
       />
       <EditLabelDialog
