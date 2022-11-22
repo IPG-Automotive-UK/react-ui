@@ -4,7 +4,6 @@ import {
   Button,
   Card,
   CardContent,
-  CardHeader,
   CardMedia,
   Chip,
   Tooltip,

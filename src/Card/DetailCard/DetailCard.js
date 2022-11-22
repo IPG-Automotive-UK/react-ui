@@ -1,10 +1,6 @@
 import {
   Box,
   Button,
-  Card,
-  CardContent,
-  CardHeader,
-  CardMedia,
   Divider,
   Popover,
   Stack,
@@ -40,14 +36,11 @@ function DetailCard({
   const [isLabelStackOverflow, setIsLabelStackOverflow] = useState(false);
   const [overFlowingLabels, setOverFlowingLabels] = useState([]);
 
-  /// label popover anchor state
+  // label popover anchor state
   const [labelAnchorEl, setLabelAnchorEl] = useState(null);
 
   // header content width
   const headerContentWidth = width - 250;
-
-  // header content height
-  const headerContentHeight = 50;
 
   // label content width
   const labelContentWidth = width - 45;
@@ -99,7 +92,7 @@ function DetailCard({
 
     // set the overflowing labels
     setOverFlowingLabels(overFlowLabels);
-  }, []);
+  }, [labels]);
 
   // determine what labels to show
   const notOverflowingLabels = labels.slice(
@@ -131,8 +124,8 @@ function DetailCard({
       <Box
         mt={1}
         sx={{
-          width,
-          height
+          height,
+          width
         }}
       >
         <Box
@@ -258,18 +251,51 @@ function DetailCard({
         <Divider />
         <Box
           sx={{
-            width,
-            display: "flex"
+            display: "flex",
+            width
           }}
         >
           <Box mt={1} ml={0.5} mb={1}>
             <FileCard media={media} width={368} height={756} files={files} />
           </Box>
-          <Box mt={1} ml={2} sx={{ height, width: 760, overflowY: "auto" }}>
+          <Box mt={1} ml={2} sx={{ height, overflowY: "auto", width: 760 }}>
             <Stack spacing={2}>{content}</Stack>
           </Box>
         </Box>
       </Box>
+      <Popover
+        open={isLabelOverflowOpen}
+        anchorEl={labelAnchorEl}
+        onClose={handleLabelOverflowClose}
+        anchorOrigin={{
+          horizontal: "left",
+          vertical: "bottom"
+        }}
+      >
+        <Stack
+          sx={{}}
+          m={`${labelSpacing}px`}
+          direction="column"
+          spacing={`${labelSpacing}px`}
+        >
+          {labels.map(label => {
+            if (!notOverflowingLabels.includes(label)) {
+              return (
+                <LabelChip
+                  clickable
+                  key={label._id}
+                  label={label.name}
+                  color={label.color}
+                  size="small"
+                  onClick={() => handleLabelClick(label)}
+                />
+              );
+            } else {
+              return null;
+            }
+          })}
+        </Stack>
+      </Popover>
     </>
   );
 }

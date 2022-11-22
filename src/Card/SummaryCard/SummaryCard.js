@@ -96,7 +96,7 @@ function SummaryCard({
 
     // set the overflowing labels
     setOverFlowingLabels(overFlowLabels);
-  }, []);
+  }, [labels]);
 
   // determine what labels to show
   const notOverflowingLabels = labels.slice(
