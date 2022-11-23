@@ -1,5 +1,6 @@
-import { Delete, Edit } from "@mui/icons-material";
 import {
+  Button,
+  Divider,
   List,
   ListItem,
   ListItemButton,
@@ -11,6 +12,7 @@ import {
   TableContainer,
   TableRow
 } from "@mui/material";
+import { Delete, Edit } from "@mui/icons-material";
 
 import React from "react";
 import SummaryCard from "./SummaryCard";
@@ -28,12 +30,6 @@ const Template = args => {
       onClickLabel={label => {
         action("onLabelClick")(label);
       }}
-      onClickMoreDetails={event => {
-        action("onMoreDetailsClick")({ event });
-      }}
-      onClickViewFiles={event => {
-        action("onViewFilesClick")({ event });
-      }}
     />
   );
 };
@@ -46,10 +42,9 @@ Default.args = {
   media: "",
   mediaHeight: 200,
   mediaWidth: 400,
+  moreCardActions: null,
   moreOptionsPopover: null,
   onClickLabel: () => {},
-  onClickMoreDetails: () => {},
-  onClickViewFiles: () => {},
   subtitle: "subtitle",
   title: "title",
   width: 450
@@ -99,6 +94,36 @@ TruncatedLabels.args = {
       name: "Test Label 5"
     }
   ]
+};
+
+export const withMoreCardActions = Template.bind({});
+withMoreCardActions.args = {
+  ...Default.args,
+  moreCardActions: (
+    <>
+      <Button
+        size="large"
+        variant="text"
+        sx={{ width: "50%" }}
+        onClick={action("onClickMoreDetails")}
+      >
+        MORE DETAILS
+      </Button>
+      <Divider
+        orientation="vertical"
+        flexItem
+        sx={{ background: theme => theme.palette.primary.main }}
+      />
+      <Button
+        size="large"
+        variant="text"
+        sx={{ width: "50%" }}
+        onClick={action("onClickViewFiles")}
+      >
+        VIEW FILES
+      </Button>
+    </>
+  )
 };
 
 export const withMoreOptionsPopover = Template.bind({});
@@ -190,6 +215,31 @@ ScenarioExample.args = {
     }
   ],
   media: "https://picsum.photos/400/200",
+  moreCardActions: (
+    <>
+      <Button
+        size="large"
+        variant="text"
+        sx={{ width: "50%" }}
+        onClick={action("onClickMoreDetails")}
+      >
+        MORE DETAILS
+      </Button>
+      <Divider
+        orientation="vertical"
+        flexItem
+        sx={{ background: theme => theme.palette.primary.main }}
+      />
+      <Button
+        size="large"
+        variant="text"
+        sx={{ width: "50%" }}
+        onClick={action("onClickViewFiles")}
+      >
+        VIEW FILES
+      </Button>
+    </>
+  ),
   moreOptionsPopover: (
     <List>
       <ListItem disablePadding>

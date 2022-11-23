@@ -169,7 +169,9 @@ function DetailCard({
               </Typography>
             </Tooltip>
           </Box>
-          <Box ref={buttonStackRef}>{buttonsStack}</Box>
+          <Stack spacing={2} direction="row" ref={buttonStackRef}>
+            {buttonsStack}
+          </Stack>
         </Box>
         <Box
           mt={2}
@@ -288,7 +290,7 @@ export default DetailCard;
 // detail card prop types
 DetailCard.propTypes = {
   /**
-   * The content of the more buttons stack.
+   * The content of the buttons stack.
    * @type {ReactNode}
    *
    */

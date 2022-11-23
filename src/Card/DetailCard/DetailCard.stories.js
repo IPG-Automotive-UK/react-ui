@@ -1,6 +1,6 @@
-import { Button, Stack } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
 
+import { Button } from "@mui/material";
 import DetailCard from "./DetailCard";
 import React from "react";
 import TableCard from "../TableCard";
@@ -18,12 +18,6 @@ const Template = args => {
       onClickLabel={label => {
         action("onLabelClick")(label);
       }}
-      onClickEdit={event => {
-        action("onClickEdit")({ event });
-      }}
-      onClickDelete={event => {
-        action("onClickDelete")({ event });
-      }}
     />
   );
 };
@@ -36,8 +30,6 @@ Default.args = {
   media: "",
   mediaHeight: 200,
   mediaWidth: 400,
-  onClickDelete: () => {},
-  onClickEdit: () => {},
   onClickLabel: () => {},
   subtitle: "subtitle",
   title: "title",
@@ -57,12 +49,10 @@ export const withMoreButtons = Template.bind({});
 withMoreButtons.args = {
   ...Default.args,
   buttonsStack: (
-    <Stack spacing={2} direction="row">
+    <>
       <Button
         sx={{ height: 42 }}
-        onClickEdit={event => {
-          action("onClickEdit")({ event });
-        }}
+        onClick={action("onClickEdit")}
         startIcon={<Edit />}
         variant="outlined"
       >
@@ -72,14 +62,12 @@ withMoreButtons.args = {
         sx={{ height: 42 }}
         color="error"
         endIcon={<Delete />}
-        onClickDelete={event => {
-          action("onClickDelete")({ event });
-        }}
+        onClick={action("onClickDelete")}
         variant="outlined"
       >
         Delete
       </Button>
-    </Stack>
+    </>
   )
 };
 
@@ -166,12 +154,10 @@ export const ScenarioExample = Template.bind({});
 ScenarioExample.args = {
   ...Default.args,
   buttonsStack: (
-    <Stack spacing={2} direction="row">
+    <>
       <Button
         sx={{ height: 42 }}
-        onClickEdit={event => {
-          action("onClickEdit")({ event });
-        }}
+        onClick={action("onClickEdit")}
         startIcon={<Edit />}
         variant="outlined"
       >
@@ -181,14 +167,12 @@ ScenarioExample.args = {
         sx={{ height: 42 }}
         color="error"
         endIcon={<Delete />}
-        onClickDelete={event => {
-          action("onClickDelete")({ event });
-        }}
+        onClick={action("onClickDelete")}
         variant="outlined"
       >
         Delete
       </Button>
-    </Stack>
+    </>
   ),
   content: [
     <TableCard

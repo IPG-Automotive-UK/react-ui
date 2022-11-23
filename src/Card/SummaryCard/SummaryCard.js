@@ -28,8 +28,7 @@ function SummaryCard({
   mediaWidth = 400,
   moreOptionsPopover = null,
   onClickLabel = () => {},
-  onClickMoreDetails = () => {},
-  onClickViewFiles = () => {},
+  moreCardActions = null,
   subtitle = "subtitle",
   title = "title",
   width = 450
@@ -272,27 +271,7 @@ function SummaryCard({
         </CardContent>
         <Divider />
         <CardActions disableSpacing sx={{ padding: 0 }}>
-          <Button
-            size="large"
-            variant="text"
-            sx={{ width: "50%" }}
-            onClick={onClickMoreDetails}
-          >
-            MORE DETAILS
-          </Button>
-          <Divider
-            orientation="vertical"
-            flexItem
-            sx={{ background: theme => theme.palette.primary.main }}
-          />
-          <Button
-            size="large"
-            variant="text"
-            sx={{ width: "50%" }}
-            onClick={onClickViewFiles}
-          >
-            VIEW FILES
-          </Button>
+          {moreCardActions}
         </CardActions>
       </Card>
       <Popover
@@ -407,6 +386,12 @@ SummaryCard.propTypes = {
    *
    */
   mediaWidth: PropTypes.number,
+  /**
+   * The content of the buttons stack.
+   * @type {ReactNode}
+   *
+   */
+  moreCardActions: PropTypes.node,
   /**
    * The content of the more options popover.
    * @type {ReactNode}
