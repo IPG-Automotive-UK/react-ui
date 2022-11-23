@@ -1,3 +1,6 @@
+import { Button, Stack } from "@mui/material";
+import { Delete, Edit } from "@mui/icons-material";
+
 import DetailCard from "./DetailCard";
 import React from "react";
 import TableCard from "../TableCard";
@@ -48,6 +51,36 @@ TruncatedTitleAndSubtitle.args = {
     "This is a very long subtitle that will be truncated, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged",
   title:
     "This is a very long title that will be truncated, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged "
+};
+
+export const withMoreButtons = Template.bind({});
+withMoreButtons.args = {
+  ...Default.args,
+  buttonsStack: (
+    <Stack spacing={2} direction="row">
+      <Button
+        sx={{ height: 42 }}
+        onClickEdit={event => {
+          action("onClickEdit")({ event });
+        }}
+        startIcon={<Edit />}
+        variant="outlined"
+      >
+        Edit
+      </Button>
+      <Button
+        sx={{ height: 42 }}
+        color="error"
+        endIcon={<Delete />}
+        onClickDelete={event => {
+          action("onClickDelete")({ event });
+        }}
+        variant="outlined"
+      >
+        Delete
+      </Button>
+    </Stack>
+  )
 };
 
 export const TruncatedLabels = Template.bind({});
@@ -132,6 +165,31 @@ TruncatedLabels.args = {
 export const ScenarioExample = Template.bind({});
 ScenarioExample.args = {
   ...Default.args,
+  buttonsStack: (
+    <Stack spacing={2} direction="row">
+      <Button
+        sx={{ height: 42 }}
+        onClickEdit={event => {
+          action("onClickEdit")({ event });
+        }}
+        startIcon={<Edit />}
+        variant="outlined"
+      >
+        Edit
+      </Button>
+      <Button
+        sx={{ height: 42 }}
+        color="error"
+        endIcon={<Delete />}
+        onClickDelete={event => {
+          action("onClickDelete")({ event });
+        }}
+        variant="outlined"
+      >
+        Delete
+      </Button>
+    </Stack>
+  ),
   content: [
     <TableCard
       key={"scenario"}
@@ -184,41 +242,6 @@ ScenarioExample.args = {
     <TableCard key={"Maneuver"} title="Maneuver" />,
     <TableCard key={"Misc"} title="Misc" />
   ],
-  labels: [
-    {
-      _id: "1",
-      color: "#174713",
-      description: "National Highways",
-      name: "National Highways"
-    },
-    {
-      _id: "2",
-      color: "#1D9586",
-      description: "Wet Surface",
-      name: "Wet Surface"
-    },
-    {
-      _id: "3",
-      color: "#fcba03",
-      description: "Test Label 1",
-      name: "Test Label 1"
-    },
-    {
-      _id: "4",
-      color: "#47357a",
-      description: "Test Label 2",
-      name: "Test Label 2"
-    },
-    {
-      _id: "5",
-      color: "#1D9586",
-      description: "Test Label 3",
-      name: "Test Label 3"
-    }
-  ],
-  media: "https://picsum.photos/400/200",
-  subtitle: "Uploaded 2 hours ago by Jega Sriskantha ",
-  title: "Expressway_3Lanes ",
   files: [
     {
       files: [{ filename: "roadFile.rd5", path: "/somepath/path/file" }],
@@ -261,5 +284,40 @@ ScenarioExample.args = {
       ],
       header: "Scenario Infographics"
     }
-  ]
+  ],
+  labels: [
+    {
+      _id: "1",
+      color: "#174713",
+      description: "National Highways",
+      name: "National Highways"
+    },
+    {
+      _id: "2",
+      color: "#1D9586",
+      description: "Wet Surface",
+      name: "Wet Surface"
+    },
+    {
+      _id: "3",
+      color: "#fcba03",
+      description: "Test Label 1",
+      name: "Test Label 1"
+    },
+    {
+      _id: "4",
+      color: "#47357a",
+      description: "Test Label 2",
+      name: "Test Label 2"
+    },
+    {
+      _id: "5",
+      color: "#1D9586",
+      description: "Test Label 3",
+      name: "Test Label 3"
+    }
+  ],
+  media: "https://picsum.photos/400/200",
+  subtitle: "Uploaded 2 hours ago by Jega Sriskantha ",
+  title: "Expressway_3Lanes "
 };

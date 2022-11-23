@@ -7,7 +7,6 @@ import {
   Tooltip,
   Typography
 } from "@mui/material";
-import { Delete, Edit } from "@mui/icons-material";
 import React, { useLayoutEffect, useRef, useState } from "react";
 
 import FileCard from "../FileCard/FileCard";
@@ -20,27 +19,28 @@ function DetailCard({
   height = 950,
   labels = [],
   media = "",
-  onClickDelete = () => {},
-  onClickEdit = () => {},
   onClickLabel = () => {},
+  buttonsStack = null,
   subtitle = "subtitle",
   title = "title",
   width = 1150
 }) {
-  // title, subtitle, and label refs and overflow states
+  // title, subtitle,buttonStack and label refs and overflow states
   const titleRef = useRef();
   const subtitleRef = useRef();
   const labelStackRef = useRef();
+  const buttonStackRef = useRef();
   const [isTitleOverflow, setIsTitleOverflow] = useState(false);
   const [isSubtitleOverflow, setIsSubtitleOverflow] = useState(false);
   const [isLabelStackOverflow, setIsLabelStackOverflow] = useState(false);
   const [overFlowingLabels, setOverFlowingLabels] = useState([]);
+  const [buttonStackWidth, setButtonStackWidth] = useState(0);
 
   // label popover anchor state
   const [labelAnchorEl, setLabelAnchorEl] = useState(null);
 
   // header content width
-  const headerContentWidth = width - 250;
+  const headerContentWidth = width - buttonStackWidth - 10;
 
   // label content width
   const labelContentWidth = width - 45;
@@ -56,6 +56,7 @@ function DetailCard({
 
   // check if title is overflowing
   useLayoutEffect(() => {
+    setButtonStackWidth(buttonStackRef.current.clientWidth);
     setIsTitleOverflow(
       titleRef.current.scrollWidth > titleRef.current.clientWidth
     );
@@ -168,27 +169,8 @@ function DetailCard({
               </Typography>
             </Tooltip>
           </Box>
-          <Stack direction="row" spacing={2} mt={1}>
-            <Button
-              sx={{ height: 42 }}
-              onClick={onClickEdit}
-              startIcon={<Edit />}
-              variant="outlined"
-            >
-              Edit
-            </Button>
-            <Button
-              sx={{ height: 42 }}
-              color="error"
-              endIcon={<Delete />}
-              onClick={onClickDelete}
-              variant="outlined"
-            >
-              Delete
-            </Button>
-          </Stack>
+          <Box ref={buttonStackRef}>{buttonsStack}</Box>
         </Box>
-
         <Box
           mt={2}
           mb={2}
@@ -305,6 +287,12 @@ export default DetailCard;
 
 // detail card prop types
 DetailCard.propTypes = {
+  /**
+   * The content of the more buttons stack.
+   * @type {ReactNode}
+   *
+   */
+  buttonsStack: PropTypes.node,
   /**
    * The content of the card to be displayed under the media.
    * @type {ReactNode}
