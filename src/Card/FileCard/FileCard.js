@@ -106,7 +106,7 @@ function FileCard({
   // render the file card
   return (
     <>
-      <Card sx={{ width, height }}>
+      <Card sx={{ height, width }}>
         <Box
           sx={{
             display: "flex",

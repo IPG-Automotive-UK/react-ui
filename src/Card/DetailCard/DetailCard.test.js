@@ -1,8 +1,14 @@
-import { render, screen } from "@testing-library/react";
+import { Button, Stack } from "@mui/material";
+import { fireEvent, render, screen } from "@testing-library/react";
 
 import DetailCard from "./DetailCard";
+import { Edit } from "@mui/icons-material";
+import FileCard from "../FileCard/FileCard";
 import React from "react";
+import { action } from "@storybook/addon-actions";
 import userEvent from "@testing-library/user-event";
+
+// import { userEvent } from "@storybook/testing-library";
 
 /**
  * Tests
@@ -13,9 +19,10 @@ describe("DetailCard", () => {
     render(
       <DetailCard title="detail card title" subtitle="detail card subtitle" />
     );
-    expect(screen.getByText("detail card title")).toBeInTheDocument();
-    expect(screen.getByText("detail card subtitle")).toBeInTheDocument();
+    expect(screen.getByText(/detail card title/i)).toBeInTheDocument();
+    expect(screen.getByText(/detail card subtitle/i)).toBeInTheDocument();
   });
+
   // test that detail card renders with label that can be clicked
   it("renders label and can be clicked", async () => {
     const labels = [
@@ -26,10 +33,8 @@ describe("DetailCard", () => {
         name: "National Highways"
       }
     ];
-
     // mock function to test if label is clicked
     const onClickLabel = jest.fn();
-
     // render detail card with label
     render(
       <DetailCard
@@ -39,15 +44,12 @@ describe("DetailCard", () => {
         onClickLabel={onClickLabel}
       />
     );
-
     // expect label to be in the document
     expect(screen.getByText("National Highways")).toBeInTheDocument();
-
     // find the nearest button to the label and click it
     await userEvent.click(
       screen.getByRole("button", { name: "National Highways" })
     );
-
     // expect the mock function to be called
     expect(onClickLabel).toHaveBeenCalled();
   });
@@ -55,13 +57,12 @@ describe("DetailCard", () => {
   // test that image is rendered in detail card
   it("renders image", () => {
     render(
-      <DetailCard
+      <FileCard
         title="detail card title"
         subtitle="detail card subtitle"
-        media="https://picsum.photos/200/300"
+        media="https://picsum.photos/400/200"
       />
     );
-
     // expect image to be in the document
     expect(screen.getByRole("img")).toBeInTheDocument();
   });
@@ -75,46 +76,39 @@ describe("DetailCard", () => {
         content={<div>Some content on the card </div>}
       />
     );
-
     // expect content to be in the document
     expect(screen.getByText("Some content on the card")).toBeInTheDocument();
   });
 
-  // test that onClickDelete is called when delete button is clicked
-  it("calls onClickDelete when delete button is clicked", async () => {
-    const onClickDelete = jest.fn();
-
+  it("calls onClickEdit when edit button is clicked", () => {
+    const onClickEdit = jest.fn();
     render(
       <DetailCard
         title="detail card title"
         subtitle="detail card subtitle"
-        onClickDelete={onClickDelete}
+        buttonsStack=<Stack>
+          <Button onClick={onClickEdit}>Edit</Button>
+          <Button onClick={action("onClickDelete")}>Delete</Button>
+        </Stack>
       />
     );
-
-    // find the nearest button to the delete button and click it
-    await userEvent.click(screen.getByRole("button", { name: "Delete" }));
-
-    // expect the mock function to be called
-    expect(onClickDelete).toHaveBeenCalled();
+    fireEvent.click(screen.getByText(/edit/i));
+    expect(onClickEdit).toHaveBeenCalledTimes(1);
   });
 
-  // test that onClickEdit is called when edit button is clicked
-  it("calls onClickEdit when edit button is clicked", async () => {
-    const onClickEdit = jest.fn();
-
+  it("calls onClickDelete when delete button is clicked", () => {
+    const onClickDelete = jest.fn();
     render(
       <DetailCard
         title="detail card title"
         subtitle="detail card subtitle"
-        onClickEdit={onClickEdit}
+        buttonsStack=<Stack>
+          <Button onClick={action("onClickEdit")}>Edit</Button>
+          <Button onClick={onClickDelete}>Delete</Button>
+        </Stack>
       />
     );
-
-    // find the nearest button to the edit button and click it
-    await userEvent.click(screen.getByRole("button", { name: "Edit" }));
-
-    // expect the mock function to be called
-    expect(onClickEdit).toHaveBeenCalled();
+    fireEvent.click(screen.getByText(/delete/i));
+    expect(onClickDelete).toHaveBeenCalledTimes(1);
   });
 });
