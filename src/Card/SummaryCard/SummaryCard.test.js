@@ -1,15 +1,19 @@
-import { Delete, Edit } from "@mui/icons-material";
 import {
+  Button,
+  Divider,
   List,
   ListItem,
   ListItemButton,
   ListItemIcon,
-  ListItemText
+  ListItemText,
+  Stack
 } from "@mui/material";
-import { render, screen } from "@testing-library/react";
+import { Delete, Edit } from "@mui/icons-material";
+import { fireEvent, render, screen } from "@testing-library/react";
 
 import React from "react";
 import SummaryCard from "./SummaryCard";
+import { action } from "@storybook/addon-actions";
 import userEvent from "@testing-library/user-event";
 
 /**
@@ -124,46 +128,91 @@ describe("SummaryCard", () => {
         content={<div>Some content on the card </div>}
       />
     );
-
     // expect the content to be in the document
     expect(screen.getByText("Some content on the card")).toBeInTheDocument();
   });
 
   // test that the onClickMoreDetails function is called when more details button is clicked
-  it("calls onClickMoreDetails when more details button is clicked", async () => {
+  it("calls onClickMoreDetails when more details button is clicked", () => {
     const onClickMoreDetails = jest.fn();
-
     render(
       <SummaryCard
         title="summary card title"
         subtitle="summary card subtitle"
-        onClickMoreDetails={onClickMoreDetails}
+        moreCardActions={
+          <Stack direction="row" spacing={1}>
+            <Button
+              size="large"
+              variant="text"
+              sx={{ width: "50%" }}
+              onClick={onClickMoreDetails}
+            >
+              MORE DETAILS
+            </Button>
+            <Divider
+              orientation="vertical"
+              flexItem
+              sx={{ background: theme => theme.palette.primary.main }}
+            />
+            <Button
+              size="large"
+              variant="text"
+              sx={{ width: "50%" }}
+              onClick={action("onClickViewFiles")}
+            >
+              VIEW FILES
+            </Button>
+          </Stack>
+        }
       />
     );
-
     // find the more details button and click it
-    await userEvent.click(screen.getByRole("button", { name: "MORE DETAILS" }));
+    fireEvent.click(screen.getByText(/more details/i));
 
     // expect the onClickMoreDetails function to be called
-    expect(onClickMoreDetails).toHaveBeenCalled();
+    expect(onClickMoreDetails).toHaveBeenCalledTimes(1);
   });
 
-  // test that the onClickViewFiles function is called when view files button is clicked
-  it("calls onClickViewFiles when view files button is clicked", async () => {
+  // // test that the onClickViewFiles function is called when view files button is clicked
+  it("calls onClickViewFiles when view files button is clicked", () => {
     const onClickViewFiles = jest.fn();
 
     render(
       <SummaryCard
         title="summary card title"
         subtitle="summary card subtitle"
-        onClickViewFiles={onClickViewFiles}
+        moreCardActions={
+          <Stack direction="row" spacing={1}>
+            <Button
+              size="large"
+              variant="text"
+              sx={{ width: "50%" }}
+              onClick={action("onClickMoreDetails")}
+            >
+              MORE DETAILS
+            </Button>
+            <Divider
+              orientation="vertical"
+              flexItem
+              sx={{ background: theme => theme.palette.primary.main }}
+            />
+            <Button
+              size="large"
+              variant="text"
+              sx={{ width: "50%" }}
+              onClick={onClickViewFiles}
+            >
+              VIEW FILES
+            </Button>
+          </Stack>
+        }
       />
     );
 
     // find the view files button and click it
-    await userEvent.click(screen.getByRole("button", { name: "VIEW FILES" }));
+    fireEvent.click(screen.getByText(/view files/i));
 
     // expect the onClickViewFiles function to be called
-    expect(onClickViewFiles).toHaveBeenCalled();
+    expect(onClickViewFiles).toHaveBeenCalledTimes(1);
   });
 });

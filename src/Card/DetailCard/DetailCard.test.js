@@ -2,13 +2,10 @@ import { Button, Stack } from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 import DetailCard from "./DetailCard";
-import { Edit } from "@mui/icons-material";
 import FileCard from "../FileCard/FileCard";
 import React from "react";
 import { action } from "@storybook/addon-actions";
 import userEvent from "@testing-library/user-event";
-
-// import { userEvent } from "@storybook/testing-library";
 
 /**
  * Tests

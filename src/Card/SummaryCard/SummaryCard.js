@@ -18,6 +18,7 @@ import React, { useLayoutEffect, useRef, useState } from "react";
 import LabelChip from "../../LabelSelector/LabelChip/LabelChip";
 import { MoreVert } from "@mui/icons-material";
 import PropTypes from "prop-types";
+import ResizeObserver from "resize-observer-polyfill";
 
 function SummaryCard({
   content = null,
@@ -39,7 +40,6 @@ function SummaryCard({
   const labelStackRef = useRef();
   const [isTitleOverflow, setIsTitleOverflow] = useState(false);
   const [isSubtitleOverflow, setIsSubtitleOverflow] = useState(false);
-  const [isLabelStackOverflow, setIsLabelStackOverflow] = useState(false);
   const [overFlowingLabels, setOverFlowingLabels] = useState([]);
 
   // label popover anchor state
@@ -51,11 +51,50 @@ function SummaryCard({
   // header content width
   const headerContentWidth = width - 65;
 
+  // label content width
+  const labelContentWidth = width - 45;
+
   // label spacing
   const labelSpacing = 8;
 
   // overflow button width
   const overflowButtonWidth = 40;
+
+  // check if label stack is overflowing
+  const useComponentSize = comRef => {
+    const [isLabelStackOverflow, setIsLabelStackOverflow] = useState(false);
+
+    React.useEffect(() => {
+      const sizeObserver = new ResizeObserver((entries, observer) => {
+        entries.forEach(({ target }) => {
+          setIsLabelStackOverflow(target.scrollWidth > target.clientWidth);
+        });
+      });
+      sizeObserver.observe(comRef.current);
+
+      let sum = overflowButtonWidth;
+      const overFlowLabels = [];
+
+      // for each of the labels in the label stack
+      labelStackRef.current.childNodes.forEach(child => {
+        // add the width of the child plus 8px of space between each child to the sum
+        sum += child.offsetWidth + labelSpacing;
+
+        // if the sum is greater than the header contend width, then them this child is overflowing
+        // the header content width
+        if (sum > labelContentWidth) {
+          overFlowLabels.push(child);
+        }
+      });
+
+      // set the overflowing labels
+      setOverFlowingLabels(overFlowLabels);
+
+      return () => sizeObserver.disconnect();
+    }, [comRef]);
+
+    return [isLabelStackOverflow];
+  };
 
   // check if title is overflowing
   useLayoutEffect(() => {
@@ -71,32 +110,6 @@ function SummaryCard({
     );
   }, []);
 
-  // check if label stack is overflowing
-  useLayoutEffect(() => {
-    setIsLabelStackOverflow(
-      labelStackRef.current.scrollWidth > labelStackRef.current.clientWidth
-    );
-
-    // find the overflowing labels
-    let sum = overflowButtonWidth;
-    const overFlowLabels = [];
-
-    // for each of the labels in the label stack
-    labelStackRef.current.childNodes.forEach(child => {
-      // add the width of the child plus 8px of space between each child to the sum
-      sum += child.offsetWidth + labelSpacing;
-
-      // if the sum is greater than the header contend width, then them this child is overflowing
-      // the header content width
-      if (sum > headerContentWidth) {
-        overFlowLabels.push(child);
-      }
-    });
-
-    // set the overflowing labels
-    setOverFlowingLabels(overFlowLabels);
-  }, [labels]);
-
   // determine what labels to show
   const notOverflowingLabels = labels.slice(
     0,
@@ -107,6 +120,9 @@ function SummaryCard({
   const handleLabelOverflowClick = event => {
     setLabelAnchorEl(event.currentTarget);
   };
+
+  // check if label stack is overflowing
+  const [lableSize] = useComponentSize(labelStackRef);
 
   // handle the close of the label overflow popover by setting the label anchor element to null
   const handleLabelOverflowClose = () => {
@@ -198,7 +214,7 @@ function SummaryCard({
             direction="row"
             spacing={`${labelSpacing}px`}
           >
-            {!isLabelStackOverflow ? (
+            {!lableSize ? (
               <>
                 {labels.map(label => (
                   <LabelChip
