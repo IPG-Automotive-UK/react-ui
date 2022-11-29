@@ -193,7 +193,6 @@ ScenarioExample.args = {
           ["Active Routes", "Test Route 1, Test Route 2"]
         ]}
       />
-      ,
       <TableCard
         key={"Road"}
         title="Road"
@@ -229,8 +228,7 @@ ScenarioExample.args = {
           ["Traffic Lights", 21]
         ]}
       />
-      ,
-      <TableCard key={"Maneuver"} title="Maneuver" />,
+      <TableCard key={"Maneuver"} title="Maneuver" />
       <TableCard key={"Misc"} title="Misc" />
     </>
   ),
