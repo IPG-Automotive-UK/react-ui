@@ -19,7 +19,6 @@ function TableCard({
   title = "Table",
   width = 735
 }) {
-  console.log(tableContent);
   return (
     <Card sx={{ width }}>
       <CardHeader

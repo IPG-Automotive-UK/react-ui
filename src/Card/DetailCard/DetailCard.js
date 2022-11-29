@@ -7,7 +7,7 @@ import {
   Tooltip,
   Typography
 } from "@mui/material";
-import React, { useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import FileCard from "../FileCard/FileCard";
 import LabelChip from "../../LabelSelector/LabelChip/LabelChip";
@@ -34,16 +34,10 @@ function DetailCard({
   const labelStackRef = useRef();
 
   const buttonStackRef = useRef();
-  const [isTitleOverflow, setIsTitleOverflow] = useState(false);
-  const [isSubtitleOverflow, setIsSubtitleOverflow] = useState(false);
   const [overFlowingLabels, setOverFlowingLabels] = useState([]);
-  const [buttonStackWidth, setButtonStackWidth] = useState(0);
 
   // label popover anchor state
   const [labelAnchorEl, setLabelAnchorEl] = useState(null);
-
-  // header content width
-  const headerContentWidth = width - buttonStackWidth - 10;
 
   // label content width
   const labelContentWidth = width - 45;
@@ -94,19 +88,62 @@ function DetailCard({
   };
 
   // check if title is overflowing
-  useLayoutEffect(() => {
-    setButtonStackWidth(buttonStackRef.current.clientWidth);
-    setIsTitleOverflow(
-      titleRef.current.scrollWidth > titleRef.current.clientWidth
-    );
-  }, []);
+  const useTitleWidth = titleRef => {
+    // setButtonStackWidth(buttonStackRef.current.clientWidth);
+
+    const [isTitleOverflow, setIsTitleOverflow] = useState(false);
+
+    useEffect(() => {
+      const sizeObserver = new ResizeObserver((entries, observer) => {
+        entries.forEach(({ target }) => {
+          setIsTitleOverflow(target.scrollWidth > target.clientWidth);
+        });
+      });
+      sizeObserver.observe(titleRef.current);
+
+      return () => sizeObserver.disconnect();
+    }, [titleRef]);
+
+    return [isTitleOverflow];
+  };
+
+  // get the width of the button stack
+  const useButtonStackwidth = buttonStackRef => {
+    // setButtonStackWidth(buttonStackRef.current.clientWidth);
+
+    const [buttonStackWidth, setButtonStackWidth] = useState(0);
+
+    useEffect(() => {
+      const sizeObserver = new ResizeObserver((entries, observer) => {
+        entries.forEach(({ target }) => {
+          setButtonStackWidth(target.clientWidth);
+        });
+      });
+      sizeObserver.observe(buttonStackRef.current);
+
+      return () => sizeObserver.disconnect();
+    }, [buttonStackRef]);
+
+    return [buttonStackWidth];
+  };
 
   // check if subtitle is overflowing
-  useLayoutEffect(() => {
-    setIsSubtitleOverflow(
-      subtitleRef.current.scrollWidth > subtitleRef.current.clientWidth
-    );
-  }, []);
+  const useSubTitleWidth = subTitleRef => {
+    const [isSubtitleOverflow, setIsSubtitleOverflow] = useState(false);
+
+    useEffect(() => {
+      const sizeObserver = new ResizeObserver((entries, observer) => {
+        entries.forEach(({ target }) => {
+          setIsSubtitleOverflow(target.scrollWidth > target.clientWidth);
+        });
+      });
+      sizeObserver.observe(subTitleRef.current);
+
+      return () => sizeObserver.disconnect();
+    }, [subTitleRef]);
+
+    return [isSubtitleOverflow];
+  };
 
   // determine what labels to show
   const notOverflowingLabels = labels.slice(
@@ -121,6 +158,18 @@ function DetailCard({
 
   // check if label stack is overflowing
   const [lableSize] = useComponentSize(labelStackRef);
+
+  // check if title is overflowing
+  const [titleSizeOverflow] = useTitleWidth(titleRef);
+
+  // check if subtitle is overflowing
+  const [subTitleSizeOverflow] = useSubTitleWidth(subtitleRef);
+
+  // get the width of the button stack
+  const [buttonsStackWidth] = useButtonStackwidth(buttonStackRef);
+
+  // header content width
+  const headerContentWidth = width - buttonsStackWidth - 10;
 
   // handle the close of the label overflow popover by setting the label anchor element to null
   const handleLabelOverflowClose = () => {
@@ -154,7 +203,7 @@ function DetailCard({
           }}
         >
           <Box>
-            <Tooltip title={title} disableHoverListener={!isTitleOverflow}>
+            <Tooltip title={title} disableHoverListener={!titleSizeOverflow}>
               <Typography
                 ref={titleRef}
                 sx={{
@@ -171,7 +220,7 @@ function DetailCard({
             </Tooltip>
             <Tooltip
               title={subtitle}
-              disableHoverListener={!isSubtitleOverflow}
+              disableHoverListener={!subTitleSizeOverflow}
             >
               <Typography
                 mt={1}

@@ -9,9 +9,10 @@ import {
   Tooltip,
   Typography
 } from "@mui/material";
-import React, { useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import PropTypes from "prop-types";
+import ResizeObserver from "resize-observer-polyfill";
 import SearchBar from "../../SearchBar/SearchBar";
 
 function FileCard({
@@ -51,7 +52,6 @@ function FileCard({
 
   // title ref and overflow state
   const titleRef = useRef();
-  const [isTitleOverflow, setIsTitleOverflow] = useState(false);
 
   // file state
   const [files, setFiles] = useState(filesIn);
@@ -63,11 +63,22 @@ function FileCard({
   const headerContentWidth = width - 271;
 
   // check if title is overflowing
-  useLayoutEffect(() => {
-    setIsTitleOverflow(
-      titleRef.current.scrollWidth > titleRef.current.clientWidth
-    );
-  }, []);
+  const useTitleWidth = titleRef => {
+    const [isTitleOverflow, setIsTitleOverflow] = useState(false);
+
+    useEffect(() => {
+      const sizeObserver = new ResizeObserver((entries, observer) => {
+        entries.forEach(({ target }) => {
+          setIsTitleOverflow(target.scrollWidth > target.clientWidth);
+        });
+      });
+      sizeObserver.observe(titleRef.current);
+
+      return () => sizeObserver.disconnect();
+    }, [titleRef]);
+
+    return [isTitleOverflow];
+  };
 
   // handle search by searching file headers and filenames
   const handleSearch = event => {
@@ -103,6 +114,9 @@ function FileCard({
     onClickDownload(paths);
   };
 
+  // check if title is overflowing
+  const [titleSizeOverflow] = useTitleWidth(titleRef);
+
   // render the file card
   return (
     <>
@@ -124,7 +138,7 @@ function FileCard({
           />
         </Box>
         <Box>
-          <Tooltip title={title} disableHoverListener={!isTitleOverflow}>
+          <Tooltip title={title} disableHoverListener={!titleSizeOverflow}>
             <Typography
               ref={titleRef}
               ml={2}

@@ -13,7 +13,7 @@ import {
   Tooltip,
   Typography
 } from "@mui/material";
-import React, { useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import LabelChip from "../../LabelSelector/LabelChip/LabelChip";
 import { MoreVert } from "@mui/icons-material";
@@ -38,8 +38,7 @@ function SummaryCard({
   const titleRef = useRef();
   const subtitleRef = useRef();
   const labelStackRef = useRef();
-  const [isTitleOverflow, setIsTitleOverflow] = useState(false);
-  const [isSubtitleOverflow, setIsSubtitleOverflow] = useState(false);
+
   const [overFlowingLabels, setOverFlowingLabels] = useState([]);
 
   // label popover anchor state
@@ -64,7 +63,7 @@ function SummaryCard({
   const useComponentSize = comRef => {
     const [isLabelStackOverflow, setIsLabelStackOverflow] = useState(false);
 
-    React.useEffect(() => {
+    useEffect(() => {
       const sizeObserver = new ResizeObserver((entries, observer) => {
         entries.forEach(({ target }) => {
           setIsLabelStackOverflow(target.scrollWidth > target.clientWidth);
@@ -97,18 +96,40 @@ function SummaryCard({
   };
 
   // check if title is overflowing
-  useLayoutEffect(() => {
-    setIsTitleOverflow(
-      titleRef.current.scrollWidth > titleRef.current.clientWidth
-    );
-  }, []);
+  const useTitleWidth = titleRef => {
+    const [isTitleOverflow, setIsTitleOverflow] = useState(false);
+
+    useEffect(() => {
+      const sizeObserver = new ResizeObserver((entries, observer) => {
+        entries.forEach(({ target }) => {
+          setIsTitleOverflow(target.scrollWidth > target.clientWidth);
+        });
+      });
+      sizeObserver.observe(titleRef.current);
+
+      return () => sizeObserver.disconnect();
+    }, [titleRef]);
+
+    return [isTitleOverflow];
+  };
 
   // check if subtitle is overflowing
-  useLayoutEffect(() => {
-    setIsSubtitleOverflow(
-      subtitleRef.current.scrollWidth > subtitleRef.current.clientWidth
-    );
-  }, []);
+  const useSubTitleWidth = subTitleRef => {
+    const [isSubtitleOverflow, setIsSubtitleOverflow] = useState(false);
+
+    useEffect(() => {
+      const sizeObserver = new ResizeObserver((entries, observer) => {
+        entries.forEach(({ target }) => {
+          setIsSubtitleOverflow(target.scrollWidth > target.clientWidth);
+        });
+      });
+      sizeObserver.observe(subTitleRef.current);
+
+      return () => sizeObserver.disconnect();
+    }, [subTitleRef]);
+
+    return [isSubtitleOverflow];
+  };
 
   // determine what labels to show
   const notOverflowingLabels = labels.slice(
@@ -123,6 +144,12 @@ function SummaryCard({
 
   // check if label stack is overflowing
   const [lableSize] = useComponentSize(labelStackRef);
+
+  // check if title is overflowing
+  const [titleSizeOverflow] = useTitleWidth(titleRef);
+
+  // check if subtitle is overflowing
+  const [subTitleSizeOverflow] = useSubTitleWidth(subtitleRef);
 
   // handle the close of the label overflow popover by setting the label anchor element to null
   const handleLabelOverflowClose = () => {
@@ -168,7 +195,7 @@ function SummaryCard({
           }
           disableTypography
           title={
-            <Tooltip title={title} disableHoverListener={!isTitleOverflow}>
+            <Tooltip title={title} disableHoverListener={!titleSizeOverflow}>
               <Typography
                 ref={titleRef}
                 sx={{
@@ -185,7 +212,7 @@ function SummaryCard({
           subheader={
             <Tooltip
               title={subtitle}
-              disableHoverListener={!isSubtitleOverflow}
+              disableHoverListener={!subTitleSizeOverflow}
             >
               <Typography
                 ref={subtitleRef}
