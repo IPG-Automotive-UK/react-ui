@@ -18,6 +18,8 @@ const Template = args => {
       onClickLabel={label => {
         action("onLabelClick")(label);
       }}
+      onClickDownload={action("onClickDownload")}
+      onClickFile={action("onClickFile")}
     />
   );
 };
@@ -30,6 +32,8 @@ Default.args = {
   media: "",
   mediaHeight: 200,
   mediaWidth: 400,
+  onClickDownload: () => {},
+  onClickFile: () => {},
   onClickLabel: () => {},
   subtitle: "subtitle",
   title: "title",

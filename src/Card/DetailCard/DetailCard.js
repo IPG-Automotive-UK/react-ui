@@ -21,6 +21,8 @@ function DetailCard({
   labels = [],
   media = "",
   onClickLabel = () => {},
+  onClickDownload = () => {},
+  onClickFile = () => {},
   buttonsStack = null,
   subtitle = "subtitle",
   title = "title",
@@ -135,7 +137,7 @@ function DetailCard({
 
   // render the detail card
   return (
-    <>
+    <Box>
       <Box
         mt={1}
         sx={{
@@ -156,6 +158,8 @@ function DetailCard({
               <Typography
                 ref={titleRef}
                 sx={{
+                  color: theme =>
+                    theme.palette.mode === "dark" ? "white" : "black",
                   fontSize: 20,
                   fontWeight: 500,
                   width: headerContentWidth
@@ -173,6 +177,8 @@ function DetailCard({
                 mt={1}
                 ref={subtitleRef}
                 sx={{
+                  color: theme =>
+                    theme.palette.mode === "dark" ? "white" : "black",
                   fontSize: 14,
                   fontWeight: 400,
                   width: headerContentWidth
@@ -260,6 +266,8 @@ function DetailCard({
               height={756}
               files={files}
               title="title"
+              onClickDownload={onClickDownload}
+              onClickFile={onClickFile}
             />
           </Box>
           <Box mt={1} ml={2} sx={{ height, overflowY: "auto", width: 760 }}>
@@ -300,7 +308,7 @@ function DetailCard({
           })}
         </Stack>
       </Popover>
-    </>
+    </Box>
   );
 }
 
