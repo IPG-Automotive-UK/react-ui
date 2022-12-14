@@ -132,6 +132,7 @@ function FileCard({
             src={media}
             sx={{
               height: 192,
+              objectFit: "contain",
               padding: 2,
               width: 336
             }}
