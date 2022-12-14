@@ -18,7 +18,7 @@ function DetailCard({
   buttonsStack = null,
   content = null,
   files = [],
-  fileTitle = "Files",
+  fileTitle = "title",
   height = 950,
   labels = [],
   media = "",
@@ -385,7 +385,7 @@ DetailCard.propTypes = {
    * The fileTitle of the card.
    * @type {string}
    * @required
-   * @default Files
+   * @default title
    *
    */
   fileTitle: PropTypes.string.isRequired,

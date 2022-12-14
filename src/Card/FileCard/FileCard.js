@@ -17,7 +17,7 @@ import SearchBar from "../../SearchBar/SearchBar";
 
 function FileCard({
   files: filesIn = [],
-  fileTitle = "Files",
+  fileTitle = "title",
   height = 796,
   media = "",
   onClickDownload = () => {},
@@ -238,7 +238,7 @@ FileCard.propTypes = {
    * The fileTitle of the card.
    * @type {string}
    * @required
-   * @default Files
+   * @default title
    *
    */
   fileTitle: PropTypes.string.isRequired,
