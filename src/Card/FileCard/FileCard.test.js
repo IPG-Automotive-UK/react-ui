@@ -9,7 +9,7 @@ import React from "react";
 describe("FileCard", () => {
   // test that file card renders with title
   it("renders title", () => {
-    render(<FileCard title="file card title" />);
+    render(<FileCard Filetitle="file card title" />);
     expect(screen.getByText("file card title")).toBeInTheDocument();
   });
 
@@ -72,7 +72,7 @@ describe("FileCard", () => {
 
     // render file card with files
     expect(() =>
-      render(<FileCard title="file card title" files={files} />)
+      render(<FileCard Filetitle="file card title" files={files} />)
     ).toThrowError("files must be an array");
   });
 
@@ -108,7 +108,7 @@ describe("FileCard", () => {
 
     // render file card with files
     expect(() =>
-      render(<FileCard title="file card title" files={files} />)
+      render(<FileCard Filetitle="file card title" files={files} />)
     ).toThrowError(
       "files must be an array of objects with files and header properties"
     );
@@ -137,7 +137,7 @@ describe("FileCard", () => {
 
     // render file card with files
     expect(() =>
-      render(<FileCard title="file card title" files={files} />)
+      render(<FileCard Filetitle="file card title" files={files} />)
     ).toThrowError(
       "files must be an array of objects with files and header properties"
     );
@@ -175,7 +175,7 @@ describe("FileCard", () => {
 
     // render file card with files
     expect(() =>
-      render(<FileCard title="file card title" files={files} />)
+      render(<FileCard Filetitle="file card title" files={files} />)
     ).toThrowError(
       "files.files must be an array of objects with filename and path properties"
     );
@@ -213,7 +213,7 @@ describe("FileCard", () => {
     ];
 
     // render file card with files
-    render(<FileCard title="file card title" files={files} />);
+    render(<FileCard Filetitle="file card title" files={files} />);
 
     // expect download button to read "Download all files"
     expect(screen.getByText("Download all Files")).toBeInTheDocument();
@@ -250,7 +250,7 @@ describe("FileCard", () => {
     ];
 
     // render file card with files
-    render(<FileCard title="file card title" files={files} />);
+    render(<FileCard Filetitle="file card title" files={files} />);
 
     // find the search input by placeholder text
     const searchInput = screen.getByPlaceholderText("Search");
@@ -299,7 +299,7 @@ describe("FileCard", () => {
     // render file card with files
     render(
       <FileCard
-        title="file card title"
+        Filetitle="file card title"
         files={files}
         onClickDownload={onClickDownload}
       />
@@ -347,7 +347,7 @@ describe("FileCard", () => {
     ];
 
     // render file card with files
-    render(<FileCard title="file card title" files={files} />);
+    render(<FileCard Filetitle="file card title" files={files} />);
 
     // find the search input by placeholder text
     const searchInput = screen.getByPlaceholderText("Search");
