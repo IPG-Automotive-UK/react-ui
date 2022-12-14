@@ -379,11 +379,11 @@ SummaryCard.propTypes = {
   content: PropTypes.node,
   /**
    * The height of the card.
-   * @type {number}
+   * @type {number | string}
    * @default 600
    *
    */
-  height: PropTypes.number,
+  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   /**
    * The labels to be displayed on the card.
    * labels should be an array of objects with the following properties:
@@ -492,9 +492,9 @@ SummaryCard.propTypes = {
   title: PropTypes.string.isRequired,
   /**
    * The width of the card.
-   * @type {number}
+   * @type {number | string}
    * @default 450
    * @default
    */
-  width: PropTypes.number
+  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };

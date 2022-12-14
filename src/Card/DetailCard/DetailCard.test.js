@@ -12,12 +12,17 @@ import userEvent from "@testing-library/user-event";
  */
 describe("DetailCard", () => {
   // test that the detail card renders with title
-  it("renders title and subtitle ", () => {
+  it("renders title,subtitle and filetitle ", () => {
     render(
-      <DetailCard title="detail card title" subtitle="detail card subtitle" />
+      <DetailCard
+        title="detail card title"
+        subtitle="detail card subtitle"
+        fileTitle="detail file title"
+      />
     );
     expect(screen.getByText(/detail card title/i)).toBeInTheDocument();
     expect(screen.getByText(/detail card subtitle/i)).toBeInTheDocument();
+    expect(screen.getByText(/detail file title/i)).toBeInTheDocument();
   });
 
   // test that detail card renders with label that can be clicked

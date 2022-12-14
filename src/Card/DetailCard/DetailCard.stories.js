@@ -232,6 +232,7 @@ ScenarioExample.args = {
       <TableCard key={"Misc"} title="Misc" />
     </>
   ),
+  fileTitle: "Files",
   files: [
     {
       files: [{ filename: "roadFile.rd5", path: "/somepath/path/file" }],

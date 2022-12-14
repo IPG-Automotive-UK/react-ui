@@ -15,15 +15,16 @@ import PropTypes from "prop-types";
 import ResizeObserver from "resize-observer-polyfill";
 
 function DetailCard({
+  buttonsStack = null,
   content = null,
   files = [],
+  fileTitle = "title",
   height = 950,
   labels = [],
   media = "",
-  onClickLabel = () => {},
   onClickDownload = () => {},
   onClickFile = () => {},
-  buttonsStack = null,
+  onClickLabel = () => {},
   subtitle = "subtitle",
   title = "title",
   width = 1150
@@ -315,6 +316,7 @@ function DetailCard({
               height={756}
               files={files}
               title="title"
+              fileTitle={fileTitle}
               onClickDownload={onClickDownload}
               onClickFile={onClickFile}
             />
@@ -379,6 +381,14 @@ DetailCard.propTypes = {
    *
    */
   content: PropTypes.node,
+  /**
+   * The fileTitle of the card.
+   * @type {string}
+   * @required
+   * @default title
+   *
+   */
+  fileTitle: PropTypes.string.isRequired,
   /**
    * The height of the card.
    * @type {number}
