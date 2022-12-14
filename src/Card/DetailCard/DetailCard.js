@@ -316,7 +316,7 @@ function DetailCard({
               height={756}
               files={files}
               title="title"
-              fileTitle="title"
+              fileTitle={fileTitle}
               onClickDownload={onClickDownload}
               onClickFile={onClickFile}
             />
