@@ -15,15 +15,16 @@ import PropTypes from "prop-types";
 import ResizeObserver from "resize-observer-polyfill";
 
 function DetailCard({
+  buttonsStack = null,
   content = null,
   files = [],
+  Filetitle = "Files",
   height = 950,
   labels = [],
   media = "",
-  onClickLabel = () => {},
   onClickDownload = () => {},
   onClickFile = () => {},
-  buttonsStack = null,
+  onClickLabel = () => {},
   subtitle = "subtitle",
   title = "title",
   width = 1150
@@ -315,6 +316,7 @@ function DetailCard({
               height={756}
               files={files}
               title="title"
+              Filetitle={Filetitle}
               onClickDownload={onClickDownload}
               onClickFile={onClickFile}
             />
@@ -366,6 +368,14 @@ export default DetailCard;
 
 // detail card prop types
 DetailCard.propTypes = {
+  /**
+   * The Filetitle of the card.
+   * @type {string}
+   * @required
+   * @default title
+   *
+   */
+  Filetitle: PropTypes.string.isRequired,
   /**
    * The content of the buttons stack.
    * @type {ReactNode}

@@ -17,13 +17,13 @@ import SearchBar from "../../SearchBar/SearchBar";
 
 function FileCard({
   files: filesIn = [],
+  Filetitle = "Files",
+  height = 796,
   media = "",
   onClickDownload = () => {},
   onClickFile = () => {},
   search: searchIn = "",
-  title = "Files",
-  width = 368,
-  height = 796
+  width = 368
 }) {
   // check that filesIn is an array of objects with files and header properties
   if (!Array.isArray(filesIn)) {
@@ -138,7 +138,7 @@ function FileCard({
           />
         </Box>
         <Box>
-          <Tooltip title={title} disableHoverListener={!titleSizeOverflow}>
+          <Tooltip title={Filetitle} disableHoverListener={!titleSizeOverflow}>
             <Typography
               ref={titleRef}
               ml={2}
@@ -149,7 +149,7 @@ function FileCard({
               }}
               noWrap
             >
-              {title}
+              {Filetitle}
             </Typography>
           </Tooltip>
         </Box>
@@ -234,6 +234,14 @@ export default FileCard;
 // detail card prop types
 FileCard.propTypes = {
   /**
+   * The Filetitle of the card.
+   * @type {string}
+   * @required
+   * @default title
+   *
+   */
+  Filetitle: PropTypes.string.isRequired,
+  /**
    *  FILES
    *
    */
@@ -286,14 +294,6 @@ FileCard.propTypes = {
    *
    */
   search: PropTypes.string,
-  /**
-   * The title of the card.
-   * @type {string}
-   * @required
-   * @default title
-   *
-   */
-  title: PropTypes.string.isRequired,
   /**
    * The width of the card.
    * @type {number}
