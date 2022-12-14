@@ -17,7 +17,7 @@ import SearchBar from "../../SearchBar/SearchBar";
 
 function FileCard({
   files: filesIn = [],
-  Filetitle = "Files",
+  fileTitle = "Files",
   height = 796,
   media = "",
   onClickDownload = () => {},
@@ -139,7 +139,7 @@ function FileCard({
           />
         </Box>
         <Box>
-          <Tooltip title={Filetitle} disableHoverListener={!titleSizeOverflow}>
+          <Tooltip title={fileTitle} disableHoverListener={!titleSizeOverflow}>
             <Typography
               ref={titleRef}
               ml={2}
@@ -150,7 +150,7 @@ function FileCard({
               }}
               noWrap
             >
-              {Filetitle}
+              {fileTitle}
             </Typography>
           </Tooltip>
         </Box>
@@ -235,13 +235,13 @@ export default FileCard;
 // detail card prop types
 FileCard.propTypes = {
   /**
-   * The Filetitle of the card.
+   * The fileTitle of the card.
    * @type {string}
    * @required
-   * @default title
+   * @default Files
    *
    */
-  Filetitle: PropTypes.string.isRequired,
+  fileTitle: PropTypes.string.isRequired,
   /**
    *  FILES
    *

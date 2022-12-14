@@ -18,7 +18,7 @@ function DetailCard({
   buttonsStack = null,
   content = null,
   files = [],
-  Filetitle = "Files",
+  fileTitle = "Files",
   height = 950,
   labels = [],
   media = "",
@@ -316,7 +316,7 @@ function DetailCard({
               height={756}
               files={files}
               title="title"
-              Filetitle={Filetitle}
+              fileTitle={fileTitle}
               onClickDownload={onClickDownload}
               onClickFile={onClickFile}
             />
@@ -369,14 +369,6 @@ export default DetailCard;
 // detail card prop types
 DetailCard.propTypes = {
   /**
-   * The Filetitle of the card.
-   * @type {string}
-   * @required
-   * @default title
-   *
-   */
-  Filetitle: PropTypes.string.isRequired,
-  /**
    * The content of the buttons stack.
    * @type {ReactNode}
    *
@@ -389,6 +381,14 @@ DetailCard.propTypes = {
    *
    */
   content: PropTypes.node,
+  /**
+   * The fileTitle of the card.
+   * @type {string}
+   * @required
+   * @default Files
+   *
+   */
+  fileTitle: PropTypes.string.isRequired,
   /**
    * The height of the card.
    * @type {number}
