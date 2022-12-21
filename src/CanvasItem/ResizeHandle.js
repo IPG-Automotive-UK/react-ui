@@ -16,7 +16,7 @@ export default function ResizeHandle({ onResize, direction, rotateAngle }) {
     event => {
       onResize(event, cursor, direction);
     },
-    [onResize, cursor]
+    [onResize, cursor, direction]
   );
 
   // get the resize handle position styles

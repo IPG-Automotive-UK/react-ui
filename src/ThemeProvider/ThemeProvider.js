@@ -106,13 +106,13 @@ export default function ThemeProvider({
       setTheme(controlledTheme);
       localStorage.setItem("theme", controlledTheme);
     }
-  }, []);
+  }, [controlledTheme]);
 
   useEffect(() => {
     if (theme !== controlledTheme) {
       setTheme(controlledTheme);
     }
-  }, [controlledTheme]);
+  }, [controlledTheme, theme]);
 
   // on theme change update local storage
   useEffect(() => {
