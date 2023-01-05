@@ -61,7 +61,7 @@ export default function EditLabelDialog({
       setDescription(label.description);
       setColor(label.color);
     }
-  }, [label]);
+  }, [label, isNew]);
 
   // check that if a label is being edited,
   // changes have been made to the label
