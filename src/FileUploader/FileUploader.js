@@ -61,7 +61,7 @@ export default function FileUploader({
   }));
   const classes = useStyles();
 
-  // update the file state with selected files
+  // update the dropzone text
   useEffect(() => {
     if (!multiple) {
       setUploaderText(
@@ -70,7 +70,7 @@ export default function FileUploader({
     } else {
       setUploaderText("Drag & drop file(s) here or click");
     }
-  }, [selectedFiles, multiple]);
+  }, [selectedFiles, multiple, uploaderText]);
 
   // handle file change
   const handleAdd = newFiles => {
