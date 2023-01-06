@@ -67,8 +67,10 @@ export default function FileUploader({
       setUploaderText(
         selectedFiles?.length > 0 ? selectedFiles[0].file?.path : uploaderText
       );
+    } else {
+      setUploaderText("Drag & drop file(s) here or click");
     }
-  }, [selectedFiles]);
+  }, [selectedFiles, multiple]);
 
   // handle file change
   const handleAdd = newFiles => {
@@ -99,24 +101,22 @@ export default function FileUploader({
 
   return (
     <Box data-testid="dropzone-base">
-      {
-        <Box
-          sx={{
-            alignItems: "center",
-            display: "flex",
-            justifyContent: "space-between",
-            marginBottom: 1,
-            minHeight: "45px"
-          }}
-        >
-          <Typography variant="h6">{title || ""}</Typography>
-          {!multiple && files.length === 1 ? (
-            <IconButton aria-label="delete" onClick={handleDelete}>
-              <DeleteIcon color={files.length === 1 ? "error" : ""} />
-            </IconButton>
-          ) : null}
-        </Box>
-      }
+      <Box
+        sx={{
+          alignItems: "center",
+          display: "flex",
+          justifyContent: "space-between",
+          marginBottom: 1,
+          minHeight: "45px"
+        }}
+      >
+        <Typography variant="h6">{title || ""}</Typography>
+        {!multiple && files.length === 1 ? (
+          <IconButton aria-label="delete" onClick={handleDelete}>
+            <DeleteIcon color={files.length === 1 ? "error" : ""} />
+          </IconButton>
+        ) : null}
+      </Box>
       <DropzoneAreaBase
         maxFileSize={maxFileSize}
         acceptedFiles={acceptedFiles}
