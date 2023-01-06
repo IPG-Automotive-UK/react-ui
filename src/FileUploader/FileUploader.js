@@ -63,14 +63,16 @@ export default function FileUploader({
 
   // update the dropzone text
   useEffect(() => {
-    if (!multiple) {
-      setUploaderText(
-        selectedFiles?.length > 0 ? selectedFiles[0].file?.path : uploaderText
-      );
-    } else {
+    if (multiple) {
       setUploaderText("Drag & drop file(s) here or click");
+    } else {
+      setUploaderText(
+        selectedFiles?.length > 0
+          ? selectedFiles[0].file?.path
+          : "Drag & drop a file here or click"
+      );
     }
-  }, [selectedFiles, multiple, uploaderText]);
+  }, [selectedFiles, multiple]);
 
   // handle file change
   const handleAdd = newFiles => {
