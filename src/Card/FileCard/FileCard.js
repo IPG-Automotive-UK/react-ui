@@ -25,31 +25,6 @@ function FileCard({
   search: searchIn = "",
   width = 368
 }) {
-  // check that filesIn is an array of objects with files and header properties
-  if (!Array.isArray(filesIn)) {
-    throw new Error("files must be an array");
-  }
-
-  // check that filesIn is an array of objects with files and header properties
-  if (!filesIn.every(file => file.files && file.header)) {
-    throw new Error(
-      "files must be an array of objects with files and header properties"
-    );
-  }
-
-  // check that files.files is an array of objects with filename and path properties
-  if (
-    !filesIn.every(
-      file =>
-        Array.isArray(file.files) &&
-        file.files.every(file => file.filename && file.path)
-    ) // check that files.files is an array of objects with filename and path properties
-  ) {
-    throw new Error(
-      "files.files must be an array of objects with filename and path properties"
-    );
-  }
-
   // title ref and overflow state
   const titleRef = useRef();
 
