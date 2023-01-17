@@ -159,7 +159,7 @@ FileUploader.propTypes = {
   filesLimit: PropTypes.number,
   /**
    * Maximum file size (in bytes) that the dropzone will accept.
-   * @default 3000000
+   * @default 1000000000
    * @type {number}
    */
   maxFileSize: PropTypes.number,

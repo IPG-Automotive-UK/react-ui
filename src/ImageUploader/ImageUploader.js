@@ -24,6 +24,10 @@ export default function ImageUploader({
   // styling
   const useStyles = makeStyles(theme => ({
     root: {
+      "& .MuiButtonBase-root": {
+        borderRadius: "50% !important",
+        padding: "8px !important"
+      },
       "& .MuiDropzoneArea-icon": {
         color: "rgba(0, 0, 0, 0.60)",
         display: files.length === 1 ? "none !important" : "block !important",
@@ -42,7 +46,7 @@ export default function ImageUploader({
         justifyContent: "center"
       },
       "& .MuiDropzonePreviewList-image": {
-        height: "250px !important"
+        height: "225px !important"
       },
       "& .MuiDropzonePreviewList-imageContainer": {
         flexBasis: "100% !important",
@@ -122,8 +126,7 @@ export default function ImageUploader({
           <Typography variant="h6">{title || ""}</Typography>
           <Typography variant="caption">{subText}</Typography>
         </Box>
-
-        {files && files.length === 1 ? (
+        {files.length === 1 ? (
           <IconButton aria-label="deleteIcon" onClick={handleDelete}>
             <DeleteIcon color={files.length === 1 ? "error" : ""} />
           </IconButton>
@@ -151,19 +154,12 @@ export default function ImageUploader({
 
 ImageUploader.propTypes = {
   /**
-   *  List of file types to accept.
-   * @default []
-   * @type {array}
-   * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
-   */
-  acceptedFiles: PropTypes.array,
-  /**
    * Text to display in dropzone
    */
   dropzoneText: PropTypes.string,
   /**
    * Maximum file size (in bytes) that the dropzone will accept.
-   * @default 3000000
+   * @default 1000000000
    * @type {number}
    */
   maxFileSize: PropTypes.number,
@@ -181,11 +177,15 @@ ImageUploader.propTypes = {
    */
   onAdd: PropTypes.func,
   /**
-   *  List of seleted files.
+   *  List of seleted file(s).
    * @default []
    * @type {array}
    */
   selectedFiles: PropTypes.array,
+  /**
+   * Text to display in sub text
+   */
+  subText: PropTypes.string,
   /**
    * Text to display in title
    */
