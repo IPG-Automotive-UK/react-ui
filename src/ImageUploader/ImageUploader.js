@@ -75,7 +75,6 @@ export default function ImageUploader({
       borderWidth: "1px !important",
       display: "flex !important",
       justifyContent: "center",
-      marginBottom: "5px !important",
       minHeight: "250px !important",
       padding: "10px",
       pointerEvents: files.length === 1 ? "none !important" : "auto !important",
