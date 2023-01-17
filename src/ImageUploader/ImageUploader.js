@@ -9,11 +9,9 @@ import { makeStyles } from "@mui/styles";
 
 // file uploader component
 export default function ImageUploader({
-  title = "Model a File",
+  title = "Model Image",
+  subText = "A default Model image will be used if no image uploaded.",
   dropzoneText = "Drag & drop infographic image or click",
-  filesLimit = 1,
-  multiple = false,
-  acceptedFiles = "image/*",
   maxFileSize = 3000000,
   onAdd = () => {},
   selectedFiles = []
@@ -28,17 +26,13 @@ export default function ImageUploader({
     root: {
       "& .MuiDropzoneArea-icon": {
         color: "rgba(0, 0, 0, 0.60)",
-        display:
-          !multiple && files.length > 0
-            ? "none !important"
-            : "block !important",
+        display: files.length === 1 ? "none !important" : "block !important",
         fontSize: "22px !important",
         height: "22px !important",
         width: "22px !important"
       },
       "& .MuiDropzoneArea-text": {
-        color:
-          !multiple && files.length === 1 ? "#003063" : "rgba(0, 0, 0, 0.60)",
+        color: files.length === 1 ? "#003063" : "rgba(0, 0, 0, 0.60)",
         fontSize: "15px",
         margin: "0 0 0 10px !important"
       },
@@ -47,49 +41,69 @@ export default function ImageUploader({
         flexDirection: "row-reverse",
         justifyContent: "center"
       },
+      "& .MuiDropzonePreviewList-image": {
+        height: "250px !important"
+      },
+      "& .MuiDropzonePreviewList-imageContainer": {
+        flexBasis: "100% !important",
+        maxWidth: "100% !important",
+        padding: "0px !important"
+      },
+      "& .MuiDropzonePreviewList-imageContainer:hover .MuiDropzonePreviewList-image":
+        {
+          opacity: "1 !important"
+        },
+
+      "& .MuiDropzonePreviewList-imageContainer:hover .MuiDropzonePreviewList-removeButton":
+        {
+          opacity: "0 !important"
+        },
+      "& .MuiGrid-container": {
+        display: "block !important",
+        margin: "0 !important",
+        width: "100% !important"
+      },
       "& .MuiTypography-subtitle1": {
         fontSize: "12px !important"
       },
-      "& .MuiDropzonePreviewList-imageContainer": {
-        padding: "10px !important"
-      },
+
       alignItems: "center",
       borderWidth: "1px !important",
-      display: "flex",
+      display: "flex !important",
       justifyContent: "center",
       marginBottom: "5px !important",
       minHeight: "250px !important",
       padding: "10px",
-      width: "40% !important"
+      pointerEvents: files.length === 1 ? "none !important" : "auto !important",
+      width: "100% !important"
     }
   }));
   const classes = useStyles();
 
+  useEffect(() => {
+    if (files.length > 0) {
+      setUploaderText("");
+    } else {
+      setUploaderText("Drag & drop infographic image or click");
+    }
+  }, [files]);
+
   // handle file change
   const handleAdd = newFiles => {
-    if (!multiple) {
-      setUploaderText("");
-    }
-    // remove the duplicate files
-    newFiles = newFiles.filter(file => !files.find(f => f.data === file.data));
+    // set the uploader text empty
+    setUploaderText("");
     // update the files state
-    const addnewFiles = [...files, ...newFiles];
-    setFiles(addnewFiles);
-    onAdd(addnewFiles);
+    setFiles(newFiles);
+    onAdd(newFiles);
   };
 
   // handle file delete
-  const handleDelete = deleted => {
-    if (multiple) {
-      // remove the deleted file from the files state
-      const updatedFiles = files.filter(f => f !== deleted);
-      // update the files state
-      setFiles(updatedFiles);
-      onAdd(updatedFiles);
-    } else {
-      setUploaderText("Drag & drop a file here or click");
-      setFiles([]);
-    }
+  const handleDelete = () => {
+    // set the uploader default text
+    setUploaderText("Drag & drop infographic image or click");
+    // update the files state
+    setFiles([]);
+    onAdd([]);
   };
 
   return (
@@ -101,32 +115,30 @@ export default function ImageUploader({
           justifyContent: "space-between",
           marginBottom: 1,
           minHeight: "45px",
-          width: "40% !important"
+          width: "100% !important"
         }}
       >
         <Box>
           <Typography variant="h6">{title || ""}</Typography>
-          <Typography variant="caption">
-            A default image will be used.
-          </Typography>
+          <Typography variant="caption">{subText}</Typography>
         </Box>
 
-        {!multiple && files.length === 1 ? (
-          <IconButton aria-label="delete" onClick={handleDelete}>
+        {files && files.length === 1 ? (
+          <IconButton aria-label="deleteIcon" onClick={handleDelete}>
             <DeleteIcon color={files.length === 1 ? "error" : ""} />
           </IconButton>
         ) : null}
       </Box>
       <DropzoneAreaBase
         maxFileSize={maxFileSize}
-        acceptedFiles={[acceptedFiles]}
+        acceptedFiles={["image/*"]}
         dropzoneText={uploaderText}
-        fileObjects={files}
+        fileObjects={files.length === 1 ? files : []}
+        initialFiles={files.length === 1 ? [files[0].data] : []}
         Icon={FileUploadIcon}
         onAdd={handleAdd}
         onDelete={handleDelete}
-        filesLimit={multiple ? filesLimit : 1}
-        useChipsForPreview={!!multiple}
+        filesLimit={1}
         showPreviewsInDropzone={true}
         showPreviews={false}
         previewText=""
@@ -150,23 +162,11 @@ ImageUploader.propTypes = {
    */
   dropzoneText: PropTypes.string,
   /**
-   * Maximum number of files to upload
-   * @default 3
-   * @type {number}
-   */
-  filesLimit: PropTypes.number,
-  /**
    * Maximum file size (in bytes) that the dropzone will accept.
    * @default 3000000
    * @type {number}
    */
   maxFileSize: PropTypes.number,
-  /**
-   * If true, the dropzone will support multiple files
-   * @default false
-   * @type {boolean}
-   */
-  multiple: PropTypes.bool,
   /**
    * Callback fired when the files is changed.
    *
