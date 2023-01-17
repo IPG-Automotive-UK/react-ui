@@ -42,6 +42,7 @@ describe("DetailCard", () => {
       <DetailCard
         title="detail card title"
         subtitle="detail card subtitle"
+        fileTitle="file card title"
         labels={labels}
         onClickLabel={onClickLabel}
       />
@@ -62,6 +63,7 @@ describe("DetailCard", () => {
       <FileCard
         title="detail card title"
         subtitle="detail card subtitle"
+        fileTitle="file card title"
         media="https://picsum.photos/400/200"
       />
     );
@@ -75,6 +77,7 @@ describe("DetailCard", () => {
       <DetailCard
         title="detail card title"
         subtitle="detail card subtitle"
+        fileTitle="file card title"
         content={<div>Some content on the card </div>}
       />
     );
@@ -88,6 +91,7 @@ describe("DetailCard", () => {
       <DetailCard
         title="detail card title"
         subtitle="detail card subtitle"
+        fileTitle="file card title"
         buttonsStack=<Stack>
           <Button onClick={onClickEdit}>Edit</Button>
           <Button onClick={action("onClickDelete")}>Delete</Button>
@@ -104,6 +108,7 @@ describe("DetailCard", () => {
       <DetailCard
         title="detail card title"
         subtitle="detail card subtitle"
+        fileTitle="file card title"
         buttonsStack=<Stack>
           <Button onClick={action("onClickEdit")}>Edit</Button>
           <Button onClick={onClickDelete}>Delete</Button>
