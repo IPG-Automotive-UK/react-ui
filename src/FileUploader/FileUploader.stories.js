@@ -10,7 +10,6 @@ export default {
 const Template = args => {
   // selectedFiles state
   const [selectedFiles, setSelectedFiles] = React.useState(args.selectedFiles);
-  console.log("args", args);
   return (
     <FileUploader
       {...args}
