@@ -1,26 +1,22 @@
 import { Box, IconButton, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import { DropzoneAreaBase } from "material-ui-dropzone";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import PropTypes from "prop-types";
+import React from "react";
 import { makeStyles } from "@mui/styles";
 
 // file uploader component
 export default function ImageUploader({
   title = "Model Image",
-  subText = "A default Model image will be used if no image uploaded.",
+  subText = "A default Model image will be used if no image is uploaded.",
   dropzoneText = "Drag & drop infographic image or click",
   maxFileSize = 3000000,
   onAdd = () => {},
+  onDelete = () => {},
   selectedFiles = []
 }) {
-  // files state
-  const [files, setFiles] = useState(selectedFiles);
-  // box text
-  const [uploaderText, setUploaderText] = useState(dropzoneText);
-
   // styling
   const useStyles = makeStyles(theme => ({
     root: {
@@ -30,13 +26,14 @@ export default function ImageUploader({
       },
       "& .MuiDropzoneArea-icon": {
         color: "rgba(0, 0, 0, 0.60)",
-        display: files.length === 1 ? "none !important" : "block !important",
+        display:
+          selectedFiles.length === 1 ? "none !important" : "block !important",
         fontSize: "22px !important",
         height: "22px !important",
         width: "22px !important"
       },
       "& .MuiDropzoneArea-text": {
-        color: files.length === 1 ? "#003063" : "rgba(0, 0, 0, 0.60)",
+        color: selectedFiles.length === 1 ? "#003063" : "rgba(0, 0, 0, 0.60)",
         fontSize: "15px",
         margin: "0 0 0 10px !important"
       },
@@ -77,36 +74,23 @@ export default function ImageUploader({
       justifyContent: "center",
       minHeight: "250px !important",
       padding: "10px",
-      pointerEvents: files.length === 1 ? "none !important" : "auto !important",
+      pointerEvents:
+        selectedFiles.length === 1 ? "none !important" : "auto !important",
       width: "100% !important"
     }
   }));
   const classes = useStyles();
 
-  useEffect(() => {
-    if (files.length > 0) {
-      setUploaderText("");
-    } else {
-      setUploaderText("Drag & drop infographic image or click");
-    }
-  }, [files]);
-
   // handle file change
   const handleAdd = newFiles => {
-    // set the uploader text empty
-    setUploaderText("");
     // update the files state
-    setFiles(newFiles);
     onAdd(newFiles);
   };
 
   // handle file delete
-  const handleDelete = () => {
-    // set the uploader default text
-    setUploaderText("Drag & drop infographic image or click");
+  const handleDelete = deleted => {
     // update the files state
-    setFiles([]);
-    onAdd([]);
+    onDelete(deleted);
   };
 
   return (
@@ -125,18 +109,18 @@ export default function ImageUploader({
           <Typography variant="h6">{title || ""}</Typography>
           <Typography variant="caption">{subText}</Typography>
         </Box>
-        {files.length === 1 ? (
+        {selectedFiles.length === 1 ? (
           <IconButton aria-label="deleteIcon" onClick={handleDelete}>
-            <DeleteIcon color={files.length === 1 ? "error" : ""} />
+            <DeleteIcon color={selectedFiles.length === 1 ? "error" : ""} />
           </IconButton>
         ) : null}
       </Box>
       <DropzoneAreaBase
         maxFileSize={maxFileSize}
         acceptedFiles={["image/*"]}
-        dropzoneText={uploaderText}
-        fileObjects={files.length === 1 ? files : []}
-        initialFiles={files.length === 1 ? [files[0].data] : []}
+        dropzoneText={selectedFiles.length === 1 ? "" : dropzoneText}
+        fileObjects={selectedFiles.length === 1 ? selectedFiles : []}
+        initialFiles={selectedFiles.length === 1 ? [selectedFiles[0].data] : []}
         Icon={FileUploadIcon}
         onAdd={handleAdd}
         onDelete={handleDelete}
@@ -163,7 +147,7 @@ ImageUploader.propTypes = {
    */
   maxFileSize: PropTypes.number,
   /**
-   * Callback fired when the files is changed.
+   * Callback fired when the file is changed.
    *
    * **Signature**
    * ```
@@ -175,6 +159,19 @@ ImageUploader.propTypes = {
    * @type {function}
    */
   onAdd: PropTypes.func,
+  /**
+   * Callback fired when the file is deleted.
+   *
+   * **Signature**
+   * ```
+   * function(_deleted_: array) => void
+   * ```
+   *
+   * _deleted_: The files that are currently deleted.
+   * @default () => {}
+   * @type {function}
+   */
+  onDelete: PropTypes.func,
   /**
    *  List of seleted file(s).
    * @default []

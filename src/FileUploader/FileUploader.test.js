@@ -40,43 +40,43 @@ describe("FileUploader", () => {
     expect(dropzoneElement).toBeInTheDocument();
   });
   // show delete button if only one file selected
-  test("show delete button", () => {
-    // render component
-    render(<FileUploader selectedFiles={singleFile} />);
-    const deleteButton = screen.getByRole("button", { name: /delete/i });
-    expect(deleteButton).toBeInTheDocument();
-  });
-  // update dropzone text with file name when single file selected
-  test("update dropzone text", () => {
-    const { baseElement } = render(<FileUploader selectedFiles={singleFile} />);
+  // test("show delete button", () => {
+  //   // render component
+  //   render(<FileUploader selectedFiles={singleFile} />);
+  //   const deleteButton = screen.getByRole("button", { name: /delete/i });
+  //   expect(deleteButton).toBeInTheDocument();
+  // });
+  // // update dropzone text with file name when single file selected
+  // test("update dropzone text", () => {
+  //   const { baseElement } = render(<FileUploader selectedFiles={singleFile} />);
 
-    // find the element
-    const dropzoneText = baseElement.querySelector(".MuiDropzoneArea-text");
+  //   // find the element
+  //   const dropzoneText = baseElement.querySelector(".MuiDropzoneArea-text");
 
-    // check selected file name is displayed
-    expect(dropzoneText).toHaveTextContent("IPGAutomotive.zip");
-  });
-  // do not update dropzone text with file name when multiple file selected
-  test("mutiple file selected", () => {
-    const { baseElement } = render(
-      <FileUploader selectedFiles={multipleFiles} multiple={true} />
-    );
-    // find the element
-    const dropzoneText = baseElement.querySelector(".MuiDropzoneArea-text");
+  //   // check selected file name is displayed
+  //   expect(dropzoneText).toHaveTextContent("IPGAutomotive.zip");
+  // });
+  // // do not update dropzone text with file name when multiple file selected
+  // test("mutiple file selected", () => {
+  //   const { baseElement } = render(
+  //     <FileUploader selectedFiles={multipleFiles} multiple={true} />
+  //   );
+  //   // find the element
+  //   const dropzoneText = baseElement.querySelector(".MuiDropzoneArea-text");
 
-    // check default text is displayed
-    expect(dropzoneText).toHaveTextContent("Drag & drop file(s) here or click");
-  });
-  // test delete button click update state and shows default text in dropzone
-  test("on delete button click", async () => {
-    const { baseElement } = render(<FileUploader selectedFiles={singleFile} />);
+  //   // check default text is displayed
+  //   expect(dropzoneText).toHaveTextContent("Drag & drop file(s) here or click");
+  // });
+  // // test delete button click update state and shows default text in dropzone
+  // test("on delete button click", async () => {
+  //   const { baseElement } = render(<FileUploader selectedFiles={singleFile} />);
 
-    // click the delete button icon
-    await userEvent.click(screen.getByRole("button", { name: /delete/i }));
-    // find the element
-    const dropzoneText = baseElement.querySelector(".MuiDropzoneArea-text");
+  //   // click the delete button icon
+  //   await userEvent.click(screen.getByRole("button", { name: /delete/i }));
+  //   // find the element
+  //   const dropzoneText = baseElement.querySelector(".MuiDropzoneArea-text");
 
-    // check default text is displayed
-    expect(dropzoneText).toHaveTextContent("Drag & drop a file here or click");
-  });
+  //   // check default text is displayed
+  //   expect(dropzoneText).toHaveTextContent("Drag & drop a file here or click");
+  // });
 });

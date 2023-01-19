@@ -1,10 +1,10 @@
 import { Box, IconButton, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import { DropzoneAreaBase } from "material-ui-dropzone";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import PropTypes from "prop-types";
+import React from "react";
 import { makeStyles } from "@mui/styles";
 
 // file uploader component
@@ -16,20 +16,16 @@ export default function FileUploader({
   acceptedFiles = [],
   maxFileSize = 3000000,
   onAdd = () => {},
+  onDelete = () => {},
   selectedFiles = []
 }) {
-  // files state
-  const [files, setFiles] = useState(selectedFiles);
-  // box text
-  const [uploaderText, setUploaderText] = useState(dropzoneText);
-
   // styling
   const useStyles = makeStyles(theme => ({
     root: {
       "& .MuiDropzoneArea-icon": {
         color: "rgba(0, 0, 0, 0.60)",
         display:
-          !multiple && files.length > 0
+          !multiple && selectedFiles.length === 1
             ? "none !important"
             : "block !important",
         fontSize: "22px !important",
@@ -38,7 +34,9 @@ export default function FileUploader({
       },
       "& .MuiDropzoneArea-text": {
         color:
-          !multiple && files.length === 1 ? "#003063" : "rgba(0, 0, 0, 0.60)",
+          !multiple && selectedFiles.length === 1
+            ? "#003063"
+            : "rgba(0, 0, 0, 0.60)",
         fontSize: "15px",
         margin: "0 0 0 10px !important"
       },
@@ -56,48 +54,29 @@ export default function FileUploader({
       justifyContent: "center",
       marginBottom: "5px !important",
       minHeight: "70px !important",
-      padding: "10px"
+      padding: "10px",
+      pointerEvents:
+        !multiple && selectedFiles.length === 1
+          ? "none !important"
+          : "auto !important"
     }
   }));
   const classes = useStyles();
 
-  // update the dropzone text
-  useEffect(() => {
-    if (multiple) {
-      setUploaderText("Drag & drop file(s) here or click");
-    } else {
-      setUploaderText(
-        selectedFiles?.length > 0
-          ? selectedFiles[0].file?.path
-          : "Drag & drop a file here or click"
-      );
-    }
-  }, [selectedFiles, multiple]);
-
   // handle file change
   const handleAdd = newFiles => {
-    if (!multiple) {
-      setUploaderText(newFiles[0].file.path);
-    }
-    // remove the duplicate files
-    newFiles = newFiles.filter(file => !files.find(f => f.data === file.data));
-    // update the files state
-    const addnewFiles = [...files, ...newFiles];
-    setFiles(addnewFiles);
-    onAdd(addnewFiles);
+    onAdd(newFiles);
   };
 
   // handle file delete
-  const handleDelete = deleted => {
-    if (multiple) {
-      // remove the deleted file from the files state
-      const updatedFiles = files.filter(f => f !== deleted);
-      // update the files state
-      setFiles(updatedFiles);
-      onAdd(updatedFiles);
+  const handleDelete = index => {
+    if (selectedFiles?.length === 1) {
+      onDelete([]);
     } else {
-      setUploaderText("Drag & drop a file here or click");
-      setFiles([]);
+      if (index > -1) {
+        selectedFiles?.splice(index, 1);
+      }
+      onDelete(selectedFiles);
     }
   };
 
@@ -113,17 +92,26 @@ export default function FileUploader({
         }}
       >
         <Typography variant="h6">{title || ""}</Typography>
-        {!multiple && files.length === 1 ? (
+        {!multiple && selectedFiles.length === 1 ? (
           <IconButton aria-label="delete" onClick={handleDelete}>
-            <DeleteIcon color={files.length === 1 ? "error" : ""} />
+            <DeleteIcon color={selectedFiles.length === 1 ? "error" : ""} />
           </IconButton>
         ) : null}
       </Box>
       <DropzoneAreaBase
         maxFileSize={maxFileSize}
         acceptedFiles={acceptedFiles}
-        dropzoneText={uploaderText}
-        fileObjects={files}
+        dropzoneText={
+          !multiple && selectedFiles.length === 1
+            ? selectedFiles[0].file.path
+            : dropzoneText
+        }
+        fileObjects={selectedFiles}
+        initialFiles={
+          selectedFiles.length === 1
+            ? [selectedFiles[0].file.path]
+            : selectedFiles
+        }
         Icon={FileUploadIcon}
         onAdd={handleAdd}
         onDelete={handleDelete}

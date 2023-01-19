@@ -1,5 +1,6 @@
 import FileUploader from "./FileUploader";
 import React from "react";
+import { action } from "@storybook/addon-actions";
 
 export default {
   component: FileUploader,
@@ -7,7 +8,27 @@ export default {
 };
 
 const Template = args => {
-  return <FileUploader {...args} />;
+  // selectedFiles state
+  const [selectedFiles, setSelectedFiles] = React.useState(args.selectedFiles);
+  console.log("args", args);
+  return (
+    <FileUploader
+      {...args}
+      selectedFiles={selectedFiles}
+      onAdd={selectedValues => {
+        setSelectedFiles(selectedValues);
+
+        // fire action
+        action("onAdd")(selectedValues);
+      }}
+      onDelete={deleted => {
+        setSelectedFiles(deleted);
+
+        // fire action
+        action("onDelete")(deleted);
+      }}
+    />
+  );
 };
 
 // default story
@@ -19,6 +40,7 @@ Default.args = {
   maxFileSize: 10000000,
   multiple: false,
   onAdd: () => {},
+  onDelete: () => {},
   selectedFiles: [],
   title: "Upload a File"
 };

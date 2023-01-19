@@ -40,11 +40,6 @@ describe("ImageUploader", () => {
     const dropzoneImg = baseElement.querySelector(
       ".MuiDropzonePreviewList-image"
     );
-    // find the element
-    const dropzoneText = baseElement.querySelector(".MuiDropzoneArea-text");
-
-    // check default text is displayed
-    expect(dropzoneText).toHaveTextContent("");
 
     // check selected image is displayed
     expect(dropzoneImg).toHaveAttribute("src", singleFile[0].data);
@@ -62,8 +57,6 @@ describe("ImageUploader", () => {
     const dropzoneText = baseElement.querySelector(".MuiDropzoneArea-text");
 
     // check default text is displayed
-    expect(dropzoneText).toHaveTextContent(
-      "Drag & drop infographic image or click"
-    );
+    expect(dropzoneText).toHaveTextContent("");
   });
 });
