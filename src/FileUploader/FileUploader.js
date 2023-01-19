@@ -103,12 +103,12 @@ export default function FileUploader({
         acceptedFiles={acceptedFiles}
         dropzoneText={
           !multiple && selectedFiles.length === 1
-            ? selectedFiles[0].name
+            ? selectedFiles[0].file.name
             : dropzoneText
         }
         fileObjects={selectedFiles}
         initialFiles={
-          selectedFiles.length === 1 ? [selectedFiles[0].name] : selectedFiles
+          selectedFiles.length === 1 ? [selectedFiles[0].file.name] : []
         }
         Icon={FileUploadIcon}
         onAdd={handleAdd}
