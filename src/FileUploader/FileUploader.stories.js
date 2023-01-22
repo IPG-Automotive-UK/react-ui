@@ -10,9 +10,13 @@ export default {
 const Template = args => {
   // selectedFiles state
   const [selectedFiles, setSelectedFiles] = React.useState(args.selectedFiles);
+  console.log("args", args);
   return (
     <FileUploader
       {...args}
+      multiple={args.multiple}
+      filesLimit={args.filesLimit}
+      dropzoneText={args.dropzoneText}
       selectedFiles={selectedFiles}
       onAdd={selectedValues => {
         setSelectedFiles(selectedValues);
@@ -40,6 +44,7 @@ Default.args = {
   multiple: false,
   onAdd: () => {},
   onDelete: () => {},
+  reruired: false,
   selectedFiles: [],
   title: "Upload a File"
 };

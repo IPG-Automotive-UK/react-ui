@@ -9,15 +9,16 @@ import { makeStyles } from "@mui/styles";
 
 // file uploader component
 export default function FileUploader({
-  title = "Upload a File",
+  acceptedFiles = [],
   dropzoneText = "Drag & drop a file here or click",
   filesLimit = 1,
-  multiple = false,
-  acceptedFiles = [],
   maxFileSize = 3000000,
+  multiple = false,
   onAdd = () => {},
   onDelete = () => {},
-  selectedFiles = []
+  reruired = false,
+  selectedFiles = [],
+  title = "Upload a File"
 }) {
   // styling
   const useStyles = makeStyles(theme => ({
@@ -70,11 +71,12 @@ export default function FileUploader({
 
   // handle file delete
   const handleDelete = index => {
-    if (selectedFiles?.length === 1) {
+    if (!multiple) {
       onDelete([]);
     } else {
-      if (index > -1) {
-        selectedFiles?.splice(index, 1);
+      const indexss = selectedFiles.indexOf(index);
+      if (indexss > -1) {
+        selectedFiles.splice(indexss, 1);
       }
       onDelete(selectedFiles);
     }
@@ -91,7 +93,10 @@ export default function FileUploader({
           minHeight: "45px"
         }}
       >
-        <Typography variant="h6">{title || ""}</Typography>
+        <Typography variant="h6" display={"flex"}>
+          {title || ""}
+          {reruired ? <Typography color={"error"}>*</Typography> : null}
+        </Typography>
         {!multiple && selectedFiles.length === 1 ? (
           <IconButton aria-label="delete" onClick={handleDelete}>
             <DeleteIcon color={selectedFiles.length === 1 ? "error" : ""} />
@@ -107,9 +112,6 @@ export default function FileUploader({
             : dropzoneText
         }
         fileObjects={selectedFiles}
-        initialFiles={
-          selectedFiles.length === 1 ? [selectedFiles[0].file.name] : []
-        }
         Icon={FileUploadIcon}
         onAdd={handleAdd}
         onDelete={handleDelete}
@@ -169,10 +171,30 @@ FileUploader.propTypes = {
    */
   onAdd: PropTypes.func,
   /**
+   * Callback fired when the file is deleted.
+   *
+   * **Signature**
+   * ```
+   * function(_deleted_: array) => void
+   * ```
+   *
+   * _deleted_: The files that are currently deleted.
+   * @default () => {}
+   * @type {function}
+   */
+  onDelete: PropTypes.func,
+  /**
+   * required field
+   * @default false
+   * @type {boolean}
+   */
+  required: PropTypes.bool,
+  /**
    *  List of seleted files.
    * @default []
    * @type {array}
    */
+
   selectedFiles: PropTypes.array,
   /**
    * Text to display in title

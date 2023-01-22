@@ -1,7 +1,7 @@
 import { Box, IconButton, Typography } from "@mui/material";
 
 import DeleteIcon from "@mui/icons-material/Delete";
-import { DropzoneAreaBase } from "material-ui-dropzone";
+import { DropzoneAreaBase } from "mui-file-dropzone";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import PropTypes from "prop-types";
 import React from "react";
@@ -20,57 +20,44 @@ export default function ImageUploader({
   // styling
   const useStyles = makeStyles(theme => ({
     root: {
+      "& .MuiBox-root.css-1jiaacd img,.MuiBox-root.css-fksjaj img": {
+        height: "225px !important"
+      },
+      "& .MuiBox-root.css-1jiaacd, .MuiBox-root.css-fksjaj": {
+        flexBasis: "100% !important",
+        maxWidth: "100% !important",
+        padding: "0px !important"
+      },
+      "& .MuiBox-root.css-xi606m, .MuiBox-root.css-fksjaj": {
+        display: "flex",
+        flexDirection: "row-reverse",
+        justifyContent: "center"
+      },
+
       "& .MuiButtonBase-root": {
         borderRadius: "50% !important",
         padding: "8px !important"
       },
-      "& .MuiDropzoneArea-icon": {
-        color: "rgba(0, 0, 0, 0.60)",
+
+      "& .MuiSvgIcon-root": {
+        color: theme.palette.text.primary,
         display:
           selectedFiles.length === 1 ? "none !important" : "block !important",
         fontSize: "22px !important",
         height: "22px !important",
         width: "22px !important"
       },
-      "& .MuiDropzoneArea-text": {
-        color: selectedFiles.length === 1 ? "#003063" : "rgba(0, 0, 0, 0.60)",
+      "& .MuiTypography-root": {
+        color: theme.palette.text.primary,
         fontSize: "15px",
         margin: "0 0 0 10px !important"
       },
-      "& .MuiDropzoneArea-textContainer": {
-        display: "flex",
-        flexDirection: "row-reverse",
-        justifyContent: "center"
-      },
-      "& .MuiDropzonePreviewList-image": {
-        height: "225px !important"
-      },
-      "& .MuiDropzonePreviewList-imageContainer": {
-        flexBasis: "100% !important",
-        maxWidth: "100% !important",
-        padding: "0px !important"
-      },
-      "& .MuiDropzonePreviewList-imageContainer:hover .MuiDropzonePreviewList-image":
-        {
-          opacity: "1 !important"
-        },
-
-      "& .MuiDropzonePreviewList-imageContainer:hover .MuiDropzonePreviewList-removeButton":
-        {
-          opacity: "0 !important"
-        },
-      "& .MuiGrid-container": {
-        display: "block !important",
-        margin: "0 !important",
-        width: "100% !important"
-      },
-      "& .MuiTypography-subtitle1": {
-        fontSize: "12px !important"
-      },
 
       alignItems: "center",
+      backgroundColor: theme.palette.background.default,
       borderWidth: "1px !important",
-      display: "flex !important",
+      display:
+        selectedFiles.length === 1 ? "block !important" : "flex !important",
       justifyContent: "center",
       minHeight: "250px !important",
       padding: "10px",
@@ -106,8 +93,15 @@ export default function ImageUploader({
         }}
       >
         <Box>
-          <Typography variant="h6">{title || ""}</Typography>
-          <Typography variant="caption">{subText}</Typography>
+          <Typography variant="h6" color={theme => theme.palette.text.primary}>
+            {title || ""}
+          </Typography>
+          <Typography
+            variant="caption"
+            color={theme => theme.palette.text.primary}
+          >
+            {subText}
+          </Typography>
         </Box>
         {selectedFiles.length === 1 ? (
           <IconButton aria-label="deleteIcon" onClick={handleDelete}>
