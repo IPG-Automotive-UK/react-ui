@@ -27,7 +27,7 @@ describe("ImageUploader", () => {
   test("show delete button", () => {
     // render component
     render(<ImageUploader selectedFiles={singleFile} />);
-    const deleteButton = screen.getByRole("button", { name: /deleteIcon/i });
+    const deleteButton = screen.getByRole("button", { name: /DeleteIcon/i });
     expect(deleteButton).toBeInTheDocument();
   });
   // show the selected image and hide dropzone text
@@ -37,9 +37,7 @@ describe("ImageUploader", () => {
     );
 
     // find the element
-    const dropzoneImg = baseElement.querySelector(
-      ".MuiDropzonePreviewList-image"
-    );
+    const dropzoneImg = baseElement.querySelector(".MuiBox-root img");
 
     // check selected image is displayed
     expect(dropzoneImg).toHaveAttribute("src", singleFile[0].data);
@@ -52,9 +50,11 @@ describe("ImageUploader", () => {
     );
 
     // click the delete button icon
-    await userEvent.click(screen.getByRole("button", { name: /deleteIcon/i }));
+    await userEvent.click(screen.getByRole("button", { name: /DeleteIcon/i }));
     // find the element
-    const dropzoneText = baseElement.querySelector(".MuiDropzoneArea-text");
+    const dropzoneText = baseElement.querySelector(
+      ".css-17pbpn5-MuiTypography-root"
+    );
 
     // check default text is displayed
     expect(dropzoneText).toHaveTextContent("");

@@ -15,17 +15,17 @@ const Template = args => {
     <ImageUploader
       {...args}
       selectedFiles={selectedFiles}
-      onAdd={selectedValues => {
-        setSelectedFiles(selectedValues);
+      onAdd={newFiles => {
+        setSelectedFiles(newFiles);
 
         // fire action
-        action("onAdd")(selectedValues);
+        action("onAdd")(newFiles);
       }}
-      onDelete={deleted => {
+      onDelete={updatedFiles => {
         setSelectedFiles([]);
 
         // fire action
-        action("onDelete")(deleted);
+        action("onDelete")(updatedFiles);
       }}
     />
   );

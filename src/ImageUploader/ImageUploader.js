@@ -1,4 +1,5 @@
 import { Box, IconButton, Typography } from "@mui/material";
+import { ThemeProvider, useTheme } from "@mui/material/styles";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import { DropzoneAreaBase } from "mui-file-dropzone";
@@ -7,15 +8,15 @@ import PropTypes from "prop-types";
 import React from "react";
 import { makeStyles } from "@mui/styles";
 
-// file uploader component
-export default function ImageUploader({
-  title = "Model Image",
-  subText = "A default Model image will be used if no image is uploaded.",
-  dropzoneText = "Drag & drop infographic image or click",
-  maxFileSize = 3000000,
-  onAdd = () => {},
-  onDelete = () => {},
-  selectedFiles = []
+// image uploader component
+function Uploader({
+  title,
+  subText,
+  dropzoneText,
+  maxFileSize,
+  onAdd,
+  onDelete,
+  selectedFiles
 }) {
   // styling
   const useStyles = makeStyles(theme => ({
@@ -47,6 +48,7 @@ export default function ImageUploader({
         height: "22px !important",
         width: "22px !important"
       },
+
       "& .MuiTypography-root": {
         color: theme.palette.text.primary,
         fontSize: "15px",
@@ -66,7 +68,10 @@ export default function ImageUploader({
       width: "100% !important"
     }
   }));
-  const classes = useStyles();
+
+  // use theme
+  const theme = useTheme();
+  const classes = useStyles(theme);
 
   // handle file change
   const handleAdd = newFiles => {
@@ -104,7 +109,7 @@ export default function ImageUploader({
           </Typography>
         </Box>
         {selectedFiles.length === 1 ? (
-          <IconButton aria-label="deleteIcon" onClick={handleDelete}>
+          <IconButton aria-label="DeleteIcon" onClick={handleDelete}>
             <DeleteIcon color={selectedFiles.length === 1 ? "error" : ""} />
           </IconButton>
         ) : null}
@@ -126,6 +131,33 @@ export default function ImageUploader({
         dropzoneClass={classes.root}
       />
     </Box>
+  );
+}
+
+// default export
+export default function ImageUploader({
+  title = "Model Image",
+  subText = "A default Model image will be used if no image is uploaded.",
+  dropzoneText = "Drag & drop infographic image or click",
+  maxFileSize = 3000000,
+  onAdd = () => {},
+  onDelete = () => {},
+  selectedFiles = []
+}) {
+  // use theme
+  const theme = useTheme();
+  return (
+    <ThemeProvider theme={theme}>
+      <Uploader
+        title={title}
+        subText={subText}
+        dropzoneText={dropzoneText}
+        maxFileSize={maxFileSize}
+        onAdd={onAdd}
+        onDelete={onDelete}
+        selectedFiles={selectedFiles}
+      />
+    </ThemeProvider>
   );
 }
 

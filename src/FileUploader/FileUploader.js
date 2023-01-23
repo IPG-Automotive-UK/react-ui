@@ -1,14 +1,15 @@
 import { Box, IconButton, Typography } from "@mui/material";
+import { ThemeProvider, useTheme } from "@mui/material/styles";
 
 import DeleteIcon from "@mui/icons-material/Delete";
-import { DropzoneAreaBase } from "material-ui-dropzone";
+import { DropzoneAreaBase } from "mui-file-dropzone";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import PropTypes from "prop-types";
 import React from "react";
 import { makeStyles } from "@mui/styles";
 
 // file uploader component
-export default function FileUploader({
+function Uploader({
   acceptedFiles = [],
   dropzoneText = "Drag & drop a file here or click",
   filesLimit = 1,
@@ -23,46 +24,60 @@ export default function FileUploader({
   // styling
   const useStyles = makeStyles(theme => ({
     root: {
-      "& .MuiDropzoneArea-icon": {
-        color: "rgba(0, 0, 0, 0.60)",
-        display:
-          !multiple && selectedFiles.length === 1
-            ? "none !important"
-            : "block !important",
-        fontSize: "22px !important",
-        height: "22px !important",
-        width: "22px !important"
+      "& .MuiBox-root.css-1jiaacd, .MuiBox-root.css-fksjaj": {
+        flexBasis: "100% !important",
+        maxWidth: "100% !important",
+        padding: "0px !important"
       },
-      "& .MuiDropzoneArea-text": {
-        color:
-          !multiple && selectedFiles.length === 1
-            ? "#003063"
-            : "rgba(0, 0, 0, 0.60)",
-        fontSize: "15px",
-        margin: "0 0 0 10px !important"
-      },
-      "& .MuiDropzoneArea-textContainer": {
+      "& .MuiBox-root.css-xi606m, .MuiBox-root.css-fksjaj": {
         display: "flex",
         flexDirection: "row-reverse",
         justifyContent: "center"
       },
-      "& .MuiTypography-subtitle1": {
-        fontSize: "12px !important"
+
+      "& .MuiButtonBase-root": {
+        borderRadius: "50% !important",
+        padding: "8px !important"
       },
+
+      "& .MuiSvgIcon-root": {
+        color: theme.palette.text.primary,
+        display:
+          selectedFiles.length === 1 ? "none !important" : "block !important",
+        fontSize: "22px !important",
+        height: "22px !important",
+        width: "22px !important"
+      },
+
+      "& .MuiTypography-root": {
+        color:
+          !multiple && selectedFiles.length === 1
+            ? theme.palette.primary.main
+            : theme.palette.text.primary,
+        fontSize: "15px",
+        margin: "0 0 0 10px !important"
+      },
+      "& .MuiTypography-root.MuiTypography-subtitle1.css-10wpov9-MuiTypography-root ":
+        {
+          color: "red !important"
+        },
+
       alignItems: "center",
+      backgroundColor: theme.palette.background.default,
       borderWidth: "1px !important",
-      display: "flex",
+      display: "flex !important",
       justifyContent: "center",
-      marginBottom: "5px !important",
+      marginBottom: "10px !important",
       minHeight: "70px !important",
       padding: "10px",
       pointerEvents:
-        !multiple && selectedFiles.length === 1
-          ? "none !important"
-          : "auto !important"
+        selectedFiles.length === 1 ? "none !important" : "auto !important",
+      width: "100% !important"
     }
   }));
-  const classes = useStyles();
+  // use theme
+  const theme = useTheme();
+  const classes = useStyles(theme);
 
   // handle file change
   const handleAdd = newFiles => {
@@ -74,9 +89,10 @@ export default function FileUploader({
     if (!multiple) {
       onDelete([]);
     } else {
-      const indexss = selectedFiles.indexOf(index);
-      if (indexss > -1) {
-        selectedFiles.splice(indexss, 1);
+      // delete file from selected files
+      const findItem = selectedFiles.indexOf(index);
+      if (findItem > -1) {
+        selectedFiles.splice(findItem, 1);
       }
       onDelete(selectedFiles);
     }
@@ -93,9 +109,15 @@ export default function FileUploader({
           minHeight: "45px"
         }}
       >
-        <Typography variant="h6" display={"flex"}>
+        <Typography
+          variant="h6"
+          display={"flex"}
+          color={theme => theme.palette.text.primary}
+        >
           {title || ""}
-          {reruired ? <Typography color={"error"}>*</Typography> : null}
+          {reruired ? (
+            <Typography color={theme => theme.palette.error.main}>*</Typography>
+          ) : null}
         </Typography>
         {!multiple && selectedFiles.length === 1 ? (
           <IconButton aria-label="delete" onClick={handleDelete}>
@@ -119,11 +141,44 @@ export default function FileUploader({
         useChipsForPreview={!!multiple}
         showPreviewsInDropzone={false}
         showPreviews={!!multiple}
-        previewText="Selected files:"
+        previewText=""
         showAlerts={false}
         dropzoneClass={classes.root}
       />
     </Box>
+  );
+}
+
+// default export
+export default function FileUploader({
+  acceptedFiles = [],
+  dropzoneText = "Drag & drop a file here or click",
+  filesLimit = 1,
+  maxFileSize = 3000000,
+  multiple = false,
+  onAdd = () => {},
+  onDelete = () => {},
+  reruired = false,
+  selectedFiles = [],
+  title = "Upload a File"
+}) {
+  // use theme
+  const theme = useTheme();
+  return (
+    <ThemeProvider theme={theme}>
+      <Uploader
+        title={title}
+        filesLimit={filesLimit}
+        multiple={multiple}
+        acceptedFiles={acceptedFiles}
+        dropzoneText={dropzoneText}
+        reruired={reruired}
+        maxFileSize={maxFileSize}
+        onAdd={onAdd}
+        onDelete={onDelete}
+        selectedFiles={selectedFiles}
+      />
+    </ThemeProvider>
   );
 }
 
