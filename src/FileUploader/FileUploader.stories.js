@@ -45,7 +45,7 @@ Default.args = {
   multiple: false,
   onAdd: () => {},
   onDelete: () => {},
-  reruired: false,
+  required: false,
   selectedFiles: [],
   title: "Upload a File"
 };

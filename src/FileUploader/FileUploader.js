@@ -17,7 +17,7 @@ function Uploader({
   multiple = false,
   onAdd = () => {},
   onDelete = () => {},
-  reruired = false,
+  required = false,
   selectedFiles = [],
   title = "Upload a File"
 }) {
@@ -43,7 +43,9 @@ function Uploader({
       "& .MuiSvgIcon-root": {
         color: theme.palette.text.primary,
         display:
-          selectedFiles.length === 1 ? "none !important" : "block !important",
+          !multiple && selectedFiles.length === 1
+            ? "none !important"
+            : "block !important",
         fontSize: "22px !important",
         height: "22px !important",
         width: "22px !important"
@@ -71,7 +73,9 @@ function Uploader({
       minHeight: "70px !important",
       padding: "10px",
       pointerEvents:
-        selectedFiles.length === 1 ? "none !important" : "auto !important",
+        !multiple && selectedFiles.length === 1
+          ? "none !important"
+          : "auto !important",
       width: "100% !important"
     }
   }));
@@ -115,7 +119,7 @@ function Uploader({
           color={theme => theme.palette.text.primary}
         >
           {title || ""}
-          {reruired ? (
+          {required ? (
             <Typography color={theme => theme.palette.error.main}>*</Typography>
           ) : null}
         </Typography>
@@ -158,7 +162,7 @@ export default function FileUploader({
   multiple = false,
   onAdd = () => {},
   onDelete = () => {},
-  reruired = false,
+  required = false,
   selectedFiles = [],
   title = "Upload a File"
 }) {
@@ -172,7 +176,7 @@ export default function FileUploader({
         multiple={multiple}
         acceptedFiles={acceptedFiles}
         dropzoneText={dropzoneText}
-        reruired={reruired}
+        required={required}
         maxFileSize={maxFileSize}
         onAdd={onAdd}
         onDelete={onDelete}
@@ -239,7 +243,7 @@ FileUploader.propTypes = {
    */
   onDelete: PropTypes.func,
   /**
-   * required field
+   * If true, red star shows on title
    * @default false
    * @type {boolean}
    */
