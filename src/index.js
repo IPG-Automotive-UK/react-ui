@@ -9,6 +9,7 @@ export { default as Copyright } from "./Copyright";
 export { default as Color } from "./Color";
 export { default as DialogTitle } from "./DialogTitle";
 export { default as FeedbackForm } from "./FeedbackForm";
+export { default as FileUploader } from "./FileUploader";
 export {
   CheckboxFilter,
   FilterPopper,
@@ -17,8 +18,9 @@ export {
   RangeFilter
 } from "./Filter";
 export { default as FontPicker } from "./FontPicker";
-export { LabelChip, LabelSelector } from "./LabelSelector";
 export { default as FontStyle } from "./FontStyle";
+export { default as ImageUploader } from "./ImageUploader";
+export { LabelChip, LabelSelector } from "./LabelSelector";
 export { default as Loading } from "./Loading";
 export { default as LoginForm } from "./LoginForm";
 export { default as NoLicense } from "./NoLicense";
