@@ -3,7 +3,11 @@ import * as React from "react";
 import { Box, Popover, Typography } from "@mui/material";
 
 import LabelChip from "../LabelSelector/LabelChip";
+import PropTypes from "prop-types";
 
+/**
+ * Handles the rendering of multiple labels. If there is only one label, it will render a single label chip. If there are multiple labels, it will render a popover with all the labels inside when the label is hovered.
+ */
 export default function MultiLabelPopover({ labels = [] }) {
   // state for popover anchor
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -90,3 +94,17 @@ export default function MultiLabelPopover({ labels = [] }) {
     </div>
   );
 }
+
+// prop types
+MultiLabelPopover.propTypes = {
+  /**
+   * The labels to render.
+   */
+  labels: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      color: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired
+    })
+  )
+};
