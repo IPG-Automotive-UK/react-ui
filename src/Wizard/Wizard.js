@@ -1,7 +1,8 @@
 import * as React from "react";
 
+import { Box, Typography } from "@mui/material";
+
 import PropTypes from "prop-types";
-import { Typography } from "@mui/material";
 
 /**
  * The Wizard component allows you to create a multi-step form.
@@ -9,14 +10,31 @@ import { Typography } from "@mui/material";
  */
 export default function Wizard({ title, children }) {
   return (
-    <div>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%"
+      }}
+    >
       {title ? (
-        <Typography variant="h5" fontWeight={500} color="textPrimary">
+        <Typography
+          variant="h5"
+          color="textPrimary"
+          sx={{
+            fontWeight: 500,
+            maxWidth: 945,
+            mb: 3,
+            mt: 1,
+            mx: "auto",
+            width: "100%"
+          }}
+        >
           {title}
         </Typography>
       ) : null}
       {children}
-    </div>
+    </Box>
   );
 }
 

@@ -27,6 +27,13 @@ const lightTheme = createTheme({
           )
         }
       })
+    },
+    MuiStepper: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "rgba(144, 202, 249, 0.08)"
+        }
+      }
     }
   },
   overrides: {
@@ -80,6 +87,13 @@ const darkTheme = createTheme({
       styleOverrides: themeParam => ({
         body: themeParam.palette.mode === "dark" ? darkScrollbar() : null
       })
+    },
+    MuiStepper: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "rgba(255, 255, 255, 0.08)"
+        }
+      }
     }
   },
   palette: {
