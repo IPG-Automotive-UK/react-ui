@@ -1,14 +1,14 @@
 import React from "react";
 import { Typography } from "@mui/material";
-import WizardStepperStep from "./WizardStepperStep";
+import WizardStep from "./WizardStep";
 
 export default {
-  component: WizardStepperStep,
-  title: "Wizard/WizardStepperStep"
+  component: WizardStep,
+  title: "Wizard/WizardStep"
 };
 
 const Template = args => {
-  return <WizardStepperStep {...args} />;
+  return <WizardStep {...args} />;
 };
 
 // default story

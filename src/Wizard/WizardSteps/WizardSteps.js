@@ -3,7 +3,7 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import { Stepper } from "@mui/material";
 
-export default function WizardStepper({ children, activeStep }) {
+export default function WizardSteps({ children, activeStep }) {
   return (
     <Stepper
       activeStep={activeStep}
@@ -21,6 +21,6 @@ export default function WizardStepper({ children, activeStep }) {
   );
 }
 
-WizardStepper.propTypes = {
+WizardSteps.propTypes = {
   activeStep: PropTypes.number.isRequired
 };

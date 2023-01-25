@@ -2,7 +2,7 @@ import React from "react";
 import Wizard from "./Wizard";
 import { Default as WizardActions } from "./WizardActions/WizardActions.stories";
 import { Default as WizardContent } from "./WizardContent/WizardContent.stories";
-import { Default as WizardStepper } from "./WizardStepper/WizardStepper.stories";
+import { Default as WizardSteps } from "./WizardSteps/WizardSteps.stories";
 
 export default {
   component: Wizard,
@@ -12,7 +12,7 @@ export default {
 const Template = args => {
   return (
     <Wizard {...args}>
-      <WizardStepper {...WizardStepper.args} />
+      <WizardSteps {...WizardSteps.args} />
       <WizardContent {...WizardContent.args} />
       <WizardActions {...WizardActions.args} />
     </Wizard>

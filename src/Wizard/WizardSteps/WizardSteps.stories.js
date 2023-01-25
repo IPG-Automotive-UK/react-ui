@@ -1,20 +1,20 @@
 import React from "react";
 import { Typography } from "@mui/material";
-import WizardStepper from "./WizardStepper";
-import WizardStepperStep from "./WizardStepperStep";
+import WizardStep from "./WizardStep";
+import WizardSteps from "./WizardSteps";
 
 export default {
-  component: WizardStepper,
-  title: "Wizard/WizardStepper"
+  component: WizardSteps,
+  title: "Wizard/WizardSteps"
 };
 
 const BasicTemplate = args => {
   return (
-    <WizardStepper {...args}>
-      <WizardStepperStep label="Step 1" completed={args.activeStep > 0} />
-      <WizardStepperStep label="Step 2" completed={args.activeStep > 1} />
-      <WizardStepperStep label="Step 3" completed={args.activeStep > 2} />
-    </WizardStepper>
+    <WizardSteps {...args}>
+      <WizardStep label="Step 1" completed={args.activeStep > 0} />
+      <WizardStep label="Step 2" completed={args.activeStep > 1} />
+      <WizardStep label="Step 3" completed={args.activeStep > 2} />
+    </WizardSteps>
   );
 };
 
@@ -26,23 +26,23 @@ Default.args = {
 
 const HelperTemplate = args => {
   return (
-    <WizardStepper {...args}>
-      <WizardStepperStep
+    <WizardSteps {...args}>
+      <WizardStep
         label="Step 1"
         completed={args.activeStep > 0}
         helperText="Helper Text 1"
       />
-      <WizardStepperStep
+      <WizardStep
         label="Step 2"
         completed={args.activeStep > 1}
         helperText="Helper Text 2"
       />
-      <WizardStepperStep
+      <WizardStep
         label="Step 3"
         completed={args.activeStep > 2}
         helperText="Helper Text 3"
       />
-    </WizardStepper>
+    </WizardSteps>
   );
 };
 
@@ -55,13 +55,13 @@ WithHelperText.args = {
 // with error text
 const ErrorTemplate = args => {
   return (
-    <WizardStepper {...args}>
-      <WizardStepperStep
+    <WizardSteps {...args}>
+      <WizardStep
         label="Step 1"
         completed={args.activeStep > 0}
         helperText="Helper Text 1"
       />
-      <WizardStepperStep
+      <WizardStep
         label="Step 2"
         completed={args.activeStep > 1}
         helperText="Helper Text 2"
@@ -71,12 +71,12 @@ const ErrorTemplate = args => {
           </Typography>
         }
       />
-      <WizardStepperStep
+      <WizardStep
         label="Step 3"
         completed={args.activeStep > 2}
         helperText="Helper Text 3"
       />
-    </WizardStepper>
+    </WizardSteps>
   );
 };
 

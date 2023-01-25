@@ -11,7 +11,7 @@ import {
 import { Error } from "@mui/icons-material";
 import PropTypes from "prop-types";
 
-export default function WizardStepperStep({
+export default function WizardStep({
   label,
   completed = false,
   index,
@@ -62,7 +62,7 @@ function WizardStepLabel({ label, helperText, errorText }) {
   return <StepLabel {...stepLabelProps}>{label}</StepLabel>;
 }
 
-WizardStepperStep.propTypes = {
+WizardStep.propTypes = {
   completed: PropTypes.bool,
   errorText: PropTypes.node,
   helperText: PropTypes.node,

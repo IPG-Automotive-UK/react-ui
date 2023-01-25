@@ -48,8 +48,8 @@ export {
   Wizard,
   WizardActions,
   WizardContent,
-  WizardStepper,
-  WizardStepperStep,
+  WizardSteps,
+  WizardStep,
   NextButton,
   BackButton,
   CancelButton
