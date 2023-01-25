@@ -25,6 +25,7 @@ export { default as Loading } from "./Loading";
 export { default as LoginForm } from "./LoginForm";
 export { default as NoLicense } from "./NoLicense";
 export { default as MultiColor } from "./MultiColor";
+export { default as MultiLabelPopover } from "./MultiLabelPopover";
 export { default as MultiText } from "./MultiText";
 export { default as NumberField } from "./NumberField";
 export { default as PasswordChangeDialog } from "./PasswordChangeDialog";
