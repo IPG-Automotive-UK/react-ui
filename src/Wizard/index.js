@@ -5,3 +5,5 @@ export {
   BackButton,
   CancelButton
 } from "./WizardActions";
+export { default as WizardContent } from "./WizardContent";
+export { default as WizardStepper, WizardStepperStep } from "./WizardStepper";

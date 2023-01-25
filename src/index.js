@@ -47,6 +47,9 @@ export { UserAvatar, useColorMap } from "./UserAvatar";
 export {
   Wizard,
   WizardActions,
+  WizardContent,
+  WizardStepper,
+  WizardStepperStep,
   NextButton,
   BackButton,
   CancelButton
