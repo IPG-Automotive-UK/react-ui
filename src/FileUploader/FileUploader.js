@@ -110,11 +110,11 @@ function Uploader({
           display: "flex",
           justifyContent: "space-between",
           marginBottom: 1,
-          minHeight: "45px"
+          minHeight: "41px"
         }}
       >
         <Typography
-          variant="h6"
+          sx={{ fontSize: 15, fontWeight: 500 }}
           display={"flex"}
           color={theme => theme.palette.text.primary}
         >
