@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+
 import {
   ThemeProvider as MuiThemeProvider,
   createTheme
@@ -106,7 +107,7 @@ export default function ThemeProvider({
       setTheme(controlledTheme);
       localStorage.setItem("theme", controlledTheme);
     }
-  }, [controlledTheme]);
+  }, []);
 
   useEffect(() => {
     if (theme !== controlledTheme) {
