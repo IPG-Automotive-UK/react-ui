@@ -10,8 +10,30 @@ import ThemeContext from "./ThemeContext";
 import darkScrollbar from "@mui/material/darkScrollbar";
 import { grey } from "@mui/material/colors";
 
+// theme defaults regardless of color mode
+const defaultTheme = createTheme({
+  layout: {
+    content: {
+      maxWidth: 945
+    }
+  },
+  overrides: {
+    MuiAccordionSummary: {
+      root: {
+        "&$expanded": { marginBottom: -20 }
+      }
+    },
+    MuiTooltip: {
+      tooltip: {
+        fontSize: "14px",
+        fontWeight: "normal"
+      }
+    }
+  }
+});
+
 // custom material-ui theme for light mode
-const lightTheme = createTheme({
+const lightTheme = createTheme(defaultTheme, {
   components: {
     MuiCssBaseline: {
       styleOverrides: themeParam => ({
@@ -37,11 +59,6 @@ const lightTheme = createTheme({
     }
   },
   overrides: {
-    MuiAccordionSummary: {
-      root: {
-        "&$expanded": { marginBottom: -20 }
-      }
-    },
     MuiIconButton: { root: { color: "#9e9e9e" } },
     MuiTableRow: {
       root: {
@@ -63,12 +80,6 @@ const lightTheme = createTheme({
         },
         "border-color": "rgb(196, 196, 196)"
       }
-    },
-    MuiTooltip: {
-      tooltip: {
-        fontSize: "14px",
-        fontWeight: "normal"
-      }
     }
   },
   palette: {
@@ -81,7 +92,7 @@ const lightTheme = createTheme({
 });
 
 // custom theme for dark mode
-const darkTheme = createTheme({
+const darkTheme = createTheme(defaultTheme, {
   components: {
     MuiCssBaseline: {
       styleOverrides: themeParam => ({

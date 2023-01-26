@@ -5,10 +5,11 @@ import { Box } from "@mui/material";
 export default function WizardContent({ children }) {
   return (
     <Box
+      role="region"
       sx={{
         boxSizing: "border-box",
         justifyContent: "stretch",
-        maxWidth: 945,
+        maxWidth: theme => theme?.layout?.content?.maxWidth,
         mx: "auto",
         overflow: "auto"
       }}

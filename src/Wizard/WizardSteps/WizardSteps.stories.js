@@ -11,9 +11,9 @@ export default {
 const BasicTemplate = args => {
   return (
     <WizardSteps {...args}>
-      <WizardStep label="Step 1" completed={args.activeStep > 0} />
-      <WizardStep label="Step 2" completed={args.activeStep > 1} />
-      <WizardStep label="Step 3" completed={args.activeStep > 2} />
+      <WizardStep label="Step 1" />
+      <WizardStep label="Step 2" />
+      <WizardStep label="Step 3" />
     </WizardSteps>
   );
 };
@@ -27,21 +27,9 @@ Default.args = {
 const HelperTemplate = args => {
   return (
     <WizardSteps {...args}>
-      <WizardStep
-        label="Step 1"
-        completed={args.activeStep > 0}
-        helperText="Helper Text 1"
-      />
-      <WizardStep
-        label="Step 2"
-        completed={args.activeStep > 1}
-        helperText="Helper Text 2"
-      />
-      <WizardStep
-        label="Step 3"
-        completed={args.activeStep > 2}
-        helperText="Helper Text 3"
-      />
+      <WizardStep label="Step 1" helperText="Helper Text 1" />
+      <WizardStep label="Step 2" helperText="Helper Text 2" />
+      <WizardStep label="Step 3" helperText="Helper Text 3" />
     </WizardSteps>
   );
 };
@@ -56,14 +44,9 @@ WithHelperText.args = {
 const ErrorTemplate = args => {
   return (
     <WizardSteps {...args}>
-      <WizardStep
-        label="Step 1"
-        completed={args.activeStep > 0}
-        helperText="Helper Text 1"
-      />
+      <WizardStep label="Step 1" helperText="Helper Text 1" />
       <WizardStep
         label="Step 2"
-        completed={args.activeStep > 1}
         helperText="Helper Text 2"
         errorText={
           <Typography variant="caption" color="error">
@@ -71,11 +54,7 @@ const ErrorTemplate = args => {
           </Typography>
         }
       />
-      <WizardStep
-        label="Step 3"
-        completed={args.activeStep > 2}
-        helperText="Helper Text 3"
-      />
+      <WizardStep label="Step 3" helperText="Helper Text 3" />
     </WizardSteps>
   );
 };

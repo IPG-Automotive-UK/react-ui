@@ -8,6 +8,7 @@ import { Stack } from "@mui/material";
 export default function WizardActions({ children }) {
   return (
     <Stack
+      role="toolbar"
       direction="row"
       justifyContent="flex-end"
       spacing={2}
