@@ -102,7 +102,7 @@ MultiLabelPopover.propTypes = {
    */
   labels: PropTypes.arrayOf(
     PropTypes.shape({
-      _id: PropTypes.string.isRequired,
+      _id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
       color: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired
     })
