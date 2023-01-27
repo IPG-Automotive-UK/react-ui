@@ -113,7 +113,7 @@ export default function ThemeProvider({
     if (theme !== controlledTheme) {
       setTheme(controlledTheme);
     }
-  }, [controlledTheme, theme]);
+  }, [controlledTheme]);
 
   // on theme change update local storage
   useEffect(() => {
