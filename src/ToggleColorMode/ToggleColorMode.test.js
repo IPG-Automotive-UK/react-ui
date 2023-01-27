@@ -1,6 +1,9 @@
 import { render, screen } from "@testing-library/react";
+
 import React from "react";
+import ThemeProvider from "../ThemeProvider/ThemeProvider";
 import ToggleColorMode from ".";
+import useTheme from "../ThemeProvider/useTheme";
 import userEvent from "@testing-library/user-event";
 
 /**
@@ -14,6 +17,14 @@ const ColorModeWithState = ({ onChange, mode: modeIn = "light", ...rest }) => {
     onChange && onChange(mode);
   };
   return <ToggleColorMode {...rest} onChange={handleChange} mode={mode} />;
+};
+
+/**
+ * Test wrapper for integration with ThemeProvider
+ */
+const ToggleWithContext = props => {
+  const [theme, setTheme] = useTheme();
+  return <ToggleColorMode {...props} mode={theme} onChange={setTheme} />;
 };
 
 describe("ToggleColorMode", () => {
@@ -51,5 +62,36 @@ describe("ToggleColorMode", () => {
 
     await user.click(button);
     expect(onChange).toHaveBeenCalledWith("light");
+  });
+
+  describe("integration with ThemeProvider", () => {
+    test("Can switch from light to dark mode", async () => {
+      const user = userEvent.setup();
+
+      render(
+        <ThemeProvider mode="light">
+          <ToggleWithContext />
+        </ThemeProvider>
+      );
+      const button = screen.getByRole("checkbox");
+
+      await user.click(button);
+
+      expect(screen.getByRole("checkbox").checked).toBeTruthy();
+    });
+    test("Can switch from dark to light mode", async () => {
+      const user = userEvent.setup();
+
+      render(
+        <ThemeProvider mode="dark">
+          <ToggleWithContext />
+        </ThemeProvider>
+      );
+      const button = screen.getByRole("checkbox");
+
+      await user.click(button);
+
+      expect(screen.getByRole("checkbox").checked).toBeFalsy();
+    });
   });
 });
