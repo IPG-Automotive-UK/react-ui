@@ -107,12 +107,14 @@ export default function ThemeProvider({
       setTheme(controlledTheme);
       localStorage.setItem("theme", controlledTheme);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (theme !== controlledTheme) {
       setTheme(controlledTheme);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [controlledTheme]);
 
   // on theme change update local storage
