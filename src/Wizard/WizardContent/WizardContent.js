@@ -10,6 +10,7 @@ export default function WizardContent({ children }) {
         boxSizing: "border-box",
         justifyContent: "stretch",
         maxWidth: theme => theme?.layout?.content?.maxWidth,
+        mb: 2,
         mx: "auto",
         overflow: "auto"
       }}

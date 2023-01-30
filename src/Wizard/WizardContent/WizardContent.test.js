@@ -21,4 +21,14 @@ describe("WizardContent", () => {
       maxWidth: undefined
     });
   });
+  it("renders children", () => {
+    render(
+      <WizardContent>
+        <div data-testid="child1">Child 1</div>
+        <div data-testid="child2">Child 2</div>
+      </WizardContent>
+    );
+    expect(screen.getByTestId("child1")).toBeInTheDocument();
+    expect(screen.getByTestId("child2")).toBeInTheDocument();
+  });
 });
