@@ -5,13 +5,13 @@ import { Default as WizardContent } from "./WizardContent/WizardContent.stories"
 import { Default as WizardSteps } from "./WizardSteps/WizardSteps.stories";
 
 export default {
-  component: Wizard,
-  title: "Wizard/Wizard",
   argTypes: {
     children: {
       control: false
     }
-  }
+  },
+  component: Wizard,
+  title: "Wizard/Wizard"
 };
 
 const Template = args => {
