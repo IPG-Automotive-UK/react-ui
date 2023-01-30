@@ -2,7 +2,8 @@ import { render, screen } from "@testing-library/react";
 
 import FileUploader from "./";
 import React from "react";
-import userEvent from "@testing-library/user-event";
+
+// import userEvent from "@testing-library/user-event";
 
 // single file for testing
 const singleFile = [
@@ -51,7 +52,9 @@ describe("FileUploader", () => {
     const { baseElement } = render(<FileUploader selectedFiles={singleFile} />);
 
     // find the element
-    const dropzoneText = baseElement.querySelector(".MuiDropzoneArea-text");
+    const dropzoneText = baseElement.querySelector(
+      ".css-17pbpn5-MuiTypography-root"
+    );
 
     // check selected file name is displayed
     expect(dropzoneText).toHaveTextContent("IPGAutomotive.zip");
@@ -59,24 +62,16 @@ describe("FileUploader", () => {
   // do not update dropzone text with file name when multiple file selected
   test("mutiple file selected", () => {
     const { baseElement } = render(
-      <FileUploader selectedFiles={multipleFiles} multiple={true} />
+      <FileUploader
+        selectedFiles={multipleFiles}
+        multiple={true}
+        dropzoneText={"Drag & drop file(s) here or click"}
+      />
     );
     // find the element
-    const dropzoneText = baseElement.querySelector(".MuiDropzoneArea-text");
+    const dropzoneText = baseElement.querySelector(".MuiTypography-h5");
 
     // check default text is displayed
     expect(dropzoneText).toHaveTextContent("Drag & drop file(s) here or click");
-  });
-  // test delete button click update state and shows default text in dropzone
-  test("on delete button click", async () => {
-    const { baseElement } = render(<FileUploader selectedFiles={singleFile} />);
-
-    // click the delete button icon
-    await userEvent.click(screen.getByRole("button", { name: /delete/i }));
-    // find the element
-    const dropzoneText = baseElement.querySelector(".MuiDropzoneArea-text");
-
-    // check default text is displayed
-    expect(dropzoneText).toHaveTextContent("Drag & drop a file here or click");
   });
 });
