@@ -9,7 +9,9 @@ const channel = addons.getChannel();
 
 addDecorator(story => {
   // this example uses hook but you can also use class component as well
-  const [isDark, setDark] = React.useState(false);
+  const [isDark, setDark] = React.useState(
+    () => localStorage.getItem("sb-addon-themes-3" || false) // default to the storybook-dark-mode local storage key
+  );
 
   React.useEffect(() => {
     // listen to DARK_MODE event
