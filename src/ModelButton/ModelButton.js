@@ -89,6 +89,11 @@ export default function ModelButton({
         sx={{
           alignItems: "center",
           bottom: "0%",
+          color: disabled
+            ? theme.palette.mode === "light"
+              ? "rgba(0, 0, 0, 0.38)"
+              : "rgba(255, 255, 255, 0.5)"
+            : theme => theme.palette.text.secondary,
           display: "flex",
           flexDirection: "row",
           fontSize: "13px",
