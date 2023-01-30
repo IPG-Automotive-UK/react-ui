@@ -8,11 +8,13 @@ export default function WizardContent({ children }) {
       role="region"
       sx={{
         boxSizing: "border-box",
+        height: "100%",
         justifyContent: "stretch",
         maxWidth: theme => theme?.layout?.content?.maxWidth,
         mb: 2,
         mx: "auto",
-        overflow: "auto"
+        overflow: "auto",
+        width: "100%"
       }}
     >
       {children}
