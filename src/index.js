@@ -24,6 +24,7 @@ export { LabelChip, LabelSelector } from "./LabelSelector";
 export { default as Loading } from "./Loading";
 export { default as LoginForm } from "./LoginForm";
 export { default as NoLicense } from "./NoLicense";
+export { default as ModelButton } from "./ModelButton";
 export { default as MultiColor } from "./MultiColor";
 export { default as MultiLabelPopover } from "./MultiLabelPopover";
 export { default as MultiText } from "./MultiText";
