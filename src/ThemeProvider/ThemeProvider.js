@@ -10,8 +10,8 @@ import ThemeContext from "./ThemeContext";
 import darkScrollbar from "@mui/material/darkScrollbar";
 import { grey } from "@mui/material/colors";
 
-// theme defaults regardless of color mode
-const defaultTheme = createTheme({
+// theme defaults regardless of color mode. these are provided as an object that can be merged during color mode theme creation
+const defaultTheme = {
   layout: {
     content: {
       maxWidth: 945
@@ -30,87 +30,98 @@ const defaultTheme = createTheme({
       }
     }
   }
-});
+};
 
 // custom material-ui theme for light mode
-const lightTheme = createTheme(defaultTheme, {
-  components: {
-    MuiCssBaseline: {
-      styleOverrides: themeParam => ({
-        body: {
-          ...darkScrollbar(
-            themeParam.palette.mode === "light"
-              ? {
-                  active: grey[400],
-                  thumb: grey[400],
-                  track: grey[200]
-                }
-              : undefined
-          )
+const lightTheme = createTheme(
+  {
+    components: {
+      MuiCssBaseline: {
+        styleOverrides: themeParam => ({
+          body: {
+            ...darkScrollbar(
+              themeParam.palette.mode === "light"
+                ? {
+                    active: grey[400],
+                    thumb: grey[400],
+                    track: grey[200]
+                  }
+                : undefined
+            )
+          }
+        })
+      },
+      MuiStepper: {
+        styleOverrides: {
+          root: {
+            backgroundColor: "rgba(144, 202, 249, 0.08)"
+          }
         }
-      })
+      }
     },
-    MuiStepper: {
-      styleOverrides: {
+    overrides: {
+      MuiIconButton: { root: { color: "#9e9e9e" } },
+      MuiTableRow: {
         root: {
-          backgroundColor: "rgba(144, 202, 249, 0.08)"
+          "&$selected": {
+            backgroundColor: "rgba(0, 95, 168, 0.08)"
+          }
         }
-      }
-    }
-  },
-  overrides: {
-    MuiIconButton: { root: { color: "#9e9e9e" } },
-    MuiTableRow: {
-      root: {
-        "&$selected": {
-          backgroundColor: "rgba(0, 95, 168, 0.08)"
-        }
-      }
-    },
-    MuiToggleButton: {
-      root: {
-        "&$selected": {
+      },
+      MuiToggleButton: {
+        root: {
+          "&$selected": {
+            "&:hover": {
+              backgroundColor: "rgba(0, 95, 168, 0.15)"
+            },
+            backgroundColor: "rgba(0, 95, 168, 0.08)"
+          },
           "&:hover": {
             backgroundColor: "rgba(0, 95, 168, 0.15)"
           },
-          backgroundColor: "rgba(0, 95, 168, 0.08)"
-        },
-        "&:hover": {
-          backgroundColor: "rgba(0, 95, 168, 0.15)"
-        },
-        "border-color": "rgb(196, 196, 196)"
-      }
-    }
-  },
-  palette: {
-    action: {
-      selected: "rgba(0, 95, 168, 0.08)"
-    },
-    primary: { main: "#003063" },
-    secondary: { main: "#005FA8" }
-  }
-});
-
-// custom theme for dark mode
-const darkTheme = createTheme(defaultTheme, {
-  components: {
-    MuiCssBaseline: {
-      styleOverrides: themeParam => ({
-        body: themeParam.palette.mode === "dark" ? darkScrollbar() : null
-      })
-    },
-    MuiStepper: {
-      styleOverrides: {
-        root: {
-          backgroundColor: "rgba(255, 255, 255, 0.08)"
+          "border-color": "rgb(196, 196, 196)"
         }
       }
+    },
+    palette: {
+      action: {
+        selected: "rgba(0, 95, 168, 0.08)"
+      },
+      primary: { main: "#003063" },
+      secondary: { main: "#005FA8" }
     }
   },
-  palette: {
-    mode: "dark"
-  }
-});
+  defaultTheme
+);
+
+// custom theme for dark mode
+const darkTheme = createTheme(
+  {
+    components: {
+      MuiCssBaseline: {
+        styleOverrides: themeParam => ({
+          body: themeParam.palette.mode === "dark" ? darkScrollbar() : null
+        })
+      },
+      MuiStepper: {
+        styleOverrides: {
+          root: {
+            backgroundColor: "rgba(255, 255, 255, 0.08)"
+          }
+        }
+      }
+    },
+    palette: {
+      mode: "dark"
+    },
+    typography: {
+      allVariants: {
+        color: "#fff"
+      }
+    }
+  },
+  defaultTheme
+);
 
 /**
  * IPG Material-ui theme provider and hook.
