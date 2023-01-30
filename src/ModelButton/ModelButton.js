@@ -20,7 +20,12 @@ export default function ModelButton({
 
   // set border color based on status
   let borderColor = theme.palette.text.secondary;
-  if (status === "error") {
+  if (disabled) {
+    borderColor =
+      theme.palette.mode === "light"
+        ? "rgba(0, 0, 0, 0.38)"
+        : "rgba(255, 255, 255, 0.5)";
+  } else if (status === "error") {
     borderColor = theme.palette.error.main;
   } else if (status === "warning") {
     borderColor = theme.palette.warning.main;
@@ -44,6 +49,10 @@ export default function ModelButton({
         onClick={onClick}
         sx={{
           "&:hover": {
+            background: theme =>
+              theme.palette.mode === "light"
+                ? "rgba(0, 48, 99, 0.04)"
+                : "rgba(2, 136, 209, 0.12)",
             border: theme => `2px solid ${theme.palette.primary.main}`,
             color: theme => theme.palette.primary.main
           },
@@ -82,6 +91,7 @@ export default function ModelButton({
           bottom: "0%",
           display: "flex",
           flexDirection: "row",
+          fontSize: "13px",
           gap: "10px",
           justifyContent: "center",
           left: "0%",
