@@ -41,6 +41,10 @@ export default function Wizard({ title, children }) {
 // prop types
 Wizard.propTypes = {
   /**
+   * Children. Should be WizardSteps, WizardContent, and WizardActions components in that order.
+   */
+  children: PropTypes.node,
+  /**
    * Wizard title
    */
   title: PropTypes.string

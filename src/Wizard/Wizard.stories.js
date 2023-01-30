@@ -6,7 +6,12 @@ import { Default as WizardSteps } from "./WizardSteps/WizardSteps.stories";
 
 export default {
   component: Wizard,
-  title: "Wizard/Wizard"
+  title: "Wizard/Wizard",
+  argTypes: {
+    children: {
+      control: false
+    }
+  }
 };
 
 const Template = args => {
