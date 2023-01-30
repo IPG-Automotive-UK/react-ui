@@ -1,11 +1,12 @@
 import * as React from "react";
 
+import PropTypes from "prop-types";
 import { Stack } from "@mui/material";
 
 /**
  * Wizard actions is a layout component that displays buttons in a row.
  */
-export default function WizardActions({ children }) {
+export default function WizardActions({ children, mx }) {
   return (
     <Stack
       role="toolbar"
@@ -13,7 +14,10 @@ export default function WizardActions({ children }) {
       justifyContent="flex-end"
       spacing={2}
       p={3}
-      sx={{ backgroundColor: theme => theme.palette.background.paper }}
+      sx={{
+        backgroundColor: theme => theme.palette.background.paper
+      }}
+      mx={mx}
     >
       {children}
     </Stack>
@@ -21,4 +25,9 @@ export default function WizardActions({ children }) {
 }
 
 // prop types
-WizardActions.propTypes = {};
+WizardActions.propTypes = {
+  /**
+   * Horizontal margin
+   */
+  mx: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+};

@@ -22,7 +22,7 @@ export default function WizardSteps({ children, activeStep }) {
       activeStep={activeStep}
       sx={{
         boxSizing: "border-box",
-        maxWidth: 945,
+        maxWidth: theme => theme?.layout?.content?.maxWidth,
         mb: 3,
         mx: "auto",
         p: 3,

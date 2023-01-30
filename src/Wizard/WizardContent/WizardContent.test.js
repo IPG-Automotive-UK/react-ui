@@ -12,7 +12,7 @@ describe("WizardContent", () => {
       </ThemeProvider>
     );
     expect(screen.getByRole("region")).toHaveStyle({
-      maxWidth: "945px"
+      maxWidth: "1152px"
     });
   });
   it("has no max width when not themed", () => {

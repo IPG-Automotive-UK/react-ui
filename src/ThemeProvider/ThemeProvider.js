@@ -15,7 +15,7 @@ import { grey } from "@mui/material/colors";
 const defaultTheme = {
   layout: {
     content: {
-      maxWidth: 945
+      maxWidth: 1152
     }
   },
   overrides: {
@@ -88,6 +88,9 @@ const lightTheme = createTheme(
       action: {
         selected: "rgba(0, 95, 168, 0.08)"
       },
+      background: {
+        default: "rgb(250, 250, 250)"
+      },
       primary: { main: "#003063" },
       secondary: { main: "#005FA8" }
     }
@@ -113,6 +116,9 @@ const darkTheme = createTheme(
       }
     },
     palette: {
+      background: {
+        default: "#121212"
+      },
       mode: "dark"
     },
     typography: {
