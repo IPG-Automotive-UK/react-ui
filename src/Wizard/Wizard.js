@@ -14,7 +14,8 @@ export default function Wizard({ title, children }) {
       sx={{
         display: "flex",
         flexDirection: "column",
-        height: "100%"
+        height: "100%",
+        px: 2
       }}
     >
       {title ? (
