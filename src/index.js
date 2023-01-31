@@ -48,3 +48,13 @@ export { default as ToggleColorMode } from "./ToggleColorMode";
 export { default as TransferList } from "./TransferList";
 export { default as UserMenu } from "./UserMenu";
 export { UserAvatar, useColorMap } from "./UserAvatar";
+export {
+  Wizard,
+  WizardActions,
+  WizardContent,
+  WizardSteps,
+  WizardStep,
+  NextButton,
+  BackButton,
+  CancelButton
+} from "./Wizard";
