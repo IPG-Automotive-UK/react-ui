@@ -1,14 +1,16 @@
 import * as React from "react";
 
-import { Box, IconButton, Typography } from "@mui/material";
+import { Box, IconButton, Popover, Stack, Typography } from "@mui/material";
 
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import PropTypes from "prop-types";
 import { useTheme } from "@mui/material/styles";
 
 /**
- * Model button component to display a button with an icon, label and border color based on the model status
+ * Model button component to display a button with an icon, label and border color based on the model status. ModelButton components can be nested to create a button group. Nested children are displayed in a popup dialog.
  */
 export default function ModelButton({
+  children,
   disabled = false,
   icon = null,
   label = "",
@@ -48,13 +50,26 @@ export default function ModelButton({
         disableRipple
         onClick={onClick}
         sx={{
+          "&::before": {
+            border: `2px solid ${borderColor}`,
+            borderRadius: "50%",
+            bottom: "-18px",
+            content: children && children.length > 0 ? '""' : "none",
+            padding: "20px",
+            position: "absolute",
+            right: "-18px"
+          },
           "&:hover": {
+            "&::before": {
+              border: theme => `2px solid ${theme.palette.primary.main}`
+            },
             background: theme =>
               theme.palette.mode === "light"
                 ? "rgba(0, 48, 99, 0.04)"
                 : "rgba(2, 136, 209, 0.12)",
             border: theme => `2px solid ${theme.palette.primary.main}`,
-            color: theme => theme.palette.primary.main
+            color: theme => theme.palette.primary.main,
+            cursor: "pointer"
           },
           alignItems: "center",
           border: `2px solid ${borderColor}`,
@@ -69,6 +84,7 @@ export default function ModelButton({
           flexDirection: "row",
           fontSize: "40px",
           left: "0%",
+          overflow: "hidden",
           padding: "16px",
           position: "absolute",
           right: "0%",
@@ -85,6 +101,11 @@ export default function ModelButton({
             })
           : null}
       </IconButton>
+      {children && children.length > 0 ? (
+        <ModelButtonPopup color={borderColor} disabled={disabled} label={label}>
+          {children}
+        </ModelButtonPopup>
+      ) : null}
       <Typography
         sx={{
           alignItems: "center",
@@ -141,4 +162,82 @@ ModelButton.propTypes = {
    * The status string that determines the border color of the button. Default is `none`.
    */
   status: PropTypes.oneOf(["none", "error", "warning", "success"])
+};
+
+// component to display children in a popup dialog
+const ModelButtonPopup = ({ color, children, disabled, label }) => {
+  // state for popover
+  const [popperOpen, setPopperOpen] = React.useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  // handle button click to open popper
+  const handleClick = event => {
+    setAnchorEl(event.currentTarget);
+    setPopperOpen(true);
+  };
+
+  // create button and popper elements
+  return (
+    <>
+      <IconButton
+        disabled={disabled}
+        onClick={handleClick}
+        sx={{
+          "&:disabled": {
+            backgroundColor: theme =>
+              theme.palette.mode === "light" ? "#fff" : "#333"
+          },
+          "&:hover": {
+            backgroundColor: theme =>
+              theme.palette.mode === "light" ? "#fff" : "#333"
+          },
+          backgroundColor: theme =>
+            theme.palette.mode === "light" ? "#fff" : "#333",
+          bottom: "-74px",
+          padding: "6px",
+          position: "relative",
+          right: "-74px"
+        }}
+      >
+        <KeyboardArrowDownIcon
+          sx={{
+            "&:hover": {
+              backgroundColor: theme => theme.palette.primary.main
+            },
+            background: color,
+            borderRadius: "50%",
+            color: theme =>
+              theme.palette.mode === "light"
+                ? disabled
+                  ? "rgba(0, 0, 0, 0.38)"
+                  : "#fff"
+                : disabled
+                ? "rgba(255, 255, 255, 0.5)"
+                : "#000",
+            height: "24px",
+            width: "24px"
+          }}
+        />
+      </IconButton>
+      <Popover
+        anchorEl={anchorEl}
+        anchorOrigin={{
+          horizontal: "left",
+          vertical: "bottom"
+        }}
+        onClose={() => setPopperOpen(false)}
+        open={popperOpen}
+        PaperProps={{
+          sx: { borderRadius: 2, padding: 2 }
+        }}
+      >
+        <Typography sx={{ fontSize: "14px", pb: 2 }}>{label}</Typography>
+        <Stack direction="row" spacing={3}>
+          {React.Children.map(children, child => (
+            <Box sx={{ height: "144px", width: "100px" }}>{child}</Box>
+          ))}
+        </Stack>
+      </Popover>
+    </>
+  );
 };
