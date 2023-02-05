@@ -180,6 +180,7 @@ const ModelButtonPopup = ({ color, children, disabled, label }) => {
   return (
     <>
       <IconButton
+        data-testid="popup-button"
         disabled={disabled}
         onClick={handleClick}
         sx={{
@@ -233,8 +234,10 @@ const ModelButtonPopup = ({ color, children, disabled, label }) => {
       >
         <Typography sx={{ fontSize: "14px", pb: 2 }}>{label}</Typography>
         <Stack direction="row" spacing={3}>
-          {React.Children.map(children, child => (
-            <Box sx={{ height: "144px", width: "100px" }}>{child}</Box>
+          {children.map((child, index) => (
+            <Box key={index} sx={{ height: "144px", width: "100px" }}>
+              {child}
+            </Box>
           ))}
         </Stack>
       </Popover>
