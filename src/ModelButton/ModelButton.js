@@ -35,6 +35,9 @@ export default function ModelButton({
     borderColor = theme.palette.success.main;
   }
 
+  // ensure children are always an array
+  const arrayChildren = React.Children.toArray(children);
+
   // render component
   return (
     <Box
@@ -54,7 +57,7 @@ export default function ModelButton({
             border: `2px solid ${borderColor}`,
             borderRadius: "50%",
             bottom: "-18px",
-            content: children && children.length > 0 ? '""' : "none",
+            content: arrayChildren && arrayChildren.length > 0 ? '""' : "none",
             padding: "20px",
             position: "absolute",
             right: "-18px"
@@ -101,9 +104,9 @@ export default function ModelButton({
             })
           : null}
       </IconButton>
-      {children && children.length > 0 ? (
+      {arrayChildren && arrayChildren.length > 0 ? (
         <ModelButtonPopup color={borderColor} disabled={disabled} label={label}>
-          {children}
+          {arrayChildren}
         </ModelButtonPopup>
       ) : null}
       <Typography
