@@ -8,6 +8,11 @@ export default {
   argTypes: {
     children: {
       control: false
+    },
+    maxWidth: {
+      control: {
+        type: "number"
+      }
     }
   },
   component: Wizard,
