@@ -70,7 +70,7 @@ Wizard.propTypes = {
    */
   children: PropTypes.node,
   /**
-   * Maximum width of the content. This includes the title, steps, and content, but not the actions.
+   * Maximum width of the content. This includes the title, steps, and content, but not the actions. Default is taken from the parent theme (layout.content.maxWidth).
    */
   maxWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   /**
