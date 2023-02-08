@@ -16,7 +16,7 @@ export default function Wizard({ title, children, maxWidth }) {
           display: "flex",
           flexDirection: "column",
           height: "100%",
-          px: 2
+          px: 3
         }}
       >
         {title ? (
