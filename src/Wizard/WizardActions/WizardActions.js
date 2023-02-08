@@ -16,7 +16,7 @@ export default function WizardActions({ children }) {
       sx={{
         backgroundColor: theme => theme.palette.background.paper
       }}
-      mx={-2}
+      mx={-3}
     >
       {children}
     </Stack>
