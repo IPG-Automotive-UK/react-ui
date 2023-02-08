@@ -32,11 +32,13 @@ const Template = args => {
 // default story
 export const Default = Template.bind({});
 Default.args = {
-  title: "Wizard Title"
+  maxWidth: 1152,
+  title: ""
 };
 
-// no title story
-export const NoTitle = Template.bind({});
-NoTitle.args = {
-  title: ""
+// with title story
+export const WithTitle = Template.bind({});
+WithTitle.args = {
+  ...Default.args,
+  title: "Wizard Title"
 };
