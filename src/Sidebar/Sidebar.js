@@ -2,7 +2,7 @@ import { Box, Link, Typography } from "@mui/material";
 
 import PropTypes from "prop-types";
 import React from "react";
-import { useTheme } from "@mui/material/styles";
+import SidebarLogo from "./SidebarLogo";
 
 // sidebar component for app which displays logo, list of items and app version
 function Sidebar({
@@ -13,17 +13,6 @@ function Sidebar({
   showVersion = true
 }) {
   // use theme
-  const theme = useTheme();
-
-  // define components
-  const logoBox = (
-    <Box
-      component="img"
-      alt="App Logo"
-      src={theme.palette.mode === "dark" ? "/ipgLogoDark.png" : "/ipgLogo.png"}
-      height={40}
-    />
-  );
 
   return (
     <>
@@ -39,10 +28,10 @@ function Sidebar({
           <>
             {logoLinkUrl ? (
               <Link href={logoLinkUrl} underline="none">
-                {logoBox}
+                <SidebarLogo />
               </Link>
             ) : (
-              logoBox
+              <SidebarLogo />
             )}
           </>
         ) : null}
