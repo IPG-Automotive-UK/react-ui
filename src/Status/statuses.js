@@ -40,7 +40,7 @@ const statuses = {
     },
     label: {
       color: red[700],
-      text: "Failed"
+      text: "Errored"
     }
   },
   "not-ready": {
