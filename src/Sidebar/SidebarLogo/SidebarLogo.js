@@ -18,6 +18,7 @@ function SidebarLogo() {
   const theme = useTheme();
   return (
     <Box
+      data-testid="sidebar-logo"
       component="img"
       alt="App Logo"
       src={theme.palette.mode === "dark" ? ipgLogoLight : ipgLogoDark}
