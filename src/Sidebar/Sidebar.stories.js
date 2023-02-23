@@ -6,6 +6,7 @@ import {
   Selected as SidebarItemSelected,
   WithCount as SidebarItemWithCount
 } from "./SidebarItem/SidebarItem.stories";
+
 import React from "react";
 import Sidebar from "./Sidebar";
 import SidebarDivider from "./SidebarDivider";
@@ -34,7 +35,7 @@ const Template = args => (
 // default story
 export const Default = Template.bind({});
 Default.args = {
-  appVersion: `v${version}`,
+  appVersion: version,
   children: (
     <>
       <SidebarItem {...SidebarItemDefault.args} />
@@ -44,7 +45,6 @@ Default.args = {
       <SidebarItem {...SidebarItemWithCount.args} />
     </>
   ),
-  logoSrc: "/ipgLogoNoText.png",
   showLogo: true,
   showVersion: true
 };
@@ -52,7 +52,7 @@ Default.args = {
 // hidden logo story
 export const HiddenLogo = Template.bind({});
 HiddenLogo.args = {
-  appVersion: `v${version}`,
+  appVersion: version,
   children: (
     <>
       <SidebarItem {...SidebarItemDefault.args} />
@@ -82,7 +82,6 @@ HiddenVersion.args = {
       <SidebarItem {...SidebarItemNested.args} />
     </>
   ),
-  logoSrc: "/ipgLogoNoText.png",
   showLogo: true,
   showVersion: false
 };
@@ -124,7 +123,7 @@ IconsOnly.args = {
 // Custom Logo Link story
 export const CustomLogoLink = Template.bind({});
 CustomLogoLink.args = {
-  appVersion: `v${version}`,
+  appVersion: version,
   children: (
     <>
       <SidebarItem {...SidebarItemDefault.args} />
@@ -135,7 +134,6 @@ CustomLogoLink.args = {
     </>
   ),
   logoLinkUrl: "https://ipg-automotive.com",
-  logoSrc: "/ipgLogoNoText.png",
   showLogo: true,
   showVersion: true
 };
