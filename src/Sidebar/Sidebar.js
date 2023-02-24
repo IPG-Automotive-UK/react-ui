@@ -1,8 +1,8 @@
 import { Box, Link, Typography } from "@mui/material";
 
+import AppLogo from "./AppLogo";
 import PropTypes from "prop-types";
 import React from "react";
-import SidebarLogo from "./SidebarLogo";
 
 // sidebar component for app which displays logo, list of items and app version
 function Sidebar({
@@ -28,10 +28,10 @@ function Sidebar({
           <>
             {logoLinkUrl ? (
               <Link href={logoLinkUrl} underline="none">
-                <SidebarLogo />
+                <AppLogo />
               </Link>
             ) : (
-              <SidebarLogo />
+              <AppLogo />
             )}
           </>
         ) : null}
