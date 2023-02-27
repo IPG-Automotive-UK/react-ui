@@ -37,7 +37,7 @@ export { default as RegistrationForm } from "./RegistrationForm";
 export { default as SearchBar } from "./SearchBar";
 export { default as Select } from "./Select";
 export { Sidebar, SidebarDivider, SidebarItem } from "./Sidebar";
-export { AppLauncher } from "./AppLauncher";
+export { default as AppLauncher } from "./AppLauncher";
 export { default as Slider } from "./Slider";
 export { default as Snackbar } from "./Snackbar";
 export { SnackbarProvider, useSnackbar } from "./SnackbarProvider";
