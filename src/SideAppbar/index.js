@@ -1,2 +1,2 @@
-export { default } from "./SideAppbar";
-export { default as SideAppbar } from "./SideAppbar";
+export { default } from "./AppLauncher";
+export { default as AppLauncher } from "./AppLauncher";

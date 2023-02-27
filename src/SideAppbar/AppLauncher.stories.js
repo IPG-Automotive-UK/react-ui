@@ -1,14 +1,12 @@
+import AppLauncher from "./AppLauncher";
 import React from "react";
-import SideAppbar from "./SideAppbar";
-import { action } from "@storybook/addon-actions";
 
 export default {
-  component: SideAppbar,
-  title: "Layout/SideAppbar"
+  component: AppLauncher,
+  title: "Layout/AppLauncher"
 };
 
 const Template = args => {
-  console.log("args", args);
   return (
     <div
       style={{
@@ -19,13 +17,7 @@ const Template = args => {
         width: 260
       }}
     >
-      <SideAppbar
-        {...args}
-        onButtonClick={name => {
-          // fire action
-          action("onButtonClick")(name);
-        }}
-      />
+      <AppLauncher {...args} />
     </div>
   );
 };
@@ -33,11 +25,20 @@ const Template = args => {
 // default story
 export const Default = Template.bind({});
 Default.args = {
+  appUrls: [
+    {
+      "VIRTO.BUILD": "https://someurl.com",
+      "VIRTO.DATA": "https://someurl.com",
+      "VIRTO.FLEET": "https://someurl.com",
+      "VIRTO.ID": "https://someurl.com"
+    }
+  ],
   showLogo: true
 };
 
 // hidden logo story
 export const HiddenLogo = Template.bind({});
 HiddenLogo.args = {
+  ...Default.args,
   showLogo: false
 };
