@@ -1,1 +1,1 @@
-export { deafult } from "./AppHeader";
+export { default } from "./AppHeader";
