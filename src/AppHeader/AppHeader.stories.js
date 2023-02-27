@@ -51,5 +51,8 @@ Default.args = {
       <SidebarItem {...SidebarItemNested.args} />
     </>
   ),
-  mode: "light"
+  mode: "light",
+  showLogo: true,
+  showVersion: true,
+  username: "Ruud van Nistelrooy"
 };
