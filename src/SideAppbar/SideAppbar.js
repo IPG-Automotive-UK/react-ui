@@ -70,6 +70,7 @@ function SideAppbar({ logoLinkUrl = null, showLogo = true, onButtonClick }) {
         {appList.map(app => {
           return (
             <Paper
+              elevation={1}
               key={app.name}
               data-testid={app.name}
               sx={theme => ({
@@ -83,7 +84,15 @@ function SideAppbar({ logoLinkUrl = null, showLogo = true, onButtonClick }) {
               })}
               onClick={() => handleClick(app.name)}
             >
-              <Box sx={{ px: 2, py: 1.5, textAlign: "center" }}>
+              <Box
+                sx={{
+                  alignItems: "center",
+                  display: "flex",
+                  flexDirection: "column",
+                  px: 2,
+                  py: 1.5
+                }}
+              >
                 <Box
                   component={"img"}
                   alt={app.name}
