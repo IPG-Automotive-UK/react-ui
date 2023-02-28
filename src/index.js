@@ -37,6 +37,7 @@ export { default as RegistrationForm } from "./RegistrationForm";
 export { default as SearchBar } from "./SearchBar";
 export { default as Select } from "./Select";
 export { Sidebar, SidebarDivider, SidebarItem } from "./Sidebar";
+export { default as AppLauncher } from "./AppLauncher";
 export { default as Slider } from "./Slider";
 export { default as Snackbar } from "./Snackbar";
 export { SnackbarProvider, useSnackbar } from "./SnackbarProvider";
@@ -48,6 +49,18 @@ export { default as ToggleColorMode } from "./ToggleColorMode";
 export { default as TransferList } from "./TransferList";
 export { default as UserMenu } from "./UserMenu";
 export { UserAvatar, useColorMap } from "./UserAvatar";
+export {
+  VirtoLogo,
+  VirtoBuild,
+  VirtoFleet,
+  VirtoModel,
+  VirtoScene,
+  VirtoResult,
+  VirtoTest,
+  VirtoData,
+  VirtoVehicle,
+  VirtoID
+} from "./SvgIcons";
 export {
   Wizard,
   WizardActions,
