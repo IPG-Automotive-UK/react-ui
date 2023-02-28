@@ -30,6 +30,9 @@ const defaultTheme = {
         fontWeight: "normal"
       }
     }
+  },
+  typography: {
+    fontFamily: "Montserrat"
   }
 };
 
