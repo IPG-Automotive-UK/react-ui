@@ -5,9 +5,9 @@ import React from "react";
 
 // a set of default inputs so that tests can change what theyre testing
 const defaultInputs = {
-  onChange: jest.fn(),
   onChangePassword: jest.fn(),
   onLogout: jest.fn(),
+  onModeChange: jest.fn(),
   username: "Joe Bloggs"
 };
 

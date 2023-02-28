@@ -1,6 +1,6 @@
 import { Box, Link, Typography } from "@mui/material";
 
-import AppLogo from "./AppLogo";
+import IpgLogo from "../SvgIcons/IpgLogo";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -28,10 +28,10 @@ function Sidebar({
           <>
             {logoLinkUrl ? (
               <Link href={logoLinkUrl} underline="none">
-                <AppLogo />
+                <IpgLogo />
               </Link>
             ) : (
-              <AppLogo />
+              <IpgLogo sx={{ height: 40, width: 120 }} />
             )}
           </>
         ) : null}
@@ -59,7 +59,7 @@ Sidebar.propTypes = {
    */
   logoLinkUrl: PropTypes.string,
   /**
-   * Boolean to determine if logo should be displayed at the top of the sidebar
+   * Boolean to determine if logo should be displayed at the bottom of the sidebar
    */
   showLogo: PropTypes.bool,
   /**

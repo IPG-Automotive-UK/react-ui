@@ -9,13 +9,14 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 
-import AppLogo from "./AppLogo";
+import AppLauncher from "../AppLauncher";
 import AppsIcon from "@mui/icons-material/Apps";
 import Menu from "@mui/icons-material/Menu";
 import PropTypes from "prop-types";
 import Sidebar from "../Sidebar";
 import ToggleColorMode from "../ToggleColorMode";
 import UserMenu from "../UserMenu";
+import VirtoLogo from "../SvgIcons/VirtoLogo";
 
 // appbar component
 function Header({
@@ -68,7 +69,14 @@ function Header({
             />
           </IconButton>
           <Box mr={1} display="flex" alignItems="center">
-            <AppLogo />
+            <VirtoLogo
+              sx={{
+                color: theme =>
+                  theme.palette.mode === "dark" ? "#003063" : "white",
+                height: 20,
+                width: 95
+              }}
+            />
           </Box>
           <Typography
             variant="h6"
@@ -94,15 +102,18 @@ function Header({
 // app header component
 function AppHeader({
   appVersion,
+  appUrls,
   children,
-  logoLinkUrl = null,
+  IpgLogoLinkUrl = null,
+  VirtoLogoLinkUrl = null,
   appName,
   onChangePassword,
   onLogout,
-  onChange,
+  onModeChange,
   mode,
   username,
-  showLogo = true,
+  showIpgLogo = true,
+  showVirtoLogo = true,
   showVersion = true
 }) {
   // sidebar styling
@@ -121,7 +132,7 @@ function AppHeader({
         onAppClick={() => setAppOpen(!appOpen)}
         onChangePassword={onChangePassword}
         onLogout={onLogout}
-        onChange={onChange}
+        onChange={onModeChange}
         username={username}
         mode={mode}
       />
@@ -147,9 +158,11 @@ function AppHeader({
               }
             }}
           >
-            <Sidebar logoLinkUrl={logoLinkUrl} appVersion={appVersion}>
-              {children}
-            </Sidebar>
+            <AppLauncher
+              appUrls={appUrls}
+              logoLinkUrl={VirtoLogoLinkUrl}
+              showLogo={showVirtoLogo}
+            />
           </Drawer>
         </Hidden>
         <Hidden mdUp>
@@ -167,9 +180,9 @@ function AppHeader({
             }}
           >
             <Sidebar
-              logoLinkUrl={logoLinkUrl}
+              logoLinkUrl={IpgLogoLinkUrl}
               appVersion={appVersion}
-              showLogo={showLogo}
+              showLogo={showIpgLogo}
               showVersion={showVersion}
             >
               {children}
@@ -189,9 +202,9 @@ function AppHeader({
             open
           >
             <Sidebar
-              logoLinkUrl={logoLinkUrl}
+              logoLinkUrl={IpgLogoLinkUrl}
               appVersion={appVersion}
-              showLogo={showLogo}
+              showLogo={showIpgLogo}
               showVersion={showVersion}
             >
               {children}
@@ -205,9 +218,30 @@ function AppHeader({
 
 AppHeader.propTypes = {
   /**
+   * A String of the href URL for the Link of the IPG Logo, default is null (link disabled)
+   */
+  IpgLogoLinkUrl: PropTypes.string,
+  /**
+   * A String of the href URL for the Link of the VIRTO Logo, default is null (link disabled)
+   */
+  VirtoLogoLinkUrl: PropTypes.string,
+  /**
    * App version to display in header.
    */
   appName: PropTypes.string.isRequired,
+  /**
+   *  List of apps to display in the AppLauncher
+   * @default []
+   * @type {array}
+   * @example
+   * [
+   * {
+   * "VIRTO.BUILD": "https://someurl.com",
+   * "VIRTO.ID": "https://someurl.com",
+   * }
+   * ]
+   */
+  appUrls: PropTypes.array,
   /**
    * App version to display at base of sidebar.
    */
@@ -216,26 +250,12 @@ AppHeader.propTypes = {
    * The content of the component. Recommended children are SidebarItem and SidebarDivider, but any valid react element can be used.
    */
   children: PropTypes.node,
-  /**
-   * A String of the href URL for the Link of the IPG Logo, default is null (link disabled)
-   */
-  logoLinkUrl: PropTypes.string,
+
   /**
    * The color mode selection
    * @default "light"
    */
   mode: PropTypes.oneOf(["light", "dark"]),
-  /**
-   * Callback fired when the color mode is changed.
-   *
-   * **Signature**
-   * ```
-   * function(newMode) => void
-   * ```
-   *
-   * _newMode_: The new color mode that has been selected
-   */
-  onChange: PropTypes.func.isRequired,
   /**
    * Callback fired when the user clicks on "Change password".
    *
@@ -257,13 +277,28 @@ AppHeader.propTypes = {
    */
   onLogout: PropTypes.func.isRequired,
   /**
-   * Boolean to determine if logo should be displayed at the top of the sidebar
+   * Callback fired when the color mode is changed.
+   *
+   * **Signature**
+   * ```
+   * function(newMode) => void
+   * ```
+   *
+   * _newMode_: The new color mode that has been selected
    */
-  showLogo: PropTypes.bool,
+  onModeChange: PropTypes.func.isRequired,
+  /**
+   * Boolean to determine if IPG logo should be displayed at the bottom of the sidebar
+   */
+  showIpgLogo: PropTypes.bool,
   /**
    * Boolean to determine if version should be displayed at the bottom of the sidebar
    */
   showVersion: PropTypes.bool,
+  /**
+   * Boolean to determine if IPG logo should be displayed at the bottom of the sidebar
+   */
+  showVirtoLogo: PropTypes.bool,
   /**
    * Name of currently logged in user.
    */

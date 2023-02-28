@@ -80,7 +80,7 @@ function AppLauncher({ logoLinkUrl = null, showLogo = true, appUrls }) {
   );
 
   return (
-    <>
+    <Box px={2} py={3}>
       {showLogo ? (
         <>
           {logoLinkUrl ? (
@@ -147,7 +147,7 @@ function AppLauncher({ logoLinkUrl = null, showLogo = true, appUrls }) {
         })}
       </Box>
       <Box flexGrow={1} />
-    </>
+    </Box>
   );
 }
 

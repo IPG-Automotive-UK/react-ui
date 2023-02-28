@@ -51,6 +51,7 @@ export { default as TransferList } from "./TransferList";
 export { default as UserMenu } from "./UserMenu";
 export { UserAvatar, useColorMap } from "./UserAvatar";
 export {
+  IpgLogo,
   VirtoLogo,
   VirtoBuild,
   VirtoFleet,
