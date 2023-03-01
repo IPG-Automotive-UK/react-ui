@@ -64,6 +64,7 @@ function Layout({
               sx={{
                 "& .MuiDrawer-paper": {
                   height: `calc(100% - 64px)`,
+                  paddingTop: "8px",
                   top: "64px",
                   width: sidebarWidth
                 }
@@ -77,6 +78,7 @@ function Layout({
               sx={{
                 "& .MuiDrawer-paper": {
                   height: `calc(100% - 64px)`,
+                  paddingTop: "8px",
                   top: "64px",
                   width: sidebarWidth
                 }

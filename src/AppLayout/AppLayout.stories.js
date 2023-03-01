@@ -38,8 +38,8 @@ Default.args = {
   mode: "light",
   sidebarContent: (
     <>
-      <SidebarItem {...SidebarItemDefault.args} />
       <SidebarItem {...SidebarItemSelected.args} />
+      <SidebarItem {...SidebarItemDefault.args} />
       <SidebarDivider />
       <SidebarItem {...SidebarItemDisabled.args} />
       <SidebarItem {...SidebarItemWithCount.args} />
