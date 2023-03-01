@@ -17,13 +17,16 @@ export default function ToggleColorMode({ mode, onChange }) {
       "&.Mui-checked": {
         "& + .MuiSwitch-track": {
           backgroundColor:
-            theme.palette.mode === "dark" ? "#8796A5" : "#aab4be",
+            theme.palette.mode === "dark" ? "#5f7493" : "#29517c",
           opacity: 1
         },
-        "& .MuiSwitch-thumb:before": {
-          backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 20 20"><path fill="${encodeURIComponent(
-            "#003063"
-          )}" d="M4.2 2.5l-.7 1.8-1.8.7 1.8.7.7 1.8.6-1.8L6.7 5l-1.9-.7-.6-1.8zm15 8.3a6.7 6.7 0 11-6.6-6.6 5.8 5.8 0 006.6 6.6z"/></svg>')`
+        "& .MuiSwitch-thumb": {
+          "&:before": {
+            backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 20 20"><path fill="${encodeURIComponent(
+              "#fff"
+            )}" d="M4.2 2.5l-.7 1.8-1.8.7 1.8.7.7 1.8.6-1.8L6.7 5l-1.9-.7-.6-1.8zm15 8.3a6.7 6.7 0 11-6.6-6.6 5.8 5.8 0 006.6 6.6z"/></svg>')`
+          },
+          backgroundColor: "#003063"
         },
         color: "#fff",
         transform: "translateX(22px)"
@@ -46,12 +49,11 @@ export default function ToggleColorMode({ mode, onChange }) {
         top: 0,
         width: "100%"
       },
-      backgroundColor: "#fff",
       height: 32,
-      width: 32
+      width: 32.5
     },
     "& .MuiSwitch-track": {
-      backgroundColor: theme.palette.mode === "dark" ? "#8796A5" : "#aab4be",
+      backgroundColor: theme.palette.mode === "dark" ? "#5f7493" : "#29517c",
       borderRadius: 20 / 2,
       opacity: 1
     },
