@@ -1,17 +1,6 @@
-import {
-  Default as SidebarItemDefault,
-  Disabled as SidebarItemDisabled,
-  Nested as SidebarItemNested,
-  Selected as SidebarItemSelected,
-  WithCount as SidebarItemWithCount
-} from "../Sidebar/SidebarItem/SidebarItem.stories";
-
 import AppHeader from "../AppHeader";
 import React from "react";
-import SidebarDivider from "../Sidebar/SidebarDivider";
-import SidebarItem from "../Sidebar/SidebarItem";
 import { action } from "@storybook/addon-actions";
-import { version } from "../../package.json";
 
 export default {
   component: AppHeader,
@@ -27,6 +16,7 @@ const Template = args => {
     <AppHeader
       {...args}
       mode={mode}
+      onMenuClick={action("onMenuClick")}
       onModeChange={newMode => {
         setMode(newMode);
         action("onChange")(newMode);
@@ -47,21 +37,6 @@ Default.args = {
       "VIRTO.ID": "https://someurl.com"
     }
   ],
-  appVersion: version,
-  children: (
-    <>
-      <SidebarItem {...SidebarItemDefault.args} />
-      <SidebarItem {...SidebarItemSelected.args} />
-      <SidebarDivider />
-      <SidebarItem {...SidebarItemDisabled.args} />
-      <SidebarItem {...SidebarItemWithCount.args} />
-      <SidebarDivider />
-      <SidebarItem {...SidebarItemNested.args} />
-    </>
-  ),
   mode: "light",
-  showIpgLogo: true,
-  showVersion: true,
-  showVirtoLogo: true,
   username: "Ruud van Nistelrooy"
 };

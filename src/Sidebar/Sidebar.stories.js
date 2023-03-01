@@ -133,7 +133,6 @@ CustomLogoLink.args = {
       <SidebarItem {...SidebarItemWithCount.args} />
     </>
   ),
-  logoLinkUrl: "https://ipg-automotive.com",
   showLogo: true,
   showVersion: true
 };

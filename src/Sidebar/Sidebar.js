@@ -8,7 +8,6 @@ import React from "react";
 function Sidebar({
   appVersion,
   children,
-  logoLinkUrl = null,
   showLogo = true,
   showVersion = true
 }) {
@@ -25,15 +24,9 @@ function Sidebar({
         p={theme => theme.spacing(2)}
       >
         {showLogo ? (
-          <>
-            {logoLinkUrl ? (
-              <Link href={logoLinkUrl} underline="none">
-                <IpgLogo />
-              </Link>
-            ) : (
-              <IpgLogo sx={{ height: 40, width: 120 }} />
-            )}
-          </>
+          <Link href={"https://ipg-automotive.com"} underline="none">
+            <IpgLogo sx={{ height: 40, width: 120 }} />
+          </Link>
         ) : null}
         {showVersion ? (
           <Typography color={theme => theme.palette.text.primary}>
@@ -54,10 +47,6 @@ Sidebar.propTypes = {
    * The content of the component. Recommended children are SidebarItem and SidebarDivider, but any valid react element can be used.
    */
   children: PropTypes.node,
-  /**
-   * A String of the href URL for the Link of the IPG Logo, default is null (link disabled)
-   */
-  logoLinkUrl: PropTypes.string,
   /**
    * Boolean to determine if logo should be displayed at the bottom of the sidebar
    */
