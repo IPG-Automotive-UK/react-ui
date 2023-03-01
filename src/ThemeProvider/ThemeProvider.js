@@ -30,6 +30,9 @@ const defaultTheme = {
         fontWeight: "normal"
       }
     }
+  },
+  typography: {
+    fontFamily: "Montserrat"
   }
 };
 
@@ -93,6 +96,11 @@ const lightTheme = createTheme(
       },
       primary: { main: "#003063" },
       secondary: { main: "#005FA8" }
+    },
+    typography: {
+      allVariants: {
+        fontFamily: "Montserrat"
+      }
     }
   },
   defaultTheme
@@ -119,11 +127,13 @@ const darkTheme = createTheme(
       background: {
         default: "#121212"
       },
-      mode: "dark"
+      mode: "dark",
+      primary: { main: "#42a5f5" }
     },
     typography: {
       allVariants: {
-        color: "#fff"
+        color: "#fff",
+        fontFamily: "Montserrat"
       }
     }
   },
