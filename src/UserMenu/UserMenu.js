@@ -14,6 +14,7 @@ import {
   bindTrigger,
   usePopupState
 } from "material-ui-popup-state/hooks";
+
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -124,8 +125,8 @@ const UserAvatar = ({ username, ...rest }) => {
     <Avatar
       {...rest}
       sx={{
-        background: "none",
-        border: "2px solid white",
+        backgroundColor: "#bdbdbd",
+        border: "2px solid #bdbdbd",
         color: "white",
         fontSize: "13px",
         height: 34,
