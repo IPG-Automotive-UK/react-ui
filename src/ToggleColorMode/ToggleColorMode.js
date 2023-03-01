@@ -17,7 +17,9 @@ export default function ToggleColorMode({ mode, onChange }) {
       "&.Mui-checked": {
         "& + .MuiSwitch-track": {
           backgroundColor:
-            theme.palette.mode === "dark" ? "#5f7493" : "#29517c",
+            theme.palette.mode === "dark"
+              ? "rgba(0, 0, 0, 0.3)"
+              : "rgba(255, 255, 255, 0.16)",
           opacity: 1
         },
         "& .MuiSwitch-thumb": {
@@ -26,7 +28,7 @@ export default function ToggleColorMode({ mode, onChange }) {
               "#fff"
             )}" d="M4.2 2.5l-.7 1.8-1.8.7 1.8.7.7 1.8.6-1.8L6.7 5l-1.9-.7-.6-1.8zm15 8.3a6.7 6.7 0 11-6.6-6.6 5.8 5.8 0 006.6 6.6z"/></svg>')`
           },
-          backgroundColor: "#003063"
+          backgroundColor: "rgba(18, 18, 18, 1)"
         },
         color: "#fff",
         transform: "translateX(22px)"
@@ -53,7 +55,10 @@ export default function ToggleColorMode({ mode, onChange }) {
       width: 32.5
     },
     "& .MuiSwitch-track": {
-      backgroundColor: theme.palette.mode === "dark" ? "#5f7493" : "#29517c",
+      backgroundColor:
+        theme.palette.mode === "dark"
+          ? "rgba(0, 0, 0, 0.3)"
+          : "rgba(255, 255, 255, 0.16)",
       borderRadius: 20 / 2,
       opacity: 1
     },
@@ -64,7 +69,12 @@ export default function ToggleColorMode({ mode, onChange }) {
 
   // Switch to change mode
   return (
-    <Box>
+    <Box
+      sx={{
+        backgroundColor: theme =>
+          theme.palette.mode === "dark" ? "#87A5D2" : "#003063"
+      }}
+    >
       <MaterialUISwitch
         sx={{ m: 1 }}
         checked={mode === "dark"}
