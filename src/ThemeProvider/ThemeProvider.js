@@ -128,7 +128,7 @@ const darkTheme = createTheme(
         default: "#121212"
       },
       mode: "dark",
-      primary: { main: "#42a5f5" }
+      primary: { main: "#87A5D2" }
     },
     typography: {
       allVariants: {
