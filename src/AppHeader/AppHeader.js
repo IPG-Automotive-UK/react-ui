@@ -39,6 +39,14 @@ function Header({
     >
       <Toolbar style={{ justifyContent: "space-between" }}>
         <Box display="flex" alignItems="center">
+          <IconButton sx={{ pl: 0 }} onClick={onAppClick} disableRipple>
+            <AppsIcon
+              sx={theme => ({
+                color: theme.palette.background.paper,
+                fontSize: "30px"
+              })}
+            />
+          </IconButton>
           <IconButton
             disableRipple
             color="inherit"
@@ -46,7 +54,7 @@ function Header({
             edge="start"
             onClick={onMenuClick}
             sx={theme => ({
-              pl: 0,
+              pl: 2.5,
               [theme.breakpoints.up("md")]: {
                 display: "none"
               }
@@ -60,36 +68,29 @@ function Header({
               })}
             />
           </IconButton>
-          <IconButton sx={{ mr: 1, pl: 0 }} onClick={onAppClick} disableRipple>
-            <AppsIcon
-              sx={theme => ({
-                color: theme.palette.background.paper,
-                fontSize: "30px"
-              })}
-            />
-          </IconButton>
-          <Box mr={1} display="flex" alignItems="center">
+          <Box ml={1} display="flex" alignItems="center">
             <VirtoLogo
               sx={{
                 color: theme =>
                   theme.palette.mode === "dark" ? "#003063" : "white",
                 height: 22,
+                mr: 1,
                 width: 110
               }}
             />
+            <Typography
+              variant="h6"
+              fontSize="28px"
+              lineHeight="34px"
+              letterSpacing="0.05em"
+              textTransform="uppercase"
+              color={theme =>
+                theme.palette.mode === "dark" ? "#003063" : "white"
+              }
+            >
+              {appName}
+            </Typography>
           </Box>
-          <Typography
-            variant="h6"
-            fontSize="28px"
-            lineHeight="34px"
-            letterSpacing="0.05em"
-            textTransform="uppercase"
-            color={theme =>
-              theme.palette.mode === "dark" ? "#003063" : "white"
-            }
-          >
-            {appName}
-          </Typography>
         </Box>
         <Box display="flex" alignItems="center">
           <ToggleColorMode mode={mode} onChange={onChange} />
