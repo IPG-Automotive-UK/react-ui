@@ -18,7 +18,7 @@ import VirtoLogo from "../SvgIcons/VirtoLogo";
 // AppLauncher component for app which displays logo, list of items and app version
 function AppLauncher({ logoLinkUrl = null, showLogo = true, appUrls }) {
   // styles for virto app icons
-  const iconStyle = { height: 75, mb: 1, width: 75 };
+  const iconStyle = { height: 74, mb: 1, width: 74 };
 
   // VIRTO app list
   const appList = [

@@ -166,7 +166,7 @@ AppLayout.propTypes = {
   /**
    * The RHS content of the component app. Valid react element can be used.
    */
-  content: PropTypes.node,
+  content: PropTypes.node.isRequired,
   /**
    * Callback fired when the user clicks on "Change password".
    *
@@ -190,7 +190,7 @@ AppLayout.propTypes = {
   /**
    * The content of the component. Recommended children are SidebarItem and SidebarDivider, but any valid react element can be used.
    */
-  sidebarContent: PropTypes.node,
+  sidebarContent: PropTypes.node.isRequired,
   /**
    * Name of currently logged in user.
    */
