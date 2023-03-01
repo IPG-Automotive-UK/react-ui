@@ -125,8 +125,8 @@ const UserAvatar = ({ username, ...rest }) => {
     <Avatar
       {...rest}
       sx={{
-        background: theme => theme.palette.paper,
-        border: "2px solid theme.palette.paper",
+        backgroundColor: "#bdbdbd",
+        border: "2px solid #bdbdbd",
         color: "white",
         fontSize: "13px",
         height: 34,
