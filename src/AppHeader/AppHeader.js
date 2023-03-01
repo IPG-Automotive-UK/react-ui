@@ -31,10 +31,7 @@ function Header({
   return (
     <AppBar
       sx={theme => ({
-        backgroundColor:
-          theme.palette.mode === "light"
-            ? theme.palette.primary.main
-            : "#87A5D2"
+        backgroundColor: theme.palette.primary.main
       })}
     >
       <Toolbar style={{ justifyContent: "space-between" }}>
