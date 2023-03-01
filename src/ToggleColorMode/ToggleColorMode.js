@@ -69,12 +69,7 @@ export default function ToggleColorMode({ mode, onChange }) {
 
   // Switch to change mode
   return (
-    <Box
-      sx={{
-        backgroundColor: theme =>
-          theme.palette.mode === "dark" ? "#87A5D2" : "#003063"
-      }}
-    >
+    <Box>
       <MaterialUISwitch
         sx={{ m: 1 }}
         checked={mode === "dark"}
