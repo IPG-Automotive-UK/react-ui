@@ -7,6 +7,7 @@ import React from "react";
 const defaultInputs = {
   onChangePassword: jest.fn(),
   onLogout: jest.fn(),
+  onMenuClick: jest.fn(),
   onModeChange: jest.fn(),
   username: "Joe Bloggs"
 };
