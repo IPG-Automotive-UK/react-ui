@@ -18,7 +18,7 @@ import VirtoLogo from "../SvgIcons/VirtoLogo";
 // AppLauncher component for app which displays logo, list of items and app version
 function AppLauncher({ logoLinkUrl = null, showLogo = true, appUrls }) {
   // styles for virto app icons
-  const iconStyle = { height: 60, mb: 1, width: 60 };
+  const iconStyle = { height: 74, mb: 1, width: 74 };
 
   // VIRTO app list
   const appList = [
@@ -80,7 +80,7 @@ function AppLauncher({ logoLinkUrl = null, showLogo = true, appUrls }) {
   );
 
   return (
-    <>
+    <Box px={2} py={3}>
       {showLogo ? (
         <>
           {logoLinkUrl ? (
@@ -111,8 +111,13 @@ function AppLauncher({ logoLinkUrl = null, showLogo = true, appUrls }) {
               data-testid={app.name}
               sx={theme => ({
                 "&:hover": {
-                  boxShadow: theme.shadows[1]
+                  backgroundColor:
+                    theme.palette.mode === "dark"
+                      ? theme.palette.action.hover
+                      : "white",
+                  boxShadow: theme.shadows[2]
                 },
+                background: "transparent",
                 boxShadow: "none",
                 cursor: "pointer",
                 mb: 2,
@@ -147,7 +152,7 @@ function AppLauncher({ logoLinkUrl = null, showLogo = true, appUrls }) {
         })}
       </Box>
       <Box flexGrow={1} />
-    </>
+    </Box>
   );
 }
 
@@ -169,7 +174,6 @@ AppLauncher.propTypes = {
    * A String of the href URL for the Link of the IPG Logo, default is null (link disabled)
    */
   logoLinkUrl: PropTypes.string,
-
   /**
    * Boolean to determine if logo should be displayed at the top of the AppLauncher
    */

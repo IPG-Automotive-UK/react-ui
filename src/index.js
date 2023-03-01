@@ -1,5 +1,7 @@
 export { default as AlignHorizontal } from "./AlignHorizontal";
 export { default as AlignVertical } from "./AlignVertical";
+export { default as AppHeader } from "./AppHeader";
+export { default as AppLayout } from "./AppLayout";
 export { default as Autocomplete } from "./Autocomplete";
 export { default as Canvas } from "./Canvas";
 export { default as CanvasItem } from "./CanvasItem";
@@ -50,6 +52,7 @@ export { default as TransferList } from "./TransferList";
 export { default as UserMenu } from "./UserMenu";
 export { UserAvatar, useColorMap } from "./UserAvatar";
 export {
+  IpgLogo,
   VirtoLogo,
   VirtoBuild,
   VirtoFleet,

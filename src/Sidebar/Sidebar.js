@@ -1,6 +1,6 @@
 import { Box, Link, Typography } from "@mui/material";
 
-import AppLogo from "./AppLogo";
+import IpgLogo from "../SvgIcons/IpgLogo";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -8,7 +8,6 @@ import React from "react";
 function Sidebar({
   appVersion,
   children,
-  logoLinkUrl = null,
   showLogo = true,
   showVersion = true
 }) {
@@ -25,15 +24,9 @@ function Sidebar({
         p={theme => theme.spacing(2)}
       >
         {showLogo ? (
-          <>
-            {logoLinkUrl ? (
-              <Link href={logoLinkUrl} underline="none">
-                <AppLogo />
-              </Link>
-            ) : (
-              <AppLogo />
-            )}
-          </>
+          <Link href={"https://ipg-automotive.com"} underline="none">
+            <IpgLogo sx={{ height: 40, width: 120 }} />
+          </Link>
         ) : null}
         {showVersion ? (
           <Typography color={theme => theme.palette.text.primary}>
@@ -55,11 +48,7 @@ Sidebar.propTypes = {
    */
   children: PropTypes.node,
   /**
-   * A String of the href URL for the Link of the IPG Logo, default is null (link disabled)
-   */
-  logoLinkUrl: PropTypes.string,
-  /**
-   * Boolean to determine if logo should be displayed at the top of the sidebar
+   * Boolean to determine if logo should be displayed at the bottom of the sidebar
    */
   showLogo: PropTypes.bool,
   /**
