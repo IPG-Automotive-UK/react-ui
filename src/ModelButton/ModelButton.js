@@ -60,8 +60,7 @@ export default function ModelButton({
             content: arrayChildren && arrayChildren.length > 0 ? '""' : "none",
             padding: "20px",
             position: "absolute",
-            right: "-18px",
-            width: "100%"
+            right: "-18px"
           },
           "&:hover": {
             "&::before": {
@@ -93,7 +92,8 @@ export default function ModelButton({
           position: "absolute",
           right: "0%",
           top: "0%",
-          transition: "all 0.2s ease-in-out"
+          transition: "all 0.2s ease-in-out",
+          width: "100%"
         }}
       >
         {icon
@@ -201,8 +201,7 @@ const ModelButtonPopup = ({ color, children, disabled, label }) => {
           bottom: "-74px",
           padding: "6px",
           position: "relative",
-          right: "-74px",
-          width: "100%"
+          right: "-74px"
         }}
       >
         <KeyboardArrowDownIcon
