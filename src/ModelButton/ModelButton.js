@@ -55,7 +55,7 @@ export default function ModelButton({
         sx={{
           "&::before": {
             border: `2px solid ${borderColor}`,
-            borderRadius: "50%",
+            borderRadius: "20px 0 0 0",
             bottom: "-18px",
             content: arrayChildren && arrayChildren.length > 0 ? '""' : "none",
             padding: "20px",
@@ -198,6 +198,7 @@ const ModelButtonPopup = ({ color, children, disabled, label }) => {
           },
           backgroundColor: theme =>
             theme.palette.mode === "light" ? "#fff" : "#333",
+          borderRadius: "20px 0 0 0",
           bottom: "-74px",
           padding: "6px",
           position: "relative",
