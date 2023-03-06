@@ -60,7 +60,8 @@ export default function ModelButton({
             content: arrayChildren && arrayChildren.length > 0 ? '""' : "none",
             padding: "20px",
             position: "absolute",
-            right: "-18px"
+            right: "-18px",
+            transition: "all 0.2s ease-in-out"
           },
           "&:hover": {
             "&::before": {
