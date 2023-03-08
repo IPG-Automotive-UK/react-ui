@@ -77,7 +77,7 @@ StyledLabels.args = {
   labelPosition: "top",
   labelStyle: {
     color: "blue",
-    fontFamily: "Sans-Serif, Helvetica",
+    fontFamily: "Montserrat",
     fontStyle: "italic"
   },
   labels: [
