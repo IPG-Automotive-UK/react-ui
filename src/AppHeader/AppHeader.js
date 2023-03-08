@@ -4,6 +4,7 @@ import {
   Drawer,
   Hidden,
   IconButton,
+  Link,
   Toolbar,
   Typography
 } from "@mui/material";
@@ -20,13 +21,14 @@ import VirtoLogo from "../SvgIcons/VirtoLogo";
 // appbar component
 function Header({
   appName,
-  onMenuClick,
-  onAppClick,
-  username,
   mode,
+  onAppClick,
   onChange,
   onChangePassword,
-  onLogout
+  onLogout,
+  onMenuClick,
+  username,
+  virtoLogoLinkUrl
 }) {
   return (
     <AppBar
@@ -66,15 +68,17 @@ function Header({
             />
           </IconButton>
           <Box ml={1} display="flex" alignItems="center">
-            <VirtoLogo
-              sx={{
-                color: theme =>
-                  theme.palette.mode === "dark" ? "#003063" : "white",
-                height: 22,
-                mr: 1,
-                width: 110
-              }}
-            />
+            <Link href={virtoLogoLinkUrl} underline="none" display="flex">
+              <VirtoLogo
+                sx={{
+                  color: theme =>
+                    theme.palette.mode === "dark" ? "#003063" : "white",
+                  height: 22,
+                  mr: 1,
+                  width: 110
+                }}
+              />
+            </Link>
             <Typography
               variant="h6"
               fontSize="28px"
@@ -86,7 +90,7 @@ function Header({
                 theme.palette.mode === "dark" ? "#003063" : "white"
               }
             >
-              {appName}
+              {`. ${appName}`}
             </Typography>
           </Box>
         </Box>
@@ -105,15 +109,15 @@ function Header({
 
 // app header component
 function AppHeader({
-  appUrls,
-  virtoLogoLinkUrl = null,
   appName,
+  appUrls,
+  mode,
   onChangePassword,
   onLogout,
+  onMenuClick,
   onModeChange,
-  mode,
   username,
-  onMenuClick
+  virtoLogoLinkUrl = null
 }) {
   // sidebar styling
   const applancherWidth = 300;
@@ -130,13 +134,14 @@ function AppHeader({
     <>
       <Header
         appName={appName}
-        onMenuClick={handleMenuClick(onMenuClick)}
+        mode={mode}
         onAppClick={() => setAppOpen(!appOpen)}
+        onChange={onModeChange}
         onChangePassword={onChangePassword}
         onLogout={onLogout}
-        onChange={onModeChange}
+        onMenuClick={handleMenuClick(onMenuClick)}
         username={username}
-        mode={mode}
+        virtoLogoLinkUrl={virtoLogoLinkUrl}
       />
       <Hidden>
         <Drawer
