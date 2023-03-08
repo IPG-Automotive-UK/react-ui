@@ -90,7 +90,8 @@ function Header({
                 theme.palette.mode === "dark" ? "#003063" : "white"
               }
             >
-              {`. ${appName}`}
+              {`. `}
+              <span>{appName}</span>
             </Typography>
           </Box>
         </Box>
