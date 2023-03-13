@@ -118,7 +118,8 @@ function AppHeader({
   onMenuClick,
   onModeChange,
   username,
-  virtoLogoLinkUrl = null
+  virtoLogoLinkUrl = null,
+  onAppButtonClick
 }) {
   // sidebar styling
   const applancherWidth = 300;
@@ -158,7 +159,11 @@ function AppHeader({
             }
           }}
         >
-          <AppLauncher appUrls={appUrls} logoLinkUrl={virtoLogoLinkUrl} />
+          <AppLauncher
+            appUrls={appUrls}
+            logoLinkUrl={virtoLogoLinkUrl}
+            onAppButtonClick={() => setAppOpen(false)}
+          />
         </Drawer>
       </Hidden>
     </>
@@ -189,6 +194,16 @@ AppHeader.propTypes = {
    */
   mode: PropTypes.oneOf(["light", "dark"]),
   /**
+   * Callback fired when the user clicks on App Button.
+   *
+   * **Signature**
+   * ```
+   * function(event: object) => void
+   * ```
+   * _event_: The event source of the callback.
+   */
+  onAppButtonClick: PropTypes.func,
+  /**
    * Callback fired when the user clicks on "Change password".
    *
    * **Signature**
@@ -208,16 +223,6 @@ AppHeader.propTypes = {
    * _event_: The event source of the callback.
    */
   onLogout: PropTypes.func.isRequired,
-  /**
-   * Callback fired when the user clicks on Menu icon.
-   *
-   * **Signature**
-   * ```
-   * function(event: object) => void
-   * ```
-   * _event_: The event source of the callback.
-   */
-  onMenuClick: PropTypes.func.isRequired,
   /**
    * Callback fired when the color mode is changed.
    *

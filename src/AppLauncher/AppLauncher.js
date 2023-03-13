@@ -16,7 +16,12 @@ import React from "react";
 import VirtoLogo from "../SvgIcons/VirtoLogo";
 
 // AppLauncher component for app which displays logo, list of items and app version
-function AppLauncher({ logoLinkUrl = null, showLogo = true, appUrls }) {
+function AppLauncher({
+  logoLinkUrl = null,
+  showLogo = true,
+  appUrls,
+  onAppButtonClick
+}) {
   // styles for virto app icons
   const iconStyle = { height: 74, mb: 1, width: 74 };
 
@@ -59,6 +64,11 @@ function AppLauncher({ logoLinkUrl = null, showLogo = true, appUrls }) {
       name: "VIRTO.ID"
     }
   ];
+
+  // handle app button click event
+  const handleAppButtonClick = cb => event => {
+    cb(event);
+  };
 
   // header logo
   const logoBox = (
@@ -104,6 +114,7 @@ function AppLauncher({ logoLinkUrl = null, showLogo = true, appUrls }) {
           return (
             <Paper
               elevation={1}
+              onClick={handleAppButtonClick(onAppButtonClick)}
               key={app.name}
               component="a"
               href={appUrls?.length > 0 ? appUrls[0][app.name] : "#"}
@@ -174,6 +185,16 @@ AppLauncher.propTypes = {
    * A String of the href URL for the Link of the IPG Logo, default is null (link disabled)
    */
   logoLinkUrl: PropTypes.string,
+  /**
+   * Callback fired when the user clicks on App Button.
+   *
+   * **Signature**
+   * ```
+   * function(event: object) => void
+   * ```
+   * _event_: The event source of the callback.
+   */
+  onAppButtonClick: PropTypes.func,
   /**
    * Boolean to determine if logo should be displayed at the top of the AppLauncher
    */
