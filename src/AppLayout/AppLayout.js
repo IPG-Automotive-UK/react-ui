@@ -18,7 +18,8 @@ function Layout({
   onChangePassword,
   onLogout,
   username,
-  content
+  content,
+  onMenuClick
 }) {
   // sidebar styling
   const sidebarWidth = 240;

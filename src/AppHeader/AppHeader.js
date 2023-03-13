@@ -74,7 +74,7 @@ function Header({
                   color: theme =>
                     theme.palette.mode === "dark" ? "#003063" : "white",
                   height: 22,
-                  mr: 1,
+                  mr: 0.4,
                   width: 110
                 }}
               />
@@ -90,8 +90,8 @@ function Header({
                 theme.palette.mode === "dark" ? "#003063" : "white"
               }
             >
-              {`. `}
-              <span>{appName}</span>
+              {`.`}
+              <span style={{ marginLeft: "7px" }}>{appName}</span>
             </Typography>
           </Box>
         </Box>
@@ -118,7 +118,8 @@ function AppHeader({
   onMenuClick,
   onModeChange,
   username,
-  virtoLogoLinkUrl = null
+  virtoLogoLinkUrl = null,
+  onAppButtonClick
 }) {
   // sidebar styling
   const applancherWidth = 300;
@@ -158,7 +159,11 @@ function AppHeader({
             }
           }}
         >
-          <AppLauncher appUrls={appUrls} logoLinkUrl={virtoLogoLinkUrl} />
+          <AppLauncher
+            appUrls={appUrls}
+            logoLinkUrl={virtoLogoLinkUrl}
+            onAppButtonClick={() => setAppOpen(false)}
+          />
         </Drawer>
       </Hidden>
     </>
@@ -189,6 +194,16 @@ AppHeader.propTypes = {
    */
   mode: PropTypes.oneOf(["light", "dark"]),
   /**
+   * Callback fired when the user clicks on App Button.
+   *
+   * **Signature**
+   * ```
+   * function(event: object) => void
+   * ```
+   * _event_: The event source of the callback.
+   */
+  onAppButtonClick: PropTypes.func.isRequired,
+  /**
    * Callback fired when the user clicks on "Change password".
    *
    * **Signature**
@@ -208,16 +223,6 @@ AppHeader.propTypes = {
    * _event_: The event source of the callback.
    */
   onLogout: PropTypes.func.isRequired,
-  /**
-   * Callback fired when the user clicks on Menu icon.
-   *
-   * **Signature**
-   * ```
-   * function(event: object) => void
-   * ```
-   * _event_: The event source of the callback.
-   */
-  onMenuClick: PropTypes.func.isRequired,
   /**
    * Callback fired when the color mode is changed.
    *

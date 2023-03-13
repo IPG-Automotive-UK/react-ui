@@ -1,5 +1,6 @@
 import AppLauncher from "./AppLauncher";
 import React from "react";
+import { action } from "@storybook/addon-actions";
 
 export default {
   component: AppLauncher,
@@ -17,7 +18,7 @@ const Template = args => {
         width: 260
       }}
     >
-      <AppLauncher {...args} />
+      <AppLauncher {...args} onMenuClick={action("onMenuClick")} />
     </div>
   );
 };
