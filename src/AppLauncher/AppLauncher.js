@@ -194,7 +194,7 @@ AppLauncher.propTypes = {
    * ```
    * _event_: The event source of the callback.
    */
-  onAppButtonClick: PropTypes.func,
+  onAppButtonClick: PropTypes.func.isRequired,
   /**
    * Boolean to determine if logo should be displayed at the top of the AppLauncher
    */

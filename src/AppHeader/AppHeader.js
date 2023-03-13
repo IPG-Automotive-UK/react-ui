@@ -202,7 +202,7 @@ AppHeader.propTypes = {
    * ```
    * _event_: The event source of the callback.
    */
-  onAppButtonClick: PropTypes.func,
+  onAppButtonClick: PropTypes.func.isRequired,
   /**
    * Callback fired when the user clicks on "Change password".
    *
