@@ -74,7 +74,7 @@ function Header({
                   color: theme =>
                     theme.palette.mode === "dark" ? "#003063" : "white",
                   height: 22,
-                  mr: 0.5,
+                  mr: 0.4,
                   width: 110
                 }}
               />
@@ -91,7 +91,7 @@ function Header({
               }
             >
               {`.`}
-              <span>{appName}</span>
+              <span style={{ marginLeft: "7px" }}>{appName}</span>
             </Typography>
           </Box>
         </Box>
