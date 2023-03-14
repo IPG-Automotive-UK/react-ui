@@ -118,8 +118,7 @@ function AppHeader({
   onMenuClick,
   onModeChange,
   username,
-  virtoLogoLinkUrl = null,
-  onAppButtonClick
+  virtoLogoLinkUrl = null
 }) {
   // sidebar styling
   const applancherWidth = 300;
@@ -193,16 +192,7 @@ AppHeader.propTypes = {
    * @default "light"
    */
   mode: PropTypes.oneOf(["light", "dark"]),
-  /**
-   * Callback fired when the user clicks on App Button.
-   *
-   * **Signature**
-   * ```
-   * function(event: object) => void
-   * ```
-   * _event_: The event source of the callback.
-   */
-  onAppButtonClick: PropTypes.func.isRequired,
+
   /**
    * Callback fired when the user clicks on "Change password".
    *
