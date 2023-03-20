@@ -22,17 +22,17 @@ import ResizeObserver from "resize-observer-polyfill";
 
 function SummaryCard({
   content = null,
-  height = 600,
+  height = 500,
   labels = [],
   media = "",
-  mediaHeight = 200,
-  mediaWidth = 400,
+  mediaHeight = 190,
+  mediaWidth = 336,
   moreOptionsPopover = null,
   onClickLabel = () => {},
   moreCardActions = null,
   subtitle = "subtitle",
   title = "title",
-  width = 450
+  width = 386
 }) {
   // title, subtitle and label refs and overflow states
   const titleRef = useRef();
@@ -418,14 +418,14 @@ SummaryCard.propTypes = {
   /**
    * The height of the media.
    * @type {number}
-   * @default 200
+   * @default 190
    *
    */
   mediaHeight: PropTypes.number,
   /**
    * The width of the media.
    * @type {number}
-   * @default 200
+   * @default 336
    *
    */
   mediaWidth: PropTypes.number,
@@ -493,7 +493,7 @@ SummaryCard.propTypes = {
   /**
    * The width of the card.
    * @type {number | string}
-   * @default 450
+   * @default 368
    * @default
    */
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
