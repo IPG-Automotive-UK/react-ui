@@ -107,7 +107,7 @@ function FileCard({
             src={media}
             sx={{
               height: 192,
-              objectFit: "contain",
+              objectFit: "fill",
               padding: 2,
               width: 336
             }}
@@ -196,7 +196,7 @@ function FileCard({
             startIcon={<Download />}
             onClick={handleDownload}
           >
-            {search === "" ? "Download all Files" : "Download Search Files"}
+            Download Project
           </Button>
         </Box>
       </Card>
