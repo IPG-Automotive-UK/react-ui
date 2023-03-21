@@ -55,7 +55,7 @@ describe("FileCard", () => {
   });
 
   // test that when there is nothing in search download button reads "Download all"
-  it("download button reads 'Download all' when there is nothing in search", () => {
+  it("download button reads 'Download Project' when there is nothing in search", () => {
     const files = [
       {
         files: [
@@ -89,7 +89,7 @@ describe("FileCard", () => {
     render(<FileCard fileTitle="file card title" files={files} />);
 
     // expect download button to read "Download all files"
-    expect(screen.getByText("Download all Files")).toBeInTheDocument();
+    expect(screen.getByText("Download Project")).toBeInTheDocument();
   });
   // test that when a search is entered download button reads "Download search files"
   it("download button reads 'Download search files' when a search is entered", () => {
@@ -179,7 +179,7 @@ describe("FileCard", () => {
     );
 
     // find download all button
-    const downloadAllButton = screen.getByText("Download all Files");
+    const downloadAllButton = screen.getByText("Download Project");
 
     // click download all button
     fireEvent.click(downloadAllButton);
