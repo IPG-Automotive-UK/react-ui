@@ -297,7 +297,7 @@ function SummaryCard({
             src={media}
             sx={{
               height: mediaHeight,
-              objectFit: "contain",
+              objectFit: "fill",
               padding: 2,
               width: mediaWidth
             }}
