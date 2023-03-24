@@ -294,12 +294,11 @@ function SummaryCard({
         >
           <CardMedia
             component="img"
-            src={media}
             sx={{
-              height: mediaHeight,
-              objectFit: "fill",
-              padding: 2,
-              width: mediaWidth
+              background: `pink url(${media})  50% 50% no-repeat`,
+              height: "190px",
+              mt: 2,
+              width: "336px"
             }}
           />
         </Box>
