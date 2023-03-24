@@ -298,6 +298,7 @@ function SummaryCard({
               background: `pink url(${media})  50% 50% no-repeat`,
               height: "190px",
               mt: 2,
+              transform: "scale(2,2)",
               width: "336px"
             }}
           />
