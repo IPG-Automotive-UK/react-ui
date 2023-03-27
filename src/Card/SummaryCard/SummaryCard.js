@@ -295,10 +295,9 @@ function SummaryCard({
           <CardMedia
             component="img"
             sx={{
-              background: `pink url(${media})  50% 50% no-repeat`,
-              height: "190px",
-              mt: 2,
-              transform: "scale(2,2)",
+              background: `url(${media}) 50% 50% no-repeat content-box`,
+              height: "192px",
+              p: 2,
               width: "336px"
             }}
           />
