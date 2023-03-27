@@ -289,21 +289,25 @@ function SummaryCard({
         <Box
           sx={{
             display: "flex",
-            justifyContent: "center"
+            height: 190,
+            justifyContent: "center",
+            width: 336
           }}
         >
           <CardMedia
+            component="img"
+            src={media}
             sx={{
-              background: `url(${media}) 50% 50% no-repeat content-box`,
-              height: "192px",
-              p: 2,
-              width: "336px"
+              maxHeight: "100%",
+              maxWidth: "100%",
+              mr: -4,
+              mt: 2
             }}
           />
         </Box>
         <CardContent
           sx={{
-            height: height - mediaHeight - 196,
+            height: height - mediaHeight - 165,
             overflowY: "hidden",
             padding: 1
           }}
