@@ -103,6 +103,8 @@ function FileCard({
           }}
         >
           <CardMedia
+            component="img"
+            src={media}
             sx={{
               background: `url(${media}) 50% 50% no-repeat content-box`,
               height: "192px",

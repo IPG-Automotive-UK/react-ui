@@ -22,7 +22,7 @@ import ResizeObserver from "resize-observer-polyfill";
 
 function SummaryCard({
   content = null,
-  height = 500,
+  height = 600,
   labels = [],
   media = "",
   mediaHeight = 190,
@@ -289,25 +289,23 @@ function SummaryCard({
         <Box
           sx={{
             display: "flex",
-            height: 190,
-            justifyContent: "center",
-            width: 336
+            justifyContent: "center"
           }}
         >
           <CardMedia
             component="img"
             src={media}
             sx={{
-              maxHeight: "100%",
-              maxWidth: "100%",
-              mr: -4,
-              mt: 2
+              height: mediaHeight,
+              objectFit: "contain",
+              padding: 2,
+              width: mediaWidth
             }}
           />
         </Box>
         <CardContent
           sx={{
-            height: height - mediaHeight - 165,
+            height: height - mediaHeight - 196,
             overflowY: "hidden",
             padding: 1
           }}
