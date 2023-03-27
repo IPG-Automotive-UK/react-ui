@@ -34,7 +34,20 @@ Default.args = {
     }
   ],
   appVersion: version,
-  content: <div>App Content goes here</div>,
+  /**
+   * Content set to something that forces the content to be scrollable
+   */
+  content: (
+    <div
+      style={{
+        height: "110vw",
+        padding: "16px",
+        width: "110vw"
+      }}
+    >
+      App Content goes here
+    </div>
+  ),
   mode: "light",
   sidebarContent: (
     <>
@@ -48,4 +61,7 @@ Default.args = {
     </>
   ),
   username: "Ruud van Nistelrooy"
+};
+Default.parameters = {
+  layout: "fullscreen" // removes the padding from the story iframe for this story
 };
