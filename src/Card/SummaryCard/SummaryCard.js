@@ -32,7 +32,7 @@ function SummaryCard({
   moreCardActions = null,
   subtitle = "subtitle",
   title = "title",
-  width = 386
+  width = 368
 }) {
   // title, subtitle and label refs and overflow states
   const titleRef = useRef();
@@ -57,7 +57,7 @@ function SummaryCard({
   const labelSpacing = 8;
 
   // overflow button width
-  const overflowButtonWidth = 40;
+  const overflowButtonWidth = 25;
 
   // check if label stack is overflowing
   const useComponentSize = comRef => {
