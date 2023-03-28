@@ -152,8 +152,8 @@ function AppHeader({
           onClose={() => setAppOpen(false)}
           sx={{
             "& .MuiDrawer-paper": {
-              height: `calc(100% - 64px)`,
-              top: "64px",
+              height: theme => `calc(100% - ${theme.mixins.toolbar.minHeight})`,
+              top: theme => theme.mixins.toolbar.minHeight,
               width: applancherWidth
             }
           }}

@@ -101,11 +101,16 @@ function Layout({
         >
           <Box sx={theme => theme.mixins.toolbar} />
           <Box
-            sx={{
-              height: theme =>
-                `calc(100vh - ${theme.mixins.toolbar.minHeight}px)`,
-              overflow: "auto"
-            }}
+            sx={theme => ({
+              height: `calc(100vh - ${theme.mixins.toolbar.minHeight}px)`,
+              overflow: "auto",
+              [theme.breakpoints.down("md")]: {
+                width: "100vw"
+              },
+              [theme.breakpoints.up("md")]: {
+                width: `calc(100vw - ${sidebarWidth}px)`
+              }
+            })}
           >
             <SnackbarProvider>{content}</SnackbarProvider>
           </Box>
