@@ -51,6 +51,7 @@ export { default as ToggleColorMode } from "./ToggleColorMode";
 export { default as TransferList } from "./TransferList";
 export { default as UserMenu } from "./UserMenu";
 export { UserAvatar, useColorMap } from "./UserAvatar";
+export { default as UseConfirmDialog } from "./UseConfirmDialog";
 export {
   IpgLogo,
   VirtoLogo,
