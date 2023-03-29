@@ -2,7 +2,6 @@ import { ConfirmProvider, useConfirm } from "material-ui-confirm";
 
 import { Button } from "@mui/material";
 import PropTypes from "prop-types";
-// import PropTypes from "prop-types";
 import React from "react";
 import useTheme from "../ThemeProvider/useTheme";
 
@@ -11,11 +10,11 @@ function ConfirmDialog({
   title = "UseConfirmDialog",
   description = "Would you like to continue?",
   confirmationText = "Yes",
-  cancellationText = "Cancel",
+  cancellationText = "No",
   allowClose = true,
   confirmationKeyword = "",
   hideCancelButton = false,
-  // buttonOrder = ["Yes", "No"],
+  buttonOrder = ["cancel", "confirm"],
   onClickThenHandler = () => {},
   onClickCatchHandler = () => {}
 }) {
@@ -72,13 +71,13 @@ function ConfirmDialog({
     confirm({
       ...confirmDialogStyle,
       allowClose,
+      buttonOrder,
       cancellationText,
       confirmationKeyword,
       confirmationText,
       description,
       hideCancelButton,
       title
-      // buttonOrder: buttonOrder
     })
       .then(() => {
         onClickThenHandler("Nikitha");
@@ -102,11 +101,11 @@ export default function UseConfirmDialog({
   onClickThenHandler = () => {},
   onClickCatchHandler = () => {},
   confirmationText = "Yes",
-  cancellationText = "Cancel",
+  cancellationText = "No",
   allowClose = true,
   confirmationKeyword = "",
-  hideCancelButton = false
-  // buttonOrder = ["Yes", "No"]
+  hideCancelButton = false,
+  buttonOrder = ["cancel", "confirm"]
 }) {
   return (
     <ConfirmProvider>
@@ -121,7 +120,7 @@ export default function UseConfirmDialog({
         allowClose={allowClose}
         confirmationKeyword={confirmationKeyword}
         hideCancelButton={hideCancelButton}
-        // buttonOrder={buttonOrder}
+        buttonOrder={buttonOrder}
       />
     </ConfirmProvider>
   );

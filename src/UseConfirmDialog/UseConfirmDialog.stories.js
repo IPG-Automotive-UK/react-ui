@@ -1,6 +1,5 @@
 import React from "react";
 import UseConfirmDialog from "./UseConfirmDialog";
-// import { action } from "@storybook/addon-actions";
 
 export default {
   component: UseConfirmDialog,
@@ -15,7 +14,7 @@ export const Default = Template.bind({});
 Default.args = {
   ...Default.args,
   allowClose: true,
-  // buttonOrder: ["Yes", "No"],
+  buttonOrder: ["cancel", "confirm"],
   buttonText: "Button",
   cancellationText: "No",
   confirmationKeyword: "",
