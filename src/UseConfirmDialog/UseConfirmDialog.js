@@ -3,6 +3,7 @@ import { ConfirmProvider, useConfirm } from "material-ui-confirm";
 
 import PropTypes from "prop-types";
 import React from "react";
+import ThemeProvider from "../ThemeProvider/ThemeProvider";
 import useTheme from "../ThemeProvider/useTheme";
 
 function ConfirmDialog({
@@ -141,28 +142,30 @@ export default function UseConfirmDialog({
   LinkUnderline = "hover"
 }) {
   return (
-    <ConfirmProvider>
-      <ConfirmDialog
-        componentText={componentText}
-        confirmationText={confirmationText}
-        cancellationText={cancellationText}
-        title={title}
-        description={description}
-        thenHandler={thenHandler}
-        catchHandler={catchHandler}
-        allowClose={allowClose}
-        confirmationKeyword={confirmationKeyword}
-        hideCancelButton={hideCancelButton}
-        buttonOrder={buttonOrder}
-        buttonVariant={buttonVariant}
-        buttonColor={buttonColor}
-        buttonSize={buttonSize}
-        componentType={componentType}
-        LinkComponent={LinkComponent}
-        LinkVariant={LinkVariant}
-        LinkColor={LinkColor}
-      />
-    </ConfirmProvider>
+    <ThemeProvider>
+      <ConfirmProvider>
+        <ConfirmDialog
+          componentText={componentText}
+          confirmationText={confirmationText}
+          cancellationText={cancellationText}
+          title={title}
+          description={description}
+          thenHandler={thenHandler}
+          catchHandler={catchHandler}
+          allowClose={allowClose}
+          confirmationKeyword={confirmationKeyword}
+          hideCancelButton={hideCancelButton}
+          buttonOrder={buttonOrder}
+          buttonVariant={buttonVariant}
+          buttonColor={buttonColor}
+          buttonSize={buttonSize}
+          componentType={componentType}
+          LinkComponent={LinkComponent}
+          LinkVariant={LinkVariant}
+          LinkColor={LinkColor}
+        />
+      </ConfirmProvider>
+    </ThemeProvider>
   );
 }
 
