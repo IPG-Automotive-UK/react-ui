@@ -1,12 +1,12 @@
+import { Button, Link } from "@mui/material";
 import { ConfirmProvider, useConfirm } from "material-ui-confirm";
 
-import { Button } from "@mui/material";
 import PropTypes from "prop-types";
 import React from "react";
 import useTheme from "../ThemeProvider/useTheme";
 
 function ConfirmDialog({
-  buttonText = "Button",
+  componentText = "Button",
   title = "UseConfirmDialog",
   description = "Would you like to continue?",
   confirmationText = "Yes",
@@ -15,8 +15,16 @@ function ConfirmDialog({
   confirmationKeyword = "",
   hideCancelButton = false,
   buttonOrder = ["cancel", "confirm"],
-  onClickThenHandler = () => {},
-  onClickCatchHandler = () => {}
+  thenHandler = () => {},
+  catchHandler = () => {},
+  buttonVariant = "contained",
+  buttonColor = "primary",
+  buttonSize = "medium",
+  componentType = "Button", // Button or Link
+  LinkComponent = "button",
+  LinkVariant = "body2",
+  LinkColor = "primary",
+  LinkUnderline = "hover"
 }) {
   // use confirm hook
   const confirm = useConfirm();
@@ -66,8 +74,6 @@ function ConfirmDialog({
   };
 
   const handleClick = () => {
-    // onClickThenHandler(confirm({ description: "Description", title: "title" }));
-    console.log(description);
     confirm({
       ...confirmDialogStyle,
       allowClose,
@@ -80,47 +86,81 @@ function ConfirmDialog({
       title
     })
       .then(() => {
-        onClickThenHandler("Nikitha");
+        thenHandler("Nikitha");
       })
       .catch(() => {
-        onClickCatchHandler("Nikitha");
+        catchHandler("Nikitha");
       });
   };
 
   return (
     <ConfirmProvider>
-      <Button onClick={handleClick}>{buttonText}</Button>
+      {componentType === "Button" ? (
+        <Button
+          variant={buttonVariant}
+          color={buttonColor}
+          size={buttonSize}
+          onClick={handleClick}
+        >
+          {componentText}
+        </Button>
+      ) : (
+        <Link
+          component={LinkComponent}
+          variant={LinkVariant}
+          color={LinkColor}
+          underline={LinkUnderline}
+          onClick={handleClick}
+        >
+          {componentText}
+        </Link>
+      )}
     </ConfirmProvider>
   );
 }
 
 export default function UseConfirmDialog({
-  buttonText = "Button",
+  componentText = "Button",
   title = "UseConfirmDialog",
   description = "Would you like to continue?",
-  onClickThenHandler = () => {},
-  onClickCatchHandler = () => {},
+  thenHandler = () => {},
+  catchHandler = () => {},
   confirmationText = "Yes",
   cancellationText = "No",
   allowClose = true,
   confirmationKeyword = "",
   hideCancelButton = false,
-  buttonOrder = ["cancel", "confirm"]
+  buttonOrder = ["cancel", "confirm"],
+  buttonVariant = "contained",
+  buttonColor = "primary",
+  buttonSize = "medium",
+  componentType = "Button",
+  LinkComponent = "button",
+  LinkVariant = "body2",
+  LinkColor = "primary",
+  LinkUnderline = "hover"
 }) {
   return (
     <ConfirmProvider>
       <ConfirmDialog
-        buttonText={buttonText}
+        componentText={componentText}
         confirmationText={confirmationText}
         cancellationText={cancellationText}
         title={title}
         description={description}
-        onClickThenHandler={onClickThenHandler}
-        onClickCatchHandler={onClickCatchHandler}
+        thenHandler={thenHandler}
+        catchHandler={catchHandler}
         allowClose={allowClose}
         confirmationKeyword={confirmationKeyword}
         hideCancelButton={hideCancelButton}
         buttonOrder={buttonOrder}
+        buttonVariant={buttonVariant}
+        buttonColor={buttonColor}
+        buttonSize={buttonSize}
+        componentType={componentType}
+        LinkComponent={LinkComponent}
+        LinkVariant={LinkVariant}
+        LinkColor={LinkColor}
       />
     </ConfirmProvider>
   );
@@ -128,21 +168,57 @@ export default function UseConfirmDialog({
 
 UseConfirmDialog.propTypes = {
   /**
+   * Color of the link
+   */
+  LinkColor: PropTypes.string,
+  /**
+   * Component of the link
+   */
+  LinkComponent: PropTypes.string,
+  /**
+   * Underline of the link
+   */
+  LinkUnderline: PropTypes.string,
+  /**
+   * Variant of the link
+   */
+  LinkVariant: PropTypes.string,
+  /**
    * Allow the dialog to be closed
    */
   allowClose: PropTypes.bool,
+  /**
+   * Color of the button
+   */
+  buttonColor: PropTypes.string,
   /**
    * Order of the buttons
    */
   buttonOrder: PropTypes.array,
   /**
-   * Text to display on the button
+   * Size of the button
    */
-  buttonText: PropTypes.string,
+  buttonSize: PropTypes.string,
+  /**
+   * Variant of the button
+   */
+  buttonVariant: PropTypes.string,
   /**
    * Text to display on the cancellation button
    */
   cancellationText: PropTypes.string,
+  /**
+   * Function to call when the dialog is cancelled
+   */
+  catchHandler: PropTypes.func,
+  /**
+   * Text to display on the button
+   */
+  componentText: PropTypes.string,
+  /**
+   * Type of the component
+   */
+  componentType: PropTypes.string,
   /**
    * Keyword to confirm the dialog
    */
@@ -160,13 +236,9 @@ UseConfirmDialog.propTypes = {
    */
   hideCancelButton: PropTypes.bool,
   /**
-   * Function to call when the dialog is cancelled
-   */
-  onClickCatchHandler: PropTypes.func,
-  /**
    * Function to call when the dialog is confirmed
    */
-  onClickThenHandler: PropTypes.func,
+  thenHandler: PropTypes.func,
   /**
    * Text to display on the title
    */
