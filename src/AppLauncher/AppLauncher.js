@@ -18,9 +18,9 @@ import VirtoLogo from "../SvgIcons/VirtoLogo";
 // AppLauncher component for app which displays logo, list of items and app version
 function AppLauncher({
   logoLinkUrl = null,
+  onAppButtonClick = () => {},
   showLogo = true,
-  appUrls,
-  onAppButtonClick
+  url = "http://localhost:3000"
 }) {
   // styles for virto app icons
   const iconStyle = { height: 74, mb: 1, width: 74 };
@@ -29,39 +29,48 @@ function AppLauncher({
   const appList = [
     {
       icon: <VirtoBuild sx={iconStyle} />,
-      name: "VIRTO.BUILD"
+      name: "VIRTO.BUILD",
+      url: `${url}/fleet/build`
     },
     {
       icon: <VirtoFleet sx={iconStyle} />,
-      name: "VIRTO.FLEET"
+      name: "VIRTO.FLEET",
+      url: `${url}/fleet`
     },
     {
       icon: <VirtoModel sx={iconStyle} />,
-      name: "VIRTO.MODEL"
+      name: "VIRTO.MODEL",
+      url: `${url}/model`
     },
     {
       icon: <VirtoScene sx={iconStyle} />,
-      name: "VIRTO.SCENE"
+      name: "VIRTO.SCENE",
+      url: `${url}/scene`
     },
     {
       icon: <VirtoTest sx={iconStyle} />,
-      name: "VIRTO.TEST"
+      name: "VIRTO.TEST",
+      url: `${url}/test`
     },
     {
       icon: <VirtoResult sx={iconStyle} />,
-      name: "VIRTO.RESULT"
+      name: "VIRTO.RESULT",
+      url: `${url}/result`
     },
     {
       icon: <VirtoData sx={iconStyle} />,
-      name: "VIRTO.DATA"
+      name: "VIRTO.DATA",
+      url: `${url}/data`
     },
     {
       icon: <VirtoVehicle sx={iconStyle} />,
-      name: "VIRTO.VEHICLE"
+      name: "VIRTO.VEHICLE",
+      url: `${url}/vehicle`
     },
     {
       icon: <VirtoID sx={iconStyle} />,
-      name: "VIRTO.ID"
+      name: "VIRTO.ID",
+      url: `${url}/id`
     }
   ];
 
@@ -117,7 +126,7 @@ function AppLauncher({
               onClick={handleAppButtonClick(onAppButtonClick)}
               key={app.name}
               component="a"
-              href={appUrls?.length > 0 ? appUrls[0][app.name] : "#"}
+              href={app.url}
               target="_blank"
               data-testid={app.name}
               sx={theme => ({
@@ -132,14 +141,6 @@ function AppLauncher({
                 boxShadow: "none",
                 cursor: "pointer",
                 mb: 2,
-                opacity:
-                  appUrls?.length > 0 && appUrls[0][app.name] !== undefined
-                    ? 1
-                    : 0.5,
-                pointerEvents:
-                  appUrls?.length > 0 && appUrls[0][app.name] !== undefined
-                    ? "auto"
-                    : "none",
                 textDecoration: "none",
                 width: 120
               })}
@@ -169,19 +170,6 @@ function AppLauncher({
 
 AppLauncher.propTypes = {
   /**
-   *  List of apps to display in the AppLauncher
-   * @default []
-   * @type {array}
-   * @example
-   * [
-   * {
-   * "VIRTO.BUILD": "https://someurl.com",
-   * "VIRTO.ID": "https://someurl.com",
-   * }
-   * ]
-   */
-  appUrls: PropTypes.array,
-  /**
    * A String of the href URL for the Link of the IPG Logo, default is null (link disabled)
    */
   logoLinkUrl: PropTypes.string,
@@ -198,7 +186,13 @@ AppLauncher.propTypes = {
   /**
    * Boolean to determine if logo should be displayed at the top of the AppLauncher
    */
-  showLogo: PropTypes.bool
+  showLogo: PropTypes.bool,
+  /**
+   *  Base URL for VIRTO home page. All apps are served relative to this URL.
+   * @default 'http://localhost:3000'
+   * @type {string}
+   */
+  url: PropTypes.string
 };
 
 export default AppLauncher;

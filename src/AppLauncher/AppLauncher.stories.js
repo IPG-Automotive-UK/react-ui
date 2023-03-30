@@ -26,14 +26,7 @@ const Template = args => {
 // default story
 export const Default = Template.bind({});
 Default.args = {
-  appUrls: [
-    {
-      "VIRTO.BUILD": "https://someurl.com",
-      "VIRTO.DATA": "https://someurl.com",
-      "VIRTO.FLEET": "https://someurl.com",
-      "VIRTO.ID": "https://someurl.com"
-    }
-  ],
+  baseUrl: "http://localhost:3000",
   showLogo: true
 };
 

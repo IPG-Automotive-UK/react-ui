@@ -11,7 +11,7 @@ import useTheme from "../ThemeProvider/useTheme";
 // app layout component
 function Layout({
   appVersion,
-  appUrls,
+  baseUrl,
   sidebarContent,
   virtoLogoLinkUrl = null,
   appName,
@@ -45,7 +45,7 @@ function Layout({
           onModeChange={newMode => setTheme(newMode)}
           username={username}
           mode={theme}
-          appUrls={appUrls}
+          baseUrl={baseUrl}
           virtoLogoLinkUrl={virtoLogoLinkUrl}
         />
         <Box
@@ -123,7 +123,7 @@ function Layout({
 // app layout wrapper component
 function AppLayout({
   appVersion,
-  appUrls,
+  baseUrl,
   sidebarContent,
   virtoLogoLinkUrl = null,
   appName,
@@ -136,7 +136,7 @@ function AppLayout({
     <ThemeProvider>
       <Layout
         appVersion={appVersion}
-        appUrls={appUrls}
+        baseUrl={baseUrl}
         sidebarContent={sidebarContent}
         virtoLogoLinkUrl={virtoLogoLinkUrl}
         appName={appName}
@@ -155,22 +155,13 @@ AppLayout.propTypes = {
    */
   appName: PropTypes.string.isRequired,
   /**
-   *  List of apps to display in the AppLauncher
-   * @default []
-   * @type {array}
-   * @example
-   * [
-   * {
-   * "VIRTO.BUILD": "https://someurl.com",
-   * "VIRTO.ID": "https://someurl.com",
-   * }
-   * ]
-   */
-  appUrls: PropTypes.array,
-  /**
    * App version to display at base of sidebar.
    */
   appVersion: PropTypes.string,
+  /**
+   * Base URL for VIRTO home page.
+   */
+  baseUrl: PropTypes.string,
   /**
    * The RHS content of the component app. Valid react element can be used.
    */
