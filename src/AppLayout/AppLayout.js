@@ -151,7 +151,7 @@ function AppLayout({
 
 AppLayout.propTypes = {
   /**
-   * App version to display in header.
+   * App name to display in header.
    */
   appName: PropTypes.string.isRequired,
   /**
