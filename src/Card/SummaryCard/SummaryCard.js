@@ -48,7 +48,7 @@ function SummaryCard({
   const [moreOptionsAnchorEl, setMoreOptionsAnchorEl] = useState(null);
 
   // header content width
-  const headerContentWidth = width - 65;
+  const headerContentWidth = width - 60;
 
   // label content width
   const labelContentWidth = width - 45;
@@ -57,7 +57,7 @@ function SummaryCard({
   const labelSpacing = 8;
 
   // overflow button width
-  const overflowButtonWidth = 25;
+  const overflowButtonWidth = 40;
 
   // check if label stack is overflowing
   const useComponentSize = comRef => {
@@ -230,6 +230,7 @@ function SummaryCard({
         />
         <Box
           ml={2}
+          pr={2}
           sx={{
             height: 24,
             maxWidth: headerContentWidth,
