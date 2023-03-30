@@ -1,1 +1,1 @@
-export { default } from "./ConfirmProvider";
+export { ConfirmProvider, useConfirm } from "./ConfirmProvider";
