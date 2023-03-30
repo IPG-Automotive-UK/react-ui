@@ -17,10 +17,10 @@ import VirtoLogo from "../SvgIcons/VirtoLogo";
 
 // AppLauncher component for app which displays logo, list of items and app version
 function AppLauncher({
+  baseUrl = "http://localhost:3000",
   logoLinkUrl = null,
   onAppButtonClick = () => {},
-  showLogo = true,
-  url = "http://localhost:3000"
+  showLogo = true
 }) {
   // styles for virto app icons
   const iconStyle = { height: 74, mb: 1, width: 74 };
@@ -30,47 +30,47 @@ function AppLauncher({
     {
       icon: <VirtoBuild sx={iconStyle} />,
       name: "VIRTO.BUILD",
-      url: `${url}/fleet/build`
+      url: `${baseUrl}/fleet/build`
     },
     {
       icon: <VirtoFleet sx={iconStyle} />,
       name: "VIRTO.FLEET",
-      url: `${url}/fleet`
+      url: `${baseUrl}/fleet`
     },
     {
       icon: <VirtoModel sx={iconStyle} />,
       name: "VIRTO.MODEL",
-      url: `${url}/model`
+      url: `${baseUrl}/model`
     },
     {
       icon: <VirtoScene sx={iconStyle} />,
       name: "VIRTO.SCENE",
-      url: `${url}/scene`
+      url: `${baseUrl}/scene`
     },
     {
       icon: <VirtoTest sx={iconStyle} />,
       name: "VIRTO.TEST",
-      url: `${url}/test`
+      url: `${baseUrl}/test`
     },
     {
       icon: <VirtoResult sx={iconStyle} />,
       name: "VIRTO.RESULT",
-      url: `${url}/result`
+      url: `${baseUrl}/result`
     },
     {
       icon: <VirtoData sx={iconStyle} />,
       name: "VIRTO.DATA",
-      url: `${url}/data`
+      url: `${baseUrl}/data`
     },
     {
       icon: <VirtoVehicle sx={iconStyle} />,
       name: "VIRTO.VEHICLE",
-      url: `${url}/vehicle`
+      url: `${baseUrl}/vehicle`
     },
     {
       icon: <VirtoID sx={iconStyle} />,
       name: "VIRTO.ID",
-      url: `${url}/id`
+      url: `${baseUrl}/id`
     }
   ];
 
@@ -170,6 +170,12 @@ function AppLauncher({
 
 AppLauncher.propTypes = {
   /**
+   * Base URL for VIRTO home page. All apps are served relative to this URL.
+   * @default 'http://localhost:3000'
+   * @type {string}
+   */
+  baseUrl: PropTypes.string,
+  /**
    * A String of the href URL for the Link of the IPG Logo, default is null (link disabled)
    */
   logoLinkUrl: PropTypes.string,
@@ -186,13 +192,7 @@ AppLauncher.propTypes = {
   /**
    * Boolean to determine if logo should be displayed at the top of the AppLauncher
    */
-  showLogo: PropTypes.bool,
-  /**
-   *  Base URL for VIRTO home page. All apps are served relative to this URL.
-   * @default 'http://localhost:3000'
-   * @type {string}
-   */
-  url: PropTypes.string
+  showLogo: PropTypes.bool
 };
 
 export default AppLauncher;

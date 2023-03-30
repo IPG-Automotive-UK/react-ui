@@ -159,9 +159,9 @@ function AppHeader({
           }}
         >
           <AppLauncher
+            baseUrl={baseUrl}
             logoLinkUrl={virtoLogoLinkUrl}
             onAppButtonClick={() => setAppOpen(false)}
-            url={baseUrl}
           />
         </Drawer>
       </Hidden>
