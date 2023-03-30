@@ -5,21 +5,17 @@ import {
 
 import PropTypes from "prop-types";
 import React from "react";
-import ThemeProvider from "../ThemeProvider/ThemeProvider";
-import useTheme from "../ThemeProvider/useTheme";
 
-export default function ConfirmProvider({ children }) {
-  const theme = useTheme();
-  // const style ConfirmDialog
+export function ConfirmProvider({ children }) {
   const confirmDialogStyle = {
     cancellationButtonProps: {
       sx: {
-        color: theme === "light" ? "" : "#87a5d2"
+        color: theme => (theme.palette.mode === "light" ? "" : "#87a5d2")
       }
     },
     confirmationButtonProps: {
       sx: {
-        bgcolor: theme === "light" ? "" : "#87a5d2"
+        bgcolor: theme => (theme.palette.mode === "light" ? "" : "#87a5d2")
       },
       variant: "contained"
     },
@@ -35,8 +31,8 @@ export default function ConfirmProvider({ children }) {
       PaperProps: {
         // change background colour of dialog
         sx: {
-          bgcolor: theme === "light" ? "" : "#383838",
-          color: theme === "light" ? "" : "#fff"
+          bgcolor: theme => (theme.palette.mode === "light" ? "" : "#383838"),
+          color: theme => (theme.palette.mode === "light" ? "" : "#fff")
         }
       },
       maxWidth: "xs",
@@ -59,50 +55,17 @@ export default function ConfirmProvider({ children }) {
     confirmationText: "Yes",
     description: "Would you like to continue?",
     hideCancelButton: false,
-    title: "UseConfirmDialog"
+    title: "Dialog Title"
   };
   return (
-    <ThemeProvider>
-      <MuiConfirmProvider defaultOptions={defaultOptions}>
-        {children}
-      </MuiConfirmProvider>
-    </ThemeProvider>
+    <MuiConfirmProvider defaultOptions={defaultOptions}>
+      {children}
+    </MuiConfirmProvider>
   );
 }
 
 export { useConfirm };
 
 ConfirmProvider.propTypes = {
-  /**
-   * Allow the dialog to be closed
-   */
-  allowClose: PropTypes.bool,
-  /**
-   * Order of the buttons
-   */
-  buttonOrder: PropTypes.arrayOf(PropTypes.string),
-  /**
-   * Text to display on the cancellation button
-   */
-  cancellationText: PropTypes.string,
-  /**
-   * Keyword to confirm the dialog
-   */
-  confirmationKeyword: PropTypes.string,
-  /**
-   * Text to display on the confirmation button
-   */
-  confirmationText: PropTypes.string,
-  /**
-   * Text to display on the description
-   */
-  description: PropTypes.string,
-  /**
-   * Hide the cancel button
-   */
-  hideCancelButton: PropTypes.bool,
-  /**
-   * Text to display on the title
-   */
-  title: PropTypes.string
+  children: PropTypes.node
 };

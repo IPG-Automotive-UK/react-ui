@@ -1,4 +1,6 @@
-import ConfirmProvider from "./ConfirmProvider";
+import { ConfirmProvider, useConfirm } from "./ConfirmProvider";
+
+import { Button } from "@mui/material";
 import React from "react";
 
 export default {
@@ -6,11 +8,31 @@ export default {
   title: "General/ConfirmProvider"
 };
 
-const Template = args => {
-  return <ConfirmProvider {...args} />;
+function ConfirmDialog() {
+  const confirm = useConfirm();
+  const handleClick = () => {
+    confirm()
+      .then(() => {
+        console.log("confirmed");
+      })
+      .catch(() => {
+        console.log("canceled");
+      });
+  };
+
+  return (
+    <Button variant="contained" onClick={handleClick}>
+      Button
+    </Button>
+  );
+}
+
+const Template = ({ children }) => {
+  return <ConfirmProvider>{children}</ConfirmProvider>;
 };
 
 export const Default = Template.bind({});
+
 Default.args = {
-  defaultOptions: { confirmationText: "Yes", title: "Confirm Dialog" }
+  children: <ConfirmDialog />
 };
