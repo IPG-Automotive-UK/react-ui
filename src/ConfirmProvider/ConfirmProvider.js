@@ -51,7 +51,6 @@ export function ConfirmProvider({ children }) {
     allowClose: true,
     buttonOrder: ["cancel", "confirm"],
     cancellationText: "No",
-    confirmationKeyword: "",
     confirmationText: "Yes",
     description: "Would you like to continue?",
     hideCancelButton: false,
