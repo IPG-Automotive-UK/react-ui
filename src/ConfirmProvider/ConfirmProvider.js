@@ -6,6 +6,7 @@ import {
 import PropTypes from "prop-types";
 import React from "react";
 
+// component to wrap the app with to provide the confirm dialog
 export function ConfirmProvider({ children }) {
   const confirmDialogStyle = {
     cancellationButtonProps: {

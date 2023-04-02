@@ -3,10 +3,12 @@ import { fireEvent, render } from "@testing-library/react";
 
 import { Button } from "@mui/material";
 import React from "react";
+import { action } from "@storybook/addon-actions";
 import { userEvent } from "@storybook/testing-library";
 
 function ConfirmDialog() {
   const confirm = useConfirm();
+
   const handleClick = () => {
     confirm({
       cancellationText: "No",
@@ -15,10 +17,10 @@ function ConfirmDialog() {
       title: "Dialog Title"
     })
       .then(() => {
-        console.log("confirmed");
+        action("confirmed");
       })
       .catch(() => {
-        console.log("cancelled");
+        action("canceled");
       });
   };
 

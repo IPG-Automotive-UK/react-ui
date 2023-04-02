@@ -2,21 +2,23 @@ import { ConfirmProvider, useConfirm } from "./ConfirmProvider";
 
 import { Button } from "@mui/material";
 import React from "react";
+import { action } from "@storybook/addon-actions";
 
 export default {
   component: ConfirmProvider,
   title: "General/ConfirmProvider"
 };
 
+// confirm dialog component with useConfirm hook
 function ConfirmDialog() {
   const confirm = useConfirm();
   const handleClick = () => {
     confirm()
       .then(() => {
-        console.log("confirmed");
+        action("confirmed");
       })
       .catch(() => {
-        console.log("canceled");
+        action("canceled");
       });
   };
 
@@ -27,6 +29,7 @@ function ConfirmDialog() {
   );
 }
 
+// template for story
 const Template = ({ children }) => {
   return <ConfirmProvider>{children}</ConfirmProvider>;
 };
