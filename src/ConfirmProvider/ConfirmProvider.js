@@ -43,6 +43,7 @@ export function ConfirmProvider({ children }) {
     },
     titleProps: {
       sx: {
+        color: theme => (theme.palette.mode === "light" ? "#000" : "#fff"),
         mb: 2
       }
     }
