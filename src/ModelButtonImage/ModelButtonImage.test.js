@@ -3,9 +3,8 @@ import ModelButtonSampleImg from "../../static/ModelButtonSampleImg.svg";
 import React from "react";
 import ThemeProvider from "../ThemeProvider";
 import { render } from "@testing-library/react";
-import { unstable_createMuiStrictModeTheme } from "@mui/material/styles";
-
 // eslint-disable-next-line camelcase
+import { unstable_createMuiStrictModeTheme } from "@mui/material/styles";
 
 // wrapper function for ModelButtonImage
 function ModelImage({ src = ModelButtonSampleImg }) {
@@ -38,6 +37,11 @@ describe("ModelButtonImage", () => {
     const image = getByAltText("model-icon");
 
     expect(image).toHaveStyle("filter: invert(0)");
+  });
+
+  // clear all mocks after each test
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   // component should render an image with filter invert(1) in dark mode
