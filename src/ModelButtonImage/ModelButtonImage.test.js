@@ -3,6 +3,8 @@ import ModelButtonSampleImg from "../../static/ModelButtonSampleImg.svg";
 import React from "react";
 import ThemeProvider from "../ThemeProvider";
 import { render } from "@testing-library/react";
+// eslint-disable-next-line camelcase
+import { unstable_createMuiStrictModeTheme } from "@mui/material/styles";
 
 // wrapper function for ModelButtonImage
 function ModelImage({ src = ModelButtonSampleImg }) {
@@ -26,15 +28,34 @@ describe("ModelButtonImage", () => {
   });
 
   // component should render an image with filter invert(0) in light mode
-
   it("should render an image with filter invert(0) in light mode", () => {
     const { getByAltText } = render(
-      <ThemeProvider theme="light">
+      <ThemeProvider theme={"light"}>
         <ModelImage />
       </ThemeProvider>
     );
     const image = getByAltText("model-icon");
 
     expect(image).toHaveStyle("filter: invert(0)");
+  });
+
+  // clear all mocks after each test
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  // component should render an image with filter invert(1) in dark mode
+  it("should render an image with filter invert(1) in dark mode", () => {
+    const theme = unstable_createMuiStrictModeTheme("dark");
+    const { getByAltText } = render(
+      <React.StrictMode>
+        <ThemeProvider theme={theme}>
+          <ModelImage />
+        </ThemeProvider>
+      </React.StrictMode>
+    );
+    const image = getByAltText("model-icon");
+
+    expect(image).toHaveStyle("filter: invert(1)");
   });
 });
