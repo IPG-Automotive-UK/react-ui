@@ -1,53 +1,40 @@
-import { ThemeProvider, useTheme } from "@mui/material/styles";
-
 import ModelButtonImage from "./ModelButtonImage";
 import ModelButtonSampleImg from "../../static/ModelButtonSampleImg.svg";
 import React from "react";
+import ThemeProvider from "../ThemeProvider";
 import { render } from "@testing-library/react";
 
 // wrapper function for ModelButtonImage
 function ModelImage({ src = ModelButtonSampleImg }) {
-  return (
-    <>
-      <ModelButtonImage src={src} />
-    </>
-  );
-}
-
-// wrapper function for ModelImage with theme
-export default function App({ src }) {
-  const theme = useTheme();
-
-  return (
-    <ThemeProvider theme={theme}>
-      <ModelImage src={src} />
-    </ThemeProvider>
-  );
+  return <ModelButtonImage src={src} />;
 }
 
 // test suite for ModelButtonImage
 describe("ModelButtonImage", () => {
   // component should show alt text
   it("should show alt text  ", () => {
-    const { getByAltText } = render(<App />);
+    const { getByAltText } = render(<ModelImage />);
     const image = getByAltText("model-icon");
     expect(image).toBeInTheDocument();
   });
 
   // component should render an image with the correct src
   it("should render an image with the correct src", () => {
-    const { getByAltText } = render(<App src={ModelButtonSampleImg} />);
+    const { getByAltText } = render(<ModelImage src={ModelButtonSampleImg} />);
     const image = getByAltText("model-icon");
     expect(image).toHaveAttribute("src", ModelButtonSampleImg);
   });
 
-  // component should render an image with the correct filter
-  it("should render an image with the correct filter", () => {
-    const { getByAltText } = render(<App />);
+  // component should render an image with filter invert(0) in light mode
+
+  it("should render an image with filter invert(0) in light mode", () => {
+    const { getByAltText } = render(
+      <ThemeProvider theme="light">
+        <ModelImage />
+      </ThemeProvider>
+    );
     const image = getByAltText("model-icon");
 
-    expect(image).toHaveStyle(
-      'filter: theme => theme.palette.mode === "light" ? "invert(0)" : "invert(1)"'
-    );
+    expect(image).toHaveStyle("filter: invert(0)");
   });
 });
