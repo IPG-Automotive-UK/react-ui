@@ -29,7 +29,7 @@ export default function NoWrapTypography({ children, maxWidth = "250px", sx }) {
       }}
     >
       <Tooltip
-        title={"test tooltip"}
+        title={children}
         disableHoverListener={!tooltipEnabled}
         onMouseEnter={handleShouldShow}
         onMouseLeave={hideTooltip}
