@@ -38,7 +38,6 @@ describe("ModelButtonImage", () => {
 
     expect(image).toHaveStyle("filter: invert(0)");
   });
-  
   // component should render an image with filter invert(1) in dark mode
   it("should render an image with filter invert(1) in dark mode", () => {
     const theme = unstable_createMuiStrictModeTheme("dark");
