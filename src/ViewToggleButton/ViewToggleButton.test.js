@@ -40,7 +40,7 @@ describe("Select", () => {
     expect(cardButton.getAttribute("aria-pressed")).toBe("false");
     expect(tableButton.getAttribute("aria-pressed")).toBe("true");
   });
-  test("test onchange callback is called", async () => {
+  test("test onchange callback is called on click of an option", async () => {
     const onChange = jest.fn();
     render(<ViewToggleButtonWithState onChange={onChange} value="card" />);
     const cardButton = screen.getByTestId("cardButton");
