@@ -59,10 +59,6 @@ ViewToggleButton.propTypes = {
    */
   onChange: PropTypes.func,
   /**
-   * The orientation of the toggle button group.
-   */
-  orientation: PropTypes.oneOf(["horizontal", "vertical"]),
-  /**
    * The size of the component.
    */
   size: PropTypes.oneOf(["small", "medium", "large"]),
