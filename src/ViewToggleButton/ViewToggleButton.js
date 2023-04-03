@@ -11,7 +11,6 @@ import PropTypes from "prop-types";
 export default function ViewToggleButton({
   disabled = false,
   onChange = () => {},
-  orientation = "horizontal",
   size = "medium",
   value = "card"
 }) {
@@ -22,7 +21,6 @@ export default function ViewToggleButton({
       disabled={disabled}
       exclusive
       onChange={onChange}
-      orientation={orientation}
       size={size}
       value={value}
     >

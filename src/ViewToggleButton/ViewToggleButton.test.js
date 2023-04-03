@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 
 import React from "react";
 import ViewToggleButton from ".";
+import userEvent from "@testing-library/user-event";
 
 /**
  * Test wrapper for ViewToggleButton
@@ -38,5 +39,12 @@ describe("Select", () => {
     const tableButton = screen.getByTestId("tableButton");
     expect(cardButton.getAttribute("aria-pressed")).toBe("false");
     expect(tableButton.getAttribute("aria-pressed")).toBe("true");
+  });
+  test("test onchange callback is called", async () => {
+    const onChange = jest.fn();
+    render(<ViewToggleButtonWithState onChange={onChange} value="card" />);
+    const cardButton = screen.getByTestId("cardButton");
+    await userEvent.click(cardButton);
+    expect(onChange).toHaveBeenCalled();
   });
 });

@@ -22,7 +22,6 @@ const Template = args => {
 export const Default = Template.bind({});
 Default.args = {
   disabled: false,
-  orientation: "horizontal",
   size: "medium",
   value: "card"
 };
