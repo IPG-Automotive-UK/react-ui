@@ -18,7 +18,7 @@ export default function ViewToggleButton({
   // return components
   return (
     <ToggleButtonGroup
-      aria-label="text alignment"
+      aria-label="toggle view"
       disabled={disabled}
       exclusive
       onChange={onChange}
@@ -27,14 +27,14 @@ export default function ViewToggleButton({
       value={value}
     >
       <ToggleButton
-        aria-label="card view"
+        aria-label="card button"
         data-testid="cardButton"
         value="card"
       >
         <GridView />
       </ToggleButton>
       <ToggleButton
-        aria-label="table view"
+        aria-label="table button"
         data-testid="tableButton"
         value="table"
       >
