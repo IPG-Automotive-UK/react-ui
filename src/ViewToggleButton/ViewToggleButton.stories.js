@@ -1,5 +1,5 @@
 import React from "react";
-import ViewToggleButton from "./ViewToggleButton";
+import ViewToggleButton from ".";
 import { action } from "@storybook/addon-actions";
 
 export default {

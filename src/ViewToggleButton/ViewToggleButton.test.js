@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 
 import React from "react";
-import ViewToggleButton from "./ViewToggleButton";
+import ViewToggleButton from ".";
 
 /**
  * Test wrapper for ViewToggleButton
