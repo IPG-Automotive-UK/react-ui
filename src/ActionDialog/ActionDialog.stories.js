@@ -1,5 +1,7 @@
 import ActionDialog from "./ActionDialog";
 import React from "react";
+import { Typography } from "@mui/material";
+import { action } from "@storybook/addon-actions";
 
 export default {
   component: ActionDialog,
@@ -7,14 +9,26 @@ export default {
 };
 
 const Template = args => {
-  return <ActionDialog {...args} open={true} />;
+  return (
+    <ActionDialog
+      {...args}
+      open={true}
+      onCancelClick={action("onCancelClick")}
+      onSaveClick={action("onSaveClick")}
+    />
+  );
 };
 
 export const Default = Template.bind({});
 Default.args = {
   cancelText: "cancel",
-  onChange: () => {},
+  content: <Typography>Content goes here</Typography>,
+  onCancelClick: () => {},
+  onSaveClick: () => {},
   open: true,
+  saveEnabled: false,
   saveText: "Save",
-  title: "IPG Automotive"
+  showCloseIcon: true,
+  title: "Some title",
+  width: "400px"
 };
