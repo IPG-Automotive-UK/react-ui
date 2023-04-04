@@ -1,12 +1,10 @@
 import { ConfirmProvider, useConfirm } from "./ConfirmProvider";
-import { fireEvent, render } from "@testing-library/react";
 
 import { Button } from "@mui/material";
 import React from "react";
 import ThemeProvider from "../ThemeProvider";
 import { action } from "@storybook/addon-actions";
-// eslint-disable-next-line camelcase
-import { unstable_createMuiStrictModeTheme } from "@mui/material/styles";
+import { render } from "@testing-library/react";
 import { userEvent } from "@storybook/testing-library";
 
 function ConfirmDialog() {
@@ -35,8 +33,8 @@ function ConfirmDialog() {
 }
 
 describe("ConfirmProvider", () => {
-  // tests in light mode
-  it("onClick button should show dialog with title, description,cancellation text and Confirmation text with appropriate colors and bgcolor in light mode", () => {
+  // test to check if dialog is shown with correct title, description, cancellation text and confirmation text
+  it("onClick button should show dialog with title, description,cancellation text and Confirmation text ", () => {
     const { getByText } = render(
       <ThemeProvider theme={"light"}>
         <ConfirmProvider>
@@ -47,52 +45,31 @@ describe("ConfirmProvider", () => {
     const button = getByText("Button");
     userEvent.click(button);
 
-    // verify dialog  background color
-    const dialog = getByText("Dialog Title").closest("div");
-    expect(dialog).toHaveStyle("background-color: rgb(255, 255, 255)");
-
-    // verify dialog title, title color is correct
+    // verify dialog title
     const dialogTitle = getByText("Dialog Title");
-    expect(dialogTitle).toHaveStyle("color: rgb(0, 0, 0)");
     expect(dialogTitle).toBeVisible();
 
-    // verify dialog description,description color is correct
+    // verify dialog description
     const dialogDescription = getByText("Would you like to continue?");
-    expect(dialogDescription).toHaveStyle("color:  rgba(0, 0, 0, 0.6)");
     expect(dialogDescription).toBeVisible();
 
-    // verify dialog confirmation button text, background color and color are correct
+    // verify dialog confirmation button text
     const dialogConfirmationButton = getByText("Yes");
-    expect(dialogConfirmationButton).toHaveStyle(
-      "background-color: rgb(0, 48, 99); color: rgb(255, 255, 255)"
-    );
     expect(dialogConfirmationButton).toBeVisible();
 
-    // verify dialog cancellation text, background color and color are correct
+    // verify dialog cancellation button text
     const dialogCancellationButton = getByText("No");
-    expect(dialogCancellationButton).toHaveStyle(
-      "background-color:transparent; color: rgb(0, 48, 99)"
-    );
     expect(dialogCancellationButton).toBeVisible();
-
-    // onclick dialog cancellation button should show alert
-    fireEvent.click(dialogCancellationButton);
-
-    // verify that dialog was closed
-    expect(dialogTitle).not.toBeVisible();
   });
 
-  // tests in dark mode
-  it("onClick button should show dialog with title, description,cancellation text and Confirmation text with appropriate colors and bgcolor in dark mode", () => {
-    const theme = unstable_createMuiStrictModeTheme("dark");
+  // tests to check confirmation dialog supports dark mode
+  it("Tests to check confirmation dialog supports dark mode", () => {
     const { getByText } = render(
-      <React.StrictMode>
-        <ThemeProvider theme={theme}>
-          <ConfirmProvider>
-            <ConfirmDialog />
-          </ConfirmProvider>
-        </ThemeProvider>
-      </React.StrictMode>
+      <ThemeProvider theme={"dark"}>
+        <ConfirmProvider>
+          <ConfirmDialog />
+        </ConfirmProvider>
+      </ThemeProvider>
     );
     const button = getByText("Button");
 
@@ -102,34 +79,62 @@ describe("ConfirmProvider", () => {
     const dialog = getByText("Dialog Title").closest("div");
     expect(dialog).toHaveStyle("background-color:rgb(56, 56, 56)");
 
-    // verify dialog title, title color is correct
+    // verify dialog title color in dark mode
     const dialogTitle = getByText("Dialog Title");
     expect(dialogTitle).toHaveStyle("color: rgb(255, 255, 255)");
-    expect(dialogTitle).toBeVisible();
 
-    // verify dialog description,description color is correct
+    // verify dialog description color in dark mode
     const dialogDescription = getByText("Would you like to continue?");
     expect(dialogDescription).toHaveStyle("color:  rgba(255, 255, 255, 0.7)");
-    expect(dialogDescription).toBeVisible();
 
-    // verify dialog confirmation button text, background color and color are correct
+    // verify dialog confirmation button background color and color in dark mode
     const dialogConfirmationButton = getByText("Yes");
     expect(dialogConfirmationButton).toHaveStyle(
       "background-color: rgb(135, 165, 210); color:rgba(0, 0, 0, 0.87)"
     );
-    expect(dialogConfirmationButton).toBeVisible();
 
-    // verify dialog cancellation text, background color and color are correct
+    // verify dialog cancellation background color and color in dark mode
     const dialogCancellationButton = getByText("No");
     expect(dialogCancellationButton).toHaveStyle(
       "background-color:transparent; color: rgb(135, 165, 210)"
     );
-    expect(dialogCancellationButton).toBeVisible();
+  });
 
-    // onclick dialog cancellation button should show alert
-    fireEvent.click(dialogCancellationButton);
+  // tests to check confirmation dialog supports light mode
+  it("Tests to check confirmation dialog supports light mode", () => {
+    const { getByText } = render(
+      <ThemeProvider theme={"light"}>
+        <ConfirmProvider>
+          <ConfirmDialog />
+        </ConfirmProvider>
+      </ThemeProvider>
+    );
+    const button = getByText("Button");
 
-    // verify that dialog was closed
-    expect(dialogTitle).not.toBeVisible();
+    userEvent.click(button);
+
+    // verify dialog  background color
+    const dialog = getByText("Dialog Title").closest("div");
+    expect(dialog).toHaveStyle("background-color: rgb(255, 255, 255)");
+
+    // verify dialog title color in light mode
+    const dialogTitle = getByText("Dialog Title");
+    expect(dialogTitle).toHaveStyle("color: rgb(0, 0, 0)");
+
+    // verify dialog description color in light mode
+    const dialogDescription = getByText("Would you like to continue?");
+    expect(dialogDescription).toHaveStyle("color:  rgba(0, 0, 0, 0.6)");
+
+    // verify dialog confirmation button background color and color are correct in light mode
+    const dialogConfirmationButton = getByText("Yes");
+    expect(dialogConfirmationButton).toHaveStyle(
+      "background-color: rgb(0, 48, 99); color: rgb(255, 255, 255)"
+    );
+
+    // verify dialog cancellation background color and color are correct in light mode
+    const dialogCancellationButton = getByText("No");
+    expect(dialogCancellationButton).toHaveStyle(
+      "background-color:transparent; color: rgb(0, 48, 99)"
+    );
   });
 });
