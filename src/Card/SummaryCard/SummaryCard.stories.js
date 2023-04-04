@@ -40,14 +40,14 @@ Default.args = {
   height: 600,
   labels: [],
   media: "",
-  mediaHeight: 190,
-  mediaWidth: 336,
+  mediaHeight: 200,
+  mediaWidth: 400,
   moreCardActions: null,
   moreOptionsPopover: null,
   onClickLabel: () => {},
   subtitle: "subtitle",
   title: "title",
-  width: 368
+  width: 450
 };
 
 export const TruncatedTitleAndSubtitle = Template.bind({});
@@ -159,10 +159,8 @@ ScenarioExample.args = {
       <Table size="small">
         <TableBody>
           <TableRow>
-            <TableCell sx={{ width: 100 }}>Description</TableCell>
-            <TableCell sx={{ width: 100 }}>
-              Some Description of a road
-            </TableCell>
+            <TableCell>Description</TableCell>
+            <TableCell>Some Description of a road</TableCell>
           </TableRow>
           <TableRow>
             <TableCell>Country</TableCell>

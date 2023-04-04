@@ -196,7 +196,7 @@ function FileCard({
             startIcon={<Download />}
             onClick={handleDownload}
           >
-            {search === "" ? "Download Project" : "Download Search Files"}
+            {search === "" ? "Download all Files" : "Download Search Files"}
           </Button>
         </Box>
       </Card>

@@ -1,6 +1,6 @@
-import { Box, Button } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
 
+import { Button } from "@mui/material";
 import DetailCard from "./DetailCard";
 import React from "react";
 import TableCard from "../TableCard";
@@ -179,7 +179,7 @@ ScenarioExample.args = {
     </>
   ),
   content: (
-    <Box sx={{ display: "flex", flexDirection: "column" }}>
+    <>
       <TableCard
         key={"scenario"}
         title="Scenario"
@@ -230,7 +230,7 @@ ScenarioExample.args = {
       />
       <TableCard key={"Maneuver"} title="Maneuver" />
       <TableCard key={"Misc"} title="Misc" />
-    </Box>
+    </>
   ),
   fileTitle: "Files",
   files: [
