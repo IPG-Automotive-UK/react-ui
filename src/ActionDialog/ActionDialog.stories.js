@@ -12,7 +12,6 @@ const Template = args => {
   return (
     <ActionDialog
       {...args}
-      open={true}
       onCancelClick={action("onCancelClick")}
       onSaveClick={action("onSaveClick")}
     />

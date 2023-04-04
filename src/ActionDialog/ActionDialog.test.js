@@ -62,4 +62,11 @@ describe("ActionDialog", () => {
     render(<ActionDialog {...defaultInputs} open={true} width="400px" />);
     expect(screen.getByTestId("action-dialog")).toHaveClass("MuiDialog-root");
   });
+  test("test dialog close icon shown", () => {
+    render(
+      <ActionDialog {...defaultInputs} open={true} showCloseIcon={true} />
+    );
+    const closeIcon = screen.getByTestId("close-icon");
+    expect(closeIcon).toBeInTheDocument();
+  });
 });

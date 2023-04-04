@@ -48,6 +48,7 @@ export default function ActionDialog({
         {title}
         {showCloseIcon ? (
           <IconButton
+            data-testid="close-icon"
             aria-label="close"
             onClick={onCancelClick}
             sx={{
