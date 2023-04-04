@@ -14,13 +14,20 @@ export default function ViewToggleButton({
   size = "medium",
   value = "card"
 }) {
+  // handle viewToggleOnChange
+  const viewToggleOnChange = (event, newValue) => {
+    if (newValue && newValue !== value) {
+      onChange(event, newValue);
+    }
+  };
+
   // return components
   return (
     <ToggleButtonGroup
       aria-label="toggle view"
       disabled={disabled}
       exclusive
-      onChange={onChange}
+      onChange={viewToggleOnChange}
       size={size}
       value={value}
     >

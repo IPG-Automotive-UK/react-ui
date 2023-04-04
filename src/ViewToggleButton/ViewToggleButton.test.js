@@ -14,12 +14,12 @@ const ViewToggleButtonWithState = ({
   value: valueIn = "",
   ...rest
 }) => {
-  const [value, setValue] = React.useState(valueIn);
+  const [view, setView] = React.useState(valueIn);
   const handleChange = (event, value) => {
-    setValue(value);
+    setView(value);
     onChange && onChange(event, value);
   };
-  return <ViewToggleButton {...rest} onChange={handleChange} value={value} />;
+  return <ViewToggleButton {...rest} onChange={handleChange} value={view} />;
 };
 
 /**
@@ -42,9 +42,19 @@ describe("Select", () => {
   });
   test("test onchange callback is called on click of an option", async () => {
     const onChange = jest.fn();
+    render(<ViewToggleButtonWithState onChange={onChange} value="table" />);
+    const cardButton = screen.getByTestId("cardButton");
+    await userEvent.click(cardButton);
+    expect(onChange).toHaveBeenCalledWith(
+      expect.objectContaining({ target: cardButton }),
+      expect.stringMatching(/card/)
+    );
+  });
+  test("test onchange callback is not called on click of selected option", async () => {
+    const onChange = jest.fn();
     render(<ViewToggleButtonWithState onChange={onChange} value="card" />);
     const cardButton = screen.getByTestId("cardButton");
     await userEvent.click(cardButton);
-    expect(onChange).toHaveBeenCalled();
+    expect(onChange).not.toHaveBeenCalled();
   });
 });

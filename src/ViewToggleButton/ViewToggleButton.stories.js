@@ -8,15 +8,19 @@ export default {
 };
 
 const Template = args => {
-  const [value, setValue] = React.useState(args.value);
+  const [view, setView] = React.useState(args.value);
+
+  // Update view if value prop changes
   React.useEffect(() => {
-    setValue(args.value);
+    setView(args.value);
   }, [args.value]);
+
+  // handle onChange
   const onChange = (event, value) => {
-    setValue(value);
+    setView(value);
     action("onChange")(event, value);
   };
-  return <ViewToggleButton {...args} onChange={onChange} value={value} />;
+  return <ViewToggleButton {...args} onChange={onChange} value={view} />;
 };
 
 export const Default = Template.bind({});
