@@ -64,6 +64,7 @@ export {
   VirtoVehicle,
   VirtoID
 } from "./SvgIcons";
+export { default as ViewToggleButton } from "./ViewToggleButton";
 export {
   Wizard,
   WizardActions,
