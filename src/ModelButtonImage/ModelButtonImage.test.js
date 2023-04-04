@@ -39,11 +39,9 @@ describe("ModelButtonImage", () => {
   // component should render an image with filter invert(1) in dark mode
   it("should render an image with filter invert(1) in dark mode", () => {
     const { getByAltText } = render(
-      <React.StrictMode>
-        <ThemeProvider theme={"dark"}>
-          <ModelImage />
-        </ThemeProvider>
-      </React.StrictMode>
+      <ThemeProvider theme={"dark"}>
+        <ModelImage />
+      </ThemeProvider>
     );
     const image = getByAltText("model-icon");
 
