@@ -41,8 +41,15 @@ function TableCard({
             <TableBody>
               {tableContent.map((row, index) => (
                 <TableRow key={index}>
-                  <TableCell>{row[0]}</TableCell>
-                  <TableCell>{row[1]}</TableCell>
+                  <TableCell sx={{ width: 100 }}>{row[0]}</TableCell>
+                  <TableCell
+                    sx={{
+                      overflowWrap: "anywhere",
+                      width: 100
+                    }}
+                  >
+                    {row[1]}
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
