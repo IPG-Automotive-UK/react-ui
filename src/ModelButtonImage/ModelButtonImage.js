@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import PropTypes from "prop-types";
 import React from "react";
 import { useTheme } from "@mui/material/styles";
@@ -7,20 +8,23 @@ export default function ModelButtonImage({ src }) {
   const theme = useTheme();
 
   return (
-    <>
-      {src && src.length > 0 ? (
-        <img
-          alt="model-icon"
-          src={src}
-          style={{
-            filter: theme.palette.mode === "dark" ? "invert(1)" : "invert(0)"
-          }}
-        />
-      ) : null}
-    </>
+    <Box
+      component="img"
+      alt="model-icon"
+      src={src}
+      style={{
+        filter: theme.palette.mode === "dark" ? "invert(1)" : "invert(0)"
+      }}
+    />
   );
 }
 
+// prop types for ModelButtonImage component.
 ModelButtonImage.propTypes = {
+  /**
+   * src: image source
+   * @type {string}
+   * @required
+   */
   src: PropTypes.string
 };

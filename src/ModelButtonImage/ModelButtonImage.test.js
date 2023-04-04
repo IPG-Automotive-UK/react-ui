@@ -11,13 +11,6 @@ function ModelImage({ src = ModelButtonSampleImg }) {
 
 // test suite for ModelButtonImage
 describe("ModelButtonImage", () => {
-  // component should show alt text
-  it("should show alt text  ", () => {
-    const { getByAltText } = render(<ModelImage />);
-    const image = getByAltText("model-icon");
-    expect(image).toBeInTheDocument();
-  });
-
   // component should render an image with the correct src
   it("should render an image with the correct src", () => {
     const { getByAltText } = render(<ModelImage src={ModelButtonSampleImg} />);
