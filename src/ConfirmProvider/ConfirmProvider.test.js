@@ -34,7 +34,7 @@ function ConfirmDialog() {
 
 describe("ConfirmProvider", () => {
   // test to check if dialog is shown with correct title, description, cancellation text and confirmation text
-  it("onClick button should show dialog with title, description,cancellation text and Confirmation text ", () => {
+  it("should have the correct default text", () => {
     const { getByText } = render(
       <ThemeProvider theme={"light"}>
         <ConfirmProvider>
@@ -63,7 +63,7 @@ describe("ConfirmProvider", () => {
   });
 
   // tests to check confirmation dialog supports dark mode
-  it("Tests to check confirmation dialog supports dark mode", () => {
+  it("Should support dark mode", () => {
     const { getByText } = render(
       <ThemeProvider theme={"dark"}>
         <ConfirmProvider>
@@ -101,7 +101,7 @@ describe("ConfirmProvider", () => {
   });
 
   // tests to check confirmation dialog supports light mode
-  it("Tests to check confirmation dialog supports light mode", () => {
+  it("Should support light mode", () => {
     const { getByText } = render(
       <ThemeProvider theme={"light"}>
         <ConfirmProvider>
