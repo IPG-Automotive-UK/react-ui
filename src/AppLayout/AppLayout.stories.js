@@ -25,15 +25,8 @@ const Template = args => {
 export const Default = Template.bind({});
 Default.args = {
   appName: "APP NAME",
-  appUrls: [
-    {
-      "VIRTO.BUILD": "https://someurl.com",
-      "VIRTO.DATA": "https://someurl.com",
-      "VIRTO.FLEET": "https://someurl.com",
-      "VIRTO.ID": "https://someurl.com"
-    }
-  ],
   appVersion: version,
+  baseUrl: "http://localhost:3000",
   /**
    * Content set to something that forces the content to be scrollable
    */

@@ -111,7 +111,7 @@ function Header({
 // app header component
 function AppHeader({
   appName,
-  appUrls,
+  baseUrl,
   mode,
   onChangePassword,
   onLogout,
@@ -159,7 +159,7 @@ function AppHeader({
           }}
         >
           <AppLauncher
-            appUrls={appUrls}
+            baseUrl={baseUrl}
             logoLinkUrl={virtoLogoLinkUrl}
             onAppButtonClick={() => setAppOpen(false)}
           />
@@ -171,28 +171,18 @@ function AppHeader({
 
 AppHeader.propTypes = {
   /**
-   * App version to display in header.
+   * App name to display in header.
    */
   appName: PropTypes.string.isRequired,
   /**
-   *  List of apps to display in the AppLauncher
-   * @default []
-   * @type {array}
-   * @example
-   * [
-   * {
-   * "VIRTO.BUILD": "https://someurl.com",
-   * "VIRTO.ID": "https://someurl.com",
-   * }
-   * ]
+   * Base URL for VIRTO home page.
    */
-  appUrls: PropTypes.array,
+  baseUrl: PropTypes.string,
   /**
    * The color mode selection
    * @default "light"
    */
   mode: PropTypes.oneOf(["light", "dark"]),
-
   /**
    * Callback fired when the user clicks on "Change password".
    *
