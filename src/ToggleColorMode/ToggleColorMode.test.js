@@ -83,7 +83,7 @@ describe("ToggleColorMode", () => {
       const user = userEvent.setup();
 
       render(
-        <ThemeProvider mode="dark">
+        <ThemeProvider theme="dark">
           <ToggleWithContext />
         </ThemeProvider>
       );
