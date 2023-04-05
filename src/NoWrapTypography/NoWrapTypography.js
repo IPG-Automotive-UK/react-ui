@@ -29,9 +29,11 @@ export default function NoWrapTypography({ children, sx }) {
       <Typography
         noWrap
         sx={sx}
-        overflow="hidden"
-        textOverflow="ellipsis"
-        whiteSpace="nowrap"
+        style={{
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          whiteSpace: "nowrap"
+        }}
       >
         {children}
       </Typography>
