@@ -7,12 +7,10 @@ export default {
   title: "General/NoWrapTypography"
 };
 
-const Template = ({ children, maxWidth, sx }) => {
+const Template = ({ children, sx }) => {
   return (
     <Box sx={{ border: "1px solid black", mt: 2, width: "350px" }}>
-      <NoWrapTypography maxWidth={maxWidth} sx={sx}>
-        {children}
-      </NoWrapTypography>
+      <NoWrapTypography sx={sx}>{children}</NoWrapTypography>
     </Box>
   );
 };
@@ -21,6 +19,5 @@ export const Default = Template.bind({});
 
 Default.args = {
   children: "text that is too long to fit in the box",
-  maxWidth: "250px",
-  sx: { fontSize: "18px" }
+  sx: { fontSize: "18px", maxWidth: "250px" }
 };

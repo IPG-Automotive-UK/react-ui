@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 /**
  * Typography component to show a tooltip if the text overflows.
  */
-export default function NoWrapTypography({ children, maxWidth = "250px", sx }) {
+export default function NoWrapTypography({ children, sx }) {
   const [tooltipEnabled, setTooltipEnabled] = useState(false);
 
   // if the text overflows its bounding box, then show the tooltip
@@ -19,25 +19,24 @@ export default function NoWrapTypography({ children, maxWidth = "250px", sx }) {
   const hideTooltip = () => setTooltipEnabled(true);
 
   return (
-    <div
-      style={{
-        overflow: "hidden",
-        textOverflow: "ellipsis",
-        whiteSpace: "nowrap",
-        width: maxWidth
-      }}
+    <Tooltip
+      title={children}
+      disableHoverListener={!tooltipEnabled}
+      onMouseEnter={handleShouldShow}
+      onMouseLeave={hideTooltip}
     >
-      <Tooltip
-        title={children}
-        disableHoverListener={!tooltipEnabled}
-        onMouseEnter={handleShouldShow}
-        onMouseLeave={hideTooltip}
+      <Typography
+        noWrap
+        sx={sx}
+        style={{
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          whiteSpace: "nowrap"
+        }}
       >
-        <Typography noWrap sx={sx}>
-          {children}
-        </Typography>
-      </Tooltip>
-    </div>
+        {children}
+      </Typography>
+    </Tooltip>
   );
 }
 
@@ -46,10 +45,6 @@ NoWrapTypography.propTypes = {
    * The content of the component.
    */
   children: PropTypes.node,
-  /**
-   * The maximum width of the component.
-   */
-  maxWidth: PropTypes.string,
   /**
    * The CSS styles applied to the component.
    */
