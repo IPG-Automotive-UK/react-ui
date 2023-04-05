@@ -11,7 +11,6 @@ export default function NoWrapTypography({ children, maxWidth = "250px", sx }) {
 
   // if the text overflows its bounding box, then show the tooltip
   const handleShouldShow = ({ currentTarget }) => {
-    console.log(currentTarget);
     if (currentTarget.scrollWidth > currentTarget.clientWidth) {
       setTooltipEnabled(true);
     }

@@ -1,40 +1,49 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 
-import { Box } from "@mui/material";
 import NoWrapTypography from "./NoWrapTypography";
 import React from "react";
 import userEvent from "@testing-library/user-event";
 
-const children = "This is a very long text that should overflow";
+const textContent = "This is a very long text that should overflow";
+
 // test that the tooltip shows when the text overflows
 describe("NoWrapTypography", () => {
   it("shows tooltip when text overflows", async () => {
     const user = userEvent.setup();
     const App = () => {
-      return (
-        <Box sx={{ border: "1px solid black", mt: 2, width: "100px" }}>
-          <NoWrapTypography maxWidth="100px" sx={{ fontSize: "18px" }}>
-            {children}
-          </NoWrapTypography>
-        </Box>
-      );
+      return <NoWrapTypography>{textContent}</NoWrapTypography>;
     };
     render(<App />);
-    const text = screen.getByText(children);
-    await user.hover(text);
+    const text = screen.getByText(textContent);
 
-    screen.logTestingPlaygroundURL();
+    // mock the text element to have a clientWidth of 50 and scrollWidth of 100
+    Object.defineProperties(text, {
+      clientWidth: {
+        value: 50
+      },
+      scrollWidth: {
+        value: 100
+      }
+    });
 
-    // expect text parent has a width of 250px
+    // expect text to have some default styling for overflow
     expect(text.parentElement.style.width).toBe("250px");
-    // expect text parent has a overflow of hidden
     expect(text.parentElement.style.overflow).toBe("hidden");
-    // expect text parent has a textOverflow of ellipsis
     expect(text.parentElement.style.textOverflow).toBe("ellipsis");
-    // expect text parent has a whiteSpace of nowrap
     expect(text.parentElement.style.whiteSpace).toBe("nowrap");
 
     // expect text has a text of "This is a very long text that should overflow"
-    expect(text.textContent).toBe(children);
+    expect(text.textContent).toBe(textContent);
+
+    // hover
+    fireEvent.mouseEnter(text);
+    await user.hover(text);
+
+    // await for tooltip to be visible (it has a delay)
+    const tooltip = await screen.findByRole("tooltip");
+
+    // expect tooltip to be visible
+    expect(tooltip).toBeVisible();
+    expect(tooltip).toHaveTextContent(textContent);
   });
 });
