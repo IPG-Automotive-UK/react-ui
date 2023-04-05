@@ -41,11 +41,13 @@ describe("ActionDialog", () => {
     expect(screen.getByText("Save")).toBeInTheDocument();
   });
   test("test dialog save button disabled", () => {
-    render(<ActionDialog {...defaultInputs} open={true} saveEnabled={true} />);
+    render(<ActionDialog {...defaultInputs} open={true} saveDisabled={true} />);
     expect(screen.getByText("Save")).toBeDisabled();
   });
   test("test dialog save button enabled", () => {
-    render(<ActionDialog {...defaultInputs} open={true} saveEnabled={false} />);
+    render(
+      <ActionDialog {...defaultInputs} open={true} saveDisabled={false} />
+    );
     expect(screen.getByText("Save")).toBeEnabled();
   });
   test("test dialog cancel button click", () => {
