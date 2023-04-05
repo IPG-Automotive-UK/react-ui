@@ -52,6 +52,7 @@ export { default as TransferList } from "./TransferList";
 export { default as UserMenu } from "./UserMenu";
 export { UserAvatar, useColorMap } from "./UserAvatar";
 export { default as NoWrapTypography } from "./NoWrapTypography";
+export { default as ModelButtonImage } from "./ModelButtonImage";
 export { ConfirmProvider, useConfirm } from "./ConfirmProvider";
 export {
   IpgLogo,
