@@ -4,6 +4,7 @@ import NoWrapTypography from "./NoWrapTypography";
 import React from "react";
 import userEvent from "@testing-library/user-event";
 
+// text that will be used in the test
 const textContent = "This is a very long text that should overflow";
 
 // test that the tooltip shows when the text overflows

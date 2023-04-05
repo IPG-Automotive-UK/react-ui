@@ -16,6 +16,7 @@ export default function NoWrapTypography({ children, sx }) {
     }
   };
 
+  // on mouse leave, hide the tooltip
   const hideTooltip = () => setTooltipEnabled(true);
 
   return (
@@ -28,11 +29,9 @@ export default function NoWrapTypography({ children, sx }) {
       <Typography
         noWrap
         sx={sx}
-        style={{
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-          whiteSpace: "nowrap"
-        }}
+        overflow="hidden"
+        textOverflow="ellipsis"
+        whiteSpace="nowrap"
       >
         {children}
       </Typography>
