@@ -2,6 +2,7 @@ import ModelButton from "../ModelButton/ModelButton";
 import ModelButtonImage from "./ModelButtonImage";
 import ModelButtonSampleImg from "../../static/ModelButtonSampleImg.svg";
 import React from "react";
+import { action } from "@storybook/addon-actions";
 
 export default {
   component: "ModelButtonImage",
@@ -21,7 +22,7 @@ const TemplateWithModelButton = ({ src }) => {
   return (
     <ModelButton
       onClick={() => {
-        console.log("click");
+        action("clicked");
       }}
       label="Model Button"
       icon={<ModelButtonImage src={src} />}

@@ -22,9 +22,7 @@ export default function ModelButtonImage({ src }) {
 // prop types for ModelButtonImage component.
 ModelButtonImage.propTypes = {
   /**
-   * src: image source
-   * @type {string}
-   * @required
+   * The image source.
    */
-  src: PropTypes.string
+  src: PropTypes.string.isRequired
 };
