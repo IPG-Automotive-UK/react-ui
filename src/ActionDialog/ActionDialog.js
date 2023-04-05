@@ -15,7 +15,7 @@ import PropTypes from "prop-types";
 import { styled } from "@mui/material/styles";
 
 /**
- * Horizontal alignment button group component to toggle between left/center/right/justify alignment
+ * ActionDialog component is used to show a dialog with title, content and action buttons.
  */
 export default function ActionDialog({
   onCancelClick = () => {},
@@ -25,7 +25,7 @@ export default function ActionDialog({
   saveText = "Save",
   open = true,
   content,
-  saveEnabled = false,
+  saveDisabled = false,
   width = "400px",
   showCloseIcon = true
 }) {
@@ -41,6 +41,7 @@ export default function ActionDialog({
       padding: theme.spacing(2, 3)
     }
   }));
+
   // return components
   return (
     <ActionDialogWrapper open={open} data-testid="action-dialog">
@@ -70,7 +71,7 @@ export default function ActionDialog({
         <Button
           variant="contained"
           onClick={onSaveClick}
-          disabled={saveEnabled}
+          disabled={saveDisabled}
         >
           {saveText}
         </Button>
@@ -81,7 +82,12 @@ export default function ActionDialog({
 
 ActionDialog.propTypes = {
   /**
-   * Thecontent of the dialog. Valid react element can be used.
+   * The text of the cancel button.
+   * @default "cancel"
+   * */
+  cancelText: PropTypes.string,
+  /**
+   * The content of the dialog. Valid react element can be used.
    */
   content: PropTypes.node.isRequired,
   /**
@@ -107,13 +113,26 @@ ActionDialog.propTypes = {
    */
   onSaveClick: PropTypes.func.isRequired,
   /**
-   * If true, save button is active
+   * If true, the dialog is open.
+   * */
+  open: PropTypes.bool,
+  /**
+   * If true, save button will be disabled.
    */
-  saveEnabled: PropTypes.bool,
+  saveDisabled: PropTypes.bool,
+  /**
+   * The text of the save button.
+   * @default "Save"
+   * */
+  saveText: PropTypes.string,
   /**
    * If true, shows close icon in dialog title
    */
   showCloseIcon: PropTypes.bool,
+  /**
+   * The title of the dialog.
+   * */
+  title: PropTypes.string,
   /**
    * The width of the dialog. Valid css width can be used.
    */

@@ -25,7 +25,7 @@ Default.args = {
   onCancelClick: () => {},
   onSaveClick: () => {},
   open: true,
-  saveEnabled: false,
+  saveDisabled: false,
   saveText: "Save",
   showCloseIcon: true,
   title: "Some title",
