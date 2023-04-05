@@ -27,10 +27,10 @@ describe("NoWrapTypography", () => {
       }
     });
 
-    // expect text to have some default styling for overflow
-    expect(text.style.overflow).toBe("hidden");
-    expect(text.style.textOverflow).toBe("ellipsis");
-    expect(text.style.whiteSpace).toBe("nowrap");
+    // expect text to have some default styles
+    expect(text).toHaveStyle("overflow: hidden");
+    expect(text).toHaveStyle("text-overflow: ellipsis");
+    expect(text).toHaveStyle("white-space: nowrap");
 
     // expect text has a text of "This is a very long text that should overflow"
     expect(text.textContent).toBe(textContent);

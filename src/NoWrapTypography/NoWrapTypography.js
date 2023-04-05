@@ -28,8 +28,8 @@ export default function NoWrapTypography({ children, sx }) {
     >
       <Typography
         noWrap
-        sx={sx}
-        style={{
+        sx={{
+          ...sx,
           overflow: "hidden",
           textOverflow: "ellipsis",
           whiteSpace: "nowrap"
