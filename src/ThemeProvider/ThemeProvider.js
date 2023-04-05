@@ -153,11 +153,14 @@ export default function ThemeProvider({
   // on first render get theme from local storage or set default to light if not set
   useEffect(() => {
     const storedThemeMode = localStorage.getItem("theme");
-    if (storedThemeMode) {
-      setTheme(storedThemeMode);
-    } else {
+    if (controlledTheme) {
       setTheme(controlledTheme);
       localStorage.setItem("theme", controlledTheme);
+    } else if (storedThemeMode) {
+      setTheme(storedThemeMode);
+    } else {
+      setTheme("light");
+      localStorage.setItem("theme", "light");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

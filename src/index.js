@@ -52,6 +52,7 @@ export { default as TransferList } from "./TransferList";
 export { default as UserMenu } from "./UserMenu";
 export { UserAvatar, useColorMap } from "./UserAvatar";
 export { default as NoWrapTypography } from "./NoWrapTypography";
+export { ConfirmProvider, useConfirm } from "./ConfirmProvider";
 export {
   IpgLogo,
   VirtoLogo,
@@ -65,6 +66,7 @@ export {
   VirtoVehicle,
   VirtoID
 } from "./SvgIcons";
+export { default as ViewToggleButton } from "./ViewToggleButton";
 export {
   Wizard,
   WizardActions,
