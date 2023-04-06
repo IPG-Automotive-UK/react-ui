@@ -12,7 +12,26 @@ import {
 
 import CloseIcon from "@mui/icons-material/Close";
 import PropTypes from "prop-types";
-import { styled } from "@mui/material/styles";
+
+// action dialog styles
+const ActionDialogWrapper = ({ width, ...rest }) => {
+  return (
+    <Dialog
+      sx={{
+        "& .MuiDialog-container": {
+          "& .MuiPaper-root": {
+            maxWidth: width,
+            width: "100%"
+          }
+        },
+        "& .MuiDialogActions-root": {
+          padding: theme => theme.spacing(2, 3)
+        }
+      }}
+      {...rest}
+    />
+  );
+};
 
 /**
  * ActionDialog component is used to show a dialog with title, content and action buttons.
@@ -29,22 +48,9 @@ export default function ActionDialog({
   width = "400px",
   showCloseIcon = true
 }) {
-  // action dialog styles
-  const ActionDialogWrapper = styled(Dialog)(({ theme }) => ({
-    "& .MuiDialog-container": {
-      "& .MuiPaper-root": {
-        maxWidth: width,
-        width: "100%"
-      }
-    },
-    "& .MuiDialogActions-root": {
-      padding: theme.spacing(2, 3)
-    }
-  }));
-
   // return components
   return (
-    <ActionDialogWrapper open={open} data-testid="action-dialog">
+    <ActionDialogWrapper open={open} data-testid="action-dialog" width={width}>
       <DialogTitle fontWeight={600}>
         {title}
         {showCloseIcon ? (
