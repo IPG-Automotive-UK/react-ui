@@ -14,6 +14,7 @@ import SidebarItem from "../Sidebar/SidebarItem";
 
 // a set of default inputs so that tests can change what theyre testing
 const defaultInputs = {
+  appName: "App Name",
   content: <div>App Content goes here</div>,
   onChangePassword: jest.fn(),
   onLogout: jest.fn(),
@@ -34,8 +35,13 @@ const defaultInputs = {
 
 // test app name in the component
 describe("AppLayout", () => {
-  test("should render app name", () => {
-    render(<AppLayout {...defaultInputs} appName="APP NAME" />);
-    expect(screen.getByText("APP NAME")).toBeInTheDocument();
+  test("should display app name", () => {
+    render(<AppLayout {...defaultInputs} />);
+    screen.getByText(defaultInputs.appName);
+  });
+
+  test("should display content", () => {
+    render(<AppLayout {...defaultInputs} />);
+    screen.getByText("App Content goes here");
   });
 });

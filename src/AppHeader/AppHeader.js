@@ -49,7 +49,7 @@ function Header({
           <IconButton
             disableRipple
             color="inherit"
-            aria-label="open menu"
+            aria-label="open-menu"
             edge="start"
             onClick={onMenuClick}
             sx={theme => ({
