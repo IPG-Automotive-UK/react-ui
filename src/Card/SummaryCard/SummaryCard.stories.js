@@ -6,6 +6,8 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  MenuItem,
+  MenuList,
   Table,
   TableBody,
   TableCell,
@@ -130,24 +132,20 @@ export const withMoreOptionsPopover = Template.bind({});
 withMoreOptionsPopover.args = {
   ...Default.args,
   moreOptionsPopover: (
-    <List>
-      <ListItem disablePadding>
-        <ListItemButton onClick={action("onEditClick")}>
-          <ListItemIcon>
-            <Edit />
-          </ListItemIcon>
-          <ListItemText primary="Edit" />
-        </ListItemButton>
-      </ListItem>
-      <ListItem disablePadding>
-        <ListItemButton onClick={action("onDeleteClick")}>
-          <ListItemIcon>
-            <Delete />
-          </ListItemIcon>
-          <ListItemText primary="Delete" />
-        </ListItemButton>
-      </ListItem>
-    </List>
+    <MenuList>
+      <MenuItem onClick={action("onEditClick")}>
+        <ListItemIcon>
+          <Edit />
+        </ListItemIcon>
+        <ListItemText primary="Edit" />
+      </MenuItem>
+      <MenuItem onClick={action("onDeleteClick")}>
+        <ListItemIcon>
+          <Delete />
+        </ListItemIcon>
+        <ListItemText primary="Delete" />
+      </MenuItem>
+    </MenuList>
   )
 };
 
