@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  Divider,
   Popover,
   Stack,
   Tooltip,
@@ -302,10 +301,10 @@ function DetailCard({
             )}
           </Stack>
         </Box>
-        <Divider />
         <Box
           sx={{
             display: "flex",
+            overflowY: "auto",
             width
           }}
         >
@@ -313,7 +312,6 @@ function DetailCard({
             <FileCard
               media={media}
               width={368}
-              height={756}
               files={files}
               title="title"
               fileTitle={fileTitle}
@@ -321,7 +319,7 @@ function DetailCard({
               onClickFile={onClickFile}
             />
           </Box>
-          <Box mt={1} ml={2} sx={{ height, overflowY: "auto", width: 760 }}>
+          <Box mt={1} ml={2} sx={{ height, width: 760 }}>
             <Stack spacing={2}>{content}</Stack>
           </Box>
         </Box>

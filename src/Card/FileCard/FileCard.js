@@ -18,7 +18,6 @@ import SearchBar from "../../SearchBar/SearchBar";
 function FileCard({
   files: filesIn = [],
   fileTitle = "title",
-  height = 796,
   media = "",
   onClickDownload = () => {},
   onClickFile = () => {},
@@ -95,7 +94,7 @@ function FileCard({
   // render the file card
   return (
     <>
-      <Card sx={{ height, width }}>
+      <Card sx={{ width }}>
         <Box
           sx={{
             display: "flex",
@@ -113,21 +112,44 @@ function FileCard({
             }}
           />
         </Box>
-        <Box>
-          <Tooltip title={fileTitle} disableHoverListener={!titleSizeOverflow}>
-            <Typography
-              ref={titleRef}
-              ml={2}
-              sx={{
-                fontSize: 20,
-                fontWeight: 500,
-                width: headerContentWidth
-              }}
-              noWrap
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between"
+          }}
+        >
+          <Box>
+            <Tooltip
+              title={fileTitle}
+              disableHoverListener={!titleSizeOverflow}
             >
-              {fileTitle}
-            </Typography>
-          </Tooltip>
+              <Typography
+                ref={titleRef}
+                ml={2}
+                sx={{
+                  fontSize: 20,
+                  fontWeight: 500,
+                  height: "32px",
+                  width: "48px"
+                }}
+                noWrap
+              >
+                {fileTitle}
+              </Typography>
+            </Tooltip>
+          </Box>
+          <Box>
+            <Button
+              disabled={!files.some(file => file.files.length)}
+              sx={{ mr: 2, width: "229px" }}
+              variant="outlined"
+              startIcon={<Download />}
+              onClick={handleDownload}
+            >
+              {search === "" ? "Download Project" : "Download Search Files"}
+            </Button>
+          </Box>
         </Box>
         <Box pl={2} pr={2}>
           <SearchBar
@@ -144,7 +166,7 @@ function FileCard({
             paddingTop: 0 // override default padding from CardContent
           }}
         >
-          <Box height={height - 400} sx={{ overflowY: "auto" }}>
+          <Box height="auto">
             {files.map(({ header, files }, index) => (
               <React.Fragment key={index}>
                 {files.length > 0 ? (
@@ -188,17 +210,6 @@ function FileCard({
             ))}
           </Box>
         </CardContent>
-        <Box m={1}>
-          <Button
-            disabled={!files.some(file => file.files.length)}
-            sx={{ width: width - 16 }}
-            variant="outlined"
-            startIcon={<Download />}
-            onClick={handleDownload}
-          >
-            {search === "" ? "Download Project" : "Download Search Files"}
-          </Button>
-        </Box>
       </Card>
     </>
   );
@@ -232,13 +243,6 @@ FileCard.propTypes = {
       header: PropTypes.string
     })
   ),
-  /**
-   * The height of the card.
-   * @type {number}
-   * @default 600
-   *
-   */
-  height: PropTypes.number,
   /**
    * Callback fired when the label is clicked.
    *
