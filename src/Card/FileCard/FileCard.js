@@ -16,6 +16,7 @@ import ResizeObserver from "resize-observer-polyfill";
 import SearchBar from "../../SearchBar/SearchBar";
 
 function FileCard({
+  downloadButtonText = "Download",
   files: filesIn = [],
   fileTitle = "title",
   media = "",
@@ -147,7 +148,7 @@ function FileCard({
               startIcon={<Download />}
               onClick={handleDownload}
             >
-              {search === "" ? "Download Project" : "Download Search Files"}
+              {search === "" ? downloadButtonText : "Download Search Files"}
             </Button>
           </Box>
         </Box>
@@ -220,6 +221,11 @@ export default FileCard;
 
 // detail card prop types
 FileCard.propTypes = {
+  /**
+   * @type {string}
+   * The text of the download button.
+   */
+  downloadButtonText: PropTypes.string,
   /**
    * The fileTitle of the card.
    * @type {string}

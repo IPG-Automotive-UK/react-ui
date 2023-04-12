@@ -232,6 +232,7 @@ ScenarioExample.args = {
       <TableCard key={"Misc"} title="Misc" />
     </Box>
   ),
+  downloadButtonText: "Download All Files",
   fileTitle: "Files",
   files: [
     {
