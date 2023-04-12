@@ -233,6 +233,7 @@ ScenarioExample.args = {
     </Box>
   ),
   downloadButtonText: "Download All Files",
+  downloadButtonTextOnSearch: "Download Search Files",
   fileTitle: "Files",
   files: [
     {

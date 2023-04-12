@@ -18,6 +18,7 @@ function DetailCard({
   content = null,
   files = [],
   downloadButtonText,
+  downloadButtonTextOnSearch,
   fileTitle = "title",
   height = 950,
   labels = [],
@@ -315,6 +316,7 @@ function DetailCard({
               width={368}
               files={files}
               downloadButtonText={downloadButtonText}
+              downloadButtonTextOnSearch={downloadButtonTextOnSearch}
               title="title"
               fileTitle={fileTitle}
               onClickDownload={onClickDownload}
@@ -387,6 +389,11 @@ DetailCard.propTypes = {
    * @default Download
    */
   downloadButtonText: PropTypes.string,
+  /**
+   * The download button text on search.
+   * @type {string}
+   */
+  downloadButtonTextOnSearch: PropTypes.string,
   /**
    * The fileTitle of the card.
    * @type {string}

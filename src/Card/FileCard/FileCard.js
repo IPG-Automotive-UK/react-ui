@@ -17,6 +17,7 @@ import SearchBar from "../../SearchBar/SearchBar";
 
 function FileCard({
   downloadButtonText = "Download",
+  downloadButtonTextOnSearch = "Download Files",
   files: filesIn = [],
   fileTitle = "title",
   media = "",
@@ -148,7 +149,7 @@ function FileCard({
               startIcon={<Download />}
               onClick={handleDownload}
             >
-              {search === "" ? downloadButtonText : "Download Search Files"}
+              {search === "" ? downloadButtonText : downloadButtonTextOnSearch}
             </Button>
           </Box>
         </Box>
@@ -226,6 +227,11 @@ FileCard.propTypes = {
    * The text of the download button.
    */
   downloadButtonText: PropTypes.string,
+  /**
+   * @type {string}
+   * The text of the download button when search is active.
+   */
+  downloadButtonTextOnSearch: PropTypes.string,
   /**
    * The fileTitle of the card.
    * @type {string}

@@ -129,7 +129,13 @@ describe("FileCard", () => {
     ];
 
     // render file card with files
-    render(<FileCard fileTitle="file card title" files={files} />);
+    render(
+      <FileCard
+        fileTitle="file card title"
+        downloadButtonTextOnSearch="Download Search Files"
+        files={files}
+      />
+    );
 
     // find the search input by placeholder text
     const searchInput = screen.getByPlaceholderText("Search");
@@ -227,7 +233,13 @@ describe("FileCard", () => {
     ];
 
     // render file card with files
-    render(<FileCard fileTitle="file card title" files={files} />);
+    render(
+      <FileCard
+        fileTitle="file card title"
+        downloadButtonTextOnSearch="Download Search Files"
+        files={files}
+      />
+    );
 
     // find the search input by placeholder text
     const searchInput = screen.getByPlaceholderText("Search");
