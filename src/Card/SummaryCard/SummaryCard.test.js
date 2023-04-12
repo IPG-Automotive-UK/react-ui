@@ -6,6 +6,8 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  MenuItem,
+  MenuList,
   Stack
 } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
@@ -115,8 +117,39 @@ describe("SummaryCard", () => {
     await userEvent.click(screen.getByRole("button", { name: "settings" }));
 
     // expect the popover to be in the document
-    expect(screen.getByText("Edit")).toBeInTheDocument();
-    expect(screen.getByText("Delete")).toBeInTheDocument();
+    expect(screen.getByText("Edit")).toBeVisible();
+    expect(screen.getByText("Delete")).toBeVisible();
+  });
+
+  it("closes more options popover when clicked", async () => {
+    const editFcn = jest.fn();
+
+    render(
+      <SummaryCard
+        title="summary card title"
+        subtitle="summary card subtitle"
+        moreOptionsPopover={
+          <MenuList>
+            <MenuItem onClick={editFcn}>Test Menu</MenuItem>
+          </MenuList>
+        }
+      />
+    );
+
+    // find the ... button and click it
+    await userEvent.click(screen.getByRole("button", { name: "settings" }));
+
+    // expect the popover to be in the document
+    expect(screen.getByText("Test Menu")).toBeVisible();
+
+    // click one of the options
+    await userEvent.click(screen.getByText("Test Menu"));
+
+    // expect callback to be called
+    expect(editFcn).toHaveBeenCalledTimes(1);
+
+    // expect the popover to be removed from the document
+    expect(screen.queryByText("Test Menu")).not.toBeVisible();
   });
 
   // test that a content is rendered in summary card

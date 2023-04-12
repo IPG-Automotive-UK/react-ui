@@ -355,6 +355,7 @@ function SummaryCard({
         open={isMoreOptionsOpen}
         anchorEl={moreOptionsAnchorEl}
         onClose={handleMoreOptionsClose}
+        onClick={handleMoreOptionsClose}
         anchorOrigin={{
           horizontal: "left",
           vertical: "bottom"
