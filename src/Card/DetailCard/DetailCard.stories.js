@@ -170,7 +170,7 @@ ScenarioExample.args = {
       <Button
         sx={{ height: 42 }}
         color="error"
-        endIcon={<Delete />}
+        startIcon={<Delete />}
         onClick={action("onClickDelete")}
         variant="outlined"
       >
