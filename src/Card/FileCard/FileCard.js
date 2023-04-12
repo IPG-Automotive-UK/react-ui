@@ -142,7 +142,7 @@ function FileCard({
           <Box>
             <Button
               disabled={!files.some(file => file.files.length)}
-              sx={{ mr: 2, width: "229px" }}
+              sx={{ maxWidth: "265px", mr: 2 }}
               variant="outlined"
               startIcon={<Download />}
               onClick={handleDownload}
@@ -194,7 +194,7 @@ function FileCard({
                           <Chip
                             clickable
                             onClick={() => onClickFile(file)}
-                            sx={{ m: 0.5, maxWidth: 250 }}
+                            sx={{ m: 0.5, maxWidth: 330 }}
                             icon={<AttachFile />}
                             size="small"
                             variant="outlined"
