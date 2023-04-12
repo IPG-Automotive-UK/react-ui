@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import LabelSelector from "./LabelSelector";
 import React from "react";
 import { action } from "@storybook/addon-actions";
@@ -15,64 +16,66 @@ const Template = args => {
   const [options, setOptions] = React.useState(args.options);
 
   return (
-    <LabelSelector
-      {...args}
-      onChange={selectedValues => {
-        setValue(selectedValues);
+    <Box maxWidth={300}>
+      <LabelSelector
+        {...args}
+        onChange={selectedValues => {
+          setValue(selectedValues);
 
-        // fire action
-        action("onChange")(selectedValues);
-      }}
-      options={options}
-      value={value}
-      onNew={newLabel => {
-        // append id to new label
-        newLabel._id = options.length + 1;
+          // fire action
+          action("onChange")(selectedValues);
+        }}
+        options={options}
+        value={value}
+        onNew={newLabel => {
+          // append id to new label
+          newLabel._id = options.length + 1;
 
-        // add new label to options
-        setOptions([...options, newLabel]);
+          // add new label to options
+          setOptions([...options, newLabel]);
 
-        // add new label to current value
-        setValue([...value, newLabel]);
+          // add new label to current value
+          setValue([...value, newLabel]);
 
-        // fire action
-        action("onNew")(newLabel);
-      }}
-      onEdit={editedLabel => {
-        // replace edited label in options
-        setOptions(
-          options.map(option => {
-            if (option._id === editedLabel._id) {
-              return editedLabel;
-            }
-            return option;
-          })
-        );
+          // fire action
+          action("onNew")(newLabel);
+        }}
+        onEdit={editedLabel => {
+          // replace edited label in options
+          setOptions(
+            options.map(option => {
+              if (option._id === editedLabel._id) {
+                return editedLabel;
+              }
+              return option;
+            })
+          );
 
-        // replace edited label in current value
-        setValue(
-          value.map(value => {
-            if (value._id === editedLabel._id) {
-              return editedLabel;
-            }
-            return value;
-          })
-        );
+          // replace edited label in current value
+          setValue(
+            value.map(value => {
+              if (value._id === editedLabel._id) {
+                return editedLabel;
+              }
+              return value;
+            })
+          );
 
-        // fire action
-        action("onEdit")(editedLabel);
-      }}
-      onDelete={deletedLabel => {
-        // remove deleted label from options
-        setOptions(options.filter(option => option._id !== deletedLabel._id));
+          // fire action
+          action("onEdit")(editedLabel);
+        }}
+        onDelete={deletedLabel => {
+          // remove deleted label from options
+          setOptions(options.filter(option => option._id !== deletedLabel._id));
 
-        // remove deleted label from current value
-        setValue(value.filter(value => value._id !== deletedLabel._id));
+          // remove deleted label from current value
+          setValue(value.filter(value => value._id !== deletedLabel._id));
 
-        // fire action
-        action("onDelete")(deletedLabel);
-      }}
-    />
+          // fire action
+          action("onDelete")(deletedLabel);
+        }}
+      />
+    </Box>
   );
 };
 
