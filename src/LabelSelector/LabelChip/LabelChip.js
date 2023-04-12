@@ -1,4 +1,4 @@
-import { Chip, darken } from "@mui/material";
+import { Chip, alpha, chipClasses, darken } from "@mui/material";
 
 import PropTypes from "prop-types";
 import React from "react";
@@ -21,10 +21,16 @@ export default function LabelChip({
       clickable={clickable}
       sx={{
         "&:hover": {
-          backgroundColor: darken(color, 0.2)
+          backgroundColor: clickable ? darken(color, 0.2) : color
         },
         backgroundColor: color,
-        color: theme => theme.palette.getContrastText(color)
+        color: theme => theme.palette.getContrastText(color),
+        [`& .${chipClasses.deleteIcon}`]: {
+          color: theme => alpha(theme.palette.getContrastText(color), 0.7)
+        },
+        [`& .${chipClasses.deleteIcon}:hover`]: {
+          color: theme => theme.palette.getContrastText(color)
+        }
       }}
       label={label}
       onClick={onClick}
