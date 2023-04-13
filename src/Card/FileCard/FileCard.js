@@ -116,6 +116,7 @@ function FileCard({
         </Box>
         <Box
           sx={{
+            alignItems: "center",
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between"

@@ -20,7 +20,6 @@ function DetailCard({
   downloadButtonText,
   downloadButtonTextOnSearch,
   fileTitle = "title",
-  height = 950,
   labels = [],
   media = "",
   onClickDownload = () => {},
@@ -48,7 +47,7 @@ function DetailCard({
   const labelSpacing = 8;
 
   // label stack height
-  const labelStackHeight = 24;
+  const labelStackHeight = 30;
 
   // overflow button width
   const overflowButtonWidth = 40;
@@ -191,8 +190,11 @@ function DetailCard({
     <Box>
       <Box
         mt={1}
+        mb={3}
         sx={{
-          height,
+          display: "flex",
+          flexDirection: "column",
+          height: "calc(100vh - 30px)",
           width
         }}
       >
@@ -306,6 +308,8 @@ function DetailCard({
         <Box
           sx={{
             display: "flex",
+            flexDirection: "row",
+            height: "100vh",
             overflowY: "auto",
             width
           }}
@@ -323,7 +327,7 @@ function DetailCard({
               onClickFile={onClickFile}
             />
           </Box>
-          <Box mt={1} ml={2} sx={{ height, width: 760 }}>
+          <Box mt={1} ml={2} sx={{ width: 768 }}>
             <Stack spacing={2}>{content}</Stack>
           </Box>
         </Box>
@@ -402,13 +406,6 @@ DetailCard.propTypes = {
    *
    */
   fileTitle: PropTypes.string.isRequired,
-  /**
-   * The height of the card.
-   * @type {number}
-   * @default 600
-   *
-   */
-  height: PropTypes.number,
   /**
    * The labels to be displayed on the card.
    * labels should be an array of objects with the following properties:
