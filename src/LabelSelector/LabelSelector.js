@@ -4,6 +4,7 @@ import {
   Button,
   IconButton,
   Paper,
+  Stack,
   TextField,
   Tooltip
 } from "@mui/material";
@@ -14,6 +15,7 @@ import Checkbox from "../Checkbox";
 import DeleteLabelDialog from "./DeleteLabelDialog/DeleteLabelDialog";
 import EditLabelDialog from "./EditLabelDialog/EditLabelDialog";
 import LabelChip from "./LabelChip/LabelChip";
+import NoWrapTypography from "../NoWrapTypography/NoWrapTypography";
 import PropTypes from "prop-types";
 
 // custom styling
@@ -37,9 +39,6 @@ const styles = {
     height: 18,
     opacity: 0.6,
     width: 18
-  },
-  text: {
-    flexGrow: 1
   }
 };
 
@@ -189,43 +188,51 @@ function LabelSelector({
         }}
         renderOption={(props, option, { selected }) => (
           <Box key={option._id} component="li" {...props}>
-            <Checkbox
-              checked={selected}
-              size={size}
-              style={{
-                "&.Mui-checked": { color: option.color },
-                color: option.color
-              }}
-            />
-            <div style={styles.text}>
-              {option.name}
-              <br />
-              <div style={{ fontSize: "80%" }}>{option.description}</div>
-            </div>
-            <>
-              {editEnabled && (
-                <Tooltip title="Edit">
-                  <IconButton
-                    data-testid={`edit-label-${option._id}`}
-                    size={size}
-                    onClick={event => onEditClick(event, option)}
-                  >
-                    <Edit sx={styles.editIcon} />
-                  </IconButton>
-                </Tooltip>
-              )}
-              {deleteEnabled && (
-                <Tooltip title="Delete">
-                  <IconButton
-                    data-testid={`delete-label-${option._id}`}
-                    size={size}
-                    onClick={event => onDeleteClick(event, option)}
-                  >
-                    <Delete sx={styles.deleteIcon} />
-                  </IconButton>
-                </Tooltip>
-              )}
-            </>
+            <Stack
+              direction="row"
+              alignItems="center"
+              overflow="hidden"
+              flexGrow={1}
+            >
+              <Checkbox
+                checked={selected}
+                size={size}
+                style={{
+                  "&.Mui-checked": { color: option.color },
+                  color: option.color
+                }}
+              />
+              <Stack direction="column" flexGrow={1} overflow="hidden">
+                <NoWrapTypography>{option.name}</NoWrapTypography>
+                <NoWrapTypography variant="caption">
+                  {option.description}
+                </NoWrapTypography>
+              </Stack>
+              <>
+                {editEnabled && (
+                  <Tooltip title="Edit">
+                    <IconButton
+                      data-testid={`edit-label-${option._id}`}
+                      size={size}
+                      onClick={event => onEditClick(event, option)}
+                    >
+                      <Edit sx={styles.editIcon} />
+                    </IconButton>
+                  </Tooltip>
+                )}
+                {deleteEnabled && (
+                  <Tooltip title="Delete">
+                    <IconButton
+                      data-testid={`delete-label-${option._id}`}
+                      size={size}
+                      onClick={event => onDeleteClick(event, option)}
+                    >
+                      <Delete sx={styles.deleteIcon} />
+                    </IconButton>
+                  </Tooltip>
+                )}
+              </>
+            </Stack>
           </Box>
         )}
         renderTags={options =>

@@ -57,7 +57,9 @@ describe("LabelSelector", () => {
     render(<LabelSelector options={options} value={options} />);
 
     // find the chip
-    const chip = screen.getByText("label 1").parentElement;
+    const chip = screen.getByRole("button", {
+      name: /label 1/i
+    });
 
     // check that the chip is rendered with the correct name and color
     expect(chip).toHaveStyle("background-color: rgb(0, 95, 168)");
@@ -88,7 +90,9 @@ describe("LabelSelector", () => {
     expect(onChange).toHaveBeenCalled();
 
     // find the chip
-    const chip = screen.getByText("label 1").parentElement;
+    const chip = screen.getByRole("button", {
+      name: /label 1/i
+    });
 
     // check that the chip is rendered with the correct name and color
     expect(chip).toHaveStyle("background-color: rgb(0, 95, 168)");
@@ -125,14 +129,18 @@ describe("LabelSelector", () => {
     expect(onChange).toHaveBeenCalled();
 
     // find the first chip
-    const chip1 = screen.getByText("label 1").parentElement;
+    const chip1 = screen.getByRole("button", {
+      name: /label 1/i
+    });
 
     // check that the first chip is rendered with the correct name and color
     expect(chip1).toHaveStyle("background-color: rgb(0, 95, 168)");
     expect(chip1).toHaveTextContent("label 1");
 
     // find the second chip
-    const chip2 = screen.getByText("label 2").parentElement;
+    const chip2 = screen.getByRole("button", {
+      name: /label 2/i
+    });
 
     // check that the second chip is rendered with the correct name and color
     expect(chip2).toHaveStyle("background-color: rgb(245, 66, 224)");
