@@ -187,14 +187,14 @@ function DetailCard({
 
   // render the detail card
   return (
-    <Box>
+    <>
       <Box
         mt={1}
         mb={3}
         sx={{
           display: "flex",
           flexDirection: "column",
-          height: "calc(100vh - 30px)",
+          height: "95vh",
           width
         }}
       >
@@ -365,7 +365,7 @@ function DetailCard({
           })}
         </Stack>
       </Popover>
-    </Box>
+    </>
   );
 }
 
