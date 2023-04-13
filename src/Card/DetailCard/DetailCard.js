@@ -194,7 +194,7 @@ function DetailCard({
         sx={{
           display: "flex",
           flexDirection: "column",
-          height: "calc(100vh - 30px)",
+          height: "100%",
           overflow: "hidden",
           width
         }}
@@ -310,7 +310,7 @@ function DetailCard({
           sx={{
             display: "flex",
             flexDirection: "row",
-            height: "100vh",
+            // height: "100vh",
             overflowY: "auto",
             width
           }}
