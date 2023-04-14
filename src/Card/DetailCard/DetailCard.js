@@ -200,7 +200,7 @@ function DetailCard({
         }}
       >
         <Box
-          m={1}
+          // m={1}
           sx={{
             display: "flex",
             flexDirection: "row",
