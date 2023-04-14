@@ -47,7 +47,7 @@ function DetailCard({
   const labelSpacing = 8;
 
   // label stack height
-  const labelStackHeight = 30;
+  const labelStackHeight = 32;
 
   // overflow button width
   const overflowButtonWidth = 40;
@@ -310,7 +310,7 @@ function DetailCard({
           sx={{
             display: "flex",
             flexDirection: "row",
-            // height: "100vh",
+            height: "100vh",
             overflowY: "auto",
             width
           }}
