@@ -17,7 +17,7 @@ function TableCard({
   action = null,
   tableContent = [],
   title = "Table",
-  width = 745
+  width = 760
 }) {
   return (
     <Card sx={{ width }}>

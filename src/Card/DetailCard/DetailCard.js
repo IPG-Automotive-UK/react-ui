@@ -313,7 +313,7 @@ function DetailCard({
             height: "100vh",
             overflowX: "hidden",
             overflowY: "auto",
-            width
+            width: 1200
           }}
         >
           <Box mt={1} ml={0.5} mb={1}>
