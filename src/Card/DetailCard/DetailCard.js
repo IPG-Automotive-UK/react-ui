@@ -311,6 +311,7 @@ function DetailCard({
             display: "flex",
             flexDirection: "row",
             height: "100vh",
+            overflowX: "hidden",
             overflowY: "auto",
             width
           }}
