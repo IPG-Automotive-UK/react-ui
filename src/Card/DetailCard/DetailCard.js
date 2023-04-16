@@ -254,7 +254,7 @@ function DetailCard({
           sx={{
             height: labelStackHeight,
             maxWidth: labelContentWidth,
-            overflowX: "hidden"
+            overflow: "hidden"
           }}
         >
           <Stack
@@ -310,7 +310,7 @@ function DetailCard({
           sx={{
             display: "flex",
             flexDirection: "row",
-            height: "100vh",
+            height: "100%",
             overflowX: "hidden",
             overflowY: "auto",
             width: 1200
