@@ -43,7 +43,7 @@ function DetailCard({
           width
         }}
       >
-        <Header
+        <DetailCardHeader
           title={title}
           subtitle={subtitle}
           buttonsStack={buttonsStack}
@@ -56,8 +56,10 @@ function DetailCard({
             display: "flex",
             flexDirection: "row",
             flexGrow: 1,
+            height: "70vh",
             overflowX: "hidden",
-            overflowY: "auto"
+            overflowY: "auto",
+            width: "1170px"
           }}
         >
           <Box mt={1} ml={0.5} mb={1}>
@@ -82,7 +84,7 @@ function DetailCard({
   );
 }
 
-function Header({
+function DetailCardHeader({
   width,
   title,
   subtitle,
@@ -108,7 +110,7 @@ function Header({
   const labelSpacing = 8;
 
   // label stack height
-  const labelStackHeight = 62;
+  const labelStackHeight = 52;
 
   // overflow button width
   const overflowButtonWidth = 40;
@@ -300,7 +302,6 @@ function Header({
       </Box>
       <Box
         mt={0}
-        mb={2}
         ml={1}
         sx={{
           height: labelStackHeight,
