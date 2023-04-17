@@ -29,6 +29,67 @@ function DetailCard({
   title = "title",
   width = 1150
 }) {
+  // render the detail card
+  return (
+    <>
+      <Stack
+        mt={1}
+        mb={3}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          flexGrow: 1,
+          height: "100%",
+          width
+        }}
+      >
+        <Header
+          title={title}
+          subtitle={subtitle}
+          buttonsStack={buttonsStack}
+          labels={labels}
+          width={width}
+          onClickLabel={onClickLabel}
+        />
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            flexGrow: 1,
+            overflowX: "hidden",
+            overflowY: "auto"
+          }}
+        >
+          <Box mt={1} ml={0.5} mb={1}>
+            <FileCard
+              media={media}
+              width={368}
+              files={files}
+              downloadButtonText={downloadButtonText}
+              downloadButtonTextOnSearch={downloadButtonTextOnSearch}
+              title="title"
+              fileTitle={fileTitle}
+              onClickDownload={onClickDownload}
+              onClickFile={onClickFile}
+            />
+          </Box>
+          <Box mt={1} ml={2} sx={{ width: 768 }}>
+            <Stack spacing={2}>{content}</Stack>
+          </Box>
+        </Box>
+      </Stack>
+    </>
+  );
+}
+
+function Header({
+  width,
+  title,
+  subtitle,
+  buttonsStack,
+  labels,
+  onClickLabel
+}) {
   // title, subtitle,buttonStack and label refs and overflow states
   const titleRef = useRef();
   const subtitleRef = useRef();
@@ -47,7 +108,7 @@ function DetailCard({
   const labelSpacing = 8;
 
   // label stack height
-  const labelStackHeight = 32;
+  const labelStackHeight = 62;
 
   // overflow button width
   const overflowButtonWidth = 40;
@@ -184,154 +245,117 @@ function DetailCard({
   const handleLabelClick = label => {
     onClickLabel(label);
   };
-
-  // render the detail card
   return (
     <>
       <Box
-        mt={1}
-        mb={3}
+        m={1}
         sx={{
           display: "flex",
-          flexDirection: "column",
-          height: "100%",
-          overflow: "hidden",
-          width
+          flexDirection: "row",
+          justifyContent: "space-between"
         }}
       >
-        <Box
-          m={1}
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between"
-          }}
-        >
-          <Box>
-            <Tooltip title={title} disableHoverListener={!titleSizeOverflow}>
-              <Typography
-                ref={titleRef}
-                sx={{
-                  color: theme =>
-                    theme.palette.mode === "dark" ? "white" : "black",
-                  fontSize: 20,
-                  fontWeight: 500,
-                  width: headerContentWidth
-                }}
-                noWrap
-              >
-                {title}
-              </Typography>
-            </Tooltip>
-            <Tooltip
-              title={subtitle}
-              disableHoverListener={!subTitleSizeOverflow}
+        <Box>
+          <Tooltip title={title} disableHoverListener={!titleSizeOverflow}>
+            <Typography
+              ref={titleRef}
+              sx={{
+                color: theme =>
+                  theme.palette.mode === "dark" ? "white" : "black",
+                fontSize: 20,
+                fontWeight: 500,
+                width: headerContentWidth
+              }}
+              noWrap
             >
-              <Typography
-                mt={1}
-                ref={subtitleRef}
-                sx={{
-                  color: theme =>
-                    theme.palette.mode === "dark" ? "white" : "black",
-                  fontSize: 14,
-                  fontWeight: 400,
-                  width: headerContentWidth
-                }}
-                noWrap
-              >
-                {subtitle}
-              </Typography>
-            </Tooltip>
-          </Box>
-          <Stack spacing={2} direction="row" ref={buttonStackRef}>
-            {buttonsStack}
-          </Stack>
-        </Box>
-        <Box
-          mt={2}
-          ml={1}
-          sx={{
-            height: labelStackHeight,
-            maxWidth: labelContentWidth,
-            overflow: "hidden"
-          }}
-        >
-          <Stack
-            ref={labelStackRef}
-            direction="row"
-            spacing={`${labelSpacing}px`}
+              {title}
+            </Typography>
+          </Tooltip>
+          <Tooltip
+            title={subtitle}
+            disableHoverListener={!subTitleSizeOverflow}
           >
-            {!lableSize ? (
-              <>
-                {labels.map(label => (
-                  <LabelChip
-                    clickable
-                    color={label.color}
-                    key={label._id}
-                    label={label.name}
-                    onClick={() => handleLabelClick(label)}
-                    size="small"
-                  />
-                ))}
-              </>
-            ) : (
-              <>
-                {notOverflowingLabels.map(label => (
-                  <LabelChip
-                    clickable
-                    color={label.color}
-                    key={label._id}
-                    label={label.name}
-                    onClick={() => handleLabelClick(label)}
-                    size="small"
-                  />
-                ))}
-                <Button
-                  variant="text"
-                  size="large"
-                  onClick={handleLabelOverflowClick}
-                  mt={0.5}
-                  sx={{
-                    maxWidth: overflowButtonWidth,
-                    minWidth: overflowButtonWidth,
-                    padding: 0
-                  }}
-                >
-                  <Typography sx={{ fontSize: 15 }}>
-                    +{overFlowingLabels.length}
-                  </Typography>
-                </Button>
-              </>
-            )}
-          </Stack>
+            <Typography
+              mt={1}
+              ref={subtitleRef}
+              sx={{
+                color: theme =>
+                  theme.palette.mode === "dark" ? "white" : "black",
+                fontSize: 14,
+                fontWeight: 400,
+                width: headerContentWidth
+              }}
+              noWrap
+            >
+              {subtitle}
+            </Typography>
+          </Tooltip>
         </Box>
         <Box
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            height: "80vh",
-            overflowX: "hidden",
-            overflowY: "auto",
-            width: 1200
-          }}
+          sx={{ display: "flex", flexDirection: "row", gap: 2 }}
+          ref={buttonStackRef}
         >
-          <Box mt={1} ml={0.5} mb={1}>
-            <FileCard
-              media={media}
-              width={368}
-              files={files}
-              downloadButtonText={downloadButtonText}
-              downloadButtonTextOnSearch={downloadButtonTextOnSearch}
-              title="title"
-              fileTitle={fileTitle}
-              onClickDownload={onClickDownload}
-              onClickFile={onClickFile}
-            />
-          </Box>
-          <Box mt={1} ml={2} sx={{ width: 768 }}>
-            <Stack spacing={2}>{content}</Stack>
-          </Box>
+          {buttonsStack}
         </Box>
+      </Box>
+      <Box
+        mt={0}
+        mb={2}
+        ml={1}
+        sx={{
+          height: labelStackHeight,
+          maxWidth: labelContentWidth,
+          overflow: "hidden"
+        }}
+      >
+        <Stack
+          ref={labelStackRef}
+          direction="row"
+          spacing={`${labelSpacing}px`}
+        >
+          {!lableSize ? (
+            <>
+              {labels.map(label => (
+                <LabelChip
+                  clickable
+                  color={label.color}
+                  key={label._id}
+                  label={label.name}
+                  onClick={() => handleLabelClick(label)}
+                  size="small"
+                />
+              ))}
+            </>
+          ) : (
+            <>
+              {notOverflowingLabels.map(label => (
+                <LabelChip
+                  clickable
+                  color={label.color}
+                  key={label._id}
+                  label={label.name}
+                  onClick={() => handleLabelClick(label)}
+                  size="small"
+                />
+              ))}
+              <Button
+                variant="text"
+                size="large"
+                onClick={handleLabelOverflowClick}
+                mt={0.5}
+                sx={{
+                  maxWidth: overflowButtonWidth,
+                  minWidth: overflowButtonWidth,
+                  padding: 0
+                }}
+              >
+                <Typography sx={{ fontSize: 15 }}>
+                  +{overFlowingLabels.length}
+                </Typography>
+              </Button>
+            </>
+          )}
+        </Stack>
       </Box>
       <Popover
         open={isLabelOverflowOpen}
@@ -369,7 +393,6 @@ function DetailCard({
     </>
   );
 }
-
 // export the detail card
 export default DetailCard;
 
