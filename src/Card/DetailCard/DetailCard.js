@@ -249,7 +249,6 @@ function DetailCard({
         </Box>
         <Box
           mt={2}
-          mb={2}
           ml={1}
           sx={{
             height: labelStackHeight,
@@ -310,7 +309,7 @@ function DetailCard({
           sx={{
             display: "flex",
             flexDirection: "row",
-            height: "100%",
+            height: "80vh",
             overflowX: "hidden",
             overflowY: "auto",
             width: 1200
