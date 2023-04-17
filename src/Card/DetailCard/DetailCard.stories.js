@@ -178,7 +178,9 @@ ScenarioExample.args = {
     </>
   ),
   content: (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+    <Box
+      sx={{ display: "flex", flexDirection: "column", gap: "8px", pb: "2px" }}
+    >
       <TableCard
         key={"scenario"}
         title="Scenario"

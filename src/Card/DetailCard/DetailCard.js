@@ -110,7 +110,7 @@ function DetailCardHeader({
   const labelSpacing = 8;
 
   // label stack height
-  const labelStackHeight = 52;
+  const labelStackHeight = 24;
 
   // overflow button width
   const overflowButtonWidth = 40;
