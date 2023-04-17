@@ -170,7 +170,7 @@ ScenarioExample.args = {
       <Button
         sx={{ height: 42 }}
         color="error"
-        endIcon={<Delete />}
+        startIcon={<Delete />}
         onClick={action("onClickDelete")}
         variant="outlined"
       >
@@ -179,7 +179,7 @@ ScenarioExample.args = {
     </>
   ),
   content: (
-    <Box sx={{ display: "flex", flexDirection: "column" }}>
+    <Box sx={{ display: "flex", flexDirection: "column", gap: "8px" }}>
       <TableCard
         key={"scenario"}
         title="Scenario"
@@ -232,6 +232,8 @@ ScenarioExample.args = {
       <TableCard key={"Misc"} title="Misc" />
     </Box>
   ),
+  downloadButtonText: "Download All Files",
+  downloadButtonTextOnSearch: "Download Search Files",
   fileTitle: "Files",
   files: [
     {

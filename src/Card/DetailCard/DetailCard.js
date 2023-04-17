@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  Divider,
   Popover,
   Stack,
   Tooltip,
@@ -18,6 +17,8 @@ function DetailCard({
   buttonsStack = null,
   content = null,
   files = [],
+  downloadButtonText,
+  downloadButtonTextOnSearch,
   fileTitle = "title",
   height = 950,
   labels = [],
@@ -302,10 +303,10 @@ function DetailCard({
             )}
           </Stack>
         </Box>
-        <Divider />
         <Box
           sx={{
             display: "flex",
+            overflowY: "auto",
             width
           }}
         >
@@ -313,15 +314,16 @@ function DetailCard({
             <FileCard
               media={media}
               width={368}
-              height={756}
               files={files}
+              downloadButtonText={downloadButtonText}
+              downloadButtonTextOnSearch={downloadButtonTextOnSearch}
               title="title"
               fileTitle={fileTitle}
               onClickDownload={onClickDownload}
               onClickFile={onClickFile}
             />
           </Box>
-          <Box mt={1} ml={2} sx={{ height, overflowY: "auto", width: 760 }}>
+          <Box mt={1} ml={2} sx={{ height, width: 760 }}>
             <Stack spacing={2}>{content}</Stack>
           </Box>
         </Box>
@@ -381,6 +383,17 @@ DetailCard.propTypes = {
    *
    */
   content: PropTypes.node,
+  /**
+   * The download button text.
+   * @type {string}
+   * @default Download
+   */
+  downloadButtonText: PropTypes.string,
+  /**
+   * The download button text on search.
+   * @type {string}
+   */
+  downloadButtonTextOnSearch: PropTypes.string,
   /**
    * The fileTitle of the card.
    * @type {string}
