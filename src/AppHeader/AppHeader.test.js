@@ -16,14 +16,18 @@ const defaultInputs = {
 
 // test app name in the component
 describe("AppHeader", () => {
+  test("shows first and last initial of username", () => {
+    render(<AppHeader {...defaultInputs} username="Ruud van Nistelrooy" />);
+    expect(screen.getByText(/RN/i)).toBeInTheDocument();
+  });
+  test("should show app name", () => {
+    render(<AppHeader {...defaultInputs} appName="APP NAME" />);
+    expect(screen.getByText(/APP NAME/i)).toBeInTheDocument();
+  });
   test("should call onMenuClick when menu button is clicked", () => {
     render(<AppHeader {...defaultInputs} />);
     screen.getByRole("button", { name: "open-menu" }).click();
     expect(defaultInputs.onMenuClick).toHaveBeenCalled();
-  });
-  test("should display app name", () => {
-    render(<AppHeader {...defaultInputs} />);
-    screen.getByText(defaultInputs.appName);
   });
   test("should call onChangePassword when password button is clicked", async () => {
     const user = userEvent.setup();
@@ -36,5 +40,33 @@ describe("AppHeader", () => {
       screen.getByRole("menuitem", { name: /Change password/i })
     );
     expect(onChangePassword).toHaveBeenCalled();
+  });
+  test("onLogout called on user click", async () => {
+    const user = userEvent.setup();
+    const onLogout = jest.fn();
+    render(<AppHeader {...defaultInputs} onLogout={onLogout} />);
+    await user.click(screen.getByRole("button", { name: /JB/i }));
+    await user.click(screen.getByRole("menuitem", { name: /Logout/i }));
+    expect(onLogout).toHaveBeenCalled();
+  });
+  test("onClick switch change from light to dark mode", async () => {
+    const user = userEvent.setup();
+    const onModeChange = jest.fn();
+    render(
+      <AppHeader {...defaultInputs} onModeChange={onModeChange} mode="light" />
+    );
+    const button = screen.getByRole("checkbox");
+    await user.click(button);
+    expect(onModeChange).toHaveBeenCalledWith("dark");
+  });
+  test("onClick switch change from dark to light mode", async () => {
+    const user = userEvent.setup();
+    const onModeChange = jest.fn();
+    render(
+      <AppHeader {...defaultInputs} onModeChange={onModeChange} mode="dark" />
+    );
+    const button = screen.getByRole("checkbox");
+    await user.click(button);
+    expect(onModeChange).toHaveBeenCalledWith("light");
   });
 });
