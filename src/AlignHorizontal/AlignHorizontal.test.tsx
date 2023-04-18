@@ -3,7 +3,7 @@ import * as React from "react";
 import { render, screen } from "@testing-library/react";
 
 import AlignHorizontal from ".";
-import { AlignHorizontalProps } from "./AlignHorizontal";
+import { AlignHorizontalProps } from "./AlignHorizontal.types";
 
 /**
  * Test wrapper for AlignHorizontal

@@ -1,5 +1,8 @@
 export { default as ActionDialog } from "./ActionDialog";
-export { default as AlignHorizontal } from "./AlignHorizontal";
+export {
+  default as AlignHorizontal,
+  AlignHorizontalProps
+} from "./AlignHorizontal";
 export { default as AlignVertical } from "./AlignVertical";
 export { default as AppHeader } from "./AppHeader";
 export { default as AppLayout } from "./AppLayout";

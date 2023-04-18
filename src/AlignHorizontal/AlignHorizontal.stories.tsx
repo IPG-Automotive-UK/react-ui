@@ -1,7 +1,8 @@
-import AlignHorizontal, { AlignHorizontalProps } from "./AlignHorizontal";
 import { Meta, Story } from "@storybook/react";
 import React, { useEffect, useState } from "react";
 
+import AlignHorizontal from "./AlignHorizontal";
+import { AlignHorizontalProps } from "./AlignHorizontal.types";
 import { action } from "@storybook/addon-actions";
 
 /**
