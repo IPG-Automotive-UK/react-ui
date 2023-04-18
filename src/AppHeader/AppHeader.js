@@ -70,6 +70,7 @@ function Header({
           <Box ml={1} display="flex" alignItems="center">
             <Link href={virtoLogoLinkUrl} underline="none" display="flex">
               <VirtoLogo
+                data-testid="virto-logo"
                 sx={{
                   color: theme =>
                     theme.palette.mode === "dark" ? "#003063" : "white",

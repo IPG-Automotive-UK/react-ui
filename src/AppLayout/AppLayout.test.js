@@ -11,9 +11,10 @@ import AppLayout from "./AppLayout";
 import React from "react";
 import SidebarDivider from "../Sidebar/SidebarDivider";
 import SidebarItem from "../Sidebar/SidebarItem";
+import mediaQuery from "css-mediaquery";
 import userEvent from "@testing-library/user-event";
 
-// a set of default inputs so that tests can change what theyre testing
+// a set of default inputs so that tests can change what they are testing
 const defaultInputs = {
   appName: "App Name",
   content: <div>App Content goes here</div>,
@@ -33,8 +34,21 @@ const defaultInputs = {
   username: "Joe Bloggs"
 };
 
-// test app name in the component
+// implementation of matchMedia for testing
+// see docs https://mui.com/material-ui/react-use-media-query/#testing
+function createMatchMedia(width) {
+  return query => ({
+    addListener: () => {},
+    matches: mediaQuery.match(query, { width }),
+    removeListener: () => {}
+  });
+}
+
+// tests for the app layout
 describe("AppLayout", () => {
+  beforeAll(() => {
+    window.matchMedia = createMatchMedia(window.innerWidth);
+  });
   test("shows first and last initial of username", () => {
     render(<AppLayout {...defaultInputs} username="Ruud van Nistelrooy" />);
     expect(screen.getByText(/RN/i)).toBeInTheDocument();
@@ -43,14 +57,38 @@ describe("AppLayout", () => {
     render(<AppLayout {...defaultInputs} appName="APP NAME" />);
     expect(screen.getByText(/APP NAME/i)).toBeInTheDocument();
   });
+  test("should show app version", () => {
+    render(<AppLayout {...defaultInputs} appVersion="1.0.0" />);
+    expect(screen.getByText(/1.0.0/i)).toBeInTheDocument();
+  });
   test("should display content", () => {
     render(
       <AppLayout
         {...defaultInputs}
-        content={<div>More content goes here</div>}
+        content={<div data-testid="main-content">More content goes here</div>}
       />
     );
-    screen.getByText("More content goes here");
+
+    expect(screen.getByTestId("main-content")).toBeInTheDocument();
+  });
+  test("should display sidebar content", () => {
+    render(
+      <AppLayout
+        {...defaultInputs}
+        sidebarContent={
+          <div data-testid="sidebar-content">
+            <SidebarItem {...SidebarItemDefault.args} />
+            <SidebarItem {...SidebarItemSelected.args} />
+            <SidebarDivider />
+            <SidebarItem {...SidebarItemDisabled.args} />
+            <SidebarItem {...SidebarItemWithCount.args} />
+            <SidebarDivider />
+            <SidebarItem {...SidebarItemNested.args} />
+          </div>
+        }
+      />
+    );
+    expect(screen.getByTestId("sidebar-content")).toBeInTheDocument();
   });
   test("should call onChangePassword when password button is clicked", async () => {
     const user = userEvent.setup();
@@ -71,5 +109,16 @@ describe("AppLayout", () => {
     await user.click(screen.getByRole("button", { name: /JB/i }));
     await user.click(screen.getByRole("menuitem", { name: /Logout/i }));
     expect(onLogout).toHaveBeenCalled();
+  });
+  test("has a valid logo link href if a string is provided", () => {
+    const { container } = render(
+      <AppLayout
+        {...defaultInputs}
+        virtoLogoLinkUrl={"https://www.some.url/"}
+      />
+    );
+    expect(
+      container.querySelector("a[href='https://www.some.url/']")
+    ).toBeInTheDocument();
   });
 });
