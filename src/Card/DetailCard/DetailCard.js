@@ -57,6 +57,7 @@ function DetailCard({
             flexDirection: "row",
             flexGrow: 1,
             height: "70vh",
+            mt: 2,
             overflowX: "hidden",
             overflowY: "auto",
             width: "1170px"
@@ -95,61 +96,11 @@ function DetailCardHeader({
   // title, subtitle,buttonStack and label refs and overflow states
   const titleRef = useRef();
   const subtitleRef = useRef();
-  const labelStackRef = useRef();
 
   const buttonStackRef = useRef();
-  const [overFlowingLabels, setOverFlowingLabels] = useState([]);
-
-  // label popover anchor state
-  const [labelAnchorEl, setLabelAnchorEl] = useState(null);
-
-  // label content width
-  const labelContentWidth = width - 45;
 
   // label spacing
   const labelSpacing = 8;
-
-  // label stack height
-  const labelStackHeight = 24;
-
-  // overflow button width
-  const overflowButtonWidth = 40;
-
-  // check if label stack is overflowing
-  const useComponentSize = comRef => {
-    const [isLabelStackOverflow, setIsLabelStackOverflow] = useState(false);
-
-    React.useEffect(() => {
-      const sizeObserver = new ResizeObserver((entries, observer) => {
-        entries.forEach(({ target }) => {
-          setIsLabelStackOverflow(target.scrollWidth > target.clientWidth);
-        });
-      });
-      sizeObserver.observe(comRef.current);
-
-      let sum = overflowButtonWidth;
-      const overFlowLabels = [];
-
-      // for each of the labels in the label stack
-      labelStackRef.current.childNodes.forEach(child => {
-        // add the width of the child plus 8px of space between each child to the sum
-        sum += child.offsetWidth + labelSpacing;
-
-        // if the sum is greater than the header contend width, then them this child is overflowing
-        // the header content width
-        if (sum > labelContentWidth) {
-          overFlowLabels.push(child);
-        }
-      });
-
-      // set the overflowing labels
-      setOverFlowingLabels(overFlowLabels);
-
-      return () => sizeObserver.disconnect();
-    }, [comRef]);
-
-    return [isLabelStackOverflow];
-  };
 
   // check if title is overflowing
   const useTitleWidth = titleRef => {
@@ -209,20 +160,6 @@ function DetailCardHeader({
     return [isSubtitleOverflow];
   };
 
-  // determine what labels to show
-  const notOverflowingLabels = labels.slice(
-    0,
-    labels.length - overFlowingLabels.length
-  );
-
-  // handle the click of the label overflow button by setting the label anchor element
-  const handleLabelOverflowClick = event => {
-    setLabelAnchorEl(event.currentTarget);
-  };
-
-  // check if label stack is overflowing
-  const [lableSize] = useComponentSize(labelStackRef);
-
   // check if title is overflowing
   const [titleSizeOverflow] = useTitleWidth(titleRef);
 
@@ -235,18 +172,6 @@ function DetailCardHeader({
   // header content width
   const headerContentWidth = width - buttonsStackWidth - 10;
 
-  // handle the close of the label overflow popover by setting the label anchor element to null
-  const handleLabelOverflowClose = () => {
-    setLabelAnchorEl(null);
-  };
-
-  // determine if the label overflow popover is open
-  const isLabelOverflowOpen = Boolean(labelAnchorEl);
-
-  // handle label click by calling the onClickLabel prop
-  const handleLabelClick = label => {
-    onClickLabel(label);
-  };
   return (
     <>
       <Box
@@ -300,12 +225,105 @@ function DetailCardHeader({
           {buttonsStack}
         </Box>
       </Box>
+      {labels.length > 0 && (
+        <LableStack
+          labelSpacing={labelSpacing}
+          width={width}
+          labels={labels}
+          onClickLabel={onClickLabel}
+        />
+      )}
+    </>
+  );
+}
+
+function LableStack({ labelSpacing, width, labels, onClickLabel }) {
+  // label stack height
+  const labelStackHeight = 24;
+
+  // overflow button width
+  const overflowButtonWidth = 40;
+
+  // label content width
+  const labelContentWidth = width - 45;
+
+  const [overFlowingLabels, setOverFlowingLabels] = useState([]);
+
+  // label popover anchor state
+  const [labelAnchorEl, setLabelAnchorEl] = useState(null);
+
+  // handle the close of the label overflow popover by setting the label anchor element to null
+  const handleLabelOverflowClose = () => {
+    setLabelAnchorEl(null);
+  };
+
+  // determine if the label overflow popover is open
+  const isLabelOverflowOpen = Boolean(labelAnchorEl);
+
+  // determine what labels to show
+  const notOverflowingLabels = labels.slice(
+    0,
+    labels.length - overFlowingLabels.length
+  );
+
+  // handle the click of the label overflow button by setting the label anchor element
+  const handleLabelOverflowClick = event => {
+    setLabelAnchorEl(event.currentTarget);
+  };
+
+  const labelStackRef = useRef();
+
+  // check if label stack is overflowing
+  const useComponentSize = comRef => {
+    const [isLabelStackOverflow, setIsLabelStackOverflow] = useState(false);
+
+    React.useEffect(() => {
+      const sizeObserver = new ResizeObserver((entries, observer) => {
+        entries.forEach(({ target }) => {
+          setIsLabelStackOverflow(target.scrollWidth > target.clientWidth);
+        });
+      });
+      sizeObserver.observe(comRef.current);
+
+      let sum = overflowButtonWidth;
+      const overFlowLabels = [];
+
+      // for each of the labels in the label stack
+      labelStackRef.current.childNodes.forEach(child => {
+        // add the width of the child plus 8px of space between each child to the sum
+        sum += child.offsetWidth + labelSpacing;
+
+        // if the sum is greater than the header contend width, then them this child is overflowing
+        // the header content width
+        if (sum > labelContentWidth) {
+          overFlowLabels.push(child);
+        }
+      });
+
+      // set the overflowing labels
+      setOverFlowingLabels(overFlowLabels);
+
+      return () => sizeObserver.disconnect();
+    }, [comRef]);
+
+    return [isLabelStackOverflow];
+  };
+
+  // handle label click by calling the onClickLabel prop
+  const handleLabelClick = label => {
+    onClickLabel(label);
+  };
+
+  // check if label stack is overflowing
+  const [lableSize] = useComponentSize(labelStackRef);
+  return (
+    <>
       <Box
         mt={0}
         ml={1}
         sx={{
-          height: labelStackHeight,
           maxWidth: labelContentWidth,
+          minHeight: labelStackHeight,
           overflow: "hidden"
         }}
       >
