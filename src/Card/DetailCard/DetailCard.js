@@ -55,10 +55,10 @@ function DetailCard({
           sx={{
             display: "flex",
             flexDirection: "row",
-            flexGrow: 1,
-            mt: 2,
-            overflowX: "hidden",
-            overflowY: "auto"
+            height: "100%",
+            justifyContent: "stretch",
+            my: 2,
+            overflow: "auto"
           }}
         >
           <Box mt={1} ml={0.5} mb={1}>
