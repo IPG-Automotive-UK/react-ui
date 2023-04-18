@@ -56,12 +56,11 @@ function DetailCard({
             display: "flex",
             flexDirection: "row",
             height: "100%",
-            justifyContent: "stretch",
             my: 2,
             overflow: "auto"
           }}
         >
-          <Box mt={1} ml={0.5} mb={1}>
+          <Box ml={0.5}>
             <FileCard
               media={media}
               width={368}
@@ -75,7 +74,6 @@ function DetailCard({
             />
           </Box>
           <Stack
-            mt={1}
             ml={2}
             spacing={2}
             sx={{ display: "flex", flexGrow: 1, mr: 0.5, width: "100%" }}
