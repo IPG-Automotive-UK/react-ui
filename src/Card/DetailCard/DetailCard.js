@@ -58,8 +58,7 @@ function DetailCard({
             flexGrow: 1,
             mt: 2,
             overflowX: "hidden",
-            overflowY: "auto",
-            width: "1170px"
+            overflowY: "auto"
           }}
         >
           <Box mt={1} ml={0.5} mb={1}>
@@ -75,9 +74,14 @@ function DetailCard({
               onClickFile={onClickFile}
             />
           </Box>
-          <Box mt={1} ml={2} sx={{ width: 768 }}>
-            <Stack spacing={2}>{content}</Stack>
-          </Box>
+          <Stack
+            mt={1}
+            ml={2}
+            spacing={2}
+            sx={{ display: "flex", flexGrow: 1, mr: 0.5, width: "100%" }}
+          >
+            {content}
+          </Stack>
         </Box>
       </Stack>
     </>

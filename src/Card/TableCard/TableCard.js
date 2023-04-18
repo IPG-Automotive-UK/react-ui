@@ -13,14 +13,9 @@ import {
 
 import React from "react";
 
-function TableCard({
-  action = null,
-  tableContent = [],
-  title = "Table",
-  width = 760
-}) {
+function TableCard({ action = null, tableContent = [], title = "Table" }) {
   return (
-    <Card sx={{ width }}>
+    <Card>
       <CardHeader
         title={
           <Typography
