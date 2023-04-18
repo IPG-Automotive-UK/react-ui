@@ -7,7 +7,6 @@ import { AlignHorizontalProps } from "./AlignHorizontal";
 
 /**
  * Test wrapper for AlignHorizontal
- *
  * Provides state for value to avoid errors changing from uncontrolled to controlled.
  */
 interface AlignHorizontalWithStateProps
