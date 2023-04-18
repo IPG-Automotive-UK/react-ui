@@ -56,7 +56,6 @@ function DetailCard({
             display: "flex",
             flexDirection: "row",
             flexGrow: 1,
-            height: "70vh",
             mt: 2,
             overflowX: "hidden",
             overflowY: "auto",
