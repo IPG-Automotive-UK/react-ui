@@ -14,7 +14,7 @@ const defaultInputs = {
   username: "Joe Bloggs"
 };
 
-// test app name in the component
+// tests for the app header component
 describe("AppHeader", () => {
   test("shows first and last initial of username", () => {
     render(<AppHeader {...defaultInputs} username="Ruud van Nistelrooy" />);

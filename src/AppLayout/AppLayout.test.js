@@ -44,7 +44,7 @@ function createMatchMedia(width) {
   });
 }
 
-// tests for the app layout
+// tests for the app layout component
 describe("AppLayout", () => {
   beforeAll(() => {
     window.matchMedia = createMatchMedia(window.innerWidth);
