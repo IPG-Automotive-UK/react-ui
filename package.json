@@ -78,7 +78,7 @@
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.7",
     "@mui/styles": "^5.11.7",
-    "@mui/x-data-grid": "^5.17.22",
+    "@mui/x-data-grid": "^6.0.4",
     "colord": "^2.9.3",
     "material-ui-confirm": "^3.0.9",
     "material-ui-popup-state": "^5.0.4",
