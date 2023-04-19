@@ -107,7 +107,8 @@ function FileCard({
             component="img"
             src={media}
             sx={{
-              height: 192,
+              boxSizing: "content-box",
+              height: 190,
               objectFit: "contain",
               padding: 2,
               width: 336
