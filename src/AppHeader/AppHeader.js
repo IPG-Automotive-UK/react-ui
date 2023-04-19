@@ -2,7 +2,6 @@ import {
   AppBar,
   Box,
   Drawer,
-  Hidden,
   IconButton,
   Link,
   Toolbar,
@@ -49,7 +48,7 @@ function Header({
           <IconButton
             disableRipple
             color="inherit"
-            aria-label="open-menu"
+            data-testid="launcher-button"
             edge="start"
             onClick={onMenuClick}
             sx={theme => ({
@@ -145,27 +144,26 @@ function AppHeader({
         username={username}
         virtoLogoLinkUrl={virtoLogoLinkUrl}
       />
-      <Hidden>
-        <Drawer
-          variant="temporary"
-          anchor="left"
-          open={appOpen}
-          onClose={() => setAppOpen(false)}
-          sx={{
-            "& .MuiDrawer-paper": {
-              height: theme => `calc(100% - ${theme.mixins.toolbar.minHeight})`,
-              top: theme => theme.mixins.toolbar.minHeight,
-              width: applancherWidth
-            }
-          }}
-        >
-          <AppLauncher
-            baseUrl={baseUrl}
-            logoLinkUrl={virtoLogoLinkUrl}
-            onAppButtonClick={() => setAppOpen(false)}
-          />
-        </Drawer>
-      </Hidden>
+      <Drawer
+        variant="temporary"
+        anchor="left"
+        data-testid="app-launcher"
+        open={appOpen}
+        onClose={() => setAppOpen(false)}
+        sx={{
+          "& .MuiDrawer-paper": {
+            height: theme => `calc(100% - ${theme.mixins.toolbar.minHeight})`,
+            top: theme => theme.mixins.toolbar.minHeight,
+            width: applancherWidth
+          }
+        }}
+      >
+        <AppLauncher
+          baseUrl={baseUrl}
+          logoLinkUrl={virtoLogoLinkUrl}
+          onAppButtonClick={() => setAppOpen(false)}
+        />
+      </Drawer>
     </>
   );
 }

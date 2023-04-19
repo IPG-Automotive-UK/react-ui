@@ -24,10 +24,12 @@ describe("AppHeader", () => {
     render(<AppHeader {...defaultInputs} appName="APP NAME" />);
     expect(screen.getByText(/APP NAME/i)).toBeInTheDocument();
   });
-  test("should call onMenuClick when menu button is clicked", () => {
-    render(<AppHeader {...defaultInputs} />);
-    screen.getByRole("button", { name: "open-menu" }).click();
-    expect(defaultInputs.onMenuClick).toHaveBeenCalled();
+  test("should call onMenuClick when menu button is clicked", async () => {
+    const onMenuClick = jest.fn();
+    render(<AppHeader {...defaultInputs} onMenuClick={onMenuClick} />);
+    const launcherButton = screen.getByTestId("launcher-button");
+    await userEvent.click(launcherButton);
+    expect(onMenuClick).toHaveBeenCalled();
   });
   test("should call onChangePassword when password button is clicked", async () => {
     const user = userEvent.setup();
