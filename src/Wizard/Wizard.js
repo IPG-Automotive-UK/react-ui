@@ -24,7 +24,7 @@ export default function Wizard({ title, children, maxWidth }) {
             variant="h5"
             color="textPrimary"
             sx={{
-              fontWeight: 500,
+              fontWeight: 700,
               maxWidth: theme => theme?.layout?.content?.maxWidth,
               mb: 3,
               mt: 1,

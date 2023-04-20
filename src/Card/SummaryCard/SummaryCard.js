@@ -25,14 +25,14 @@ function SummaryCard({
   height = 600,
   labels = [],
   media = "",
-  mediaHeight = 200,
-  mediaWidth = 400,
+  mediaHeight = 190,
+  mediaWidth = 336,
   moreOptionsPopover = null,
   onClickLabel = () => {},
   moreCardActions = null,
   subtitle = "subtitle",
   title = "title",
-  width = 450
+  width = 368
 }) {
   // title, subtitle and label refs and overflow states
   const titleRef = useRef();
@@ -48,7 +48,7 @@ function SummaryCard({
   const [moreOptionsAnchorEl, setMoreOptionsAnchorEl] = useState(null);
 
   // header content width
-  const headerContentWidth = width - 65;
+  const headerContentWidth = width - 60;
 
   // label content width
   const labelContentWidth = width - 45;
@@ -230,6 +230,7 @@ function SummaryCard({
         />
         <Box
           ml={2}
+          pr={2}
           sx={{
             height: 24,
             maxWidth: headerContentWidth,
@@ -354,6 +355,7 @@ function SummaryCard({
         open={isMoreOptionsOpen}
         anchorEl={moreOptionsAnchorEl}
         onClose={handleMoreOptionsClose}
+        onClick={handleMoreOptionsClose}
         anchorOrigin={{
           horizontal: "left",
           vertical: "bottom"
@@ -418,14 +420,14 @@ SummaryCard.propTypes = {
   /**
    * The height of the media.
    * @type {number}
-   * @default 200
+   * @default 190
    *
    */
   mediaHeight: PropTypes.number,
   /**
    * The width of the media.
    * @type {number}
-   * @default 200
+   * @default 336
    *
    */
   mediaWidth: PropTypes.number,
@@ -493,7 +495,7 @@ SummaryCard.propTypes = {
   /**
    * The width of the card.
    * @type {number | string}
-   * @default 450
+   * @default 368
    * @default
    */
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number])

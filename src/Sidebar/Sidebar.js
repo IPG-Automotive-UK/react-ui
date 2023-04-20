@@ -24,7 +24,12 @@ function Sidebar({
         p={theme => theme.spacing(2)}
       >
         {showLogo ? (
-          <Link href={"https://ipg-automotive.com"} underline="none">
+          <Link
+            href={"https://ipg-automotive.com"}
+            underline="none"
+            display="flex"
+            target="_blank"
+          >
             <IpgLogo sx={{ height: 40, width: 120 }} />
           </Link>
         ) : null}

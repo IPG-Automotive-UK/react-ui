@@ -55,13 +55,13 @@ export default function ModelButton({
         sx={{
           "&::before": {
             border: `2px solid ${borderColor}`,
-            borderRadius: "50%",
+            borderRadius: "20px 0 0 0",
             bottom: "-18px",
             content: arrayChildren && arrayChildren.length > 0 ? '""' : "none",
             padding: "20px",
             position: "absolute",
             right: "-18px",
-            width: "100%"
+            transition: "all 0.2s ease-in-out"
           },
           "&:hover": {
             "&::before": {
@@ -93,7 +93,8 @@ export default function ModelButton({
           position: "absolute",
           right: "0%",
           top: "0%",
-          transition: "all 0.2s ease-in-out"
+          transition: "all 0.2s ease-in-out",
+          width: "100%"
         }}
       >
         {icon
@@ -198,11 +199,11 @@ const ModelButtonPopup = ({ color, children, disabled, label }) => {
           },
           backgroundColor: theme =>
             theme.palette.mode === "light" ? "#fff" : "#333",
+          borderRadius: "20px 0 0 0",
           bottom: "-74px",
           padding: "6px",
           position: "relative",
-          right: "-74px",
-          width: "100%"
+          right: "-74px"
         }}
       >
         <KeyboardArrowDownIcon

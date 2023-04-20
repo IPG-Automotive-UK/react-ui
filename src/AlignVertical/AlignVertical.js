@@ -1,10 +1,12 @@
 import * as React from "react";
+
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 import {
   VerticalAlignBottom,
   VerticalAlignCenter,
   VerticalAlignTop
 } from "@mui/icons-material";
+
 import PropTypes from "prop-types";
 
 /**

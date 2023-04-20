@@ -18,8 +18,7 @@ Default.args = {
   action: null,
   height: "100%",
   tableContent: [],
-  title: "Table",
-  width: 735
+  title: "Table"
 };
 
 export const TableWithContent = Template.bind({});

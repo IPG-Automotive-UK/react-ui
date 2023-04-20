@@ -2,8 +2,8 @@ import {
   AppBar,
   Box,
   Drawer,
-  Hidden,
   IconButton,
+  Link,
   Toolbar,
   Typography
 } from "@mui/material";
@@ -20,21 +20,19 @@ import VirtoLogo from "../SvgIcons/VirtoLogo";
 // appbar component
 function Header({
   appName,
-  onMenuClick,
-  onAppClick,
-  username,
   mode,
+  onAppClick,
   onChange,
   onChangePassword,
-  onLogout
+  onLogout,
+  onMenuClick,
+  username,
+  virtoLogoLinkUrl
 }) {
   return (
     <AppBar
       sx={theme => ({
-        backgroundColor:
-          theme.palette.mode === "light"
-            ? theme.palette.primary.main
-            : "#87A5D2"
+        backgroundColor: theme.palette.primary.main
       })}
     >
       <Toolbar style={{ justifyContent: "space-between" }}>
@@ -50,7 +48,7 @@ function Header({
           <IconButton
             disableRipple
             color="inherit"
-            aria-label="open menu"
+            data-testid="launcher-button"
             edge="start"
             onClick={onMenuClick}
             sx={theme => ({
@@ -69,15 +67,18 @@ function Header({
             />
           </IconButton>
           <Box ml={1} display="flex" alignItems="center">
-            <VirtoLogo
-              sx={{
-                color: theme =>
-                  theme.palette.mode === "dark" ? "#003063" : "white",
-                height: 22,
-                mr: 1,
-                width: 110
-              }}
-            />
+            <Link href={virtoLogoLinkUrl} underline="none" display="flex">
+              <VirtoLogo
+                data-testid="virto-logo"
+                sx={{
+                  color: theme =>
+                    theme.palette.mode === "dark" ? "#003063" : "white",
+                  height: 22,
+                  mr: 0.4,
+                  width: 110
+                }}
+              />
+            </Link>
             <Typography
               variant="h6"
               fontSize="28px"
@@ -89,7 +90,8 @@ function Header({
                 theme.palette.mode === "dark" ? "#003063" : "white"
               }
             >
-              {appName}
+              {`.`}
+              <span style={{ marginLeft: "7px" }}>{appName}</span>
             </Typography>
           </Box>
         </Box>
@@ -108,15 +110,15 @@ function Header({
 
 // app header component
 function AppHeader({
-  appUrls,
-  virtoLogoLinkUrl = null,
   appName,
+  baseUrl,
+  mode,
   onChangePassword,
   onLogout,
+  onMenuClick,
   onModeChange,
-  mode,
   username,
-  onMenuClick
+  virtoLogoLinkUrl = null
 }) {
   // sidebar styling
   const applancherWidth = 300;
@@ -133,53 +135,48 @@ function AppHeader({
     <>
       <Header
         appName={appName}
-        onMenuClick={handleMenuClick(onMenuClick)}
+        mode={mode}
         onAppClick={() => setAppOpen(!appOpen)}
+        onChange={onModeChange}
         onChangePassword={onChangePassword}
         onLogout={onLogout}
-        onChange={onModeChange}
+        onMenuClick={handleMenuClick(onMenuClick)}
         username={username}
-        mode={mode}
+        virtoLogoLinkUrl={virtoLogoLinkUrl}
       />
-      <Hidden>
-        <Drawer
-          variant="temporary"
-          anchor="left"
-          open={appOpen}
-          onClose={() => setAppOpen(false)}
-          sx={{
-            "& .MuiDrawer-paper": {
-              height: `calc(100% - 64px)`,
-              top: "64px",
-              width: applancherWidth
-            }
-          }}
-        >
-          <AppLauncher appUrls={appUrls} logoLinkUrl={virtoLogoLinkUrl} />
-        </Drawer>
-      </Hidden>
+      <Drawer
+        variant="temporary"
+        anchor="left"
+        data-testid="app-launcher"
+        open={appOpen}
+        onClose={() => setAppOpen(false)}
+        sx={{
+          "& .MuiDrawer-paper": {
+            height: theme => `calc(100% - ${theme.mixins.toolbar.minHeight})`,
+            top: theme => theme.mixins.toolbar.minHeight,
+            width: applancherWidth
+          }
+        }}
+      >
+        <AppLauncher
+          baseUrl={baseUrl}
+          logoLinkUrl={virtoLogoLinkUrl}
+          onAppButtonClick={() => setAppOpen(false)}
+        />
+      </Drawer>
     </>
   );
 }
 
 AppHeader.propTypes = {
   /**
-   * App version to display in header.
+   * App name to display in header.
    */
   appName: PropTypes.string.isRequired,
   /**
-   *  List of apps to display in the AppLauncher
-   * @default []
-   * @type {array}
-   * @example
-   * [
-   * {
-   * "VIRTO.BUILD": "https://someurl.com",
-   * "VIRTO.ID": "https://someurl.com",
-   * }
-   * ]
+   * Base URL for VIRTO home page.
    */
-  appUrls: PropTypes.array,
+  baseUrl: PropTypes.string,
   /**
    * The color mode selection
    * @default "light"
@@ -205,16 +202,6 @@ AppHeader.propTypes = {
    * _event_: The event source of the callback.
    */
   onLogout: PropTypes.func.isRequired,
-  /**
-   * Callback fired when the user clicks on Menu icon.
-   *
-   * **Signature**
-   * ```
-   * function(event: object) => void
-   * ```
-   * _event_: The event source of the callback.
-   */
-  onMenuClick: PropTypes.func.isRequired,
   /**
    * Callback fired when the color mode is changed.
    *

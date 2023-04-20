@@ -6,6 +6,8 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  MenuItem,
+  MenuList,
   Table,
   TableBody,
   TableCell,
@@ -40,14 +42,14 @@ Default.args = {
   height: 600,
   labels: [],
   media: "",
-  mediaHeight: 200,
-  mediaWidth: 400,
+  mediaHeight: 190,
+  mediaWidth: 336,
   moreCardActions: null,
   moreOptionsPopover: null,
   onClickLabel: () => {},
   subtitle: "subtitle",
   title: "title",
-  width: 450
+  width: 368
 };
 
 export const TruncatedTitleAndSubtitle = Template.bind({});
@@ -130,24 +132,20 @@ export const withMoreOptionsPopover = Template.bind({});
 withMoreOptionsPopover.args = {
   ...Default.args,
   moreOptionsPopover: (
-    <List>
-      <ListItem disablePadding>
-        <ListItemButton onClick={action("onEditClick")}>
-          <ListItemIcon>
-            <Edit />
-          </ListItemIcon>
-          <ListItemText primary="Edit" />
-        </ListItemButton>
-      </ListItem>
-      <ListItem disablePadding>
-        <ListItemButton onClick={action("onDeleteClick")}>
-          <ListItemIcon>
-            <Delete />
-          </ListItemIcon>
-          <ListItemText primary="Delete" />
-        </ListItemButton>
-      </ListItem>
-    </List>
+    <MenuList>
+      <MenuItem onClick={action("onEditClick")}>
+        <ListItemIcon>
+          <Edit />
+        </ListItemIcon>
+        <ListItemText primary="Edit" />
+      </MenuItem>
+      <MenuItem onClick={action("onDeleteClick")}>
+        <ListItemIcon>
+          <Delete />
+        </ListItemIcon>
+        <ListItemText primary="Delete" />
+      </MenuItem>
+    </MenuList>
   )
 };
 
@@ -159,8 +157,10 @@ ScenarioExample.args = {
       <Table size="small">
         <TableBody>
           <TableRow>
-            <TableCell>Description</TableCell>
-            <TableCell>Some Description of a road</TableCell>
+            <TableCell sx={{ width: 100 }}>Description</TableCell>
+            <TableCell sx={{ width: 100 }}>
+              Some Description of a road
+            </TableCell>
           </TableRow>
           <TableRow>
             <TableCell>Country</TableCell>

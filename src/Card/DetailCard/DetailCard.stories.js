@@ -1,6 +1,6 @@
+import { Box, Button } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
 
-import { Button } from "@mui/material";
 import DetailCard from "./DetailCard";
 import React from "react";
 import TableCard from "../TableCard";
@@ -27,7 +27,6 @@ const Template = args => {
 export const Default = Template.bind({});
 Default.args = {
   content: null,
-  height: 950,
   labels: [],
   media: "",
   mediaHeight: 200,
@@ -170,7 +169,7 @@ ScenarioExample.args = {
       <Button
         sx={{ height: 42 }}
         color="error"
-        endIcon={<Delete />}
+        startIcon={<Delete />}
         onClick={action("onClickDelete")}
         variant="outlined"
       >
@@ -179,7 +178,9 @@ ScenarioExample.args = {
     </>
   ),
   content: (
-    <>
+    <Box
+      sx={{ display: "flex", flexDirection: "column", gap: "8px", pb: "2px" }}
+    >
       <TableCard
         key={"scenario"}
         title="Scenario"
@@ -230,8 +231,10 @@ ScenarioExample.args = {
       />
       <TableCard key={"Maneuver"} title="Maneuver" />
       <TableCard key={"Misc"} title="Misc" />
-    </>
+    </Box>
   ),
+  downloadButtonText: "Download All Files",
+  downloadButtonTextOnSearch: "Download Search Files",
   fileTitle: "Files",
   files: [
     {

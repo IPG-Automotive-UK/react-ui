@@ -16,7 +16,12 @@ import React from "react";
 import VirtoLogo from "../SvgIcons/VirtoLogo";
 
 // AppLauncher component for app which displays logo, list of items and app version
-function AppLauncher({ logoLinkUrl = null, showLogo = true, appUrls }) {
+function AppLauncher({
+  baseUrl = "http://localhost:3000",
+  logoLinkUrl = null,
+  onAppButtonClick = () => {},
+  showLogo = true
+}) {
   // styles for virto app icons
   const iconStyle = { height: 74, mb: 1, width: 74 };
 
@@ -24,41 +29,55 @@ function AppLauncher({ logoLinkUrl = null, showLogo = true, appUrls }) {
   const appList = [
     {
       icon: <VirtoBuild sx={iconStyle} />,
-      name: "VIRTO.BUILD"
+      name: "VIRTO.BUILD",
+      url: `${baseUrl}/fleet/build`
     },
     {
       icon: <VirtoFleet sx={iconStyle} />,
-      name: "VIRTO.FLEET"
+      name: "VIRTO.FLEET",
+      url: `${baseUrl}/fleet`
     },
     {
       icon: <VirtoModel sx={iconStyle} />,
-      name: "VIRTO.MODEL"
+      name: "VIRTO.MODEL",
+      url: `${baseUrl}/model`
     },
     {
       icon: <VirtoScene sx={iconStyle} />,
-      name: "VIRTO.SCENE"
+      name: "VIRTO.SCENE",
+      url: `${baseUrl}/scene`
     },
     {
       icon: <VirtoTest sx={iconStyle} />,
-      name: "VIRTO.TEST"
+      name: "VIRTO.TEST",
+      url: `${baseUrl}/test`
     },
     {
       icon: <VirtoResult sx={iconStyle} />,
-      name: "VIRTO.RESULT"
+      name: "VIRTO.RESULT",
+      url: `${baseUrl}/result`
     },
     {
       icon: <VirtoData sx={iconStyle} />,
-      name: "VIRTO.DATA"
+      name: "VIRTO.DATA",
+      url: `${baseUrl}/data`
     },
     {
       icon: <VirtoVehicle sx={iconStyle} />,
-      name: "VIRTO.VEHICLE"
+      name: "VIRTO.VEHICLE",
+      url: `${baseUrl}/vehicle`
     },
     {
       icon: <VirtoID sx={iconStyle} />,
-      name: "VIRTO.ID"
+      name: "VIRTO.ID",
+      url: `${baseUrl}/id`
     }
   ];
+
+  // handle app button click event
+  const handleAppButtonClick = cb => event => {
+    cb(event);
+  };
 
   // header logo
   const logoBox = (
@@ -104,9 +123,10 @@ function AppLauncher({ logoLinkUrl = null, showLogo = true, appUrls }) {
           return (
             <Paper
               elevation={1}
+              onClick={handleAppButtonClick(onAppButtonClick)}
               key={app.name}
               component="a"
-              href={appUrls?.length > 0 ? appUrls[0][app.name] : "#"}
+              href={app.url}
               target="_blank"
               data-testid={app.name}
               sx={theme => ({
@@ -121,14 +141,6 @@ function AppLauncher({ logoLinkUrl = null, showLogo = true, appUrls }) {
                 boxShadow: "none",
                 cursor: "pointer",
                 mb: 2,
-                opacity:
-                  appUrls?.length > 0 && appUrls[0][app.name] !== undefined
-                    ? 1
-                    : 0.5,
-                pointerEvents:
-                  appUrls?.length > 0 && appUrls[0][app.name] !== undefined
-                    ? "auto"
-                    : "none",
                 textDecoration: "none",
                 width: 120
               })}
@@ -158,22 +170,25 @@ function AppLauncher({ logoLinkUrl = null, showLogo = true, appUrls }) {
 
 AppLauncher.propTypes = {
   /**
-   *  List of apps to display in the AppLauncher
-   * @default []
-   * @type {array}
-   * @example
-   * [
-   * {
-   * "VIRTO.BUILD": "https://someurl.com",
-   * "VIRTO.ID": "https://someurl.com",
-   * }
-   * ]
+   * Base URL for VIRTO home page. All apps are served relative to this URL.
+   * @default 'http://localhost:3000'
+   * @type {string}
    */
-  appUrls: PropTypes.array,
+  baseUrl: PropTypes.string,
   /**
    * A String of the href URL for the Link of the IPG Logo, default is null (link disabled)
    */
   logoLinkUrl: PropTypes.string,
+  /**
+   * Callback fired when the user clicks on App Button.
+   *
+   * **Signature**
+   * ```
+   * function(event: object) => void
+   * ```
+   * _event_: The event source of the callback.
+   */
+  onAppButtonClick: PropTypes.func.isRequired,
   /**
    * Boolean to determine if logo should be displayed at the top of the AppLauncher
    */

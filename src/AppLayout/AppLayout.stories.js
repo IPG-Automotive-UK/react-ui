@@ -25,16 +25,22 @@ const Template = args => {
 export const Default = Template.bind({});
 Default.args = {
   appName: "APP NAME",
-  appUrls: [
-    {
-      "VIRTO.BUILD": "https://someurl.com",
-      "VIRTO.DATA": "https://someurl.com",
-      "VIRTO.FLEET": "https://someurl.com",
-      "VIRTO.ID": "https://someurl.com"
-    }
-  ],
   appVersion: version,
-  content: <div>App Content goes here</div>,
+  baseUrl: "http://localhost:3000",
+  /**
+   * Content set to something that forces the content to be scrollable
+   */
+  content: (
+    <div
+      style={{
+        height: "110vw",
+        padding: "16px",
+        width: "110vw"
+      }}
+    >
+      App Content goes here
+    </div>
+  ),
   mode: "light",
   sidebarContent: (
     <>
@@ -48,4 +54,7 @@ Default.args = {
     </>
   ),
   username: "Ruud van Nistelrooy"
+};
+Default.parameters = {
+  layout: "fullscreen" // removes the padding from the story iframe for this story
 };

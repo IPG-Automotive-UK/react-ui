@@ -1,5 +1,6 @@
 import AppLauncher from "./AppLauncher";
 import React from "react";
+import { action } from "@storybook/addon-actions";
 
 export default {
   component: AppLauncher,
@@ -17,7 +18,7 @@ const Template = args => {
         width: 260
       }}
     >
-      <AppLauncher {...args} />
+      <AppLauncher {...args} onMenuClick={action("onMenuClick")} />
     </div>
   );
 };
@@ -25,14 +26,7 @@ const Template = args => {
 // default story
 export const Default = Template.bind({});
 Default.args = {
-  appUrls: [
-    {
-      "VIRTO.BUILD": "https://someurl.com",
-      "VIRTO.DATA": "https://someurl.com",
-      "VIRTO.FLEET": "https://someurl.com",
-      "VIRTO.ID": "https://someurl.com"
-    }
-  ],
+  baseUrl: "http://localhost:3000",
   showLogo: true
 };
 

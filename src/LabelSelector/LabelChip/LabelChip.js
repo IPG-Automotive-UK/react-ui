@@ -1,6 +1,5 @@
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { Chip, alpha, chipClasses, darken } from "@mui/material";
 
-import { Chip } from "@mui/material";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -15,29 +14,30 @@ export default function LabelChip({
   variant = "filled",
   ...props
 }) {
-  // create theme to overide primary color
-  const theme = createTheme({
-    palette: {
-      primary: {
-        main: color
-      }
-    }
-  });
-
   // return the styled chip component
   return (
-    <ThemeProvider theme={theme}>
-      <Chip
-        {...props}
-        clickable={clickable}
-        color="primary"
-        label={label}
-        onClick={onClick}
-        onDelete={onDelete}
-        size={size}
-        variant={variant}
-      />
-    </ThemeProvider>
+    <Chip
+      {...props}
+      clickable={clickable}
+      sx={{
+        "&:hover": {
+          backgroundColor: clickable ? darken(color, 0.2) : color
+        },
+        backgroundColor: color,
+        color: theme => theme.palette.getContrastText(color),
+        [`& .${chipClasses.deleteIcon}`]: {
+          color: theme => alpha(theme.palette.getContrastText(color), 0.7)
+        },
+        [`& .${chipClasses.deleteIcon}:hover`]: {
+          color: theme => theme.palette.getContrastText(color)
+        }
+      }}
+      label={label}
+      onClick={onClick}
+      onDelete={onDelete}
+      size={size}
+      variant={variant}
+    />
   );
 }
 
