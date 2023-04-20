@@ -1,11 +1,10 @@
 import { ConfirmProvider, useConfirm } from "./ConfirmProvider";
+import { fireEvent, render, screen } from "@testing-library/react";
 
 import { Button } from "@mui/material";
 import React from "react";
 import ThemeProvider from "../ThemeProvider";
 import { action } from "@storybook/addon-actions";
-import { render } from "@testing-library/react";
-import { userEvent } from "@storybook/testing-library";
 
 function ConfirmDialog() {
   const confirm = useConfirm();
@@ -42,8 +41,8 @@ describe("ConfirmProvider", () => {
         </ConfirmProvider>
       </ThemeProvider>
     );
-    const button = getByText("Button");
-    userEvent.click(button);
+
+    fireEvent.click(screen.getByRole("button", { name: "Button" }));
 
     // verify dialog title
     const dialogTitle = getByText("Dialog Title");
@@ -71,9 +70,8 @@ describe("ConfirmProvider", () => {
         </ConfirmProvider>
       </ThemeProvider>
     );
-    const button = getByText("Button");
 
-    userEvent.click(button);
+    fireEvent.click(screen.getByRole("button", { name: "Button" }));
 
     // verify dialog  background color
     const dialog = getByText("Dialog Title").closest("div");
@@ -109,9 +107,8 @@ describe("ConfirmProvider", () => {
         </ConfirmProvider>
       </ThemeProvider>
     );
-    const button = getByText("Button");
 
-    userEvent.click(button);
+    fireEvent.click(screen.getByRole("button", { name: "Button" }));
 
     // verify dialog  background color
     const dialog = getByText("Dialog Title").closest("div");
