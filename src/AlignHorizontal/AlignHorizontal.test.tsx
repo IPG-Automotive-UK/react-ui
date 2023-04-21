@@ -1,19 +1,27 @@
+import * as React from "react";
+
 import { render, screen } from "@testing-library/react";
+
 import AlignHorizontal from ".";
-import React from "react";
+import { AlignHorizontalProps } from "./AlignHorizontal.types";
 
 /**
  * Test wrapper for AlignHorizontal
- *
  * Provides state for value to avoid errors changing from uncontrolled to controlled.
  */
+interface AlignHorizontalWithStateProps
+  extends Pick<AlignHorizontalProps, "value">,
+    Partial<Pick<AlignHorizontalProps, "onChange">> {}
 const AlignHorizontalWithState = ({
-  onChange,
-  value: valueIn = "",
+  onChange = () => {},
+  value: valueIn = null,
   ...rest
-}) => {
+}: AlignHorizontalWithStateProps) => {
   const [value, setValue] = React.useState(valueIn);
-  const handleChange = (event, value) => {
+  const handleChange = (
+    event: React.MouseEvent<HTMLElement>,
+    value: "left" | "center" | "right" | "justify" | null
+  ) => {
     setValue(value);
     onChange && onChange(event, value);
   };
