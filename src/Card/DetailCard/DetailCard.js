@@ -20,7 +20,6 @@ function DetailCard({
   downloadButtonText,
   downloadButtonTextOnSearch,
   fileTitle = "title",
-  height = 950,
   labels = [],
   media = "",
   onClickDownload = () => {},
@@ -30,64 +29,79 @@ function DetailCard({
   title = "title",
   width = 1150
 }) {
+  // render the detail card
+  return (
+    <>
+      <Stack
+        mt={1}
+        mb={3}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          flexGrow: 1,
+          height: "100%",
+          width
+        }}
+      >
+        <DetailCardHeader
+          title={title}
+          subtitle={subtitle}
+          buttonsStack={buttonsStack}
+          labels={labels}
+          width={width}
+          onClickLabel={onClickLabel}
+        />
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            height: "100%",
+            my: 2,
+            overflow: "auto"
+          }}
+        >
+          <Box ml={0.5}>
+            <FileCard
+              media={media}
+              width={368}
+              files={files}
+              downloadButtonText={downloadButtonText}
+              downloadButtonTextOnSearch={downloadButtonTextOnSearch}
+              title="title"
+              fileTitle={fileTitle}
+              onClickDownload={onClickDownload}
+              onClickFile={onClickFile}
+            />
+          </Box>
+          <Stack
+            ml={2}
+            spacing={2}
+            sx={{ display: "flex", flexGrow: 1, mr: 0.5, width: "100%" }}
+          >
+            {content}
+          </Stack>
+        </Box>
+      </Stack>
+    </>
+  );
+}
+
+function DetailCardHeader({
+  width,
+  title,
+  subtitle,
+  buttonsStack,
+  labels,
+  onClickLabel
+}) {
   // title, subtitle,buttonStack and label refs and overflow states
   const titleRef = useRef();
   const subtitleRef = useRef();
-  const labelStackRef = useRef();
 
   const buttonStackRef = useRef();
-  const [overFlowingLabels, setOverFlowingLabels] = useState([]);
-
-  // label popover anchor state
-  const [labelAnchorEl, setLabelAnchorEl] = useState(null);
-
-  // label content width
-  const labelContentWidth = width - 45;
 
   // label spacing
   const labelSpacing = 8;
-
-  // label stack height
-  const labelStackHeight = 24;
-
-  // overflow button width
-  const overflowButtonWidth = 40;
-
-  // check if label stack is overflowing
-  const useComponentSize = comRef => {
-    const [isLabelStackOverflow, setIsLabelStackOverflow] = useState(false);
-
-    React.useEffect(() => {
-      const sizeObserver = new ResizeObserver((entries, observer) => {
-        entries.forEach(({ target }) => {
-          setIsLabelStackOverflow(target.scrollWidth > target.clientWidth);
-        });
-      });
-      sizeObserver.observe(comRef.current);
-
-      let sum = overflowButtonWidth;
-      const overFlowLabels = [];
-
-      // for each of the labels in the label stack
-      labelStackRef.current.childNodes.forEach(child => {
-        // add the width of the child plus 8px of space between each child to the sum
-        sum += child.offsetWidth + labelSpacing;
-
-        // if the sum is greater than the header contend width, then them this child is overflowing
-        // the header content width
-        if (sum > labelContentWidth) {
-          overFlowLabels.push(child);
-        }
-      });
-
-      // set the overflowing labels
-      setOverFlowingLabels(overFlowLabels);
-
-      return () => sizeObserver.disconnect();
-    }, [comRef]);
-
-    return [isLabelStackOverflow];
-  };
 
   // check if title is overflowing
   const useTitleWidth = titleRef => {
@@ -147,20 +161,6 @@ function DetailCard({
     return [isSubtitleOverflow];
   };
 
-  // determine what labels to show
-  const notOverflowingLabels = labels.slice(
-    0,
-    labels.length - overFlowingLabels.length
-  );
-
-  // handle the click of the label overflow button by setting the label anchor element
-  const handleLabelOverflowClick = event => {
-    setLabelAnchorEl(event.currentTarget);
-  };
-
-  // check if label stack is overflowing
-  const [lableSize] = useComponentSize(labelStackRef);
-
   // check if title is overflowing
   const [titleSizeOverflow] = useTitleWidth(titleRef);
 
@@ -173,6 +173,86 @@ function DetailCard({
   // header content width
   const headerContentWidth = width - buttonsStackWidth - 10;
 
+  return (
+    <>
+      <Box
+        m={1}
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between"
+        }}
+      >
+        <Box>
+          <Tooltip title={title} disableHoverListener={!titleSizeOverflow}>
+            <Typography
+              ref={titleRef}
+              sx={{
+                color: theme =>
+                  theme.palette.mode === "dark" ? "white" : "black",
+                fontSize: 20,
+                fontWeight: 500,
+                width: headerContentWidth
+              }}
+              noWrap
+            >
+              {title}
+            </Typography>
+          </Tooltip>
+          <Tooltip
+            title={subtitle}
+            disableHoverListener={!subTitleSizeOverflow}
+          >
+            <Typography
+              mt={1}
+              ref={subtitleRef}
+              sx={{
+                color: theme =>
+                  theme.palette.mode === "dark" ? "white" : "black",
+                fontSize: 14,
+                fontWeight: 400,
+                width: headerContentWidth
+              }}
+              noWrap
+            >
+              {subtitle}
+            </Typography>
+          </Tooltip>
+        </Box>
+        <Box
+          sx={{ display: "flex", flexDirection: "row", gap: 2 }}
+          ref={buttonStackRef}
+        >
+          {buttonsStack}
+        </Box>
+      </Box>
+      {labels.length > 0 && (
+        <LableStack
+          labelSpacing={labelSpacing}
+          width={width}
+          labels={labels}
+          onClickLabel={onClickLabel}
+        />
+      )}
+    </>
+  );
+}
+
+function LableStack({ labelSpacing, width, labels, onClickLabel }) {
+  // label stack height
+  const labelStackHeight = 24;
+
+  // overflow button width
+  const overflowButtonWidth = 40;
+
+  // label content width
+  const labelContentWidth = width - 45;
+
+  const [overFlowingLabels, setOverFlowingLabels] = useState([]);
+
+  // label popover anchor state
+  const [labelAnchorEl, setLabelAnchorEl] = useState(null);
+
   // handle the close of the label overflow popover by setting the label anchor element to null
   const handleLabelOverflowClose = () => {
     setLabelAnchorEl(null);
@@ -181,152 +261,121 @@ function DetailCard({
   // determine if the label overflow popover is open
   const isLabelOverflowOpen = Boolean(labelAnchorEl);
 
+  // determine what labels to show
+  const notOverflowingLabels = labels.slice(
+    0,
+    labels.length - overFlowingLabels.length
+  );
+
+  // handle the click of the label overflow button by setting the label anchor element
+  const handleLabelOverflowClick = event => {
+    setLabelAnchorEl(event.currentTarget);
+  };
+
+  const labelStackRef = useRef();
+
+  // check if label stack is overflowing
+  const useComponentSize = comRef => {
+    const [isLabelStackOverflow, setIsLabelStackOverflow] = useState(false);
+
+    React.useEffect(() => {
+      const sizeObserver = new ResizeObserver((entries, observer) => {
+        entries.forEach(({ target }) => {
+          setIsLabelStackOverflow(target.scrollWidth > target.clientWidth);
+        });
+      });
+      sizeObserver.observe(comRef.current);
+
+      let sum = overflowButtonWidth;
+      const overFlowLabels = [];
+
+      // for each of the labels in the label stack
+      labelStackRef.current.childNodes.forEach(child => {
+        // add the width of the child plus 8px of space between each child to the sum
+        sum += child.offsetWidth + labelSpacing;
+
+        // if the sum is greater than the header contend width, then them this child is overflowing
+        // the header content width
+        if (sum > labelContentWidth) {
+          overFlowLabels.push(child);
+        }
+      });
+
+      // set the overflowing labels
+      setOverFlowingLabels(overFlowLabels);
+
+      return () => sizeObserver.disconnect();
+    }, [comRef]);
+
+    return [isLabelStackOverflow];
+  };
+
   // handle label click by calling the onClickLabel prop
   const handleLabelClick = label => {
     onClickLabel(label);
   };
 
-  // render the detail card
+  // check if label stack is overflowing
+  const [lableSize] = useComponentSize(labelStackRef);
   return (
-    <Box>
+    <>
       <Box
-        mt={1}
+        mt={0}
+        ml={1}
         sx={{
-          height,
-          width
+          maxWidth: labelContentWidth,
+          minHeight: labelStackHeight,
+          overflow: "hidden"
         }}
       >
-        <Box
-          m={1}
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between"
-          }}
+        <Stack
+          ref={labelStackRef}
+          direction="row"
+          spacing={`${labelSpacing}px`}
         >
-          <Box>
-            <Tooltip title={title} disableHoverListener={!titleSizeOverflow}>
-              <Typography
-                ref={titleRef}
+          {!lableSize ? (
+            <>
+              {labels.map(label => (
+                <LabelChip
+                  clickable
+                  color={label.color}
+                  key={label._id}
+                  label={label.name}
+                  onClick={() => handleLabelClick(label)}
+                  size="small"
+                />
+              ))}
+            </>
+          ) : (
+            <>
+              {notOverflowingLabels.map(label => (
+                <LabelChip
+                  clickable
+                  color={label.color}
+                  key={label._id}
+                  label={label.name}
+                  onClick={() => handleLabelClick(label)}
+                  size="small"
+                />
+              ))}
+              <Button
+                variant="text"
+                size="large"
+                onClick={handleLabelOverflowClick}
+                mt={0.5}
                 sx={{
-                  color: theme =>
-                    theme.palette.mode === "dark" ? "white" : "black",
-                  fontSize: 20,
-                  fontWeight: 500,
-                  width: headerContentWidth
+                  maxWidth: overflowButtonWidth,
+                  minWidth: overflowButtonWidth,
+                  padding: 0
                 }}
-                noWrap
               >
-                {title}
-              </Typography>
-            </Tooltip>
-            <Tooltip
-              title={subtitle}
-              disableHoverListener={!subTitleSizeOverflow}
-            >
-              <Typography
-                mt={1}
-                ref={subtitleRef}
-                sx={{
-                  color: theme =>
-                    theme.palette.mode === "dark" ? "white" : "black",
-                  fontSize: 14,
-                  fontWeight: 400,
-                  width: headerContentWidth
-                }}
-                noWrap
-              >
-                {subtitle}
-              </Typography>
-            </Tooltip>
-          </Box>
-          <Stack spacing={2} direction="row" ref={buttonStackRef}>
-            {buttonsStack}
-          </Stack>
-        </Box>
-        <Box
-          mt={2}
-          mb={2}
-          ml={1}
-          sx={{
-            height: labelStackHeight,
-            maxWidth: labelContentWidth,
-            overflowX: "hidden"
-          }}
-        >
-          <Stack
-            ref={labelStackRef}
-            direction="row"
-            spacing={`${labelSpacing}px`}
-          >
-            {!lableSize ? (
-              <>
-                {labels.map(label => (
-                  <LabelChip
-                    clickable
-                    color={label.color}
-                    key={label._id}
-                    label={label.name}
-                    onClick={() => handleLabelClick(label)}
-                    size="small"
-                  />
-                ))}
-              </>
-            ) : (
-              <>
-                {notOverflowingLabels.map(label => (
-                  <LabelChip
-                    clickable
-                    color={label.color}
-                    key={label._id}
-                    label={label.name}
-                    onClick={() => handleLabelClick(label)}
-                    size="small"
-                  />
-                ))}
-                <Button
-                  variant="text"
-                  size="large"
-                  onClick={handleLabelOverflowClick}
-                  mt={0.5}
-                  sx={{
-                    maxWidth: overflowButtonWidth,
-                    minWidth: overflowButtonWidth,
-                    padding: 0
-                  }}
-                >
-                  <Typography sx={{ fontSize: 15 }}>
-                    +{overFlowingLabels.length}
-                  </Typography>
-                </Button>
-              </>
-            )}
-          </Stack>
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            overflowY: "auto",
-            width
-          }}
-        >
-          <Box mt={1} ml={0.5} mb={1}>
-            <FileCard
-              media={media}
-              width={368}
-              files={files}
-              downloadButtonText={downloadButtonText}
-              downloadButtonTextOnSearch={downloadButtonTextOnSearch}
-              title="title"
-              fileTitle={fileTitle}
-              onClickDownload={onClickDownload}
-              onClickFile={onClickFile}
-            />
-          </Box>
-          <Box mt={1} ml={2} sx={{ height, width: 760 }}>
-            <Stack spacing={2}>{content}</Stack>
-          </Box>
-        </Box>
+                <Typography sx={{ fontSize: 15 }}>
+                  +{overFlowingLabels.length}
+                </Typography>
+              </Button>
+            </>
+          )}
+        </Stack>
       </Box>
       <Popover
         open={isLabelOverflowOpen}
@@ -361,10 +410,9 @@ function DetailCard({
           })}
         </Stack>
       </Popover>
-    </Box>
+    </>
   );
 }
-
 // export the detail card
 export default DetailCard;
 
@@ -402,13 +450,6 @@ DetailCard.propTypes = {
    *
    */
   fileTitle: PropTypes.string.isRequired,
-  /**
-   * The height of the card.
-   * @type {number}
-   * @default 600
-   *
-   */
-  height: PropTypes.number,
   /**
    * The labels to be displayed on the card.
    * labels should be an array of objects with the following properties:

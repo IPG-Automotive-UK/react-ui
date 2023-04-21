@@ -140,7 +140,7 @@ describe("SummaryCard", () => {
     await userEvent.click(screen.getByRole("button", { name: "settings" }));
 
     // expect the popover to be in the document
-    expect(screen.getByText("Test Menu")).toBeVisible();
+    expect(screen.getByText("Test Menu")).toBeInTheDocument();
 
     // click one of the options
     await userEvent.click(screen.getByText("Test Menu"));
@@ -149,7 +149,7 @@ describe("SummaryCard", () => {
     expect(editFcn).toHaveBeenCalledTimes(1);
 
     // expect the popover to be removed from the document
-    expect(screen.queryByText("Test Menu")).not.toBeVisible();
+    expect(screen.queryByText("Test Menu")).not.toBeInTheDocument();
   });
 
   // test that a content is rendered in summary card

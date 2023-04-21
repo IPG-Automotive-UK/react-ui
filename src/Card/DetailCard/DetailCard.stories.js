@@ -27,7 +27,6 @@ const Template = args => {
 export const Default = Template.bind({});
 Default.args = {
   content: null,
-  height: 950,
   labels: [],
   media: "",
   mediaHeight: 200,
@@ -179,7 +178,9 @@ ScenarioExample.args = {
     </>
   ),
   content: (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+    <Box
+      sx={{ display: "flex", flexDirection: "column", gap: "8px", pb: "2px" }}
+    >
       <TableCard
         key={"scenario"}
         title="Scenario"
