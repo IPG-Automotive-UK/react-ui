@@ -1,10 +1,12 @@
 import { render, screen } from "@testing-library/react";
+
 import React from "react";
-import UserMenu from "./";
+import UserMenu from ".";
+import { UserMenuProps } from "./UserMenu.types";
 import userEvent from "@testing-library/user-event";
 
 // a set of default inputs so that tests can change what theyre testing
-const defaultInputs = {
+const defaultInputs: UserMenuProps = {
   onChangePassword: jest.fn(),
   onLogout: jest.fn(),
   username: "Joe Bloggs"
