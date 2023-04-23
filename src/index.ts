@@ -42,7 +42,13 @@ export { default as RadioButtons } from "./RadioButtons";
 export { default as RegistrationForm } from "./RegistrationForm";
 export { default as SearchBar } from "./SearchBar";
 export { default as Select } from "./Select";
-export { Sidebar, SidebarDivider, SidebarItem } from "./Sidebar";
+export {
+  Sidebar,
+  SidebarDivider,
+  SidebarItem,
+  SidebarItemProps,
+  SidebarProps
+} from "./Sidebar";
 export { default as AppLauncher } from "./AppLauncher";
 export { default as Slider } from "./Slider";
 export { default as Snackbar } from "./Snackbar";
