@@ -3,6 +3,7 @@ import React, { Fragment, useState } from "react";
 
 import AppHeader from "../AppHeader";
 import { AppLayoutProps } from "./AppLayout.types";
+import { ConfirmProvider } from "../ConfirmProvider";
 import Sidebar from "../Sidebar";
 import SnackbarProvider from "../SnackbarProvider";
 import ThemeProvider from "../ThemeProvider";
@@ -133,17 +134,19 @@ function AppLayout({
 }: AppLayoutProps) {
   return (
     <ThemeProvider>
-      <Layout
-        appVersion={appVersion}
-        baseUrl={baseUrl}
-        sidebarContent={sidebarContent}
-        virtoLogoLinkUrl={virtoLogoLinkUrl}
-        appName={appName}
-        onChangePassword={onChangePassword}
-        onLogout={onLogout}
-        username={username}
-        content={content}
-      />
+      <ConfirmProvider>
+        <Layout
+          appVersion={appVersion}
+          baseUrl={baseUrl}
+          sidebarContent={sidebarContent}
+          virtoLogoLinkUrl={virtoLogoLinkUrl}
+          appName={appName}
+          onChangePassword={onChangePassword}
+          onLogout={onLogout}
+          username={username}
+          content={content}
+        />
+      </ConfirmProvider>
     </ThemeProvider>
   );
 }
