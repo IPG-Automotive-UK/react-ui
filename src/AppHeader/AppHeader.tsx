@@ -7,12 +7,13 @@ import {
   Toolbar,
   Typography
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 
+import { AppHeaderProps } from "./AppHeader.types";
 import AppLauncher from "../AppLauncher";
 import AppsIcon from "@mui/icons-material/Apps";
 import Menu from "@mui/icons-material/Menu";
-import PropTypes from "prop-types";
+import { Theme } from "@mui/material/styles";
 import ToggleColorMode from "../ToggleColorMode";
 import UserMenu from "../UserMenu";
 import VirtoLogo from "../SvgIcons/VirtoLogo";
@@ -22,13 +23,13 @@ function Header({
   appName,
   mode,
   onAppClick,
-  onChange,
+  onModeChange,
   onChangePassword,
   onLogout,
   onMenuClick,
   username,
   virtoLogoLinkUrl
-}) {
+}: AppHeaderProps) {
   return (
     <AppBar
       sx={theme => ({
@@ -71,7 +72,7 @@ function Header({
               <VirtoLogo
                 data-testid="virto-logo"
                 sx={{
-                  color: theme =>
+                  color: (theme: Theme) =>
                     theme.palette.mode === "dark" ? "#003063" : "white",
                   height: 22,
                   mr: 0.4,
@@ -96,7 +97,7 @@ function Header({
           </Box>
         </Box>
         <Box display="flex" alignItems="center">
-          <ToggleColorMode mode={mode} onChange={onChange} />
+          <ToggleColorMode mode={mode} onChange={onModeChange} />
           <UserMenu
             username={username}
             onChangePassword={onChangePassword}
@@ -118,8 +119,8 @@ function AppHeader({
   onMenuClick,
   onModeChange,
   username,
-  virtoLogoLinkUrl = null
-}) {
+  virtoLogoLinkUrl = ""
+}: AppHeaderProps) {
   // sidebar styling
   const applancherWidth = 300;
 
@@ -127,17 +128,18 @@ function AppHeader({
   const [appOpen, setAppOpen] = useState(false);
 
   // handle click event
-  const handleMenuClick = cb => event => {
-    cb(event);
-  };
+  const handleMenuClick =
+    (cb: (event: object) => void) => (event: React.MouseEvent<HTMLElement>) => {
+      cb(event);
+    };
 
   return (
-    <>
+    <Fragment>
       <Header
         appName={appName}
         mode={mode}
         onAppClick={() => setAppOpen(!appOpen)}
-        onChange={onModeChange}
+        onModeChange={onModeChange}
         onChangePassword={onChangePassword}
         onLogout={onLogout}
         onMenuClick={handleMenuClick(onMenuClick)}
@@ -164,63 +166,8 @@ function AppHeader({
           onAppButtonClick={() => setAppOpen(false)}
         />
       </Drawer>
-    </>
+    </Fragment>
   );
 }
-
-AppHeader.propTypes = {
-  /**
-   * App name to display in header.
-   */
-  appName: PropTypes.string.isRequired,
-  /**
-   * Base URL for VIRTO home page.
-   */
-  baseUrl: PropTypes.string,
-  /**
-   * The color mode selection
-   * @default "light"
-   */
-  mode: PropTypes.oneOf(["light", "dark"]),
-  /**
-   * Callback fired when the user clicks on "Change password".
-   *
-   * **Signature**
-   * ```
-   * function(event: object) => void
-   * ```
-   * _event_: The event source of the callback.
-   */
-  onChangePassword: PropTypes.func.isRequired,
-  /**
-   * Callback fired when the user clicks on "Logout".
-   *
-   * **Signature**
-   * ```
-   * function(event: object) => void
-   * ```
-   * _event_: The event source of the callback.
-   */
-  onLogout: PropTypes.func.isRequired,
-  /**
-   * Callback fired when the color mode is changed.
-   *
-   * **Signature**
-   * ```
-   * function(newMode) => void
-   * ```
-   *
-   * _newMode_: The new color mode that has been selected
-   */
-  onModeChange: PropTypes.func.isRequired,
-  /**
-   * Name of currently logged in user.
-   */
-  username: PropTypes.string.isRequired,
-  /**
-   * A String of the href URL for the Link of the VIRTO Logo, default is null (link disabled)
-   */
-  virtoLogoLinkUrl: PropTypes.string
-};
 
 export default AppHeader;

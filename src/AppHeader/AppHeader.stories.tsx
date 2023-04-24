@@ -1,14 +1,21 @@
-import AppHeader from "../AppHeader";
+import { Meta, Story } from "@storybook/react";
+
+import AppHeader from ".";
+import { AppHeaderProps } from "./AppHeader.types";
 import React from "react";
 import { action } from "@storybook/addon-actions";
 
-export default {
+/**
+ * Story metadata
+ */
+const meta: Meta<typeof AppHeader> = {
   component: AppHeader,
   title: "Layout/AppHeader"
 };
+export default meta;
 
-const Template = args => {
-  const [mode, setMode] = React.useState("light");
+const Template: Story<AppHeaderProps> = args => {
+  const [mode, setMode] = React.useState<"light" | "dark" | undefined>("light");
   React.useEffect(() => {
     setMode(args.mode);
   }, [args.mode]);

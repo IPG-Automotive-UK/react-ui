@@ -1,12 +1,13 @@
 import { render, screen } from "@testing-library/react";
 
-import AppHeader from "./AppHeader";
+import AppHeader from ".";
 import React from "react";
 import userEvent from "@testing-library/user-event";
 
 // a set of default inputs so that tests can change what theyre testing
 const defaultInputs = {
   appName: "App Name",
+  onAppClick: jest.fn(),
   onChangePassword: () => {},
   onLogout: jest.fn(),
   onMenuClick: jest.fn(),

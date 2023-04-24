@@ -4,7 +4,7 @@ export {
   AlignHorizontalProps
 } from "./AlignHorizontal";
 export { default as AlignVertical } from "./AlignVertical";
-export { default as AppHeader } from "./AppHeader";
+export { default as AppHeader, AppHeaderProps } from "./AppHeader";
 export { default as AppLayout } from "./AppLayout";
 export { default as Autocomplete } from "./Autocomplete";
 export { default as Canvas } from "./Canvas";
@@ -49,7 +49,7 @@ export {
   SidebarItemProps,
   SidebarProps
 } from "./Sidebar";
-export { default as AppLauncher } from "./AppLauncher";
+export { default as AppLauncher, AppLauncherProps } from "./AppLauncher";
 export { default as Slider } from "./Slider";
 export { default as Snackbar } from "./Snackbar";
 export { SnackbarProvider, useSnackbar } from "./SnackbarProvider";
