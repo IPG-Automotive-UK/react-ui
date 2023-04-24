@@ -1,7 +1,7 @@
 import { Box, Link, Typography } from "@mui/material";
+import React, { Fragment } from "react";
 
 import IpgLogo from "../SvgIcons/IpgLogo";
-import React from "react";
 import { SidebarProps } from "./Sidebar.types";
 
 // sidebar component for app which displays logo, list of items and app version
@@ -12,7 +12,7 @@ function Sidebar({
   showVersion = true
 }: SidebarProps) {
   return (
-    <Box>
+    <Fragment>
       {children}
       <Box flexGrow={1} />
       <Box
@@ -37,7 +37,7 @@ function Sidebar({
           </Typography>
         ) : null}
       </Box>
-    </Box>
+    </Fragment>
   );
 }
 
