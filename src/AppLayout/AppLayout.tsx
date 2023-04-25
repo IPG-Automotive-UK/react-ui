@@ -42,7 +42,7 @@ function Layout({
           onAppClick={() => setAppOpen(!appOpen)}
           onChangePassword={onChangePassword}
           onLogout={onLogout}
-          onModeChange={newMode => setTheme(newMode)}
+          onColourModeChange={newMode => setTheme(newMode)}
           username={username}
           mode={theme}
           baseUrl={baseUrl}

@@ -24,7 +24,7 @@ const Template: Story<AppHeaderProps> = args => {
       {...args}
       mode={mode}
       onMenuClick={action("onMenuClick")}
-      onModeChange={newMode => {
+      onColourModeChange={newMode => {
         setMode(newMode);
         action("onChange")(newMode);
       }}
