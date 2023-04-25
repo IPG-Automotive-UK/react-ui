@@ -1,3 +1,5 @@
+import { CSSProperties } from "react";
+
 export interface SidebarItemProps {
   /**
    * The content of the component. Children are displayed in an expansion panel that is initially closed.
@@ -48,5 +50,5 @@ export interface SidebarItemProps {
   /**
    * Custom style to apply to the text
    */
-  textStyle?: Object;
+  textStyle?: CSSProperties;
 }
