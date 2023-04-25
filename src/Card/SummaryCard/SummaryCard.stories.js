@@ -11,7 +11,6 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableContainer,
   TableRow
 } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
@@ -39,7 +38,7 @@ const Template = args => {
 export const Default = Template.bind({});
 Default.args = {
   content: null,
-  height: 600,
+  height: 563,
   labels: [],
   media: "",
   mediaHeight: 190,
@@ -153,34 +152,30 @@ export const ScenarioExample = Template.bind({});
 ScenarioExample.args = {
   ...Default.args,
   content: (
-    <TableContainer>
-      <Table size="small">
-        <TableBody>
-          <TableRow>
-            <TableCell sx={{ width: 100 }}>Description</TableCell>
-            <TableCell sx={{ width: 100 }}>
-              Some Description of a road
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Country</TableCell>
-            <TableCell>Germany</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Scenario</TableCell>
-            <TableCell>Expressway</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Road Length (m)</TableCell>
-            <TableCell>3000</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Road Format</TableCell>
-            <TableCell>.rd5</TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <Table size="small">
+      <TableBody>
+        <TableRow>
+          <TableCell sx={{ width: 100 }}>Description</TableCell>
+          <TableCell sx={{ width: 100 }}>Some Description of a road</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>Country</TableCell>
+          <TableCell>Germany</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>Scenario</TableCell>
+          <TableCell>Expressway</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>Road Length (m)</TableCell>
+          <TableCell>3000</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>Road Format</TableCell>
+          <TableCell>.rd5</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
   ),
   labels: [
     {
