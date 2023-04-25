@@ -1,16 +1,24 @@
 import * as React from "react";
 
-import PropTypes from "prop-types";
+import { IpgLogoProps } from "./IpgLogo.types";
 import SvgIcon from "@mui/material/SvgIcon";
 import { useTheme } from "@mui/material/styles";
 
 // IPG logo svg
-function Icon(props) {
+function Icon(props: IpgLogoProps) {
+  // get mode as modeIn and sx from props
+  const { mode: modeIn, sx } = props;
+
   // use theme
   const theme = useTheme();
+
+  // if modeIn is provided set mode to modeIn otherwise use theme.pallete.mode
+  const mode = modeIn || theme.palette.mode;
+
+  // return the IPG logo svg which is different for light and dark mode
   return (
-    <SvgIcon viewBox="0 0 300 82" {...props}>
-      {theme.palette.mode === "dark" ? (
+    <SvgIcon viewBox="0 0 300 82" sx={{ ...sx }}>
+      {mode === "dark" ? (
         <svg
           width="300"
           height="82"
@@ -157,7 +165,8 @@ function Icon(props) {
             </clipPath>
           </defs>
         </svg>
-      ) : (
+      ) : null}
+      {mode === "light" ? (
         <svg
           width="300"
           height="82"
@@ -304,19 +313,12 @@ function Icon(props) {
             </clipPath>
           </defs>
         </svg>
-      )}
+      ) : null}
     </SvgIcon>
   );
 }
 
 // IPG logo component
-export default function IpgLogo({ sx }) {
-  return <Icon sx={sx} />;
+export default function IpgLogo({ mode, sx }: IpgLogoProps) {
+  return <Icon mode={mode} sx={sx} />;
 }
-
-IpgLogo.propTypes = {
-  /**
-   * styles applied to the svg element
-   */
-  sx: PropTypes.object
-};
