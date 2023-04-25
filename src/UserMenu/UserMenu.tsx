@@ -1,6 +1,5 @@
 import {
   Avatar,
-  Box,
   Divider,
   IconButton,
   ListItemIcon,
@@ -10,13 +9,13 @@ import {
   Typography
 } from "@mui/material";
 import { ExitToApp, VpnKey } from "@mui/icons-material";
+import React, { Fragment } from "react";
 import {
   bindMenu,
   bindTrigger,
   usePopupState
 } from "material-ui-popup-state/hooks";
 
-import React from "react";
 import { Theme } from "@mui/material/styles";
 import { UserMenuProps } from "./UserMenu.types";
 
@@ -51,15 +50,18 @@ export default function UserMenu({
 }: UserMenuProps) {
   const popupState = usePopupState({ popupId: "userMenu", variant: "popover" });
   const handleClick =
-    (cb: ((event: object) => void) | undefined) =>
-    (event: React.MouseEvent<HTMLElement>) => {
+    (cb: (event: object) => void) => (event: React.MouseEvent<HTMLElement>) => {
       popupState.close();
       cb && cb(event);
     };
   return (
-    <Box>
+    <Fragment>
       <IconButton {...bindTrigger(popupState)} size="large" sx={sx.button}>
-        <UserAvatar username={username} />
+        <UserAvatar
+          username={username}
+          onChangePassword={onChangePassword}
+          onLogout={onLogout}
+        />
       </IconButton>
       <Menu
         {...bindMenu(popupState)}
@@ -84,7 +86,7 @@ export default function UserMenu({
           <ListItemText>Logout</ListItemText>
         </MenuItem>
       </Menu>
-    </Box>
+    </Fragment>
   );
 }
 
