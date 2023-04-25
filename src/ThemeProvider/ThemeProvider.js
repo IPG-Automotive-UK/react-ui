@@ -147,7 +147,12 @@ export default function ThemeProvider({ children, theme: controlledTheme }) {
   // theme state
   const [theme, setTheme] = React.useState("light");
 
+  // effect to set the theme on mount
   useEffect(() => {
+    // theme preference is decided in the following order:
+    // 1. controlled theme prop
+    // 2. local storage
+    // 3. default to light
     const storedThemeMode = localStorage.getItem("theme");
     if (controlledTheme !== undefined) {
       setTheme(controlledTheme);
@@ -159,6 +164,7 @@ export default function ThemeProvider({ children, theme: controlledTheme }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // effect to update theme when controlled theme prop changes
   useEffect(() => {
     if (controlledTheme && theme !== controlledTheme) {
       setTheme(controlledTheme);
@@ -166,7 +172,7 @@ export default function ThemeProvider({ children, theme: controlledTheme }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [controlledTheme]);
 
-  // on theme change update local storage
+  // effect to update local storage when theme changes
   useEffect(() => {
     localStorage.setItem("theme", theme);
   }, [theme]);
