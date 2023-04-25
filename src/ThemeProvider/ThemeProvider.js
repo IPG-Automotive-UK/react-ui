@@ -145,16 +145,19 @@ const darkTheme = createTheme(
  */
 export default function ThemeProvider({ children, theme: controlledTheme }) {
   // theme state
-  const [theme, setTheme] = React.useState(() => {
+  const [theme, setTheme] = React.useState("light");
+
+  useEffect(() => {
     const storedThemeMode = localStorage.getItem("theme");
     if (controlledTheme !== undefined) {
-      return controlledTheme;
+      setTheme(controlledTheme);
     } else if (storedThemeMode !== null) {
-      return storedThemeMode;
+      setTheme(storedThemeMode);
     } else {
-      return "light";
+      setTheme("light");
     }
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (controlledTheme && theme !== controlledTheme) {
