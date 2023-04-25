@@ -1,3 +1,7 @@
+import { SxProps, Theme } from "@mui/material/styles";
+
+import { TypographyProps } from "@mui/material";
+
 export interface NoWrapTypographyProps {
   /**
    * The content of the component.
@@ -7,23 +11,9 @@ export interface NoWrapTypographyProps {
    * The CSS styles applied to the component.
    */
   // define react type for sx
-  sx?: Record<string, any>;
+  sx?: SxProps<Theme>;
   /**
    * The variant to use.
    */
-  variant?:
-    | "body1"
-    | "body2"
-    | "button"
-    | "caption"
-    | "h1"
-    | "h2"
-    | "h3"
-    | "h4"
-    | "h5"
-    | "h6"
-    | "inherit"
-    | "overline"
-    | "subtitle1"
-    | "subtitle2";
+  variant?: TypographyProps["variant"];
 }
