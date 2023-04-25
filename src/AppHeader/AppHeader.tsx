@@ -23,7 +23,7 @@ function Header({
   appName,
   mode,
   onAppClick,
-  onModeChange,
+  onColourModeChange,
   onChangePassword,
   onLogout,
   onMenuClick,
@@ -97,7 +97,7 @@ function Header({
           </Box>
         </Box>
         <Box display="flex" alignItems="center">
-          <ToggleColorMode mode={mode} onChange={onModeChange} />
+          <ToggleColorMode mode={mode} onChange={onColourModeChange} />
           <UserMenu
             username={username}
             onChangePassword={onChangePassword}
@@ -117,7 +117,7 @@ function AppHeader({
   onChangePassword,
   onLogout,
   onMenuClick,
-  onModeChange,
+  onColourModeChange,
   username,
   virtoLogoLinkUrl = ""
 }: AppHeaderProps) {
@@ -139,7 +139,7 @@ function AppHeader({
         appName={appName}
         mode={mode}
         onAppClick={() => setAppOpen(!appOpen)}
-        onModeChange={onModeChange}
+        onColourModeChange={onColourModeChange}
         onChangePassword={onChangePassword}
         onLogout={onLogout}
         onMenuClick={handleMenuClick(onMenuClick)}
