@@ -143,30 +143,21 @@ const darkTheme = createTheme(
 /**
  * IPG Material-ui theme provider and hook.
  */
-export default function ThemeProvider({
-  children,
-  theme: controlledTheme = "light"
-}) {
+export default function ThemeProvider({ children, theme: controlledTheme }) {
   // theme state
-  const [theme, setTheme] = React.useState(controlledTheme);
-
-  // on first render get theme from local storage or set default to light if not set
-  useEffect(() => {
+  const [theme, setTheme] = React.useState(() => {
     const storedThemeMode = localStorage.getItem("theme");
-    if (controlledTheme) {
-      setTheme(controlledTheme);
-      localStorage.setItem("theme", controlledTheme);
-    } else if (storedThemeMode) {
-      setTheme(storedThemeMode);
+    if (controlledTheme !== undefined) {
+      return controlledTheme;
+    } else if (storedThemeMode !== null) {
+      return storedThemeMode;
     } else {
-      setTheme("light");
-      localStorage.setItem("theme", "light");
+      return "light";
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  });
 
   useEffect(() => {
-    if (theme !== controlledTheme) {
+    if (controlledTheme && theme !== controlledTheme) {
       setTheme(controlledTheme);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
