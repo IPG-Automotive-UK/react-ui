@@ -1,3 +1,4 @@
+import { Meta, Story } from "@storybook/react";
 import {
   Default as SidebarItemDefault,
   Disabled as SidebarItemDisabled,
@@ -6,18 +7,23 @@ import {
   WithCount as SidebarItemWithCount
 } from "../Sidebar/SidebarItem/SidebarItem.stories";
 
-import AppLayout from "../AppLayout";
+import AppLayout from ".";
+import { AppLayoutProps } from "./AppLayout.types";
 import React from "react";
 import SidebarDivider from "../Sidebar/SidebarDivider";
 import SidebarItem from "../Sidebar/SidebarItem";
 import { version } from "../../package.json";
 
-export default {
+/**
+ * Story metadata
+ */
+const meta: Meta<typeof AppLayout> = {
   component: AppLayout,
   title: "Layout/AppLayout"
 };
+export default meta;
 
-const Template = args => {
+const Template: Story<AppLayoutProps> = args => {
   return <AppLayout {...args} />;
 };
 

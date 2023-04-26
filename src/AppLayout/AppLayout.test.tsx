@@ -7,7 +7,7 @@ import {
 } from "../Sidebar/SidebarItem/SidebarItem.stories";
 import { render, screen } from "@testing-library/react";
 
-import AppLayout from "./AppLayout";
+import AppLayout from ".";
 import React from "react";
 import SidebarDivider from "../Sidebar/SidebarDivider";
 import SidebarItem from "../Sidebar/SidebarItem";
@@ -36,10 +36,15 @@ const defaultInputs = {
 
 // implementation of matchMedia for testing
 // see docs https://mui.com/material-ui/react-use-media-query/#testing
-function createMatchMedia(width) {
-  return query => ({
+function createMatchMedia(width: number) {
+  return (query: mediaQuery) => ({
+    addEventListener: jest.fn(),
     addListener: () => {},
+    dispatchEvent: jest.fn(),
     matches: mediaQuery.match(query, { width }),
+    media: query,
+    onchange: null,
+    removeEventListener: jest.fn(),
     removeListener: () => {}
   });
 }

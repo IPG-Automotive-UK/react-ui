@@ -1,4 +1,5 @@
 import { Box, Divider, Link, Paper, Typography } from "@mui/material";
+import React, { Fragment } from "react";
 import {
   VirtoBuild,
   VirtoData,
@@ -11,14 +12,13 @@ import {
   VirtoVehicle
 } from "../SvgIcons";
 
-import PropTypes from "prop-types";
-import React from "react";
+import { Theme } from "@mui/material/styles";
 import VirtoLogo from "../SvgIcons/VirtoLogo";
 
 // AppLauncher component for app which displays logo, list of items and app version
 function AppLauncher({
   baseUrl = "http://localhost:3000",
-  logoLinkUrl = null,
+  logoLinkUrl = "",
   onAppButtonClick = () => {},
   showLogo = true
 }) {
@@ -75,17 +75,18 @@ function AppLauncher({
   ];
 
   // handle app button click event
-  const handleAppButtonClick = cb => event => {
-    cb(event);
-  };
+  const handleAppButtonClick =
+    (cb: (event: object) => void) => (event: React.MouseEvent<HTMLElement>) => {
+      cb(event);
+    };
 
   // header logo
   const logoBox = (
-    <>
+    <Fragment>
       <Box display="flex" justifyContent="center">
         <VirtoLogo
           sx={{
-            color: theme =>
+            color: (theme: Theme) =>
               theme.palette.mode === "dark"
                 ? "white"
                 : theme.palette.primary.main,
@@ -95,13 +96,13 @@ function AppLauncher({
         />
       </Box>
       <Divider sx={{ margin: theme => theme.spacing(3, 0, 1.5, 0) }} />
-    </>
+    </Fragment>
   );
 
   return (
     <Box px={2} py={3}>
       {showLogo ? (
-        <>
+        <Fragment>
           {logoLinkUrl ? (
             <Link
               data-testid="virto-logo"
@@ -116,7 +117,7 @@ function AppLauncher({
           ) : (
             logoBox
           )}
-        </>
+        </Fragment>
       ) : null}
       <Box display="flex" flexWrap="wrap" justifyContent="space-between">
         {appList.map(app => {
@@ -167,32 +168,5 @@ function AppLauncher({
     </Box>
   );
 }
-
-AppLauncher.propTypes = {
-  /**
-   * Base URL for VIRTO home page. All apps are served relative to this URL.
-   * @default 'http://localhost:3000'
-   * @type {string}
-   */
-  baseUrl: PropTypes.string,
-  /**
-   * A String of the href URL for the Link of the IPG Logo, default is null (link disabled)
-   */
-  logoLinkUrl: PropTypes.string,
-  /**
-   * Callback fired when the user clicks on App Button.
-   *
-   * **Signature**
-   * ```
-   * function(event: object) => void
-   * ```
-   * _event_: The event source of the callback.
-   */
-  onAppButtonClick: PropTypes.func.isRequired,
-  /**
-   * Boolean to determine if logo should be displayed at the top of the AppLauncher
-   */
-  showLogo: PropTypes.bool
-};
 
 export default AppLauncher;

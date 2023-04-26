@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 
 import React from "react";
-import Sidebar from "./";
+import Sidebar from ".";
 
 describe("Sidebar", () => {
   it("renders children", () => {

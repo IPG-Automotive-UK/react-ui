@@ -1,4 +1,5 @@
 import { Home, Mail, Person, Settings } from "@mui/icons-material";
+import { Meta, Story } from "@storybook/react";
 import {
   Default as SidebarItemDefault,
   Disabled as SidebarItemDisabled,
@@ -11,21 +12,26 @@ import React from "react";
 import Sidebar from "./Sidebar";
 import SidebarDivider from "./SidebarDivider";
 import SidebarItem from "./SidebarItem";
+import { SidebarProps } from "./Sidebar.types";
 import { version } from "../../package.json";
 
-export default {
+/**
+ * Story metadata
+ */
+const meta: Meta<typeof Sidebar> = {
   component: Sidebar,
   subcomponents: { SidebarDivider, SidebarItem },
   title: "Layout/Sidebar"
 };
+export default meta;
 
-const Template = args => (
+const Template: Story<SidebarProps> = args => (
   <div
     style={{
       display: "flex",
       flexDirection: "column",
       minHeight: 500,
-      width: args.width || 240
+      width: 240
     }}
   >
     <Sidebar {...args} />

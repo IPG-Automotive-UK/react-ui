@@ -6,7 +6,6 @@ import {
   CardContent,
   CardHeader,
   CardMedia,
-  Divider,
   IconButton,
   Popover,
   Stack,
@@ -313,7 +312,6 @@ function SummaryCard({
         >
           {content}
         </CardContent>
-        <Divider />
         <CardActions disableSpacing sx={{ padding: 0 }}>
           {moreCardActions}
         </CardActions>

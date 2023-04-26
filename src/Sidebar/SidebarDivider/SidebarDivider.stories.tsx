@@ -1,12 +1,18 @@
+import { Meta, Story } from "@storybook/react";
+
 import React from "react";
 import SidebarDivider from "./SidebarDivider";
 
-export default {
+/**
+ * Story metadata
+ */
+const meta: Meta<typeof SidebarDivider> = {
   component: SidebarDivider,
   title: "Layout/SidebarDivider"
 };
+export default meta;
 
-const Template = () => {
+const Template: Story = () => {
   return <SidebarDivider />;
 };
 

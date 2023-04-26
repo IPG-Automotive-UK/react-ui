@@ -4,7 +4,7 @@ export {
   AlignHorizontalProps
 } from "./AlignHorizontal";
 export { default as AlignVertical } from "./AlignVertical";
-export { default as AppHeader } from "./AppHeader";
+export { default as AppHeader, AppHeaderProps } from "./AppHeader";
 export { default as AppLayout } from "./AppLayout";
 export { default as Autocomplete } from "./Autocomplete";
 export { default as Canvas } from "./Canvas";
@@ -41,8 +41,14 @@ export { default as RadioButtons } from "./RadioButtons";
 export { default as RegistrationForm } from "./RegistrationForm";
 export { default as SearchBar } from "./SearchBar";
 export { default as Select } from "./Select";
-export { Sidebar, SidebarDivider, SidebarItem } from "./Sidebar";
-export { default as AppLauncher } from "./AppLauncher";
+export {
+  Sidebar,
+  SidebarDivider,
+  SidebarItem,
+  SidebarItemProps,
+  SidebarProps
+} from "./Sidebar";
+export { default as AppLauncher, AppLauncherProps } from "./AppLauncher";
 export { default as Slider } from "./Slider";
 export { default as Snackbar } from "./Snackbar";
 export { SnackbarProvider, useSnackbar } from "./SnackbarProvider";
@@ -52,9 +58,12 @@ export { default as TextField } from "./TextField";
 export { ThemeProvider, useTheme } from "./ThemeProvider";
 export { default as ToggleColorMode } from "./ToggleColorMode";
 export { default as TransferList } from "./TransferList";
-export { default as UserMenu } from "./UserMenu";
+export { default as UserMenu, UserMenuProps } from "./UserMenu";
 export { UserAvatar, useColorMap } from "./UserAvatar";
-export { default as NoWrapTypography } from "./NoWrapTypography";
+export {
+  default as NoWrapTypography,
+  NoWrapTypographyProps
+} from "./NoWrapTypography";
 export { default as ModelButtonImage } from "./ModelButtonImage";
 export { ConfirmProvider, useConfirm } from "./ConfirmProvider";
 export {
