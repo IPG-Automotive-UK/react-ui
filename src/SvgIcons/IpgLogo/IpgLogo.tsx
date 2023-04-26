@@ -165,8 +165,7 @@ function Icon(props: IpgLogoProps) {
             </clipPath>
           </defs>
         </svg>
-      ) : null}
-      {mode === "light" ? (
+      ) : (
         <svg
           width="300"
           height="82"
@@ -313,7 +312,7 @@ function Icon(props: IpgLogoProps) {
             </clipPath>
           </defs>
         </svg>
-      ) : null}
+      )}
     </SvgIcon>
   );
 }
