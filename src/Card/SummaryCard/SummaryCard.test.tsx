@@ -14,7 +14,7 @@ import { Delete, Edit } from "@mui/icons-material";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 import React from "react";
-import SummaryCard from "./SummaryCard";
+import SummaryCard from ".";
 import { action } from "@storybook/addon-actions";
 import userEvent from "@testing-library/user-event";
 
@@ -214,6 +214,7 @@ describe("SummaryCard", () => {
       <SummaryCard
         title="summary card title"
         subtitle="summary card subtitle"
+        content={<div>Some content on the card </div>}
         moreCardActions={
           <Stack direction="row" spacing={1}>
             <Button

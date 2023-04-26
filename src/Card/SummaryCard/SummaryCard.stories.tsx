@@ -14,17 +14,23 @@ import {
   TableRow
 } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
+import { Meta, Story } from "@storybook/react";
 
 import React from "react";
 import SummaryCard from "./SummaryCard";
+import { SummaryCardProps } from "./SummaryCard.types";
 import { action } from "@storybook/addon-actions";
 
-export default {
+/**
+ * Story metadata
+ */
+const meta: Meta<typeof SummaryCard> = {
   component: SummaryCard,
   title: "Card/SummaryCard"
 };
+export default meta;
 
-const Template = args => {
+const Template: Story<SummaryCardProps> = args => {
   return (
     <SummaryCard
       {...args}
