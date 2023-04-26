@@ -1,4 +1,4 @@
-import ThemeProvider, { useTheme } from "./";
+import ThemeProvider, { useTheme } from ".";
 import { act, render, screen } from "@testing-library/react";
 
 import React from "react";
@@ -53,7 +53,7 @@ describe("ThemeProvider", () => {
     const text = screen.getByText("light");
     expect(text).toBeInTheDocument();
   });
-  test.each(["light", "dark"])(
+  test.each(["light", "dark"] as const)(
     "renders %s theme when theme controlled",
     mode => {
       // render the component with the mode we want to test
