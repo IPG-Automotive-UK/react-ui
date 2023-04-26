@@ -44,7 +44,7 @@ const Template: Story<SummaryCardProps> = args => {
 export const Default = Template.bind({});
 Default.args = {
   content: null,
-  height: 563,
+  height: 557,
   labels: [],
   media: "",
   mediaHeight: 190,
