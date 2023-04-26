@@ -24,7 +24,7 @@ export interface SidebarItemProps {
   /**
    * Custom style to apply to the icon
    */
-  iconStyle?: Object;
+  iconStyle?: CSSProperties;
   /**
    * Initial open state of sidebar item with children
    */
