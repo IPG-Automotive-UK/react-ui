@@ -1,13 +1,19 @@
-import AppLauncher from "./AppLauncher";
-import React from "react";
-import { action } from "@storybook/addon-actions";
+import { Meta, Story } from "@storybook/react";
 
-export default {
+import AppLauncher from "./AppLauncher";
+import { AppLauncherProps } from "./AppLauncher.types";
+import React from "react";
+
+/**
+ * Story metadata
+ */
+const meta: Meta<typeof AppLauncher> = {
   component: AppLauncher,
   title: "Layout/AppLauncher"
 };
+export default meta;
 
-const Template = args => {
+const Template: Story<AppLauncherProps> = args => {
   return (
     <div
       style={{
@@ -18,7 +24,7 @@ const Template = args => {
         width: 260
       }}
     >
-      <AppLauncher {...args} onMenuClick={action("onMenuClick")} />
+      <AppLauncher {...args} />
     </div>
   );
 };

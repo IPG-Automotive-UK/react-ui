@@ -39,7 +39,7 @@ const Template = args => {
 export const Default = Template.bind({});
 Default.args = {
   content: null,
-  height: 600,
+  height: 557,
   labels: [],
   media: "",
   mediaHeight: 190,
@@ -50,6 +50,21 @@ Default.args = {
   subtitle: "subtitle",
   title: "title",
   width: 368
+};
+
+// styling
+const sx = {
+  headerTableCell: {
+    color: theme =>
+      theme.palette.mode === "light"
+        ? "rgba(0, 0, 0, 0.6)"
+        : "rgba(255, 255, 255, 0.7)",
+    fontSize: "16px"
+  },
+  tableCell: {
+    fontSize: "16px",
+    textAlign: "right"
+  }
 };
 
 export const TruncatedTitleAndSubtitle = Template.bind({});
@@ -157,26 +172,24 @@ ScenarioExample.args = {
       <Table size="small">
         <TableBody>
           <TableRow>
-            <TableCell sx={{ width: 100 }}>Description</TableCell>
-            <TableCell sx={{ width: 100 }}>
-              Some Description of a road
-            </TableCell>
+            <TableCell sx={sx.headerTableCell}>Description</TableCell>
+            <TableCell sx={sx.tableCell}>Some Description</TableCell>
           </TableRow>
           <TableRow>
-            <TableCell>Country</TableCell>
-            <TableCell>Germany</TableCell>
+            <TableCell sx={sx.headerTableCell}>Country</TableCell>
+            <TableCell sx={sx.tableCell}>Germany</TableCell>
           </TableRow>
           <TableRow>
-            <TableCell>Scenario</TableCell>
-            <TableCell>Expressway</TableCell>
+            <TableCell sx={sx.headerTableCell}>Scenario</TableCell>
+            <TableCell sx={sx.tableCell}>Expressway</TableCell>
           </TableRow>
           <TableRow>
-            <TableCell>Road Length (m)</TableCell>
-            <TableCell>3000</TableCell>
+            <TableCell sx={sx.headerTableCell}>Road Length (m)</TableCell>
+            <TableCell sx={sx.tableCell}>3000</TableCell>
           </TableRow>
           <TableRow>
-            <TableCell>Road Format</TableCell>
-            <TableCell>.rd5</TableCell>
+            <TableCell sx={sx.headerTableCell}>Road Format</TableCell>
+            <TableCell sx={sx.tableCell}>.rd5</TableCell>
           </TableRow>
         </TableBody>
       </Table>

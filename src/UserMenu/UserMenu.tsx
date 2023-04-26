@@ -9,14 +9,15 @@ import {
   Typography
 } from "@mui/material";
 import { ExitToApp, VpnKey } from "@mui/icons-material";
+import React, { Fragment } from "react";
 import {
   bindMenu,
   bindTrigger,
   usePopupState
 } from "material-ui-popup-state/hooks";
 
-import PropTypes from "prop-types";
-import React from "react";
+import { Theme } from "@mui/material/styles";
+import { UserMenuProps } from "./UserMenu.types";
 
 // styling
 const sx = {
@@ -25,33 +26,42 @@ const sx = {
     width: 34
   },
   divider: {
-    marginBottom: theme => theme.spacing(1),
-    marginTop: theme => theme.spacing(1)
+    marginBottom: (theme: Theme) => theme.spacing(1),
+    marginTop: (theme: Theme) => theme.spacing(1)
   },
   loggedInAs: {
     "&:focus": {
       outline: "none"
     },
-    padding: theme => theme.spacing(1, 2)
+    padding: (theme: Theme) => theme.spacing(1, 2)
   },
   menu: {
-    marginTop: theme => theme.spacing(1)
+    marginTop: (theme: Theme) => theme.spacing(1)
   }
 };
 
 /**
  * User menu avatar and dropdown menu
  */
-export default function UserMenu({ username, onChangePassword, onLogout }) {
+export default function UserMenu({
+  username,
+  onChangePassword,
+  onLogout
+}: UserMenuProps) {
   const popupState = usePopupState({ popupId: "userMenu", variant: "popover" });
-  const handleClick = cb => event => {
-    popupState.close();
-    cb(event);
-  };
+  const handleClick =
+    (cb: (event: object) => void) => (event: React.MouseEvent<HTMLElement>) => {
+      popupState.close();
+      cb && cb(event);
+    };
   return (
-    <>
+    <Fragment>
       <IconButton {...bindTrigger(popupState)} size="large" sx={sx.button}>
-        <UserAvatar username={username} />
+        <UserAvatar
+          username={username}
+          onChangePassword={onChangePassword}
+          onLogout={onLogout}
+        />
       </IconButton>
       <Menu
         {...bindMenu(popupState)}
@@ -76,44 +86,16 @@ export default function UserMenu({ username, onChangePassword, onLogout }) {
           <ListItemText>Logout</ListItemText>
         </MenuItem>
       </Menu>
-    </>
+    </Fragment>
   );
 }
-
-// prop types
-UserMenu.propTypes = {
-  /**
-   * Callback fired when the user clicks on "Change password".
-   *
-   * **Signature**
-   * ```
-   * function(event: object) => void
-   * ```
-   * _event_: The event source of the callback.
-   */
-  onChangePassword: PropTypes.func.isRequired,
-  /**
-   * Callback fired when the user clicks on "Logout".
-   *
-   * **Signature**
-   * ```
-   * function(event: object) => void
-   * ```
-   * _event_: The event source of the callback.
-   */
-  onLogout: PropTypes.func.isRequired,
-  /**
-   * Name of currently logged in user.
-   */
-  username: PropTypes.string.isRequired
-};
 
 /**
  * User avatar
  *
  * Provides custom styling and converts username to max 2 initials
  */
-const UserAvatar = ({ username, ...rest }) => {
+const UserAvatar = ({ username, ...rest }: UserMenuProps) => {
   const allInitials = (!username ? "?" : username)
     .split(" ")
     .map(s => s[0])
@@ -139,6 +121,6 @@ const UserAvatar = ({ username, ...rest }) => {
 };
 
 // returns the first and last chars of a string concatenated
-function getFirstAndLastChars(str) {
+function getFirstAndLastChars(str: string) {
   return [str.charAt(0), str.charAt(str.length - 1)].join("");
 }

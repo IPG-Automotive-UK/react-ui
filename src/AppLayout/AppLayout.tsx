@@ -1,8 +1,9 @@
 import { Box, CssBaseline, Drawer, Hidden } from "@mui/material";
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 
 import AppHeader from "../AppHeader";
-import PropTypes from "prop-types";
+import { AppLayoutProps } from "./AppLayout.types";
+import { ConfirmProvider } from "../ConfirmProvider";
 import Sidebar from "../Sidebar";
 import SnackbarProvider from "../SnackbarProvider";
 import ThemeProvider from "../ThemeProvider";
@@ -13,13 +14,13 @@ function Layout({
   appVersion,
   baseUrl,
   sidebarContent,
-  virtoLogoLinkUrl = null,
+  virtoLogoLinkUrl = "",
   appName,
   onChangePassword,
   onLogout,
   username,
   content
-}) {
+}: AppLayoutProps) {
   // sidebar styling
   const sidebarWidth = 240;
 
@@ -32,7 +33,7 @@ function Layout({
   const [theme, setTheme] = useTheme();
 
   return (
-    <>
+    <Fragment>
       <Box height="100vh" display="flex">
         <CssBaseline />
         <AppHeader
@@ -41,7 +42,7 @@ function Layout({
           onAppClick={() => setAppOpen(!appOpen)}
           onChangePassword={onChangePassword}
           onLogout={onLogout}
-          onModeChange={newMode => setTheme(newMode)}
+          onColourModeChange={newMode => setTheme(newMode)}
           username={username}
           mode={theme}
           baseUrl={baseUrl}
@@ -115,7 +116,7 @@ function Layout({
           </Box>
         </Box>
       </Box>
-    </>
+    </Fragment>
   );
 }
 
@@ -124,79 +125,30 @@ function AppLayout({
   appVersion,
   baseUrl,
   sidebarContent,
-  virtoLogoLinkUrl = null,
+  virtoLogoLinkUrl = "",
   appName,
   onChangePassword,
   onLogout,
   username,
   content
-}) {
+}: AppLayoutProps) {
   return (
     <ThemeProvider>
-      <Layout
-        appVersion={appVersion}
-        baseUrl={baseUrl}
-        sidebarContent={sidebarContent}
-        virtoLogoLinkUrl={virtoLogoLinkUrl}
-        appName={appName}
-        onChangePassword={onChangePassword}
-        onLogout={onLogout}
-        username={username}
-        content={content}
-      />
+      <ConfirmProvider>
+        <Layout
+          appVersion={appVersion}
+          baseUrl={baseUrl}
+          sidebarContent={sidebarContent}
+          virtoLogoLinkUrl={virtoLogoLinkUrl}
+          appName={appName}
+          onChangePassword={onChangePassword}
+          onLogout={onLogout}
+          username={username}
+          content={content}
+        />
+      </ConfirmProvider>
     </ThemeProvider>
   );
 }
-
-AppLayout.propTypes = {
-  /**
-   * App name to display in header.
-   */
-  appName: PropTypes.string.isRequired,
-  /**
-   * App version to display at base of sidebar.
-   */
-  appVersion: PropTypes.string,
-  /**
-   * Base URL for VIRTO home page.
-   */
-  baseUrl: PropTypes.string,
-  /**
-   * The RHS content of the component app. Valid react element can be used.
-   */
-  content: PropTypes.node.isRequired,
-  /**
-   * Callback fired when the user clicks on "Change password".
-   *
-   * **Signature**
-   * ```
-   * function(event: object) => void
-   * ```
-   * _event_: The event source of the callback.
-   */
-  onChangePassword: PropTypes.func.isRequired,
-  /**
-   * Callback fired when the user clicks on "Logout".
-   *
-   * **Signature**
-   * ```
-   * function(event: object) => void
-   * ```
-   * _event_: The event source of the callback.
-   */
-  onLogout: PropTypes.func.isRequired,
-  /**
-   * The content of the component. Recommended children are SidebarItem and SidebarDivider, but any valid react element can be used.
-   */
-  sidebarContent: PropTypes.node.isRequired,
-  /**
-   * Name of currently logged in user.
-   */
-  username: PropTypes.string.isRequired,
-  /**
-   * A String of the href URL for the Link of the VIRTO Logo, default is null (link disabled)
-   */
-  virtoLogoLinkUrl: PropTypes.string
-};
 
 export default AppLayout;

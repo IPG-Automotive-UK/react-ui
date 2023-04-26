@@ -1,8 +1,8 @@
 import { Box, Link, Typography } from "@mui/material";
+import React, { Fragment } from "react";
 
 import IpgLogo from "../SvgIcons/IpgLogo";
-import PropTypes from "prop-types";
-import React from "react";
+import { SidebarProps } from "./Sidebar.types";
 
 // sidebar component for app which displays logo, list of items and app version
 function Sidebar({
@@ -10,11 +10,9 @@ function Sidebar({
   children,
   showLogo = true,
   showVersion = true
-}) {
-  // use theme
-
+}: SidebarProps) {
   return (
-    <>
+    <Fragment>
       {children}
       <Box flexGrow={1} />
       <Box
@@ -39,27 +37,8 @@ function Sidebar({
           </Typography>
         ) : null}
       </Box>
-    </>
+    </Fragment>
   );
 }
-
-Sidebar.propTypes = {
-  /**
-   * App version to display at base of sidebar.
-   */
-  appVersion: PropTypes.string,
-  /**
-   * The content of the component. Recommended children are SidebarItem and SidebarDivider, but any valid react element can be used.
-   */
-  children: PropTypes.node,
-  /**
-   * Boolean to determine if logo should be displayed at the bottom of the sidebar
-   */
-  showLogo: PropTypes.bool,
-  /**
-   * Boolean to determine if version should be displayed at the bottom of the sidebar
-   */
-  showVersion: PropTypes.bool
-};
 
 export default Sidebar;
