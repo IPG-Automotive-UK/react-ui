@@ -29,19 +29,19 @@ Default.args = {
 };
 
 /**
- * Story for the IpgLogo component with light mode overide
+ * Story for the IpgLogo component with textColour set to white
  */
-export const LightModeOveride = Template.bind({});
-LightModeOveride.args = {
-  mode: "light",
-  sx: { height: 40, width: 160 }
+export const WhiteTextColour = Template.bind({});
+WhiteTextColour.args = {
+  sx: { height: 40, width: 160 },
+  textColour: "white"
 };
 
 /**
- * Story for the IpgLogo component with dark mode overide
+ * Story for the IpgLogo component with textColour set to black
  */
-export const DarkModeOveride = Template.bind({});
-DarkModeOveride.args = {
-  mode: "dark",
-  sx: { height: 40, width: 160 }
+export const BlackTextColour = Template.bind({});
+BlackTextColour.args = {
+  sx: { height: 40, width: 160 },
+  textColour: "black"
 };

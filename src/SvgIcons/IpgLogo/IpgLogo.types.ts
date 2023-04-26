@@ -2,9 +2,9 @@ import { SvgIconProps } from "@mui/material/SvgIcon";
 
 export interface IpgLogoProps {
   /**
-   * An overide for the theme.palette.mode of the component either light or dark
+   * The colour of the text in the logo
    */
-  mode?: "light" | "dark";
+  textColour?: "white" | "black";
   /**
    * SVG icon props to be passed to the icon
    */
