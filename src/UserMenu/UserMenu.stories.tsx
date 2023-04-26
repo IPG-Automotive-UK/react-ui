@@ -1,15 +1,21 @@
 import { AppBar, Toolbar } from "@mui/material";
+import { Meta, Story } from "@storybook/react";
 
 import React from "react";
 import UserMenu from "./UserMenu";
+import { UserMenuProps } from "./UserMenu.types";
 import { action } from "@storybook/addon-actions";
 
-export default {
+/**
+ * Story metadata
+ */
+const meta: Meta<typeof UserMenu> = {
   component: UserMenu,
   title: "Layout/UserMenu"
 };
+export default meta;
 
-const DefaultTemplate = args => (
+const DefaultTemplate: Story<UserMenuProps> = args => (
   <div style={{ display: "flex", justifyContent: "flex-end" }}>
     <UserMenu
       {...args}
@@ -27,7 +33,7 @@ Default.parameters = {
   }
 };
 
-const AppBarTemplate = args => {
+const AppBarTemplate: Story<UserMenuProps> = args => {
   return (
     <AppBar>
       <Toolbar style={{ justifyContent: "flex-end" }}>

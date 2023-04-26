@@ -5,17 +5,25 @@ import {
   Person,
   Settings
 } from "@mui/icons-material";
+import { Meta, Story } from "@storybook/react";
 
 import React from "react";
 import SidebarItem from "./SidebarItem";
+import { SidebarItemProps } from "./SidebarItem.types";
 import { action } from "@storybook/addon-actions";
 
-export default {
+/**
+ * Story metadata
+ */
+const meta: Meta<typeof SidebarItem> = {
   component: SidebarItem,
   title: "Layout/SidebarItem"
 };
+export default meta;
 
-const Template = args => <SidebarItem {...args} onClick={action("onClick")} />;
+const Template: Story<SidebarItemProps> = args => (
+  <SidebarItem {...args} onClick={action("onClick")} />
+);
 
 export const Default = Template.bind({});
 Default.args = { icon: <Home />, name: "Home" };

@@ -1,7 +1,8 @@
 import { render, screen, waitFor } from "@testing-library/react";
+
 import { Mail } from "@mui/icons-material";
 import React from "react";
-import SidebarItem from "./";
+import SidebarItem from ".";
 import userEvent from "@testing-library/user-event";
 
 describe("SidebarItem", () => {

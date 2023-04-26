@@ -1,13 +1,20 @@
+import { Meta, Story } from "@storybook/react";
+
 import { Box } from "@mui/material";
 import NoWrapTypography from "./NoWrapTypography";
+import { NoWrapTypographyProps } from "./NoWrapTypography.types";
 import React from "react";
 
-export default {
+/**
+ * Story metadata
+ */
+const meta: Meta<typeof NoWrapTypography> = {
   component: NoWrapTypography,
   title: "General/NoWrapTypography"
 };
+export default meta;
 
-const Template = ({ children, sx }) => {
+const Template: Story<NoWrapTypographyProps> = ({ children, sx }) => {
   return (
     <Box sx={{ border: "1px solid black", mt: 2, width: "350px" }}>
       <NoWrapTypography sx={sx}>{children}</NoWrapTypography>

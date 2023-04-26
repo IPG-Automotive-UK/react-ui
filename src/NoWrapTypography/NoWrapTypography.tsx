@@ -1,16 +1,22 @@
 import React, { useState } from "react";
 import { Tooltip, Typography } from "@mui/material";
 
-import PropTypes from "prop-types";
+import { NoWrapTypographyProps } from "./NoWrapTypography.types";
 
 /**
  * Typography component to show a tooltip if the text overflows.
  */
-export default function NoWrapTypography({ children, sx, variant }) {
+export default function NoWrapTypography({
+  children,
+  sx,
+  variant
+}: NoWrapTypographyProps) {
   const [tooltipEnabled, setTooltipEnabled] = useState(false);
 
   // if the text overflows its bounding box, then show the tooltip
-  const handleShouldShow = ({ currentTarget }) => {
+  const handleShouldShow = ({
+    currentTarget
+  }: React.MouseEvent<HTMLDivElement | null>) => {
     if (currentTarget.scrollWidth > currentTarget.clientWidth) {
       setTooltipEnabled(true);
     }
@@ -46,36 +52,3 @@ export default function NoWrapTypography({ children, sx, variant }) {
     </Tooltip>
   );
 }
-
-NoWrapTypography.propTypes = {
-  /**
-   * The content of the component.
-   */
-  children: PropTypes.node,
-  /**
-   * The CSS styles applied to the component.
-   */
-  sx: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.object),
-    PropTypes.object
-  ]),
-  /**
-   * The variant to use.
-   */
-  variant: PropTypes.oneOf([
-    "body1",
-    "body2",
-    "button",
-    "caption",
-    "h1",
-    "h2",
-    "h3",
-    "h4",
-    "h5",
-    "h6",
-    "inherit",
-    "overline",
-    "subtitle1",
-    "subtitle2"
-  ])
-};
