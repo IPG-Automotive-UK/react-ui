@@ -26,7 +26,8 @@ export default function SidebarItem({
   name,
   onClick,
   selected = false,
-  textStyle = {}
+  textStyle = {},
+  display = "in-line"
 }: SidebarItemProps) {
   // use styles
   const color = selected ? "primary" : "inherit";
@@ -47,15 +48,35 @@ export default function SidebarItem({
     onClick && onClick(event);
   };
 
-  // define components
-  return (
-    <Box display="flex" flexDirection="column">
-      <ListItemButton
-        selected={selected}
-        onClick={handleClick}
-        disabled={disabled}
-        className={className}
-      >
+  const CountBadge = () => {
+    return count ? (
+      <Badge
+        badgeContent={count}
+        max={9}
+        color="primary"
+        // if display is inline then add a margin to the right
+        sx={{
+          ...(display === "in-line"
+            ? { marginRight: (theme: Theme) => theme.spacing(3) }
+            : {})
+        }}
+      />
+    ) : null;
+  };
+
+  const ExpandIcon = () => {
+    return children ? (
+      expanded ? (
+        <Badge badgeContent={<ArrowDropDown />} />
+      ) : (
+        <Badge badgeContent={<ArrowRight />} />
+      )
+    ) : null;
+  };
+
+  const SidebarInLine = () => {
+    return (
+      <>
         <ListItemIcon sx={iconStyle}>
           {React.cloneElement(icon, { color })}
         </ListItemIcon>
@@ -64,15 +85,60 @@ export default function SidebarItem({
           primaryTypographyProps={primaryTypographyProps}
           sx={textStyle}
         />
-        {count ? (
-          <Badge
-            badgeContent={count}
-            max={9}
-            color="primary"
-            sx={{ marginRight: theme => theme.spacing(2) }}
+        <CountBadge />
+        <ExpandIcon />
+      </>
+    );
+  };
+
+  // Sidebar Stacked
+  const SidebarStacked = () => {
+    return (
+      <Box
+        display="flex"
+        width="100%"
+        flexDirection="row"
+        justifyContent="center"
+      >
+        <Box display="flex" flexDirection="column" justifyContent="center">
+          <ListItemIcon
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              ...iconStyle
+            }}
+          >
+            {React.cloneElement(icon, {
+              color,
+              fontSize: "large"
+            })}
+            <CountBadge />
+          </ListItemIcon>
+          <ExpandIcon />
+
+          <ListItemText
+            primary={name}
+            primaryTypographyProps={primaryTypographyProps}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              ...textStyle
+            }}
           />
-        ) : null}
-        {children && (expanded ? <ArrowDropDown /> : <ArrowRight />)}
+        </Box>
+      </Box>
+    );
+  };
+
+  return (
+    <Box display="flex" flexDirection="column">
+      <ListItemButton
+        selected={selected}
+        onClick={handleClick}
+        disabled={disabled}
+        className={className}
+      >
+        {display === "in-line" ? <SidebarInLine /> : <SidebarStacked />}
       </ListItemButton>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         {React.Children.map(children, child =>

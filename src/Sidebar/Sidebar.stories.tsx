@@ -4,6 +4,7 @@ import {
   Default as SidebarItemDefault,
   Disabled as SidebarItemDisabled,
   Nested as SidebarItemNested,
+  NestedAndStacked as SidebarItemNestedAndStacked,
   Selected as SidebarItemSelected,
   WithCount as SidebarItemWithCount
 } from "./SidebarItem/SidebarItem.stories";
@@ -137,6 +138,25 @@ CustomLogoLink.args = {
       <SidebarDivider />
       <SidebarItem {...SidebarItemDisabled.args} />
       <SidebarItem {...SidebarItemWithCount.args} />
+    </>
+  ),
+  showLogo: true,
+  showVersion: true
+};
+
+// items only story
+export const StackedSidebar = Template.bind({});
+StackedSidebar.args = {
+  appVersion: version,
+  children: (
+    <>
+      <SidebarItem {...SidebarItemDefault.args} display="stacked" />
+      <SidebarItem {...SidebarItemSelected.args} display="stacked" />
+      <SidebarDivider />
+      <SidebarItem {...SidebarItemDisabled.args} display="stacked" />
+      <SidebarItem {...SidebarItemWithCount.args} display="stacked" />
+      <SidebarDivider />
+      <SidebarItem {...SidebarItemNestedAndStacked.args} display="stacked" />
     </>
   ),
   showLogo: true,
