@@ -79,7 +79,7 @@ export default function SidebarItem({
   // Sidebar In Line component that gets displayed when the display prop is set to in-line
   const SidebarInLine = () => {
     return (
-      <>
+      <React.Fragment>
         <ListItemIcon sx={iconStyle}>
           {React.cloneElement(icon, { color })}
         </ListItemIcon>
@@ -90,7 +90,7 @@ export default function SidebarItem({
         />
         <CountBadge />
         <ExpandIcon />
-      </>
+      </React.Fragment>
     );
   };
 
