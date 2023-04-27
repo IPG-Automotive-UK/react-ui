@@ -48,6 +48,7 @@ export default function SidebarItem({
     onClick && onClick(event);
   };
 
+  // Count badge component that displays the count
   const CountBadge = () => {
     return count ? (
       <Badge
@@ -64,6 +65,7 @@ export default function SidebarItem({
     ) : null;
   };
 
+  // Expand icon component that displays the expand icon depending on the expanded state
   const ExpandIcon = () => {
     return children ? (
       expanded ? (
@@ -74,6 +76,7 @@ export default function SidebarItem({
     ) : null;
   };
 
+  // Sidebar In Line component that gets displayed when the display prop is set to in-line
   const SidebarInLine = () => {
     return (
       <>
@@ -91,7 +94,7 @@ export default function SidebarItem({
     );
   };
 
-  // Sidebar Stacked
+  // Sidebar Stacked component that gets displayed when the display prop is set to stacked
   const SidebarStacked = () => {
     return (
       <Box
@@ -130,6 +133,7 @@ export default function SidebarItem({
     );
   };
 
+  // return the sidebar item component
   return (
     <Box display="flex" flexDirection="column">
       <ListItemButton
