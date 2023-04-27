@@ -118,7 +118,6 @@ export default function SidebarItem({
             <CountBadge />
           </ListItemIcon>
           <ExpandIcon />
-
           <ListItemText
             primary={name}
             primaryTypographyProps={primaryTypographyProps}
