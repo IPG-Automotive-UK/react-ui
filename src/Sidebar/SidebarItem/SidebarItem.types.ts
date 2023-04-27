@@ -34,11 +34,11 @@ export interface SidebarItemProps {
    */
   name: string;
   /**
-   * The display type of the sidebar item. Defaults to "in-line".
-   * Where "in-line" displays the icon and text on the same line.
+   * The display type of the sidebar item. Defaults to "inline".
+   * Where "inline" displays the icon and text on the same line.
    * "stacked" displays the icon and text on separate lines.
    */
-  display?: "in-line" | "stacked";
+  display?: "inline" | "stacked";
   /**
    * Callback fired when the user clicks on item.
    *
