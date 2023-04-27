@@ -27,7 +27,7 @@ export default function SidebarItem({
   onClick,
   selected = false,
   textStyle = {},
-  display = "in-line"
+  display = "inline"
 }: SidebarItemProps) {
   // use styles
   const color = selected ? "primary" : "inherit";
@@ -57,7 +57,7 @@ export default function SidebarItem({
         color="primary"
         // if display is inline then add a margin to the right
         sx={{
-          ...(display === "in-line"
+          ...(display === "inline"
             ? { marginRight: (theme: Theme) => theme.spacing(3) }
             : {})
         }}
@@ -76,7 +76,7 @@ export default function SidebarItem({
     ) : null;
   };
 
-  // Sidebar In Line component that gets displayed when the display prop is set to in-line
+  // Sidebar In Line component that gets displayed when the display prop is set to inline
   const SidebarInLine = () => {
     return (
       <React.Fragment>
@@ -141,7 +141,7 @@ export default function SidebarItem({
         disabled={disabled}
         className={className}
       >
-        {display === "in-line" ? <SidebarInLine /> : <SidebarStacked />}
+        {display === "inline" ? <SidebarInLine /> : <SidebarStacked />}
       </ListItemButton>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         {React.Children.map(children, child =>
