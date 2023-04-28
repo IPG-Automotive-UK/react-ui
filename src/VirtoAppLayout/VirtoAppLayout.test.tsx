@@ -7,7 +7,7 @@ import {
 } from "../Sidebar/SidebarItem/SidebarItem.stories";
 import { render, screen } from "@testing-library/react";
 
-import AppLayout from ".";
+import VirtoAppLayout from ".";
 import React from "react";
 import SidebarDivider from "../Sidebar/SidebarDivider";
 import SidebarItem from "../Sidebar/SidebarItem";
@@ -50,25 +50,27 @@ function createMatchMedia(width: number) {
 }
 
 // tests for the app layout component
-describe("AppLayout", () => {
+describe("VirtoAppLayout", () => {
   beforeAll(() => {
     window.matchMedia = createMatchMedia(window.innerWidth);
   });
   test("shows first and last initial of username", () => {
-    render(<AppLayout {...defaultInputs} username="Ruud van Nistelrooy" />);
+    render(
+      <VirtoAppLayout {...defaultInputs} username="Ruud van Nistelrooy" />
+    );
     expect(screen.getByText(/RN/i)).toBeInTheDocument();
   });
   test("should show app name", () => {
-    render(<AppLayout {...defaultInputs} appName="APP NAME" />);
+    render(<VirtoAppLayout {...defaultInputs} appName="APP NAME" />);
     expect(screen.getByText(/APP NAME/i)).toBeInTheDocument();
   });
   test("should show app version", () => {
-    render(<AppLayout {...defaultInputs} appVersion="1.0.0" />);
+    render(<VirtoAppLayout {...defaultInputs} appVersion="1.0.0" />);
     expect(screen.getByText(/1.0.0/i)).toBeInTheDocument();
   });
   test("should display content", () => {
     render(
-      <AppLayout
+      <VirtoAppLayout
         {...defaultInputs}
         content={<div data-testid="main-content">More content goes here</div>}
       />
@@ -78,7 +80,7 @@ describe("AppLayout", () => {
   });
   test("should display sidebar content", () => {
     render(
-      <AppLayout
+      <VirtoAppLayout
         {...defaultInputs}
         sidebarContent={
           <div data-testid="sidebar-content">
@@ -99,7 +101,7 @@ describe("AppLayout", () => {
     const user = userEvent.setup();
     const onChangePassword = jest.fn();
     render(
-      <AppLayout {...defaultInputs} onChangePassword={onChangePassword} />
+      <VirtoAppLayout {...defaultInputs} onChangePassword={onChangePassword} />
     );
     await user.click(screen.getByRole("button", { name: /JB/i }));
     await user.click(
@@ -110,14 +112,14 @@ describe("AppLayout", () => {
   test("onLogout called on user click", async () => {
     const user = userEvent.setup();
     const onLogout = jest.fn();
-    render(<AppLayout {...defaultInputs} onLogout={onLogout} />);
+    render(<VirtoAppLayout {...defaultInputs} onLogout={onLogout} />);
     await user.click(screen.getByRole("button", { name: /JB/i }));
     await user.click(screen.getByRole("menuitem", { name: /Logout/i }));
     expect(onLogout).toHaveBeenCalled();
   });
   test("has a valid logo link href if a string is provided", () => {
     const { container } = render(
-      <AppLayout
+      <VirtoAppLayout
         {...defaultInputs}
         virtoLogoLinkUrl={"https://www.some.url/"}
       />

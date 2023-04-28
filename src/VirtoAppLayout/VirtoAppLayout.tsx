@@ -1,7 +1,7 @@
 import { Box, CssBaseline, Drawer, Hidden } from "@mui/material";
 import React, { Fragment, useState } from "react";
 
-import { AppLayoutProps } from "./AppLayout.types";
+import { VirtoAppLayoutProps } from "./VirtoAppLayout.types";
 import { ConfirmProvider } from "../ConfirmProvider";
 import Sidebar from "../Sidebar";
 import SnackbarProvider from "../SnackbarProvider";
@@ -20,7 +20,7 @@ function Layout({
   onLogout,
   username,
   content
-}: AppLayoutProps) {
+}: VirtoAppLayoutProps) {
   // sidebar styling
   const sidebarWidth = 240;
 
@@ -121,7 +121,7 @@ function Layout({
 }
 
 // app layout wrapper component
-function AppLayout({
+function VirtoAppLayout({
   appVersion,
   baseUrl,
   sidebarContent,
@@ -131,7 +131,7 @@ function AppLayout({
   onLogout,
   username,
   content
-}: AppLayoutProps) {
+}: VirtoAppLayoutProps) {
   return (
     <ThemeProvider>
       <ConfirmProvider>
@@ -151,4 +151,4 @@ function AppLayout({
   );
 }
 
-export default AppLayout;
+export default VirtoAppLayout;

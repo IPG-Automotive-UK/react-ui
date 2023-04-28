@@ -1,4 +1,4 @@
-export interface AppLayoutProps {
+export interface VirtoAppLayoutProps {
   /**
    * App name to display in header.
    */

@@ -7,8 +7,8 @@ import {
   WithCount as SidebarItemWithCount
 } from "../Sidebar/SidebarItem/SidebarItem.stories";
 
-import AppLayout from ".";
-import { AppLayoutProps } from "./AppLayout.types";
+import VirtoAppLayout from ".";
+import { VirtoAppLayoutProps } from "./VirtoAppLayout.types";
 import React from "react";
 import SidebarDivider from "../Sidebar/SidebarDivider";
 import SidebarItem from "../Sidebar/SidebarItem";
@@ -17,14 +17,14 @@ import { version } from "../../package.json";
 /**
  * Story metadata
  */
-const meta: Meta<typeof AppLayout> = {
-  component: AppLayout,
-  title: "Layout/AppLayout"
+const meta: Meta<typeof VirtoAppLayout> = {
+  component: VirtoAppLayout,
+  title: "Layout/VirtoAppLayout"
 };
 export default meta;
 
-const Template: Story<AppLayoutProps> = args => {
-  return <AppLayout {...args} />;
+const Template: Story<VirtoAppLayoutProps> = args => {
+  return <VirtoAppLayout {...args} />;
 };
 
 // default story
