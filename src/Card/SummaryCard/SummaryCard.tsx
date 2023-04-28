@@ -49,10 +49,10 @@ function SummaryCard({
     useState<HTMLElement | null>(null);
 
   // header content width
-  const headerContentWidth = Number(width) - 60;
+  const headerContentWidth = width - 60;
 
   // label content width
-  const labelContentWidth = Number(width) - 45;
+  const labelContentWidth = width - 45;
 
   // label spacing
   const labelSpacing = 8;
@@ -187,7 +187,7 @@ function SummaryCard({
   const handleLabelClick = (label: {
     _id: string;
     color: string;
-    description?: string | undefined;
+    description?: string;
     name: string;
   }) => {
     onClickLabel(label);
@@ -325,7 +325,7 @@ function SummaryCard({
 
         <Box
           sx={{
-            height: Number(height) - mediaHeight - 196,
+            height: height - mediaHeight - 196,
             overflowY: "hidden",
             py: 1
           }}
