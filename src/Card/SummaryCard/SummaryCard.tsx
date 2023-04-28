@@ -3,6 +3,7 @@ import {
   Button,
   Card,
   CardActions,
+  CardContent,
   CardHeader,
   CardMedia,
   IconButton,
@@ -322,17 +323,16 @@ function SummaryCard({
             }}
           />
         </Box>
-
-        <Box
+        <CardContent
           sx={{
             height: height - mediaHeight - 196,
             overflowY: "hidden",
+            px: 0,
             py: 1
           }}
         >
           {content}
-        </Box>
-
+        </CardContent>
         <CardActions disableSpacing sx={{ padding: 0 }}>
           {moreCardActions}
         </CardActions>

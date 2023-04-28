@@ -11,6 +11,7 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableContainer,
   TableRow
 } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
@@ -173,30 +174,32 @@ export const ScenarioExample = Template.bind({});
 ScenarioExample.args = {
   ...Default.args,
   content: (
-    <Table size="small">
-      <TableBody>
-        <TableRow>
-          <TableCell sx={sx.headerTableCell}>Description</TableCell>
-          <TableCell sx={sx.tableCell}>Some Description</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell sx={sx.headerTableCell}>Country</TableCell>
-          <TableCell sx={sx.tableCell}>Germany</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell sx={sx.headerTableCell}>Scenario</TableCell>
-          <TableCell sx={sx.tableCell}>Expressway</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell sx={sx.headerTableCell}>Road Length (m)</TableCell>
-          <TableCell sx={sx.tableCell}>3000</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell sx={sx.headerTableCell}>Road Format</TableCell>
-          <TableCell sx={sx.tableCell}>.rd5</TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
+    <TableContainer>
+      <Table size="small">
+        <TableBody>
+          <TableRow>
+            <TableCell sx={sx.headerTableCell}>Description</TableCell>
+            <TableCell sx={sx.tableCell}>Some Description</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell sx={sx.headerTableCell}>Country</TableCell>
+            <TableCell sx={sx.tableCell}>Germany</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell sx={sx.headerTableCell}>Scenario</TableCell>
+            <TableCell sx={sx.tableCell}>Expressway</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell sx={sx.headerTableCell}>Road Length (m)</TableCell>
+            <TableCell sx={sx.tableCell}>3000</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell sx={sx.headerTableCell}>Road Format</TableCell>
+            <TableCell sx={sx.tableCell}>.rd5</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </TableContainer>
   ),
   labels: [
     {
