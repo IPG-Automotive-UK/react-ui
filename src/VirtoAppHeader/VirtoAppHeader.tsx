@@ -9,13 +9,13 @@ import {
 } from "@mui/material";
 import React, { Fragment, useState } from "react";
 
-import { AppHeaderProps } from "./AppHeader.types";
 import AppLauncher from "../AppLauncher";
 import AppsIcon from "@mui/icons-material/Apps";
 import Menu from "@mui/icons-material/Menu";
 import { Theme } from "@mui/material/styles";
 import ToggleColorMode from "../ToggleColorMode";
 import UserMenu from "../UserMenu";
+import { VirtoAppHeaderProps } from "./VirtoAppHeader.types";
 import VirtoLogo from "../SvgIcons/VirtoLogo";
 
 // appbar component
@@ -29,7 +29,7 @@ function Header({
   onMenuClick,
   username,
   virtoLogoLinkUrl
-}: AppHeaderProps) {
+}: VirtoAppHeaderProps) {
   return (
     <AppBar
       sx={theme => ({
@@ -110,7 +110,7 @@ function Header({
 }
 
 // app header component
-function AppHeader({
+function VirtoAppHeader({
   appName,
   baseUrl,
   mode,
@@ -120,7 +120,7 @@ function AppHeader({
   onColourModeChange,
   username,
   virtoLogoLinkUrl = ""
-}: AppHeaderProps) {
+}: VirtoAppHeaderProps) {
   // sidebar styling
   const applancherWidth = 300;
 
@@ -170,4 +170,4 @@ function AppHeader({
   );
 }
 
-export default AppHeader;
+export default VirtoAppHeader;

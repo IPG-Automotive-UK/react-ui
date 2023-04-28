@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 
-import AppHeader from ".";
 import React from "react";
+import VirtoAppHeader from ".";
 import userEvent from "@testing-library/user-event";
 
 // a set of default inputs so that tests can change what theyre testing
@@ -16,18 +16,20 @@ const defaultInputs = {
 };
 
 // tests for the app header component
-describe("AppHeader", () => {
+describe("VirtoAppHeader", () => {
   test("shows first and last initial of username", () => {
-    render(<AppHeader {...defaultInputs} username="Ruud van Nistelrooy" />);
+    render(
+      <VirtoAppHeader {...defaultInputs} username="Ruud van Nistelrooy" />
+    );
     expect(screen.getByText(/RN/i)).toBeInTheDocument();
   });
   test("should show app name", () => {
-    render(<AppHeader {...defaultInputs} appName="APP NAME" />);
+    render(<VirtoAppHeader {...defaultInputs} appName="APP NAME" />);
     expect(screen.getByText(/APP NAME/i)).toBeInTheDocument();
   });
   test("should call onMenuClick when menu button is clicked", async () => {
     const onMenuClick = jest.fn();
-    render(<AppHeader {...defaultInputs} onMenuClick={onMenuClick} />);
+    render(<VirtoAppHeader {...defaultInputs} onMenuClick={onMenuClick} />);
     const launcherButton = screen.getByTestId("launcher-button");
     await userEvent.click(launcherButton);
     expect(onMenuClick).toHaveBeenCalled();
@@ -36,7 +38,7 @@ describe("AppHeader", () => {
     const user = userEvent.setup();
     const onChangePassword = jest.fn();
     render(
-      <AppHeader {...defaultInputs} onChangePassword={onChangePassword} />
+      <VirtoAppHeader {...defaultInputs} onChangePassword={onChangePassword} />
     );
     await user.click(screen.getByRole("button", { name: /JB/i }));
     await user.click(
@@ -47,7 +49,7 @@ describe("AppHeader", () => {
   test("onLogout called on user click", async () => {
     const user = userEvent.setup();
     const onLogout = jest.fn();
-    render(<AppHeader {...defaultInputs} onLogout={onLogout} />);
+    render(<VirtoAppHeader {...defaultInputs} onLogout={onLogout} />);
     await user.click(screen.getByRole("button", { name: /JB/i }));
     await user.click(screen.getByRole("menuitem", { name: /Logout/i }));
     expect(onLogout).toHaveBeenCalled();
@@ -56,7 +58,7 @@ describe("AppHeader", () => {
     const user = userEvent.setup();
     const onColourModeChange = jest.fn();
     render(
-      <AppHeader
+      <VirtoAppHeader
         {...defaultInputs}
         onColourModeChange={onColourModeChange}
         mode="light"
@@ -70,7 +72,7 @@ describe("AppHeader", () => {
     const user = userEvent.setup();
     const onColourModeChange = jest.fn();
     render(
-      <AppHeader
+      <VirtoAppHeader
         {...defaultInputs}
         onColourModeChange={onColourModeChange}
         mode="dark"
