@@ -4,6 +4,7 @@ import {
   Default as SidebarItemDefault,
   Disabled as SidebarItemDisabled,
   Nested as SidebarItemNested,
+  NestedAndStacked as SidebarItemNestedAndStacked,
   Selected as SidebarItemSelected,
   WithCount as SidebarItemWithCount
 } from "./SidebarItem/SidebarItem.stories";
@@ -38,7 +39,9 @@ const Template: Story<SidebarProps> = args => (
   </div>
 );
 
-// default story
+/**
+ * Default story for the Sidebar component
+ */
 export const Default = Template.bind({});
 Default.args = {
   appVersion: version,
@@ -55,7 +58,9 @@ Default.args = {
   showVersion: true
 };
 
-// hidden logo story
+/**
+ * Story for the Sidebar component with the logo hidden
+ */
 export const HiddenLogo = Template.bind({});
 HiddenLogo.args = {
   appVersion: version,
@@ -74,7 +79,9 @@ HiddenLogo.args = {
   showVersion: true
 };
 
-// hidden version story
+/**
+ * Story for the Sidebar component with the version hidden
+ */
 export const HiddenVersion = Template.bind({});
 HiddenVersion.args = {
   children: (
@@ -92,7 +99,9 @@ HiddenVersion.args = {
   showVersion: false
 };
 
-// items only story
+/**
+ * Story for the Sidebar component with the logo and version hidden
+ */
 export const ItemsOnly = Template.bind({});
 ItemsOnly.args = {
   children: (
@@ -110,7 +119,9 @@ ItemsOnly.args = {
   showVersion: false
 };
 
-// icons only story
+/**
+ * Story for the Sidebar component with only icons and no text
+ */
 export const IconsOnly = Template.bind({});
 IconsOnly.args = {
   children: (
@@ -126,7 +137,9 @@ IconsOnly.args = {
   width: 60
 };
 
-// Custom Logo Link story
+/**
+ * Story for the Sidebar component with a custom logo link
+ */
 export const CustomLogoLink = Template.bind({});
 CustomLogoLink.args = {
   appVersion: version,
@@ -137,6 +150,27 @@ CustomLogoLink.args = {
       <SidebarDivider />
       <SidebarItem {...SidebarItemDisabled.args} />
       <SidebarItem {...SidebarItemWithCount.args} />
+    </>
+  ),
+  showLogo: true,
+  showVersion: true
+};
+
+/**
+ * Story for the Sidebar component with stacked items
+ */
+export const StackedSidebar = Template.bind({});
+StackedSidebar.args = {
+  appVersion: version,
+  children: (
+    <>
+      <SidebarItem {...SidebarItemDefault.args} display="stacked" />
+      <SidebarItem {...SidebarItemSelected.args} display="stacked" />
+      <SidebarDivider />
+      <SidebarItem {...SidebarItemDisabled.args} display="stacked" />
+      <SidebarItem {...SidebarItemWithCount.args} display="stacked" />
+      <SidebarDivider />
+      <SidebarItem {...SidebarItemNestedAndStacked.args} display="stacked" />
     </>
   ),
   showLogo: true,
