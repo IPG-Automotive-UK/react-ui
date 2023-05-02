@@ -77,7 +77,8 @@ export {
   VirtoTest,
   VirtoData,
   VirtoVehicle,
-  VirtoID
+  VirtoID,
+  IpgLogoProps
 } from "./SvgIcons";
 export { default as ViewToggleButton } from "./ViewToggleButton";
 export {

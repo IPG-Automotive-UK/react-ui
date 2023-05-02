@@ -1,4 +1,4 @@
-import { Box, Link, Typography } from "@mui/material";
+import { Box, Link, Typography, useTheme } from "@mui/material";
 import React, { Fragment } from "react";
 
 import IpgLogo from "../SvgIcons/IpgLogo";
@@ -11,6 +11,8 @@ function Sidebar({
   showLogo = true,
   showVersion = true
 }: SidebarProps) {
+  // theme hook
+  const theme = useTheme();
   return (
     <Fragment>
       {children}
@@ -28,7 +30,10 @@ function Sidebar({
             display="flex"
             target="_blank"
           >
-            <IpgLogo sx={{ height: 40, width: 120 }} />
+            <IpgLogo
+              textColour={theme.palette.mode === "light" ? "black" : "white"}
+              sx={{ height: 40, width: 120 }}
+            />
           </Link>
         ) : null}
         {showVersion ? (
