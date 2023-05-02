@@ -1,4 +1,4 @@
-export { default as IpgLogo } from "./IpgLogo";
+export { default as IpgLogo, IpgLogoProps } from "./IpgLogo";
 export { default as VirtoLogo } from "./VirtoLogo";
 export { default as VirtoBuild } from "./VirtoBuild";
 export { default as VirtoFleet } from "./VirtoFleet";
@@ -9,4 +9,3 @@ export { default as VirtoTest } from "./VirtoTest";
 export { default as VirtoData } from "./VirtoData";
 export { default as VirtoVehicle } from "./VirtoVehicle";
 export { default as VirtoID } from "./VirtoID";
-export { IpgLogoProps } from "./IpgLogo";
