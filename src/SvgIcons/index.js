@@ -9,3 +9,4 @@ export { default as VirtoTest } from "./VirtoTest";
 export { default as VirtoData } from "./VirtoData";
 export { default as VirtoVehicle } from "./VirtoVehicle";
 export { default as VirtoID } from "./VirtoID";
+export { IpgLogoProps } from "./IpgLogo";
