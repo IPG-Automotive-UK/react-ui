@@ -8,6 +8,7 @@ import React from "react";
 import SearchBar from "../SearchBar";
 import ThemeProvider from "../ThemeProvider";
 import ToggleColorMode from "../ToggleColorMode";
+import VirtoLogo from "../SvgIcons/VirtoLogo";
 import { useDarkMode } from "storybook-dark-mode";
 
 /**
@@ -47,10 +48,25 @@ Default.args = {
 };
 
 /**
- * Story for the AppHeader component where a SearchBar is passed as a child
+ * Story for the AppHeader component where a single child is passed
  */
-export const SearchBarAndDarkModeAsChild = Template.bind({});
-SearchBarAndDarkModeAsChild.args = {
+export const SingleChild = Template.bind({});
+SingleChild.args = {
+  appName: "APP NAME",
+  children: (
+    <IconButton sx={{ mr: 1 }}>
+      <Notifications color="info" fontSize="large" />
+    </IconButton>
+  ),
+  mode: "light",
+  username: "Ruud van Nistelrooy"
+};
+
+/**
+ * Story for the AppHeader component where a multiple children are passed
+ */
+export const MultipleChildren = Template.bind({});
+MultipleChildren.args = {
   appName: "APP NAME",
   children: (
     <>
@@ -63,15 +79,23 @@ SearchBarAndDarkModeAsChild.args = {
 };
 
 /**
- * Story for the AppHeader component where an IconButton is passed as a child
+ * Story for the AppHeader component where a multiple children are passed
  */
-export const IconButtonAsChild = Template.bind({});
-IconButtonAsChild.args = {
-  appName: "APP NAME",
+export const MultipleChildrenAndLogo = Template.bind({});
+MultipleChildrenAndLogo.args = {
+  appLogo: (
+    <VirtoLogo
+      sx={{
+        height: 50,
+        width: 140
+      }}
+    />
+  ),
   children: (
-    <IconButton>
-      <Notifications color="info" fontSize="large" />
-    </IconButton>
+    <>
+      <SearchBar />
+      <ToggleColorMode mode={"light"} onChange={() => {}} />
+    </>
   ),
   mode: "light",
   username: "Ruud van Nistelrooy"
