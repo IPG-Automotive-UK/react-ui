@@ -44,7 +44,7 @@ function Layout({
           onLogout={onLogout}
           onColourModeChange={newMode => setTheme(newMode)}
           username={username}
-          mode={theme}
+          mode={theme as "light" | "dark"}
           baseUrl={baseUrl}
           virtoLogoLinkUrl={virtoLogoLinkUrl}
         />
