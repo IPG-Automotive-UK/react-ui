@@ -45,32 +45,12 @@ describe("AppHeader", () => {
     await user.click(screen.getByRole("menuitem", { name: /Logout/i }));
     expect(onLogout).toHaveBeenCalled();
   });
-  test("onClick switch change from light to dark mode", async () => {
-    const user = userEvent.setup();
-    const onColourModeChange = jest.fn();
+  test("children are rendered", () => {
     render(
-      <AppHeader
-        {...defaultInputs}
-        onColourModeChange={onColourModeChange}
-        mode="light"
-      />
+      <AppHeader {...defaultInputs}>
+        <div>Child</div>
+      </AppHeader>
     );
-    const button = screen.getByRole("checkbox");
-    await user.click(button);
-    expect(onColourModeChange).toHaveBeenCalledWith("dark");
-  });
-  test("onClick switch change from dark to light mode", async () => {
-    const user = userEvent.setup();
-    const onColourModeChange = jest.fn();
-    render(
-      <AppHeader
-        {...defaultInputs}
-        onColourModeChange={onColourModeChange}
-        mode="dark"
-      />
-    );
-    const button = screen.getByRole("checkbox");
-    await user.click(button);
-    expect(onColourModeChange).toHaveBeenCalledWith("light");
+    expect(screen.getByText(/Child/i)).toBeInTheDocument();
   });
 });
