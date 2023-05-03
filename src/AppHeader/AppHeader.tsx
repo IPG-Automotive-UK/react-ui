@@ -3,14 +3,12 @@ import { AppBar, Box, Toolbar, Typography } from "@mui/material";
 import { AppHeaderProps } from "./AppHeader.types";
 import IpgLogo from "../SvgIcons/IpgLogo";
 import React from "react";
-import ToggleColorMode from "../ToggleColorMode";
 import UserMenu from "../UserMenu";
 
 // appbar component
 function AppHeader({
   appName,
-  mode,
-  onColourModeChange,
+  mode = "light",
   onChangePassword,
   onLogout,
   username,
@@ -48,7 +46,6 @@ function AppHeader({
         </Box>
         <Box display="flex" alignItems="center">
           {children}
-          <ToggleColorMode mode={mode} onChange={onColourModeChange} />
           <UserMenu
             username={username}
             onChangePassword={onChangePassword}
