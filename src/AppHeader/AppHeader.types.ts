@@ -20,10 +20,7 @@ export interface AppHeaderProps {
    * Callback fired when the user clicks on "Logout".
    */
   onLogout: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  /**
-   * Callback fired when the color mode is changed.
-   */
-  onColourModeChange: (newMode: "light" | "dark") => void;
+
   /**
    * Name of currently logged in user.
    */
