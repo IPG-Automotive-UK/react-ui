@@ -2,33 +2,63 @@
 
 import {
   ThemeProvider as MuiThemeProvider,
+  ThemeOptions,
   createTheme
 } from "@mui/material/styles";
 import React, { useEffect } from "react";
 
 import PropTypes from "prop-types";
 import ThemeContext from "./ThemeContext";
+import { ThemeProviderProps } from "./ThemeProvider.types";
 import darkScrollbar from "@mui/material/darkScrollbar";
 import { grey } from "@mui/material/colors";
 
+// extend the theme to include custom properties
+// https://mui.com/material-ui/customization/theming/#custom-variables
+declare module "@mui/material/styles" {
+  // eslint-disable-next-line no-unused-vars
+  interface Theme {
+    layout: {
+      content: {
+        maxWidth: number;
+      };
+    };
+  }
+  // allow configuration using `createTheme`
+  // eslint-disable-next-line no-unused-vars
+  interface ThemeOptions {
+    layout?: {
+      content?: {
+        maxWidth?: number;
+      };
+    };
+  }
+}
+
 // theme defaults regardless of color mode. these are provided as an object that can be merged during color mode theme creation
-const defaultTheme = {
-  layout: {
-    content: {
-      maxWidth: 1152
-    }
-  },
-  overrides: {
+const defaultTheme: ThemeOptions = {
+  components: {
     MuiAccordionSummary: {
-      root: {
-        "&$expanded": { marginBottom: -20 }
+      styleOverrides: {
+        root: {
+          "&$expanded": {
+            marginBottom: -20
+          }
+        }
       }
     },
     MuiTooltip: {
-      tooltip: {
-        fontSize: "14px",
-        fontWeight: "normal"
+      styleOverrides: {
+        tooltip: {
+          fontSize: "14px",
+          fontWeight: "normal"
+        }
       }
+    }
+  },
+  layout: {
+    content: {
+      maxWidth: 1152
     }
   },
   typography: {
@@ -55,35 +85,37 @@ const lightTheme = createTheme(
           }
         })
       },
+      MuiIconButton: { styleOverrides: { root: { color: "#9e9e9e" } } },
       MuiStepper: {
         styleOverrides: {
           root: {
             backgroundColor: "rgba(144, 202, 249, 0.08)"
           }
         }
-      }
-    },
-    overrides: {
-      MuiIconButton: { root: { color: "#9e9e9e" } },
+      },
       MuiTableRow: {
-        root: {
-          "&$selected": {
-            backgroundColor: "rgba(0, 95, 168, 0.08)"
+        styleOverrides: {
+          root: {
+            "&$selected": {
+              backgroundColor: "rgba(0, 95, 168, 0.08)"
+            }
           }
         }
       },
       MuiToggleButton: {
-        root: {
-          "&$selected": {
+        styleOverrides: {
+          root: {
+            "&$selected": {
+              "&:hover": {
+                backgroundColor: "rgba(0, 95, 168, 0.15)"
+              },
+              backgroundColor: "rgba(0, 95, 168, 0.08)"
+            },
             "&:hover": {
               backgroundColor: "rgba(0, 95, 168, 0.15)"
             },
-            backgroundColor: "rgba(0, 95, 168, 0.08)"
-          },
-          "&:hover": {
-            backgroundColor: "rgba(0, 95, 168, 0.15)"
-          },
-          "border-color": "rgb(196, 196, 196)"
+            "border-color": "rgb(196, 196, 196)"
+          }
         }
       }
     },
@@ -145,40 +177,43 @@ const darkTheme = createTheme(
  */
 export default function ThemeProvider({
   children,
-  theme: controlledTheme = "light"
-}) {
+  theme: controlledTheme
+}: ThemeProviderProps) {
   // theme state
-  const [theme, setTheme] = React.useState(controlledTheme);
+  const [theme, setTheme] = React.useState("light");
 
-  // on first render get theme from local storage or set default to light if not set
+  // effect to set the theme on mount
   useEffect(() => {
+    // theme preference is decided in the following order:
+    // 1. controlled theme prop
+    // 2. local storage
+    // 3. default to light
     const storedThemeMode = localStorage.getItem("theme");
-    if (controlledTheme) {
+    if (controlledTheme !== undefined) {
       setTheme(controlledTheme);
-      localStorage.setItem("theme", controlledTheme);
-    } else if (storedThemeMode) {
+    } else if (storedThemeMode !== null) {
       setTheme(storedThemeMode);
     } else {
       setTheme("light");
-      localStorage.setItem("theme", "light");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // effect to update theme when controlled theme prop changes
   useEffect(() => {
-    if (theme !== controlledTheme) {
+    if (controlledTheme && theme !== controlledTheme) {
       setTheme(controlledTheme);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [controlledTheme]);
 
-  // on theme change update local storage
+  // effect to update local storage when theme changes
   useEffect(() => {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
   // define context value
-  const value = [theme, setTheme];
+  const value = [theme, setTheme] as const;
 
   // wrap mui theme provider and children in theme context
   return (
