@@ -12,7 +12,7 @@ export { default as AppLayout } from "./AppLayout";
 export { default as Autocomplete } from "./Autocomplete";
 export { default as Canvas } from "./Canvas";
 export { default as CanvasItem } from "./CanvasItem";
-export { DetailCard, SummaryCard, TableCard } from "./Card";
+export { DetailCard, SummaryCard, TableCard, SummaryCardProps } from "./Card";
 export { default as Checkbox } from "./Checkbox";
 export { default as Copyright } from "./Copyright";
 export { default as Color } from "./Color";
@@ -58,7 +58,7 @@ export { SnackbarProvider, useSnackbar } from "./SnackbarProvider";
 export { StatusIcon, StatusLabel, StatusMessage } from "./Status";
 export { default as SwitchField } from "./SwitchField";
 export { default as TextField } from "./TextField";
-export { ThemeProvider, useTheme } from "./ThemeProvider";
+export { ThemeProvider, ThemeProviderProps, useTheme } from "./ThemeProvider";
 export { default as ToggleColorMode } from "./ToggleColorMode";
 export { default as TransferList } from "./TransferList";
 export { default as UserMenu, UserMenuProps } from "./UserMenu";
@@ -80,7 +80,8 @@ export {
   VirtoTest,
   VirtoData,
   VirtoVehicle,
-  VirtoID
+  VirtoID,
+  IpgLogoProps
 } from "./SvgIcons";
 export { default as ViewToggleButton } from "./ViewToggleButton";
 export {
