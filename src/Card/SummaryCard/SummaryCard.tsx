@@ -269,7 +269,6 @@ function SummaryCard({
                     key={label._id}
                     label={label.name}
                     color={label.color}
-                    onDelete={() => {}}
                     onClick={() => handleLabelClick(label)}
                     size="small"
                   />
@@ -283,7 +282,6 @@ function SummaryCard({
                     key={label._id}
                     label={label.name}
                     color={label.color}
-                    onDelete={() => {}}
                     onClick={() => handleLabelClick(label)}
                     size="small"
                   />
@@ -361,7 +359,6 @@ function SummaryCard({
                   label={label.name}
                   color={label.color}
                   size="small"
-                  onDelete={() => {}}
                   onClick={() => handleLabelClick(label)}
                 />
               );

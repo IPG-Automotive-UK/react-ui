@@ -1,13 +1,20 @@
+import { Meta, Story } from "@storybook/react";
+
 import LabelChip from "./LabelChip";
+import { LabelChipProps } from "./LabelChip.types";
 import React from "react";
 import { action } from "@storybook/addon-actions";
 
-export default {
+/**
+ * Story metadata
+ */
+const meta: Meta<typeof LabelChip> = {
   component: LabelChip,
   title: "General/LabelChip"
 };
+export default meta;
 
-const Template = args => {
+const Template: Story<LabelChipProps> = args => {
   return <LabelChip {...args} />;
 };
 
