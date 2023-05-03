@@ -1,8 +1,12 @@
 export interface AppHeaderProps {
   /**
+   * App Logo to display in header.
+   */
+  appLogo?: React.ReactNode;
+  /**
    * App name to display in header.
    */
-  appName: string;
+  appName?: string;
   /**
    * Children to render in header on the left side, but right of the dark mode toggle.
    */
@@ -20,10 +24,7 @@ export interface AppHeaderProps {
    * Callback fired when the user clicks on "Logout".
    */
   onLogout: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  /**
-   * Callback fired when the color mode is changed.
-   */
-  onColourModeChange: (newMode: "light" | "dark") => void;
+
   /**
    * Name of currently logged in user.
    */

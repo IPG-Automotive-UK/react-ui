@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 
 import AppHeader from ".";
 import React from "react";
+import VirtoLogo from "../SvgIcons/VirtoLogo";
 import userEvent from "@testing-library/user-event";
 
 // a set of default inputs so that tests can change what theyre testing
@@ -45,32 +46,28 @@ describe("AppHeader", () => {
     await user.click(screen.getByRole("menuitem", { name: /Logout/i }));
     expect(onLogout).toHaveBeenCalled();
   });
-  test("onClick switch change from light to dark mode", async () => {
-    const user = userEvent.setup();
-    const onColourModeChange = jest.fn();
+  test("children are rendered", () => {
     render(
-      <AppHeader
-        {...defaultInputs}
-        onColourModeChange={onColourModeChange}
-        mode="light"
-      />
+      <AppHeader {...defaultInputs}>
+        <div>Child</div>
+      </AppHeader>
     );
-    const button = screen.getByRole("checkbox");
-    await user.click(button);
-    expect(onColourModeChange).toHaveBeenCalledWith("dark");
+    expect(screen.getByText(/Child/i)).toBeInTheDocument();
   });
-  test("onClick switch change from dark to light mode", async () => {
-    const user = userEvent.setup();
-    const onColourModeChange = jest.fn();
-    render(
-      <AppHeader
-        {...defaultInputs}
-        onColourModeChange={onColourModeChange}
-        mode="dark"
-      />
+  test("can render app logo", () => {
+    const { container } = render(
+      <AppHeader {...defaultInputs} appLogo={<VirtoLogo />} />
     );
-    const button = screen.getByRole("checkbox");
-    await user.click(button);
-    expect(onColourModeChange).toHaveBeenCalledWith("light");
+
+    // expect container to exist
+    expect(container).toBeInTheDocument();
+
+    // find a specific path in the svg with the virto logo and check it exists
+    const virtoLogoPath = container.querySelector(
+      'path[d="M124.58 0H93.2086C92.5382 0.00459184 92.0928 0.707143 92.3775 1.31327L94.88 6.68112C95.0316 7.00255 95.3576 7.21378 95.7112 7.21378H105.556V35.077C105.556 35.5867 105.969 35.9954 106.474 35.9954H111.314C111.819 35.9954 112.233 35.5821 112.233 35.077V7.21378H122.077C122.436 7.20918 122.757 6.99796 122.909 6.67653L125.411 1.30867C125.696 0.697959 125.25 0 124.58 0Z"]'
+    );
+
+    // expect the path to exist
+    expect(virtoLogoPath).toBeInTheDocument();
   });
 });

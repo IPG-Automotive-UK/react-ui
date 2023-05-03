@@ -7,7 +7,9 @@ import { Notifications } from "@mui/icons-material";
 import React from "react";
 import SearchBar from "../SearchBar";
 import ThemeProvider from "../ThemeProvider";
-import { action } from "@storybook/addon-actions";
+import ToggleColorMode from "../ToggleColorMode";
+import VirtoLogo from "../SvgIcons/VirtoLogo";
+import { useDarkMode } from "storybook-dark-mode";
 
 /**
  * Story metadata
@@ -23,29 +25,14 @@ export default meta;
  * This provides some state management for the component to make it easier to use in Storybook
  */
 const Template: Story<AppHeaderProps> = args => {
-  // theme mode state
-  const [mode, setMode] = React.useState<"light" | "dark" | undefined>(
-    args.mode
-  );
-
-  // use effect to set the mode when the mode prop changes
-  React.useEffect(() => {
-    setMode(args.mode);
-  }, [args.mode]);
+  // get the dark mode state from Storybook
+  const isDarkMode = useDarkMode();
+  const theme = isDarkMode ? "dark" : "light";
 
   // return the component
   return (
-    <ThemeProvider theme={mode}>
-      <AppHeader
-        {...args}
-        mode={mode}
-        onColourModeChange={newMode => {
-          setMode(newMode);
-          action("onChange")(newMode);
-        }}
-      >
-        {args.children}
-      </AppHeader>
+    <ThemeProvider theme={theme}>
+      <AppHeader {...args}>{args.children}</AppHeader>
     </ThemeProvider>
   );
 };
@@ -61,26 +48,54 @@ Default.args = {
 };
 
 /**
- * Story for the AppHeader component where a SearchBar is passed as a child
+ * Story for the AppHeader component where a single child is passed
  */
-export const SearchBarAsChild = Template.bind({});
-SearchBarAsChild.args = {
+export const SingleChild = Template.bind({});
+SingleChild.args = {
   appName: "APP NAME",
-  children: <SearchBar />,
+  children: (
+    <IconButton sx={{ mr: 1 }}>
+      <Notifications color="info" fontSize="large" />
+    </IconButton>
+  ),
   mode: "light",
   username: "Ruud van Nistelrooy"
 };
 
 /**
- * Story for the AppHeader component where an IconButton is passed as a child
+ * Story for the AppHeader component where a multiple children are passed
  */
-export const IconButtonAsChild = Template.bind({});
-IconButtonAsChild.args = {
+export const MultipleChildren = Template.bind({});
+MultipleChildren.args = {
   appName: "APP NAME",
   children: (
-    <IconButton>
-      <Notifications color="info" fontSize="large" />
-    </IconButton>
+    <>
+      <SearchBar />
+      <ToggleColorMode mode={"light"} onChange={() => {}} />
+    </>
+  ),
+  mode: "light",
+  username: "Ruud van Nistelrooy"
+};
+
+/**
+ * Story for the AppHeader component where a multiple children are passed
+ */
+export const MultipleChildrenAndLogo = Template.bind({});
+MultipleChildrenAndLogo.args = {
+  appLogo: (
+    <VirtoLogo
+      sx={{
+        height: 50,
+        width: 140
+      }}
+    />
+  ),
+  children: (
+    <>
+      <SearchBar />
+      <ToggleColorMode mode={"light"} onChange={() => {}} />
+    </>
   ),
   mode: "light",
   username: "Ruud van Nistelrooy"
