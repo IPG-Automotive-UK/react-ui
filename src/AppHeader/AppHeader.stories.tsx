@@ -7,7 +7,8 @@ import { Notifications } from "@mui/icons-material";
 import React from "react";
 import SearchBar from "../SearchBar";
 import ThemeProvider from "../ThemeProvider";
-import { action } from "@storybook/addon-actions";
+import ToggleColorMode from "../ToggleColorMode";
+import { useDarkMode } from "storybook-dark-mode";
 
 /**
  * Story metadata
@@ -23,29 +24,14 @@ export default meta;
  * This provides some state management for the component to make it easier to use in Storybook
  */
 const Template: Story<AppHeaderProps> = args => {
-  // theme mode state
-  const [mode, setMode] = React.useState<"light" | "dark" | undefined>(
-    args.mode
-  );
-
-  // use effect to set the mode when the mode prop changes
-  React.useEffect(() => {
-    setMode(args.mode);
-  }, [args.mode]);
+  // get the dark mode state from Storybook
+  const isDarkMode = useDarkMode();
+  const theme = isDarkMode ? "dark" : "light";
 
   // return the component
   return (
-    <ThemeProvider theme={mode}>
-      <AppHeader
-        {...args}
-        mode={mode}
-        onColourModeChange={newMode => {
-          setMode(newMode);
-          action("onChange")(newMode);
-        }}
-      >
-        {args.children}
-      </AppHeader>
+    <ThemeProvider theme={theme}>
+      <AppHeader {...args}>{args.children}</AppHeader>
     </ThemeProvider>
   );
 };
@@ -63,10 +49,15 @@ Default.args = {
 /**
  * Story for the AppHeader component where a SearchBar is passed as a child
  */
-export const SearchBarAsChild = Template.bind({});
-SearchBarAsChild.args = {
+export const SearchBarAndDarkModeAsChild = Template.bind({});
+SearchBarAndDarkModeAsChild.args = {
   appName: "APP NAME",
-  children: <SearchBar />,
+  children: (
+    <>
+      <SearchBar />
+      <ToggleColorMode mode={"light"} onChange={() => {}} />
+    </>
+  ),
   mode: "light",
   username: "Ruud van Nistelrooy"
 };
