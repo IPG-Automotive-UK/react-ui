@@ -7,6 +7,7 @@ import UserMenu from "../UserMenu";
 
 // appbar component
 function AppHeader({
+  appLogo,
   appName,
   mode = "light",
   onChangePassword,
@@ -31,18 +32,22 @@ function AppHeader({
           />
         </Box>
         <Box display="flex" alignItems="center">
-          <Typography
-            variant="h6"
-            fontSize="26px"
-            lineHeight="34px"
-            letterSpacing="0.05em"
-            fontWeight="700"
-            color={theme =>
-              theme.palette.mode === "dark" ? "#003063" : "white"
-            }
-          >
-            <span>{appName}</span>
-          </Typography>
+          {appLogo ? (
+            <span>{appLogo}</span>
+          ) : (
+            <Typography
+              variant="h6"
+              fontSize="26px"
+              lineHeight="34px"
+              letterSpacing="0.05em"
+              fontWeight="700"
+              color={theme =>
+                theme.palette.mode === "dark" ? "#003063" : "white"
+              }
+            >
+              <span>{appName}</span>
+            </Typography>
+          )}
         </Box>
         <Box display="flex" alignItems="center">
           {children}
