@@ -3,14 +3,13 @@ import { AppBar, Box, Toolbar, Typography } from "@mui/material";
 import { AppHeaderProps } from "./AppHeader.types";
 import IpgLogo from "../SvgIcons/IpgLogo";
 import React from "react";
-import ToggleColorMode from "../ToggleColorMode";
 import UserMenu from "../UserMenu";
 
 // appbar component
 function AppHeader({
+  appLogo,
   appName,
-  mode,
-  onColourModeChange,
+  mode = "light",
   onChangePassword,
   onLogout,
   username,
@@ -33,22 +32,25 @@ function AppHeader({
           />
         </Box>
         <Box display="flex" alignItems="center">
-          <Typography
-            variant="h6"
-            fontSize="26px"
-            lineHeight="34px"
-            letterSpacing="0.05em"
-            fontWeight="700"
-            color={theme =>
-              theme.palette.mode === "dark" ? "#003063" : "white"
-            }
-          >
-            <span>{appName}</span>
-          </Typography>
+          {appLogo ? (
+            <span>{appLogo}</span>
+          ) : (
+            <Typography
+              variant="h6"
+              fontSize="26px"
+              lineHeight="34px"
+              letterSpacing="0.05em"
+              fontWeight="700"
+              color={theme =>
+                theme.palette.mode === "dark" ? "#003063" : "white"
+              }
+            >
+              <span>{appName}</span>
+            </Typography>
+          )}
         </Box>
         <Box display="flex" alignItems="center">
           {children}
-          <ToggleColorMode mode={mode} onChange={onColourModeChange} />
           <UserMenu
             username={username}
             onChangePassword={onChangePassword}
