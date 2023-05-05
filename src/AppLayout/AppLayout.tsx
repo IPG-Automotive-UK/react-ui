@@ -1,13 +1,12 @@
 import { Box, CssBaseline, Drawer, Hidden } from "@mui/material";
 import React, { Fragment, useState } from "react";
 
+import AppHeader from "../AppHeader";
 import { AppLayoutProps } from "./AppLayout.types";
 import { ConfirmProvider } from "../ConfirmProvider";
 import Sidebar from "../Sidebar";
 import SnackbarProvider from "../SnackbarProvider";
 import ThemeProvider from "../ThemeProvider";
-import AppHeader from "../AppHeader";
-import useTheme from "../ThemeProvider/useTheme";
 
 // app layout component
 function Layout({
@@ -17,16 +16,15 @@ function Layout({
   onChangePassword,
   onLogout,
   username,
-  content
+  content,
+  headerChildren,
+  mode = "light"
 }: AppLayoutProps) {
   // sidebar styling
   const sidebarWidth = 100;
 
   // define state for managing dynamic sidebar
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  // use theme context hook
-  const [theme, setTheme] = useTheme();
 
   return (
     <Fragment>
@@ -36,10 +34,11 @@ function Layout({
           appName={appName}
           onChangePassword={onChangePassword}
           onLogout={onLogout}
-          onColourModeChange={newMode => setTheme(newMode)}
           username={username}
-          mode={theme}
-        />
+          mode={mode}
+        >
+          {headerChildren}
+        </AppHeader>
         <Box
           sx={theme => ({
             [theme.breakpoints.up("md")]: {
@@ -81,7 +80,11 @@ function Layout({
               variant="permanent"
               open
             >
-              <Sidebar showLogo={false} showVersion={false}>
+              <Sidebar
+                showLogo={false}
+                showVersion={appVersion !== undefined}
+                appVersion={appVersion}
+              >
                 {sidebarContent}
               </Sidebar>
             </Drawer>

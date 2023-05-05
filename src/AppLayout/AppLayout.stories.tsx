@@ -2,7 +2,6 @@ import { Meta, Story } from "@storybook/react";
 import {
   Default as SidebarItemDefault,
   Disabled as SidebarItemDisabled,
-  Nested as SidebarItemNested,
   Selected as SidebarItemSelected,
   WithCount as SidebarItemWithCount
 } from "../Sidebar/SidebarItem/SidebarItem.stories";
@@ -12,6 +11,8 @@ import { AppLayoutProps } from "./AppLayout.types";
 import React from "react";
 import SidebarDivider from "../Sidebar/SidebarDivider";
 import SidebarItem from "../Sidebar/SidebarItem";
+import ThemeProvider from "../ThemeProvider";
+import { useDarkMode } from "storybook-dark-mode";
 import { version } from "../../package.json";
 
 /**
@@ -24,7 +25,15 @@ const meta: Meta<typeof AppLayout> = {
 export default meta;
 
 const Template: Story<AppLayoutProps> = args => {
-  return <AppLayout {...args} />;
+  // get the dark mode state from Storybook
+  const isDarkMode = useDarkMode();
+  const theme = isDarkMode ? "dark" : "light";
+
+  return (
+    <ThemeProvider theme={theme}>
+      <AppLayout {...args} />
+    </ThemeProvider>
+  );
 };
 
 // default story
