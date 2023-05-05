@@ -1,12 +1,12 @@
 import { Box, CssBaseline, Drawer, Hidden } from "@mui/material";
 import React, { Fragment, useState } from "react";
 
-import AppHeader from "../AppHeader";
 import { AppLayoutProps } from "./AppLayout.types";
 import { ConfirmProvider } from "../ConfirmProvider";
 import Sidebar from "../Sidebar";
 import SnackbarProvider from "../SnackbarProvider";
 import ThemeProvider from "../ThemeProvider";
+import VirtoAppHeader from "../VirtoAppHeader";
 import useTheme from "../ThemeProvider/useTheme";
 
 // app layout component
@@ -36,7 +36,7 @@ function Layout({
     <Fragment>
       <Box height="100vh" display="flex">
         <CssBaseline />
-        <AppHeader
+        <VirtoAppHeader
           appName={appName}
           onMenuClick={() => setMobileOpen(!mobileOpen)}
           onAppClick={() => setAppOpen(!appOpen)}
