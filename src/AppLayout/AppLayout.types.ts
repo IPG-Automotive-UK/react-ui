@@ -16,6 +16,15 @@ export interface AppLayoutProps {
    */
   content: React.ReactNode;
   /**
+   * Children to render in header on the left side, but right of the dark mode toggle.
+   */
+  headerChildren?: React.ReactNode;
+  /**
+   * The color mode selection
+   * @default "light"
+   */
+  mode?: "light" | "dark";
+  /**
    * Callback fired when the user clicks on "Change password".
    *
    * **Signature**
