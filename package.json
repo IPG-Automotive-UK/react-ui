@@ -93,6 +93,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.2",
     "react-text-mask": "^5.5.0",
+    "react-dropzone": "^14.2.3",
     "use-debouncy": "^4.4.0",
     "zxcvbn": "^4.4.2"
   },
