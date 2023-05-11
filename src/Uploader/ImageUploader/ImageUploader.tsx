@@ -119,7 +119,7 @@ export default function ImageUploader({
             ? theme.palette.error.main
             : theme.palette.divider,
           borderStyle: "dashed",
-          borderWidth: 1,
+          borderWidth: 1.5,
           boxSizing: "border-box",
           cursor: "pointer",
           display: "flex",

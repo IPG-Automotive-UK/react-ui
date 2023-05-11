@@ -80,7 +80,7 @@ export default function FileUploader({
         minHeight="40px"
       >
         <Box>
-          <Typography variant="h6" color="textPrimary">
+          <Typography fontWeight="400" color="textPrimary">
             {title}
             {required ? (
               <Typography
@@ -146,7 +146,7 @@ export default function FileUploader({
             ? theme.palette.error.main
             : theme.palette.divider,
           borderStyle: "dashed",
-          borderWidth: 1,
+          borderWidth: 1.5,
           boxSizing: "border-box",
           cursor: "pointer",
           display: "flex",
