@@ -140,6 +140,9 @@ export default function SidebarItem({
         onClick={handleClick}
         disabled={disabled}
         className={className}
+        sx={{
+          ...(display === "inline" ? {} : { pl: 0, pr: 0 })
+        }}
       >
         {display === "inline" ? <SidebarInLine /> : <SidebarStacked />}
       </ListItemButton>
