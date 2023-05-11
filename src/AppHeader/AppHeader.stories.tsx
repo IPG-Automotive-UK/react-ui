@@ -79,7 +79,7 @@ MultipleChildren.args = {
 };
 
 /**
- * Story for the AppHeader component where a multiple children are passed
+ * Story for the AppHeader component where multiple children and a logo are passed
  */
 export const MultipleChildrenAndLogo = Template.bind({});
 MultipleChildrenAndLogo.args = {
