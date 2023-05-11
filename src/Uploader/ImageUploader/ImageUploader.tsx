@@ -1,10 +1,11 @@
-import { Box, IconButton, Stack, Typography } from "@mui/material";
+import { Box, IconButton, Stack, Typography, alpha } from "@mui/material";
 import { FileRejection, useDropzone } from "react-dropzone";
 import React, { useCallback, useEffect, useState } from "react";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { ImageUploaderProps } from "./ImageUploader.types";
+import { readAsDataURL } from "../utils/readAsDataURL";
 
 export default function ImageUploader({
   title = "Upload Image",
@@ -19,7 +20,7 @@ export default function ImageUploader({
     async (acceptedFiles: File[]) => {
       const fileWithPreview = await Promise.all(
         acceptedFiles.map(async f => ({
-          data: await readFile(f),
+          data: await readAsDataURL(f),
           file: f
         }))
       );
@@ -35,7 +36,7 @@ export default function ImageUploader({
   useEffect(() => {
     // hide message after 5000ms
     const timer = setTimeout(() => {
-      if (!rejectionMessage) {
+      if (rejectionMessage) {
         setRejectionMessage(null);
       }
     }, 2000);
@@ -67,6 +68,7 @@ export default function ImageUploader({
         justifyContent="space-between"
         alignItems="flex-end"
         mb={1}
+        minHeight="40px"
       >
         <Box>
           <Typography variant="h6" color="textPrimary">
@@ -85,10 +87,14 @@ export default function ImageUploader({
       <Box
         {...getRootProps()}
         sx={theme => ({
-          backgroundColor: theme.palette.background.paper,
           borderColor: isDragReject
             ? theme.palette.error.main
             : theme.palette.divider,
+          ".dropzoneText": {
+            color: isDragReject
+              ? theme.palette.error.main
+              : theme.palette.text.secondary
+          },
           borderStyle: "dashed",
           borderWidth: 1,
           boxSizing: "border-box",
@@ -97,7 +103,12 @@ export default function ImageUploader({
           height: "250px",
           justifyContent: "center",
           p: 2,
-          pointerEvenets: selectedFiles.length > 0 ? "none" : "auto"
+          pointerEvenets: selectedFiles.length > 0 ? "none" : "auto",
+          "&:hover": {
+            background: alpha(theme.palette.primary.main, 0.04),
+            borderColor: theme.palette.primary.main,
+            color: theme.palette.primary.main
+          }
         })}
       >
         <input {...getInputProps()} />
@@ -108,19 +119,10 @@ export default function ImageUploader({
             justifyContent="center"
             gap={1}
             height="100%"
+            className="dropzoneText"
           >
-            <FileUploadIcon
-              sx={{
-                color: theme =>
-                  isDragReject || rejectionMessage
-                    ? theme.palette.error.main
-                    : theme.palette.text.primary
-              }}
-            />
-            <Typography
-              color={isDragReject || rejectionMessage ? "error" : "textPrimary"}
-              fontSize="15px"
-            >
+            <FileUploadIcon />
+            <Typography fontSize="15px">
               {rejectionMessage ?? dropzoneText}
             </Typography>
           </Stack>
@@ -137,20 +139,4 @@ export default function ImageUploader({
       </Box>
     </Box>
   );
-}
-
-function readFile(file: File): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = event => {
-      if (typeof event?.target?.result === "string") {
-        resolve(event?.target?.result);
-      }
-    };
-    reader.onerror = event => {
-      reader.abort();
-      reject(event);
-    };
-    reader.readAsDataURL(file);
-  });
 }

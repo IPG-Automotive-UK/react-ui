@@ -1,17 +1,27 @@
-type FileWithData = {
-  data: string;
-  file: File;
-};
+import { Accept } from "react-dropzone";
+import { FileWithData } from "../Uploader.types";
 
-export interface ImageUploaderProps {
+export interface FileUploaderProps {
+  /**
+   * Accepted file types
+   */
+  acceptedFiles: Accept;
   /**
    * Text to display in dropzone
    */
   dropzoneText?: string;
   /**
+   * Maximum number of files that the dropzone will accept.
+   */
+  filesLimit?: number;
+  /**
    * Maximum file size (in bytes) that the dropzone will accept.
    */
   maxFileSize?: number;
+  /**
+   * Accept multiple files?
+   */
+  multiple?: boolean;
   /**
    * Callback fired when the file is changed.
    *
@@ -24,6 +34,10 @@ export interface ImageUploaderProps {
    * _selectedFiles_: The currently selected files after deletion.
    */
   onDelete?: (deleted: FileWithData[]) => void;
+  /**
+   * Is field required?
+   */
+  required?: boolean;
   /**
    * List of selected file(s).
    */

@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 
-import ImageUploader from "./";
+import ImageUploader from ".";
 import React from "react";
 import userEvent from "@testing-library/user-event";
 

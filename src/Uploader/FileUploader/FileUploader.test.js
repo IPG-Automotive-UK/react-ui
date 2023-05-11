@@ -1,7 +1,8 @@
-import { render, screen } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 
-import FileUploader from "./";
+import FileUploader from "./FileUploader";
 import React from "react";
+import { userEvent } from "@storybook/testing-library";
 
 // import userEvent from "@testing-library/user-event";
 
@@ -34,30 +35,20 @@ const multipleFiles = [
 ];
 
 describe("FileUploader", () => {
-  // render FileUploader component
   test("render fileuploader", () => {
     render(<FileUploader selectedFiles={[]} />);
     const dropzoneElement = screen.getByTestId("dropzone-base");
     expect(dropzoneElement).toBeInTheDocument();
   });
-  // show delete button if only one file selected
-  test("show delete button", () => {
-    // render component
+  test("show delete button when file is selected", () => {
     render(<FileUploader selectedFiles={singleFile} />);
     const deleteButton = screen.getByRole("button", { name: /delete/i });
     expect(deleteButton).toBeInTheDocument();
   });
-  // update dropzone text with file name when single file selected
-  test("update dropzone text", () => {
-    const { baseElement } = render(<FileUploader selectedFiles={singleFile} />);
-
-    // find the element
-    const dropzoneText = baseElement.querySelector(
-      ".css-17pbpn5-MuiTypography-root"
-    );
-
-    // check selected file name is displayed
-    expect(dropzoneText).toHaveTextContent("IPGAutomotive.zip");
+  test("updates dropzone text in single select mode", () => {
+    render(<FileUploader selectedFiles={singleFile} />);
+    const dropzoneElement = screen.getByTestId("dropzone-base");
+    expect(dropzoneElement).toHaveTextContent("IPGAutomotive.zip");
   });
   // do not update dropzone text with file name when multiple file selected
   test("mutiple file selected", () => {
@@ -68,6 +59,8 @@ describe("FileUploader", () => {
         dropzoneText={"Drag & drop file(s) here or click"}
       />
     );
+
+    // find the dropzone
     // find the element
     const dropzoneText = baseElement.querySelector(".MuiTypography-h5");
 

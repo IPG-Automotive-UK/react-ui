@@ -41,7 +41,6 @@ export {
 } from "./Filter";
 export { default as FontPicker } from "./FontPicker";
 export { default as FontStyle } from "./FontStyle";
-export { default as ImageUploader, ImageUploaderProps } from "./ImageUploader";
 export { LabelChip, LabelChipProps, LabelSelector } from "./LabelSelector";
 export { default as Loading } from "./Loading";
 export { default as LoginForm } from "./LoginForm";
@@ -81,6 +80,8 @@ export { default as TextField, TextFieldProps } from "./TextField";
 export { ThemeProvider, ThemeProviderProps, useTheme } from "./ThemeProvider";
 export { default as ToggleColorMode } from "./ToggleColorMode";
 export { default as TransferList } from "./TransferList";
+
+export { ImageUploader, ImageUploaderProps } from "./Uploader";
 export { default as UserMenu, UserMenuProps } from "./UserMenu";
 export { UserAvatar, useColorMap } from "./UserAvatar";
 export {
