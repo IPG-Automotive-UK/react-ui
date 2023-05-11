@@ -1,9 +1,11 @@
 import * as React from "react";
+
 import {
   FormControlLabel,
   FormGroup,
   Checkbox as MuiCheckbox
 } from "@mui/material";
+
 import PropTypes from "prop-types";
 
 /**
@@ -31,7 +33,10 @@ export default function Checkbox({
           />
         }
         label={label}
-        sx={{ pointerEvents: "none" }}
+        sx={{
+          color: theme => theme.palette.text.primary,
+          pointerEvents: "none"
+        }}
       />
     </FormGroup>
   );

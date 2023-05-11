@@ -1,4 +1,5 @@
 import { Box, Slider as MuiSlider, Typography } from "@mui/material";
+
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -70,7 +71,7 @@ export default function Slider({
   // return components
   return (
     <Box sx={{ height: "100%" }} display="flex" flexDirection="column">
-      <Typography>{title}</Typography>
+      <Typography color="textPrimary">{title}</Typography>
       <Box
         sx={{
           height: "100%",

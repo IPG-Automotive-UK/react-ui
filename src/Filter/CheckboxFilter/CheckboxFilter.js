@@ -101,7 +101,7 @@ function Option(props, option, { selected }) {
         checked={selected}
         value={option}
       />
-      <Typography>{option}</Typography>
+      <Typography color="textPrimary">{option}</Typography>
     </Box>
   );
 }

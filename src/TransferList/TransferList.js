@@ -11,6 +11,7 @@ import {
   Typography
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+
 import CloseIcon from "@mui/icons-material/Close";
 import PropTypes from "prop-types";
 import SearchIcon from "@mui/icons-material/Search";
@@ -130,7 +131,10 @@ export default function TransferList({
                         disableRipple
                       />
                     </ListItemIcon>
-                    <ListItemText primary={value} />
+                    <ListItemText
+                      primary={value}
+                      primaryTypographyProps={{ color: "textPrimary" }}
+                    />
                   </ListItem>
                 );
               })}
@@ -163,7 +167,7 @@ export default function TransferList({
             </Typography>
           ) : (
             <>
-              <Typography sx={{ pl: 1, pt: 1 }}>
+              <Typography sx={{ pl: 1, pt: 1 }} color="textPrimary">
                 {`${selectedItems.length} selected`}
               </Typography>
               <Button
@@ -204,7 +208,10 @@ export default function TransferList({
                       </IconButton>
                     }
                   >
-                    <ListItemText primary={value} />
+                    <ListItemText
+                      primary={value}
+                      primaryTypographyProps={{ color: "textPrimary" }}
+                    />
                   </ListItem>
                 );
               })}

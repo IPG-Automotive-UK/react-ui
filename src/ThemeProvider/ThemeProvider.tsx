@@ -172,7 +172,6 @@ const darkTheme = createTheme(
     },
     typography: {
       allVariants: {
-        color: "#fff",
         fontFamily: "Montserrat"
       }
     }

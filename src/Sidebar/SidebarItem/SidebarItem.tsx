@@ -31,7 +31,7 @@ export default function SidebarItem({
   display = "inline"
 }: SidebarItemProps) {
   // use styles
-  const color = selected ? "primary" : "inherit";
+  const color = selected ? "primary" : "textPrimary";
   const primaryTypographyProps = {
     color,
     sx: {
@@ -71,9 +71,19 @@ export default function SidebarItem({
   const ExpandIcon = () => {
     return children ? (
       expanded ? (
-        <Badge badgeContent={<ArrowDropDown />} />
+        <Badge
+          badgeContent={
+            <ArrowDropDown
+              sx={{ color: theme => theme.palette.text.primary }}
+            />
+          }
+        />
       ) : (
-        <Badge badgeContent={<ArrowRight />} />
+        <Badge
+          badgeContent={
+            <ArrowRight sx={{ color: theme => theme.palette.text.primary }} />
+          }
+        />
       )
     ) : null;
   };

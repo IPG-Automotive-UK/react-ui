@@ -25,7 +25,14 @@ export default function UserAvatar({ img, name = "", color = "rgb(0,0,0)" }) {
       {img ? (
         <Avatar src={img} />
       ) : (
-        <Avatar sx={{ backgroundColor: color }}>{initials}</Avatar>
+        <Avatar
+          sx={{
+            backgroundColor: color,
+            color: theme => theme.palette.getContrastText(color)
+          }}
+        >
+          {initials}
+        </Avatar>
       )}
     </>
   );

@@ -23,7 +23,9 @@ const Template: StoryFn<WizardContentProps> = () => {
   return (
     <WizardContent>
       {lipsum.map((paragraph, index) => (
-        <Typography key={index}>{paragraph}</Typography>
+        <Typography key={index} color="textPrimary">
+          {paragraph}
+        </Typography>
       ))}
     </WizardContent>
   );
