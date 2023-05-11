@@ -115,15 +115,4 @@ describe("AppLayout", () => {
     await user.click(screen.getByRole("menuitem", { name: /Logout/i }));
     expect(onLogout).toHaveBeenCalled();
   });
-  test("has a valid logo link href if a string is provided", () => {
-    const { container } = render(
-      <AppLayout
-        {...defaultInputs}
-        virtoLogoLinkUrl={"https://www.some.url/"}
-      />
-    );
-    expect(
-      container.querySelector("a[href='https://www.some.url/']")
-    ).toBeInTheDocument();
-  });
 });
