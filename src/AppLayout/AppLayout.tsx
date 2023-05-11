@@ -121,29 +121,31 @@ function Layout({
 
 // app layout wrapper component
 function AppLayout({
+  appName,
   appVersion,
   baseUrl,
-  sidebarContent,
-  virtoLogoLinkUrl = "",
-  appName,
+  content,
+  headerChildren,
   onChangePassword,
   onLogout,
+  sidebarContent,
   username,
-  content
+  virtoLogoLinkUrl = ""
 }: AppLayoutProps) {
   return (
     <ThemeProvider>
       <ConfirmProvider>
         <Layout
+          appName={appName}
           appVersion={appVersion}
           baseUrl={baseUrl}
-          sidebarContent={sidebarContent}
-          virtoLogoLinkUrl={virtoLogoLinkUrl}
-          appName={appName}
+          content={content}
+          headerChildren={headerChildren}
           onChangePassword={onChangePassword}
           onLogout={onLogout}
+          sidebarContent={sidebarContent}
           username={username}
-          content={content}
+          virtoLogoLinkUrl={virtoLogoLinkUrl}
         />
       </ConfirmProvider>
     </ThemeProvider>
