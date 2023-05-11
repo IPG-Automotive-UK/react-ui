@@ -5,7 +5,7 @@ export interface FileUploaderProps {
   /**
    * Accepted file types
    */
-  acceptedFiles: Accept;
+  acceptedFiles?: Accept;
   /**
    * Text to display in dropzone
    */

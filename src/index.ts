@@ -81,7 +81,12 @@ export { ThemeProvider, ThemeProviderProps, useTheme } from "./ThemeProvider";
 export { default as ToggleColorMode } from "./ToggleColorMode";
 export { default as TransferList } from "./TransferList";
 
-export { ImageUploader, ImageUploaderProps } from "./Uploader";
+export {
+  ImageUploader,
+  ImageUploaderProps,
+  FileUploader,
+  FileUploaderProps
+} from "./Uploader";
 export { default as UserMenu, UserMenuProps } from "./UserMenu";
 export { UserAvatar, useColorMap } from "./UserAvatar";
 export {

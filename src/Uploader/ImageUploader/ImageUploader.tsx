@@ -87,44 +87,54 @@ export default function ImageUploader({
       <Box
         {...getRootProps()}
         sx={theme => ({
+          "&:hover": {
+            ".dropzoneText": {
+              color:
+                isDragReject || rejectionMessage
+                  ? theme.palette.error.main
+                  : theme.palette.primary.main
+            },
+            background:
+              isDragReject || rejectionMessage
+                ? "inherit"
+                : alpha(theme.palette.primary.main, 0.04),
+            borderColor:
+              isDragReject || rejectionMessage
+                ? theme.palette.error.main
+                : theme.palette.primary.main,
+            color: theme.palette.primary.main
+          },
+          ".dropzoneText": {
+            alignItems: "center",
+            color:
+              isDragReject || rejectionMessage
+                ? theme.palette.error.main
+                : theme.palette.text.secondary,
+            flexDirection: "row",
+            gap: 1,
+            height: "100%",
+            justifyContent: "center"
+          },
           borderColor: isDragReject
             ? theme.palette.error.main
             : theme.palette.divider,
-          ".dropzoneText": {
-            color: isDragReject
-              ? theme.palette.error.main
-              : theme.palette.text.secondary
-          },
           borderStyle: "dashed",
           borderWidth: 1,
           boxSizing: "border-box",
           cursor: "pointer",
           display: "flex",
+          fontSize: "16px",
           height: "250px",
           justifyContent: "center",
           p: 2,
-          pointerEvenets: selectedFiles.length > 0 ? "none" : "auto",
-          "&:hover": {
-            background: alpha(theme.palette.primary.main, 0.04),
-            borderColor: theme.palette.primary.main,
-            color: theme.palette.primary.main
-          }
+          pointerEvenets: selectedFiles.length > 0 ? "none" : "auto"
         })}
       >
         <input {...getInputProps()} />
         {selectedFiles.length === 0 ? (
-          <Stack
-            alignItems="center"
-            flexDirection="row"
-            justifyContent="center"
-            gap={1}
-            height="100%"
-            className="dropzoneText"
-          >
+          <Stack className="dropzoneText">
             <FileUploadIcon />
-            <Typography fontSize="15px">
-              {rejectionMessage ?? dropzoneText}
-            </Typography>
+            <Typography>{rejectionMessage ?? dropzoneText}</Typography>
           </Stack>
         ) : (
           selectedFiles.map(f => (

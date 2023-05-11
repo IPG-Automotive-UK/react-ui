@@ -16,8 +16,8 @@ import { FileUploaderProps } from "./FileUploader.types";
 import { FileWithData } from "../Uploader.types";
 import { readAsDataURL } from "../utils/readAsDataURL";
 
-export default function ImageUploader({
-  acceptedFiles = {},
+export default function FileUploader({
+  acceptedFiles,
   dropzoneText = "Drag & drop a file here or click",
   filesLimit = 1,
   maxFileSize = 3000000,
@@ -69,8 +69,6 @@ export default function ImageUploader({
     onDelete(selectedFiles.filter(i => i !== deletedFile));
   };
 
-  console.log(selectedFiles);
-
   return (
     <Box data-testid="dropzone-base">
       <Stack
@@ -89,7 +87,10 @@ export default function ImageUploader({
                 color={theme => theme.palette.error.main}
                 component="span"
                 lineHeight="inherit"
-                sx={{ verticalAlign: "super", marginLeft: "4px" }}
+                sx={{
+                  marginLeft: "4px",
+                  verticalAlign: "super"
+                }}
               >
                 *
               </Typography>
@@ -110,10 +111,19 @@ export default function ImageUploader({
         sx={theme => ({
           "&:hover": {
             "& .dropzoneText": {
-              color: theme.palette.primary.main
+              color:
+                isDragReject || rejectionMessage
+                  ? theme.palette.error.main
+                  : theme.palette.primary.main
             },
-            background: alpha(theme.palette.primary.main, 0.04),
-            borderColor: theme.palette.primary.main,
+            background:
+              isDragReject || rejectionMessage
+                ? "inherit"
+                : alpha(theme.palette.primary.main, 0.04),
+            borderColor:
+              isDragReject || rejectionMessage
+                ? theme.palette.error.main
+                : theme.palette.primary.main,
             color: theme.palette.primary.main
           },
           ".dropzoneSingleFile": {
@@ -127,9 +137,10 @@ export default function ImageUploader({
             justifyContent: "center"
           },
           ".dropzoneText": {
-            color: isDragReject
-              ? theme.palette.error.main
-              : theme.palette.text.secondary
+            color:
+              isDragReject || rejectionMessage
+                ? theme.palette.error.main
+                : theme.palette.text.secondary
           },
           borderColor: isDragReject
             ? theme.palette.error.main
@@ -166,7 +177,6 @@ export default function ImageUploader({
                 <Chip
                   variant="outlined"
                   label={thisFile.file.name}
-                  color="primary"
                   onDelete={() => handleDelete(thisFile)}
                 />
               </Grid>
