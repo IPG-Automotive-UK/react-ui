@@ -141,7 +141,13 @@ export default function SidebarItem({
         disabled={disabled}
         className={className}
         sx={{
-          ...(display === "inline" ? {} : { pl: 0, pr: 0 })
+          ...(display === "inline" ? {} : { pb: 2, pl: 0, pr: 0, pt: 2 }),
+          ...(selected === true
+            ? {
+                borderRight: "2px solid",
+                borderColor: theme => theme.palette.primary.main
+              }
+            : {})
         }}
       >
         {display === "inline" ? <SidebarInLine /> : <SidebarStacked />}
