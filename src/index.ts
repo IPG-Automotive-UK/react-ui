@@ -8,8 +8,12 @@ export {
   default as VirtoAppHeader,
   VirtoAppHeaderProps
 } from "./VirtoAppHeader";
-export { default as VirtoAppLayout } from "./VirtoAppLayout";
+export {
+  default as VirtoAppLayout,
+  VirtoAppLayoutProps
+} from "./VirtoAppLayout";
 export { default as AppHeader, AppHeaderProps } from "./AppHeader";
+export { default as AppLayout, AppLayoutProps } from "./AppLayout";
 export { default as Autocomplete } from "./Autocomplete";
 export { default as Canvas } from "./Canvas";
 export { default as CanvasItem } from "./CanvasItem";
