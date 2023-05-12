@@ -8,6 +8,7 @@ import {
   ListItemText
 } from "@mui/material";
 
+import type { BadgeProps } from "@mui/material";
 import React from "react";
 import { SidebarItemProps } from "./SidebarItem.types";
 import { Theme } from "@mui/material/styles";
@@ -49,7 +50,7 @@ export default function SidebarItem({
   };
 
   // Count badge component that displays the count
-  const CountBadge = () => {
+  const CountBadge = (props: BadgeProps) => {
     return count ? (
       <Badge
         badgeContent={count}
@@ -61,6 +62,7 @@ export default function SidebarItem({
             ? { marginRight: (theme: Theme) => theme.spacing(3) }
             : {})
         }}
+        {...props}
       />
     ) : null;
   };
@@ -113,15 +115,16 @@ export default function SidebarItem({
           >
             {React.cloneElement(icon, {
               color,
-              fontSize: "large"
+              fontSize: "medium"
             })}
-            <CountBadge />
+            <CountBadge variant="dot" />
           </ListItemIcon>
           <ExpandIcon />
           <ListItemText
             primary={name}
             primaryTypographyProps={primaryTypographyProps}
             sx={{
+              ".MuiTypography-root": { fontSize: "12px" },
               display: "flex",
               justifyContent: "center",
               ...textStyle
