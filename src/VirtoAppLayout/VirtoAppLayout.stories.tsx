@@ -7,11 +7,11 @@ import {
   WithCount as SidebarItemWithCount
 } from "../Sidebar/SidebarItem/SidebarItem.stories";
 
-import VirtoAppLayout from ".";
-import { VirtoAppLayoutProps } from "./VirtoAppLayout.types";
 import React from "react";
 import SidebarDivider from "../Sidebar/SidebarDivider";
 import SidebarItem from "../Sidebar/SidebarItem";
+import VirtoAppLayout from ".";
+import { VirtoAppLayoutProps } from "./VirtoAppLayout.types";
 import { version } from "../../package.json";
 
 /**

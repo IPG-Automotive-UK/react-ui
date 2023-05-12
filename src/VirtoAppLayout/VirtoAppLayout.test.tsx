@@ -7,10 +7,10 @@ import {
 } from "../Sidebar/SidebarItem/SidebarItem.stories";
 import { render, screen } from "@testing-library/react";
 
-import VirtoAppLayout from ".";
 import React from "react";
 import SidebarDivider from "../Sidebar/SidebarDivider";
 import SidebarItem from "../Sidebar/SidebarItem";
+import VirtoAppLayout from ".";
 import mediaQuery from "css-mediaquery";
 import userEvent from "@testing-library/user-event";
 
