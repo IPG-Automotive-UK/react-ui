@@ -22,7 +22,7 @@ function AppHeader({
       })}
     >
       <Toolbar style={{ justifyContent: "space-between" }}>
-        <Box ml={1} display="flex" alignItems="center">
+        <Box display="flex" alignItems="center">
           <IpgLogo
             textColour={mode === "light" ? "white" : "black"}
             sx={{
