@@ -147,8 +147,8 @@ export default function SidebarItem({
           ...(display === "inline" ? {} : { pb: 2, pl: 0, pr: 0, pt: 2 }),
           ...(selected === true
             ? {
-                borderRight: "2px solid",
-                borderColor: theme => theme.palette.primary.main
+                borderColor: theme => theme.palette.primary.main,
+                borderRight: "2px solid"
               }
             : {})
         }}
