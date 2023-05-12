@@ -1,12 +1,12 @@
 import { Box, CssBaseline, Drawer, Hidden } from "@mui/material";
 import React, { Fragment, useState } from "react";
 
-import { VirtoAppLayoutProps } from "./VirtoAppLayout.types";
 import { ConfirmProvider } from "../ConfirmProvider";
 import Sidebar from "../Sidebar";
 import SnackbarProvider from "../SnackbarProvider";
 import ThemeProvider from "../ThemeProvider";
 import VirtoAppHeader from "../VirtoAppHeader";
+import { VirtoAppLayoutProps } from "./VirtoAppLayout.types";
 import useTheme from "../ThemeProvider/useTheme";
 
 // app layout component
