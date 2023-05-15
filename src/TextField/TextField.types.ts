@@ -12,6 +12,10 @@ export interface TextFieldProps {
    */
   margin?: "none" | "dense" | "normal";
   /**
+   * If true, text field will be masked.
+   */
+  maskTextField?: boolean;
+  /**
    * Callback fired when the value changes.
    */
   onChange?: (

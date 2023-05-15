@@ -75,6 +75,7 @@ Default.args = {
   helperText: "What are you going to type?",
   label: "Enter some text here",
   margin: "normal",
+  maskTextField: false,
   required: false,
   size: "medium",
   variant: "outlined"
