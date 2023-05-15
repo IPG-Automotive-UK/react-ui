@@ -26,7 +26,7 @@ const Template: Story<TextFieldProps> = args => {
   return <TextField {...args} onChange={onChange} value={value} />;
 };
 
-// masked input for tire size
+// masked input
 const TextFieldMask = React.forwardRef((props, ref) => (
   <MaskedInput
     {...props}
@@ -36,6 +36,9 @@ const TextFieldMask = React.forwardRef((props, ref) => (
 ));
 TextFieldMask.displayName = "TextFieldMask";
 
+/**
+ * Story template for the TextField component
+ */
 const TemplateWithInputProps: Story<TextFieldProps> = args => {
   const [value, setValue] = React.useState(args.value);
   const [error, setError] = React.useState(false);
@@ -63,6 +66,9 @@ const TemplateWithInputProps: Story<TextFieldProps> = args => {
   );
 };
 
+/**
+ * Default story for the TextField component
+ */
 export const Default = Template.bind({});
 Default.args = {
   disabled: false,
@@ -75,4 +81,7 @@ Default.args = {
   variant: "outlined"
 };
 
+/**
+ * Story for the TextField component with a masked input
+ */
 export const TextFieldWithInputProps = TemplateWithInputProps.bind({});
