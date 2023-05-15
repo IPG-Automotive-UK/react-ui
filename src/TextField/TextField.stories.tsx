@@ -56,12 +56,11 @@ const TemplateWithInputProps: Story<TextFieldProps> = args => {
 
   return (
     <TextField
-      {...Default.args}
+      {...args}
       InputProps={{ inputComponent: TextFieldMask }}
       onChange={onChange}
       value={value}
       error={error}
-      helperText={"e.g. 225/60R16"}
     />
   );
 };
@@ -85,3 +84,12 @@ Default.args = {
  * Story for the TextField component with a masked input
  */
 export const TextFieldWithInputProps = TemplateWithInputProps.bind({});
+TextFieldWithInputProps.args = {
+  disabled: false,
+  helperText: "e.g. 225/60R16",
+  label: "Enter some text here",
+  margin: "normal",
+  required: false,
+  size: "medium",
+  variant: "outlined"
+};
