@@ -8,14 +8,14 @@ import userEvent from "@testing-library/user-event";
 /**
  * Tests
  */
-const TextFieldMask = React.forwardRef((props, ref) => (
+const MaskedTextField = React.forwardRef((props, ref) => (
   <MaskedInput
     {...props}
     mask={[/[1-9]/, /\d/, /\d/, "/", /[1-9]/, /\d/, "R", /[1-9]/, /\d/]}
     keepCharPositions={true}
   />
 ));
-TextFieldMask.displayName = "TextFieldMask";
+MaskedTextField.displayName = "MaskedTextField";
 
 describe("TextField", () => {
   test("can type value in textfield", async () => {
@@ -41,7 +41,7 @@ describe("TextField", () => {
       <TextField
         label="Test Field"
         onChange={onChangeMock}
-        InputProps={{ inputComponent: TextFieldMask }}
+        InputProps={{ inputComponent: MaskedTextField }}
       />
     );
     const input = getByRole("textbox") as HTMLInputElement;
@@ -56,7 +56,7 @@ describe("TextField", () => {
       <TextField
         label="Test Field"
         onChange={onChangeMock}
-        InputProps={{ inputComponent: TextFieldMask }}
+        InputProps={{ inputComponent: MaskedTextField }}
         maskTextField={true}
       />
     );
@@ -72,7 +72,7 @@ describe("TextField", () => {
       <TextField
         label="Test Field"
         onChange={onChangeMock}
-        InputProps={{ inputComponent: TextFieldMask }}
+        InputProps={{ inputComponent: MaskedTextField }}
         maskTextField={false}
       />
     );

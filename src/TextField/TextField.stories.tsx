@@ -26,15 +26,15 @@ const Template: Story<TextFieldProps> = args => {
   return <TextField {...args} onChange={onChange} value={value} />;
 };
 
-// masked input
-const TextFieldMask = React.forwardRef((props, ref) => (
+// masked input to be in the form of 225/60R16
+const MaskedTextField = React.forwardRef((props, ref) => (
   <MaskedInput
     {...props}
     mask={[/[1-9]/, /\d/, /\d/, "/", /[1-9]/, /\d/, "R", /[1-9]/, /\d/]}
     keepCharPositions={true}
   />
 ));
-TextFieldMask.displayName = "TextFieldMask";
+MaskedTextField.displayName = "MaskedTextField";
 
 /**
  * Story template for the TextField component
@@ -57,7 +57,7 @@ const TemplateWithInputProps: Story<TextFieldProps> = args => {
   return (
     <TextField
       {...args}
-      InputProps={{ inputComponent: TextFieldMask }}
+      InputProps={{ inputComponent: MaskedTextField }}
       onChange={onChange}
       value={value}
       error={error}
@@ -90,6 +90,7 @@ TextFieldWithInputProps.args = {
   helperText: "e.g. 225/60R16",
   label: "Enter some text here",
   margin: "normal",
+  maskTextField: true,
   required: false,
   size: "medium",
   variant: "outlined"

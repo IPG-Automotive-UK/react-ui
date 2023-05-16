@@ -4,14 +4,14 @@ import React from "react";
 import { TextFieldProps } from "./TextField.types";
 
 // masked input
-const TextFieldMask = React.forwardRef((props, ref) => (
+const MaskedTextField = React.forwardRef((props, ref) => (
   <MaskedInput
     {...props}
     mask={[/[1-9]/, /\d/, /\d/, "/", /[1-9]/, /\d/, "R", /[1-9]/, /\d/]}
     keepCharPositions={true}
   />
 ));
-TextFieldMask.displayName = "TextFieldMask";
+MaskedTextField.displayName = "MaskedTextField";
 
 /**
  * TextField components are used for collecting user provided information as a string.
@@ -19,7 +19,7 @@ TextFieldMask.displayName = "TextFieldMask";
 export default function TextField({
   disabled = false,
   error = false,
-  InputProps = { inputComponent: TextFieldMask },
+  InputProps = { inputComponent: MaskedTextField },
   helperText,
   label,
   margin = "normal",
@@ -29,7 +29,7 @@ export default function TextField({
   size = "medium",
   value,
   variant = "outlined",
-  maskTextField = false // add the new prop
+  maskTextField = false
 }: TextFieldProps) {
   // return components
   return (
@@ -42,7 +42,7 @@ export default function TextField({
       margin={margin}
       onChange={onChange}
       placeholder={placeholder}
-      InputProps={!maskTextField ? undefined : InputProps} // set InputProps based on the maskTextField prop
+      InputProps={!maskTextField ? undefined : InputProps}
       required={required}
       size={size}
       type="string"
