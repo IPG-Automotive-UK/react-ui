@@ -50,14 +50,14 @@ describe("TextField", () => {
     expect(input).toHaveValue("225/60R16");
   });
 
-  test("check that input is masked when maskTextField is true", () => {
+  test("check that input is masked when isFieldMasked is true", () => {
     const onChangeMock = jest.fn();
     const { getByRole } = render(
       <TextField
         label="Test Field"
         onChange={onChangeMock}
         InputProps={{ inputComponent: MaskedTextField }}
-        maskTextField={true}
+        isFieldMasked={true}
       />
     );
     const input = getByRole("textbox") as HTMLInputElement;
@@ -66,14 +66,14 @@ describe("TextField", () => {
     expect(input).toHaveValue("225/66R66");
   });
 
-  test("check that input is not masked when maskTextField is false", () => {
+  test("check that input is not masked when isFieldMasked is false", () => {
     const onChangeMock = jest.fn();
     const { getByRole } = render(
       <TextField
         label="Test Field"
         onChange={onChangeMock}
         InputProps={{ inputComponent: MaskedTextField }}
-        maskTextField={false}
+        isFieldMasked={false}
       />
     );
     const input = getByRole("textbox") as HTMLInputElement;

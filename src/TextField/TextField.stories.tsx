@@ -73,9 +73,9 @@ Default.args = {
   disabled: false,
   error: false,
   helperText: "What are you going to type?",
+  isFieldMasked: false,
   label: "Enter some text here",
   margin: "normal",
-  maskTextField: false,
   required: false,
   size: "medium",
   variant: "outlined"
@@ -88,9 +88,9 @@ export const TextFieldWithInputProps = TemplateWithInputProps.bind({});
 TextFieldWithInputProps.args = {
   disabled: false,
   helperText: "e.g. 225/60R16",
+  isFieldMasked: true,
   label: "Enter some text here",
   margin: "normal",
-  maskTextField: true,
   required: false,
   size: "medium",
   variant: "outlined"

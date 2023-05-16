@@ -14,7 +14,7 @@ export interface TextFieldProps {
   /**
    * If true, text field will be masked.
    */
-  maskTextField?: boolean;
+  isFieldMasked?: boolean;
   /**
    * Callback fired when the value changes.
    */

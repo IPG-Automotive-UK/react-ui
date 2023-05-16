@@ -29,7 +29,7 @@ export default function TextField({
   size = "medium",
   value,
   variant = "outlined",
-  maskTextField = false
+  isFieldMasked = false
 }: TextFieldProps) {
   // return components
   return (
@@ -42,7 +42,7 @@ export default function TextField({
       margin={margin}
       onChange={onChange}
       placeholder={placeholder}
-      InputProps={!maskTextField ? undefined : InputProps}
+      InputProps={!isFieldMasked ? undefined : InputProps}
       required={required}
       size={size}
       type="string"
