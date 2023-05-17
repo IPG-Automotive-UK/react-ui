@@ -26,22 +26,10 @@ export interface AppLayoutProps {
   mode?: "light" | "dark";
   /**
    * Callback fired when the user clicks on "Change password".
-   *
-   * **Signature**
-   * ```
-   * function(event: object) => void
-   * ```
-   * _event_: The event source of the callback.
    */
   onChangePassword: (event: React.MouseEvent<HTMLElement>) => void;
   /**
    * Callback fired when the user clicks on "Logout".
-   *
-   * **Signature**
-   * ```
-   * function(event: object) => void
-   * ```
-   * _event_: The event source of the callback.
    */
   onLogout: (event: React.MouseEvent<HTMLElement>) => void;
   /**
