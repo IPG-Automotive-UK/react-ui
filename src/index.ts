@@ -57,7 +57,7 @@ export { default as Snackbar } from "./Snackbar";
 export { SnackbarProvider, useSnackbar } from "./SnackbarProvider";
 export { StatusIcon, StatusLabel, StatusMessage } from "./Status";
 export { default as SwitchField } from "./SwitchField";
-export { default as TextField } from "./TextField";
+export { default as TextField, TextFieldProps } from "./TextField";
 export { ThemeProvider, ThemeProviderProps, useTheme } from "./ThemeProvider";
 export { default as ToggleColorMode } from "./ToggleColorMode";
 export { default as TransferList } from "./TransferList";
