@@ -14,6 +14,8 @@ export default meta;
 
 const Template: Story<TextFieldProps> = args => {
   const [value, setValue] = React.useState(args.value);
+  const [error, setError] = React.useState(false);
+
   React.useEffect(() => {
     setValue(args.value);
   }, [args.value]);
@@ -21,9 +23,12 @@ const Template: Story<TextFieldProps> = args => {
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
     setValue(value);
+    setError(event.target.value.indexOf("_") > 0);
     action("onChange")(event, event.target.value);
   };
-  return <TextField {...args} onChange={onChange} value={value} />;
+  return (
+    <TextField {...args} onChange={onChange} value={value} error={error} />
+  );
 };
 
 // masked input to be in the form of 225/60R16
@@ -39,7 +44,7 @@ MaskedTextField.displayName = "MaskedTextField";
 /**
  * Story template for the TextField component
  */
-const TemplateWithInputProps: Story<TextFieldProps> = args => {
+const TemplateWithMaskEnabled: Story<TextFieldProps> = args => {
   const [value, setValue] = React.useState(args.value);
   const [error, setError] = React.useState(false);
 
@@ -71,7 +76,6 @@ const TemplateWithInputProps: Story<TextFieldProps> = args => {
 export const Default = Template.bind({});
 Default.args = {
   disabled: false,
-  error: false,
   helperText: "What are you going to type?",
   isFieldMasked: false,
   label: "Enter some text here",
@@ -84,8 +88,8 @@ Default.args = {
 /**
  * Story for the TextField component with a masked input
  */
-export const TextFieldWithInputProps = TemplateWithInputProps.bind({});
-TextFieldWithInputProps.args = {
+export const TextFieldWithMaskEnabled = TemplateWithMaskEnabled.bind({});
+TextFieldWithMaskEnabled.args = {
   disabled: false,
   helperText: "e.g. 225/60R16",
   isFieldMasked: true,
