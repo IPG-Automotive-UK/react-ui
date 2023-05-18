@@ -139,7 +139,7 @@ export default function ImageUploader({
   title = "Model Image",
   subText = "A default Model image will be used if no image is uploaded.",
   dropzoneText = "Drag & drop infographic image or click",
-  maxFileSize = 3000000,
+  maxFileSize = 1000000000,
   onAdd = () => {},
   onDelete = () => {},
   selectedFiles = []
