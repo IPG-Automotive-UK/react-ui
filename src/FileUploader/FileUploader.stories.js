@@ -41,7 +41,7 @@ Default.args = {
   acceptedFiles: [],
   dropzoneText: "Drag & drop a file here or click",
   filesLimit: 1,
-  maxFileSize: 10000000,
+  maxFileSize: 1000000000,
   multiple: false,
   onAdd: () => {},
   onDelete: () => {},
