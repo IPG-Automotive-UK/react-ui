@@ -1,4 +1,4 @@
-import { CSSProperties } from "react";
+import { SxProps } from "@mui/material";
 
 export interface SidebarItemProps {
   /**
@@ -24,7 +24,7 @@ export interface SidebarItemProps {
   /**
    * Custom style to apply to the icon
    */
-  iconStyle?: CSSProperties;
+  iconStyle?: SxProps;
   /**
    * Initial open state of sidebar item with children
    */
@@ -56,5 +56,5 @@ export interface SidebarItemProps {
   /**
    * Custom style to apply to the text
    */
-  textStyle?: CSSProperties;
+  textStyle?: SxProps;
 }
