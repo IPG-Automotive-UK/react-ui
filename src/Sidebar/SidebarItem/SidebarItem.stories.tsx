@@ -132,3 +132,14 @@ NestedAndStacked.args = {
   icon: <Settings />,
   name: "Settings"
 };
+
+/**
+ * Story for the SidebarItem component that is nested with a the item selected
+ */
+export const NestedAndSelected = Template.bind({});
+NestedAndSelected.args = {
+  display: "stacked",
+  icon: <Person />,
+  name: "Profile",
+  selected: true
+};
