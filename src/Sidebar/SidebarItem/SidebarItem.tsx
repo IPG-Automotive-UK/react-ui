@@ -145,10 +145,10 @@ export default function SidebarItem({
         className={className}
         sx={{
           ...(display === "inline" ? {} : { pb: 2, pl: 0, pr: 0, pt: 2 }),
-          ...(selected === true
+          ...(selected === true && display === "stacked"
             ? {
-                borderColor: theme => theme.palette.primary.main,
-                borderRight: "2px solid"
+                borderRight: "2px solid",
+                borderRightColor: theme => theme.palette.primary.main
               }
             : {})
         }}
