@@ -256,7 +256,7 @@ const ModelButtonPopup = ({
 
   // create button and popper elements
   return (
-    <>
+    <React.Fragment>
       <IconButton
         data-testid="popup-button"
         disabled={disabled}
@@ -306,6 +306,6 @@ const ModelButtonPopup = ({
           {children}
         </Stack>
       </Popover>
-    </>
+    </React.Fragment>
   );
 };
