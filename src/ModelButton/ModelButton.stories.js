@@ -1,5 +1,6 @@
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import ModelButton from "./ModelButton";
+import { Paper } from "@mui/material";
 import React from "react";
 import { action } from "@storybook/addon-actions";
 
@@ -51,6 +52,14 @@ const ChildrenTemplate = args => {
   );
 };
 
+const ChildrenTemplateWithPaper = ({ elevation, ...args }) => {
+  return (
+    <Paper elevation={elevation} sx={{ p: 3 }}>
+      <ChildrenTemplate {...args} />
+    </Paper>
+  );
+};
+
 // default story props
 export const Default = DefaultTemplate.bind({});
 Default.args = {
@@ -65,6 +74,17 @@ Default.args = {
 export const WithChildren = ChildrenTemplate.bind({});
 WithChildren.args = {
   disabled: false,
+  icon: <DirectionsCarIcon />,
+  label: "Parent Model",
+  onClick: () => {},
+  status: "warning"
+};
+
+// with children and paper story props
+export const WithChildrenAndPaper = ChildrenTemplateWithPaper.bind({});
+WithChildrenAndPaper.args = {
+  disabled: false,
+  elevation: 3,
   icon: <DirectionsCarIcon />,
   label: "Parent Model",
   onClick: () => {},

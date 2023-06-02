@@ -35,36 +35,17 @@ describe("ModelButton", () => {
     expect(screen.getByRole("button")).toBeDisabled();
   });
 
-  // test status none is correctly set
-  test("sets status none", () => {
-    render(<ModelButton status="none" />);
-    const button = screen.getByTestId("model-button");
-    const styles = window.getComputedStyle(button);
-    expect(styles.border).toBe("2px solid rgba(0, 0, 0, 0.6)");
-  });
-
-  // test status error is correctly set
-  test("sets status error", () => {
-    render(<ModelButton status="error" />);
-    const button = screen.getByTestId("model-button");
-    const styles = window.getComputedStyle(button);
-    expect(styles.border).toBe("2px solid #d32f2f");
-  });
-
-  // test status warning is correctly set
-  test("sets status warning", () => {
-    render(<ModelButton status="warning" />);
-    const button = screen.getByTestId("model-button");
-    const styles = window.getComputedStyle(button);
-    expect(styles.border).toBe("2px solid #ed6c02");
-  });
-
-  // test status success is correctly set
-  test("sets status success", () => {
-    render(<ModelButton status="success" />);
-    const button = screen.getByTestId("model-button");
-    const styles = window.getComputedStyle(button);
-    expect(styles.border).toBe("2px solid #2e7d32");
+  // test status is correctly set
+  test.each([
+    ["none", "rgba(0, 0, 0, 0.6)"],
+    ["error", "#d32f2f"],
+    ["warning", "#ed6c02"],
+    ["success", "#2e7d32"]
+  ])("sets status %s", (status, color) => {
+    render(<ModelButton status={status} />);
+    const svgElement = screen.getByTestId("background");
+    expect(svgElement).toHaveAttribute("stroke", color);
+    expect(svgElement).toHaveAttribute("stroke-width", "2");
   });
 
   // test that popup button is not shown when no children are provided
