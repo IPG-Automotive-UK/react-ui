@@ -26,8 +26,8 @@ function AppHeader({
           <IpgLogo
             textColour={mode === "light" ? "white" : "black"}
             sx={{
-              height: 50,
-              width: 140
+              height: 33,
+              width: 119
             }}
           />
         </Box>
@@ -37,10 +37,10 @@ function AppHeader({
           ) : (
             <Typography
               variant="h6"
-              fontSize="26px"
+              fontSize="20px"
               lineHeight="34px"
               letterSpacing="0.05em"
-              fontWeight="700"
+              fontWeight="600"
               color={theme =>
                 theme.palette.mode === "dark" ? "#003063" : "white"
               }
