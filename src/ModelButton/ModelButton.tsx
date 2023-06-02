@@ -11,7 +11,6 @@ import {
   Popover,
   Stack,
   SvgIcon,
-  Theme,
   Typography
 } from "@mui/material";
 import { alpha, useTheme } from "@mui/material/styles";
@@ -168,10 +167,10 @@ export default function ModelButton({
             top: "0%",
             width: "100%"
           }}
-          onMouseOver={event => {
+          onMouseOver={() => {
             setIsHover(true);
           }}
-          onMouseOut={event => {
+          onMouseOut={() => {
             setIsHover(false);
           }}
         >
@@ -184,13 +183,12 @@ export default function ModelButton({
           />
           {icon
             ? React.cloneElement(icon, {
-                sx: {
-                  color: (theme: Theme) =>
-                    isHover
-                      ? theme.palette.primary.main
-                      : theme.palette.mode === "light"
-                      ? theme.palette.common.black
-                      : theme.palette.common.white,
+                style: {
+                  color: isHover
+                    ? theme.palette.primary.main
+                    : theme.palette.mode === "light"
+                    ? theme.palette.common.black
+                    : theme.palette.common.white,
                   height: "60px",
                   position: "absolute",
                   width: "60px"
