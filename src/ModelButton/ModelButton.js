@@ -13,6 +13,9 @@ import { alpha, useTheme } from "@mui/material/styles";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import PropTypes from "prop-types";
 
+/**
+ * SvgIcon for use with the ModelButton. Square shape with a 2px border and 20px border radius.
+ */
 const CompleteBackground = ({ backgroundColor, borderColor }) => {
   return (
     <SvgIcon
@@ -37,6 +40,9 @@ const CompleteBackground = ({ backgroundColor, borderColor }) => {
   );
 };
 
+/**
+ * SvgIcon for use with the ModelButton. Square shape with a 2px border and 20px border radius. One corner is cut out with an inverse rounded corner.
+ */
 const CutOutBackground = ({ borderColor, backgroundColor }) => {
   return (
     <SvgIcon
@@ -100,8 +106,10 @@ export default function ModelButton({
   // ensure children are always an array
   const arrayChildren = React.Children.toArray(children);
 
+  // is button being hovered over
   const [isHover, setIsHover] = React.useState(false);
 
+  // which background to show. if there are nested children, show a cutout background, otherwise the normal background
   const Background =
     arrayChildren.length > 1 ? CutOutBackground : CompleteBackground;
 
