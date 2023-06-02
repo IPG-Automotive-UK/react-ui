@@ -1,22 +1,30 @@
 import * as React from "react";
 
 import {
+  BackgroundProps,
+  ModelButtonPopupProps,
+  ModelButtonProps
+} from "./ModelButton.types";
+import {
   Box,
   IconButton,
   Popover,
   Stack,
   SvgIcon,
+  Theme,
   Typography
 } from "@mui/material";
 import { alpha, useTheme } from "@mui/material/styles";
 
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import PropTypes from "prop-types";
 
 /**
  * SvgIcon for use with the ModelButton. Square shape with a 2px border and 20px border radius.
  */
-const CompleteBackground = ({ backgroundColor, borderColor }) => {
+const CompleteBackground = ({
+  backgroundColor,
+  borderColor
+}: BackgroundProps) => {
   return (
     <SvgIcon
       viewBox="0 0 100 100"
@@ -43,7 +51,10 @@ const CompleteBackground = ({ backgroundColor, borderColor }) => {
 /**
  * SvgIcon for use with the ModelButton. Square shape with a 2px border and 20px border radius. One corner is cut out with an inverse rounded corner.
  */
-const CutOutBackground = ({ borderColor, backgroundColor }) => {
+const CutOutBackground = ({
+  borderColor,
+  backgroundColor
+}: BackgroundProps) => {
   return (
     <SvgIcon
       viewBox="0 0 100 100"
@@ -84,7 +95,7 @@ export default function ModelButton({
   label = "",
   onClick = () => {},
   status = "none"
-}) {
+}: ModelButtonProps) {
   // use theme hook
   const theme = useTheme();
 
@@ -174,7 +185,7 @@ export default function ModelButton({
           {icon
             ? React.cloneElement(icon, {
                 sx: {
-                  color: theme =>
+                  color: (theme: Theme) =>
                     isHover
                       ? theme.palette.primary.main
                       : theme.palette.mode === "light"
@@ -226,43 +237,19 @@ export default function ModelButton({
   );
 }
 
-ModelButton.propTypes = {
-  /**
-   * If `true`, the button will be disabled. Default is `false`.
-   */
-  disabled: PropTypes.bool,
-  /**
-   * The icon component to render inside the button. Can be set to `null` to not display an icon. MUI SVG icons are recommended.
-   */
-  icon: PropTypes.node,
-  /**
-   * The label text to display. Default is an empty string.
-   */
-  label: PropTypes.string,
-  /**
-   * Callback fired when the button is clicked.
-   *
-   * **Signature**
-   * ```
-   * function(event: React.MouseEvent<HTMLElement>) => void
-   * ```
-   * event: The event source of the callback.
-   */
-  onClick: PropTypes.func,
-  /**
-   * The status string that determines the border color of the button. Default is `none`.
-   */
-  status: PropTypes.oneOf(["none", "error", "warning", "success"])
-};
-
 // component to display children in a popup dialog
-const ModelButtonPopup = ({ color, children, disabled, label }) => {
+const ModelButtonPopup = ({
+  color,
+  children,
+  disabled,
+  label
+}: ModelButtonPopupProps) => {
   // state for popover
   const [popperOpen, setPopperOpen] = React.useState(false);
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   // handle button click to open popper
-  const handleClick = event => {
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
     setPopperOpen(true);
   };

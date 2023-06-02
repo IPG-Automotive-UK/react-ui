@@ -1,11 +1,14 @@
+import { Meta, Story } from "@storybook/react";
+
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import ModelButton from "./ModelButton";
+import { ModelButtonProps } from "./ModelButton.types";
 import { Paper } from "@mui/material";
 import React from "react";
 import { action } from "@storybook/addon-actions";
 
 // define story metadata
-export default {
+const meta: Meta<typeof ModelButton> = {
   argTypes: {
     disabled: {
       control: "boolean"
@@ -20,6 +23,7 @@ export default {
   component: ModelButton,
   title: "General/ModelButton"
 };
+export default meta;
 
 // default component with no children
 const DefaultTemplate = args => {
@@ -27,7 +31,7 @@ const DefaultTemplate = args => {
 };
 
 // component with children
-const ChildrenTemplate = args => {
+const ChildrenTemplate: Story<ModelButtonProps> = args => {
   return (
     <ModelButton {...args} onClick={event => action("onClick")(event)}>
       <ModelButton
@@ -52,7 +56,11 @@ const ChildrenTemplate = args => {
   );
 };
 
-const ChildrenTemplateWithPaper = ({ elevation, ...args }) => {
+// component with children over a paper component
+// useful to see how different background colours in dark mode effect the button
+const ChildrenTemplateWithPaper: Story<
+  ModelButtonProps & { elevation: number }
+> = ({ elevation, ...args }) => {
   return (
     <Paper elevation={elevation} sx={{ p: 3 }}>
       <ChildrenTemplate {...args} />

@@ -41,7 +41,7 @@ describe("ModelButton", () => {
     ["error", "#d32f2f"],
     ["warning", "#ed6c02"],
     ["success", "#2e7d32"]
-  ])("sets status %s", (status, color) => {
+  ] as const)("sets status %s", (status, color) => {
     render(<ModelButton status={status} />);
     const svgElement = screen.getByTestId("background");
     expect(svgElement).toHaveAttribute("stroke", color);
@@ -89,6 +89,9 @@ describe("ModelButton", () => {
       </ModelButton>
     );
     const popupButton = screen.queryByTestId("popup-button");
+    if (!popupButton) {
+      throw new Error("Popup button not found");
+    }
     await userEvent.click(popupButton);
     const children = screen.queryAllByTestId("model-button");
     expect(children.length).toBe(4); // 3 children + 1 parent
