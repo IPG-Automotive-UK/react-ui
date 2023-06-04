@@ -21,7 +21,7 @@ export default function ModelButtonImage({
 
   // render
   return (
-    <>
+    <React.Fragment>
       <Box
         component="img"
         alt="model-icon"
@@ -33,7 +33,7 @@ export default function ModelButtonImage({
           width: "60px"
         }}
       />
-    </>
+    </React.Fragment>
   );
 }
 
