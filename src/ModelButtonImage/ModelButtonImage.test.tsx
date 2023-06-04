@@ -1,12 +1,16 @@
 import ModelButtonImage from "./ModelButtonImage";
+import { ModelButtonImageProps } from "./ModelButtonImage.types";
 import ModelButtonSampleImg from "../../static/ModelButtonSampleImg.svg";
 import React from "react";
 import ThemeProvider from "../ThemeProvider";
 import { render } from "@testing-library/react";
 
 // wrapper function for ModelButtonImage
-function ModelImage({ src = ModelButtonSampleImg }) {
-  return <ModelButtonImage src={src} />;
+function ModelImage({
+  src = ModelButtonSampleImg,
+  ...rest
+}: Partial<ModelButtonImageProps>) {
+  return <ModelButtonImage src={src} {...rest} />;
 }
 
 // test suite for ModelButtonImage
@@ -19,7 +23,7 @@ describe("ModelButtonImage", () => {
   });
 
   // component should render an image with filter invert(0) in light mode
-  it("should render an image with filter invert(0) in light mode", () => {
+  it("should default to black in light mode", () => {
     const { getByAltText } = render(
       <ThemeProvider theme={"light"}>
         <ModelImage />
@@ -27,10 +31,10 @@ describe("ModelButtonImage", () => {
     );
     const image = getByAltText("model-icon");
 
-    expect(image).toHaveStyle("filter: invert(0)");
+    expect(image).toHaveStyle("filter: invert(0%)");
   });
   // component should render an image with filter invert(1) in dark mode
-  it("should render an image with filter invert(1) in dark mode", () => {
+  it("should default to white in dark mode", () => {
     const { getByAltText } = render(
       <ThemeProvider theme={"dark"}>
         <ModelImage />
@@ -38,6 +42,6 @@ describe("ModelButtonImage", () => {
     );
     const image = getByAltText("model-icon");
 
-    expect(image).toHaveStyle("filter: invert(1)");
+    expect(image).toHaveStyle("filter: invert(100%)");
   });
 });

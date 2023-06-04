@@ -1,8 +1,9 @@
 import { Meta, Story } from "@storybook/react";
 
-import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import ModelButton from "./ModelButton";
+import ModelButtonImage from "../ModelButtonImage";
 import { ModelButtonProps } from "./ModelButton.types";
+import ModelButtonSampleImg from "../../static/ModelButtonSampleImg.svg";
 import { Paper } from "@mui/material";
 import React from "react";
 import { action } from "@storybook/addon-actions";
@@ -35,19 +36,19 @@ const ChildrenTemplate: Story<ModelButtonProps> = args => {
   return (
     <ModelButton {...args} onClick={event => action("onClick")(event)}>
       <ModelButton
-        icon={<DirectionsCarIcon />}
+        icon={<ModelButtonImage src={ModelButtonSampleImg} />}
         label="Child Model 1"
         onClick={event => action("onClick")(event)}
         status="error"
       />
       <ModelButton
-        icon={<DirectionsCarIcon />}
+        icon={<ModelButtonImage src={ModelButtonSampleImg} />}
         label="Child Model 2"
         onClick={event => action("onClick")(event)}
         status="warning"
       />
       <ModelButton
-        icon={<DirectionsCarIcon />}
+        icon={<ModelButtonImage src={ModelButtonSampleImg} />}
         label="Child Model 3"
         onClick={event => action("onClick")(event)}
         status="success"
@@ -72,7 +73,7 @@ const ChildrenTemplateWithPaper: Story<
 export const Default = DefaultTemplate.bind({});
 Default.args = {
   disabled: false,
-  icon: <DirectionsCarIcon />,
+  icon: <ModelButtonImage src={ModelButtonSampleImg} />,
   label: "My Model",
   onClick: () => {},
   status: "none"
@@ -82,7 +83,7 @@ Default.args = {
 export const WithChildren = ChildrenTemplate.bind({});
 WithChildren.args = {
   disabled: false,
-  icon: <DirectionsCarIcon />,
+  icon: <ModelButtonImage src={ModelButtonSampleImg} />,
   label: "Parent Model",
   onClick: () => {},
   status: "warning"
@@ -93,7 +94,7 @@ export const WithChildrenAndPaper = ChildrenTemplateWithPaper.bind({});
 WithChildrenAndPaper.args = {
   disabled: false,
   elevation: 3,
-  icon: <DirectionsCarIcon />,
+  icon: <ModelButtonImage src={ModelButtonSampleImg} />,
   label: "Parent Model",
   onClick: () => {},
   status: "warning"

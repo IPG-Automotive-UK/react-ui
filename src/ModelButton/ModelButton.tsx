@@ -183,22 +183,17 @@ export default function ModelButton({
           />
           {icon
             ? React.cloneElement(icon, {
-                style: {
-                  color: isHover
-                    ? theme.palette.primary.main
-                    : theme.palette.mode === "light"
-                    ? theme.palette.common.black
-                    : theme.palette.common.white,
-                  height: "60px",
-                  position: "absolute",
-                  width: "60px"
-                }
+                color: isHover
+                  ? theme.palette.primary.main
+                  : theme.palette.mode === "light"
+                  ? theme.palette.common.black
+                  : theme.palette.common.white
               })
             : null}
         </IconButton>
         {arrayChildren && arrayChildren.length > 0 ? (
           <ModelButtonPopup
-            color={borderColor}
+            color={isHover ? theme.palette.primary.main : borderColor}
             disabled={disabled}
             label={label}
           >
