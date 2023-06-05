@@ -14,15 +14,16 @@
   },
   "scripts": {
     "build": "microbundle-crl --no-compress --format modern,cjs --jsxFragment React.Fragment",
-    "start": "microbundle-crl watch --no-compress --format modern,cjs --jsxFragment React.Fragment",
+    "build-storybook": "build-storybook",
     "prepare": "run-s build",
+    "start": "microbundle-crl watch --no-compress --format modern,cjs --jsxFragment React.Fragment",
+    "storybook": "start-storybook -s static -p 6006",
     "test": "run-s test:unit test:lint test:build",
     "test:build": "run-s build",
     "test:lint": "eslint ./src",
     "test:unit": "cross-env CI=1 react-scripts test --env=jsdom --collectCoverage=true",
     "test:watch": "react-scripts test --env=jsdom",
-    "storybook": "start-storybook -s static -p 6006",
-    "build-storybook": "build-storybook"
+    "type-check": "tsc --noEmit --skipLibCheck"
   },
   "devDependencies": {
     "@babel/core": "^7.21.8",
