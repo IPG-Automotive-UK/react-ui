@@ -1,4 +1,5 @@
 export { default as CheckboxFilter } from "./CheckboxFilter";
+export { CheckboxFilterProps } from "./CheckboxFilter/CheckboxFilter.types";
 export { default as LabelFilter } from "./LabelFilter";
 export { default as RangeFilter } from "./RangeFilter";
 export { default as FilterPopper } from "./FilterPopper";

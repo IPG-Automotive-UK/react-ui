@@ -26,6 +26,7 @@ export { default as FeedbackForm } from "./FeedbackForm";
 export { default as FileUploader } from "./FileUploader";
 export {
   CheckboxFilter,
+  CheckboxFilterProps,
   FilterPopper,
   FilterStack,
   LabelFilter,
