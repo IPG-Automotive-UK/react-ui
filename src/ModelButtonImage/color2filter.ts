@@ -343,7 +343,7 @@ export default function color2filter(rgb: RgbaColor) {
   // query cache for existing filter for this color if it exists
   const colorString = color.toString();
   if (color2filterCache.has(colorString)) {
-    return color2filterCache.get(colorString)!;
+    return color2filterCache.get(colorString);
   }
 
   // otherwise, compute the filter

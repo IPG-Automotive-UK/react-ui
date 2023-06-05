@@ -28,9 +28,9 @@ export default function ModelButtonImage({
         src={src}
         sx={{
           filter,
-          height: "60px",
-          position: "absolute",
-          width: "60px"
+          maxHeight: "60px",
+          maxWidth: "60px",
+          position: "absolute"
         }}
       />
     </React.Fragment>
