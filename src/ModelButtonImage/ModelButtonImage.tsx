@@ -1,7 +1,6 @@
 import { Box, useTheme } from "@mui/material";
 
 import { ModelButtonImageProps } from "./ModelButtonImage.types";
-import PropTypes from "prop-types";
 import React from "react";
 import { colord } from "colord";
 import solve from "./color2filter";
@@ -36,11 +35,3 @@ export default function ModelButtonImage({
     </React.Fragment>
   );
 }
-
-// prop types for ModelButtonImage component.
-ModelButtonImage.propTypes = {
-  /**
-   * The image source.
-   */
-  src: PropTypes.string.isRequired
-};
