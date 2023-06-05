@@ -3,6 +3,8 @@ import { ModelButtonImageProps } from "./ModelButtonImage.types";
 import ModelButtonSampleImg from "../../static/ModelButtonSampleImg.svg";
 import React from "react";
 import ThemeProvider from "../ThemeProvider";
+import color2filter from "./color2filter";
+import { colord } from "colord";
 import { render } from "@testing-library/react";
 
 // wrapper function for ModelButtonImage
@@ -43,5 +45,17 @@ describe("ModelButtonImage", () => {
     const image = getByAltText("model-icon");
 
     expect(image).toHaveStyle("filter: invert(100%)");
+  });
+
+  it("should render an image with the correct color", () => {
+    const { getByAltText } = render(
+      <ThemeProvider theme={"light"}>
+        <ModelImage color={"#015D52"} />
+      </ThemeProvider>
+    );
+    const image = getByAltText("model-icon");
+
+    const cssFilter = color2filter(colord("#015D52").toRgb());
+    expect(image).toHaveStyle(`filter: ${cssFilter}`);
   });
 });

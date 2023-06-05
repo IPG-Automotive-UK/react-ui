@@ -1,6 +1,13 @@
 import { RgbaColor } from "colord";
 
 /**
+ * Cache for the color to filter conversion.
+ */
+const color2filterCache = new Map<string, string>();
+color2filterCache.set("rgb(0, 0, 0)", "invert(0%)");
+color2filterCache.set("rgb(255, 255, 255)", "invert(100%)");
+
+/**
  * The Color and Solver class in this file come from https://stackoverflow.com/a/43960991 where a detailed brekadown of the algorithm is provided.
  */
 
@@ -183,8 +190,8 @@ class Solver {
   target: Color;
   targetHSL: {
     h: number;
-    s: number;
     l: number;
+    s: number;
   };
 
   reusedColor: Color;
@@ -333,15 +340,15 @@ class Solver {
 export default function color2filter(rgb: RgbaColor) {
   const color = new Color(rgb.r, rgb.g, rgb.b);
 
-  if (rgb.r === 0 && rgb.g === 0 && rgb.b === 0) {
-    return "invert(0%)";
+  // query cache for existing filter for this color if it exists
+  const colorString = color.toString();
+  if (color2filterCache.has(colorString)) {
+    return color2filterCache.get(colorString)!;
   }
 
-  if (rgb.r === 255 && rgb.g === 255 && rgb.b === 255) {
-    return "invert(100%)";
-  }
-
+  // otherwise, compute the filter
   const solver = new Solver(color);
   const result = solver.solve();
+  color2filterCache.set(colorString, result.filter);
   return result.filter;
 }
