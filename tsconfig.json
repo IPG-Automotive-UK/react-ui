@@ -33,5 +33,6 @@
     "**/*.stories.tsx",
     "**/*.config.ts",
     "src/setupTests.js"
-  ]
+  ],
+  "include": ["src/**/*", "global.d.ts"]
 }
