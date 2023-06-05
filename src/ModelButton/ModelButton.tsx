@@ -11,7 +11,8 @@ import {
   Popover,
   Stack,
   SvgIcon,
-  Typography
+  Typography,
+  iconButtonClasses
 } from "@mui/material";
 import { alpha, useTheme } from "@mui/material/styles";
 
@@ -191,15 +192,6 @@ export default function ModelButton({
               })
             : null}
         </IconButton>
-        {hasChildren ? (
-          <ModelButtonPopup
-            color={isHover ? theme.palette.primary.main : borderColor}
-            disabled={disabled}
-            label={label}
-          >
-            {arrayChildren}
-          </ModelButtonPopup>
-        ) : null}
         <Typography
           sx={{
             alignItems: "center",
@@ -225,6 +217,15 @@ export default function ModelButton({
         >
           {label}
         </Typography>
+        {hasChildren ? (
+          <ModelButtonPopup
+            color={borderColor}
+            disabled={disabled}
+            label={label}
+          >
+            {arrayChildren}
+          </ModelButtonPopup>
+        ) : null}
       </Box>
     </Box>
   );
@@ -256,19 +257,23 @@ const ModelButtonPopup = ({
         onClick={handleClick}
         disableRipple
         sx={{
-          bottom: "-75px",
-          padding: "6px",
-          position: "relative",
-          right: "-77px"
+          "&:hover": {
+            backgroundColor: theme => theme.palette.primary.main
+          },
+          [`&.${iconButtonClasses.disabled}`]: {
+            backgroundColor: color
+          },
+          background: color,
+          borderRadius: "50%",
+          height: "24px",
+          left: "83px",
+          position: "absolute",
+          top: "81px",
+          width: "24px"
         }}
       >
         <KeyboardArrowDownIcon
           sx={{
-            "&:hover": {
-              backgroundColor: theme => theme.palette.primary.main
-            },
-            background: color,
-            borderRadius: "50%",
             color: theme =>
               theme.palette.mode === "light"
                 ? disabled
@@ -276,9 +281,7 @@ const ModelButtonPopup = ({
                   : "#fff"
                 : disabled
                 ? "rgba(255, 255, 255, 0.5)"
-                : "#000",
-            height: "24px",
-            width: "24px"
+                : "#000"
           }}
         />
       </IconButton>
