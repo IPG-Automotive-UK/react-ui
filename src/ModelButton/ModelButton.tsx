@@ -115,13 +115,13 @@ export default function ModelButton({
 
   // ensure children are always an array
   const arrayChildren = React.Children.toArray(children);
+  const hasChildren = arrayChildren && arrayChildren.length > 0;
 
   // is button being hovered over
   const [isHover, setIsHover] = React.useState(false);
 
   // which background to show. if there are nested children, show a cutout background, otherwise the normal background
-  const Background =
-    arrayChildren.length > 1 ? CutOutBackground : CompleteBackground;
+  const Background = hasChildren ? CutOutBackground : CompleteBackground;
 
   // render component
   return (
@@ -191,7 +191,7 @@ export default function ModelButton({
               })
             : null}
         </IconButton>
-        {arrayChildren && arrayChildren.length > 0 ? (
+        {hasChildren ? (
           <ModelButtonPopup
             color={isHover ? theme.palette.primary.main : borderColor}
             disabled={disabled}
