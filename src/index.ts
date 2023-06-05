@@ -38,7 +38,7 @@ export { default as ImageUploader } from "./ImageUploader";
 export { LabelChip, LabelChipProps, LabelSelector } from "./LabelSelector";
 export { default as Loading } from "./Loading";
 export { default as LoginForm } from "./LoginForm";
-export { default as ModelButton } from "./ModelButton";
+export { default as ModelButton, ModelButtonProps } from "./ModelButton";
 export { default as MultiColor } from "./MultiColor";
 export { default as MultiLabelPopover } from "./MultiLabelPopover";
 export { default as MultiText } from "./MultiText";
@@ -73,7 +73,10 @@ export {
   default as NoWrapTypography,
   NoWrapTypographyProps
 } from "./NoWrapTypography";
-export { default as ModelButtonImage } from "./ModelButtonImage";
+export {
+  default as ModelButtonImage,
+  ModelButtonImageProps
+} from "./ModelButtonImage";
 export { ConfirmProvider, useConfirm } from "./ConfirmProvider";
 export {
   IpgLogo,
