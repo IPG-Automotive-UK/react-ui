@@ -5,6 +5,7 @@ import ModelButtonImage from "../ModelButtonImage";
 import { ModelButtonProps } from "./ModelButton.types";
 import ModelButtonSampleImg from "../../static/ModelButtonSampleImg.svg";
 import { Paper } from "@mui/material";
+import PowerSupplyImg from "../../static/powersupply-lv.svg";
 import React from "react";
 import { action } from "@storybook/addon-actions";
 
@@ -36,7 +37,7 @@ const ChildrenTemplate: Story<ModelButtonProps> = args => {
   return (
     <ModelButton {...args} onClick={event => action("onClick")(event)}>
       <ModelButton
-        icon={<ModelButtonImage src={ModelButtonSampleImg} />}
+        icon={<ModelButtonImage src={PowerSupplyImg} />}
         label="Child Model 1"
         onClick={event => action("onClick")(event)}
         status="error"
