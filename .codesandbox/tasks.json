@@ -10,7 +10,7 @@
   // These tasks can be run from CodeSandbox. Running one will open a log in the app.
   "tasks": {
     "start": {
-      "name": "Start",
+      "name": "Deploy Preview",
       "command": "npm run storybook",
       "preview": {
         "port": 6006,
