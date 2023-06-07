@@ -35,7 +35,7 @@ npm run storybook
 
 To release a new version, follow these steps.
 
-1. Check that all tests pass
+1. Check that all tests pass (Edited)
 
    ```bash
    npm test
