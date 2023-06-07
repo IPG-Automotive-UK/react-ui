@@ -1,0 +1,12 @@
+build:
+  app:
+    context: frontend 
+
+deploy:
+  commands: npm run storybook
+
+dev:
+  api:
+    command: ["bash"]
+    forward:
+      - 6006:6006
