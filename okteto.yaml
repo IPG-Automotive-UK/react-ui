@@ -3,7 +3,8 @@ build:
     context: frontend 
 
 deploy:
-  commands: npm run storybook
+  commands: 
+  - npm run storybook
 
 dev:
   api:
