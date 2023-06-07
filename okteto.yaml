@@ -1,6 +1,7 @@
 build:
-  app:
-    context: frontend 
+  react-ui:
+    image: okteto.dev/react-ui:1.0.0
+    context: . 
 
 deploy:
   commands: 
