@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { ExitToApp, VpnKey } from "@mui/icons-material";
 import React, { Fragment } from "react";
+import { UserAvatarProps, UserMenuProps } from "./UserMenu.types";
 import {
   bindMenu,
   bindTrigger,
@@ -17,7 +18,6 @@ import {
 } from "material-ui-popup-state/hooks";
 
 import { Theme } from "@mui/material/styles";
-import { UserMenuProps } from "./UserMenu.types";
 
 // styling
 const sx = {
@@ -91,10 +91,6 @@ export default function UserMenu({
  *
  * Provides custom styling and converts username to max 2 initials
  */
-interface UserAvatarProps {
-  username: string;
-}
-
 const UserAvatar = ({ username, ...rest }: UserAvatarProps) => {
   const allInitials = (!username ? "?" : username)
     .split(" ")
