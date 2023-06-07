@@ -2,7 +2,7 @@ on:
     pull_request:
       branches:
         - okteto-demo
-  
+
   jobs:
     preview:
       runs-on: ubuntu-latest
