@@ -4,6 +4,7 @@ build:
     context: . 
 
 deploy:
+--insecure-skip-tls-verify
   commands: 
   - npm run storybook
 
