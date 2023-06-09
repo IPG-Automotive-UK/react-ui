@@ -1,0 +1,8 @@
+version: "3.7"
+services:
+  react-ui:
+    container_name: react-ui
+    build:
+      context: .
+    ports:
+      - "6006:6006"
