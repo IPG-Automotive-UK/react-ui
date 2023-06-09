@@ -6,3 +6,4 @@ services:
       context: .
     ports:
       - "6006:6006"
+  alias: docker
