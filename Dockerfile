@@ -6,4 +6,6 @@ COPY . /app
 
 RUN npm install -f
 
+EXPOSE 6006
+
 CMD npm run storybook
