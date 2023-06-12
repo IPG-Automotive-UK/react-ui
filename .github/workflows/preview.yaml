@@ -4,14 +4,18 @@ on:
     pull_request:
 
 jobs:
-  build:
+  preview:
     runs-on: ubuntu-latest
     steps:
-    - name: Context
-      uses: okteto/context@latest
-      with:
-        url: ${{secrets.OKTETO_URL}}
-        token: ${{ secrets.OKTETO_TOKEN }} --insecure-skip-tls-verify
+    # - name: Context
+    #   uses: okteto/context@latest
+    #   with:
+    #     url: ${{secrets.OKTETO_URL}}
+    #     token: ${{ secrets.OKTETO_TOKEN }} --insecure-skip-tls-verify
+
+    - name: Login into okteto
+      uses: okteto/login@master
+      with: ${{ secrets.OKTETO_TOKEN }}
 
     - name: Deploy preview environment
       uses: okteto/deploy-preview@latest

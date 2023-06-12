@@ -1,6 +1,7 @@
 build:
   react-ui:
     image: okteto.ipg-automotive.uk/react-ui:1.0.0
+    context: .
     
 deploy:
   commands: 
