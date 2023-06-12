@@ -1,12 +1,7 @@
 build:
   react-ui:
     image: okteto.ipg-automotive.uk/react-ui:1.0.0
-    context: .
-    args:
-      environment: 
-        - HOST=0.0.0.0
-        - PORT=6006
-
+    
 deploy:
   commands: 
     - "npm run storybook"
