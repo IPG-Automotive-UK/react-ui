@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 
-import PropTypes from "prop-types";
+import { FileCardProps } from "./FileCard.types";
 import ResizeObserver from "resize-observer-polyfill";
 import SearchBar from "../../SearchBar/SearchBar";
 
@@ -25,9 +25,9 @@ function FileCard({
   onClickFile = () => {},
   search: searchIn = "",
   width = 368
-}) {
+}: FileCardProps) {
   // title ref and overflow state
-  const titleRef = useRef();
+  const titleRef = useRef<HTMLDivElement>(null);
 
   // file state
   const [files, setFiles] = useState(filesIn);
@@ -35,11 +35,8 @@ function FileCard({
   // search state
   const [search, setSearch] = useState(searchIn);
 
-  // header content width
-  const headerContentWidth = width - 271;
-
   // check if title is overflowing
-  const useTitleWidth = titleRef => {
+  const useTitleWidth = (titleRef: React.RefObject<HTMLDivElement>) => {
     const [isTitleOverflow, setIsTitleOverflow] = useState(false);
 
     useEffect(() => {
@@ -48,7 +45,9 @@ function FileCard({
           setIsTitleOverflow(target.scrollWidth > target.clientWidth);
         });
       });
-      sizeObserver.observe(titleRef.current);
+      if (titleRef.current) {
+        sizeObserver.observe(titleRef.current);
+      }
 
       return () => sizeObserver.disconnect();
     }, [titleRef]);
@@ -57,7 +56,11 @@ function FileCard({
   };
 
   // handle search by searching file headers and filenames
-  const handleSearch = event => {
+  const handleSearch = (
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    // get search term
+    if (!(event.target instanceof HTMLInputElement)) return;
     const search = event.target.value.toLowerCase();
     const newFiles = filesIn.map(file => {
       const newFile = { ...file };
@@ -161,7 +164,6 @@ function FileCard({
             onBlur={handleSearch}
             onChange={handleSearch}
             placeholder="Search"
-            sx={{ width: headerContentWidth }}
           />
         </Box>
         <CardContent
@@ -221,78 +223,3 @@ function FileCard({
 
 // export the file card
 export default FileCard;
-
-// detail card prop types
-FileCard.propTypes = {
-  /**
-   * @type {string}
-   * The text of the download button.
-   */
-  downloadButtonText: PropTypes.string,
-  /**
-   * @type {string}
-   * The text of the download button when search is active.
-   */
-  downloadButtonTextOnSearch: PropTypes.string,
-  /**
-   * The fileTitle of the card.
-   * @type {string}
-   * @required
-   * @default title
-   *
-   */
-  fileTitle: PropTypes.string.isRequired,
-  /**
-   *  FILES
-   *
-   */
-  files: PropTypes.arrayOf(
-    PropTypes.shape({
-      files: PropTypes.arrayOf(
-        PropTypes.shape({
-          filename: PropTypes.string,
-          path: PropTypes.string
-        })
-      ),
-      header: PropTypes.string
-    })
-  ),
-  /**
-   * Callback fired when the label is clicked.
-   *
-   *
-   * **Signature**
-   * ```
-   * function(color: string) => void
-   * ```
-   *
-   * _label_: The clicked label object.
-   */
-  onClickDownload: PropTypes.func,
-  /**
-   * Callback fired when the more details button is clicked.
-   *
-   * **Signature**
-   * ```
-   * function(event: React.SyntheticEvent<HTMLElement>) => void
-   * ```
-   *
-   * _event_: The event source of the callback.
-   */
-  onClickFile: PropTypes.func,
-  /**
-   * An optional inital search term
-   * @type {string}
-   * @default ""
-   * @optional
-   *
-   */
-  search: PropTypes.string,
-  /**
-   * The width of the card.
-   * @type {number}
-   * @default 450
-   * @default
-   */
-  width: PropTypes.number
-};
