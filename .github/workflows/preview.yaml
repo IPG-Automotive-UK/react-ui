@@ -14,8 +14,9 @@ jobs:
     #     token: ${{ secrets.OKTETO_TOKEN }} --insecure-skip-tls-verify
 
     - name: Login into okteto
-      uses: okteto/login@master
-      with: ${{ secrets.OKTETO_TOKEN }}
+      uses: okteto/login@main
+      with: 
+        token: ${{ secrets.OKTETO_TOKEN }}
 
     - name: Deploy preview environment
       uses: okteto/deploy-preview@latest
