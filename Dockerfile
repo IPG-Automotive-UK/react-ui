@@ -1,4 +1,6 @@
-FROM node:16.16.0 as base
+FROM node:18-alpine as base
+
+RUN npm install -g nodemon
 
 WORKDIR /app
 

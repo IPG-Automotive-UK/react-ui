@@ -5,7 +5,6 @@ build:
     
 deploy:
   commands: 
-    - npm install -f
     - npm run storybook
 
 dev:
