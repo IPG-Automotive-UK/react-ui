@@ -10,7 +10,7 @@ jobs:
     - name: Context
       uses: okteto/context@latest
       with:
-        builder: ${{secrets.OKTETO_URL}}
+        url: ${{secrets.OKTETO_URL}}
         token: ${{ secrets.OKTETO_TOKEN }} --insecure-skip-tls-verify
 
     - name: Deploy preview environment
