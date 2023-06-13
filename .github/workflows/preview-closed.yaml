@@ -13,7 +13,7 @@ jobs:
       uses: okteto/context@latest
       with:
         url: ${{secrets.OKTETO_URL}}
-        token: ${{ secrets.OKTETO_TOKEN }}
+        token: ${{ secrets.OKTETO_TOKEN }} --insecure-skip-tls-verify
 
     - name: Destroy preview environment
       uses: okteto/destroy-preview@latest
