@@ -11,7 +11,7 @@ import {
   DetaiCardProps,
   DetailCardLabelStackProps
 } from "./DetailCard.types";
-import React, { useEffect, useRef, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 
 import FileCard from "../FileCard/FileCard";
 import LabelChip from "../../LabelSelector/LabelChip/LabelChip";
@@ -35,55 +35,57 @@ function DetailCard({
 }: DetaiCardProps) {
   // render the detail card
   return (
-    <Stack
-      mt={1}
-      mb={3}
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        flexGrow: 1,
-        height: "100%",
-        width
-      }}
-    >
-      <DetailCardHeader
-        title={title}
-        subtitle={subtitle}
-        buttonsStack={buttonsStack}
-        labels={labels}
-        width={width}
-        onClickLabel={onClickLabel}
-      />
-      <Box
+    <Fragment>
+      <Stack
+        mt={1}
+        mb={3}
         sx={{
           display: "flex",
-          flexDirection: "row",
+          flexDirection: "column",
+          flexGrow: 1,
           height: "100%",
-          my: 2,
-          overflow: "auto"
+          width
         }}
       >
-        <Box ml={0.5}>
-          <FileCard
-            media={media}
-            width={368}
-            files={files}
-            downloadButtonText={downloadButtonText}
-            downloadButtonTextOnSearch={downloadButtonTextOnSearch}
-            fileTitle={fileTitle}
-            onClickDownload={onClickDownload}
-            onClickFile={onClickFile}
-          />
-        </Box>
-        <Stack
-          ml={2}
-          spacing={2}
-          sx={{ display: "flex", flexGrow: 1, mr: 0.5, width: "100%" }}
+        <DetailCardHeader
+          title={title}
+          subtitle={subtitle}
+          buttonsStack={buttonsStack}
+          labels={labels}
+          width={width}
+          onClickLabel={onClickLabel}
+        />
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            height: "100%",
+            my: 2,
+            overflow: "auto"
+          }}
         >
-          {content}
-        </Stack>
-      </Box>
-    </Stack>
+          <Box ml={0.5}>
+            <FileCard
+              media={media}
+              width={368}
+              files={files}
+              downloadButtonText={downloadButtonText}
+              downloadButtonTextOnSearch={downloadButtonTextOnSearch}
+              fileTitle={fileTitle}
+              onClickDownload={onClickDownload}
+              onClickFile={onClickFile}
+            />
+          </Box>
+          <Stack
+            ml={2}
+            spacing={2}
+            sx={{ display: "flex", flexGrow: 1, mr: 0.5, width: "100%" }}
+          >
+            {content}
+          </Stack>
+        </Box>
+      </Stack>
+    </Fragment>
   );
 }
 
@@ -182,7 +184,7 @@ function DetailCardHeader({
   const headerContentWidth = width - buttonsStackWidth - 10;
 
   return (
-    <Stack>
+    <Fragment>
       <Box
         m={1}
         sx={{
@@ -241,7 +243,7 @@ function DetailCardHeader({
           onClickLabel={onClickLabel}
         />
       )}
-    </Stack>
+    </Fragment>
   );
 }
 
@@ -345,7 +347,7 @@ function LableStack({
   // check if label stack is overflowing
   const [lableSize] = useComponentSize(labelStackRef);
   return (
-    <Stack>
+    <Fragment>
       <Box
         mt={0}
         ml={1}
@@ -361,7 +363,7 @@ function LableStack({
           spacing={`${labelSpacing}px`}
         >
           {!lableSize ? (
-            <>
+            <Fragment>
               {labels?.map(label => (
                 <LabelChip
                   clickable
@@ -372,9 +374,9 @@ function LableStack({
                   size="small"
                 />
               ))}
-            </>
+            </Fragment>
           ) : (
-            <>
+            <Fragment>
               {notOverflowingLabels?.map(label => (
                 <LabelChip
                   clickable
@@ -400,7 +402,7 @@ function LableStack({
                   +{overFlowingLabels.length}
                 </Typography>
               </Button>
-            </>
+            </Fragment>
           )}
         </Stack>
       </Box>
@@ -437,7 +439,7 @@ function LableStack({
           })}
         </Stack>
       </Popover>
-    </Stack>
+    </Fragment>
   );
 }
 // export the detail card
