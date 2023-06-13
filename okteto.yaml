@@ -5,7 +5,7 @@ build:
     
 deploy:
   commands:
-    - npm run storybook
+    - docker run ${OKTETO_BUILD_REACT-UI_IMAGE}
     
 dev:
   api:
