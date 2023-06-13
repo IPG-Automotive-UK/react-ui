@@ -6,6 +6,8 @@ build:
 deploy:
   compose:
     file: docker-compose.yaml
+  commands:
+    - rpm run storybook
     
 dev:
   api:
