@@ -182,7 +182,7 @@ function DetailCardHeader({
   const headerContentWidth = width - buttonsStackWidth - 10;
 
   return (
-    <>
+    <Stack>
       <Box
         m={1}
         sx={{
@@ -241,7 +241,7 @@ function DetailCardHeader({
           onClickLabel={onClickLabel}
         />
       )}
-    </>
+    </Stack>
   );
 }
 
