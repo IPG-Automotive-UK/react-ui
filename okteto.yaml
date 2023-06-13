@@ -1,14 +1,20 @@
-build:
-  react-ui:
-    image: okteto.dev/react-ui:1.0.0
-    context: .
+# build:
+#   react-ui:
+#     image: okteto.dev/react-ui:1.0.0
+#     context: .
     
 deploy:
-  commands:
-    - docker run ${OKTETO_BUILD_REACT_UI_IMAGE}
+  compose:
+    - file: docker-compose.yml
+      services:
+        - frontend
+  endpoints:
+    - path: /
+      service: frontend
+      port: 6006
     
-dev:
-  api:
-    command: bash
-    forward:
-      - 6006:6006
+# dev:
+#   api:
+#     command: bash
+#     forward:
+#       - 6006:6006
