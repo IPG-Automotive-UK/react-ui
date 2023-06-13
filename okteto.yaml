@@ -4,11 +4,9 @@ build:
     context: .
     
 deploy:
-  commands: 
-    - okteto deploy --build
-    - okteto up
-    - npm run storybook
-
+  compose:
+    file: docker-compose.yaml
+    
 dev:
   api:
     command: ["bash"]
