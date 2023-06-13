@@ -1,6 +1,6 @@
 import { File, Label } from "../../Common.types";
 
-export interface DetaiCardProps {
+export interface DetailCardProps {
   /**
    * The content of the buttons stack.
    */
@@ -26,13 +26,13 @@ export interface DetaiCardProps {
    */
   files: Array<{
     header: string;
-    files: Array<File>;
+    files: File[];
   }>;
   /**
    * The labels to be displayed on the card.
    * labels should be an array of objects with the following properties:
    */
-  labels?: Array<Label>;
+  labels?: Label[];
   /**
    * An alias for image property. Available only with media
    * components. Media components: video, audio, picture, iframe, img.
@@ -80,7 +80,7 @@ export interface DetaiCardProps {
   width: number;
 }
 
-export interface DetaiCardHeaderProps {
+export interface DetailCardHeaderProps {
   /**
    * The content of the buttons stack.
    */
@@ -89,21 +89,11 @@ export interface DetaiCardHeaderProps {
    * The labels to be displayed on the card.
    * labels should be an array of objects with the following properties:
    */
-  labels?: Array<{
-    _id: string;
-    color: string;
-    description?: string;
-    name: string;
-  }>;
+  labels?: Label[];
   /**
    * Callback fired when the label is clicked.
    */
-  onClickLabel?: (label: {
-    _id: string;
-    color: string;
-    description?: string;
-    name: string;
-  }) => void;
+  onClickLabel?: (label: Label) => void;
   /**
    * The subheader of the card.
    */
@@ -123,12 +113,7 @@ export interface DetailCardLabelStackProps {
    * The labels to be displayed on the card.
    * labels should be an array of objects with the following properties:
    */
-  labels?: Array<{
-    _id: string;
-    color: string;
-    description?: string;
-    name: string;
-  }>;
+  labels?: Label[];
   /**
    * The spacing between the labels in px.
    */
@@ -136,12 +121,7 @@ export interface DetailCardLabelStackProps {
   /**
    * Callback fired when the label is clicked.
    */
-  onClickLabel?: (label: {
-    _id: string;
-    color: string;
-    description?: string;
-    name: string;
-  }) => void;
+  onClickLabel?: (label: Label) => void;
   /**
    * The width of the card in px.
    */

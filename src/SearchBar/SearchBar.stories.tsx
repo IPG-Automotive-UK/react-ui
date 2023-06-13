@@ -1,13 +1,20 @@
+import { Meta, Story } from "@storybook/react";
+
 import React from "react";
-import SearchBar from "./SearchBar";
+import SearchBar from ".";
+import { SearchBarProps } from "./SearchBar.types";
 import { action } from "@storybook/addon-actions";
 
-export default {
+/**
+ * Story metadata
+ */
+const meta: Meta<typeof SearchBar> = {
   component: SearchBar,
   title: "General/SearchBar"
 };
+export default meta;
 
-const Template = args => {
+const Template: Story<SearchBarProps> = args => {
   const [value, setValue] = React.useState(args.value);
   React.useEffect(() => {
     setValue(args.value);

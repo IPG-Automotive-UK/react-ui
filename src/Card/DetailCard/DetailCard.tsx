@@ -7,13 +7,14 @@ import {
   Typography
 } from "@mui/material";
 import {
-  DetaiCardHeaderProps,
-  DetaiCardProps,
-  DetailCardLabelStackProps
+  DetailCardHeaderProps,
+  DetailCardLabelStackProps,
+  DetailCardProps
 } from "./DetailCard.types";
 import React, { Fragment, useEffect, useRef, useState } from "react";
 
 import FileCard from "../FileCard/FileCard";
+import { Label } from "../../Common.types";
 import LabelChip from "../../LabelSelector/LabelChip/LabelChip";
 import ResizeObserver from "resize-observer-polyfill";
 
@@ -32,7 +33,7 @@ function DetailCard({
   subtitle = "subtitle",
   title = "title",
   width = 1150
-}: DetaiCardProps) {
+}: DetailCardProps) {
   // render the detail card
   return (
     <Fragment>
@@ -96,7 +97,7 @@ function DetailCardHeader({
   buttonsStack,
   labels,
   onClickLabel
-}: DetaiCardHeaderProps) {
+}: DetailCardHeaderProps) {
   // title, subtitle,buttonStack and label refs and overflow states
   const titleRef = useRef<HTMLDivElement>(null);
   const subtitleRef = useRef<HTMLDivElement>(null);
@@ -131,8 +132,6 @@ function DetailCardHeader({
   const useButtonStackwidth = (
     buttonStackRef: React.RefObject<HTMLDivElement>
   ) => {
-    // setButtonStackWidth(buttonStackRef.current.clientWidth);
-
     const [buttonStackWidth, setButtonStackWidth] = useState(0);
 
     useEffect(() => {
@@ -201,7 +200,7 @@ function DetailCardHeader({
                 color: theme =>
                   theme.palette.mode === "dark" ? "white" : "black",
                 fontSize: 20,
-                fontWeight: 500,
+                fontWeight: 700,
                 width: headerContentWidth
               }}
               noWrap
@@ -333,12 +332,7 @@ function LableStack({
   };
 
   // handle label click by calling the onClickLabel prop
-  const handleLabelClick = (label: {
-    _id: string;
-    color: string;
-    description?: string;
-    name: string;
-  }) => {
+  const handleLabelClick = (label: Label) => {
     if (label && onClickLabel) {
       onClickLabel(label);
     }

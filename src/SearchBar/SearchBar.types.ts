@@ -1,4 +1,4 @@
-export interface SearhBarProps {
+export interface SearchBarProps {
   /**
    * Callback fired when the input is blurred.
    * Notice that the first argument (event) might be undefined.

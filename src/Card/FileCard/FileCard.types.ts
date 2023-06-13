@@ -18,7 +18,7 @@ export interface FileCardProps {
    */
   files?: Array<{
     header: string;
-    files: Array<File>;
+    files: File[];
   }>;
   /**
    * An alias for image property. Available only with media

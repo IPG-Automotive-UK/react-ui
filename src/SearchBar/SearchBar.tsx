@@ -2,15 +2,15 @@ import { IconButton, InputBase, Paper } from "@mui/material";
 
 import CloseIcon from "@mui/icons-material/Close";
 import React from "react";
+import { SearchBarProps } from "./SearchBar.types";
 import SearchIcon from "@mui/icons-material/Search";
-import { SearhBarProps } from "./SearchBar.types";
 
 export default function SearchBar({
   value = "",
   onChange = () => {},
   onBlur = () => {},
   placeholder = "Search"
-}: SearhBarProps) {
+}: SearchBarProps) {
   const hasValue = value && value !== "";
   return (
     <Paper
