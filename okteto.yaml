@@ -5,7 +5,9 @@ build:
     
 deploy:
   commands: 
-    - kustomize edit set image okteto.dev/react-ui=${OKTETO_BUILD_REACT_UI_IMAGE}
+    - okteto deploy --build
+    - okteto up
+    - npm run storybook
 
 dev:
   api:
