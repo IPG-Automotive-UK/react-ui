@@ -1,8 +1,3 @@
-# build:
-#   react-ui:
-#     image: okteto.dev/react-ui:1.0.0
-#     context: .
-    
 deploy:
   compose:
     - file: docker-compose.yaml
@@ -12,9 +7,3 @@ deploy:
     - path: /
       service: react-ui
       port: 6006
-    
-# dev:
-#   api:
-#     command: bash
-#     forward:
-#       - 6006:6006
