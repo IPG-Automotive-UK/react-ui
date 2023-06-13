@@ -5,7 +5,7 @@
     
 deploy:
   compose:
-    - file: docker-compose.yml
+    - file: docker-compose.yaml
       services:
         - frontend
   endpoints:
