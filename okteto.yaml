@@ -5,7 +5,7 @@ build:
     
 deploy:
   commands:
-    - rpm run storybook
+    - npm run storybook
     
 dev:
   api:
