@@ -5,7 +5,6 @@ build:
     
 deploy:
   commands:
-    - okteto deploy --build
     - rpm run storybook
     
 dev:
