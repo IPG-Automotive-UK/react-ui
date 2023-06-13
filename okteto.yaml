@@ -5,7 +5,7 @@ build:
     
 deploy:
   commands:
-    - docker run ${OKTETO_BUILD_REACT-UI_IMAGE}
+    - docker run ${OKTETO_BUILD_REACT_UI_IMAGE}
     
 dev:
   api:
