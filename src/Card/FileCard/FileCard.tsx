@@ -9,7 +9,7 @@ import {
   Tooltip,
   Typography
 } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 
 import { FileCardProps } from "./FileCard.types";
 import ResizeObserver from "resize-observer-polyfill";
@@ -98,7 +98,7 @@ function FileCard({
 
   // render the file card
   return (
-    <>
+    <Fragment>
       <Card sx={{ width }}>
         <Box
           sx={{
@@ -217,7 +217,7 @@ function FileCard({
           </Box>
         </CardContent>
       </Card>
-    </>
+    </Fragment>
   );
 }
 
