@@ -12,3 +12,7 @@ export interface UserMenuProps {
    */
   username: string;
 }
+// type definitions for UserAvatar
+export interface UserAvatarProps {
+  username: string;
+}
