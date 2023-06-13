@@ -345,7 +345,7 @@ function LableStack({
   // check if label stack is overflowing
   const [lableSize] = useComponentSize(labelStackRef);
   return (
-    <>
+    <Stack>
       <Box
         mt={0}
         ml={1}
@@ -437,7 +437,7 @@ function LableStack({
           })}
         </Stack>
       </Popover>
-    </>
+    </Stack>
   );
 }
 // export the detail card
