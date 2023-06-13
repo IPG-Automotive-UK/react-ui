@@ -7,10 +7,10 @@ deploy:
   compose:
     - file: docker-compose.yaml
       services:
-        - frontend
+        - react-ui
   endpoints:
     - path: /
-      service: frontend
+      service: react-ui
       port: 6006
     
 # dev:
