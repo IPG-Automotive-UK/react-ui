@@ -4,9 +4,8 @@ build:
     context: .
     
 deploy:
-  compose:
-    file: docker-compose.yaml
   commands:
+    - okteto deploy --build
     - rpm run storybook
     
 dev:
