@@ -9,9 +9,11 @@ export interface SearhBarProps {
   /**
    * Callback fired when the value is changed.
    */
-  onChange?: (
-    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) => void;
+  onChange?: (event: {
+    target: {
+      value: string;
+    };
+  }) => void;
   /**
    * The short hint displayed in the input before the user enters a value.
    */

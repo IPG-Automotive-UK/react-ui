@@ -1,3 +1,5 @@
+import { File } from "../../Common.types";
+
 export interface FileCardProps {
   /**
    * The download button text.
@@ -16,10 +18,7 @@ export interface FileCardProps {
    */
   files?: Array<{
     header: string;
-    files: Array<{
-      filename: string;
-      path: string;
-    }>;
+    files: Array<File>;
   }>;
   /**
    * An alias for image property. Available only with media
@@ -29,11 +28,11 @@ export interface FileCardProps {
   /**
    * Callback fired when the download files button is clicked.
    */
-  onClickDownload?: (event: React.MouseEventHandler<HTMLButtonElement>) => void;
+  onClickDownload?: (paths: string[]) => void;
   /**
    * Callback fired when the files chips is clicked.
    */
-  onClickFile?: (event: React.SyntheticEvent<HTMLElement>) => void;
+  onClickFile?: (file: File) => void;
   /**
    * An optional inital search term
    */

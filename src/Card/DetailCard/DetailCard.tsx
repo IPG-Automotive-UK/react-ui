@@ -26,8 +26,8 @@ function DetailCard({
   fileTitle = "title",
   labels = [],
   media = "",
-  onClickDownload = () => {},
-  onClickFile = () => {},
+  onClickDownload,
+  onClickFile,
   onClickLabel = () => {},
   subtitle = "subtitle",
   title = "title",
@@ -35,57 +35,55 @@ function DetailCard({
 }: DetaiCardProps) {
   // render the detail card
   return (
-    <>
-      <Stack
-        mt={1}
-        mb={3}
+    <Stack
+      mt={1}
+      mb={3}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        flexGrow: 1,
+        height: "100%",
+        width
+      }}
+    >
+      <DetailCardHeader
+        title={title}
+        subtitle={subtitle}
+        buttonsStack={buttonsStack}
+        labels={labels}
+        width={width}
+        onClickLabel={onClickLabel}
+      />
+      <Box
         sx={{
           display: "flex",
-          flexDirection: "column",
-          flexGrow: 1,
+          flexDirection: "row",
           height: "100%",
-          width
+          my: 2,
+          overflow: "auto"
         }}
       >
-        <DetailCardHeader
-          title={title}
-          subtitle={subtitle}
-          buttonsStack={buttonsStack}
-          labels={labels}
-          width={width}
-          onClickLabel={onClickLabel}
-        />
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            height: "100%",
-            my: 2,
-            overflow: "auto"
-          }}
-        >
-          <Box ml={0.5}>
-            <FileCard
-              media={media}
-              width={368}
-              files={files}
-              downloadButtonText={downloadButtonText}
-              downloadButtonTextOnSearch={downloadButtonTextOnSearch}
-              fileTitle={fileTitle}
-              onClickDownload={onClickDownload}
-              onClickFile={onClickFile}
-            />
-          </Box>
-          <Stack
-            ml={2}
-            spacing={2}
-            sx={{ display: "flex", flexGrow: 1, mr: 0.5, width: "100%" }}
-          >
-            {content}
-          </Stack>
+        <Box ml={0.5}>
+          <FileCard
+            media={media}
+            width={368}
+            files={files}
+            downloadButtonText={downloadButtonText}
+            downloadButtonTextOnSearch={downloadButtonTextOnSearch}
+            fileTitle={fileTitle}
+            onClickDownload={onClickDownload}
+            onClickFile={onClickFile}
+          />
         </Box>
-      </Stack>
-    </>
+        <Stack
+          ml={2}
+          spacing={2}
+          sx={{ display: "flex", flexGrow: 1, mr: 0.5, width: "100%" }}
+        >
+          {content}
+        </Stack>
+      </Box>
+    </Stack>
   );
 }
 

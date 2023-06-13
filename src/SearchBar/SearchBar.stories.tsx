@@ -16,9 +16,7 @@ const Template = args => {
     <SearchBar
       {...args}
       onChange={event => {
-        if (event.target instanceof HTMLInputElement) {
-          setValue(event.target.value);
-        }
+        setValue(event.target.value);
         action("onChange")(event);
       }}
       onBlur={event => {

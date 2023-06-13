@@ -31,9 +31,9 @@ export default function SearchBar({
       />
       {hasValue ? (
         <IconButton
-          onClick={() =>
-            onChange({ target: { value: "" } as HTMLInputElement })
-          }
+          onClick={() => {
+            onChange({ target: { value: "" } });
+          }}
           size="large"
           sx={{ padding: theme => theme.spacing(1) }}
         >

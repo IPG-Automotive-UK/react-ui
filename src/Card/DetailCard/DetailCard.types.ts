@@ -1,3 +1,5 @@
+import { File, Label } from "../../Common.types";
+
 export interface DetaiCardProps {
   /**
    * The content of the buttons stack.
@@ -24,21 +26,13 @@ export interface DetaiCardProps {
    */
   files: Array<{
     header: string;
-    files: Array<{
-      filename: string;
-      path: string;
-    }>;
+    files: Array<File>;
   }>;
   /**
    * The labels to be displayed on the card.
    * labels should be an array of objects with the following properties:
    */
-  labels?: Array<{
-    _id: string;
-    color: string;
-    description?: string;
-    name: string;
-  }>;
+  labels?: Array<Label>;
   /**
    * An alias for image property. Available only with media
    * components. Media components: video, audio, picture, iframe, img.
@@ -55,20 +49,15 @@ export interface DetaiCardProps {
   /**
    * Callback fired when the label is clicked.
    */
-  onClickLabel?: (label: {
-    _id: string;
-    color: string;
-    description?: string;
-    name: string;
-  }) => void;
+  onClickLabel?: (label: Label) => void;
   /**
    * Callback fired when the download files button is clicked.
    */
-  onClickDownload?: (event: React.MouseEventHandler<HTMLButtonElement>) => void;
+  onClickDownload?: (paths: string[]) => void;
   /**
    * Callback fired when the files chips is clicked.
    */
-  onClickFile?: (event: React.SyntheticEvent<HTMLElement>) => void;
+  onClickFile?: (file: File) => void;
   /**
    * Callback fired when the more details button is clicked.
    */

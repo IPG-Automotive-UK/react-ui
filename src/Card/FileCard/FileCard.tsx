@@ -21,8 +21,8 @@ function FileCard({
   files: filesIn = [],
   fileTitle = "title",
   media = "",
-  onClickDownload = () => {},
-  onClickFile = () => {},
+  onClickDownload,
+  onClickFile,
   search: searchIn = "",
   width = 368
 }: FileCardProps) {
@@ -56,11 +56,11 @@ function FileCard({
   };
 
   // handle search by searching file headers and filenames
-  const handleSearch = (
-    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) => {
-    // get search term
-    if (!(event.target instanceof HTMLInputElement)) return;
+  const handleSearch = (event: {
+    target: {
+      value: string;
+    };
+  }) => {
     const search = event.target.value.toLowerCase();
     const newFiles = filesIn.map(file => {
       const newFile = { ...file };
@@ -90,7 +90,7 @@ function FileCard({
     const paths = files.map(file => file.files.map(file => file.path)).flat();
 
     // call onClickDownload
-    onClickDownload(paths);
+    onClickDownload && onClickDownload(paths);
   };
 
   // check if title is overflowing
@@ -199,7 +199,7 @@ function FileCard({
                         >
                           <Chip
                             clickable
-                            onClick={() => onClickFile(file)}
+                            onClick={() => onClickFile && onClickFile(file)}
                             sx={{ m: 0.5, maxWidth: 330 }}
                             icon={<AttachFile />}
                             size="small"
