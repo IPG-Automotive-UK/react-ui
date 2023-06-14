@@ -108,8 +108,6 @@ function DetailCardHeader({
 
   // check if title is overflowing
   const useTitleWidth = (titleRef: React.RefObject<HTMLDivElement>) => {
-    // setButtonStackWidth(buttonStackRef.current.clientWidth);
-
     const [isTitleOverflow, setIsTitleOverflow] = useState(false);
 
     useEffect(() => {
