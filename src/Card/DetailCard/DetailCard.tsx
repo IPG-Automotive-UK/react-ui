@@ -6,11 +6,16 @@ import {
   Tooltip,
   Typography
 } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import {
+  DetailCardHeaderProps,
+  DetailCardLabelStackProps,
+  DetailCardProps
+} from "./DetailCard.types";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 
 import FileCard from "../FileCard/FileCard";
+import { Label } from "../../Common.types";
 import LabelChip from "../../LabelSelector/LabelChip/LabelChip";
-import PropTypes from "prop-types";
 import ResizeObserver from "resize-observer-polyfill";
 
 function DetailCard({
@@ -22,16 +27,16 @@ function DetailCard({
   fileTitle = "title",
   labels = [],
   media = "",
-  onClickDownload = () => {},
-  onClickFile = () => {},
+  onClickDownload,
+  onClickFile,
   onClickLabel = () => {},
   subtitle = "subtitle",
   title = "title",
   width = 1150
-}) {
+}: DetailCardProps) {
   // render the detail card
   return (
-    <>
+    <Fragment>
       <Stack
         mt={1}
         mb={3}
@@ -67,7 +72,6 @@ function DetailCard({
               files={files}
               downloadButtonText={downloadButtonText}
               downloadButtonTextOnSearch={downloadButtonTextOnSearch}
-              title="title"
               fileTitle={fileTitle}
               onClickDownload={onClickDownload}
               onClickFile={onClickFile}
@@ -82,7 +86,7 @@ function DetailCard({
           </Stack>
         </Box>
       </Stack>
-    </>
+    </Fragment>
   );
 }
 
@@ -93,20 +97,17 @@ function DetailCardHeader({
   buttonsStack,
   labels,
   onClickLabel
-}) {
+}: DetailCardHeaderProps) {
   // title, subtitle,buttonStack and label refs and overflow states
-  const titleRef = useRef();
-  const subtitleRef = useRef();
-
-  const buttonStackRef = useRef();
+  const titleRef = useRef<HTMLDivElement>(null);
+  const subtitleRef = useRef<HTMLDivElement>(null);
+  const buttonStackRef = useRef<HTMLDivElement>(null);
 
   // label spacing
   const labelSpacing = 8;
 
   // check if title is overflowing
-  const useTitleWidth = titleRef => {
-    // setButtonStackWidth(buttonStackRef.current.clientWidth);
-
+  const useTitleWidth = (titleRef: React.RefObject<HTMLDivElement>) => {
     const [isTitleOverflow, setIsTitleOverflow] = useState(false);
 
     useEffect(() => {
@@ -115,7 +116,9 @@ function DetailCardHeader({
           setIsTitleOverflow(target.scrollWidth > target.clientWidth);
         });
       });
-      sizeObserver.observe(titleRef.current);
+      if (titleRef.current) {
+        sizeObserver.observe(titleRef.current);
+      }
 
       return () => sizeObserver.disconnect();
     }, [titleRef]);
@@ -124,9 +127,9 @@ function DetailCardHeader({
   };
 
   // get the width of the button stack
-  const useButtonStackwidth = buttonStackRef => {
-    // setButtonStackWidth(buttonStackRef.current.clientWidth);
-
+  const useButtonStackwidth = (
+    buttonStackRef: React.RefObject<HTMLDivElement>
+  ) => {
     const [buttonStackWidth, setButtonStackWidth] = useState(0);
 
     useEffect(() => {
@@ -135,7 +138,9 @@ function DetailCardHeader({
           setButtonStackWidth(target.clientWidth);
         });
       });
-      sizeObserver.observe(buttonStackRef.current);
+      if (buttonStackRef.current) {
+        sizeObserver.observe(buttonStackRef.current);
+      }
 
       return () => sizeObserver.disconnect();
     }, [buttonStackRef]);
@@ -144,7 +149,7 @@ function DetailCardHeader({
   };
 
   // check if subtitle is overflowing
-  const useSubTitleWidth = subTitleRef => {
+  const useSubTitleWidth = (subTitleRef: React.RefObject<HTMLDivElement>) => {
     const [isSubtitleOverflow, setIsSubtitleOverflow] = useState(false);
 
     useEffect(() => {
@@ -153,7 +158,9 @@ function DetailCardHeader({
           setIsSubtitleOverflow(target.scrollWidth > target.clientWidth);
         });
       });
-      sizeObserver.observe(subTitleRef.current);
+      if (subTitleRef.current) {
+        sizeObserver.observe(subTitleRef.current);
+      }
 
       return () => sizeObserver.disconnect();
     }, [subTitleRef]);
@@ -174,7 +181,7 @@ function DetailCardHeader({
   const headerContentWidth = width - buttonsStackWidth - 10;
 
   return (
-    <>
+    <Fragment>
       <Box
         m={1}
         sx={{
@@ -191,7 +198,7 @@ function DetailCardHeader({
                 color: theme =>
                   theme.palette.mode === "dark" ? "white" : "black",
                 fontSize: 20,
-                fontWeight: 500,
+                fontWeight: 700,
                 width: headerContentWidth
               }}
               noWrap
@@ -207,8 +214,7 @@ function DetailCardHeader({
               mt={1}
               ref={subtitleRef}
               sx={{
-                color: theme =>
-                  theme.palette.mode === "dark" ? "white" : "black",
+                color: theme => theme.palette.text.secondary,
                 fontSize: 14,
                 fontWeight: 400,
                 width: headerContentWidth
@@ -226,7 +232,7 @@ function DetailCardHeader({
           {buttonsStack}
         </Box>
       </Box>
-      {labels.length > 0 && (
+      {labels && labels.length > 0 && (
         <LableStack
           labelSpacing={labelSpacing}
           width={width}
@@ -234,11 +240,16 @@ function DetailCardHeader({
           onClickLabel={onClickLabel}
         />
       )}
-    </>
+    </Fragment>
   );
 }
 
-function LableStack({ labelSpacing, width, labels, onClickLabel }) {
+function LableStack({
+  labelSpacing,
+  width,
+  labels,
+  onClickLabel
+}: DetailCardLabelStackProps) {
   // label stack height
   const labelStackHeight = 24;
 
@@ -248,10 +259,12 @@ function LableStack({ labelSpacing, width, labels, onClickLabel }) {
   // label content width
   const labelContentWidth = width - 45;
 
-  const [overFlowingLabels, setOverFlowingLabels] = useState([]);
+  const [overFlowingLabels, setOverFlowingLabels] = useState<
+    HTMLElement[] | []
+  >([]);
 
   // label popover anchor state
-  const [labelAnchorEl, setLabelAnchorEl] = useState(null);
+  const [labelAnchorEl, setLabelAnchorEl] = useState<HTMLElement | null>(null);
 
   // handle the close of the label overflow popover by setting the label anchor element to null
   const handleLabelOverflowClose = () => {
@@ -262,20 +275,20 @@ function LableStack({ labelSpacing, width, labels, onClickLabel }) {
   const isLabelOverflowOpen = Boolean(labelAnchorEl);
 
   // determine what labels to show
-  const notOverflowingLabels = labels.slice(
+  const notOverflowingLabels = labels?.slice(
     0,
     labels.length - overFlowingLabels.length
   );
 
   // handle the click of the label overflow button by setting the label anchor element
-  const handleLabelOverflowClick = event => {
+  const handleLabelOverflowClick = (event: React.MouseEvent<HTMLElement>) => {
     setLabelAnchorEl(event.currentTarget);
   };
 
-  const labelStackRef = useRef();
+  const labelStackRef = useRef<HTMLDivElement>(null);
 
   // check if label stack is overflowing
-  const useComponentSize = comRef => {
+  const useComponentSize = (comRef: React.RefObject<HTMLDivElement>) => {
     const [isLabelStackOverflow, setIsLabelStackOverflow] = useState(false);
 
     React.useEffect(() => {
@@ -284,22 +297,28 @@ function LableStack({ labelSpacing, width, labels, onClickLabel }) {
           setIsLabelStackOverflow(target.scrollWidth > target.clientWidth);
         });
       });
-      sizeObserver.observe(comRef.current);
+      if (comRef.current) {
+        sizeObserver.observe(comRef.current);
+      }
 
       let sum = overflowButtonWidth;
-      const overFlowLabels = [];
+      const overFlowLabels: HTMLElement[] = [];
 
       // for each of the labels in the label stack
-      labelStackRef.current.childNodes.forEach(child => {
-        // add the width of the child plus 8px of space between each child to the sum
-        sum += child.offsetWidth + labelSpacing;
+      if (labelStackRef.current) {
+        labelStackRef.current.childNodes.forEach(child => {
+          // add the width of the child plus 8px of space between each child to the sum
+          if (child instanceof HTMLElement) {
+            sum += child.offsetWidth + labelSpacing;
 
-        // if the sum is greater than the header contend width, then them this child is overflowing
-        // the header content width
-        if (sum > labelContentWidth) {
-          overFlowLabels.push(child);
-        }
-      });
+            // if the sum is greater than the header contend width, then them this child is overflowing
+            // the header content width
+            if (sum > labelContentWidth) {
+              overFlowLabels.push(child);
+            }
+          }
+        });
+      }
 
       // set the overflowing labels
       setOverFlowingLabels(overFlowLabels);
@@ -311,14 +330,16 @@ function LableStack({ labelSpacing, width, labels, onClickLabel }) {
   };
 
   // handle label click by calling the onClickLabel prop
-  const handleLabelClick = label => {
-    onClickLabel(label);
+  const handleLabelClick = (label: Label) => {
+    if (label && onClickLabel) {
+      onClickLabel(label);
+    }
   };
 
   // check if label stack is overflowing
   const [lableSize] = useComponentSize(labelStackRef);
   return (
-    <>
+    <Fragment>
       <Box
         mt={0}
         ml={1}
@@ -334,8 +355,8 @@ function LableStack({ labelSpacing, width, labels, onClickLabel }) {
           spacing={`${labelSpacing}px`}
         >
           {!lableSize ? (
-            <>
-              {labels.map(label => (
+            <Fragment>
+              {labels?.map(label => (
                 <LabelChip
                   clickable
                   color={label.color}
@@ -345,10 +366,10 @@ function LableStack({ labelSpacing, width, labels, onClickLabel }) {
                   size="small"
                 />
               ))}
-            </>
+            </Fragment>
           ) : (
-            <>
-              {notOverflowingLabels.map(label => (
+            <Fragment>
+              {notOverflowingLabels?.map(label => (
                 <LabelChip
                   clickable
                   color={label.color}
@@ -362,8 +383,8 @@ function LableStack({ labelSpacing, width, labels, onClickLabel }) {
                 variant="text"
                 size="large"
                 onClick={handleLabelOverflowClick}
-                mt={0.5}
                 sx={{
+                  marginTop: 0.5,
                   maxWidth: overflowButtonWidth,
                   minWidth: overflowButtonWidth,
                   padding: 0
@@ -373,7 +394,7 @@ function LableStack({ labelSpacing, width, labels, onClickLabel }) {
                   +{overFlowingLabels.length}
                 </Typography>
               </Button>
-            </>
+            </Fragment>
           )}
         </Stack>
       </Box>
@@ -392,8 +413,8 @@ function LableStack({ labelSpacing, width, labels, onClickLabel }) {
           direction="column"
           spacing={`${labelSpacing}px`}
         >
-          {labels.map(label => {
-            if (!notOverflowingLabels.includes(label)) {
+          {labels?.map(label => {
+            if (!notOverflowingLabels?.includes(label)) {
               return (
                 <LabelChip
                   clickable
@@ -410,145 +431,8 @@ function LableStack({ labelSpacing, width, labels, onClickLabel }) {
           })}
         </Stack>
       </Popover>
-    </>
+    </Fragment>
   );
 }
 // export the detail card
 export default DetailCard;
-
-// detail card prop types
-DetailCard.propTypes = {
-  /**
-   * The content of the buttons stack.
-   * @type {ReactNode}
-   *
-   */
-  buttonsStack: PropTypes.node,
-  /**
-   * The content of the card to be displayed under the media.
-   * @type {ReactNode}
-   * @required
-   *
-   */
-  content: PropTypes.node,
-  /**
-   * The download button text.
-   * @type {string}
-   * @default Download
-   */
-  downloadButtonText: PropTypes.string,
-  /**
-   * The download button text on search.
-   * @type {string}
-   */
-  downloadButtonTextOnSearch: PropTypes.string,
-  /**
-   * The fileTitle of the card.
-   * @type {string}
-   * @required
-   * @default title
-   *
-   */
-  fileTitle: PropTypes.string.isRequired,
-  /**
-   * The labels to be displayed on the card.
-   * labels should be an array of objects with the following properties:
-   * @type {Array}
-   * @default []
-   * @example
-   * [
-   * {
-   *  _id: "5f9f1b9b9c9c1c0017a5f1b5",
-   * color: "#ff0000"
-   * description: "This is a label"
-   * name: "Label 1"
-   * }]
-   *
-   */
-  labels: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      color: PropTypes.string.isRequired,
-      description: PropTypes.string,
-      name: PropTypes.string.isRequired
-    })
-  ),
-  /**
-   * An alias for image property. Available only with media
-   * components. Media components: video, audio, picture, iframe, img.
-   * @type {string}
-   * @required
-   *
-   */
-  media: PropTypes.string,
-  /**
-   * The height of the media.
-   * @type {number}
-   * @default 200
-   *
-   */
-  mediaHeight: PropTypes.number,
-  /**
-   * The width of the media.
-   * @type {number}
-   * @default 200
-   *
-   */
-  mediaWidth: PropTypes.number,
-  /**
-   * Callback fired when the label is clicked.
-   *
-   *
-   * **Signature**
-   * ```
-   * function(color: string) => void
-   * ```
-   *
-   * _label_: The clicked label object.
-   */
-  onClickLabel: PropTypes.func,
-  /**
-   * Callback fired when the more details button is clicked.
-   *
-   * **Signature**
-   * ```
-   * function(event: React.SyntheticEvent<HTMLElement>) => void
-   * ```
-   *
-   * _event_: The event source of the callback.
-   */
-  onClickMoreDetails: PropTypes.func,
-  /**
-   * Callback fired when the more options button is clicked.
-   *
-   * **Signature**
-   * ```
-   * function(event: React.SyntheticEvent<HTMLElement>) => void
-   * ```
-   *
-   * _event_: The event source of the callback.
-   */
-  onClickViewFiles: PropTypes.func,
-  /**
-   * The subheader of the card.
-   * @type {string}
-   * @required
-   * @default subtitle
-   */
-  subtitle: PropTypes.string.isRequired,
-  /**
-   * The title of the card.
-   * @type {string}
-   * @required
-   * @default title
-   *
-   */
-  title: PropTypes.string.isRequired,
-  /**
-   * The width of the card.
-   * @type {number}
-   * @default 450
-   * @default
-   */
-  width: PropTypes.number
-};

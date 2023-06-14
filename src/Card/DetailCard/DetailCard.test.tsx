@@ -7,19 +7,27 @@ import React from "react";
 import { action } from "@storybook/addon-actions";
 import userEvent from "@testing-library/user-event";
 
+// a set of default inputs so that tests can change what theyre testing
+const defaultInputs = {
+  fileTitle: "detail file title",
+  files: [
+    {
+      files: [{ filename: "roadFile.rd5", path: "/somepath/path/file" }],
+      header: "Road Files"
+    }
+  ],
+  subtitle: "detail card subtitle",
+  title: "detail card title",
+  width: 1150
+};
+
 /**
  * Tests
  */
 describe("DetailCard", () => {
   // test that the detail card renders with title
   it("renders title,subtitle and filetitle ", () => {
-    render(
-      <DetailCard
-        title="detail card title"
-        subtitle="detail card subtitle"
-        fileTitle="detail file title"
-      />
-    );
+    render(<DetailCard {...defaultInputs} />);
     expect(screen.getByText(/detail card title/i)).toBeInTheDocument();
     expect(screen.getByText(/detail card subtitle/i)).toBeInTheDocument();
     expect(screen.getByText(/detail file title/i)).toBeInTheDocument();
@@ -40,9 +48,7 @@ describe("DetailCard", () => {
     // render detail card with label
     render(
       <DetailCard
-        title="detail card title"
-        subtitle="detail card subtitle"
-        fileTitle="file card title"
+        {...defaultInputs}
         labels={labels}
         onClickLabel={onClickLabel}
       />
@@ -60,12 +66,7 @@ describe("DetailCard", () => {
   // test that image is rendered in detail card
   it("renders image", () => {
     render(
-      <FileCard
-        title="detail card title"
-        subtitle="detail card subtitle"
-        fileTitle="file card title"
-        media="https://picsum.photos/400/200"
-      />
+      <FileCard {...defaultInputs} media="https://picsum.photos/400/200" />
     );
     // expect image to be in the document
     expect(screen.getByRole("img")).toBeInTheDocument();
@@ -75,9 +76,7 @@ describe("DetailCard", () => {
   it("renders content", () => {
     render(
       <DetailCard
-        title="detail card title"
-        subtitle="detail card subtitle"
-        fileTitle="file card title"
+        {...defaultInputs}
         content={<div>Some content on the card </div>}
       />
     );
@@ -89,13 +88,13 @@ describe("DetailCard", () => {
     const onClickEdit = jest.fn();
     render(
       <DetailCard
-        title="detail card title"
-        subtitle="detail card subtitle"
-        fileTitle="file card title"
-        buttonsStack=<Stack>
-          <Button onClick={onClickEdit}>Edit</Button>
-          <Button onClick={action("onClickDelete")}>Delete</Button>
-        </Stack>
+        {...defaultInputs}
+        buttonsStack={
+          <Stack>
+            <Button onClick={onClickEdit}>Edit</Button>
+            <Button onClick={action("onClickDelete")}>Delete</Button>
+          </Stack>
+        }
       />
     );
     fireEvent.click(screen.getByText(/edit/i));
@@ -106,13 +105,13 @@ describe("DetailCard", () => {
     const onClickDelete = jest.fn();
     render(
       <DetailCard
-        title="detail card title"
-        subtitle="detail card subtitle"
-        fileTitle="file card title"
-        buttonsStack=<Stack>
-          <Button onClick={action("onClickEdit")}>Edit</Button>
-          <Button onClick={onClickDelete}>Delete</Button>
-        </Stack>
+        {...defaultInputs}
+        buttonsStack={
+          <Stack>
+            <Button onClick={action("onClickEdit")}>Edit</Button>
+            <Button onClick={onClickDelete}>Delete</Button>
+          </Stack>
+        }
       />
     );
     fireEvent.click(screen.getByText(/delete/i));

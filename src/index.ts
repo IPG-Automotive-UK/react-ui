@@ -17,7 +17,16 @@ export { default as AppLayout, AppLayoutProps } from "./AppLayout";
 export { default as Autocomplete } from "./Autocomplete";
 export { default as Canvas } from "./Canvas";
 export { default as CanvasItem } from "./CanvasItem";
-export { DetailCard, SummaryCard, TableCard, SummaryCardProps } from "./Card";
+export {
+  DetailCard,
+  SummaryCard,
+  TableCard,
+  SummaryCardProps,
+  DetailCardProps,
+  DetailCardHeaderProps,
+  DetailCardLabelStackProps,
+  FileCardProps
+} from "./Card";
 export { default as Checkbox } from "./Checkbox";
 export { default as Copyright } from "./Copyright";
 export { default as Color } from "./Color";
@@ -47,7 +56,7 @@ export { default as PasswordChangeForm } from "./PasswordChangeForm";
 export { default as PasswordResetForm } from "./PasswordResetForm";
 export { default as RadioButtons } from "./RadioButtons";
 export { default as RegistrationForm } from "./RegistrationForm";
-export { default as SearchBar } from "./SearchBar";
+export { default as SearchBar, SearchBarProps } from "./SearchBar";
 export { default as Select } from "./Select";
 export {
   Sidebar,

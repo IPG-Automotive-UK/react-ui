@@ -1,17 +1,23 @@
 import { Box, Button } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
+import { Meta, Story } from "@storybook/react";
 
-import DetailCard from "./DetailCard";
+import DetailCard from ".";
+import { DetailCardProps } from "./DetailCard.types";
 import React from "react";
 import TableCard from "../TableCard";
 import { action } from "@storybook/addon-actions";
 
-export default {
+/**
+ * Story metadata
+ */
+const meta: Meta<typeof DetailCard> = {
   component: DetailCard,
   title: "Card/DetailCard"
 };
+export default meta;
 
-const Template = args => {
+const Template: Story<DetailCardProps> = args => {
   return (
     <DetailCard
       {...args}

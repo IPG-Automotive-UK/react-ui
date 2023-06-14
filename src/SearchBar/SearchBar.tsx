@@ -1,7 +1,8 @@
 import { IconButton, InputBase, Paper } from "@mui/material";
+
 import CloseIcon from "@mui/icons-material/Close";
-import PropTypes from "prop-types";
 import React from "react";
+import { SearchBarProps } from "./SearchBar.types";
 import SearchIcon from "@mui/icons-material/Search";
 
 export default function SearchBar({
@@ -9,7 +10,7 @@ export default function SearchBar({
   onChange = () => {},
   onBlur = () => {},
   placeholder = "Search"
-}) {
+}: SearchBarProps) {
   const hasValue = value && value !== "";
   return (
     <Paper
@@ -30,7 +31,9 @@ export default function SearchBar({
       />
       {hasValue ? (
         <IconButton
-          onClick={() => onChange({ target: { value: "" } })}
+          onClick={() => {
+            onChange({ target: { value: "" } });
+          }}
           size="large"
           sx={{ padding: theme => theme.spacing(1) }}
         >
@@ -42,29 +45,3 @@ export default function SearchBar({
     </Paper>
   );
 }
-// prop types
-SearchBar.propTypes = {
-  /**
-   * Callback fired when the input is blurred.
-   * Notice that the first argument (event) might be undefined.
-   */
-  onBlur: PropTypes.func,
-  /**
-   * Callback fired when the value is changed.
-   *
-   * **Signature**
-   * ```
-   * function(event: object) => void
-   * ```
-   * _event_: The event source of the callback. You can pull out the new value by accessing `event.target.value` (string).
-   */
-  onChange: PropTypes.func,
-  /**
-   * The short hint displayed in the input before the user enters a value.
-   */
-  placeholder: PropTypes.string,
-  /**
-   * The value of the input element, required for a controlled component.
-   */
-  value: PropTypes.string
-};
