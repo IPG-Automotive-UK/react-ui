@@ -78,7 +78,7 @@
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.11.16",
-    "@mui/material": "^5.13.3",
+    "@mui/material": "^5.13.6",
     "@mui/styles": "^5.13.2",
     "@mui/x-data-grid": "^6.6.0",
     "colord": "^2.9.3",
