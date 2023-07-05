@@ -1,4 +1,4 @@
-export { default as ActionDialog } from "./ActionDialog";
+export { default as ActionDialog, ActionDialogProps } from "./ActionDialog";
 export {
   default as AlignHorizontal,
   AlignHorizontalProps
