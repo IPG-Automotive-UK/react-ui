@@ -11,7 +11,7 @@ import { action } from "@storybook/addon-actions";
  */
 const meta: Meta<typeof ActionDialog> = {
   argTypes: {
-    open: {
+    content: {
       control: false
     },
     onCancelClick: {
@@ -20,7 +20,7 @@ const meta: Meta<typeof ActionDialog> = {
     onSaveClick: {
       control: false
     },
-    content: {
+    open: {
       control: false
     }
   },
