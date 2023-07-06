@@ -109,5 +109,6 @@ export {
   WizardStep,
   NextButton,
   BackButton,
+  BackButtonProps,
   CancelButton
 } from "./Wizard";

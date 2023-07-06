@@ -3,6 +3,7 @@ export {
   default as WizardActions,
   NextButton,
   BackButton,
+  BackButtonProps,
   CancelButton
 } from "./WizardActions";
 export { default as WizardContent } from "./WizardContent";

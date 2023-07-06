@@ -1,13 +1,13 @@
 import * as React from "react";
 
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { BackButtonProps } from "./BackButton.types";
 import { Button } from "@mui/material";
-import PropTypes from "prop-types";
 
 /**
  * Back button component for Wizard
  */
-export default function BackButton({ onClick, disabled }) {
+export default function BackButton({ onClick, disabled }: BackButtonProps) {
   return (
     <Button
       onClick={onClick}
@@ -20,15 +20,3 @@ export default function BackButton({ onClick, disabled }) {
     </Button>
   );
 }
-
-// prop types
-BackButton.propTypes = {
-  /**
-   * If `true`, the button will be disabled.
-   */
-  disabled: PropTypes.bool,
-  /**
-   * Callback function to handle click event
-   */
-  onClick: PropTypes.func
-};
