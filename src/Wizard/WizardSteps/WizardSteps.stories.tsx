@@ -1,14 +1,18 @@
+import { Meta, Story } from "@storybook/react";
+
 import React from "react";
 import { Typography } from "@mui/material";
 import WizardStep from "./WizardStep";
 import WizardSteps from "./WizardSteps";
+import { WizardStepsProps } from "./WizardSteps.types";
 
-export default {
+const meta: Meta<typeof WizardSteps> = {
   component: WizardSteps,
   title: "Wizard/WizardSteps"
 };
+export default meta;
 
-const BasicTemplate = args => {
+const BasicTemplate: Story<WizardStepsProps> = args => {
   return (
     <WizardSteps {...args}>
       <WizardStep label="Step 1" />
@@ -24,7 +28,7 @@ Default.args = {
   activeStep: 0
 };
 
-const HelperTemplate = args => {
+const HelperTemplate: Story<WizardStepsProps> = args => {
   return (
     <WizardSteps {...args}>
       <WizardStep label="Step 1" helperText="Helper Text 1" />
@@ -41,7 +45,7 @@ WithHelperText.args = {
 };
 
 // with error text
-const ErrorTemplate = args => {
+const ErrorTemplate: Story<WizardStepsProps> = args => {
   return (
     <WizardSteps {...args}>
       <WizardStep label="Step 1" helperText="Helper Text 1" />

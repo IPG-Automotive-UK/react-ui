@@ -18,7 +18,7 @@ export interface WizardStepProps {
   /**
    * The index of the step. Normally set by the WizardSteps parent component.
    */
-  index: number;
+  index?: number;
   /**
    * The label displayed in the step icon.
    */

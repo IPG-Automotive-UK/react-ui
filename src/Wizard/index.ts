@@ -12,6 +12,7 @@ export {
 export { default as WizardContent } from "./WizardContent";
 export {
   default as WizardSteps,
+  WizardStepsProps,
   WizardStep,
   WizardStepProps
 } from "./WizardSteps";
