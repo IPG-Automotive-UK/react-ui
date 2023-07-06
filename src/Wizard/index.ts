@@ -4,7 +4,8 @@ export {
   NextButton,
   BackButton,
   BackButtonProps,
-  CancelButton
+  CancelButton,
+  CancelButtonProps
 } from "./WizardActions";
 export { default as WizardContent } from "./WizardContent";
 export { default as WizardSteps, WizardStep } from "./WizardSteps";
