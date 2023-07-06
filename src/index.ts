@@ -108,6 +108,7 @@ export {
   WizardContent,
   WizardSteps,
   WizardStep,
+  WizardStepProps,
   NextButton,
   NextButtonProps,
   BackButton,

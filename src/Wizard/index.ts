@@ -10,4 +10,8 @@ export {
   CancelButtonProps
 } from "./WizardActions";
 export { default as WizardContent } from "./WizardContent";
-export { default as WizardSteps, WizardStep } from "./WizardSteps";
+export {
+  default as WizardSteps,
+  WizardStep,
+  WizardStepProps
+} from "./WizardSteps";
