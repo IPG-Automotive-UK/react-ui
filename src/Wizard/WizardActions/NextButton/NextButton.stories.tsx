@@ -1,13 +1,17 @@
+import { Meta, Story } from "@storybook/react";
+
 import NextButton from "./NextButton";
+import { NextButtonProps } from "./NextButton.types";
 import React from "react";
 import { action } from "@storybook/addon-actions";
 
-export default {
+const meta: Meta<typeof NextButton> = {
   component: NextButton,
   title: "Wizard/NextButton"
 };
+export default meta;
 
-const Template = args => {
+const Template: Story<NextButtonProps> = args => {
   return <NextButton {...args} />;
 };
 
