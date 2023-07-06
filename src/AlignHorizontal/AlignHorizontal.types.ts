@@ -5,13 +5,6 @@ export interface AlignHorizontalProps {
   disabled?: boolean;
   /**
    * Callback fired when the value changes.
-   *
-   * **Signature**
-   * ```
-   * function(event: React.MouseEvent<HTMLElement>, value: any) => void
-   * ```
-   * event: The event source of the callback.
-   * value: The value of the selected button.
    */
   onChange: (
     event: React.MouseEvent<HTMLElement, MouseEvent>,

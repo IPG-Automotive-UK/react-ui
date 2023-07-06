@@ -9,6 +9,11 @@ import { action } from "@storybook/addon-actions";
  * Story metadata
  */
 const meta: Meta<typeof AlignHorizontal> = {
+  argTypes: {
+    onChange: {
+      control: false
+    }
+  },
   component: AlignHorizontal,
   title: "Text/AlignHorizontal"
 };
