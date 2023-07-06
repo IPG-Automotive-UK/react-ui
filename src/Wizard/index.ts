@@ -9,7 +9,7 @@ export {
   CancelButton,
   CancelButtonProps
 } from "./WizardActions";
-export { default as WizardContent } from "./WizardContent";
+export { default as WizardContent, WizardContentProps } from "./WizardContent";
 export {
   default as WizardSteps,
   WizardStepsProps,

@@ -1,8 +1,9 @@
 import * as React from "react";
 
 import { Box } from "@mui/material";
+import { WizardContentProps } from "./WizardContent.types";
 
-export default function WizardContent({ children }) {
+export default function WizardContent({ children }: WizardContentProps) {
   return (
     <Box
       role="region"
