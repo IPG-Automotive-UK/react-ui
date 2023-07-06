@@ -1,10 +1,13 @@
+import { Meta, Story } from "@storybook/react";
+
 import React from "react";
 import Wizard from "./Wizard";
 import { Default as WizardActions } from "./WizardActions/WizardActions.stories";
 import { Default as WizardContent } from "./WizardContent/WizardContent.stories";
+import { WizardProps } from "./Wizard.types";
 import { Default as WizardSteps } from "./WizardSteps/WizardSteps.stories";
 
-export default {
+const meta: Meta<typeof Wizard> = {
   argTypes: {
     children: {
       control: false
@@ -18,8 +21,9 @@ export default {
   component: Wizard,
   title: "Wizard/Wizard"
 };
+export default meta;
 
-const Template = args => {
+const Template: Story<WizardProps> = args => {
   return (
     <Wizard {...args}>
       <WizardSteps {...WizardSteps.args} />

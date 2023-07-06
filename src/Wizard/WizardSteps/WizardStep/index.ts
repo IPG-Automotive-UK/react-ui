@@ -1,2 +1,2 @@
 export { default } from "./WizardStep";
-export { WizardStepProps } from "./WizardStep.types";
+export type { WizardStepProps } from "./WizardStep.types";

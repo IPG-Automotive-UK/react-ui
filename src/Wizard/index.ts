@@ -1,4 +1,5 @@
 export { default as Wizard } from "./Wizard";
+export { WizardProps } from "./Wizard.types";
 export {
   default as WizardActions,
   WizardActionsProps,
