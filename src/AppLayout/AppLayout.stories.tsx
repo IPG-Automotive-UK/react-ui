@@ -12,6 +12,7 @@ import React from "react";
 import SidebarDivider from "../Sidebar/SidebarDivider";
 import SidebarItem from "../Sidebar/SidebarItem";
 import ThemeProvider from "../ThemeProvider";
+import { fixedPositionComponentDecorator } from "../../.storybook/decorators";
 import { useDarkMode } from "storybook-dark-mode";
 import { version } from "../../package.json";
 
@@ -20,6 +21,9 @@ import { version } from "../../package.json";
  */
 const meta: Meta<typeof AppLayout> = {
   component: AppLayout,
+  decorators: [
+    fixedPositionComponentDecorator({ width: "100vw", height: "100vh" })
+  ],
   title: "Layout/AppLayout"
 };
 export default meta;

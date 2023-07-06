@@ -1,37 +1,23 @@
-import { Box, IconButton } from "@mui/material";
-import { DecoratorFn, Meta, Story } from "@storybook/react";
+import { Meta, Story } from "@storybook/react";
 
 import AppHeader from ".";
 import { AppHeaderProps } from "./AppHeader.types";
+import { IconButton } from "@mui/material";
 import { Notifications } from "@mui/icons-material";
 import React from "react";
 import SearchBar from "../SearchBar";
 import ThemeProvider from "../ThemeProvider";
 import ToggleColorMode from "../ToggleColorMode";
 import VirtoLogo from "../SvgIcons/VirtoLogo";
+import { fixedPositionComponentDecorator } from "../../.storybook/decorators";
 import { useDarkMode } from "storybook-dark-mode";
-
-/**
- * Story decorator
- * This helps bound the component to the Storybook UI otherwise the fixed positioning of the AppHeader can render outside of the bounds of where the story is rendering
- */
-const decorator: DecoratorFn = storyFcn => (
-  <Box
-    sx={{
-      height: theme => theme.mixins.toolbar,
-      transform: "scale(1)"
-    }}
-  >
-    {storyFcn()}
-  </Box>
-);
 
 /**
  * Story metadata
  */
 const meta: Meta<typeof AppHeader> = {
   component: AppHeader,
-  decorators: [decorator],
+  decorators: [fixedPositionComponentDecorator({ minHeight: 58 })],
   title: "Layout/AppHeader"
 };
 export default meta;

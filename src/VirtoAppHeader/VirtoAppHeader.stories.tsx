@@ -4,12 +4,14 @@ import React from "react";
 import VirtoAppHeader from ".";
 import { VirtoAppHeaderProps } from "./VirtoAppHeader.types";
 import { action } from "@storybook/addon-actions";
+import { fixedPositionComponentDecorator } from "../../.storybook/decorators";
 
 /**
  * Story metadata
  */
 const meta: Meta<typeof VirtoAppHeader> = {
   component: VirtoAppHeader,
+  decorators: [fixedPositionComponentDecorator({ minHeight: 58 })],
   title: "Layout/VirtoAppHeader"
 };
 export default meta;
