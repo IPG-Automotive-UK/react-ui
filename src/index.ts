@@ -104,6 +104,7 @@ export { default as ViewToggleButton } from "./ViewToggleButton";
 export {
   Wizard,
   WizardActions,
+  WizardActionsProps,
   WizardContent,
   WizardSteps,
   WizardStep,

@@ -1,6 +1,7 @@
 export { default as Wizard } from "./Wizard";
 export {
   default as WizardActions,
+  WizardActionsProps,
   NextButton,
   NextButtonProps,
   BackButton,
