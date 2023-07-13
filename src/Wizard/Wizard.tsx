@@ -58,6 +58,6 @@ function ThemeOverride({ children, maxWidth }: WizardThemeOverrideProps) {
       {children}
     </ThemeProvider>
   ) : (
-    <>{children}</>
+    <React.Fragment>{children}</React.Fragment>
   );
 }
