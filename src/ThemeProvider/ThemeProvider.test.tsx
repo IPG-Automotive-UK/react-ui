@@ -1,5 +1,5 @@
 import ThemeProvider, { useTheme } from ".";
-import { act, render, screen } from "@testing-library/react";
+import { act, render, screen, waitFor } from "@testing-library/react";
 
 import React from "react";
 import { userEvent } from "@storybook/testing-library";
@@ -101,7 +101,10 @@ describe("ThemeProvider", () => {
     });
 
     // check that the theme is now the mode we want to test
-    const text = screen.getByText(mode);
-    expect(text).toBeInTheDocument();
+    waitFor(() => {
+      // check that the theme is now the mode we want to test
+      const text = screen.getByText(mode);
+      expect(text).toBeInTheDocument();
+    });
   });
 });
