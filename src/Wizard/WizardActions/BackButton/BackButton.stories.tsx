@@ -1,8 +1,8 @@
 import { Meta, Story } from "@storybook/react";
 
 import BackButton from "./BackButton";
-import { BackButtonProps } from "./BackButton.types";
 import React from "react";
+import { WizardActionButtonProps } from "../WizardActions.types";
 
 const meta: Meta<typeof BackButton> = {
   argTypes: {
@@ -15,7 +15,7 @@ const meta: Meta<typeof BackButton> = {
 };
 export default meta;
 
-const Template: Story<BackButtonProps> = args => {
+const Template: Story<WizardActionButtonProps> = args => {
   return <BackButton {...args} />;
 };
 

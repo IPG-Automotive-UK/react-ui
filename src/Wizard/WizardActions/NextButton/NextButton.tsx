@@ -2,12 +2,15 @@ import * as React from "react";
 
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Button } from "@mui/material";
-import { NextButtonProps } from "./NextButton.types";
+import { WizardActionButtonProps } from "../WizardActions.types";
 
 /**
  * Next button component for Wizard
  */
-export default function NextButton({ onClick, disabled }: NextButtonProps) {
+export default function NextButton({
+  onClick,
+  disabled
+}: WizardActionButtonProps) {
   return (
     <Button
       onClick={onClick}

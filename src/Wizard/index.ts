@@ -3,12 +3,10 @@ export { WizardProps } from "./Wizard.types";
 export {
   default as WizardActions,
   WizardActionsProps,
+  WizardActionButtonProps,
   NextButton,
-  NextButtonProps,
   BackButton,
-  BackButtonProps,
-  CancelButton,
-  CancelButtonProps
+  CancelButton
 } from "./WizardActions";
 export { default as WizardContent, WizardContentProps } from "./WizardContent";
 export {

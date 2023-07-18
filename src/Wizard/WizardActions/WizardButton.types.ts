@@ -1,4 +1,4 @@
-export interface CancelButtonProps {
+export interface WizardActionButtonProps {
   /**
    * If `true`, the button will be disabled.
    */

@@ -1,8 +1,8 @@
 import { Meta, Story } from "@storybook/react";
 
 import NextButton from "./NextButton";
-import { NextButtonProps } from "./NextButton.types";
 import React from "react";
+import { WizardActionButtonProps } from "../WizardActions.types";
 
 const meta: Meta<typeof NextButton> = {
   argTypes: {
@@ -15,7 +15,7 @@ const meta: Meta<typeof NextButton> = {
 };
 export default meta;
 
-const Template: Story<NextButtonProps> = args => {
+const Template: Story<WizardActionButtonProps> = args => {
   return <NextButton {...args} />;
 };
 

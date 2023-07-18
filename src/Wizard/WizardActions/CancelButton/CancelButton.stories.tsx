@@ -1,8 +1,8 @@
 import { Meta, Story } from "@storybook/react";
 
 import CancelButton from "./CancelButton";
-import { CancelButtonProps } from "./CancelButton.types";
 import React from "react";
+import { WizardActionButtonProps } from "../WizardActions.types";
 
 const meta: Meta<typeof CancelButton> = {
   argTypes: {
@@ -15,7 +15,7 @@ const meta: Meta<typeof CancelButton> = {
 };
 export default meta;
 
-const Template: Story<CancelButtonProps> = args => {
+const Template: Story<WizardActionButtonProps> = args => {
   return <CancelButton {...args} />;
 };
 
