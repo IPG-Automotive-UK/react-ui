@@ -65,6 +65,10 @@ export default function Snackbar({
   // icon
   const Icon = icons[variant];
 
+  // variant styling
+  const variantStyle = sx[variant];
+  variantStyle.flexWrap = "nowrap";
+
   // callback for closing
   const handleClose = (event, reason = "action") => {
     if (reason === "clickaway") return;
@@ -98,7 +102,7 @@ export default function Snackbar({
       open={open}
     >
       <SnackbarContent
-        sx={sx[variant]}
+        sx={variantStyle}
         message={
           <span>
             <Icon sx={sx.icon} />
