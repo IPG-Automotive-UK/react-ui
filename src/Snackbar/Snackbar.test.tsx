@@ -1,6 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
+
 import React from "react";
-import Snackbar from "./";
+import Snackbar from ".";
 import userEvent from "@testing-library/user-event";
 
 describe("Snackbar", () => {

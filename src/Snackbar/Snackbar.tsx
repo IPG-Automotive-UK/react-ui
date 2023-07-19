@@ -2,13 +2,15 @@ import {
   Button,
   IconButton,
   Snackbar as MuiSnackbar,
+  SnackbarCloseReason,
   SnackbarContent
 } from "@mui/material";
 import { CheckCircle, Close, Error, Info, Warning } from "@mui/icons-material";
 import { amber, green } from "@mui/material/colors";
 
-import PropTypes from "prop-types";
 import React from "react";
+import { SnackbarProps } from "./Snackbar.types";
+import { Theme } from "@mui/material/styles";
 
 // icon map
 const icons = {
@@ -27,26 +29,30 @@ const sx = {
     fontSize: 15
   },
   error: {
-    backgroundColor: theme => theme.palette.error.dark,
-    color: "#fff"
+    backgroundColor: (theme: Theme) => theme.palette.error.dark,
+    color: "#fff",
+    flexWrap: "nowrap"
   },
   icon: {
     float: "left",
     fontSize: 20,
-    marginRight: theme => theme.spacing(1),
+    marginRight: (theme: Theme) => theme.spacing(1),
     opacity: 0.9
   },
   info: {
-    backgroundColor: theme => theme.palette.primary.main,
-    color: "#fff"
+    backgroundColor: (theme: Theme) => theme.palette.primary.main,
+    color: "#fff",
+    flexWrap: "nowrap"
   },
   success: {
     backgroundColor: green[600],
-    color: "#fff"
+    color: "#fff",
+    flexWrap: "nowrap"
   },
   warning: {
     backgroundColor: amber[700],
-    color: "#fff"
+    color: "#fff",
+    flexWrap: "nowrap"
   }
 };
 
@@ -56,23 +62,27 @@ const sx = {
 export default function Snackbar({
   actionCallback,
   actionText,
-  autoHideDuration = null,
+  autoHideDuration,
   message,
   onClose,
   open,
   variant = "info"
-}) {
-  // icon
+}: SnackbarProps) {
+  // get icon based on variant
   const Icon = icons[variant];
 
-  // variant styling
+  // get styling based on variant
   const variantStyle = sx[variant];
-  variantStyle.flexWrap = "nowrap";
 
   // callback for closing
-  const handleClose = (event, reason = "action") => {
+  const handleClose = (
+    event: React.SyntheticEvent<HTMLElement>,
+    reason: SnackbarCloseReason = "timeout"
+  ) => {
     if (reason === "clickaway") return;
-    onClose(event, reason);
+    if (onClose) {
+      onClose(event, reason);
+    }
   };
 
   // action button
@@ -81,7 +91,7 @@ export default function Snackbar({
       <Button
         key="action"
         onClick={event => {
-          handleClose(event, "action");
+          handleClose(event, "timeout");
           actionCallback(event);
         }}
         sx={sx.action}
@@ -125,49 +135,3 @@ export default function Snackbar({
     </MuiSnackbar>
   );
 }
-// prop types
-Snackbar.propTypes = {
-  /**
-   * Callback fired when the user clicks the action button.
-   *
-   * **Signature**
-   * ```
-   * function(event: object) => void
-   * ```
-   * _event_: The event source of the callback.
-   */
-  actionCallback: PropTypes.func,
-  /**
-   * The action button text to display. It renders after the message, at the end of the snackbar.
-   */
-  actionText: PropTypes.string,
-  /**
-   * The number of milliseconds to wait before automatically calling the onClose function. onClose should then set the state of the open prop to hide the Snackbar. This behavior is disabled by default with the null value.
-   */
-  autoHideDuration: PropTypes.number,
-  /**
-   * The message to display.
-   */
-  message: PropTypes.node.isRequired,
-  /**
-   * Callback fired when the component requests to be closed. Typically onClose is used to set state in the parent component, which is used to control the Snackbar open prop.
-   *
-   * **Signature**
-   * ```
-   * function(event, reason) => void
-   * ```
-   *
-   * _event_: The event source of the callback.
-   *
-   * _reason_: Can be: "timeout" (autoHideDuration expired), "clickaway", "action".
-   */
-  onClose: PropTypes.func,
-  /**
-   * If true, Snackbar is open.
-   */
-  open: PropTypes.bool.isRequired,
-  /**
-   * Variant used to control the styling and icon.
-   */
-  variant: PropTypes.oneOf(Object.keys(icons))
-};

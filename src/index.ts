@@ -67,7 +67,7 @@ export {
 } from "./Sidebar";
 export { default as AppLauncher, AppLauncherProps } from "./AppLauncher";
 export { default as Slider } from "./Slider";
-export { default as Snackbar } from "./Snackbar";
+export { default as Snackbar, SnackbarProps } from "./Snackbar";
 export { SnackbarProvider, useSnackbar } from "./SnackbarProvider";
 export { StatusIcon, StatusLabel, StatusMessage } from "./Status";
 export { default as SwitchField } from "./SwitchField";
