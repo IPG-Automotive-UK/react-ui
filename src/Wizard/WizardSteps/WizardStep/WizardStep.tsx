@@ -2,7 +2,6 @@ import * as React from "react";
 
 import {
   Step,
-  StepContextType,
   StepLabel,
   StepLabelProps,
   SvgIcon,
@@ -10,7 +9,7 @@ import {
   useStepContext
 } from "@mui/material";
 
-import { Error } from "@mui/icons-material";
+import { Error as ErrorIcon } from "@mui/icons-material";
 import { WizardStepProps } from "./WizardStep.types";
 
 /**
@@ -45,7 +44,16 @@ function WizardStepLabel({
   errorText
 }: Pick<WizardStepProps, "label" | "helperText" | "errorText">) {
   // get context state
-  const { active, completed } = useStepContext() as StepContextType;
+  const stepContext = useStepContext();
+  let active: boolean, completed: boolean;
+  if ("completed" in stepContext && "active" in stepContext) {
+    active = stepContext.active;
+    completed = stepContext.completed;
+  } else {
+    throw new Error(
+      "WizardStepLabel must be used within a WizardStep component."
+    );
+  }
 
   // support string helper text with default typography
   if (helperText && typeof helperText === "string") {
@@ -69,7 +77,7 @@ function WizardStepLabel({
     stepLabelProps.optional = errorText;
     stepLabelProps.error = true;
     stepLabelProps.icon = (
-      <SvgIcon component={Error} color="error" fontSize="medium" />
+      <SvgIcon component={ErrorIcon} color="error" fontSize="medium" />
     );
   }
 
