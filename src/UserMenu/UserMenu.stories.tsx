@@ -35,7 +35,13 @@ Default.parameters = {
 
 const AppBarTemplate: Story<UserMenuProps> = args => {
   return (
-    <Box sx={{ width: "100%", transform: "scale(1)", minHeight: 56 }}>
+    <Box
+      sx={{
+        minHeight: 56,
+        transform: "scale(1)",
+        width: "100%"
+      }}
+    >
       <AppBar>
         <Toolbar style={{ justifyContent: "flex-end" }}>
           <UserMenu

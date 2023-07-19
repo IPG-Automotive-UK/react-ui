@@ -22,7 +22,10 @@ import { version } from "../../package.json";
 const meta: Meta<typeof AppLayout> = {
   component: AppLayout,
   decorators: [
-    fixedPositionComponentDecorator({ width: "100vw", height: "100vh" })
+    fixedPositionComponentDecorator({
+      height: "100vh",
+      width: "100vw"
+    })
   ],
   title: "Layout/AppLayout"
 };
