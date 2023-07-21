@@ -3,7 +3,7 @@ export {
   default as AlignHorizontal,
   AlignHorizontalProps
 } from "./AlignHorizontal";
-export { default as AlignVertical } from "./AlignVertical";
+export { default as AlignVertical, AlignVerticalProps } from "./AlignVertical";
 export {
   default as VirtoAppHeader,
   VirtoAppHeaderProps

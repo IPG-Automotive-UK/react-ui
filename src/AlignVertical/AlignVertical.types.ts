@@ -1,4 +1,4 @@
-export interface AlignHorizontalProps {
+export interface AlignVerticalProps {
   /**
    * If true, the component is disabled.
    */
@@ -8,7 +8,7 @@ export interface AlignHorizontalProps {
    */
   onChange: (
     event: React.MouseEvent<HTMLElement, MouseEvent>,
-    value: "left" | "center" | "right" | "justify" | null
+    value: "bottom" | "center" | "top" | null
   ) => void;
   /**
    * The orientation of the toggle button group.
@@ -21,5 +21,5 @@ export interface AlignHorizontalProps {
   /**
    * The value of the selected button.
    */
-  value?: "left" | "center" | "right" | "justify" | null;
+  value?: "bottom" | "center" | "top" | null;
 }

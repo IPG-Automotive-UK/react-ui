@@ -1,6 +1,9 @@
 import * as React from "react";
+
 import { render, screen } from "@testing-library/react";
+
 import AlignVertical from ".";
+import { AlignVerticalProps } from "./AlignVertical.types";
 import userEvent from "@testing-library/user-event";
 
 /**
@@ -8,8 +11,13 @@ import userEvent from "@testing-library/user-event";
  *
  * Provides state for value to avoid errors changing from uncontrolled to controlled.
  */
-const AlignVerticalWithState = ({ onChange, value: valueIn = "", ...rest }) => {
-  const [value, setValue] = React.useState(valueIn);
+const AlignVerticalWithState = ({
+  onChange,
+  value: valueIn = null,
+  ...rest
+}: Partial<AlignVerticalProps>) => {
+  const [value, setValue] =
+    React.useState<AlignVerticalProps["value"]>(valueIn);
   const handleChange = (event, value) => {
     setValue(value);
     onChange && onChange(event, value);

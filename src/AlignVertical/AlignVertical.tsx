@@ -7,18 +7,18 @@ import {
   VerticalAlignTop
 } from "@mui/icons-material";
 
-import PropTypes from "prop-types";
+import { AlignVerticalProps } from "./AlignVertical.types";
 
 /**
  * Vertical alignment button group component to toggle between top/center/bottom alignment
  */
 export default function AlignVertical({
   disabled = false,
-  onChange = () => {},
+  onChange,
   orientation = "horizontal",
   size = "medium",
   value = "top"
-}) {
+}: AlignVerticalProps) {
   return (
     <ToggleButtonGroup
       aria-label="vertical alignment"
@@ -49,33 +49,3 @@ export default function AlignVertical({
     </ToggleButtonGroup>
   );
 }
-
-AlignVertical.propTypes = {
-  /**
-   * If `true`, the button group will be disabled.
-   */
-  disabled: PropTypes.bool,
-  /**
-   * Callback fired when the value changes.
-   *
-   * **Signature**
-   * ```
-   * function(event: React.MouseEvent<HTMLElement>, value: any) => void
-   * ```
-   * event: The event source of the callback.
-   * value: The value of the selected button.
-   */
-  onChange: PropTypes.func,
-  /**
-   * The orientation of the toggle button group.
-   */
-  orientation: PropTypes.oneOf(["horizontal", "vertical"]),
-  /**
-   * The size of the component.
-   */
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-  /**
-   * The value of the selected toggle button.
-   */
-  value: PropTypes.oneOf(["bottom", "center", "top"])
-};
