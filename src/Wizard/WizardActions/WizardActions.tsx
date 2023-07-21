@@ -1,11 +1,12 @@
 import * as React from "react";
 
 import { Stack } from "@mui/material";
+import { WizardActionsProps } from "./WizardActions.types";
 
 /**
  * Wizard actions is a layout component that displays buttons in a row.
  */
-export default function WizardActions({ children }) {
+export default function WizardActions({ children }: WizardActionsProps) {
   return (
     <Stack
       role="toolbar"
@@ -22,6 +23,3 @@ export default function WizardActions({ children }) {
     </Stack>
   );
 }
-
-// prop types
-WizardActions.propTypes = {};

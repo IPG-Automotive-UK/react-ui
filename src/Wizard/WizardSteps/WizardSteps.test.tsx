@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 
 import React from "react";
-import WizardStep from "../WizardSteps/WizardStep";
+import WizardStep from "./WizardStep";
 import WizardSteps from "./WizardSteps";
 
 describe("WizardSteps", () => {

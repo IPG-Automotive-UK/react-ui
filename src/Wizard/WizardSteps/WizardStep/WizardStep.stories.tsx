@@ -1,13 +1,17 @@
+import { Meta, Story } from "@storybook/react";
+
 import React from "react";
 import { Typography } from "@mui/material";
 import WizardStep from "./WizardStep";
+import { WizardStepProps } from "./WizardStep.types";
 
-export default {
+const meta: Meta<typeof WizardStep> = {
   component: WizardStep,
   title: "Wizard/WizardStep"
 };
+export default meta;
 
-const Template = args => {
+const Template: Story<WizardStepProps> = args => {
   return <WizardStep {...args} />;
 };
 

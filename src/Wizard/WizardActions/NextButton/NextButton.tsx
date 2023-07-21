@@ -2,12 +2,15 @@ import * as React from "react";
 
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Button } from "@mui/material";
-import PropTypes from "prop-types";
+import { WizardActionButtonProps } from "../WizardActions.types";
 
 /**
  * Next button component for Wizard
  */
-export default function NextButton({ onClick, disabled }) {
+export default function NextButton({
+  onClick,
+  disabled
+}: WizardActionButtonProps) {
   return (
     <Button
       onClick={onClick}
@@ -21,15 +24,3 @@ export default function NextButton({ onClick, disabled }) {
     </Button>
   );
 }
-
-// prop types
-NextButton.propTypes = {
-  /**
-   * If `true`, the button will be disabled.
-   */
-  disabled: PropTypes.bool,
-  /**
-   * Callback function to handle click event
-   */
-  onClick: PropTypes.func
-};

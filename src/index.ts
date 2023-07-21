@@ -102,12 +102,18 @@ export {
 } from "./SvgIcons";
 export { default as ViewToggleButton } from "./ViewToggleButton";
 export {
-  Wizard,
-  WizardActions,
-  WizardContent,
-  WizardSteps,
-  WizardStep,
-  NextButton,
   BackButton,
-  CancelButton
+  CancelButton,
+  NextButton,
+  Wizard,
+  WizardActionButtonProps,
+  WizardActions,
+  WizardActionsProps,
+  WizardContent,
+  WizardContentProps,
+  WizardProps,
+  WizardStep,
+  WizardStepProps,
+  WizardSteps,
+  WizardStepsProps
 } from "./Wizard";

@@ -1,11 +1,15 @@
+import { Meta, Story } from "@storybook/react";
+
 import React from "react";
 import { Typography } from "@mui/material";
 import WizardContent from "./WizardContent";
+import { WizardContentProps } from "./WizardContent.types";
 
-export default {
+const meta: Meta<typeof WizardContent> = {
   component: WizardContent,
   title: "Wizard/WizardContent"
 };
+export default meta;
 
 const lipsum = [
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet libero vestibulum lacus eleifend sollicitudin. Mauris nisi purus, fermentum ac sagittis sit amet, commodo sed sapien. Suspendisse consectetur massa vel sodales laoreet. Phasellus maximus vitae augue et posuere. Pellentesque dictum, lorem ac imperdiet fringilla, ipsum massa euismod libero, nec fermentum ligula sapien et mi. Nulla dignissim quis erat quis tincidunt. Ut aliquam pulvinar leo id pharetra. Proin efficitur varius semper. Aliquam erat volutpat. Phasellus vehicula lacus sed lacus tincidunt, eleifend congue massa dapibus. Nulla ultrices odio nec diam congue, a accumsan tellus dapibus. Suspendisse potenti. Aenean ut gravida erat, a tincidunt nisl. In vitae ligula risus.",
@@ -15,7 +19,7 @@ const lipsum = [
   "Proin sit amet commodo metus. Nunc laoreet, ante sed commodo iaculis, mi dolor convallis elit, ut pulvinar turpis velit ut turpis. Fusce sed euismod lectus. Integer mi dolor, gravida id orci cursus, euismod commodo tellus. Duis fringilla pellentesque quam fermentum placerat. Curabitur nisl magna, ultrices quis lacinia vitae, feugiat sollicitudin leo. Nam dapibus ultricies mollis. Proin vel sodales turpis, id tempor tellus. Proin blandit gravida dolor, ac blandit neque cursus non. Pellentesque vestibulum faucibus metus, in rhoncus velit pretium a. Mauris felis tortor, cursus sed dignissim blandit, consequat sit amet sapien. Nam nibh arcu, pharetra eget auctor a, varius sit amet enim. Vestibulum semper nunc urna, ut convallis mauris elementum imperdiet. Nunc est dolor, porta ut gravida in, scelerisque nec felis."
 ];
 
-const Template = () => {
+const Template: Story<WizardContentProps> = () => {
   return (
     <WizardContent>
       {lipsum.map((paragraph, index) => (

@@ -1,14 +1,13 @@
 import * as React from "react";
 
 import { Box, ThemeProvider, Typography } from "@mui/material";
-
-import PropTypes from "prop-types";
+import { WizardProps, WizardThemeOverrideProps } from "./Wizard.types";
 
 /**
  * The Wizard component allows you to create a multi-step form.
  * It handles title and layout.
  */
-export default function Wizard({ title, children, maxWidth }) {
+export default function Wizard({ title, children, maxWidth }: WizardProps) {
   return (
     <ThemeOverride maxWidth={maxWidth}>
       <Box
@@ -44,7 +43,7 @@ export default function Wizard({ title, children, maxWidth }) {
 /**
  * Internal wrapper for ThemeProvider that overrides the layout.content.maxWidth if maxWidth is provided.
  */
-function ThemeOverride({ children, maxWidth }) {
+function ThemeOverride({ children, maxWidth }: WizardThemeOverrideProps) {
   return maxWidth ? (
     <ThemeProvider
       theme={baseTheme => ({
@@ -59,33 +58,6 @@ function ThemeOverride({ children, maxWidth }) {
       {children}
     </ThemeProvider>
   ) : (
-    children
+    <React.Fragment>{children}</React.Fragment>
   );
 }
-
-// prop types
-Wizard.propTypes = {
-  /**
-   * Children. Should be WizardSteps, WizardContent, and WizardActions components in that order.
-   */
-  children: PropTypes.node,
-  /**
-   * Maximum width of the content. This includes the title, steps, and content, but not the actions. Default is taken from the parent theme (layout.content.maxWidth).
-   */
-  maxWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  /**
-   * Wizard title
-   */
-  title: PropTypes.string
-};
-
-ThemeOverride.propTypes = {
-  /**
-   * Children.
-   */
-  children: PropTypes.node,
-  /**
-   * Maximum width to override in the theme.
-   */
-  maxWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
-};
