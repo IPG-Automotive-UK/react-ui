@@ -1,4 +1,4 @@
-import { AppBar, Toolbar } from "@mui/material";
+import { AppBar, Box, Toolbar } from "@mui/material";
 import { Meta, Story } from "@storybook/react";
 
 import React from "react";
@@ -35,15 +35,23 @@ Default.parameters = {
 
 const AppBarTemplate: Story<UserMenuProps> = args => {
   return (
-    <AppBar>
-      <Toolbar style={{ justifyContent: "flex-end" }}>
-        <UserMenu
-          {...args}
-          onChangePassword={action("changePassword")}
-          onLogout={action("logout")}
-        />
-      </Toolbar>
-    </AppBar>
+    <Box
+      sx={{
+        minHeight: 56,
+        transform: "scale(1)",
+        width: "100%"
+      }}
+    >
+      <AppBar>
+        <Toolbar style={{ justifyContent: "flex-end" }}>
+          <UserMenu
+            {...args}
+            onChangePassword={action("changePassword")}
+            onLogout={action("logout")}
+          />
+        </Toolbar>
+      </AppBar>
+    </Box>
   );
 };
 

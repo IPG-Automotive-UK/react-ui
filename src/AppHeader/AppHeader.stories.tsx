@@ -9,6 +9,7 @@ import SearchBar from "../SearchBar";
 import ThemeProvider from "../ThemeProvider";
 import ToggleColorMode from "../ToggleColorMode";
 import VirtoLogo from "../SvgIcons/VirtoLogo";
+import { fixedPositionComponentDecorator } from "../../.storybook/decorators";
 import { useDarkMode } from "storybook-dark-mode";
 
 /**
@@ -16,6 +17,7 @@ import { useDarkMode } from "storybook-dark-mode";
  */
 const meta: Meta<typeof AppHeader> = {
   component: AppHeader,
+  decorators: [fixedPositionComponentDecorator({ minHeight: 58 })],
   title: "Layout/AppHeader"
 };
 export default meta;
