@@ -2,9 +2,13 @@ import {
   AccessTime,
   Block,
   Cached,
+  Cancel,
+  CheckCircle,
   Close,
   Done,
   InsertDriveFileOutlined,
+  Timelapse,
+  Warning,
   WarningAmber
 } from "@mui/icons-material";
 import { amber, green, grey, indigo, red, teal } from "@mui/material/colors";
@@ -13,6 +17,47 @@ import { amber, green, grey, indigo, red, teal } from "@mui/material/colors";
  * Single source of truth for status definitons
  */
 const statuses = {
+  Failed: {
+    icon: {
+      color: red[700],
+      type: Cancel
+    },
+    label: {
+      color: red[700],
+      text: "Failed"
+    }
+  },
+  "Not Run": {
+    icon: {
+      color: amber[800],
+      type: Warning
+    },
+    label: {
+      color: amber[800],
+      text: "Not Run"
+    }
+  },
+  Passed: {
+    icon: {
+      color: green[800],
+      type: CheckCircle
+    },
+    label: {
+      color: green[800],
+      text: "Passed"
+    }
+  },
+  Pending: {
+    icon: {
+      color: grey[400],
+      type: Timelapse
+    },
+    label: {
+      color: grey[400],
+      text: "Pending"
+    }
+  },
+
   cancelled: {
     icon: {
       color: grey[500],

@@ -21,6 +21,8 @@ const Template: Story<StatusCardProps> = args => {
 };
 export const Default = Template.bind({});
 Default.args = {
+  height: 39,
   name: "Status",
-  status: "completed"
+  status: "Passed",
+  width: 39
 };
