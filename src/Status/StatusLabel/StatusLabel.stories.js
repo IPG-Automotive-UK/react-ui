@@ -13,6 +13,8 @@ const Template = args => {
 
 export const Default = Template.bind({});
 Default.args = {
+  height: 24,
   status: statusTypes[0],
-  variant: "body2"
+  variant: "body2",
+  width: 24
 };

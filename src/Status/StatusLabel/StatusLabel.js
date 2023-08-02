@@ -8,7 +8,12 @@ import StatusIcon from "../StatusIcon";
 /**
  * Displays a status icon and text label.
  */
-export default function StatusLabel({ status, variant = "body2" }) {
+export default function StatusLabel({
+  status,
+  variant = "body2",
+  height = 24,
+  width = 24
+}) {
   return (
     <Box
       sx={{
@@ -19,13 +24,17 @@ export default function StatusLabel({ status, variant = "body2" }) {
         justifyContent: "center"
       }}
     >
-      <StatusIcon status={status} height={24} width={24} />
+      <StatusIcon status={status} height={height} width={width} />
       <Typography variant={variant}>{status}</Typography>
     </Box>
   );
 }
 
 StatusLabel.propTypes = {
+  /**
+   * Icon height
+   */
+  height: PropTypes.number,
   /**
    * The status type.
    */
@@ -58,5 +67,9 @@ StatusLabel.propTypes = {
     "inherit",
     "subtitle1",
     "subtitle2"
-  ])
+  ]),
+  /**
+   * Icon width
+   */
+  width: PropTypes.number
 };
