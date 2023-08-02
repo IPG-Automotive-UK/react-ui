@@ -33,7 +33,7 @@ describe("StatusCard", () => {
     "Pending"
   ];
 
-  test.each(allStatuses)("renders correct icon for status", status => {
+  test.each(allStatuses)("renders correct icon for %s", status => {
     const { container } = render(<StatusCard status={status} name={"Test"} />);
     // confirm that the svg icon has the same name as we expect
     const iconName = (statuses[status].icon.type as CustomIcon).name;

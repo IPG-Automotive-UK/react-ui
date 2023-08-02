@@ -15,7 +15,7 @@ const meta: Meta<typeof StatusIcon> = {
 export default meta;
 
 /**
- * Story template for the StatusCard component
+ * Story template for the StatusIcon component
  */
 const Template: Story<StatusIconProps> = args => {
   return <StatusIcon {...args} />;

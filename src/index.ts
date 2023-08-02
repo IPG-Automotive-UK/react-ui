@@ -74,7 +74,8 @@ export {
   StatusLabel,
   StatusCard,
   StatusCardProps,
-  StatusIconProps
+  StatusIconProps,
+  StatusLabelProps
 } from "./Status";
 export { default as SwitchField } from "./SwitchField";
 export { default as TextField, TextFieldProps } from "./TextField";
