@@ -1,13 +1,23 @@
+import { Meta, Story } from "@storybook/react";
+
 import React from "react";
 import StatusIcon from "./StatusIcon";
+import { StatusIconProps } from "./StatusIcon.types";
 import { statusTypes } from "../statuses";
 
-export default {
+/**
+ * Story metadata
+ */
+const meta: Meta<typeof StatusIcon> = {
   component: StatusIcon,
   title: "Status/StatusIcon"
 };
+export default meta;
 
-const Template = args => {
+/**
+ * Story template for the StatusCard component
+ */
+const Template: Story<StatusIconProps> = args => {
   return <StatusIcon {...args} />;
 };
 

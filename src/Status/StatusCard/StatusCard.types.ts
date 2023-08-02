@@ -16,5 +16,3 @@ export interface StatusCardProps {
    */
   height?: number;
 }
-
-export interface StatusIconProps extends Omit<StatusCardProps, "name"> {}
