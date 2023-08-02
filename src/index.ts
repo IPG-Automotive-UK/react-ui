@@ -69,13 +69,7 @@ export { default as AppLauncher, AppLauncherProps } from "./AppLauncher";
 export { default as Slider } from "./Slider";
 export { default as Snackbar, SnackbarProps } from "./Snackbar";
 export { SnackbarProvider, useSnackbar } from "./SnackbarProvider";
-export {
-  StatusIcon,
-  StatusLabel,
-  StatusMessage,
-  StatusCard,
-  StatusCardProps
-} from "./Status";
+export { StatusIcon, StatusLabel, StatusCard, StatusCardProps } from "./Status";
 export { default as SwitchField } from "./SwitchField";
 export { default as TextField, TextFieldProps } from "./TextField";
 export { ThemeProvider, ThemeProviderProps, useTheme } from "./ThemeProvider";
