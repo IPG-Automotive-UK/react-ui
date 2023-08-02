@@ -10,10 +10,41 @@ import {
 } from "@mui/icons-material";
 import { amber, green, grey, indigo, red, teal } from "@mui/material/colors";
 
+// Define the types for the icon and label objects
+type Icon = {
+  color: string;
+  type: React.ElementType;
+};
+
+type Label = {
+  text: string;
+};
+
+// Define the status object type
+type Status = {
+  icon: Icon;
+  label: Label;
+};
+
+// Define the statuses object type with appropriate keys
+type Statuses = {
+  Failed: Status;
+  "Not Run": Status;
+  Passed: Status;
+  Pending: Status;
+  cancelled: Status;
+  completed: Status;
+  failed: Status;
+  "not-ready": Status;
+  ready: Status;
+  running: Status;
+  submitted: Status;
+};
+
 /**
- * Single source of truth for status definitons
+ * Single source of truth for status definitions
  */
-const statuses = {
+const statuses: Statuses = {
   Failed: {
     icon: {
       color: red[700],
@@ -50,7 +81,6 @@ const statuses = {
       text: "Pending"
     }
   },
-
   cancelled: {
     icon: {
       color: grey[500],
@@ -118,4 +148,6 @@ const statuses = {
 
 export default statuses;
 
-export const statusTypes = Object.keys(statuses);
+export const statusTypes: Array<keyof Statuses> = Object.keys(
+  statuses
+) as Array<keyof Statuses>;

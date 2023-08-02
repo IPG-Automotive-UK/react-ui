@@ -2,7 +2,12 @@ import { render, screen } from "@testing-library/react";
 
 import React from "react";
 import StatusCard from "./StatusCard";
+import { SvgIconComponent } from "@mui/icons-material";
 import statuses from "../statuses";
+
+interface CustomIcon extends SvgIconComponent {
+  name?: string;
+}
 
 describe("StatusCard", () => {
   test("renders card with status and name", () => {
@@ -31,9 +36,10 @@ describe("StatusCard", () => {
   test.each(allStatuses)("renders correct icon for status", status => {
     const { container } = render(<StatusCard status={status} name={"Test"} />);
     // confirm that the svg icon has the same name as we expect
+    const iconName = (statuses[status].icon.type as CustomIcon).name;
     expect(container.querySelector("svg")).toHaveAttribute(
       "data-testid",
-      statuses[status].icon.type.name
+      iconName
     );
   });
 });
