@@ -1,15 +1,12 @@
 import {
-  AccessTime,
+  AccessTimeFilled,
   Block,
-  Cached,
   Cancel,
+  ChangeCircle,
   CheckCircle,
-  Close,
-  Done,
-  InsertDriveFileOutlined,
+  Task,
   Timelapse,
-  Warning,
-  WarningAmber
+  Warning
 } from "@mui/icons-material";
 import { amber, green, grey, indigo, red, teal } from "@mui/material/colors";
 
@@ -23,7 +20,6 @@ const statuses = {
       type: Cancel
     },
     label: {
-      color: red[700],
       text: "Failed"
     }
   },
@@ -33,7 +29,6 @@ const statuses = {
       type: Warning
     },
     label: {
-      color: amber[800],
       text: "Not Run"
     }
   },
@@ -43,7 +38,6 @@ const statuses = {
       type: CheckCircle
     },
     label: {
-      color: green[800],
       text: "Passed"
     }
   },
@@ -53,7 +47,6 @@ const statuses = {
       type: Timelapse
     },
     label: {
-      color: grey[400],
       text: "Pending"
     }
   },
@@ -64,67 +57,60 @@ const statuses = {
       type: Block
     },
     label: {
-      color: grey[500],
       text: "Cancelled"
     }
   },
   completed: {
     icon: {
       color: green[800],
-      type: Done
+      type: CheckCircle
     },
     label: {
-      color: green[800],
       text: "Completed"
     }
   },
   failed: {
     icon: {
       color: red[700],
-      type: Close
+      type: Cancel
     },
     label: {
-      color: red[700],
       text: "Failed"
     }
   },
   "not-ready": {
     icon: {
       color: amber[800],
-      type: WarningAmber
+      type: Warning
     },
     label: {
-      color: amber[800],
       text: "Not Ready"
     }
   },
   ready: {
     icon: {
       color: teal[500],
-      type: InsertDriveFileOutlined
+      type: Task
     },
     label: {
-      color: teal[500],
       text: "Ready"
     }
   },
   running: {
     icon: {
       color: indigo[400],
-      type: Cached
+      type: ChangeCircle
     },
     label: {
-      color: indigo[500],
       text: "Running"
     }
   },
   submitted: {
     icon: {
-      color: amber[400],
-      type: AccessTime
+      color: amber[800],
+      type: AccessTimeFilled
     },
     label: {
-      color: amber[500],
       text: "Submitted"
     }
   }
