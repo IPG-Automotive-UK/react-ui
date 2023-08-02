@@ -13,5 +13,6 @@ const Template = args => {
 
 export const Default = Template.bind({});
 Default.args = {
-  status: statusTypes[0]
+  status: statusTypes[0],
+  variant: "body2"
 };

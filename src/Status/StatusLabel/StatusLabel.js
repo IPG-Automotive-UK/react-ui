@@ -1,14 +1,14 @@
 import * as React from "react";
 
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+
 import PropTypes from "prop-types";
 import StatusIcon from "../StatusIcon";
-import StatusMessage from "../StatusMessage";
 
 /**
  * Displays a status icon and text label.
  */
-export default function StatusLabel({ status }) {
+export default function StatusLabel({ status, variant = "body2" }) {
   return (
     <Box
       sx={{
@@ -20,7 +20,7 @@ export default function StatusLabel({ status }) {
       }}
     >
       <StatusIcon status={status} height={24} width={24} />
-      <StatusMessage status={status} />
+      <Typography variant={variant}>{status}</Typography>
     </Box>
   );
 }
@@ -37,5 +37,22 @@ StatusLabel.propTypes = {
     "ready",
     "running",
     "submitted"
-  ]).isRequired
+  ]).isRequired,
+  /**
+   * The variant to use.
+   */
+  variant: PropTypes.oneOf([
+    "body1",
+    "body2",
+    "caption",
+    "h1",
+    "h2",
+    "h3",
+    "h4",
+    "h5",
+    "h6",
+    "inherit",
+    "subtitle1",
+    "subtitle2"
+  ])
 };
