@@ -30,6 +30,10 @@ StatusLabel.propTypes = {
    * The status type.
    */
   status: PropTypes.oneOf([
+    "Passed",
+    "Failed",
+    "Not Run",
+    "Pending",
     "cancelled",
     "completed",
     "failed",
