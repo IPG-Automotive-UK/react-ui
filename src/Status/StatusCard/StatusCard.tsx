@@ -1,26 +1,10 @@
 import * as React from "react";
 
 import { Box, Card, CardContent, Typography } from "@mui/material";
-import { StatusCardProps, StatusIconProps } from "./StatusCard.types";
 
+import { StatusCardProps } from "./StatusCard.types";
+import StatusIcon from "../StatusIcon/StatusIcon";
 import { grey } from "@mui/material/colors";
-import statuses from "../statuses";
-
-// custom icon component that will be used to display status icons
-function StatusIcon({ status, width, height }: StatusIconProps) {
-  const {
-    icon: { type: Icon, color }
-  } = statuses[status];
-  return (
-    <Icon
-      sx={{
-        color,
-        height,
-        width
-      }}
-    />
-  );
-}
 
 // custom card component that will be used to display status information
 const card = ({ status, name, width, height }: StatusCardProps) => {

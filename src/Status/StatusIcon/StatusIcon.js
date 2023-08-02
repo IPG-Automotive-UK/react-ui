@@ -1,6 +1,5 @@
 import * as React from "react";
 
-import { Avatar } from "@mui/material";
 import PropTypes from "prop-types";
 import statuses from "../statuses";
 
@@ -12,20 +11,13 @@ export default function StatusIcon({ status, width = 40, height = 40 }) {
     icon: { type: Icon, color }
   } = statuses[status];
   return (
-    <Avatar
+    <Icon
       sx={{
-        bgcolor: color,
+        color,
         height,
         width
       }}
-    >
-      <Icon
-        sx={{
-          height: height * 0.7,
-          width: width * 0.7
-        }}
-      />
-    </Avatar>
+    />
   );
 }
 
