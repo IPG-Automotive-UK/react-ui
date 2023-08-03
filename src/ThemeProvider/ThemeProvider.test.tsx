@@ -1,5 +1,5 @@
 import ThemeProvider, { useTheme } from ".";
-import { act, render, screen } from "@testing-library/react";
+import { act, render, screen, waitFor } from "@testing-library/react";
 
 import React from "react";
 import { userEvent } from "@storybook/testing-library";
@@ -83,25 +83,31 @@ describe("ThemeProvider", () => {
     const text = screen.getByText(mode);
     expect(text).toBeInTheDocument();
   });
-  test.each(["light", "dark"])("renders %s theme when theme toggled", mode => {
-    // first set the theme to the opposite of the mode we want to test
-    window.localStorage.setItem("theme", mode === "light" ? "dark" : "light");
+  test.each(["light", "dark"])(
+    "renders %s theme when theme toggled",
+    async mode => {
+      // first set the theme to the opposite of the mode we want to test
+      window.localStorage.setItem("theme", mode === "light" ? "dark" : "light");
 
-    // render the toggle button
-    render(
-      <ThemeProvider>
-        <ThemeToggle />
-      </ThemeProvider>
-    );
+      // render the toggle button
+      render(
+        <ThemeProvider>
+          <ThemeToggle />
+        </ThemeProvider>
+      );
 
-    // click the toggle button
-    const button = screen.getByText("Toggle");
-    act(() => {
-      userEvent.click(button);
-    });
+      // click the toggle button
+      const button = screen.getByText("Toggle");
+      act(() => {
+        userEvent.click(button);
+      });
 
-    // check that the theme is now the mode we want to test
-    const text = screen.getByText(mode);
-    expect(text).toBeInTheDocument();
-  });
+      // check that the theme is now the mode we want to test
+      await waitFor(() => {
+        // check that the theme is now the mode we want to test
+        const text = screen.getByText(mode);
+        expect(text).toBeInTheDocument();
+      });
+    }
+  );
 });
