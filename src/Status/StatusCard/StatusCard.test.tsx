@@ -2,12 +2,7 @@ import { render, screen } from "@testing-library/react";
 
 import React from "react";
 import StatusCard from "./StatusCard";
-import { SvgIconComponent } from "@mui/icons-material";
 import statuses from "../statuses";
-
-interface CustomIcon extends SvgIconComponent {
-  name?: string;
-}
 
 describe("StatusCard", () => {
   test("renders card with status and name", () => {
@@ -26,20 +21,29 @@ describe("StatusCard", () => {
     expect(nameElement).toBeInTheDocument();
   });
 
-  const allStatuses: Array<"Passed" | "Failed" | "Pending" | "Not Run"> = [
-    "Passed",
-    "Failed",
-    "Not Run",
-    "Pending"
-  ];
+  test.each(["Passed", "Failed", "Not Run", "Pending"] as const)(
+    "renders correct icon for %s",
+    status => {
+      // render component
+      const { container } = render(
+        <StatusCard status={status} name={"Test"} />
+      );
 
-  test.each(allStatuses)("renders correct icon for %s", status => {
-    const { container } = render(<StatusCard status={status} name={"Test"} />);
-    // confirm that the svg icon has the same name as we expect
-    const iconName = (statuses[status].icon.type as CustomIcon).name;
-    expect(container.querySelector("svg")).toHaveAttribute(
-      "data-testid",
-      iconName
-    );
-  });
+      // render raw icon
+      const Icon = statuses[status].icon.type;
+      const { container: iconContainer } = render(<Icon />);
+
+      // MUI should render the icon name in the data-testid attribute
+      expect(
+        container.querySelector("svg")?.getAttribute("data-testid")
+      ).not.toBeUndefined();
+
+      // expect the icon to be the same as the raw icon
+      expect(
+        container.querySelector("svg")?.getAttribute("data-testid")
+      ).toEqual(
+        iconContainer.querySelector("svg")?.getAttribute("data-testid")
+      );
+    }
+  );
 });
