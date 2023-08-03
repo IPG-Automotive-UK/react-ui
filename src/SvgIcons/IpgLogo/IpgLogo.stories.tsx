@@ -1,4 +1,4 @@
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 
 import IpgLogo from "./IpgLogo";
 import { IpgLogoProps } from "./IpgLogo.types";
@@ -16,32 +16,32 @@ export default meta;
 /**
  * Story template for the IpgLogo component
  */
-const Template: Story<IpgLogoProps> = args => {
+const Template: StoryFn<IpgLogoProps> = args => {
   return <IpgLogo {...args} />;
 };
 
-/**
- * Default story for the IpgLogo component
- */
-export const Default = Template.bind({});
-Default.args = {
-  sx: { height: 40, width: 160 }
+export const Default = {
+  render: Template,
+
+  args: {
+    sx: { height: 40, width: 160 }
+  }
 };
 
-/**
- * Story for the IpgLogo component with textColour set to white
- */
-export const WhiteTextColour = Template.bind({});
-WhiteTextColour.args = {
-  sx: { height: 40, width: 160 },
-  textColour: "white"
+export const WhiteTextColour = {
+  render: Template,
+
+  args: {
+    sx: { height: 40, width: 160 },
+    textColour: "white"
+  }
 };
 
-/**
- * Story for the IpgLogo component with textColour set to black
- */
-export const BlackTextColour = Template.bind({});
-BlackTextColour.args = {
-  sx: { height: 40, width: 160 },
-  textColour: "black"
+export const BlackTextColour = {
+  render: Template,
+
+  args: {
+    sx: { height: 40, width: 160 },
+    textColour: "black"
+  }
 };

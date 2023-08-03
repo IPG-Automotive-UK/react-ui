@@ -1,4 +1,4 @@
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 
 import React from "react";
 import StatusCard from "./StatusCard";
@@ -16,11 +16,15 @@ export default meta;
 /**
  * Story template for the StatusCard component
  */
-const Template: Story<StatusCardProps> = args => {
+const Template: StoryFn<StatusCardProps> = args => {
   return <StatusCard {...args} />;
 };
-export const Default = Template.bind({});
-Default.args = {
-  name: "Status",
-  status: "passed"
+
+export const Default = {
+  render: Template,
+
+  args: {
+    name: "Status",
+    status: "passed"
+  }
 };

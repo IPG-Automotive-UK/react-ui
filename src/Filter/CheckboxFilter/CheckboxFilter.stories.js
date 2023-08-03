@@ -20,20 +20,24 @@ const Template = args => {
   return <CheckboxFilter {...args} onChange={onChange} value={value} />;
 };
 
-// default story
-export const Default = Template.bind({});
-Default.args = {
-  label: "Select options",
-  limitTags: -1,
-  name: "checkbox-filter",
-  options: Array.from(Array(20).keys()).map(i => `Option ${i}`),
-  value: ["Option 1"],
-  variant: "popper"
+export const Default = {
+  render: Template,
+
+  args: {
+    label: "Select options",
+    limitTags: -1,
+    name: "checkbox-filter",
+    options: Array.from(Array(20).keys()).map(i => `Option ${i}`),
+    value: ["Option 1"],
+    variant: "popper"
+  }
 };
 
-// AlwaysOpen story
-export const AlwaysOpen = Template.bind({});
-AlwaysOpen.args = {
-  ...Default.args,
-  variant: "always-open"
+export const AlwaysOpen = {
+  render: Template,
+
+  args: {
+    ...Default.args,
+    variant: "always-open"
+  }
 };

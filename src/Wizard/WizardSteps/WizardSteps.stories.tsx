@@ -1,4 +1,4 @@
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 
 import React from "react";
 import { Typography } from "@mui/material";
@@ -12,7 +12,7 @@ const meta: Meta<typeof WizardSteps> = {
 };
 export default meta;
 
-const BasicTemplate: Story<WizardStepsProps> = args => {
+const BasicTemplate: StoryFn<WizardStepsProps> = args => {
   return (
     <WizardSteps {...args}>
       <WizardStep label="Step 1" />
@@ -22,13 +22,15 @@ const BasicTemplate: Story<WizardStepsProps> = args => {
   );
 };
 
-// default story
-export const Default = BasicTemplate.bind({});
-Default.args = {
-  activeStep: 0
+export const Default = {
+  render: BasicTemplate,
+
+  args: {
+    activeStep: 0
+  }
 };
 
-const HelperTemplate: Story<WizardStepsProps> = args => {
+const HelperTemplate: StoryFn<WizardStepsProps> = args => {
   return (
     <WizardSteps {...args}>
       <WizardStep label="Step 1" helperText="Helper Text 1" />
@@ -38,14 +40,16 @@ const HelperTemplate: Story<WizardStepsProps> = args => {
   );
 };
 
-// with helper text
-export const WithHelperText = HelperTemplate.bind({});
-WithHelperText.args = {
-  ...Default.args
+export const WithHelperText = {
+  render: HelperTemplate,
+
+  args: {
+    ...Default.args
+  }
 };
 
 // with error text
-const ErrorTemplate: Story<WizardStepsProps> = args => {
+const ErrorTemplate: StoryFn<WizardStepsProps> = args => {
   return (
     <WizardSteps {...args}>
       <WizardStep label="Step 1" helperText="Helper Text 1" />
@@ -63,8 +67,10 @@ const ErrorTemplate: Story<WizardStepsProps> = args => {
   );
 };
 
-// with error text
-export const WithErrorText = ErrorTemplate.bind({});
-WithErrorText.args = {
-  activeStep: 1
+export const WithErrorText = {
+  render: ErrorTemplate,
+
+  args: {
+    activeStep: 1
+  }
 };

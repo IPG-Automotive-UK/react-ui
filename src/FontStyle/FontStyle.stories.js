@@ -22,10 +22,13 @@ const Template = args => {
   return <FontStyle {...args} onChange={onChange} value={value} />;
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  disabled: false,
-  orientation: "horizontal",
-  size: "medium",
-  value: []
+export const Default = {
+  render: Template,
+
+  args: {
+    disabled: false,
+    orientation: "horizontal",
+    size: "medium",
+    value: []
+  }
 };

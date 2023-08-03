@@ -1,5 +1,5 @@
 import { AppBar, Box, Toolbar } from "@mui/material";
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 
 import React from "react";
 import UserMenu from "./UserMenu";
@@ -15,7 +15,7 @@ const meta: Meta<typeof UserMenu> = {
 };
 export default meta;
 
-const DefaultTemplate: Story<UserMenuProps> = args => (
+const DefaultTemplate: StoryFn<UserMenuProps> = args => (
   <div style={{ display: "flex", justifyContent: "flex-end" }}>
     <UserMenu
       {...args}
@@ -25,15 +25,18 @@ const DefaultTemplate: Story<UserMenuProps> = args => (
   </div>
 );
 
-export const Default = DefaultTemplate.bind({});
-Default.args = { username: "Ruud van Nistelrooy" };
-Default.parameters = {
-  backgrounds: {
-    default: "dark"
+export const Default = {
+  render: DefaultTemplate,
+  args: { username: "Ruud van Nistelrooy" },
+
+  parameters: {
+    backgrounds: {
+      default: "dark"
+    }
   }
 };
 
-const AppBarTemplate: Story<UserMenuProps> = args => {
+const AppBarTemplate: StoryFn<UserMenuProps> = args => {
   return (
     <Box
       sx={{
@@ -55,5 +58,7 @@ const AppBarTemplate: Story<UserMenuProps> = args => {
   );
 };
 
-export const InAppBar = AppBarTemplate.bind({});
-InAppBar.args = { username: "Ruud van Nistelrooy" };
+export const InAppBar = {
+  render: AppBarTemplate,
+  args: { username: "Ruud van Nistelrooy" }
+};

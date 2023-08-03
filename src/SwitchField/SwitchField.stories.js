@@ -26,21 +26,27 @@ const Template = args => {
   );
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  checked: false,
-  helperText: "Maybe you need some help?",
-  label: "Make a choice",
-  options: ["Choice A", "Choice B"],
-  size: "medium"
+export const Default = {
+  render: Template,
+
+  args: {
+    checked: false,
+    helperText: "Maybe you need some help?",
+    label: "Make a choice",
+    options: ["Choice A", "Choice B"],
+    size: "medium"
+  }
 };
 
-export const Disabled = Template.bind({});
-Disabled.args = {
-  checked: false,
-  disabled: true,
-  helperText: "Maybe you need some help?",
-  label: "Make a choice",
-  options: ["Choice A", "Choice B"],
-  size: "medium"
+export const Disabled = {
+  render: Template,
+
+  args: {
+    checked: false,
+    disabled: true,
+    helperText: "Maybe you need some help?",
+    label: "Make a choice",
+    options: ["Choice A", "Choice B"],
+    size: "medium"
+  }
 };

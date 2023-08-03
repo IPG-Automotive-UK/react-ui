@@ -10,5 +10,7 @@ const Template = () => {
   return <Copyright />;
 };
 
-export const Default = Template.bind({});
-Default.args = {};
+export const Default = {
+  render: Template,
+  args: {}
+};

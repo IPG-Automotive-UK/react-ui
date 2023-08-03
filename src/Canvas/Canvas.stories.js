@@ -50,17 +50,24 @@ const defaultArgs = {
   width: 500
 };
 
-export const Default = TemplateWithState.bind({});
-Default.args = defaultArgs;
+export const Default = {
+  render: TemplateWithState,
+  args: defaultArgs
+};
 
-export const Interactive = TemplateWithState.bind({});
-Interactive.args = defaultArgs;
+export const Interactive = {
+  render: TemplateWithState,
+  args: defaultArgs
+};
 
-export const Viewer = TemplateWithoutState.bind({});
-Viewer.args = {
-  ...defaultArgs,
-  grid: false,
-  onMouseDown: undefined,
-  onResize: undefined,
-  onSelectionRectangle: undefined
+export const Viewer = {
+  render: TemplateWithoutState,
+
+  args: {
+    ...defaultArgs,
+    grid: false,
+    onMouseDown: undefined,
+    onResize: undefined,
+    onSelectionRectangle: undefined
+  }
 };

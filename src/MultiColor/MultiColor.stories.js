@@ -24,18 +24,21 @@ const Template = args => {
   );
 };
 
-// default story
-export const Default = Template.bind({});
-Default.args = {};
+export const Default = {
+  render: Template,
+  args: {}
+};
 
-// custom rows
-export const CustomRows = Template.bind({});
-CustomRows.args = {
-  rows: [
-    {
-      color: "rgba(0,22,252,1)",
-      value: 2
-    },
-    { color: "rgba(240,242,10,1)", value: 4 }
-  ]
+export const CustomRows = {
+  render: Template,
+
+  args: {
+    rows: [
+      {
+        color: "rgba(0,22,252,1)",
+        value: 2
+      },
+      { color: "rgba(240,242,10,1)", value: 4 }
+    ]
+  }
 };

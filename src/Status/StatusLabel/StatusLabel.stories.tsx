@@ -1,4 +1,4 @@
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 
 import React from "react";
 import StatusLabel from "./StatusLabel";
@@ -17,16 +17,19 @@ export default meta;
 /**
  * Story template for the StatusLabel component
  */
-const Template: Story<StatusLabelProps> = args => {
+const Template: StoryFn<StatusLabelProps> = args => {
   return <StatusLabel {...args} />;
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  iconProps: {
-    height: 20,
-    width: 20
-  },
-  status: statusTypes[0],
-  variant: "body2"
+export const Default = {
+  render: Template,
+
+  args: {
+    iconProps: {
+      height: 20,
+      width: 20
+    },
+    status: statusTypes[0],
+    variant: "body2"
+  }
 };

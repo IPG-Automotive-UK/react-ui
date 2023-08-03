@@ -32,8 +32,11 @@ const Template = args => {
   );
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  items: ["Apples", "Pears", "Oranges", "Banana", "Mangoes"],
-  selectedItems: ["Apples"]
+export const Default = {
+  render: Template,
+
+  args: {
+    items: ["Apples", "Pears", "Oranges", "Banana", "Mangoes"],
+    selectedItems: ["Apples"]
+  }
 };

@@ -18,18 +18,23 @@ const Template = args => {
   return <MultiLabelPopover {...args} />;
 };
 
-// default
-export const Default = Template.bind({});
-Default.args = {};
-
-// single label
-export const Single = Template.bind({});
-Single.args = {
-  labels: [labels[0]]
+export const Default = {
+  render: Template,
+  args: {}
 };
 
-// multiple labels
-export const Multi = Template.bind({});
-Multi.args = {
-  labels
+export const Single = {
+  render: Template,
+
+  args: {
+    labels: [labels[0]]
+  }
+};
+
+export const Multi = {
+  render: Template,
+
+  args: {
+    labels
+  }
 };

@@ -1,4 +1,4 @@
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 
 import React from "react";
 import { Typography } from "@mui/material";
@@ -19,7 +19,7 @@ const lipsum = [
   "Proin sit amet commodo metus. Nunc laoreet, ante sed commodo iaculis, mi dolor convallis elit, ut pulvinar turpis velit ut turpis. Fusce sed euismod lectus. Integer mi dolor, gravida id orci cursus, euismod commodo tellus. Duis fringilla pellentesque quam fermentum placerat. Curabitur nisl magna, ultrices quis lacinia vitae, feugiat sollicitudin leo. Nam dapibus ultricies mollis. Proin vel sodales turpis, id tempor tellus. Proin blandit gravida dolor, ac blandit neque cursus non. Pellentesque vestibulum faucibus metus, in rhoncus velit pretium a. Mauris felis tortor, cursus sed dignissim blandit, consequat sit amet sapien. Nam nibh arcu, pharetra eget auctor a, varius sit amet enim. Vestibulum semper nunc urna, ut convallis mauris elementum imperdiet. Nunc est dolor, porta ut gravida in, scelerisque nec felis."
 ];
 
-const Template: Story<WizardContentProps> = () => {
+const Template: StoryFn<WizardContentProps> = () => {
   return (
     <WizardContent>
       {lipsum.map((paragraph, index) => (
@@ -29,6 +29,7 @@ const Template: Story<WizardContentProps> = () => {
   );
 };
 
-// default story
-export const Default = Template.bind({});
-Default.args = {};
+export const Default = {
+  render: Template,
+  args: {}
+};

@@ -1,4 +1,4 @@
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import {
   Default as SidebarItemDefault,
   Disabled as SidebarItemDisabled,
@@ -30,44 +30,47 @@ const meta: Meta<typeof VirtoAppLayout> = {
 };
 export default meta;
 
-const Template: Story<VirtoAppLayoutProps> = args => {
+const Template: StoryFn<VirtoAppLayoutProps> = args => {
   return <VirtoAppLayout {...args} />;
 };
 
-// default story
-export const Default = Template.bind({});
-Default.args = {
-  appName: "APP NAME",
-  appVersion: version,
-  baseUrl: "http://localhost:3000",
-  /**
-   * Content set to something that forces the content to be scrollable
-   */
-  content: (
-    <div
-      style={{
-        height: "110vw",
-        padding: "16px",
-        width: "110vw"
-      }}
-    >
-      App Content goes here
-    </div>
-  ),
-  mode: "light",
-  sidebarContent: (
-    <>
-      <SidebarItem {...SidebarItemSelected.args} />
-      <SidebarItem {...SidebarItemDefault.args} />
-      <SidebarDivider />
-      <SidebarItem {...SidebarItemDisabled.args} />
-      <SidebarItem {...SidebarItemWithCount.args} />
-      <SidebarDivider />
-      <SidebarItem {...SidebarItemNested.args} />
-    </>
-  ),
-  username: "Ruud van Nistelrooy"
-};
-Default.parameters = {
-  layout: "fullscreen" // removes the padding from the story iframe for this story
+export const Default = {
+  render: Template,
+
+  args: {
+    appName: "APP NAME",
+    appVersion: version,
+    baseUrl: "http://localhost:3000",
+    /**
+     * Content set to something that forces the content to be scrollable
+     */
+    content: (
+      <div
+        style={{
+          height: "110vw",
+          padding: "16px",
+          width: "110vw"
+        }}
+      >
+        App Content goes here
+      </div>
+    ),
+    mode: "light",
+    sidebarContent: (
+      <>
+        <SidebarItem {...SidebarItemSelected.args} />
+        <SidebarItem {...SidebarItemDefault.args} />
+        <SidebarDivider />
+        <SidebarItem {...SidebarItemDisabled.args} />
+        <SidebarItem {...SidebarItemWithCount.args} />
+        <SidebarDivider />
+        <SidebarItem {...SidebarItemNested.args} />
+      </>
+    ),
+    username: "Ruud van Nistelrooy"
+  },
+
+  parameters: {
+    layout: "fullscreen" // removes the padding from the story iframe for this story
+  }
 };

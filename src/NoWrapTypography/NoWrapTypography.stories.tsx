@@ -1,4 +1,4 @@
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 
 import { Box } from "@mui/material";
 import NoWrapTypography from "./NoWrapTypography";
@@ -14,7 +14,7 @@ const meta: Meta<typeof NoWrapTypography> = {
 };
 export default meta;
 
-const Template: Story<NoWrapTypographyProps> = ({ children, sx }) => {
+const Template: StoryFn<NoWrapTypographyProps> = ({ children, sx }) => {
   return (
     <Box sx={{ border: "1px solid black", mt: 2, width: "350px" }}>
       <NoWrapTypography sx={sx}>{children}</NoWrapTypography>
@@ -22,9 +22,11 @@ const Template: Story<NoWrapTypographyProps> = ({ children, sx }) => {
   );
 };
 
-export const Default = Template.bind({});
+export const Default = {
+  render: Template,
 
-Default.args = {
-  children: "text that is too long to fit in the box",
-  sx: { fontSize: "18px", maxWidth: "250px" }
+  args: {
+    children: "text that is too long to fit in the box",
+    sx: { fontSize: "18px", maxWidth: "250px" }
+  }
 };

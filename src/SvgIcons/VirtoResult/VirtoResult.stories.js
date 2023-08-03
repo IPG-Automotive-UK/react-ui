@@ -10,7 +10,10 @@ const Template = args => {
   return <VirtoResult {...args} />;
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  sx: { height: 60, width: 60 }
+export const Default = {
+  render: Template,
+
+  args: {
+    sx: { height: 60, width: 60 }
+  }
 };

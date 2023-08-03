@@ -28,25 +28,36 @@ const Template = args => {
   );
 };
 
-export const Default = Template.bind({});
-Default.args = { open: true, status: "init" };
-
-export const Loading = Template.bind({});
-Loading.args = {
-  open: true,
-  status: "loading"
+export const Default = {
+  render: Template,
+  args: { open: true, status: "init" }
 };
 
-export const Success = Template.bind({});
-Success.args = {
-  open: true,
-  status: "success",
-  successMessage: "Password successfully updated."
+export const Loading = {
+  render: Template,
+
+  args: {
+    open: true,
+    status: "loading"
+  }
 };
 
-export const Error = Template.bind({});
-Error.args = {
-  errorMessage: "Something went wrong. Please try again.",
-  open: true,
-  status: "error"
+export const Success = {
+  render: Template,
+
+  args: {
+    open: true,
+    status: "success",
+    successMessage: "Password successfully updated."
+  }
+};
+
+export const Error = {
+  render: Template,
+
+  args: {
+    errorMessage: "Something went wrong. Please try again.",
+    open: true,
+    status: "error"
+  }
 };

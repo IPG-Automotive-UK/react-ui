@@ -14,8 +14,11 @@ const Template = args => {
   return <FeedbackForm {...args} onSubmit={onSubmit} />;
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  dialogPosition: "bottomLeft",
-  open: false
+export const Default = {
+  render: Template,
+
+  args: {
+    dialogPosition: "bottomLeft",
+    open: false
+  }
 };

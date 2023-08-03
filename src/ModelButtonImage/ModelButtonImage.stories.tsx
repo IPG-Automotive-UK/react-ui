@@ -1,4 +1,4 @@
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 
 import ModelButton from "../ModelButton/ModelButton";
 import ModelButtonImage from "./ModelButtonImage";
@@ -13,22 +13,28 @@ const meta: Meta<typeof ModelButton> = {
 };
 export default meta;
 
-const DefaultTemplate: Story<ModelButtonImageProps> = props => {
+const DefaultTemplate: StoryFn<ModelButtonImageProps> = props => {
   return <ModelButtonImage {...props} />;
 };
 
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  src: ModelButtonSampleImg
+export const Default = {
+  render: DefaultTemplate,
+
+  args: {
+    src: ModelButtonSampleImg
+  }
 };
 
-export const WithColor = DefaultTemplate.bind({});
-WithColor.args = {
-  color: "#015D52",
-  src: ModelButtonSampleImg
+export const WithColor = {
+  render: DefaultTemplate,
+
+  args: {
+    color: "#015D52",
+    src: ModelButtonSampleImg
+  }
 };
 
-const TemplateWithModelButton: Story<ModelButtonImageProps> = ({ src }) => {
+const TemplateWithModelButton: StoryFn<ModelButtonImageProps> = ({ src }) => {
   return (
     <ModelButton
       onClick={() => {
@@ -40,7 +46,10 @@ const TemplateWithModelButton: Story<ModelButtonImageProps> = ({ src }) => {
   );
 };
 
-export const WithModelButton = TemplateWithModelButton.bind({});
-WithModelButton.args = {
-  src: ModelButtonSampleImg
+export const WithModelButton = {
+  render: TemplateWithModelButton,
+
+  args: {
+    src: ModelButtonSampleImg
+  }
 };

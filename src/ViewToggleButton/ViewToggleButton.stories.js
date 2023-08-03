@@ -23,9 +23,12 @@ const Template = args => {
   return <ViewToggleButton {...args} onChange={onChange} value={view} />;
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  disabled: false,
-  size: "medium",
-  value: "card"
+export const Default = {
+  render: Template,
+
+  args: {
+    disabled: false,
+    size: "medium",
+    value: "card"
+  }
 };

@@ -10,10 +10,12 @@ const Template = args => {
   return <UserAvatar {...args} />;
 };
 
-// default story
-export const Default = Template.bind({});
-Default.args = {
-  color: "rgb(0,0,0)",
-  img: "",
-  name: ""
+export const Default = {
+  render: Template,
+
+  args: {
+    color: "rgb(0,0,0)",
+    img: "",
+    name: ""
+  }
 };

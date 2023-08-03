@@ -1,4 +1,4 @@
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 
 import ModelButton from "./ModelButton";
 import ModelButtonImage from "../ModelButtonImage";
@@ -33,7 +33,7 @@ const DefaultTemplate = args => {
 };
 
 // component with children
-const ChildrenTemplate: Story<ModelButtonProps> = args => {
+const ChildrenTemplate: StoryFn<ModelButtonProps> = args => {
   return (
     <ModelButton {...args} onClick={event => action("onClick")(event)}>
       <ModelButton
@@ -60,7 +60,7 @@ const ChildrenTemplate: Story<ModelButtonProps> = args => {
 
 // component with children over a paper component
 // useful to see how different background colours in dark mode effect the button
-const ChildrenTemplateWithPaper: Story<
+const ChildrenTemplateWithPaper: StoryFn<
   ModelButtonProps & { elevation: number }
 > = ({ elevation, ...args }) => {
   return (
@@ -70,33 +70,39 @@ const ChildrenTemplateWithPaper: Story<
   );
 };
 
-// default story props
-export const Default = DefaultTemplate.bind({});
-Default.args = {
-  disabled: false,
-  icon: <ModelButtonImage src={ModelButtonSampleImg} />,
-  label: "My Model",
-  onClick: () => {},
-  status: "none"
+export const Default = {
+  render: DefaultTemplate,
+
+  args: {
+    disabled: false,
+    icon: <ModelButtonImage src={ModelButtonSampleImg} />,
+    label: "My Model",
+    onClick: () => {},
+    status: "none"
+  }
 };
 
-// with children story props
-export const WithChildren = ChildrenTemplate.bind({});
-WithChildren.args = {
-  disabled: false,
-  icon: <ModelButtonImage src={ModelButtonSampleImg} />,
-  label: "Parent Model",
-  onClick: () => {},
-  status: "warning"
+export const WithChildren = {
+  render: ChildrenTemplate,
+
+  args: {
+    disabled: false,
+    icon: <ModelButtonImage src={ModelButtonSampleImg} />,
+    label: "Parent Model",
+    onClick: () => {},
+    status: "warning"
+  }
 };
 
-// with children and paper story props
-export const WithChildrenAndPaper = ChildrenTemplateWithPaper.bind({});
-WithChildrenAndPaper.args = {
-  disabled: false,
-  elevation: 3,
-  icon: <ModelButtonImage src={ModelButtonSampleImg} />,
-  label: "Parent Model",
-  onClick: () => {},
-  status: "warning"
+export const WithChildrenAndPaper = {
+  render: ChildrenTemplateWithPaper,
+
+  args: {
+    disabled: false,
+    elevation: 3,
+    icon: <ModelButtonImage src={ModelButtonSampleImg} />,
+    label: "Parent Model",
+    onClick: () => {},
+    status: "warning"
+  }
 };

@@ -20,12 +20,14 @@ const Template = args => {
   return <RangeFilter {...args} onChange={onChange} value={value} />;
 };
 
-// default story
-export const Default = Template.bind({});
-Default.args = {
-  label: "Select range",
-  max: 100,
-  min: 0,
-  name: "range-filter",
-  value: [0, 100]
+export const Default = {
+  render: Template,
+
+  args: {
+    label: "Select range",
+    max: 100,
+    min: 0,
+    name: "range-filter",
+    value: [0, 100]
+  }
 };

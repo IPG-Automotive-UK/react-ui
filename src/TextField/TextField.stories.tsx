@@ -1,4 +1,4 @@
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 
 import MaskedInput from "react-text-mask";
 import React from "react";
@@ -12,7 +12,7 @@ const meta: Meta<typeof TextField> = {
 };
 export default meta;
 
-const Template: Story<TextFieldProps> = args => {
+const Template: StoryFn<TextFieldProps> = args => {
   const [value, setValue] = React.useState(args.value);
   const [error, setError] = React.useState(false);
 
@@ -44,7 +44,7 @@ MaskedTextField.displayName = "MaskedTextField";
 /**
  * Story template for the TextField component
  */
-const TemplateWithMaskEnabled: Story<TextFieldProps> = args => {
+const TemplateWithMaskEnabled: StoryFn<TextFieldProps> = args => {
   const [value, setValue] = React.useState(args.value);
   const [error, setError] = React.useState(false);
 
@@ -70,49 +70,49 @@ const TemplateWithMaskEnabled: Story<TextFieldProps> = args => {
   );
 };
 
-/**
- * Default story for the TextField component
- */
-export const Default = Template.bind({});
-Default.args = {
-  disabled: false,
-  helperText: "What are you going to type?",
-  isFieldMasked: false,
-  label: "Enter some text here",
-  margin: "normal",
-  required: false,
-  size: "medium",
-  variant: "outlined"
+export const Default = {
+  render: Template,
+
+  args: {
+    disabled: false,
+    helperText: "What are you going to type?",
+    isFieldMasked: false,
+    label: "Enter some text here",
+    margin: "normal",
+    required: false,
+    size: "medium",
+    variant: "outlined"
+  }
 };
 
-/**
- * Story for the TextField component with a masked input
- */
-export const TextFieldWithMaskEnabled = TemplateWithMaskEnabled.bind({});
-TextFieldWithMaskEnabled.args = {
-  disabled: false,
-  helperText: "e.g. 225/60R16",
-  isFieldMasked: true,
-  label: "Enter some text here",
-  margin: "normal",
-  required: false,
-  size: "medium",
-  variant: "outlined"
+export const TextFieldWithMaskEnabled = {
+  render: TemplateWithMaskEnabled,
+
+  args: {
+    disabled: false,
+    helperText: "e.g. 225/60R16",
+    isFieldMasked: true,
+    label: "Enter some text here",
+    margin: "normal",
+    required: false,
+    size: "medium",
+    variant: "outlined"
+  }
 };
 
-/**
- * Story for the TextField component with multiline enabled with dynamic rows
- */
-export const TextFieldWithMultiline = Template.bind({});
-TextFieldWithMultiline.args = {
-  disabled: false,
-  isFieldMasked: false,
-  label: "Enter some text here",
-  margin: "normal",
-  maxRows: 4,
-  minRows: 2,
-  multiline: true,
-  required: true,
-  size: "medium",
-  variant: "outlined"
+export const TextFieldWithMultiline = {
+  render: Template,
+
+  args: {
+    disabled: false,
+    isFieldMasked: false,
+    label: "Enter some text here",
+    margin: "normal",
+    maxRows: 4,
+    minRows: 2,
+    multiline: true,
+    required: true,
+    size: "medium",
+    variant: "outlined"
+  }
 };

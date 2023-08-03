@@ -19,121 +19,145 @@ const Template = args => {
   return <NumberField {...args} onChange={onChange} value={value} />;
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  disabled: false,
-  error: false,
-  helperText: "What Number are you going to type?",
-  label: "Enter a Number",
-  margin: "normal",
-  required: false,
-  showMinMaxErrorMessage: true,
-  size: "medium",
-  stepper: true,
-  variant: "outlined"
+export const Default = {
+  render: Template,
+
+  args: {
+    disabled: false,
+    error: false,
+    helperText: "What Number are you going to type?",
+    label: "Enter a Number",
+    margin: "normal",
+    required: false,
+    showMinMaxErrorMessage: true,
+    size: "medium",
+    stepper: true,
+    variant: "outlined"
+  }
 };
 
-export const StartAdornment = Template.bind({});
-StartAdornment.args = {
-  disabled: false,
-  error: false,
-  helperText: "What Number are you going to type?",
-  label: "Enter a Number",
-  margin: "normal",
-  required: false,
-  showMinMaxErrorMessage: true,
-  size: "medium",
-  startAdornment: "$",
-  stepper: true,
-  variant: "outlined"
+export const StartAdornment = {
+  render: Template,
+
+  args: {
+    disabled: false,
+    error: false,
+    helperText: "What Number are you going to type?",
+    label: "Enter a Number",
+    margin: "normal",
+    required: false,
+    showMinMaxErrorMessage: true,
+    size: "medium",
+    startAdornment: "$",
+    stepper: true,
+    variant: "outlined"
+  }
 };
 
-export const EndAdornment = Template.bind({});
-EndAdornment.args = {
-  disabled: false,
-  endAdornment: "px",
-  error: false,
-  helperText: "What Number are you going to type?",
-  label: "Enter a Number",
-  margin: "normal",
-  required: false,
-  showMinMaxErrorMessage: true,
-  size: "medium",
-  stepper: true,
-  variant: "outlined"
+export const EndAdornment = {
+  render: Template,
+
+  args: {
+    disabled: false,
+    endAdornment: "px",
+    error: false,
+    helperText: "What Number are you going to type?",
+    label: "Enter a Number",
+    margin: "normal",
+    required: false,
+    showMinMaxErrorMessage: true,
+    size: "medium",
+    stepper: true,
+    variant: "outlined"
+  }
 };
 
-export const SmallAndDense = Template.bind({});
-SmallAndDense.args = {
-  disabled: false,
-  error: false,
-  helperText: "What Number are you going to type?",
-  label: "Enter a Number",
-  margin: "dense",
-  required: false,
-  showMinMaxErrorMessage: true,
-  size: "small",
-  stepper: false,
-  variant: "outlined"
+export const SmallAndDense = {
+  render: Template,
+
+  args: {
+    disabled: false,
+    error: false,
+    helperText: "What Number are you going to type?",
+    label: "Enter a Number",
+    margin: "dense",
+    required: false,
+    showMinMaxErrorMessage: true,
+    size: "small",
+    stepper: false,
+    variant: "outlined"
+  }
 };
 
-export const NoStepper = Template.bind({});
-NoStepper.args = {
-  disabled: false,
-  error: false,
-  helperText: "What Number are you going to type?",
-  label: "Enter a Number",
-  margin: "normal",
-  required: false,
-  showMinMaxErrorMessage: true,
-  size: "medium",
-  stepper: false,
-  variant: "outlined"
+export const NoStepper = {
+  render: Template,
+
+  args: {
+    disabled: false,
+    error: false,
+    helperText: "What Number are you going to type?",
+    label: "Enter a Number",
+    margin: "normal",
+    required: false,
+    showMinMaxErrorMessage: true,
+    size: "medium",
+    stepper: false,
+    variant: "outlined"
+  }
 };
 
-export const CustomMinMaxAndStep = Template.bind({});
-CustomMinMaxAndStep.args = {
-  disabled: false,
-  error: false,
-  label: "Enter a Number",
-  margin: "normal",
-  max: 1,
-  min: 0,
-  required: false,
-  showMinMaxErrorMessage: true,
-  size: "medium",
-  step: 0.1,
-  variant: "outlined"
+export const CustomMinMaxAndStep = {
+  render: Template,
+
+  args: {
+    disabled: false,
+    error: false,
+    label: "Enter a Number",
+    margin: "normal",
+    max: 1,
+    min: 0,
+    required: false,
+    showMinMaxErrorMessage: true,
+    size: "medium",
+    step: 0.1,
+    variant: "outlined"
+  }
 };
 
-export const InitialError = Template.bind({});
-InitialError.args = {
-  disabled: false,
-  error: false,
-  label: "Enter a Number",
-  margin: "normal",
-  max: 1,
-  min: 0,
-  required: false,
-  showMinMaxErrorMessage: true,
-  size: "medium",
-  step: 0.1,
-  value: 2,
-  variant: "outlined"
+export const InitialError = {
+  render: Template,
+
+  args: {
+    disabled: false,
+    error: false,
+    label: "Enter a Number",
+    margin: "normal",
+    max: 1,
+    min: 0,
+    required: false,
+    showMinMaxErrorMessage: true,
+    size: "medium",
+    step: 0.1,
+    value: 2,
+    variant: "outlined"
+  }
 };
 
-export const NoMinMaxErrorMessage = Template.bind({});
-NoMinMaxErrorMessage.args = {
-  disabled: false,
-  error: false,
-  label: "Enter a Number",
-  margin: "normal",
-  max: 1,
-  min: 0,
-  required: false,
-  showMinMaxErrorMessage: false,
-  size: "medium",
-  step: 0.1,
-  value: 2,
-  variant: "outlined"
+export const NoMinMaxErrorMessage = {
+  render: Template,
+
+  args: {
+    disabled: false,
+    error: false,
+    label: "Enter a Number",
+    margin: "normal",
+    max: 1,
+    min: 0,
+    required: false,
+    showMinMaxErrorMessage: false,
+    size: "medium",
+    step: 0.1,
+    value: 2,
+    variant: "outlined"
+  }
 };

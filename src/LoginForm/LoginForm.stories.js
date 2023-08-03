@@ -11,10 +11,15 @@ const Template = args => {
   return <LoginForm {...args} onLogin={action("login")} />;
 };
 
-export const Default = Template.bind({});
-Default.args = {};
+export const Default = {
+  render: Template,
+  args: {}
+};
 
-export const Loading = Template.bind({});
-Loading.args = {
-  loading: true
+export const Loading = {
+  render: Template,
+
+  args: {
+    loading: true
+  }
 };

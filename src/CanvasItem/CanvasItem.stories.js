@@ -127,7 +127,10 @@ const defaultArgs = {
   zIndex: 1
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  ...defaultArgs
+export const Default = {
+  render: Template,
+
+  args: {
+    ...defaultArgs
+  }
 };

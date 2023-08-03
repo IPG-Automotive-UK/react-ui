@@ -1,4 +1,4 @@
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 
 import AppLauncher from "./AppLauncher";
 import { AppLauncherProps } from "./AppLauncher.types";
@@ -13,7 +13,7 @@ const meta: Meta<typeof AppLauncher> = {
 };
 export default meta;
 
-const Template: Story<AppLauncherProps> = args => {
+const Template: StoryFn<AppLauncherProps> = args => {
   return (
     <div
       style={{
@@ -29,16 +29,20 @@ const Template: Story<AppLauncherProps> = args => {
   );
 };
 
-// default story
-export const Default = Template.bind({});
-Default.args = {
-  baseUrl: "http://localhost:3000",
-  showLogo: true
+export const Default = {
+  render: Template,
+
+  args: {
+    baseUrl: "http://localhost:3000",
+    showLogo: true
+  }
 };
 
-// hidden logo story
-export const HiddenLogo = Template.bind({});
-HiddenLogo.args = {
-  ...Default.args,
-  showLogo: false
+export const HiddenLogo = {
+  render: Template,
+
+  args: {
+    ...Default.args,
+    showLogo: false
+  }
 };

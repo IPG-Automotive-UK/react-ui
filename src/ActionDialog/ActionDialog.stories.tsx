@@ -1,5 +1,5 @@
 import { Button, Typography } from "@mui/material";
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import React, { MouseEventHandler } from "react";
 
 import ActionDialog from "./ActionDialog";
@@ -29,7 +29,7 @@ const meta: Meta<typeof ActionDialog> = {
 };
 export default meta;
 
-const Template: Story<ActionDialogProps> = args => {
+const Template: StoryFn<ActionDialogProps> = args => {
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => setOpen(true);
   const handleCancel: MouseEventHandler<HTMLButtonElement> = args => {
@@ -55,15 +55,18 @@ const Template: Story<ActionDialogProps> = args => {
   );
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  cancelText: "cancel",
-  content: <Typography>Content goes here</Typography>,
-  onCancelClick: () => {},
-  onSaveClick: () => {},
-  saveDisabled: false,
-  saveText: "Save",
-  showCloseIcon: true,
-  title: "Some title",
-  width: "400px"
+export const Default = {
+  render: Template,
+
+  args: {
+    cancelText: "cancel",
+    content: <Typography>Content goes here</Typography>,
+    onCancelClick: () => {},
+    onSaveClick: () => {},
+    saveDisabled: false,
+    saveText: "Save",
+    showCloseIcon: true,
+    title: "Some title",
+    width: "400px"
+  }
 };

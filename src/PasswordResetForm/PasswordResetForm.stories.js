@@ -11,10 +11,15 @@ const Template = args => {
   return <PasswordResetForm {...args} onSubmit={action("reset")} />;
 };
 
-export const Default = Template.bind({});
-Default.args = {};
+export const Default = {
+  render: Template,
+  args: {}
+};
 
-export const Loading = Template.bind({});
-Loading.args = {
-  loading: true
+export const Loading = {
+  render: Template,
+
+  args: {
+    loading: true
+  }
 };
