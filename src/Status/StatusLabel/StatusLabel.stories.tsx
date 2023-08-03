@@ -24,8 +24,8 @@ const Template: Story<StatusLabelProps> = args => {
 export const Default = Template.bind({});
 Default.args = {
   iconProps: {
-    height: 24,
-    width: 24
+    height: 20,
+    width: 20
   },
   status: statusTypes[0],
   variant: "body2"
