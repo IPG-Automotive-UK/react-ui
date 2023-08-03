@@ -1,16 +1,17 @@
 import {
-  AccessTime,
+  AccessTimeFilled,
   Block,
-  Cached,
-  Close,
-  Done,
-  InsertDriveFileOutlined,
-  WarningAmber
+  Cancel,
+  ChangeCircle,
+  CheckCircle,
+  Task,
+  Timelapse,
+  Warning
 } from "@mui/icons-material";
 import { amber, green, grey, indigo, red, teal } from "@mui/material/colors";
 
 /**
- * Single source of truth for status definitons
+ * Single source of truth for status definitions
  */
 const statuses = {
   cancelled: {
@@ -19,72 +20,94 @@ const statuses = {
       type: Block
     },
     label: {
-      color: grey[500],
       text: "Cancelled"
     }
   },
   completed: {
     icon: {
       color: green[800],
-      type: Done
+      type: CheckCircle
     },
     label: {
-      color: green[800],
       text: "Completed"
     }
   },
   failed: {
     icon: {
       color: red[700],
-      type: Close
+      type: Cancel
     },
     label: {
-      color: red[700],
       text: "Failed"
     }
   },
   "not-ready": {
     icon: {
       color: amber[800],
-      type: WarningAmber
+      type: Warning
     },
     label: {
-      color: amber[800],
       text: "Not Ready"
+    }
+  },
+  "not-run": {
+    icon: {
+      color: amber[800],
+      type: Warning
+    },
+    label: {
+      text: "Not Run"
+    }
+  },
+  passed: {
+    icon: {
+      color: green[800],
+      type: CheckCircle
+    },
+    label: {
+      text: "Passed"
+    }
+  },
+  pending: {
+    icon: {
+      color: grey[400],
+      type: Timelapse
+    },
+    label: {
+      text: "Pending"
     }
   },
   ready: {
     icon: {
       color: teal[500],
-      type: InsertDriveFileOutlined
+      type: Task
     },
     label: {
-      color: teal[500],
       text: "Ready"
     }
   },
   running: {
     icon: {
       color: indigo[400],
-      type: Cached
+      type: ChangeCircle
     },
     label: {
-      color: indigo[500],
       text: "Running"
     }
   },
   submitted: {
     icon: {
-      color: amber[400],
-      type: AccessTime
+      color: amber[800],
+      type: AccessTimeFilled
     },
     label: {
-      color: amber[500],
       text: "Submitted"
     }
   }
-};
+} as const;
 
 export default statuses;
 
-export const statusTypes = Object.keys(statuses);
+export const statusTypes = Object.keys(statuses) as Array<
+  keyof typeof statuses
+>;
