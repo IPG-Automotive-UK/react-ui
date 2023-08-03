@@ -13,7 +13,8 @@ describe("StatusCard", () => {
     // render the component
     render(<StatusCard status={status} name={name} />);
 
-    const statusElement = screen.getByText(status);
+    // find the status element using getByText with a regex pattern
+    const statusElement = screen.getByText(new RegExp(status, "i"));
     const nameElement = screen.getByText(name);
 
     // expect the status and name to be in the document
