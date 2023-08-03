@@ -25,9 +25,7 @@ describe("StatusCard", () => {
     "renders correct icon for %s",
     status => {
       // render component
-      const { container } = render(
-        <StatusCard status={status} name={"Test"} />
-      );
+      const { container } = render(<StatusCard status={status} name="Test" />);
 
       // render raw icon
       const Icon = statuses[status].icon.type;

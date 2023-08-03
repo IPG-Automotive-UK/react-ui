@@ -11,7 +11,7 @@ const card = ({ status, name, width, height }: StatusCardProps) => {
   return (
     <CardContent
       sx={{
-        ":last-child": { paddingBottom: "16px" }
+        ":last-child": { pb: 2 }
       }}
     >
       <Box
