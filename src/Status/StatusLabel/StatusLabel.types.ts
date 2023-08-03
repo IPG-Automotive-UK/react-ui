@@ -1,3 +1,5 @@
+import { CSSProperties } from "react";
+
 export interface StatusLabelProps {
   /**
    *
@@ -30,4 +32,14 @@ export interface StatusLabelProps {
     | "inherit"
     | "subtitle1"
     | "subtitle2";
+  iconProps?: {
+    /**
+     * Icon height
+     */
+    height?: CSSProperties["height"];
+    /**
+     * Icon width
+     */
+    width?: CSSProperties["width"];
+  };
 }

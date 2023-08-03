@@ -1,12 +1,14 @@
+import { CSSProperties } from "react";
+
 export interface StatusIconProps {
   /**
    * Icon height
    */
-  height?: number;
+  height?: CSSProperties["height"];
   /**
    * Icon width
    */
-  width?: number;
+  width?: CSSProperties["width"];
   /**
    *
    * The status type.
