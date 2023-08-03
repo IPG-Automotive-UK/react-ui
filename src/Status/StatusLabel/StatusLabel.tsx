@@ -11,9 +11,7 @@ import statuses from "../statuses";
  */
 export default function StatusLabel({
   status,
-  variant = "body2",
-  height = 24,
-  width = 24
+  variant = "body2"
 }: StatusLabelProps) {
   const {
     label: { text }
@@ -28,7 +26,7 @@ export default function StatusLabel({
         justifyContent: "center"
       }}
     >
-      <StatusIcon status={status} height={height} width={width} />
+      <StatusIcon status={status} height={20} width={20} />
       <Typography variant={variant}>{text}</Typography>
     </Box>
   );

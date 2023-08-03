@@ -5,9 +5,13 @@ import { Box, Card, CardContent, Typography } from "@mui/material";
 import { StatusCardProps } from "./StatusCard.types";
 import StatusIcon from "../StatusIcon/StatusIcon";
 import { grey } from "@mui/material/colors";
+import statuses from "../statuses";
 
 // custom card component that will be used to display status information
-const card = ({ status, name, width, height }: StatusCardProps) => {
+const card = ({ status, name }: StatusCardProps) => {
+  const {
+    label: { text }
+  } = statuses[status];
   return (
     <CardContent
       sx={{
@@ -21,7 +25,7 @@ const card = ({ status, name, width, height }: StatusCardProps) => {
           gap: "8px"
         }}
       >
-        <StatusIcon status={status} width={width} height={height} />
+        <StatusIcon status={status} width={39} height={39} />
         <Box
           sx={{ display: "flex", flexDirection: "column", marginLeft: "8px" }}
         >
@@ -29,7 +33,7 @@ const card = ({ status, name, width, height }: StatusCardProps) => {
             {name}
           </Typography>
           <Typography variant="body1" sx={{ color: grey[500] }}>
-            {status}
+            {text}
           </Typography>
         </Box>
       </Box>
@@ -40,14 +44,12 @@ const card = ({ status, name, width, height }: StatusCardProps) => {
 // create a custom card component that will be used to display status information
 export default function StatusCard({
   status = "passed",
-  name = "Test",
-  width = 39,
-  height = 39
+  name = "Test"
 }: StatusCardProps) {
   // return components
   return (
     <Card variant="outlined" sx={{ minWidth: "300px", width: "300px" }}>
-      {card({ height, name, status, width })}
+      {card({ name, status })}
     </Card>
   );
 }

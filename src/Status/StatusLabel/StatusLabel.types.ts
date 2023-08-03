@@ -1,13 +1,5 @@
 export interface StatusLabelProps {
   /**
-   * Icon height
-   */
-  height?: number;
-  /**
-   * Icon width
-   */
-  width?: number;
-  /**
    *
    * The status type.
    */

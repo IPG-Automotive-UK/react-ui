@@ -19,6 +19,7 @@ export default function StatusIcon({
       sx={{
         color,
         height,
+        padding: "2px",
         width
       }}
     />
