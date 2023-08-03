@@ -39,7 +39,7 @@ const card = ({ status, name, width, height }: StatusCardProps) => {
 
 // create a custom card component that will be used to display status information
 export default function StatusCard({
-  status = "Passed",
+  status = "passed",
   name = "Test",
   width = 39,
   height = 39

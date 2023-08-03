@@ -23,6 +23,6 @@ export const Default = Template.bind({});
 Default.args = {
   height: 39,
   name: "Status",
-  status: "Passed",
+  status: "passed",
   width: 39
 };

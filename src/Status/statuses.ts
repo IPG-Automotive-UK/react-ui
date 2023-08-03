@@ -14,42 +14,6 @@ import { amber, green, grey, indigo, red, teal } from "@mui/material/colors";
  * Single source of truth for status definitions
  */
 const statuses = {
-  Failed: {
-    icon: {
-      color: red[700],
-      type: Cancel
-    },
-    label: {
-      text: "Failed"
-    }
-  },
-  "Not Run": {
-    icon: {
-      color: amber[800],
-      type: Warning
-    },
-    label: {
-      text: "Not Run"
-    }
-  },
-  Passed: {
-    icon: {
-      color: green[800],
-      type: CheckCircle
-    },
-    label: {
-      text: "Passed"
-    }
-  },
-  Pending: {
-    icon: {
-      color: grey[400],
-      type: Timelapse
-    },
-    label: {
-      text: "Pending"
-    }
-  },
   cancelled: {
     icon: {
       color: grey[500],
@@ -84,6 +48,33 @@ const statuses = {
     },
     label: {
       text: "Not Ready"
+    }
+  },
+  "not-run": {
+    icon: {
+      color: amber[800],
+      type: Warning
+    },
+    label: {
+      text: "Not Run"
+    }
+  },
+  passed: {
+    icon: {
+      color: green[800],
+      type: CheckCircle
+    },
+    label: {
+      text: "Passed"
+    }
+  },
+  pending: {
+    icon: {
+      color: grey[400],
+      type: Timelapse
+    },
+    label: {
+      text: "Pending"
     }
   },
   ready: {

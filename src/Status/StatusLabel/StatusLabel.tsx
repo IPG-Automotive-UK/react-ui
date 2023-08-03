@@ -4,6 +4,7 @@ import { Box, Typography } from "@mui/material";
 
 import StatusIcon from "../StatusIcon";
 import { StatusLabelProps } from "./StatusLabel.types";
+import statuses from "../statuses";
 
 /**
  * Displays a status icon and text label.
@@ -14,6 +15,9 @@ export default function StatusLabel({
   height = 24,
   width = 24
 }: StatusLabelProps) {
+  const {
+    label: { text }
+  } = statuses[status];
   return (
     <Box
       sx={{
@@ -25,7 +29,7 @@ export default function StatusLabel({
       }}
     >
       <StatusIcon status={status} height={height} width={width} />
-      <Typography variant={variant}>{status}</Typography>
+      <Typography variant={variant}>{text}</Typography>
     </Box>
   );
 }

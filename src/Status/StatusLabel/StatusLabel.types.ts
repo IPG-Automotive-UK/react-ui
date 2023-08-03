@@ -12,10 +12,9 @@ export interface StatusLabelProps {
    * The status type.
    */
   status:
-    | "Passed"
-    | "Failed"
-    | "Not Run"
-    | "Pending"
+    | "passed"
+    | "not-run"
+    | "pending"
     | "cancelled"
     | "completed"
     | "failed"

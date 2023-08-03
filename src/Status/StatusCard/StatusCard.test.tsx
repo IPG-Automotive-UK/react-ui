@@ -7,7 +7,7 @@ import statuses from "../statuses";
 describe("StatusCard", () => {
   test("renders card with status and name", () => {
     // data to render
-    const status = "Passed";
+    const status = "passed";
     const name = "John Doe";
 
     // render the component
@@ -21,7 +21,7 @@ describe("StatusCard", () => {
     expect(nameElement).toBeInTheDocument();
   });
 
-  test.each(["Passed", "Failed", "Not Run", "Pending"] as const)(
+  test.each(["passed", "failed", "not-run", "pending"] as const)(
     "renders correct icon for %s",
     status => {
       // render component

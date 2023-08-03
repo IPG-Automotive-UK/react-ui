@@ -2,7 +2,7 @@ export interface StatusCardProps {
   /**
    * The status type.
    */
-  status: "Passed" | "Failed" | "Pending" | "Not Run";
+  status: "passed" | "failed" | "pending" | "not-run";
   /**
    * The status message.
    */
