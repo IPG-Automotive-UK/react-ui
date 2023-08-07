@@ -48,7 +48,10 @@ export default function StatusCard({
 }: StatusCardProps) {
   // return components
   return (
-    <Card variant="outlined" sx={{ minWidth: "300px", width: "300px" }}>
+    <Card
+      variant="outlined"
+      sx={{ borderRadius: "6px", minWidth: "337px", width: "337px" }}
+    >
       {card({ name, status })}
     </Card>
   );
