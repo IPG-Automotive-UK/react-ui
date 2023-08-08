@@ -99,3 +99,20 @@ TextFieldWithMaskEnabled.args = {
   size: "medium",
   variant: "outlined"
 };
+
+/**
+ * Story for the TextField component with multiline enabled with dynamic rows
+ */
+export const TextFieldWithMultiline = Template.bind({});
+TextFieldWithMultiline.args = {
+  disabled: false,
+  isFieldMasked: false,
+  label: "Enter some text here",
+  margin: "normal",
+  maxRows: "4",
+  minRows: "2",
+  multiline: true,
+  required: true,
+  size: "medium",
+  variant: "outlined"
+};

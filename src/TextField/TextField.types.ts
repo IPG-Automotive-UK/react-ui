@@ -12,6 +12,10 @@ export interface TextFieldProps {
    */
   margin?: "none" | "dense" | "normal";
   /**
+   * If true, multiline will be enabled.
+   */
+  multiline?: boolean;
+  /**
    * If true, text field will be masked.
    */
   isFieldMasked?: boolean;
@@ -41,6 +45,14 @@ export interface TextFieldProps {
    * The label of the component.
    */
   label?: string;
+  /**
+   * minRows of the component.
+   */
+  minRows?: number | string;
+  /**
+   * maxRows of the component.
+   */
+  maxRows?: number | string;
   /**
    * The placeholder of the component.
    */
