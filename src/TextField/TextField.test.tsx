@@ -1,4 +1,4 @@
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 
 import MaskedInput from "react-text-mask";
 import React from "react";
@@ -82,35 +82,20 @@ describe("TextField", () => {
     expect(input).toHaveValue("2256666");
   });
 
-  it("test for minRows when multiline is enabled", () => {
-    const { getByTestId } = render(<TextField multiline minRows={"2"} />);
-    const textField = getByTestId("text-field");
+  it("can type multiline text", async () => {
+    render(<TextField multiline={true} minRows={2} maxRows={4} />);
 
-    expect(textField).toBeInTheDocument();
+    const textarea = screen.getByRole("textbox");
 
-    // Wait for the component to finish rendering and then check the rows attribute
-    setTimeout(() => {
-      expect(textField.querySelector("textarea")).toHaveAttribute("rows", "2");
-    }, 0);
-  });
-
-  it("does not exceed maxRows when multiline is enabled", () => {
-    const { getByTestId } = render(
-      <TextField multiline minRows={"2"} maxRows={"4"} />
+    await userEvent.type(
+      textarea,
+      `Line 1
+Line 2
+Line 3
+Line 4
+Line 5`
     );
-    const textField = getByTestId("text-field");
 
-    const textarea = textField.querySelector("textarea");
-
-    if (textarea) {
-      fireEvent.change(textarea, {
-        target: { value: "Line 1\nLine 2\nLine 3\nLine 4" }
-      });
-
-      // calculate the number of rows by counting the number of new lines
-      const rows = textarea.value.split("\n").length;
-
-      expect(rows).toBe(4);
-    }
+    expect(textarea).toHaveValue(`Line 1\nLine 2\nLine 3\nLine 4\nLine 5`);
   });
 });

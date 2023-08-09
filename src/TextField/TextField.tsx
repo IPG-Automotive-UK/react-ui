@@ -24,8 +24,8 @@ export default function TextField({
   label,
   margin = "normal",
   multiline = false,
-  minRows = "2",
-  maxRows = "4",
+  minRows = 2,
+  maxRows = 4,
   onChange = () => {},
   placeholder,
   required = false,
@@ -45,12 +45,12 @@ export default function TextField({
       label={label}
       margin={margin}
       multiline={multiline}
+      minRows={multiline ? minRows : undefined}
+      maxRows={multiline ? maxRows : undefined}
       onChange={onChange}
       placeholder={placeholder}
       InputProps={!isFieldMasked ? undefined : InputProps}
       required={required}
-      minRows={minRows}
-      maxRows={maxRows}
       size={size}
       type="string"
       value={value}
