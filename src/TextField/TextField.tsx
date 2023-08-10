@@ -23,6 +23,9 @@ export default function TextField({
   helperText,
   label,
   margin = "normal",
+  multiline = false,
+  minRows = 2,
+  maxRows = 4,
   onChange = () => {},
   placeholder,
   required = false,
@@ -34,12 +37,16 @@ export default function TextField({
   // return components
   return (
     <MuiTextField
+      data-testid="text-field"
       disabled={disabled}
       error={error}
       fullWidth
       helperText={helperText}
       label={label}
       margin={margin}
+      multiline={multiline}
+      minRows={multiline ? minRows : undefined}
+      maxRows={multiline ? maxRows : undefined}
       onChange={onChange}
       placeholder={placeholder}
       InputProps={!isFieldMasked ? undefined : InputProps}

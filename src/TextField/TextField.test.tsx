@@ -1,4 +1,4 @@
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 
 import MaskedInput from "react-text-mask";
 import React from "react";
@@ -80,5 +80,22 @@ describe("TextField", () => {
     fireEvent.change(input, { target: { value: "2256666" } });
 
     expect(input).toHaveValue("2256666");
+  });
+
+  it("can type multiline text", async () => {
+    render(<TextField multiline={true} minRows={2} maxRows={4} />);
+
+    const textarea = screen.getByRole("textbox");
+
+    await userEvent.type(
+      textarea,
+      `Line 1
+Line 2
+Line 3
+Line 4
+Line 5`
+    );
+
+    expect(textarea).toHaveValue(`Line 1\nLine 2\nLine 3\nLine 4\nLine 5`);
   });
 });
