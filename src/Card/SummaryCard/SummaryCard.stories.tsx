@@ -43,8 +43,6 @@ const Template: StoryFn<SummaryCardProps> = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     content: null,
     height: 557,
@@ -58,7 +56,9 @@ export const Default = {
     subtitle: "subtitle",
     title: "title",
     width: 368
-  }
+  },
+
+  render: Template
 };
 
 // styling
@@ -77,20 +77,18 @@ const sx = {
 };
 
 export const TruncatedTitleAndSubtitle = {
-  render: Template,
-
   args: {
     ...Default.args,
     subtitle:
       "This is a very long subtitle that will be truncated, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged",
     title:
       "This is a very long title that will be truncated, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged "
-  }
+  },
+
+  render: Template
 };
 
 export const TruncatedLabels = {
-  render: Template,
-
   args: {
     ...Default.args,
     labels: [
@@ -125,12 +123,12 @@ export const TruncatedLabels = {
         name: "Test Label 5"
       }
     ]
-  }
+  },
+
+  render: Template
 };
 
 export const withMoreCardActions = {
-  render: Template,
-
   args: {
     ...Default.args,
     moreCardActions: (
@@ -158,12 +156,12 @@ export const withMoreCardActions = {
         </Button>
       </>
     )
-  }
+  },
+
+  render: Template
 };
 
 export const withMoreOptionsPopover = {
-  render: Template,
-
   args: {
     ...Default.args,
     moreOptionsPopover: (
@@ -182,12 +180,12 @@ export const withMoreOptionsPopover = {
         </MenuItem>
       </MenuList>
     )
-  }
+  },
+
+  render: Template
 };
 
 export const ScenarioExample = {
-  render: Template,
-
   args: {
     ...Default.args,
     content: (
@@ -298,5 +296,7 @@ export const ScenarioExample = {
     ),
     subtitle: "Uploaded 2 hours ago by Jega Sriskantha ",
     title: "Expressway_3Lanes "
-  }
+  },
+
+  render: Template
 };

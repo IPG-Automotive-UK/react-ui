@@ -21,27 +21,27 @@ const Template: StoryFn<IpgLogoProps> = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     sx: { height: 40, width: 160 }
-  }
+  },
+
+  render: Template
 };
 
 export const WhiteTextColour = {
-  render: Template,
-
   args: {
     sx: { height: 40, width: 160 },
     textColour: "white"
-  }
+  },
+
+  render: Template
 };
 
 export const BlackTextColour = {
-  render: Template,
-
   args: {
     sx: { height: 40, width: 160 },
     textColour: "black"
-  }
+  },
+
+  render: Template
 };

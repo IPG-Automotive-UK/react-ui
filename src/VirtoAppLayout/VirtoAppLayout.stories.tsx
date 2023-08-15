@@ -35,8 +35,6 @@ const Template: StoryFn<VirtoAppLayoutProps> = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     appName: "APP NAME",
     appVersion: version,
@@ -72,5 +70,7 @@ export const Default = {
 
   parameters: {
     layout: "fullscreen" // removes the padding from the story iframe for this story
-  }
+  },
+
+  render: Template
 };

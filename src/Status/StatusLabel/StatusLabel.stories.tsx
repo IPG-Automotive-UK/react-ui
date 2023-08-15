@@ -22,8 +22,6 @@ const Template: StoryFn<StatusLabelProps> = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     iconProps: {
       height: 20,
@@ -31,5 +29,7 @@ export const Default = {
     },
     status: statusTypes[0],
     variant: "body2"
-  }
+  },
+
+  render: Template
 };

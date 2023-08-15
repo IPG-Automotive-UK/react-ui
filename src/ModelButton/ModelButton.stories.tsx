@@ -71,32 +71,30 @@ const ChildrenTemplateWithPaper: StoryFn<
 };
 
 export const Default = {
-  render: DefaultTemplate,
-
   args: {
     disabled: false,
     icon: <ModelButtonImage src={ModelButtonSampleImg} />,
     label: "My Model",
     onClick: () => {},
     status: "none"
-  }
+  },
+
+  render: DefaultTemplate
 };
 
 export const WithChildren = {
-  render: ChildrenTemplate,
-
   args: {
     disabled: false,
     icon: <ModelButtonImage src={ModelButtonSampleImg} />,
     label: "Parent Model",
     onClick: () => {},
     status: "warning"
-  }
+  },
+
+  render: ChildrenTemplate
 };
 
 export const WithChildrenAndPaper = {
-  render: ChildrenTemplateWithPaper,
-
   args: {
     disabled: false,
     elevation: 3,
@@ -104,5 +102,7 @@ export const WithChildrenAndPaper = {
     label: "Parent Model",
     onClick: () => {},
     status: "warning"
-  }
+  },
+
+  render: ChildrenTemplateWithPaper
 };

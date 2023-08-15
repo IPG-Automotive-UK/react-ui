@@ -11,9 +11,9 @@ const Template = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     sx: { height: 60, width: 60 }
-  }
+  },
+
+  render: Template
 };

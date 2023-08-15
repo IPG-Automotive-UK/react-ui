@@ -12,14 +12,14 @@ const Template = args => {
 };
 
 export const Default = {
-  render: Template,
-  args: {}
+  args: {},
+  render: Template
 };
 
 export const Loading = {
-  render: Template,
-
   args: {
     loading: true
-  }
+  },
+
+  render: Template
 };

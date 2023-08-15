@@ -35,12 +35,12 @@ const Template: StoryFn<VirtoAppHeaderProps> = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     appName: "APP NAME",
     baseUrl: "http://localhost:3000",
     mode: "light",
     username: "Ruud van Nistelrooy"
-  }
+  },
+
+  render: Template
 };

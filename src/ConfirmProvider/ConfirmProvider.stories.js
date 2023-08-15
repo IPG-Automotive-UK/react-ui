@@ -35,9 +35,9 @@ const Template = ({ children }) => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     children: <ConfirmDialog />
-  }
+  },
+
+  render: Template
 };

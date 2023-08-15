@@ -20,9 +20,9 @@ const Template: StoryFn<WizardActionButtonProps> = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     disabled: false
-  }
+  },
+
+  render: Template
 };

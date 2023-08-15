@@ -23,10 +23,10 @@ const Template = ({ children, ...rest }) => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     children: "An example title",
     onClose: () => null
-  }
+  },
+
+  render: Template
 };

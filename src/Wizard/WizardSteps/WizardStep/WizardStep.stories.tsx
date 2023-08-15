@@ -16,28 +16,26 @@ const Template: StoryFn<WizardStepProps> = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     completed: false,
     index: 0,
     label: "Step 1",
     last: false
-  }
+  },
+
+  render: Template
 };
 
 export const WithHelperText = {
-  render: Template,
-
   args: {
     ...Default.args,
     helperText: "Helper Text"
-  }
+  },
+
+  render: Template
 };
 
 export const WithErrorText = {
-  render: Template,
-
   args: {
     ...Default.args,
     errorText: (
@@ -45,5 +43,7 @@ export const WithErrorText = {
         Error text
       </Typography>
     )
-  }
+  },
+
+  render: Template
 };

@@ -20,8 +20,6 @@ const Template = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     disabled: false,
     error: false,
@@ -33,12 +31,12 @@ export const Default = {
     size: "medium",
     stepper: true,
     variant: "outlined"
-  }
+  },
+
+  render: Template
 };
 
 export const StartAdornment = {
-  render: Template,
-
   args: {
     disabled: false,
     error: false,
@@ -51,12 +49,12 @@ export const StartAdornment = {
     startAdornment: "$",
     stepper: true,
     variant: "outlined"
-  }
+  },
+
+  render: Template
 };
 
 export const EndAdornment = {
-  render: Template,
-
   args: {
     disabled: false,
     endAdornment: "px",
@@ -69,12 +67,12 @@ export const EndAdornment = {
     size: "medium",
     stepper: true,
     variant: "outlined"
-  }
+  },
+
+  render: Template
 };
 
 export const SmallAndDense = {
-  render: Template,
-
   args: {
     disabled: false,
     error: false,
@@ -86,12 +84,12 @@ export const SmallAndDense = {
     size: "small",
     stepper: false,
     variant: "outlined"
-  }
+  },
+
+  render: Template
 };
 
 export const NoStepper = {
-  render: Template,
-
   args: {
     disabled: false,
     error: false,
@@ -103,12 +101,12 @@ export const NoStepper = {
     size: "medium",
     stepper: false,
     variant: "outlined"
-  }
+  },
+
+  render: Template
 };
 
 export const CustomMinMaxAndStep = {
-  render: Template,
-
   args: {
     disabled: false,
     error: false,
@@ -121,12 +119,12 @@ export const CustomMinMaxAndStep = {
     size: "medium",
     step: 0.1,
     variant: "outlined"
-  }
+  },
+
+  render: Template
 };
 
 export const InitialError = {
-  render: Template,
-
   args: {
     disabled: false,
     error: false,
@@ -140,12 +138,12 @@ export const InitialError = {
     step: 0.1,
     value: 2,
     variant: "outlined"
-  }
+  },
+
+  render: Template
 };
 
 export const NoMinMaxErrorMessage = {
-  render: Template,
-
   args: {
     disabled: false,
     error: false,
@@ -159,5 +157,7 @@ export const NoMinMaxErrorMessage = {
     step: 0.1,
     value: 2,
     variant: "outlined"
-  }
+  },
+
+  render: Template
 };

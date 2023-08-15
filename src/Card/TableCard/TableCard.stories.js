@@ -14,19 +14,17 @@ const Template = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     action: null,
     height: "100%",
     tableContent: [],
     title: "Table"
-  }
+  },
+
+  render: Template
 };
 
 export const TableWithContent = {
-  render: Template,
-
   args: {
     ...Default.args,
     tableContent: [
@@ -34,12 +32,12 @@ export const TableWithContent = {
       ["Description", "Example Description"],
       ["Component", <CircularProgress key={"component"} />]
     ]
-  }
+  },
+
+  render: Template
 };
 
 export const TableWithAction = {
-  render: Template,
-
   args: {
     ...Default.args,
     action: (
@@ -52,5 +50,7 @@ export const TableWithAction = {
       ["Description", "Example Description"],
       ["Component", <CircularProgress key={"component"} />]
     ]
-  }
+  },
+
+  render: Template
 };

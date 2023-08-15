@@ -19,22 +19,22 @@ const Template = args => {
 };
 
 export const Default = {
-  render: Template,
-  args: {}
+  args: {},
+  render: Template
 };
 
 export const Single = {
-  render: Template,
-
   args: {
     labels: [labels[0]]
-  }
+  },
+
+  render: Template
 };
 
 export const Multi = {
-  render: Template,
-
   args: {
     labels
-  }
+  },
+
+  render: Template
 };

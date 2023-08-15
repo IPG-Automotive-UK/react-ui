@@ -23,18 +23,18 @@ const Template = args => (
 );
 
 export const Default = {
-  render: Template,
-
   args: {
     onClear: action("onClear")
-  }
+  },
+
+  render: Template
 };
 
 export const WithCount = {
-  render: Template,
-
   args: {
     ...Default.args,
     count: 3
-  }
+  },
+
+  render: Template
 };

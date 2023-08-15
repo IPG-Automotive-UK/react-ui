@@ -26,8 +26,6 @@ const Template = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     disabled: false,
     labelPlacement: "end",
@@ -37,5 +35,7 @@ export const Default = {
     style: {},
     title: "This is an example",
     value: "Option B"
-  }
+  },
+
+  render: Template
 };

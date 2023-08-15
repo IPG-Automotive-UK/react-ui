@@ -21,8 +21,6 @@ const Template = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     label: "Select options",
     limitTags: -1,
@@ -30,14 +28,16 @@ export const Default = {
     options: Array.from(Array(20).keys()).map(i => `Option ${i}`),
     value: ["Option 1"],
     variant: "popper"
-  }
+  },
+
+  render: Template
 };
 
 export const AlwaysOpen = {
-  render: Template,
-
   args: {
     ...Default.args,
     variant: "always-open"
-  }
+  },
+
+  render: Template
 };

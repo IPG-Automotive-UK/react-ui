@@ -40,8 +40,6 @@ const Template: StoryFn<SidebarProps> = args => (
 );
 
 export const Default = {
-  render: Template,
-
   args: {
     appVersion: version,
     children: (
@@ -55,12 +53,12 @@ export const Default = {
     ),
     showLogo: true,
     showVersion: true
-  }
+  },
+
+  render: Template
 };
 
 export const HiddenLogo = {
-  render: Template,
-
   args: {
     appVersion: version,
     children: (
@@ -76,12 +74,12 @@ export const HiddenLogo = {
     ),
     showLogo: false,
     showVersion: true
-  }
+  },
+
+  render: Template
 };
 
 export const HiddenVersion = {
-  render: Template,
-
   args: {
     children: (
       <>
@@ -96,12 +94,12 @@ export const HiddenVersion = {
     ),
     showLogo: true,
     showVersion: false
-  }
+  },
+
+  render: Template
 };
 
 export const ItemsOnly = {
-  render: Template,
-
   args: {
     children: (
       <>
@@ -116,12 +114,12 @@ export const ItemsOnly = {
     ),
     showLogo: false,
     showVersion: false
-  }
+  },
+
+  render: Template
 };
 
 export const IconsOnly = {
-  render: Template,
-
   args: {
     children: (
       <>
@@ -134,12 +132,12 @@ export const IconsOnly = {
     showLogo: false,
     showVersion: false,
     width: 60
-  }
+  },
+
+  render: Template
 };
 
 export const CustomLogoLink = {
-  render: Template,
-
   args: {
     appVersion: version,
     children: (
@@ -153,12 +151,12 @@ export const CustomLogoLink = {
     ),
     showLogo: true,
     showVersion: true
-  }
+  },
+
+  render: Template
 };
 
 export const StackedSidebar = {
-  render: Template,
-
   args: {
     appVersion: version,
     children: (
@@ -174,5 +172,7 @@ export const StackedSidebar = {
     ),
     showLogo: true,
     showVersion: true
-  }
+  },
+
+  render: Template
 };

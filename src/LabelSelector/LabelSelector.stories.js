@@ -80,8 +80,6 @@ const Template = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     addEnabled: false,
     autocompleteLabel: "",
@@ -97,12 +95,12 @@ export const Default = {
     options: [],
     size: "small",
     value: []
-  }
+  },
+
+  render: Template
 };
 
 export const WithLabelOptions = {
-  render: Template,
-
   args: {
     ...Default.args,
     options: [
@@ -119,12 +117,12 @@ export const WithLabelOptions = {
         name: "a really looooooooooooooooooong string"
       }
     ]
-  }
+  },
+
+  render: Template
 };
 
 export const MediumSizeWithOptions = {
-  render: Template,
-
   args: {
     ...Default.args,
     options: [
@@ -132,37 +130,39 @@ export const MediumSizeWithOptions = {
       { _id: 2, color: "#f542e0", description: "second label", name: "label 2" }
     ],
     size: "medium"
-  }
+  },
+
+  render: Template
 };
 
 export const WithInitialValues = {
-  render: Template,
-
   args: {
     ...WithLabelOptions.args,
     value: [WithLabelOptions.args.options[0]]
-  }
+  },
+
+  render: Template
 };
 
 export const WithAddingEditingAndDeleteEnabled = {
-  render: Template,
-
   args: {
     ...WithLabelOptions.args,
     addEnabled: true,
     deleteEnabled: true,
     editEnabled: true
-  }
+  },
+
+  render: Template
 };
 
 export const CustomNameMaxLength = {
-  render: Template,
-
   args: {
     ...WithLabelOptions.args,
     addEnabled: true,
     deleteEnabled: true,
     editEnabled: true,
     nameMaxLength: 5
-  }
+  },
+
+  render: Template
 };

@@ -11,11 +11,11 @@ const Template = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     color: "rgb(0,0,0)",
     img: "",
     name: ""
-  }
+  },
+
+  render: Template
 };

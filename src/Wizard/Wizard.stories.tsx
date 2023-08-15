@@ -34,19 +34,19 @@ const Template: StoryFn<WizardProps> = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     maxWidth: 1152,
     title: ""
-  }
+  },
+
+  render: Template
 };
 
 export const WithTitle = {
-  render: Template,
-
   args: {
     ...Default.args,
     title: "Wizard Title"
-  }
+  },
+
+  render: Template
 };

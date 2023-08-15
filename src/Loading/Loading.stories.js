@@ -11,6 +11,6 @@ const Template = args => {
 };
 
 export const Default = {
-  render: Template,
-  args: { label: "Loading..." }
+  args: { label: "Loading..." },
+  render: Template
 };

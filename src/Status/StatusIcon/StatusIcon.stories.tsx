@@ -22,11 +22,11 @@ const Template: StoryFn<StatusIconProps> = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     height: 40,
     status: statusTypes[0],
     width: 40
-  }
+  },
+
+  render: Template
 };

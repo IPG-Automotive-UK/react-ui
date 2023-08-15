@@ -31,8 +31,6 @@ const Template: StoryFn<DetailCardProps> = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     content: null,
     labels: [],
@@ -45,24 +43,24 @@ export const Default = {
     subtitle: "subtitle",
     title: "title",
     width: 1150
-  }
+  },
+
+  render: Template
 };
 
 export const TruncatedTitleAndSubtitle = {
-  render: Template,
-
   args: {
     ...Default.args,
     subtitle:
       "This is a very long subtitle that will be truncated, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged",
     title:
       "This is a very long title that will be truncated, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged "
-  }
+  },
+
+  render: Template
 };
 
 export const withMoreButtons = {
-  render: Template,
-
   args: {
     ...Default.args,
     buttonsStack: (
@@ -86,12 +84,12 @@ export const withMoreButtons = {
         </Button>
       </>
     )
-  }
+  },
+
+  render: Template
 };
 
 export const TruncatedLabels = {
-  render: Template,
-
   args: {
     ...Default.args,
     labels: [
@@ -168,12 +166,12 @@ export const TruncatedLabels = {
         name: "Test Label 12"
       }
     ]
-  }
+  },
+
+  render: Template
 };
 
 export const ScenarioExample = {
-  render: Template,
-
   args: {
     ...Default.args,
     buttonsStack: (
@@ -337,5 +335,7 @@ export const ScenarioExample = {
     media: "https://picsum.photos/400/200",
     subtitle: "Uploaded 2 hours ago by Jega Sriskantha ",
     title: "Expressway_3Lanes "
-  }
+  },
+
+  render: Template
 };

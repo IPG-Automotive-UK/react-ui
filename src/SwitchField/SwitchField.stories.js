@@ -27,20 +27,18 @@ const Template = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     checked: false,
     helperText: "Maybe you need some help?",
     label: "Make a choice",
     options: ["Choice A", "Choice B"],
     size: "medium"
-  }
+  },
+
+  render: Template
 };
 
 export const Disabled = {
-  render: Template,
-
   args: {
     checked: false,
     disabled: true,
@@ -48,5 +46,7 @@ export const Disabled = {
     label: "Make a choice",
     options: ["Choice A", "Choice B"],
     size: "medium"
-  }
+  },
+
+  render: Template
 };

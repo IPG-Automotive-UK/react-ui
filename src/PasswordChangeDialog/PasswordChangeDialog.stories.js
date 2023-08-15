@@ -29,35 +29,35 @@ const Template = args => {
 };
 
 export const Default = {
-  render: Template,
-  args: { open: true, status: "init" }
+  args: { open: true, status: "init" },
+  render: Template
 };
 
 export const Loading = {
-  render: Template,
-
   args: {
     open: true,
     status: "loading"
-  }
+  },
+
+  render: Template
 };
 
 export const Success = {
-  render: Template,
-
   args: {
     open: true,
     status: "success",
     successMessage: "Password successfully updated."
-  }
+  },
+
+  render: Template
 };
 
 export const Error = {
-  render: Template,
-
   args: {
     errorMessage: "Something went wrong. Please try again.",
     open: true,
     status: "error"
-  }
+  },
+
+  render: Template
 };

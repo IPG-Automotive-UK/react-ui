@@ -128,9 +128,9 @@ const defaultArgs = {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     ...defaultArgs
-  }
+  },
+
+  render: Template
 };

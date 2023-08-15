@@ -41,12 +41,11 @@ const Template: StoryFn<AlignVerticalProps> = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     disabled: false,
     orientation: "horizontal",
     size: "medium",
     value: "top"
-  }
+  },
+  render: Template
 };

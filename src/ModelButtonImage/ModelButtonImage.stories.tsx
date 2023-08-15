@@ -18,20 +18,20 @@ const DefaultTemplate: StoryFn<ModelButtonImageProps> = props => {
 };
 
 export const Default = {
-  render: DefaultTemplate,
-
   args: {
     src: ModelButtonSampleImg
-  }
+  },
+
+  render: DefaultTemplate
 };
 
 export const WithColor = {
-  render: DefaultTemplate,
-
   args: {
     color: "#015D52",
     src: ModelButtonSampleImg
-  }
+  },
+
+  render: DefaultTemplate
 };
 
 const TemplateWithModelButton: StoryFn<ModelButtonImageProps> = ({ src }) => {
@@ -47,9 +47,9 @@ const TemplateWithModelButton: StoryFn<ModelButtonImageProps> = ({ src }) => {
 };
 
 export const WithModelButton = {
-  render: TemplateWithModelButton,
-
   args: {
     src: ModelButtonSampleImg
-  }
+  },
+
+  render: TemplateWithModelButton
 };

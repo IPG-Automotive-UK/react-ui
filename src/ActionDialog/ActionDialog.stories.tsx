@@ -56,8 +56,6 @@ const Template: StoryFn<ActionDialogProps> = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     cancelText: "cancel",
     content: <Typography>Content goes here</Typography>,
@@ -68,5 +66,6 @@ export const Default = {
     showCloseIcon: true,
     title: "Some title",
     width: "400px"
-  }
+  },
+  render: Template
 };

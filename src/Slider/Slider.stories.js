@@ -30,8 +30,6 @@ const Template = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     color: "primary",
     disabled: false,
@@ -46,12 +44,12 @@ export const Default = {
     title: "Slider example",
     value: 1,
     valueLabelDisplay: "auto"
-  }
+  },
+
+  render: Template
 };
 
 export const CustomLabels = {
-  render: Template,
-
   args: {
     color: "primary",
     disabled: false,
@@ -70,12 +68,12 @@ export const CustomLabels = {
     title: "Slider example",
     value: 1,
     valueLabelDisplay: "auto"
-  }
+  },
+
+  render: Template
 };
 
 export const StyledLabels = {
-  render: Template,
-
   args: {
     color: "primary",
     disabled: false,
@@ -98,12 +96,12 @@ export const StyledLabels = {
     title: "Slider example",
     value: 1,
     valueLabelDisplay: "auto"
-  }
+  },
+
+  render: Template
 };
 
 export const StyledSlider = {
-  render: Template,
-
   args: {
     color: "green",
     disabled: false,
@@ -122,12 +120,12 @@ export const StyledSlider = {
     title: "Slider example",
     value: 1,
     valueLabelDisplay: "auto"
-  }
+  },
+
+  render: Template
 };
 
 export const Disabled = {
-  render: Template,
-
   args: {
     color: "primary",
     disabled: true,
@@ -142,12 +140,12 @@ export const Disabled = {
     title: "Slider example",
     value: 1,
     valueLabelDisplay: "auto"
-  }
+  },
+
+  render: Template
 };
 
 export const VerticalSlider = {
-  render: Template,
-
   args: {
     color: "primary",
     disabled: false,
@@ -162,5 +160,7 @@ export const VerticalSlider = {
     title: "Vertical slider",
     value: 1,
     valueLabelDisplay: "auto"
-  }
+  },
+
+  render: Template
 };

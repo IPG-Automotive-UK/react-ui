@@ -30,6 +30,6 @@ const Template: StoryFn<WizardContentProps> = () => {
 };
 
 export const Default = {
-  render: Template,
-  args: {}
+  args: {},
+  render: Template
 };

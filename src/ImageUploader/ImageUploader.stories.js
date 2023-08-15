@@ -32,8 +32,6 @@ const Template = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     dropzoneText: "Drag & drop infographic image or click",
     maxFileSize: 1000000000,
@@ -42,12 +40,12 @@ export const Default = {
     selectedFiles: [],
     subText: "A default Model image will be used if no image is uploaded.",
     title: "Model Image"
-  }
+  },
+
+  render: Template
 };
 
 export const WithSingleFileSelected = {
-  render: Template,
-
   args: {
     ...Default.args,
     selectedFiles: [
@@ -60,5 +58,7 @@ export const WithSingleFileSelected = {
         }
       }
     ]
-  }
+  },
+
+  render: Template
 };

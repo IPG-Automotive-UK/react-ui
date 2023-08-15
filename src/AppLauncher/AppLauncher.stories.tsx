@@ -30,19 +30,19 @@ const Template: StoryFn<AppLauncherProps> = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     baseUrl: "http://localhost:3000",
     showLogo: true
-  }
+  },
+
+  render: Template
 };
 
 export const HiddenLogo = {
-  render: Template,
-
   args: {
     ...Default.args,
     showLogo: false
-  }
+  },
+
+  render: Template
 };

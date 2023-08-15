@@ -35,11 +35,11 @@ const Template: StoryFn<SearchBarProps> = args => {
 };
 
 export const Default = {
-  render: Template,
-  args: {}
+  args: {},
+  render: Template
 };
 
 export const CustomPlaceholder = {
-  render: Template,
-  args: { placeholder: "custom placeholder" }
+  args: { placeholder: "custom placeholder" },
+  render: Template
 };

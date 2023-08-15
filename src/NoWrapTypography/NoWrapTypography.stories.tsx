@@ -23,10 +23,10 @@ const Template: StoryFn<NoWrapTypographyProps> = ({ children, sx }) => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     children: "text that is too long to fit in the box",
     sx: { fontSize: "18px", maxWidth: "250px" }
-  }
+  },
+
+  render: Template
 };

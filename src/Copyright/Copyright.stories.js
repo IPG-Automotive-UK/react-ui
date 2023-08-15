@@ -11,6 +11,6 @@ const Template = () => {
 };
 
 export const Default = {
-  render: Template,
-  args: {}
+  args: {},
+  render: Template
 };

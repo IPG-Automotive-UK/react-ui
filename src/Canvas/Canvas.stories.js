@@ -51,23 +51,23 @@ const defaultArgs = {
 };
 
 export const Default = {
-  render: TemplateWithState,
-  args: defaultArgs
+  args: defaultArgs,
+  render: TemplateWithState
 };
 
 export const Interactive = {
-  render: TemplateWithState,
-  args: defaultArgs
+  args: defaultArgs,
+  render: TemplateWithState
 };
 
 export const Viewer = {
-  render: TemplateWithoutState,
-
   args: {
     ...defaultArgs,
     grid: false,
     onMouseDown: undefined,
     onResize: undefined,
     onSelectionRectangle: undefined
-  }
+  },
+
+  render: TemplateWithoutState
 };

@@ -23,12 +23,12 @@ const Template = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     disabled: false,
     orientation: "horizontal",
     size: "medium",
     value: []
-  }
+  },
+
+  render: Template
 };

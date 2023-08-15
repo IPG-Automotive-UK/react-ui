@@ -23,11 +23,11 @@ const BasicTemplate: StoryFn<WizardStepsProps> = args => {
 };
 
 export const Default = {
-  render: BasicTemplate,
-
   args: {
     activeStep: 0
-  }
+  },
+
+  render: BasicTemplate
 };
 
 const HelperTemplate: StoryFn<WizardStepsProps> = args => {
@@ -41,11 +41,11 @@ const HelperTemplate: StoryFn<WizardStepsProps> = args => {
 };
 
 export const WithHelperText = {
-  render: HelperTemplate,
-
   args: {
     ...Default.args
-  }
+  },
+
+  render: HelperTemplate
 };
 
 // with error text
@@ -68,9 +68,9 @@ const ErrorTemplate: StoryFn<WizardStepsProps> = args => {
 };
 
 export const WithErrorText = {
-  render: ErrorTemplate,
-
   args: {
     activeStep: 1
-  }
+  },
+
+  render: ErrorTemplate
 };

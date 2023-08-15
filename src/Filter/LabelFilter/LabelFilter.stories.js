@@ -27,8 +27,6 @@ const Template = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     label: "Select options",
     limitTags: -1,
@@ -36,14 +34,16 @@ export const Default = {
     options,
     value: [options[0]],
     variant: "popper"
-  }
+  },
+
+  render: Template
 };
 
 export const AlwaysOpen = {
-  render: Template,
-
   args: {
     ...Default.args,
     variant: "always-open"
-  }
+  },
+
+  render: Template
 };

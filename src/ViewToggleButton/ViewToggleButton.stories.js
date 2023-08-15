@@ -24,11 +24,11 @@ const Template = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     disabled: false,
     size: "medium",
     value: "card"
-  }
+  },
+
+  render: Template
 };

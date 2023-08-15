@@ -25,13 +25,11 @@ const Template = args => {
 };
 
 export const Default = {
-  render: Template,
-  args: {}
+  args: {},
+  render: Template
 };
 
 export const CustomRows = {
-  render: Template,
-
   args: {
     rows: [
       {
@@ -47,5 +45,7 @@ export const CustomRows = {
         value: 2
       }
     ]
-  }
+  },
+
+  render: Template
 };

@@ -71,8 +71,6 @@ const TemplateWithMaskEnabled: StoryFn<TextFieldProps> = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     disabled: false,
     helperText: "What are you going to type?",
@@ -82,12 +80,12 @@ export const Default = {
     required: false,
     size: "medium",
     variant: "outlined"
-  }
+  },
+
+  render: Template
 };
 
 export const TextFieldWithMaskEnabled = {
-  render: TemplateWithMaskEnabled,
-
   args: {
     disabled: false,
     helperText: "e.g. 225/60R16",
@@ -97,12 +95,12 @@ export const TextFieldWithMaskEnabled = {
     required: false,
     size: "medium",
     variant: "outlined"
-  }
+  },
+
+  render: TemplateWithMaskEnabled
 };
 
 export const TextFieldWithMultiline = {
-  render: Template,
-
   args: {
     disabled: false,
     isFieldMasked: false,
@@ -114,5 +112,7 @@ export const TextFieldWithMultiline = {
     required: true,
     size: "medium",
     variant: "outlined"
-  }
+  },
+
+  render: Template
 };

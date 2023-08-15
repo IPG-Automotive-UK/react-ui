@@ -64,41 +64,39 @@ const Template: StoryFn<SnackbarProps> = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     message: "This is a snackbar",
     open: false,
     variant: "info"
-  }
+  },
+
+  render: Template
 };
 
 export const MultiLineMessage = {
-  render: Template,
-
   args: {
     message:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     open: false,
     variant: "info"
-  }
+  },
+
+  render: Template
 };
 
 export const ActionButton = {
-  render: Template,
-
   args: {
     actionCallback: action("onAction"),
     actionText: "Click me",
     message: "This snackbar has an action button",
     open: false,
     variant: "warning"
-  }
+  },
+
+  render: Template
 };
 
 export const ComplexMessage = {
-  render: Template,
-
   args: {
     message: (
       <>
@@ -110,5 +108,7 @@ export const ComplexMessage = {
     ),
     open: false,
     variant: "info"
-  }
+  },
+
+  render: Template
 };

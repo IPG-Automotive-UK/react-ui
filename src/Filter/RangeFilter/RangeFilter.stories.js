@@ -21,13 +21,13 @@ const Template = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     label: "Select range",
     max: 100,
     min: 0,
     name: "range-filter",
     value: [0, 100]
-  }
+  },
+
+  render: Template
 };

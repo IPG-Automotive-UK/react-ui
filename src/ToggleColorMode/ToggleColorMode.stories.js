@@ -26,9 +26,9 @@ const Template = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     mode: "light"
-  }
+  },
+
+  render: Template
 };

@@ -40,18 +40,16 @@ const Template: StoryFn<AppHeaderProps> = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     appName: "APP NAME",
     mode: "light",
     username: "Ruud van Nistelrooy"
-  }
+  },
+
+  render: Template
 };
 
 export const SingleChild = {
-  render: Template,
-
   args: {
     appName: "APP NAME",
     children: (
@@ -61,12 +59,12 @@ export const SingleChild = {
     ),
     mode: "light",
     username: "Ruud van Nistelrooy"
-  }
+  },
+
+  render: Template
 };
 
 export const MultipleChildren = {
-  render: Template,
-
   args: {
     appName: "APP NAME",
     children: (
@@ -77,12 +75,12 @@ export const MultipleChildren = {
     ),
     mode: "light",
     username: "Ruud van Nistelrooy"
-  }
+  },
+
+  render: Template
 };
 
 export const MultipleChildrenAndLogo = {
-  render: Template,
-
   args: {
     appLogo: (
       <VirtoLogo
@@ -100,5 +98,7 @@ export const MultipleChildrenAndLogo = {
     ),
     mode: "light",
     username: "Ruud van Nistelrooy"
-  }
+  },
+
+  render: Template
 };

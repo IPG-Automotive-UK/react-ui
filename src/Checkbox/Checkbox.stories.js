@@ -20,25 +20,25 @@ const Template = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     checked: false,
     disabled: false,
     label: "Disabled",
     size: "medium",
     style: {}
-  }
+  },
+
+  render: Template
 };
 
 export const styledCheckbox = {
-  render: Template,
-
   args: {
     checked: false,
     disabled: false,
     label: "Disabled",
     size: "medium",
     style: { border: "1px solid red", padding: "20px" }
-  }
+  },
+
+  render: Template
 };

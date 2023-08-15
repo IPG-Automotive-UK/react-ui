@@ -72,11 +72,11 @@ const MultiTemplate = args => {
 };
 
 export const Multi = {
-  render: MultiTemplate,
-
   args: {
     label: "Grouped filters"
-  }
+  },
+
+  render: MultiTemplate
 };
 
 // template for a single checkbox filter
@@ -107,11 +107,11 @@ const SingleCheckboxTemplate = args => {
 };
 
 export const SingleCheckbox = {
-  render: SingleCheckboxTemplate,
-
   args: {
     label: "Single checkbox"
-  }
+  },
+
+  render: SingleCheckboxTemplate
 };
 
 // template for a single label filter
@@ -142,9 +142,9 @@ const SingleLabelTemplate = args => {
 };
 
 export const SingleLabel = {
-  render: SingleLabelTemplate,
-
   args: {
     label: "Single label"
-  }
+  },
+
+  render: SingleLabelTemplate
 };

@@ -36,8 +36,6 @@ const Template = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     acceptedFiles: [],
     dropzoneText: "Drag & drop a file here or click",
@@ -49,12 +47,12 @@ export const Default = {
     required: false,
     selectedFiles: [],
     title: "Upload a File"
-  }
+  },
+
+  render: Template
 };
 
 export const WithSingleFileSelected = {
-  render: Template,
-
   args: {
     ...Default.args,
     selectedFiles: [
@@ -66,12 +64,12 @@ export const WithSingleFileSelected = {
         }
       }
     ]
-  }
+  },
+
+  render: Template
 };
 
 export const WithMultipleFilesSelected = {
-  render: Template,
-
   args: {
     ...Default.args,
     dropzoneText: "Drag & drop file(s) here or click",
@@ -93,5 +91,7 @@ export const WithMultipleFilesSelected = {
         }
       }
     ]
-  }
+  },
+
+  render: Template
 };

@@ -14,15 +14,15 @@ const Template = args => {
 };
 
 export const Default = {
-  render: Template,
-  args: { teams }
+  args: { teams },
+  render: Template
 };
 
 export const Loading = {
-  render: Template,
-
   args: {
     loading: true,
     teams
-  }
+  },
+
+  render: Template
 };

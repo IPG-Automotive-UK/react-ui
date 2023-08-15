@@ -23,8 +23,6 @@ const Template = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     disabled: false,
     error: false,
@@ -34,12 +32,12 @@ export const Default = {
     size: "medium",
     value: "Arial",
     variant: "outlined"
-  }
+  },
+
+  render: Template
 };
 
 export const CustomOptions = {
-  render: Template,
-
   args: {
     disabled: false,
     error: false,
@@ -50,5 +48,7 @@ export const CustomOptions = {
     size: "medium",
     value: "Arial",
     variant: "outlined"
-  }
+  },
+
+  render: Template
 };

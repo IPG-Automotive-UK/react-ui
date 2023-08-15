@@ -23,8 +23,6 @@ const Template = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     disabled: false,
     error: false,
@@ -36,5 +34,7 @@ export const Default = {
     size: "medium",
     value: "Apple",
     variant: "outlined"
-  }
+  },
+
+  render: Template
 };

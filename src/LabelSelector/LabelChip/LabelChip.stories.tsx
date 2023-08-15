@@ -19,8 +19,6 @@ const Template: StoryFn<LabelChipProps> = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     clickable: false,
     color: "#005FA8",
@@ -29,53 +27,55 @@ export const Default = {
     onDelete: undefined,
     size: "medium",
     variant: "filled"
-  }
+  },
+
+  render: Template
 };
 
 export const Clickable = {
-  render: Template,
-
   args: {
     ...Default.args,
     clickable: true,
     onClick: action("onClick")
-  }
+  },
+
+  render: Template
 };
 
 export const Deletable = {
-  render: Template,
-
   args: {
     ...Default.args,
     onDelete: action("onDelete")
-  }
+  },
+
+  render: Template
 };
 
 export const ClickableAndDeletable = {
-  render: Template,
-
   args: {
     ...Default.args,
     clickable: true,
     onClick: action("onClick"),
     onDelete: action("onDelete")
-  }
+  },
+
+  render: Template
 };
 
 export const CustomColor = {
-  render: Template,
-
   args: {
     ...Default.args,
     color: "#FF0000"
-  }
+  },
+
+  render: Template
 };
 
 export const Small = {
-  render: Template,
-
   args: {
     ...Default.args,
     size: "small"
-  }
+  },
+
+  render: Template
 };

@@ -17,6 +17,6 @@ const Template: StoryFn = () => {
 };
 
 export const Default = {
-  render: Template,
-  args: {}
+  args: {},
+  render: Template
 };

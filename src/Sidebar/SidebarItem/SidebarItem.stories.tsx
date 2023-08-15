@@ -29,54 +29,52 @@ const Template: StoryFn<SidebarItemProps> = args => (
 );
 
 export const Default = {
-  render: Template,
-  args: { icon: <Home />, name: "Home" }
+  args: { icon: <Home />, name: "Home" },
+  render: Template
 };
 
 export const IconStyle = {
-  render: Template,
-
   args: {
     icon: <Home />,
     iconStyle: { border: "1px solid blue", minWidth: 20 },
     name: "Home"
-  }
+  },
+
+  render: Template
 };
 
 export const TextStyle = {
-  render: Template,
-
   args: {
     icon: <Home />,
     name: "Home",
     textStyle: { border: "1px solid blue" }
-  }
+  },
+
+  render: Template
 };
 
 export const Selected = {
-  render: Template,
-  args: { icon: <Person />, name: "Profile", selected: true }
+  args: { icon: <Person />, name: "Profile", selected: true },
+  render: Template
 };
 
 export const Disabled = {
-  render: Template,
-
   args: {
     count: 2,
     disabled: true,
     icon: <CalendarToday />,
     name: "Calendar"
-  }
+  },
+
+  render: Template
 };
 
 export const WithCount = {
-  render: Template,
-  args: { count: 12, icon: <Mail />, name: "Inbox" }
+  args: { count: 12, icon: <Mail />, name: "Inbox" },
+  render: Template
 };
 
 export const Nested = {
-  render: Template,
-
   args: {
     children: [
       <SidebarItem key="default" {...Default.args} />,
@@ -87,12 +85,12 @@ export const Nested = {
     ],
     icon: <Settings />,
     name: "Settings"
-  }
+  },
+
+  render: Template
 };
 
 export const NestedInitiallyOpen = {
-  render: Template,
-
   args: {
     children: [
       <SidebarItem key="default" {...Default.args} />,
@@ -104,17 +102,17 @@ export const NestedInitiallyOpen = {
     icon: <Settings />,
     initialOpen: true,
     name: "Settings"
-  }
+  },
+
+  render: Template
 };
 
 export const Stacked = {
-  render: Template,
-  args: { display: "stacked", icon: <Home />, name: "Home" }
+  args: { display: "stacked", icon: <Home />, name: "Home" },
+  render: Template
 };
 
 export const NestedAndStacked = {
-  render: Template,
-
   args: {
     children: [
       <SidebarItem key="default" {...Default.args} display="stacked" />,
@@ -126,16 +124,18 @@ export const NestedAndStacked = {
     display: "stacked",
     icon: <Settings />,
     name: "Settings"
-  }
+  },
+
+  render: Template
 };
 
 export const NestedAndSelected = {
-  render: Template,
-
   args: {
     display: "stacked",
     icon: <Person />,
     name: "Profile",
     selected: true
-  }
+  },
+
+  render: Template
 };

@@ -36,51 +36,51 @@ const Template = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     showControls: true,
     showPicker: true,
     value: "rgba(255,0,0,1)"
-  }
+  },
+
+  render: Template
 };
 
 export const NoColor = {
-  render: Template,
-
   args: {
     showControls: true,
     showPicker: true,
     value: ""
-  }
+  },
+
+  render: Template
 };
 
 export const NoControls = {
-  render: Template,
-
   args: {
     showControls: false,
     showPicker: true,
     value: "rgba(255,0,0,1)"
-  }
+  },
+
+  render: Template
 };
 
 export const NoNoColor = {
-  render: Template,
-
   args: {
     showControls: true,
     showNoColor: false,
     value: "rgba(255,0,0,1)"
-  }
+  },
+
+  render: Template
 };
 
 export const NoPicker = {
-  render: Template,
-
   args: {
     showControls: true,
     showPicker: false,
     value: "rgba(255,0,0,1)"
-  }
+  },
+
+  render: Template
 };

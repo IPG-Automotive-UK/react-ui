@@ -15,10 +15,10 @@ const Template = args => {
 };
 
 export const Default = {
-  render: Template,
-
   args: {
     dialogPosition: "bottomLeft",
     open: false
-  }
+  },
+
+  render: Template
 };
