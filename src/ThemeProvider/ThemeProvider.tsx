@@ -153,7 +153,14 @@ const darkTheme = createTheme(
             backgroundColor: "rgba(255, 255, 255, 0.08)"
           }
         }
-      }
+      },
+      MuiAlertTitle: {
+        styleOverrides: {
+          root: {
+            color: 'inherit',
+          },
+        },
+      },
     },
     palette: {
       background: {
