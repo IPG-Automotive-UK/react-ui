@@ -1,15 +1,22 @@
+import { Meta, StoryFn } from "@storybook/react";
+
 import ImageUploader from "./ImageUploader";
+import { ImageUploaderProps } from "./ImageUploader.types";
 import React from "react";
 import { action } from "@storybook/addon-actions";
 
-export default {
+const meta: Meta<typeof ImageUploader> = {
   component: ImageUploader,
   title: "General/ImageUploader"
 };
+export default meta;
 
-const Template = args => {
+const Template: StoryFn<ImageUploaderProps> = args => {
   // selectedFiles state
   const [selectedFiles, setSelectedFiles] = React.useState(args.selectedFiles);
+  React.useEffect(() => {
+    setSelectedFiles(args.selectedFiles);
+  }, [args.selectedFiles]);
 
   return (
     <ImageUploader

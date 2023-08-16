@@ -20,7 +20,7 @@ export default function FileUploader({
   acceptedFiles,
   dropzoneText = "Drag & drop a file here or click",
   filesLimit = 1,
-  maxFileSize = 3000000,
+  maxFileSize = Infinity,
   multiple = false,
   onAdd = () => {},
   onDelete = () => {},

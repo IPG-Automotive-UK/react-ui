@@ -1,15 +1,22 @@
+import { Meta, StoryFn } from "@storybook/react";
+import React, { useEffect } from "react";
+
 import FileUploader from "./FileUploader";
-import React from "react";
+import { FileUploaderProps } from "./FileUploader.types";
 import { action } from "@storybook/addon-actions";
 
-export default {
+const meta: Meta<typeof FileUploader> = {
   component: FileUploader,
   title: "General/FileUploader"
 };
+export default meta;
 
-const Template = args => {
+const Template: StoryFn<FileUploaderProps> = args => {
   // selectedFiles state
   const [selectedFiles, setSelectedFiles] = React.useState(args.selectedFiles);
+  useEffect(() => {
+    setSelectedFiles(args.selectedFiles);
+  }, [args.selectedFiles]);
 
   return (
     <FileUploader
@@ -92,6 +99,5 @@ export const WithMultipleFilesSelected = {
       }
     ]
   },
-
   render: Template
 };
