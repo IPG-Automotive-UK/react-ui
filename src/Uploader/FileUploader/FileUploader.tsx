@@ -1,17 +1,9 @@
-import {
-  Box,
-  Chip,
-  Grid,
-  IconButton,
-  Stack,
-  Typography,
-  alpha
-} from "@mui/material";
+import { Box, Chip, Grid, Stack, Typography, alpha } from "@mui/material";
 
-import DeleteIcon from "@mui/icons-material/Delete";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { FileUploaderProps } from "./FileUploader.types";
 import React from "react";
+import UploaderHeader from "../UploaderHeader";
 import useUploader from "../useUploader";
 
 export default function FileUploader({
@@ -24,7 +16,8 @@ export default function FileUploader({
   onDelete,
   required = false,
   selectedFiles = [],
-  title = "Upload a File"
+  title = "Upload a File",
+  subText
 }: FileUploaderProps) {
   // useUploader is a custom hook that handles the logic for uploading files
   const {
@@ -43,44 +36,18 @@ export default function FileUploader({
     selectedFiles
   });
 
+  console.log(getRootProps());
+
   // render
   return (
     <Box data-testid="dropzone-base">
-      <Stack
-        gap={2}
-        flexDirection="row"
-        justifyContent="space-between"
-        alignItems="flex-end"
-        mb={1}
-        minHeight="40px"
-      >
-        <Box>
-          <Typography fontWeight="400" color="textPrimary">
-            {title}
-            {required ? (
-              <Typography
-                color={theme => theme.palette.error.main}
-                component="span"
-                lineHeight="inherit"
-                sx={{
-                  marginLeft: "4px",
-                  verticalAlign: "super"
-                }}
-              >
-                *
-              </Typography>
-            ) : null}
-          </Typography>
-        </Box>
-        {!multiple && selectedFiles.length === 1 ? (
-          <IconButton
-            aria-label="DeleteIcon"
-            onClick={() => handleDelete(selectedFiles[0])}
-          >
-            <DeleteIcon color="error" />
-          </IconButton>
-        ) : null}
-      </Stack>
+      <UploaderHeader
+        title={title}
+        subText={subText}
+        required={required}
+        showDelete={!multiple && selectedFiles.length === 1}
+        onDelete={() => handleDelete(selectedFiles[0])}
+      />
       <Box
         {...getRootProps()}
         sx={theme => ({

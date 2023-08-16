@@ -1,9 +1,9 @@
-import { Box, IconButton, Stack, Typography, alpha } from "@mui/material";
+import { Box, Stack, Typography, alpha } from "@mui/material";
 
-import DeleteIcon from "@mui/icons-material/Delete";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { ImageUploaderProps } from "./ImageUploader.types";
 import React from "react";
+import UploaderHeader from "../UploaderHeader";
 import useUploader from "../useUploader";
 
 export default function ImageUploader({
@@ -13,7 +13,8 @@ export default function ImageUploader({
   maxFileSize = 1000000,
   onAdd,
   onDelete,
-  selectedFiles = []
+  selectedFiles = [],
+  required = false
 }: ImageUploaderProps) {
   // useUploader is a custom hook that handles the logic for uploading files
   const {
@@ -40,31 +41,13 @@ export default function ImageUploader({
   // render
   return (
     <Box data-testid="dropzone-base">
-      <Stack
-        gap={2}
-        flexDirection="row"
-        justifyContent="space-between"
-        alignItems="flex-end"
-        mb={1}
-        minHeight="40px"
-      >
-        <Box>
-          <Typography variant="h6" color="textPrimary">
-            {title}
-          </Typography>
-          <Typography variant="caption" color="textPrimary">
-            {subText}
-          </Typography>
-        </Box>
-        {selectedFiles.length > 0 ? (
-          <IconButton
-            aria-label="DeleteIcon"
-            onClick={() => handleDelete(selectedFiles[0])}
-          >
-            <DeleteIcon color="error" />
-          </IconButton>
-        ) : null}
-      </Stack>
+      <UploaderHeader
+        title={title}
+        required={required}
+        subText={subText}
+        showDelete={selectedFiles.length > 0}
+        onDelete={() => handleDelete(selectedFiles[0])}
+      />
       <Box
         {...getRootProps()}
         sx={theme => ({

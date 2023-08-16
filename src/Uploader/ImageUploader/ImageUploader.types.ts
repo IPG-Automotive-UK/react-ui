@@ -22,6 +22,10 @@ export interface ImageUploaderProps {
    */
   onDelete?: (deleted: FileWithData[]) => void;
   /**
+   * Is field required?
+   */
+  required?: boolean;
+  /**
    * List of selected file(s).
    */
   selectedFiles?: FileWithData[];
