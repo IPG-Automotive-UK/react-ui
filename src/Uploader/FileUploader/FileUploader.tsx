@@ -7,14 +7,12 @@ import {
   Typography,
   alpha
 } from "@mui/material";
-import { FileRejection, useDropzone } from "react-dropzone";
-import React, { useCallback, useEffect, useState } from "react";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { FileUploaderProps } from "./FileUploader.types";
-import { FileWithData } from "../Uploader.types";
-import { readAsDataURL } from "../utils/readAsDataURL";
+import React from "react";
+import useUploader from "../useUploader";
 
 export default function FileUploader({
   acceptedFiles,
@@ -22,63 +20,30 @@ export default function FileUploader({
   filesLimit = 1,
   maxFileSize = Infinity,
   multiple = false,
-  onAdd = () => {},
-  onDelete = () => {},
+  onAdd,
+  onDelete,
   required = false,
   selectedFiles = [],
   title = "Upload a File"
 }: FileUploaderProps) {
-  const [rejectionMessage, setRejectionMessage] = useState<string | null>(null);
-
-  const onDropAccepted = useCallback(
-    async (acceptedFiles: File[]) => {
-      const fileWithPreview = await Promise.all(
-        acceptedFiles.map(async f => ({
-          data: await readAsDataURL(f),
-          file: f
-        }))
-      );
-      const newSelection = multiple
-        ? [...selectedFiles, ...fileWithPreview]
-        : fileWithPreview;
-      if (newSelection.length > filesLimit) {
-        setRejectionMessage(
-          `The maximum allowed number of files is ${filesLimit}.`
-        );
-        return;
-      }
-      onAdd && onAdd(newSelection);
-    },
-    [onAdd, selectedFiles, multiple, setRejectionMessage, filesLimit]
-  );
-
-  const onDropRejected = (fileRejection: FileRejection[]) => {
-    setRejectionMessage(fileRejection[0].errors[0].message);
-  };
-  useEffect(() => {
-    // hide message after 5000ms
-    const timer = setTimeout(() => {
-      if (rejectionMessage) {
-        setRejectionMessage(null);
-      }
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, [rejectionMessage]);
-
-  const { getRootProps, getInputProps, isDragReject } = useDropzone({
-    accept: acceptedFiles,
-    maxFiles: filesLimit,
-    maxSize: maxFileSize,
+  // useUploader is a custom hook that handles the logic for uploading files
+  const {
+    getRootProps,
+    getInputProps,
+    handleDelete,
+    isDragReject,
+    rejectionMessage
+  } = useUploader({
+    acceptedFiles,
+    filesLimit,
+    maxFileSize,
     multiple,
-    onDropAccepted,
-    onDropRejected
+    onAdd,
+    onDelete,
+    selectedFiles
   });
 
-  const handleDelete = (deletedFile: FileWithData) => {
-    // delete file from selected files
-    onDelete(selectedFiles.filter(i => i !== deletedFile));
-  };
-
+  // render
   return (
     <Box data-testid="dropzone-base">
       <Stack

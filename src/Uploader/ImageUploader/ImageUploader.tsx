@@ -1,11 +1,10 @@
 import { Box, IconButton, Stack, Typography, alpha } from "@mui/material";
-import { FileRejection, useDropzone } from "react-dropzone";
-import React, { useCallback, useEffect, useState } from "react";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { ImageUploaderProps } from "./ImageUploader.types";
-import { readAsDataURL } from "../utils/readAsDataURL";
+import React from "react";
+import useUploader from "../useUploader";
 
 export default function ImageUploader({
   title = "Upload Image",
@@ -16,50 +15,29 @@ export default function ImageUploader({
   onDelete,
   selectedFiles = []
 }: ImageUploaderProps) {
-  const onDropAccepted = useCallback(
-    async (acceptedFiles: File[]) => {
-      const fileWithPreview = await Promise.all(
-        acceptedFiles.map(async f => ({
-          data: await readAsDataURL(f),
-          file: f
-        }))
-      );
-      onAdd && onAdd(fileWithPreview);
-    },
-    [onAdd]
-  );
-
-  const [rejectionMessage, setRejectionMessage] = useState<string | null>(null);
-  const onDropRejected = (fileRejection: FileRejection[]) => {
-    setRejectionMessage(fileRejection[0].errors[0].message);
-  };
-  useEffect(() => {
-    // hide message after 5000ms
-    const timer = setTimeout(() => {
-      if (rejectionMessage) {
-        setRejectionMessage(null);
-      }
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, [rejectionMessage]);
-
-  const { getRootProps, getInputProps, isDragReject } = useDropzone({
-    accept: {
+  // useUploader is a custom hook that handles the logic for uploading files
+  const {
+    getRootProps,
+    getInputProps,
+    handleDelete,
+    isDragReject,
+    rejectionMessage
+  } = useUploader({
+    acceptedFiles: {
       "image/gif": [".gif"],
       "image/jpeg": [".jpg", ".jpeg"],
       "image/png": [".png"],
       "image/webp": [".webp"]
     },
-    maxSize: maxFileSize,
+    filesLimit: 1,
+    maxFileSize,
     multiple: false,
-    onDropAccepted,
-    onDropRejected
+    onAdd,
+    onDelete,
+    selectedFiles
   });
 
-  const handleDelete = () => {
-    onDelete && onDelete([]);
-  };
-
+  // render
   return (
     <Box data-testid="dropzone-base">
       <Stack
@@ -79,7 +57,10 @@ export default function ImageUploader({
           </Typography>
         </Box>
         {selectedFiles.length > 0 ? (
-          <IconButton aria-label="DeleteIcon" onClick={handleDelete}>
+          <IconButton
+            aria-label="DeleteIcon"
+            onClick={() => handleDelete(selectedFiles[0])}
+          >
             <DeleteIcon color="error" />
           </IconButton>
         ) : null}
