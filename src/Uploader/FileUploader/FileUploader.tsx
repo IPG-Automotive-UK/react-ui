@@ -146,7 +146,7 @@ export default function FileUploader({
             ? theme.palette.error.main
             : theme.palette.divider,
           borderStyle: "dashed",
-          borderWidth: 1.5,
+          borderWidth: 1,
           boxSizing: "border-box",
           cursor: "pointer",
           display: "flex",
