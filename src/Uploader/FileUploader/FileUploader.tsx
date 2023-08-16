@@ -28,6 +28,8 @@ export default function FileUploader({
   selectedFiles = [],
   title = "Upload a File"
 }: FileUploaderProps) {
+  const [rejectionMessage, setRejectionMessage] = useState<string | null>(null);
+
   const onDropAccepted = useCallback(
     async (acceptedFiles: File[]) => {
       const fileWithPreview = await Promise.all(
@@ -36,12 +38,20 @@ export default function FileUploader({
           file: f
         }))
       );
-      onAdd && onAdd([...selectedFiles, ...fileWithPreview]);
+      const newSelection = multiple
+        ? [...selectedFiles, ...fileWithPreview]
+        : fileWithPreview;
+      if (newSelection.length > filesLimit) {
+        setRejectionMessage(
+          `The maximum allowed number of files is ${filesLimit}.`
+        );
+        return;
+      }
+      onAdd && onAdd(newSelection);
     },
-    [onAdd, selectedFiles]
+    [onAdd, selectedFiles, multiple, setRejectionMessage, filesLimit]
   );
 
-  const [rejectionMessage, setRejectionMessage] = useState<string | null>(null);
   const onDropRejected = (fileRejection: FileRejection[]) => {
     setRejectionMessage(fileRejection[0].errors[0].message);
   };
