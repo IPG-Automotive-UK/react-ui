@@ -142,11 +142,19 @@ const lightTheme = createTheme(
 const darkTheme = createTheme(
   {
     components: {
+      MuiAlertTitle: {
+        styleOverrides: {
+          root: {
+            color: "inherit"
+          }
+        }
+      },
       MuiCssBaseline: {
         styleOverrides: themeParam => ({
           body: themeParam.palette.mode === "dark" ? darkScrollbar() : null
         })
       },
+
       MuiStepper: {
         styleOverrides: {
           root: {
