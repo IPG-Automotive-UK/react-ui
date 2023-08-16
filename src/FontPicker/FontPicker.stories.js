@@ -22,27 +22,33 @@ const Template = args => {
   return <FontPicker {...args} onChange={onChange} value={value} />;
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  disabled: false,
-  error: false,
-  label: "Font",
-  margin: "normal",
-  required: false,
-  size: "medium",
-  value: "Arial",
-  variant: "outlined"
+export const Default = {
+  args: {
+    disabled: false,
+    error: false,
+    label: "Font",
+    margin: "normal",
+    required: false,
+    size: "medium",
+    value: "Arial",
+    variant: "outlined"
+  },
+
+  render: Template
 };
 
-export const CustomOptions = Template.bind({});
-CustomOptions.args = {
-  disabled: false,
-  error: false,
-  label: "Font",
-  margin: "normal",
-  options: ["Arial", "Helvetica", "Times New Roman"],
-  required: false,
-  size: "medium",
-  value: "Arial",
-  variant: "outlined"
+export const CustomOptions = {
+  args: {
+    disabled: false,
+    error: false,
+    label: "Font",
+    margin: "normal",
+    options: ["Arial", "Helvetica", "Times New Roman"],
+    required: false,
+    size: "medium",
+    value: "Arial",
+    variant: "outlined"
+  },
+
+  render: Template
 };

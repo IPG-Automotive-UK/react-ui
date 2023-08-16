@@ -1,5 +1,5 @@
 import { Box, Button, LinearProgress } from "@mui/material";
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 
 import React from "react";
 import Snackbar from "./Snackbar";
@@ -29,7 +29,7 @@ const meta: Meta<typeof Snackbar> = {
 export default meta;
 
 // Template for the Snackbar stories to manage the state of the Snackbar
-const Template: Story<SnackbarProps> = args => {
+const Template: StoryFn<SnackbarProps> = args => {
   const [open, setOpen] = React.useState(false);
   const [actionText, setActionText] = React.useState(args.actionText);
   const [autoHideDuration, setAutoHideDuration] = React.useState(
@@ -63,44 +63,52 @@ const Template: Story<SnackbarProps> = args => {
   );
 };
 
-// Default story for the Snackbar component
-export const Default = Template.bind({});
-Default.args = {
-  message: "This is a snackbar",
-  open: false,
-  variant: "info"
+export const Default = {
+  args: {
+    message: "This is a snackbar",
+    open: false,
+    variant: "info"
+  },
+
+  render: Template
 };
 
-// Multi-line message story for the Snackbar component
-export const MultiLineMessage = Template.bind({});
-MultiLineMessage.args = {
-  message:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  open: false,
-  variant: "info"
+export const MultiLineMessage = {
+  args: {
+    message:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    open: false,
+    variant: "info"
+  },
+
+  render: Template
 };
 
-// Action button story for the Snackbar component
-export const ActionButton = Template.bind({});
-ActionButton.args = {
-  actionCallback: action("onAction"),
-  actionText: "Click me",
-  message: "This snackbar has an action button",
-  open: false,
-  variant: "warning"
+export const ActionButton = {
+  args: {
+    actionCallback: action("onAction"),
+    actionText: "Click me",
+    message: "This snackbar has an action button",
+    open: false,
+    variant: "warning"
+  },
+
+  render: Template
 };
 
-// Complex message story for the Snackbar component
-export const ComplexMessage = Template.bind({});
-ComplexMessage.args = {
-  message: (
-    <>
-      Showing some progress
-      <Box mt={1}>
-        <LinearProgress />
-      </Box>
-    </>
-  ),
-  open: false,
-  variant: "info"
+export const ComplexMessage = {
+  args: {
+    message: (
+      <>
+        Showing some progress
+        <Box mt={1}>
+          <LinearProgress />
+        </Box>
+      </>
+    ),
+    open: false,
+    variant: "info"
+  },
+
+  render: Template
 };

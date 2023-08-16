@@ -1,4 +1,4 @@
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 
 import React from "react";
 import Wizard from "./Wizard";
@@ -23,7 +23,7 @@ const meta: Meta<typeof Wizard> = {
 };
 export default meta;
 
-const Template: Story<WizardProps> = args => {
+const Template: StoryFn<WizardProps> = args => {
   return (
     <Wizard {...args}>
       <WizardSteps {...WizardSteps.args} />
@@ -33,16 +33,20 @@ const Template: Story<WizardProps> = args => {
   );
 };
 
-// default story
-export const Default = Template.bind({});
-Default.args = {
-  maxWidth: 1152,
-  title: ""
+export const Default = {
+  args: {
+    maxWidth: 1152,
+    title: ""
+  },
+
+  render: Template
 };
 
-// with title story
-export const WithTitle = Template.bind({});
-WithTitle.args = {
-  ...Default.args,
-  title: "Wizard Title"
+export const WithTitle = {
+  args: {
+    ...Default.args,
+    title: "Wizard Title"
+  },
+
+  render: Template
 };

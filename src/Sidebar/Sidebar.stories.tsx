@@ -1,5 +1,5 @@
 import { Home, Mail, Person, Settings } from "@mui/icons-material";
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import {
   Default as SidebarItemDefault,
   Disabled as SidebarItemDisabled,
@@ -26,7 +26,7 @@ const meta: Meta<typeof Sidebar> = {
 };
 export default meta;
 
-const Template: Story<SidebarProps> = args => (
+const Template: StoryFn<SidebarProps> = args => (
   <div
     style={{
       display: "flex",
@@ -39,140 +39,140 @@ const Template: Story<SidebarProps> = args => (
   </div>
 );
 
-/**
- * Default story for the Sidebar component
- */
-export const Default = Template.bind({});
-Default.args = {
-  appVersion: version,
-  children: (
-    <>
-      <SidebarItem {...SidebarItemDefault.args} />
-      <SidebarItem {...SidebarItemSelected.args} />
-      <SidebarDivider />
-      <SidebarItem {...SidebarItemDisabled.args} />
-      <SidebarItem {...SidebarItemWithCount.args} />
-    </>
-  ),
-  showLogo: true,
-  showVersion: true
+export const Default = {
+  args: {
+    appVersion: version,
+    children: (
+      <>
+        <SidebarItem {...SidebarItemDefault.args} />
+        <SidebarItem {...SidebarItemSelected.args} />
+        <SidebarDivider />
+        <SidebarItem {...SidebarItemDisabled.args} />
+        <SidebarItem {...SidebarItemWithCount.args} />
+      </>
+    ),
+    showLogo: true,
+    showVersion: true
+  },
+
+  render: Template
 };
 
-/**
- * Story for the Sidebar component with the logo hidden
- */
-export const HiddenLogo = Template.bind({});
-HiddenLogo.args = {
-  appVersion: version,
-  children: (
-    <>
-      <SidebarItem {...SidebarItemDefault.args} />
-      <SidebarItem {...SidebarItemSelected.args} />
-      <SidebarDivider />
-      <SidebarItem {...SidebarItemDisabled.args} />
-      <SidebarItem {...SidebarItemWithCount.args} />
-      <SidebarDivider />
-      <SidebarItem {...SidebarItemNested.args} />
-    </>
-  ),
-  showLogo: false,
-  showVersion: true
+export const HiddenLogo = {
+  args: {
+    appVersion: version,
+    children: (
+      <>
+        <SidebarItem {...SidebarItemDefault.args} />
+        <SidebarItem {...SidebarItemSelected.args} />
+        <SidebarDivider />
+        <SidebarItem {...SidebarItemDisabled.args} />
+        <SidebarItem {...SidebarItemWithCount.args} />
+        <SidebarDivider />
+        <SidebarItem {...SidebarItemNested.args} />
+      </>
+    ),
+    showLogo: false,
+    showVersion: true
+  },
+
+  render: Template
 };
 
-/**
- * Story for the Sidebar component with the version hidden
- */
-export const HiddenVersion = Template.bind({});
-HiddenVersion.args = {
-  children: (
-    <>
-      <SidebarItem {...SidebarItemDefault.args} />
-      <SidebarItem {...SidebarItemSelected.args} />
-      <SidebarDivider />
-      <SidebarItem {...SidebarItemDisabled.args} />
-      <SidebarItem {...SidebarItemWithCount.args} />
-      <SidebarDivider />
-      <SidebarItem {...SidebarItemNested.args} />
-    </>
-  ),
-  showLogo: true,
-  showVersion: false
+export const HiddenVersion = {
+  args: {
+    children: (
+      <>
+        <SidebarItem {...SidebarItemDefault.args} />
+        <SidebarItem {...SidebarItemSelected.args} />
+        <SidebarDivider />
+        <SidebarItem {...SidebarItemDisabled.args} />
+        <SidebarItem {...SidebarItemWithCount.args} />
+        <SidebarDivider />
+        <SidebarItem {...SidebarItemNested.args} />
+      </>
+    ),
+    showLogo: true,
+    showVersion: false
+  },
+
+  render: Template
 };
 
-/**
- * Story for the Sidebar component with the logo and version hidden
- */
-export const ItemsOnly = Template.bind({});
-ItemsOnly.args = {
-  children: (
-    <>
-      <SidebarItem {...SidebarItemDefault.args} />
-      <SidebarItem {...SidebarItemSelected.args} />
-      <SidebarDivider />
-      <SidebarItem {...SidebarItemDisabled.args} />
-      <SidebarItem {...SidebarItemWithCount.args} />
-      <SidebarDivider />
-      <SidebarItem {...SidebarItemNested.args} />
-    </>
-  ),
-  showLogo: false,
-  showVersion: false
+export const ItemsOnly = {
+  args: {
+    children: (
+      <>
+        <SidebarItem {...SidebarItemDefault.args} />
+        <SidebarItem {...SidebarItemSelected.args} />
+        <SidebarDivider />
+        <SidebarItem {...SidebarItemDisabled.args} />
+        <SidebarItem {...SidebarItemWithCount.args} />
+        <SidebarDivider />
+        <SidebarItem {...SidebarItemNested.args} />
+      </>
+    ),
+    showLogo: false,
+    showVersion: false
+  },
+
+  render: Template
 };
 
-/**
- * Story for the Sidebar component with only icons and no text
- */
-export const IconsOnly = Template.bind({});
-IconsOnly.args = {
-  children: (
-    <>
-      <SidebarItem icon={<Home />} name="" />
-      <SidebarItem icon={<Mail />} name="" selected />
-      <SidebarItem icon={<Person />} name="" />
-      <SidebarItem icon={<Settings />} name="" />
-    </>
-  ),
-  showLogo: false,
-  showVersion: false,
-  width: 60
+export const IconsOnly = {
+  args: {
+    children: (
+      <>
+        <SidebarItem icon={<Home />} name="" />
+        <SidebarItem icon={<Mail />} name="" selected />
+        <SidebarItem icon={<Person />} name="" />
+        <SidebarItem icon={<Settings />} name="" />
+      </>
+    ),
+    showLogo: false,
+    showVersion: false,
+    width: 60
+  },
+
+  render: Template
 };
 
-/**
- * Story for the Sidebar component with a custom logo link
- */
-export const CustomLogoLink = Template.bind({});
-CustomLogoLink.args = {
-  appVersion: version,
-  children: (
-    <>
-      <SidebarItem {...SidebarItemDefault.args} />
-      <SidebarItem {...SidebarItemSelected.args} />
-      <SidebarDivider />
-      <SidebarItem {...SidebarItemDisabled.args} />
-      <SidebarItem {...SidebarItemWithCount.args} />
-    </>
-  ),
-  showLogo: true,
-  showVersion: true
+export const CustomLogoLink = {
+  args: {
+    appVersion: version,
+    children: (
+      <>
+        <SidebarItem {...SidebarItemDefault.args} />
+        <SidebarItem {...SidebarItemSelected.args} />
+        <SidebarDivider />
+        <SidebarItem {...SidebarItemDisabled.args} />
+        <SidebarItem {...SidebarItemWithCount.args} />
+      </>
+    ),
+    showLogo: true,
+    showVersion: true
+  },
+
+  render: Template
 };
 
-/**
- * Story for the Sidebar component with stacked items
- */
-export const StackedSidebar = Template.bind({});
-StackedSidebar.args = {
-  appVersion: version,
-  children: (
-    <>
-      <SidebarItem {...SidebarItemDefault.args} display="stacked" />
-      <SidebarItem {...SidebarItemSelected.args} display="stacked" />
-      <SidebarDivider />
-      <SidebarItem {...SidebarItemDisabled.args} display="stacked" />
-      <SidebarItem {...SidebarItemWithCount.args} display="stacked" />
-      <SidebarDivider />
-      <SidebarItem {...SidebarItemNestedAndStacked.args} display="stacked" />
-    </>
-  ),
-  showLogo: true,
-  showVersion: true
+export const StackedSidebar = {
+  args: {
+    appVersion: version,
+    children: (
+      <>
+        <SidebarItem {...SidebarItemDefault.args} display="stacked" />
+        <SidebarItem {...SidebarItemSelected.args} display="stacked" />
+        <SidebarDivider />
+        <SidebarItem {...SidebarItemDisabled.args} display="stacked" />
+        <SidebarItem {...SidebarItemWithCount.args} display="stacked" />
+        <SidebarDivider />
+        <SidebarItem {...SidebarItemNestedAndStacked.args} display="stacked" />
+      </>
+    ),
+    showLogo: true,
+    showVersion: true
+  },
+
+  render: Template
 };

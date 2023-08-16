@@ -1,4 +1,4 @@
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 
 import NextButton from "./NextButton";
 import React from "react";
@@ -15,12 +15,14 @@ const meta: Meta<typeof NextButton> = {
 };
 export default meta;
 
-const Template: Story<WizardActionButtonProps> = args => {
+const Template: StoryFn<WizardActionButtonProps> = args => {
   return <NextButton {...args} />;
 };
 
-// default story
-export const Default = Template.bind({});
-Default.args = {
-  disabled: false
+export const Default = {
+  args: {
+    disabled: false
+  },
+
+  render: Template
 };

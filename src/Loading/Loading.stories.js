@@ -10,5 +10,7 @@ const Template = args => {
   return <Loading {...args} />;
 };
 
-export const Default = Template.bind({});
-Default.args = { label: "Loading..." };
+export const Default = {
+  args: { label: "Loading..." },
+  render: Template
+};

@@ -35,37 +35,52 @@ const Template = args => {
   );
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  showControls: true,
-  showPicker: true,
-  value: "rgba(255,0,0,1)"
+export const Default = {
+  args: {
+    showControls: true,
+    showPicker: true,
+    value: "rgba(255,0,0,1)"
+  },
+
+  render: Template
 };
 
-export const NoColor = Template.bind({});
-NoColor.args = {
-  showControls: true,
-  showPicker: true,
-  value: ""
+export const NoColor = {
+  args: {
+    showControls: true,
+    showPicker: true,
+    value: ""
+  },
+
+  render: Template
 };
 
-export const NoControls = Template.bind({});
-NoControls.args = {
-  showControls: false,
-  showPicker: true,
-  value: "rgba(255,0,0,1)"
+export const NoControls = {
+  args: {
+    showControls: false,
+    showPicker: true,
+    value: "rgba(255,0,0,1)"
+  },
+
+  render: Template
 };
 
-export const NoNoColor = Template.bind({});
-NoNoColor.args = {
-  showControls: true,
-  showNoColor: false,
-  value: "rgba(255,0,0,1)"
+export const NoNoColor = {
+  args: {
+    showControls: true,
+    showNoColor: false,
+    value: "rgba(255,0,0,1)"
+  },
+
+  render: Template
 };
 
-export const NoPicker = Template.bind({});
-NoPicker.args = {
-  showControls: true,
-  showPicker: false,
-  value: "rgba(255,0,0,1)"
+export const NoPicker = {
+  args: {
+    showControls: true,
+    showPicker: false,
+    value: "rgba(255,0,0,1)"
+  },
+
+  render: Template
 };

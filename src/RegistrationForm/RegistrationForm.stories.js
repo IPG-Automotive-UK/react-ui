@@ -13,11 +13,16 @@ const Template = args => {
   return <RegistrationForm {...args} onRegister={action("onRegister")} />;
 };
 
-export const Default = Template.bind({});
-Default.args = { teams };
+export const Default = {
+  args: { teams },
+  render: Template
+};
 
-export const Loading = Template.bind({});
-Loading.args = {
-  loading: true,
-  teams
+export const Loading = {
+  args: {
+    loading: true,
+    teams
+  },
+
+  render: Template
 };

@@ -22,9 +22,11 @@ const Template = ({ children, ...rest }) => {
   );
 };
 
-// default story
-export const Default = Template.bind({});
-Default.args = {
-  children: "An example title",
-  onClose: () => null
+export const Default = {
+  args: {
+    children: "An example title",
+    onClose: () => null
+  },
+
+  render: Template
 };

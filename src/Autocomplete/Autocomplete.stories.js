@@ -22,16 +22,19 @@ const Template = args => {
   return <Autocomplete {...args} onChange={onChange} value={value} />;
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  disabled: false,
-  error: false,
-  helperText: "What is your selection going to be?",
-  label: "Select an option",
-  margin: "normal",
-  options: ["Apple", "Apricot", "Pear"],
-  required: true,
-  size: "medium",
-  value: "Apple",
-  variant: "outlined"
+export const Default = {
+  args: {
+    disabled: false,
+    error: false,
+    helperText: "What is your selection going to be?",
+    label: "Select an option",
+    margin: "normal",
+    options: ["Apple", "Apricot", "Pear"],
+    required: true,
+    size: "medium",
+    value: "Apple",
+    variant: "outlined"
+  },
+
+  render: Template
 };

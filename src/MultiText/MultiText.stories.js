@@ -24,25 +24,28 @@ const Template = args => {
   );
 };
 
-// default story
-export const Default = Template.bind({});
-Default.args = {};
+export const Default = {
+  args: {},
+  render: Template
+};
 
-// custom rows
-export const CustomRows = Template.bind({});
-CustomRows.args = {
-  rows: [
-    {
-      label: "Label1",
-      value: 0
-    },
-    {
-      label: "Label2",
-      value: 1
-    },
-    {
-      label: "Label3",
-      value: 2
-    }
-  ]
+export const CustomRows = {
+  args: {
+    rows: [
+      {
+        label: "Label1",
+        value: 0
+      },
+      {
+        label: "Label2",
+        value: 1
+      },
+      {
+        label: "Label3",
+        value: 2
+      }
+    ]
+  },
+
+  render: Template
 };

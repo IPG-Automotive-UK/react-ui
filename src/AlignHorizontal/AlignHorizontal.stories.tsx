@@ -1,4 +1,4 @@
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import React, { useEffect, useState } from "react";
 
 import AlignHorizontal from "./AlignHorizontal";
@@ -23,7 +23,7 @@ export default meta;
  * Story template for the AlignHorizontal component
  * This provides some state management for the component to make it easier to use in Storybook
  */
-const Template: Story<AlignHorizontalProps> = args => {
+const Template: StoryFn<AlignHorizontalProps> = args => {
   const [value, setValue] = useState<AlignHorizontalProps["value"]>(
     args.value ?? null
   );
@@ -40,13 +40,13 @@ const Template: Story<AlignHorizontalProps> = args => {
   return <AlignHorizontal {...args} onChange={onChange} value={value} />;
 };
 
-/**
- * Default story for the AlignHorizontal component
- */
-export const Default = Template.bind({});
-Default.args = {
-  disabled: false,
-  orientation: "horizontal",
-  size: "medium",
-  value: "left"
+export const Default = {
+  args: {
+    disabled: false,
+    orientation: "horizontal",
+    size: "medium",
+    value: "left"
+  },
+
+  render: Template
 };

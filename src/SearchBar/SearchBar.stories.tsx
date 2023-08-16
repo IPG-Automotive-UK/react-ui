@@ -1,4 +1,4 @@
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 
 import React from "react";
 import SearchBar from ".";
@@ -14,7 +14,7 @@ const meta: Meta<typeof SearchBar> = {
 };
 export default meta;
 
-const Template: Story<SearchBarProps> = args => {
+const Template: StoryFn<SearchBarProps> = args => {
   const [value, setValue] = React.useState(args.value);
   React.useEffect(() => {
     setValue(args.value);
@@ -34,8 +34,12 @@ const Template: Story<SearchBarProps> = args => {
   );
 };
 
-export const Default = Template.bind({});
-Default.args = {};
+export const Default = {
+  args: {},
+  render: Template
+};
 
-export const CustomPlaceholder = Template.bind({});
-CustomPlaceholder.args = { placeholder: "custom placeholder" };
+export const CustomPlaceholder = {
+  args: { placeholder: "custom placeholder" },
+  render: Template
+};

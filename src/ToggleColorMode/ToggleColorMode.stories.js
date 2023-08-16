@@ -25,7 +25,10 @@ const Template = args => {
   );
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  mode: "light"
+export const Default = {
+  args: {
+    mode: "light"
+  },
+
+  render: Template
 };

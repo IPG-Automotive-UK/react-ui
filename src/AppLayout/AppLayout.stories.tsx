@@ -1,4 +1,4 @@
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import {
   Default as SidebarItemDefault,
   Disabled as SidebarItemDisabled,
@@ -31,7 +31,7 @@ const meta: Meta<typeof AppLayout> = {
 };
 export default meta;
 
-const Template: Story<AppLayoutProps> = args => {
+const Template: StoryFn<AppLayoutProps> = args => {
   // get the dark mode state from Storybook
   const isDarkMode = useDarkMode();
   const theme = isDarkMode ? "dark" : "light";
@@ -43,38 +43,41 @@ const Template: Story<AppLayoutProps> = args => {
   );
 };
 
-// default story
-export const Default = Template.bind({});
-Default.args = {
-  appName: "APP NAME",
-  appVersion: version,
-  baseUrl: "http://localhost:3000",
-  /**
-   * Content set to something that forces the content to be scrollable
-   */
-  content: (
-    <div
-      style={{
-        height: "110vw",
-        padding: "16px",
-        width: "110vw"
-      }}
-    >
-      App Content goes here
-    </div>
-  ),
-  mode: "light",
-  sidebarContent: (
-    <>
-      <SidebarItem {...SidebarItemSelected.args} display="stacked" />
-      <SidebarItem {...SidebarItemDefault.args} display="stacked" />
-      <SidebarDivider />
-      <SidebarItem {...SidebarItemDisabled.args} display="stacked" />
-      <SidebarItem {...SidebarItemWithCount.args} display="stacked" />
-    </>
-  ),
-  username: "Ruud van Nistelrooy"
-};
-Default.parameters = {
-  layout: "fullscreen" // removes the padding from the story iframe for this story
+export const Default = {
+  args: {
+    appName: "APP NAME",
+    appVersion: version,
+    baseUrl: "http://localhost:3000",
+    /**
+     * Content set to something that forces the content to be scrollable
+     */
+    content: (
+      <div
+        style={{
+          height: "110vw",
+          padding: "16px",
+          width: "110vw"
+        }}
+      >
+        App Content goes here
+      </div>
+    ),
+    mode: "light",
+    sidebarContent: (
+      <>
+        <SidebarItem {...SidebarItemSelected.args} display="stacked" />
+        <SidebarItem {...SidebarItemDefault.args} display="stacked" />
+        <SidebarDivider />
+        <SidebarItem {...SidebarItemDisabled.args} display="stacked" />
+        <SidebarItem {...SidebarItemWithCount.args} display="stacked" />
+      </>
+    ),
+    username: "Ruud van Nistelrooy"
+  },
+
+  parameters: {
+    layout: "fullscreen" // removes the padding from the story iframe for this story
+  },
+
+  render: Template
 };

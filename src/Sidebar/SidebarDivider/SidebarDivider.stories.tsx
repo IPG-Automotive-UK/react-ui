@@ -1,4 +1,4 @@
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 
 import React from "react";
 import SidebarDivider from "./SidebarDivider";
@@ -12,9 +12,11 @@ const meta: Meta<typeof SidebarDivider> = {
 };
 export default meta;
 
-const Template: Story = () => {
+const Template: StoryFn = () => {
   return <SidebarDivider />;
 };
 
-export const Default = Template.bind({});
-Default.args = {};
+export const Default = {
+  args: {},
+  render: Template
+};

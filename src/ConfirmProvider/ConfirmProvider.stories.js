@@ -34,8 +34,10 @@ const Template = ({ children }) => {
   return <ConfirmProvider>{children}</ConfirmProvider>;
 };
 
-export const Default = Template.bind({});
+export const Default = {
+  args: {
+    children: <ConfirmDialog />
+  },
 
-Default.args = {
-  children: <ConfirmDialog />
+  render: Template
 };

@@ -1,4 +1,4 @@
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 
 import React from "react";
 import { Typography } from "@mui/material";
@@ -11,33 +11,39 @@ const meta: Meta<typeof WizardStep> = {
 };
 export default meta;
 
-const Template: Story<WizardStepProps> = args => {
+const Template: StoryFn<WizardStepProps> = args => {
   return <WizardStep {...args} />;
 };
 
-// default story
-export const Default = Template.bind({});
-Default.args = {
-  completed: false,
-  index: 0,
-  label: "Step 1",
-  last: false
+export const Default = {
+  args: {
+    completed: false,
+    index: 0,
+    label: "Step 1",
+    last: false
+  },
+
+  render: Template
 };
 
-// with helper text
-export const WithHelperText = Template.bind({});
-WithHelperText.args = {
-  ...Default.args,
-  helperText: "Helper Text"
+export const WithHelperText = {
+  args: {
+    ...Default.args,
+    helperText: "Helper Text"
+  },
+
+  render: Template
 };
 
-// with error text
-export const WithErrorText = Template.bind({});
-WithErrorText.args = {
-  ...Default.args,
-  errorText: (
-    <Typography variant="caption" color="error">
-      Error text
-    </Typography>
-  )
+export const WithErrorText = {
+  args: {
+    ...Default.args,
+    errorText: (
+      <Typography variant="caption" color="error">
+        Error text
+      </Typography>
+    )
+  },
+
+  render: Template
 };

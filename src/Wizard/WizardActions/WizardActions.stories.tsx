@@ -1,4 +1,4 @@
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 
 import { Default as BackButton } from "./BackButton/BackButton.stories";
 import { Default as CancelButton } from "./CancelButton/CancelButton.stories";
@@ -13,7 +13,7 @@ const meta: Meta<typeof WizardActions> = {
 };
 export default meta;
 
-const Template: Story<WizardActionsProps> = () => {
+const Template: StoryFn<WizardActionsProps> = () => {
   return (
     <WizardActions>
       <CancelButton {...CancelButton.args} />
@@ -23,6 +23,7 @@ const Template: Story<WizardActionsProps> = () => {
   );
 };
 
-// default story
-export const Default = Template.bind({});
-Default.args = {};
+export const Default = {
+  args: {},
+  render: Template
+};

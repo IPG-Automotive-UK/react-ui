@@ -26,20 +26,24 @@ const Template = args => {
   return <LabelFilter {...args} onChange={onChange} value={value} />;
 };
 
-// Default story
-export const Default = Template.bind({});
-Default.args = {
-  label: "Select options",
-  limitTags: -1,
-  name: "label-filter",
-  options,
-  value: [options[0]],
-  variant: "popper"
+export const Default = {
+  args: {
+    label: "Select options",
+    limitTags: -1,
+    name: "label-filter",
+    options,
+    value: [options[0]],
+    variant: "popper"
+  },
+
+  render: Template
 };
 
-// AlwaysOpen story
-export const AlwaysOpen = Template.bind({});
-AlwaysOpen.args = {
-  ...Default.args,
-  variant: "always-open"
+export const AlwaysOpen = {
+  args: {
+    ...Default.args,
+    variant: "always-open"
+  },
+
+  render: Template
 };

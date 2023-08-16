@@ -35,57 +35,63 @@ const Template = args => {
   );
 };
 
-// default story
-export const Default = Template.bind({});
-Default.args = {
-  acceptedFiles: [],
-  dropzoneText: "Drag & drop a file here or click",
-  filesLimit: 1,
-  maxFileSize: 1000000000,
-  multiple: false,
-  onAdd: () => {},
-  onDelete: () => {},
-  required: false,
-  selectedFiles: [],
-  title: "Upload a File"
+export const Default = {
+  args: {
+    acceptedFiles: [],
+    dropzoneText: "Drag & drop a file here or click",
+    filesLimit: 1,
+    maxFileSize: 1000000000,
+    multiple: false,
+    onAdd: () => {},
+    onDelete: () => {},
+    required: false,
+    selectedFiles: [],
+    title: "Upload a File"
+  },
+
+  render: Template
 };
 
-// with single file selected
-export const WithSingleFileSelected = Template.bind({});
-WithSingleFileSelected.args = {
-  ...Default.args,
-  selectedFiles: [
-    {
-      data: "",
-      file: {
-        name: "IPGAutomotive.zip",
-        path: "IPGAutomotive.zip"
+export const WithSingleFileSelected = {
+  args: {
+    ...Default.args,
+    selectedFiles: [
+      {
+        data: "",
+        file: {
+          name: "IPGAutomotive.zip",
+          path: "IPGAutomotive.zip"
+        }
       }
-    }
-  ]
+    ]
+  },
+
+  render: Template
 };
 
-// with multiple files selected
-export const WithMultipleFilesSelected = Template.bind({});
-WithMultipleFilesSelected.args = {
-  ...Default.args,
-  dropzoneText: "Drag & drop file(s) here or click",
-  filesLimit: 3,
-  multiple: true,
-  selectedFiles: [
-    {
-      data: "",
-      file: {
-        name: "IPGAutomotive.zip",
-        path: "IPGAutomotive.zip"
+export const WithMultipleFilesSelected = {
+  args: {
+    ...Default.args,
+    dropzoneText: "Drag & drop file(s) here or click",
+    filesLimit: 3,
+    multiple: true,
+    selectedFiles: [
+      {
+        data: "",
+        file: {
+          name: "IPGAutomotive.zip",
+          path: "IPGAutomotive.zip"
+        }
+      },
+      {
+        data: "",
+        file: {
+          name: "CarMaker.zip",
+          path: "CarMaker.zip"
+        }
       }
-    },
-    {
-      data: "",
-      file: {
-        name: "CarMaker.zip",
-        path: "CarMaker.zip"
-      }
-    }
-  ]
+    ]
+  },
+
+  render: Template
 };

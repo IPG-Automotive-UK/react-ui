@@ -19,20 +19,26 @@ const Template = args => {
   return <Checkbox {...args} checked={checked} onChange={onChange} />;
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  checked: false,
-  disabled: false,
-  label: "Disabled",
-  size: "medium",
-  style: {}
+export const Default = {
+  args: {
+    checked: false,
+    disabled: false,
+    label: "Disabled",
+    size: "medium",
+    style: {}
+  },
+
+  render: Template
 };
 
-export const styledCheckbox = Template.bind({});
-styledCheckbox.args = {
-  checked: false,
-  disabled: false,
-  label: "Disabled",
-  size: "medium",
-  style: { border: "1px solid red", padding: "20px" }
+export const styledCheckbox = {
+  args: {
+    checked: false,
+    disabled: false,
+    label: "Disabled",
+    size: "medium",
+    style: { border: "1px solid red", padding: "20px" }
+  },
+
+  render: Template
 };

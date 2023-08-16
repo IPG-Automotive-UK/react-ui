@@ -22,13 +22,19 @@ const Template = args => (
   </FilterStack>
 );
 
-export const Default = Template.bind({});
-Default.args = {
-  onClear: action("onClear")
+export const Default = {
+  args: {
+    onClear: action("onClear")
+  },
+
+  render: Template
 };
 
-export const WithCount = Template.bind({});
-WithCount.args = {
-  ...Default.args,
-  count: 3
+export const WithCount = {
+  args: {
+    ...Default.args,
+    count: 3
+  },
+
+  render: Template
 };

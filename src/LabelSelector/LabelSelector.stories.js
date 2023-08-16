@@ -79,77 +79,90 @@ const Template = args => {
   );
 };
 
-// default
-export const Default = Template.bind({});
-Default.args = {
-  addEnabled: false,
-  autocompleteLabel: "",
-  deleteEnabled: false,
-  editEnabled: false,
-  limitTags: -1,
-  multiple: true,
-  nameMaxLength: 50,
-  onChange: () => {},
-  onDelete: () => {},
-  onEdit: () => {},
-  onNew: () => {},
-  options: [],
-  size: "small",
-  value: []
+export const Default = {
+  args: {
+    addEnabled: false,
+    autocompleteLabel: "",
+    deleteEnabled: false,
+    editEnabled: false,
+    limitTags: -1,
+    multiple: true,
+    nameMaxLength: 50,
+    onChange: () => {},
+    onDelete: () => {},
+    onEdit: () => {},
+    onNew: () => {},
+    options: [],
+    size: "small",
+    value: []
+  },
+
+  render: Template
 };
 
-// with label options
-export const WithLabelOptions = Template.bind({});
-WithLabelOptions.args = {
-  ...Default.args,
-  options: [
-    {
-      _id: 1,
-      color: "#005FA8",
-      description: "a really looooooooooooooooooong string",
-      name: "label 1"
-    },
-    {
-      _id: 2,
-      color: "#f542e0",
-      description: "second label",
-      name: "a really looooooooooooooooooong string"
-    }
-  ]
+export const WithLabelOptions = {
+  args: {
+    ...Default.args,
+    options: [
+      {
+        _id: 1,
+        color: "#005FA8",
+        description: "a really looooooooooooooooooong string",
+        name: "label 1"
+      },
+      {
+        _id: 2,
+        color: "#f542e0",
+        description: "second label",
+        name: "a really looooooooooooooooooong string"
+      }
+    ]
+  },
+
+  render: Template
 };
 
-export const MediumSizeWithOptions = Template.bind({});
-MediumSizeWithOptions.args = {
-  ...Default.args,
-  options: [
-    { _id: 1, color: "#005FA8", description: "first label", name: "label 1" },
-    { _id: 2, color: "#f542e0", description: "second label", name: "label 2" }
-  ],
-  size: "medium"
+export const MediumSizeWithOptions = {
+  args: {
+    ...Default.args,
+    options: [
+      { _id: 1, color: "#005FA8", description: "first label", name: "label 1" },
+      { _id: 2, color: "#f542e0", description: "second label", name: "label 2" }
+    ],
+    size: "medium"
+  },
+
+  render: Template
 };
 
-// with initial value
-export const WithInitialValues = Template.bind({});
-WithInitialValues.args = {
-  ...WithLabelOptions.args,
-  value: [WithLabelOptions.args.options[0]]
+export const WithInitialValues = {
+  args: {
+    ...WithLabelOptions.args,
+    value: [WithLabelOptions.args.options[0]]
+  },
+
+  render: Template
 };
 
-// with add new label enabled
-export const WithAddingEditingAndDeleteEnabled = Template.bind({});
-WithAddingEditingAndDeleteEnabled.args = {
-  ...WithLabelOptions.args,
-  addEnabled: true,
-  deleteEnabled: true,
-  editEnabled: true
+export const WithAddingEditingAndDeleteEnabled = {
+  args: {
+    ...WithLabelOptions.args,
+    addEnabled: true,
+    deleteEnabled: true,
+    editEnabled: true
+  },
+
+  render: Template
 };
 
-// custom max label lentgh
-export const CustomNameMaxLength = Template.bind({});
-CustomNameMaxLength.args = {
-  ...WithLabelOptions.args,
-  addEnabled: true,
-  deleteEnabled: true,
-  editEnabled: true,
-  nameMaxLength: 5
+export const CustomNameMaxLength = {
+  args: {
+    ...WithLabelOptions.args,
+    addEnabled: true,
+    deleteEnabled: true,
+    editEnabled: true,
+    nameMaxLength: 5
+  },
+
+  render: Template
 };

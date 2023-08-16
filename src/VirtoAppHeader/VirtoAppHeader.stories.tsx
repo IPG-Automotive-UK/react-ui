@@ -1,4 +1,4 @@
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 
 import React from "react";
 import VirtoAppHeader from ".";
@@ -16,7 +16,7 @@ const meta: Meta<typeof VirtoAppHeader> = {
 };
 export default meta;
 
-const Template: Story<VirtoAppHeaderProps> = args => {
+const Template: StoryFn<VirtoAppHeaderProps> = args => {
   const [mode, setMode] = React.useState<"light" | "dark" | undefined>("light");
   React.useEffect(() => {
     setMode(args.mode);
@@ -34,11 +34,13 @@ const Template: Story<VirtoAppHeaderProps> = args => {
   );
 };
 
-// default story
-export const Default = Template.bind({});
-Default.args = {
-  appName: "APP NAME",
-  baseUrl: "http://localhost:3000",
-  mode: "light",
-  username: "Ruud van Nistelrooy"
+export const Default = {
+  args: {
+    appName: "APP NAME",
+    baseUrl: "http://localhost:3000",
+    mode: "light",
+    username: "Ruud van Nistelrooy"
+  },
+
+  render: Template
 };

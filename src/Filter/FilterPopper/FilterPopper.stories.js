@@ -71,10 +71,12 @@ const MultiTemplate = args => {
   );
 };
 
-// story for a multi filter popper
-export const Multi = MultiTemplate.bind({});
-Multi.args = {
-  label: "Grouped filters"
+export const Multi = {
+  args: {
+    label: "Grouped filters"
+  },
+
+  render: MultiTemplate
 };
 
 // template for a single checkbox filter
@@ -104,10 +106,12 @@ const SingleCheckboxTemplate = args => {
   );
 };
 
-// story for a single checkbox filter
-export const SingleCheckbox = SingleCheckboxTemplate.bind({});
-SingleCheckbox.args = {
-  label: "Single checkbox"
+export const SingleCheckbox = {
+  args: {
+    label: "Single checkbox"
+  },
+
+  render: SingleCheckboxTemplate
 };
 
 // template for a single label filter
@@ -137,8 +141,10 @@ const SingleLabelTemplate = args => {
   );
 };
 
-// story for a single label filter
-export const SingleLabel = SingleLabelTemplate.bind({});
-SingleLabel.args = {
-  label: "Single label"
+export const SingleLabel = {
+  args: {
+    label: "Single label"
+  },
+
+  render: SingleLabelTemplate
 };

@@ -29,126 +29,138 @@ const Template = args => {
   );
 };
 
-// default story
-export const Default = Template.bind({});
-Default.args = {
-  color: "primary",
-  disabled: false,
-  labelPosition: "bottom",
-  labelStyle: {},
-  labels: [],
-  max: 10,
-  min: 1,
-  orientation: "horizontal",
-  showLabels: true,
-  step: 1,
-  title: "Slider example",
-  value: 1,
-  valueLabelDisplay: "auto"
-};
-
-// custom labels story
-export const CustomLabels = Template.bind({});
-CustomLabels.args = {
-  color: "primary",
-  disabled: false,
-  labelPosition: "bottom",
-  labelStyle: {},
-  labels: [
-    { label: "low", value: 1 },
-    { label: "mid", value: 5 },
-    { label: "high", value: 10 }
-  ],
-  max: 10,
-  min: 1,
-  orientation: "horizontal",
-  showLabels: true,
-  step: 1,
-  title: "Slider example",
-  value: 1,
-  valueLabelDisplay: "auto"
-};
-
-// styled labels
-export const StyledLabels = Template.bind({});
-StyledLabels.args = {
-  color: "primary",
-  disabled: false,
-  labelPosition: "top",
-  labelStyle: {
-    color: "blue",
-    fontFamily: "Montserrat",
-    fontStyle: "italic"
+export const Default = {
+  args: {
+    color: "primary",
+    disabled: false,
+    labelPosition: "bottom",
+    labelStyle: {},
+    labels: [],
+    max: 10,
+    min: 1,
+    orientation: "horizontal",
+    showLabels: true,
+    step: 1,
+    title: "Slider example",
+    value: 1,
+    valueLabelDisplay: "auto"
   },
-  labels: [
-    { label: "low", value: 1 },
-    { label: "mid", value: 5 },
-    { label: "high", value: 10 }
-  ],
-  max: 10,
-  min: 1,
-  orientation: "horizontal",
-  showLabels: true,
-  step: 1,
-  title: "Slider example",
-  value: 1,
-  valueLabelDisplay: "auto"
+
+  render: Template
 };
 
-// styled slider
-export const StyledSlider = Template.bind({});
-StyledSlider.args = {
-  color: "green",
-  disabled: false,
-  labelPosition: "bottom",
-  labelStyle: {},
-  labels: [
-    { label: "low", value: 1 },
-    { label: "mid", value: 5 },
-    { label: "high", value: 10 }
-  ],
-  max: 10,
-  min: 1,
-  orientation: "horizontal",
-  showLabels: true,
-  step: 1,
-  title: "Slider example",
-  value: 1,
-  valueLabelDisplay: "auto"
+export const CustomLabels = {
+  args: {
+    color: "primary",
+    disabled: false,
+    labelPosition: "bottom",
+    labelStyle: {},
+    labels: [
+      { label: "low", value: 1 },
+      { label: "mid", value: 5 },
+      { label: "high", value: 10 }
+    ],
+    max: 10,
+    min: 1,
+    orientation: "horizontal",
+    showLabels: true,
+    step: 1,
+    title: "Slider example",
+    value: 1,
+    valueLabelDisplay: "auto"
+  },
+
+  render: Template
 };
 
-// disabled slider
-export const Disabled = Template.bind({});
-Disabled.args = {
-  color: "primary",
-  disabled: true,
-  labelPosition: "bottom",
-  labelStyle: {},
-  labels: [],
-  max: 10,
-  min: 1,
-  orientation: "horizontal",
-  showLabels: true,
-  step: 1,
-  title: "Slider example",
-  value: 1,
-  valueLabelDisplay: "auto"
+export const StyledLabels = {
+  args: {
+    color: "primary",
+    disabled: false,
+    labelPosition: "top",
+    labelStyle: {
+      color: "blue",
+      fontFamily: "Montserrat",
+      fontStyle: "italic"
+    },
+    labels: [
+      { label: "low", value: 1 },
+      { label: "mid", value: 5 },
+      { label: "high", value: 10 }
+    ],
+    max: 10,
+    min: 1,
+    orientation: "horizontal",
+    showLabels: true,
+    step: 1,
+    title: "Slider example",
+    value: 1,
+    valueLabelDisplay: "auto"
+  },
+
+  render: Template
 };
 
-// vertical slider
-export const VerticalSlider = Template.bind({});
-VerticalSlider.args = {
-  color: "primary",
-  disabled: false,
-  labelPosition: "right",
-  labelStyle: {},
-  labels: [],
-  max: 10,
-  min: 1,
-  orientation: "vertical",
-  showLabels: true,
-  step: 1,
-  title: "Vertical slider",
-  value: 1,
-  valueLabelDisplay: "auto"
+export const StyledSlider = {
+  args: {
+    color: "green",
+    disabled: false,
+    labelPosition: "bottom",
+    labelStyle: {},
+    labels: [
+      { label: "low", value: 1 },
+      { label: "mid", value: 5 },
+      { label: "high", value: 10 }
+    ],
+    max: 10,
+    min: 1,
+    orientation: "horizontal",
+    showLabels: true,
+    step: 1,
+    title: "Slider example",
+    value: 1,
+    valueLabelDisplay: "auto"
+  },
+
+  render: Template
+};
+
+export const Disabled = {
+  args: {
+    color: "primary",
+    disabled: true,
+    labelPosition: "bottom",
+    labelStyle: {},
+    labels: [],
+    max: 10,
+    min: 1,
+    orientation: "horizontal",
+    showLabels: true,
+    step: 1,
+    title: "Slider example",
+    value: 1,
+    valueLabelDisplay: "auto"
+  },
+
+  render: Template
+};
+
+export const VerticalSlider = {
+  args: {
+    color: "primary",
+    disabled: false,
+    labelPosition: "right",
+    labelStyle: {},
+    labels: [],
+    max: 10,
+    min: 1,
+    orientation: "vertical",
+    showLabels: true,
+    step: 1,
+    title: "Vertical slider",
+    value: 1,
+    valueLabelDisplay: "auto"
+  },
+
+  render: Template
 };

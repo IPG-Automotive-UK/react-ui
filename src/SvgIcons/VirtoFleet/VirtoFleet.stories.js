@@ -10,7 +10,10 @@ const Template = args => {
   return <VirtoFleet {...args} />;
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  sx: { height: 60, width: 60 }
+export const Default = {
+  args: {
+    sx: { height: 60, width: 60 }
+  },
+
+  render: Template
 };

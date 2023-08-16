@@ -1,4 +1,4 @@
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 
 import React from "react";
 import StatusIcon from "./StatusIcon";
@@ -17,13 +17,16 @@ export default meta;
 /**
  * Story template for the StatusIcon component
  */
-const Template: Story<StatusIconProps> = args => {
+const Template: StoryFn<StatusIconProps> = args => {
   return <StatusIcon {...args} />;
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  height: 40,
-  status: statusTypes[0],
-  width: 40
+export const Default = {
+  args: {
+    height: 40,
+    status: statusTypes[0],
+    width: 40
+  },
+
+  render: Template
 };

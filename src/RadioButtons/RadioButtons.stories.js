@@ -25,14 +25,17 @@ const Template = args => {
   );
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  disabled: false,
-  labelPlacement: "end",
-  options: ["Option A", "Option B", "Option C"],
-  row: false,
-  size: "medium",
-  style: {},
-  title: "This is an example",
-  value: "Option B"
+export const Default = {
+  args: {
+    disabled: false,
+    labelPlacement: "end",
+    options: ["Option A", "Option B", "Option C"],
+    row: false,
+    size: "medium",
+    style: {},
+    title: "This is an example",
+    value: "Option B"
+  },
+
+  render: Template
 };

@@ -18,15 +18,18 @@ const Template = args => {
   return <Select {...args} onChange={onChange} value={value} />;
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  disabled: false,
-  error: false,
-  helperText: "What is your selection going to be?",
-  label: "Select an option",
-  margin: "normal",
-  options: ["Option A", "Option B", "Option C"],
-  required: true,
-  size: "medium",
-  variant: "outlined"
+export const Default = {
+  args: {
+    disabled: false,
+    error: false,
+    helperText: "What is your selection going to be?",
+    label: "Select an option",
+    margin: "normal",
+    options: ["Option A", "Option B", "Option C"],
+    required: true,
+    size: "medium",
+    variant: "outlined"
+  },
+
+  render: Template
 };
