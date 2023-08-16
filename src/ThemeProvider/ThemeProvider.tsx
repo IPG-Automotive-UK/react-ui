@@ -147,20 +147,20 @@ const darkTheme = createTheme(
           body: themeParam.palette.mode === "dark" ? darkScrollbar() : null
         })
       },
+      MuiAlertTitle: {
+        styleOverrides: {
+          root: {
+            color: 'inherit'
+          }
+        }
+      },
       MuiStepper: {
         styleOverrides: {
           root: {
             backgroundColor: "rgba(255, 255, 255, 0.08)"
           }
         }
-      },
-      MuiAlertTitle: {
-        styleOverrides: {
-          root: {
-            color: 'inherit',
-          },
-        },
-      },
+      }
     },
     palette: {
       background: {
