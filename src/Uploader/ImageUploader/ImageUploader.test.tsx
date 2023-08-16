@@ -1,18 +1,26 @@
 import { render, screen } from "@testing-library/react";
 
+import { FileWithData } from "../Uploader.types";
 import ImageUploader from ".";
 import React from "react";
 import userEvent from "@testing-library/user-event";
 
 // single file for testing
 // https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png
+const dataUrl =
+  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=";
 const singleFile = {
-  data: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=",
-  file: { name: "1x1.png", path: "1x1.png", type: "image/png" }
-};
+  data: dataUrl,
+  file: {
+    name: "1x1.png",
+    type: "image/png"
+  }
+} as FileWithData;
 
 const WithState = () => {
-  const [selectedFiles, setSelectedFiles] = React.useState([singleFile]);
+  const [selectedFiles, setSelectedFiles] = React.useState<FileWithData[]>([
+    singleFile
+  ]);
   return (
     <ImageUploader
       selectedFiles={selectedFiles}
@@ -40,7 +48,7 @@ describe("ImageUploader", () => {
   test("show selected image", () => {
     render(<WithState />);
     const img = screen.getByAltText("Preview of 1x1.png");
-    expect(img).toHaveAttribute("src", singleFile.preview);
+    expect(img).toHaveAttribute("src", singleFile.data);
     expect(
       screen.queryByText("Drag 'n' drop an image file here, or click to select")
     ).not.toBeInTheDocument();
