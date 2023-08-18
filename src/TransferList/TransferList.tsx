@@ -168,7 +168,7 @@ export default function TransferList({
               None Selected
             </Typography>
           ) : (
-            <>
+            <Box>
               <Typography sx={{ pl: 1, pt: 1 }}>
                 {`${selectedItems.length} selected`}
               </Typography>
@@ -180,7 +180,7 @@ export default function TransferList({
               >
                 Clear All
               </Button>
-            </>
+            </Box>
           )}
         </Box>
         <Box
