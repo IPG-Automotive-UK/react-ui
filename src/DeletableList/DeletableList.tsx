@@ -10,6 +10,8 @@ const DeletableList = ({ list = [], onDelete }: DeletableListProps) => {
       {list?.map(value => {
         return (
           <ListItem
+            sx={{ py: theme => theme.spacing(1) }}
+            divider={true}
             data-testid="deletableList"
             key={value}
             role="listitem2"
