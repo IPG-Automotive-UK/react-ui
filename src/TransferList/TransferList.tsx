@@ -11,17 +11,19 @@ import {
   Typography
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+
 import CloseIcon from "@mui/icons-material/Close";
-import PropTypes from "prop-types";
+import DeletableList from "src/DeletableList/DeletableList";
 import SearchIcon from "@mui/icons-material/Search";
+import { TransferListProps } from "./TransferList.types";
 
 export default function TransferList({
   items = [],
   onChange = () => null,
   selectedItems = []
-}) {
+}: TransferListProps) {
   // search state
-  const [filteredItems, setFilteredItems] = useState([]);
+  const [filteredItems, setFilteredItems] = useState<string[]>([]);
   const [search, setSearch] = useState("");
 
   // update filtered items when search state changes
@@ -38,12 +40,16 @@ export default function TransferList({
   }, [items, search]);
 
   // handle search change
-  const handleSearch = event => {
+  const handleSearch = (event: {
+    target: {
+      value: string;
+    };
+  }) => {
     setSearch(event.target.value);
   };
 
   // handle list item toggle
-  const handleToggle = value => {
+  const handleToggle = (value: string) => {
     const currentIndex = selectedItems.indexOf(value);
     const newSelectedItems = [...selectedItems];
     if (currentIndex === -1) {
@@ -187,57 +193,13 @@ export default function TransferList({
         >
           <Box
             sx={{
-              // borderLeft: theme => `1px solid ${theme.palette.divider}`,
               width: "100%"
             }}
           >
-            <List dense component="div" role="sortedlist">
-              {selectedItems.map(value => {
-                return (
-                  <ListItem
-                    key={value}
-                    role="listitem2"
-                    onClick={() => handleToggle(value)}
-                    secondaryAction={
-                      <IconButton edge="end">
-                        <CloseIcon data-testid="close" />
-                      </IconButton>
-                    }
-                  >
-                    <ListItemText primary={value} />
-                  </ListItem>
-                );
-              })}
-              <ListItem />
-            </List>
+            <DeletableList list={selectedItems} onDelete={handleToggle} />
           </Box>
         </Box>
       </Box>
     </Box>
   );
 }
-TransferList.propTypes = {
-  /**
-   * Array of Items.
-   */
-  items: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-  ),
-  /**
-   * Callback fired when the new item is selected.
-   *
-   * **Signature**
-   * ```
-   * function(newItems) => void
-   * ```
-   *
-   * _newItems_: The new items that have been selected
-   */
-  onChange: PropTypes.func,
-  /**
-   * Array of selectedItems.
-   */
-  selectedItems: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-  )
-};
