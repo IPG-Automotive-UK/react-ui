@@ -9,10 +9,6 @@ export interface AutocompleteProps {
    */
   multiple?: boolean;
   /**
-   * Input name
-   */
-  name: string;
-  /**
    * Callback function to handle changes
    */
   onChange: (selectedOptions: string[] | string) => void;
@@ -23,7 +19,7 @@ export interface AutocompleteProps {
   /**
    * The selected options
    */
-  value: string[];
+  value: string[] | string;
 }
 
 export interface OptionProps extends React.HTMLAttributes<HTMLLIElement> {

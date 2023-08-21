@@ -15,9 +15,8 @@ import { AutocompleteProps } from "./Autocomplete.types";
 export default function Autocomplete({
   value = [],
   label,
-  onChange,
+  onChange = () => null,
   multiple = false,
-
   options
 }: AutocompleteProps) {
   const inputRef = useRef<HTMLDivElement>(null);
@@ -89,7 +88,7 @@ export default function Autocomplete({
 
   return (
     <MuiAutocomplete
-      limitTags={limitTags}
+      limitTags={multiple ? limitTags : -1}
       multiple={multiple}
       onChange={(e, newValue) => onChange(newValue || [])}
       options={options}
@@ -97,8 +96,7 @@ export default function Autocomplete({
         <TextField {...params} label={label} ref={inputRef} />
       )}
       renderOption={multiple ? Option : undefined}
-      value={multiple ? value : value[0]}
-      clearIcon={null}
+      value={value}
     />
   );
 }
