@@ -15,11 +15,11 @@ const meta: Meta<typeof Autocomplete> = {
 export default meta;
 
 const Template: StoryFn<AutocompleteProps> = args => {
-  console.log("args", args.multiple);
+  // console.log("args", args.multiple);
   const [value, setValue] = React.useState(args.value);
   React.useEffect(() => {
     if (args.multiple) {
-      console.log("in use effect multiple");
+      // console.log("in use effect multiple");
       setValue([]);
     } else {
       setValue(args.value);

@@ -26,46 +26,49 @@ export default function Autocomplete({
 
   const calculateLimitTags = React.useCallback(() => {
     if (inputRef.current) {
-      const inputStyles = window.getComputedStyle(inputRef.current);
-      const inputWidth = parseFloat(inputStyles.width);
+      if (Array.isArray(value) && value.length > 0) {
+        const inputStyles = window.getComputedStyle(inputRef.current);
+        const inputWidth = parseFloat(inputStyles.width);
 
-      // total width of the selected options
-      let totalOptionWidth = 0;
+        // total width of the selected options
+        let totalOptionWidth = 0;
 
-      // length of the selected options
-      let length = 0;
+        // length of the selected options
+        let length = 0;
 
-      // const spacing between the selected options
-      const spacing = 9;
+        // const spacing between the selected options
+        const spacing = 12;
 
-      // loop through the selected options
-      inputRef.current.childNodes[1].childNodes.forEach(child => {
-        if (
-          child instanceof HTMLElement &&
-          child.classList.contains("MuiChip-root")
-        ) {
-          totalOptionWidth += child.offsetWidth + spacing;
-          length++;
+        // loop through the selected options
+        inputRef.current.childNodes[1].childNodes.forEach(child => {
+          if (
+            child instanceof HTMLElement &&
+            child.classList.contains("MuiChip-root")
+          ) {
+            totalOptionWidth += child.offsetWidth + spacing;
+            length++;
+          }
+        });
+        console.log("totalOptionWidth", totalOptionWidth);
+        console.log("inputWidth", inputWidth);
+        // if the total width of the selected options is greater than the input width then set the limitTags
+        if (totalOptionWidth > inputWidth) {
+          // add 1 to the length to account for the input
+          let sum = 0;
+          sum++;
+
+          // calculate the limitTags
+          const limitTags = length - sum;
+
+          // set the limitTags
+          setLimitTags(limitTags);
+        } else {
+          // if the total width of the selected options is less than the input width then set the limitTags to -1
+          setLimitTags(-1);
         }
-      });
-
-      // if the total width of the selected options is greater than the input width then set the limitTags
-      if (totalOptionWidth > inputWidth) {
-        // add 1 to the length to account for the input
-        let sum = 0;
-        sum++;
-
-        // calculate the limitTags
-        const limitTags = length - sum;
-
-        // set the limitTags
-        setLimitTags(limitTags);
-      } else {
-        // if the total width of the selected options is less than the input width then set the limitTags to -1
-        setLimitTags(-1);
       }
     }
-  }, [inputRef]);
+  }, [inputRef, value]);
 
   useEffect(() => {
     if (multiple) {
