@@ -15,11 +15,17 @@ const meta: Meta<typeof Autocomplete> = {
 export default meta;
 
 const Template: StoryFn<AutocompleteProps> = args => {
-  console.log("args", args);
+  console.log("args", args.multiple);
   const [value, setValue] = React.useState(args.value);
   React.useEffect(() => {
-    setValue(args.value);
-  }, [args.value]);
+    if (args.multiple) {
+      console.log("in use effect multiple");
+      setValue([]);
+    } else {
+      setValue(args.value);
+    }
+  }, [args.value, args.multiple]);
+
   const onChange = newValue => {
     setValue(newValue);
     action("onChange")(newValue);
@@ -30,10 +36,7 @@ const Template: StoryFn<AutocompleteProps> = args => {
 export const Default = {
   args: {
     label: "Select options",
-    limitTags: -1,
-
-    multiple: false,
-
+    multiple: true,
     options: [
       "Nikitha",
       "Nikitha 1",
@@ -45,6 +48,5 @@ export const Default = {
     ],
     value: []
   },
-
   render: Template
 };

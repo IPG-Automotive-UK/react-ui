@@ -27,12 +27,11 @@ function calculateOptionWidth(option: string) {
 export default function Autocomplete({
   value = [],
   label,
-  onChange,
+  onChange = () => null,
   multiple = false,
-
   options
 }: AutocompleteProps) {
-  console.log("multiple", multiple);
+  console.log("value", value);
   const inputRef = useRef<HTMLDivElement>(null);
 
   // define local state for limitTags
@@ -40,20 +39,20 @@ export default function Autocomplete({
 
   const calculateLimitTags = React.useCallback(() => {
     if (inputRef.current) {
-      const inputStyles = window.getComputedStyle(inputRef.current);
-      const inputWidth = parseFloat(inputStyles.width);
-      console.log("inputWidth", inputWidth);
+      if (Array.isArray(value) && value.length > 0) {
+        const inputStyles = window.getComputedStyle(inputRef.current);
+        const inputWidth = parseFloat(inputStyles.width);
+        const optionWidths = value.map(option => calculateOptionWidth(option));
+        const totalOptionWidth = optionWidths.reduce(
+          (sum, width) => sum + width,
+          0
+        );
 
-      const optionWidths = value.map(option => calculateOptionWidth(option));
-      const totalOptionWidth = optionWidths.reduce(
-        (sum, width) => sum + width,
-        0
-      );
+        // Calculate the maximum number of visible options
+        const maxOptions = Math.floor((inputWidth - totalOptionWidth) / 62);
 
-      // Calculate the maximum number of visible options
-      const maxOptions = Math.floor((inputWidth - totalOptionWidth) / 62);
-
-      setLimitTags(maxOptions);
+        setLimitTags(maxOptions);
+      }
     }
   }, [inputRef, value]);
 
@@ -78,16 +77,15 @@ export default function Autocomplete({
 
   return (
     <MuiAutocomplete
-      limitTags={limitTags}
+      limitTags={multiple ? limitTags : -1}
       multiple={multiple}
-      onChange={(e, newValue) => onChange(newValue || "")}
+      onChange={(e, newValue) => onChange(newValue || [])}
       options={options}
       renderInput={params => (
         <TextField {...params} label={label} ref={inputRef} />
       )}
       renderOption={multiple ? Option : undefined}
-      value={multiple ? value : value[0]}
-      clearIcon={null}
+      value={value}
     />
   );
 }
