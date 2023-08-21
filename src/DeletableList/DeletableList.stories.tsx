@@ -25,7 +25,7 @@ const Template: StoryFn<DeletableListProps> = args => {
 // Default
 export const Default = {
   args: {
-    list: ["Apple", "Mango", "Banana"],
+    items: ["Apple", "Mango", "Banana"],
     onDelete: () => {}
   },
   render: Template

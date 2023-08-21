@@ -6,13 +6,13 @@ import { render } from "@testing-library/react";
 describe("DeletableList", () => {
   // test to check the component renders
   test("renders", () => {
-    render(<DeletableList list={[]} onDelete={() => {}} />);
+    render(<DeletableList items={[]} onDelete={() => {}} />);
   });
 
   // test to check the list renders
   test("renders list", () => {
     const { container } = render(
-      <DeletableList list={["Apple", "Mango", "Banana"]} onDelete={() => {}} />
+      <DeletableList items={["Apple", "Mango", "Banana"]} onDelete={() => {}} />
     );
     expect(container.querySelectorAll("li").length).toBe(3);
   });
@@ -21,7 +21,7 @@ describe("DeletableList", () => {
   test("test list delete works", () => {
     const onDelete = jest.fn();
     const { container } = render(
-      <DeletableList list={["Apple", "Mango", "Banana"]} onDelete={onDelete} />
+      <DeletableList items={["Apple", "Mango", "Banana"]} onDelete={onDelete} />
     );
     const deleteButton = container.querySelector("button");
     deleteButton && deleteButton.click();

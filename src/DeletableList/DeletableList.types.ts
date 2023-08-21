@@ -1,8 +1,8 @@
 export interface DeletableListProps {
   /**
-   * Array of list to be displayed.
+   * Array of items to be displayed.
    */
-  list: string[];
+  items: string[];
   /**
    * Callback fired when the user clicks on Delete("X") button
    */

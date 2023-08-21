@@ -4,10 +4,13 @@ import CloseIcon from "@mui/icons-material/Close";
 import { DeletableListProps } from "./DeletableList.types";
 import React from "react";
 
-const DeletableList = ({ list = [], onDelete }: DeletableListProps) => {
+const DeletableList = ({
+  items = [],
+  onDelete = () => null
+}: DeletableListProps) => {
   return (
     <List dense component="div" role="sortedlist">
-      {list?.map(value => {
+      {items?.map(value => {
         return (
           <ListItem
             sx={{ py: theme => theme.spacing(1) }}

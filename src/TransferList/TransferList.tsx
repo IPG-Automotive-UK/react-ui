@@ -196,7 +196,7 @@ export default function TransferList({
               width: "100%"
             }}
           >
-            <DeletableList list={selectedItems} onDelete={handleToggle} />
+            <DeletableList items={selectedItems} onDelete={handleToggle} />
           </Box>
         </Box>
       </Box>
