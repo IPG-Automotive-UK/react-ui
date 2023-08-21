@@ -15,7 +15,6 @@ const meta: Meta<typeof Autocomplete> = {
 export default meta;
 
 const Template: StoryFn<AutocompleteProps> = args => {
-  console.log("args", args);
   const [value, setValue] = React.useState(args.value);
   React.useEffect(() => {
     setValue(args.value);
@@ -30,7 +29,6 @@ const Template: StoryFn<AutocompleteProps> = args => {
 export const Default = {
   args: {
     label: "Select options",
-    limitTags: -1,
 
     multiple: false,
 

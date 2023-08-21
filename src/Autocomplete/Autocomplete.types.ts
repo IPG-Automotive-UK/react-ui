@@ -3,10 +3,7 @@ export interface AutocompleteProps {
    * The label for the filter.
    */
   label: string;
-  /**
-   * The number of selected tags to show
-   */
-  limitTags?: number;
+
   /**
    * multi select
    */
