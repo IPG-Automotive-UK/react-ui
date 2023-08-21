@@ -42,6 +42,8 @@ function SummaryCard({
     HTMLElement[] | []
   >([]);
 
+  console.log(overFlowingLabels, "overFlowingLabels");
+
   // label popover anchor state
   const [labelAnchorEl, setLabelAnchorEl] = useState<HTMLElement | null>(null);
 
