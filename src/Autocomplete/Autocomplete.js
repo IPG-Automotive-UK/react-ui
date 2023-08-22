@@ -1,4 +1,5 @@
 import { Autocomplete as MuiAutocomplete, TextField } from "@mui/material";
+
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -25,6 +26,7 @@ export default function Autocomplete({
       onChange={onChange}
       options={options}
       size={size}
+      fullWidth
       value={value}
       renderInput={params => (
         <TextField
