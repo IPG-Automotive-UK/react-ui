@@ -50,18 +50,50 @@ const Template: StoryFn<
 
 export const Default: StoryObj<typeof Autocomplete> = {
   args: {
+    disabled: false,
+    error: false,
+    helperText: "Helper Text",
     label: "Select options",
+    limitTags: -1,
+    margin: "normal",
+    multiple: false,
+    options: [
+      "Option 1",
+      "Option 2",
+      "Option 3",
+      "Option 4",
+      "Option 5",
+      "Option 6"
+    ],
+    required: false,
+    size: "medium",
+    value: "Option 1",
+    variant: "outlined"
+  },
+  render: Template
+};
+
+export const MultiSelect: StoryObj<typeof Autocomplete> = {
+  args: {
+    disabled: false,
+    error: false,
+    helperText: "Helper Text",
+    label: "Select options",
+    limitTags: -1,
+    margin: "normal",
     multiple: true,
     options: [
-      "Nikitha",
-      "Nikitha 1",
-      "Nikitha 22",
-      "Nikitha333",
-      "Nikitha 4444 ",
-      "Nikitha 55555",
-      "Nikitha 56666"
+      "Option 1",
+      "Option 2",
+      "Option 3",
+      "Option 4",
+      "Option 5",
+      "Option 6"
     ],
-    value: []
+    required: false,
+    size: "medium",
+    value: [],
+    variant: "outlined"
   },
   render: Template
 };

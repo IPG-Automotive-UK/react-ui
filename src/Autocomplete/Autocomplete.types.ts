@@ -8,7 +8,13 @@ export type AutocompleteProps<
   Multiple extends boolean | undefined
 > = Pick<
   MuiAutocompleteProps<Value, Multiple, false, false>,
-  "multiple" | "onChange" | "options" | "value" | "disabled" | "size"
+  | "multiple"
+  | "onChange"
+  | "options"
+  | "value"
+  | "disabled"
+  | "size"
+  | "limitTags"
 > &
   Pick<
     TextFieldProps,
