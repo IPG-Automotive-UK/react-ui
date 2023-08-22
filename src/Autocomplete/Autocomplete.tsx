@@ -13,7 +13,7 @@ import { useEffect, useRef, useState } from "react";
 import { AutocompleteProps } from "./Autocomplete.types";
 
 export default function Autocomplete({
-  value = [],
+  value,
   label,
   onChange = () => null,
   multiple = false,
@@ -33,11 +33,14 @@ export default function Autocomplete({
         // total width of the selected options
         let totalOptionWidth = 0;
 
-        // length of the selected options
-        let length = 0;
+        // selected tags length
+        let selectedTagsLength = 0;
 
-        // const spacing between the selected options
-        const spacing = 12;
+        // available space for tags to fit
+        let availableSpace = 0;
+
+        // space between the tags
+        const tagSpacing = 9;
 
         // loop through the selected options
         inputRef.current.childNodes[1].childNodes.forEach(child => {
@@ -45,27 +48,28 @@ export default function Autocomplete({
             child instanceof HTMLElement &&
             child.classList.contains("MuiChip-root")
           ) {
-            totalOptionWidth += child.offsetWidth + spacing;
-            length++;
+            totalOptionWidth += child.offsetWidth + tagSpacing + 32;
+
+            // Calculate the available space for tags
+            availableSpace = inputWidth - totalOptionWidth;
+
+            // selected tags length
+            selectedTagsLength++;
+
+            if (availableSpace >= child.offsetWidth + tagSpacing) {
+              // All tags fit within the input, so no limit needed
+              setLimitTags(-1);
+            } else {
+              // Calculate the limitTags based on available space
+              let limitTags = 0;
+
+              limitTags++;
+              console.log("limitTags", limitTags);
+
+              setLimitTags(selectedTagsLength - limitTags);
+            }
           }
         });
-        console.log("totalOptionWidth", totalOptionWidth);
-        console.log("inputWidth", inputWidth);
-        // if the total width of the selected options is greater than the input width then set the limitTags
-        if (totalOptionWidth > inputWidth) {
-          // add 1 to the length to account for the input
-          let sum = 0;
-          sum++;
-
-          // calculate the limitTags
-          const limitTags = length - sum;
-
-          // set the limitTags
-          setLimitTags(limitTags);
-        } else {
-          // if the total width of the selected options is less than the input width then set the limitTags to -1
-          setLimitTags(-1);
-        }
       }
     }
   }, [inputRef, value]);
@@ -100,6 +104,7 @@ export default function Autocomplete({
       )}
       renderOption={multiple ? Option : undefined}
       value={value}
+      clearIcon={multiple ? null : undefined}
     />
   );
 }

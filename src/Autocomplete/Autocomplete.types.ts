@@ -21,8 +21,3 @@ export interface AutocompleteProps {
    */
   value: string[] | string;
 }
-
-export interface OptionProps extends React.HTMLAttributes<HTMLLIElement> {
-  option: string;
-  selected: boolean;
-}
