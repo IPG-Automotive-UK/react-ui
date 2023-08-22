@@ -12,10 +12,13 @@ import { useEffect, useRef, useState } from "react";
 
 import { AutocompleteProps } from "./Autocomplete.types";
 
-export default function Autocomplete({
+export default function Autocomplete<
+  Value extends string,
+  Multiple extends boolean | undefined
+>({
   value,
   label,
-  onChange = () => null,
+  onChange,
   multiple = false,
   options,
   disabled = false,
@@ -25,7 +28,7 @@ export default function Autocomplete({
   margin = "normal",
   required = false,
   variant = "outlined"
-}: AutocompleteProps) {
+}: AutocompleteProps<Value, Multiple>) {
   const inputRef = useRef<HTMLDivElement>(null);
 
   // define local state for limitTags
@@ -82,7 +85,7 @@ export default function Autocomplete({
     <MuiAutocomplete
       limitTags={multiple ? limitTags : -1}
       multiple={multiple}
-      onChange={(e, newValue) => onChange(newValue || [])}
+      onChange={onChange}
       options={options}
       renderInput={params => (
         <TextField

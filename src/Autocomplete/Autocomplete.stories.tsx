@@ -15,11 +15,14 @@ const meta: Meta<typeof Autocomplete> = {
 };
 export default meta;
 
-const Template: StoryFn<AutocompleteProps> = args => {
-  const [{ value, multiple }, updateArgs] = useArgs<AutocompleteProps>();
+const Template: StoryFn<
+  AutocompleteProps<string, boolean | undefined>
+> = args => {
+  const [{ value, multiple }, updateArgs] =
+    useArgs<AutocompleteProps<string, boolean | undefined>>();
 
   React.useEffect(() => {
-    if (multiple && !Array.isArray(value))
+    if (multiple && !Array.isArray(value) && value)
       updateArgs({ value: value !== "" ? [value] : [] });
     if (!multiple && Array.isArray(value))
       updateArgs({ value: value.length > 0 ? value[0] : "" });
@@ -35,10 +38,17 @@ const Template: StoryFn<AutocompleteProps> = args => {
     updateArgs({ value: newValue });
     action("onChange")(newValue);
   };
-  return <Autocomplete {...args} onChange={onChange} value={value} />;
+  return (
+    <Autocomplete
+      {...args}
+      onChange={onChange}
+      value={theValue}
+      multiple={multiple}
+    />
+  );
 };
 
-export const Default = {
+export const Default: StoryObj<typeof Autocomplete> = {
   args: {
     label: "Select options",
     multiple: true,
