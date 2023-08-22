@@ -34,7 +34,7 @@ const Template: StoryFn<
   if (!multiple && Array.isArray(value)) theValue = value[0];
   if (!multiple && !Array.isArray(value)) theValue = value;
 
-  const onChange = newValue => {
+  const onChange = (event, newValue) => {
     updateArgs({ value: newValue });
     action("onChange")(newValue);
   };
