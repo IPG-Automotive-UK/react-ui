@@ -17,7 +17,14 @@ export default function Autocomplete({
   label,
   onChange = () => null,
   multiple = false,
-  options
+  options,
+  disabled = false,
+  size = "medium",
+  error = false,
+  helperText,
+  margin = "normal",
+  required = false,
+  variant = "outlined"
 }: AutocompleteProps) {
   const inputRef = useRef<HTMLDivElement>(null);
 
@@ -64,7 +71,6 @@ export default function Autocomplete({
               let limitTags = 0;
 
               limitTags++;
-              console.log("limitTags", limitTags);
 
               setLimitTags(selectedTagsLength - limitTags);
             }
@@ -100,11 +106,22 @@ export default function Autocomplete({
       onChange={(e, newValue) => onChange(newValue || [])}
       options={options}
       renderInput={params => (
-        <TextField {...params} label={label} ref={inputRef} />
+        <TextField
+          {...params}
+          label={label}
+          ref={inputRef}
+          error={error}
+          helperText={helperText}
+          margin={margin}
+          required={required}
+          variant={variant}
+        />
       )}
       renderOption={multiple ? Option : undefined}
       value={value}
       clearIcon={multiple ? null : undefined}
+      disabled={disabled}
+      size={size}
     />
   );
 }
