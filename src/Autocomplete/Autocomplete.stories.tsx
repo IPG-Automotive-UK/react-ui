@@ -1,9 +1,10 @@
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, StoryFn, StoryObj } from "@storybook/react";
 
 import Autocomplete from "./Autocomplete";
 import { AutocompleteProps } from "./Autocomplete.types";
 import React from "react";
 import { action } from "@storybook/addon-actions";
+import { useArgs } from "@storybook/client-api";
 
 /**
  * Story metadata
@@ -15,19 +16,23 @@ const meta: Meta<typeof Autocomplete> = {
 export default meta;
 
 const Template: StoryFn<AutocompleteProps> = args => {
-  // console.log("args", args.multiple);
-  const [value, setValue] = React.useState(args.value);
+  const [{ value, multiple }, updateArgs] = useArgs<AutocompleteProps>();
+
   React.useEffect(() => {
-    if (args.multiple) {
-      // console.log("in use effect multiple");
-      setValue([]);
-    } else {
-      setValue(args.value);
-    }
-  }, [args.value, args.multiple]);
+    if (multiple && !Array.isArray(value))
+      updateArgs({ value: value !== "" ? [value] : [] });
+    if (!multiple && Array.isArray(value))
+      updateArgs({ value: value.length > 0 ? value[0] : "" });
+  }, [updateArgs, multiple, value]);
+
+  let theValue;
+  if (multiple && Array.isArray(value)) theValue = value;
+  if (multiple && !Array.isArray(value)) theValue = [value];
+  if (!multiple && Array.isArray(value)) theValue = value[0];
+  if (!multiple && !Array.isArray(value)) theValue = value;
 
   const onChange = newValue => {
-    setValue(newValue);
+    updateArgs({ value: newValue });
     action("onChange")(newValue);
   };
   return <Autocomplete {...args} onChange={onChange} value={value} />;

@@ -37,45 +37,24 @@ export default function Autocomplete({
         const inputStyles = window.getComputedStyle(inputRef.current);
         const inputWidth = parseFloat(inputStyles.width);
 
-        // total width of the selected options
-        let totalOptionWidth = 0;
+        const tagWidths = Array.from(inputRef.current.childNodes[1].childNodes)
+          .map(child => {
+            if (!(child instanceof HTMLElement)) return NaN;
+            if (!child.classList.contains("MuiChip-root")) return NaN;
 
-        // selected tags length
-        let selectedTagsLength = 0;
+            const styles = window.getComputedStyle(child);
+            const marginLeft = parseFloat(styles.marginLeft);
+            const marginRight = parseFloat(styles.marginRight);
+            const width = parseFloat(styles.width);
+            return marginLeft + marginRight + width;
+          })
+          .filter(x => !isNaN(x))
+          .reduce((a, b) => [...a, a[a.length - 1] + b], []);
 
-        // available space for tags to fit
-        let availableSpace = 0;
+        console.log(tagWidths);
+        const maxTags = tagWidths.filter(x => x < inputWidth).length;
 
-        // space between the tags
-        const tagSpacing = 9;
-
-        // loop through the selected options
-        inputRef.current.childNodes[1].childNodes.forEach(child => {
-          if (
-            child instanceof HTMLElement &&
-            child.classList.contains("MuiChip-root")
-          ) {
-            totalOptionWidth += child.offsetWidth + tagSpacing + 32;
-
-            // Calculate the available space for tags
-            availableSpace = inputWidth - totalOptionWidth;
-
-            // selected tags length
-            selectedTagsLength++;
-
-            if (availableSpace >= child.offsetWidth + tagSpacing) {
-              // All tags fit within the input, so no limit needed
-              setLimitTags(-1);
-            } else {
-              // Calculate the limitTags based on available space
-              let limitTags = 0;
-
-              limitTags++;
-
-              setLimitTags(selectedTagsLength - limitTags);
-            }
-          }
-        });
+        setLimitTags(maxTags === tagWidths.length ? -1 : maxTags);
       }
     }
   }, [inputRef, value]);
