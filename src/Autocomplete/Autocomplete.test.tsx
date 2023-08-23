@@ -31,9 +31,8 @@ describe("Select", () => {
     expect(screen.getByText("option 2")).toBeInTheDocument();
     expect(screen.getByText("option 3")).toBeInTheDocument();
 
-    // click the first option
+    // click the first option and check callback is called
     await userEvent.click(screen.getByText("option 1"));
-
     expect(onChange).toHaveBeenCalledTimes(1);
 
     // check that the onChange event is fired with the expected value
@@ -65,9 +64,8 @@ describe("Select", () => {
     expect(screen.getByText("option 2")).toBeInTheDocument();
     expect(screen.getByText("option 3")).toBeInTheDocument();
 
-    // click the first option
+    // click the first option and check callback is called 
     await userEvent.click(screen.getByText("option 1"));
-
     expect(onChange).toHaveBeenCalledTimes(1);
 
     // check that the onChange event is fired with the expected value
@@ -93,10 +91,10 @@ describe("Select", () => {
       { option: "option 2" }
     );
 
-    // Check the first call with "option 1"
+    // check the first call with "option 1"
     expect(onChange.mock.calls[0][1]).toEqual(["option 1"]);
 
-    // Check the second call with "option 2"
+    // check the second call with "option 2"
     expect(onChange.mock.calls[1][1]).toEqual(["option 2"]);
   });
 });
