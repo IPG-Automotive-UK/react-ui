@@ -64,7 +64,7 @@ describe("Select", () => {
     expect(screen.getByText("option 2")).toBeInTheDocument();
     expect(screen.getByText("option 3")).toBeInTheDocument();
 
-    // click the first option and check callback is called 
+    // click the first option and check callback is called
     await userEvent.click(screen.getByText("option 1"));
     expect(onChange).toHaveBeenCalledTimes(1);
 
