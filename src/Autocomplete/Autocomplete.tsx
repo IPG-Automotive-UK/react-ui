@@ -57,7 +57,7 @@ export default function Autocomplete<
 
 // renderer for a checkbox option
 function Option(
-  props: any,
+  props: React.HTMLAttributes<HTMLLIElement>,
   option: string,
   { selected }: { selected: boolean }
 ) {
