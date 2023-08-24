@@ -1,70 +1,12 @@
-// User group
-export type UserGroup = {
-  _id: string;
-  name: string;
-  createdAt: string;
-  updatedAt: string;
-};
-
-// Vehicle milestone timing
-export type Timing = {
-  gate: string;
-  date: string;
-};
-
-// Vehicle project milestone
-export type Milestone = {
-  timings: Timing[];
-  color: string;
-};
-export type EmptyMilestone = {
-  timings: [];
-};
-
-// Vehicle
+// Vehicle types
 export type Vehicle = {
-  DMF?: string;
-  __v: number;
   _id: string;
-  bodyStyle?: string;
-  brakeCircuit?: string;
-  brand: string;
-  drive: string;
-  driveSource: string;
-  engineOrientation?: string;
-  frontDiffType?: string;
-  milestones: EmptyMilestone | Milestone[];
   modelYear: string;
-  mountElectricMotor?: string;
-  numberElectricMotors?: number | null;
-  numberEngineMounts?: number | null;
-  powerSteering: string;
-  powerSupplyEV?: string;
-  powertrain?: string;
-  powertrainCoordinateOrientation: string;
-  powertrainCoordinateOrigin: string;
   projectCode: string;
-  rearDiffType?: string;
-  restricted: boolean;
-  restrictedGroups: UserGroup[];
-  rimSizeFA: string;
-  rimSizeRA: string;
-  suspension: string;
-  systemPowerkW: number;
-  tireAspectRatioFA: number;
-  tireAspectRatioRA: number;
-  tireWidthFA: number;
-  tireWidthRA: number;
-  transmissionGears: number;
-  transmissionType: string;
-  transmissonGears: number | null;
-  turbochargerEquipped?: string;
   variant: string;
-  vehicleCoordinateOrientation: string;
-  vehicleCoordinateOrigin: string;
-  vehicleSegment: string;
 };
 
+// types for the selected vehicle
 export type SelectedVehicle = {
   _id: string;
   project: string;
@@ -81,7 +23,7 @@ export interface VehicleSelectProps {
   /**
    * Array of all vehicles
    */
-  allVehicles: Pick<Vehicle, "_id" | "projectCode" | "modelYear" | "variant">[];
+  allVehicles: Vehicle[];
   /**
    * The currently selected vehicles
    */
