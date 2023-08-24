@@ -139,7 +139,7 @@ describe("Vehicle Select", () => {
         gate: "Gate 1",
         modelYear: "2015",
         project: "911",
-        variant: "mp"
+        variant: "MP"
       }
     ];
     render(
@@ -157,7 +157,7 @@ describe("Vehicle Select", () => {
     );
     expect(
       screen.getByRole("button", {
-        name: /mp/i
+        name: /MP/i
       })
     ).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /gate 1/i })).toBeInTheDocument();
