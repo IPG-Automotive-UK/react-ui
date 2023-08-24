@@ -30,7 +30,7 @@ function VehicleSelect({
     ...new Set(selectedVehicles.map(vehicle => vehicle.modelYear))
   ];
   if (selectedModelYears.length > 1)
-    throw new Error("Multiple model is ambiguous");
+    throw new Error("Multiple year is ambiguous");
   const selectedModelYear = selectedModelYears[0] ?? "";
 
   // derive all model years
