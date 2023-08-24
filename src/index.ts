@@ -107,6 +107,7 @@ export {
   VirtoID,
   IpgLogoProps
 } from "./SvgIcons";
+export { default as VehicleSelect, VehicleSelectProps } from "./VehicleSelect";
 export { default as ViewToggleButton } from "./ViewToggleButton";
 export {
   BackButton,

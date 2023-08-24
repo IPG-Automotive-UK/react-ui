@@ -80,7 +80,6 @@ function VehicleSelect({
     >
       <Box flex="40%">
         <Autocomplete
-          data-testid="project"
           label="Project Code"
           required
           multiple={false}
@@ -102,7 +101,6 @@ function VehicleSelect({
       </Box>
       <Box flex="40%">
         <Autocomplete
-          data-testid="model-year"
           disabled={selectedProject === ""}
           label="Model Year"
           required
@@ -125,7 +123,6 @@ function VehicleSelect({
       </Box>
       <Box flex="40%">
         <Autocomplete
-          data-testid="variant"
           disabled={selectedModelYear === ""}
           label="Vehicle Variant"
           required
@@ -179,7 +176,6 @@ function VehicleSelect({
       </Box>
       <Box flex="40%">
         <Autocomplete
-          data-testid="gate"
           disabled={selectedVariants.length === 0}
           required
           multiple={true}

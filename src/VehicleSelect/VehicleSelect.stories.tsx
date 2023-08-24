@@ -70,11 +70,11 @@ export const Default = {
     ],
     selectedVehicles: [
       {
-        _id: "64c8c4cccc8d6f00130b366b",
-        gate: "Gate 1",
-        modelYear: "2015",
-        project: "911",
-        variant: "MP - 3.6 l6 - 397kW - 7MT - R20"
+        _id: "",
+        gate: "",
+        modelYear: "",
+        project: "",
+        variant: ""
       }
     ]
   },
@@ -82,7 +82,7 @@ export const Default = {
   render: Template
 };
 
-// WithFlexStyles story
+// With flex styles story
 export const WithFlexStyles = {
   args: {
     ...Default.args,
