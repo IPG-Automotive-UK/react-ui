@@ -1,194 +1,221 @@
-import {
-  SelectedVehicle,
-  Vehicle,
-  VehicleSelectProps
-} from "./VehicleSelect.types";
-
 import Autocomplete from "../Autocomplete";
 import { Box } from "@mui/material";
 import React from "react";
-
-function VehicleSelect({
-  vehicles,
-  selectedVehicle = [
-    {
-      _id: "",
-      gate: "",
-      modelYear: "",
-      project: "",
-      variant: ""
-    }
-  ],
-  flexDirection = "column",
-  flexWrap = "wrap",
-  onVehicleChange = () => {}
-}: VehicleSelectProps) {
-  // handle vehicle selection change
-  const handleVehicleChange = (index: number, vehicle: SelectedVehicle) => {
-    // update the vehicle selection at the specified index
-    const newVehicleSelections = [...(selectedVehicle as SelectedVehicle[])];
-    newVehicleSelections[index] = vehicle;
-    onVehicleChange(newVehicleSelections);
-  };
-
-  return (
-    <>
-      {selectedVehicle?.map(
-        (selectedVehicle: SelectedVehicle, index: number) => (
-          <VehicleSelector
-            key={index}
-            allGates={["Gate1", "Gate 2", "Gate 3"]}
-            flexDirection={flexDirection}
-            flexWrap={flexWrap}
-            allVehicles={vehicles}
-            onVehicleChange={newVehicle =>
-              handleVehicleChange(index, newVehicle)
-            }
-            selectedVehicle={selectedVehicle}
-          />
-        )
-      )}
-    </>
-  );
-}
+import { VehicleSelectProps } from "./VehicleSelect.types";
 
 // component to select a vehicle
-function VehicleSelector({
-  allGates,
-  allVehicles,
-  onVehicleChange,
-  selectedVehicle,
+function VehicleSelect({
+  allVehicles = [],
+  selectedVehicles = [],
   flexDirection = "column",
-  flexWrap = "wrap"
-}: {
-  allGates: string[];
-  allVehicles: Vehicle[];
-  onVehicleChange: (vehicle: SelectedVehicle) => void;
-  selectedVehicle: SelectedVehicle;
-  flexDirection?: string;
-  flexWrap?: string;
-}) {
-  // create the UI components
+  flexWrap = "nowrap",
+  allGates = [],
+  onVehicleChange = () => {}
+}: VehicleSelectProps) {
+  // derive state for project
+  const selectedProjects = [
+    ...new Set(selectedVehicles.map(vehicle => vehicle.project))
+  ];
+  if (selectedProjects.length > 1)
+    throw new Error("Project selection is ambiguous");
+  const selectedProject = selectedProjects[0] ?? "";
+
+  // derive all projects
+  const allProjects = [
+    ...new Set(allVehicles.map(vehicle => vehicle.projectCode))
+  ].sort();
+
+  // derive state for model year
+  const selectedModelYears = [
+    ...new Set(selectedVehicles.map(vehicle => vehicle.modelYear))
+  ];
+  if (selectedModelYears.length > 1)
+    throw new Error("Multiple model is ambiguous");
+  const selectedModelYear = selectedModelYears[0] ?? "";
+
+  // derive all model years
+  const allModelYears = [
+    ...new Set(
+      allVehicles
+        .filter(v => v.projectCode === selectedProject)
+        .map(vehicle => vehicle.modelYear)
+    )
+  ].sort();
+
+  // derive state for variant
+  const selectedVariants = [
+    ...new Set(selectedVehicles.map(vehicle => vehicle.variant))
+  ]
+    .filter(v => v !== "")
+    .sort();
+
+  // derive all variants
+  const allVariants = [
+    ...new Set(
+      allVehicles
+        .filter(
+          v =>
+            v.projectCode === selectedProject &&
+            v.modelYear === selectedModelYear
+        )
+        .map(v => v.variant)
+    )
+  ].sort();
+
+  // derive state for gate
+  const selectedGates = [
+    ...new Set(selectedVehicles.map(vehicle => vehicle.gate))
+  ]
+    .filter(v => v !== "")
+    .sort();
+
   return (
     <Box
       sx={{
         display: "flex",
         flexDirection,
         flexWrap,
-        gap: flexDirection === "row" ? 2 : 0
+        gap: flexDirection === "row" ? "0 24px" : 0
       }}
     >
-      <Box
-        sx={{ display: "flex", flex: flexDirection === "row" ? "50%" : "100%" }}
-      >
+      <Box flex="40%">
         <Autocomplete
+          data-testid="project"
           label="Project Code"
           required
-          options={[
-            ...new Set(allVehicles.map(vehicle => vehicle.projectCode))
-          ].sort()}
-          onChange={(_event: React.SyntheticEvent, value: string | null) => {
+          multiple={false}
+          options={allProjects}
+          onChange={(_event, value) => {
             const newValue = value === null ? "" : value;
-            onVehicleChange({
-              ...selectedVehicle,
-              gate: "",
-              modelYear: "",
-              project: newValue,
-              variant: ""
-            });
+            onVehicleChange([
+              {
+                _id: "",
+                gate: "",
+                modelYear: "",
+                project: newValue,
+                variant: ""
+              }
+            ]);
           }}
-          value={
-            selectedVehicle.project.length > 0 ? selectedVehicle.project : null
-          }
+          value={selectedProject}
         />
       </Box>
-      <Box
-        sx={{ display: "flex", flex: flexDirection === "row" ? "50%" : "100%" }}
-      >
+      <Box flex="40%">
         <Autocomplete
-          disabled={selectedVehicle.project.length === 0}
+          data-testid="model-year"
+          disabled={selectedProject === ""}
           label="Model Year"
           required
-          options={[
-            ...new Set(
-              allVehicles
-                .filter(
-                  vehicle => vehicle.projectCode === selectedVehicle.project
-                )
-                .map(vehicle => vehicle.modelYear)
-            )
-          ].sort()}
-          onChange={(_event: React.SyntheticEvent, value: string | null) => {
+          multiple={false}
+          options={allModelYears}
+          onChange={(_event, value) => {
             const newValue = value === null ? "" : value;
-            onVehicleChange({
-              ...selectedVehicle,
-              gate: "",
-              modelYear: newValue,
-              variant: ""
-            });
+            onVehicleChange([
+              {
+                _id: "",
+                gate: "",
+                modelYear: newValue,
+                project: selectedProject,
+                variant: ""
+              }
+            ]);
           }}
-          value={
-            selectedVehicle.modelYear.length > 0
-              ? selectedVehicle.modelYear
-              : null
-          }
+          value={selectedModelYear}
         />
       </Box>
-      <Box
-        sx={{ display: "flex", flex: flexDirection === "row" ? "50%" : "100%" }}
-      >
+      <Box flex="40%">
         <Autocomplete
-          disabled={selectedVehicle.modelYear.length === 0}
+          data-testid="variant"
+          disabled={selectedModelYear === ""}
           label="Vehicle Variant"
           required
-          options={[
-            ...new Set(
-              allVehicles
-                .filter(
-                  vehicle =>
-                    vehicle.projectCode === selectedVehicle.project &&
-                    vehicle.modelYear === selectedVehicle.modelYear
-                )
-                .map(vehicle => vehicle.variant)
-            )
-          ].sort()}
-          onChange={(_event: React.SyntheticEvent, value: string | null) => {
-            const newValue = value === null ? "" : value;
-            const id =
-              allVehicles.find(
-                vehicle =>
-                  vehicle.projectCode === selectedVehicle.project &&
-                  vehicle.modelYear === selectedVehicle.modelYear &&
-                  vehicle.variant === newValue
-              )?._id ?? "";
-            onVehicleChange({
-              ...selectedVehicle,
-              _id: id,
-              gate: "",
-              variant: newValue
-            });
+          multiple={true}
+          options={allVariants}
+          onChange={(_event, value) => {
+            const newVehicles = allVehicles.filter(
+              v =>
+                v.projectCode === selectedProject &&
+                v.modelYear === selectedModelYear &&
+                value.includes(v.variant)
+            );
+            if (newVehicles.length === 0) {
+              onVehicleChange([
+                {
+                  _id: "",
+                  gate: "",
+                  modelYear: selectedModelYear,
+                  project: selectedProject,
+                  variant: ""
+                }
+              ]);
+              return;
+            }
+            if (selectedGates.length === 0) {
+              onVehicleChange(
+                newVehicles.map(v => ({
+                  _id: v._id,
+                  gate: "",
+                  modelYear: v.modelYear,
+                  project: v.projectCode,
+                  variant: v.variant
+                }))
+              );
+            }
+            if (selectedGates.length > 0) {
+              const newVehiclesWithGates = selectedGates.flatMap(gate =>
+                newVehicles.map(v => ({
+                  _id: v._id,
+                  gate,
+                  modelYear: v.modelYear,
+                  project: v.projectCode,
+                  variant: v.variant
+                }))
+              );
+              onVehicleChange(newVehiclesWithGates);
+            }
           }}
-          value={
-            selectedVehicle.variant.length > 0 ? selectedVehicle.variant : null
-          }
+          value={selectedVariants}
         />
       </Box>
-      <Box
-        sx={{ display: "flex", flex: flexDirection === "row" ? "50%" : "100%" }}
-      >
+      <Box flex="40%">
         <Autocomplete
-          disabled={selectedVehicle.variant.length === 0}
+          data-testid="gate"
+          disabled={selectedVariants.length === 0}
           required
+          multiple={true}
           label="Gate"
           options={allGates}
-          onChange={(_event: React.SyntheticEvent, value: string | null) => {
-            const newValue = value === null ? "" : value;
-            onVehicleChange({
-              ...selectedVehicle,
-              gate: newValue
-            });
+          onChange={(_event, value) => {
+            const newVehicles = allVehicles.filter(
+              v =>
+                v.projectCode === selectedProject &&
+                v.modelYear === selectedModelYear &&
+                selectedVariants.includes(v.variant)
+            );
+            if (value.length === 0) {
+              onVehicleChange(
+                newVehicles.map(v => ({
+                  _id: v._id,
+                  gate: "",
+                  modelYear: v.modelYear,
+                  project: v.projectCode,
+                  variant: v.variant
+                }))
+              );
+              return;
+            }
+            const newVehiclesWithGate = value.flatMap(gate =>
+              newVehicles.map(v => ({
+                _id: v._id,
+                gate,
+                modelYear: v.modelYear,
+                project: v.projectCode,
+                variant: v.variant
+              }))
+            );
+            onVehicleChange(newVehiclesWithGate);
           }}
-          value={selectedVehicle.gate.length > 0 ? selectedVehicle.gate : null}
+          value={selectedGates}
         />
       </Box>
     </Box>

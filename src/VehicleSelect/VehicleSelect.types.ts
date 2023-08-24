@@ -75,17 +75,17 @@ export type SelectedVehicle = {
 
 export interface VehicleSelectProps {
   /**
-   * Array of gates to display
+   * List of gates to show in the dropdown
    */
   allGates: string[];
   /**
-   * Array of project code options to display
+   * Array of all vehicles
    */
-  vehicles: Vehicle[];
+  allVehicles: Pick<Vehicle, "_id" | "projectCode" | "modelYear" | "variant">[];
   /**
-   * The currently selected project code
+   * The currently selected vehicles
    */
-  selectedVehicle: SelectedVehicle[];
+  selectedVehicles: SelectedVehicle[];
   /**
    * FlexDirection of the component
    */
@@ -95,7 +95,7 @@ export interface VehicleSelectProps {
    */
   flexWrap?: "wrap" | "nowrap";
   /**
-   * Callback function won each vehicle metadata change
+   * Callback function fired on each vehicle metadata change
    */
   onVehicleChange: (value: SelectedVehicle[]) => void;
 }
