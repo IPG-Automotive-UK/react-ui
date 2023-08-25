@@ -72,6 +72,7 @@ function VehicleSelect({
 
   return (
     <Box
+      data-testid="vehicle-select"
       sx={{
         display: "flex",
         flexDirection,

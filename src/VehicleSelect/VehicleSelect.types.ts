@@ -31,11 +31,11 @@ export interface VehicleSelectProps {
   /**
    * FlexDirection of the component
    */
-  flexDirection?: "row" | "column";
+  flexDirection?: string;
   /**
    * FlexWrap of the component
    */
-  flexWrap?: "wrap" | "nowrap";
+  flexWrap?: string;
   /**
    * Callback function fired on each vehicle metadata change
    */

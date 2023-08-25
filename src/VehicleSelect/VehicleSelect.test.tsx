@@ -34,6 +34,8 @@ const defaultProps = {
       variant: "MC"
     }
   ],
+  flexDirection: "column",
+  flexWrap: "nowrap",
   onVehicleChange: () => {},
   selectedVehicles: []
 };
@@ -45,6 +47,8 @@ const defaultProps = {
 const VehicleSelectWithState = ({
   onVehicleChange,
   selectedVehicles: valueIn = [],
+  flexDirection = "column",
+  flexWrap = "nowrap",
   ...rest
 }: VehicleSelectProps) => {
   const [value, setValue] = React.useState(valueIn);
@@ -57,6 +61,8 @@ const VehicleSelectWithState = ({
       {...rest}
       onVehicleChange={handleChange}
       selectedVehicles={value}
+      flexDirection={flexDirection}
+      flexWrap={flexWrap}
     />
   );
 };
@@ -277,5 +283,19 @@ describe("Vehicle Select", () => {
       })
     ).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /gate 1/i })).toBeInTheDocument();
+  });
+
+  it("has flex direction and flex wrap styles applied", () => {
+    render(
+      <VehicleSelectWithState
+        {...defaultProps}
+        flexDirection="row"
+        flexWrap="wrap"
+      />
+    );
+    expect(screen.getByTestId("vehicle-select")).toHaveStyle({
+      flexDirection: "row",
+      flexWrap: "wrap"
+    });
   });
 });
