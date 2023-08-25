@@ -16,6 +16,7 @@ function VehicleSelect({
   const selectedProjects = [
     ...new Set(selectedVehicles.map(vehicle => vehicle.project))
   ];
+
   if (selectedProjects.length > 1)
     throw new Error("Project selection is ambiguous");
   const selectedProject = selectedProjects[0] ?? "";

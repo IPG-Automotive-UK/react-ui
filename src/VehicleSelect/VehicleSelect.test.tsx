@@ -48,7 +48,7 @@ const VehicleSelectWithState = ({
   ...rest
 }: VehicleSelectProps) => {
   const [value, setValue] = React.useState(valueIn);
-
+  console.log("value", value);
   const handleChange = selectedValues => {
     setValue(selectedValues);
     onVehicleChange(selectedValues);
@@ -85,12 +85,40 @@ describe("Vehicle Select", () => {
     // click the first option
     await userEvent.click(screen.getByRole("option", { name: /911/i }));
 
+    // expect the onVehicleChange callback to be called once
+    expect(onVehicleChange).toHaveBeenCalledTimes(1);
+
+    // expect the onVehicleChange callback to be called wih expected value
+    expect(onVehicleChange).toHaveBeenCalledWith([
+      {
+        _id: "",
+        gate: "",
+        modelYear: "",
+        project: "911",
+        variant: ""
+      }
+    ]);
+
     // open the model year selector
     await userEvent.click(
       screen.getByRole("combobox", { name: /model year/i })
     );
     // click the first option
     await userEvent.click(screen.getByRole("option", { name: /2015/i }));
+
+    // expect the onVehicleChange callback to be called twice
+    expect(onVehicleChange).toHaveBeenCalledTimes(2);
+
+    // expect the onVehicleChange callback to be called with expected value
+    expect(onVehicleChange).toHaveBeenCalledWith([
+      {
+        _id: "",
+        gate: "",
+        modelYear: "2015",
+        project: "911",
+        variant: ""
+      }
+    ]);
 
     // open the vehicle variant selector
     await userEvent.click(
@@ -101,6 +129,20 @@ describe("Vehicle Select", () => {
     // click the first option
     await userEvent.click(screen.getByRole("option", { name: /JS/i }));
 
+    // expect the onVehicleChange callback to be called three times
+    expect(onVehicleChange).toHaveBeenCalledTimes(3);
+
+    // expect the onVehicleChange callback to be called with expected value
+    expect(onVehicleChange).toHaveBeenCalledWith([
+      {
+        _id: "64c8c4cccc8d6f00130b367e",
+        gate: "",
+        modelYear: "2015",
+        project: "911",
+        variant: "JS"
+      }
+    ]);
+
     // open the vehicle variant selector
     await userEvent.click(
       screen.getByRole("combobox", {
@@ -109,6 +151,27 @@ describe("Vehicle Select", () => {
     );
     // click the second option
     await userEvent.click(screen.getByRole("option", { name: /MP/i }));
+
+    // expect the onVehicleChange callback to be called four times
+    expect(onVehicleChange).toHaveBeenCalledTimes(4);
+
+    // expect the onVehicleChange callback to be called with the expected value
+    expect(onVehicleChange).toHaveBeenCalledWith([
+      {
+        _id: "64c8c4cccc8d6f00130b366b",
+        gate: "",
+        modelYear: "2015",
+        project: "911",
+        variant: "MP"
+      },
+      {
+        _id: "64c8c4cccc8d6f00130b367e",
+        gate: "",
+        modelYear: "2015",
+        project: "911",
+        variant: "JS"
+      }
+    ]);
 
     // open the gate selector
     await userEvent.click(
@@ -119,6 +182,27 @@ describe("Vehicle Select", () => {
     // click the first option
     await userEvent.click(screen.getByRole("option", { name: /Gate 1/i }));
 
+    // expect the onVehicleChange callback to be called five times
+    expect(onVehicleChange).toHaveBeenCalledTimes(5);
+
+    // expect the onVehicleChange callback to be called with the expected value
+    expect(onVehicleChange).toHaveBeenCalledWith([
+      {
+        _id: "64c8c4cccc8d6f00130b366b",
+        gate: "Gate 1",
+        modelYear: "2015",
+        project: "911",
+        variant: "MP"
+      },
+      {
+        _id: "64c8c4cccc8d6f00130b367e",
+        gate: "Gate 1",
+        modelYear: "2015",
+        project: "911",
+        variant: "JS"
+      }
+    ]);
+
     // open the gate selector
     await userEvent.click(
       screen.getByRole("combobox", {
@@ -128,7 +212,40 @@ describe("Vehicle Select", () => {
     // click the second option
     await userEvent.click(screen.getByRole("option", { name: /Gate 2/i }));
 
+    // expect the onVehicleChange callback to be called six times
     expect(onVehicleChange).toHaveBeenCalledTimes(6);
+
+    // expect the onVehicleChange callback to be called with the expected value
+    expect(onVehicleChange).toHaveBeenCalledWith([
+      {
+        _id: "64c8c4cccc8d6f00130b366b",
+        gate: "Gate 1",
+        modelYear: "2015",
+        project: "911",
+        variant: "MP"
+      },
+      {
+        _id: "64c8c4cccc8d6f00130b367e",
+        gate: "Gate 1",
+        modelYear: "2015",
+        project: "911",
+        variant: "JS"
+      },
+      {
+        _id: "64c8c4cccc8d6f00130b366b",
+        gate: "Gate 2",
+        modelYear: "2015",
+        project: "911",
+        variant: "MP"
+      },
+      {
+        _id: "64c8c4cccc8d6f00130b367e",
+        gate: "Gate 2",
+        modelYear: "2015",
+        project: "911",
+        variant: "JS"
+      }
+    ]);
   });
 
   it("Called with selectedVehicles", () => {
