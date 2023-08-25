@@ -1,14 +1,13 @@
-import { VehicleSelectProps } from "src/VehicleSelect/VehicleSelect.types";
+import {
+  SelectedVehicle,
+  VehicleSelectProps
+} from "src/VehicleSelect/VehicleSelect.types";
 
 export interface VehicleSelectDialogProps {
   /**
    * The text of the cancel button.
    * */
   cancelText?: string;
-  /**
-   * The content of the dialog. Valid react element can be used.
-   */
-  content: React.ReactNode;
   /**
    * Dividers are vertical lines that separate content into groups.
    */
@@ -20,7 +19,7 @@ export interface VehicleSelectDialogProps {
   /**
    * Callback fired when save button clicked.
    */
-  onSaveClick: React.MouseEventHandler<HTMLButtonElement>;
+  onSaveClick: (vehicle: SelectedVehicle[]) => void;
   /**
    * If true, the dialog is open.
    * */

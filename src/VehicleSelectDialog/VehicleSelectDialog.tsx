@@ -11,11 +11,12 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import { CombinedVehicleProps } from "./VehicleSelectDialog.types";
 import React from "react";
+import { SelectedVehicle } from "src/VehicleSelect/VehicleSelect.types";
 import VehicleSelect from "src/VehicleSelect/VehicleSelect";
 
 const VehicleSelectDialog = ({
-  onCancelClick,
-  onSaveClick,
+  onCancelClick = () => {},
+  onSaveClick = () => {},
   title = "Some title",
   cancelText = "cancel",
   saveText = "Save",
@@ -30,6 +31,11 @@ const VehicleSelectDialog = ({
   allGates = [],
   onVehicleChange = () => {}
 }: CombinedVehicleProps) => {
+  const handleSaveClick = (selectedVehicles: SelectedVehicle[]) => {
+    if (!saveDisabled) {
+      onSaveClick(selectedVehicles);
+    }
+  };
   return (
     <Dialog
       open={open}
@@ -80,7 +86,7 @@ const VehicleSelectDialog = ({
         <Button onClick={onCancelClick}>{cancelText}</Button>
         <Button
           variant="contained"
-          onClick={onSaveClick}
+          onClick={() => handleSaveClick(selectedVehicles)}
           disabled={saveDisabled}
         >
           {saveText}
