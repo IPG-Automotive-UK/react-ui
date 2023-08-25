@@ -1,13 +1,10 @@
 import { Meta, StoryFn } from "@storybook/react";
 import React, { MouseEventHandler } from "react";
-import {
-  SelectedVehicle,
-  VehicleSelectProps
-} from "../VehicleSelect/VehicleSelect.types";
 
 import { Button } from "@mui/material";
+import { CombinedVehicleProps } from "./VehicleSelectDialog.types";
+import { SelectedVehicle } from "../VehicleSelect/VehicleSelect.types";
 import VehicleSelectDialog from "./VehicleSelectDialog";
-import { VehicleSelectDialogProps } from "./VehicleSelectDialog.types";
 import { action } from "@storybook/addon-actions";
 import { useArgs } from "@storybook/client-api";
 
@@ -21,7 +18,7 @@ const meta: Meta<typeof VehicleSelectDialog> = {
 
 export default meta;
 
-const Template: StoryFn<VehicleSelectDialogProps> = args => {
+const Template: StoryFn<CombinedVehicleProps> = args => {
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => setOpen(true);
   const handleCancel: MouseEventHandler<HTMLButtonElement> = args => {
@@ -34,7 +31,7 @@ const Template: StoryFn<VehicleSelectDialogProps> = args => {
   };
 
   // useArgs is a hook that returns the current state of the args object
-  const [{ selectedVehicles }, updateArgs] = useArgs<VehicleSelectProps>();
+  const [{ selectedVehicles }, updateArgs] = useArgs<CombinedVehicleProps>();
 
   // update the args object with the new selectedVehicles value
   React.useEffect(() => {
@@ -65,16 +62,6 @@ const Template: StoryFn<VehicleSelectDialogProps> = args => {
 
 export const Default = {
   args: {
-    cancelText: "cancel",
-    content: <div>Some content</div>,
-    dividers: false,
-    onCancelClick: () => {},
-    onSaveClick: () => {},
-    saveDisabled: false,
-    saveText: "ADD VEHICLE",
-    showCloseIcon: true,
-    title: "Add Vehicle",
-    width: "800px",
     allGates: ["Gate 1", "Gate 2", "Gate 3"],
     allVehicles: [
       {
@@ -102,6 +89,13 @@ export const Default = {
         variant: "MC - 397kW - 7MT - R20"
       }
     ],
+    cancelText: "cancel",
+    content: <div>Some content</div>,
+    dividers: false,
+    onCancelClick: () => {},
+    onSaveClick: () => {},
+    saveDisabled: false,
+    saveText: "ADD VEHICLE",
     selectedVehicles: [
       {
         _id: "",
@@ -110,7 +104,10 @@ export const Default = {
         project: "",
         variant: ""
       }
-    ]
+    ],
+    showCloseIcon: true,
+    title: "Add Vehicle",
+    width: "800px"
   },
   render: Template
 };

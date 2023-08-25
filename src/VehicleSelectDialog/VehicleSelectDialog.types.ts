@@ -46,9 +46,8 @@ export interface VehicleSelectDialogProps {
    * The width of the dialog. Valid css width can be used.
    */
   width?: string;
-  /**
-   * Callback function fired on each vehicle metadata change
-   */
-  onVehicleChange: VehicleSelectProps["onVehicleChange"];
-  selectedVehicles: VehicleSelectProps["selectedVehicles"];
 }
+
+// Create a new interface that merges VehicleSelectProps and VehicleSelectDialogProps
+export type CombinedVehicleProps = VehicleSelectProps &
+  VehicleSelectDialogProps;

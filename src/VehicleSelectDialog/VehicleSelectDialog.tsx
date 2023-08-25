@@ -1,18 +1,17 @@
-import { DialogTitle, Stack } from "@mui/material";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  IconButton,
+  Stack
+} from "@mui/material";
 
-import Button from "@mui/material/Button";
 import CloseIcon from "@mui/icons-material/Close";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import IconButton from "@mui/material/IconButton";
+import { CombinedVehicleProps } from "./VehicleSelectDialog.types";
 import React from "react";
 import VehicleSelect from "src/VehicleSelect/VehicleSelect";
-import { VehicleSelectDialogProps } from "./VehicleSelectDialog.types";
-import { VehicleSelectProps } from "src/VehicleSelect/VehicleSelect.types";
-
-// Create a new interface that merges VehicleSelectProps and VehicleSelectDialogProps
-interface CombinedProps extends VehicleSelectProps, VehicleSelectDialogProps {}
 
 const VehicleSelectDialog = ({
   onCancelClick,
@@ -30,7 +29,7 @@ const VehicleSelectDialog = ({
   flexWrap = "nowrap",
   allGates = [],
   onVehicleChange = () => {}
-}: CombinedProps) => {
+}: CombinedVehicleProps) => {
   return (
     <Dialog
       open={open}
