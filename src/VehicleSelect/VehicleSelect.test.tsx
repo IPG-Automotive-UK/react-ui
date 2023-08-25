@@ -48,7 +48,6 @@ const VehicleSelectWithState = ({
   ...rest
 }: VehicleSelectProps) => {
   const [value, setValue] = React.useState(valueIn);
-  console.log("value", value);
   const handleChange = selectedValues => {
     setValue(selectedValues);
     onVehicleChange(selectedValues);
@@ -85,7 +84,7 @@ describe("Vehicle Select", () => {
     // click the first option
     await userEvent.click(screen.getByRole("option", { name: /911/i }));
 
-    // expect the onVehicleChange callback to be called once
+    // expect the onVehicleChange callback to be called first time
     expect(onVehicleChange).toHaveBeenCalledTimes(1);
 
     // expect the onVehicleChange callback to be called wih expected value
@@ -106,7 +105,7 @@ describe("Vehicle Select", () => {
     // click the first option
     await userEvent.click(screen.getByRole("option", { name: /2015/i }));
 
-    // expect the onVehicleChange callback to be called twice
+    // expect the onVehicleChange callback to be called second time
     expect(onVehicleChange).toHaveBeenCalledTimes(2);
 
     // expect the onVehicleChange callback to be called with expected value
@@ -129,7 +128,7 @@ describe("Vehicle Select", () => {
     // click the first option
     await userEvent.click(screen.getByRole("option", { name: /JS/i }));
 
-    // expect the onVehicleChange callback to be called three times
+    // expect the onVehicleChange callback to be called third time
     expect(onVehicleChange).toHaveBeenCalledTimes(3);
 
     // expect the onVehicleChange callback to be called with expected value
@@ -152,7 +151,7 @@ describe("Vehicle Select", () => {
     // click the second option
     await userEvent.click(screen.getByRole("option", { name: /MP/i }));
 
-    // expect the onVehicleChange callback to be called four times
+    // expect the onVehicleChange callback to be called fourth time
     expect(onVehicleChange).toHaveBeenCalledTimes(4);
 
     // expect the onVehicleChange callback to be called with the expected value
@@ -182,7 +181,7 @@ describe("Vehicle Select", () => {
     // click the first option
     await userEvent.click(screen.getByRole("option", { name: /Gate 1/i }));
 
-    // expect the onVehicleChange callback to be called five times
+    // expect the onVehicleChange callback to be called fifth time
     expect(onVehicleChange).toHaveBeenCalledTimes(5);
 
     // expect the onVehicleChange callback to be called with the expected value
@@ -212,7 +211,7 @@ describe("Vehicle Select", () => {
     // click the second option
     await userEvent.click(screen.getByRole("option", { name: /Gate 2/i }));
 
-    // expect the onVehicleChange callback to be called six times
+    // expect the onVehicleChange callback to be called sixth time
     expect(onVehicleChange).toHaveBeenCalledTimes(6);
 
     // expect the onVehicleChange callback to be called with the expected value

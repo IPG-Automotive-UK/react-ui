@@ -136,6 +136,7 @@ function VehicleSelect({
                 v.modelYear === selectedModelYear &&
                 value.includes(v.variant)
             );
+            // if no vehicles keep the project and model year but clear the variant and gate in selectedVehicles
             if (newVehicles.length === 0) {
               onVehicleChange([
                 {
@@ -148,6 +149,7 @@ function VehicleSelect({
               ]);
               return;
             }
+            // if no gates keep the project, model year and variant but clear the gate in selectedVehicles
             if (selectedGates.length === 0) {
               onVehicleChange(
                 newVehicles.map(v => ({
@@ -159,6 +161,7 @@ function VehicleSelect({
                 }))
               );
             }
+            // if gates are selected update the selectedVehicles with the new vehicles and gates
             if (selectedGates.length > 0) {
               const newVehiclesWithGates = selectedGates.flatMap(gate =>
                 newVehicles.map(v => ({
@@ -189,6 +192,7 @@ function VehicleSelect({
                 v.modelYear === selectedModelYear &&
                 selectedVariants.includes(v.variant)
             );
+            // if no gates selected keep the project, model year and variant but clear the gate in selectedVehicles
             if (value.length === 0) {
               onVehicleChange(
                 newVehicles.map(v => ({
@@ -201,6 +205,7 @@ function VehicleSelect({
               );
               return;
             }
+            // if gates are selected update the selectedVehicles with the new vehicles and gates
             const newVehiclesWithGate = value.flatMap(gate =>
               newVehicles.map(v => ({
                 _id: v._id,
