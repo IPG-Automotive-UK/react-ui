@@ -92,8 +92,8 @@ export const Default = {
     cancelText: "cancel",
     content: <div>Some content</div>,
     dividers: false,
-    onCancelClick: () => {},
-    onSaveClick: () => {},
+    flexDirection: "column",
+    flexWrap: "nowrap",
     saveDisabled: false,
     saveText: "ADD VEHICLE",
     selectedVehicles: [
