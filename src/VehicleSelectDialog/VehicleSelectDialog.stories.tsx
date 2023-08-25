@@ -20,14 +20,19 @@ export default meta;
 
 const Template: StoryFn<CombinedVehicleProps> = args => {
   const [open, setOpen] = React.useState(false);
+  // saveDisabled is a boolean that is passed to the dialog
+  const [isSaveDisabled, setIsSaveDisabled] = React.useState(true);
+
   const handleClickOpen = () => setOpen(true);
   const handleCancel: MouseEventHandler<HTMLButtonElement> = args => {
     setOpen(false);
     action("onCancelClick")(args);
   };
   const handleSave: MouseEventHandler<HTMLButtonElement> = args => {
-    setOpen(false);
-    action("onSaveClick")(args);
+    if (!isSaveDisabled) {
+      setOpen(false);
+      action("onSaveClick")(args);
+    }
   };
 
   // useArgs is a hook that returns the current state of the args object
@@ -36,13 +41,28 @@ const Template: StoryFn<CombinedVehicleProps> = args => {
   // update the args object with the new selectedVehicles value
   React.useEffect(() => {
     updateArgs({ selectedVehicles });
+    setIsSaveDisabled(!isValidSelection(selectedVehicles));
   }, [selectedVehicles, updateArgs]);
 
   // callback for when the selected vehicles change
   const onVehicleChange = (selectedVehicle: SelectedVehicle[]) => {
     updateArgs({ selectedVehicles: selectedVehicle });
     action("onVehicleChange")(selectedVehicle);
+    setIsSaveDisabled(!isValidSelection(selectedVehicle));
   };
+
+  // check if the selected vehicles are valid (i.e. all fields are filled in)
+  const isValidSelection = (selectedVehicles: SelectedVehicle[]) => {
+    return selectedVehicles.every(
+      vehicle =>
+        !!vehicle._id &&
+        !!vehicle.gate &&
+        !!vehicle.modelYear &&
+        !!vehicle.project &&
+        !!vehicle.variant
+    );
+  };
+
   return (
     <>
       <Button variant="outlined" onClick={handleClickOpen}>
@@ -55,6 +75,7 @@ const Template: StoryFn<CombinedVehicleProps> = args => {
         onSaveClick={handleSave}
         onVehicleChange={onVehicleChange}
         selectedVehicles={selectedVehicles}
+        saveDisabled={isSaveDisabled}
       />
     </>
   );
