@@ -68,6 +68,8 @@ export const Default = {
         variant: "MC - 397kW - 7MT - R20"
       }
     ],
+    flexDirection: "column",
+    flexWrap: "nowrap",
     selectedVehicles: [
       {
         _id: "",
