@@ -16,6 +16,7 @@ function VehicleSelect({
   const selectedProjects = [
     ...new Set(selectedVehicles.map(vehicle => vehicle.project))
   ];
+
   if (selectedProjects.length > 1)
     throw new Error("Project selection is ambiguous");
   const selectedProject = selectedProjects[0] ?? "";
@@ -30,7 +31,7 @@ function VehicleSelect({
     ...new Set(selectedVehicles.map(vehicle => vehicle.modelYear))
   ];
   if (selectedModelYears.length > 1)
-    throw new Error("Multiple model is ambiguous");
+    throw new Error("Multiple year is ambiguous");
   const selectedModelYear = selectedModelYears[0] ?? "";
 
   // derive all model years
@@ -71,6 +72,7 @@ function VehicleSelect({
 
   return (
     <Box
+      data-testid="vehicle-select"
       sx={{
         display: "flex",
         flexDirection,
@@ -135,6 +137,7 @@ function VehicleSelect({
                 v.modelYear === selectedModelYear &&
                 value.includes(v.variant)
             );
+            // if no vehicles keep the project and model year but clear the variant and gate in selectedVehicles
             if (newVehicles.length === 0) {
               onVehicleChange([
                 {
@@ -147,6 +150,7 @@ function VehicleSelect({
               ]);
               return;
             }
+            // if no gates keep the project, model year and variant but clear the gate in selectedVehicles
             if (selectedGates.length === 0) {
               onVehicleChange(
                 newVehicles.map(v => ({
@@ -158,6 +162,7 @@ function VehicleSelect({
                 }))
               );
             }
+            // if gates are selected update the selectedVehicles with the new vehicles and gates
             if (selectedGates.length > 0) {
               const newVehiclesWithGates = selectedGates.flatMap(gate =>
                 newVehicles.map(v => ({
@@ -188,6 +193,7 @@ function VehicleSelect({
                 v.modelYear === selectedModelYear &&
                 selectedVariants.includes(v.variant)
             );
+            // if no gates selected keep the project, model year and variant but clear the gate in selectedVehicles
             if (value.length === 0) {
               onVehicleChange(
                 newVehicles.map(v => ({
@@ -200,6 +206,7 @@ function VehicleSelect({
               );
               return;
             }
+            // if gates are selected update the selectedVehicles with the new vehicles and gates
             const newVehiclesWithGate = value.flatMap(gate =>
               newVehicles.map(v => ({
                 _id: v._id,
