@@ -6,7 +6,7 @@ import {
 export interface VehicleSelectDialogProps {
   /**
    * The text of the cancel button.
-   * */
+   */
   cancelText?: string;
   /**
    * Dividers are vertical lines that separate content into groups.
@@ -22,13 +22,11 @@ export interface VehicleSelectDialogProps {
   onSaveClick: (vehicle: SelectedVehicle[]) => void;
   /**
    * If true, the dialog is open.
-   * */
+   */
   open?: boolean;
-
   /**
    * The text of the save button.
-   * @default "Save"
-   * */
+   */
   saveText?: string;
   /**
    * If true, shows close icon in dialog title
@@ -36,7 +34,7 @@ export interface VehicleSelectDialogProps {
   showCloseIcon?: boolean;
   /**
    * The title of the dialog.
-   * */
+   */
   title?: string;
   /**
    * The width of the dialog. Valid css width can be used.
@@ -44,6 +42,6 @@ export interface VehicleSelectDialogProps {
   width?: string;
 }
 
-// Create a new interface that merges VehicleSelectProps and VehicleSelectDialogProps
+// Create a new type that merges VehicleSelectProps and VehicleSelectDialogProps
 export type CombinedVehicleProps = VehicleSelectProps &
   VehicleSelectDialogProps;

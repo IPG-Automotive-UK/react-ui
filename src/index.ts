@@ -108,6 +108,10 @@ export {
   IpgLogoProps
 } from "./SvgIcons";
 export { default as VehicleSelect, VehicleSelectProps } from "./VehicleSelect";
+export {
+  default as VehicleSelectDialog,
+  VehicleSelectDialogProps
+} from "./VehicleSelectDialog";
 export { default as ViewToggleButton } from "./ViewToggleButton";
 export {
   BackButton,

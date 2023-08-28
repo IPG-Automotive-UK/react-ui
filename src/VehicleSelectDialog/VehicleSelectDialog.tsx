@@ -40,17 +40,13 @@ const VehicleSelectDialog = ({
       !vehicle.variant
   );
 
+  // handle save click will return callback with selected vehicles
   const handleSaveClick = (selectedVehicles: SelectedVehicle[]) => {
     if (!isSaveDisabled) {
       onSaveClick(selectedVehicles);
     }
   };
 
-  // const handleSaveClick = (selectedVehicles: SelectedVehicle[]) => {
-  //   if (!saveDisabled) {
-  //     onSaveClick(selectedVehicles);
-  //   }
-  // };
   return (
     <Dialog
       open={open}

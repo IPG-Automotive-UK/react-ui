@@ -3,9 +3,10 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
 import VehicleSelectDialog from "./VehicleSelectDialog";
 
-// Define a mock function for onSaveClick
+// mock function for onSaveClick
 const mockOnSaveClick = jest.fn();
 
+// some mock data for selected vehicles
 const selectedVehicles = [
   {
     _id: "64c8c4cccc8d6f00130b367e",
@@ -16,7 +17,7 @@ const selectedVehicles = [
   }
 ];
 
-// Define some mock data for testing.
+// some mock data for testing.
 const defaultProps = {
   allGates: ["Gate 1", "Gate 2", "Gate 3"],
   allVehicles: [
@@ -80,9 +81,10 @@ test("calls onSaveClick when Save button is clicked", () => {
 });
 
 test("disables the Save button when any field is empty", () => {
-  // render the component with an empty field in one of the selected vehicles
+  // modify the selected vehicles to have an empty gate field
   const modifiedVehicles = [...selectedVehicles];
-  modifiedVehicles[0].gate = ""; // Empty gate field
+  // empty the gate field
+  modifiedVehicles[0].gate = "";
 
   render(
     <VehicleSelectDialog
