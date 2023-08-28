@@ -21,7 +21,6 @@ const VehicleSelectDialog = ({
   cancelText = "cancel",
   saveText = "Save",
   open = true,
-  saveDisabled = false,
   width = "400px",
   showCloseIcon = true,
   allVehicles = [],
@@ -31,11 +30,27 @@ const VehicleSelectDialog = ({
   allGates = [],
   onVehicleChange = () => {}
 }: CombinedVehicleProps) => {
+  // check if all fields are filled for each selected vehicle
+  const isSaveDisabled = selectedVehicles.some(
+    vehicle =>
+      !vehicle._id ||
+      !vehicle.gate ||
+      !vehicle.modelYear ||
+      !vehicle.project ||
+      !vehicle.variant
+  );
+
   const handleSaveClick = (selectedVehicles: SelectedVehicle[]) => {
-    if (!saveDisabled) {
+    if (!isSaveDisabled) {
       onSaveClick(selectedVehicles);
     }
   };
+
+  // const handleSaveClick = (selectedVehicles: SelectedVehicle[]) => {
+  //   if (!saveDisabled) {
+  //     onSaveClick(selectedVehicles);
+  //   }
+  // };
   return (
     <Dialog
       open={open}
@@ -87,7 +102,7 @@ const VehicleSelectDialog = ({
         <Button
           variant="contained"
           onClick={() => handleSaveClick(selectedVehicles)}
-          disabled={saveDisabled}
+          disabled={isSaveDisabled}
         >
           {saveText}
         </Button>

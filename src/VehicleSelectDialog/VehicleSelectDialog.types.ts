@@ -24,10 +24,7 @@ export interface VehicleSelectDialogProps {
    * If true, the dialog is open.
    * */
   open?: boolean;
-  /**
-   * If true, save button will be disabled.
-   */
-  saveDisabled?: boolean;
+
   /**
    * The text of the save button.
    * @default "Save"
