@@ -5,7 +5,7 @@ import { action } from "@storybook/addon-actions";
 
 export default {
   component: LabelSelector,
-  title: "General/LabelSelector"
+  title: "Selectors/LabelSelector"
 };
 
 const Template = args => {
