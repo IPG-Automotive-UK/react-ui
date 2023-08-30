@@ -39,5 +39,5 @@ export interface VehicleSelectProps {
   /**
    * Callback function fired on each vehicle metadata change
    */
-  onVehicleChange: (value: SelectedVehicle[]) => void;
+  onChange: (value: SelectedVehicle[]) => void;
 }

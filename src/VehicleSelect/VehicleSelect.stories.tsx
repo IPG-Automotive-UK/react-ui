@@ -25,14 +25,14 @@ const Template: StoryFn<VehicleSelectProps> = args => {
   }, [selectedVehicles, updateArgs]);
 
   // callback for when the selected vehicles change
-  const onVehicleChange = (selectedVehicle: SelectedVehicle[]) => {
+  const onChange = (selectedVehicle: SelectedVehicle[]) => {
     updateArgs({ selectedVehicles: selectedVehicle });
-    action("onVehicleChange")(selectedVehicle);
+    action("onChange")(selectedVehicle);
   };
   return (
     <VehicleSelect
       {...args}
-      onVehicleChange={onVehicleChange}
+      onChange={onChange}
       selectedVehicles={selectedVehicles}
     />
   );

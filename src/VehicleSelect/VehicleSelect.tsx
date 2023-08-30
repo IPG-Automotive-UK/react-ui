@@ -10,7 +10,7 @@ function VehicleSelect({
   flexDirection = "column",
   flexWrap = "nowrap",
   allGates = [],
-  onVehicleChange = () => {}
+  onChange = () => {}
 }: VehicleSelectProps) {
   // derive state for project
   const selectedProjects = [
@@ -88,7 +88,7 @@ function VehicleSelect({
           options={allProjects}
           onChange={(_event, value) => {
             const newValue = value === null ? "" : value;
-            onVehicleChange([
+            onChange([
               {
                 _id: "",
                 gate: "",
@@ -110,7 +110,7 @@ function VehicleSelect({
           options={allModelYears}
           onChange={(_event, value) => {
             const newValue = value === null ? "" : value;
-            onVehicleChange([
+            onChange([
               {
                 _id: "",
                 gate: "",
@@ -139,7 +139,7 @@ function VehicleSelect({
             );
             // if no vehicles keep the project and model year but clear the variant and gate in selectedVehicles
             if (newVehicles.length === 0) {
-              onVehicleChange([
+              onChange([
                 {
                   _id: "",
                   gate: "",
@@ -152,7 +152,7 @@ function VehicleSelect({
             }
             // if no gates keep the project, model year and variant but clear the gate in selectedVehicles
             if (selectedGates.length === 0) {
-              onVehicleChange(
+              onChange(
                 newVehicles.map(v => ({
                   _id: v._id,
                   gate: "",
@@ -173,7 +173,7 @@ function VehicleSelect({
                   variant: v.variant
                 }))
               );
-              onVehicleChange(newVehiclesWithGates);
+              onChange(newVehiclesWithGates);
             }
           }}
           value={selectedVariants}
@@ -195,7 +195,7 @@ function VehicleSelect({
             );
             // if no gates selected keep the project, model year and variant but clear the gate in selectedVehicles
             if (value.length === 0) {
-              onVehicleChange(
+              onChange(
                 newVehicles.map(v => ({
                   _id: v._id,
                   gate: "",
@@ -216,7 +216,7 @@ function VehicleSelect({
                 variant: v.variant
               }))
             );
-            onVehicleChange(newVehiclesWithGate);
+            onChange(newVehiclesWithGate);
           }}
           value={selectedGates}
         />
