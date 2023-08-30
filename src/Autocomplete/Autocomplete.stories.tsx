@@ -75,6 +75,7 @@ export const Default: StoryObj<typeof Autocomplete> = {
 
 export const MultiSelect: StoryObj<typeof Autocomplete> = {
   args: {
+    disableCloseOnSelect: true,
     disabled: false,
     error: false,
     helperText: "Helper Text",

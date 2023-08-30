@@ -15,6 +15,7 @@ export default function Autocomplete<
   Value extends string,
   Multiple extends boolean | undefined
 >({
+  disableCloseOnSelect = false,
   disabled = false,
   error = false,
   helperText,
@@ -31,6 +32,7 @@ export default function Autocomplete<
 }: AutocompleteProps<Value, Multiple>) {
   return (
     <MuiAutocomplete
+      disableCloseOnSelect={disableCloseOnSelect}
       limitTags={limitTags}
       multiple={multiple}
       onChange={onChange}

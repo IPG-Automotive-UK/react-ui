@@ -15,6 +15,7 @@ export type AutocompleteProps<
   | "disabled"
   | "size"
   | "limitTags"
+  | "disableCloseOnSelect"
 > &
   Pick<
     TextFieldProps,
