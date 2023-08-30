@@ -30,6 +30,7 @@ export {
 export { default as Checkbox } from "./Checkbox";
 export { default as Copyright } from "./Copyright";
 export { default as Color } from "./Color";
+export { default as DeletableList, DeletableListProps } from "./DeletableList";
 export { default as DialogTitle } from "./DialogTitle";
 export { default as FeedbackForm } from "./FeedbackForm";
 export { default as FileUploader } from "./FileUploader";
@@ -81,7 +82,7 @@ export { default as SwitchField } from "./SwitchField";
 export { default as TextField, TextFieldProps } from "./TextField";
 export { ThemeProvider, ThemeProviderProps, useTheme } from "./ThemeProvider";
 export { default as ToggleColorMode } from "./ToggleColorMode";
-export { default as TransferList } from "./TransferList";
+export { default as TransferList, TransferListProps } from "./TransferList";
 export { default as UserMenu, UserMenuProps } from "./UserMenu";
 export { UserAvatar, useColorMap } from "./UserAvatar";
 export {
