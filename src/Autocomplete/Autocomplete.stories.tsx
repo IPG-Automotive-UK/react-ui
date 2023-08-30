@@ -11,7 +11,7 @@ import { useArgs } from "@storybook/client-api";
  */
 const meta: Meta<typeof Autocomplete> = {
   component: Autocomplete,
-  title: "General/Autocomplete"
+  title: "Selectors/Autocomplete"
 };
 export default meta;
 

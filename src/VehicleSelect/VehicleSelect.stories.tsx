@@ -11,7 +11,7 @@ import { useArgs } from "@storybook/client-api";
  */
 const meta: Meta<typeof VehicleSelect> = {
   component: VehicleSelect,
-  title: "General/VehicleSelect"
+  title: "Selectors/VehicleSelect"
 };
 export default meta;
 
