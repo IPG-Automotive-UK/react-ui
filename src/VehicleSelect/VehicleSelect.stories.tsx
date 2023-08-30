@@ -35,7 +35,6 @@ const Template: StoryFn<VehicleSelectProps> = args => {
 // Default story
 export const Default = {
   args: {
-    allGates: ["Gate 1", "Gate 2", "Gate 3"],
     allVehicles: [
       {
         _id: "64c8c4cccc8d6f00130b366b",
@@ -64,6 +63,7 @@ export const Default = {
     ],
     flexDirection: "column",
     flexWrap: "nowrap",
+    gates: ["Gate 1", "Gate 2", "Gate 3"],
     value: [
       {
         _id: "",

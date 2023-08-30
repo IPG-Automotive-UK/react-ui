@@ -17,10 +17,6 @@ export type SelectedVehicle = {
 
 export interface VehicleSelectProps {
   /**
-   * List of gates to show in the dropdown
-   */
-  allGates: string[];
-  /**
    * Array of all vehicles
    */
   allVehicles: Vehicle[];
@@ -32,6 +28,10 @@ export interface VehicleSelectProps {
    * FlexWrap of the component
    */
   flexWrap?: string;
+  /**
+   * List of gates to show in the dropdown
+   */
+  gates: string[];
   /**
    * Callback function fired on each vehicle metadata change
    */

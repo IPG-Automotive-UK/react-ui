@@ -5,10 +5,10 @@ import { VehicleSelectProps } from "./VehicleSelect.types";
 
 // component to select a vehicle
 function VehicleSelect({
-  allGates = [],
   allVehicles = [],
   flexDirection = "column",
   flexWrap = "nowrap",
+  gates = [],
   onChange = () => {},
   value = []
 }: VehicleSelectProps) {
@@ -179,7 +179,7 @@ function VehicleSelect({
           required
           multiple={true}
           label="Gate"
-          options={allGates}
+          options={gates}
           onChange={(_event, value) => {
             const newVehicles = allVehicles.filter(
               v =>
