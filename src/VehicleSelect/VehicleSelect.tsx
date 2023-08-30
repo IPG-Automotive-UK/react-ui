@@ -98,7 +98,6 @@ function VehicleSelect({
               }
             ]);
           }}
-          value={selectedProject}
         />
       </Box>
       <Box flex="40%">
@@ -120,7 +119,6 @@ function VehicleSelect({
               }
             ]);
           }}
-          value={selectedModelYear}
         />
       </Box>
       <Box flex="40%">
@@ -176,7 +174,6 @@ function VehicleSelect({
               onVehicleChange(newVehiclesWithGates);
             }
           }}
-          value={selectedVariants}
         />
       </Box>
       <Box flex="40%">
@@ -218,7 +215,6 @@ function VehicleSelect({
             );
             onVehicleChange(newVehiclesWithGate);
           }}
-          value={selectedGates}
         />
       </Box>
     </Box>
