@@ -7,7 +7,7 @@ import {
   IconButton,
   Stack
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import CloseIcon from "@mui/icons-material/Close";
 import { CombinedVehicleProps } from "./VehicleSelectDialog.types";
@@ -49,6 +49,13 @@ const VehicleSelectDialog = ({
       onSaveClick(value);
     }
   };
+
+  // reset the state when the dialog is opened
+  useEffect(() => {
+    if (open) {
+      setValue([]);
+    }
+  }, [open]);
 
   // render the dialog with the vehicle select component
   return (
