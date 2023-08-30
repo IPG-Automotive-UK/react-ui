@@ -85,7 +85,7 @@ test("disables the Save button when any field is empty", () => {
   const modifiedVehicles = [...selectedVehicles];
   // empty the gate field
   modifiedVehicles[0].gate = "";
-
+  // render the component with the modified selected vehicles
   render(
     <VehicleSelectDialog
       {...defaultProps}

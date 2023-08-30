@@ -17,7 +17,7 @@ const meta: Meta<typeof VehicleSelectDialog> = {
 };
 
 export default meta;
-
+// Default story with all props
 const Template: StoryFn<CombinedVehicleProps> = args => {
   const [open, setOpen] = React.useState(false);
 
@@ -44,7 +44,7 @@ const Template: StoryFn<CombinedVehicleProps> = args => {
     updateArgs({ selectedVehicles: selectedVehicle });
     action("onVehicleChange")(selectedVehicle);
   };
-
+  // render the dialog with the vehicle select component
   return (
     <>
       <Button variant="outlined" onClick={handleClickOpen}>

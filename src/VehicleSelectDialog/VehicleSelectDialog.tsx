@@ -46,7 +46,7 @@ const VehicleSelectDialog = ({
       onSaveClick(selectedVehicles);
     }
   };
-
+  // render the dialog with the vehicle select component
   return (
     <Dialog
       open={open}
