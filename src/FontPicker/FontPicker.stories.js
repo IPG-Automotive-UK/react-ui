@@ -7,7 +7,7 @@ export default {
     value: { type: "string" }
   },
   component: FontPicker,
-  title: "General/FontPicker"
+  title: "Selectors/FontPicker"
 };
 
 const Template = args => {

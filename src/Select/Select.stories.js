@@ -6,7 +6,7 @@ export default {
     value: { type: "string" }
   },
   component: Select,
-  title: "General/Select"
+  title: "Selectors/Select"
 };
 
 const Template = args => {
