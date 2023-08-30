@@ -11,38 +11,43 @@ import { useArgs } from "@storybook/client-api";
  */
 const meta: Meta<typeof VehicleSelect> = {
   component: VehicleSelect,
-  title: "General/VehicleSelect"
+  title: "Selectors/VehicleSelect"
 };
 export default meta;
 
 const Template: StoryFn<VehicleSelectProps> = args => {
   // useArgs is a hook that returns the current state of the args object
-  const [{ selectedVehicles }, updateArgs] = useArgs<VehicleSelectProps>();
+  const [{ value }, updateArgs] = useArgs<VehicleSelectProps>();
 
-  // update the args object with the new selectedVehicles value
+  // update the args object with the new value value
   React.useEffect(() => {
-    updateArgs({ selectedVehicles });
-  }, [selectedVehicles, updateArgs]);
+    updateArgs({ value });
+  }, [value, updateArgs]);
 
   // callback for when the selected vehicles change
-  const onVehicleChange = (selectedVehicle: SelectedVehicle[]) => {
-    updateArgs({ selectedVehicles: selectedVehicle });
-    action("onVehicleChange")(selectedVehicle);
+  const onChange = (selectedVehicle: SelectedVehicle[]) => {
+    updateArgs({ value: selectedVehicle });
+    action("onChange")(selectedVehicle);
   };
-  return (
-    <VehicleSelect
-      {...args}
-      onVehicleChange={onVehicleChange}
-      selectedVehicles={selectedVehicles}
-    />
-  );
+  return <VehicleSelect {...args} onChange={onChange} value={value} />;
 };
 
 // Default story
 export const Default = {
   args: {
-    allGates: ["Gate 1", "Gate 2", "Gate 3"],
-    allVehicles: [
+    flexDirection: "column",
+    flexWrap: "nowrap",
+    gates: ["Gate 1", "Gate 2", "Gate 3"],
+    value: [
+      {
+        _id: "",
+        gate: "",
+        modelYear: "",
+        project: "",
+        variant: ""
+      }
+    ],
+    variants: [
       {
         _id: "64c8c4cccc8d6f00130b366b",
         modelYear: "2015",
@@ -66,17 +71,6 @@ export const Default = {
         modelYear: "2016",
         projectCode: "911",
         variant: "MC - 397kW - 7MT - R20"
-      }
-    ],
-    flexDirection: "column",
-    flexWrap: "nowrap",
-    selectedVehicles: [
-      {
-        _id: "",
-        gate: "",
-        modelYear: "",
-        project: "",
-        variant: ""
       }
     ]
   },

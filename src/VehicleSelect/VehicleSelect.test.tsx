@@ -7,8 +7,12 @@ import userEvent from "@testing-library/user-event";
 
 // default props
 const defaultProps = {
-  allGates: ["Gate 1", "Gate 2", "Gate 3"],
-  allVehicles: [
+  flexDirection: "column",
+  flexWrap: "nowrap",
+  gates: ["Gate 1", "Gate 2", "Gate 3"],
+  onChange: () => {},
+  value: [],
+  variants: [
     {
       _id: "64c8c4cccc8d6f00130b366b",
       modelYear: "2015",
@@ -33,11 +37,7 @@ const defaultProps = {
       projectCode: "911",
       variant: "MC"
     }
-  ],
-  flexDirection: "column",
-  flexWrap: "nowrap",
-  onVehicleChange: () => {},
-  selectedVehicles: []
+  ]
 };
 
 /**
@@ -45,8 +45,8 @@ const defaultProps = {
  */
 
 const VehicleSelectWithState = ({
-  onVehicleChange,
-  selectedVehicles: valueIn = [],
+  onChange,
+  value: valueIn = [],
   flexDirection = "column",
   flexWrap = "nowrap",
   ...rest
@@ -54,13 +54,13 @@ const VehicleSelectWithState = ({
   const [value, setValue] = React.useState(valueIn);
   const handleChange = selectedValues => {
     setValue(selectedValues);
-    onVehicleChange(selectedValues);
+    onChange(selectedValues);
   };
   return (
     <VehicleSelect
       {...rest}
-      onVehicleChange={handleChange}
-      selectedVehicles={value}
+      onChange={handleChange}
+      value={value}
       flexDirection={flexDirection}
       flexWrap={flexWrap}
     />
@@ -74,14 +74,9 @@ describe("Vehicle Select", () => {
   it("renders component", () => {
     render(<VehicleSelectWithState {...defaultProps} />);
   });
-  it("onVehicleChange called", async () => {
-    const onVehicleChange = jest.fn();
-    render(
-      <VehicleSelectWithState
-        {...defaultProps}
-        onVehicleChange={onVehicleChange}
-      />
-    );
+  it("onChange called", async () => {
+    const onChange = jest.fn();
+    render(<VehicleSelectWithState {...defaultProps} onChange={onChange} />);
 
     // open the project selector
     await userEvent.click(
@@ -90,11 +85,11 @@ describe("Vehicle Select", () => {
     // click the first option
     await userEvent.click(screen.getByRole("option", { name: /911/i }));
 
-    // expect the onVehicleChange callback to be called first time
-    expect(onVehicleChange).toHaveBeenCalledTimes(1);
+    // expect the onChange callback to be called first time
+    expect(onChange).toHaveBeenCalledTimes(1);
 
-    // expect the onVehicleChange callback to be called wih expected value
-    expect(onVehicleChange).toHaveBeenCalledWith([
+    // expect the onChange callback to be called wih expected value
+    expect(onChange).toHaveBeenCalledWith([
       {
         _id: "",
         gate: "",
@@ -111,11 +106,11 @@ describe("Vehicle Select", () => {
     // click the first option
     await userEvent.click(screen.getByRole("option", { name: /2015/i }));
 
-    // expect the onVehicleChange callback to be called second time
-    expect(onVehicleChange).toHaveBeenCalledTimes(2);
+    // expect the onChange callback to be called second time
+    expect(onChange).toHaveBeenCalledTimes(2);
 
-    // expect the onVehicleChange callback to be called with expected value
-    expect(onVehicleChange).toHaveBeenCalledWith([
+    // expect the onChange callback to be called with expected value
+    expect(onChange).toHaveBeenCalledWith([
       {
         _id: "",
         gate: "",
@@ -134,11 +129,11 @@ describe("Vehicle Select", () => {
     // click the first option
     await userEvent.click(screen.getByRole("option", { name: /JS/i }));
 
-    // expect the onVehicleChange callback to be called third time
-    expect(onVehicleChange).toHaveBeenCalledTimes(3);
+    // expect the onChange callback to be called third time
+    expect(onChange).toHaveBeenCalledTimes(3);
 
-    // expect the onVehicleChange callback to be called with expected value
-    expect(onVehicleChange).toHaveBeenCalledWith([
+    // expect the onChange callback to be called with expected value
+    expect(onChange).toHaveBeenCalledWith([
       {
         _id: "64c8c4cccc8d6f00130b367e",
         gate: "",
@@ -157,11 +152,11 @@ describe("Vehicle Select", () => {
     // click the second option
     await userEvent.click(screen.getByRole("option", { name: /MP/i }));
 
-    // expect the onVehicleChange callback to be called fourth time
-    expect(onVehicleChange).toHaveBeenCalledTimes(4);
+    // expect the onChange callback to be called fourth time
+    expect(onChange).toHaveBeenCalledTimes(4);
 
-    // expect the onVehicleChange callback to be called with the expected value
-    expect(onVehicleChange).toHaveBeenCalledWith([
+    // expect the onChange callback to be called with the expected value
+    expect(onChange).toHaveBeenCalledWith([
       {
         _id: "64c8c4cccc8d6f00130b366b",
         gate: "",
@@ -187,11 +182,11 @@ describe("Vehicle Select", () => {
     // click the first option
     await userEvent.click(screen.getByRole("option", { name: /Gate 1/i }));
 
-    // expect the onVehicleChange callback to be called fifth time
-    expect(onVehicleChange).toHaveBeenCalledTimes(5);
+    // expect the onChange callback to be called fifth time
+    expect(onChange).toHaveBeenCalledTimes(5);
 
-    // expect the onVehicleChange callback to be called with the expected value
-    expect(onVehicleChange).toHaveBeenCalledWith([
+    // expect the onChange callback to be called with the expected value
+    expect(onChange).toHaveBeenCalledWith([
       {
         _id: "64c8c4cccc8d6f00130b366b",
         gate: "Gate 1",
@@ -217,11 +212,11 @@ describe("Vehicle Select", () => {
     // click the second option
     await userEvent.click(screen.getByRole("option", { name: /Gate 2/i }));
 
-    // expect the onVehicleChange callback to be called sixth time
-    expect(onVehicleChange).toHaveBeenCalledTimes(6);
+    // expect the onChange callback to be called sixth time
+    expect(onChange).toHaveBeenCalledTimes(6);
 
-    // expect the onVehicleChange callback to be called with the expected value
-    expect(onVehicleChange).toHaveBeenCalledWith([
+    // expect the onChange callback to be called with the expected value
+    expect(onChange).toHaveBeenCalledWith([
       {
         _id: "64c8c4cccc8d6f00130b366b",
         gate: "Gate 1",
@@ -251,6 +246,33 @@ describe("Vehicle Select", () => {
         variant: "JS"
       }
     ]);
+  });
+
+  it("Called with value", () => {
+    // selected vehicles example
+    const value = [
+      {
+        _id: "64c8c4cccc8d6f00130b367e",
+        gate: "Gate 1",
+        modelYear: "2015",
+        project: "911",
+        variant: "MP"
+      }
+    ];
+    render(<VehicleSelectWithState {...defaultProps} value={value} />);
+
+    expect(screen.getByRole("combobox", { name: /project code/i })).toHaveValue(
+      "911"
+    );
+    expect(screen.getByRole("combobox", { name: /model year/i })).toHaveValue(
+      "2015"
+    );
+    expect(
+      screen.getByRole("button", {
+        name: /MP/i
+      })
+    ).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /gate 1/i })).toBeInTheDocument();
   });
 
   it("has flex direction and flex wrap styles applied", () => {

@@ -5,55 +5,50 @@ import { VehicleSelectProps } from "./VehicleSelect.types";
 
 // component to select a vehicle
 function VehicleSelect({
-  allVehicles = [],
-  selectedVehicles = [],
   flexDirection = "column",
   flexWrap = "nowrap",
-  allGates = [],
-  onVehicleChange = () => {}
+  gates = [],
+  onChange = () => {},
+  value = [],
+  variants = []
 }: VehicleSelectProps) {
-  // derive state for project
-  const selectedProjects = [
-    ...new Set(selectedVehicles.map(vehicle => vehicle.project))
-  ];
-
+  // derive state for selected project
+  const selectedProjects = [...new Set(value.map(vehicle => vehicle.project))];
   if (selectedProjects.length > 1)
     throw new Error("Project selection is ambiguous");
-  const selectedProject = selectedProjects[0] ?? "";
+  const selectedProject = selectedProjects[0] ?? null;
 
-  // derive all projects
+  // derive state for all projects
   const allProjects = [
-    ...new Set(allVehicles.map(vehicle => vehicle.projectCode))
+    ...new Set(variants.map(vehicle => vehicle.projectCode))
   ].sort();
 
-  // derive state for model year
+  // derive state for selected model year
   const selectedModelYears = [
-    ...new Set(selectedVehicles.map(vehicle => vehicle.modelYear))
+    ...new Set(value.map(vehicle => vehicle.modelYear))
   ];
   if (selectedModelYears.length > 1)
     throw new Error("Multiple year is ambiguous");
-  const selectedModelYear = selectedModelYears[0] ?? "";
+  const selectedModelYear = selectedModelYears[0] ?? null;
 
-  // derive all model years
+  // derive state for all model years
   const allModelYears = [
     ...new Set(
-      allVehicles
+      variants
         .filter(v => v.projectCode === selectedProject)
         .map(vehicle => vehicle.modelYear)
     )
   ].sort();
 
-  // derive state for variant
-  const selectedVariants = [
-    ...new Set(selectedVehicles.map(vehicle => vehicle.variant))
-  ]
+  // derive state for select variants
+  const selectedVariants = [...new Set(value.map(vehicle => vehicle.variant))]
     .filter(v => v !== "")
     .sort();
 
-  // derive all variants
+  // derive state for all variants
   const allVariants = [
     ...new Set(
-      allVehicles
+      variants
         .filter(
           v =>
             v.projectCode === selectedProject &&
@@ -63,13 +58,12 @@ function VehicleSelect({
     )
   ].sort();
 
-  // derive state for gate
-  const selectedGates = [
-    ...new Set(selectedVehicles.map(vehicle => vehicle.gate))
-  ]
+  // derive state for selected gates
+  const selectedGates = [...new Set(value.map(vehicle => vehicle.gate))]
     .filter(v => v !== "")
     .sort();
 
+  // create the selector components for project, model year, variant and gate with single select for project and model year and multi select for variant and gate
   return (
     <Box
       data-testid="vehicle-select"
@@ -88,7 +82,7 @@ function VehicleSelect({
           options={allProjects}
           onChange={(_event, value) => {
             const newValue = value === null ? "" : value;
-            onVehicleChange([
+            onChange([
               {
                 _id: "",
                 gate: "",
@@ -98,6 +92,7 @@ function VehicleSelect({
               }
             ]);
           }}
+          value={selectedProject === "" ? null : selectedProject}
         />
       </Box>
       <Box flex="40%">
@@ -109,7 +104,7 @@ function VehicleSelect({
           options={allModelYears}
           onChange={(_event, value) => {
             const newValue = value === null ? "" : value;
-            onVehicleChange([
+            onChange([
               {
                 _id: "",
                 gate: "",
@@ -119,6 +114,7 @@ function VehicleSelect({
               }
             ]);
           }}
+          value={selectedModelYear === "" ? null : selectedModelYear}
         />
       </Box>
       <Box flex="40%">
@@ -129,15 +125,15 @@ function VehicleSelect({
           multiple={true}
           options={allVariants}
           onChange={(_event, value) => {
-            const newVehicles = allVehicles.filter(
+            const newVehicles = variants.filter(
               v =>
                 v.projectCode === selectedProject &&
                 v.modelYear === selectedModelYear &&
                 value.includes(v.variant)
             );
-            // if no vehicles keep the project and model year but clear the variant and gate in selectedVehicles
+            // if no vehicles keep the project and model year but clear the variant and gate in value
             if (newVehicles.length === 0) {
-              onVehicleChange([
+              onChange([
                 {
                   _id: "",
                   gate: "",
@@ -148,9 +144,9 @@ function VehicleSelect({
               ]);
               return;
             }
-            // if no gates keep the project, model year and variant but clear the gate in selectedVehicles
+            // if no gates keep the project, model year and variant but clear the gate in value
             if (selectedGates.length === 0) {
-              onVehicleChange(
+              onChange(
                 newVehicles.map(v => ({
                   _id: v._id,
                   gate: "",
@@ -160,7 +156,7 @@ function VehicleSelect({
                 }))
               );
             }
-            // if gates are selected update the selectedVehicles with the new vehicles and gates
+            // if gates are selected update the value with the new vehicles and gates
             if (selectedGates.length > 0) {
               const newVehiclesWithGates = selectedGates.flatMap(gate =>
                 newVehicles.map(v => ({
@@ -171,9 +167,10 @@ function VehicleSelect({
                   variant: v.variant
                 }))
               );
-              onVehicleChange(newVehiclesWithGates);
+              onChange(newVehiclesWithGates);
             }
           }}
+          value={selectedVariants}
         />
       </Box>
       <Box flex="40%">
@@ -182,17 +179,17 @@ function VehicleSelect({
           required
           multiple={true}
           label="Gate"
-          options={allGates}
+          options={gates}
           onChange={(_event, value) => {
-            const newVehicles = allVehicles.filter(
+            const newVehicles = variants.filter(
               v =>
                 v.projectCode === selectedProject &&
                 v.modelYear === selectedModelYear &&
                 selectedVariants.includes(v.variant)
             );
-            // if no gates selected keep the project, model year and variant but clear the gate in selectedVehicles
+            // if no gates selected keep the project, model year and variant but clear the gate in value
             if (value.length === 0) {
-              onVehicleChange(
+              onChange(
                 newVehicles.map(v => ({
                   _id: v._id,
                   gate: "",
@@ -203,7 +200,7 @@ function VehicleSelect({
               );
               return;
             }
-            // if gates are selected update the selectedVehicles with the new vehicles and gates
+            // if gates are selected update the value with the new vehicles and gates
             const newVehiclesWithGate = value.flatMap(gate =>
               newVehicles.map(v => ({
                 _id: v._id,
@@ -213,8 +210,9 @@ function VehicleSelect({
                 variant: v.variant
               }))
             );
-            onVehicleChange(newVehiclesWithGate);
+            onChange(newVehiclesWithGate);
           }}
+          value={selectedGates}
         />
       </Box>
     </Box>
