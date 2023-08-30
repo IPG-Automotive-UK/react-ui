@@ -1,4 +1,5 @@
 import { render, screen, within } from "@testing-library/react";
+
 import React from "react";
 import TransferList from ".";
 import userEvent from "@testing-library/user-event";
@@ -42,7 +43,7 @@ describe("TransferList", () => {
     await user.click(button);
 
     // check selections have been cleared
-    expect(container.querySelector(".MuiTypography-body1").textContent).toBe(
+    expect(container.querySelector(".MuiTypography-body1")?.textContent).toBe(
       "None Selected"
     );
     expect(onChange).toHaveBeenCalledWith([]);
@@ -51,10 +52,15 @@ describe("TransferList", () => {
   test("Search filters the list items", async () => {
     // render component
     const user = userEvent.setup();
-    const { container } = render(<SelectedItemsWithState />);
+    const onChange = jest.fn();
+    const { container } = render(
+      <SelectedItemsWithState onChange={onChange} />
+    );
 
     // type in search input
-    const inputBase = container.querySelector(".MuiInputBase-input");
+    const inputBase = container.querySelector(
+      ".MuiInputBase-input"
+    ) as HTMLInputElement;
     await user.type(inputBase, "p");
 
     // check if the left list has been filtered
@@ -100,7 +106,7 @@ describe("TransferList", () => {
     await user.click(listItem);
 
     // check selections have been cleared
-    expect(container.querySelector(".MuiTypography-body1").textContent).toBe(
+    expect(container.querySelector(".MuiTypography-body1")?.textContent).toBe(
       "None Selected"
     );
     expect(onChange).toHaveBeenCalledWith([]);
