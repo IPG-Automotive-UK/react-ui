@@ -253,6 +253,38 @@ describe("Vehicle Select", () => {
     ]);
   });
 
+  it("Called with selectedVehicles", () => {
+    // selected vehicles example
+    const selectedVehicles = [
+      {
+        _id: "64c8c4cccc8d6f00130b367e",
+        gate: "Gate 1",
+        modelYear: "2015",
+        project: "911",
+        variant: "MP"
+      }
+    ];
+    render(
+      <VehicleSelectWithState
+        {...defaultProps}
+        selectedVehicles={selectedVehicles}
+      />
+    );
+
+    expect(screen.getByRole("combobox", { name: /project code/i })).toHaveValue(
+      "911"
+    );
+    expect(screen.getByRole("combobox", { name: /model year/i })).toHaveValue(
+      "2015"
+    );
+    expect(
+      screen.getByRole("button", {
+        name: /MP/i
+      })
+    ).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /gate 1/i })).toBeInTheDocument();
+  });
+
   it("has flex direction and flex wrap styles applied", () => {
     render(
       <VehicleSelectWithState
