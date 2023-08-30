@@ -7,7 +7,12 @@ import userEvent from "@testing-library/user-event";
 
 // default props
 const defaultProps = {
-  allVehicles: [
+  flexDirection: "column",
+  flexWrap: "nowrap",
+  gates: ["Gate 1", "Gate 2", "Gate 3"],
+  onChange: () => {},
+  value: [],
+  variants: [
     {
       _id: "64c8c4cccc8d6f00130b366b",
       modelYear: "2015",
@@ -32,12 +37,7 @@ const defaultProps = {
       projectCode: "911",
       variant: "MC"
     }
-  ],
-  flexDirection: "column",
-  flexWrap: "nowrap",
-  gates: ["Gate 1", "Gate 2", "Gate 3"],
-  onChange: () => {},
-  value: []
+  ]
 };
 
 /**

@@ -5,12 +5,12 @@ import { VehicleSelectProps } from "./VehicleSelect.types";
 
 // component to select a vehicle
 function VehicleSelect({
-  allVehicles = [],
   flexDirection = "column",
   flexWrap = "nowrap",
   gates = [],
   onChange = () => {},
-  value = []
+  value = [],
+  variants = []
 }: VehicleSelectProps) {
   // derive state for project
   const selectedProjects = [...new Set(value.map(vehicle => vehicle.project))];
@@ -21,7 +21,7 @@ function VehicleSelect({
 
   // derive all projects
   const allProjects = [
-    ...new Set(allVehicles.map(vehicle => vehicle.projectCode))
+    ...new Set(variants.map(vehicle => vehicle.projectCode))
   ].sort();
 
   // derive state for model year
@@ -35,7 +35,7 @@ function VehicleSelect({
   // derive all model years
   const allModelYears = [
     ...new Set(
-      allVehicles
+      variants
         .filter(v => v.projectCode === selectedProject)
         .map(vehicle => vehicle.modelYear)
     )
@@ -49,7 +49,7 @@ function VehicleSelect({
   // derive all variants
   const allVariants = [
     ...new Set(
-      allVehicles
+      variants
         .filter(
           v =>
             v.projectCode === selectedProject &&
@@ -125,7 +125,7 @@ function VehicleSelect({
           multiple={true}
           options={allVariants}
           onChange={(_event, value) => {
-            const newVehicles = allVehicles.filter(
+            const newVehicles = variants.filter(
               v =>
                 v.projectCode === selectedProject &&
                 v.modelYear === selectedModelYear &&
@@ -181,7 +181,7 @@ function VehicleSelect({
           label="Gate"
           options={gates}
           onChange={(_event, value) => {
-            const newVehicles = allVehicles.filter(
+            const newVehicles = variants.filter(
               v =>
                 v.projectCode === selectedProject &&
                 v.modelYear === selectedModelYear &&

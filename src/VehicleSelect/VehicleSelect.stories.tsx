@@ -35,7 +35,19 @@ const Template: StoryFn<VehicleSelectProps> = args => {
 // Default story
 export const Default = {
   args: {
-    allVehicles: [
+    flexDirection: "column",
+    flexWrap: "nowrap",
+    gates: ["Gate 1", "Gate 2", "Gate 3"],
+    value: [
+      {
+        _id: "",
+        gate: "",
+        modelYear: "",
+        project: "",
+        variant: ""
+      }
+    ],
+    variants: [
       {
         _id: "64c8c4cccc8d6f00130b366b",
         modelYear: "2015",
@@ -59,18 +71,6 @@ export const Default = {
         modelYear: "2016",
         projectCode: "911",
         variant: "MC - 397kW - 7MT - R20"
-      }
-    ],
-    flexDirection: "column",
-    flexWrap: "nowrap",
-    gates: ["Gate 1", "Gate 2", "Gate 3"],
-    value: [
-      {
-        _id: "",
-        gate: "",
-        modelYear: "",
-        project: "",
-        variant: ""
       }
     ]
   },

@@ -17,10 +17,6 @@ export type SelectedVehicle = {
 
 export interface VehicleSelectProps {
   /**
-   * Array of all vehicles
-   */
-  allVehicles: Vehicle[];
-  /**
    * FlexDirection of the component
    */
   flexDirection?: string;
@@ -40,4 +36,8 @@ export interface VehicleSelectProps {
    * The currently selected vehicles
    */
   value: SelectedVehicle[];
+  /**
+   * Array of all vehicle variants with fields _id, modelYear, projectCode, variant
+   */
+  variants: Vehicle[];
 }
