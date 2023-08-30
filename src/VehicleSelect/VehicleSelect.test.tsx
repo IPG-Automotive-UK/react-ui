@@ -37,7 +37,7 @@ const defaultProps = {
   flexDirection: "column",
   flexWrap: "nowrap",
   onChange: () => {},
-  selectedVehicles: []
+  value: []
 };
 
 /**
@@ -46,7 +46,7 @@ const defaultProps = {
 
 const VehicleSelectWithState = ({
   onChange,
-  selectedVehicles: valueIn = [],
+  value: valueIn = [],
   flexDirection = "column",
   flexWrap = "nowrap",
   ...rest
@@ -60,7 +60,7 @@ const VehicleSelectWithState = ({
     <VehicleSelect
       {...rest}
       onChange={handleChange}
-      selectedVehicles={value}
+      value={value}
       flexDirection={flexDirection}
       flexWrap={flexWrap}
     />
@@ -248,9 +248,9 @@ describe("Vehicle Select", () => {
     ]);
   });
 
-  it("Called with selectedVehicles", () => {
+  it("Called with value", () => {
     // selected vehicles example
-    const selectedVehicles = [
+    const value = [
       {
         _id: "64c8c4cccc8d6f00130b367e",
         gate: "Gate 1",
@@ -259,12 +259,7 @@ describe("Vehicle Select", () => {
         variant: "MP"
       }
     ];
-    render(
-      <VehicleSelectWithState
-        {...defaultProps}
-        selectedVehicles={selectedVehicles}
-      />
-    );
+    render(<VehicleSelectWithState {...defaultProps} value={value} />);
 
     expect(screen.getByRole("combobox", { name: /project code/i })).toHaveValue(
       "911"

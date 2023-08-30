@@ -25,10 +25,6 @@ export interface VehicleSelectProps {
    */
   allVehicles: Vehicle[];
   /**
-   * The currently selected vehicles
-   */
-  selectedVehicles: SelectedVehicle[];
-  /**
    * FlexDirection of the component
    */
   flexDirection?: string;
@@ -40,4 +36,8 @@ export interface VehicleSelectProps {
    * Callback function fired on each vehicle metadata change
    */
   onChange: (value: SelectedVehicle[]) => void;
+  /**
+   * The currently selected vehicles
+   */
+  value: SelectedVehicle[];
 }

@@ -17,25 +17,19 @@ export default meta;
 
 const Template: StoryFn<VehicleSelectProps> = args => {
   // useArgs is a hook that returns the current state of the args object
-  const [{ selectedVehicles }, updateArgs] = useArgs<VehicleSelectProps>();
+  const [{ value }, updateArgs] = useArgs<VehicleSelectProps>();
 
-  // update the args object with the new selectedVehicles value
+  // update the args object with the new value value
   React.useEffect(() => {
-    updateArgs({ selectedVehicles });
-  }, [selectedVehicles, updateArgs]);
+    updateArgs({ value });
+  }, [value, updateArgs]);
 
   // callback for when the selected vehicles change
   const onChange = (selectedVehicle: SelectedVehicle[]) => {
-    updateArgs({ selectedVehicles: selectedVehicle });
+    updateArgs({ value: selectedVehicle });
     action("onChange")(selectedVehicle);
   };
-  return (
-    <VehicleSelect
-      {...args}
-      onChange={onChange}
-      selectedVehicles={selectedVehicles}
-    />
-  );
+  return <VehicleSelect {...args} onChange={onChange} value={value} />;
 };
 
 // Default story
@@ -70,7 +64,7 @@ export const Default = {
     ],
     flexDirection: "column",
     flexWrap: "nowrap",
-    selectedVehicles: [
+    value: [
       {
         _id: "",
         gate: "",
