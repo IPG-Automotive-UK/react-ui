@@ -25,7 +25,7 @@ const meta: Meta<typeof ActionDialog> = {
     }
   },
   component: ActionDialog,
-  title: "General/ActionDialog"
+  title: "Dialog/ActionDialog"
 };
 export default meta;
 

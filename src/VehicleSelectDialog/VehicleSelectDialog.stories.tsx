@@ -13,7 +13,7 @@ import { useArgs } from "@storybook/client-api";
  */
 const meta: Meta<typeof VehicleSelectDialog> = {
   component: VehicleSelectDialog,
-  title: "General/VehicleSelectDialog"
+  title: "Dialog/VehicleSelectDialog"
 };
 
 export default meta;
