@@ -7,7 +7,7 @@ import VehicleSelectDialog from "./VehicleSelectDialog";
 const mockOnSaveClick = jest.fn();
 
 // some mock data for selected vehicles
-const selectedVehicles = [
+const value = [
   {
     _id: "64c8c4cccc8d6f00130b367e",
     gate: "Gate 1",
@@ -19,8 +19,13 @@ const selectedVehicles = [
 
 // some mock data for testing.
 const defaultProps = {
-  allGates: ["Gate 1", "Gate 2", "Gate 3"],
-  allVehicles: [
+  flexDirection: "column",
+  flexWrap: "nowrap",
+  gates: ["Gate 1", "Gate 2", "Gate 3"],
+  onChange: () => {},
+  onSaveClick: mockOnSaveClick,
+  value,
+  variants: [
     {
       _id: "64c8c4cccc8d6f00130b366b",
       modelYear: "2015",
@@ -45,12 +50,7 @@ const defaultProps = {
       projectCode: "911",
       variant: "MC"
     }
-  ],
-  flexDirection: "column",
-  flexWrap: "nowrap",
-  onSaveClick: mockOnSaveClick,
-  onVehicleChange: () => {},
-  selectedVehicles
+  ]
 };
 
 test("renders the VehicleSelectDialog component", () => {
@@ -77,21 +77,16 @@ test("calls onSaveClick when Save button is clicked", () => {
   fireEvent.click(saveButton);
 
   // check that the onSaveClick function was called
-  expect(mockOnSaveClick).toHaveBeenCalledWith(selectedVehicles);
+  expect(mockOnSaveClick).toHaveBeenCalledWith(value);
 });
 
 test("disables the Save button when any field is empty", () => {
   // modify the selected vehicles to have an empty gate field
-  const modifiedVehicles = [...selectedVehicles];
+  const modifiedVehicles = [...value];
   // empty the gate field
   modifiedVehicles[0].gate = "";
   // render the component with the modified selected vehicles
-  render(
-    <VehicleSelectDialog
-      {...defaultProps}
-      selectedVehicles={modifiedVehicles}
-    />
-  );
+  render(<VehicleSelectDialog {...defaultProps} value={modifiedVehicles} />);
 
   // check that the Save button is disabled
   const saveButton = screen.getByText("Save");

@@ -23,15 +23,15 @@ const VehicleSelectDialog = ({
   open = true,
   width = "400px",
   showCloseIcon = true,
-  allVehicles = [],
-  selectedVehicles = [],
+  variants = [],
+  value = [],
   flexDirection = "column",
   flexWrap = "nowrap",
-  allGates = [],
-  onVehicleChange = () => {}
+  gates = [],
+  onChange = () => {}
 }: CombinedVehicleProps) => {
   // check if all fields are filled for each selected vehicle
-  const isSaveDisabled = selectedVehicles.some(
+  const isSaveDisabled = value.some(
     vehicle =>
       !vehicle._id ||
       !vehicle.gate ||
@@ -41,9 +41,9 @@ const VehicleSelectDialog = ({
   );
 
   // handle save click will return callback with selected vehicles
-  const handleSaveClick = (selectedVehicles: SelectedVehicle[]) => {
+  const handleSaveClick = (value: SelectedVehicle[]) => {
     if (!isSaveDisabled) {
-      onSaveClick(selectedVehicles);
+      onSaveClick(value);
     }
   };
   // render the dialog with the vehicle select component
@@ -84,12 +84,12 @@ const VehicleSelectDialog = ({
       <DialogContent>
         <Stack spacing={3}>
           <VehicleSelect
-            allVehicles={allVehicles}
-            selectedVehicles={selectedVehicles}
+            variants={variants}
+            value={value}
             flexDirection={flexDirection}
             flexWrap={flexWrap}
-            allGates={allGates}
-            onVehicleChange={onVehicleChange}
+            gates={gates}
+            onChange={onChange}
           />
         </Stack>
       </DialogContent>
@@ -97,7 +97,7 @@ const VehicleSelectDialog = ({
         <Button onClick={onCancelClick}>{cancelText}</Button>
         <Button
           variant="contained"
-          onClick={() => handleSaveClick(selectedVehicles)}
+          onClick={() => handleSaveClick(value)}
           disabled={isSaveDisabled}
         >
           {saveText}
