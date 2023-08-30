@@ -3,6 +3,7 @@ import React, { MouseEventHandler } from "react";
 
 import { Button } from "@mui/material";
 import { CombinedVehicleProps } from "./VehicleSelectDialog.types";
+import { SelectedVehicle } from "../VehicleSelect/VehicleSelect.types";
 import VehicleSelectDialog from "./VehicleSelectDialog";
 import { action } from "@storybook/addon-actions";
 
@@ -24,7 +25,7 @@ const Template: StoryFn<CombinedVehicleProps> = args => {
     setOpen(false);
     action("onCancelClick")(args);
   };
-  const handleSave: MouseEventHandler<HTMLButtonElement> = args => {
+  const handleSave: (vehicle: SelectedVehicle[]) => void = args => {
     setOpen(false);
     action("onSaveClick")(args);
   };

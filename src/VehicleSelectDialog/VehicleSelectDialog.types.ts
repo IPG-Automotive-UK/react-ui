@@ -39,5 +39,8 @@ export interface VehicleSelectDialogProps {
 }
 
 // Create a new type that merges VehicleSelectProps and VehicleSelectDialogProps
-export type CombinedVehicleProps = VehicleSelectProps &
+export type CombinedVehicleProps = Omit<
+  VehicleSelectProps,
+  "onChange" | "value"
+> &
   VehicleSelectDialogProps;
