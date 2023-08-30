@@ -119,6 +119,7 @@ function VehicleSelect({
       </Box>
       <Box flex="40%">
         <Autocomplete
+          disableCloseOnSelect={true}
           disabled={selectedModelYear === ""}
           label="Vehicle Variant"
           required
@@ -175,6 +176,7 @@ function VehicleSelect({
       </Box>
       <Box flex="40%">
         <Autocomplete
+          disableCloseOnSelect={true}
           disabled={selectedVariants.length === 0}
           required
           multiple={true}

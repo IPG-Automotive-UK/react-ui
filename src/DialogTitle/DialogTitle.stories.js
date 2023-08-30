@@ -6,7 +6,7 @@ import React from "react";
 
 export default {
   component: DialogTitle,
-  title: "General/DialogTitle"
+  title: "Dialog/DialogTitle"
 };
 
 const Template = ({ children, ...rest }) => {

@@ -85,6 +85,9 @@ describe("Vehicle Select", () => {
     // click the first option
     await userEvent.click(screen.getByRole("option", { name: /911/i }));
 
+    // explicitly close the dropdown
+    await userEvent.click(document.body);
+
     // expect the onChange callback to be called first time
     expect(onChange).toHaveBeenCalledTimes(1);
 
@@ -105,6 +108,9 @@ describe("Vehicle Select", () => {
     );
     // click the first option
     await userEvent.click(screen.getByRole("option", { name: /2015/i }));
+
+    // explicitly close the dropdown
+    await userEvent.click(document.body);
 
     // expect the onChange callback to be called second time
     expect(onChange).toHaveBeenCalledTimes(2);
@@ -129,6 +135,9 @@ describe("Vehicle Select", () => {
     // click the first option
     await userEvent.click(screen.getByRole("option", { name: /JS/i }));
 
+    // explicitly close the dropdown
+    await userEvent.click(document.body);
+
     // expect the onChange callback to be called third time
     expect(onChange).toHaveBeenCalledTimes(3);
 
@@ -151,6 +160,9 @@ describe("Vehicle Select", () => {
     );
     // click the second option
     await userEvent.click(screen.getByRole("option", { name: /MP/i }));
+
+    // explicitly close the dropdown
+    await userEvent.click(document.body);
 
     // expect the onChange callback to be called fourth time
     expect(onChange).toHaveBeenCalledTimes(4);
@@ -182,6 +194,9 @@ describe("Vehicle Select", () => {
     // click the first option
     await userEvent.click(screen.getByRole("option", { name: /Gate 1/i }));
 
+    // explicitly close the dropdown
+    await userEvent.click(document.body);
+
     // expect the onChange callback to be called fifth time
     expect(onChange).toHaveBeenCalledTimes(5);
 
@@ -211,6 +226,9 @@ describe("Vehicle Select", () => {
     );
     // click the second option
     await userEvent.click(screen.getByRole("option", { name: /Gate 2/i }));
+
+    // explicitly close the dropdown
+    await userEvent.click(document.body);
 
     // expect the onChange callback to be called sixth time
     expect(onChange).toHaveBeenCalledTimes(6);
