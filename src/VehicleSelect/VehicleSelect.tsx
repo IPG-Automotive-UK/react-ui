@@ -12,27 +12,26 @@ function VehicleSelect({
   value = [],
   variants = []
 }: VehicleSelectProps) {
-  // derive state for project
+  // derive state for selected project
   const selectedProjects = [...new Set(value.map(vehicle => vehicle.project))];
-
   if (selectedProjects.length > 1)
     throw new Error("Project selection is ambiguous");
-  const selectedProject = selectedProjects[0] ?? "";
+  const selectedProject = selectedProjects[0] ?? null;
 
-  // derive all projects
+  // derive state for all projects
   const allProjects = [
     ...new Set(variants.map(vehicle => vehicle.projectCode))
   ].sort();
 
-  // derive state for model year
+  // derive state for selected model year
   const selectedModelYears = [
     ...new Set(value.map(vehicle => vehicle.modelYear))
   ];
   if (selectedModelYears.length > 1)
     throw new Error("Multiple year is ambiguous");
-  const selectedModelYear = selectedModelYears[0] ?? "";
+  const selectedModelYear = selectedModelYears[0] ?? null;
 
-  // derive all model years
+  // derive state for all model years
   const allModelYears = [
     ...new Set(
       variants
@@ -41,12 +40,12 @@ function VehicleSelect({
     )
   ].sort();
 
-  // derive state for variant
+  // derive state for select variants
   const selectedVariants = [...new Set(value.map(vehicle => vehicle.variant))]
     .filter(v => v !== "")
     .sort();
 
-  // derive all variants
+  // derive state for all variants
   const allVariants = [
     ...new Set(
       variants
@@ -59,11 +58,12 @@ function VehicleSelect({
     )
   ].sort();
 
-  // derive state for gate
+  // derive state for selected gates
   const selectedGates = [...new Set(value.map(vehicle => vehicle.gate))]
     .filter(v => v !== "")
     .sort();
 
+  // create the selector components for project, model year, variant and gate with single select for project and model year and multi select for variant and gate
   return (
     <Box
       data-testid="vehicle-select"
@@ -92,7 +92,7 @@ function VehicleSelect({
               }
             ]);
           }}
-          value={selectedProject}
+          value={selectedProject === "" ? null : selectedProject}
         />
       </Box>
       <Box flex="40%">
@@ -114,7 +114,7 @@ function VehicleSelect({
               }
             ]);
           }}
-          value={selectedModelYear}
+          value={selectedModelYear === "" ? null : selectedModelYear}
         />
       </Box>
       <Box flex="40%">
