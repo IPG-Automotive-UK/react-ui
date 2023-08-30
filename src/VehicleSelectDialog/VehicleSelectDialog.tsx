@@ -7,10 +7,10 @@ import {
   IconButton,
   Stack
 } from "@mui/material";
+import React, { useState } from "react";
 
 import CloseIcon from "@mui/icons-material/Close";
 import { CombinedVehicleProps } from "./VehicleSelectDialog.types";
-import React from "react";
 import { SelectedVehicle } from "src/VehicleSelect/VehicleSelect.types";
 import VehicleSelect from "src/VehicleSelect/VehicleSelect";
 
@@ -24,28 +24,32 @@ const VehicleSelectDialog = ({
   width = "400px",
   showCloseIcon = true,
   variants = [],
-  value = [],
   flexDirection = "column",
   flexWrap = "nowrap",
-  gates = [],
-  onChange = () => {}
+  gates = []
 }: CombinedVehicleProps) => {
+  // internal state to manage selected vehicles
+  const [value, setValue] = useState<SelectedVehicle[]>([]);
+
   // check if all fields are filled for each selected vehicle
-  const isSaveDisabled = value.some(
-    vehicle =>
-      !vehicle._id ||
-      !vehicle.gate ||
-      !vehicle.modelYear ||
-      !vehicle.project ||
-      !vehicle.variant
-  );
+  const isSaveDisabled =
+    value.length === 0 ||
+    value.some(
+      vehicle =>
+        !vehicle._id ||
+        !vehicle.gate ||
+        !vehicle.modelYear ||
+        !vehicle.project ||
+        !vehicle.variant
+    );
 
   // handle save click will return callback with selected vehicles
-  const handleSaveClick = (value: SelectedVehicle[]) => {
+  const handleSaveClick = () => {
     if (!isSaveDisabled) {
       onSaveClick(value);
     }
   };
+
   // render the dialog with the vehicle select component
   return (
     <Dialog
@@ -89,7 +93,7 @@ const VehicleSelectDialog = ({
             flexDirection={flexDirection}
             flexWrap={flexWrap}
             gates={gates}
-            onChange={onChange}
+            onChange={setValue}
           />
         </Stack>
       </DialogContent>
@@ -97,7 +101,7 @@ const VehicleSelectDialog = ({
         <Button onClick={onCancelClick}>{cancelText}</Button>
         <Button
           variant="contained"
-          onClick={() => handleSaveClick(value)}
+          onClick={handleSaveClick}
           disabled={isSaveDisabled}
         >
           {saveText}

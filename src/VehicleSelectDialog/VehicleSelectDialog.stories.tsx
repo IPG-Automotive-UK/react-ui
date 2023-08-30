@@ -3,10 +3,11 @@ import React, { MouseEventHandler } from "react";
 
 import { Button } from "@mui/material";
 import { CombinedVehicleProps } from "./VehicleSelectDialog.types";
-import { SelectedVehicle } from "../VehicleSelect/VehicleSelect.types";
+// import { SelectedVehicle } from "../VehicleSelect/VehicleSelect.types";
 import VehicleSelectDialog from "./VehicleSelectDialog";
 import { action } from "@storybook/addon-actions";
-import { useArgs } from "@storybook/client-api";
+
+// import { useArgs } from "@storybook/client-api";
 
 /**
  * Story metadata
@@ -31,19 +32,6 @@ const Template: StoryFn<CombinedVehicleProps> = args => {
     action("onSaveClick")(args);
   };
 
-  // useArgs is a hook that returns the current state of the args object
-  const [{ value }, updateArgs] = useArgs<CombinedVehicleProps>();
-
-  // update the args object with the new value value
-  React.useEffect(() => {
-    updateArgs({ value });
-  }, [value, updateArgs]);
-
-  // callback for when the selected vehicles change
-  const onChange = (selectedVehicle: SelectedVehicle[]) => {
-    updateArgs({ value: selectedVehicle });
-    action("onChange")(selectedVehicle);
-  };
   // render the dialog with the vehicle select component
   return (
     <>
@@ -55,8 +43,6 @@ const Template: StoryFn<CombinedVehicleProps> = args => {
         open={open}
         onCancelClick={handleCancel}
         onSaveClick={handleSave}
-        onChange={onChange}
-        value={value}
       />
     </>
   );
@@ -65,24 +51,12 @@ const Template: StoryFn<CombinedVehicleProps> = args => {
 export const Default = {
   args: {
     cancelText: "cancel",
-    content: <div>Some content</div>,
-    dividers: false,
     flexDirection: "column",
     flexWrap: "nowrap",
     gates: ["Gate 1", "Gate 2", "Gate 3"],
-    saveDisabled: false,
     saveText: "ADD VEHICLE",
     showCloseIcon: true,
     title: "Add Vehicle",
-    value: [
-      {
-        _id: "",
-        gate: "",
-        modelYear: "",
-        project: "",
-        variant: ""
-      }
-    ],
     variants: [
       {
         _id: "64c8c4cccc8d6f00130b366b",

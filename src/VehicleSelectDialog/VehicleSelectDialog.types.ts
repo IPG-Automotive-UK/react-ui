@@ -9,10 +9,6 @@ export interface VehicleSelectDialogProps {
    */
   cancelText?: string;
   /**
-   * Dividers are vertical lines that separate content into groups.
-   */
-  dividers?: boolean;
-  /**
    * Callback fired when cancel button clicked.
    */
   onCancelClick: React.MouseEventHandler<HTMLButtonElement>;
