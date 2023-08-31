@@ -3,6 +3,11 @@ import { Box } from "@mui/material";
 import React from "react";
 import { VehicleSelectProps } from "./VehicleSelect.types";
 
+// function to return unique sorted array of values from a string array
+function uniqueSortedArray(values: string[]) {
+  return values.filter((item, i, ar) => ar.indexOf(item) === i).sort();
+}
+
 // component to select a vehicle
 function VehicleSelect({
   flexDirection = "column",
@@ -13,57 +18,52 @@ function VehicleSelect({
   variants = []
 }: VehicleSelectProps) {
   // derive state for selected project
-  const selectedProjects = [
-    ...new Set(value.map(vehicle => vehicle.projectCode))
-  ];
+  const selectedProjects = uniqueSortedArray(
+    value.map(vehicle => vehicle.projectCode)
+  );
   if (selectedProjects.length > 1)
     throw new Error("Project selection is ambiguous");
   const selectedProject = selectedProjects[0] ?? null;
 
   // derive state for all projects
-  const allProjects = [
-    ...new Set(variants.map(vehicle => vehicle.projectCode))
-  ].sort();
+  const allProjects = uniqueSortedArray(
+    variants.map(vehicle => vehicle.projectCode)
+  );
 
   // derive state for selected model year
-  const selectedModelYears = [
-    ...new Set(value.map(vehicle => vehicle.modelYear))
-  ];
+  const selectedModelYears = uniqueSortedArray(
+    value.map(vehicle => vehicle.modelYear)
+  );
   if (selectedModelYears.length > 1)
     throw new Error("Multiple year is ambiguous");
   const selectedModelYear = selectedModelYears[0] ?? null;
 
   // derive state for all model years
-  const allModelYears = [
-    ...new Set(
-      variants
-        .filter(v => v.projectCode === selectedProject)
-        .map(vehicle => vehicle.modelYear)
-    )
-  ].sort();
+  const allModelYears = uniqueSortedArray(
+    variants
+      .filter(v => v.projectCode === selectedProject)
+      .map(vehicle => vehicle.modelYear)
+  );
 
-  // derive state for select variants
-  const selectedVariants = [...new Set(value.map(vehicle => vehicle.variant))]
-    .filter(v => v !== "")
-    .sort();
+  // derive state for selected variants
+  const selectedVariants = uniqueSortedArray(
+    value.map(vehicle => vehicle.variant)
+  ).filter(v => v !== "");
 
   // derive state for all variants
-  const allVariants = [
-    ...new Set(
-      variants
-        .filter(
-          v =>
-            v.projectCode === selectedProject &&
-            v.modelYear === selectedModelYear
-        )
-        .map(v => v.variant)
-    )
-  ].sort();
+  const allVariants = uniqueSortedArray(
+    variants
+      .filter(
+        v =>
+          v.projectCode === selectedProject && v.modelYear === selectedModelYear
+      )
+      .map(vehicle => vehicle.variant)
+  );
 
   // derive state for selected gates
-  const selectedGates = [...new Set(value.map(vehicle => vehicle.gate))]
-    .filter(v => v !== "")
-    .sort();
+  const selectedGates = uniqueSortedArray(
+    value.map(vehicle => vehicle.gate)
+  ).filter(v => v !== "");
 
   // create the selector components for project, model year, variant and gate with single select for project and model year and multi select for variant and gate
   return (
