@@ -13,7 +13,9 @@ function VehicleSelect({
   variants = []
 }: VehicleSelectProps) {
   // derive state for selected project
-  const selectedProjects = [...new Set(value.map(vehicle => vehicle.project))];
+  const selectedProjects = [
+    ...new Set(value.map(vehicle => vehicle.projectCode))
+  ];
   if (selectedProjects.length > 1)
     throw new Error("Project selection is ambiguous");
   const selectedProject = selectedProjects[0] ?? null;
@@ -87,7 +89,7 @@ function VehicleSelect({
                 _id: "",
                 gate: "",
                 modelYear: "",
-                project: newValue,
+                projectCode: newValue,
                 variant: ""
               }
             ]);
@@ -109,7 +111,7 @@ function VehicleSelect({
                 _id: "",
                 gate: "",
                 modelYear: newValue,
-                project: selectedProject,
+                projectCode: selectedProject,
                 variant: ""
               }
             ]);
@@ -139,7 +141,7 @@ function VehicleSelect({
                   _id: "",
                   gate: "",
                   modelYear: selectedModelYear,
-                  project: selectedProject,
+                  projectCode: selectedProject,
                   variant: ""
                 }
               ]);
@@ -152,7 +154,7 @@ function VehicleSelect({
                   _id: v._id,
                   gate: "",
                   modelYear: v.modelYear,
-                  project: v.projectCode,
+                  projectCode: v.projectCode,
                   variant: v.variant
                 }))
               );
@@ -164,7 +166,7 @@ function VehicleSelect({
                   _id: v._id,
                   gate,
                   modelYear: v.modelYear,
-                  project: v.projectCode,
+                  projectCode: v.projectCode,
                   variant: v.variant
                 }))
               );
@@ -196,7 +198,7 @@ function VehicleSelect({
                   _id: v._id,
                   gate: "",
                   modelYear: v.modelYear,
-                  project: v.projectCode,
+                  projectCode: v.projectCode,
                   variant: v.variant
                 }))
               );
@@ -208,7 +210,7 @@ function VehicleSelect({
                 _id: v._id,
                 gate,
                 modelYear: v.modelYear,
-                project: v.projectCode,
+                projectCode: v.projectCode,
                 variant: v.variant
               }))
             );

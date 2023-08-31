@@ -43,7 +43,7 @@ export const Default = {
         _id: "",
         gate: "",
         modelYear: "",
-        project: "",
+        projectCode: "",
         variant: ""
       }
     ],
