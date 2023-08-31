@@ -9,7 +9,7 @@ export type Vehicle = {
 // types for the selected vehicle
 export type SelectedVehicle = {
   _id: string;
-  project: string;
+  projectCode: string;
   modelYear: string;
   variant: string;
   gate: string;

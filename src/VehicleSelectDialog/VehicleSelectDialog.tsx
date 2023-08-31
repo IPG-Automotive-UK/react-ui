@@ -39,7 +39,7 @@ const VehicleSelectDialog = ({
         !vehicle._id ||
         !vehicle.gate ||
         !vehicle.modelYear ||
-        !vehicle.project ||
+        !vehicle.projectCode ||
         !vehicle.variant
     );
 

@@ -97,7 +97,7 @@ describe("Vehicle Select", () => {
         _id: "",
         gate: "",
         modelYear: "",
-        project: "911",
+        projectCode: "911",
         variant: ""
       }
     ]);
@@ -121,7 +121,7 @@ describe("Vehicle Select", () => {
         _id: "",
         gate: "",
         modelYear: "2015",
-        project: "911",
+        projectCode: "911",
         variant: ""
       }
     ]);
@@ -147,7 +147,7 @@ describe("Vehicle Select", () => {
         _id: "64c8c4cccc8d6f00130b367e",
         gate: "",
         modelYear: "2015",
-        project: "911",
+        projectCode: "911",
         variant: "JS"
       }
     ]);
@@ -173,14 +173,14 @@ describe("Vehicle Select", () => {
         _id: "64c8c4cccc8d6f00130b366b",
         gate: "",
         modelYear: "2015",
-        project: "911",
+        projectCode: "911",
         variant: "MP"
       },
       {
         _id: "64c8c4cccc8d6f00130b367e",
         gate: "",
         modelYear: "2015",
-        project: "911",
+        projectCode: "911",
         variant: "JS"
       }
     ]);
@@ -206,14 +206,14 @@ describe("Vehicle Select", () => {
         _id: "64c8c4cccc8d6f00130b366b",
         gate: "Gate 1",
         modelYear: "2015",
-        project: "911",
+        projectCode: "911",
         variant: "MP"
       },
       {
         _id: "64c8c4cccc8d6f00130b367e",
         gate: "Gate 1",
         modelYear: "2015",
-        project: "911",
+        projectCode: "911",
         variant: "JS"
       }
     ]);
@@ -239,28 +239,28 @@ describe("Vehicle Select", () => {
         _id: "64c8c4cccc8d6f00130b366b",
         gate: "Gate 1",
         modelYear: "2015",
-        project: "911",
+        projectCode: "911",
         variant: "MP"
       },
       {
         _id: "64c8c4cccc8d6f00130b367e",
         gate: "Gate 1",
         modelYear: "2015",
-        project: "911",
+        projectCode: "911",
         variant: "JS"
       },
       {
         _id: "64c8c4cccc8d6f00130b366b",
         gate: "Gate 2",
         modelYear: "2015",
-        project: "911",
+        projectCode: "911",
         variant: "MP"
       },
       {
         _id: "64c8c4cccc8d6f00130b367e",
         gate: "Gate 2",
         modelYear: "2015",
-        project: "911",
+        projectCode: "911",
         variant: "JS"
       }
     ]);
@@ -273,7 +273,7 @@ describe("Vehicle Select", () => {
         _id: "64c8c4cccc8d6f00130b367e",
         gate: "Gate 1",
         modelYear: "2015",
-        project: "911",
+        projectCode: "911",
         variant: "MP"
       }
     ];
