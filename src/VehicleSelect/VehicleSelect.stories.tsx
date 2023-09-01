@@ -38,15 +38,7 @@ export const Default = {
     flexDirection: "column",
     flexWrap: "nowrap",
     gates: ["Gate 1", "Gate 2", "Gate 3"],
-    value: [
-      {
-        _id: "",
-        gate: "",
-        modelYear: "",
-        projectCode: "",
-        variant: ""
-      }
-    ],
+    value: [],
     variants: [
       {
         _id: "64c8c4cccc8d6f00130b366b",
@@ -85,6 +77,5 @@ export const WithFlexStyles = {
     flexDirection: "row",
     flexWrap: "wrap"
   },
-
   render: Template
 };

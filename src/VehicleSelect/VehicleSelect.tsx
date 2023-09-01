@@ -99,7 +99,7 @@ function VehicleSelect({
       </Box>
       <Box flex="40%">
         <Autocomplete
-          disabled={selectedProject === ""}
+          disabled={selectedProject === null || selectedProject === ""}
           label="Model Year"
           required
           multiple={false}
@@ -122,7 +122,7 @@ function VehicleSelect({
       <Box flex="40%">
         <Autocomplete
           disableCloseOnSelect={true}
-          disabled={selectedModelYear === ""}
+          disabled={selectedModelYear === null || selectedModelYear === ""}
           label="Vehicle Variant"
           required
           multiple={true}
@@ -179,7 +179,7 @@ function VehicleSelect({
       <Box flex="40%">
         <Autocomplete
           disableCloseOnSelect={true}
-          disabled={selectedVariants.length === 0}
+          disabled={selectedVariants === null || selectedVariants.length === 0}
           required
           multiple={true}
           label="Gate"
