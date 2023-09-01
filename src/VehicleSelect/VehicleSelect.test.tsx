@@ -385,9 +385,9 @@ describe("Vehicle Select", () => {
         {...defaultProps}
         value={[
           {
-            _id: "64c8c4cccc8d6f00130b366b",
+            _id: "64c8c4cccc8d6f00130b3691",
             gate: "Gate 1",
-            modelYear: "2015",
+            modelYear: "2016",
             projectCode: "911",
             variant: "DB"
           }
