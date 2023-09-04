@@ -110,7 +110,7 @@ const VehicleSelectDialog = ({
           </Box>
         ) : null}
       </DialogContent>
-      <DialogActions sx={{ px: 3, py: 2 }}>
+      <DialogActions sx={{ pb: 3, pt: 2, px: 3 }}>
         <Button onClick={onCancelClick}>{cancelText}</Button>
         <Button
           variant="contained"
