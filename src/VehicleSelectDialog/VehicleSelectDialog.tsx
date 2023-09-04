@@ -5,6 +5,7 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  Divider,
   IconButton,
   Stack
 } from "@mui/material";
@@ -102,13 +103,10 @@ const VehicleSelectDialog = ({
             maxWidth: width,
             width: "100%"
           }
-        },
-        "& .MuiDialogActions-root": {
-          p: [2, 3]
         }
       }}
     >
-      <DialogTitle fontWeight={600}>
+      <DialogTitle fontWeight={600} sx={{ px: 2 }}>
         {title}
         {showCloseIcon ? (
           <IconButton
@@ -126,7 +124,8 @@ const VehicleSelectDialog = ({
           </IconButton>
         ) : null}
       </DialogTitle>
-      <DialogContent>
+      <Divider />
+      <DialogContent sx={{ pt: 1 }}>
         <Stack spacing={3}>
           <VehicleSelect
             variants={variants}
@@ -158,7 +157,7 @@ const VehicleSelectDialog = ({
           are already added
         </Alert>
       ) : null}
-      <DialogActions>
+      <DialogActions sx={{ px: 3, py: 2 }}>
         <Button onClick={onCancelClick}>{cancelText}</Button>
         <Button
           variant="contained"
