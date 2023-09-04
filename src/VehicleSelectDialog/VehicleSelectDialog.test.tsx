@@ -95,4 +95,18 @@ describe("VehicleSelectDialog", () => {
       ]);
     }
   });
+
+  it("displays the error message in an Alert component", () => {
+    // render the component with the error message
+    const { getByText } = render(
+      <VehicleSelectDialog
+        {...defaultProps}
+        errorMessage="This is an error message"
+      />
+    );
+
+    // check if the error message is displayed within the Alert component
+    const errorMessageElement = getByText("This is an error message");
+    expect(errorMessageElement).toBeInTheDocument();
+  });
 });
