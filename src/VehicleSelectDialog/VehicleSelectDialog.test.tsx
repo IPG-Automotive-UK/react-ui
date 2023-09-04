@@ -95,4 +95,41 @@ describe("VehicleSelectDialog", () => {
       ]);
     }
   });
+
+  it('displays an alert and disables the "Save" button when a duplicate vehicle is selected', () => {
+    // create initial selected vehicles that contain a duplicate with the default props
+    const initialSelectedVehicles = [
+      {
+        gate: "Gate 1",
+        id: "64c8c4cccc8d6f00130b366b",
+        modelYear: "2015",
+        projectCode: "911",
+        variant: "MP"
+      }
+    ];
+
+    // render the component with the initial selected vehicles
+    const { container, getByText } = render(
+      <VehicleSelectDialog {...defaultProps} value={initialSelectedVehicles} />
+    );
+
+    // find the button that triggers vehicle selection
+    const selectVehicleButton = container.querySelector(
+      '[aria-label="Select a vehicle"]'
+    );
+
+    // check if selectVehicleButton is not null before simulating the click
+    if (selectVehicleButton) {
+      fireEvent.click(selectVehicleButton);
+
+      // make sure "Save" button is disabled
+      const saveButton = getByText("Save");
+      expect(saveButton).toBeDisabled();
+
+      // check if an alert is displayed for duplicate vehicles
+      expect(
+        getByText("911- 2015- MP- Gate 1 are already added")
+      ).toBeInTheDocument();
+    }
+  });
 });

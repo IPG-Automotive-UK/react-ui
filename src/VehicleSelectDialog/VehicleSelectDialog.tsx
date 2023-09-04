@@ -1,4 +1,5 @@
 import {
+  Alert,
   Button,
   Dialog,
   DialogActions,
@@ -31,6 +32,12 @@ const VehicleSelectDialog = ({
   // internal state to manage selected vehicles
   const [value, setValue] = useState<SelectedVehicle[]>([]);
 
+  // internal state to say if the vehicle already exists
+  const [valueExist, setValueExist] = useState(false);
+
+  // internal state to manage old selections
+  const [oldSelection, setOldSelection] = useState<SelectedVehicle[]>([]);
+
   // check if all fields are filled for each selected vehicle
   const isSaveDisabled =
     value.length === 0 ||
@@ -43,12 +50,30 @@ const VehicleSelectDialog = ({
         !vehicle.variant
     );
 
-  // handle save click will return callback with selected vehicles
   const handleSaveClick = () => {
-    if (!isSaveDisabled) {
+    // Check for duplicates between the new and old selections
+    const hasDuplicates = value.some(vehicle =>
+      oldSelection.some(
+        oldVehicle =>
+          oldVehicle.gate === vehicle.gate &&
+          oldVehicle.modelYear === vehicle.modelYear &&
+          oldVehicle.projectCode === vehicle.projectCode &&
+          oldVehicle.variant === vehicle.variant
+      )
+    );
+
+    // Update the valueExist state based on whether there are duplicates
+    setValueExist(hasDuplicates);
+
+    // If there are no duplicates, and all fields are filled, call onSaveClick
+    if (!hasDuplicates && !isSaveDisabled) {
       onSaveClick(value);
+      // Save the current selection as part of the old selections
+      setOldSelection(prevOldSelection => [...prevOldSelection, ...value]);
     }
   };
+
+  console.log("valueExist", valueExist);
 
   // reset the state when the dialog is opened
   useEffect(() => {
@@ -56,6 +81,15 @@ const VehicleSelectDialog = ({
       setValue([]);
     }
   }, [open]);
+
+  // handle changes in the selected vehicles
+  const handleVehicleSelectChange = (newValue: SelectedVehicle[]) => {
+    // Update the selected vehicles immediately when they change
+    setValue(newValue);
+
+    // Reset valueExist when the vehicles change
+    setValueExist(false);
+  };
 
   // render the dialog with the vehicle select component
   return (
@@ -100,10 +134,30 @@ const VehicleSelectDialog = ({
             flexDirection={flexDirection}
             flexWrap={flexWrap}
             gates={gates}
-            onChange={setValue}
+            onChange={handleVehicleSelectChange}
           />
         </Stack>
       </DialogContent>
+      {valueExist ? (
+        <Alert variant="filled" severity="error">
+          {value
+            .filter(vehicle =>
+              oldSelection.some(
+                oldVehicle =>
+                  oldVehicle.gate === vehicle.gate &&
+                  oldVehicle.modelYear === vehicle.modelYear &&
+                  oldVehicle.projectCode === vehicle.projectCode &&
+                  oldVehicle.variant === vehicle.variant
+              )
+            )
+            .map(
+              vehicle =>
+                `${vehicle.projectCode}- ${vehicle.modelYear}- ${vehicle.variant}- ${vehicle.gate}`
+            )
+            .join(", ")}
+          are already added
+        </Alert>
+      ) : null}
       <DialogActions>
         <Button onClick={onCancelClick}>{cancelText}</Button>
         <Button
