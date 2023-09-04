@@ -49,6 +49,7 @@ const Template: StoryFn<CombinedVehicleProps> = args => {
 export const Default = {
   args: {
     cancelText: "cancel",
+    errorMessage: "New error message",
     flexDirection: "column",
     flexWrap: "nowrap",
     gates: ["Gate 1", "Gate 2", "Gate 3"],

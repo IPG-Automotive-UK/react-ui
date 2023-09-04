@@ -9,6 +9,10 @@ export interface VehicleSelectDialogProps {
    */
   cancelText?: string;
   /**
+   * Error message to display in the dialog.
+   */
+  errorMessage?: string;
+  /**
    * Callback fired when cancel button clicked.
    */
   onCancelClick: React.MouseEventHandler<HTMLButtonElement>;
