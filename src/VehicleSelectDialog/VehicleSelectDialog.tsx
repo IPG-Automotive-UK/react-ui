@@ -1,13 +1,13 @@
 import {
   Alert,
+  Box,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
   Divider,
-  IconButton,
-  Stack
+  IconButton
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
@@ -94,23 +94,22 @@ const VehicleSelectDialog = ({
       </DialogTitle>
       <Divider />
       <DialogContent sx={{ pt: 1 }}>
-        <Stack spacing={3}>
-          <VehicleSelect
-            variants={variants}
-            value={value}
-            flexDirection={flexDirection}
-            flexWrap={flexWrap}
-            gates={gates}
-            onChange={setValue}
-          />
-          {errorMessage ? (
+        <VehicleSelect
+          variants={variants}
+          value={value}
+          flexDirection={flexDirection}
+          flexWrap={flexWrap}
+          gates={gates}
+          onChange={setValue}
+        />
+        {errorMessage ? (
+          <Box display={"flex"} mt={2}>
             <Alert variant="filled" severity="error">
               {errorMessage}
             </Alert>
-          ) : null}
-        </Stack>
+          </Box>
+        ) : null}
       </DialogContent>
-
       <DialogActions sx={{ px: 3, py: 2 }}>
         <Button onClick={onCancelClick}>{cancelText}</Button>
         <Button
