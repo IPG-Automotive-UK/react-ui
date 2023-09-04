@@ -51,6 +51,7 @@ const VehicleSelectDialog = ({
         !vehicle.variant
     );
 
+  // handle save click
   const handleSaveClick = () => {
     // Check for duplicates between the new and old selections
     const hasDuplicates = value.some(vehicle =>
@@ -63,14 +64,16 @@ const VehicleSelectDialog = ({
       )
     );
 
+    console.log("hasDuplicates", hasDuplicates); // Add this line for debugging
+
     // Update the valueExist state based on whether there are duplicates
     setValueExist(hasDuplicates);
 
     // If there are no duplicates, and all fields are filled, call onSaveClick
     if (!hasDuplicates && !isSaveDisabled) {
       onSaveClick(value);
-      // Save the current selection as part of the old selections
-      setOldSelection(prevOldSelection => prevOldSelection.concat(value));
+      // Update oldSelection only if there are no duplicates
+      setOldSelection(prevOldSelection => [...prevOldSelection, ...value]);
     }
   };
 
