@@ -70,7 +70,7 @@ const VehicleSelectDialog = ({
     if (!hasDuplicates && !isSaveDisabled) {
       onSaveClick(value);
       // Save the current selection as part of the old selections
-      setOldSelection(prevOldSelection => [...prevOldSelection, ...value]);
+      setOldSelection(prevOldSelection => prevOldSelection.concat(value));
     }
   };
 
@@ -90,6 +90,15 @@ const VehicleSelectDialog = ({
 
     // Reset valueExist when the vehicles change
     setValueExist(false);
+  };
+
+  // handle cancel click
+  const handleCancelClick = () => {
+    // reset the valueExist state to false
+    setValueExist(false);
+
+    // call onCancelClick with a dummy argument
+    onCancelClick({} as React.MouseEvent<HTMLButtonElement>);
   };
 
   // render the dialog with the vehicle select component
@@ -112,7 +121,7 @@ const VehicleSelectDialog = ({
           <IconButton
             data-testid="close-icon"
             aria-label="close"
-            onClick={onCancelClick}
+            onClick={handleCancelClick}
             sx={{
               color: theme => theme.palette.grey[500],
               position: "absolute",
@@ -158,7 +167,7 @@ const VehicleSelectDialog = ({
         </Alert>
       ) : null}
       <DialogActions sx={{ px: 3, py: 2 }}>
-        <Button onClick={onCancelClick}>{cancelText}</Button>
+        <Button onClick={handleCancelClick}>{cancelText}</Button>
         <Button
           variant="contained"
           onClick={handleSaveClick}
