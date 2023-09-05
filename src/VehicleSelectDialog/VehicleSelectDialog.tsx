@@ -19,7 +19,7 @@ import VehicleSelect from "src/VehicleSelect/VehicleSelect";
 const VehicleSelectDialog = ({
   onCancelClick = () => {},
   onSaveClick = () => {},
-  errorMessage,
+  errorMessage = "",
   title = "Some title",
   cancelText = "cancel",
   saveText = "Save",
