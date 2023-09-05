@@ -1,11 +1,13 @@
 import {
+  Alert,
+  Box,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
-  IconButton,
-  Stack
+  Divider,
+  IconButton
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
@@ -17,6 +19,7 @@ import VehicleSelect from "src/VehicleSelect/VehicleSelect";
 const VehicleSelectDialog = ({
   onCancelClick = () => {},
   onSaveClick = () => {},
+  errorMessage = "",
   title = "Some title",
   cancelText = "cancel",
   saveText = "Save",
@@ -68,13 +71,10 @@ const VehicleSelectDialog = ({
             maxWidth: width,
             width: "100%"
           }
-        },
-        "& .MuiDialogActions-root": {
-          p: [2, 3]
         }
       }}
     >
-      <DialogTitle fontWeight={600}>
+      <DialogTitle fontWeight={600} sx={{ px: 2 }}>
         {title}
         {showCloseIcon ? (
           <IconButton
@@ -92,19 +92,25 @@ const VehicleSelectDialog = ({
           </IconButton>
         ) : null}
       </DialogTitle>
-      <DialogContent>
-        <Stack spacing={3}>
-          <VehicleSelect
-            variants={variants}
-            value={value}
-            flexDirection={flexDirection}
-            flexWrap={flexWrap}
-            gates={gates}
-            onChange={setValue}
-          />
-        </Stack>
+      <Divider />
+      <DialogContent sx={{ pt: 1 }}>
+        <VehicleSelect
+          variants={variants}
+          value={value}
+          flexDirection={flexDirection}
+          flexWrap={flexWrap}
+          gates={gates}
+          onChange={setValue}
+        />
+        {errorMessage ? (
+          <Box display={"flex"} mt={2}>
+            <Alert variant="filled" severity="error">
+              {errorMessage}
+            </Alert>
+          </Box>
+        ) : null}
       </DialogContent>
-      <DialogActions>
+      <DialogActions sx={{ pb: 3, pt: 2, px: 3 }}>
         <Button onClick={onCancelClick}>{cancelText}</Button>
         <Button
           variant="contained"
