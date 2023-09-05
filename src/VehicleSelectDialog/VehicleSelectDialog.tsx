@@ -19,7 +19,7 @@ import VehicleSelect from "src/VehicleSelect/VehicleSelect";
 const VehicleSelectDialog = ({
   onCancelClick = () => {},
   onSaveClick = () => {},
-  errorMessage = "",
+  errorMessage = "Some error message",
   title = "Some title",
   cancelText = "cancel",
   saveText = "Save",
@@ -33,6 +33,12 @@ const VehicleSelectDialog = ({
 }: CombinedVehicleProps) => {
   // internal state to manage selected vehicles
   const [value, setValue] = useState<SelectedVehicle[]>([]);
+  console.log("value", value);
+
+  const [currentErrorMessage, setCurrentErrorMessage] = useState(errorMessage);
+  console.log("setCurrentErrorMessage", setCurrentErrorMessage);
+
+  console.log("currentErrorMessage", currentErrorMessage);
 
   // check if all fields are filled for each selected vehicle
   const isSaveDisabled =
@@ -57,8 +63,23 @@ const VehicleSelectDialog = ({
   useEffect(() => {
     if (open) {
       setValue([]);
+      setCurrentErrorMessage("");
     }
   }, [open]);
+
+  // Reset errorMessage when any value changes
+  useEffect(() => {
+    value.every(
+      vehicle =>
+        vehicle._id &&
+        vehicle.gate &&
+        vehicle.modelYear &&
+        vehicle.projectCode &&
+        vehicle.variant
+    )
+      ? setCurrentErrorMessage("")
+      : setCurrentErrorMessage(errorMessage);
+  }, [value, errorMessage]);
 
   // render the dialog with the vehicle select component
   return (
@@ -102,10 +123,10 @@ const VehicleSelectDialog = ({
           gates={gates}
           onChange={setValue}
         />
-        {errorMessage ? (
+        {currentErrorMessage !== "" ? (
           <Box display={"flex"} mt={2}>
             <Alert variant="filled" severity="error">
-              {errorMessage}
+              {currentErrorMessage}
             </Alert>
           </Box>
         ) : null}
