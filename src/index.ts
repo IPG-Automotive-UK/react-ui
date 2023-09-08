@@ -45,6 +45,7 @@ export { default as FontPicker } from "./FontPicker";
 export { default as FontStyle } from "./FontStyle";
 export { default as ImageUploader } from "./ImageUploader";
 export { LabelChip, LabelChipProps, LabelSelector } from "./LabelSelector";
+export { default as LinePlot, LinePlotProps } from "./LinePlot";
 export { default as Loading } from "./Loading";
 export { default as LoginForm } from "./LoginForm";
 export { default as ModelButton, ModelButtonProps } from "./ModelButton";
