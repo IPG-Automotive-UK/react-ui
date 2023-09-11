@@ -1,8 +1,6 @@
-import React, { lazy } from "react";
-
+import LinePlot from "./LinePlot";
+import React from "react";
 import { render } from "@testing-library/react";
-
-const Plotly = lazy(() => import("./LinePlot"));
 
 // default arguments for the LinePlot component
 const defaultArgs = {
@@ -16,20 +14,20 @@ const defaultArgs = {
 describe("LinePlot", () => {
   // test to check the component renders
   test("Renders LinePlot", () => {
-    render(<Plotly {...defaultArgs} />);
+    render(<LinePlot {...defaultArgs} />);
   });
 
   // dont show title in component if showTitle is false
   test("Does not render title if showTitle is false", () => {
     const { queryByText } = render(
-      <Plotly {...defaultArgs} title="Dialog Title" />
+      <LinePlot {...defaultArgs} title="Dialog Title" />
     );
     expect(queryByText("Dialog Title")).not.toBeInTheDocument();
   });
   // test x-axis label in component
   test("Renders x-axis label", () => {
     const { getByText } = render(
-      <Plotly {...defaultArgs} xlabel="x-axis label" />
+      <LinePlot {...defaultArgs} xlabel="x-axis label" />
     );
     expect(getByText("x-axis label")).toBeInTheDocument();
   });
@@ -37,7 +35,7 @@ describe("LinePlot", () => {
   // test y-axis label in component
   test("Renders y-axis label", () => {
     const { getByText } = render(
-      <Plotly {...defaultArgs} ylabel="y-axis label" />
+      <LinePlot {...defaultArgs} ylabel="y-axis label" />
     );
     expect(getByText("y-axis label")).toBeInTheDocument();
   });

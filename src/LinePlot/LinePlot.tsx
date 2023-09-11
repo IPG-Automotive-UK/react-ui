@@ -2,16 +2,14 @@ import {
   Box,
   Dialog,
   DialogContent,
-  Skeleton,
   Typography,
   useTheme
 } from "@mui/material";
-import React, { Suspense, lazy } from "react";
 
 import DialogTitle from "../DialogTitle/DialogTitle";
 import { LinePlotProps } from "./LinePlot.types";
-
-const LazyLinePlot = lazy(() => import("react-plotly.js"));
+import Plotly from "react-plotly.js";
+import React from "react";
 
 const LinePlot = ({
   title = "",
@@ -61,72 +59,60 @@ const LinePlot = ({
             {title || ""}
           </Typography>
         ) : null}
-        <Suspense
-          fallback={
-            <Skeleton animation="wave" variant="rectangular" height={"100%"} />
-          }
-        >
-          <LazyLinePlot
-            data={[
-              {
-                line: {
-                  color: theme.palette.primary.main,
-                  width: 2
+        <Plotly
+          data={[
+            {
+              line: {
+                color: theme.palette.primary.main,
+                width: 2
+              },
+              marker: { color: theme.palette.primary.main, size: 8 },
+              mode: markers ? "lines+markers" : "lines",
+              type: "scatter",
+              x: xdata,
+              y: ydata
+            }
+          ]}
+          layout={{
+            autosize: true,
+            margin: {
+              pad: 2,
+              t: 50
+            },
+            paper_bgcolor:
+              theme.palette.mode === "light" ? "" : "rgba(255, 255, 255, 0.05)",
+            plot_bgcolor:
+              theme.palette.mode === "light" ? "" : "rgba(255, 255, 255, 0)",
+            xaxis: {
+              color: theme.palette.mode === "light" ? "" : "white",
+              gridcolor:
+                theme.palette.mode === "light" ? "" : theme.palette.grey["500"],
+              showgrid: false,
+              title: {
+                font: {
+                  family: "Montserrat",
+                  size: 12
                 },
-                marker: { color: theme.palette.primary.main, size: 8 },
-                mode: markers ? "lines+markers" : "lines",
-                type: "scatter",
-                x: xdata,
-                y: ydata
+                text: xlabel || ""
               }
-            ]}
-            layout={{
-              autosize: true,
-              margin: {
-                pad: 2,
-                t: 50
-              },
-              paper_bgcolor:
-                theme.palette.mode === "light"
-                  ? ""
-                  : "rgba(255, 255, 255, 0.05)",
-              plot_bgcolor:
-                theme.palette.mode === "light" ? "" : "rgba(255, 255, 255, 0)",
-              xaxis: {
-                color: theme.palette.mode === "light" ? "" : "white",
-                gridcolor:
-                  theme.palette.mode === "light"
-                    ? ""
-                    : theme.palette.grey["500"],
-                showgrid: false,
-                title: {
-                  font: {
-                    family: "Montserrat",
-                    size: 12
-                  },
-                  text: xlabel || ""
-                }
-              },
-              yaxis: {
-                color: theme.palette.mode === "light" ? "" : "white",
-                gridcolor:
-                  theme.palette.mode === "light"
-                    ? ""
-                    : theme.palette.grey["500"],
-                ticksuffix: " ",
-                title: {
-                  font: {
-                    family: "Montserrat",
-                    size: 12
-                  },
-                  text: ylabel || ""
-                }
+            },
+            yaxis: {
+              color: theme.palette.mode === "light" ? "" : "white",
+              gridcolor:
+                theme.palette.mode === "light" ? "" : theme.palette.grey["500"],
+              ticksuffix: " ",
+              title: {
+                font: {
+                  family: "Montserrat",
+                  size: 12
+                },
+                text: ylabel || ""
               }
-            }}
-            style={{ height: "100%", width: "100%" }}
-            config={config}
-          />
-        </Suspense>
+            }
+          }}
+          style={{ height: "100%", width: "100%" }}
+          config={config}
+        />
       </Box>
     </ConditionalDialog>
   );
