@@ -5,12 +5,11 @@ import {
   Typography,
   useTheme
 } from "@mui/material";
-import React, { lazy } from "react";
 
 import DialogTitle from "../DialogTitle/DialogTitle";
 import { LinePlotProps } from "./LinePlot.types";
-
-const Plotly = lazy(() => import("react-plotly.js"));
+import Plotly from "react-plotly.js";
+import React from "react";
 
 const LinePlot = ({
   title = "",
@@ -181,6 +180,6 @@ function ConditionalDialog({
       </Dialog>
     );
   } else {
-    return <Box style={{ height: "100%" }}>{children}</Box>;
+    return <Box sx={{ height: "100%" }}>{children}</Box>;
   }
 }
