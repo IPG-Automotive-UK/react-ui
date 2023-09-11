@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Box,
   Dialog,
@@ -8,7 +10,7 @@ import {
 
 import DialogTitle from "../DialogTitle/DialogTitle";
 import { LinePlotProps } from "./LinePlot.types";
-import Plotly from "react-plotly.js";
+import Plot from "react-plotly.js";
 import React from "react";
 
 const LinePlot = ({
@@ -59,7 +61,7 @@ const LinePlot = ({
             {title || ""}
           </Typography>
         ) : null}
-        <Plotly
+        <Plot
           data={[
             {
               line: {
