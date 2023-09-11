@@ -41,81 +41,89 @@ const LinePlot = ({
   const config = getConfig({ handleClickFullscreen, isFullscreen });
 
   return (
-    <ConditionalDialog
-      condition={isFullscreen}
-      onClose={handleClose}
-      dialogTitle={title}
-    >
-      <Box
-        display="flex"
-        flexDirection="column"
-        overflow="hidden"
-        minHeight="100%"
+    <Box>
+      <ConditionalDialog
+        condition={isFullscreen}
+        onClose={handleClose}
+        dialogTitle={title}
       >
-        {showTitle ? (
-          <Typography
-            align="center"
-            style={{ padding: "0 16px", wordWrap: "break-word" }}
-          >
-            {title || ""}
-          </Typography>
-        ) : null}
-        <Plotly
-          data={[
-            {
-              line: {
-                color: theme.palette.primary.main,
-                width: 2
+        <Box
+          display="flex"
+          flexDirection="column"
+          overflow="hidden"
+          minHeight="100%"
+        >
+          {showTitle ? (
+            <Typography
+              align="center"
+              style={{ padding: "0 16px", wordWrap: "break-word" }}
+            >
+              {title || ""}
+            </Typography>
+          ) : null}
+          <Plotly
+            data={[
+              {
+                line: {
+                  color: theme.palette.primary.main,
+                  width: 2
+                },
+                marker: { color: theme.palette.primary.main, size: 8 },
+                mode: markers ? "lines+markers" : "lines",
+                type: "scatter",
+                x: xdata,
+                y: ydata
+              }
+            ]}
+            layout={{
+              autosize: true,
+              margin: {
+                pad: 2,
+                t: 50
               },
-              marker: { color: theme.palette.primary.main, size: 8 },
-              mode: markers ? "lines+markers" : "lines",
-              type: "scatter",
-              x: xdata,
-              y: ydata
-            }
-          ]}
-          layout={{
-            autosize: true,
-            margin: {
-              pad: 2,
-              t: 50
-            },
-            paper_bgcolor:
-              theme.palette.mode === "light" ? "" : "rgba(255, 255, 255, 0.05)",
-            plot_bgcolor:
-              theme.palette.mode === "light" ? "" : "rgba(255, 255, 255, 0)",
-            xaxis: {
-              color: theme.palette.mode === "light" ? "" : "white",
-              gridcolor:
-                theme.palette.mode === "light" ? "" : theme.palette.grey["500"],
-              showgrid: false,
-              title: {
-                font: {
-                  family: "Montserrat",
-                  size: 12
-                },
-                text: xlabel || ""
+              paper_bgcolor:
+                theme.palette.mode === "light"
+                  ? ""
+                  : "rgba(255, 255, 255, 0.05)",
+              plot_bgcolor:
+                theme.palette.mode === "light" ? "" : "rgba(255, 255, 255, 0)",
+              xaxis: {
+                color: theme.palette.mode === "light" ? "" : "white",
+                gridcolor:
+                  theme.palette.mode === "light"
+                    ? ""
+                    : theme.palette.grey["500"],
+                showgrid: false,
+                title: {
+                  font: {
+                    family: "Montserrat",
+                    size: 12
+                  },
+                  text: xlabel || ""
+                }
+              },
+              yaxis: {
+                color: theme.palette.mode === "light" ? "" : "white",
+                gridcolor:
+                  theme.palette.mode === "light"
+                    ? ""
+                    : theme.palette.grey["500"],
+                ticksuffix: " ",
+                title: {
+                  font: {
+                    family: "Montserrat",
+                    size: 12
+                  },
+                  text: ylabel || ""
+                }
               }
-            },
-            yaxis: {
-              color: theme.palette.mode === "light" ? "" : "white",
-              gridcolor:
-                theme.palette.mode === "light" ? "" : theme.palette.grey["500"],
-              ticksuffix: " ",
-              title: {
-                font: {
-                  family: "Montserrat",
-                  size: 12
-                },
-                text: ylabel || ""
-              }
-            }
-          }}
-          style={{ height: "100%", width: "100%" }}
-          config={config}
-        />
-      </Box>
-    </ConditionalDialog>
+            }}
+            style={{ height: "100%", width: "100%" }}
+            config={config}
+          />
+        </Box>
+      </ConditionalDialog>
+    </Box>
   );
 };
 
