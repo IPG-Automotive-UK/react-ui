@@ -5,11 +5,12 @@ import {
   Typography,
   useTheme
 } from "@mui/material";
+import React, { lazy } from "react";
 
 import DialogTitle from "../DialogTitle/DialogTitle";
 import { LinePlotProps } from "./LinePlot.types";
-import Plotly from "react-plotly.js";
-import React from "react";
+
+const Plotly = lazy(() => import("react-plotly.js"));
 
 const LinePlot = ({
   title = "",
@@ -45,8 +46,13 @@ const LinePlot = ({
       onClose={handleClose}
       dialogTitle={title}
     >
-      <Box display="flex" flexDirection="column" overflow="hidden">
-        {showTitle && !isFullscreen ? (
+      <Box
+        display="flex"
+        flexDirection="column"
+        overflow="hidden"
+        minHeight="100%"
+      >
+        {showTitle ? (
           <Typography
             align="center"
             style={{ padding: "0 16px", wordWrap: "break-word" }}
@@ -59,7 +65,7 @@ const LinePlot = ({
             {
               line: {
                 color: theme.palette.primary.main,
-                width: 1
+                width: 2
               },
               marker: { color: theme.palette.primary.main, size: 8 },
               mode: markers ? "lines+markers" : "lines",
@@ -71,6 +77,7 @@ const LinePlot = ({
           layout={{
             autosize: true,
             margin: {
+              pad: 2,
               t: 50
             },
             paper_bgcolor:
@@ -142,8 +149,7 @@ const getConfig = ({ isFullscreen, handleClickFullscreen }: ConfigProps) => {
             title: "Fullscreen"
           }
         ]
-      : [],
-    modeBarButtonsToRemove: ["pan2d", "lasso2d"]
+      : []
   };
 };
 

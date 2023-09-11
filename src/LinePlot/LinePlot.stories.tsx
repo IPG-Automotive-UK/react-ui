@@ -33,9 +33,9 @@ export const Default = {
     markers: false,
     showTitle: false,
     title: "",
-    xdata: [1, 2, 3, 4, 5],
+    xdata: [0, 1, 2, 3, 4, 5],
     xlabel: "X",
-    ydata: [1, 2, 3, 4, 5],
+    ydata: [0, 20, 30, 40, 50],
     ylabel: "Y"
   },
   render: Template

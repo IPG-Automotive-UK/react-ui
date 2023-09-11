@@ -1,30 +1,30 @@
 export interface LinePlotProps {
   /*
-    Arrays of numbers that represent the X coordinates of the points to be plotted.
+    markers is a boolean that determines whether or not the points are marked.
   */
-  xdata: number[];
+  markers?: boolean;
   /*
-    Arrays of numbers that represent the Y coordinates of the points to be plotted.
+    showTitle is a boolean that determines whether or not the title is shown on main view.
   */
-  ydata: number[];
-  /*
-    Label for the X axis.
-  */
-  xlabel: string;
-  /*
-    Label for the Y axis.
-  */
-  ylabel: string;
+  showTitle?: boolean;
   /*
     Title of the plot
   */
   title?: string;
   /*
-    showTitle is a boolean that determines whether or not the title is shown.
+    Arrays of numbers that represent the X coordinates of the points to be plotted.
   */
-  showTitle?: boolean;
+  xdata: number[];
   /*
-    markers is a boolean that determines whether or not the points are marked.
+    Label for the X axis.
   */
-  markers?: boolean;
+  xlabel: string;
+  /*
+    Arrays of numbers that represent the Y coordinates of the points to be plotted.
+  */
+  ydata: number[];
+  /*
+    Label for the Y axis.
+  */
+  ylabel: string;
 }
