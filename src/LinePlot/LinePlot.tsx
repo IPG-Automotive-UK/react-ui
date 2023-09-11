@@ -90,9 +90,6 @@ const LinePlot = ({
                 text: xlabel || ""
               }
             },
-            modebar: {
-              paddingLeft: 0
-            },
             yaxis: {
               color: theme.palette.mode === "light" ? "" : "white",
               gridcolor:
