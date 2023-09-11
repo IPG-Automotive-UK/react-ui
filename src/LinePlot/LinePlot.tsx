@@ -189,6 +189,6 @@ function ConditionalDialog({
       </Dialog>
     );
   } else {
-    return children;
+    return <Box style={{ height: "100%" }}>{children}</Box>;
   }
 }
