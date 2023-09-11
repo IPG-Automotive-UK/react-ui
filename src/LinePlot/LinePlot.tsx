@@ -181,6 +181,6 @@ function ConditionalDialog({
       </Dialog>
     );
   } else {
-    return <>{children}</>;
+    return children;
   }
 }
