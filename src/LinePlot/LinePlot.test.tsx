@@ -4,9 +4,6 @@ import { render } from "@testing-library/react";
 
 // default arguments for the LinePlot component
 const defaultArgs = {
-  markers: false,
-  showTitle: false,
-  title: "",
   xdata: [],
   xlabel: "",
   ydata: [],
@@ -26,5 +23,29 @@ describe("LinePlot", () => {
       <LinePlot {...defaultArgs} showTitle title="Dialog Title" />
     );
     expect(getByText("Dialog Title")).toBeInTheDocument();
+  });
+
+  // dont show title in component if showTitle is false
+  test("Does not render title if showTitle is false", () => {
+    const { queryByText } = render(
+      <LinePlot {...defaultArgs} showTitle={false} title="Dialog Title" />
+    );
+    expect(queryByText("Dialog Title")).not.toBeInTheDocument();
+  });
+
+  // test x-axis label in component
+  test("Renders x-axis label", () => {
+    const { getByText } = render(
+      <LinePlot {...defaultArgs} xlabel="x-axis label" />
+    );
+    expect(getByText("x-axis label")).toBeInTheDocument();
+  });
+
+  // test y-axis label in component
+  test("Renders y-axis label", () => {
+    const { getByText } = render(
+      <LinePlot {...defaultArgs} ylabel="y-axis label" />
+    );
+    expect(getByText("y-axis label")).toBeInTheDocument();
   });
 });

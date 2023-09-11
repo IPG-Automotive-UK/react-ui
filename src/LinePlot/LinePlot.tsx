@@ -45,20 +45,15 @@ const LinePlot = ({
       onClose={handleClose}
       dialogTitle={title}
     >
-      <Box
-        minHeight="100%"
-        display="flex"
-        flexDirection="column"
-        overflow="hidden"
-      >
-        {showTitle && (
+      <Box display="flex" flexDirection="column" overflow="hidden">
+        {showTitle && !isFullscreen ? (
           <Typography
             align="center"
             style={{ padding: "0 16px", wordWrap: "break-word" }}
           >
             {title || ""}
           </Typography>
-        )}
+        ) : null}
         <Plotly
           data={[
             {
@@ -76,7 +71,6 @@ const LinePlot = ({
           layout={{
             autosize: true,
             margin: {
-              pad: 4,
               t: 50
             },
             paper_bgcolor:
@@ -95,6 +89,9 @@ const LinePlot = ({
                 },
                 text: xlabel || ""
               }
+            },
+            modebar: {
+              paddingLeft: 0
             },
             yaxis: {
               color: theme.palette.mode === "light" ? "" : "white",
