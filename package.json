@@ -83,6 +83,7 @@
     "@mui/material": "^5.14.3",
     "@mui/styles": "^5.14.3",
     "@mui/x-data-grid": "^6.10.2",
+    "@types/react-plotly.js": "^2.6.0",
     "colord": "^2.9.3",
     "css-mediaquery": "^0.1.2",
     "material-ui-confirm": "^3.0.9",
