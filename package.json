@@ -1,25 +1,19 @@
 {
   "name": "@ipguk/react-ui",
-  "version": "4.7.0",
+  "version": "5.0.0-1",
   "description": "React UI component library for IPG web applications",
   "author": "IPG-Automotive-UK",
   "license": "MIT",
   "repository": "IPG-Automotive-UK/react-ui",
-  "main": "dist/index.js",
-  "module": "dist/index.modern.js",
-  "source": "src/index.ts",
-  "types": "dist/index.d.ts",
+  "main": "src/index.ts",
   "engines": {
     "node": ">=10"
   },
   "scripts": {
-    "build": "microbundle-crl --no-compress --format modern,cjs --jsxFragment React.Fragment",
     "build-storybook": "storybook build",
-    "prepare": "run-s build",
     "start": "microbundle-crl watch --no-compress --format modern,cjs --jsxFragment React.Fragment",
     "storybook": "storybook dev -p 6006",
-    "test": "run-s test:unit test:lint test:build",
-    "test:build": "run-s build",
+    "test": "run-s test:unit test:lint",
     "test:lint": "eslint ./src",
     "test:unit": "cross-env CI=1 react-scripts test --env=jsdom --collectCoverage=true",
     "test:watch": "react-scripts test --env=jsdom",
@@ -29,6 +23,12 @@
     "@babel/core": "^7.22.9",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@babel/preset-react": "^7.22.5",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.8",
+    "@mui/material": "^5.14.8",
+    "@mui/styles": "^5.14.7",
+    "@mui/x-data-grid": "^6.13.0",
     "@storybook/addon-actions": "^7.1.0",
     "@storybook/addon-essentials": "^7.1.0",
     "@storybook/addon-interactions": "^7.1.0",
@@ -51,7 +51,9 @@
     "@types/react-text-mask": "^5.4.11",
     "@typescript-eslint/eslint-plugin": "^6.2.1",
     "@typescript-eslint/parser": "^6.2.1",
+    "colord": "^2.9.3",
     "cross-env": "^7.0.3",
+    "css-mediaquery": "^0.1.2",
     "eslint": "^8.46.0",
     "eslint-config-prettier": "^8.9.0",
     "eslint-config-standard": "^17.1.0",
@@ -62,26 +64,33 @@
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.33.1",
     "eslint-plugin-standard": "^5.0.0",
+    "material-ui-confirm": "^3.0.9",
+    "material-ui-popup-state": "^5.0.9",
     "microbundle-crl": "^0.13.11",
+    "mui-file-dropzone": "^4.0.2",
     "mutationobserver-shim": "^0.3.7",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.0.0",
+    "react": "^18.2.0",
+    "react-colorful": "^5.6.1",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.46.1",
+    "react-text-mask": "^5.5.0",
     "resize-observer-polyfill": "^1.5.1",
     "storybook": "^7.1.0",
     "storybook-dark-mode": "^3.0.1",
     "ts-jest": "^29.1.1",
     "typescript": "^5.1.6",
-    "webpack": "^5.88.2"
+    "use-debouncy": "^4.6.0",
+    "webpack": "^5.88.2",
+    "zxcvbn": "^4.4.2"
   },
-  "files": [
-    "dist"
-  ],
-  "dependencies": {
+  "peerDependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.14.3",
-    "@mui/material": "^5.14.3",
-    "@mui/styles": "^5.14.3",
+    "@mui/icons-material": "^5.14.8",
+    "@mui/material": "^5.14.8",
+    "@mui/styles": "^5.14.7",
     "@mui/x-data-grid": "^6.10.2",
     "@types/plotly.js": "^2.12.26",
     "@types/react-plotly.js": "^2.6.0",
@@ -100,6 +109,44 @@
     "use-debouncy": "^4.4.0",
     "zxcvbn": "^4.4.2"
   },
+  "peerDependenciesMeta": {
+    "@mui/x-data-grid": {
+      "optional": true
+    },
+    "colord": {
+      "optional": true
+    },
+    "css-mediaquery": {
+      "optional": true
+    },
+    "material-ui-confirm": {
+      "optional": true
+    },
+    "material-ui-popup-state": {
+      "optional": true
+    },
+    "mui-file-dropzone": {
+      "optional": true
+    },
+    "react-colorful": {
+      "optional": true
+    },
+    "react-hook-form": {
+      "optional": true
+    },
+    "react-text-mask": {
+      "optional": true
+    },
+    "use-debouncy": {
+      "optional": true
+    },
+    "zxcvbn": {
+      "optional": true
+    }
+  },
+  "files": [
+    "src"
+  ],
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
