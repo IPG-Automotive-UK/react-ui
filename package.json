@@ -5,21 +5,15 @@
   "author": "IPG-Automotive-UK",
   "license": "MIT",
   "repository": "IPG-Automotive-UK/react-ui",
-  "main": "dist/index.js",
-  "module": "dist/index.modern.js",
-  "source": "src/index.ts",
-  "types": "dist/index.d.ts",
+  "main": "src/index.ts",
   "engines": {
     "node": ">=10"
   },
   "scripts": {
-    "build": "microbundle-crl --no-compress --format modern,cjs --jsxFragment React.Fragment",
     "build-storybook": "storybook build",
-    "prepare": "run-s build",
     "start": "microbundle-crl watch --no-compress --format modern,cjs --jsxFragment React.Fragment",
     "storybook": "storybook dev -p 6006",
     "test": "run-s test:unit test:lint test:build",
-    "test:build": "run-s build",
     "test:lint": "eslint ./src",
     "test:unit": "cross-env CI=1 react-scripts test --env=jsdom --collectCoverage=true",
     "test:watch": "react-scripts test --env=jsdom",
@@ -74,7 +68,7 @@
     "webpack": "^5.88.2"
   },
   "files": [
-    "dist"
+    "src"
   ],
   "dependencies": {
     "@emotion/react": "^11.11.1",
