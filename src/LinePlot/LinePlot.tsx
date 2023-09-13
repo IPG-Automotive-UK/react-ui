@@ -50,6 +50,7 @@ const LinePlot = ({
         flexDirection="column"
         overflow="hidden"
         minHeight="100%"
+        minWidth="100%"
       >
         {showTitle ? (
           <Typography
@@ -74,6 +75,7 @@ const LinePlot = ({
             }
           ]}
           layout={{
+            autosize: true,
             margin: {
               pad: 2,
               t: 50
@@ -110,6 +112,7 @@ const LinePlot = ({
             }
           }}
           style={{ height: "100%", width: "100%" }}
+          useResizeHandler={true}
           config={config}
         />
       </Box>
