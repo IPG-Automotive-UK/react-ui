@@ -180,6 +180,6 @@ function ConditionalDialog({
       </Dialog>
     );
   } else {
-    return <Box sx={{ height: "100%" }}>{children}</Box>;
+    return <Box>{children}</Box>;
   }
 }
