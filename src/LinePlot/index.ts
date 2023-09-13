@@ -1,2 +1,2 @@
-export { default } from "./LinePlot";
+export { default } from "./LinePlotClientOnly";
 export { LinePlotProps } from "./LinePlot.types";
