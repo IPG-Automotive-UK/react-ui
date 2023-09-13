@@ -1,18 +1,15 @@
-import React, { Suspense, lazy } from "react";
-
 import ClientOnly from "../ClientOnly";
+import LinePlot from ".";
 import { LinePlotProps } from "./LinePlot.types";
+import React from "react";
 
 /**
  * LinePlot component wrapped in ClientOnly for use with server side rendering.
  */
 export default function LinePlotClientOnly(props: LinePlotProps) {
-  const LazyImportedLinePlot = lazy(() => import("./LinePlot"));
   return (
     <ClientOnly>
-      <Suspense fallback={<p>Loading...</p>}>
-        <LazyImportedLinePlot {...props} />
-      </Suspense>
+      <LinePlot {...props} />
     </ClientOnly>
   );
 }
