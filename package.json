@@ -29,6 +29,7 @@
     "@mui/material": "^5.14.8",
     "@mui/styles": "^5.14.7",
     "@mui/x-data-grid": "^6.13.0",
+    "@playwright/test": "^1.37.1",
     "@storybook/addon-actions": "^7.1.0",
     "@storybook/addon-essentials": "^7.1.0",
     "@storybook/addon-interactions": "^7.1.0",
@@ -152,5 +153,8 @@
       "src/**/*.{js,jsx,ts,tsx}",
       "!src/**/*.stories.{js,jsx,ts,tsx}"
     ]
+  },
+  "dependencies": {
+    "playwright": "^1.37.1"
   }
 }
