@@ -74,7 +74,6 @@ const LinePlot = ({
             }
           ]}
           layout={{
-            autosize: true,
             margin: {
               pad: 2,
               t: 50
@@ -148,7 +147,8 @@ const getConfig = ({ isFullscreen, handleClickFullscreen }: ConfigProps) => {
             title: "Fullscreen"
           }
         ]
-      : []
+      : [],
+    responsive: true // make plot responsive
   };
 };
 
@@ -180,6 +180,6 @@ function ConditionalDialog({
       </Dialog>
     );
   } else {
-    return <Box>{children}</Box>;
+    return children;
   }
 }
