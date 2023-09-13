@@ -28,6 +28,7 @@ export {
   FileCardProps
 } from "./Card";
 export { default as Checkbox } from "./Checkbox";
+export { default as ClientOnly, ClientOnlyProps } from "./ClientOnly";
 export { default as Copyright } from "./Copyright";
 export { default as Color } from "./Color";
 export { default as DeletableList, DeletableListProps } from "./DeletableList";
