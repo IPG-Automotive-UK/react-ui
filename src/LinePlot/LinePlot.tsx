@@ -50,6 +50,7 @@ const LinePlot = ({
         flexDirection="column"
         overflow="hidden"
         minHeight="100%"
+        minWidth="100%"
       >
         {showTitle ? (
           <Typography
@@ -111,6 +112,7 @@ const LinePlot = ({
             }
           }}
           style={{ height: "100%", width: "100%" }}
+          useResizeHandler={true}
           config={config}
         />
       </Box>
@@ -148,7 +150,8 @@ const getConfig = ({ isFullscreen, handleClickFullscreen }: ConfigProps) => {
             title: "Fullscreen"
           }
         ]
-      : []
+      : [],
+    responsive: true // make plot responsive
   };
 };
 
@@ -180,6 +183,6 @@ function ConditionalDialog({
       </Dialog>
     );
   } else {
-    return <Box sx={{ height: "100%" }}>{children}</Box>;
+    return children;
   }
 }
