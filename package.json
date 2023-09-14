@@ -72,6 +72,7 @@
     "mui-file-dropzone": "^4.0.2",
     "mutationobserver-shim": "^0.3.7",
     "npm-run-all": "^4.1.5",
+    "playwright": "^1.37.1",
     "prettier": "^3.0.0",
     "react": "^18.2.0",
     "react-colorful": "^5.6.1",
@@ -152,10 +153,12 @@
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
-      "!src/**/*.stories.{js,jsx,ts,tsx}"
+      "!src/**/*.stories.{js,jsx,ts,tsx}",
+      "!src/**/*.spec.{js,jsx,ts,tsx}"
+    ],
+    "testMatch": [
+      "**/__tests__/**/*.[jt]s?(x)",
+      "**/?(*.)+(test).[jt]s?(x)"
     ]
-  },
-  "dependencies": {
-    "playwright": "^1.37.1"
   }
 }
