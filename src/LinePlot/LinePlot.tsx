@@ -78,7 +78,7 @@ const LinePlot = ({
             autosize: true,
             margin: {
               b: 35,
-              l: 35,
+              l: 60,
               r: 10,
               t: 30
             },
