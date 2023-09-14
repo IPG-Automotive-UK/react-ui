@@ -77,8 +77,10 @@ const LinePlot = ({
           layout={{
             autosize: true,
             margin: {
-              pad: 0,
-              t: 40
+              b: 35,
+              l: 35,
+              r: 10,
+              t: 30
             },
             paper_bgcolor: "rgba(0,0,0,0)",
             plot_bgcolor: "rgba(0,0,0,0)",
