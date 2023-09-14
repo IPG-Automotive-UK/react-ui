@@ -49,7 +49,8 @@ const LinePlot = ({
         display="flex"
         flexDirection="column"
         overflow="hidden"
-        minHeight="100%"
+        height="100%"
+        width="100%"
       >
         {showTitle ? (
           <Typography
@@ -76,13 +77,11 @@ const LinePlot = ({
           layout={{
             autosize: true,
             margin: {
-              pad: 2,
-              t: 50
+              pad: 0,
+              t: 40
             },
-            paper_bgcolor:
-              theme.palette.mode === "light" ? "" : "rgba(255, 255, 255, 0.05)",
-            plot_bgcolor:
-              theme.palette.mode === "light" ? "" : "rgba(255, 255, 255, 0)",
+            paper_bgcolor: "rgba(0,0,0,0)",
+            plot_bgcolor: "rgba(0,0,0,0)",
             xaxis: {
               color: theme.palette.mode === "light" ? "" : "white",
               gridcolor:
@@ -110,7 +109,7 @@ const LinePlot = ({
               }
             }
           }}
-          style={plotStyle(0)}
+          style={{ flexGrow: 1, height: "100%", minHeight: 0, width: "100%" }}
           useResizeHandler={true}
           config={config}
         />
@@ -120,13 +119,6 @@ const LinePlot = ({
 };
 
 export default LinePlot;
-
-const plotStyle = (minHeight: string | number) => ({
-  flexGrow: 1,
-  height: "100%",
-  minHeight,
-  width: "100%"
-});
 
 // svg path for fullscreen icon in plotly menu bar
 const fullscreenIcon = {
