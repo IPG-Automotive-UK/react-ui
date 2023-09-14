@@ -22,7 +22,7 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   /* Match test files using this regular expression */
-  testMatch: /.*(spec)\.(js|ts|mjs|tsx)/,
+  testMatch: /.*(spec)\.(js|ts|mjs)/,
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
