@@ -76,6 +76,7 @@ const LinePlot = ({
           ]}
           layout={{
             autosize: true,
+            height: isFullscreen ? 500 : 200,
             margin: {
               pad: 2,
               t: 50
@@ -111,7 +112,7 @@ const LinePlot = ({
               }
             }
           }}
-          style={{ height: "100%", width: "100%" }}
+          style={{ width: "100%" }}
           useResizeHandler={true}
           config={config}
         />
