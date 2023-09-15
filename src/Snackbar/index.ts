@@ -1,2 +1,2 @@
 export { default } from "./Snackbar";
-export { SnackbarProps } from "./Snackbar.types";
+export type { SnackbarProps } from "./Snackbar.types";

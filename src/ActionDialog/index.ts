@@ -1,2 +1,2 @@
 export { default } from "./ActionDialog";
-export { ActionDialogProps } from "./ActionDialog.types";
+export type { ActionDialogProps } from "./ActionDialog.types";

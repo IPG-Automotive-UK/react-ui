@@ -1,5 +1,5 @@
 export { default } from "./WizardActions";
-export {
+export type {
   WizardActionsProps,
   WizardActionButtonProps
 } from "./WizardActions.types";
