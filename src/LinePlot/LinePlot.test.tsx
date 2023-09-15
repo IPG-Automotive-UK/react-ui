@@ -1,4 +1,4 @@
-import React, { lazy } from "react";
+import React, { Suspense, lazy } from "react";
 
 import { render } from "@testing-library/react";
 
@@ -17,6 +17,10 @@ const LazyLinePlot = lazy(() => import("./LinePlot"));
 describe("LinePlot", () => {
   // test to check the component renders
   test("Renders LinePlot", () => {
-    render(<LazyLinePlot {...defaultArgs} />);
+    render(
+      <Suspense fallback={<div>Loading...</div>}>
+        <LazyLinePlot {...defaultArgs} />{" "}
+      </Suspense>
+    );
   });
 });
