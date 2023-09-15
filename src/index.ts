@@ -28,6 +28,7 @@ export { default as Canvas } from "./Canvas";
 export { default as CanvasItem } from "./CanvasItem";
 export {
   DetailCard,
+  FileCard,
   SummaryCard,
   TableCard,
   type SummaryCardProps,
