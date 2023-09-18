@@ -116,17 +116,17 @@ export {
 export { ConfirmProvider, useConfirm } from "./ConfirmProvider";
 export {
   IpgLogo,
-  VirtoLogo,
+  type IpgLogoProps,
   VirtoBuild,
-  VirtoFleet,
-  VirtoModel,
-  VirtoScene,
-  VirtoResult,
-  VirtoTest,
   VirtoData,
-  VirtoVehicle,
+  VirtoFleet,
   VirtoID,
-  type IpgLogoProps
+  VirtoLogo,
+  VirtoModel,
+  VirtoResult,
+  VirtoScene,
+  VirtoTest,
+  VirtoVehicle
 } from "./SvgIcons";
 export {
   default as VehicleSelect,

@@ -1,12 +1,5 @@
-import { SvgIconProps } from "@mui/material/SvgIcon";
+import { SvgIconProps } from "../SvgIcons.types";
 
-export type IpgLogoProps = {
-  /**
-   * The colour of the text in the logo
-   */
+export type IpgLogoProps = SvgIconProps & {
   textColour?: "white" | "black";
-  /**
-   * SVG icon props to be passed to the icon
-   */
-  sx?: SvgIconProps["sx"];
 };
