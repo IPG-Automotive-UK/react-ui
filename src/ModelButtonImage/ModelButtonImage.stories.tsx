@@ -7,7 +7,7 @@ import ModelButtonSampleImg from "../../static/ModelButtonSampleImg.svg";
 import React from "react";
 import { action } from "@storybook/addon-actions";
 
-const meta: Meta<typeof ModelButton> = {
+const meta: Meta<typeof ModelButtonImage> = {
   component: ModelButtonImage,
   title: "General/ModelButtonImage"
 };
