@@ -18,9 +18,8 @@ const DeletableList = ({
             data-testid="deletableList"
             key={value}
             role="listitem2"
-            onClick={() => onDelete(value)}
             secondaryAction={
-              <IconButton edge="end">
+              <IconButton edge="end" onClick={() => onDelete(value)}>
                 <CloseIcon data-testid="close" />
               </IconButton>
             }
