@@ -12,9 +12,9 @@ import userEvent from "@testing-library/user-event";
 const SelectedItemsWithState = ({
   items: itemsIn = ["Apples", "Pears", "Oranges"],
   onChange,
-  selectedItem: selectedItemsIn = ["Apples"],
+  selectedItems: selectedItemsIn = ["Apples"],
   ...rest
-}) => {
+}: TransferListProps) => {
   const [selectedItems, setSelectedItems] = React.useState(selectedItemsIn);
   const handleChange: TransferListProps["onChange"] = newSelections => {
     setSelectedItems(newSelections);
@@ -80,7 +80,7 @@ describe("TransferList", () => {
       <SelectedItemsWithState
         onChange={onChange}
         items={["Apples", "Pears", "Oranges"]}
-        selectedItem={[]}
+        selectedItems={[]}
       />
     );
 
