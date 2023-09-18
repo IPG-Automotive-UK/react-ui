@@ -30,18 +30,17 @@ const Template: StoryFn<
 
   let theValue;
   if (multiple && Array.isArray(value)) theValue = value;
-  if (multiple && !Array.isArray(value)) theValue = [value];
+  if (multiple && !Array.isArray(value) && value) theValue = [value];
   if (!multiple && Array.isArray(value)) theValue = value[0];
   if (!multiple && !Array.isArray(value)) theValue = value;
 
-  const onChange = (event, newValue) => {
-    updateArgs({ value: newValue });
-    action("onChange")(newValue);
-  };
   return (
     <Autocomplete
       {...args}
-      onChange={onChange}
+      onChange={(event, newValue) => {
+        updateArgs({ value: newValue });
+        action("onChange")(newValue);
+      }}
       value={theValue}
       multiple={multiple}
     />
