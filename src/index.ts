@@ -31,11 +31,11 @@ export {
   FileCard,
   SummaryCard,
   TableCard,
-  type SummaryCardProps,
   type DetailCardProps,
   type DetailCardHeaderProps,
   type DetailCardLabelStackProps,
-  type FileCardProps
+  type FileCardProps,
+  type SummaryCardProps
 } from "./Card";
 export { default as Checkbox } from "./Checkbox";
 export { default as Copyright } from "./Copyright";

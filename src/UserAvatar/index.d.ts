@@ -6,4 +6,8 @@ export type UserAvatarProps = {
 
 declare const UserAvatar: React.FC<UserAvatarProps>;
 
-export default UserAvatar;
+declare const useColorMap: (names: string[]) => {
+  getColor: (name: string) => string;
+};
+
+export { UserAvatar, useColorMap };

@@ -4,4 +4,4 @@ export type SnackbarProviderProps = {
 
 declare const SnackbarProvider: React.FC<SnackbarProviderProps>;
 
-export default SnackbarProvider;
+export { SnackbarProvider };
