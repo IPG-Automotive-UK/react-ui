@@ -1,4 +1,4 @@
-import {
+import type {
   SnackbarProps as MuiSnackbarProps,
   SnackbarContentProps
 } from "@mui/material";
