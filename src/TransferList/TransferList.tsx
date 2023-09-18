@@ -13,7 +13,7 @@ import {
 import React, { useEffect, useState } from "react";
 
 import CloseIcon from "@mui/icons-material/Close";
-import DeletableList from "src/DeletableList/DeletableList";
+import DeletableList from "../DeletableList/DeletableList";
 import SearchIcon from "@mui/icons-material/Search";
 import { TransferListProps } from "./TransferList.types";
 

@@ -28,6 +28,7 @@ export {
   FileCardProps
 } from "./Card";
 export { default as Checkbox } from "./Checkbox";
+export { default as ClientOnly, ClientOnlyProps } from "./ClientOnly";
 export { default as Copyright } from "./Copyright";
 export { default as Color } from "./Color";
 export { default as DeletableList, DeletableListProps } from "./DeletableList";
@@ -45,6 +46,7 @@ export { default as FontPicker } from "./FontPicker";
 export { default as FontStyle } from "./FontStyle";
 export { default as ImageUploader } from "./ImageUploader";
 export { LabelChip, LabelChipProps, LabelSelector } from "./LabelSelector";
+export { default as LinePlot, LinePlotProps } from "./LinePlot";
 export { default as Loading } from "./Loading";
 export { default as LoginForm } from "./LoginForm";
 export { default as ModelButton, ModelButtonProps } from "./ModelButton";
