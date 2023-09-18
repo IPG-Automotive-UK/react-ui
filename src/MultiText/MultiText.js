@@ -1,4 +1,5 @@
 import { Box, IconButton } from "@mui/material";
+
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -111,9 +112,9 @@ LabelSetter.propTypes = {
    *
    * **Signature**
    * ```
-   * function(event: object) => void
+   * function(rows: object) => void
    * ```
-   * _event_: The event source of the callback.
+   * _rows_: The updated rows.
    */
   onChange: PropTypes.func,
   /**
