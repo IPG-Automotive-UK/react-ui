@@ -1,39 +1,17 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "outDir": "dist",
-    "module": "esnext",
-    "target": "esnext",
-    "lib": ["es6", "dom"],
-    "sourceMap": true,
     "allowJs": true,
-    "jsx": "react",
-    "moduleResolution": "node",
-    "rootDir": "src",
+    "baseUrl": ".",
+    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noImplicitAny": true,
-    "importHelpers": true,
-    "strictNullChecks": true,
-    "noUnusedLocals": true,
-    "strictBindCallApply": true,
-    "allowSyntheticDefaultImports": true
-  },
-  "exclude": [
-    "node_modules",
-    "dist",
-    "package",
-    ".storybook",
-    "coverage",
-    "**/*.test.js",
-    "**/*.test.ts",
-    "**/*.test.tsx",
-    "**/*.stories.js",
-    "**/*.stories.ts",
-    "**/*.stories.tsx",
-    "**/*.config.ts",
-    "src/setupTests.js"
-  ],
-  "include": ["src/**/*", "global.d.ts"]
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "lib": ["DOM", "DOM.Iterable", "ES2019"],
+    "moduleResolution": "node",
+    "module": "ES2022",
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "target": "ES2019"
+  }
 }
