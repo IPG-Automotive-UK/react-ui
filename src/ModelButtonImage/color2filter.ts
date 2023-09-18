@@ -15,9 +15,9 @@ color2filterCache.set("rgb(255, 255, 255)", "invert(100%)");
  * The Color class represents a RGB color
  */
 class Color {
-  r: number;
-  g: number;
-  b: number;
+  r: number = NaN;
+  g: number = NaN;
+  b: number = NaN;
 
   /**
    * Creates a new Color instance.
