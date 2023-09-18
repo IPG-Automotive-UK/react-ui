@@ -15,7 +15,7 @@ export type SelectedVehicle = {
   gate: string;
 };
 
-export interface VehicleSelectProps {
+export type VehicleSelectProps = {
   /**
    * FlexDirection of the component
    */
@@ -40,4 +40,4 @@ export interface VehicleSelectProps {
    * Array of all vehicle variants with fields _id, modelYear, projectCode, variant
    */
   variants: Vehicle[];
-}
+};

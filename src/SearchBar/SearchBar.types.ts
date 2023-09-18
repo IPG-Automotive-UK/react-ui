@@ -1,4 +1,4 @@
-export interface SearchBarProps {
+export type SearchBarProps = {
   /**
    * Callback fired when the input is blurred.
    * Notice that the first argument (event) might be undefined.
@@ -22,4 +22,4 @@ export interface SearchBarProps {
    * The value of the input element, required for a controlled component.
    */
   value?: string;
-}
+};

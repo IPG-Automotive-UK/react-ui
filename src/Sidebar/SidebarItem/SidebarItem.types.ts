@@ -1,6 +1,6 @@
 import { SxProps } from "@mui/material";
 
-export interface SidebarItemProps {
+export type SidebarItemProps = {
   /**
    * The content of the component. Children are displayed in an expansion panel that is initially closed.
    */
@@ -57,4 +57,4 @@ export interface SidebarItemProps {
    * Custom style to apply to the text
    */
   textStyle?: SxProps;
-}
+};

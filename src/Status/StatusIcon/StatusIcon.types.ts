@@ -1,6 +1,6 @@
 import { CSSProperties } from "react";
 
-export interface StatusIconProps {
+export type StatusIconProps = {
   /**
    * Icon height
    */
@@ -24,4 +24,4 @@ export interface StatusIconProps {
     | "ready"
     | "running"
     | "submitted";
-}
+};

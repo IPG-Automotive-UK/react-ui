@@ -17,22 +17,22 @@ import { grey } from "@mui/material/colors";
 // https://mui.com/material-ui/customization/theming/#custom-variables
 declare module "@mui/material/styles" {
   // eslint-disable-next-line no-unused-vars
-  interface Theme {
+  type Theme = {
     layout: {
       content: {
         maxWidth: number;
       };
     };
-  }
+  };
   // allow configuration using `createTheme`
   // eslint-disable-next-line no-unused-vars
-  interface ThemeOptions {
+  type ThemeOptions = {
     layout?: {
       content?: {
         maxWidth?: number;
       };
     };
-  }
+  };
 }
 
 // theme defaults regardless of color mode. these are provided as an object that can be merged during color mode theme creation

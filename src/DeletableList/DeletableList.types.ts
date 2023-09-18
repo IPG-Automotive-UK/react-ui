@@ -1,4 +1,4 @@
-export interface DeletableListProps {
+export type DeletableListProps = {
   /**
    * Array of items to be displayed.
    */
@@ -7,4 +7,4 @@ export interface DeletableListProps {
    * Callback fired when the user clicks on Delete("X") button
    */
   onDelete: (value: string) => void;
-}
+};

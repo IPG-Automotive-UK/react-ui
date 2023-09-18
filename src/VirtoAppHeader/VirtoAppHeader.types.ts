@@ -1,4 +1,4 @@
-export interface VirtoAppHeaderProps {
+export type VirtoAppHeaderProps = {
   /**
    * App name to display in header.
    */
@@ -40,4 +40,4 @@ export interface VirtoAppHeaderProps {
    * callback is fired when user clicks on "App"
    */
   onAppClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
-}
+};

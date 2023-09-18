@@ -1,4 +1,4 @@
-export interface TextFieldProps {
+export type TextFieldProps = {
   /**
    * If true, the component is disabled.
    */
@@ -65,4 +65,4 @@ export interface TextFieldProps {
    * The error text of the component.
    */
   error?: boolean;
-}
+};

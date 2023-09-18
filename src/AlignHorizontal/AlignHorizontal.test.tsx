@@ -9,9 +9,8 @@ import { AlignHorizontalProps } from "./AlignHorizontal.types";
  * Test wrapper for AlignHorizontal
  * Provides state for value to avoid errors changing from uncontrolled to controlled.
  */
-interface AlignHorizontalWithStateProps
-  extends Pick<AlignHorizontalProps, "value">,
-    Partial<Pick<AlignHorizontalProps, "onChange">> {}
+type AlignHorizontalWithStateProps = Pick<AlignHorizontalProps, "value"> &
+  Partial<Pick<AlignHorizontalProps, "onChange">> & {};
 const AlignHorizontalWithState = ({
   onChange = () => {},
   value: valueIn = null,

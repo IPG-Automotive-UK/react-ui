@@ -1,4 +1,4 @@
-export interface TransferListProps {
+export type TransferListProps = {
   /**
    * Array of Items.
    */
@@ -11,4 +11,4 @@ export interface TransferListProps {
    * Array of selectedItems.
    */
   selectedItems: string[];
-}
+};

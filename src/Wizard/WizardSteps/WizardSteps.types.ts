@@ -1,4 +1,4 @@
-export interface WizardStepsProps {
+export type WizardStepsProps = {
   /**
    * The current active step index. zero-based.
    */
@@ -7,4 +7,4 @@ export interface WizardStepsProps {
    * Children
    */
   children?: React.ReactNode;
-}
+};

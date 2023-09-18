@@ -1,6 +1,6 @@
 import { AnyColor } from "colord";
 
-export interface ModelButtonImageProps {
+export type ModelButtonImageProps = {
   /**
    * The image source.
    */
@@ -9,4 +9,4 @@ export interface ModelButtonImageProps {
    * The color to filter the image to. Defaults to black in light mode and white in dark mode.
    */
   color?: AnyColor;
-}
+};

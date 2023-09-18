@@ -1,4 +1,4 @@
-export interface AppHeaderProps {
+export type AppHeaderProps = {
   /**
    * App Logo to display in header.
    */
@@ -29,4 +29,4 @@ export interface AppHeaderProps {
    * Name of currently logged in user.
    */
   username: string;
-}
+};

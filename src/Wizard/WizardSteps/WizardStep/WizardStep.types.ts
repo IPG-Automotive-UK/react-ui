@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-export interface WizardStepProps {
+export type WizardStepProps = {
   /**
    * If true, the step is marked as completed. Is normally set by the WizardSteps parent component.
    */
@@ -27,4 +27,4 @@ export interface WizardStepProps {
    * If true, the step is marked as last. Normally set by the WizardSteps parent component.
    */
   last?: boolean;
-}
+};

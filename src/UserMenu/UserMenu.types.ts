@@ -1,18 +1,18 @@
-export interface UserMenuProps {
+export type UserMenuProps = {
   /**
    * Callback fired when the user clicks on "Change password".
    */
-  onChangePassword: (event: object) => void;
+  onChangePassword: (event: React.MouseEvent<HTMLButtonElement>) => void;
   /**
    * Callback fired when the user clicks on "Logout".
    */
-  onLogout: (event: object) => void;
+  onLogout: (event: React.MouseEvent<HTMLButtonElement>) => void;
   /**
    * Name of currently logged in user.
    */
   username: string;
-}
+};
 // type definitions for UserAvatar
-export interface UserAvatarProps {
+export type UserAvatarProps = {
   username: string;
-}
+};

@@ -1,4 +1,4 @@
-export interface AlignVerticalProps {
+export type AlignVerticalProps = {
   /**
    * If true, the component is disabled.
    */
@@ -22,4 +22,4 @@ export interface AlignVerticalProps {
    * The value of the selected button.
    */
   value?: "bottom" | "center" | "top" | null;
-}
+};

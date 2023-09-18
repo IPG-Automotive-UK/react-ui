@@ -1,6 +1,6 @@
 import { CSSProperties } from "react";
 
-export interface StatusLabelProps {
+export type StatusLabelProps = {
   /**
    *
    * The status type.
@@ -42,4 +42,4 @@ export interface StatusLabelProps {
      */
     width?: CSSProperties["width"];
   };
-}
+};
