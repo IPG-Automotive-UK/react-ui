@@ -12,8 +12,8 @@ import { Delete, Edit } from "@mui/icons-material";
 import React, { useState } from "react";
 
 import Checkbox from "../Checkbox";
-import DeleteLabelDialog from "./DeleteLabelDialog/DeleteLabelDialog";
-import EditLabelDialog from "./EditLabelDialog/EditLabelDialog";
+import { DeleteLabelDialog } from "./DeleteLabelDialog";
+import { EditLabelDialog } from "./EditLabelDialog";
 import LabelChip from "./LabelChip/LabelChip";
 import NoWrapTypography from "../NoWrapTypography/NoWrapTypography";
 import PropTypes from "prop-types";

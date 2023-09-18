@@ -1,9 +1,5 @@
-type Label = {
-  _id: string;
-  color: string;
-  description: string;
-  name: string;
-};
+import type { Label } from "../../LabelSelector/Label.types";
+
 export type LabelFilterProps = {
   label?: string;
   name?: string;
