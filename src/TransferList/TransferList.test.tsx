@@ -2,6 +2,7 @@ import { render, screen, within } from "@testing-library/react";
 
 import React from "react";
 import TransferList from ".";
+import { TransferListProps } from "./TransferList.types";
 import userEvent from "@testing-library/user-event";
 
 /**
@@ -15,7 +16,7 @@ const SelectedItemsWithState = ({
   ...rest
 }) => {
   const [selectedItems, setSelectedItems] = React.useState(selectedItemsIn);
-  const handleChange = newSelections => {
+  const handleChange: TransferListProps["onChange"] = newSelections => {
     setSelectedItems(newSelections);
     onChange && onChange(newSelections);
   };

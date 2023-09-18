@@ -16,9 +16,9 @@ export default meta;
 const Template: StoryFn<WizardActionsProps> = () => {
   return (
     <WizardActions>
-      <CancelButton {...CancelButton.args} />
-      <BackButton {...BackButton.args} />
-      <NextButton {...NextButton.args} />
+      <CancelButton.render {...CancelButton.args} />
+      <BackButton.render {...BackButton.args} />
+      <NextButton.render {...NextButton.args} />
     </WizardActions>
   );
 };

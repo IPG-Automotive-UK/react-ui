@@ -52,7 +52,7 @@ const VehicleSelectWithState = ({
   ...rest
 }: VehicleSelectProps) => {
   const [value, setValue] = React.useState(valueIn);
-  const handleChange = selectedValues => {
+  const handleChange: VehicleSelectProps["onChange"] = selectedValues => {
     setValue(selectedValues);
     onChange(selectedValues);
   };

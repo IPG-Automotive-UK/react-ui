@@ -6,7 +6,7 @@ export type TransferListProps = {
   /**
    * Callback fired when the new item is selected.
    */
-  onChange: (value: string | string[]) => void;
+  onChange: (value: string[]) => void;
   /**
    * Array of selectedItems.
    */

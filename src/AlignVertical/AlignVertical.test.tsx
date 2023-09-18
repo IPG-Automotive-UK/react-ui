@@ -18,7 +18,7 @@ const AlignVerticalWithState = ({
 }: Partial<AlignVerticalProps>) => {
   const [value, setValue] =
     React.useState<AlignVerticalProps["value"]>(valueIn);
-  const handleChange = (event, value) => {
+  const handleChange: AlignVerticalProps["onChange"] = (event, value) => {
     setValue(value);
     onChange && onChange(event, value);
   };

@@ -50,7 +50,8 @@ export default function UserMenu({
 }: UserMenuProps) {
   const popupState = usePopupState({ popupId: "userMenu", variant: "popover" });
   const handleClick =
-    (cb: (event: object) => void) => (event: React.MouseEvent<HTMLElement>) => {
+    (cb: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void) =>
+    (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
       popupState.close();
       cb && cb(event);
     };

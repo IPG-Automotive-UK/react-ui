@@ -58,4 +58,4 @@ type ModelButtonPopupProps = {
   label: string;
 };
 
-export { BackgroundProps, ModelButtonProps, ModelButtonPopupProps };
+export type { BackgroundProps, ModelButtonProps, ModelButtonPopupProps };

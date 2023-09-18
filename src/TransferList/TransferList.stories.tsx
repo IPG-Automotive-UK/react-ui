@@ -21,7 +21,7 @@ const Template: StoryFn<TransferListProps> = args => {
   React.useEffect(() => {
     setSelectedItems(args.selectedItems);
   }, [args.selectedItems]);
-  const onChange = newItems => {
+  const onChange: TransferListProps["onChange"] = newItems => {
     setSelectedItems(newItems);
     action("onChange")(newItems);
   };
