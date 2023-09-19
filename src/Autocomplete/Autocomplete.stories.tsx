@@ -15,6 +15,13 @@ const meta: Meta<typeof Autocomplete> = {
 };
 export default meta;
 
+// Typescript does not support readonly arrays with Array.isArray so we need a custom type guard for this story
+function isReadOnlyArray<T>(
+  value: T | ReadonlyArray<T>
+): value is ReadonlyArray<T> {
+  return Array.isArray(value);
+}
+
 const Template: StoryFn<
   AutocompleteProps<string, boolean | undefined>
 > = args => {
@@ -22,9 +29,9 @@ const Template: StoryFn<
     useArgs<AutocompleteProps<string, boolean | undefined>>();
 
   React.useEffect(() => {
-    if (multiple && !Array.isArray(value) && value)
+    if (multiple && value && !isReadOnlyArray(value))
       updateArgs({ value: value !== "" ? [value] : [] });
-    if (!multiple && Array.isArray(value))
+    if (!multiple && isReadOnlyArray(value))
       updateArgs({ value: value.length > 0 ? value[0] : "" });
   }, [updateArgs, multiple, value]);
 
