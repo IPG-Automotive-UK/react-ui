@@ -13,7 +13,7 @@ import React, { useEffect, useState } from "react";
 
 import CloseIcon from "@mui/icons-material/Close";
 import { CombinedVehicleProps } from "./VehicleSelectDialog.types";
-import { SelectedVehicle } from "../VehicleSelect/VehicleSelect.types";
+import type { SelectedVehicle } from "../VehicleSelect/VehicleSelect.types";
 import VehicleSelect from "../VehicleSelect/VehicleSelect";
 
 const VehicleSelectDialog = ({

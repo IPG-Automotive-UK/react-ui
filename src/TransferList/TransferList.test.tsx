@@ -1,4 +1,4 @@
-import { render, screen, within } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 
 import React from "react";
 import TransferList from ".";
@@ -94,22 +94,37 @@ describe("TransferList", () => {
     expect(onChange).toHaveBeenCalledWith(["Pears"]);
   });
 
-  test("Can remove a list item selection", async () => {
+  it("Can remove a list item selection", async () => {
     // render component
     const user = userEvent.setup();
     const onChange = jest.fn();
-    const { container } = render(
-      <SelectedItemsWithState onChange={onChange} />
+    render(
+      <SelectedItemsWithState
+        onChange={onChange}
+        items={["Apples", "Pears", "Oranges"]}
+        selectedItem={[]}
+      />
     );
 
-    // remove selected item
-    const listItem = screen.getByRole("listitem2");
-    await user.click(listItem);
+    // select item
+    const list = screen.getByRole("list");
+    const { getAllByRole } = within(list);
+    const items = getAllByRole("listitem1");
+    await user.click(items[1]);
 
-    // check selections have been cleared
-    expect(container.querySelector(".MuiTypography-body1")?.textContent).toBe(
-      "None Selected"
-    );
+    // check if the item has been selected
+    expect(onChange).toHaveBeenCalledWith(["Pears"]);
+
+    // find the IconButton by its data-testid attribute
+    const deleteButtons = screen.getAllByTestId("close");
+
+    // trigger a click event on the IconButton
+    fireEvent.click(deleteButtons[0]);
+
+    // check if the onChange function was called with an empty array (selection removed)
     expect(onChange).toHaveBeenCalledWith([]);
+
+    // check if the "None Selected" text is displayed
+    expect(screen.getByTestId("none-selected")).toBeInTheDocument();
   });
 });

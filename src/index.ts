@@ -38,6 +38,7 @@ export {
   type SummaryCardProps
 } from "./Card";
 export { default as Checkbox } from "./Checkbox";
+export { default as ClientOnly, ClientOnlyProps } from "./ClientOnly";
 export { default as Copyright } from "./Copyright";
 export { default as Color } from "./Color";
 export {
@@ -58,6 +59,7 @@ export { default as FontPicker } from "./FontPicker";
 export { default as FontStyle } from "./FontStyle";
 export { default as ImageUploader } from "./ImageUploader";
 export { LabelChip, type LabelChipProps, LabelSelector } from "./LabelSelector";
+export { default as LinePlot, type LinePlotProps } from "./LinePlot";
 export { default as Loading } from "./Loading";
 export { default as LoginForm } from "./LoginForm";
 export { default as ModelButton, type ModelButtonProps } from "./ModelButton";

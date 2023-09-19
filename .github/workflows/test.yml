@@ -21,6 +21,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install -force
+      # Installing Playwright browsers
+      - run: npx playwright install --with-deps
+      - run: npm run storybook & npx wait-on http://localhost:6006
       - run: npm test
         env:
           CI: true

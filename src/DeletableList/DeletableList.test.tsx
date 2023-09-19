@@ -1,6 +1,7 @@
+import { fireEvent, render } from "@testing-library/react";
+
 import DeletableList from ".";
 import React from "react";
-import { render } from "@testing-library/react";
 
 // tests for the DeletableList component
 describe("DeletableList", () => {
@@ -20,11 +21,17 @@ describe("DeletableList", () => {
   // test that checks the delete button click called with the deleted item
   test("test list delete works", () => {
     const onDelete = jest.fn();
-    const { container } = render(
+    const { queryAllByTestId } = render(
       <DeletableList items={["Apple", "Mango", "Banana"]} onDelete={onDelete} />
     );
-    const deleteButton = container.querySelector("button");
-    deleteButton && deleteButton.click();
+
+    // find the IconButton by its data-testid attribute
+    const deleteButtons = queryAllByTestId("close");
+
+    // trigger a click event on the IconButton
+    fireEvent.click(deleteButtons[0]);
+
+    // check if onDelete was called with the expected argument
     expect(onDelete).toHaveBeenCalledWith("Apple");
   });
 });
