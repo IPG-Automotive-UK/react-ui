@@ -36,12 +36,12 @@ export default function NoWrapTypography({
         noWrap
         component="p" // forces a block element
         sx={{
-          ...sx,
           hyphens: "auto",
           overflow: "hidden",
           textOverflow: "ellipsis",
           whiteSpace: "nowrap",
-          wordBreak: "break-all"
+          wordBreak: "break-all",
+          ...(Array.isArray(sx) ? sx : [sx])
         }}
         variant={variant}
       >
