@@ -5,4 +5,4 @@ export type DialogTitleProps = {
 
 declare const DialogTitle: React.FC<DialogTitleProps>;
 
-export { DialogTitle };
+export default DialogTitle;
