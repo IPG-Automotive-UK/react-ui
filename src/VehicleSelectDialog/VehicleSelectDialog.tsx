@@ -13,8 +13,8 @@ import React, { useEffect, useState } from "react";
 
 import CloseIcon from "@mui/icons-material/Close";
 import { CombinedVehicleProps } from "./VehicleSelectDialog.types";
-import { SelectedVehicle } from "src/VehicleSelect/VehicleSelect.types";
-import VehicleSelect from "src/VehicleSelect/VehicleSelect";
+import { SelectedVehicle } from "../VehicleSelect/VehicleSelect.types";
+import VehicleSelect from "../VehicleSelect/VehicleSelect";
 
 const VehicleSelectDialog = ({
   onCancelClick = () => {},

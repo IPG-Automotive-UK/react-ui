@@ -1,7 +1,7 @@
 import {
   SelectedVehicle,
   VehicleSelectProps
-} from "src/VehicleSelect/VehicleSelect.types";
+} from "../VehicleSelect/VehicleSelect.types";
 
 export type VehicleSelectDialogProps = {
   /**

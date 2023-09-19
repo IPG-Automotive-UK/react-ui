@@ -1,4 +1,4 @@
-import type { TextFieldProps } from "src/TextField";
+import type { TextFieldProps } from "../TextField";
 
 export type SelectProps = {
   disabled?: boolean;
