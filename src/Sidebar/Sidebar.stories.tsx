@@ -21,7 +21,6 @@ import { version } from "../../package.json";
  */
 const meta: Meta<typeof Sidebar> = {
   component: Sidebar,
-  subcomponents: { SidebarDivider, SidebarItem },
   title: "Layout/Sidebar"
 };
 export default meta;
