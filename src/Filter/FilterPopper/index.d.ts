@@ -1,4 +1,5 @@
 export type FilterPopperProps = {
+  children?: React.ReactNode;
   count?: number;
   label?: string;
 };
