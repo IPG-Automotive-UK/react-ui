@@ -3,7 +3,7 @@ export type PasswordChangeFormProps = {
   onSubmit: (
     data: {
       password: string;
-      passwordRepear: string;
+      passwordRepeat: string;
     },
     event: React.FormEvent<HTMLFormElement>
   ) => null;
