@@ -1,1 +1,1 @@
-export { default } from "./ToggleColorMode";
+export { default } from "./ToggleColorMode.jsx";

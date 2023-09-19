@@ -1,5 +1,5 @@
 import React from "react";
-import ToggleColorMode from "./ToggleColorMode";
+import ToggleColorMode from "./ToggleColorMode.jsx";
 import { action } from "@storybook/addon-actions";
 
 export default {
