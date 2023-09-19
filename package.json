@@ -51,6 +51,7 @@
     "@types/node": "^20.4.5",
     "@types/react": "^18.2.18",
     "@types/react-dom": "^18.2.7",
+    "@types/react-plotly.js": "^2.6.0",
     "@types/react-text-mask": "^5.4.11",
     "@typescript-eslint/eslint-plugin": "^6.2.1",
     "@typescript-eslint/parser": "^6.2.1",
@@ -98,8 +99,8 @@
     "@mui/x-data-grid": "^6.10.2",
     "@types/css-mediaquery": "^0.1.2",
     "@types/plotly.js": "^2.12.26",
-    "@types/react-text-mask": "^5.4.11",
     "@types/react-plotly.js": "^2.6.0",
+    "@types/react-text-mask": "^5.4.11",
     "colord": "^2.9.3",
     "css-mediaquery": "^0.1.2",
     "material-ui-confirm": "^3.0.9",
@@ -120,6 +121,12 @@
       "optional": true
     },
     "@types/css-mediaquery": {
+      "optional": true
+    },
+    "@types/plotly.js": {
+      "optional": true
+    },
+    "@types/react-plotly.js": {
       "optional": true
     },
     "@types/react-text-mask": {

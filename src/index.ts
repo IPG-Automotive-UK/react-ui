@@ -38,7 +38,7 @@ export {
   type SummaryCardProps
 } from "./Card";
 export { default as Checkbox } from "./Checkbox";
-export { default as ClientOnly, ClientOnlyProps } from "./ClientOnly";
+export { default as ClientOnly, type ClientOnlyProps } from "./ClientOnly";
 export { default as Copyright } from "./Copyright";
 export { default as Color } from "./Color";
 export {

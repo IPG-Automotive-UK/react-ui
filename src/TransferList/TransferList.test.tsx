@@ -102,7 +102,7 @@ describe("TransferList", () => {
       <SelectedItemsWithState
         onChange={onChange}
         items={["Apples", "Pears", "Oranges"]}
-        selectedItem={[]}
+        selectedItems={[]}
       />
     );
 
