@@ -1,3 +1,5 @@
+import { SxProps, Theme } from "@mui/material/styles";
+
 export type CanvasProps = {
   backgroundColor?: string;
   backgroundImage?: string;
@@ -24,7 +26,7 @@ export type CanvasProps = {
   ref?: React.RefObject<HTMLDivElement>;
   showBorder?: boolean;
   showGrid?: boolean;
-  sx?: object;
+  sx?: SxProps<Theme>;
   tabIndex?: number;
   width?: number;
 };
