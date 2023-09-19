@@ -93,6 +93,8 @@
     "@mui/material": "^5.14.8",
     "@mui/styles": "^5.14.7",
     "@mui/x-data-grid": "^6.10.2",
+    "@types/css-mediaquery": "^0.1.2",
+    "@types/react-text-mask": "^5.4.11",
     "colord": "^2.9.3",
     "css-mediaquery": "^0.1.2",
     "material-ui-confirm": "^3.0.9",
@@ -108,6 +110,12 @@
   },
   "peerDependenciesMeta": {
     "@mui/x-data-grid": {
+      "optional": true
+    },
+    "@types/css-mediaquery": {
+      "optional": true
+    },
+    "@types/react-text-mask": {
       "optional": true
     },
     "colord": {
