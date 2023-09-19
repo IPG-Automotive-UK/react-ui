@@ -1,9 +1,11 @@
+import { FileObject } from "mui-file-dropzone";
+
 export type ImageUploaderProps = {
   dropzoneText?: string;
   maxFileSize?: number;
-  onAdd?: (selectedFiles: File[]) => void;
-  onDelete?: (deletedFiles: File[]) => void;
-  selectedFiles?: File[];
+  onAdd?: (selectedFiles: FileObject[]) => void;
+  onDelete?: (deletedFiles: FileObject[]) => void;
+  selectedFiles?: FileObject[];
   subText?: string;
   title?: string;
 };
