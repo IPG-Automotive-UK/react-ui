@@ -10,7 +10,7 @@ export type PasswordChangeDialogProps = {
       newPasswordRepeat: string;
     },
     event: React.FormEvent<HTMLFormElement>
-  ) => null;
+  ) => void;
   open: boolean;
   status: "init" | "loading" | "success" | "error";
   successMessage?: string;

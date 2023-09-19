@@ -5,7 +5,7 @@ export type PasswordResetFormProps = {
       email: string;
     },
     event: React.FormEvent<HTMLFormElement>
-  ) => null;
+  ) => void;
 };
 
 declare const PasswordResetForm: React.FC<PasswordResetFormProps>;

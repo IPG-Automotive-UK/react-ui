@@ -6,7 +6,7 @@ export type PasswordChangeFormProps = {
       passwordRepeat: string;
     },
     event: React.FormEvent<HTMLFormElement>
-  ) => null;
+  ) => void;
 };
 
 declare const PasswordChangeForm: React.FC<PasswordChangeFormProps>;
