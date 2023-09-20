@@ -1,10 +1,9 @@
-export { default as DetailCard } from "./DetailCard";
-export { default as TableCard } from "./TableCard";
-export { default as SummaryCard } from "./SummaryCard";
-export { SummaryCardProps } from "./SummaryCard/SummaryCard.types";
 export {
-  DetailCardProps,
-  DetailCardHeaderProps,
-  DetailCardLabelStackProps
-} from "./DetailCard/DetailCard.types";
-export { FileCardProps } from "./FileCard/FileCard.types";
+  default as DetailCard,
+  type DetailCardProps,
+  type DetailCardHeaderProps,
+  type DetailCardLabelStackProps
+} from "./DetailCard";
+export { default as FileCard, type FileCardProps } from "./FileCard";
+export { default as SummaryCard, type SummaryCardProps } from "./SummaryCard";
+export { default as TableCard, type TableCardProps } from "./TableCard";

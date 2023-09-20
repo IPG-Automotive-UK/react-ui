@@ -1,9 +1,9 @@
 import {
   SelectedVehicle,
   VehicleSelectProps
-} from "src/VehicleSelect/VehicleSelect.types";
+} from "../VehicleSelect/VehicleSelect.types";
 
-export interface VehicleSelectDialogProps {
+export type VehicleSelectDialogProps = {
   /**
    * The text of the cancel button.
    */
@@ -40,7 +40,7 @@ export interface VehicleSelectDialogProps {
    * The width of the dialog. Valid css width can be used.
    */
   width?: string;
-}
+};
 
 // Create a new type that merges VehicleSelectProps and VehicleSelectDialogProps
 export type CombinedVehicleProps = Omit<

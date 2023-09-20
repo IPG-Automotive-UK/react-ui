@@ -1,6 +1,6 @@
 import { File, Label } from "../../Common.types";
 
-export interface DetailCardProps {
+export type DetailCardProps = {
   /**
    * The content of the buttons stack.
    */
@@ -78,9 +78,9 @@ export interface DetailCardProps {
    * The width of the card in px.
    */
   width: number;
-}
+};
 
-export interface DetailCardHeaderProps {
+export type DetailCardHeaderProps = {
   /**
    * The content of the buttons stack.
    */
@@ -106,9 +106,9 @@ export interface DetailCardHeaderProps {
    * The width of the card in px.
    */
   width: number;
-}
+};
 
-export interface DetailCardLabelStackProps {
+export type DetailCardLabelStackProps = {
   /**
    * The labels to be displayed on the card.
    * labels should be an array of objects with the following properties:
@@ -126,4 +126,4 @@ export interface DetailCardLabelStackProps {
    * The width of the card in px.
    */
   width: number;
-}
+};

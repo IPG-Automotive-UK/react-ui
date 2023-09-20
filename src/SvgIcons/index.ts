@@ -1,11 +1,14 @@
-export { default as IpgLogo, IpgLogoProps } from "./IpgLogo";
-export { default as VirtoLogo } from "./VirtoLogo";
-export { default as VirtoBuild } from "./VirtoBuild";
-export { default as VirtoFleet } from "./VirtoFleet";
-export { default as VirtoModel } from "./VirtoModel";
-export { default as VirtoScene } from "./VirtoScene";
-export { default as VirtoResult } from "./VirtoResult";
-export { default as VirtoTest } from "./VirtoTest";
-export { default as VirtoData } from "./VirtoData";
-export { default as VirtoVehicle } from "./VirtoVehicle";
-export { default as VirtoID } from "./VirtoID";
+export { default as IpgLogo, type IpgLogoProps } from "./IpgLogo";
+export { default as VirtoBuild, type VirtoBuildProps } from "./VirtoBuild";
+export { default as VirtoData, type VirtoDataProps } from "./VirtoData";
+export { default as VirtoFleet, type VirtoFleetProps } from "./VirtoFleet";
+export { default as VirtoID, type VirtoIDProps } from "./VirtoID";
+export { default as VirtoLogo, type VirtoLogoProps } from "./VirtoLogo";
+export { default as VirtoModel, type VirtoModelProps } from "./VirtoModel";
+export { default as VirtoResult, type VirtoResultProps } from "./VirtoResult";
+export { default as VirtoScene, type VirtoSceneProps } from "./VirtoScene";
+export { default as VirtoTest, type VirtoTestProps } from "./VirtoTest";
+export {
+  default as VirtoVehicle,
+  type VirtoVehicleProps
+} from "./VirtoVehicle";

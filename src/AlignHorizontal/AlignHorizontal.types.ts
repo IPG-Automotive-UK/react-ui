@@ -1,4 +1,4 @@
-export interface AlignHorizontalProps {
+export type AlignHorizontalProps = {
   /**
    * If true, the component is disabled.
    */
@@ -22,4 +22,4 @@ export interface AlignHorizontalProps {
    * The value of the selected button.
    */
   value?: "left" | "center" | "right" | "justify" | null;
-}
+};

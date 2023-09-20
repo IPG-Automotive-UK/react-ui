@@ -22,7 +22,7 @@ export default function Autocomplete<
   label,
   limitTags = -1,
   margin = "normal",
-  multiple = false,
+  multiple,
   onChange,
   options,
   required = false,

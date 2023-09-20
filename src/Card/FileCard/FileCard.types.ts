@@ -1,6 +1,6 @@
 import { File } from "../../Common.types";
 
-export interface FileCardProps {
+export type FileCardProps = {
   /**
    * The download button text.
    */
@@ -41,4 +41,4 @@ export interface FileCardProps {
    * The width of the card in px.
    */
   width?: number;
-}
+};

@@ -1,3 +1,5 @@
-export { default } from "./LabelSelector";
-export { default as LabelSelector } from "./LabelSelector";
-export { default as LabelChip, LabelChipProps } from "./LabelChip";
+export {
+  default as LabelSelector,
+  type LabelSelectorProps
+} from "./LabelSelector";
+export { default as LabelChip, type LabelChipProps } from "./LabelChip";

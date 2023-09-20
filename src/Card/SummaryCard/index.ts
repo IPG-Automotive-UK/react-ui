@@ -1,2 +1,2 @@
 export { default } from "./SummaryCard";
-export { SummaryCardProps } from "./SummaryCard.types";
+export type { SummaryCardProps } from "./SummaryCard.types";

@@ -1,4 +1,4 @@
-export interface VirtoAppLayoutProps {
+export type VirtoAppLayoutProps = {
   /**
    * App name to display in header.
    */
@@ -47,4 +47,4 @@ export interface VirtoAppLayoutProps {
    * A String of the href URL for the Link of the VIRTO Logo, default is null (link disabled)
    */
   virtoLogoLinkUrl?: string;
-}
+};

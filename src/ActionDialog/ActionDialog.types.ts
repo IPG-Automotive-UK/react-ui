@@ -1,4 +1,4 @@
-export interface ActionDialogProps {
+export type ActionDialogProps = {
   /**
    * The text of the cancel button.
    * */
@@ -40,4 +40,4 @@ export interface ActionDialogProps {
    * The width of the dialog. Valid css width can be used.
    */
   width?: string;
-}
+};

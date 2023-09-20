@@ -4,7 +4,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import PropTypes from "prop-types";
 import React from "react";
 
-export default function DialogTitle(props) {
+function DialogTitle(props) {
   const { children, onClose, ...other } = props;
   return (
     <MuiDialogTitle sx={{ m: 0, p: 2 }} {...other}>
@@ -26,6 +26,8 @@ export default function DialogTitle(props) {
     </MuiDialogTitle>
   );
 }
+
+export default DialogTitle;
 
 DialogTitle.propTypes = {
   children: PropTypes.node,

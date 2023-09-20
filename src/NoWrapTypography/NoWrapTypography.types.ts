@@ -2,7 +2,7 @@ import { SxProps, Theme } from "@mui/material/styles";
 
 import { TypographyProps } from "@mui/material";
 
-export interface NoWrapTypographyProps {
+export type NoWrapTypographyProps = {
   /**
    * The content of the component.
    */
@@ -16,4 +16,4 @@ export interface NoWrapTypographyProps {
    * The variant to use.
    */
   variant?: TypographyProps["variant"];
-}
+};

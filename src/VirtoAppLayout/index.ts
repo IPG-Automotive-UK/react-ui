@@ -1,2 +1,2 @@
 export { default } from "./VirtoAppLayout";
-export { VirtoAppLayoutProps } from "./VirtoAppLayout.types";
+export type { VirtoAppLayoutProps } from "./VirtoAppLayout.types";

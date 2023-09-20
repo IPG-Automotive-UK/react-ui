@@ -1,6 +1,6 @@
 import { ChipProps } from "@mui/material";
 
-export interface LabelChipProps extends Omit<ChipProps, "color" | "label"> {
+export type LabelChipProps = Omit<ChipProps, "color" | "label"> & {
   /**
    * The color of the chip.
    */
@@ -9,4 +9,4 @@ export interface LabelChipProps extends Omit<ChipProps, "color" | "label"> {
    * The label content of the chip.
    */
   label: string;
-}
+};

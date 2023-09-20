@@ -1,3 +1,3 @@
-export { default as StatusIcon, StatusIconProps } from "./StatusIcon";
-export { default as StatusLabel, StatusLabelProps } from "./StatusLabel";
-export { default as StatusCard, StatusCardProps } from "./StatusCard";
+export { default as StatusIcon, type StatusIconProps } from "./StatusIcon";
+export { default as StatusLabel, type StatusLabelProps } from "./StatusLabel";
+export { default as StatusCard, type StatusCardProps } from "./StatusCard";

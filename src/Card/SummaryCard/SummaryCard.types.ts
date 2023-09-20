@@ -1,4 +1,4 @@
-export interface SummaryCardProps {
+export type SummaryCardProps = {
   /**
    * The content of the card to be displayed under the media.
    */
@@ -65,4 +65,4 @@ export interface SummaryCardProps {
    * The width of the card in px.
    */
   width?: number;
-}
+};

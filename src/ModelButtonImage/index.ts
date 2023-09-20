@@ -1,2 +1,2 @@
 export { default } from "./ModelButtonImage";
-export { ModelButtonImageProps } from "./ModelButtonImage.types";
+export type { ModelButtonImageProps } from "./ModelButtonImage.types";

@@ -37,7 +37,7 @@ const defaultInputs = {
 // implementation of matchMedia for testing
 // see docs https://mui.com/material-ui/react-use-media-query/#testing
 function createMatchMedia(width: number) {
-  return (query: mediaQuery) => ({
+  return (query: string) => ({
     addEventListener: jest.fn(),
     addListener: () => {},
     dispatchEvent: jest.fn(),

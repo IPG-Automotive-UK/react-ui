@@ -1,4 +1,4 @@
-export interface SidebarProps {
+export type SidebarProps = {
   /**
    * App version to display at base of sidebar.
    */
@@ -15,4 +15,4 @@ export interface SidebarProps {
    * Boolean to determine if version should be displayed at the bottom of the sidebar
    */
   showVersion?: boolean;
-}
+};

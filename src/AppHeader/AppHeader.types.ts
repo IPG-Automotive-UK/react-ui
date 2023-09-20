@@ -1,4 +1,4 @@
-export interface AppHeaderProps {
+export type AppHeaderProps = {
   /**
    * App Logo to display in header.
    */
@@ -19,14 +19,14 @@ export interface AppHeaderProps {
   /**
    * Callback fired when the user clicks on "Change password".
    */
-  onChangePassword: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onChangePassword: (event: React.MouseEvent<HTMLElement>) => void;
   /**
    * Callback fired when the user clicks on "Logout".
    */
-  onLogout: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onLogout: (event: React.MouseEvent<HTMLElement>) => void;
 
   /**
    * Name of currently logged in user.
    */
   username: string;
-}
+};

@@ -26,9 +26,9 @@ export default meta;
 const Template: StoryFn<WizardProps> = args => {
   return (
     <Wizard {...args}>
-      <WizardSteps {...WizardSteps.args} />
-      <WizardContent {...WizardContent.args} />
-      <WizardActions {...WizardActions.args} />
+      <WizardSteps.render {...WizardSteps.args} />
+      <WizardContent.render {...WizardContent.args} />
+      <WizardActions.render {...WizardActions.args} />
     </Wizard>
   );
 };

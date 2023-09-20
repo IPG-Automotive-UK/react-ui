@@ -1,2 +1,2 @@
 export { default } from "./StatusLabel";
-export { StatusLabelProps } from "./StatusLabel.types";
+export type { StatusLabelProps } from "./StatusLabel.types";

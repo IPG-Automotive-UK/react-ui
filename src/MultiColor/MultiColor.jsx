@@ -188,9 +188,9 @@ MultiColor.propTypes = {
    *
    * **Signature**
    * ```
-   * function(event: object) => void
+   * function(rows: object) => void
    * ```
-   * _event_: The event source of the callback.
+   * _rows_: The currently selected rows.
    */
   onChange: PropTypes.func,
   /**

@@ -2,14 +2,13 @@ import {
   Button,
   IconButton,
   Snackbar as MuiSnackbar,
-  SnackbarCloseReason,
   SnackbarContent
 } from "@mui/material";
 import { CheckCircle, Close, Error, Info, Warning } from "@mui/icons-material";
 import { amber, green } from "@mui/material/colors";
 
 import React from "react";
-import { SnackbarProps } from "./Snackbar.types";
+import type { SnackbarProps } from "./Snackbar.types";
 import { Theme } from "@mui/material/styles";
 
 // icon map
@@ -75,10 +74,7 @@ export default function Snackbar({
   const variantStyle = sx[variant];
 
   // callback for closing
-  const handleClose = (
-    event: React.SyntheticEvent<HTMLElement>,
-    reason: SnackbarCloseReason = "timeout"
-  ) => {
+  const handleClose: SnackbarProps["onClose"] = (event, reason = "timeout") => {
     if (reason === "clickaway") return;
     if (onClose) {
       onClose(event, reason);
@@ -124,7 +120,9 @@ export default function Snackbar({
           <IconButton
             key="close"
             color="inherit"
-            onClick={handleClose}
+            onClick={event => {
+              handleClose(event, "timeout");
+            }}
             size="large"
             sx={sx.action}
           >

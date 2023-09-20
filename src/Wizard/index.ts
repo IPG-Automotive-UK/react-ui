@@ -1,17 +1,20 @@
 export { default as Wizard } from "./Wizard";
-export { WizardProps } from "./Wizard.types";
+export type { WizardProps } from "./Wizard.types";
 export {
   default as WizardActions,
-  WizardActionsProps,
-  WizardActionButtonProps,
+  type WizardActionsProps,
+  type WizardActionButtonProps,
   NextButton,
   BackButton,
   CancelButton
 } from "./WizardActions";
-export { default as WizardContent, WizardContentProps } from "./WizardContent";
+export {
+  default as WizardContent,
+  type WizardContentProps
+} from "./WizardContent";
 export {
   default as WizardSteps,
-  WizardStepsProps,
+  type WizardStepsProps,
   WizardStep,
-  WizardStepProps
+  type WizardStepProps
 } from "./WizardSteps";

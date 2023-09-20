@@ -25,7 +25,7 @@ export default function EditLabelDialog({
   onEdit = () => {},
   onClose = () => {},
   labelDialogTitle = "Edit Label",
-  label = { color: "#005FA8", description: "", id: "", name: "" },
+  label = { _id: "", color: "#005FA8", description: "", name: "" },
   nameMaxLength = 50
 }) {
   // define label states for user input
@@ -34,7 +34,7 @@ export default function EditLabelDialog({
   const [color, setColor] = useState("#005FA8");
 
   // check if label is new and not being edited
-  const isNew = label.id === "" && label.name === "";
+  const isNew = label._id === "" && label.name === "";
 
   // reset label states when cancel or close button is clicked
   const handleCancel = () => {
@@ -221,11 +221,11 @@ EditLabelDialog.propTypes = {
   isOpen: PropTypes.bool,
   /**
    * The label to be edited.
-   * @default { color: "#005FA8", description: "", id: "", name: "" }
+   * @default { color: "#005FA8", description: "", _id: "", name: "" }
    * @type {object}
    * @property {string} color The color of the label.
    * @property {string} description The description of the label.
-   * @property {string} id The id of the label.
+   * @property {string} _id The id of the label.
    * @property {string} name The name of the label.
    *
    */

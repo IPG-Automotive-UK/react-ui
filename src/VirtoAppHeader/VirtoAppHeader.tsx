@@ -129,7 +129,8 @@ function VirtoAppHeader({
 
   // handle click event
   const handleMenuClick =
-    (cb: (event: object) => void) => (event: React.MouseEvent<HTMLElement>) => {
+    (cb: (event: React.MouseEvent<HTMLElement>) => void) =>
+    (event: React.MouseEvent<HTMLElement>) => {
       cb(event);
     };
 

@@ -1,13 +1,13 @@
-// File interface
-export interface File {
+// File type
+export type File = {
   filename: string;
   path: string;
-}
+};
 
-// Label interface
-export interface Label {
+// Label type
+export type Label = {
   _id: string;
   color: string;
   description?: string;
   name: string;
-}
+};

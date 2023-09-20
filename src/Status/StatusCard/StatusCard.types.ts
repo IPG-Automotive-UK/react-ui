@@ -1,4 +1,4 @@
-export interface StatusCardProps {
+export type StatusCardProps = {
   /**
    * The status type.
    */
@@ -7,4 +7,4 @@ export interface StatusCardProps {
    * The status message.
    */
   name: string;
-}
+};

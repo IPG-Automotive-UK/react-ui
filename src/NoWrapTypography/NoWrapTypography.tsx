@@ -35,16 +35,14 @@ export default function NoWrapTypography({
       <Typography
         noWrap
         component="p" // forces a block element
-        sx={[
-          {
-            hyphens: "auto",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            whiteSpace: "nowrap",
-            wordBreak: "break-all"
-          },
+        sx={{
+          hyphens: "auto",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          whiteSpace: "nowrap",
+          wordBreak: "break-all",
           ...(Array.isArray(sx) ? sx : [sx])
-        ]}
+        }}
         variant={variant}
       >
         {children}

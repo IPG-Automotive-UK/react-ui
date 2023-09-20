@@ -5,7 +5,7 @@ import AppHeader from "../AppHeader";
 import { AppLayoutProps } from "./AppLayout.types";
 import { ConfirmProvider } from "../ConfirmProvider";
 import Sidebar from "../Sidebar";
-import SnackbarProvider from "../SnackbarProvider";
+import { SnackbarProvider } from "../SnackbarProvider";
 import ThemeProvider from "../ThemeProvider";
 
 // app layout component

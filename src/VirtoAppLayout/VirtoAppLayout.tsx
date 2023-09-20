@@ -3,7 +3,7 @@ import React, { Fragment, useState } from "react";
 
 import { ConfirmProvider } from "../ConfirmProvider";
 import Sidebar from "../Sidebar";
-import SnackbarProvider from "../SnackbarProvider";
+import { SnackbarProvider } from "../SnackbarProvider";
 import ThemeProvider from "../ThemeProvider";
 import VirtoAppHeader from "../VirtoAppHeader";
 import { VirtoAppLayoutProps } from "./VirtoAppLayout.types";

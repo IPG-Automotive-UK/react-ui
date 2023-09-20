@@ -1,4 +1,4 @@
-export interface WizardActionButtonProps {
+export type WizardActionButtonProps = {
   /**
    * If `true`, the button will be disabled.
    */
@@ -7,4 +7,4 @@ export interface WizardActionButtonProps {
    * Callback function to handle click event
    */
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
-}
+};

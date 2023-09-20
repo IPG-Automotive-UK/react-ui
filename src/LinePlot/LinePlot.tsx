@@ -6,7 +6,7 @@ import {
   useTheme
 } from "@mui/material";
 
-import DialogTitle from "../DialogTitle/DialogTitle";
+import DialogTitle from "../DialogTitle";
 import { LinePlotProps } from "./LinePlot.types";
 import Plotly from "react-plotly.js";
 import React from "react";

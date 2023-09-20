@@ -1,2 +1,2 @@
 export { default } from "./ClientOnly";
-export { ClientOnlyProps } from "./ClientOnly.types";
+export type { ClientOnlyProps } from "./ClientOnly.types";

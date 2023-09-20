@@ -1,2 +1,2 @@
 export { default } from "./FileCard";
-export { FileCardProps } from "./FileCard.types";
+export type { FileCardProps } from "./FileCard.types";

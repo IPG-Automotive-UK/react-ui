@@ -1,4 +1,4 @@
-interface BackgroundProps {
+type BackgroundProps = {
   /**
    * The color of the border
    */
@@ -7,9 +7,9 @@ interface BackgroundProps {
    * The color of the background
    */
   backgroundColor: string;
-}
+};
 
-interface ModelButtonProps {
+type ModelButtonProps = {
   /**
    * Children
    */
@@ -37,9 +37,9 @@ interface ModelButtonProps {
    * The status string that determines the border color of the button. Default is `none`.
    */
   status?: "none" | "error" | "warning" | "success";
-}
+};
 
-interface ModelButtonPopupProps {
+type ModelButtonPopupProps = {
   /**
    * Children
    */
@@ -56,6 +56,6 @@ interface ModelButtonPopupProps {
    * The label text to display. Default is an empty string.
    */
   label: string;
-}
+};
 
-export { BackgroundProps, ModelButtonProps, ModelButtonPopupProps };
+export type { BackgroundProps, ModelButtonProps, ModelButtonPopupProps };

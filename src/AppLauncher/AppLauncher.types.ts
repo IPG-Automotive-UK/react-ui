@@ -1,4 +1,4 @@
-export interface AppLauncherProps {
+export type AppLauncherProps = {
   /**
    * Base URL for VIRTO home page. All apps are served relative to this URL.
    * @default 'http://localhost:3000'
@@ -23,4 +23,4 @@ export interface AppLauncherProps {
    * Boolean to determine if logo should be displayed at the top of the AppLauncher
    */
   showLogo?: boolean | undefined;
-}
+};

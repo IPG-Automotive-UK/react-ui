@@ -1,4 +1,5 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+
 import React from "react";
 import RegistrationForm from "./";
 import userEvent from "@testing-library/user-event";
@@ -53,16 +54,14 @@ describe("RegistrationForm", () => {
 
     // click register
     await user.click(elements.submit);
-    await waitFor(() =>
-      expect(onRegister).toHaveReturnedWith({
-        email: "joe.bloggs@domain.com",
-        firstName: "Joe",
-        lastName: "Bloggs",
-        password: "indigo shark wallplug",
-        passwordRepeat: "indigo shark wallplug",
-        team: teams[0]
-      })
-    );
+    expect(onRegister).toHaveReturnedWith({
+      email: "joe.bloggs@domain.com",
+      firstName: "Joe",
+      lastName: "Bloggs",
+      password: "indigo shark wallplug",
+      passwordRepeat: "indigo shark wallplug",
+      team: teams[0]
+    });
   });
   it("doesnt call callback on validation errors", async () => {
     const user = userEvent.setup();
@@ -72,7 +71,7 @@ describe("RegistrationForm", () => {
     // incorrect email format
     // missing first, lastname, team, password + password repeat
     user.click(elements.submit);
-    await waitFor(() => expect(onRegister).not.toHaveBeenCalled());
+    expect(onRegister).not.toHaveBeenCalled();
   });
   describe("Password restrictions", () => {
     it("displays password complexity score", async () => {
@@ -81,11 +80,9 @@ describe("RegistrationForm", () => {
       const elements = setup({ onRegister });
       await user.type(elements.inputs.password, "something");
       await user.click(elements.inputs.passwordRepeat); // moving to next form element triggers validation
-      await waitFor(() =>
-        expect(
-          screen.queryByText("Password strength: 0/4. Minimum required 3+.")
-        ).toBeInTheDocument()
-      );
+      expect(
+        screen.queryByText("Password strength: 0/4. Minimum required 3+.")
+      ).toBeInTheDocument();
     });
     it("displays user feedback on password", async () => {
       const user = userEvent.setup();
@@ -93,13 +90,11 @@ describe("RegistrationForm", () => {
       const elements = setup({ onRegister });
       await user.type(elements.inputs.password, "something");
       await user.click(elements.inputs.passwordRepeat); // moving to next form element triggers validation
-      await waitFor(() =>
-        expect(
-          screen.queryByText(
-            "Add another word or two. Uncommon words are better."
-          )
-        ).toBeInTheDocument()
-      );
+      expect(
+        screen.queryByText(
+          "Add another word or two. Uncommon words are better."
+        )
+      ).toBeInTheDocument();
     });
   });
 });

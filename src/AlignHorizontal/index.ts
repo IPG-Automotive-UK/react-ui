@@ -1,2 +1,2 @@
 export { default } from "./AlignHorizontal";
-export { AlignHorizontalProps } from "./AlignHorizontal.types";
+export type { AlignHorizontalProps } from "./AlignHorizontal.types";

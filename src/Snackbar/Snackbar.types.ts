@@ -1,9 +1,9 @@
-import {
+import type {
   SnackbarProps as MuiSnackbarProps,
   SnackbarContentProps
 } from "@mui/material";
 
-export interface SnackbarProps {
+export type SnackbarProps = {
   /**
    * Callback fired when the user clicks the action button.
    */
@@ -32,4 +32,4 @@ export interface SnackbarProps {
    * Variant used to control the styling and icon.
    */
   variant?: "error" | "info" | "success" | "warning";
-}
+};

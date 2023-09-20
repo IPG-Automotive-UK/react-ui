@@ -28,7 +28,7 @@ const meta: Meta<typeof ModelButton> = {
 export default meta;
 
 // default component with no children
-const DefaultTemplate = args => {
+const DefaultTemplate: StoryFn<ModelButtonProps> = args => {
   return <ModelButton {...args} onClick={event => action("onClick")(event)} />;
 };
 

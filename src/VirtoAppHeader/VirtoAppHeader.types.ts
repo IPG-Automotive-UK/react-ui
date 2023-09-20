@@ -1,4 +1,4 @@
-export interface VirtoAppHeaderProps {
+export type VirtoAppHeaderProps = {
   /**
    * App name to display in header.
    */
@@ -15,11 +15,11 @@ export interface VirtoAppHeaderProps {
   /**
    * Callback fired when the user clicks on "Change password".
    */
-  onChangePassword: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onChangePassword: (event: React.MouseEvent<HTMLElement>) => void;
   /**
    * Callback fired when the user clicks on "Logout".
    */
-  onLogout: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onLogout: (event: React.MouseEvent<HTMLElement>) => void;
   /**
    * Callback fired when the color mode is changed.
    */
@@ -35,9 +35,9 @@ export interface VirtoAppHeaderProps {
   /**
    * callback is fired when user clicks on "menu"
    */
-  onMenuClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onMenuClick: (event: React.MouseEvent<HTMLElement>) => void;
   /**
    * callback is fired when user clicks on "App"
    */
-  onAppClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
-}
+  onAppClick: (event: React.MouseEvent<HTMLElement>) => void;
+};

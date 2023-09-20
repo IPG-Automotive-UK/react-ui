@@ -20,6 +20,7 @@ import { Meta, StoryFn } from "@storybook/react";
 import React from "react";
 import SummaryCard from "./SummaryCard";
 import { SummaryCardProps } from "./SummaryCard.types";
+import { Theme } from "@mui/material/styles";
 import { action } from "@storybook/addon-actions";
 
 /**
@@ -64,7 +65,7 @@ export const Default = {
 // styling
 const sx = {
   headerTableCell: {
-    color: theme =>
+    color: (theme: Theme) =>
       theme.palette.mode === "light"
         ? "rgba(0, 0, 0, 0.6)"
         : "rgba(255, 255, 255, 0.7)",
