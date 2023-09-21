@@ -1,4 +1,4 @@
-import { Context } from "react";
+import type { SnackbarProps } from "../Snackbar/Snackbar.types";
 
 export type SnackbarProviderProps = {
   children: React.ReactNode;
@@ -6,6 +6,15 @@ export type SnackbarProviderProps = {
 
 declare const SnackbarProvider: React.FC<SnackbarProviderProps>;
 
-declare function useSnackbar<T>(context: Context<T> | null): T;
+declare const useSnackbar: () => {
+  close: () => void;
+  show: (
+    message: SnackbarProps["message"],
+    variant: SnackbarProps["variant"],
+    autoHideDuration?: SnackbarProps["autoHideDuration"],
+    actionText?: SnackbarProps["actionText"],
+    actionCallback?: SnackbarProps["actionCallback"]
+  ) => void;
+};
 
 export { SnackbarProvider, useSnackbar };
