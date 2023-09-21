@@ -1,21 +1,12 @@
 import { CSSProperties } from "react";
+import type { StatusIconProps } from "../StatusIcon";
 
 export type StatusLabelProps = {
   /**
    *
    * The status type.
    */
-  status:
-    | "passed"
-    | "not-run"
-    | "pending"
-    | "cancelled"
-    | "completed"
-    | "failed"
-    | "not-ready"
-    | "ready"
-    | "running"
-    | "submitted";
+  status: StatusIconProps["status"];
   /**
    * The Variant type.
    */

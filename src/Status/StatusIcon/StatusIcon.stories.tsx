@@ -27,6 +27,5 @@ export const Default = {
     status: statusTypes[0],
     width: 40
   },
-
   render: Template
 };

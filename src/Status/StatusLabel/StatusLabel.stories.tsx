@@ -30,6 +30,5 @@ export const Default = {
     status: statusTypes[0],
     variant: "body2"
   },
-
   render: Template
 };
