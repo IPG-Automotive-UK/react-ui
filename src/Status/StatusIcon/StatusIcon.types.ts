@@ -14,13 +14,14 @@ export type StatusIconProps = {
    * The status type.
    */
   status:
-    | "passed"
-    | "not-run"
-    | "pending"
     | "cancelled"
     | "completed"
     | "failed"
+    | "no-metrics"
     | "not-ready"
+    | "not-run"
+    | "passed"
+    | "pending"
     | "ready"
     | "running"
     | "submitted";

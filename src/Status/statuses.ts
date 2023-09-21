@@ -4,6 +4,7 @@ import {
   Cancel,
   ChangeCircle,
   CheckCircle,
+  Error,
   Task,
   Timelapse,
   Warning
@@ -39,6 +40,15 @@ const statuses = {
     },
     label: {
       text: "Failed"
+    }
+  },
+  "no-metrics": {
+    icon: {
+      color: grey[400],
+      type: Error
+    },
+    label: {
+      text: "No Metrics"
     }
   },
   "not-ready": {
@@ -108,6 +118,6 @@ const statuses = {
 
 export default statuses;
 
-export const statusTypes = Object.keys(statuses) as Array<
+export const statusTypes = Object.keys(statuses).sort() as Array<
   keyof typeof statuses
 >;
