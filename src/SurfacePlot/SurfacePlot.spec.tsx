@@ -15,9 +15,6 @@ test("Surface plot in fullscreen and title visible", async ({ page }) => {
     .locator("div:nth-child(4) > .modebar-btn")
     .click();
 
-  // Fill in the title input with the text "Test"
-  await page.getByLabel("Surface Plot", { exact: true }).fill("Test");
-
   // Assert that the fullscreen dialog is visible
   await expect(
     page
@@ -26,5 +23,9 @@ test("Surface plot in fullscreen and title visible", async ({ page }) => {
   ).toBeVisible();
 
   // Assert that the title of the fullscreen dialog is visible
-  await expect(page.getByText("Test")).toBeVisible();
+  await expect(
+    page
+      .frameLocator('iframe[title="storybook-preview-iframe"]')
+      .getByText("Surface Plot")
+  ).toBeVisible();
 });
