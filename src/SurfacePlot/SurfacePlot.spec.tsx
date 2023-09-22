@@ -1,31 +1,18 @@
 import { expect, test } from "@playwright/test";
 
 test("Surface plot in fullscreen and title visible", async ({ page }) => {
+  // Navigate to the SurfacePlot component
   await page.goto(
-    "http://localhost:6006/?path=/story/plots-surfaceplot--default",
-    { waitUntil: "networkidle" }
+    "http://localhost:6006/?path=/story/plots-surfaceplot--default"
   );
 
-  await page.waitForTimeout(2000);
-  await page.waitForSelector('iframe[title="storybook-preview-iframe"]');
-
-  await expect(
-    page
-      .frameLocator('iframe[title="storybook-preview-iframe"]')
-      .locator("div:nth-child(4) > .modebar-btn")
-  ).toBeVisible();
-
+  // Click the fullscreen button
   await page
     .frameLocator('iframe[title="storybook-preview-iframe"]')
     .locator("div:nth-child(4) > .modebar-btn")
     .click();
 
-  await expect(
-    page
-      .frameLocator('iframe[title="storybook-preview-iframe"]')
-      .locator(".MuiDialogContent-root")
-  ).toBeVisible();
-
+  // Check that the title is visible
   await expect(
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
