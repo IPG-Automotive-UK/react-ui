@@ -37,6 +37,7 @@ jobs:
           CI: true
       - name: Upload Playwright Report
         uses: actions/upload-artifact@v2
+        if: always()
         with:
           name: playwright-report ${{ matrix.node-version }}
           path: playwright-report
