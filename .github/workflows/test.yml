@@ -22,7 +22,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm install -force
       - run: npm run storybook & npx wait-on tcp:127.0.0.1:6006
-      - run: npm test
+      - run: npm run test:playwright
         env:
           CI: true
       - uses: actions/upload-artifact@v2
