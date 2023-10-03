@@ -8,24 +8,33 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
         node-version: [18.x]
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout Repo
+        uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm install -force
-      - run: npm run storybook ; npx wait-on http://localhost:6006
-      - run: npm test
+      - name: Install Dependencies
+        run: npm install -force
+      - name: Lint Checks
+        run: npm run test:lint
+      - name: Typescript Checks
+        run: npm run type-check
+      - name: Unit Tests
+        run: npm run test:unit
         env:
           CI: true
-      - uses: actions/upload-artifact@v2
+      - name: End to End Tests
+        run: npm run test:playwright
+      - name: Upload Coverage Report
+        uses: actions/upload-artifact@v2
         with:
           name: coverage-report ${{ matrix.node-version }}
           path: coverage/lcov-report
