@@ -33,6 +33,11 @@ jobs:
           CI: true
       - name: End to End Tests
         run: npm run test:playwright
+      - name: Upload Playwright Report
+        uses: actions/upload-artifact@v2
+        with:
+          name: playwright-report ${{ matrix.node-version }}
+          path: playwright-report
       - name: Upload Coverage Report
         uses: actions/upload-artifact@v2
         with:
