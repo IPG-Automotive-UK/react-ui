@@ -21,7 +21,14 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install -force
-      - run: npm run test
+      - name: Lint Checks
+        run: npm run test:lint
+      - name: Typescript Checks
+        run: npm run type-check
+      - name: Unit Tests
+        run: npm run test:unit
+      - name: E2E Tests
+        run: npm run test:playwright
         env:
           CI: true
       - uses: actions/upload-artifact@v2
