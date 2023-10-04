@@ -21,14 +21,14 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install Dependencies
         run: npm install -force
-      # - name: Lint Checks
-      #   run: npm run test:lint
-      # - name: Typescript Checks
-      #   run: npm run type-check
-      # - name: Unit Tests
-      #   run: npm run test:unit
-      #   env:
-      #     CI: true
+      - name: Lint Checks
+        run: npm run test:lint
+      - name: Typescript Checks
+        run: npm run type-check
+      - name: Unit Tests
+        run: npm run test:unit
+        env:
+          CI: true
       - name: End to End Tests (Linux)
         if: runner.os == 'Linux'
         run: sudo apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y xvfb && xvfb-run npm run test:playwright:headed
