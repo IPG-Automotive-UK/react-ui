@@ -30,6 +30,12 @@ jobs:
         env:
           CI: true
       - name: End to End Tests
+        if: runner.os == 'Linux'
+        run: apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y xvfb && xvfb-run npm run test:playwright:headed
+        env:
+          CI: true
+      - name: End to End Tests
+        if: runner.os != 'Linux'
         run: npm run test:playwright
         env:
           CI: true
