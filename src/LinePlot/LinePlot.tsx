@@ -52,7 +52,7 @@ const LinePlot = ({
         height="100%"
         width="100%"
       >
-        {showTitle ? (
+        {!isFullscreen && showTitle ? (
           <Typography
             align="center"
             style={{ padding: "0 16px", wordWrap: "break-word" }}
