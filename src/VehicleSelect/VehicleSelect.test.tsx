@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 
 import React from "react";
 import VehicleSelect from "./VehicleSelect";
@@ -71,6 +71,9 @@ const VehicleSelectWithState = ({
  * Tests
  */
 describe("Vehicle Select", () => {
+  // increase jest timeout to allow for async operations
+  jest.setTimeout(10000);
+
   // test that the component renders with the default props
   it("renders component", () => {
     render(<VehicleSelectWithState {...defaultProps} />);
@@ -85,8 +88,13 @@ describe("Vehicle Select", () => {
     await userEvent.click(
       screen.getByRole("combobox", { name: /project code/i })
     );
-    // click the first option
-    await userEvent.click(screen.getByRole("option", { name: /911/i }));
+    // Use waitFor to wait for the option to appear
+    await waitFor(() =>
+      expect(screen.getByRole("option", { name: /911/i })).toBeInTheDocument()
+    );
+
+    // Click the first option
+    userEvent.click(screen.getByRole("option", { name: /911/i }));
 
     // explicitly close the dropdown
     await userEvent.click(document.body);
@@ -109,6 +117,12 @@ describe("Vehicle Select", () => {
     await userEvent.click(
       screen.getByRole("combobox", { name: /model year/i })
     );
+
+    // use waitFor to wait for the option to appear
+    await waitFor(() =>
+      expect(screen.getByRole("option", { name: /2016/i })).toBeInTheDocument()
+    );
+
     // click the first option
     await userEvent.click(screen.getByRole("option", { name: /2015/i }));
 
@@ -135,6 +149,12 @@ describe("Vehicle Select", () => {
         name: /vehicle variant/i
       })
     );
+
+    // use waitFor to wait for the option to appear
+    await waitFor(() =>
+      expect(screen.getByRole("option", { name: /JS/i })).toBeInTheDocument()
+    );
+
     // click the first option
     await userEvent.click(screen.getByRole("option", { name: /JS/i }));
 
@@ -161,6 +181,12 @@ describe("Vehicle Select", () => {
         name: /vehicle variant/i
       })
     );
+
+    // use waitFor to wait for the option to appear
+    await waitFor(() =>
+      expect(screen.getByRole("option", { name: /MP/i })).toBeInTheDocument()
+    );
+
     // click the second option
     await userEvent.click(screen.getByRole("option", { name: /MP/i }));
 
@@ -194,6 +220,14 @@ describe("Vehicle Select", () => {
         name: /gate/i
       })
     );
+
+    // use waitFor to wait for the option to appear
+    await waitFor(() =>
+      expect(
+        screen.getByRole("option", { name: /Gate 1/i })
+      ).toBeInTheDocument()
+    );
+
     // click the first option
     await userEvent.click(screen.getByRole("option", { name: /Gate 1/i }));
 
@@ -227,6 +261,14 @@ describe("Vehicle Select", () => {
         name: /gate/i
       })
     );
+
+    // use waitFor to wait for the option to appear
+    await waitFor(() =>
+      expect(
+        screen.getByRole("option", { name: /Gate 2/i })
+      ).toBeInTheDocument()
+    );
+
     // click the second option
     await userEvent.click(screen.getByRole("option", { name: /Gate 2/i }));
 
