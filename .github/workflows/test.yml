@@ -1,31 +1,46 @@
 name: Tests
-
 on:
   push:
     branches:
       - main
   pull_request:
-
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
+  tests:
     strategy:
       matrix:
         node-version: [18.x]
-
+        os: [ubuntu-latest, windows-latest, macos-latest]
+      fail-fast: false
+    runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout Repo
+        uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm install -force
-      - run: npm run storybook & npx wait-on http://localhost:6006
-      - run: npm test
+      - name: Install Dependencies
+        run: npm install -force
+      - name: Lint Checks
+        run: npm run test:lint
+      - name: Typescript Checks
+        run: npm run type-check
+      - name: Unit Tests
+        run: npm run test:unit
         env:
           CI: true
-      - uses: actions/upload-artifact@v2
+      - name: End to End Tests
+        run: npm run test:playwright
+        env:
+          CI: true
+      - name: Upload Playwright Report
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: playwright-report ${{ matrix.node-version }}
+          path: playwright-report
+      - name: Upload Coverage Report
+        uses: actions/upload-artifact@v3
         with:
           name: coverage-report ${{ matrix.node-version }}
           path: coverage/lcov-report
