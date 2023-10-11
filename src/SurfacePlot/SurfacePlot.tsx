@@ -1,7 +1,7 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import React, { useState } from "react";
 
-import ConditionalDialog from "src/FullScreenDialog/FullScreenDialog";
+import FullScreenDialog from "src/FullScreenDialog/FullScreenDialog";
 import Plotly from "react-plotly.js";
 import { SurfacePlotProps } from "./SurfacePlot.types";
 import { getConfig } from "src/utils/plotlyConfig";
@@ -38,7 +38,7 @@ const SurfacePlot = ({
   const config = getConfig({ handleClickFullscreen, isFullscreen });
 
   return (
-    <ConditionalDialog
+    <FullScreenDialog
       condition={isFullscreen}
       onClose={handleClose}
       dialogTitle={title}
@@ -126,7 +126,7 @@ const SurfacePlot = ({
           config={config}
         />
       </Box>
-    </ConditionalDialog>
+    </FullScreenDialog>
   );
 };
 

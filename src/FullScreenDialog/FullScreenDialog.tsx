@@ -1,11 +1,11 @@
 import { Box, Dialog, DialogContent } from "@mui/material";
 
-import { ConditionalDialogProps } from "./FullScreenDialog.types";
 import DialogTitle from "../DialogTitle";
+import { FullScreenDialogProps } from "./FullScreenDialog.types";
 import React from "react";
 
 // This component is used to render a dialog that uses the full width (if the condition is true)
-const ConditionalDialog = (props: ConditionalDialogProps) => {
+const FullScreenDialog = (props: FullScreenDialogProps) => {
   const { condition, onClose, children, dialogTitle } = props;
   // If the condition is true, render a dialog with the specified title and content
   if (condition) {
@@ -26,4 +26,4 @@ const ConditionalDialog = (props: ConditionalDialogProps) => {
   }
 };
 
-export default ConditionalDialog;
+export default FullScreenDialog;

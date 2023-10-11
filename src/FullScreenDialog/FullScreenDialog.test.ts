@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 test("Fullscreen dialog title and content rendered", async ({ page }) => {
   // Navigate to the FullScreenDialog component in Storybook
   await page.goto(
-    "http://localhost:6006/?path=/story/reusable-conditionaldialog--default"
+    "http://localhost:6006/?path=/story/dialog-fullscreendialog--default"
   );
 
   // Get the title of the fullscreen dialog and assert that it is correct
