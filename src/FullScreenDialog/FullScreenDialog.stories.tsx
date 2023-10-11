@@ -9,7 +9,7 @@ import React from "react";
  */
 const meta: Meta = {
   component: ConditionalDialog,
-  title: "Utils/ConditionalDialog"
+  title: "Dialog/ConditionalDialog"
 };
 export default meta;
 
