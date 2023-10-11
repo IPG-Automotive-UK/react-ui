@@ -5,14 +5,16 @@ import SurfacePlot from "./SurfacePlot";
 import { SurfacePlotProps } from "./SurfacePlot.types";
 import { useArgs } from "@storybook/client-api";
 
-// Define metadata for the story
+/**
+ * Story metadata
+ */
 const meta: Meta = {
   component: SurfacePlot,
   title: "Plots/SurfacePlot"
 };
 export default meta;
 
-// Define a story template that can be reused for different stories
+// Story Template
 const Template: StoryFn<SurfacePlotProps> = args => {
   // Get the current values of the story's arguments and a function to update them
   const [{ showTitle }, updateArgs] = useArgs<SurfacePlotProps>();

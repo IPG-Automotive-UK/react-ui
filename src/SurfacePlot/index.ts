@@ -1,5 +1,4 @@
-// This file exports the default export of the SurfacePlotClientOnly module
-// and the SurfacePlotProps type from the SurfacePlot.types module.
+// This file exports the default export of the SurfacePlotClientOnly module and the SurfacePlotProps type from the SurfacePlot.types module.
 
 // Import the default export from the SurfacePlotClientOnly module
 export { default } from "./SurfacePlotClientOnly";
