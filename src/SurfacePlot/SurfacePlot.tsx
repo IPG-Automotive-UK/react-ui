@@ -1,10 +1,10 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import React, { useState } from "react";
 
-import FullScreenDialog from "src/FullScreenDialog/FullScreenDialog";
+import FullScreenDialog from "../FullScreenDialog";
 import Plotly from "react-plotly.js";
 import { SurfacePlotProps } from "./SurfacePlot.types";
-import { getConfig } from "src/utils/plotlyConfig";
+import { getConfig } from "../utils/plotlyConfig";
 
 // The `SurfacePlot` component renders a 3D surface plot using Plotly.
 const SurfacePlot = ({
