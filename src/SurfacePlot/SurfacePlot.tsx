@@ -70,9 +70,10 @@ const SurfacePlot = ({
           ]}
           layout={{
             autosize: true,
+            height: isFullscreen ? 320 : 450,
             margin: {
-              pad: 4,
-              t: 50
+              pad: 0,
+              t: 5
             },
             paper_bgcolor: "rgba(0,0,0,0)",
             scene: {
