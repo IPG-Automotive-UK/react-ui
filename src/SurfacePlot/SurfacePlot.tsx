@@ -1,17 +1,12 @@
-import {
-  Box,
-  Dialog,
-  DialogContent,
-  Typography,
-  useTheme
-} from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import React, { useState } from "react";
 
-import DialogTitle from "../DialogTitle";
+import ConditionalDialog from "src/FullScreenDialog/FullScreenDialog";
 import Plotly from "react-plotly.js";
 import { SurfacePlotProps } from "./SurfacePlot.types";
+import { getConfig } from "src/utils/plotlyConfig";
 
-// Define the SurfacePlot component
+// The `SurfacePlot` component renders a 3D surface plot using Plotly.
 const SurfacePlot = ({
   xdata = [],
   ydata = [],
@@ -23,6 +18,7 @@ const SurfacePlot = ({
   markers = false,
   showTitle = false
 }: SurfacePlotProps) => {
+  // theme hook
   const theme = useTheme();
 
   // state for fullscreen
@@ -79,7 +75,6 @@ const SurfacePlot = ({
               t: 50
             },
             paper_bgcolor: "rgba(0,0,0,0)",
-            // plot_bgcolor: "rgba(0,0,0,0)",
             scene: {
               xaxis: {
                 color: theme.palette.mode === "light" ? "" : "white",
@@ -136,67 +131,3 @@ const SurfacePlot = ({
 };
 
 export default SurfacePlot;
-
-// svg path for fullscreen icon in plotly menu bar
-const fullscreenIcon = {
-  height: 1792,
-  path: "M256 1408h1280v-768h-1280v768zm1536-1120v1216q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-1216q0-66 47-113t113-47h1472q66 0 113 47t47 113z",
-  width: 1792
-};
-
-type ConfigProps = {
-  isFullscreen: boolean;
-  handleClickFullscreen: () => void;
-};
-
-/**
- * Returns a plotly config function with provided callback for clicking fullscreen
- */
-const getConfig = ({ isFullscreen, handleClickFullscreen }: ConfigProps) => {
-  return {
-    displaylogo: false, // never display plotly logo
-    modeBarButtonsToAdd: !isFullscreen // if we are not in full screen, show a button to launch to fullscreen
-      ? [
-          {
-            click: handleClickFullscreen,
-            direction: "up",
-            icon: fullscreenIcon,
-            name: "Fullscreen",
-            title: "Fullscreen"
-          }
-        ]
-      : []
-  };
-};
-
-type ConditionalDialogProps = {
-  condition: boolean;
-  onClose: () => void;
-  children: React.ReactNode;
-  dialogTitle?: string;
-};
-
-/**
- * Returns children in a fullscreen dialog if condition is true, otherwise just returns children
- */
-function ConditionalDialog({
-  condition,
-  onClose,
-  children,
-  dialogTitle
-}: ConditionalDialogProps) {
-  if (condition) {
-    return (
-      <Dialog maxWidth="xl" fullWidth open>
-        <DialogTitle onClose={onClose}>
-          <Box sx={dialogTitle ? {} : { p: 2 }}>{dialogTitle}</Box>
-        </DialogTitle>
-        <DialogContent dividers>
-          <Box style={{ height: "calc(100vh - 168px)" }}>{children}</Box>
-        </DialogContent>
-      </Dialog>
-    );
-  } else {
-    return children;
-  }
-}
