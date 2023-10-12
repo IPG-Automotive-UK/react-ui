@@ -86,9 +86,9 @@ export { default as LoginForm, type LoginFormProps } from "./LoginForm";
 export { default as ModelButton, type ModelButtonProps } from "./ModelButton";
 export { default as MultiColor, type MultiColorProps } from "./MultiColor";
 export {
-  default as FullScreenDialog,
-  type FullScreenDialogProps
-} from "./FullScreenDialog";
+  default as ConditionalDialog,
+  type ConditionalDialogProps
+} from "./ConditionalDialog";
 export {
   default as MultiLabelPopover,
   type MultiLabelPopoverProps

@@ -1,25 +1,25 @@
 import { Meta, StoryFn } from "@storybook/react";
 
-import FullScreenDialog from "./FullScreenDialog";
-import { FullScreenDialogProps } from "./FullScreenDialog.types";
+import ConditionalDialog from "./ConditionalDialog";
+import { ConditionalDialogProps } from "./ConditionalDialog.types";
 import React from "react";
 
 /**
  * Story metadata
  */
 const meta: Meta = {
-  component: FullScreenDialog,
-  title: "Dialog/FullScreenDialog"
+  component: ConditionalDialog,
+  title: "Dialog/ConditionalDialog"
 };
 export default meta;
 
 // Story Template
-const Template: StoryFn<FullScreenDialogProps> = args => {
-  // Render the FullScreenDialog component with the current arguments
+const Template: StoryFn<ConditionalDialogProps> = args => {
+  // Render the ConditionalDialog component with the current arguments
   return (
-    <FullScreenDialog {...args}>
+    <ConditionalDialog {...args}>
       <div>Content goes here</div>
-    </FullScreenDialog>
+    </ConditionalDialog>
   );
 };
 
@@ -28,8 +28,8 @@ export const Default = {
   // Set the default values for the story's arguments
   args: {
     condition: true,
-    dialogTitle: "Dialog Title",
-    onClose: () => {}
+    onClose: () => {},
+    title: "Dialog Title"
   },
   // Set the render function to use the story template
   render: Template

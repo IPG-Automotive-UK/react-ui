@@ -1,7 +1,7 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import React, { useState } from "react";
 
-import FullScreenDialog from "../FullScreenDialog";
+import ConditionalDialog from "../ConditionalDialog";
 import Plotly from "react-plotly.js";
 import { SurfacePlotProps } from "./SurfacePlot.types";
 import { getConfig } from "../utils/plotlyConfig";
@@ -38,10 +38,10 @@ const SurfacePlot = ({
   const config = getConfig({ handleClickFullscreen, isFullscreen });
 
   return (
-    <FullScreenDialog
+    <ConditionalDialog
       condition={isFullscreen}
       onClose={handleClose}
-      dialogTitle={title}
+      title={title}
     >
       <Box
         display="flex"
@@ -61,6 +61,13 @@ const SurfacePlot = ({
         <Plotly
           data={[
             {
+              colorbar: {
+                tickfont: {
+                  color: theme.palette.mode === "light" ? "" : "white",
+                  family: "Montserrat",
+                  size: 12
+                }
+              },
               mode: markers ? "lines+markers" : "lines",
               type: "surface",
               x: xdata,
@@ -70,13 +77,15 @@ const SurfacePlot = ({
           ]}
           layout={{
             autosize: true,
-            height: isFullscreen ? 320 : 450,
             margin: {
-              pad: 0,
+              b: 5,
+              l: 5,
+              r: 5,
               t: 5
             },
             paper_bgcolor: "rgba(0,0,0,0)",
             scene: {
+              camera: { eye: { x: 2 } },
               xaxis: {
                 color: theme.palette.mode === "light" ? "" : "white",
                 gridcolor:
@@ -122,12 +131,18 @@ const SurfacePlot = ({
               }
             }
           }}
-          style={{ flexGrow: 1, height: "100%", minHeight: 0, width: "100%" }}
+          style={{
+            flexGrow: 1,
+            fontFamily: "Montserrat",
+            height: "100%",
+            minHeight: 0,
+            width: "100%"
+          }}
           useResizeHandler={true}
           config={config}
         />
       </Box>
-    </FullScreenDialog>
+    </ConditionalDialog>
   );
 };
 
