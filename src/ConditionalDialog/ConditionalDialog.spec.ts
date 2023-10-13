@@ -29,6 +29,13 @@ test("Condition false should not render dialog", async ({ page }) => {
     "http://localhost:6006/?path=/story/dialog-conditionaldialog--condition-false"
   );
 
+  // locate the iframe
+  const frame = page.frameLocator('iframe[title="storybook-preview-iframe"]');
+
+  // try locate the open dialog and assert that it is not visible
+  const openDialog = await frame.locator("#open-dialog");
+  expect(await openDialog.isVisible()).toBeFalsy();
+
   // Get the content of the body and assert that it is correct
   const content = await page
     .frameLocator('iframe[title="storybook-preview-iframe"]')

@@ -10,7 +10,7 @@ const ConditionalDialog = (props: ConditionalDialogProps) => {
   // If the condition is true, render a dialog with the specified title and content
   if (condition) {
     return (
-      <Dialog maxWidth="xl" fullWidth open>
+      <Dialog maxWidth="xl" fullWidth open id="open-dialog">
         <DialogTitle onClose={onClose}>
           <Box sx={title ? {} : { p: 2 }}>{title}</Box>
         </DialogTitle>
