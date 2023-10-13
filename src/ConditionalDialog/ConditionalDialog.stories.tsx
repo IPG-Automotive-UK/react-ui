@@ -34,3 +34,13 @@ export const Default = {
   // Set the render function to use the story template
   render: Template
 };
+
+// Define the condition false story
+export const conditionFalse = {
+  // Set the condition false value for the story's arguments
+  args: {
+    condition: false
+  },
+  // Set the render function to use the story template
+  render: Template
+};
