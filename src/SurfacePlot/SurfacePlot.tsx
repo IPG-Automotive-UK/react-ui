@@ -81,7 +81,7 @@ const SurfacePlot = ({
               b: 5,
               l: 5,
               r: 5,
-              t: 5
+              t: 20
             },
             paper_bgcolor: "rgba(0,0,0,0)",
             scene: {
