@@ -80,10 +80,15 @@ export {
   type LabelSelectorProps
 } from "./LabelSelector";
 export { default as LinePlot, type LinePlotProps } from "./LinePlot";
+export { default as SurfacePlot, type SurfacePlotProps } from "./SurfacePlot";
 export { default as Loading, type LoadingProps } from "./Loading";
 export { default as LoginForm, type LoginFormProps } from "./LoginForm";
 export { default as ModelButton, type ModelButtonProps } from "./ModelButton";
 export { default as MultiColor, type MultiColorProps } from "./MultiColor";
+export {
+  default as ConditionalDialog,
+  type ConditionalDialogProps
+} from "./ConditionalDialog";
 export {
   default as MultiLabelPopover,
   type MultiLabelPopoverProps

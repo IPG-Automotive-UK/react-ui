@@ -29,7 +29,13 @@ jobs:
         run: npm run test:unit
         env:
           CI: true
-      - name: End to End Tests
+      - name: End to End Tests (Linux)
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y xvfb && xvfb-run npm run test:playwright:headed
+        env:
+          CI: true
+      - name: End to End Tests (Windows & MacOS)
+        if: runner.os != 'Linux'
         run: npm run test:playwright
         env:
           CI: true
