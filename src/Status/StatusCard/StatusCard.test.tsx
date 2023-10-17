@@ -22,7 +22,7 @@ describe("StatusCard", () => {
     expect(nameElement).toBeInTheDocument();
   });
 
-  test.each(["passed", "failed", "not-run", "pending"] as const)(
+  test.each(["passed", "failed", "not-run", "pending", "no-metrics"] as const)(
     "renders correct icon for %s",
     status => {
       // render component
