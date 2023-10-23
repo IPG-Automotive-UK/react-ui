@@ -68,7 +68,7 @@ export const DataFetchError = {
 export const TechnicalError = {
   args: {
     contactTeam: "Support",
-    errorDetails: "No data found",
+    errorDetails: "",
     message:
       "We're experiencing technical difficulties with our server right now. 😓",
     showImg: true,

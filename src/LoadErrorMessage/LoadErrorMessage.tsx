@@ -46,7 +46,7 @@ const LoadErrorMessage = ({
       }}
     >
       {/* Render the VirtoThinking SVG if showImg prop is true */}
-      {showImg && <VirtoThinking />}
+      {showImg && <VirtoThinking data-testid="virto-thinking-svg" />}
       {/* Render the error title */}
       <Typography
         variant="h6"
@@ -64,16 +64,14 @@ const LoadErrorMessage = ({
       >
         <span>{message}</span>
       </Typography>
-
       {/* Render the action button if actionButtonText prop is provided */}
       {actionButtonText && (
         <Button variant="contained" onClick={onButtonClick}>
           {actionButtonText}
         </Button>
       )}
-
       {/* Render the error details if detailsVisible state is true */}
-      {detailsVisible ? (
+      {detailsVisible && (
         <>
           {/* Render the "Hide More Details" text */}
           <Typography
@@ -126,8 +124,10 @@ const LoadErrorMessage = ({
             </Box>
           </Box>
         </>
-      ) : (
-        // Render the "View More Details" text if detailsVisible state is false
+      )}
+
+      {/* Render the "View More Details" text if errorDetails isn't empty and detailsVisible state is false */}
+      {errorDetails && !detailsVisible && (
         <Typography
           variant="body2"
           color="var(--light-primary-main, #003063)"
@@ -137,7 +137,6 @@ const LoadErrorMessage = ({
           View More Details
         </Typography>
       )}
-
       {/* Render the contact team text */}
       <Typography
         fontFamily="Montserrat"
@@ -148,20 +147,34 @@ const LoadErrorMessage = ({
         color="var(--light-text-primary, rgba(0, 0, 0, 0.87))"
       >
         If this persists, contact {/* Render the contact team link */}
-        <Typography
-          fontFamily="Montserrat"
-          fontSize="12px"
-          fontStyle="normal"
-          fontWeight="400"
-          lineHeight="166%"
-          letterSpacing="0.4px"
-          color="var(--light-primary-main, #003063)"
-          display="inline"
-          style={{ cursor: "pointer", textDecoration: "underline" }}
-          onClick={handleSupportClick}
-        >
-          {contactTeam}
-        </Typography>
+        {supportUrl ? (
+          <Typography
+            fontFamily="Montserrat"
+            fontSize="12px"
+            fontStyle="normal"
+            fontWeight="400"
+            lineHeight="166%"
+            letterSpacing="0.4px"
+            color="var(--light-primary-main, #003063)"
+            display="inline"
+            style={{ cursor: "pointer", textDecoration: "underline" }}
+            onClick={handleSupportClick}
+          >
+            {contactTeam}
+          </Typography>
+        ) : (
+          <Typography
+            fontFamily="Montserrat"
+            fontSize="12px"
+            fontStyle="normal"
+            fontWeight="400"
+            lineHeight="166%"
+            letterSpacing="0.4px"
+            display="inline"
+          >
+            {contactTeam}
+          </Typography>
+        )}
       </Typography>
     </Box>
   );
