@@ -8,12 +8,6 @@ import type { ImageUploaderProps } from "./ImageUploader.types";
 import React from "react";
 import { makeStyles } from "@mui/styles";
 
-// types and interfaces for style compatability
-interface CSSProperties {
-  [key: string]: string | number | CSSProperties;
-}
-type StyleRules = Record<string, CSSProperties>;
-
 // image uploader component
 function Uploader({
   title = "Model Image",
@@ -26,60 +20,54 @@ function Uploader({
   showErrorAlert = true
 }: ImageUploaderProps) {
   // styling
-  const useStyles = makeStyles(
-    (theme: Theme) =>
-      ({
-        root: {
-          "& .MuiBox-root.css-1jiaacd img,.MuiBox-root.css-fksjaj img": {
-            height: "225px !important"
-          },
-          "& .MuiBox-root.css-1jiaacd, .MuiBox-root.css-fksjaj": {
-            flexBasis: "100% !important",
-            maxWidth: "100% !important",
-            padding: "0px !important"
-          },
-          "& .MuiBox-root.css-xi606m, .MuiBox-root.css-fksjaj": {
-            display: "flex",
-            flexDirection: "row-reverse",
-            justifyContent: "center"
-          },
+  const useStyles = makeStyles((theme: Theme) => ({
+    root: {
+      "& .MuiBox-root.css-1jiaacd img,.MuiBox-root.css-fksjaj img": {
+        height: "225px !important"
+      },
+      "& .MuiBox-root.css-1jiaacd, .MuiBox-root.css-fksjaj": {
+        flexBasis: "100% !important",
+        maxWidth: "100% !important",
+        padding: "0px !important"
+      },
+      "& .MuiBox-root.css-xi606m, .MuiBox-root.css-fksjaj": {
+        display: "flex",
+        flexDirection: "row-reverse",
+        justifyContent: "center"
+      },
 
-          "& .MuiButtonBase-root": {
-            borderRadius: "50% !important",
-            padding: "8px !important"
-          },
+      "& .MuiButtonBase-root": {
+        borderRadius: "50% !important",
+        padding: "8px !important"
+      },
 
-          "& .MuiSvgIcon-root": {
-            color: theme.palette.text.primary,
-            display:
-              selectedFiles.length === 1
-                ? "none !important"
-                : "block !important",
-            fontSize: "22px !important",
-            height: "22px !important",
-            width: "22px !important"
-          },
+      "& .MuiSvgIcon-root": {
+        color: theme.palette.text.primary,
+        display:
+          selectedFiles.length === 1 ? "none !important" : "block !important",
+        fontSize: "22px !important",
+        height: "22px !important",
+        width: "22px !important"
+      },
 
-          "& .MuiTypography-root": {
-            color: theme.palette.text.primary,
-            fontSize: "15px",
-            margin: "0 0 0 10px !important"
-          },
+      "& .MuiTypography-root": {
+        color: theme.palette.text.primary,
+        fontSize: "15px",
+        margin: "0 0 0 10px !important"
+      },
 
-          alignItems: "center",
-          backgroundColor: theme.palette.background.default,
-          borderWidth: "1px !important",
-          display:
-            selectedFiles.length === 1 ? "block !important" : "flex !important",
-          justifyContent: "center",
-          minHeight: "250px !important",
-          padding: "10px",
-          pointerEvents:
-            selectedFiles.length === 1 ? "none !important" : "auto !important",
-          width: "100% !important"
-        }
-      }) as StyleRules
-  );
+      alignItems: "center",
+      backgroundColor: theme.palette.background.default,
+      borderWidth: "1px !important",
+      display:
+        selectedFiles.length === 1 ? "block !important" : "flex !important",
+      justifyContent: "center",
+      minHeight: "250px !important",
+      padding: "10px",
+      pointerEvents: selectedFiles.length === 1 ? "none" : "auto",
+      width: "100% !important"
+    }
+  }));
 
   // use theme
   const theme = useTheme();

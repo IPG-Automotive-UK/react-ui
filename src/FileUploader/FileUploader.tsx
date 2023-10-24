@@ -9,10 +9,6 @@ import React from "react";
 import { makeStyles } from "@mui/styles";
 
 // types and interfaces for style compatability
-interface CSSProperties {
-  [key: string]: string | number | CSSProperties;
-}
-type StyleRules = Record<string, CSSProperties>;
 
 // file uploader component
 function Uploader({
@@ -29,66 +25,60 @@ function Uploader({
   showErrorAlert = true
 }: FileUploaderProps) {
   // styling
-  const useStyles = makeStyles(
-    (theme: Theme) =>
-      ({
-        root: {
-          "& .MuiBox-root.css-1jiaacd, .MuiBox-root.css-fksjaj": {
-            flexBasis: "100% !important",
-            maxWidth: "100% !important",
-            padding: "0px !important"
-          },
-          "& .MuiBox-root.css-xi606m, .MuiBox-root.css-fksjaj": {
-            display: "flex",
-            flexDirection: "row-reverse",
-            justifyContent: "center"
-          },
+  const useStyles = makeStyles((theme: Theme) => ({
+    root: {
+      "& .MuiBox-root.css-1jiaacd, .MuiBox-root.css-fksjaj": {
+        flexBasis: "100% !important",
+        maxWidth: "100% !important",
+        padding: "0px !important"
+      },
+      "& .MuiBox-root.css-xi606m, .MuiBox-root.css-fksjaj": {
+        display: "flex",
+        flexDirection: "row-reverse",
+        justifyContent: "center"
+      },
 
-          "& .MuiButtonBase-root": {
-            borderRadius: "50% !important",
-            padding: "8px !important"
-          },
+      "& .MuiButtonBase-root": {
+        borderRadius: "50% !important",
+        padding: "8px !important"
+      },
 
-          "& .MuiSvgIcon-root": {
-            color: theme.palette.text.primary,
-            display:
-              !multiple && selectedFiles.length === 1
-                ? "none !important"
-                : "block !important",
-            fontSize: "22px !important",
-            height: "22px !important",
-            width: "22px !important"
-          },
+      "& .MuiSvgIcon-root": {
+        color: theme.palette.text.primary,
+        display:
+          !multiple && selectedFiles.length === 1
+            ? "none !important"
+            : "block !important",
+        fontSize: "22px !important",
+        height: "22px !important",
+        width: "22px !important"
+      },
 
-          "& .MuiTypography-root": {
-            color:
-              !multiple && selectedFiles.length === 1
-                ? theme.palette.primary.main
-                : theme.palette.text.primary,
-            fontSize: "15px",
-            margin: "0 0 0 10px !important"
-          },
-          "& .MuiTypography-root.MuiTypography-subtitle1.css-10wpov9-MuiTypography-root ":
-            {
-              color: "red !important"
-            },
+      "& .MuiTypography-root": {
+        color:
+          !multiple && selectedFiles.length === 1
+            ? theme.palette.primary.main
+            : theme.palette.text.primary,
+        fontSize: "15px",
+        margin: "0 0 0 10px !important"
+      },
+      "& .MuiTypography-root.MuiTypography-subtitle1.css-10wpov9-MuiTypography-root ":
+        {
+          color: "red !important"
+        },
 
-          alignItems: "center",
-          backgroundColor: theme.palette.background.default,
-          borderWidth: "1px !important",
-          display: "flex !important",
-          justifyContent: "center",
-          marginBottom: "10px !important",
-          minHeight: "70px !important",
-          padding: "10px",
-          pointerEvents:
-            !multiple && selectedFiles.length === 1
-              ? "none !important"
-              : "auto !important",
-          width: "100% !important"
-        }
-      }) as StyleRules
-  );
+      alignItems: "center",
+      backgroundColor: theme.palette.background.default,
+      borderWidth: "1px !important",
+      display: "flex !important",
+      justifyContent: "center",
+      marginBottom: "10px !important",
+      minHeight: "70px !important",
+      padding: "10px",
+      pointerEvents: !multiple && selectedFiles.length === 1 ? "none" : "auto",
+      width: "100% !important"
+    }
+  }));
 
   // use theme
   const theme = useTheme();
