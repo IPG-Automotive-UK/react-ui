@@ -154,7 +154,15 @@ function Uploader({
         showAlerts={showErrorAlert && ["error"]}
         alertSnackbarProps={{
           anchorOrigin: { horizontal: "center", vertical: "bottom" },
-          autoHideDuration: 3000
+          autoHideDuration: 3000,
+          sx: {
+            ".MuiIconButton-root": {
+              color: theme.palette.error.contrastText
+            },
+            ".MuiSnackbarContent-root": {
+              color: theme.palette.error.contrastText
+            }
+          }
         }}
         useChipsForPreview={!!multiple}
       />
