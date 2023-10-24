@@ -8,8 +8,6 @@ import type { FileUploaderProps } from "./FileUploader.types";
 import React from "react";
 import { makeStyles } from "@mui/styles";
 
-// types and interfaces for style compatability
-
 // file uploader component
 function Uploader({
   acceptedFiles = [],
@@ -160,7 +158,8 @@ function Uploader({
               color: theme.palette.error.contrastText
             },
             ".MuiSnackbarContent-root": {
-              color: theme.palette.error.contrastText
+              color: theme.palette.error.contrastText,
+              flexWrap: "nowrap"
             }
           }
         }}
