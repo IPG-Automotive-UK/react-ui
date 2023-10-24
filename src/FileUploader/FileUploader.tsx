@@ -1,10 +1,10 @@
 import { Box, IconButton, Typography } from "@mui/material";
-import { ThemeProvider, useTheme } from "@mui/material/styles";
+import { DropzoneAreaBase, FileObject } from "mui-file-dropzone";
+import { Theme, ThemeProvider, useTheme } from "@mui/material/styles";
 
 import DeleteIcon from "@mui/icons-material/Delete";
-import { DropzoneAreaBase } from "mui-file-dropzone";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
-import PropTypes from "prop-types";
+import type { FileUploaderProps } from "./FileUploader.types";
 import React from "react";
 import { makeStyles } from "@mui/styles";
 
@@ -19,10 +19,11 @@ function Uploader({
   onDelete = () => {},
   required = false,
   selectedFiles = [],
-  title = "Upload a File"
-}) {
+  title = "Upload a File",
+  showErrorAlert = true
+}: FileUploaderProps) {
   // styling
-  const useStyles = makeStyles(theme => ({
+  const useStyles = makeStyles((theme: Theme) => ({
     root: {
       "& .MuiBox-root.css-1jiaacd, .MuiBox-root.css-fksjaj": {
         flexBasis: "100% !important",
@@ -72,33 +73,35 @@ function Uploader({
       marginBottom: "10px !important",
       minHeight: "70px !important",
       padding: "10px",
-      pointerEvents:
-        !multiple && selectedFiles.length === 1
-          ? "none !important"
-          : "auto !important",
+      pointerEvents: !multiple && selectedFiles.length === 1 ? "none" : "auto",
       width: "100% !important"
     }
   }));
+
   // use theme
   const theme = useTheme();
   const classes = useStyles(theme);
 
   // handle file change
-  const handleAdd = newFiles => {
-    onAdd(newFiles);
+  const handleAdd = (newFiles: FileObject[]) => {
+    if (!multiple) {
+      onAdd(newFiles);
+    } else {
+      const updatedFiles = [...selectedFiles, ...newFiles];
+      onAdd(updatedFiles);
+    }
   };
 
   // handle file delete
-  const handleDelete = index => {
+  const handleDelete = (data: React.SyntheticEvent | FileObject) => {
     if (!multiple) {
       onDelete([]);
-    } else {
-      // delete file from selected files
-      const findItem = selectedFiles.indexOf(index);
-      if (findItem > -1) {
-        selectedFiles.splice(findItem, 1);
-      }
-      onDelete(selectedFiles);
+      return;
+    }
+
+    if (data) {
+      const updatedFiles = selectedFiles.filter(file => file !== data);
+      onDelete(updatedFiles);
     }
   };
 
@@ -125,7 +128,7 @@ function Uploader({
         </Typography>
         {!multiple && selectedFiles.length === 1 ? (
           <IconButton aria-label="delete" onClick={handleDelete}>
-            <DeleteIcon color={selectedFiles.length === 1 ? "error" : ""} />
+            <DeleteIcon color={"error"} />
           </IconButton>
         ) : null}
       </Box>
@@ -137,17 +140,30 @@ function Uploader({
             ? selectedFiles[0].file.name
             : dropzoneText
         }
+        dropzoneClass={classes.root}
         fileObjects={selectedFiles}
+        filesLimit={multiple ? filesLimit : 1}
         Icon={FileUploadIcon}
         onAdd={handleAdd}
         onDelete={handleDelete}
-        filesLimit={multiple ? filesLimit : 1}
-        useChipsForPreview={!!multiple}
         showPreviewsInDropzone={false}
         showPreviews={!!multiple}
         previewText=""
-        showAlerts={false}
-        dropzoneClass={classes.root}
+        showAlerts={showErrorAlert && ["error"]}
+        alertSnackbarProps={{
+          anchorOrigin: { horizontal: "center", vertical: "bottom" },
+          autoHideDuration: 3000,
+          sx: {
+            ".MuiIconButton-root": {
+              color: theme.palette.error.contrastText
+            },
+            ".MuiSnackbarContent-root": {
+              color: theme.palette.error.contrastText,
+              flexWrap: "nowrap"
+            }
+          }
+        }}
+        useChipsForPreview={!!multiple}
       />
     </Box>
   );
@@ -164,8 +180,9 @@ export default function FileUploader({
   onDelete = () => {},
   required = false,
   selectedFiles = [],
-  title = "Upload a File"
-}) {
+  title = "Upload a File",
+  showErrorAlert = true
+}: FileUploaderProps) {
   // use theme
   const theme = useTheme();
   return (
@@ -181,82 +198,8 @@ export default function FileUploader({
         onAdd={onAdd}
         onDelete={onDelete}
         selectedFiles={selectedFiles}
+        showErrorAlert={showErrorAlert}
       />
     </ThemeProvider>
   );
 }
-
-FileUploader.propTypes = {
-  /**
-   *  List of file types to accept.
-   * @default []
-   * @type {array}
-   * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
-   */
-  acceptedFiles: PropTypes.array,
-  /**
-   * Text to display in dropzone
-   */
-  dropzoneText: PropTypes.string,
-  /**
-   * Maximum number of files to upload
-   * @default 3
-   * @type {number}
-   */
-  filesLimit: PropTypes.number,
-  /**
-   * Maximum file size (in bytes) that the dropzone will accept.
-   * @default 1000000000
-   * @type {number}
-   */
-  maxFileSize: PropTypes.number,
-  /**
-   * If true, the dropzone will support multiple files
-   * @default false
-   * @type {boolean}
-   */
-  multiple: PropTypes.bool,
-  /**
-   * Callback fired when the files is changed.
-   *
-   * **Signature**
-   * ```
-   * function(selectedFiles: array) => void
-   * ```
-   *
-   * _selectedFiles_: The files that are currently selected.
-   * @default () => {}
-   * @type {function}
-   */
-  onAdd: PropTypes.func,
-  /**
-   * Callback fired when the file is deleted.
-   *
-   * **Signature**
-   * ```
-   * function(_deleted_: array) => void
-   * ```
-   *
-   * _deleted_: The files that are currently deleted.
-   * @default () => {}
-   * @type {function}
-   */
-  onDelete: PropTypes.func,
-  /**
-   * If true, red star shows on title
-   * @default false
-   * @type {boolean}
-   */
-  required: PropTypes.bool,
-  /**
-   *  List of seleted files.
-   * @default []
-   * @type {array}
-   */
-
-  selectedFiles: PropTypes.array,
-  /**
-   * Text to display in title
-   */
-  title: PropTypes.string
-};

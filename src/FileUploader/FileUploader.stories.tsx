@@ -1,13 +1,20 @@
+import { Meta, StoryFn } from "@storybook/react";
+
 import FileUploader from "./FileUploader";
+import { FileUploaderProps } from "./FileUploader.types";
 import React from "react";
 import { action } from "@storybook/addon-actions";
 
-export default {
+/**
+ * Story metadata
+ */
+const meta: Meta<typeof FileUploader> = {
   component: FileUploader,
   title: "General/FileUploader"
 };
+export default meta;
 
-const Template = args => {
+const Template: StoryFn<FileUploaderProps> = args => {
   // selectedFiles state
   const [selectedFiles, setSelectedFiles] = React.useState(args.selectedFiles);
 
@@ -46,6 +53,7 @@ export const Default = {
     onDelete: () => {},
     required: false,
     selectedFiles: [],
+    showErrorAlert: true,
     title: "Upload a File"
   },
 
