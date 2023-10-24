@@ -90,7 +90,7 @@ const LoadErrorMessage = ({
                 ? "var(--dark-primary-main, #87A5D2)"
                 : "var(--light-primary-main, #003063)"
             }
-            style={{ cursor: "pointer" }}
+            sx={{ cursor: "pointer" }}
             onClick={handleDetailsClick}
           >
             Hide More Details
@@ -109,7 +109,7 @@ const LoadErrorMessage = ({
               ? "var(--dark-primary-main, #87A5D2)"
               : "var(--light-primary-main, #003063)"
           }
-          style={{ cursor: "pointer" }}
+          sx={{ cursor: "pointer" }}
           onClick={handleDetailsClick}
         >
           View More Details
@@ -141,7 +141,7 @@ const LoadErrorMessage = ({
                 : "var(--light-primary-main, #003063)"
             }
             display="inline"
-            style={{ cursor: "pointer", textDecoration: "underline" }}
+            sx={{ cursor: "pointer", textDecoration: "underline" }}
             onClick={handleSupportClick}
           >
             {contactTeam}
