@@ -1,4 +1,4 @@
-import { Alert, Button, Paper, Typography } from "@mui/material";
+import { Alert, Button, Paper, Typography, lighten } from "@mui/material";
 import React, { useState } from "react";
 
 import { LoadErrorMessageProps } from "./LoadErrorMessage.types";
@@ -31,19 +31,16 @@ const LoadErrorMessage = ({
   // Render the LoadErrorMessage component
   return (
     <Paper
-      sx={theme => ({
+      variant="outlined"
+      sx={{
         alignItems: "center",
-        border:
-          theme.palette.mode === "dark"
-            ? "1px solid var(--dark-other-outlined-border-23-p, rgba(255, 255, 255, 0.23))"
-            : "1px solid var(--light-other-outlined-border-23-p, rgba(0, 0, 0, 0.23))",
         borderRadius: "3px",
         display: "flex",
         flexDirection: "column",
         gap: "16px",
         padding: "24px",
         width: "320px"
-      })}
+      }}
     >
       {/* Render the VirtoThinking SVG if showImg prop is true */}
       {showImg && (
@@ -57,9 +54,9 @@ const LoadErrorMessage = ({
         variant="h6"
         fontWeight="600"
         textAlign="center"
-        color="#D32F2F"
+        color={theme => theme.palette.error.main}
       >
-        <span>{title}</span>
+        {title}
       </Typography>
       {/* Render the error message */}
       <Typography
@@ -67,11 +64,11 @@ const LoadErrorMessage = ({
         textAlign="center"
         color={theme =>
           theme.palette.mode === "dark"
-            ? "var(--dark-text-secondary, rgba(255, 255, 255, 0.70))"
-            : "rgba(0, 0, 0, 0.87)"
+            ? lighten(theme.palette.text.secondary, 0.7)
+            : theme.palette.text.primary
         }
       >
-        <span>{message}</span>
+        {message}
       </Typography>
       {/* Render the action button if actionButtonText prop is provided */}
       {actionButtonText && (
@@ -85,18 +82,16 @@ const LoadErrorMessage = ({
           {/* Render the "Hide More Details" text */}
           <Typography
             variant="body2"
-            color={theme =>
-              theme.palette.mode === "dark"
-                ? "var(--dark-primary-main, #87A5D2)"
-                : "var(--light-primary-main, #003063)"
-            }
+            color={theme => theme.palette.primary.main}
             sx={{ cursor: "pointer" }}
             onClick={handleDetailsClick}
           >
             Hide More Details
           </Typography>
           {/* Render the error details */}
-          <Alert severity="error">{errorDetails}</Alert>
+          <Alert severity="error" sx={{ alignItems: "center" }}>
+            {errorDetails}
+          </Alert>
         </>
       )}
 
@@ -104,11 +99,7 @@ const LoadErrorMessage = ({
       {errorDetails && !detailsVisible && (
         <Typography
           variant="body2"
-          color={theme =>
-            theme.palette.mode === "dark"
-              ? "var(--dark-primary-main, #87A5D2)"
-              : "var(--light-primary-main, #003063)"
-          }
+          color={theme => theme.palette.primary.main}
           sx={{ cursor: "pointer" }}
           onClick={handleDetailsClick}
         >
@@ -117,46 +108,26 @@ const LoadErrorMessage = ({
       )}
       {/* Render the contact team text */}
       <Typography
-        fontSize="12px"
-        lineHeight="20x"
-        letterSpacing="0.17px"
-        fontWeight="400"
+        variant="caption"
         color={theme =>
           theme.palette.mode === "dark"
-            ? "var(--dark-text-secondary, rgba(255, 255, 255, 0.70))"
-            : "rgba(0, 0, 0, 0.87)"
+            ? lighten(theme.palette.text.secondary, 0.7)
+            : theme.palette.text.primary
         }
       >
         If this persists, contact {/* Render the contact team link */}
         {supportUrl ? (
           <Typography
-            fontSize="12px"
-            fontStyle="normal"
-            fontWeight="400"
-            lineHeight="166%"
-            letterSpacing="0.4px"
-            color={theme =>
-              theme.palette.mode === "dark"
-                ? "var(--dark-primary-main, #87A5D2)"
-                : "var(--light-primary-main, #003063)"
-            }
-            display="inline"
-            sx={{ cursor: "pointer", textDecoration: "underline" }}
+            variant="caption"
+            component={"a"}
+            color={theme => theme.palette.primary.main}
+            sx={{ textDecoration: "underline" }}
             onClick={handleSupportClick}
           >
             {contactTeam}
           </Typography>
         ) : (
-          <Typography
-            fontSize="12px"
-            fontStyle="normal"
-            fontWeight="400"
-            lineHeight="166%"
-            letterSpacing="0.4px"
-            display="inline"
-          >
-            {contactTeam}
-          </Typography>
+          <Typography variant="caption">{contactTeam}</Typography>
         )}
       </Typography>
     </Paper>
