@@ -19,7 +19,8 @@ export default function Select({
   value = "",
   variant = "outlined"
 }) {
-  const valueIsValid = options.some(
+  // set value for select, when options is a key value pair the value will be in option.value otherwise option is the value
+  const setValue = options.some(
     option => option.value === value || option === value
   );
 
@@ -33,13 +34,14 @@ export default function Select({
       margin={margin}
       fullWidth
       label={label}
-      value={valueIsValid ? value : ""}
+      value={setValue ? value : ""}
       onChange={onChange}
       disabled={disabled}
       id={label}
       helperText={helperText}
       size={size}
     >
+      {/* Render the options */}
       {options.map(option => {
         const value = option.value || option;
         const key = option.key || option;
@@ -85,7 +87,7 @@ Select.propTypes = {
    */
   onChange: PropTypes.func,
   /**
-   * Array of options to display.
+   * Array of options to display. Each option can be a string, number, or an object with `key` and `value` properties.
    */
   options: PropTypes.arrayOf(
     PropTypes.oneOfType([

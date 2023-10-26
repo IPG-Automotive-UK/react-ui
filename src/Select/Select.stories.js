@@ -42,8 +42,8 @@ export const KeyValueOptions = {
     label: "Select an option",
     margin: "normal",
     options: [
-      { key: "Option A", value: "Option A" },
-      { key: "Option B", value: "Option B" }
+      { key: "option-a", value: "Option A" },
+      { key: "option-b", value: "Option B" }
     ],
     required: true,
     size: "medium",
