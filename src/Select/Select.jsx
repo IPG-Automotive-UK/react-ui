@@ -1,4 +1,5 @@
 import { MenuItem, TextField } from "@mui/material";
+
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -15,9 +16,13 @@ export default function Select({
   options = [],
   required = false,
   size = "medium",
-  value,
+  value = "",
   variant = "outlined"
 }) {
+  const valueIsValid = options.some(
+    option => option.value === value || option === value
+  );
+
   // return components
   return (
     <TextField
@@ -28,18 +33,22 @@ export default function Select({
       margin={margin}
       fullWidth
       label={label}
-      value={options.includes(value) ? value : ""}
+      value={valueIsValid ? value : ""}
       onChange={onChange}
       disabled={disabled}
       id={label}
       helperText={helperText}
       size={size}
     >
-      {options.map(option => (
-        <MenuItem value={option} key={option}>
-          {option}
-        </MenuItem>
-      ))}
+      {options.map(option => {
+        const value = option.value || option;
+        const key = option.key || option;
+        return (
+          <MenuItem value={value} key={key}>
+            {value}
+          </MenuItem>
+        );
+      })}
     </TextField>
   );
 }
@@ -79,7 +88,14 @@ Select.propTypes = {
    * Array of options to display.
    */
   options: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+      PropTypes.shape({
+        key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+      })
+    ])
   ),
   /**
    * If true, the label will indicate that the input is required.
