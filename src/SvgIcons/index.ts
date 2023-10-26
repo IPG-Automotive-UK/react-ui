@@ -12,3 +12,7 @@ export {
   default as VirtoVehicle,
   type VirtoVehicleProps
 } from "./VirtoVehicle";
+export {
+  default as VirtoThinking,
+  type VirtoThinkingProps
+} from "./VirtoMascots/VirtoThinking";
