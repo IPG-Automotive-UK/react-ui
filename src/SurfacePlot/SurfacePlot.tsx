@@ -88,6 +88,7 @@ const SurfacePlot = ({
               camera: { eye: { x: 2 } },
               xaxis: {
                 color: theme.palette.mode === "light" ? "" : "white",
+                exponentformat: "E",
                 gridcolor:
                   theme.palette.mode === "light"
                     ? ""
@@ -103,6 +104,7 @@ const SurfacePlot = ({
               },
               yaxis: {
                 color: theme.palette.mode === "light" ? "" : "white",
+                exponentformat: "E",
                 gridcolor:
                   theme.palette.mode === "light"
                     ? ""
@@ -117,6 +119,7 @@ const SurfacePlot = ({
               },
               zaxis: {
                 color: theme.palette.mode === "light" ? "" : "white",
+                exponentformat: "E",
                 gridcolor:
                   theme.palette.mode === "light"
                     ? ""
