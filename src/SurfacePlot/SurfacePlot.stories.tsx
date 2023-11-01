@@ -3,7 +3,7 @@ import { Meta, StoryFn } from "@storybook/react";
 import React from "react";
 import SurfacePlot from "./SurfacePlot";
 import { SurfacePlotProps } from "./SurfacePlot.types";
-import { useArgs } from "@storybook/client-api";
+import { useArgs } from "@storybook/preview-api";
 
 /**
  * Story metadata

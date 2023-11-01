@@ -42,7 +42,7 @@ describe("RegistrationForm", () => {
 
     // get the button that opens the dropdown, which is a sibling of the input
     const selectButton =
-      elements.inputs.team.parentNode.querySelector("[role=button]");
+      elements.inputs.team.parentNode.querySelector("[role=combobox]");
 
     // open the select dropdown
     await user.click(selectButton);

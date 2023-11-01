@@ -4,7 +4,7 @@ import { SelectedVehicle, VehicleSelectProps } from "./VehicleSelect.types";
 import React from "react";
 import VehicleSelect from "./VehicleSelect";
 import { action } from "@storybook/addon-actions";
-import { useArgs } from "@storybook/client-api";
+import { useArgs } from "@storybook/preview-api";
 
 /**
  * Story metadata
