@@ -78,7 +78,7 @@ const LinePlot = ({
             autosize: true,
             margin: {
               b: 35,
-              l: 60,
+              l: 80,
               r: 10,
               t: 30
             },
@@ -86,6 +86,7 @@ const LinePlot = ({
             plot_bgcolor: "rgba(0,0,0,0)",
             xaxis: {
               color: theme.palette.mode === "light" ? "" : "white",
+              exponentformat: "E",
               gridcolor:
                 theme.palette.mode === "light" ? "" : theme.palette.grey["500"],
               showgrid: false,
@@ -99,6 +100,7 @@ const LinePlot = ({
             },
             yaxis: {
               color: theme.palette.mode === "light" ? "" : "white",
+              exponentformat: "E",
               gridcolor:
                 theme.palette.mode === "light" ? "" : theme.palette.grey["500"],
               ticksuffix: " ",
