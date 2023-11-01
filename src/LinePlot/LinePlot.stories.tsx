@@ -3,7 +3,7 @@ import { Meta, StoryFn } from "@storybook/react";
 import LinePlot from "./LinePlot";
 import { LinePlotProps } from "./LinePlot.types";
 import React from "react";
-import { useArgs } from "@storybook/client-api";
+import { useArgs } from "@storybook/preview-api";
 
 /**
  * Story metadata
