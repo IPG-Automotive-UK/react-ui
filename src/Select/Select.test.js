@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+
 import React from "react";
 import Select from "./";
 import userEvent from "@testing-library/user-event";
@@ -42,7 +43,7 @@ describe("Select", () => {
     const value = options[3];
 
     // get the button that opens the dropdown, which is a sibling of the input
-    const selectButton = container.parentNode.querySelector("[role=button]");
+    const selectButton = container.parentNode.querySelector("[role=combobox]");
 
     // open the select dropdown
     await user.click(selectButton);
