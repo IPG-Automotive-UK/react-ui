@@ -6,6 +6,12 @@ import { userEvent } from "@storybook/testing-library";
 
 // sample options
 const options = ["option 1", "option 2", "option 3"];
+const keyValueOptions = [
+  { key: 1, value: "Option 1" },
+  { key: 2, value: "Option 2" },
+  { key: 3, value: "Option 3" },
+  { key: 4, value: "Option 4" }
+];
 
 /**
  * Tests
@@ -96,5 +102,39 @@ describe("Select", () => {
 
     // check the second call with "option 2"
     expect(onChange.mock.calls[1][1]).toEqual(["option 2"]);
+  });
+
+  it("can single select with key-value pairs", async () => {
+    const onChange = jest.fn();
+
+    render(
+      <Autocomplete
+        multiple={false}
+        options={keyValueOptions}
+        onChange={onChange}
+        label="Select an option"
+        value={{ key: 2, value: "option 2" }}
+      />
+    );
+
+    // click the label selector down arrow
+    await userEvent.click(screen.getByRole("button", { name: /open/i }));
+
+    // check that the options are rendered
+    keyValueOptions.forEach(opt =>
+      expect(screen.getByText(opt.value)).toBeInTheDocument()
+    );
+
+    // click the first option and check callback is called
+    await userEvent.click(screen.getByText("Option 1"));
+    expect(onChange).toHaveBeenCalledTimes(1);
+
+    // check that the onChange event is fired with the expected value
+    expect(onChange).toHaveBeenCalledWith(
+      expect.anything(),
+      { key: 1, value: "Option 1" },
+      expect.anything(),
+      expect.anything()
+    );
   });
 });

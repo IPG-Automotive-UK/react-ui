@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import { AutocompleteProps, KeyValueOption } from "./Autocomplete.types";
 import {
   Box,
   Checkbox,
@@ -9,10 +10,8 @@ import {
 } from "@mui/material";
 import { CheckBox, CheckBoxOutlineBlank } from "@mui/icons-material";
 
-import { AutocompleteProps } from "./Autocomplete.types";
-
 export default function Autocomplete<
-  Value extends string,
+  Value extends KeyValueOption | string,
   Multiple extends boolean | undefined
 >({
   disableCloseOnSelect = false,
@@ -37,6 +36,9 @@ export default function Autocomplete<
       multiple={multiple}
       onChange={onChange}
       options={options}
+      getOptionLabel={(option: KeyValueOption | string) =>
+        typeof option === "string" ? option : option.value
+      }
       renderInput={params => (
         <TextField
           {...params}
@@ -60,7 +62,7 @@ export default function Autocomplete<
 // renderer for a checkbox option
 function Option(
   props: React.HTMLAttributes<HTMLLIElement>,
-  option: string,
+  option: KeyValueOption | string,
   { selected }: { selected: boolean }
 ) {
   return (
@@ -69,9 +71,11 @@ function Option(
         icon={<CheckBoxOutlineBlank fontSize="small" />}
         checkedIcon={<CheckBox fontSize="small" />}
         checked={selected}
-        value={option}
+        value={typeof option === "string" ? option : option.key}
       />
-      <Typography>{option}</Typography>
+      <Typography>
+        {typeof option === "string" ? option : option.value}
+      </Typography>
     </Box>
   );
 }
