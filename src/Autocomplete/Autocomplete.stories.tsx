@@ -1,7 +1,7 @@
+import { AutocompleteProps, KeyValueOption } from "./Autocomplete.types";
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
 
 import Autocomplete from "./Autocomplete";
-import { AutocompleteProps } from "./Autocomplete.types";
 import React from "react";
 import { action } from "@storybook/addon-actions";
 import { useArgs } from "@storybook/preview-api";
@@ -22,12 +22,15 @@ function isReadOnlyArray<T>(
   return Array.isArray(value);
 }
 
+// Define the template for the story
 const Template: StoryFn<
-  AutocompleteProps<string, boolean | undefined>
+  AutocompleteProps<string | KeyValueOption, boolean | undefined>
 > = args => {
+  // Use the useArgs hook to get and update the args
   const [{ value, multiple }, updateArgs] =
     useArgs<AutocompleteProps<string, boolean | undefined>>();
 
+  // Use an effect to update the value arg based on the multiple arg
   React.useEffect(() => {
     if (multiple && value && !isReadOnlyArray(value))
       updateArgs({ value: value !== "" ? [value] : [] });
@@ -35,17 +38,33 @@ const Template: StoryFn<
       updateArgs({ value: value.length > 0 ? value[0] : "" });
   }, [updateArgs, multiple, value]);
 
+  // Determine the value to use based on the multiple and value args
   let theValue;
   if (multiple && Array.isArray(value)) theValue = value;
   if (multiple && !Array.isArray(value) && value) theValue = [value];
   if (!multiple && Array.isArray(value)) theValue = value[0];
   if (!multiple && !Array.isArray(value)) theValue = value;
 
+  // Return the Autocomplete component with the appropriate props
   return (
     <Autocomplete
       {...args}
       onChange={(event, newValue) => {
-        updateArgs({ value: newValue });
+        if (newValue !== null) {
+          if (Array.isArray(newValue)) {
+            updateArgs({
+              value: newValue.map(val =>
+                typeof val === "string" ? val : val.value
+              )
+            });
+          } else {
+            updateArgs({
+              value: typeof newValue === "string" ? newValue : newValue.value
+            });
+          }
+        } else {
+          updateArgs({ value: multiple ? [] : "" });
+        }
         action("onChange")(newValue);
       }}
       value={theValue}
@@ -54,8 +73,10 @@ const Template: StoryFn<
   );
 };
 
+// Define the default story
 export const Default: StoryObj<typeof Autocomplete> = {
   args: {
+    // Define the default args
     disabled: false,
     error: false,
     helperText: "Helper Text",
@@ -79,8 +100,35 @@ export const Default: StoryObj<typeof Autocomplete> = {
   render: Template
 };
 
+// Define the story for key-value options
+export const KeyValueOptions: StoryObj<typeof Autocomplete> = {
+  args: {
+    // Define the args for key-value options
+    disabled: false,
+    error: false,
+    helperText: "Helper Text",
+    label: "Select options",
+    limitTags: -1,
+    margin: "normal",
+    multiple: false,
+    options: [
+      { key: 1, value: "Option 1" },
+      { key: 2, value: "Option 2" },
+      { key: 3, value: "Option 3" },
+      { key: 4, value: "Option 4" }
+    ],
+    required: false,
+    size: "medium",
+    value: "Option 1",
+    variant: "outlined"
+  },
+  render: Template
+};
+
+// Define the story for multi-select
 export const MultiSelect: StoryObj<typeof Autocomplete> = {
   args: {
+    // Define the args for multi-select
     disableCloseOnSelect: true,
     disabled: false,
     error: false,
