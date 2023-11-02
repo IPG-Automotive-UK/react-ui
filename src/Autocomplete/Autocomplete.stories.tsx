@@ -4,7 +4,7 @@ import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import Autocomplete from "./Autocomplete";
 import React from "react";
 import { action } from "@storybook/addon-actions";
-import { useArgs } from "@storybook/client-api";
+import { useArgs } from "@storybook/preview-api";
 
 /**
  * Story metadata
@@ -22,12 +22,15 @@ function isReadOnlyArray<T>(
   return Array.isArray(value);
 }
 
+// Define the template for the story
 const Template: StoryFn<
   AutocompleteProps<string | KeyValueOption, boolean | undefined>
 > = args => {
+  // Use the useArgs hook to get and update the args
   const [{ value, multiple }, updateArgs] =
     useArgs<AutocompleteProps<string, boolean | undefined>>();
 
+  // Use an effect to update the value arg based on the multiple arg
   React.useEffect(() => {
     if (multiple && value && !isReadOnlyArray(value))
       updateArgs({ value: value !== "" ? [value] : [] });
@@ -35,12 +38,14 @@ const Template: StoryFn<
       updateArgs({ value: value.length > 0 ? value[0] : "" });
   }, [updateArgs, multiple, value]);
 
+  // Determine the value to use based on the multiple and value args
   let theValue;
   if (multiple && Array.isArray(value)) theValue = value;
   if (multiple && !Array.isArray(value) && value) theValue = [value];
   if (!multiple && Array.isArray(value)) theValue = value[0];
   if (!multiple && !Array.isArray(value)) theValue = value;
 
+  // Return the Autocomplete component with the appropriate props
   return (
     <Autocomplete
       {...args}
@@ -68,8 +73,10 @@ const Template: StoryFn<
   );
 };
 
+// Define the default story
 export const Default: StoryObj<typeof Autocomplete> = {
   args: {
+    // Define the default args
     disabled: false,
     error: false,
     helperText: "Helper Text",
@@ -93,8 +100,10 @@ export const Default: StoryObj<typeof Autocomplete> = {
   render: Template
 };
 
+// Define the story for key-value options
 export const KeyValueOptions: StoryObj<typeof Autocomplete> = {
   args: {
+    // Define the args for key-value options
     disabled: false,
     error: false,
     helperText: "Helper Text",
@@ -116,8 +125,10 @@ export const KeyValueOptions: StoryObj<typeof Autocomplete> = {
   render: Template
 };
 
+// Define the story for multi-select
 export const MultiSelect: StoryObj<typeof Autocomplete> = {
   args: {
+    // Define the args for multi-select
     disableCloseOnSelect: true,
     disabled: false,
     error: false,
