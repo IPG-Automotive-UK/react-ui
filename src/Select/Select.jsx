@@ -16,14 +16,9 @@ export default function Select({
   options = [],
   required = false,
   size = "medium",
-  value = "",
+  value,
   variant = "outlined"
 }) {
-  // set value for select, when options is a key value pair the value will be in option.value otherwise option is the value
-  const setValue = options.some(
-    option => option.value === value || option === value
-  );
-
   // return components
   return (
     <TextField
@@ -34,23 +29,18 @@ export default function Select({
       margin={margin}
       fullWidth
       label={label}
-      value={setValue ? value : ""}
+      value={options.includes(value) ? value : ""}
       onChange={onChange}
       disabled={disabled}
       id={label}
       helperText={helperText}
       size={size}
     >
-      {/* Render the options */}
-      {options.map(option => {
-        const value = option.value || option;
-        const key = option.key || option;
-        return (
-          <MenuItem value={value} key={key}>
-            {value}
-          </MenuItem>
-        );
-      })}
+      {options.map(option => (
+        <MenuItem value={option} key={option}>
+          {option}
+        </MenuItem>
+      ))}
     </TextField>
   );
 }
@@ -87,17 +77,10 @@ Select.propTypes = {
    */
   onChange: PropTypes.func,
   /**
-   * Array of options to display. Each option can be a string, number, or an object with `key` and `value` properties.
+   * Array of options to display.
    */
   options: PropTypes.arrayOf(
-    PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-      PropTypes.shape({
-        key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-      })
-    ])
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   ),
   /**
    * If true, the label will indicate that the input is required.

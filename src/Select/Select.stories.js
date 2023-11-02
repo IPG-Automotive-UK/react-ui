@@ -33,22 +33,3 @@ export const Default = {
 
   render: Template
 };
-
-export const KeyValueOptions = {
-  args: {
-    disabled: false,
-    error: false,
-    helperText: "",
-    label: "Select an option",
-    margin: "normal",
-    options: [
-      { key: "option-a", value: "Option A" },
-      { key: "option-b", value: "Option B" }
-    ],
-    required: true,
-    size: "medium",
-    variant: "outlined"
-  },
-
-  render: Template
-};
