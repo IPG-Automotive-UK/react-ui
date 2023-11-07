@@ -1,4 +1,5 @@
 import { render, screen, waitFor } from "@testing-library/react";
+
 import PasswordResetForm from "./";
 import React from "react";
 import userEvent from "@testing-library/user-event";
@@ -22,7 +23,7 @@ function setup(inputs) {
 describe("PasswordResetForm", () => {
   it("returns form information to callback when successfully validated", async () => {
     const user = userEvent.setup();
-    const onSubmit = jest.fn(data => data);
+    const onSubmit = vi.fn(data => data);
     const elements = setup({ onSubmit });
     await user.type(elements.inputs.email, "joe.bloggs@domain.com");
     user.click(elements.submit);
@@ -34,7 +35,7 @@ describe("PasswordResetForm", () => {
   });
   it("shows error message with invalid email", async () => {
     const user = userEvent.setup();
-    const onSubmit = jest.fn();
+    const onSubmit = vi.fn();
     const elements = setup({ onSubmit });
     await user.type(elements.inputs.email, "joe.bloggs"); // incorrect email address format
     user.click(elements.submit);

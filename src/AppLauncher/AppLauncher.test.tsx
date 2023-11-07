@@ -2,10 +2,11 @@ import { render, screen } from "@testing-library/react";
 
 import AppLauncher from ".";
 import React from "react";
+import { vi } from "vitest";
 
 // a set of default inputs so that tests can change what theyre testing
 const defaultInputs = {
-  onAppButtonClick: jest.fn()
+  onAppButtonClick: vi.fn()
 };
 
 /**

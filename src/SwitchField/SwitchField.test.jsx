@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+
 import React from "react";
 import SwitchField from "./";
 import userEvent from "@testing-library/user-event";
@@ -6,7 +7,7 @@ import userEvent from "@testing-library/user-event";
 describe("SwitchField", () => {
   it.each([true, false])("can be checked = %s", async expected => {
     const user = userEvent.setup();
-    const onChange = jest.fn(event => event.target.checked);
+    const onChange = vi.fn(event => event.target.checked);
     render(
       <SwitchField
         options={["Option A", "Option B"]}
@@ -22,7 +23,7 @@ describe("SwitchField", () => {
       <SwitchField
         options={["Option A", "Option B"]}
         helperText="A descriptive helper"
-        onChange={jest.fn()}
+        onChange={vi.fn()}
         checked={false}
       />
     );
@@ -33,7 +34,7 @@ describe("SwitchField", () => {
       <SwitchField
         options={["Option A", "Option B"]}
         label="A descriptive label"
-        onChange={jest.fn()}
+        onChange={vi.fn()}
         checked={false}
       />
     );
@@ -43,7 +44,7 @@ describe("SwitchField", () => {
     render(
       <SwitchField
         options={["Option A", "Option B"]}
-        onChange={jest.fn()}
+        onChange={vi.fn()}
         checked={false}
       />
     );
@@ -54,7 +55,7 @@ describe("SwitchField", () => {
     const { container } = render(
       <SwitchField
         options={["Option A", "Option B"]}
-        onChange={jest.fn()}
+        onChange={vi.fn()}
         checked={false}
         disabled
       />

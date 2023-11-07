@@ -3,12 +3,13 @@ import { render, screen } from "@testing-library/react";
 import ActionDialog from "./ActionDialog";
 import React from "react";
 import { Typography } from "@mui/material";
+import { vi } from "vitest";
 
 // a set of default inputs so that tests can change what theyre testing
 const defaultInputs = {
   content: <Typography>Content goes here</Typography>,
-  onCancelClick: jest.fn(),
-  onSaveClick: jest.fn()
+  onCancelClick: vi.fn(),
+  onSaveClick: vi.fn()
 };
 
 // Tests

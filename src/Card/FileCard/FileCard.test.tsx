@@ -2,6 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 
 import FileCard from "./FileCard";
 import React from "react";
+import { vi } from "vitest";
 
 /**
  * Tests
@@ -179,7 +180,7 @@ describe("FileCard", () => {
     ];
 
     // mock onClickDownload function
-    const onClickDownload = jest.fn();
+    const onClickDownload = vi.fn();
 
     // render file card with files
     render(

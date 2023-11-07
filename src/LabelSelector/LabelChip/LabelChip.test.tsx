@@ -3,6 +3,7 @@ import { render, screen } from "@testing-library/react";
 import LabelChip from "./LabelChip";
 import React from "react";
 import userEvent from "@testing-library/user-event";
+import { vi } from "vitest";
 
 describe("LabelChip", () => {
   // test that the label chip renders
@@ -42,7 +43,7 @@ describe("LabelChip", () => {
   // test that on click, the callback is called
   it("calls callback onClick", async () => {
     const user = userEvent.setup();
-    const onClick = jest.fn();
+    const onClick = vi.fn();
     render(<LabelChip label="Label" onClick={onClick} clickable />);
     await user.click(screen.getByRole("button"));
     expect(onClick).toHaveBeenCalled();
@@ -57,7 +58,7 @@ describe("LabelChip", () => {
   // test that on delete, the callback is called
   it("calls callback onDelete", async () => {
     const user = userEvent.setup();
-    const onDelete = jest.fn();
+    const onDelete = vi.fn();
     render(<LabelChip label="Label" onDelete={onDelete} />);
 
     // find the cancel icon by data-testid

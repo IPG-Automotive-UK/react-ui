@@ -70,9 +70,6 @@ const VehicleSelectWithState = ({
  * Tests
  */
 describe("Vehicle Select", () => {
-  // increase jest timeout to allow for async operations
-  jest.setTimeout(10000);
-
   // test that the component renders with the default props
   it("renders component", () => {
     render(<VehicleSelectWithState {...defaultProps} />);

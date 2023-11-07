@@ -46,7 +46,7 @@ const options = [
 describe("LabelFilter", () => {
   describe("variant=popper", () => {
     it("can single select", async () => {
-      const onChange = jest.fn();
+      const onChange = vi.fn();
       render(<LabelFilterWithState options={options} onChange={onChange} />);
 
       // click the label selector down arrow
@@ -64,7 +64,7 @@ describe("LabelFilter", () => {
       expect(onChange).toHaveBeenLastCalledWith([options[0]]);
     });
     it("can multi select", async () => {
-      const onChange = jest.fn();
+      const onChange = vi.fn();
       render(<LabelFilterWithState options={options} onChange={onChange} />);
 
       // click the label selector down arrow
@@ -86,7 +86,7 @@ describe("LabelFilter", () => {
   });
   describe("variant=always-open", () => {
     it("can single select", async () => {
-      const onChange = jest.fn();
+      const onChange = vi.fn();
       render(
         <LabelFilterWithState
           options={options}
@@ -107,7 +107,7 @@ describe("LabelFilter", () => {
       expect(onChange).toHaveBeenLastCalledWith([options[0]]);
     });
     it("can single select", async () => {
-      const onChange = jest.fn();
+      const onChange = vi.fn();
       render(
         <LabelFilterWithState
           options={options}

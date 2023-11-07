@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 
 import NextButton from "./NextButton";
 import React from "react";
+import { vi } from "vitest";
 
 describe("NextButton", () => {
   it("renders with text", () => {
@@ -13,7 +14,7 @@ describe("NextButton", () => {
     expect(screen.getByRole("button")).toBeDisabled();
   });
   it("can be clicked", () => {
-    const onClick = jest.fn();
+    const onClick = vi.fn();
     render(<NextButton onClick={onClick} />);
     screen.getByRole("button").click();
     expect(onClick).toHaveBeenCalledTimes(1);

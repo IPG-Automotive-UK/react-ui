@@ -3,15 +3,16 @@ import { render, screen } from "@testing-library/react";
 import React from "react";
 import VirtoAppHeader from ".";
 import userEvent from "@testing-library/user-event";
+import { vi } from "vitest";
 
 // a set of default inputs so that tests can change what theyre testing
 const defaultInputs = {
   appName: "App Name",
-  onAppClick: jest.fn(),
+  onAppClick: vi.fn(),
   onChangePassword: () => {},
-  onColourModeChange: jest.fn(),
-  onLogout: jest.fn(),
-  onMenuClick: jest.fn(),
+  onColourModeChange: vi.fn(),
+  onLogout: vi.fn(),
+  onMenuClick: vi.fn(),
   username: "Joe Bloggs"
 };
 
@@ -28,7 +29,7 @@ describe("VirtoAppHeader", () => {
     expect(screen.getByText(/APP NAME/i)).toBeInTheDocument();
   });
   test("should call onMenuClick when menu button is clicked", async () => {
-    const onMenuClick = jest.fn();
+    const onMenuClick = vi.fn();
     render(<VirtoAppHeader {...defaultInputs} onMenuClick={onMenuClick} />);
     const launcherButton = screen.getByTestId("launcher-button");
     await userEvent.click(launcherButton);
@@ -36,7 +37,7 @@ describe("VirtoAppHeader", () => {
   });
   test("should call onChangePassword when password button is clicked", async () => {
     const user = userEvent.setup();
-    const onChangePassword = jest.fn();
+    const onChangePassword = vi.fn();
     render(
       <VirtoAppHeader {...defaultInputs} onChangePassword={onChangePassword} />
     );
@@ -48,7 +49,7 @@ describe("VirtoAppHeader", () => {
   });
   test("onLogout called on user click", async () => {
     const user = userEvent.setup();
-    const onLogout = jest.fn();
+    const onLogout = vi.fn();
     render(<VirtoAppHeader {...defaultInputs} onLogout={onLogout} />);
     await user.click(screen.getByRole("button", { name: /JB/i }));
     await user.click(screen.getByRole("menuitem", { name: /Logout/i }));
@@ -56,7 +57,7 @@ describe("VirtoAppHeader", () => {
   });
   test("onClick switch change from light to dark mode", async () => {
     const user = userEvent.setup();
-    const onColourModeChange = jest.fn();
+    const onColourModeChange = vi.fn();
     render(
       <VirtoAppHeader
         {...defaultInputs}
@@ -70,7 +71,7 @@ describe("VirtoAppHeader", () => {
   });
   test("onClick switch change from dark to light mode", async () => {
     const user = userEvent.setup();
-    const onColourModeChange = jest.fn();
+    const onColourModeChange = vi.fn();
     render(
       <VirtoAppHeader
         {...defaultInputs}

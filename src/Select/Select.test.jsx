@@ -36,7 +36,7 @@ const SelectWithState = ({ onChange, value: valueIn = "", ...rest }) => {
 describe("Select", () => {
   test("can select an item", async () => {
     const user = userEvent.setup();
-    const onChange = jest.fn(event => event.target.value);
+    const onChange = vi.fn(event => event.target.value);
     const { container } = render(
       <SelectWithState options={options} onChange={onChange} />
     );

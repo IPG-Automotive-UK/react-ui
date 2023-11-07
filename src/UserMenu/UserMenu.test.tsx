@@ -4,11 +4,12 @@ import React from "react";
 import UserMenu from ".";
 import { UserMenuProps } from "./UserMenu.types";
 import userEvent from "@testing-library/user-event";
+import { vi } from "vitest";
 
 // a set of default inputs so that tests can change what theyre testing
 const defaultInputs: UserMenuProps = {
-  onChangePassword: jest.fn(),
-  onLogout: jest.fn(),
+  onChangePassword: vi.fn(),
+  onLogout: vi.fn(),
   username: "Joe Bloggs"
 };
 
@@ -45,7 +46,7 @@ describe("User Menu", () => {
   describe("Menu item", () => {
     test("onLogout called on user click", async () => {
       const user = userEvent.setup();
-      const onLogout = jest.fn();
+      const onLogout = vi.fn();
       render(
         <UserMenu
           {...defaultInputs}
@@ -59,7 +60,7 @@ describe("User Menu", () => {
     });
     test("onChangePassword called on user click", async () => {
       const user = userEvent.setup();
-      const onChangePassword = jest.fn();
+      const onChangePassword = vi.fn();
       render(
         <UserMenu
           {...defaultInputs}

@@ -4,6 +4,7 @@ import MaskedInput from "react-text-mask";
 import React from "react";
 import TextField from ".";
 import userEvent from "@testing-library/user-event";
+import { vi } from "vitest";
 
 /**
  * Tests
@@ -36,7 +37,7 @@ describe("TextField", () => {
   });
 
   test("renders TextField with masked input component and updates value correctly", () => {
-    const onChangeMock = jest.fn();
+    const onChangeMock = vi.fn();
     const { getByRole } = render(
       <TextField
         label="Test Field"
@@ -51,7 +52,7 @@ describe("TextField", () => {
   });
 
   test("check that input is masked when isFieldMasked is true", () => {
-    const onChangeMock = jest.fn();
+    const onChangeMock = vi.fn();
     const { getByRole } = render(
       <TextField
         label="Test Field"
@@ -67,7 +68,7 @@ describe("TextField", () => {
   });
 
   test("check that input is not masked when isFieldMasked is false", () => {
-    const onChangeMock = jest.fn();
+    const onChangeMock = vi.fn();
     const { getByRole } = render(
       <TextField
         label="Test Field"

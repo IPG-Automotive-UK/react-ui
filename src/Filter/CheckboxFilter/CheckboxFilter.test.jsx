@@ -31,7 +31,7 @@ const options = ["option 1", "option 2", "option 3"];
 describe("CheckboxFilter", () => {
   describe("variant=popper", () => {
     it("can single select", async () => {
-      const onChange = jest.fn();
+      const onChange = vi.fn();
       render(<CheckboxFilterWithState options={options} onChange={onChange} />);
 
       // click the label selector down arrow
@@ -49,7 +49,7 @@ describe("CheckboxFilter", () => {
       expect(onChange).toHaveBeenLastCalledWith(["option 1"]);
     });
     it("can multi select", async () => {
-      const onChange = jest.fn();
+      const onChange = vi.fn();
       render(<CheckboxFilterWithState options={options} onChange={onChange} />);
 
       // click the label selector down arrow
@@ -71,7 +71,7 @@ describe("CheckboxFilter", () => {
   });
   describe("variant=always-open", () => {
     it("can single select", async () => {
-      const onChange = jest.fn();
+      const onChange = vi.fn();
       render(
         <CheckboxFilterWithState
           options={options}
@@ -92,7 +92,7 @@ describe("CheckboxFilter", () => {
       expect(onChange).toHaveBeenLastCalledWith(["option 1"]);
     });
     it("can single select", async () => {
-      const onChange = jest.fn();
+      const onChange = vi.fn();
       render(
         <CheckboxFilterWithState
           options={options}

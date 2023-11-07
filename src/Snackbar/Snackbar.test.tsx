@@ -3,37 +3,38 @@ import { render, screen, waitFor } from "@testing-library/react";
 import React from "react";
 import Snackbar from ".";
 import userEvent from "@testing-library/user-event";
+import { vi } from "vitest";
 
 describe("Snackbar", () => {
   it("is hidden when open=false", () => {
     const { container } = render(
-      <Snackbar message="Hello world" open={false} onClose={jest.fn} />
+      <Snackbar message="Hello world" open={false} onClose={vi.fn} />
     );
     expect(container.querySelector(".MuiSnackbar-root")).toBeFalsy();
   });
   it("is shown when open=true", () => {
     const { container } = render(
-      <Snackbar message="Hello world" open onClose={jest.fn} />
+      <Snackbar message="Hello world" open onClose={vi.fn} />
     );
     expect(container.querySelector(".MuiSnackbar-root")).toBeTruthy();
   });
   it("calls onClose when user clicks x", async () => {
     const user = userEvent.setup();
-    const onClose = jest.fn();
+    const onClose = vi.fn();
     render(<Snackbar message="Hello world" open onClose={onClose} />);
     await user.click(screen.getByRole("button"));
     expect(onClose).toHaveBeenCalled();
   });
   it("calls onClose when user clicks action button", async () => {
     const user = userEvent.setup();
-    const onClose = jest.fn();
+    const onClose = vi.fn();
     render(
       <Snackbar
         message="Hello world"
         open
         onClose={onClose}
         actionText="Action"
-        actionCallback={jest.fn()}
+        actionCallback={vi.fn()}
       />
     );
     await user.click(screen.getByRole("button", { name: "Action" }));
@@ -41,12 +42,12 @@ describe("Snackbar", () => {
   });
   it("calls actionCallback when user clicks action button", async () => {
     const user = userEvent.setup();
-    const onAction = jest.fn();
+    const onAction = vi.fn();
     render(
       <Snackbar
         message="Hello world"
         open
-        onClose={jest.fn()}
+        onClose={vi.fn()}
         actionText="Action"
         actionCallback={onAction}
       />
@@ -55,21 +56,21 @@ describe("Snackbar", () => {
     expect(onAction).toHaveBeenCalled();
   });
   it("calls onClose after autohide duration", async () => {
-    const onClose = jest.fn();
+    const onClose = vi.fn();
     render(
       <Snackbar
         message="Hello world"
         open
         onClose={onClose}
         actionText="Action"
-        actionCallback={jest.fn()}
+        actionCallback={vi.fn()}
         autoHideDuration={100}
       />
     );
     await waitFor(() => expect(onClose).toHaveBeenCalled());
   });
   it("shows message", () => {
-    render(<Snackbar message="Hello world" open onClose={jest.fn} />);
+    render(<Snackbar message="Hello world" open onClose={vi.fn} />);
     expect(screen.queryByText("Hello world")).toBeInTheDocument();
   });
 });

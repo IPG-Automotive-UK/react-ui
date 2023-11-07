@@ -24,8 +24,8 @@
     "pretest:playwright": "npx playwright install --with-deps",
     "test:playwright:headed": "npx playwright install --with-deps && npm run storybook:build && npm run storybook:serve:start && npx playwright test --headed && npm run storybook:serve:stop",
     "test:lint": "eslint ./src",
-    "test:unit": "cross-env CI=1 react-scripts test --env=jsdom --collectCoverage=true",
-    "test:watch": "react-scripts test --env=jsdom",
+    "test:unit": "vitest",
+    "test:watch": "vitest",
     "type-check": "tsc --noEmit --skipLibCheck"
   },
   "devDependencies": {
@@ -49,7 +49,6 @@
     "@testing-library/react": "^14.1.2",
     "@testing-library/user-event": "^14.5.2",
     "@types/css-mediaquery": "^0.1.4",
-    "@types/jest": "^29.5.11",
     "@types/node": "^20.10.6",
     "@types/react": "^18.2.46",
     "@types/react-dom": "^18.2.18",
@@ -74,6 +73,7 @@
     "eslint-plugin-standard": "^5.0.0",
     "express": "^4.18.2",
     "forever": "^4.0.3",
+    "jsdom": "^22.1.0",
     "mutationobserver-shim": "^0.3.7",
     "npm-run-all": "^4.1.5",
     "playwright": "^1.40.1",
@@ -86,7 +86,9 @@
     "ts-jest": "^29.1.1",
     "typescript": "^5.3.3",
     "vite": "^4.5.0",
-    "vite-plugin-eslint": "^1.8.1"
+    "vite-plugin-eslint": "^1.8.1",
+    "vitest": "^0.34.6",
+    "zxcvbn": "^4.4.2"
   },
   "dependencies": {
     "@juggle/resize-observer": "^3.4.0",
@@ -118,16 +120,5 @@
   },
   "files": [
     "dist"
-  ],
-  "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx,ts,tsx}",
-      "!src/**/*.stories.{js,jsx,ts,tsx}",
-      "!src/**/*.spec.{js,jsx,ts,tsx}"
-    ],
-    "testMatch": [
-      "**/__tests__/**/*.[jt]s?(x)",
-      "**/?(*.)+(test).[jt]s?(x)"
-    ]
-  }
+  ]
 }

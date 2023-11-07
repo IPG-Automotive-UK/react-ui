@@ -1,4 +1,5 @@
 import { render, screen, waitFor } from "@testing-library/react";
+
 import LoginForm from "./";
 import React from "react";
 import userEvent from "@testing-library/user-event";
@@ -23,7 +24,7 @@ function setup(inputs) {
 describe("LoginForm", () => {
   it("returns form information to callback when successfully validated", async () => {
     const user = userEvent.setup();
-    const onLogin = jest.fn(data => data);
+    const onLogin = vi.fn(data => data);
     const elements = setup({ onLogin });
     await user.type(elements.inputs.email, "joe.bloggs@domain.com");
     await user.type(elements.inputs.password, "indigo shark wallplug");
@@ -37,7 +38,7 @@ describe("LoginForm", () => {
   });
   it("doesnt call callback on validation errors", async () => {
     const user = userEvent.setup();
-    const onLogin = jest.fn();
+    const onLogin = vi.fn();
     const elements = setup({ onLogin });
     await user.type(elements.inputs.email, "joe.bloggs"); // incorrect email address format
     user.click(elements.submit);

@@ -72,7 +72,7 @@ describe("LabelSelector", () => {
     ];
 
     // mock the onChange event
-    const onChange = jest.fn();
+    const onChange = vi.fn();
 
     // render the label selector
     render(<LabelSelectorWithState options={options} onChange={onChange} />);
@@ -106,7 +106,7 @@ describe("LabelSelector", () => {
     ];
 
     // mock the onChange event
-    const onChange = jest.fn();
+    const onChange = vi.fn();
 
     // render the label selector
     render(
@@ -149,7 +149,7 @@ describe("LabelSelector", () => {
   // can add a new label
   it("can add a new label", async () => {
     // mock the onChange event
-    const onNew = jest.fn();
+    const onNew = vi.fn();
 
     // render the label selector
     render(<LabelSelectorWithState onNew={onNew} addEnabled />);
@@ -180,7 +180,7 @@ describe("LabelSelector", () => {
     ];
 
     // mock the onChange event
-    const onEdit = jest.fn();
+    const onEdit = vi.fn();
 
     // render the label selector
     render(
@@ -216,7 +216,7 @@ describe("LabelSelector", () => {
     ];
 
     // mock the onChange event
-    const onDelete = jest.fn();
+    const onDelete = vi.fn();
 
     // render the label selector
     render(
@@ -248,7 +248,7 @@ describe("LabelSelector", () => {
   // cannot save a new label that exceeds the max length
   it("cannot save a new label that exceeds the max length", async () => {
     // mock the onChange event
-    const onNew = jest.fn();
+    const onNew = vi.fn();
 
     // render the label selector
     render(

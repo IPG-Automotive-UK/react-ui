@@ -96,7 +96,7 @@ describe("NumberField", () => {
   });
   test("does not call callback when value is not valid", async () => {
     const user = userEvent.setup();
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     const { container } = render(
       <NumberField min={0} max={100} step={10} onChange={onChange} />
     );
@@ -108,7 +108,7 @@ describe("NumberField", () => {
   });
   test("calls callback when value is valid", async () => {
     const user = userEvent.setup();
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     const { container } = render(
       <NumberField min={0} max={100} step={10} onChange={onChange} />
     );
@@ -137,7 +137,7 @@ describe("NumberField", () => {
     expect(errorBase).toBe(null);
   });
   test("onChange is called when a value deleted from component and the new value is still valid", async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     const user = userEvent.setup();
     const { container } = render(<NumberFieldWithState onChange={onChange} />);
     const inputBase = container.querySelector(".MuiInputBase-input");
@@ -147,7 +147,7 @@ describe("NumberField", () => {
     expect(onChange).toHaveBeenCalled();
   });
   test("onChange is called when a value is entered to component with no step set", async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     const user = userEvent.setup();
     const { container } = render(<NumberField onChange={onChange} />);
     const inputBase = container.querySelector(".MuiInputBase-input");
@@ -157,7 +157,7 @@ describe("NumberField", () => {
     expect(onChange).toHaveBeenCalled();
   });
   test("onChange is called when a value is entered to component with step set and value is valid", async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     const user = userEvent.setup();
     const { container } = render(<NumberField onChange={onChange} step={1} />);
     const inputBase = container.querySelector(".MuiInputBase-input");
@@ -167,7 +167,7 @@ describe("NumberField", () => {
     expect(onChange).toHaveBeenCalled();
   });
   test("onChange is not called when a value is entered to a component with step set and value is invalid", async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     const user = userEvent.setup();
     const { container } = render(<NumberField onChange={onChange} step={10} />);
     const inputBase = container.querySelector(".MuiInputBase-input");
@@ -177,7 +177,7 @@ describe("NumberField", () => {
     expect(onChange).not.toHaveBeenCalled();
   });
   test("onChange is called when a value is entered to a component with a max value set and entered value is valid", async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     const user = userEvent.setup();
     const { container } = render(<NumberField onChange={onChange} max={10} />);
     const inputBase = container.querySelector(".MuiInputBase-input");
@@ -187,7 +187,7 @@ describe("NumberField", () => {
     expect(onChange).toHaveBeenCalled();
   });
   test("onChange is not called when a value is entered to a component with a max value set and entered value is invalid", async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     const user = userEvent.setup();
     const { container } = render(<NumberField onChange={onChange} max={10} />);
     const inputBase = container.querySelector(".MuiInputBase-input");
@@ -197,7 +197,7 @@ describe("NumberField", () => {
     expect(onChange).toHaveBeenCalledTimes(1);
   });
   test("onChange is called when a value is entered to a component with a min value set and entered value is valid", async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     const user = userEvent.setup();
     const { container } = render(<NumberField onChange={onChange} min={10} />);
     const inputBase = container.querySelector(".MuiInputBase-input");
@@ -207,7 +207,7 @@ describe("NumberField", () => {
     expect(onChange).toHaveBeenCalled();
   });
   test("onChange is not called when a value is entered to a component with a min value set and entered value is invalid", async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     const user = userEvent.setup();
     const { container } = render(<NumberField onChange={onChange} min={10} />);
     const inputBase = container.querySelector(".MuiInputBase-input");

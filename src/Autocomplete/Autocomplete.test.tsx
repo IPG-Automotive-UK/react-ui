@@ -3,6 +3,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import Autocomplete from ".";
 import React from "react";
 import { userEvent } from "@storybook/testing-library";
+import { vi } from "vitest";
 
 // sample options
 const options = ["option 1", "option 2", "option 3"];
@@ -24,7 +25,7 @@ const keyValueOptionsWithTooltip = [
  */
 describe("Select", () => {
   it("can single select", async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
 
     render(
       <Autocomplete
@@ -57,7 +58,7 @@ describe("Select", () => {
   });
 
   it("can multi select", async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(
       <Autocomplete
         multiple={true}
@@ -111,7 +112,7 @@ describe("Select", () => {
   });
 
   it("can single select with key-value pairs", async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
 
     render(
       <Autocomplete
@@ -119,7 +120,7 @@ describe("Select", () => {
         options={keyValueOptions}
         onChange={onChange}
         label="Select an option"
-        value={{ key: 2, value: "option 2" }}
+        value={keyValueOptions[1]}
       />
     );
 

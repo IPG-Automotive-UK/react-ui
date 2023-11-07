@@ -2,6 +2,7 @@ import React from "react";
 import SearchBar from ".";
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { vi } from "vitest";
 
 describe("SearchBar", () => {
   test("Search bar updates value", () => {
@@ -14,7 +15,7 @@ describe("SearchBar", () => {
   });
   test("onChange works as expected", async () => {
     const user = userEvent.setup();
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     const message = "another search query";
     const { container } = render(<SearchBar onChange={onChange} />);
     const inputBase = container.querySelector(
@@ -25,7 +26,7 @@ describe("SearchBar", () => {
   });
   test("onBlur works as expected", async () => {
     const user = userEvent.setup();
-    const onBlur = jest.fn();
+    const onBlur = vi.fn();
     const message = "another search query";
     const { container } = render(<SearchBar onBlur={onBlur} />);
     const inputBase = container.querySelector(
