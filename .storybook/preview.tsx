@@ -1,9 +1,10 @@
+import { Decorator } from "@storybook/react";
 import { DocsContainer } from "./DocsContainer";
 import React from "react";
 import ThemeProvider from "../src/ThemeProvider/ThemeProvider";
 import { useDarkMode } from "storybook-dark-mode";
 
-export const decorators = [
+export const decorators: Decorator[] = [
   renderStory => {
     const isDark = useDarkMode();
     return (
