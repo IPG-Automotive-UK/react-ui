@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "allowJs": true,
+    "allowJs": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "inlineSources": true,
@@ -14,7 +14,7 @@
     "strict": true,
     "target": "ES2019"
   },
-  "include": ["src/**/*.tsx", "src/**/*.ts"],
+  "include": ["src/**/*.tsx", "src/**/*.ts", "src/**/*.jsx"],
   "exclude": [
     "src/**/*.test.tsx",
     "src/**/*.spec.tsx",

@@ -10,7 +10,7 @@
     "node": ">=10"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc --build --clean && tsc",
     "postinstall": "npx playwright install --with-deps",
     "prepublishOnly": "npm run build",
     "start": "microbundle-crl watch --no-compress --format modern,cjs --jsxFragment React.Fragment",
