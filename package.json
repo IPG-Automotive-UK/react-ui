@@ -12,6 +12,7 @@
   "scripts": {
     "build": "tsc",
     "postinstall": "npx playwright install --with-deps",
+    "prepublishOnly": "npm run build",
     "start": "microbundle-crl watch --no-compress --format modern,cjs --jsxFragment React.Fragment",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
