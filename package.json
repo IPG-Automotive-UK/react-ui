@@ -5,7 +5,7 @@
   "author": "IPG-Automotive-UK",
   "license": "MIT",
   "repository": "IPG-Automotive-UK/react-ui",
-  "main": "src/index.ts",
+  "main": "src/index",
   "engines": {
     "node": ">=10"
   },
