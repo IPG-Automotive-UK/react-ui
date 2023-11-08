@@ -12,7 +12,7 @@ import {
 import React, { Fragment, useEffect, useRef, useState } from "react";
 
 import { FileCardProps } from "./FileCard.types";
-import ResizeObserver from "resize-observer-polyfill";
+import { ResizeObserver } from "@juggle/resize-observer";
 import SearchBar from "../../SearchBar/SearchBar";
 
 function FileCard({
