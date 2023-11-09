@@ -5,7 +5,7 @@
   "author": "IPG-Automotive-UK",
   "license": "MIT",
   "repository": "IPG-Automotive-UK/react-ui",
-  "main": "src/index",
+  "main": "dist/index",
   "engines": {
     "node": ">=10"
   },
@@ -176,7 +176,7 @@
     }
   },
   "files": [
-    "src"
+    "dist"
   ],
   "jest": {
     "collectCoverageFrom": [
