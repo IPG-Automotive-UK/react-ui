@@ -16,7 +16,7 @@ import React, { Fragment, useEffect, useRef, useState } from "react";
 
 import LabelChip from "../../LabelSelector/LabelChip/LabelChip";
 import { MoreVert } from "@mui/icons-material";
-import ResizeObserver from "resize-observer-polyfill";
+import { ResizeObserver } from "@juggle/resize-observer";
 import { SummaryCardProps } from "./SummaryCard.types";
 
 function SummaryCard({

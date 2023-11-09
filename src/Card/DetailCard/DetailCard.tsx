@@ -16,7 +16,7 @@ import React, { Fragment, useEffect, useRef, useState } from "react";
 import FileCard from "../FileCard/FileCard";
 import { Label } from "../../Common.types";
 import LabelChip from "../../LabelSelector/LabelChip/LabelChip";
-import ResizeObserver from "resize-observer-polyfill";
+import { ResizeObserver } from "@juggle/resize-observer";
 
 function DetailCard({
   buttonsStack = null,

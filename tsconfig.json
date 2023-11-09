@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
-    "allowJs": true,
-    "baseUrl": ".",
+    "allowJs": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
@@ -9,9 +8,15 @@
     "lib": ["DOM", "DOM.Iterable", "ES2019"],
     "moduleResolution": "node",
     "module": "ES2022",
-    "noEmit": true,
     "resolveJsonModule": true,
     "strict": true,
     "target": "ES2019"
-  }
+  },
+  "include": ["src/**/*.tsx", "src/**/*.ts", "src/**/*.jsx"],
+  "exclude": [
+    "src/**/*.test.tsx",
+    "src/**/*.spec.tsx",
+    "src/**/*.stories.tsx",
+    "node_modules"
+  ]
 }
