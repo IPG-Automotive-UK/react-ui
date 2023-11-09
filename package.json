@@ -101,6 +101,7 @@
   "peerDependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@juggle/resize-observer": "^3.4.0",
     "@mui/icons-material": "^5.14.8",
     "@mui/material": "^5.14.8",
     "@mui/styles": "^5.14.7",
@@ -125,6 +126,9 @@
     "zxcvbn": "^4.4.2"
   },
   "peerDependenciesMeta": {
+    "@juggle/resize-observer": {
+      "optional": true
+    },
     "@mui/x-data-grid": {
       "optional": true
     },
