@@ -19,6 +19,8 @@
     "src/**/*.test.**",
     "src/**/*.spec.**",
     "src/**/*.stories.**",
+    "**/jest.config*",
+    "**/setupTests*",
     "node_modules",
     "dist"
   ]
