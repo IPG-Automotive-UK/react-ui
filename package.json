@@ -1,16 +1,18 @@
 {
   "name": "@ipguk/react-ui",
-  "version": "5.6.0",
+  "version": "5.6.1-1",
   "description": "React UI component library for IPG web applications",
   "author": "IPG-Automotive-UK",
   "license": "MIT",
   "repository": "IPG-Automotive-UK/react-ui",
-  "main": "src/index",
+  "main": "dist/index",
   "engines": {
     "node": ">=10"
   },
   "scripts": {
-    "build": "tsc --build --clean && tsc",
+    "build": "npm run clean && tsc && npm run copy-files",
+    "clean": "rm -rf dist",
+    "copy-files": "copyfiles -e '**/*.test.**' -e '**/*.spec.**' -e '**/*.stories.**' -u 1 src/**/*.html src/**/*.css src/**/*.ts src/**/*.tsx dist/",
     "postinstall": "npx playwright install --with-deps",
     "prepublishOnly": "npm run build",
     "start": "microbundle-crl watch --no-compress --format modern,cjs --jsxFragment React.Fragment",
@@ -63,6 +65,7 @@
     "@typescript-eslint/eslint-plugin": "^6.9.1",
     "@typescript-eslint/parser": "^6.9.1",
     "colord": "^2.9.3",
+    "copyfiles": "^2.4.1",
     "cross-env": "^7.0.3",
     "css-mediaquery": "^0.1.2",
     "eslint": "^8.52.0",
@@ -176,7 +179,7 @@
     }
   },
   "files": [
-    "src"
+    "dist"
   ],
   "jest": {
     "collectCoverageFrom": [
