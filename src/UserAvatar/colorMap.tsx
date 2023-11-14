@@ -8,10 +8,11 @@ import {
   red,
   teal
 } from "@mui/material/colors";
+
 import { useMemo } from "react";
 
 // custom hook to generate a color map for a list of options
-export default function useColorMap(allOptions) {
+export default function useColorMap(allOptions: string[]) {
   // generate color map from options
   const colorMap = useMemo(() => {
     // define list of colors
@@ -27,7 +28,7 @@ export default function useColorMap(allOptions) {
     ];
 
     // create color map
-    const colorMap = {};
+    const colorMap: { [key: string]: string } = {};
     for (let i = 0; i < allOptions.length; i++) {
       colorMap[allOptions[i]] = colors[i % colors.length];
     }
@@ -35,6 +36,6 @@ export default function useColorMap(allOptions) {
   }, [allOptions]);
 
   // return function to get color for a given option
-  const getColor = option => colorMap[option];
+  const getColor = (option: string) => colorMap[option];
   return getColor;
 }
