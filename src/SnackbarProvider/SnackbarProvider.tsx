@@ -26,11 +26,11 @@ export default function SnackbarProvider({ children }: SnackbarProviderProps) {
   // show snackbar
   const show = React.useCallback(
     (
-      message = "",
+      message: "",
       variant: "info",
       autoHideDuration: null,
-      actionText = "",
-      actionCallback = () => {}
+      actionText: "",
+      actionCallback: () => {}
     ) =>
       setSnackbar({
         actionCallback,
