@@ -119,7 +119,7 @@ function OptionWithTooltip(
         {option.tooltip ? (
           <Tooltip title={option.tooltip} placement="right" arrow>
             <ErrorOutlineIcon
-              sx={{ pl: 1 }}
+              sx={{ height: 20, pl: 1, width: 20 }}
               color="primary"
               data-testid={`tooltip-${option.key}`}
             />
