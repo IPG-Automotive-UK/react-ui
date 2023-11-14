@@ -5,11 +5,13 @@ import {
   Checkbox,
   Autocomplete as MuiAutocomplete,
   TextField,
+  Tooltip,
   Typography
 } from "@mui/material";
 import { CheckBox, CheckBoxOutlineBlank } from "@mui/icons-material";
 
 import { AutocompleteProps } from "./Autocomplete.types";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { KeyValueOption } from "../Common.types";
 import { isKeyValueOption } from "../utils/common";
 
@@ -53,7 +55,7 @@ export default function Autocomplete<
           variant={variant}
         />
       )}
-      renderOption={multiple ? Option : undefined}
+      renderOption={multiple ? Option : OptionWithTooltip}
       value={value}
       clearIcon={multiple ? null : undefined}
       disabled={disabled}
@@ -97,4 +99,39 @@ function Option(
       </Typography>
     </Box>
   );
+}
+
+// renderer for a tooltip icon
+function OptionWithTooltip(
+  props: React.HTMLAttributes<HTMLLIElement>,
+  option: KeyValueOption | string
+) {
+  if (typeof option === "object") {
+    return (
+      <Box
+        {...props}
+        component="li"
+        sx={{
+          justifyContent: "space-between !important"
+        }}
+      >
+        <Typography>{option.value}</Typography>
+        {option.tooltip ? (
+          <Tooltip title={option.tooltip} placement="right" arrow>
+            <ErrorOutlineIcon
+              sx={{ pl: 1 }}
+              color="primary"
+              data-testid={`tooltip-${option.key}`}
+            />
+          </Tooltip>
+        ) : null}
+      </Box>
+    );
+  } else {
+    return (
+      <Box component="li" {...props}>
+        <Typography>{option}</Typography>
+      </Box>
+    );
+  }
 }
