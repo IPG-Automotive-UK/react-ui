@@ -63,19 +63,18 @@ export default function Autocomplete<
       disabled={disabled}
       size={size}
       isOptionEqualToValue={(option, value) => {
-        // if the option is a key value pair, compare option.value to value
-        if (isKeyValueOption(option)) {
-          if (option.value === value) {
-            return true;
-          }
+        // if the option is a key value pair, compare option.value to value.value
+        if (
+          isKeyValueOption(option) &&
+          (isKeyValueOption(value)
+            ? option.value === value.value
+            : option.value === value)
+        ) {
+          return true;
         } else {
           // if the option is not a key value then compare option to value
-          if (option === value) {
-            return true;
-          }
+          if (option === value) return true;
         }
-
-        // if the option is not a match, return false
         return false;
       }}
     />
