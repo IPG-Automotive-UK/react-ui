@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import {
+  AutocompleteRenderOptionState,
   Box,
   Checkbox,
   Autocomplete as MuiAutocomplete,
@@ -55,9 +56,7 @@ export default function Autocomplete<
           variant={variant}
         />
       )}
-      renderOption={(props, option, state, ownerState) =>
-        Option(props, option, state, { multiple: ownerState.multiple })
-      }
+      renderOption={Option}
       value={value}
       clearIcon={multiple ? null : undefined}
       disabled={disabled}
@@ -72,11 +71,14 @@ export default function Autocomplete<
 }
 
 // renderer for a checkbox option
-function Option(
+function Option<
+  Value extends KeyValueOption | string,
+  Multiple extends boolean | undefined
+>(
   props: React.HTMLAttributes<HTMLLIElement>,
   option: KeyValueOption | string,
-  { selected }: { selected: boolean },
-  { multiple }: { multiple: boolean | undefined }
+  { selected }: AutocompleteRenderOptionState,
+  { multiple }: AutocompleteProps<Value, Multiple>
 ) {
   // if the option is a key value pair, use the key as the value
   const optionValue = typeof option === "string" ? option : option.key;
