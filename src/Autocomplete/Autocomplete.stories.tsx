@@ -51,21 +51,7 @@ const Template: StoryFn<
     <Autocomplete
       {...args}
       onChange={(event, newValue) => {
-        if (newValue !== null) {
-          if (Array.isArray(newValue)) {
-            updateArgs({
-              value: newValue.map(val =>
-                typeof val === "string" ? val : val.value
-              )
-            });
-          } else {
-            updateArgs({
-              value: typeof newValue === "string" ? newValue : newValue.value
-            });
-          }
-        } else {
-          updateArgs({ value: multiple ? [] : "" });
-        }
+        updateArgs({ value: newValue });
         action("onChange")(newValue);
       }}
       value={theValue}
@@ -120,7 +106,7 @@ export const KeyValueOptions: StoryObj<typeof Autocomplete> = {
     ],
     required: false,
     size: "medium",
-    value: "Option 1",
+    value: { key: 1, value: "Option 1" },
     variant: "outlined"
   },
   render: Template
