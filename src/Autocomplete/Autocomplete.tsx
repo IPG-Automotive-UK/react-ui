@@ -41,8 +41,8 @@ export default function Autocomplete<
       multiple={multiple}
       onChange={onChange}
       options={options}
-      getOptionLabel={(option: KeyValueOption | string) =>
-        typeof option === "string" ? option : option.value
+      getOptionLabel={option =>
+        isKeyValueOption(option) ? option.value : String(option)
       }
       renderInput={params => (
         <TextField
