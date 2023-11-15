@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import {
+  AutocompleteRenderOptionState,
   Box,
   Checkbox,
   Autocomplete as MuiAutocomplete,
@@ -41,8 +42,8 @@ export default function Autocomplete<
       multiple={multiple}
       onChange={onChange}
       options={options}
-      getOptionLabel={(option: KeyValueOption | string) =>
-        typeof option === "string" ? option : option.value
+      getOptionLabel={option =>
+        isKeyValueOption(option) ? option.value : String(option)
       }
       renderInput={params => (
         <TextField
@@ -55,83 +56,88 @@ export default function Autocomplete<
           variant={variant}
         />
       )}
-      renderOption={multiple ? Option : OptionWithTooltip}
+      renderOption={Option}
       value={value}
       clearIcon={multiple ? null : undefined}
       disabled={disabled}
       size={size}
-      isOptionEqualToValue={(option, value) => {
-        // if the option is a key value pair, compare option.value to value
-        if (isKeyValueOption(option)) {
-          if (option.value === value) {
-            return true;
-          }
-        } else {
-          // if the option is not a key value then compare option to value
-          if (option === value) {
-            return true;
-          }
-        }
-
-        // if the option is not a match, return false
-        return false;
-      }}
+      isOptionEqualToValue={(option, value) =>
+        isKeyValueOption(option) && isKeyValueOption(value)
+          ? option.key === value.key
+          : option === value
+      }
     />
   );
 }
 
 // renderer for a checkbox option
-function Option(
+function Option<
+  Value extends KeyValueOption | string,
+  Multiple extends boolean | undefined
+>(
   props: React.HTMLAttributes<HTMLLIElement>,
   option: KeyValueOption | string,
-  { selected }: { selected: boolean }
+  { selected }: AutocompleteRenderOptionState,
+  { multiple }: AutocompleteProps<Value, Multiple>
 ) {
-  return (
-    <Box component="li" {...props}>
-      <Checkbox
-        icon={<CheckBoxOutlineBlank fontSize="small" />}
-        checkedIcon={<CheckBox fontSize="small" />}
-        checked={selected}
-        value={typeof option === "string" ? option : option.key}
-      />
-      <Typography>
-        {typeof option === "string" ? option : option.value}
-      </Typography>
-    </Box>
-  );
-}
-
-// renderer for a tooltip icon
-function OptionWithTooltip(
-  props: React.HTMLAttributes<HTMLLIElement>,
-  option: KeyValueOption | string
-) {
-  if (typeof option === "object") {
-    return (
-      <Box
-        {...props}
-        component="li"
-        sx={{
-          justifyContent: "space-between !important"
-        }}
-      >
-        <Typography>{option.value}</Typography>
-        {option.tooltip ? (
-          <Tooltip title={option.tooltip} placement="right" arrow>
-            <ErrorOutlineIcon
-              sx={{ height: 20, pl: 1, width: 20 }}
-              color="primary"
-              data-testid={`tooltip-${option.key}`}
-            />
-          </Tooltip>
-        ) : null}
-      </Box>
-    );
-  } else {
+  // handle key value options rendering
+  if (isKeyValueOption(option)) {
     return (
       <Box component="li" {...props}>
-        <Typography>{option}</Typography>
+        <Box
+          sx={{
+            alignItems: "center",
+            display: "flex",
+            flexGrow: 1,
+            justifyContent: "space-between"
+          }}
+        >
+          <Box sx={{ alignItems: "center", display: "flex" }}>
+            {multiple ? (
+              <Checkbox
+                icon={<CheckBoxOutlineBlank fontSize="small" />}
+                checkedIcon={<CheckBox fontSize="small" />}
+                checked={selected}
+                value={option.key}
+              />
+            ) : null}
+            <Typography>{option.value}</Typography>
+          </Box>
+          <Box sx={{ alignItems: "center", display: "flex" }}>
+            {option.tooltip && (
+              <Tooltip title={option.tooltip} placement="right" arrow>
+                <ErrorOutlineIcon
+                  sx={{ height: 20, pl: 1, width: 20 }}
+                  color="primary"
+                  data-testid={`tooltip-${option.key}`}
+                />
+              </Tooltip>
+            )}
+          </Box>
+        </Box>
       </Box>
     );
   }
+
+  // handle string options rendering
+  return (
+    <Box component="li" {...props}>
+      <Box
+        sx={{
+          alignItems: "center",
+          display: "flex"
+        }}
+      >
+        {multiple ? (
+          <Checkbox
+            icon={<CheckBoxOutlineBlank fontSize="small" />}
+            checkedIcon={<CheckBox fontSize="small" />}
+            checked={selected}
+            value={option}
+          />
+        ) : null}
+        <Typography>{option}</Typography>
+      </Box>
+    </Box>
+  );
 }
