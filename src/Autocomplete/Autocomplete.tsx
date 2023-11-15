@@ -80,12 +80,10 @@ function Option<
   { selected }: AutocompleteRenderOptionState,
   { multiple }: AutocompleteProps<Value, Multiple>
 ) {
-  // if the option is a key value pair, use the key as the value
-  const optionValue = typeof option === "string" ? option : option.key;
-
-  return (
-    <Box component="li" {...props}>
-      {typeof option === "object" ? (
+  // handle key value options rendering
+  if (isKeyValueOption(option)) {
+    return (
+      <Box component="li" {...props}>
         <Box
           sx={{
             alignItems: "center",
@@ -100,7 +98,7 @@ function Option<
                 icon={<CheckBoxOutlineBlank fontSize="small" />}
                 checkedIcon={<CheckBox fontSize="small" />}
                 checked={selected}
-                value={optionValue}
+                value={option.key}
               />
             ) : null}
             <Typography>{option.value}</Typography>
@@ -117,24 +115,29 @@ function Option<
             )}
           </Box>
         </Box>
-      ) : (
-        <Box
-          sx={{
-            alignItems: "center",
-            display: "flex"
-          }}
-        >
-          {multiple ? (
-            <Checkbox
-              icon={<CheckBoxOutlineBlank fontSize="small" />}
-              checkedIcon={<CheckBox fontSize="small" />}
-              checked={selected}
-              value={optionValue}
-            />
-          ) : null}
-          <Typography>{option}</Typography>
-        </Box>
-      )}
+      </Box>
+    );
+  }
+
+  // handle string options rendering
+  return (
+    <Box component="li" {...props}>
+      <Box
+        sx={{
+          alignItems: "center",
+          display: "flex"
+        }}
+      >
+        {multiple ? (
+          <Checkbox
+            icon={<CheckBoxOutlineBlank fontSize="small" />}
+            checkedIcon={<CheckBox fontSize="small" />}
+            checked={selected}
+            value={option}
+          />
+        ) : null}
+        <Typography>{option}</Typography>
+      </Box>
     </Box>
   );
 }
