@@ -1,6 +1,5 @@
 import * as React from "react";
 
-import { AutocompleteProps, KeyValueOption } from "./Autocomplete.types";
 import {
   Box,
   Checkbox,
@@ -9,6 +8,10 @@ import {
   Typography
 } from "@mui/material";
 import { CheckBox, CheckBoxOutlineBlank } from "@mui/icons-material";
+
+import { AutocompleteProps } from "./Autocomplete.types";
+import { KeyValueOption } from "../Common.types";
+import { isKeyValueOption } from "../utils/common";
 
 export default function Autocomplete<
   Value extends KeyValueOption | string,
@@ -55,6 +58,22 @@ export default function Autocomplete<
       clearIcon={multiple ? null : undefined}
       disabled={disabled}
       size={size}
+      isOptionEqualToValue={(option, value) => {
+        // if the option is a key value pair, compare option.value to value
+        if (isKeyValueOption(option)) {
+          if (option.value === value) {
+            return true;
+          }
+        } else {
+          // if the option is not a key value then compare option to value
+          if (option === value) {
+            return true;
+          }
+        }
+
+        // if the option is not a match, return false
+        return false;
+      }}
     />
   );
 }
