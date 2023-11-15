@@ -1,22 +1,26 @@
 import {
+  ConfirmOptions,
   ConfirmProvider as MuiConfirmProvider,
   useConfirm
 } from "material-ui-confirm";
 
-import PropTypes from "prop-types";
+import type { ConfirmProviderProps } from "./ConfirmProvider.types";
 import React from "react";
+import { Theme } from "@mui/material/styles";
 
 // component to wrap the app with to provide the confirm dialog
-export function ConfirmProvider({ children }) {
-  const confirmDialogStyle = {
+export function ConfirmProvider({ children }: ConfirmProviderProps) {
+  const confirmDialogStyle: ConfirmOptions = {
     cancellationButtonProps: {
       sx: {
-        color: theme => (theme.palette.mode === "light" ? "" : "#87a5d2")
+        color: (theme: Theme) =>
+          theme.palette.mode === "light" ? "" : "#87a5d2"
       }
     },
     confirmationButtonProps: {
       sx: {
-        bgcolor: theme => (theme.palette.mode === "light" ? "" : "#87a5d2")
+        bgcolor: (theme: Theme) =>
+          theme.palette.mode === "light" ? "" : "#87a5d2"
       },
       variant: "contained"
     },
@@ -32,8 +36,10 @@ export function ConfirmProvider({ children }) {
       PaperProps: {
         // change background colour of dialog
         sx: {
-          bgcolor: theme => (theme.palette.mode === "light" ? "" : "#383838"),
-          color: theme => (theme.palette.mode === "light" ? "" : "#fff")
+          bgcolor: (theme: Theme) =>
+            theme.palette.mode === "light" ? "" : "#383838",
+          color: (theme: Theme) =>
+            theme.palette.mode === "light" ? "" : "#fff"
         }
       },
       maxWidth: "xs",
@@ -43,12 +49,13 @@ export function ConfirmProvider({ children }) {
     },
     titleProps: {
       sx: {
-        color: theme => (theme.palette.mode === "light" ? "#000" : "#fff"),
+        color: (theme: any) =>
+          theme.palette.mode === "light" ? "#000" : "#fff",
         mb: 2
       }
     }
   };
-  const defaultOptions = {
+  const defaultOptions: ConfirmOptions = {
     ...confirmDialogStyle,
     allowClose: true,
     buttonOrder: ["cancel", "confirm"],
@@ -66,7 +73,3 @@ export function ConfirmProvider({ children }) {
 }
 
 export { useConfirm };
-
-ConfirmProvider.propTypes = {
-  children: PropTypes.node
-};

@@ -1,7 +1,8 @@
-import { AutocompleteProps, KeyValueOption } from "./Autocomplete.types";
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
 
 import Autocomplete from "./Autocomplete";
+import { AutocompleteProps } from "./Autocomplete.types";
+import { KeyValueOption } from "../Common.types";
 import React from "react";
 import { action } from "@storybook/addon-actions";
 import { useArgs } from "@storybook/preview-api";
@@ -50,21 +51,7 @@ const Template: StoryFn<
     <Autocomplete
       {...args}
       onChange={(event, newValue) => {
-        if (newValue !== null) {
-          if (Array.isArray(newValue)) {
-            updateArgs({
-              value: newValue.map(val =>
-                typeof val === "string" ? val : val.value
-              )
-            });
-          } else {
-            updateArgs({
-              value: typeof newValue === "string" ? newValue : newValue.value
-            });
-          }
-        } else {
-          updateArgs({ value: multiple ? [] : "" });
-        }
+        updateArgs({ value: newValue });
         action("onChange")(newValue);
       }}
       value={theValue}
@@ -119,7 +106,32 @@ export const KeyValueOptions: StoryObj<typeof Autocomplete> = {
     ],
     required: false,
     size: "medium",
-    value: "Option 1",
+    value: { key: 1, value: "Option 1" },
+    variant: "outlined"
+  },
+  render: Template
+};
+
+// Define the story for options with tooltips
+export const KeyValueOptionsTooltip: StoryObj<typeof Autocomplete> = {
+  args: {
+    // Define the args for key-value options
+    disabled: false,
+    error: false,
+    helperText: "Helper Text",
+    label: "Select options",
+    limitTags: -1,
+    margin: "normal",
+    multiple: false,
+    options: [
+      { key: 1, tooltip: "Tooltip 1", value: "Option 1" },
+      { key: 2, tooltip: "Tooltip 2", value: "Option 2" },
+      { key: 3, tooltip: "Tooltip 3", value: "Option 3" },
+      { key: 4, tooltip: "Tooltip 4", value: "Option 4" }
+    ],
+    required: false,
+    size: "medium",
+    value: { key: 1, tooltip: "Tooltip 1", value: "Option 1" },
     variant: "outlined"
   },
   render: Template

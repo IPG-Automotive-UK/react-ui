@@ -11,3 +11,10 @@ export type Label = {
   description?: string;
   name: string;
 };
+
+// KeyValueOption type
+export type KeyValueOption = {
+  key: string | number;
+  value: string;
+  tooltip?: string;
+};

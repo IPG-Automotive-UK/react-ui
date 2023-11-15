@@ -1,13 +1,17 @@
 import { Avatar } from "@mui/material";
-import PropTypes from "prop-types";
 import React from "react";
+import { UserAvatarProps } from "./UserAvatar.types";
 
 /**
  * UserAvatar component
  */
-export default function UserAvatar({ img, name = "", color = "rgb(0,0,0)" }) {
+export default function UserAvatar({
+  img,
+  name = "",
+  color = "rgb(0,0,0)"
+}: UserAvatarProps) {
   // returns the first char of first name and first char of last name
-  const getFirstAndLastChars = str => {
+  const getFirstAndLastChars = (str: string) => {
     return str.charAt(0) + str.charAt(str.length - 1);
   };
 
@@ -30,18 +34,3 @@ export default function UserAvatar({ img, name = "", color = "rgb(0,0,0)" }) {
     </>
   );
 }
-
-UserAvatar.propTypes = {
-  /**
-   * Icon background color
-   */
-  color: PropTypes.string,
-  /**
-   * Display Image
-   */
-  img: PropTypes.string,
-  /**
-   * Display Name
-   */
-  name: PropTypes.string
-};

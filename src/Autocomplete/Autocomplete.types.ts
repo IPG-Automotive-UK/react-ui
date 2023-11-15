@@ -3,7 +3,7 @@ import {
   TextFieldProps
 } from "@mui/material";
 
-export type KeyValueOption = { key: string | number; value: string };
+import { KeyValueOption } from "../Common.types";
 
 export type AutocompleteProps<
   Value extends string | KeyValueOption,
