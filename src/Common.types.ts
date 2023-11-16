@@ -13,4 +13,8 @@ export type Label = {
 };
 
 // KeyValueOption type
-export type KeyValueOption = { key: string | number; value: string };
+export type KeyValueOption = {
+  key: string | number;
+  value: string;
+  tooltip?: string;
+};

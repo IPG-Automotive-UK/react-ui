@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 
 import Autocomplete from ".";
 import React from "react";
@@ -11,6 +11,12 @@ const keyValueOptions = [
   { key: 2, value: "Option 2" },
   { key: 3, value: "Option 3" },
   { key: 4, value: "Option 4" }
+];
+const keyValueOptionsWithTooltip = [
+  { key: 1, tooltip: "Tooltip 1", value: "Option 1" },
+  { key: 2, tooltip: "Tooltip 2", value: "Option 2" },
+  { key: 3, tooltip: "Tooltip 3", value: "Option 3" },
+  { key: 4, tooltip: "Tooltip 4", value: "Option 4" }
 ];
 
 /**
@@ -133,6 +139,51 @@ describe("Select", () => {
     expect(onChange).toHaveBeenCalledWith(
       expect.anything(),
       { key: 1, value: "Option 1" },
+      expect.anything(),
+      expect.anything()
+    );
+  });
+
+  it("check helper icon is visible and tooltip shown on hover", async () => {
+    const onChange = jest.fn();
+
+    render(
+      <Autocomplete
+        multiple={false}
+        options={keyValueOptionsWithTooltip}
+        onChange={onChange}
+        label="Select an option"
+        value={{ key: 2, tooltip: "Tooltip 2", value: "Option 2" }}
+      />
+    );
+
+    // click the label selector down arrow
+    await userEvent.click(screen.getByRole("button", { name: /open/i }));
+
+    // check that the options are rendered
+    keyValueOptionsWithTooltip.forEach(opt =>
+      expect(screen.getByText(opt.value)).toBeInTheDocument()
+    );
+
+    // check that helper icons is rendered
+    keyValueOptionsWithTooltip.forEach(opt =>
+      expect(screen.getByTestId(`tooltip-${opt.key}`)).toBeInTheDocument()
+    );
+
+    // check tooltip is shown on hover of helper icon
+    await userEvent.hover(screen.getByTestId("tooltip-1"));
+    waitFor(() => {
+      expect(screen.getByText("Tooltip 1")).toBeInTheDocument();
+    });
+
+    // click the first option and check callback is called
+    await userEvent.click(screen.getByText("Option 1"));
+    expect(onChange).toHaveBeenCalledTimes(1);
+
+    // check that the onChange event is fired with the expected value
+    expect(onChange).toHaveBeenCalledWith(
+      expect.anything(),
+      { key: 1, tooltip: "Tooltip 1", value: "Option 1" },
       expect.anything(),
       expect.anything()
     );
