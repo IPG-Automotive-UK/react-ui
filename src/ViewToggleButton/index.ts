@@ -1,4 +1,5 @@
 import type { ToggleButtonGroupProps } from "@mui/material";
+import ViewToggleButton from "./ViewToggleButton";
 
 export type ViewToggleButtonProps = {
   disabled?: boolean;
@@ -7,6 +8,4 @@ export type ViewToggleButtonProps = {
   value: "card" | "table";
 };
 
-declare const ViewToggleButton: React.FC<ViewToggleButtonProps>;
-
-export default ViewToggleButton;
+export default ViewToggleButton as React.FC<ViewToggleButtonProps>;

@@ -1,3 +1,5 @@
+import RangeFilter from "./RangeFilter";
+
 export type RangeFilterProps = {
   label?: string;
   max?: number;
@@ -7,6 +9,4 @@ export type RangeFilterProps = {
   value?: number[];
 };
 
-declare const RangeFilter: React.FC<RangeFilterProps>;
-
-export default RangeFilter;
+export default RangeFilter as React.FC<RangeFilterProps>;

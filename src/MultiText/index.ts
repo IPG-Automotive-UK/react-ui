@@ -1,3 +1,5 @@
+import MultiText from "./MultiText";
+
 type Row = {
   label: string;
   value: number;
@@ -7,6 +9,4 @@ export type MultiTextProps = {
   rows?: Row[];
 };
 
-declare const MultiText: React.FC<MultiTextProps>;
-
-export default MultiText;
+export default MultiText as React.FC<MultiTextProps>;

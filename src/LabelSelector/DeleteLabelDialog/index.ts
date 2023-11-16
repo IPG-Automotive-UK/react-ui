@@ -1,3 +1,4 @@
+import DeleteLabelDialog from "./DeleteLabelDialog";
 import type { DialogProps } from "@mui/material/Dialog";
 import type { Label } from "../Label.types";
 
@@ -8,6 +9,4 @@ export type DeleteLabelDialogProps = {
   onDelete?: (deletedLabel: Label) => void;
 };
 
-declare const DeleteLabelDialog: React.FC<DeleteLabelDialogProps>;
-
-export { DeleteLabelDialog };
+export default DeleteLabelDialog as React.FC<DeleteLabelDialogProps>;

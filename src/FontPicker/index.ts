@@ -1,3 +1,5 @@
+import FontPicker from "./FontPicker";
+
 export type FontPickerProps = {
   disabled?: boolean;
   error?: boolean;
@@ -10,6 +12,4 @@ export type FontPickerProps = {
   variant?: "standard" | "outlined" | "filled";
 };
 
-declare const FontPicker: React.FC<FontPickerProps>;
-
-export default FontPicker;
+export default FontPicker as React.FC<FontPickerProps>;

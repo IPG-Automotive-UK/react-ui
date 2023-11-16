@@ -1,5 +1,5 @@
+import Copyright from "./Copyright";
+
 export type CopyrightProps = {};
 
-declare const Copyright: React.FC<CopyrightProps>;
-
-export default Copyright;
+export default Copyright as React.FC<CopyrightProps>;

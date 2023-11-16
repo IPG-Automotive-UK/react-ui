@@ -1,3 +1,5 @@
+import PasswordResetForm from "./PasswordResetForm";
+
 export type PasswordResetFormProps = {
   loading?: boolean;
   onSubmit: (
@@ -8,6 +10,4 @@ export type PasswordResetFormProps = {
   ) => void;
 };
 
-declare const PasswordResetForm: React.FC<PasswordResetFormProps>;
-
-export default PasswordResetForm;
+export default PasswordResetForm as React.FC<PasswordResetFormProps>;

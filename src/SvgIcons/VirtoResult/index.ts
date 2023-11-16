@@ -1,7 +1,6 @@
 import { SvgIconProps } from "../SvgIcons.types";
+import VirtoResult from "./VirtoResult";
 
 export type VirtoResultProps = SvgIconProps;
 
-declare const VirtoResult: React.FC<VirtoResultProps>;
-
-export default VirtoResult;
+export default VirtoResult as React.FC<VirtoResultProps>;

@@ -62,46 +62,18 @@ export default function DeleteLabelDialog({
 DeleteLabelDialog.propTypes = {
   /**
    * If true, the component is shown.
-   * @default false
-   * @type {boolean}
    */
   isOpen: PropTypes.bool,
   /**
    * The label to delete.
-   * @default { color: "#005FA8", description: "", _id: "", name: "" }
-   * @type {object}
-   * @property {string} color - The color of the label.
-   * @property {string} description - The description of the label.
-   * @property {string} _id - The id of the label.
-   * @property {string} name - The name of the label.
-   *
    */
   label: PropTypes.object,
   /**
    * Callback fired when the component requests to be closed.
-   *
-   * **Signature:**
-   * ```
-   * function(event: object, string: reason) => void
-   * ```
-   *
-   * - `event`: The event source of the callback.
-   * - `reason`: Can be: `"escapeKeyDown"`, `"backdropClick"`.
-   *
-   * @type {function}
    */
   onClose: PropTypes.func,
   /**
    * Callback fired when the delete button is clicked.
-   *
-   * **Signature:**
-   * ```
-   * function(object: label) => void
-   * ```
-   *
-   * - `label`: The label object to be deleted.
-   *
-   * @type {function}
    */
   onDelete: PropTypes.func
 };

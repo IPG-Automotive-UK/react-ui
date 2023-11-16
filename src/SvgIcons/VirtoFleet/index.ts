@@ -1,7 +1,6 @@
 import { SvgIconProps } from "../SvgIcons.types";
+import VirtoFleet from "./VirtoFleet";
 
 export type VirtoFleetProps = SvgIconProps;
 
-declare const VirtoFleet: React.FC<VirtoFleetProps>;
-
-export default VirtoFleet;
+export default VirtoFleet as React.FC<VirtoFleetProps>;

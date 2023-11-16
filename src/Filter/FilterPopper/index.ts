@@ -1,9 +1,9 @@
+import FilterPopper from "./FilterPopper";
+
 export type FilterPopperProps = {
   children?: React.ReactNode;
   count?: number;
   label?: string;
 };
 
-declare const FilterPopper: React.FC<FilterPopperProps>;
-
-export default FilterPopper;
+export default FilterPopper as React.FC<FilterPopperProps>;

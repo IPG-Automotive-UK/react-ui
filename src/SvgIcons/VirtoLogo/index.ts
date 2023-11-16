@@ -1,7 +1,6 @@
 import { SvgIconProps } from "../SvgIcons.types";
+import VirtoLogo from "./VirtoLogo";
 
 export type VirtoLogoProps = SvgIconProps;
 
-declare const VirtoLogo: React.FC<VirtoLogoProps>;
-
-export default VirtoLogo;
+export default VirtoLogo as React.FC<VirtoLogoProps>;

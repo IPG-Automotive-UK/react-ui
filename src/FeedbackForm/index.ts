@@ -1,3 +1,5 @@
+import FeedbackForm from "./FeedbackForm";
+
 export type FeedbackFormProps = {
   dialogPosition?: "rightTop" | "bottomLeft" | "leftTop" | "leftBottom";
   onSubmit?: (data: {
@@ -9,6 +11,4 @@ export type FeedbackFormProps = {
   open?: boolean;
 };
 
-declare const FeedbackForm: React.FC<FeedbackFormProps>;
-
-export default FeedbackForm;
+export default FeedbackForm as React.FC<FeedbackFormProps>;

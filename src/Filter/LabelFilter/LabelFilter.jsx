@@ -11,7 +11,6 @@ import {
 
 import AlwaysOpenAutocomplete from "../AlwaysOpenAutocomplete";
 import LabelChip from "../../LabelSelector/LabelChip/LabelChip";
-import PropTypes from "prop-types";
 
 /**
  * A label filter allows the user to select multiple labels from a list.
@@ -146,48 +145,3 @@ function Option(props, option, { selected }) {
     </li>
   );
 }
-
-// prop types
-LabelFilter.propTypes = {
-  /**
-   * The label for the filter.
-   */
-  label: PropTypes.string,
-  /**
-   * The name for the input.
-   */
-  name: PropTypes.string,
-  /**
-   * Callback function to handle changes
-   * @param {Array} value - The new value
-   * @returns {void}
-   */
-  onChange: PropTypes.func,
-  /**
-   * The options to select from
-   * @type {Array}
-   * @example
-   * [
-   *  { _id: 1, color: "#005FA8", description: "first label", name: "label 1" },
-   *  { _id: 2, color: "#005FA8", description: "second label", name: "label 2" }
-   * ]
-   */
-  options: PropTypes.arrayOf(PropTypes.object).isRequired,
-  /**
-   * The selected value
-   * @type {Array}
-   * @example
-   * [
-   * { _id: 1, color: "#005FA8", description: "first label", name: "label 1" },
-   * ]
-   * @default []
-   */
-  value: PropTypes.arrayOf(PropTypes.object),
-  /**
-   * The variant of the filter
-   * @type {string}
-   * @default "popper"
-   * @enum {"popper", "always-open"}
-   */
-  variant: PropTypes.oneOf(["popper", "always-open"])
-};

@@ -1,3 +1,5 @@
+import PasswordChangeForm from "./PasswordChangeForm";
+
 export type PasswordChangeFormProps = {
   loading?: boolean;
   onSubmit: (
@@ -9,6 +11,4 @@ export type PasswordChangeFormProps = {
   ) => void;
 };
 
-declare const PasswordChangeForm: React.FC<PasswordChangeFormProps>;
-
-export default PasswordChangeForm;
+export default PasswordChangeForm as React.FC<PasswordChangeFormProps>;

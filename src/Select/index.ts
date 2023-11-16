@@ -1,3 +1,4 @@
+import Select from "./Select";
 import type { TextFieldProps } from "../TextField";
 
 export type SelectProps = {
@@ -14,6 +15,4 @@ export type SelectProps = {
   variant?: "filled" | "outlined" | "standard";
 };
 
-declare const Select: React.FC<SelectProps>;
-
-export default Select;
+export default Select as React.FC<SelectProps>;

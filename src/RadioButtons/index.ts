@@ -1,5 +1,7 @@
 import type { RadioGroupProps, SxProps, Theme } from "@mui/material";
 
+import RadioButtons from "./RadioButtons";
+
 export type RadioButtonsProps = {
   disabled?: boolean;
   labelPlacement?: "end" | "start" | "top" | "bottom";
@@ -12,6 +14,4 @@ export type RadioButtonsProps = {
   value?: string;
 };
 
-declare const RadioButtons: React.FC<RadioButtonsProps>;
-
-export default RadioButtons;
+export default RadioButtons as React.FC<RadioButtonsProps>;

@@ -1,7 +1,6 @@
 import { SvgIconProps } from "../SvgIcons.types";
+import VirtoID from "./VirtoID";
 
 export type VirtoIDProps = SvgIconProps;
 
-declare const VirtoID: React.FC<VirtoIDProps>;
-
-export default VirtoID;
+export default VirtoID as React.FC<VirtoIDProps>;

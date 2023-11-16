@@ -1,3 +1,4 @@
+import NumberField from "./NumberField";
 import type { TextFieldProps } from "@mui/material";
 
 export type NumberFieldProps = {
@@ -21,6 +22,4 @@ export type NumberFieldProps = {
   variant?: "standard" | "filled" | "outlined";
 };
 
-declare const NumberField: React.FC<NumberFieldProps>;
-
-export default NumberField;
+export default NumberField as React.FC<NumberFieldProps>;

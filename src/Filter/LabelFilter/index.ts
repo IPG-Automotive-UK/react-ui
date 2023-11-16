@@ -1,4 +1,5 @@
 import type { Label } from "../../LabelSelector/Label.types";
+import LabelFilter from "./LabelFilter";
 
 export type LabelFilterProps = {
   label?: string;
@@ -9,6 +10,4 @@ export type LabelFilterProps = {
   variant?: "popper" | "always-open";
 };
 
-declare const LabelFilter: React.FC<LabelFilterProps>;
-
-export default LabelFilter;
+export default LabelFilter as React.FC<LabelFilterProps>;

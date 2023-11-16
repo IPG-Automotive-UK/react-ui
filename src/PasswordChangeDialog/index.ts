@@ -1,4 +1,5 @@
 import type { DialogProps } from "@mui/material";
+import PasswordChangeDialog from "./PasswordChangeDialog";
 
 export type PasswordChangeDialogProps = {
   errorMessage?: string;
@@ -16,6 +17,4 @@ export type PasswordChangeDialogProps = {
   successMessage?: string;
 };
 
-declare const PasswordChangeDialog: React.FC<PasswordChangeDialogProps>;
-
-export default PasswordChangeDialog;
+export default PasswordChangeDialog as React.FC<PasswordChangeDialogProps>;

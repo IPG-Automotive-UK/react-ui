@@ -4,6 +4,8 @@ import type {
   Theme
 } from "@mui/material";
 
+import Slider from "./Slider";
+
 export type SliderProps = {
   color?: string;
   disabled?: boolean;
@@ -24,6 +26,4 @@ export type SliderProps = {
   valueLabelDisplay?: "auto" | "off" | "on";
 };
 
-declare const Slider: React.FC<SliderProps>;
-
-export default Slider;
+export default Slider as React.FC<SliderProps>;

@@ -1,8 +1,8 @@
 import type { Label } from "../LabelSelector/Label.types";
+import MultiLabelPopover from "./MultiLabelPopover";
+
 export type MultiLabelPopoverProps = {
   labels?: Label[];
 };
 
-declare const MultiLabelPopover: React.FC<MultiLabelPopoverProps>;
-
-export default MultiLabelPopover;
+export default MultiLabelPopover as React.FC<MultiLabelPopoverProps>;

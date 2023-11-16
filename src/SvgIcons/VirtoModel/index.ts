@@ -1,7 +1,6 @@
 import { SvgIconProps } from "../SvgIcons.types";
+import VirtoModel from "./VirtoModel";
 
 export type VirtoModelProps = SvgIconProps;
 
-declare const VirtoModel: React.FC<VirtoModelProps>;
-
-export default VirtoModel;
+export default VirtoModel as React.FC<VirtoModelProps>;

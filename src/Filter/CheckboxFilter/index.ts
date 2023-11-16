@@ -1,3 +1,5 @@
+import CheckboxFilter from "./CheckboxFilter";
+
 export type CheckboxFilterProps = {
   label?: string;
   limitTags?: number;
@@ -8,6 +10,4 @@ export type CheckboxFilterProps = {
   variant?: "popper" | "always-open";
 };
 
-declare const CheckboxFilter: React.FC<CheckboxFilterProps>;
-
-export default CheckboxFilter;
+export default CheckboxFilter as React.FC<CheckboxFilterProps>;

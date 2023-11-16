@@ -1,3 +1,5 @@
+import Color from "./Color";
+
 export type ColorProps = {
   onChange?: (color: string) => void;
   showControls?: boolean;
@@ -6,6 +8,4 @@ export type ColorProps = {
   value?: string;
 };
 
-declare const Color: React.FC<ColorProps>;
-
-export default Color;
+export default Color as React.FC<ColorProps>;

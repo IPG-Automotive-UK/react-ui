@@ -1,3 +1,5 @@
+import MultiColor from "./MultiColor";
+
 type Row = {
   color: string;
   value: number;
@@ -7,6 +9,4 @@ export type MultiColorProps = {
   rows?: Row[];
 };
 
-declare const MultiColor: React.FC<MultiColorProps>;
-
-export default MultiColor;
+export default MultiColor as React.FC<MultiColorProps>;

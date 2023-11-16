@@ -1,7 +1,7 @@
+import Loading from "./Loading";
+
 export type LoadingProps = {
   label?: string;
 };
 
-declare const Loading: React.FC<LoadingProps>;
-
-export default Loading;
+export default Loading as React.FC<LoadingProps>;

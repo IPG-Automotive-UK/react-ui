@@ -1,3 +1,5 @@
+import Checkbox from "./Checkbox";
+
 export type CheckboxProps = {
   checked?: boolean;
   disabled?: boolean;
@@ -7,6 +9,4 @@ export type CheckboxProps = {
   style?: React.CSSProperties;
 };
 
-declare const Checkbox: React.FC<CheckboxProps>;
-
-export default Checkbox;
+export default Checkbox as React.FC<CheckboxProps>;

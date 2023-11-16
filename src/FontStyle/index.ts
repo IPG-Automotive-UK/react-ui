@@ -1,3 +1,5 @@
+import FontStyle from "./FontStyle";
+
 export type FontStyleProps = {
   disabled?: boolean;
   onChange?: (event: React.MouseEvent<HTMLElement>, value: string[]) => void;
@@ -6,6 +8,4 @@ export type FontStyleProps = {
   value?: string[];
 };
 
-declare const FontStyle: React.FC<FontStyleProps>;
-
-export default FontStyle;
+export default FontStyle as React.FC<FontStyleProps>;

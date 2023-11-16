@@ -1,5 +1,7 @@
 import { SxProps, Theme } from "@mui/material/styles";
 
+import Canvas from "./Canvas";
+
 export type CanvasProps = {
   backgroundColor?: string;
   backgroundImage?: string;
@@ -31,6 +33,4 @@ export type CanvasProps = {
   width?: number;
 };
 
-declare const Canvas: React.FC<CanvasProps>;
-
-export default Canvas;
+export default Canvas as React.FC<CanvasProps>;

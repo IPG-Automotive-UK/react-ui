@@ -1,3 +1,5 @@
+import LoginForm from "./LoginForm";
+
 export type LoginFormProps = {
   loading?: boolean;
   onLogin?: (
@@ -6,6 +8,4 @@ export type LoginFormProps = {
   ) => void;
 };
 
-declare const LoginForm: React.FC<LoginFormProps>;
-
-export default LoginForm;
+export default LoginForm as React.FC<LoginFormProps>;

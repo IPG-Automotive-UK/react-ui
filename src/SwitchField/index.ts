@@ -1,3 +1,4 @@
+import SwitchField from "./SwitchField";
 import type { SwitchProps } from "@mui/material";
 
 export type SwitchFieldProps = {
@@ -10,6 +11,4 @@ export type SwitchFieldProps = {
   size?: "small" | "medium";
 };
 
-declare const SwitchField: React.FC<SwitchFieldProps>;
-
-export default SwitchField;
+export default SwitchField as React.FC<SwitchFieldProps>;

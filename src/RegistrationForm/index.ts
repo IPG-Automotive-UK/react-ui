@@ -1,3 +1,5 @@
+import RegistrationForm from "./RegistrationForm";
+
 export type RegistrationFormProps = {
   loading?: boolean;
   onRegister?: (
@@ -14,6 +16,4 @@ export type RegistrationFormProps = {
   teams: string[];
 };
 
-declare const RegistrationForm: React.FC<RegistrationFormProps>;
-
-export default RegistrationForm;
+export default RegistrationForm as React.FC<RegistrationFormProps>;

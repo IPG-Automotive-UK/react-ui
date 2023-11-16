@@ -1,7 +1,6 @@
 import { SvgIconProps } from "../SvgIcons.types";
+import VirtoScene from "./VirtoScene";
 
 export type VirtoSceneProps = SvgIconProps;
 
-declare const VirtoScene: React.FC<VirtoSceneProps>;
-
-export default VirtoScene;
+export default VirtoScene as React.FC<VirtoSceneProps>;

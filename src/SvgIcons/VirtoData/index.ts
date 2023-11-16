@@ -1,7 +1,6 @@
 import { SvgIconProps } from "../SvgIcons.types";
+import VirtoData from "./VirtoData";
 
 export type VirtoDataProps = SvgIconProps;
 
-declare const VirtoData: React.FC<VirtoDataProps>;
-
-export default VirtoData;
+export default VirtoData as React.FC<VirtoDataProps>;
