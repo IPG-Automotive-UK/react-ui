@@ -1,15 +1,17 @@
 import React from "react";
 import Snackbar from "../Snackbar";
 import SnackbarContext from "./SnackbarContext";
+import { SnackbarProps } from "../Snackbar/Snackbar.types";
+import { SnackbarProviderProps } from "./SnackbarProvider.types";
 
 /**
  * A helper component for adding a snackbar to an application. Injects a single snackbar component in your application, and exposes context down the React tree to control the snackbar via the useSnackbar hook. It should preferably be used at the root of your component tree.
  */
-export default function SnackbarProvider({ children }) {
+export default function SnackbarProvider({ children }: SnackbarProviderProps) {
   // snackbar state
-  const [snackbar, setSnackbar] = React.useState({
-    actionCallback: null,
-    actionText: null,
+  const [snackbar, setSnackbar] = React.useState<SnackbarProps>({
+    actionCallback: () => {},
+    actionText: "",
     message: "",
     open: false,
     variant: "info"
@@ -24,11 +26,11 @@ export default function SnackbarProvider({ children }) {
   // show snackbar
   const show = React.useCallback(
     (
-      message = "",
-      variant = "info",
-      autoHideDuration = null,
-      actionText = null,
-      actionCallback = null
+      message: "",
+      variant: "info",
+      autoHideDuration: null,
+      actionText: "",
+      actionCallback: () => {}
     ) =>
       setSnackbar({
         actionCallback,

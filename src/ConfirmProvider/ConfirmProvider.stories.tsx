@@ -1,13 +1,19 @@
 import { ConfirmProvider, useConfirm } from "./ConfirmProvider";
+import { Meta, StoryFn } from "@storybook/react";
 
 import { Button } from "@mui/material";
+import { ConfirmProviderProps } from "./ConfirmProvider.types";
 import React from "react";
 import { action } from "@storybook/addon-actions";
 
-export default {
+/**
+ * Story metadata
+ */
+const meta: Meta<typeof ConfirmProvider> = {
   component: ConfirmProvider,
   title: "General/ConfirmProvider"
 };
+export default meta;
 
 // confirm dialog component with useConfirm hook
 function ConfirmDialog() {
@@ -30,7 +36,7 @@ function ConfirmDialog() {
 }
 
 // template for story
-const Template = ({ children }) => {
+const Template: StoryFn<ConfirmProviderProps> = ({ children }) => {
   return <ConfirmProvider>{children}</ConfirmProvider>;
 };
 

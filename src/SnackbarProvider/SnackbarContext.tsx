@@ -3,4 +3,4 @@ import React from "react";
 /**
  * Context for snackbar
  */
-export default React.createContext();
+export default React.createContext({});

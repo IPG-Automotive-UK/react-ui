@@ -18,7 +18,7 @@ describe("UserAvatar", () => {
   test("one letter initial shown for single word name", () => {
     const name = "John";
     const { container } = render(<UserAvatar name={name} />);
-    const avatar = container.querySelector(".MuiAvatar-root");
+    const avatar = container.querySelector(".MuiAvatar-root") as HTMLElement;
     expect(avatar.innerHTML).toBe("J");
   });
 
@@ -26,7 +26,7 @@ describe("UserAvatar", () => {
   test("two letter initial shown for two word name", () => {
     const name = "John Doe";
     const { container } = render(<UserAvatar name={name} />);
-    const avatar = container.querySelector(".MuiAvatar-root");
+    const avatar = container.querySelector(".MuiAvatar-root") as HTMLElement;
     expect(avatar.innerHTML).toBe("JD");
   });
 
@@ -34,7 +34,7 @@ describe("UserAvatar", () => {
   test("only first and last initials shown for more than two word name", () => {
     const name = "John Doe Smith";
     const { container } = render(<UserAvatar name={name} />);
-    const avatar = container.querySelector(".MuiAvatar-root");
+    const avatar = container.querySelector(".MuiAvatar-root") as HTMLElement;
     expect(avatar.innerHTML).toBe("JS");
   });
 
@@ -43,14 +43,18 @@ describe("UserAvatar", () => {
     const imgSrc =
       "https://avatars2.githubusercontent.com/u/8186664?s=460&u=e9f9c8f8b8e9d0b5f7b1f8f8b8c8f8f8b8c8f8f8&v=4";
     const { container } = render(<UserAvatar img={imgSrc} />);
-    const imageComponent = container.querySelector(".MuiAvatar-img");
+    const imageComponent = container.querySelector(
+      ".MuiAvatar-img"
+    ) as HTMLImageElement;
     expect(imageComponent.src).toBe(imgSrc);
   });
 
   // check no image is shown when image prop is not set
   test("no image shown when image prop is not set", () => {
     const { container } = render(<UserAvatar />);
-    const imageComponent = container.querySelector(".MuiAvatar-img");
+    const imageComponent = container.querySelector(
+      ".MuiAvatar-img"
+    ) as HTMLImageElement;
     expect(imageComponent).toBeNull();
   });
 });
