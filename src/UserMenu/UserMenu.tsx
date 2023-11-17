@@ -62,7 +62,7 @@ export default function UserMenu({
           name={username}
           color="#bdbdbd"
           sx={{
-            // color: "#fff",
+            color: "#fff",
             height: 34,
             width: 34
           }}
