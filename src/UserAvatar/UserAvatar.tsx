@@ -2,19 +2,20 @@ import { Avatar } from "@mui/material";
 import React from "react";
 import { UserAvatarProps } from "./UserAvatar.types";
 
+// returns the first char of first name and first char of last name
+const getFirstAndLastChars = (str: string) => {
+  return str.charAt(0) + str.charAt(str.length - 1);
+};
+
 /**
  * UserAvatar component
  */
 export default function UserAvatar({
   img,
   name = "",
-  color = "rgb(0,0,0)"
+  color = "rgb(0,0,0)",
+  sx
 }: UserAvatarProps) {
-  // returns the first char of first name and first char of last name
-  const getFirstAndLastChars = (str: string) => {
-    return str.charAt(0) + str.charAt(str.length - 1);
-  };
-
   // set icon name
   let initials = (name === "" ? "?" : name)
     .split(" ")
@@ -27,9 +28,16 @@ export default function UserAvatar({
   return (
     <>
       {img ? (
-        <Avatar src={img} />
+        <Avatar src={img} sx={sx} />
       ) : (
-        <Avatar sx={{ backgroundColor: color }}>{initials}</Avatar>
+        <Avatar
+          sx={[
+            { backgroundColor: color, fontSize: "14px" },
+            ...(Array.isArray(sx) ? sx : [sx])
+          ]}
+        >
+          {initials}
+        </Avatar>
       )}
     </>
   );
