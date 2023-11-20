@@ -213,89 +213,11 @@ export default function EditLabelDialog({
 
 // EditLabelDialog Proptypes
 EditLabelDialog.propTypes = {
-  /**
-   * If true, the component is shown.
-   * @default false
-   * @type {boolean}
-   */
   isOpen: PropTypes.bool,
-  /**
-   * The label to be edited.
-   * @default { color: "#005FA8", description: "", _id: "", name: "" }
-   * @type {object}
-   * @property {string} color The color of the label.
-   * @property {string} description The description of the label.
-   * @property {string} _id The id of the label.
-   * @property {string} name The name of the label.
-   *
-   */
   label: PropTypes.object,
-  /**
-   * The title of the dialog.
-   * @default "Edit Label"
-   * @type {string}
-   */
   labelDialogTitle: PropTypes.string,
-  /**
-   * Callback fired when the component requests to be closed.
-   *
-   * **Signature:**
-   * ```
-   * function(event: object, string: reason) => void
-   * ```
-   *
-   * - `event`: The event source of the callback.
-   * - `reason`: Can be: `"escapeKeyDown"`, `"backdropClick"`.
-   *
-   * @type {function}
-   */
   onClose: PropTypes.func,
-  /**
-   * Callback fired when a label is edited.
-   *
-   * **Signature**
-   * ```
-   * function(label: object) => void
-   * ```
-   *
-   * _label_: The label that is edited.
-   * @default () => {}
-   * @type {function}
-   */
   onEdit: PropTypes.func,
-  /**
-   * Callback fired when a new label is added.
-   *
-   * **Signature**
-   * ```
-   * function(label: object) => void
-   * ```
-   *
-   * _label_: The label that is added.
-   * @default () => {}
-   * @type {function}
-   */
   onNew: PropTypes.func,
-  /**
-   * The array of label objects that are options to render in the listbox.
-   * @default []
-   * @type {array}
-   *
-   * @example
-   * [
-   *  {
-   *   _id: "5f9f1b9b0b5b9c0b8c8b4567",
-   *  name: "Label 1",
-   * description: "Description 1",
-   * color: "#ff0000"
-   * },
-   * {
-   *  _id: "5f9f1b9b0b5b9c0b8c8b4568",
-   * name: "Label 2",
-   * description: "Description 2",
-   * color: "#00ff00"
-   * }
-   * ]
-   */
   options: PropTypes.array
 };

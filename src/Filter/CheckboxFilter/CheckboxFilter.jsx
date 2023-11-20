@@ -11,7 +11,6 @@ import {
 import { CheckBox, CheckBoxOutlineBlank } from "@mui/icons-material";
 
 import AlwaysOpenAutocomplete from "../AlwaysOpenAutocomplete";
-import PropTypes from "prop-types";
 
 /**
  * A checkbox filter allows the user to select multiple options from a list.
@@ -105,47 +104,3 @@ function Option(props, option, { selected }) {
     </Box>
   );
 }
-
-// prop types
-CheckboxFilter.propTypes = {
-  /**
-   * The label for the filter.
-   */
-  label: PropTypes.string,
-  /**
-   * The number of selected tags to show
-   */
-  limitTags: PropTypes.number,
-  /**
-   * Input name
-   */
-  name: PropTypes.string,
-  /**
-   * Callback function to handle changes
-   * @param {Array} value - The new value
-   * @returns {void}
-   */
-  onChange: PropTypes.func,
-  /**
-   * The options to select from
-   * @type {Array}
-   * @example
-   * ["Option 1", "Option 2"]
-   */
-  options: PropTypes.arrayOf(PropTypes.string).isRequired,
-  /**
-   * The selected options
-   * @type {Array}
-   * @example
-   * ["Option 1"]
-   * @default []
-   */
-  value: PropTypes.arrayOf(PropTypes.string),
-  /**
-   * The variant of the filter
-   * @type {string}
-   * @default "popper"
-   * @enum {"popper", "always-open"}
-   */
-  variant: PropTypes.oneOf(["popper", "always-open"])
-};

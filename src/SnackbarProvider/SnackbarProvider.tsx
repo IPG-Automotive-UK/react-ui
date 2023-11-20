@@ -1,15 +1,24 @@
+import Snackbar, { SnackbarProps } from "../Snackbar";
+import SnackbarContext, { SnackbarContextType } from "./SnackbarContext";
+
 import React from "react";
-import Snackbar from "../Snackbar";
-import SnackbarContext from "./SnackbarContext";
-import { SnackbarProps } from "../Snackbar/Snackbar.types";
 import { SnackbarProviderProps } from "./SnackbarProvider.types";
+
+type SnackbarStateType = {
+  message: SnackbarProps["message"];
+  variant: SnackbarProps["variant"];
+  autoHideDuration?: SnackbarProps["autoHideDuration"];
+  actionText?: SnackbarProps["actionText"];
+  actionCallback?: SnackbarProps["actionCallback"];
+  open: boolean;
+};
 
 /**
  * A helper component for adding a snackbar to an application. Injects a single snackbar component in your application, and exposes context down the React tree to control the snackbar via the useSnackbar hook. It should preferably be used at the root of your component tree.
  */
 export default function SnackbarProvider({ children }: SnackbarProviderProps) {
   // snackbar state
-  const [snackbar, setSnackbar] = React.useState<SnackbarProps>({
+  const [snackbar, setSnackbar] = React.useState<SnackbarStateType>({
     actionCallback: () => {},
     actionText: "",
     message: "",
@@ -18,19 +27,23 @@ export default function SnackbarProvider({ children }: SnackbarProviderProps) {
   });
 
   // close snackbar
-  const close = React.useCallback(
-    () => setSnackbar(snackbar => ({ ...snackbar, open: false })),
+  const close = React.useCallback<SnackbarContextType["close"]>(
+    () =>
+      setSnackbar(snackbar => ({
+        ...snackbar,
+        open: false
+      })),
     [setSnackbar]
   );
 
   // show snackbar
-  const show = React.useCallback(
+  const show = React.useCallback<SnackbarContextType["show"]>(
     (
-      message: "",
-      variant: "info",
-      autoHideDuration: null,
-      actionText: "",
-      actionCallback: () => {}
+      message = "",
+      variant = "info",
+      autoHideDuration = null,
+      actionText = "",
+      actionCallback = () => {}
     ) =>
       setSnackbar({
         actionCallback,
@@ -44,11 +57,11 @@ export default function SnackbarProvider({ children }: SnackbarProviderProps) {
   );
 
   // memoise callbacks
-  const value = React.useMemo(() => ({ close, show }), [close, show]);
+  const contextValue = React.useMemo(() => ({ close, show }), [close, show]);
 
   // wrap snackbar component and children in provider
   return (
-    <SnackbarContext.Provider value={value}>
+    <SnackbarContext.Provider value={contextValue}>
       {children}
       <Snackbar {...snackbar} onClose={close} />
     </SnackbarContext.Provider>
