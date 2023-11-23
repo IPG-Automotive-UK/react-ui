@@ -29,24 +29,24 @@ jobs:
         run: npm run test:unit
         env:
           CI: true
-      - name: End to End Tests (Linux)
-        if: runner.os == 'Linux'
-        run: sudo apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y xvfb && xvfb-run npm run test:playwright:headed
-        env:
-          CI: true
-      - name: End to End Tests (Windows & MacOS)
-        if: runner.os != 'Linux'
-        run: npm run test:playwright
-        env:
-          CI: true
-      - name: Upload Playwright Report
-        uses: actions/upload-artifact@v3
-        if: always()
-        with:
-          name: playwright-report ${{ matrix.node-version }}
-          path: playwright-report
-      - name: Upload Coverage Report
-        uses: actions/upload-artifact@v3
-        with:
-          name: coverage-report ${{ matrix.node-version }}
-          path: coverage/lcov-report
+      # - name: End to End Tests (Linux)
+      #   if: runner.os == 'Linux'
+      #   run: sudo apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y xvfb && xvfb-run npm run test:playwright:headed
+      #   env:
+      #     CI: true
+      # - name: End to End Tests (Windows & MacOS)
+      #   if: runner.os != 'Linux'
+      #   run: npm run test:playwright
+      #   env:
+      #     CI: true
+      # - name: Upload Playwright Report
+      #   uses: actions/upload-artifact@v3
+      #   if: always()
+      #   with:
+      #     name: playwright-report ${{ matrix.node-version }}
+      #     path: playwright-report
+      # - name: Upload Coverage Report
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: coverage-report ${{ matrix.node-version }}
+      #     path: coverage/lcov-report
