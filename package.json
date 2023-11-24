@@ -39,7 +39,7 @@
     "@mui/material": "^5.14.16",
     "@mui/styles": "^5.14.16",
     "@mui/x-data-grid": "^6.17.0",
-    "@playwright/test": "^1.39.0",
+    "@playwright/test": "1.40",
     "@storybook/addon-actions": "^7.5.2",
     "@storybook/addon-essentials": "^7.5.2",
     "@storybook/addon-interactions": "^7.5.2",
