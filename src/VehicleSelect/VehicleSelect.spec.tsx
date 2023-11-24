@@ -1,6 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test.describe("Vehicle Select tests", () => {
+  // Test that onChanges is called correctly
   test("Test onChange is called with the expected values", async ({ page }) => {
     // Wait for page to load
     await page.goto(

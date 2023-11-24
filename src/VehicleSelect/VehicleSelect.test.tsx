@@ -1,9 +1,8 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 
 import React from "react";
 import VehicleSelect from "./VehicleSelect";
 import { VehicleSelectProps } from "./VehicleSelect.types";
-import userEvent from "@testing-library/user-event";
 
 // default props
 const defaultProps = {
