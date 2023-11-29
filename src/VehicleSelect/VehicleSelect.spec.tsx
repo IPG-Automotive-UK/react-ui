@@ -60,5 +60,16 @@ test.describe("Vehicle Select tests", () => {
         await expect(page.getByText(option).first()).toBeVisible();
       }
     }
+
+    await expect(page.getByText("911").first()).toBeVisible();
+    await expect(page.getByText("2015").first()).toBeVisible();
+    await expect(
+      page.getByText("JS - 3.6 l6 - 397kW - 7MT -").first()
+    ).toBeVisible();
+    await expect(
+      page.getByText("MP - 3.6 l6 - 397kW - 7MT -").first()
+    ).toBeVisible();
+    await expect(page.getByText("Gate 1").first()).toBeVisible();
+    await expect(page.getByText("Gate 2").first()).toBeVisible();
   });
 });
