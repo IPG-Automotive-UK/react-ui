@@ -187,8 +187,8 @@ export default function ModelButton({
                 color: isHover
                   ? theme.palette.primary.main
                   : theme.palette.mode === "light"
-                  ? theme.palette.common.black
-                  : theme.palette.common.white
+                    ? theme.palette.common.black
+                    : theme.palette.common.white
               })
             : null}
         </IconButton>
@@ -280,8 +280,8 @@ const ModelButtonPopup = ({
                   ? "rgba(0, 0, 0, 0.38)"
                   : "#fff"
                 : disabled
-                ? "rgba(255, 255, 255, 0.5)"
-                : "#000"
+                  ? "rgba(255, 255, 255, 0.5)"
+                  : "#000"
           }}
         />
       </IconButton>
