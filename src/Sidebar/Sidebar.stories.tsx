@@ -14,7 +14,7 @@ import Sidebar from "./Sidebar";
 import SidebarDivider from "./SidebarDivider";
 import SidebarItem from "./SidebarItem";
 import { SidebarProps } from "./Sidebar.types";
-import { version } from "../../package.json";
+import version from "../../package.json";
 
 /**
  * Story metadata

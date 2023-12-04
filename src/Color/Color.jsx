@@ -80,8 +80,8 @@ export default function Color({
     const newColor = event.target.checked
       ? ""
       : lastColor.length === 0
-      ? "rgba(255,0,0,1)" // if there was no last value then return default
-      : lastColor;
+        ? "rgba(255,0,0,1)" // if there was no last value then return default
+        : lastColor;
     setColor(newColor);
   };
 
