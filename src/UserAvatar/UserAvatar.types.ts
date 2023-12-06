@@ -1,3 +1,5 @@
+import { SxProps, Theme } from "@mui/material";
+
 export type UserAvatarProps = {
   /**
    * Icon background color
@@ -11,4 +13,8 @@ export type UserAvatarProps = {
    * Display Name
    */
   name?: string;
+  /**
+   * Styling
+   */
+  sx?: SxProps<Theme>;
 };

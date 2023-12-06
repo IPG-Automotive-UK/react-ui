@@ -23,6 +23,10 @@ describe("User Menu", () => {
       render(<UserMenu {...defaultInputs} username="" />);
       expect(screen.getByText(/\?/i)).toBeInTheDocument();
     });
+    test("renders correct font-size", () => {
+      render(<UserMenu {...defaultInputs} username="John Doe" />);
+      expect(screen.getByText(/JD/i)).toHaveStyle("font-size: 14px");
+    });
   });
   describe("Menu header", () => {
     test("shows full username", async () => {

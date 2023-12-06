@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Divider,
   IconButton,
   ListItemIcon,
@@ -10,7 +9,6 @@ import {
 } from "@mui/material";
 import { ExitToApp, VpnKey } from "@mui/icons-material";
 import React, { Fragment } from "react";
-import { UserAvatarProps, UserMenuProps } from "./UserMenu.types";
 import {
   bindMenu,
   bindTrigger,
@@ -18,6 +16,8 @@ import {
 } from "material-ui-popup-state/hooks";
 
 import { Theme } from "@mui/material/styles";
+import { UserAvatar } from "../UserAvatar";
+import { UserMenuProps } from "./UserMenu.types";
 
 // styling
 const sx = {
@@ -58,7 +58,15 @@ export default function UserMenu({
   return (
     <Fragment>
       <IconButton {...bindTrigger(popupState)} size="large" sx={sx.button}>
-        <UserAvatar username={username} />
+        <UserAvatar
+          name={username}
+          color="#bdbdbd"
+          sx={{
+            color: "#fff",
+            height: 34,
+            width: 34
+          }}
+        />
       </IconButton>
       <Menu
         {...bindMenu(popupState)}
@@ -85,39 +93,4 @@ export default function UserMenu({
       </Menu>
     </Fragment>
   );
-}
-
-/**
- * User avatar
- *
- * Provides custom styling and converts username to max 2 initials
- */
-const UserAvatar = ({ username, ...rest }: UserAvatarProps) => {
-  const allInitials = (!username ? "?" : username)
-    .split(" ")
-    .map(s => s[0])
-    .join("")
-    .toUpperCase();
-  const initials =
-    allInitials.length <= 2 ? allInitials : getFirstAndLastChars(allInitials);
-  return (
-    <Avatar
-      {...rest}
-      sx={{
-        backgroundColor: "#bdbdbd",
-        border: "2px solid #bdbdbd",
-        color: "white",
-        fontSize: "13px",
-        height: 34,
-        width: 34
-      }}
-    >
-      {initials}
-    </Avatar>
-  );
-};
-
-// returns the first and last chars of a string concatenated
-function getFirstAndLastChars(str: string) {
-  return [str.charAt(0), str.charAt(str.length - 1)].join("");
 }
