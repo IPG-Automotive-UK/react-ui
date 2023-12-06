@@ -30,6 +30,14 @@ describe("UserAvatar", () => {
     expect(avatar.innerHTML).toBe("JD");
   });
 
+  // checks the correct font size is set for two word name
+  test("correct font size set for two word name", () => {
+    const name = "John Doe";
+    const { container } = render(<UserAvatar name={name} />);
+    const avatar = container.querySelector(".MuiAvatar-root") as HTMLElement;
+    expect(avatar).toHaveStyle("font-size: 14px");
+  });
+
   // check only first and last initials are shown for more than two word name
   test("only first and last initials shown for more than two word name", () => {
     const name = "John Doe Smith";
