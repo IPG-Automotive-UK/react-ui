@@ -32,7 +32,11 @@ export default function UserAvatar({
       ) : (
         <Avatar
           sx={[
-            { backgroundColor: color, fontSize: "14px" },
+            {
+              backgroundColor: color,
+              color: theme => theme.palette.getContrastText(color),
+              fontSize: "14px"
+            },
             ...(Array.isArray(sx) ? sx : [sx])
           ]}
         >
