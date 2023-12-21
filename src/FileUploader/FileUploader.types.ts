@@ -1,4 +1,4 @@
-import { FileObject } from "mui-file-dropzone";
+import { FileWithData } from "../Uploader/Uploader.types";
 
 export type FileUploaderProps = {
   /**
@@ -25,11 +25,11 @@ export type FileUploaderProps = {
    * Callback fired when the files is changed.
    *
    */
-  onAdd?: (selectedFiles: FileObject[]) => void;
+  onAdd?: (selectedFiles: FileWithData[]) => void;
   /**
    * Callback fired when the file is deleted.
    */
-  onDelete?: (deletedFiles: FileObject[]) => void;
+  onDelete?: (deletedFiles: FileWithData[]) => void;
   /**
    * If true, red star shows on title
    */
@@ -37,11 +37,15 @@ export type FileUploaderProps = {
   /**
    *  List of seleted files.
    */
-  selectedFiles?: FileObject[];
+  selectedFiles?: FileWithData[];
   /**
    * If true, alerts shows in a Snackbar
    */
   showErrorAlert?: boolean;
+  /**
+   * Text to display in sub text
+   */
+  subText?: string;
   /**
    * Text to display in title
    */
