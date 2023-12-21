@@ -54,7 +54,7 @@ export default function UploaderHeader({
               lineHeight="inherit"
               sx={{
                 marginLeft: "4px",
-                verticalAlign: "super"
+                verticalAlign: "text-top"
               }}
             >
               *
