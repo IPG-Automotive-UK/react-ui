@@ -83,6 +83,7 @@ export default function ImageUploader({
             height: "100%",
             justifyContent: "center"
           },
+          backgroundColor: theme.palette.background.default,
           borderColor: isDragReject
             ? theme.palette.error.main
             : theme.palette.divider,
@@ -102,7 +103,9 @@ export default function ImageUploader({
         {selectedFiles.length === 0 ? (
           <Stack className="dropzoneText">
             <FileUploadIcon />
-            <Typography>{rejectionMessage ?? dropzoneText}</Typography>
+            <Typography fontSize="15px">
+              {rejectionMessage ?? dropzoneText}
+            </Typography>
           </Stack>
         ) : (
           selectedFiles.map(f => (

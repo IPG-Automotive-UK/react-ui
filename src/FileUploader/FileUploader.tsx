@@ -81,6 +81,7 @@ export default function FileUploader({
               ? theme.palette.error.main
               : theme.palette.text.secondary
           },
+          background: theme.palette.background.default,
           borderColor: isDragReject
             ? theme.palette.error.main
             : theme.palette.divider,
@@ -99,12 +100,16 @@ export default function FileUploader({
         <input {...getInputProps()} />
         {!multiple && selectedFiles.length === 1 ? (
           <Stack className="dropzoneSingleFile">
-            <Typography>{selectedFiles[0].file.name}</Typography>
+            <Typography fontSize="15px">
+              {selectedFiles[0].file.name}
+            </Typography>
           </Stack>
         ) : (
           <Stack className="dropzoneText">
             <FileUploadIcon />
-            <Typography>{rejectionMessage ?? dropzoneText}</Typography>
+            <Typography fontSize="15px">
+              {rejectionMessage ?? dropzoneText}
+            </Typography>
           </Stack>
         )}
       </Box>
