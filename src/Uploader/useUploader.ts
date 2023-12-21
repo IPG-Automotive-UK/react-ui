@@ -80,12 +80,13 @@ export default function useUploader({
 
   // use react-dropzone hook
   const dropzone = useDropzone({
-    accept: acceptedFiles ? { "": acceptedFiles } : undefined,
+    accept: acceptedFiles,
     maxFiles: filesLimit,
     maxSize: maxFileSize,
     multiple,
     onDropAccepted,
-    onDropRejected
+    onDropRejected,
+    useFsAccessApi: false
   });
 
   // handle file deletion

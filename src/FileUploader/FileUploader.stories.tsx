@@ -54,7 +54,8 @@ export const Default = {
     required: false,
     selectedFiles: [],
     showErrorAlert: true,
-    title: "Upload a File"
+    title: "Upload a File",
+    titleVariant: "body"
   },
 
   render: Template

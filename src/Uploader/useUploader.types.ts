@@ -1,10 +1,11 @@
+import { Accept } from "react-dropzone";
 import { FileWithData } from "./Uploader.types";
 
 export interface UseUploaderProps {
   /**
    * Accepted file types
    */
-  acceptedFiles?: string[];
+  acceptedFiles?: Accept;
   /**
    * Maximum number of files that the dropzone will accept.
    */

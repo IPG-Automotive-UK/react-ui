@@ -17,7 +17,7 @@ import { UploaderHeaderProps } from "./UploaderHeader.types";
  */
 export default function UploaderHeader({
   title,
-  titleVariant = "title",
+  titleVariant = "body",
   subText,
   required,
   showDelete,

@@ -25,17 +25,12 @@ export default function ImageUploader({
     isDragReject,
     rejectionMessage
   } = useUploader({
-    acceptedFiles: [
-      "image/jpeg",
-      ".jpg",
-      ".jpeg",
-      "image/png",
-      ".png",
-      "image/gif",
-      ".gif",
-      "image/webp",
-      ".webp"
-    ],
+    acceptedFiles: {
+      "image/gif": [".gif"],
+      "image/jpeg": [".jpg", ".jpeg"],
+      "image/png": [".png"],
+      "image/webp": [".webp"]
+    },
     filesLimit: 1,
     maxFileSize,
     multiple: false,
