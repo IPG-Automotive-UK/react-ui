@@ -19,4 +19,8 @@ export interface UploaderHeaderProps {
    * Text to display in title
    */
   title?: string;
+  /**
+   * Typography variant for title
+   */
+  titleVariant?: "title" | "body";
 }

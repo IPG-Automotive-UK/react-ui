@@ -1,4 +1,10 @@
-import { Box, IconButton, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  IconButton,
+  Stack,
+  Typography,
+  TypographyProps
+} from "@mui/material";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import React from "react";
@@ -11,11 +17,24 @@ import { UploaderHeaderProps } from "./UploaderHeader.types";
  */
 export default function UploaderHeader({
   title,
+  titleVariant = "title",
   subText,
   required,
   showDelete,
   onDelete
 }: UploaderHeaderProps) {
+  // title variant styling
+  const titleTypographyProps: TypographyProps =
+    titleVariant === "title"
+      ? {
+          color: "textPrimary",
+          fontSize: "20px",
+          fontWeight: 600
+        }
+      : {
+          variant: "body2"
+        };
+
   return (
     <Stack
       gap={2}
@@ -26,7 +45,7 @@ export default function UploaderHeader({
       minHeight="40px"
     >
       <Box>
-        <Typography fontWeight="600" fontSize="20px" color="textPrimary">
+        <Typography {...titleTypographyProps}>
           {title}
           {required ? (
             <Typography

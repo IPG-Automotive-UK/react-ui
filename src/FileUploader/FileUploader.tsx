@@ -17,6 +17,7 @@ export default function FileUploader({
   required = false,
   selectedFiles = [],
   title = "Upload a File",
+  titleVariant,
   subText
 }: FileUploaderProps) {
   // useUploader is a custom hook that handles the logic for uploading files
@@ -44,6 +45,7 @@ export default function FileUploader({
     <Box data-testid="dropzone-base">
       <UploaderHeader
         title={title}
+        titleVariant={titleVariant}
         subText={subText}
         required={required}
         showDelete={!multiple && selectedFiles.length === 1}

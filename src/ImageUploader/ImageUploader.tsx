@@ -8,6 +8,7 @@ import useUploader from "../Uploader/useUploader";
 
 export default function ImageUploader({
   title = "Upload Image",
+  titleVariant,
   subText = "A default image will be used if no image is uploaded",
   dropzoneText = "Drag 'n' drop an image file here, or click to select",
   maxFileSize = 1000000,
@@ -51,6 +52,7 @@ export default function ImageUploader({
     <Box data-testid="dropzone-base">
       <UploaderHeader
         title={title}
+        titleVariant={titleVariant}
         required={required}
         subText={subText}
         showDelete={selectedFiles.length > 0}
