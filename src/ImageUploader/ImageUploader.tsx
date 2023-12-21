@@ -94,6 +94,11 @@ export default function ImageUploader({
           display: "flex",
           fontSize: "16px",
           height: "250px",
+          img: {
+            height: "100%",
+            objectFit: "contain",
+            width: "100%"
+          },
           justifyContent: "center",
           p: 2,
           pointerEvenets: selectedFiles.length > 0 ? "none" : "auto"
@@ -110,7 +115,6 @@ export default function ImageUploader({
         ) : (
           selectedFiles.map(f => (
             <img
-              style={{ height: "100%" }}
               key={f.file.name}
               src={f.data}
               alt={`Preview of ${f.file.name}`}
