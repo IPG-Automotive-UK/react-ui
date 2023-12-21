@@ -39,10 +39,6 @@ export type FileUploaderProps = {
    */
   selectedFiles?: FileWithData[];
   /**
-   * If true, alerts shows in a Snackbar
-   */
-  showErrorAlert?: boolean;
-  /**
    * Text to display in sub text
    */
   subText?: string;
