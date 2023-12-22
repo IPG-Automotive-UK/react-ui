@@ -1,5 +1,6 @@
 import { Accept } from "react-dropzone";
 import { FileWithData } from "../Uploader/Uploader.types";
+import { UploaderHeaderProps } from "../Uploader/UploaderHeader.types";
 
 export type FileUploaderProps = {
   /**
@@ -50,5 +51,5 @@ export type FileUploaderProps = {
   /**
    * Typography variant for title
    */
-  titleVariant?: "title" | "body";
+  titleVariant?: UploaderHeaderProps["titleVariant"];
 };

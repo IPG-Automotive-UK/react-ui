@@ -22,5 +22,5 @@ export interface UploaderHeaderProps {
   /**
    * Typography variant for title
    */
-  titleVariant?: "title" | "body";
+  titleVariant?: "title" | "subtitle" | "body";
 }

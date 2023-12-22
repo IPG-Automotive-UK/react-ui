@@ -24,16 +24,24 @@ export default function UploaderHeader({
   onDelete
 }: UploaderHeaderProps) {
   // title variant styling
-  const titleTypographyProps: TypographyProps =
-    titleVariant === "title"
-      ? {
-          color: "textPrimary",
-          fontSize: "20px",
-          fontWeight: 600
-        }
-      : {
-          variant: "body2"
-        };
+  let titleTypographyProps: TypographyProps = {};
+  if (titleVariant === "title") {
+    titleTypographyProps = {
+      color: "textPrimary",
+      fontSize: "20px",
+      fontWeight: 600
+    };
+  } else if (titleVariant === "subtitle") {
+    titleTypographyProps = {
+      color: "textPrimary",
+      fontSize: "14px",
+      fontWeight: 500
+    };
+  } else if (titleVariant === "body") {
+    titleTypographyProps = {
+      variant: "body2"
+    };
+  }
 
   return (
     <Stack

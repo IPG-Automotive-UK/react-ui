@@ -1,4 +1,5 @@
 import { FileWithData } from "../Uploader/Uploader.types";
+import { UploaderHeaderProps } from "../Uploader/UploaderHeader.types";
 
 export type ImageUploaderProps = {
   /**
@@ -37,5 +38,5 @@ export type ImageUploaderProps = {
   /**
    * Typography variant for title
    */
-  titleVariant?: "title" | "body";
+  titleVariant?: UploaderHeaderProps["titleVariant"];
 };
