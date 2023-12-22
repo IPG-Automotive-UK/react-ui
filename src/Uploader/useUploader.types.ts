@@ -27,9 +27,9 @@ export interface UseUploaderProps {
   /**
    * Callback fired when the file is deleted.
    *
-   * _selectedFiles_: The currently selected files after deletion.
+   * _selectedFiles_: The files that are currently selected.
    */
-  onDelete?: (deleted: FileWithData[]) => void;
+  onDelete?: (selectedFiles: FileWithData[]) => void;
   /**
    * List of selected file(s).
    */

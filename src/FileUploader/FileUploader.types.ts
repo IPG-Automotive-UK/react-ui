@@ -30,7 +30,7 @@ export type FileUploaderProps = {
   /**
    * Callback fired when the file is deleted.
    */
-  onDelete?: (deletedFiles: FileWithData[]) => void;
+  onDelete?: (selectedFiles: FileWithData[]) => void;
   /**
    * If true, red star shows on title
    */
