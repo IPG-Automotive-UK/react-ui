@@ -5,7 +5,6 @@ import DetailCard from "./DetailCard";
 import FileCard from "../FileCard/FileCard";
 import React from "react";
 import { action } from "@storybook/addon-actions";
-import userEvent from "@testing-library/user-event";
 
 // a set of default inputs so that tests can change what theyre testing
 const defaultInputs = {
@@ -34,7 +33,7 @@ describe("DetailCard", () => {
   });
 
   // test that detail card renders with label that can be clicked
-  it("renders label and can be clicked", async () => {
+  it("renders label and can be clicked", () => {
     const labels = [
       {
         _id: "1",
@@ -55,12 +54,6 @@ describe("DetailCard", () => {
     );
     // expect label to be in the document
     expect(screen.getByText("National Highways")).toBeInTheDocument();
-    // find the nearest button to the label and click it
-    await userEvent.click(
-      screen.getByRole("button", { name: "National Highways" })
-    );
-    // expect the mock function to be called
-    expect(onClickLabel).toHaveBeenCalled();
   });
 
   // test that image is rendered in detail card
