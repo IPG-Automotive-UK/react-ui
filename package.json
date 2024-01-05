@@ -156,9 +156,6 @@
     "material-ui-popup-state": {
       "optional": true
     },
-    "mui-file-dropzone": {
-      "optional": true
-    },
     "react-colorful": {
       "optional": true
     },
