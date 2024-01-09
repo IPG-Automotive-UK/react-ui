@@ -358,7 +358,6 @@ function LableStack({
             <Fragment>
               {labels?.map(label => (
                 <LabelChip
-                  clickable
                   color={label.color}
                   key={label._id}
                   label={label.name}
@@ -371,7 +370,6 @@ function LableStack({
             <Fragment>
               {notOverflowingLabels?.map(label => (
                 <LabelChip
-                  clickable
                   color={label.color}
                   key={label._id}
                   label={label.name}
@@ -417,7 +415,6 @@ function LableStack({
             if (!notOverflowingLabels?.includes(label)) {
               return (
                 <LabelChip
-                  clickable
                   key={label._id}
                   label={label.name}
                   color={label.color}
