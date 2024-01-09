@@ -37,7 +37,6 @@
     "@juggle/resize-observer": "^3.4.0",
     "@mui/icons-material": "^5.15.3",
     "@mui/material": "^5.15.3",
-    "@mui/styles": "^5.15.3",
     "@mui/x-data-grid": "^6.18.7",
     "@playwright/test": "^1.40.1",
     "@storybook/addon-actions": "^7.6.7",
@@ -83,13 +82,13 @@
     "material-ui-confirm": "^3.0.9",
     "material-ui-popup-state": "^5.0.10",
     "microbundle-crl": "^0.13.11",
-    "mui-file-dropzone": "^4.0.2",
     "mutationobserver-shim": "^0.3.7",
     "npm-run-all": "^4.1.5",
     "playwright": "^1.40.1",
     "prettier": "^3.1.1",
     "react": "^18.2.0",
     "react-colorful": "^5.6.1",
+    "react-dropzone": "^14.2.3",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.49.2",
     "react-text-mask": "^5.5.0",
@@ -108,7 +107,6 @@
     "@juggle/resize-observer": "^3.4.0",
     "@mui/icons-material": "^5.14.8",
     "@mui/material": "^5.14.8",
-    "@mui/styles": "^5.14.7",
     "@mui/x-data-grid": "^6.10.2",
     "@types/css-mediaquery": "^0.1.2",
     "@types/plotly.js": "^2.12.26",
@@ -118,9 +116,9 @@
     "css-mediaquery": "^0.1.2",
     "material-ui-confirm": "^3.0.9",
     "material-ui-popup-state": "^5.0.9",
-    "mui-file-dropzone": "^4.0.2",
     "plotly.js": "^2.26.0",
     "react": "^18.2.0",
+    "react-dropzone": "^14.2.3",
     "react-colorful": "^5.6.1",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.2",
@@ -160,10 +158,10 @@
     "material-ui-popup-state": {
       "optional": true
     },
-    "mui-file-dropzone": {
+    "react-colorful": {
       "optional": true
     },
-    "react-colorful": {
+    "react-dropzone": {
       "optional": true
     },
     "react-hook-form": {

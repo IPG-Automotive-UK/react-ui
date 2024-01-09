@@ -1,7 +1,6 @@
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 
 import FileUploader from "./FileUploader";
-import { FileUploaderProps } from "./FileUploader.types";
 import React from "react";
 import { action } from "@storybook/addon-actions";
 
@@ -10,39 +9,42 @@ import { action } from "@storybook/addon-actions";
  */
 const meta: Meta<typeof FileUploader> = {
   component: FileUploader,
+  render: function Render(args) {
+    // selectedFiles state
+    const [selectedFiles, setSelectedFiles] = React.useState(
+      args.selectedFiles
+    );
+
+    return (
+      <FileUploader
+        {...args}
+        required={args.required}
+        multiple={args.multiple}
+        filesLimit={args.filesLimit}
+        dropzoneText={args.dropzoneText}
+        selectedFiles={selectedFiles}
+        onAdd={newFiles => {
+          setSelectedFiles(newFiles);
+
+          // fire action
+          action("onAdd")(newFiles);
+        }}
+        onDelete={updatedFiles => {
+          setSelectedFiles(updatedFiles);
+
+          // fire action
+          action("onDelete")(updatedFiles);
+        }}
+      />
+    );
+  },
   title: "General/FileUploader"
 };
 export default meta;
 
-const Template: StoryFn<FileUploaderProps> = args => {
-  // selectedFiles state
-  const [selectedFiles, setSelectedFiles] = React.useState(args.selectedFiles);
-
-  return (
-    <FileUploader
-      {...args}
-      required={args.required}
-      multiple={args.multiple}
-      filesLimit={args.filesLimit}
-      dropzoneText={args.dropzoneText}
-      selectedFiles={selectedFiles}
-      onAdd={newFiles => {
-        setSelectedFiles(newFiles);
-
-        // fire action
-        action("onAdd")(newFiles);
-      }}
-      onDelete={updatedFiles => {
-        setSelectedFiles(updatedFiles);
-
-        // fire action
-        action("onDelete")(updatedFiles);
-      }}
-    />
-  );
-};
-
-export const Default = {
+// Story which shows the component defaults
+type Story = StoryObj<typeof FileUploader>;
+export const Default: Story = {
   args: {
     acceptedFiles: [],
     dropzoneText: "Drag & drop a file here or click",
@@ -53,31 +55,30 @@ export const Default = {
     onDelete: () => {},
     required: false,
     selectedFiles: [],
-    showErrorAlert: true,
-    title: "Upload a File"
-  },
-
-  render: Template
+    title: "Upload a File",
+    titleVariant: "body"
+  }
 };
 
-export const WithSingleFileSelected = {
+/**
+ * Story which shows the uploader in single select mode
+ */
+export const WithSingleFileSelected: Story = {
   args: {
     ...Default.args,
     selectedFiles: [
       {
         data: "",
-        file: {
-          name: "IPGAutomotive.zip",
-          path: "IPGAutomotive.zip"
-        }
+        file: new File([""], "IPGAutomotive.zip")
       }
     ]
-  },
-
-  render: Template
+  }
 };
 
-export const WithMultipleFilesSelected = {
+/**
+ * Story which shows the uploader in multiple select mode
+ */
+export const WithMultipleFilesSelected: Story = {
   args: {
     ...Default.args,
     dropzoneText: "Drag & drop file(s) here or click",
@@ -86,20 +87,12 @@ export const WithMultipleFilesSelected = {
     selectedFiles: [
       {
         data: "",
-        file: {
-          name: "IPGAutomotive.zip",
-          path: "IPGAutomotive.zip"
-        }
+        file: new File([""], "IPGAutomotive.zip")
       },
       {
         data: "",
-        file: {
-          name: "CarMaker.zip",
-          path: "CarMaker.zip"
-        }
+        file: new File([""], "CarMaker.zip")
       }
     ]
-  },
-
-  render: Template
+  }
 };
