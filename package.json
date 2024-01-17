@@ -107,7 +107,8 @@
     "react-plotly.js": "^2.6.0",
     "react-text-mask": "^5.5.0",
     "use-debouncy": "^4.4.0",
-    "zxcvbn": "^4.4.2"
+    "zxcvbn": "^4.4.2",
+    "@mui/x-tree-view": "^6.17.0"
   },
   "peerDependencies": {
     "@emotion/react": "^11.11.1",
