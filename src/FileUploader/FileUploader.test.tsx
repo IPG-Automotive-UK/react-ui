@@ -40,10 +40,20 @@ describe("FileUploader", () => {
     const deleteButton = screen.getByRole("button", { name: /delete/i });
     expect(deleteButton).toBeInTheDocument();
   });
+  test("hide delete button when validating", () => {
+    render(<FileUploader selectedFiles={singleFile} isValidating={true} />);
+    const deleteButton = screen.queryByRole("button", { name: /delete/i });
+    expect(deleteButton).not.toBeInTheDocument();
+  });
   test("updates dropzone text in single select mode", () => {
     render(<FileUploader selectedFiles={singleFile} />);
     const dropzoneElement = screen.getByTestId("dropzone-base");
     expect(dropzoneElement).toHaveTextContent("IPGAutomotive.zip");
+  });
+  test("updates dropzone text when validating single select", () => {
+    render(<FileUploader selectedFiles={singleFile} isValidating />);
+    const dropzoneElement = screen.getByTestId("dropzone-base");
+    expect(dropzoneElement).toHaveTextContent("Validating Selection");
   });
   test("mutiple file selected", () => {
     const { container } = render(
@@ -61,5 +71,30 @@ describe("FileUploader", () => {
     expect(chips.length).toBe(2);
     expect(chips[0]).toHaveTextContent("IPGAutomotive.zip");
     expect(chips[1]).toHaveTextContent("CarMaker.zip");
+  });
+  test("chips disabled when validating", () => {
+    const { container } = render(
+      <FileUploader
+        selectedFiles={multipleFiles}
+        multiple={true}
+        dropzoneText={"Drag & drop file(s) here or click"}
+        isValidating={true}
+      />
+    );
+    const chips = container.querySelectorAll(".MuiChip-root");
+    expect(chips[0]).toHaveClass("Mui-disabled");
+    expect(chips[1]).toHaveClass("Mui-disabled");
+  });
+  test("updates dropzone text when validating multi select", () => {
+    render(
+      <FileUploader
+        selectedFiles={multipleFiles}
+        multiple={true}
+        dropzoneText={"Drag & drop file(s) here or click"}
+        isValidating={true}
+      />
+    );
+    const dropzoneElement = screen.getByTestId("dropzone-base");
+    expect(dropzoneElement).toHaveTextContent("Validating Selection");
   });
 });
