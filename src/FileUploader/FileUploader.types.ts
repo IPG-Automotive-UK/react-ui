@@ -16,6 +16,10 @@ export type FileUploaderProps = {
    */
   filesLimit?: number;
   /**
+   * Whether the component is in the validating state with the loading indicator and selection disabled.
+   */
+  isValidating?: boolean;
+  /**
    * Maximum file size (in bytes) that the dropzone will accept.
    */
   maxFileSize?: number;

@@ -49,6 +49,7 @@ export const Default: Story = {
     acceptedFiles: [],
     dropzoneText: "Drag & drop a file here or click",
     filesLimit: 1,
+    isValidating: false,
     maxFileSize: 1000000000,
     multiple: false,
     onAdd: () => {},
@@ -94,5 +95,25 @@ export const WithMultipleFilesSelected: Story = {
         file: new File([""], "CarMaker.zip")
       }
     ]
+  }
+};
+
+/**
+ * Story which shows the uploader in validation mode with single select
+ */
+export const ValidatingSingleFile: Story = {
+  args: {
+    ...WithSingleFileSelected.args,
+    isValidating: true
+  }
+};
+
+/**
+ * Story which shows the uploader in validation mode with multiple select
+ */
+export const ValidatingMultipleFiles: Story = {
+  args: {
+    ...WithMultipleFilesSelected.args,
+    isValidating: true
   }
 };
