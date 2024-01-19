@@ -64,7 +64,7 @@ const TreeViewList = <T,>({
             ""
           )
         }
-        placement="bottom-start"
+        placement="right"
       >
         <TreeItem
           {...props}
