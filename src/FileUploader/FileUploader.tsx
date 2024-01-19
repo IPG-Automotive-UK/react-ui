@@ -1,4 +1,12 @@
-import { Box, Chip, Grid, Stack, Typography, alpha } from "@mui/material";
+import {
+  Box,
+  Chip,
+  Grid,
+  LinearProgress,
+  Stack,
+  Typography,
+  alpha
+} from "@mui/material";
 
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { FileUploaderProps } from "./FileUploader.types";
@@ -10,6 +18,7 @@ export default function FileUploader({
   acceptedFiles,
   dropzoneText = "Drag & drop a file here or click",
   filesLimit = 1,
+  isValidating = false,
   maxFileSize = Infinity,
   multiple = false,
   onAdd,
@@ -58,7 +67,7 @@ export default function FileUploader({
         titleVariant={titleVariant}
         subText={subText}
         required={required}
-        showDelete={!multiple && selectedFiles.length === 1}
+        showDelete={!isValidating && !multiple && selectedFiles.length === 1}
         onDelete={() => handleDelete(selectedFiles[0])}
       />
       <Box
@@ -106,23 +115,39 @@ export default function FileUploader({
           height: "70px",
           justifyContent: "center",
           p: 2,
-          pointerEvenets: selectedFiles.length > 0 ? "none" : "auto"
+          pointerEvents:
+            isValidating || (!multiple && selectedFiles.length === 1)
+              ? "none"
+              : "auto"
         })}
       >
         <input {...getInputProps()} />
-        {!multiple && selectedFiles.length === 1 ? (
-          <Stack className="dropzoneSingleFile">
-            <Typography fontSize="15px">
-              {selectedFiles[0].file.name}
+        {isValidating ? (
+          <Stack className="dropzoneText">
+            <Typography fontSize="14px">
+              {multiple ? `Validating Selection(s)` : `Validating Selection`}
             </Typography>
+            <Box width={200}>
+              <LinearProgress />
+            </Box>
           </Stack>
         ) : (
-          <Stack className="dropzoneText">
-            <FileUploadIcon />
-            <Typography fontSize="15px">
-              {rejectionMessage ?? dropzoneText}
-            </Typography>
-          </Stack>
+          <>
+            {!multiple && selectedFiles.length === 1 ? (
+              <Stack className="dropzoneSingleFile">
+                <Typography fontSize="15px">
+                  {selectedFiles[0].file.name}
+                </Typography>
+              </Stack>
+            ) : (
+              <Stack className="dropzoneText">
+                <FileUploadIcon />
+                <Typography fontSize="15px">
+                  {rejectionMessage ?? dropzoneText}
+                </Typography>
+              </Stack>
+            )}
+          </>
         )}
       </Box>
       {multiple && selectedFiles.length > 0 ? (
@@ -131,6 +156,7 @@ export default function FileUploader({
             return (
               <Grid item={true} key={`${thisFile.file?.name ?? "file"}-${i}`}>
                 <Chip
+                  disabled={isValidating}
                   variant="outlined"
                   label={thisFile.file.name}
                   onDelete={() => handleDelete(thisFile)}
