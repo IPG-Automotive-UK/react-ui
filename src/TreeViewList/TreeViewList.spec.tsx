@@ -10,12 +10,17 @@ test("should render the tree list", async ({ page }) => {
   await expect(
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
-      .getByRole("treeitem", { name: "AER" })
+      .getByRole("treeitem", { name: "BRK" })
   ).toBeVisible();
   await expect(
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
-      .getByRole("treeitem", { name: "BRK" })
+      .getByRole("treeitem", { name: "ELE" })
+  ).toBeVisible();
+  await expect(
+    page
+      .frameLocator('iframe[title="storybook-preview-iframe"]')
+      .getByRole("treeitem", { name: "TRM" })
   ).toBeVisible();
 });
 
@@ -28,12 +33,12 @@ test("should display parameter value once expanded", async ({ page }) => {
   );
   await page
     .frameLocator('iframe[title="storybook-preview-iframe"]')
-    .getByText("AER")
+    .getByText("TRM")
     .click();
   await expect(
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
-      .getByText("ConsiderationPointPosition", { exact: true })
+      .getByText("Efficiency1D", { exact: true })
   ).toBeVisible();
 });
 
@@ -82,18 +87,16 @@ test("should hide tooltip when not hovering over parameter", async ({
   );
   await page
     .frameLocator('iframe[title="storybook-preview-iframe"]')
-    .getByText("AER")
+    .getByText("TRM")
     .click();
   await page
     .frameLocator('iframe[title="storybook-preview-iframe"]')
-    .getByText("ConsiderationPointPosition", { exact: true })
+    .getByText("GearSpred")
     .hover();
   await expect(
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
-      .getByText(
-        "AER.ConsiderationPointPositionWhen the vehicle is gripped by side wind, the wind starts to take effect only from a certain point on, e.g. if only the bumper is attacked by side wind the driver will usually not recognize the effects. Ahead of this point, the vehicle body does not offer enough contact surface to the wind to take effect."
-      )
+      .getByText("TRM.GearSpredEfficieny for")
   ).toBeVisible();
 
   // Move the mouse to the top left corner of the page to simulate "unhovering"
@@ -102,9 +105,7 @@ test("should hide tooltip when not hovering over parameter", async ({
   await expect(
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
-      .getByText(
-        "AER.ConsiderationPointPositionWhen the vehicle is gripped by side wind, the wind starts to take effect only from a certain point on, e.g. if only the bumper is attacked by side wind the driver will usually not recognize the effects. Ahead of this point, the vehicle body does not offer enough contact surface to the wind to take effect."
-      )
+      .getByText("TRM.GearSpred Efficieny for")
   ).toBeHidden();
 });
 
@@ -117,20 +118,20 @@ test("should hide child when is collapsed", async ({ page }) => {
   );
   await page
     .frameLocator('iframe[title="storybook-preview-iframe"]')
-    .getByText("AER")
+    .getByText("TRM")
     .click();
   await expect(
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
-      .getByText("ConsiderationPointPosition", { exact: true })
+      .getByText("GearSpred", { exact: true })
   ).toBeVisible();
   await page
     .frameLocator('iframe[title="storybook-preview-iframe"]')
-    .getByText("AER")
+    .getByText("TRM")
     .click();
   await expect(
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
-      .getByText("ConsiderationPointPosition", { exact: true })
+      .getByText("GearSpred", { exact: true })
   ).toBeHidden();
 });

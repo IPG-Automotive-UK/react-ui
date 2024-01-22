@@ -85,7 +85,12 @@ export const Default = {
       {
         children: [
           { name: "Efficiency1D", options: [] },
-          { name: "GearSpred", options: [] }
+          {
+            name: "GearSpred",
+            options: [],
+            tooltip:
+              "Efficieny for all gear numbers. If the number of efficiencies are less than the number of gears, the last entry in the table will be applied to all remaining gears."
+          }
         ],
         name: "TRM"
       }
