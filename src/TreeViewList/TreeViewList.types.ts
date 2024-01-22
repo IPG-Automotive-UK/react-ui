@@ -23,12 +23,12 @@ export type TreeViewListProps<T> = {
   selected: string;
 
   /**
-   * The term to search for in the items.
+   *  The term to search for in the items. This is optional.
    */
-  searchTerm: string;
+  searchTerm?: string;
 
   /**
-   * The IDs of the items that should be expanded by default.
+   * The IDs of the items that should be expanded by default. This is optional.
    */
   defaultExpanded?: string[];
 
@@ -36,6 +36,11 @@ export type TreeViewListProps<T> = {
    * The function to call when the selection changes.
    */
   onSelectionChange: (value: string) => void;
+
+  /**
+   * The display width of the tree view list. This is optional.
+   */
+  width?: string;
 };
 
 /**
@@ -99,51 +104,28 @@ export type TooltipTreeItemProps = {
 };
 
 /**
- * Properties for the parseChild function.
+ * Type representing a child in a tree structure.
+ *
+ * @template T The type of the options array elements.
  */
-export type ParseChildProps = {
-  /**
-   * The nodes to add the new child node to.
-   */
-  nodes: TreeNode[];
-
-  /**
-   * The characteristic value of the new child node. This would be the last child displayed.
-   */
-  characteristic: string;
-
-  /**
-   * The name of the new child node.
-   */
+export type ChildData<T> = {
+  /** The name of the node. */
   name: string;
 
   /**
-   * The tooltip of the new child node.
+   * Optional array of child nodes.
+   * Each child is also a `ChildData` object, allowing for a nested tree structure.
    */
-  tooltip: string;
-};
-
-/**
- * Properties for the findOrCreateNode function.
- */
-export type FindOrCreateNodeProps = {
-  /**
-   * The nodes to find or create a node in.
-   */
-  nodes: TreeNode[];
+  children?: ChildData<T>[];
 
   /**
-   * The ID of the node to find or create.
+   * Optional array of options. The options are displayed as the last child.
+   * The type of the elements in this array is defined by the generic parameter `T`.
    */
-  id: string;
+  options?: T[];
 
   /**
-   * The name of the node to find or create.
-   */
-  name: string;
-
-  /**
-   * The tooltip of the node to find or create.
+   * The tooltip of the child. This is optional.
    */
   tooltip?: string;
 };

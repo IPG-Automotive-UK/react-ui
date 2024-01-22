@@ -1,7 +1,6 @@
 import {
-  FindOrCreateNodeProps,
+  ChildData,
   Item,
-  ParseChildProps,
   TooltipTreeItemProps,
   TreeNode,
   TreeViewListProps
@@ -17,12 +16,13 @@ import { alpha } from "@mui/material/styles";
 /**
  * A component that renders a tree view list.
  *
+ * @template T The type of the options array elements.
  * @param props - The properties for the tree view list.
  * @property props.items - The items to display in the tree view list.
  * @property props.selected - The ID of the currently selected item.
  * @property props.searchTerm - The term to search for in the items.
  * @property [props.defaultExpanded=[]] - The IDs of the items that should be expanded by default.
- * @property (selection: string) props.onSelectionChange - The function to call when the selection changes.
+ * @property props.onSelectionChange - The function to call when the selection changes.
  * @returns The tree view list component.
  */
 const TreeViewList = <T,>({
@@ -30,6 +30,7 @@ const TreeViewList = <T,>({
   selected,
   searchTerm,
   defaultExpanded = [],
+  width,
   onSelectionChange
 }: TreeViewListProps<T>) => {
   const [expanded, setExpanded] = useState(defaultExpanded);
@@ -79,26 +80,60 @@ const TreeViewList = <T,>({
     );
   };
 
-  // search function
-  const applySearch = (search: string, parameters: Item<T>[]) => {
+  // Recursive search function
+  const applySearch = (search: string, parameters: Item<T>[]): Item<T>[] => {
     const terms = search
       .toUpperCase()
       .trim()
       .split(/(?:\.| )+/);
-    return parameters.filter(opt =>
-      terms.every(term =>
-        typeof opt.name === "string"
-          ? opt.name.toUpperCase().includes(term)
+
+    const searchInItem = (item: Item<T>): Item<T> | null => {
+      const match = terms.some(term =>
+        typeof item.name === "string"
+          ? item.name.toUpperCase().includes(term)
           : false
-      )
-    );
+      );
+
+      if (match) {
+        // If the item matches any of the search terms, return the whole item
+        return item;
+      }
+
+      const children = Array.isArray(item.children)
+        ? item.children.map(searchInItem).filter(Boolean)
+        : [];
+      const options = Array.isArray(item.options)
+        ? item.options
+            .map((option: Item<T>) => {
+              if (typeof option === "object" && option !== null) {
+                return searchInItem(option as Item<T>);
+              }
+              return null;
+            })
+            .filter(Boolean)
+        : [];
+
+      if (children.length > 0 || options.length > 0) {
+        return {
+          ...item,
+          children: children as T,
+          options: options as T
+        };
+      }
+
+      return null;
+    };
+
+    return parameters.map(searchInItem).filter(Boolean) as Item<T>[];
   };
+
   // build tree nodes
-  const parameters = buildParameterTree(
+  const parameters = buildTree(
     searchTerm !== undefined && searchTerm !== ""
       ? applySearch(searchTerm, items)
       : items
   );
+
   const renderTree = (nodes: TreeNode[]) =>
     nodes.map(node => (
       <TooltipTreeItem
@@ -121,6 +156,7 @@ const TreeViewList = <T,>({
       expanded={expanded}
       selected={selected}
       onNodeToggle={handleToggle}
+      sx={{ width }}
     >
       {renderTree(parameters)}
     </TreeView>
@@ -136,12 +172,12 @@ export default TreeViewList;
  * @param name - The name of the new node.
  * @param tooltip - The tooltip of the new node.
  * @param [disable=true] - Optional parameter that indicates whether the node is disabled. Defaults to true.
- * @returns TreeNode The newly created tree node.
+ * @returns The newly created tree node.
  */
 function createNode(
   id: string,
   name: string,
-  tooltip: string,
+  tooltip?: string,
   disable = true
 ): TreeNode {
   return {
@@ -156,52 +192,31 @@ function createNode(
 /**
  * Builds a tree structure from a flat list of items.
  *
- * @param Item<T>[] parameterMapping - The flat list of items to transform into a tree.
- * @returns TreeNode[] The tree structure built from the input items.
- * @example buildParameterTree(items) // returns TreeNode[]
+ * @template T The type of the options array elements.
+ * @param data - The flat list of items to transform into a tree.
+ * @returns The tree structure built from the input items.
+ * @example buildTree(items) // returns TreeNode[]
  */
-function buildParameterTree<T>(parameterMapping: Item<T>[]): TreeNode[] {
+function buildTree<T>(data: Item<T>[]): TreeNode[] {
   const itemsTree: TreeNode[] = [];
 
-  // Find or create a node in the tree
-  const findOrCreateNode = ({
-    nodes,
-    id,
-    name,
-    tooltip = ""
-  }: FindOrCreateNodeProps) => {
-    let node = nodes.find(n => n.id === id);
-    if (!node) {
-      node = createNode(id, name, tooltip);
-      nodes.push(node);
-    }
-    return node;
-  };
-
   // Iterate through each item
-  parameterMapping.forEach(item => {
-    // Start with the root level
-    let currentLevelNodes = itemsTree;
+  data.forEach(item => {
+    // create node for this root model
+    const name = item.name ? item.name.toString() : "default";
+    const tooltip = item.tooltip ? item.tooltip.toString() : undefined;
+    const parentNode = createNode(name, name, tooltip);
+    itemsTree.push(parentNode);
 
-    // Iterate through each level
-    for (const level in item) {
-      if (level.startsWith("level") && item[level]) {
-        const node = findOrCreateNode({
-          id: item[level] as string,
-          name: item.name as string,
-          nodes: currentLevelNodes
-        });
-        currentLevelNodes = node.children;
-      }
+    if (Array.isArray(item.options)) {
+      item.options.forEach(childData => {
+        parseChild(parentNode, childData);
+      });
     }
 
-    // Add characteristic to the last node in the hierarchy
-    if (currentLevelNodes !== itemsTree && item.characteristic) {
-      parseChild({
-        characteristic: item.characteristic as string,
-        name: item.name as string,
-        nodes: currentLevelNodes,
-        tooltip: item.description as string
+    if (Array.isArray(item.children)) {
+      item.children.forEach(childData => {
+        parseChild(parentNode, childData);
       });
     }
   });
@@ -210,18 +225,51 @@ function buildParameterTree<T>(parameterMapping: Item<T>[]): TreeNode[] {
 }
 
 /**
- * Parses a child node and adds it to the provided nodes array.
+ * Type guard to check if a variable is of type ChildData<T>.
  *
- * @param  props - The properties for parsing a child node.
- * @property props.nodes - The array of nodes to add the new child node to.
- * @property props.characteristic - The characteristic value of the new child node.
- * @property props.name - The name of the new child node.
- * @property props.tooltip - The tooltip of the new child node.
+ * @template T The type of the options array elements.
+ * @param data - The variable to check.
+ * @returns A boolean indicating whether the variable is of type ChildData<T>.
  */
-function parseChild({ nodes, characteristic, name, tooltip }: ParseChildProps) {
-  if (!characteristic) return;
+function isChildData<T>(data: any): data is ChildData<T> {
+  return data.children !== undefined || data.options !== undefined;
+}
 
-  const newId = characteristic;
-  const thisNode = createNode(newId, name, tooltip);
-  nodes.push(thisNode);
+/**
+ * Parses a child node and adds it to the parent node.
+ *
+ * @template T The type of the options array elements.
+ * @param parentNode - The parent node to which the child node will be added.
+ * @param childData - The data of the child node.
+ */
+function parseChild<T>(parentNode: TreeNode, childData: ChildData<T> | T) {
+  // If childData is of type T and not ChildData<T>, return
+  if (!isChildData(childData)) return;
+
+  // ignore if child data is a leaf node, i.e. has no children or options
+  if (!childData.children && !childData.options) return;
+
+  const tooltip = childData.tooltip ? childData.tooltip.toString() : undefined;
+
+  // create node for this child
+  const thisNode = createNode(
+    childData.name,
+    parentNode.name + "." + childData.name,
+    tooltip
+  );
+  parentNode.children.push(thisNode);
+
+  // parse children of this child recursively
+  if (childData.children) {
+    childData.children.forEach((child: ChildData<T>) => {
+      parseChild(thisNode, child);
+    });
+  }
+
+  // parse options of this child recursively
+  if (childData.options) {
+    childData.options.forEach((child: T) => {
+      parseChild(thisNode, child);
+    });
+  }
 }
