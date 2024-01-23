@@ -80,7 +80,7 @@ const TreeViewList = <T,>({
     );
   };
 
-  // Recursive search function
+  // recursive search function
   const applySearch = (search: string, parameters: Item<T>[]): Item<T>[] => {
     const terms = search
       .toUpperCase()
@@ -95,7 +95,7 @@ const TreeViewList = <T,>({
       );
 
       if (match) {
-        // If the item matches any of the search terms, return the whole item
+        // if the item matches any of the search terms, return the whole item
         return item;
       }
 
@@ -200,7 +200,7 @@ function createNode(
 function buildTree<T>(data: Item<T>[]): TreeNode[] {
   const itemsTree: TreeNode[] = [];
 
-  // Iterate through each item
+  // iterate through each item
   data.forEach(item => {
     // create node for this root model
     const name = item.name ? item.name.toString() : "default";
@@ -208,6 +208,7 @@ function buildTree<T>(data: Item<T>[]): TreeNode[] {
     const parentNode = createNode(name, name, tooltip);
     itemsTree.push(parentNode);
 
+    // parse options and children recursively
     if (Array.isArray(item.options)) {
       item.options.forEach(childData => {
         parseChild(parentNode, childData);
@@ -243,12 +244,13 @@ function isChildData<T>(data: any): data is ChildData<T> {
  * @param childData - The data of the child node.
  */
 function parseChild<T>(parentNode: TreeNode, childData: ChildData<T> | T) {
-  // If childData is of type T and not ChildData<T>, return
+  // if childData is of type T and not ChildData<T>, return
   if (!isChildData(childData)) return;
 
   // ignore if child data is a leaf node, i.e. has no children or options
   if (!childData.children && !childData.options) return;
 
+  // set tooltip if it exists in child data else set to undefined
   const tooltip = childData.tooltip ? childData.tooltip.toString() : undefined;
 
   // create node for this child
