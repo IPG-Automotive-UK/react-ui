@@ -101,6 +101,11 @@ export type TooltipTreeItemProps = {
    * The tree node.
    */
   node: TreeNode;
+
+  /**
+   * Whether the tree item has a parent.
+   */
+  hasParent?: boolean;
 };
 
 /**

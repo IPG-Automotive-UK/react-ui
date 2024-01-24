@@ -71,7 +71,9 @@ const TreeViewList = <T,>({
           {...props}
           onClick={handleClick}
           sx={theme => ({
-            borderLeft: `1px solid ${alpha(theme.palette.text.primary, 0.1)}`,
+            borderLeft: props.hasParent
+              ? `1px solid ${alpha(theme.palette.text.primary, 0.1)}`
+              : "none",
             color: theme.palette.text.primary,
             padding: "5px"
           })}
@@ -134,7 +136,7 @@ const TreeViewList = <T,>({
       : items
   );
 
-  const renderTree = (nodes: TreeNode[]) =>
+  const renderTree = (nodes: TreeNode[], hasParent = false) =>
     nodes.map(node => (
       <TooltipTreeItem
         key={node.id}
@@ -142,9 +144,10 @@ const TreeViewList = <T,>({
         label={node.id}
         tooltip={node.tooltip ? node.tooltip : ""}
         node={node}
+        hasParent={hasParent}
       >
         {Array.isArray(node.children) && node.children.length > 0
-          ? renderTree(node.children)
+          ? renderTree(node.children, true)
           : null}
       </TooltipTreeItem>
     ));
