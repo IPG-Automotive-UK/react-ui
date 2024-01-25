@@ -135,3 +135,49 @@ test("should hide child when is collapsed", async ({ page }) => {
       .getByText("GearSpred", { exact: true })
   ).toBeHidden();
 });
+
+test("should expand the parent and child nodes that match the search term", async ({
+  page
+}) => {
+  await page.goto(
+    "http://localhost:6006/?path=/story/lists-treeviewlist--default&args=expandSearchTerm:true;searchTerm:ratio"
+  );
+  await expect(
+    page
+      .frameLocator('iframe[title="storybook-preview-iframe"]')
+      .getByText("BRK")
+  ).toBeVisible();
+  await expect(
+    page
+      .frameLocator('iframe[title="storybook-preview-iframe"]')
+      .getByText("Pedal")
+  ).toBeVisible();
+  await expect(
+    page
+      .frameLocator('iframe[title="storybook-preview-iframe"]')
+      .getByText("Ratio", { exact: true })
+  ).toBeVisible();
+});
+
+test("should not expand the child nodes when expand for search is not enabled", async ({
+  page
+}) => {
+  await page.goto(
+    "http://localhost:6006/?path=/story/lists-treeviewlist--default&args=expandSearchTerm:false;searchTerm:ratio"
+  );
+  await expect(
+    page
+      .frameLocator('iframe[title="storybook-preview-iframe"]')
+      .getByText("BRK")
+  ).toBeVisible();
+  await expect(
+    page
+      .frameLocator('iframe[title="storybook-preview-iframe"]')
+      .getByText("Pedal")
+  ).toBeHidden();
+  await expect(
+    page
+      .frameLocator('iframe[title="storybook-preview-iframe"]')
+      .getByText("Ratio", { exact: true })
+  ).toBeHidden();
+});
