@@ -5,7 +5,7 @@ import {
   TreeNode,
   TreeViewListProps
 } from "./TreeViewList.types";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TreeItem, TreeView } from "@mui/x-tree-view";
 
 import AddIcon from "@mui/icons-material/Add";
@@ -22,14 +22,17 @@ import { alpha } from "@mui/material/styles";
  * @property props.selected - The ID of the currently selected item.
  * @property props.searchTerm - The term to search for in the items.
  * @property [props.defaultExpanded=[]] - The IDs of the items that should be expanded by default.
+ * @property props.expandSearchTerm - Weather to expand the tree when searching.
+ * @property props.width - The width of the tree view list.
  * @property props.onSelectionChange - The function to call when the selection changes.
  * @returns The tree view list component.
  */
 const TreeViewList = <T,>({
   items,
   selected,
-  searchTerm,
+  searchTerm = "",
   defaultExpanded = [],
+  expandSearchTerm = false,
   width,
   onSelectionChange
 }: TreeViewListProps<T>) => {
@@ -41,6 +44,40 @@ const TreeViewList = <T,>({
     nodeIds: string[]
   ) => {
     setExpanded(nodeIds);
+  };
+
+  // search the tree and return an array of matching nodeIds
+  const searchTree = (
+    nodes: TreeNode[],
+    term: string,
+    isChildSearch: boolean = false // Additional parameter to indicate if we are searching within child nodes
+  ): string[] => {
+    let result: string[] = [];
+    const terms = term.toLowerCase().split(" "); // Convert term to lower case and split into words
+
+    nodes.forEach(node => {
+      const nodeNameLower = node.name.toLowerCase(); // Convert node name to lower case
+      const nodeMatched = terms.some(t => nodeNameLower.includes(t));
+
+      // If the current node matches, or if we're in a child search and there's a match in children, add the node ID
+      if (nodeMatched || isChildSearch) {
+        result.push(node.id);
+      }
+
+      // If the node has children, search them too
+      if (node.children) {
+        const childResult = searchTree(node.children, term, true);
+        // If there's a match in children, ensure the parent node is included for expansion
+        if (childResult.length > 0 && !nodeMatched) {
+          result.push(node.id);
+        }
+        // Concatenate the child results (which includes only matching children and their parents)
+        result = result.concat(childResult);
+      }
+    });
+
+    // Remove duplicates and return
+    return Array.from(new Set(result));
   };
 
   // tooltip tree item
@@ -151,6 +188,21 @@ const TreeViewList = <T,>({
           : null}
       </TooltipTreeItem>
     ));
+
+  // expand nodes that match the search term
+  useEffect(() => {
+    if (expandSearchTerm) {
+      // Reset expanded ids
+      setExpanded([]);
+
+      // if the search term is not empty, get the ids of the matching nodes and set them as expanded
+      if (searchTerm !== "") {
+        const ids = searchTree(parameters, searchTerm);
+        setExpanded(ids);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchTerm]);
 
   return (
     <TreeView
