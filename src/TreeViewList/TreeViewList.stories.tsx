@@ -36,6 +36,12 @@ export const Default = {
                   }
                 ],
                 name: "HydESPModel"
+              },
+              {
+                name: "BoreTravel",
+                options: [],
+                tooltip:
+                  "Piston travel to close compensation bore inside master cylinder. Parameter needed for CarMaker hydraulic ESC (Name: 'MC.xCompBore')."
               }
             ],
             name: "MCbooster"

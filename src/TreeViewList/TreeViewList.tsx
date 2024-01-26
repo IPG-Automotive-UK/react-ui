@@ -121,49 +121,39 @@ const TreeViewList = <T,>({
 
   // recursive search function
   const applySearch = (search: string, parameters: Item<T>[]): Item<T>[] => {
-    const terms = search
-      .toUpperCase()
-      .trim()
-      .split(/(?:\.| )+/);
+    // Split the search string into individual terms for comparison
+    const terms = search.toLowerCase().split(" ");
 
-    const searchInItem = (item: Item<T>): Item<T> | null => {
-      const match = terms.some(term =>
-        typeof item.name === "string"
-          ? item.name.toUpperCase().includes(term)
-          : false
-      );
+    // Function to recursively search and filter the items
+    const filterItems = (items: Item<T>[]): Item<T>[] => {
+      return items.reduce((acc: Item<T>[], item) => {
+        const itemName = (item.name as string)?.toLowerCase() || "";
 
-      if (match) {
-        // if the item matches any of the search terms, return the whole item
-        return item;
-      }
+        // Check if the item name matches any of the search terms
+        let matches = terms.some(term => itemName.toLowerCase().includes(term));
 
-      const children = Array.isArray(item.children)
-        ? item.children.map(searchInItem).filter(Boolean)
-        : [];
-      const options = Array.isArray(item.options)
-        ? item.options
-            .map((option: Item<T>) => {
-              if (typeof option === "object" && option !== null) {
-                return searchInItem(option as Item<T>);
-              }
-              return null;
-            })
-            .filter(Boolean)
-        : [];
+        // If there are children, recursively filter them
+        if (Array.isArray(item.children) && item.children.length > 0) {
+          const filteredChildren = filterItems(item.children);
 
-      if (children.length > 0 || options.length > 0) {
-        return {
-          ...item,
-          children: children as T,
-          options: options as T
-        };
-      }
+          // If any children match, include this item in the result
+          if (filteredChildren.length > 0) {
+            matches = true;
+            // Update the item with the filtered children
+            item = { ...item, children: filteredChildren as T };
+          }
+        }
 
-      return null;
+        // If this item or any of its children match, add it to the accumulator
+        if (matches) {
+          acc.push(item);
+        }
+
+        return acc;
+      }, []);
     };
 
-    return parameters.map(searchInItem).filter(Boolean) as Item<T>[];
+    return filterItems(parameters);
   };
 
   // build tree nodes
