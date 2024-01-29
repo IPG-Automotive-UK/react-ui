@@ -28,6 +28,11 @@ export type TreeViewListProps<T> = {
   searchTerm?: string;
 
   /**
+   * Flag indicating whether the search term should be expanded in the tree view list. This is optional.
+   */
+  expandSearchTerm?: boolean;
+
+  /**
    * The IDs of the items that should be expanded by default. This is optional.
    */
   defaultExpanded?: string[];
