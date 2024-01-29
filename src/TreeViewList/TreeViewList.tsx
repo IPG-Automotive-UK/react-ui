@@ -95,15 +95,18 @@ const TreeViewList = <T,>({
   // recursive search function
   const applySearch = (search: string, parameters: Item<T>[]): Item<T>[] => {
     // Split the search string into individual terms for comparison
-    const terms = search.toLowerCase().split(" ");
+    const terms = search.toLowerCase().trim().split(" ");
 
     // Function to recursively search and filter the items
     const filterItems = (items: Item<T>[]): Item<T>[] => {
       return items.reduce((acc: Item<T>[], item) => {
-        const itemName = (item.name as string)?.toLowerCase() || "";
+        const itemName = (item.name as string)?.trim().toLowerCase() || "";
 
-        // Check if the item name matches any of the search terms
-        let matches = terms.some(term => itemName.toLowerCase().includes(term));
+        // Check if the item name matches any of the search terms as whole words
+        let matches = terms.some(term => {
+          const regex = new RegExp(`\\b${term}\\b`, "i"); // \b is a word boundary in regex
+          return regex.test(itemName);
+        });
 
         // If there are children, recursively filter them
         if (Array.isArray(item.children) && item.children.length > 0) {
@@ -164,7 +167,8 @@ const TreeViewList = <T,>({
         setExpanded(ids);
       }
     }
-  }, [expandSearchTerm, parameters, searchTerm, searchTreeCallback]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [expandSearchTerm, searchTerm, searchTreeCallback]);
 
   return (
     <TreeView
