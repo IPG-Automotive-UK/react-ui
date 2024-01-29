@@ -5,7 +5,7 @@ import {
   TreeNode,
   TreeViewListProps
 } from "./TreeViewList.types";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { TreeItem, TreeView } from "@mui/x-tree-view";
 
 import AddIcon from "@mui/icons-material/Add";
@@ -46,39 +46,12 @@ const TreeViewList = <T,>({
     setExpanded(nodeIds);
   };
 
-  // search the tree and return an array of matching nodeIds
-  const searchTree = (
-    nodes: TreeNode[],
-    term: string,
-    isChildSearch: boolean = false // Additional parameter to indicate if we are searching within child nodes
-  ): string[] => {
-    let result: string[] = [];
-    const terms = term.toLowerCase().split(" "); // Convert term to lower case and split into words
-
-    nodes.forEach(node => {
-      const nodeNameLower = node.name.toLowerCase(); // Convert node name to lower case
-      const nodeMatched = terms.some(t => nodeNameLower.includes(t));
-
-      // If the current node matches, or if we're in a child search and there's a match in children, add the node ID
-      if (nodeMatched || isChildSearch) {
-        result.push(node.id);
-      }
-
-      // If the node has children, search them too
-      if (node.children) {
-        const childResult = searchTree(node.children, term, true);
-        // If there's a match in children, ensure the parent node is included for expansion
-        if (childResult.length > 0 && !nodeMatched) {
-          result.push(node.id);
-        }
-        // Concatenate the child results (which includes only matching children and their parents)
-        result = result.concat(childResult);
-      }
-    });
-
-    // Remove duplicates and return
-    return Array.from(new Set(result));
-  };
+  // search tree callback
+  const searchTreeCallback = useCallback(
+    (parameters: TreeNode[], searchTerm: string) =>
+      searchTree(parameters, searchTerm),
+    []
+  );
 
   // tooltip tree item
   const TooltipTreeItem = (props: TooltipTreeItemProps) => {
@@ -187,12 +160,11 @@ const TreeViewList = <T,>({
 
       // if the search term is not empty, get the ids of the matching nodes and set them as expanded
       if (searchTerm !== "") {
-        const ids = searchTree(parameters, searchTerm);
+        const ids = searchTreeCallback(parameters, searchTerm);
         setExpanded(ids);
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchTerm]);
+  }, [expandSearchTerm, parameters, searchTerm, searchTreeCallback]);
 
   return (
     <TreeView
@@ -320,3 +292,44 @@ function parseChild<T>(parentNode: TreeNode, childData: ChildData<T> | T) {
     });
   }
 }
+
+/**
+ * Searches a tree for nodes that match the given search term.
+ *
+ * @param nodes - The nodes to search.
+ * @param term - The term to search for.
+ * @param isChildSearch - Weather we are searching within child nodes.
+ * @returns The IDs of the nodes that match the search term.
+ */
+const searchTree = (
+  nodes: TreeNode[],
+  term: string,
+  isChildSearch: boolean = false // Additional parameter to indicate if we are searching within child nodes
+): string[] => {
+  let result: string[] = [];
+  const terms = term.toLowerCase().split(" "); // Convert term to lower case and split into words
+
+  nodes.forEach(node => {
+    const nodeNameLower = node.name.toLowerCase(); // Convert node name to lower case
+    const nodeMatched = terms.some(t => nodeNameLower.includes(t));
+
+    // If the current node matches, or if we're in a child search and there's a match in children, add the node ID
+    if (nodeMatched || isChildSearch) {
+      result.push(node.id);
+    }
+
+    // If the node has children, search them too
+    if (node.children) {
+      const childResult = searchTree(node.children, term, true);
+      // If there's a match in children, ensure the parent node is included for expansion
+      if (childResult.length > 0 && !nodeMatched) {
+        result.push(node.id);
+      }
+      // Concatenate the child results (which includes only matching children and their parents)
+      result = result.concat(childResult);
+    }
+  });
+
+  // Remove duplicates and return
+  return Array.from(new Set(result));
+};
