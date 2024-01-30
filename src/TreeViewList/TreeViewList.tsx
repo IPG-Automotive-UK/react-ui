@@ -46,13 +46,6 @@ const TreeViewList = <T,>({
     setExpanded(nodeIds);
   };
 
-  // search tree callback
-  const searchTreeCallback = useCallback(
-    (parameters: TreeNode[], searchTerm: string) =>
-      searchTree(parameters, searchTerm),
-    []
-  );
-
   // tooltip tree item
   const TooltipTreeItem = (props: TooltipTreeItemProps) => {
     const handleClick = () => {
@@ -139,6 +132,25 @@ const TreeViewList = <T,>({
       : items
   );
 
+  // search tree callback
+  const searchTreeCallback = useCallback(() => {
+    return searchTree(parameters, searchTerm);
+  }, [parameters, searchTerm]);
+
+  // expand nodes that match the search term
+  useEffect(() => {
+    if (expandSearchTerm) {
+      // Reset expanded ids
+      setExpanded([]);
+
+      // if the search term is not empty, get the ids of the matching nodes and set them as expanded
+      if (searchTerm !== "") {
+        const ids = searchTreeCallback();
+        setExpanded(ids);
+      }
+    }
+  }, [expandSearchTerm, searchTerm, searchTreeCallback]);
+
   const renderTree = (nodes: TreeNode[], hasParent = false) =>
     nodes.map(node => (
       <TooltipTreeItem
@@ -154,21 +166,6 @@ const TreeViewList = <T,>({
           : null}
       </TooltipTreeItem>
     ));
-
-  // expand nodes that match the search term
-  useEffect(() => {
-    if (expandSearchTerm) {
-      // Reset expanded ids
-      setExpanded([]);
-
-      // if the search term is not empty, get the ids of the matching nodes and set them as expanded
-      if (searchTerm !== "") {
-        const ids = searchTreeCallback(parameters, searchTerm);
-        setExpanded(ids);
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [expandSearchTerm, searchTerm, searchTreeCallback]);
 
   return (
     <TreeView
