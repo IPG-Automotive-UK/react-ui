@@ -111,6 +111,11 @@ export type TooltipTreeItemProps = {
    * Whether the tree item has a parent.
    */
   hasParent?: boolean;
+
+  /**
+   * The function to call when the selection changes.
+   */
+  onSelectionChange: (value: string) => void;
 };
 
 /**

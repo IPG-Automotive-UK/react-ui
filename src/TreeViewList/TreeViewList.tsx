@@ -40,19 +40,19 @@ const TreeViewList = <T,>({
   const [expanded, setExpanded] = useState(defaultExpanded);
 
   // state for items to display in the tree
-  const [treeItems, setTreeItems] =
+  const [treeDisplayItems, setTreeDisplayItems] =
     useState<TreeViewListProps<T>["items"]>(items);
 
   // update tree items when the items or search term prop changes
   useEffect(() => {
     // if there's no search term or no items, set the tree items to the original items
     if (searchTerm === "" || items.length === 0) {
-      setTreeItems(items);
-      return;
+      setTreeDisplayItems(items);
+      // return;
     }
 
     // split the search string into individual terms for comparison
-    const terms = searchTerm.toLowerCase().trim().split(" ");
+    // const terms = searchTerm.toLowerCase().trim().split(" ");
     // terms = ["suspension", "david"]
     // items = [{name: "suspension david", children: [{name: "front", children: []}]}, {name: "suspension front david", children: [{name: "rear", children: []}]}]
     // matches = [];
@@ -69,116 +69,7 @@ const TreeViewList = <T,>({
     setExpanded(nodeIds);
   };
 
-  // tooltip tree item
-  const TooltipTreeItem = (props: TooltipTreeItemProps) => {
-    const handleClick = () => {
-      if (props.children === null) {
-        onSelectionChange(props.node.name);
-      }
-    };
-    return (
-      <Tooltip
-        disableFocusListener
-        title={
-          props.tooltip ? (
-            <>
-              <strong>{props.node.name}</strong>
-              <br />
-              {props.tooltip}
-            </>
-          ) : (
-            ""
-          )
-        }
-        placement="right"
-      >
-        <TreeItem
-          {...props}
-          onClick={handleClick}
-          sx={theme => ({
-            borderLeft: props.hasParent
-              ? `1px solid ${alpha(theme.palette.text.primary, 0.1)}`
-              : "none",
-            color: theme.palette.text.primary,
-            padding: "5px"
-          })}
-        />
-      </Tooltip>
-    );
-  };
-
-  // recursive search function
-  const applySearch = useCallback((search: string, parameters: Item<T>[]) => {
-    // Split the search string into individual terms for comparison
-    const terms = search.toLowerCase().trim().split(" ");
-
-    // Function to recursively search and filter the items
-    const filterItems = (items: Item<T>[]): Item<T>[] => {
-      return items.reduce((acc: Item<T>[], item) => {
-        const itemName = (item.name as string)?.trim().toLowerCase() || "";
-
-        // Check if the item name matches any of the search terms as whole words
-        let matches = terms.some(term => {
-          const regex = new RegExp(`\\b${term}\\b`, "i"); // \b is a word boundary in regex
-          return regex.test(itemName);
-        });
-
-        // If there are children, recursively filter them
-        if (Array.isArray(item.children) && item.children.length > 0) {
-          const filteredChildren = filterItems(item.children);
-
-          // If any children match, include this item in the result
-          if (filteredChildren.length > 0) {
-            matches = true;
-            // Update the item with the filtered children
-            item = { ...item, children: filteredChildren as T };
-          }
-        }
-
-        // If this item or any of its children match, add it to the accumulator
-        if (matches) {
-          acc.push(item);
-        }
-
-        return acc;
-      }, []);
-    };
-
-    return filterItems(parameters);
-  }, []);
-
-  // const setParams = useCallback(() => {
-  //   // build tree nodes
-  //   return buildTree(
-  //     searchTerm !== undefined && searchTerm !== ""
-  //       ? applySearch(searchTerm, items)
-  //       : items
-  //   );
-  // }, [applySearch, items, searchTerm]);
-
-  // const parameters = setParams();
-
-  // search tree callback
-  // const searchTreeCallback = useCallback(() => {
-  //   return searchTree(parameters, searchTerm);
-  // }, [parameters, searchTerm]);
-
-  // // expand nodes that match the search term
-  // useEffect(() => {
-  //   console.log("Here");
-  //   if (expandSearchTerm) {
-  //     // Reset expanded ids
-  //     setExpanded([]);
-
-  //     // if the search term is not empty, get the ids of the matching nodes and set them as expanded
-  //     if (searchTerm !== "") {
-  //       const ids = searchTreeCallback();
-  //       setExpanded(ids);
-  //     }
-  //   }
-  // }, [expandSearchTerm, searchTerm, searchTreeCallback]);
-
-  // build the tree nodes with optional tooltips
+  // render the tree nodes with optional tooltips
   const renderTree = (nodes: TreeNode[], hasParent = false) =>
     nodes.map(node => (
       <TooltipTreeItem
@@ -188,6 +79,7 @@ const TreeViewList = <T,>({
         tooltip={node.tooltip ? node.tooltip : ""}
         node={node}
         hasParent={hasParent}
+        onSelectionChange={onSelectionChange}
       >
         {Array.isArray(node.children) && node.children.length > 0
           ? renderTree(node.children, true)
@@ -204,12 +96,60 @@ const TreeViewList = <T,>({
       onNodeToggle={handleToggle}
       sx={{ width }}
     >
-      {renderTree(buildTree(treeItems))}
+      {renderTree(buildTreeNodes(treeDisplayItems))}
     </TreeView>
   );
 };
 
-export default TreeViewList;
+/**
+ * Creates a tree view list item with an optional tooltip.
+ *
+ * @param props - The properties for the tooltip tree item.
+ * @property props.tooltip - The tooltip to display.
+ * @property props.nodeId - The unique ID of the tree item.
+ * @property props.children - The children of the tree item.
+ * @property props.label - The label of the tree item.
+ * @property props.node - The tree node.
+ * @property props.hasParent - Whether the tree item has a parent.
+ * @property props.onSelectionChange - The function to call when the selection changes.
+ * @returns The tree item wrapped in a tooltip.
+ */
+const TooltipTreeItem = (props: TooltipTreeItemProps) => {
+  const handleClick = () => {
+    if (props.children === null) {
+      props.onSelectionChange(props.node.name);
+    }
+  };
+  return (
+    <Tooltip
+      disableFocusListener
+      title={
+        props.tooltip ? (
+          <>
+            <strong>{props.node.name}</strong>
+            <br />
+            {props.tooltip}
+          </>
+        ) : (
+          ""
+        )
+      }
+      placement="right"
+    >
+      <TreeItem
+        {...props}
+        onClick={handleClick}
+        sx={theme => ({
+          borderLeft: props.hasParent
+            ? `1px solid ${alpha(theme.palette.text.primary, 0.1)}`
+            : "none",
+          color: theme.palette.text.primary,
+          padding: "5px"
+        })}
+      />
+    </Tooltip>
+  );
+};
 
 /**
  * Creates a new tree node with the given properties.
@@ -236,14 +176,15 @@ function createNode(
 }
 
 /**
- * Builds a tree structure from a flat list of items.
+ * Builds a tree node structure from a list of items with parent-child relationships.
  *
  * @template T The type of the options array elements.
  * @param data - The flat list of items to transform into a tree.
  * @returns The tree structure built from the input items.
  * @example buildTree(items) // returns TreeNode[]
  */
-function buildTree<T>(data: Item<T>[]): TreeNode[] {
+function buildTreeNodes<T>(data: Item<T>[]) {
+  // create array to hold nodes
   const itemsTree: TreeNode[] = [];
 
   // iterate through each item
@@ -322,43 +263,4 @@ function parseChild<T>(parentNode: TreeNode, childData: ChildData<T> | T) {
   }
 }
 
-/**
- * Searches a tree for nodes that match the given search term.
- *
- * @param nodes - The nodes to search.
- * @param term - The term to search for.
- * @param isChildSearch - Weather we are searching within child nodes.
- * @returns The IDs of the nodes that match the search term.
- */
-// const searchTree = (
-//   nodes: TreeNode[],
-//   term: string,
-//   isChildSearch: boolean = false // Additional parameter to indicate if we are searching within child nodes
-// ): string[] => {
-//   let result: string[] = [];
-//   const terms = term.toLowerCase().split(" "); // Convert term to lower case and split into words
-
-//   nodes.forEach(node => {
-//     const nodeNameLower = node.name.toLowerCase(); // Convert node name to lower case
-//     const nodeMatched = terms.some(t => nodeNameLower.includes(t));
-
-//     // If the current node matches, or if we're in a child search and there's a match in children, add the node ID
-//     if (nodeMatched || isChildSearch) {
-//       result.push(node.id);
-//     }
-
-//     // If the node has children, search them too
-//     if (node.children) {
-//       const childResult = searchTree(node.children, term, true);
-//       // If there's a match in children, ensure the parent node is included for expansion
-//       if (childResult.length > 0 && !nodeMatched) {
-//         result.push(node.id);
-//       }
-//       // Concatenate the child results (which includes only matching children and their parents)
-//       result = result.concat(childResult);
-//     }
-//   });
-
-//   // Remove duplicates and return
-//   return Array.from(new Set(result));
-// };
+export default TreeViewList;
