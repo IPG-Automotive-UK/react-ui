@@ -1,21 +1,41 @@
 /**
- * Represents an item with arbitrary properties.
+ * Represents a node in a tree structure.
  */
-export type Item<T> = {
+export type TreeNodeItem = {
   /**
-   * The value of the item.
+   * The name of the node.
    */
-  [key: string]: T;
+  name: string;
+
+  /**
+   * The ID of the node.
+   */
+  id: string;
+
+  /**
+   * The child nodes of the node.
+   */
+  children?: TreeNodeItem[];
+
+  /**
+   * Whether the node is disabled.
+   */
+  disable?: boolean;
+
+  /**
+   * The tooltip of the node.
+   */
+  tooltip?: string;
 };
 
 /**
  * Properties for the TreeViewList component.
  */
-export type TreeViewListProps<T> = {
+export type TreeViewListProps = {
   /**
    * The items to display in the tree view list.
    */
-  items: Item<T>[];
+  items: TreeNodeItem[];
 
   /**
    * The ID of the currently selected item.
@@ -49,36 +69,6 @@ export type TreeViewListProps<T> = {
 };
 
 /**
- * Represents a node in a tree structure.
- */
-export type TreeNode = {
-  /**
-   * The name of the node.
-   */
-  name: string;
-
-  /**
-   * The ID of the node.
-   */
-  id: string;
-
-  /**
-   * The child nodes of the node.
-   */
-  children: TreeNode[];
-
-  /**
-   * Whether the node is disabled.
-   */
-  disable?: boolean;
-
-  /**
-   * The tooltip of the node.
-   */
-  tooltip?: string;
-};
-
-/**
  * Properties for the TooltipTreeItem component.
  */
 export type TooltipTreeItemProps = {
@@ -105,7 +95,7 @@ export type TooltipTreeItemProps = {
   /**
    * The tree node.
    */
-  node: TreeNode;
+  node: TreeNodeItem;
 
   /**
    * Whether the tree item has a parent.
@@ -116,31 +106,4 @@ export type TooltipTreeItemProps = {
    * The function to call when the selection changes.
    */
   onSelectionChange: (value: string) => void;
-};
-
-/**
- * Type representing a child in a tree structure.
- *
- * @template T The type of the options array elements.
- */
-export type ChildData<T> = {
-  /** The name of the node. */
-  name: string;
-
-  /**
-   * Optional array of child nodes.
-   * Each child is also a `ChildData` object, allowing for a nested tree structure.
-   */
-  children?: ChildData<T>[];
-
-  /**
-   * Optional array of options. The options are displayed as the last child.
-   * The type of the elements in this array is defined by the generic parameter `T`.
-   */
-  options?: T[];
-
-  /**
-   * The tooltip of the child. This is optional.
-   */
-  tooltip?: string;
 };

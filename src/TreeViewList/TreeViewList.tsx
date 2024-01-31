@@ -1,11 +1,9 @@
+import React, { useEffect, useState } from "react";
 import {
-  ChildData,
-  Item,
   TooltipTreeItemProps,
-  TreeNode,
+  TreeNodeItem,
   TreeViewListProps
 } from "./TreeViewList.types";
-import React, { useEffect, useState } from "react";
 import { TreeItem, TreeView } from "@mui/x-tree-view";
 
 import AddIcon from "@mui/icons-material/Add";
@@ -16,18 +14,17 @@ import { alpha } from "@mui/material/styles";
 /**
  * A component that renders a tree view list.
  *
- * @template T The type of the options array elements.
  * @param props - The properties for the tree view list.
  * @property props.items - The items to display in the tree view list.
  * @property props.selected - The ID of the currently selected item.
  * @property props.searchTerm - The term to search for in the items.
  * @property [props.defaultExpanded=[]] - The IDs of the items that should be expanded by default.
- * @property props.expandSearchTerm - Weather to expand the tree when searching.
+ * @property props.expandSearchTerm - Whether to expand the tree when searching.
  * @property props.width - The width of the tree view list.
  * @property props.onSelectionChange - The function to call when the selection changes.
  * @returns The tree view list component.
  */
-const TreeViewList = <T,>({
+const TreeViewList = ({
   items,
   selected,
   searchTerm = "",
@@ -35,13 +32,13 @@ const TreeViewList = <T,>({
   expandSearchTerm = false,
   width,
   onSelectionChange
-}: TreeViewListProps<T>) => {
+}: TreeViewListProps) => {
   // state for expanded nodes
   const [expanded, setExpanded] = useState(defaultExpanded);
 
   // state for items to display in the tree
   const [treeDisplayItems, setTreeDisplayItems] =
-    useState<TreeViewListProps<T>["items"]>(items);
+    useState<TreeViewListProps["items"]>(items);
 
   // update tree items when the items or search term prop changes
   useEffect(() => {
@@ -70,12 +67,12 @@ const TreeViewList = <T,>({
   };
 
   // render the tree nodes with optional tooltips
-  const renderTree = (nodes: TreeNode[], hasParent = false) =>
+  const renderTree = (nodes: TreeNodeItem[], hasParent = false) =>
     nodes.map(node => (
       <TooltipTreeItem
-        key={node.id}
-        nodeId={node.id}
-        label={node.id}
+        key={node.name}
+        nodeId={node.name}
+        label={node.name}
         tooltip={node.tooltip ? node.tooltip : ""}
         node={node}
         hasParent={hasParent}
@@ -96,7 +93,7 @@ const TreeViewList = <T,>({
       onNodeToggle={handleToggle}
       sx={{ width }}
     >
-      {renderTree(buildTreeNodes(treeDisplayItems))}
+      {renderTree(treeDisplayItems)}
     </TreeView>
   );
 };
@@ -150,117 +147,5 @@ const TooltipTreeItem = (props: TooltipTreeItemProps) => {
     </Tooltip>
   );
 };
-
-/**
- * Creates a new tree node with the given properties.
- *
- * @param id - The ID of the new node.
- * @param name - The name of the new node.
- * @param tooltip - The tooltip of the new node.
- * @param [disable=true] - Optional parameter that indicates whether the node is disabled. Defaults to true.
- * @returns The newly created tree node.
- */
-function createNode(
-  id: string,
-  name: string,
-  tooltip?: string,
-  disable = true
-): TreeNode {
-  return {
-    children: [],
-    disable,
-    id,
-    name,
-    tooltip
-  };
-}
-
-/**
- * Builds a tree node structure from a list of items with parent-child relationships.
- *
- * @template T The type of the options array elements.
- * @param data - The flat list of items to transform into a tree.
- * @returns The tree structure built from the input items.
- * @example buildTree(items) // returns TreeNode[]
- */
-function buildTreeNodes<T>(data: Item<T>[]) {
-  // create array to hold nodes
-  const itemsTree: TreeNode[] = [];
-
-  // iterate through each item
-  data.forEach(item => {
-    // create node for this root model
-    const name = item.name ? item.name.toString() : "default";
-    const tooltip = item.tooltip ? item.tooltip.toString() : undefined;
-    const parentNode = createNode(name, name, tooltip);
-    itemsTree.push(parentNode);
-
-    // parse options and children recursively
-    if (Array.isArray(item.options)) {
-      item.options.forEach(childData => {
-        parseChild(parentNode, childData);
-      });
-    }
-
-    if (Array.isArray(item.children)) {
-      item.children.forEach(childData => {
-        parseChild(parentNode, childData);
-      });
-    }
-  });
-
-  return itemsTree;
-}
-
-/**
- * Type guard to check if a variable is of type ChildData<T>.
- *
- * @template T The type of the options array elements.
- * @param data - The variable to check.
- * @returns A boolean indicating whether the variable is of type ChildData<T>.
- */
-function isChildData<T>(data: any): data is ChildData<T> {
-  return data.children !== undefined || data.options !== undefined;
-}
-
-/**
- * Parses a child node and adds it to the parent node.
- *
- * @template T The type of the options array elements.
- * @param parentNode - The parent node to which the child node will be added.
- * @param childData - The data of the child node.
- */
-function parseChild<T>(parentNode: TreeNode, childData: ChildData<T> | T) {
-  // if childData is of type T and not ChildData<T>, return
-  if (!isChildData(childData)) return;
-
-  // ignore if child data is a leaf node, i.e. has no children or options
-  if (!childData.children && !childData.options) return;
-
-  // set tooltip if it exists in child data else set to undefined
-  const tooltip = childData.tooltip ? childData.tooltip.toString() : undefined;
-
-  // create node for this child
-  const thisNode = createNode(
-    childData.name,
-    parentNode.name + "." + childData.name,
-    tooltip
-  );
-  parentNode.children.push(thisNode);
-
-  // parse children of this child recursively
-  if (childData.children) {
-    childData.children.forEach((child: ChildData<T>) => {
-      parseChild(thisNode, child);
-    });
-  }
-
-  // parse options of this child recursively
-  if (childData.options) {
-    childData.options.forEach((child: T) => {
-      parseChild(thisNode, child);
-    });
-  }
-}
 
 export default TreeViewList;
