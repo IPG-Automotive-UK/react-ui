@@ -5,9 +5,12 @@
     "src/**/*.test.**",
     "src/**/*.spec.**",
     "src/**/*.stories.**",
-    "**/jest.config*",
-    "**/setupTests*",
-    "node_modules",
-    "dist"
-  ]
+    "dist",
+    "vitest-setup.ts",
+    "vite.config.ts",
+    "vite.config.ts"
+  ],
+  "compilerOptions": {
+    "skipLibCheck": true
+  }
 }
