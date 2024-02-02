@@ -16,9 +16,9 @@ export default {
 
 const Template = args => (
   <FilterStack {...args}>
-    <Multi {...Multi.args} />
-    <SingleCheckbox {...SingleCheckbox.args} />
-    <SingleLabel {...SingleLabel.args} />
+    <Multi.render {...Multi.args} />
+    <SingleCheckbox.render {...SingleCheckbox.args} />
+    <SingleLabel.render {...SingleLabel.args} />
   </FilterStack>
 );
 
