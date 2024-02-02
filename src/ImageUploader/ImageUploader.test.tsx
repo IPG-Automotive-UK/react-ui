@@ -46,7 +46,7 @@ describe("ImageUploader", () => {
 
   // test delete button click update state and shows default text in dropzone
   test("on delete button click", async () => {
-    const onDelete = jest.fn();
+    const onDelete = vi.fn();
 
     const WithState = () => {
       const [selectedFiles, setSelectedFiles] = React.useState<FileWithData[]>([

@@ -12,16 +12,7 @@
     "outDir": "dist",
     "resolveJsonModule": true,
     "strict": true,
-    "target": "ES2019"
-  },
-  "include": ["src/**/*.tsx", "src/**/*.ts", "src/**/*.jsx", "src/**/*.js"],
-  "exclude": [
-    "src/**/*.test.**",
-    "src/**/*.spec.**",
-    "src/**/*.stories.**",
-    "**/jest.config*",
-    "**/setupTests*",
-    "node_modules",
-    "dist"
-  ]
+    "target": "ES2019",
+    "types": ["vitest/globals"]
+  }
 }

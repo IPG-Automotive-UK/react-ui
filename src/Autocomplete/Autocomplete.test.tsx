@@ -3,7 +3,6 @@ import { render, screen, waitFor } from "@testing-library/react";
 import Autocomplete from ".";
 import React from "react";
 import { userEvent } from "@storybook/testing-library";
-import { vi } from "vitest";
 
 // sample options
 const options = ["option 1", "option 2", "option 3"];
@@ -146,7 +145,7 @@ describe("Select", () => {
   });
 
   it("check helper icon is visible and tooltip shown on hover", async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
 
     render(
       <Autocomplete
