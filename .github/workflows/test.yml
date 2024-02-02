@@ -43,10 +43,11 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: playwright-report ${{ matrix.node-version }}
+          name: playwright-report-${{ github.sha }}-${{matrix.os}}-${{ matrix.node-version }}
           path: playwright-report
       - name: Upload Coverage Report
         uses: actions/upload-artifact@v4
+        if: matrix.os == 'ubuntu-latest'
         with:
-          name: coverage-report ${{ matrix.node-version }}
+          name: coverage-report-${{ github.sha }}-${{ matrix.node-version }}
           path: coverage
