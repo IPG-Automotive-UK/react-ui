@@ -172,7 +172,7 @@ describe("Select", () => {
 
     // check tooltip is shown on hover of helper icon
     await userEvent.hover(screen.getByTestId("tooltip-1"));
-    waitFor(() => {
+    await waitFor(() => {
       expect(screen.getByText("Tooltip 1")).toBeInTheDocument();
     });
 
