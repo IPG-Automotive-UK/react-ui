@@ -15,28 +15,33 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
+          cache: "pnpm"
       - name: Install Dependencies
-        run: npm ci
+        run: pnpm ci
       - name: Lint Checks
-        run: npm run test:lint
+        run: pnpm run test:lint
       - name: Typescript Checks
-        run: npm run type-check
+        run: pnpm run type-check
       - name: Unit Tests
-        run: npm run test:unit
+        run: pnpm run test:unit
         env:
           CI: true
       - name: End to End Tests (Linux)
         if: runner.os == 'Linux'
-        run: sudo apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y xvfb && xvfb-run npm run test:playwright:headed
+        run: sudo apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y xvfb && xvfb-run pnpm run test:playwright:headed
         env:
           CI: true
       - name: End to End Tests (Windows & MacOS)
         if: runner.os != 'Linux'
-        run: npm run test:playwright
+        run: pnpm run test:playwright
         env:
           CI: true
       - name: Upload Playwright Report

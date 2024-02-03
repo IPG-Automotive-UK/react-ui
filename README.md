@@ -7,7 +7,7 @@
 ## Install
 
 ```bash
-npm install --save @ipguk/react-ui
+pnpm install --save @ipguk/react-ui
 ```
 
 ## Usage
@@ -27,8 +27,9 @@ function Example() {
 ## Documentation
 
 Run storybook to explore all of the components and documentation.
+
 ```
-npm run storybook
+pnpm run storybook
 ```
 
 ## Release
@@ -38,13 +39,13 @@ To release a new version, follow these steps.
 1. Check that all tests pass
 
    ```bash
-   npm test
+   pnpm test
    ```
 
 2. Up version the package using
 
    ```bash
-   npm version major|minor|patch|prerelease
+   pnpm version major|minor|patch|prerelease
 
    ```
 
@@ -54,7 +55,7 @@ To release a new version, follow these steps.
    git push
 
    ```
-   
+
    ```bash
    git push --tags
 
@@ -63,20 +64,21 @@ To release a new version, follow these steps.
 4. Run the publish command
 
    Note: If publishing for the first time you will need to login to npm
+
    ```bash
-   npm login
+   pnpm login
 
    ```
 
    ```bash
-   npm publish --access=public
+   pnpm publish --access=public
    ```
 
-    Note: If publishing a prerelease ensure that it is tagged as next rather than latest
+   Note: If publishing a prerelease ensure that it is tagged as next rather than latest
 
-    ```
-    npm publish --access=public --tag=next
-    ```
+   ```
+   pnpm publish --access=public --tag=next
+   ```
 
 5. Publish the release on GitHub
 
