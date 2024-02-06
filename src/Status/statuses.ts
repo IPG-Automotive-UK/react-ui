@@ -13,6 +13,7 @@ import { amber, green, grey, indigo, red, teal } from "@mui/material/colors";
 
 /**
  * Single source of truth for status definitions
+ * Handles icon, colours and label for each status type
  */
 const statuses = {
   cancelled: {
