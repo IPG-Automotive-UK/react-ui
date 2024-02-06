@@ -123,15 +123,6 @@ const statuses = {
     label: {
       text: "Running"
     }
-  },
-  submitted: {
-    icon: {
-      color: amber[800],
-      type: AccessTimeFilled
-    },
-    label: {
-      text: "Submitted"
-    }
   }
 } as const;
 
