@@ -34,6 +34,15 @@ const statuses = {
       text: "Completed"
     }
   },
+  errored: {
+    icon: {
+      color: red[700],
+      type: Error
+    },
+    label: {
+      text: "Errored"
+    }
+  },
   failed: {
     icon: {
       color: red[700],
@@ -86,6 +95,15 @@ const statuses = {
     },
     label: {
       text: "Pending"
+    }
+  },
+  queued: {
+    icon: {
+      color: amber[900],
+      type: AccessTimeFilled
+    },
+    label: {
+      text: "Queued"
     }
   },
   ready: {
