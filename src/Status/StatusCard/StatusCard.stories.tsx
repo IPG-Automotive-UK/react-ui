@@ -22,7 +22,7 @@ const Template: StoryFn<StatusCardProps> = args => {
 
 export const Default = {
   args: {
-    name: "Status",
+    name: "Title",
     status: "passed"
   },
 

@@ -1,12 +1,12 @@
 import { CSSProperties } from "react";
-import type { StatusIconProps } from "../StatusIcon";
+import { Status } from "../statuses.types";
 
 export type StatusLabelProps = {
   /**
    *
    * The status type.
    */
-  status: StatusIconProps["status"];
+  status: Status;
   /**
    * The Variant type.
    */

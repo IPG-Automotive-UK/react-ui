@@ -13,6 +13,7 @@ import { amber, green, grey, indigo, red, teal } from "@mui/material/colors";
 
 /**
  * Single source of truth for status definitions
+ * Handles icon, colours and label for each status type
  */
 const statuses = {
   cancelled: {
@@ -31,6 +32,15 @@ const statuses = {
     },
     label: {
       text: "Completed"
+    }
+  },
+  errored: {
+    icon: {
+      color: red[700],
+      type: Error
+    },
+    label: {
+      text: "Errored"
     }
   },
   failed: {
@@ -87,6 +97,15 @@ const statuses = {
       text: "Pending"
     }
   },
+  queued: {
+    icon: {
+      color: amber[900],
+      type: AccessTimeFilled
+    },
+    label: {
+      text: "Queued"
+    }
+  },
   ready: {
     icon: {
       color: teal[500],
@@ -103,15 +122,6 @@ const statuses = {
     },
     label: {
       text: "Running"
-    }
-  },
-  submitted: {
-    icon: {
-      color: amber[800],
-      type: AccessTimeFilled
-    },
-    label: {
-      text: "Submitted"
     }
   }
 } as const;
