@@ -9,6 +9,7 @@
         "tooltip": "Defines the drag coefficient of the entire vehicle as a function of wind angle of attack (tau)"
       },
       {
+        "disabled": true,
         "label": "Front Area",
         "nodeId": "AER.FrontalArea",
         "tooltip": "The vehicle reference area is the projected frontal area including tires and underbody parts"
