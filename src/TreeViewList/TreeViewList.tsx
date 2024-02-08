@@ -22,6 +22,7 @@ import SearchBar from "../SearchBar/SearchBar";
  */
 const TreeViewList = ({
   enableSearch = false,
+  expandSearchResults = false,
   items,
   onNodeSelect,
   onNodeToggle,
@@ -34,6 +35,9 @@ const TreeViewList = ({
 
   // state for search input value
   const [searchValue, setSearchValue] = useState("");
+
+  // state for expanded nodes
+  const [defaultExpanded, setDefaultExpanded] = useState<string[]>([]);
 
   // update tree display items when the items prop changes or when the search input changes
   useEffect(() => {
@@ -52,6 +56,25 @@ const TreeViewList = ({
       setTreeDisplayItems(items);
     }
   }, [enableSearch, items, searchValue]);
+
+  // if search is enabled and expandSearchResults is true, expand all nodes when the tree display items change
+  useEffect(() => {
+    if (enableSearch && expandSearchResults && searchValue !== "") {
+      const expandedNodes: string[] = [];
+      const expandAllNodes = (items: TreeNodeItem[]) => {
+        for (const item of items) {
+          expandedNodes.push(item.nodeId);
+          if (item.children) {
+            expandAllNodes(item.children);
+          }
+        }
+      };
+      expandAllNodes(treeDisplayItems);
+      setDefaultExpanded(expandedNodes);
+    } else {
+      setDefaultExpanded([]);
+    }
+  }, [enableSearch, expandSearchResults, searchValue, treeDisplayItems]);
 
   // render the tree nodes with optional tooltips
   const renderTree = (nodes: TreeNodeItem[]) =>
@@ -78,8 +101,10 @@ const TreeViewList = ({
         />
       ) : null}
       <TreeView
+        key={`${searchValue} + ${defaultExpanded.length}`} // key to force re-render so that we can reset the expanded nodes when the search input changes but still allow user to expand/collapse nodes
         defaultCollapseIcon={<RemoveIcon />}
         defaultExpandIcon={<AddIcon />}
+        defaultExpanded={defaultExpanded}
         selected={selected}
         onNodeSelect={onNodeSelect}
         onNodeToggle={onNodeToggle}
