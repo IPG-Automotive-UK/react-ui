@@ -10,7 +10,7 @@
       },
       {
         "disabled": true,
-        "label": "Front Area",
+        "label": "Frontal Area",
         "nodeId": "AER.FrontalArea",
         "tooltip": "The vehicle reference area is the projected frontal area including tires and underbody parts"
       },

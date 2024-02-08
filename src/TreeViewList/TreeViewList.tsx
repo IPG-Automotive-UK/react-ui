@@ -32,10 +32,23 @@ const TreeViewList = ({
   // state for search input value
   const [searchValue, setSearchValue] = useState("");
 
-  // update tree display items when the items prop changes
+  // update tree display items when the items prop changes or when the search input changes
   useEffect(() => {
-    setTreeDisplayItems(items);
-  }, [items]);
+    // if search is enabled and the search input is not empty, display only items that match the search terms, otherwise display all items
+    if (enableSearch && searchValue !== "") {
+      // split the search into individual words and filter out any empty strings
+      const searchTerms = searchValue.split(" ").filter(term => term);
+
+      // filter the items to contain only those that match each search term
+      let filteredItems = items;
+      for (const term of searchTerms) {
+        filteredItems = filterBySearchTerm(filteredItems, term);
+      }
+      setTreeDisplayItems(filteredItems);
+    } else {
+      setTreeDisplayItems(items);
+    }
+  }, [enableSearch, items, searchValue]);
 
   // render the tree nodes with optional tooltips
   const renderTree = (nodes: TreeNodeItem[]) =>
@@ -104,6 +117,72 @@ const TooltipTreeItem = (
       />
     </Tooltip>
   );
+};
+
+// function to filter the items to contain only those that match the search term
+const filterBySearchTerm = (items: TreeNodeItem[], searchTerm: string) => {
+  // take a copy of the items array to avoid mutating the original
+  const itemsCopy = JSON.parse(JSON.stringify(items)) as TreeNodeItem[];
+
+  // function to check if a node item matches the search term
+  const matchesSearch = (node: TreeNodeItem, searchTerm: string) => {
+    return node.label.toLowerCase().includes(searchTerm.toLowerCase());
+  };
+
+  // interim type to add the active property to the node item
+  type TreeNodeItemWithActive = TreeNodeItem & { active?: boolean };
+
+  // function to recursively loop through all node items and check if they match the search term
+  const checkNodes = (items: TreeNodeItemWithActive[], searchTerm: string) => {
+    for (const item of items) {
+      if (matchesSearch(item, searchTerm)) {
+        item.active = true;
+      } else {
+        item.active = false;
+      }
+      if (item.children) {
+        checkNodes(item.children, searchTerm);
+      }
+    }
+  };
+  checkNodes(itemsCopy, searchTerm);
+
+  // function to recursively filter out all inactive items, making sure to keep parent items if they have active children
+  const removeInactiveItems = (
+    items: TreeNodeItemWithActive[]
+  ): TreeNodeItemWithActive[] => {
+    return items.filter((item: TreeNodeItemWithActive) => {
+      // if the item is active, we want to keep it and all its children
+      if (item.active) {
+        return true;
+      }
+
+      // if we have any children, we want to recursively call this function on them and keep the parent if it has any active children left
+      if (item.children) {
+        item.children = removeInactiveItems(item.children);
+        return item.children && item.children.length > 0;
+      }
+
+      // otherwise we want to remove it
+      return false;
+    });
+  };
+  const filteredItems = removeInactiveItems(itemsCopy);
+
+  // remove the active property from the filtered items
+  const removeActiveProperty = (items: TreeNodeItemWithActive[]) => {
+    for (const item of items) {
+      delete item.active;
+      if (item.children) {
+        removeActiveProperty(item.children);
+      }
+    }
+    return items;
+  };
+  removeActiveProperty(filteredItems);
+
+  // return the filtered items
+  return filteredItems as TreeNodeItem[];
 };
 
 export default TreeViewList;
