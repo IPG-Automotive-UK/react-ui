@@ -1,26 +1,28 @@
+import { TreeViewProps } from "@mui/x-tree-view";
+
 /**
  * Represents a node in a tree structure.
  */
 export type TreeNodeItem = {
-  /**
-   * The name of the node.
-   */
-  name: string;
-
-  /**
-   * The ID of the node.
-   */
-  id: string;
-
   /**
    * The child nodes of the node.
    */
   children?: TreeNodeItem[];
 
   /**
-   * Whether the node is disabled.
+   * If true, the node is disabled.
    */
-  disable?: boolean;
+  disabled?: boolean;
+
+  /**
+   * The tree node label.
+   */
+  label: string;
+
+  /**
+   * The ID of the node.
+   */
+  nodeId: string;
 
   /**
    * The tooltip of the node.
@@ -38,72 +40,17 @@ export type TreeViewListProps = {
   items: TreeNodeItem[];
 
   /**
-   * The ID of the currently selected item.
+   * Callback fired when tree items are selected/unselected.
    */
-  selected: string;
+  onNodeSelect: TreeViewProps<false>["onNodeSelect"];
 
   /**
-   *  The term to search for in the items. This is optional.
+   * The ID of the currently selected node.
    */
-  searchTerm?: string;
-
-  /**
-   * Flag indicating whether the search term should be expanded in the tree view list. This is optional.
-   */
-  expandSearchTerm?: boolean;
-
-  /**
-   * The IDs of the items that should be expanded by default. This is optional.
-   */
-  defaultExpanded?: string[];
-
-  /**
-   * The function to call when the selection changes.
-   */
-  onSelectionChange: (value: string) => void;
+  selected: TreeViewProps<false>["selected"];
 
   /**
    * The display width of the tree view list. This is optional.
    */
   width?: string;
-};
-
-/**
- * Properties for the TooltipTreeItem component.
- */
-export type TooltipTreeItemProps = {
-  /**
-   * The tooltip of the tree item.
-   */
-  tooltip: string;
-
-  /**
-   * The ID of the node.
-   */
-  nodeId: string;
-
-  /**
-   * The child nodes of the tree item.
-   */
-  children?: React.ReactNode;
-
-  /**
-   * The label of the tree item.
-   */
-  label: string;
-
-  /**
-   * The tree node.
-   */
-  node: TreeNodeItem;
-
-  /**
-   * Whether the tree item has a parent.
-   */
-  hasParent?: boolean;
-
-  /**
-   * The function to call when the selection changes.
-   */
-  onSelectionChange: (value: string) => void;
 };

@@ -1,9 +1,9 @@
-import { Item, TreeViewListProps } from "./TreeViewList.types";
+import { Meta, StoryFn } from "@storybook/react";
 
-import { Meta } from "@storybook/react";
 import React from "react";
 import TreeViewList from "./TreeViewList";
-import data from "./data.json";
+import { TreeViewListProps } from "./TreeViewList.types";
+import items from "./example-items.json";
 
 /**
  * Story metadata
@@ -15,14 +15,14 @@ const meta: Meta<typeof TreeViewList> = {
 export default meta;
 
 // Story Template
-const Template = <T,>(args: TreeViewListProps<Item<T>>) => {
+const Template: StoryFn<TreeViewListProps> = args => {
   return <TreeViewList {...args} width="500px" />;
 };
 
 // Default
 export const Default = {
   args: {
-    items: data
+    items
   },
   render: Template
 };
