@@ -19,6 +19,7 @@ import { Tooltip } from "@mui/material";
 const TreeViewList = ({
   items,
   onNodeSelect,
+  onNodeToggle,
   selected,
   width
 }: TreeViewListProps) => {
@@ -53,6 +54,7 @@ const TreeViewList = ({
       defaultExpandIcon={<AddIcon />}
       selected={selected}
       onNodeSelect={onNodeSelect}
+      onNodeToggle={onNodeToggle}
       sx={{ width }}
     >
       {renderTree(treeDisplayItems)}
