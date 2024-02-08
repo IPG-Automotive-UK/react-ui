@@ -40,6 +40,11 @@ export type TreeViewListProps = {
   enableSearch?: boolean;
 
   /**
+   * If true, the tree nodes will be automatically expanded when a search term is entered. Defaults to false.
+   */
+  expandSearchResults?: boolean;
+
+  /**
    * The items to display in the tree view list.
    */
   items: TreeNodeItem[];

@@ -11,8 +11,11 @@ import SearchBar from "../SearchBar/SearchBar";
  * A component that renders a tree view list.
  *
  * @param props - The properties for the tree view list.
+ * @property props.enableSearch - If true, the search input is displayed. Defaults to false.
+ * @property props.expandSearchResults - If true, the tree nodes will be automatically expanded when a search term is entered. Defaults to false.
  * @property props.items - The items to display in the tree view list.
  * @property props.onNodeSelect - The function to call when a node is selected.
+ * @property props.onNodeToggle - The function to call when a node is toggled.
  * @property props.selected - The ID of the currently selected item.
  * @property props.width - The width of the tree view list.
  * @returns The tree view list component.
