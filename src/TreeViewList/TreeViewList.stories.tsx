@@ -16,13 +16,27 @@ export default meta;
 
 // Story Template
 const Template: StoryFn<TreeViewListProps> = args => {
-  return <TreeViewList {...args} width="500px" />;
+  return <TreeViewList {...args} />;
 };
 
 // Default
 export const Default = {
   args: {
-    items
+    enableSearch: false,
+    items,
+    selected: "",
+    width: "100%"
+  },
+  render: Template
+};
+
+// With Search
+export const WithSearch = {
+  args: {
+    enableSearch: true,
+    items,
+    selected: "",
+    width: "100%"
   },
   render: Template
 };

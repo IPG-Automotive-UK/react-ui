@@ -35,6 +35,11 @@ export type TreeNodeItem = {
  */
 export type TreeViewListProps = {
   /**
+   * If true, the search input is displayed. Defaults to false.
+   */
+  enableSearch?: boolean;
+
+  /**
    * The items to display in the tree view list.
    */
   items: TreeNodeItem[];

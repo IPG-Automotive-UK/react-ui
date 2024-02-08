@@ -1,10 +1,11 @@
+import { Box, Tooltip } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { TreeItem, TreeView } from "@mui/x-tree-view";
 import { TreeNodeItem, TreeViewListProps } from "./TreeViewList.types";
 
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { Tooltip } from "@mui/material";
+import SearchBar from "../SearchBar/SearchBar";
 
 /**
  * A component that renders a tree view list.
@@ -17,15 +18,19 @@ import { Tooltip } from "@mui/material";
  * @returns The tree view list component.
  */
 const TreeViewList = ({
+  enableSearch = false,
   items,
   onNodeSelect,
   onNodeToggle,
   selected,
-  width
+  width = "100%"
 }: TreeViewListProps) => {
   // state for items to display in the tree
   const [treeDisplayItems, setTreeDisplayItems] =
     useState<TreeViewListProps["items"]>(items);
+
+  // state for search input value
+  const [searchValue, setSearchValue] = useState("");
 
   // update tree display items when the items prop changes
   useEffect(() => {
@@ -49,16 +54,23 @@ const TreeViewList = ({
     ));
 
   return (
-    <TreeView
-      defaultCollapseIcon={<RemoveIcon />}
-      defaultExpandIcon={<AddIcon />}
-      selected={selected}
-      onNodeSelect={onNodeSelect}
-      onNodeToggle={onNodeToggle}
-      sx={{ width }}
-    >
-      {renderTree(treeDisplayItems)}
-    </TreeView>
+    <Box sx={{ overflow: "clip", width }}>
+      {enableSearch ? (
+        <SearchBar
+          value={searchValue}
+          onChange={event => setSearchValue(event.target.value)}
+        />
+      ) : null}
+      <TreeView
+        defaultCollapseIcon={<RemoveIcon />}
+        defaultExpandIcon={<AddIcon />}
+        selected={selected}
+        onNodeSelect={onNodeSelect}
+        onNodeToggle={onNodeToggle}
+      >
+        {renderTree(treeDisplayItems)}
+      </TreeView>
+    </Box>
   );
 };
 
