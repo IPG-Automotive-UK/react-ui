@@ -42,3 +42,15 @@ export const WithSearch = {
   },
   render: Template
 };
+
+// With Custom width
+export const CustomWidth = {
+  args: {
+    enableSearch: true,
+    expandSearchResults: true,
+    items,
+    selected: "",
+    width: "60%"
+  },
+  render: Template
+};
