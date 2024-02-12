@@ -39,7 +39,7 @@ function TableCard({ action = null, tableContent = [], title = "Table" }) {
                   key={index}
                   sx={{
                     "&:last-child td": {
-                      border: 0
+                      borderBottom: 0
                     }
                   }}
                 >
