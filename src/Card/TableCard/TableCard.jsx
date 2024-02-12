@@ -30,13 +30,26 @@ function TableCard({ action = null, tableContent = [], title = "Table" }) {
         }
         action={action}
       />
-      <CardContent sx={{ padding: 0 }}>
+      <CardContent sx={{ padding: 0, paddingBottom: "0 !important" }}>
         <TableContainer component={Box}>
           <Table size="small">
             <TableBody>
               {tableContent.map((row, index) => (
-                <TableRow key={index}>
-                  <TableCell sx={{ width: 100 }}>{row[0]}</TableCell>
+                <TableRow
+                  key={index}
+                  sx={{
+                    "&:last-child td": {
+                      border: 0
+                    }
+                  }}
+                >
+                  <TableCell
+                    sx={{
+                      width: 100
+                    }}
+                  >
+                    {row[0]}
+                  </TableCell>
                   <TableCell
                     sx={{
                       overflowWrap: "anywhere",
