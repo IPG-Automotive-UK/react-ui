@@ -147,7 +147,13 @@ const TooltipTreeItem = (
   );
 };
 
-// function to filter the items to contain only those that match the search term
+/**
+ * Filter items to contain only those that match the searchTerm
+ * @param items - The items to filter.
+ * @param searchTerm - The search term to match.
+ * @returns The filtered items.
+ * @example filterBySearchTerm(items, "search term");
+ */
 const filterBySearchTerm = (items: TreeNodeItem[], searchTerm: string) => {
   // take a copy of the items array to avoid mutating the original
   const itemsCopy = JSON.parse(JSON.stringify(items)) as TreeNodeItem[];
