@@ -1,8 +1,9 @@
-import { Item, TreeViewListProps } from "./TreeViewList.types";
+import { Meta, StoryFn } from "@storybook/react";
 
-import { Meta } from "@storybook/react";
 import React from "react";
 import TreeViewList from "./TreeViewList";
+import { TreeViewListProps } from "./TreeViewList.types";
+import items from "./example-items.json";
 
 /**
  * Story metadata
@@ -14,93 +15,42 @@ const meta: Meta<typeof TreeViewList> = {
 export default meta;
 
 // Story Template
-const Template = <T,>(args: TreeViewListProps<Item<T>>) => {
-  return <TreeViewList {...args} width="500px" />;
+const Template: StoryFn<TreeViewListProps> = args => {
+  return <TreeViewList {...args} />;
 };
 
 // Default
 export const Default = {
   args: {
-    items: [
-      {
-        children: [
-          {
-            children: [
-              {
-                children: [
-                  {
-                    name: "PumpMaxDelivery",
-                    options: [],
-                    tooltip:
-                      "Maximum delivery of the two hydraulic pumps (each responsible for one circuit) at 0 bar pressure difference. Parameter needed for CarMaker hydraulic ESC (Name: 'Pump.qMax')."
-                  }
-                ],
-                name: "HydESPModel"
-              },
-              {
-                name: "BoreTravel",
-                options: [],
-                tooltip:
-                  "Piston travel to close compensation bore inside master cylinder. Parameter needed for CarMaker hydraulic ESC (Name: 'MC.xCompBore')."
-              }
-            ],
-            name: "MCbooster"
-          },
-          {
-            children: [
-              {
-                name: "Ratio",
-                options: [],
-                tooltip:
-                  "The pedal ratio amplifies the force of the brake pedal. Parameter needed for CarMaker hydraulic ESC (Name: 'Pedal.ratio')."
-              },
-              {
-                name: "ResponseTime",
-                options: [],
-                tooltip:
-                  "Period of time from pressing the pedal till the brake pressure begins to build up."
-              }
-            ],
-            name: "Pedal"
-          }
-        ],
-        id: "64f1b6fd511d08b5f6bc2a1e",
-        name: "BRK"
-      },
-      {
-        children: [
-          {
-            children: [
-              {
-                children: [
-                  {
-                    name: "Capacity",
-                    options: [],
-                    tooltip:
-                      "This is the total capacity of the board high voltage battery"
-                  }
-                ],
-                name: "HV"
-              }
-            ],
-            name: "Battery"
-          }
-        ],
-        name: "ELE"
-      },
-      {
-        children: [
-          { name: "Efficiency1D", options: [] },
-          {
-            name: "GearSpred",
-            options: [],
-            tooltip:
-              "Efficieny for all gear numbers. If the number of efficiencies are less than the number of gears, the last entry in the table will be applied to all remaining gears."
-          }
-        ],
-        name: "TRM"
-      }
-    ]
+    enableSearch: false,
+    expandSearchResults: false,
+    items,
+    selected: "",
+    width: "100%"
+  },
+  render: Template
+};
+
+// With Search
+export const WithSearch = {
+  args: {
+    enableSearch: true,
+    expandSearchResults: true,
+    items,
+    selected: "",
+    width: "100%"
+  },
+  render: Template
+};
+
+// With Custom width
+export const CustomWidth = {
+  args: {
+    enableSearch: true,
+    expandSearchResults: true,
+    items,
+    selected: "",
+    width: "60%"
   },
   render: Template
 };
