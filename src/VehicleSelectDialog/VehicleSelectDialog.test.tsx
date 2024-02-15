@@ -2,6 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 
 import React from "react";
 import VehicleSelectDialog from "./VehicleSelectDialog";
+import { vi } from "vitest";
 
 // some mock data for testing.
 const defaultProps = {
@@ -9,8 +10,8 @@ const defaultProps = {
   flexDirection: "column",
   flexWrap: "nowrap",
   gates: ["Gate 1", "Gate 2", "Gate 3"],
-  onCancelClick: jest.fn(),
-  onSaveClick: jest.fn(),
+  onCancelClick: vi.fn(),
+  onSaveClick: vi.fn(),
   open: true,
   saveText: "Save",
   showCloseIcon: true,

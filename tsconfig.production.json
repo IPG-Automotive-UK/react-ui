@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["src/**/*.tsx", "src/**/*.ts", "src/**/*.jsx", "src/**/*.js"],
+  "exclude": [
+    "src/**/*.test.**",
+    "src/**/*.spec.**",
+    "src/**/*.stories.**",
+    "dist",
+    "vitest-setup.ts",
+    "vite.config.ts",
+    "vite.config.ts"
+  ],
+  "compilerOptions": {
+    "skipLibCheck": true
+  }
+}

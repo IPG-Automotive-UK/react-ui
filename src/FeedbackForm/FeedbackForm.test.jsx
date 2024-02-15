@@ -14,7 +14,7 @@ describe("FeedbackForm", () => {
     async (sentimentCardId, expectedSentiment) => {
       const user = userEvent.setup();
       // render component
-      const onSubmit = jest.fn();
+      const onSubmit = vi.fn();
       render(<FeedbackForm onSubmit={onSubmit} />);
 
       // click button to open dialog

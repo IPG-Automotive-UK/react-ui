@@ -3,6 +3,7 @@ import { render, screen } from "@testing-library/react";
 import ModelButton from "./ModelButton";
 import React from "react";
 import userEvent from "@testing-library/user-event";
+import { vi } from "vitest";
 
 /**
  * Tests for model button component
@@ -16,7 +17,7 @@ describe("ModelButton", () => {
 
   // test onClick is called when button is clicked
   test("calls onClick when clicked", () => {
-    const onClick = jest.fn();
+    const onClick = vi.fn();
     render(<ModelButton onClick={onClick} />);
     const button = screen.getByRole("button");
     button.click();

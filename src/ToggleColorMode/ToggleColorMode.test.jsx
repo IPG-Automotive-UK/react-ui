@@ -44,7 +44,7 @@ describe("ToggleColorMode", () => {
 
   test("onClick switch change from light to dark mode", async () => {
     const user = userEvent.setup();
-    const onChange = jest.fn();
+    const onChange = vi.fn();
 
     render(<ColorModeWithState onChange={onChange} mode="light" />);
     const button = screen.getByRole("checkbox");
@@ -55,7 +55,7 @@ describe("ToggleColorMode", () => {
 
   test("onClick switch change from dark to light mode", async () => {
     const user = userEvent.setup();
-    const onChange = jest.fn();
+    const onChange = vi.fn();
 
     render(<ColorModeWithState onChange={onChange} mode="dark" />);
     const button = screen.getByRole("checkbox");

@@ -1,4 +1,5 @@
 import { render, screen, waitFor } from "@testing-library/react";
+
 import PasswordChangeDialog from "./";
 import React from "react";
 import userEvent from "@testing-library/user-event";
@@ -10,7 +11,7 @@ function setup(inputs) {
   render(
     <PasswordChangeDialog
       open
-      onClose={jest.fn()}
+      onClose={vi.fn()}
       onSubmit={() => {}}
       status="init"
       {...inputs}
@@ -32,7 +33,7 @@ function setup(inputs) {
 describe("PasswordChangeDialog", () => {
   it("returns form information to callback when successfully validated", async () => {
     const user = userEvent.setup();
-    const onSubmit = jest.fn(data => data);
+    const onSubmit = vi.fn(data => data);
     const elements = setup({ onSubmit });
     await user.type(elements.inputs.currentPassword, "abc123");
     await user.type(elements.inputs.newPassword, "coffee podium dvdplayer");
@@ -51,7 +52,7 @@ describe("PasswordChangeDialog", () => {
   });
   it("doesnt call callback on validation errors", async () => {
     const user = userEvent.setup();
-    const onSubmit = jest.fn();
+    const onSubmit = vi.fn();
     const elements = setup({ onSubmit });
     await user.type(elements.inputs.newPassword, "abc123"); // top 100 password))
     user.click(elements.submit);

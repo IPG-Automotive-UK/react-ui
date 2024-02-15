@@ -1,4 +1,5 @@
 import { render, screen, waitFor } from "@testing-library/react";
+
 import PasswordChangeForm from "./";
 import React from "react";
 import userEvent from "@testing-library/user-event";
@@ -25,7 +26,7 @@ function setup(inputs) {
 describe("PasswordChangeForm", () => {
   it("returns form information to callback when successfully validated", async () => {
     const user = userEvent.setup();
-    const onSubmit = jest.fn(data => data);
+    const onSubmit = vi.fn(data => data);
     const elements = setup({ onSubmit });
     await user.type(elements.inputs.password, "indigo shark wallplug");
     await user.type(elements.inputs.passwordRepeat, "indigo shark wallplug");
@@ -39,7 +40,7 @@ describe("PasswordChangeForm", () => {
   });
   it("doesnt call callback on validation errors", async () => {
     const user = userEvent.setup();
-    const onSubmit = jest.fn();
+    const onSubmit = vi.fn();
     const elements = setup({ onSubmit });
     await user.type(elements.inputs.password, "abc123"); // common password
     await user.click(elements.submit);
@@ -59,7 +60,7 @@ describe("PasswordChangeForm", () => {
     });
     it("doesnt call callback on validation errors", async () => {
       const user = userEvent.setup();
-      const onSubmit = jest.fn();
+      const onSubmit = vi.fn();
       const elements = setup({ onSubmit });
       await user.type(elements.inputs.password, "abc123"); // top 100 password
       user.click(elements.submit);

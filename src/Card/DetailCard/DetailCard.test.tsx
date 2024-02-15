@@ -5,6 +5,7 @@ import DetailCard from "./DetailCard";
 import FileCard from "../FileCard/FileCard";
 import React from "react";
 import { action } from "@storybook/addon-actions";
+import { vi } from "vitest";
 
 // a set of default inputs so that tests can change what theyre testing
 const defaultInputs = {
@@ -43,7 +44,7 @@ describe("DetailCard", () => {
       }
     ];
     // mock function to test if label is clicked
-    const onClickLabel = jest.fn();
+    const onClickLabel = vi.fn();
     // render detail card with label
     render(
       <DetailCard
@@ -78,7 +79,7 @@ describe("DetailCard", () => {
   });
 
   it("calls onClickEdit when edit button is clicked", () => {
-    const onClickEdit = jest.fn();
+    const onClickEdit = vi.fn();
     render(
       <DetailCard
         {...defaultInputs}
@@ -95,7 +96,7 @@ describe("DetailCard", () => {
   });
 
   it("calls onClickDelete when delete button is clicked", () => {
-    const onClickDelete = jest.fn();
+    const onClickDelete = vi.fn();
     render(
       <DetailCard
         {...defaultInputs}

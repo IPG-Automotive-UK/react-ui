@@ -13,13 +13,14 @@ import SidebarDivider from "../Sidebar/SidebarDivider";
 import SidebarItem from "../Sidebar/SidebarItem";
 import mediaQuery from "css-mediaquery";
 import userEvent from "@testing-library/user-event";
+import { vi } from "vitest";
 
 // a set of default inputs so that tests can change what they are testing
 const defaultInputs = {
   appName: "App Name",
   content: <div>App Content goes here</div>,
-  onChangePassword: jest.fn(),
-  onLogout: jest.fn(),
+  onChangePassword: vi.fn(),
+  onLogout: vi.fn(),
   sidebarContent: (
     <>
       <SidebarItem {...SidebarItemDefault.args} />
@@ -38,13 +39,13 @@ const defaultInputs = {
 // see docs https://mui.com/material-ui/react-use-media-query/#testing
 function createMatchMedia(width: number) {
   return (query: string) => ({
-    addEventListener: jest.fn(),
+    addEventListener: vi.fn(),
     addListener: () => {},
-    dispatchEvent: jest.fn(),
+    dispatchEvent: vi.fn(),
     matches: mediaQuery.match(query, { width }),
     media: query,
     onchange: null,
-    removeEventListener: jest.fn(),
+    removeEventListener: vi.fn(),
     removeListener: () => {}
   });
 }
@@ -97,7 +98,7 @@ describe("AppLayout", () => {
   });
   test("should call onChangePassword when password button is clicked", async () => {
     const user = userEvent.setup();
-    const onChangePassword = jest.fn();
+    const onChangePassword = vi.fn();
     render(
       <AppLayout {...defaultInputs} onChangePassword={onChangePassword} />
     );
@@ -109,7 +110,7 @@ describe("AppLayout", () => {
   });
   test("onLogout called on user click", async () => {
     const user = userEvent.setup();
-    const onLogout = jest.fn();
+    const onLogout = vi.fn();
     render(<AppLayout {...defaultInputs} onLogout={onLogout} />);
     await user.click(screen.getByRole("button", { name: /JB/i }));
     await user.click(screen.getByRole("menuitem", { name: /Logout/i }));

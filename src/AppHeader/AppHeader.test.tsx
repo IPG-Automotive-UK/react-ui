@@ -4,14 +4,15 @@ import AppHeader from ".";
 import React from "react";
 import VirtoLogo from "../SvgIcons/VirtoLogo";
 import userEvent from "@testing-library/user-event";
+import { vi } from "vitest";
 
 // a set of default inputs so that tests can change what theyre testing
 const defaultInputs = {
   appName: "App Name",
-  onAppClick: jest.fn(),
+  onAppClick: vi.fn(),
   onChangePassword: () => {},
-  onColourModeChange: jest.fn(),
-  onLogout: jest.fn(),
+  onColourModeChange: vi.fn(),
+  onLogout: vi.fn(),
   username: "Joe Bloggs"
 };
 
@@ -28,7 +29,7 @@ describe("AppHeader", () => {
 
   test("should call onChangePassword when password button is clicked", async () => {
     const user = userEvent.setup();
-    const onChangePassword = jest.fn();
+    const onChangePassword = vi.fn();
     render(
       <AppHeader {...defaultInputs} onChangePassword={onChangePassword} />
     );
@@ -40,7 +41,7 @@ describe("AppHeader", () => {
   });
   test("onLogout called on user click", async () => {
     const user = userEvent.setup();
-    const onLogout = jest.fn();
+    const onLogout = vi.fn();
     render(<AppHeader {...defaultInputs} onLogout={onLogout} />);
     await user.click(screen.getByRole("button", { name: /JB/i }));
     await user.click(screen.getByRole("menuitem", { name: /Logout/i }));

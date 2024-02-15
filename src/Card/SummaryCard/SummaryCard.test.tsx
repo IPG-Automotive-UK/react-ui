@@ -17,6 +17,7 @@ import React from "react";
 import SummaryCard from ".";
 import { action } from "@storybook/addon-actions";
 import userEvent from "@testing-library/user-event";
+import { vi } from "vitest";
 
 /**
  * Tests
@@ -46,7 +47,7 @@ describe("SummaryCard", () => {
     ];
 
     // mock function to test if label is clicked
-    const onClickLabel = jest.fn();
+    const onClickLabel = vi.fn();
 
     // render summary card with label
     render(
@@ -122,7 +123,7 @@ describe("SummaryCard", () => {
   });
 
   it("closes more options popover when clicked", async () => {
-    const editFcn = jest.fn();
+    const editFcn = vi.fn();
 
     render(
       <SummaryCard
@@ -167,7 +168,7 @@ describe("SummaryCard", () => {
 
   // test that the onClickMoreDetails function is called when more details button is clicked
   it("calls onClickMoreDetails when more details button is clicked", () => {
-    const onClickMoreDetails = jest.fn();
+    const onClickMoreDetails = vi.fn();
     render(
       <SummaryCard
         title="summary card title"
@@ -208,7 +209,7 @@ describe("SummaryCard", () => {
 
   // // test that the onClickViewFiles function is called when view files button is clicked
   it("calls onClickViewFiles when view files button is clicked", () => {
-    const onClickViewFiles = jest.fn();
+    const onClickViewFiles = vi.fn();
 
     render(
       <SummaryCard

@@ -28,7 +28,7 @@ const RangeFilterWithState = ({
 // Tests
 describe("RangeFilter", () => {
   it("can select range", () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(<RangeFilterWithState onChange={onChange} />);
 
     // adjust sliders

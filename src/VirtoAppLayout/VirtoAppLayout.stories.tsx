@@ -13,7 +13,7 @@ import SidebarItem from "../Sidebar/SidebarItem";
 import VirtoAppLayout from ".";
 import { VirtoAppLayoutProps } from "./VirtoAppLayout.types";
 import { fixedPositionComponentDecorator } from "../../.storybook/decorators";
-import version from "../../package.json";
+import { version } from "../../package.json";
 
 /**
  * Story metadata

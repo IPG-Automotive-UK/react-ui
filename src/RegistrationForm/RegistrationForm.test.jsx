@@ -31,7 +31,7 @@ function setup(inputs) {
 describe("RegistrationForm", () => {
   it("returns form information to callback when successfully validated", async () => {
     const user = userEvent.setup();
-    const onRegister = jest.fn(data => data);
+    const onRegister = vi.fn(data => data);
     const elements = setup({ onRegister });
     await user.type(elements.inputs.firstName, "Joe");
     await user.type(elements.inputs.lastName, "Bloggs");
@@ -65,7 +65,7 @@ describe("RegistrationForm", () => {
   });
   it("doesnt call callback on validation errors", async () => {
     const user = userEvent.setup();
-    const onRegister = jest.fn();
+    const onRegister = vi.fn();
     const elements = setup({ onRegister });
     await user.type(elements.inputs.email, "joe.bloggs");
     // incorrect email format
@@ -76,7 +76,7 @@ describe("RegistrationForm", () => {
   describe("Password restrictions", () => {
     it("displays password complexity score", async () => {
       const user = userEvent.setup();
-      const onRegister = jest.fn();
+      const onRegister = vi.fn();
       const elements = setup({ onRegister });
       await user.type(elements.inputs.password, "something");
       await user.click(elements.inputs.passwordRepeat); // moving to next form element triggers validation
@@ -86,7 +86,7 @@ describe("RegistrationForm", () => {
     });
     it("displays user feedback on password", async () => {
       const user = userEvent.setup();
-      const onRegister = jest.fn();
+      const onRegister = vi.fn();
       const elements = setup({ onRegister });
       await user.type(elements.inputs.password, "something");
       await user.click(elements.inputs.passwordRepeat); // moving to next form element triggers validation

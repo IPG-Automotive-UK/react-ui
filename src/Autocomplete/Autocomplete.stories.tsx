@@ -29,7 +29,7 @@ const Template: StoryFn<
 > = args => {
   // Use the useArgs hook to get and update the args
   const [{ value, multiple }, updateArgs] =
-    useArgs<AutocompleteProps<string, boolean | undefined>>();
+    useArgs<AutocompleteProps<string | KeyValueOption, boolean | undefined>>();
 
   // Use an effect to update the value arg based on the multiple arg
   React.useEffect(() => {

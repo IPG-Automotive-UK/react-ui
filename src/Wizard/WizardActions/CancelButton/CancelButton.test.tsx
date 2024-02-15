@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 
 import CancelButton from "./CancelButton";
 import React from "react";
+import { vi } from "vitest";
 
 describe("CancelButton", () => {
   it("renders with text", () => {
@@ -13,7 +14,7 @@ describe("CancelButton", () => {
     expect(screen.getByRole("button")).toBeDisabled();
   });
   it("can be clicked", () => {
-    const onClick = jest.fn();
+    const onClick = vi.fn();
     render(<CancelButton onClick={onClick} />);
     screen.getByRole("button").click();
     expect(onClick).toHaveBeenCalledTimes(1);

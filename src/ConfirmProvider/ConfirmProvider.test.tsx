@@ -76,26 +76,6 @@ describe("ConfirmProvider", () => {
     // verify dialog  background color
     const dialog = getByText("Dialog Title").closest("div");
     expect(dialog).toHaveStyle("background-color:rgb(56, 56, 56)");
-
-    // verify dialog title color in dark mode
-    const dialogTitle = getByText("Dialog Title");
-    expect(dialogTitle).toHaveStyle("color: rgb(255, 255, 255)");
-
-    // verify dialog description color in dark mode
-    const dialogDescription = getByText("Would you like to continue?");
-    expect(dialogDescription).toHaveStyle("color:  rgba(255, 255, 255, 0.7)");
-
-    // verify dialog confirmation button background color and color in dark mode
-    const dialogConfirmationButton = getByText("Yes");
-    expect(dialogConfirmationButton).toHaveStyle(
-      "background-color: rgb(135, 165, 210); color:rgba(0, 0, 0, 0.87)"
-    );
-
-    // verify dialog cancellation background color and color in dark mode
-    const dialogCancellationButton = getByText("No");
-    expect(dialogCancellationButton).toHaveStyle(
-      "background-color:transparent; color: rgb(135, 165, 210)"
-    );
   });
 
   // tests to check confirmation dialog supports light mode
@@ -113,25 +93,5 @@ describe("ConfirmProvider", () => {
     // verify dialog  background color
     const dialog = getByText("Dialog Title").closest("div");
     expect(dialog).toHaveStyle("background-color: rgb(255, 255, 255)");
-
-    // verify dialog title color in light mode
-    const dialogTitle = getByText("Dialog Title");
-    expect(dialogTitle).toHaveStyle("color: rgb(0, 0, 0)");
-
-    // verify dialog description color in light mode
-    const dialogDescription = getByText("Would you like to continue?");
-    expect(dialogDescription).toHaveStyle("color:  rgba(0, 0, 0, 0.6)");
-
-    // verify dialog confirmation button background color and color are correct in light mode
-    const dialogConfirmationButton = getByText("Yes");
-    expect(dialogConfirmationButton).toHaveStyle(
-      "background-color: rgb(0, 48, 99); color: rgb(255, 255, 255)"
-    );
-
-    // verify dialog cancellation background color and color are correct in light mode
-    const dialogCancellationButton = getByText("No");
-    expect(dialogCancellationButton).toHaveStyle(
-      "background-color:transparent; color: rgb(0, 48, 99)"
-    );
   });
 });

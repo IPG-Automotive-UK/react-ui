@@ -2,6 +2,7 @@ import { fireEvent, render } from "@testing-library/react";
 
 import DeletableList from ".";
 import React from "react";
+import { vi } from "vitest";
 
 // tests for the DeletableList component
 describe("DeletableList", () => {
@@ -20,7 +21,7 @@ describe("DeletableList", () => {
 
   // test that checks the delete button click called with the deleted item
   test("test list delete works", () => {
-    const onDelete = jest.fn();
+    const onDelete = vi.fn();
     const { queryAllByTestId } = render(
       <DeletableList items={["Apple", "Mango", "Banana"]} onDelete={onDelete} />
     );

@@ -41,7 +41,7 @@ describe("Select", () => {
     expect(tableButton.getAttribute("aria-pressed")).toBe("true");
   });
   test("test onchange callback is called on click of an option", async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(<ViewToggleButtonWithState onChange={onChange} value="table" />);
     const cardButton = screen.getByTestId("cardButton");
     await userEvent.click(cardButton);
@@ -51,7 +51,7 @@ describe("Select", () => {
     );
   });
   test("test onchange callback is not called on click of selected option", async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(<ViewToggleButtonWithState onChange={onChange} value="card" />);
     const cardButton = screen.getByTestId("cardButton");
     await userEvent.click(cardButton);

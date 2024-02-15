@@ -4,6 +4,7 @@ import React from "react";
 import TransferList from ".";
 import { TransferListProps } from "./TransferList.types";
 import userEvent from "@testing-library/user-event";
+import { vi } from "vitest";
 
 /**
  * Test wrapper for TransferList
@@ -34,7 +35,7 @@ describe("TransferList", () => {
   test("Clicking clear all button clears selections", async () => {
     // render component
     const user = userEvent.setup();
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     const { container } = render(
       <SelectedItemsWithState onChange={onChange} />
     );
@@ -53,7 +54,7 @@ describe("TransferList", () => {
   test("Search filters the list items", async () => {
     // render component
     const user = userEvent.setup();
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     const { container } = render(
       <SelectedItemsWithState onChange={onChange} />
     );
@@ -75,7 +76,7 @@ describe("TransferList", () => {
   test("Can select a list item", async () => {
     // render component
     const user = userEvent.setup();
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(
       <SelectedItemsWithState
         onChange={onChange}
@@ -97,7 +98,7 @@ describe("TransferList", () => {
   it("Can remove a list item selection", async () => {
     // render component
     const user = userEvent.setup();
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(
       <SelectedItemsWithState
         onChange={onChange}

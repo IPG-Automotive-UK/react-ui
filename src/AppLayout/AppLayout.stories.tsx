@@ -14,7 +14,7 @@ import SidebarItem from "../Sidebar/SidebarItem";
 import ThemeProvider from "../ThemeProvider";
 import { fixedPositionComponentDecorator } from "../../.storybook/decorators";
 import { useDarkMode } from "storybook-dark-mode";
-import version from "../../package.json";
+import { version } from "../../package.json";
 
 /**
  * Story metadata

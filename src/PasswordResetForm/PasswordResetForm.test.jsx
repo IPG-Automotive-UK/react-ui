@@ -1,5 +1,6 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import LoginForm from "./";
+
+import PasswordResetForm from "./";
 import React from "react";
 import userEvent from "@testing-library/user-event";
 
@@ -7,41 +8,42 @@ import userEvent from "@testing-library/user-event";
  * Test setup function that renders component and returns elements for testing
  */
 function setup(inputs) {
-  render(<LoginForm onLogin={() => {}} {...inputs} />);
+  render(<PasswordResetForm onSubmit={() => {}} {...inputs} />);
   return {
     inputs: {
-      email: screen.getByLabelText("email"),
-      password: screen.getByLabelText("password")
+      email: screen.getByLabelText("email")
     },
-    submit: screen.getByRole("button", { name: /login/i })
+    submit: screen.getByRole("button", { name: /Reset password/i })
   };
 }
 
 /**
  * Tests
  */
-describe("LoginForm", () => {
+describe("PasswordResetForm", () => {
   it("returns form information to callback when successfully validated", async () => {
     const user = userEvent.setup();
-    const onLogin = jest.fn(data => data);
-    const elements = setup({ onLogin });
+    const onSubmit = vi.fn(data => data);
+    const elements = setup({ onSubmit });
     await user.type(elements.inputs.email, "joe.bloggs@domain.com");
-    await user.type(elements.inputs.password, "indigo shark wallplug");
     user.click(elements.submit);
     await waitFor(() =>
-      expect(onLogin).toHaveReturnedWith({
-        email: "joe.bloggs@domain.com",
-        password: "indigo shark wallplug"
+      expect(onSubmit).toHaveReturnedWith({
+        email: "joe.bloggs@domain.com"
       })
     );
   });
-  it("doesnt call callback on validation errors", async () => {
+  it("shows error message with invalid email", async () => {
     const user = userEvent.setup();
-    const onLogin = jest.fn();
-    const elements = setup({ onLogin });
+    const onSubmit = vi.fn();
+    const elements = setup({ onSubmit });
     await user.type(elements.inputs.email, "joe.bloggs"); // incorrect email address format
     user.click(elements.submit);
-    await waitFor(() => expect(onLogin).not.toHaveBeenCalled());
+    await waitFor(() =>
+      expect(
+        screen.queryByText("Please enter a valid email address")
+      ).toBeInTheDocument()
+    );
   });
   it("displays error message to user on validation fail", async () => {
     const user = userEvent.setup();

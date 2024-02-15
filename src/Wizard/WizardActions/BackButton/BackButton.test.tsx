@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 
 import BackButton from "./BackButton";
 import React from "react";
+import { vi } from "vitest";
 
 describe("BackButton", () => {
   it("renders with text", () => {
@@ -13,7 +14,7 @@ describe("BackButton", () => {
     expect(screen.getByRole("button")).toBeDisabled();
   });
   it("can be clicked", () => {
-    const onClick = jest.fn();
+    const onClick = vi.fn();
     render(<BackButton onClick={onClick} />);
     screen.getByRole("button").click();
     expect(onClick).toHaveBeenCalledTimes(1);

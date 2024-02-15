@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+
 import MultiText from "./MultiText";
 import React from "react";
 import userEvent from "@testing-library/user-event";
@@ -17,7 +18,7 @@ describe("MultiText", () => {
   });
   test("can add a row", async () => {
     const user = userEvent.setup();
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(<MultiText onChange={onChange} />);
     const addButton = screen.getByTestId("addButton");
     await user.click(addButton);
@@ -25,7 +26,7 @@ describe("MultiText", () => {
   });
   test("can delete a row", async () => {
     const user = userEvent.setup();
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(<MultiText onChange={onChange} rows={rows} />);
     const deleteButton = screen.getAllByTestId("deleteButton");
     await user.click(deleteButton[0]);

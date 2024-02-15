@@ -2,7 +2,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 
 import Autocomplete from ".";
 import React from "react";
-import { userEvent } from "@storybook/testing-library";
+import { userEvent } from "@testing-library/user-event";
 
 // sample options
 const options = ["option 1", "option 2", "option 3"];
@@ -24,7 +24,7 @@ const keyValueOptionsWithTooltip = [
  */
 describe("Select", () => {
   it("can single select", async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
 
     render(
       <Autocomplete
@@ -57,7 +57,7 @@ describe("Select", () => {
   });
 
   it("can multi select", async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(
       <Autocomplete
         multiple={true}
@@ -111,7 +111,7 @@ describe("Select", () => {
   });
 
   it("can single select with key-value pairs", async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
 
     render(
       <Autocomplete
@@ -119,7 +119,7 @@ describe("Select", () => {
         options={keyValueOptions}
         onChange={onChange}
         label="Select an option"
-        value={{ key: 2, value: "option 2" }}
+        value={keyValueOptions[1]}
       />
     );
 
@@ -145,7 +145,7 @@ describe("Select", () => {
   });
 
   it("check helper icon is visible and tooltip shown on hover", async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
 
     render(
       <Autocomplete
@@ -172,7 +172,7 @@ describe("Select", () => {
 
     // check tooltip is shown on hover of helper icon
     await userEvent.hover(screen.getByTestId("tooltip-1"));
-    waitFor(() => {
+    await waitFor(() => {
       expect(screen.getByText("Tooltip 1")).toBeInTheDocument();
     });
 
