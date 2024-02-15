@@ -5,11 +5,11 @@ test("Renders the title", async ({ page }) => {
     "http://localhost:6006/?path=/story/card-loaderrormessage--default"
   );
 
-  const title = await page
+  const title = page
     .frameLocator('iframe[title="storybook-preview-iframe"]')
     .getByText("Failed to load");
 
-  await expect(title).toBeTruthy();
+  await expect(title).toBeVisible();
 });
 
 test("Renders the action button", async ({ page }) => {
@@ -17,16 +17,13 @@ test("Renders the action button", async ({ page }) => {
     "http://localhost:6006/?path=/story/card-loaderrormessage--default"
   );
 
-  const frame = page.frameLocator('iframe[title="storybook-preview-iframe"]');
-  const button = frame.locator("button", { hasText: "Refresh" });
+  const button = page
+    .frameLocator('iframe[title="storybook-preview-iframe"]')
+    .getByRole("button", {
+      name: "Refresh"
+    });
 
-  const isButtonVisible = await button.isVisible();
-
-  if (isButtonVisible) {
-    await expect(button).toBeVisible();
-  } else {
-    console.log("Button with text 'Refresh' not found or is not visible.");
-  }
+  await expect(button).toBeVisible();
 });
 
 test('Does not render "View More Details" text if no details are provided', async ({
