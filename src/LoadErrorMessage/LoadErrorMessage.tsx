@@ -1,7 +1,9 @@
-import { Alert, Button, Paper, Typography, lighten } from "@mui/material";
+import { Alert, Button, Link, Paper, Typography, lighten } from "@mui/material";
 import React, { useState } from "react";
 
 import { LoadErrorMessageProps } from "./LoadErrorMessage.types";
+import VirtoHeadScratching from "../SvgIcons/VirtoMascots/VirtoHeadScratching";
+import { VirtoShrugging } from "../SvgIcons";
 import VirtoThinking from "../SvgIcons/VirtoMascots/VirtoThinking";
 
 // LoadErrorMessage component
@@ -11,9 +13,10 @@ const LoadErrorMessage = ({
   errorDetails,
   message,
   title,
-  showImg,
+  image = "virto-thinking",
   supportUrl,
-  onButtonClick
+  onButtonClick,
+  showContact = true
 }: LoadErrorMessageProps) => {
   // State to track whether the error details are visible or not
   const [detailsVisible, setDetailsVisible] = useState(false);
@@ -21,11 +24,6 @@ const LoadErrorMessage = ({
   // Function to toggle the visibility of the error details
   const handleDetailsClick = () => {
     setDetailsVisible(!detailsVisible);
-  };
-
-  // Function to open the support URL in a new tab
-  const handleSupportClick = () => {
-    window.open(supportUrl, "_blank");
   };
 
   // Render the LoadErrorMessage component
@@ -37,16 +35,34 @@ const LoadErrorMessage = ({
         borderRadius: "3px",
         display: "flex",
         flexDirection: "column",
-        gap: "16px",
-        padding: "24px",
+        gap: 2,
+        padding: 3,
         width: "320px"
       }}
     >
-      {/* Render the VirtoThinking SVG if showImg prop is true */}
-      {showImg && (
+      {/* Render image */}
+      {image === "virto-thinking" && (
         <VirtoThinking
-          data-testid="virto-thinking-svg"
-          sx={{ height: 126, width: 150 }}
+          sx={{
+            height: "150px",
+            width: "100%"
+          }}
+        />
+      )}
+      {image === "virto-shrugging" && (
+        <VirtoShrugging
+          sx={{
+            height: "150px",
+            width: "100%"
+          }}
+        />
+      )}
+      {image === "virto-head-scratching" && (
+        <VirtoHeadScratching
+          sx={{
+            height: "150px",
+            width: "100%"
+          }}
         />
       )}
       {/* Render the error title */}
@@ -72,7 +88,7 @@ const LoadErrorMessage = ({
       </Typography>
       {/* Render the action button if actionButtonText prop is provided */}
       {actionButtonText && (
-        <Button variant="contained" onClick={onButtonClick}>
+        <Button variant="contained" size="small" onClick={onButtonClick}>
           {actionButtonText}
         </Button>
       )}
@@ -107,29 +123,25 @@ const LoadErrorMessage = ({
         </Typography>
       )}
       {/* Render the contact team text */}
-      <Typography
-        variant="caption"
-        color={theme =>
-          theme.palette.mode === "dark"
-            ? lighten(theme.palette.text.secondary, 0.7)
-            : theme.palette.text.primary
-        }
-      >
-        If this persists, contact {/* Render the contact team link */}
-        {supportUrl ? (
-          <Typography
-            variant="caption"
-            component={"a"}
-            color={theme => theme.palette.primary.main}
-            sx={{ textDecoration: "underline" }}
-            onClick={handleSupportClick}
-          >
-            {contactTeam}
-          </Typography>
-        ) : (
-          <Typography variant="caption">{contactTeam}</Typography>
-        )}
-      </Typography>
+      {showContact ? (
+        <Typography
+          variant="caption"
+          color={theme =>
+            theme.palette.mode === "dark"
+              ? lighten(theme.palette.text.secondary, 0.7)
+              : theme.palette.text.primary
+          }
+        >
+          If this persists, contact {/* Render the contact team link */}
+          {supportUrl ? (
+            <Link href={supportUrl} target="_blank" rel="noopener noreferrer">
+              {contactTeam}
+            </Link>
+          ) : (
+            <Typography variant="caption">{contactTeam}</Typography>
+          )}
+        </Typography>
+      ) : null}
     </Paper>
   );
 };
