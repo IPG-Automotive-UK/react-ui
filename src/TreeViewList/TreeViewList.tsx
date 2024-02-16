@@ -108,10 +108,9 @@ const TreeViewList = ({
         selected={selected}
         onNodeSelect={(event, nodeId) => {
           const node = getNodeById(treeDisplayItems, nodeId);
-          if (node && (!node.children || node.children.length === 0)) {
-            if (onNodeSelect) {
-              onNodeSelect(event, nodeId);
-            }
+          const isChild = Boolean(node && !node.children);
+          if (onNodeSelect) {
+            onNodeSelect(event, nodeId, isChild);
           }
         }}
         onNodeToggle={onNodeToggle}

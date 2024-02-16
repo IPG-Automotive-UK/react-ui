@@ -52,7 +52,7 @@ export type TreeViewListProps = {
   /**
    * Callback fired when tree items are selected/unselected.
    */
-  onNodeSelect: TreeViewProps<false>["onNodeSelect"];
+  onNodeSelect: OnNodeSelect;
 
   /**
    * Callback fired when tree items are expanded/collapsed.
@@ -69,3 +69,12 @@ export type TreeViewListProps = {
    */
   width?: string;
 };
+
+/**
+ * Callback fired when a node is selected.
+ */
+type OnNodeSelect = (
+  event: React.SyntheticEvent,
+  nodeId: string,
+  isChild: boolean
+) => void;
