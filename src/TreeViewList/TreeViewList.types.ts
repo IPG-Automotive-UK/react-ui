@@ -31,6 +31,15 @@ export type TreeNodeItem = {
 };
 
 /**
+ * Callback fired when a node is selected.
+ */
+type OnNodeSelect = (
+  event: React.SyntheticEvent,
+  nodeId: string,
+  isChild: boolean
+) => void;
+
+/**
  * Properties for the TreeViewList component.
  */
 export type TreeViewListProps = {
@@ -69,12 +78,3 @@ export type TreeViewListProps = {
    */
   width?: string;
 };
-
-/**
- * Callback fired when a node is selected.
- */
-type OnNodeSelect = (
-  event: React.SyntheticEvent,
-  nodeId: string,
-  isChild: boolean
-) => void;
