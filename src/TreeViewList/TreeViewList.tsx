@@ -106,13 +106,44 @@ const TreeViewList = ({
         defaultExpandIcon={<AddIcon />}
         defaultExpanded={defaultExpanded}
         selected={selected}
-        onNodeSelect={onNodeSelect}
+        onNodeSelect={(event, nodeId) => {
+          const node = getNodeById(treeDisplayItems, nodeId);
+          if (node && (!node.children || node.children.length === 0)) {
+            if (onNodeSelect) {
+              onNodeSelect(event, nodeId);
+            }
+          }
+        }}
         onNodeToggle={onNodeToggle}
       >
         {renderTree(treeDisplayItems)}
       </TreeView>
     </Box>
   );
+};
+
+/**
+ * Recursively finds a node by its ID.
+ *
+ * @param nodes - The nodes to search.
+ * @param nodeId - The ID of the node to find.
+ * @returns The node with the specified ID, or null if not found.
+ */
+const getNodeById = (
+  nodes: TreeNodeItem[],
+  nodeId: string
+): TreeNodeItem | null => {
+  for (const node of nodes) {
+    if (node.nodeId === nodeId) {
+      return node;
+    } else if (node.children) {
+      const result = getNodeById(node.children, nodeId);
+      if (result) {
+        return result;
+      }
+    }
+  }
+  return null;
 };
 
 /**
