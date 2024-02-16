@@ -27,7 +27,7 @@ export type TreeNodeItem = {
   /**
    * The tooltip of the node.
    */
-  tooltip?: string;
+  tooltip?: React.ReactNode;
 };
 
 /**
