@@ -9,7 +9,6 @@
   "engines": {
     "node": ">=10"
   },
-  "type": "module",
   "scripts": {
     "build": "npm run clean && tsc --project ./tsconfig.production.json && npm run copy-files",
     "clean": "rimraf dist",
