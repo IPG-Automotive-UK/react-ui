@@ -24,7 +24,6 @@ export const Default = {
     contactTeam: "Support",
     image: "virto-thinking",
     message: "Your message goes here.",
-    showContact: true,
     title: "Title"
   },
   render: Template
@@ -35,10 +34,10 @@ export const HTTP404 = {
   args: {
     ...Default.args,
     actionButtonText: "Go back",
+    contactTeam: "none",
     image: "virto-shrugging",
     message:
       "We're unable to locate the page you requested. Please ensure the URL is correct or explore other areas of the site.",
-    showContact: false,
     title: "Sorry, the page doesn't exist!"
   },
   render: Template
@@ -49,9 +48,9 @@ export const HTTP401 = {
   args: {
     ...Default.args,
     actionButtonText: undefined,
+    contactTeam: "none",
     message:
       "Sorry, but you don't have access to view this page. Contact an admin to request access.",
-    showContact: false,
     title: "Access Denied!"
   },
   render: Template

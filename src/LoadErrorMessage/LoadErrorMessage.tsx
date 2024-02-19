@@ -9,14 +9,13 @@ import VirtoThinking from "../SvgIcons/VirtoMascots/VirtoThinking";
 // LoadErrorMessage component
 const LoadErrorMessage = ({
   actionButtonText,
-  contactTeam,
+  contactTeam = "Support",
   errorDetails,
   message,
   title,
   image = "virto-thinking",
   supportUrl,
-  onButtonClick,
-  showContact = true
+  onButtonClick
 }: LoadErrorMessageProps) => {
   // State to track whether the error details are visible or not
   const [detailsVisible, setDetailsVisible] = useState(false);
@@ -123,7 +122,7 @@ const LoadErrorMessage = ({
         </Typography>
       )}
       {/* Render the contact team text */}
-      {showContact ? (
+      {contactTeam !== "none" ? (
         <Typography
           variant="caption"
           color={theme =>

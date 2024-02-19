@@ -22,15 +22,11 @@ export type LoadErrorMessageProps = {
   /**
    * The team to contact if the error persists.
    */
-  contactTeam?: "Support" | "Customer Service";
+  contactTeam?: "none" | "Support" | "Customer Service";
   /**
    * The URL to the support page (optional).
    */
   supportUrl?: string;
-  /**
-   * Whether to show the contact team and support URL or not.
-   */
-  showContact?: boolean;
   /**
    * The text to display on the action button (optional).
    */
