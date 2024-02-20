@@ -2,7 +2,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 
 import Autocomplete from ".";
 import React from "react";
-import { userEvent } from "@storybook/testing-library";
+import { userEvent } from "@testing-library/user-event";
 
 // sample options
 const options = ["option 1", "option 2", "option 3"];

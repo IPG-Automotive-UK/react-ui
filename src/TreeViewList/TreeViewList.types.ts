@@ -1,76 +1,28 @@
-/**
- * Represents an item with arbitrary properties.
- */
-export type Item<T> = {
-  /**
-   * The value of the item.
-   */
-  [key: string]: T;
-};
-
-/**
- * Properties for the TreeViewList component.
- */
-export type TreeViewListProps<T> = {
-  /**
-   * The items to display in the tree view list.
-   */
-  items: Item<T>[];
-
-  /**
-   * The ID of the currently selected item.
-   */
-  selected: string;
-
-  /**
-   *  The term to search for in the items. This is optional.
-   */
-  searchTerm?: string;
-
-  /**
-   * Flag indicating whether the search term should be expanded in the tree view list. This is optional.
-   */
-  expandSearchTerm?: boolean;
-
-  /**
-   * The IDs of the items that should be expanded by default. This is optional.
-   */
-  defaultExpanded?: string[];
-
-  /**
-   * The function to call when the selection changes.
-   */
-  onSelectionChange: (value: string) => void;
-
-  /**
-   * The display width of the tree view list. This is optional.
-   */
-  width?: string;
-};
+import { TreeViewProps } from "@mui/x-tree-view";
 
 /**
  * Represents a node in a tree structure.
  */
-export type TreeNode = {
+export type TreeNodeItem = {
   /**
-   * The name of the node.
+   * The child nodes of the node.
    */
-  name: string;
+  children?: TreeNodeItem[];
+
+  /**
+   * If true, the node is disabled.
+   */
+  disabled?: boolean;
+
+  /**
+   * The tree node label.
+   */
+  label: string;
 
   /**
    * The ID of the node.
    */
-  id: string;
-
-  /**
-   * The child nodes of the node.
-   */
-  children: TreeNode[];
-
-  /**
-   * Whether the node is disabled.
-   */
-  disable?: boolean;
+  nodeId: string;
 
   /**
    * The tooltip of the node.
@@ -79,63 +31,41 @@ export type TreeNode = {
 };
 
 /**
- * Properties for the TooltipTreeItem component.
+ * Properties for the TreeViewList component.
  */
-export type TooltipTreeItemProps = {
+export type TreeViewListProps = {
   /**
-   * The tooltip of the tree item.
+   * If true, the search input is displayed. Defaults to false.
    */
-  tooltip: string;
+  enableSearch?: boolean;
 
   /**
-   * The ID of the node.
+   * If true, the tree nodes will be automatically expanded when a search term is entered. Defaults to false.
    */
-  nodeId: string;
+  expandSearchResults?: boolean;
 
   /**
-   * The child nodes of the tree item.
+   * The items to display in the tree view list.
    */
-  children?: React.ReactNode;
+  items: TreeNodeItem[];
 
   /**
-   * The label of the tree item.
+   * Callback fired when tree items are selected/unselected.
    */
-  label: string;
+  onNodeSelect: TreeViewProps<false>["onNodeSelect"];
 
   /**
-   * The tree node.
+   * Callback fired when tree items are expanded/collapsed.
    */
-  node: TreeNode;
+  onNodeToggle: TreeViewProps<false>["onNodeToggle"];
 
   /**
-   * Whether the tree item has a parent.
+   * The ID of the currently selected node.
    */
-  hasParent?: boolean;
-};
-
-/**
- * Type representing a child in a tree structure.
- *
- * @template T The type of the options array elements.
- */
-export type ChildData<T> = {
-  /** The name of the node. */
-  name: string;
+  selected: TreeViewProps<false>["selected"];
 
   /**
-   * Optional array of child nodes.
-   * Each child is also a `ChildData` object, allowing for a nested tree structure.
+   * The display width of the tree view list. This is optional.
    */
-  children?: ChildData<T>[];
-
-  /**
-   * Optional array of options. The options are displayed as the last child.
-   * The type of the elements in this array is defined by the generic parameter `T`.
-   */
-  options?: T[];
-
-  /**
-   * The tooltip of the child. This is optional.
-   */
-  tooltip?: string;
+  width?: string;
 };

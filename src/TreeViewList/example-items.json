@@ -1,0 +1,95 @@
+[
+  {
+    "label": "Aerodynamics",
+    "nodeId": "AER",
+    "children": [
+      {
+        "label": "Drag Coefficient",
+        "nodeId": "AER.DragCoefficient1D",
+        "tooltip": "Defines the drag coefficient of the entire vehicle as a function of wind angle of attack (tau)"
+      },
+      {
+        "disabled": true,
+        "label": "Frontal Area",
+        "nodeId": "AER.FrontalArea",
+        "tooltip": "The vehicle reference area is the projected frontal area including tires and underbody parts"
+      },
+      {
+        "label": "Reference Length",
+        "nodeId": "AER.ReferenceLength",
+        "tooltip": "This is the length between VEHICLE.AERODYNAMIC.CONSIDERATION POINT XYZ and the vehicle's rearmost point. It is used to calculate the torques applied to VEHICLE.AERODYNAMIC.RESULTANT FORCE POINT XYZ"
+      }
+    ]
+  },
+  {
+    "label": "Suspension",
+    "nodeId": "SUS",
+    "children": [
+      {
+        "label": "Axle",
+        "nodeId": "SUS.Axle",
+        "children": [
+          {
+            "label": "Wheelbase",
+            "nodeId": "SUS.Axle.WheelBase",
+            "tooltip": "This is the vehicle wheelbase measured tire contact patch to tire contact patch"
+          },
+          {
+            "label": "Front",
+            "nodeId": "SUS.Axle.Front",
+            "children": [
+              {
+                "label": "Load",
+                "nodeId": "SUS.Axle.Front.Load",
+                "tooltip": "Preload of Front Suspension with gravity Amesim Parameter: Front SUSP Axle load"
+              },
+              {
+                "label": "Track Width",
+                "nodeId": "SUS.Axle.Front.TrackWidth",
+                "tooltip": "Vehicle front track width measured at the tire contact patch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Damper",
+        "nodeId": "SUS.Damper",
+        "children": [
+          {
+            "label": "Front",
+            "nodeId": "SUS.Damper.Front",
+            "children": [
+              {
+                "label": "Damping",
+                "nodeId": "SUS.Damper.Front.Damping1D",
+                "tooltip": "Shock absorber damping force characteristic in a 1D table - front suspension"
+              },
+              {
+                "label": "Mass",
+                "nodeId": "SUS.Damper.Front.Mass",
+                "tooltip": "This is the front mass of the shock absorber"
+              }
+            ]
+          },
+          {
+            "label": "Rear",
+            "nodeId": "SUS.Damper.Rear",
+            "children": [
+              {
+                "label": "Damping",
+                "nodeId": "SUS.Damper.Rear.Damping1D",
+                "tooltip": "Shock absorber damping characteristic in a 1D table - rear suspension"
+              },
+              {
+                "label": "Mass",
+                "nodeId": "SUS.Damper.Rear.Mass",
+                "tooltip": "This is the rear mass of the shock absorber"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

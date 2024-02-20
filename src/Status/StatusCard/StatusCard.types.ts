@@ -1,8 +1,10 @@
+import { Status } from "../statuses.types";
+
 export type StatusCardProps = {
   /**
    * The status type.
    */
-  status: "passed" | "failed" | "pending" | "not-run" | "no-metrics";
+  status: Status;
   /**
    * The status message.
    */
