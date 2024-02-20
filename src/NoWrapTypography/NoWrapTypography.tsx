@@ -39,7 +39,7 @@ export default function NoWrapTypography({
           textOverflow: "ellipsis",
           whiteSpace: "nowrap",
           wordBreak: "break-all",
-          ...(Array.isArray(sx) ? sx : [sx])
+          ...sx
         }}
         variant={variant}
       >

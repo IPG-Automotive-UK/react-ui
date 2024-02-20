@@ -29,10 +29,13 @@ const Template: StoryFn<NoWrapTypographyProps> = props => {
   );
 };
 
-export const Default = {
+export const Default: {
+  args: NoWrapTypographyProps;
+  render: StoryFn<NoWrapTypographyProps>;
+} = {
   args: {
     children: "text that is too long to fit in the box",
-    sx: { fontSize: "18px", maxWidth: "250px" }
+    sx: { fontSize: "16px", maxWidth: "250px" }
   },
 
   render: Template
