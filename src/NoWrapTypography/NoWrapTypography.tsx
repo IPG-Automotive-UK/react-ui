@@ -33,14 +33,17 @@ export default function NoWrapTypography({
       <Typography
         noWrap
         component="p" // forces a block element
-        sx={{
-          hyphens: "auto",
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-          whiteSpace: "nowrap",
-          wordBreak: "break-all",
-          ...sx
-        }}
+        sx={[
+          {
+            hyphens: "auto",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+            wordBreak: "break-all"
+          },
+          // You cannot spread `sx` directly because `SxProps` (typeof sx) can be an array.
+          ...(Array.isArray(sx) ? sx : [sx])
+        ]}
         variant={variant}
       >
         {children}

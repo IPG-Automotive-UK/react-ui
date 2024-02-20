@@ -35,7 +35,7 @@ export const Default: {
 } = {
   args: {
     children: "text that is too long to fit in the box",
-    sx: { fontSize: "16px", maxWidth: "250px" }
+    sx: { fontSize: "18px", maxWidth: "250px" }
   },
 
   render: Template
