@@ -37,6 +37,7 @@
     "@storybook/addon-interactions": "^7.6.16",
     "@storybook/addon-links": "^7.6.16",
     "@storybook/addon-storysource": "^7.6.16",
+    "@storybook/blocks": "^7.6.17",
     "@storybook/node-logger": "^7.6.16",
     "@storybook/preview-api": "^7.6.16",
     "@storybook/react": "^7.6.16",
