@@ -1,6 +1,6 @@
 {
   "name": "@ipguk/react-ui",
-  "version": "6.1.1",
+  "version": "6.1.2",
   "description": "React UI component library for IPG web applications",
   "author": "IPG-Automotive-UK",
   "license": "MIT",
@@ -17,7 +17,7 @@
     "start": "microbundle-crl watch --no-compress --format modern,cjs --jsxFragment React.Fragment",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
-    "storybook:serve:start": "pm2 start ./serve-storybook.js --name storybook",
+    "storybook:serve:start": "pm2 delete storybook -s 2> /dev/null || true && pm2 start ./serve-storybook.js --name storybook",
     "storybook:serve:stop": "pm2 delete storybook",
     "test": "run-s test:unit test:lint test:playwright",
     "test:playwright": "pnpm exec playwright install --with-deps && pnpm run storybook:build && pnpm run storybook:serve:start && pnpm exec playwright test && pnpm run storybook:serve:stop",
