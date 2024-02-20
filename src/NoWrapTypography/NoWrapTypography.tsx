@@ -11,38 +11,39 @@ export default function NoWrapTypography({
   sx,
   variant
 }: NoWrapTypographyProps) {
-  const [tooltipEnabled, setTooltipEnabled] = useState(false);
+  const [open, setOpen] = useState(false);
 
   // if the text overflows its bounding box, then show the tooltip
   const handleShouldShow = ({
     currentTarget
   }: React.MouseEvent<HTMLDivElement | null>) => {
-    if (currentTarget.scrollWidth > currentTarget.clientWidth) {
-      setTooltipEnabled(true);
-    }
+    setOpen(currentTarget.scrollWidth > currentTarget.clientWidth);
   };
 
   // on mouse leave, hide the tooltip
-  const hideTooltip = () => setTooltipEnabled(true);
+  const hideTooltip = () => setOpen(false);
 
   return (
     <Tooltip
       title={children}
-      disableHoverListener={!tooltipEnabled}
+      open={open}
       onMouseEnter={handleShouldShow}
       onMouseLeave={hideTooltip}
     >
       <Typography
         noWrap
         component="p" // forces a block element
-        sx={{
-          hyphens: "auto",
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-          whiteSpace: "nowrap",
-          wordBreak: "break-all",
+        sx={[
+          {
+            hyphens: "auto",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+            wordBreak: "break-all"
+          },
+          // You cannot spread `sx` directly because `SxProps` (typeof sx) can be an array.
           ...(Array.isArray(sx) ? sx : [sx])
-        }}
+        ]}
         variant={variant}
       >
         {children}

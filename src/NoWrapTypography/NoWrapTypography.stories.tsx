@@ -9,23 +9,34 @@ import React from "react";
  * Story metadata
  */
 const meta: Meta<typeof NoWrapTypography> = {
+  argTypes: {
+    children: {
+      control: {
+        type: "text"
+      }
+    }
+  },
   component: NoWrapTypography,
   title: "General/NoWrapTypography"
 };
 export default meta;
 
-const Template: StoryFn<NoWrapTypographyProps> = ({ children, sx }) => {
+const Template: StoryFn<NoWrapTypographyProps> = props => {
   return (
     <Box sx={{ border: "1px solid black", mt: 2, width: "350px" }}>
-      <NoWrapTypography sx={sx}>{children}</NoWrapTypography>
+      <NoWrapTypography {...props} />
     </Box>
   );
 };
 
-export const Default = {
+export const Default: {
+  args: NoWrapTypographyProps;
+  render: StoryFn<NoWrapTypographyProps>;
+} = {
   args: {
     children: "text that is too long to fit in the box",
-    sx: { fontSize: "18px", maxWidth: "250px" }
+    sx: { maxWidth: "250px" },
+    variant: "body1"
   },
 
   render: Template
