@@ -30,7 +30,7 @@ export default defineConfig({
       use: { ...devices["Desktop Safari"] }
     }
   ],
-  reporter: "html",
+  reporter: [["html", { open: "never" }]],
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   testDir: "./src",
