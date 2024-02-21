@@ -168,7 +168,7 @@ test("should expand the parent and child nodes that match the search term", asyn
   page
 }) => {
   await page.goto(
-    "http://localhost:6006/?path=/story/lists-treeviewlist--default&args=enableSearch:true;expandSearchResults:true"
+    "http://localhost:6006/?path=/story/lists-treeviewlist--default&args=enableSearch:true;expandSearchResults:true;expandItems:2"
   );
 
   // Wait for the iframe to be attached in the DOM.
@@ -177,7 +177,7 @@ test("should expand the parent and child nodes that match the search term", asyn
   await page
     .frameLocator('iframe[title="storybook-preview-iframe"]')
     .getByPlaceholder("Search")
-    .fill("rear");
+    .fill("front");
 
   // Get the Frame object for the iframe.
   const frameElement = await page.$('iframe[title="storybook-preview-iframe"]');
@@ -193,7 +193,7 @@ test("should expand the parent and child nodes that match the search term", asyn
 
       const elementCount = liElements.length;
 
-      expect(elementCount).toBe(5);
+      expect(elementCount).toBe(2);
     } else {
       throw new Error("Frame object is null");
     }
