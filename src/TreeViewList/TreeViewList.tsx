@@ -1,4 +1,4 @@
-import { Box, Tooltip } from "@mui/material";
+import { Box, Tooltip, debounce } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { TreeItem, TreeView } from "@mui/x-tree-view";
 import { TreeNodeItem, TreeViewListProps } from "./TreeViewList.types";
@@ -13,6 +13,7 @@ import SearchBar from "../SearchBar/SearchBar";
  * @param props - The properties for the tree view list.
  * @property props.enableSearch - If true, the search input is displayed. Defaults to false.
  * @property props.expandSearchResults - If true, the tree nodes will be automatically expanded when a search term is entered. Defaults to false.
+ * @property props.expandItems - The number of items to expand
  * @property props.items - The items to display in the tree view list.
  * @property props.onNodeSelect - The function to call when a node is selected.
  * @property props.onNodeToggle - The function to call when a node is toggled.
@@ -23,6 +24,7 @@ import SearchBar from "../SearchBar/SearchBar";
 const TreeViewList = ({
   enableSearch = false,
   expandSearchResults = false,
+  expandItems = 1,
   items,
   onNodeSelect,
   onNodeToggle,
@@ -57,24 +59,32 @@ const TreeViewList = ({
     }
   }, [enableSearch, items, searchValue]);
 
-  // if search is enabled and expandSearchResults is true, expand all nodes when the tree display items change
-  useEffect(() => {
-    if (enableSearch && expandSearchResults && searchValue !== "") {
-      const expandedNodes: string[] = [];
-      const expandAllNodes = (items: TreeNodeItem[]) => {
+  const expandNodes = () => {
+    const expandedNodes: string[] = [];
+    const expandNodes = (items: TreeNodeItem[]) => {
+      if (items.length <= expandItems) {
         for (const item of items) {
           expandedNodes.push(item.nodeId);
           if (item.children) {
-            expandAllNodes(item.children);
+            expandNodes(item.children);
           }
         }
-      };
-      expandAllNodes(treeDisplayItems);
-      setDefaultExpanded(expandedNodes);
+      }
+    };
+    expandNodes(treeDisplayItems);
+    setDefaultExpanded(expandedNodes);
+  };
+
+  const debouncedExpandAllNodes = debounce(expandNodes, 300);
+
+  // if search is enabled and expandSearchResults is true, expand the nodes when the tree display items change
+  useEffect(() => {
+    if (enableSearch && expandSearchResults && searchValue !== "") {
+      debouncedExpandAllNodes();
     } else {
       setDefaultExpanded([]);
     }
-  }, [enableSearch, expandSearchResults, searchValue, treeDisplayItems]);
+  }, [debouncedExpandAllNodes, enableSearch, expandSearchResults, searchValue]);
 
   // render the tree nodes with optional tooltips
   const renderTree = (nodes: TreeNodeItem[]) =>
@@ -160,10 +170,21 @@ const TooltipTreeItem = (
     children?: React.ReactNode;
   }
 ) => {
+  // check if a node has children
+  const hasChildren = (children: React.ReactNode) => {
+    return React.Children.count(children) > 0;
+  };
+
   return (
     <Tooltip
       disableFocusListener
-      title={props.tooltip ? <>{props.tooltip}</> : ""}
+      title={
+        props.tooltip && !hasChildren(props.children) ? (
+          <>{props.tooltip}</>
+        ) : (
+          ""
+        )
+      }
       placement="right"
     >
       <TreeItem

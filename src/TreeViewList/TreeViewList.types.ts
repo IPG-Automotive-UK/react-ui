@@ -27,7 +27,7 @@ export type TreeNodeItem = {
   /**
    * The tooltip of the node.
    */
-  tooltip?: React.ReactNode;
+  tooltip?: string;
 };
 
 /**
@@ -52,6 +52,11 @@ export type TreeViewListProps = {
    * If true, the tree nodes will be automatically expanded when a search term is entered. Defaults to false.
    */
   expandSearchResults?: boolean;
+
+  /**
+   * The number of items to expand
+   */
+  expandItems?: number;
 
   /**
    * The items to display in the tree view list.

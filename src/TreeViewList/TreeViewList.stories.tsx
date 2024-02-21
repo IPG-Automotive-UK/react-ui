@@ -35,6 +35,7 @@ export const Default = {
 export const WithSearch = {
   args: {
     enableSearch: true,
+    expandItems: 2,
     expandSearchResults: true,
     items,
     selected: "",
