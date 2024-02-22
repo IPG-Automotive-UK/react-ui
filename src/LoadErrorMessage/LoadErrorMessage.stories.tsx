@@ -65,7 +65,7 @@ export const GeneralError = {
     image: "virto-head-scratching",
     message:
       "Oops! Something went wrong on our end 😓 Our team is actively addressing it and working to resolve the issue. Please try again later.",
-    supportUrl: "https://support.virto.com",
+    contactUrl: "https://support.virto.com",
     title: "Something is not right!"
   },
   render: Template

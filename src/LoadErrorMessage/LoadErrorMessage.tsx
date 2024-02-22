@@ -14,7 +14,7 @@ const LoadErrorMessage = ({
   message,
   title,
   image = "virto-thinking",
-  supportUrl,
+  contactUrl,
   onButtonClick
 }: LoadErrorMessageProps) => {
   // State to track whether the error details are visible or not
@@ -132,8 +132,8 @@ const LoadErrorMessage = ({
           }
         >
           If this persists, contact {/* Render the contact team link */}
-          {supportUrl ? (
-            <Link href={supportUrl} target="_blank" rel="noopener noreferrer">
+          {contactUrl ? (
+            <Link href={contactUrl} target="_blank" rel="noopener noreferrer">
               {contactTeam}
             </Link>
           ) : (
