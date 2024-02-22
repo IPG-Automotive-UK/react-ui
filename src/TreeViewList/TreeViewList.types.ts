@@ -56,7 +56,7 @@ export type TreeViewListProps = {
   expandSearchResults?: boolean;
 
   /**
-   * The number of items to expand
+   * The number of items to automactically expand when expandSearchResults is true. Defaults to 1.
    */
   expandItems?: number;
 
