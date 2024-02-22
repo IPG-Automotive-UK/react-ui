@@ -36,7 +36,9 @@ export type TreeNodeItem = {
 type OnNodeSelect = (
   event: React.SyntheticEvent,
   nodeId: string,
-  isChild: boolean
+  nodeDetails: {
+    isChild: boolean;
+  }
 ) => void;
 
 /**

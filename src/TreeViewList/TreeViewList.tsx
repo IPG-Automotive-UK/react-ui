@@ -59,13 +59,34 @@ const TreeViewList = ({
     }
   }, [enableSearch, items, searchValue]);
 
+  // count the number of last children in the tree
+  const countLastChild = (items: TreeNodeItem[]) => {
+    let count = 0;
+
+    for (const item of items) {
+      // Check if the object has a 'children' property and it's not empty
+      if (item.children && item.children.length > 0) {
+        // If the object has children, recursively call the function on its children
+        count += countLastChild(item.children);
+      } else {
+        // If the object has no children, it is a last child
+        count += 1;
+      }
+    }
+
+    return count;
+  };
+
+  // expand the nodes when the search input changes
   const expandNodes = () => {
     const expandedNodes: string[] = [];
     const expandNodes = (items: TreeNodeItem[]) => {
-      if (items.length <= expandItems) {
+      // if the number of last children is less than or equal to the expandItems, expand the nodes
+      if (countLastChild(items) <= expandItems) {
         for (const item of items) {
-          expandedNodes.push(item.nodeId);
+          // if the node has children, expand it and call the function on its children
           if (item.children) {
+            expandedNodes.push(item.nodeId);
             expandNodes(item.children);
           }
         }
@@ -75,6 +96,7 @@ const TreeViewList = ({
     setDefaultExpanded(expandedNodes);
   };
 
+  // debounce the expandNodes function to prevent it from being called too frequently
   const debouncedExpandAllNodes = debounce(expandNodes, 300);
 
   // if search is enabled and expandSearchResults is true, expand the nodes when the tree display items change
@@ -82,9 +104,18 @@ const TreeViewList = ({
     if (enableSearch && expandSearchResults && searchValue !== "") {
       debouncedExpandAllNodes();
     } else {
-      setDefaultExpanded([]);
+      // if setDefaultExpanded is not already empty, reset it to empty
+      if (defaultExpanded && defaultExpanded.length > 0) {
+        setDefaultExpanded([]);
+      }
     }
-  }, [debouncedExpandAllNodes, enableSearch, expandSearchResults, searchValue]);
+  }, [
+    debouncedExpandAllNodes,
+    defaultExpanded,
+    enableSearch,
+    expandSearchResults,
+    searchValue
+  ]);
 
   // render the tree nodes with optional tooltips
   const renderTree = (nodes: TreeNodeItem[]) =>
@@ -118,9 +149,12 @@ const TreeViewList = ({
         selected={selected}
         onNodeSelect={(event, nodeId) => {
           const node = getNodeById(treeDisplayItems, nodeId);
-          const isChild = Boolean(node && !node.children);
+          const isChild = Boolean(
+            node && (!node.children || node.children.length === 0)
+          );
           if (onNodeSelect) {
-            onNodeSelect(event, nodeId, isChild);
+            const nodeDetails = { isChild };
+            onNodeSelect(event, nodeId, nodeDetails);
           }
         }}
         onNodeToggle={onNodeToggle}
