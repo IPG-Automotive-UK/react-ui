@@ -145,4 +145,32 @@ const LoadErrorMessage = ({
   );
 };
 
+LoadErrorMessage.default404Props = {
+  actionButtonText: "Go back",
+  contactTeam: "none",
+  image: "virto-shrugging",
+  message:
+    "We're unable to locate the page you requested. Please ensure the URL is correct or explore other areas of the site.",
+  title: "Sorry, the page doesn't exist!"
+} as const;
+
+LoadErrorMessage.default401Props = {
+  contactTeam: "none",
+  image: "virto-thinking",
+  message:
+    "Sorry, but you don't have access to view this page. Contact an admin to request access.",
+  title: "Access Denied!"
+} as const;
+
+LoadErrorMessage.defaultErrorProps = {
+  actionButtonText: "Refresh",
+  contactTeam: "Support",
+  contactUrl: "https://support.virto.com",
+  errorDetails: "Invalid token - length is 0",
+  image: "virto-head-scratching",
+  message:
+    "Oops! Something went wrong on our end 😓 Our team is actively addressing it and working to resolve the issue. Please try again later.",
+  title: "Something is not right!"
+} as const;
+
 export default LoadErrorMessage;
