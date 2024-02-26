@@ -39,7 +39,10 @@ const TreeViewList = ({
   const [searchValue, setSearchValue] = useState("");
 
   // state for expanded nodes
-  const [defaultExpanded, setDefaultExpanded] = useState<string[]>([]);
+  const [expandedNodes, setExpandedNodes] = useState<string[]>([]);
+
+  // state for user expanded nodes
+  const [userExpanded, setUserExpanded] = useState<string[]>([]);
 
   // state for the node we are hovered over
   const [hoveredNode, setHoveredNode] = useState<string>("");
@@ -82,21 +85,22 @@ const TreeViewList = ({
 
   // expand the nodes when the search input changes
   const expandNodes = () => {
-    const expandedNodes: string[] = [];
+    const searchedNodes: string[] = [];
     const expandNodes = (items: TreeNodeItem[]) => {
       // if the number of last children is less than or equal to the expandItems, expand the nodes
       if (countLastChild(items) <= expandItems) {
         for (const item of items) {
           // if the node has children, expand it and call the function on its children
           if (item.children) {
-            expandedNodes.push(item.nodeId);
+            searchedNodes.push(item.nodeId);
             expandNodes(item.children);
           }
         }
       }
     };
     expandNodes(treeDisplayItems);
-    setDefaultExpanded(expandedNodes);
+    // set the expanded nodes to combine searched nodes and user expanded nodes
+    setExpandedNodes([...new Set(searchedNodes.concat(userExpanded))]);
   };
 
   // debounce the expandNodes function to prevent it from being called too frequently
@@ -106,15 +110,10 @@ const TreeViewList = ({
   useEffect(() => {
     if (enableSearch && expandSearchResults && searchValue !== "") {
       debouncedExpandAllNodes();
-    } else {
-      // if setDefaultExpanded is not already empty, reset it to empty
-      if (defaultExpanded && defaultExpanded.length > 0) {
-        setDefaultExpanded([]);
-      }
     }
   }, [
     debouncedExpandAllNodes,
-    defaultExpanded,
+    expandedNodes,
     enableSearch,
     expandSearchResults,
     searchValue
@@ -147,10 +146,10 @@ const TreeViewList = ({
         />
       ) : null}
       <TreeView
-        key={`${searchValue} + ${defaultExpanded.length}`} // key to force re-render so that we can reset the expanded nodes when the search input changes but still allow user to expand/collapse nodes
+        key={`${searchValue} + ${expandedNodes.length}`} // key to force re-render so that we can reset the expanded nodes when the search input changes but still allow user to expand/collapse nodes
         defaultCollapseIcon={<RemoveIcon />}
         defaultExpandIcon={<AddIcon />}
-        defaultExpanded={defaultExpanded}
+        defaultExpanded={expandedNodes}
         selected={selected}
         onNodeSelect={(event, nodeId) => {
           const node = getNodeById(treeDisplayItems, nodeId);
@@ -162,7 +161,9 @@ const TreeViewList = ({
             onNodeSelect(event, nodeId, nodeDetails);
           }
         }}
-        onNodeToggle={onNodeToggle}
+        onNodeToggle={(event, nodeId) => {
+          setUserExpanded([...nodeId]);
+        }}
       >
         {renderTree(treeDisplayItems)}
       </TreeView>
