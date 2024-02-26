@@ -13,7 +13,7 @@
   "scripts": {
     "build": "npm run clean && tsc --project ./tsconfig.production.json && npm run copy-files",
     "clean": "rimraf dist",
-    "copy-files": "copyfiles -e '**/*.test.**' -e '**/*.spec.**' -e '**/*.stories.**' -u 1 src/**/*.html src/**/*.css src/**/*.ts src/**/*.tsx dist/",
+    "copy-files": "copyfiles -e '**/*.test.**' -e '**/*.spec.**' -e '**/*.stories.**' -u 1 src/**/*.html src/**/*.css dist/",
     "prepublishOnly": "npm run build",
     "start": "microbundle-crl watch --no-compress --format modern,cjs --jsxFragment React.Fragment",
     "storybook": "storybook dev -p 6006",
