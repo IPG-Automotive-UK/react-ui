@@ -6,6 +6,7 @@
   "license": "MIT",
   "repository": "IPG-Automotive-UK/react-ui",
   "main": "dist/index",
+  "type": "module",
   "engines": {
     "node": ">=10"
   },
