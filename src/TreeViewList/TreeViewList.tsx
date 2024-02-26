@@ -41,6 +41,9 @@ const TreeViewList = ({
   // state for expanded nodes
   const [defaultExpanded, setDefaultExpanded] = useState<string[]>([]);
 
+  // state for the node we are hovered over
+  const [hoveredNode, setHoveredNode] = useState<string>("");
+
   // update tree display items when the items prop changes or when the search input changes
   useEffect(() => {
     // if search is enabled and the search input is not empty, display only items that match the search terms, otherwise display all items
@@ -122,9 +125,11 @@ const TreeViewList = ({
     nodes.map(node => (
       <TooltipTreeItem
         disabled={node.disabled}
+        hoveredNode={hoveredNode}
         key={node.nodeId}
         label={node.label}
         nodeId={node.nodeId}
+        setHoveredNode={setHoveredNode}
         tooltip={node.tooltip}
       >
         {Array.isArray(node.children) && node.children.length > 0
@@ -202,24 +207,15 @@ const getNodeById = (
 const TooltipTreeItem = (
   props: Pick<TreeNodeItem, "disabled" | "label" | "nodeId" | "tooltip"> & {
     children?: React.ReactNode;
+    hoveredNode: string;
+    setHoveredNode: (nodeId: string) => void;
   }
 ) => {
-  // check if a node has children
-  const hasChildren = (children: React.ReactNode) => {
-    return React.Children.count(children) > 0;
-  };
-
   return (
     <Tooltip
-      disableFocusListener
-      title={
-        props.tooltip && !hasChildren(props.children) ? (
-          <>{props.tooltip}</>
-        ) : (
-          ""
-        )
-      }
-      placement="right"
+      title={props.tooltip ? <>{props.tooltip}</> : ""}
+      placement="right-start"
+      open={props.hoveredNode === props.nodeId}
     >
       <TreeItem
         {...props}
@@ -227,6 +223,14 @@ const TooltipTreeItem = (
           color: theme.palette.text.primary,
           padding: "5px"
         })}
+        onMouseOver={event => {
+          event.stopPropagation();
+          props.setHoveredNode(props.nodeId);
+        }}
+        onMouseOut={event => {
+          event.stopPropagation();
+          props.setHoveredNode("");
+        }}
       />
     </Tooltip>
   );

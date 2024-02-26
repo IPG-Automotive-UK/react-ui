@@ -2,6 +2,7 @@
   {
     "label": "Aerodynamics",
     "nodeId": "AER",
+    "tooltip": "Aerodynamics description goes here",
     "children": [
       {
         "label": "Drag Coefficient",
