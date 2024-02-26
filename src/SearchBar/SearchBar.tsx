@@ -1,9 +1,8 @@
+import { Close as CloseIcon, Search as SearchIcon } from "@mui/icons-material";
 import { IconButton, InputBase, Paper } from "@mui/material";
 
-import CloseIcon from "@mui/icons-material/Close";
 import React from "react";
 import { SearchBarProps } from "./SearchBar.types";
-import SearchIcon from "@mui/icons-material/Search";
 
 export default function SearchBar({
   value = "",
