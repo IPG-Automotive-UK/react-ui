@@ -99,9 +99,20 @@ const TreeViewList = ({
       }
     };
     expandNodes(treeDisplayItems);
-    // set the expanded nodes to combine searched nodes and user expanded nodes
-    setExpandedNodes([...new Set(searchedNodes.concat(userExpanded))]);
+    // update the expanded nodes with the searched nodes
+    setExpandedNodes(prevState => [...prevState, ...searchedNodes]);
   };
+
+  // update expanded when user search value or user expanded nodes changes
+  useEffect(() => {
+    if (searchValue !== "") {
+      // if the search input is not empty, update expanded nodes with the user expanded nodes
+      setExpandedNodes(prevState => [...prevState, ...userExpanded]);
+    } else {
+      // if the search input is empty, update expanded nodes with the user expanded nodes
+      setExpandedNodes(userExpanded);
+    }
+  }, [userExpanded, searchValue]);
 
   // debounce the expandNodes function to prevent it from being called too frequently
   const debouncedExpandAllNodes = debounce(expandNodes, 300);
@@ -146,10 +157,9 @@ const TreeViewList = ({
         />
       ) : null}
       <TreeView
-        key={`${searchValue} + ${expandedNodes.length}`} // key to force re-render so that we can reset the expanded nodes when the search input changes but still allow user to expand/collapse nodes
         defaultCollapseIcon={<RemoveIcon />}
         defaultExpandIcon={<AddIcon />}
-        defaultExpanded={expandedNodes}
+        expanded={expandedNodes}
         selected={selected}
         onNodeSelect={(event, nodeId) => {
           const node = getNodeById(treeDisplayItems, nodeId);
@@ -212,25 +222,29 @@ const TooltipTreeItem = (
     setHoveredNode: (nodeId: string) => void;
   }
 ) => {
+  // destructure the hoveredNode and setHoveredNode from the props and pass the rest of the props to the TreeItem
+  const { hoveredNode, setHoveredNode, ...rest } = props;
+
   return (
     <Tooltip
       title={props.tooltip ? <>{props.tooltip}</> : ""}
       placement="right-start"
       open={props.hoveredNode === props.nodeId}
+      disableFocusListener
     >
       <TreeItem
-        {...props}
+        {...rest}
         sx={theme => ({
           color: theme.palette.text.primary,
           padding: "5px"
         })}
         onMouseOver={event => {
           event.stopPropagation();
-          props.setHoveredNode(props.nodeId);
+          setHoveredNode(props.nodeId);
         }}
         onMouseOut={event => {
           event.stopPropagation();
-          props.setHoveredNode("");
+          setHoveredNode("");
         }}
       />
     </Tooltip>
