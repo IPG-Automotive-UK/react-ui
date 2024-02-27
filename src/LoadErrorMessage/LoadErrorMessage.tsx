@@ -154,14 +154,6 @@ LoadErrorMessage.default404Props = {
   title: "Sorry, the page doesn't exist!"
 } as const;
 
-LoadErrorMessage.default401Props = {
-  contactTeam: "none",
-  image: "virto-thinking",
-  message:
-    "Sorry, but you don't have access to view this page. Contact an admin to request access.",
-  title: "Access Denied!"
-} as const;
-
 LoadErrorMessage.defaultErrorProps = {
   actionButtonText: "Refresh",
   contactTeam: "Support",

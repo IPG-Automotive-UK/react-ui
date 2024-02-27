@@ -43,12 +43,6 @@ export const HTTP404: Story = {
   render: Template
 };
 
-// HTTP 401
-export const HTTP401: Story = {
-  args: LoadErrorMessage.default401Props,
-  render: Template
-};
-
 // General Error
 export const GeneralError: Story = {
   args: LoadErrorMessage.defaultErrorProps,
