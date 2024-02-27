@@ -142,7 +142,7 @@ test("should hide child when is collapsed", async ({ page }) => {
     if (frame !== null) {
       await page
         .frameLocator('iframe[title="storybook-preview-iframe"]')
-        .getByText("Aerodynamics")
+        .getByText("Aerodynamics", { exact: true })
         .click();
       await expect(
         page
@@ -151,7 +151,7 @@ test("should hide child when is collapsed", async ({ page }) => {
       ).toBeVisible();
       await page
         .frameLocator('iframe[title="storybook-preview-iframe"]')
-        .getByText("Aerodynamics")
+        .getByText("Aerodynamics", { exact: true })
         .click();
       await expect(
         page
