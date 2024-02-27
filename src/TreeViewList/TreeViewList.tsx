@@ -85,20 +85,27 @@ const TreeViewList = ({
 
   // expand the nodes when the search input changes
   const expandNodes = () => {
-    const searchedNodes: string[] = [];
-    const expandNodes = (items: TreeNodeItem[]) => {
+    let searchedNodes: string[] = [];
+    const expandChildNodes = (items: TreeNodeItem[]) => {
+      // If the condition is not met for the entire items array, return early
+      if (countLastChild(items) > expandItems) {
+        // reset the searched nodes array
+        searchedNodes = [];
+        return;
+      }
+
       // if the number of last children is less than or equal to the expandItems, expand the nodes
       if (countLastChild(items) <= expandItems) {
         for (const item of items) {
           // if the node has children, expand it and call the function on its children
           if (item.children) {
             searchedNodes.push(item.nodeId);
-            expandNodes(item.children);
+            expandChildNodes(item.children);
           }
         }
       }
     };
-    expandNodes(treeDisplayItems);
+    expandChildNodes(treeDisplayItems);
     // update the expanded nodes with the searched nodes
     setExpandedNodes(prevState => [...prevState, ...searchedNodes]);
   };
@@ -121,8 +128,12 @@ const TreeViewList = ({
   useEffect(() => {
     if (enableSearch && expandSearchResults && searchValue !== "") {
       debouncedExpandAllNodes();
+    } else {
+      // if enableSearch is false and expandSearchResults is false and searchValue is empty, update the expanded nodes with the user expanded nodes
+      setExpandedNodes(userExpanded);
     }
   }, [
+    userExpanded,
     debouncedExpandAllNodes,
     expandedNodes,
     enableSearch,
