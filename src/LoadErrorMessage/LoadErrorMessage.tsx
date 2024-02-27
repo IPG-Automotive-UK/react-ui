@@ -150,8 +150,8 @@ LoadErrorMessage.default404Props = {
   contactTeam: "none",
   image: "virto-shrugging",
   message:
-    "We're unable to locate the page you requested. Please ensure the URL is correct or explore other areas of the site.",
-  title: "Sorry, the page doesn't exist!"
+    "We couldn't find the page you requested. It either does not exist or you may not have access to it.",
+  title: "Page not found!"
 } as const;
 
 LoadErrorMessage.defaultErrorProps = {
