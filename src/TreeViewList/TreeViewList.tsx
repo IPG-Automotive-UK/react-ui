@@ -110,19 +110,8 @@ const TreeViewList = ({
     setExpandedNodes(prevState => [...prevState, ...searchedNodes]);
   };
 
-  // update expanded when user search value or user expanded nodes changes
-  useEffect(() => {
-    if (searchValue !== "") {
-      // if the search input is not empty, update expanded nodes with the user expanded nodes
-      setExpandedNodes(prevState => [...prevState, ...userExpanded]);
-    } else {
-      // if the search input is empty, update expanded nodes with the user expanded nodes
-      setExpandedNodes(userExpanded);
-    }
-  }, [userExpanded, searchValue]);
-
   // debounce the expandNodes function to prevent it from being called too frequently
-  const debouncedExpandAllNodes = debounce(expandNodes, 300);
+  const debouncedExpandAllNodes = debounce(expandNodes, 100);
 
   // if search is enabled and expandSearchResults is true, expand the nodes when the tree display items change
   useEffect(() => {
