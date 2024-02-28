@@ -16,3 +16,7 @@ export {
   default as VirtoThinking,
   type VirtoThinkingProps
 } from "./VirtoMascots/VirtoThinking";
+export {
+  default as VirtoShrugging,
+  type VirtoShruggingProps
+} from "./VirtoMascots/VirtoShrugging";
