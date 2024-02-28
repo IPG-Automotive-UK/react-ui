@@ -1,4 +1,4 @@
-import { Box, Tooltip } from "@mui/material";
+import { Box, Tooltip, debounce } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { TreeItem, TreeView } from "@mui/x-tree-view";
 import { TreeNodeItem, TreeViewListProps } from "./TreeViewList.types";
@@ -13,6 +13,7 @@ import SearchBar from "../SearchBar/SearchBar";
  * @param props - The properties for the tree view list.
  * @property props.enableSearch - If true, the search input is displayed. Defaults to false.
  * @property props.expandSearchResults - If true, the tree nodes will be automatically expanded when a search term is entered. Defaults to false.
+ * @property props.expandItems - The number of items to expand
  * @property props.items - The items to display in the tree view list.
  * @property props.onNodeSelect - The function to call when a node is selected.
  * @property props.onNodeToggle - The function to call when a node is toggled.
@@ -23,6 +24,7 @@ import SearchBar from "../SearchBar/SearchBar";
 const TreeViewList = ({
   enableSearch = false,
   expandSearchResults = false,
+  expandItems = 1,
   items,
   onNodeSelect,
   onNodeToggle,
@@ -37,7 +39,13 @@ const TreeViewList = ({
   const [searchValue, setSearchValue] = useState("");
 
   // state for expanded nodes
-  const [defaultExpanded, setDefaultExpanded] = useState<string[]>([]);
+  const [expandedNodes, setExpandedNodes] = useState<string[]>([]);
+
+  // state for user expanded nodes
+  const [userExpanded, setUserExpanded] = useState<string[]>([]);
+
+  // state for the node we are hovered over
+  const [hoveredNode, setHoveredNode] = useState<string>("");
 
   // update tree display items when the items prop changes or when the search input changes
   useEffect(() => {
@@ -57,33 +65,81 @@ const TreeViewList = ({
     }
   }, [enableSearch, items, searchValue]);
 
-  // if search is enabled and expandSearchResults is true, expand all nodes when the tree display items change
-  useEffect(() => {
-    if (enableSearch && expandSearchResults && searchValue !== "") {
-      const expandedNodes: string[] = [];
-      const expandAllNodes = (items: TreeNodeItem[]) => {
+  // count the number of last children in the tree
+  const countLastChild = (items: TreeNodeItem[]) => {
+    let count = 0;
+
+    for (const item of items) {
+      // Check if the object has a 'children' property and it's not empty
+      if (item.children && item.children.length > 0) {
+        // If the object has children, recursively call the function on its children
+        count += countLastChild(item.children);
+      } else {
+        // If the object has no children, it is a last child
+        count += 1;
+      }
+    }
+
+    return count;
+  };
+
+  // expand the nodes when the search input changes
+  const expandNodes = () => {
+    let searchedNodes: string[] = [];
+    const expandChildNodes = (items: TreeNodeItem[]) => {
+      // If the condition is not met for the entire items array, return early
+      if (countLastChild(items) > expandItems) {
+        // reset the searched nodes array
+        searchedNodes = [];
+        return;
+      }
+
+      // if the number of last children is less than or equal to the expandItems, expand the nodes
+      if (countLastChild(items) <= expandItems) {
         for (const item of items) {
-          expandedNodes.push(item.nodeId);
+          // if the node has children, expand it and call the function on its children
           if (item.children) {
-            expandAllNodes(item.children);
+            searchedNodes.push(item.nodeId);
+            expandChildNodes(item.children);
           }
         }
-      };
-      expandAllNodes(treeDisplayItems);
-      setDefaultExpanded(expandedNodes);
+      }
+    };
+    expandChildNodes(treeDisplayItems);
+    // update the expanded nodes with the searched nodes
+    setExpandedNodes(prevState => [...prevState, ...searchedNodes]);
+  };
+
+  // debounce the expandNodes function to prevent it from being called too frequently
+  const debouncedExpandAllNodes = debounce(expandNodes, 100);
+
+  // if search is enabled and expandSearchResults is true, expand the nodes when the tree display items change
+  useEffect(() => {
+    if (enableSearch && expandSearchResults && searchValue !== "") {
+      debouncedExpandAllNodes();
     } else {
-      setDefaultExpanded([]);
+      // if enableSearch is false and expandSearchResults is false and searchValue is empty, update the expanded nodes with the user expanded nodes
+      setExpandedNodes(userExpanded);
     }
-  }, [enableSearch, expandSearchResults, searchValue, treeDisplayItems]);
+  }, [
+    userExpanded,
+    debouncedExpandAllNodes,
+    expandedNodes,
+    enableSearch,
+    expandSearchResults,
+    searchValue
+  ]);
 
   // render the tree nodes with optional tooltips
   const renderTree = (nodes: TreeNodeItem[]) =>
     nodes.map(node => (
       <TooltipTreeItem
         disabled={node.disabled}
+        hoveredNode={hoveredNode}
         key={node.nodeId}
         label={node.label}
         nodeId={node.nodeId}
+        setHoveredNode={setHoveredNode}
         tooltip={node.tooltip}
       >
         {Array.isArray(node.children) && node.children.length > 0
@@ -101,18 +157,52 @@ const TreeViewList = ({
         />
       ) : null}
       <TreeView
-        key={`${searchValue} + ${defaultExpanded.length}`} // key to force re-render so that we can reset the expanded nodes when the search input changes but still allow user to expand/collapse nodes
         defaultCollapseIcon={<RemoveIcon />}
         defaultExpandIcon={<AddIcon />}
-        defaultExpanded={defaultExpanded}
+        expanded={expandedNodes}
         selected={selected}
-        onNodeSelect={onNodeSelect}
-        onNodeToggle={onNodeToggle}
+        onNodeSelect={(event, nodeId) => {
+          const node = getNodeById(treeDisplayItems, nodeId);
+          const isChild = Boolean(
+            node && (!node.children || node.children.length === 0)
+          );
+          if (onNodeSelect) {
+            const nodeDetails = { isChild };
+            onNodeSelect(event, nodeId, nodeDetails);
+          }
+        }}
+        onNodeToggle={(event, nodeId) => {
+          setUserExpanded([...nodeId]);
+        }}
       >
         {renderTree(treeDisplayItems)}
       </TreeView>
     </Box>
   );
+};
+
+/**
+ * Recursively finds a node by its ID.
+ *
+ * @param nodes - The nodes to search.
+ * @param nodeId - The ID of the node to find.
+ * @returns The node with the specified ID, or null if not found.
+ */
+const getNodeById = (
+  nodes: TreeNodeItem[],
+  nodeId: string
+): TreeNodeItem | null => {
+  for (const node of nodes) {
+    if (node.nodeId === nodeId) {
+      return node;
+    } else if (node.children) {
+      const result = getNodeById(node.children, nodeId);
+      if (result) {
+        return result;
+      }
+    }
+  }
+  return null;
 };
 
 /**
@@ -128,20 +218,34 @@ const TreeViewList = ({
 const TooltipTreeItem = (
   props: Pick<TreeNodeItem, "disabled" | "label" | "nodeId" | "tooltip"> & {
     children?: React.ReactNode;
+    hoveredNode: string;
+    setHoveredNode: (nodeId: string) => void;
   }
 ) => {
+  // destructure the hoveredNode and setHoveredNode from the props and pass the rest of the props to the TreeItem
+  const { hoveredNode, setHoveredNode, ...rest } = props;
+
   return (
     <Tooltip
-      disableFocusListener
       title={props.tooltip ? <>{props.tooltip}</> : ""}
-      placement="right"
+      placement="right-start"
+      open={props.hoveredNode === props.nodeId}
+      disableFocusListener
     >
       <TreeItem
-        {...props}
+        {...rest}
         sx={theme => ({
           color: theme.palette.text.primary,
           padding: "5px"
         })}
+        onMouseOver={event => {
+          event.stopPropagation();
+          setHoveredNode(props.nodeId);
+        }}
+        onMouseOut={event => {
+          event.stopPropagation();
+          setHoveredNode("");
+        }}
       />
     </Tooltip>
   );

@@ -31,6 +31,17 @@ export type TreeNodeItem = {
 };
 
 /**
+ * Callback fired when a node is selected.
+ */
+type OnNodeSelect = (
+  event: React.SyntheticEvent,
+  nodeId: string,
+  nodeDetails: {
+    isChild: boolean;
+  }
+) => void;
+
+/**
  * Properties for the TreeViewList component.
  */
 export type TreeViewListProps = {
@@ -45,6 +56,11 @@ export type TreeViewListProps = {
   expandSearchResults?: boolean;
 
   /**
+   * The number of items to automactically expand when expandSearchResults is true. Defaults to 1.
+   */
+  expandItems?: number;
+
+  /**
    * The items to display in the tree view list.
    */
   items: TreeNodeItem[];
@@ -52,7 +68,7 @@ export type TreeViewListProps = {
   /**
    * Callback fired when tree items are selected/unselected.
    */
-  onNodeSelect: TreeViewProps<false>["onNodeSelect"];
+  onNodeSelect: OnNodeSelect;
 
   /**
    * Callback fired when tree items are expanded/collapsed.
