@@ -23,6 +23,7 @@ const Template: StoryFn<TreeViewListProps> = args => {
 export const Default = {
   args: {
     enableSearch: false,
+    expandItems: 1,
     expandSearchResults: false,
     items,
     selected: "",
@@ -35,7 +36,7 @@ export const Default = {
 export const WithSearch = {
   args: {
     enableSearch: true,
-    expandItems: 2,
+    expandItems: 1,
     expandSearchResults: true,
     items,
     selected: "",
@@ -48,6 +49,7 @@ export const WithSearch = {
 export const CustomWidth = {
   args: {
     enableSearch: true,
+    expandItems: 1,
     expandSearchResults: true,
     items,
     selected: "",
