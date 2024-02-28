@@ -1,34 +1,38 @@
 export type LoadErrorMessageProps = {
   /**
-   * Whether to show the VirtoThinking SVG or not.
+   * The text to display on the action button (optional).
    */
-  showImg: boolean;
+  actionButtonText?: string;
   /**
-   * The title of the error message.
+   * The team to contact if the error persists.
    */
-  title: string;
+  contactTeam?: "none" | "Support" | "Customer Service";
   /**
-   * The main message of the error message.
+   * The URL to the support page (optional).
    */
-  message: string;
+  contactUrl?: string;
   /**
    * The details of the error message (optional).
    */
   errorDetails?: string;
   /**
-   * The team to contact if the error persists.
+   * Whether to show the VirtoThinking SVG or not.
    */
-  contactTeam: "Support" | "Customer Service";
+  image?:
+    | "none"
+    | "virto-thinking"
+    | "virto-shrugging"
+    | "virto-head-scratching";
   /**
-   * The URL to the support page (optional).
+   * The main message of the error message.
    */
-  supportUrl?: string;
-  /**
-   * The text to display on the action button (optional).
-   */
-  actionButtonText?: string;
+  message: string;
   /**
    * The function to call when the action button is clicked (optional).
    */
   onButtonClick?: () => void;
+  /**
+   * The title of the error message.
+   */
+  title: string;
 };

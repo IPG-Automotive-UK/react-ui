@@ -7,14 +7,14 @@ test("Renders the title", async ({ page }) => {
 
   const title = page
     .frameLocator('iframe[title="storybook-preview-iframe"]')
-    .getByText("Failed to load");
+    .getByText("Title");
 
   await expect(title).toBeVisible();
 });
 
 test("Renders the action button", async ({ page }) => {
   await page.goto(
-    "http://localhost:6006/?path=/story/card-loaderrormessage--default"
+    "http://localhost:6006/?path=/story/card-loaderrormessage--default&args=actionButtonText:Refresh"
   );
 
   const button = page
@@ -41,9 +41,9 @@ test('Does not render "View More Details" text if no details are provided', asyn
   await expect(viewMoreDetailsText).toBeHidden();
 });
 
-test("Does not render image when showImg is false", async ({ page }) => {
+test("Does not render image when image is none", async ({ page }) => {
   await page.goto(
-    "http://localhost:6006/?path=/story/card-loaderrormessage--default&args=showImg:false"
+    "http://localhost:6006/?path=/story/card-loaderrormessage--default&args=image:none"
   );
 
   const frame = page.frameLocator('iframe[title="storybook-preview-iframe"]');
