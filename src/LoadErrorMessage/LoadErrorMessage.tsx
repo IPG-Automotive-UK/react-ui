@@ -146,7 +146,6 @@ const LoadErrorMessage = ({
 };
 
 LoadErrorMessage.default404Props = {
-  actionButtonText: "Go back",
   contactTeam: "none",
   image: "virto-shrugging",
   message:
