@@ -18,6 +18,7 @@ import SearchBar from "../SearchBar/SearchBar";
  * @property props.onNodeSelect - The function to call when a node is selected.
  * @property props.onNodeToggle - The function to call when a node is toggled.
  * @property props.selected - The ID of the currently selected item.
+ * @property props.height - The height of the tree view list.
  * @property props.width - The width of the tree view list.
  * @returns The tree view list component.
  */
@@ -29,6 +30,7 @@ const TreeViewList = ({
   onNodeSelect,
   onNodeToggle,
   selected,
+  height = "90vh",
   width = "100%"
 }: TreeViewListProps) => {
   // state for items to display in the tree
@@ -110,6 +112,16 @@ const TreeViewList = ({
     setExpandedNodes(prevState => [...prevState, ...searchedNodes]);
   };
 
+  useEffect(() => {
+    if (searchValue !== "") {
+      // if the search input is not empty, update expanded nodes with the user expanded nodes
+      setExpandedNodes(prevState => [...prevState, ...userExpanded]);
+    } else {
+      // if the search input is empty, update expanded nodes with the user expanded nodes
+      setExpandedNodes(userExpanded);
+    }
+  }, [userExpanded, searchValue]);
+
   // debounce the expandNodes function to prevent it from being called too frequently
   const debouncedExpandAllNodes = debounce(expandNodes, 100);
 
@@ -149,35 +161,86 @@ const TreeViewList = ({
     ));
 
   return (
-    <Box sx={{ overflow: "clip", width }}>
-      {enableSearch ? (
-        <SearchBar
-          value={searchValue}
-          onChange={event => setSearchValue(event.target.value)}
-        />
-      ) : null}
-      <TreeView
-        defaultCollapseIcon={<RemoveIcon />}
-        defaultExpandIcon={<AddIcon />}
-        expanded={expandedNodes}
-        selected={selected}
-        onNodeSelect={(event, nodeId) => {
-          const node = getNodeById(treeDisplayItems, nodeId);
-          const isChild = Boolean(
-            node && (!node.children || node.children.length === 0)
-          );
-          if (onNodeSelect) {
-            const nodeDetails = { isChild };
-            onNodeSelect(event, nodeId, nodeDetails);
-          }
-        }}
-        onNodeToggle={(event, nodeId) => {
-          setUserExpanded([...nodeId]);
-        }}
+    <>
+      <Box
+        sx={theme => ({
+          background: theme.palette.background.paper,
+          height,
+          overflowX: "hidden",
+          overflowY: "auto",
+          position: "relative",
+          width
+        })}
       >
-        {renderTree(treeDisplayItems)}
-      </TreeView>
-    </Box>
+        <Box
+          sx={theme => ({
+            background: theme.palette.background.paper,
+            padding: "1px 5px 1px 5px",
+            position: "sticky",
+            top: 0,
+            width: "100%",
+            zIndex: 2
+          })}
+        >
+          {/* Additional layer to block content behind */}
+          <Box
+            sx={theme => ({
+              background: theme.palette.background.paper, // Matching background color
+              height: "100%",
+              left: 0,
+              position: "absolute",
+              right: 0,
+              top: 0,
+              zIndex: -1 // Behind the sticky box content
+            })}
+          ></Box>
+          {enableSearch ? (
+            <SearchBar
+              width="98%"
+              value={searchValue}
+              onChange={event => setSearchValue(event.target.value)}
+            />
+          ) : null}
+        </Box>
+        <Box
+          sx={theme => ({
+            background: theme.palette.background.paper,
+            padding: "10px",
+            position: "relative",
+            zIndex: 1
+          })}
+        >
+          <TreeView
+            defaultCollapseIcon={<RemoveIcon />}
+            defaultExpandIcon={<AddIcon />}
+            expanded={expandedNodes}
+            selected={selected}
+            onNodeSelect={(event, nodeId) => {
+              const node = getNodeById(treeDisplayItems, nodeId);
+              const isChild = Boolean(
+                node && (!node.children || node.children.length === 0)
+              );
+              if (onNodeSelect) {
+                const nodeDetails = { isChild };
+                onNodeSelect(event, nodeId, nodeDetails);
+              }
+            }}
+            onNodeToggle={(event, nodeId) => {
+              // update the user expanded nodes when a node is toggled
+              setUserExpanded(nodeId);
+              // update the expanded nodes when a node is toggled
+              setExpandedNodes(nodeId);
+              // call the onNodeToggle function if it is defined
+              if (onNodeToggle) {
+                onNodeToggle(event, nodeId);
+              }
+            }}
+          >
+            {renderTree(treeDisplayItems)}
+          </TreeView>
+        </Box>
+      </Box>
+    </>
   );
 };
 
