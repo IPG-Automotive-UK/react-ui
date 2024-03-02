@@ -9,7 +9,8 @@ export default function SearchBar({
   value = "",
   onChange = () => {},
   onBlur = () => {},
-  placeholder = "Search"
+  placeholder = "Search",
+  width = "100%"
 }: SearchBarProps) {
   const hasValue = value && value !== "";
   return (
@@ -19,7 +20,8 @@ export default function SearchBar({
         alignItems: "center",
         display: "flex",
         marginBottom: theme => theme.spacing(2),
-        marginTop: theme => theme.spacing(2)
+        marginTop: theme => theme.spacing(2),
+        width
       }}
     >
       <InputBase
