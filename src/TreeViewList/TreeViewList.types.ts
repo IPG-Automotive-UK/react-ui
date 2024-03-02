@@ -73,12 +73,17 @@ export type TreeViewListProps = {
   /**
    * Callback fired when tree items are expanded/collapsed.
    */
-  onNodeToggle: TreeViewProps<false>["onNodeToggle"];
+  onNodeToggle?: TreeViewProps<false>["onNodeToggle"];
 
   /**
    * The ID of the currently selected node.
    */
   selected: TreeViewProps<false>["selected"];
+
+  /**
+   * The display height of the tree view list. This is optional.
+   */
+  height?: string;
 
   /**
    * The display width of the tree view list. This is optional.
