@@ -30,7 +30,7 @@ const TreeViewList = ({
   onNodeSelect,
   onNodeToggle,
   selected,
-  height = "80vh",
+  height = "100%",
   width = "100%"
 }: TreeViewListProps) => {
   // state for items to display in the tree
@@ -165,84 +165,73 @@ const TreeViewList = ({
       <Box
         sx={theme => ({
           background: theme.palette.background.paper,
+          display: "flex",
+          flexDirection: "column",
           height,
-          padding: "2px 5px",
+          overflow: "hidden",
+          paddingX: "5px",
+          paddingY: "2px",
           width
         })}
       >
-        <Box
-          sx={theme => ({
-            background: theme.palette.background.paper,
-            position: "sticky",
-            top: 0,
-            zIndex: 2
-          })}
-        >
-          {/* Additional layer to block content behind */}
-          <Box
-            sx={theme => ({
-              background: theme.palette.background.paper, // Matching background color
-              height: "100%",
-              left: 0,
-              position: "absolute",
-              right: 0,
-              top: 0,
-              zIndex: -1 // Behind the sticky box content
-            })}
-          ></Box>
-          {enableSearch ? (
-            <SearchBar
-              value={searchValue}
-              onChange={event => setSearchValue(event.target.value)}
-            />
-          ) : null}
-        </Box>
-        <Box sx={{ paddingBottom: "10px" }}>
+        <Box sx={{ flexShrink: 0 }}>
           <Box
             sx={theme => ({
               background: theme.palette.background.paper,
-              maxHeight: `calc(${height} - 90px)`, // Subtract the height of the search bar
-              overflowY: "auto",
-              position: "relative"
+              position: "sticky",
+              top: 0,
+              zIndex: 2
             })}
           >
+            {/* Additional layer to block content behind */}
             <Box
               sx={theme => ({
-                background: theme.palette.background.paper,
-                position: "relative",
-                zIndex: 1
+                background: theme.palette.background.paper, // Matching background color
+                height: "100%",
+                left: 0,
+                position: "absolute",
+                right: 0,
+                top: 0,
+                zIndex: -1 // Behind the sticky box content
               })}
-            >
-              <TreeView
-                defaultCollapseIcon={<RemoveIcon />}
-                defaultExpandIcon={<AddIcon />}
-                expanded={expandedNodes}
-                selected={selected}
-                onNodeSelect={(event, nodeId) => {
-                  const node = getNodeById(treeDisplayItems, nodeId);
-                  const isChild = Boolean(
-                    node && (!node.children || node.children.length === 0)
-                  );
-                  if (onNodeSelect) {
-                    const nodeDetails = { isChild };
-                    onNodeSelect(event, nodeId, nodeDetails);
-                  }
-                }}
-                onNodeToggle={(event, nodeId) => {
-                  // update the user expanded nodes when a node is toggled
-                  setUserExpanded(nodeId);
-                  // update the expanded nodes when a node is toggled
-                  setExpandedNodes(nodeId);
-                  // call the onNodeToggle function if it is defined
-                  if (onNodeToggle) {
-                    onNodeToggle(event, nodeId);
-                  }
-                }}
-              >
-                {renderTree(treeDisplayItems)}
-              </TreeView>
-            </Box>
+            ></Box>
+            {enableSearch ? (
+              <SearchBar
+                value={searchValue}
+                onChange={event => setSearchValue(event.target.value)}
+              />
+            ) : null}
           </Box>
+        </Box>
+        <Box sx={{ flexGrow: 1, overflowY: "auto" }}>
+          <TreeView
+            defaultCollapseIcon={<RemoveIcon />}
+            defaultExpandIcon={<AddIcon />}
+            expanded={expandedNodes}
+            selected={selected}
+            onNodeSelect={(event, nodeId) => {
+              const node = getNodeById(treeDisplayItems, nodeId);
+              const isChild = Boolean(
+                node && (!node.children || node.children.length === 0)
+              );
+              if (onNodeSelect) {
+                const nodeDetails = { isChild };
+                onNodeSelect(event, nodeId, nodeDetails);
+              }
+            }}
+            onNodeToggle={(event, nodeId) => {
+              // update the user expanded nodes when a node is toggled
+              setUserExpanded(nodeId);
+              // update the expanded nodes when a node is toggled
+              setExpandedNodes(nodeId);
+              // call the onNodeToggle function if it is defined
+              if (onNodeToggle) {
+                onNodeToggle(event, nodeId);
+              }
+            }}
+          >
+            {renderTree(treeDisplayItems)}
+          </TreeView>
         </Box>
       </Box>
     </>
