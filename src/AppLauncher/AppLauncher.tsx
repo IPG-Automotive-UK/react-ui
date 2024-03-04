@@ -128,9 +128,7 @@ function AppLauncher({
               key={app.name}
               component="a"
               href={app.url}
-              target={
-                window.location.href.startsWith(app.url) ? "self" : "_blank"
-              }
+              target={window.location.href.startsWith(app.url) ? "" : "_blank"}
               data-testid={app.name}
               sx={theme => ({
                 "&:hover": {
