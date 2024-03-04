@@ -30,7 +30,7 @@ const TreeViewList = ({
   onNodeSelect,
   onNodeToggle,
   selected,
-  height = "90vh",
+  height = "80vh",
   width = "100%"
 }: TreeViewListProps) => {
   // state for items to display in the tree
@@ -166,19 +166,15 @@ const TreeViewList = ({
         sx={theme => ({
           background: theme.palette.background.paper,
           height,
-          overflowX: "hidden",
-          overflowY: "auto",
-          position: "relative",
+          padding: "2px 5px",
           width
         })}
       >
         <Box
           sx={theme => ({
             background: theme.palette.background.paper,
-            padding: "1px 5px 1px 5px",
             position: "sticky",
             top: 0,
-            width: "100%",
             zIndex: 2
           })}
         >
@@ -196,48 +192,57 @@ const TreeViewList = ({
           ></Box>
           {enableSearch ? (
             <SearchBar
-              width="98%"
               value={searchValue}
               onChange={event => setSearchValue(event.target.value)}
             />
           ) : null}
         </Box>
-        <Box
-          sx={theme => ({
-            background: theme.palette.background.paper,
-            padding: "10px",
-            position: "relative",
-            zIndex: 1
-          })}
-        >
-          <TreeView
-            defaultCollapseIcon={<RemoveIcon />}
-            defaultExpandIcon={<AddIcon />}
-            expanded={expandedNodes}
-            selected={selected}
-            onNodeSelect={(event, nodeId) => {
-              const node = getNodeById(treeDisplayItems, nodeId);
-              const isChild = Boolean(
-                node && (!node.children || node.children.length === 0)
-              );
-              if (onNodeSelect) {
-                const nodeDetails = { isChild };
-                onNodeSelect(event, nodeId, nodeDetails);
-              }
-            }}
-            onNodeToggle={(event, nodeId) => {
-              // update the user expanded nodes when a node is toggled
-              setUserExpanded(nodeId);
-              // update the expanded nodes when a node is toggled
-              setExpandedNodes(nodeId);
-              // call the onNodeToggle function if it is defined
-              if (onNodeToggle) {
-                onNodeToggle(event, nodeId);
-              }
-            }}
+        <Box sx={{ paddingBottom: "10px" }}>
+          <Box
+            sx={theme => ({
+              background: theme.palette.background.paper,
+              maxHeight: `calc(${height} - 90px)`, // Subtract the height of the search bar
+              overflowY: "auto",
+              position: "relative"
+            })}
           >
-            {renderTree(treeDisplayItems)}
-          </TreeView>
+            <Box
+              sx={theme => ({
+                background: theme.palette.background.paper,
+                position: "relative",
+                zIndex: 1
+              })}
+            >
+              <TreeView
+                defaultCollapseIcon={<RemoveIcon />}
+                defaultExpandIcon={<AddIcon />}
+                expanded={expandedNodes}
+                selected={selected}
+                onNodeSelect={(event, nodeId) => {
+                  const node = getNodeById(treeDisplayItems, nodeId);
+                  const isChild = Boolean(
+                    node && (!node.children || node.children.length === 0)
+                  );
+                  if (onNodeSelect) {
+                    const nodeDetails = { isChild };
+                    onNodeSelect(event, nodeId, nodeDetails);
+                  }
+                }}
+                onNodeToggle={(event, nodeId) => {
+                  // update the user expanded nodes when a node is toggled
+                  setUserExpanded(nodeId);
+                  // update the expanded nodes when a node is toggled
+                  setExpandedNodes(nodeId);
+                  // call the onNodeToggle function if it is defined
+                  if (onNodeToggle) {
+                    onNodeToggle(event, nodeId);
+                  }
+                }}
+              >
+                {renderTree(treeDisplayItems)}
+              </TreeView>
+            </Box>
+          </Box>
         </Box>
       </Box>
     </>

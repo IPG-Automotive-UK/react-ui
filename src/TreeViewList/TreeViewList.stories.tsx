@@ -40,7 +40,7 @@ export const WithSearch = {
     expandSearchResults: true,
     items,
     selected: "",
-    width: "100%"
+    width: "90%"
   },
   render: Template
 };
@@ -53,7 +53,7 @@ export const CustomWidth = {
     expandSearchResults: true,
     items,
     selected: "",
-    width: "60%"
+    width: "400px"
   },
   render: Template
 };
