@@ -22,4 +22,9 @@ export type SearchBarProps = {
    * The value of the input element, required for a controlled component.
    */
   value?: string;
+
+  /**
+   * The width of the input element. This is optional.
+   */
+  width?: string;
 };

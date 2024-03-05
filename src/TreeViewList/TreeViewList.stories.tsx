@@ -53,7 +53,21 @@ export const CustomWidth = {
     expandSearchResults: true,
     items,
     selected: "",
-    width: "60%"
+    width: "400px"
+  },
+  render: Template
+};
+
+// With Custom Height
+export const CustomHeight = {
+  args: {
+    enableSearch: true,
+    expandItems: 1,
+    expandSearchResults: true,
+    height: "400px",
+    items,
+    selected: "",
+    width: "50%"
   },
   render: Template
 };

@@ -146,7 +146,6 @@ const LoadErrorMessage = ({
 };
 
 LoadErrorMessage.default404Props = {
-  actionButtonText: "Go back",
   contactTeam: "none",
   image: "virto-shrugging",
   message:
@@ -157,7 +156,7 @@ LoadErrorMessage.default404Props = {
 LoadErrorMessage.defaultErrorProps = {
   actionButtonText: "Refresh",
   contactTeam: "Support",
-  contactUrl: "https://support.virto.com",
+  contactUrl: "https://www.ipg-automotive.com/en/support/support-request/",
   errorDetails: "Invalid token - length is 0",
   image: "virto-head-scratching",
   message:
