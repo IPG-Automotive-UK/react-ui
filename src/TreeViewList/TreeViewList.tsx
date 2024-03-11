@@ -37,6 +37,9 @@ const TreeViewList = ({
   const [treeDisplayItems, setTreeDisplayItems] =
     useState<TreeViewListProps["items"]>(items);
 
+  // state for selected node
+  const [selectedNode, setSelectedNode] = useState<string>(selected ?? "");
+
   // state for search input value
   const [searchValue, setSearchValue] = useState("");
 
@@ -87,12 +90,14 @@ const TreeViewList = ({
 
   // expand the nodes when the search input changes
   const expandNodes = () => {
-    let searchedNodes: string[] = [];
+    // use a Set to store the searched nodes to prevent duplicates
+    const searchedNodes = new Set<string>();
+
     const expandChildNodes = (items: TreeNodeItem[]) => {
       // If the condition is not met for the entire items array, return early
       if (countLastChild(items) > expandItems) {
         // reset the searched nodes array
-        searchedNodes = [];
+        searchedNodes.clear();
         return;
       }
 
@@ -101,7 +106,7 @@ const TreeViewList = ({
         for (const item of items) {
           // if the node has children, expand it and call the function on its children
           if (item.children) {
-            searchedNodes.push(item.nodeId);
+            searchedNodes.add(item.nodeId);
             expandChildNodes(item.children);
           }
         }
@@ -109,9 +114,21 @@ const TreeViewList = ({
     };
     expandChildNodes(treeDisplayItems);
     // update the expanded nodes with the searched nodes
-    setExpandedNodes(prevState => [...prevState, ...searchedNodes]);
+
+    // Convert the Set to an Array for comparison
+    const newExpandedNodes = [...searchedNodes];
+
+    // Only update the state if there are changes
+    setExpandedNodes(prevState => {
+      const isSame =
+        prevState.length === newExpandedNodes.length &&
+        prevState.every((node, index) => node === newExpandedNodes[index]);
+
+      return isSame ? prevState : newExpandedNodes;
+    });
   };
 
+  // update the expanded nodes when the user expanded nodes change or when the search input changes
   useEffect(() => {
     if (searchValue !== "") {
       // if the search input is not empty, update expanded nodes with the user expanded nodes
@@ -130,8 +147,10 @@ const TreeViewList = ({
     if (enableSearch && expandSearchResults && searchValue !== "") {
       debouncedExpandAllNodes();
     } else {
-      // if enableSearch is false and expandSearchResults is false and searchValue is empty, update the expanded nodes with the user expanded nodes
-      setExpandedNodes(userExpanded);
+      // if enableSearch is false and expandSearchResults is false, searchValue is empty, and there isn't a selectedNode update the expanded nodes with the user expanded nodes
+      if (selectedNode === "") {
+        setExpandedNodes(userExpanded);
+      }
     }
   }, [
     userExpanded,
@@ -139,8 +158,21 @@ const TreeViewList = ({
     expandedNodes,
     enableSearch,
     expandSearchResults,
-    searchValue
+    searchValue,
+    selectedNode,
+    items
   ]);
+
+  // update the expanded nodes when the selected node changes
+  useEffect(() => {
+    if (selectedNode) {
+      // update the expanded nodes when the selected node changes
+      const parentNodeIds = findPathToNodeId(items, selectedNode);
+
+      // update the expanded nodes with the parent node ids
+      setExpandedNodes(prev => [...prev, ...parentNodeIds]);
+    }
+  }, [items, selectedNode]);
 
   // render the tree nodes with optional tooltips
   const renderTree = (nodes: TreeNodeItem[]) =>
@@ -198,7 +230,10 @@ const TreeViewList = ({
             {enableSearch ? (
               <SearchBar
                 value={searchValue}
-                onChange={event => setSearchValue(event.target.value)}
+                onChange={event => {
+                  setSelectedNode("");
+                  setSearchValue(event.target.value);
+                }}
               />
             ) : null}
           </Box>
@@ -208,7 +243,7 @@ const TreeViewList = ({
             defaultCollapseIcon={<RemoveIcon />}
             defaultExpandIcon={<AddIcon />}
             expanded={expandedNodes}
-            selected={selected}
+            selected={selectedNode}
             onNodeSelect={(event, nodeId) => {
               const node = getNodeById(treeDisplayItems, nodeId);
               const isChild = Boolean(
@@ -216,10 +251,16 @@ const TreeViewList = ({
               );
               if (onNodeSelect) {
                 const nodeDetails = { isChild };
+                // update the selected node when a node is selected and it is a child
+                if (isChild) {
+                  setSelectedNode(nodeId);
+                }
                 onNodeSelect(event, nodeId, nodeDetails);
               }
             }}
             onNodeToggle={(event, nodeId) => {
+              // reset the selected node when a node is toggled
+              setSelectedNode("");
               // update the user expanded nodes when a node is toggled
               setUserExpanded(nodeId);
               // update the expanded nodes when a node is toggled
@@ -378,6 +419,35 @@ const filterBySearchTerm = (items: TreeNodeItem[], searchTerm: string) => {
 
   // return the filtered items
   return filteredItems as TreeNodeItem[];
+};
+
+/**
+ * Recursively find the path from the root to the given nodeId
+ * @param items - The items to search.
+ * @param nodeId - The node id to find.
+ * @returns The path from the root to the node id.
+ * @example findPathToNodeId(items, "node_id");
+ */
+const findPathToNodeId = (items: TreeNodeItem[], nodeId: string): string[] => {
+  for (const item of items) {
+    if (item.nodeId === nodeId) {
+      // if the current item is the one we're looking for, return an array containing only its id
+      return [item.nodeId];
+    }
+
+    if (item.children) {
+      // if the current item has children, recursively call this function on them
+      const pathFromChild = findPathToNodeId(item.children, nodeId);
+
+      if (pathFromChild.length > 0) {
+        // if we found the node in the children, return an array containing the id of the current item and the path from the child
+        return [item.nodeId, ...pathFromChild];
+      }
+    }
+  }
+
+  // if no node found, return an empty array
+  return [];
 };
 
 export default TreeViewList;

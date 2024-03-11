@@ -46,6 +46,19 @@ export const WithSearch = {
 };
 
 // With Custom width
+export const SelectedNode = {
+  args: {
+    enableSearch: true,
+    expandItems: 1,
+    expandSearchResults: true,
+    items,
+    selected: "SUS.Axle.WheelBase",
+    width: "90%px"
+  },
+  render: Template
+};
+
+// With Custom width
 export const CustomWidth = {
   args: {
     enableSearch: true,
