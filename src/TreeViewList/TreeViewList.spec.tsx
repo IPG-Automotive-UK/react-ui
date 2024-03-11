@@ -239,3 +239,33 @@ test("should not expand the child nodes when expand for search is not enabled", 
     throw new Error("Frame element is null");
   }
 });
+
+test("should expand selected node", async ({ page }) => {
+  // Navigate to the story
+  await page.goto(
+    "http://localhost:6006/?path=/story/lists-treeviewlist--default"
+  );
+
+  // Wait for the iframe to be attached in the DOM.
+  await page.waitForSelector('iframe[title="storybook-preview-iframe"]');
+
+  // Expect the test node to be hidden initially
+  await expect(
+    page
+      .frameLocator('iframe[title="storybook-preview-iframe"]')
+      .getByText("Mass", { exact: true })
+  ).toBeHidden();
+
+  // Fill the selected field with an example node id and then lose focus to trigger the update
+  await page
+    .getByPlaceholder("Edit JSON string...")
+    .fill('"SUS.Damper.Front.Mass"');
+  await page.keyboard.press("Tab");
+
+  // Expect the selected test node to be visible after the update
+  await expect(
+    page
+      .frameLocator('iframe[title="storybook-preview-iframe"]')
+      .getByText("Mass", { exact: true })
+  ).toBeVisible();
+});
