@@ -4,6 +4,7 @@ import React from "react";
 import TreeViewList from "./TreeViewList";
 import { TreeViewListProps } from "./TreeViewList.types";
 import items from "./example-items.json";
+import { useArgs } from "@storybook/preview-api";
 
 /**
  * Story metadata
@@ -16,7 +17,15 @@ export default meta;
 
 // Story Template
 const Template: StoryFn<TreeViewListProps> = args => {
-  return <TreeViewList {...args} />;
+  // useArgs is a hook that returns the current state of the args object
+  const [{ selected }, updateArgs] = useArgs<TreeViewListProps>();
+
+  // update the args object with the new value value
+  React.useEffect(() => {
+    updateArgs({ selected });
+  }, [selected, updateArgs]);
+
+  return <TreeViewList {...args} selected={selected} />;
 };
 
 // Default
@@ -53,7 +62,7 @@ export const SelectedNode = {
     expandSearchResults: true,
     items,
     selected: "SUS.Axle.WheelBase",
-    width: "90%px"
+    width: "90%"
   },
   render: Template
 };

@@ -163,6 +163,14 @@ const TreeViewList = ({
     items
   ]);
 
+  // update the selected node when the selected prop changes
+  useEffect(() => {
+    // if the selected node is not empty, update the selected node
+    if (selected) {
+      setSelectedNode(selected);
+    }
+  }, [selected]);
+
   // update the expanded nodes when the selected node changes
   useEffect(() => {
     if (selectedNode) {
