@@ -112,19 +112,14 @@ const TreeViewList = ({
         }
       }
     };
+
+    // recursively expand the child nodes
     expandChildNodes(treeDisplayItems);
+
     // update the expanded nodes with the searched nodes
-
-    // Convert the Set to an Array for comparison
-    const newExpandedNodes = [...searchedNodes];
-
-    // Only update the state if there are changes
     setExpandedNodes(prevState => {
-      const isSame =
-        prevState.length === newExpandedNodes.length &&
-        prevState.every((node, index) => node === newExpandedNodes[index]);
-
-      return isSame ? prevState : newExpandedNodes;
+      const merged = new Set([...prevState, ...searchedNodes]);
+      return Array.from(merged);
     });
   };
 
