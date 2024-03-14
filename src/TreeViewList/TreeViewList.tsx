@@ -1,5 +1,5 @@
 import { Box, Tooltip, debounce } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { TreeItem, TreeView } from "@mui/x-tree-view";
 import { TreeNodeItem, TreeViewListProps } from "./TreeViewList.types";
 
@@ -71,7 +71,7 @@ const TreeViewList = ({
   }, [enableSearch, items, searchValue]);
 
   // count the number of last children in the tree
-  const countLastChild = (items: TreeNodeItem[]) => {
+  const countLastChild = useCallback((items: TreeNodeItem[]) => {
     let count = 0;
 
     for (const item of items) {
@@ -86,10 +86,10 @@ const TreeViewList = ({
     }
 
     return count;
-  };
+  }, []);
 
   // expand the nodes when the search input changes
-  const expandNodes = () => {
+  const expandNodes = useCallback(() => {
     // use a Set to store the searched nodes to prevent duplicates
     const searchedNodes = new Set<string>();
 
@@ -121,7 +121,7 @@ const TreeViewList = ({
       const merged = new Set([...prevState, ...searchedNodes]);
       return Array.from(merged);
     });
-  };
+  }, [countLastChild, expandItems, treeDisplayItems]);
 
   // update the expanded nodes when the user expanded nodes change or when the search input changes
   useEffect(() => {
@@ -135,9 +135,11 @@ const TreeViewList = ({
   }, [userExpanded, searchValue]);
 
   // debounce the expandNodes function to prevent it from being called too frequently
-  const debouncedExpandAllNodes = debounce(expandNodes, 100);
+  const debouncedExpandAllNodes = useCallback(
+    () => debounce(expandNodes, 100)(),
+    [expandNodes]
+  );
 
-  // if search is enabled and expandSearchResults is true, expand the nodes when the tree display items change
   useEffect(() => {
     if (enableSearch && expandSearchResults && searchValue !== "") {
       debouncedExpandAllNodes();
@@ -150,12 +152,10 @@ const TreeViewList = ({
   }, [
     userExpanded,
     debouncedExpandAllNodes,
-    expandedNodes,
     enableSearch,
     expandSearchResults,
     searchValue,
-    selectedNode,
-    items
+    selectedNode
   ]);
 
   // update the selected node when the selected prop changes
