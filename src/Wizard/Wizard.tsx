@@ -25,7 +25,7 @@ export default function Wizard({ title, children, maxWidth }: WizardProps) {
             sx={{
               fontWeight: 700,
               maxWidth: theme => theme?.layout?.content?.maxWidth,
-              mb: 3,
+              mb: 2,
               mt: 1,
               mx: "auto",
               width: "100%"
