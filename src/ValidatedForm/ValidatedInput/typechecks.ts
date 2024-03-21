@@ -2,6 +2,7 @@ import {
   InputType,
   ValidatedAutocompleteProps,
   ValidatedCheckboxProps,
+  ValidatedFileUploaderProps,
   ValidatedInputProps,
   ValidatedRadioButtonsProps,
   ValidatedSwitchFieldProps,
@@ -10,66 +11,77 @@ import {
 
 /**
  * Validates if the input is an autocomplete input
- * @param metadata ValidatedInputProps
+ * @param props ValidatedInputProps
  * @returns Correct type of input
  */
 export function isAutocompleteInput(
-  metadata: ValidatedInputProps
-): metadata is ValidatedAutocompleteProps {
-  return metadata.kind === InputType.SELECT;
+  props: ValidatedInputProps
+): props is ValidatedAutocompleteProps {
+  return props.kind === InputType.SELECT;
 }
 
 /**
- * Validates if the input is a boolean input
- * @param metadata ValidatedInputProps
+ * Validates if the input is a switch input
+ * @param props ValidatedInputProps
  * @returns Correct type of input
  */
 export function isBooleanInput(
-  metadata: ValidatedInputProps
-): metadata is ValidatedSwitchFieldProps {
-  return metadata.kind === InputType.BOOLEAN;
+  props: ValidatedInputProps
+): props is ValidatedSwitchFieldProps {
+  return props.kind === InputType.SWITCH;
 }
 
 /**
  * Validates if the input is a checkbox input
- * @param metadata ValidatedInputProps
+ * @param props ValidatedInputProps
  * @returns Correct type of input
  */
 export function isCheckboxInput(
-  metadata: ValidatedInputProps
-): metadata is ValidatedCheckboxProps {
-  return metadata.kind === InputType.CHECKBOX;
+  props: ValidatedInputProps
+): props is ValidatedCheckboxProps {
+  return props.kind === InputType.CHECKBOX;
 }
 
 /**
  * Validates if the input is a number input
- * @param metadata ValidatedInputProps
+ * @param props ValidatedInputProps
  * @returns Correct type of input
  */
 export function isNumberInput(
-  metadata: ValidatedInputProps
-): metadata is ValidatedTextFieldProps {
-  return metadata.kind === InputType.NUMBER;
+  props: ValidatedInputProps
+): props is ValidatedTextFieldProps {
+  return props.kind === InputType.NUMBER;
 }
 
 /**
  * Validates if the input is a text input
- * @param metadata ValidatedInputProps
+ * @param props ValidatedInputProps
  * @returns Correct type of input
  */
 export function isTextInput(
-  metadata: ValidatedInputProps
-): metadata is ValidatedTextFieldProps {
-  return metadata.kind === InputType.TEXT;
+  props: ValidatedInputProps
+): props is ValidatedTextFieldProps {
+  return props.kind === InputType.TEXT;
 }
 
 /**
  * Validates if the input is a radio input
- * @param metadata ValidatedInputProps
+ * @param props ValidatedInputProps
  * @returns Correct type of input
  */
 export function isRadioInput(
-  metadata: ValidatedInputProps
-): metadata is ValidatedRadioButtonsProps {
-  return metadata.kind === InputType.RADIO;
+  props: ValidatedInputProps
+): props is ValidatedRadioButtonsProps {
+  return props.kind === InputType.RADIO;
+}
+
+/**
+ * Validates if the input is a file uploader input
+ * @param props ValidatedInputProps
+ * @returns Correct type of input
+ */
+export function isFileUploaderInput(
+  props: ValidatedInputProps
+): props is ValidatedFileUploaderProps {
+  return props.kind === InputType.FILE_UPLOADER;
 }

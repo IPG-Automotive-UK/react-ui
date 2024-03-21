@@ -13,7 +13,7 @@ import { SyntheticEvent } from "react";
  * Input types
  */
 export enum InputType {
-  BOOLEAN = "boolean",
+  SWITCH = "switch",
   CHECKBOX = "checkbox",
   NUMBER = "number",
   RADIO = "radio",
