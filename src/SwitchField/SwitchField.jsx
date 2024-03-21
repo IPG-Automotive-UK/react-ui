@@ -7,6 +7,7 @@ import {
   Switch,
   Typography
 } from "@mui/material";
+
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -15,6 +16,7 @@ import React from "react";
  */
 export default function FormSwitch({
   checked,
+  defaultChecked,
   disabled = false,
   helperText,
   label,
@@ -33,7 +35,12 @@ export default function FormSwitch({
         >
           <Stack alignItems="center" component="label" direction="row">
             <SwitchOptionLabel disabled={disabled} label={options[0]} />
-            <Switch checked={checked} onChange={onChange} size={size} />
+            <Switch
+              defaultChecked={defaultChecked}
+              checked={checked}
+              onChange={onChange}
+              size={size}
+            />
             <SwitchOptionLabel disabled={disabled} label={options[1]} />
           </Stack>
         </Typography>
@@ -60,6 +67,10 @@ FormSwitch.propTypes = {
    * If true, the component is checked.
    */
   checked: PropTypes.bool.isRequired,
+  /**
+   * Default checked for uncontrolled usage.
+   */
+  defaultChecked: PropTypes.bool,
   /**
    * If true, the switch will be disabled.
    */

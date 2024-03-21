@@ -3,6 +3,7 @@ import type { SwitchProps } from "@mui/material";
 
 export type SwitchFieldProps = {
   checked?: boolean;
+  defaultChecked?: boolean;
   disabled?: boolean;
   helperText?: string;
   label?: string;
