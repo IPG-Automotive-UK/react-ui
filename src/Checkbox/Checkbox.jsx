@@ -12,7 +12,7 @@ import PropTypes from "prop-types";
  * Checkbox component
  */
 export default function Checkbox({
-  checked = false,
+  checked = undefined,
   defaultChecked = false,
   disabled = false,
   label = "",
