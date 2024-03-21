@@ -269,3 +269,28 @@ test("should expand selected node", async ({ page }) => {
       .getByText("Mass", { exact: true })
   ).toBeVisible();
 });
+
+test("should show no search results message when no search results are found", async ({
+  page
+}) => {
+  // Navigate to the story
+  await page.goto(
+    "http://localhost:6006/?path=/story/lists-treeviewlist--with-search"
+  );
+
+  // Wait for the iframe to be attached in the DOM.
+  await page.waitForSelector('iframe[title="storybook-preview-iframe"]');
+
+  // Fill the search field with a search term that will not return any results
+  await page
+    .frameLocator('iframe[title="storybook-preview-iframe"]')
+    .getByPlaceholder("Search")
+    .fill("xx");
+
+  // Expect the no search results message to contain the correct text
+  await expect(
+    page
+      .frameLocator('iframe[title="storybook-preview-iframe"]')
+      .getByTestId("none-selected")
+  ).toContainText("No search results.");
+});
