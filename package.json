@@ -91,6 +91,8 @@
     "zxcvbn": "^4.4.2"
   },
   "dependencies": {
+    "@conform-to/react": "^1.0.4",
+    "@conform-to/zod": "^1.0.4",
     "@juggle/resize-observer": "^3.4.0",
     "@mui/icons-material": "^5.15.11",
     "@mui/x-data-grid": "^6.19.6",
