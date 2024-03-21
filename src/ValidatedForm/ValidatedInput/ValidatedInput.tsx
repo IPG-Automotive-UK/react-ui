@@ -15,18 +15,14 @@ import RadioButtons from "../../RadioButtons";
 import React from "react";
 import SwitchField from "../../SwitchField";
 import { ValidatedInputProps } from "./ValidatedInput.types";
-import { useField } from "remix-validated-form";
+import { useField } from "@conform-to/react";
 
 /**
  * Component for displaying appropriate inputs based on the props
  */
 const ValidatedInput = (props: ValidatedInputProps) => {
-  // Get data from the useField hook from remix validated form
-  const { error, getInputProps, defaultValue } = useField(props.name, {
-    validationBehavior: {
-      whenTouched: "onSubmit"
-    }
-  });
+  // Provides the meta data from the form context for the input field
+  const [meta] = useField(props.name);
 
   // If props are for a text input field, return a text input field
   if (isTextInput(props)) {
@@ -38,13 +34,12 @@ const ValidatedInput = (props: ValidatedInputProps) => {
         }}
       >
         <TextField
-          error={!!error || props.error}
-          helperText={error}
-          name={props.name}
+          error={!!meta.errors}
+          helperText={meta.errors && meta.errors[0]}
+          name={meta.name}
           label={props.label}
           required={props.required}
           size="small"
-          {...getInputProps()}
         />
       </Box>
     );
@@ -53,7 +48,7 @@ const ValidatedInput = (props: ValidatedInputProps) => {
   // If props are for a number input field, return a number input field
   if (isNumberInput(props)) {
     // Getting input props to do a transform on the default value
-    const inputProps = getInputProps();
+    const inputProps = { defaultValue: 0 };
     // Transform the default value to an empty string if it is 0
     const defaultValue =
       inputProps.defaultValue === 0 ? "" : inputProps.defaultValue;
@@ -68,9 +63,9 @@ const ValidatedInput = (props: ValidatedInputProps) => {
       >
         <TextField
           type="number"
-          error={!!error || props.error}
-          helperText={error}
-          name={props.name}
+          error={!!meta.errors}
+          helperText={meta.errors && meta.errors[0]}
+          name={meta.name}
           label={props.label}
           required={props.required}
           size="small"
@@ -92,21 +87,17 @@ const ValidatedInput = (props: ValidatedInputProps) => {
       >
         <Autocomplete
           options={props.options}
-          {...getInputProps({
-            onChange: (e, value: string) => {
-              if (!error) {
-                props.handleAutocompleteChange(e, value, props.name);
-              }
-            }
-          })}
-          defaultValue={defaultValue || undefined}
+          // onChange={(e, value: string) => {
+          //   props.handleAutocompleteChange(e, value, meta.name);
+          // }}
+          defaultValue={meta.initialValue || undefined}
           renderInput={params => (
             <TextField
               {...params}
-              error={!!error}
-              helperText={error}
+              error={!!meta.errors}
+              helperText={meta.errors && meta.errors[0]}
               required={props.required}
-              name={props.name}
+              name={meta.name}
               label={props.label}
               size="small"
             />
@@ -126,12 +117,11 @@ const ValidatedInput = (props: ValidatedInputProps) => {
         }}
       >
         <SwitchField
-          helperText={error}
+          helperText={meta.errors && meta.errors[0]}
           label={props.label}
           size="small"
-          defaultChecked={defaultValue}
+          defaultChecked={meta.initialValue}
           options={props.options}
-          {...getInputProps()}
         />
       </Box>
     );
@@ -150,8 +140,7 @@ const ValidatedInput = (props: ValidatedInputProps) => {
           disabled={props.disabled}
           label={props.label}
           size="small"
-          defaultChecked={defaultValue}
-          {...getInputProps()}
+          defaultChecked={meta.initialValue}
         />
       </Box>
     );
@@ -168,12 +157,11 @@ const ValidatedInput = (props: ValidatedInputProps) => {
       >
         <RadioButtons
           {...props}
-          name={props.name}
+          name={meta.name}
           title={props.label}
           options={props.options}
           size="small"
-          defaultValue={defaultValue}
-          {...getInputProps()}
+          defaultValue={meta.initialValue}
         />
       </Box>
     );
@@ -190,10 +178,9 @@ const ValidatedInput = (props: ValidatedInputProps) => {
       >
         <FileUploader
           {...props}
-          name={props.name}
+          // name={meta.name}
           title={props.label}
           required={props.required}
-          {...getInputProps()}
         />
       </Box>
     );
