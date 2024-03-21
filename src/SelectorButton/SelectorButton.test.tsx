@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 
-import AddHomeIcon from '@mui/icons-material/AddHome';
+import AddHomeIcon from "@mui/icons-material/AddHome";
 import React from "react";
 import SelectorButton from "./SelectorButton";
 import userEvent from "@testing-library/user-event";
@@ -10,7 +10,7 @@ describe("SelectorButton", () => {
   test("renders correctly", () => {
     const { container } = render(
       <SelectorButton
-        icon={<AddHomeIcon sx={{fontSize: 56}} />}
+        icon={<AddHomeIcon sx={{ fontSize: 56 }} />}
         text={"Porsche"}
         description="View all cars by Porsche"
         onClick={vi.fn()}
