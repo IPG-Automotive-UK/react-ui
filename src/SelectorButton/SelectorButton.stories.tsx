@@ -1,7 +1,7 @@
 import AddHomeIcon from "@mui/icons-material/AddHome";
 import React from "react";
 import SelectorButton from "./SelectorButton";
-import { SelectorButtonProps } from ".";
+import { SelectorButtonProps } from "./SelectorButton.types";
 import { StoryFn } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 
