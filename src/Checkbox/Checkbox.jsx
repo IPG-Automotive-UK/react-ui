@@ -1,9 +1,11 @@
 import * as React from "react";
+
 import {
   FormControlLabel,
   FormGroup,
   Checkbox as MuiCheckbox
 } from "@mui/material";
+
 import PropTypes from "prop-types";
 
 /**
@@ -11,6 +13,7 @@ import PropTypes from "prop-types";
  */
 export default function Checkbox({
   checked = false,
+  defaultChecked = false,
   disabled = false,
   label = "",
   onChange = () => {},
@@ -25,6 +28,7 @@ export default function Checkbox({
           <MuiCheckbox
             sx={{ ...style, pointerEvents: "auto" }}
             checked={checked}
+            defaultChecked={defaultChecked}
             disabled={disabled}
             onChange={onChange}
             size={size}
@@ -42,6 +46,10 @@ Checkbox.propTypes = {
    * If true, the component is checked.
    */
   checked: PropTypes.bool,
+  /**
+   * Default checked for uncontrolled usage.
+   */
+  defaultChecked: PropTypes.bool,
   /**
    * If true, the component is disabled.
    */

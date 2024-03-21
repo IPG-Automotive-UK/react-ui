@@ -2,6 +2,7 @@ import Checkbox from "./Checkbox";
 
 export type CheckboxProps = {
   checked?: boolean;
+  defaultChecked?: boolean;
   disabled?: boolean;
   label?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
