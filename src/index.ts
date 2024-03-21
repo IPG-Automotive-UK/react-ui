@@ -202,6 +202,7 @@ export {
   type VirtoTestProps,
   type VirtoVehicleProps
 } from "./SvgIcons";
+export { ValidatedInput, type ValidatedInputProps } from "./ValidatedForm";
 export {
   default as VehicleSelect,
   type VehicleSelectProps
