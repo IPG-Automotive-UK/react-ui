@@ -8,7 +8,7 @@ export default {
 };
 
 const Template = args => {
-  const [checked, setChecked] = React.useState(false);
+  const [checked, setChecked] = React.useState(undefined);
 
   React.useEffect(() => {
     setChecked(args.checked);
@@ -18,8 +18,21 @@ const Template = args => {
     <SwitchField
       {...args}
       checked={checked}
+      defaultChecked={args.defaultChecked}
       onChange={(...args) => {
         setChecked(!checked);
+        action("onChange")(...args);
+      }}
+    />
+  );
+};
+
+const UncontrolledTemplate = args => {
+  return (
+    <SwitchField
+      {...args}
+      defaultChecked={args.defaultChecked}
+      onChange={(...args) => {
         action("onChange")(...args);
       }}
     />
@@ -29,6 +42,7 @@ const Template = args => {
 export const Default = {
   args: {
     checked: false,
+    defaultChecked: false,
     helperText: "Maybe you need some help?",
     label: "Make a choice",
     options: ["Choice A", "Choice B"],
@@ -36,6 +50,18 @@ export const Default = {
   },
 
   render: Template
+};
+
+export const Uncontrolled = {
+  args: {
+    defaultChecked: true,
+    helperText: "Maybe you need some help?",
+    label: "Make a choice",
+    options: ["Choice A", "Choice B"],
+    size: "medium"
+  },
+
+  render: UncontrolledTemplate
 };
 
 export const Disabled = {
