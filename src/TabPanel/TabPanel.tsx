@@ -38,7 +38,13 @@ const TabPanel = ({ children, active }: TabPanelProps) => {
         {React.Children.map(children, (child, index) => {
           if (!React.isValidElement(child)) return null;
 
-          return <Tab key={index} label={child.props["data-label"]} />;
+          return (
+            <Tab
+              key={index}
+              label={child.props["data-label"]}
+              sx={{ minWidth: "100px" }}
+            />
+          );
         })}
       </Tabs>
       {React.Children.map(children, (child, index) => {
