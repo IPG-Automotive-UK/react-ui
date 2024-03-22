@@ -20,6 +20,7 @@ export default function FormSwitch({
   disabled = false,
   helperText,
   label,
+  name,
   onChange,
   options,
   size = "medium"
@@ -38,6 +39,7 @@ export default function FormSwitch({
             <Switch
               checked={checked}
               defaultChecked={defaultChecked}
+              name={name}
               onChange={onChange}
               size={size}
             />

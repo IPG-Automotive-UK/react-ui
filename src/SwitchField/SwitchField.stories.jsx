@@ -57,6 +57,7 @@ export const Uncontrolled = {
     defaultChecked: true,
     helperText: "Maybe you need some help?",
     label: "Make a choice",
+    name: "switch",
     options: ["Choice A", "Choice B"],
     size: "medium"
   },
