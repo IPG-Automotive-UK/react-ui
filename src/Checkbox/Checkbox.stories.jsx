@@ -19,6 +19,19 @@ const Template = args => {
   return <Checkbox {...args} checked={checked} onChange={onChange} />;
 };
 
+const UncontrolledTemplate = args => {
+  const onChange = event => {
+    action("onChange")(event);
+  };
+  return (
+    <Checkbox
+      {...args}
+      defaultChecked={args.defaultChecked}
+      onChange={onChange}
+    />
+  );
+};
+
 export const Default = {
   args: {
     checked: false,
@@ -29,6 +42,18 @@ export const Default = {
   },
 
   render: Template
+};
+
+export const Uncontrolled = {
+  args: {
+    defaultChecked: true,
+    disabled: false,
+    label: "Uncontrolled",
+    size: "medium",
+    style: {}
+  },
+
+  render: UncontrolledTemplate
 };
 
 export const styledCheckbox = {
