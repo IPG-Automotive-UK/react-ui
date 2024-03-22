@@ -31,6 +31,10 @@ const Template: StoryFn<TextFieldProps> = args => {
   );
 };
 
+const UncontrolledTemplate: StoryFn<TextFieldProps> = args => {
+  return <TextField {...args} defaultValue={args.defaultValue} />;
+};
+
 // masked input to be in the form of 225/60R16
 const MaskedTextField = React.forwardRef((props, ref) => (
   <MaskedInput
@@ -83,6 +87,22 @@ export const Default = {
   },
 
   render: Template
+};
+
+export const UncontrolledDefault = {
+  args: {
+    defaultValue: "Uncontrolled",
+    disabled: false,
+    helperText: "What are you going to type?",
+    isFieldMasked: false,
+    label: "Enter some text here",
+    margin: "normal",
+    required: false,
+    size: "medium",
+    variant: "outlined"
+  },
+
+  render: UncontrolledTemplate
 };
 
 export const TextFieldWithMaskEnabled = {

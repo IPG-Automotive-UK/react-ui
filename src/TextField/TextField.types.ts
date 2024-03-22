@@ -1,5 +1,9 @@
 export type TextFieldProps = {
   /**
+   * Default value for uncontrolled use
+   */
+  defaultValue?: string;
+  /**
    * If true, the component is disabled.
    */
   disabled?: boolean;
@@ -15,6 +19,10 @@ export type TextFieldProps = {
    * If true, multiline will be enabled.
    */
   multiline?: boolean;
+  /**
+   * Field name
+   */
+  name?: string;
   /**
    * If true, text field will be masked.
    */
