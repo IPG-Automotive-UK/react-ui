@@ -7,6 +7,7 @@ export type SwitchFieldProps = {
   disabled?: boolean;
   helperText?: string;
   label?: string;
+  name?: string;
   onChange: SwitchProps["onChange"];
   options?: [string, string];
   size?: "small" | "medium";
