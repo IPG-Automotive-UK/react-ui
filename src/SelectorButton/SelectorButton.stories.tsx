@@ -1,7 +1,7 @@
 import AddHomeIcon from "@mui/icons-material/AddHome";
 import React from "react";
 import SelectorButton from "./SelectorButton";
-import { SelectorButtonProps } from "./SelectorButton.types";
+import { SelectorButtonProps } from ".";
 import { StoryFn } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 
@@ -11,7 +11,10 @@ const Template: StoryFn<SelectorButtonProps> = args => {
   return <SelectorButton {...args} />;
 };
 
-export const Default = {
+export const Default: {
+  args: SelectorButtonProps;
+  render: StoryFn<SelectorButtonProps>;
+} = {
   args: {
     description: "Let's add a new house",
     icon: <AddHomeIcon sx={{ fontSize: 56 }} />,
