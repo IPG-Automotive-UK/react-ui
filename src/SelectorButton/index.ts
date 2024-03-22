@@ -12,7 +12,7 @@ export type SelectorButtonProps = {
   /**
    * The description to render below the text
    */
-  description: string;
+  description?: string;
   /**
    * OnClick handler for the button
    * @returns A clientside redirect to the upload wizard for
