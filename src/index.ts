@@ -79,6 +79,7 @@ export {
   type LabelChipProps,
   type LabelSelectorProps
 } from "./LabelSelector";
+export { default as TabPanel, type TabPanelProps } from "./TabPanel";
 export { default as LinePlot, type LinePlotProps } from "./LinePlot";
 export { default as SurfacePlot, type SurfacePlotProps } from "./SurfacePlot";
 export { default as Loading, type LoadingProps } from "./Loading";
