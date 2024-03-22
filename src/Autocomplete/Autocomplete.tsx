@@ -20,6 +20,7 @@ export default function Autocomplete<
   Value extends KeyValueOption | string,
   Multiple extends boolean | undefined
 >({
+  defaultValue,
   disableCloseOnSelect = false,
   disabled = false,
   error = false,
@@ -37,6 +38,7 @@ export default function Autocomplete<
 }: AutocompleteProps<Value, Multiple>) {
   return (
     <MuiAutocomplete
+      defaultValue={defaultValue}
       disableCloseOnSelect={disableCloseOnSelect}
       limitTags={limitTags}
       multiple={multiple}

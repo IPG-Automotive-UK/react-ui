@@ -14,6 +14,7 @@ export type AutocompleteProps<
   | "onChange"
   | "options"
   | "value"
+  | "defaultValue"
   | "disabled"
   | "size"
   | "limitTags"
