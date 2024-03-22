@@ -25,6 +25,21 @@ const Template = args => {
   );
 };
 
+const UncontrolledTemplate = args => {
+  const onChange = (event, value) => {
+    action("onChange")(event, value);
+  };
+  return (
+    <div>
+      <RadioButtons
+        {...args}
+        onChange={onChange}
+        defaultValue={args.defaultValue}
+      />
+    </div>
+  );
+};
+
 export const Default = {
   args: {
     disabled: false,
@@ -38,4 +53,20 @@ export const Default = {
   },
 
   render: Template
+};
+
+export const Uncontrolled = {
+  args: {
+    defaultValue: "Option C",
+    disabled: false,
+    labelPlacement: "end",
+    name: "radio",
+    options: ["Option A", "Option B", "Option C"],
+    row: false,
+    size: "medium",
+    style: {},
+    title: "This is an example"
+  },
+
+  render: UncontrolledTemplate
 };

@@ -3,8 +3,10 @@ import type { RadioGroupProps, SxProps, Theme } from "@mui/material";
 import RadioButtons from "./RadioButtons";
 
 export type RadioButtonsProps = {
+  defaultValue?: string;
   disabled?: boolean;
   labelPlacement?: "end" | "start" | "top" | "bottom";
+  name?: string;
   onChange?: RadioGroupProps["onChange"];
   options?: string[];
   row?: boolean;
