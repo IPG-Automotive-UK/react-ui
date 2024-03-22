@@ -1,4 +1,5 @@
 import { fireEvent, render } from "@testing-library/react";
+
 import RadioButtons from "./RadioButtons";
 import React from "react";
 
@@ -21,5 +22,18 @@ describe("RadioButtons", () => {
     const radioInput = container.querySelector("input");
     fireEvent.change(radioInput, { target: { value: thisValue } });
     expect(radioInput.value).toBe(thisValue);
+  });
+  test("can set a name and default value", () => {
+    const thisValue = options[2];
+    const { container } = render(
+      <RadioButtons
+        defaultValue={thisValue}
+        name="uncontrolled"
+        options={options}
+        title="Test"
+      />
+    );
+    const radioInput = container.querySelectorAll(`input[name="uncontrolled"]`);
+    expect(radioInput[2]).toBeChecked();
   });
 });

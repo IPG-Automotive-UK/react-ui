@@ -18,6 +18,19 @@ describe("SwitchField", () => {
     await user.click(screen.getByRole("checkbox"));
     expect(onChange).toHaveReturnedWith(expected);
   });
+  it("can be uncontrolled and have a defaultChecked prop", async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn(event => event.target.checked);
+    render(
+      <SwitchField
+        defaultChecked={true}
+        options={["Option A", "Option B"]}
+        onChange={onChange}
+      />
+    );
+    await user.click(screen.getByRole("checkbox"));
+    expect(onChange).toHaveReturnedWith(false);
+  });
   it("renders helper text when provided", () => {
     render(
       <SwitchField

@@ -188,4 +188,18 @@ describe("Select", () => {
       expect.anything()
     );
   });
+
+  it("textfield default value", () => {
+    const { getByRole } = render(
+      <Autocomplete
+        defaultValue={"option-one"}
+        options={["optione-one", "option-two", "option-three"]}
+        label="Select an option"
+      />
+    );
+
+    const input = getByRole("combobox") as HTMLInputElement;
+
+    expect(input).toHaveValue("option-one");
+  });
 });

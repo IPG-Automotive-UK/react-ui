@@ -30,6 +30,13 @@ describe("TextField", () => {
     inputBase.value && expect(inputBase.value).toBe("Hello World");
   });
 
+  test("textfield default value", () => {
+    const { getByRole } = render(<TextField defaultValue="uncontrolled" />);
+    const input = getByRole("textbox") as HTMLInputElement;
+
+    expect(input).toHaveValue("uncontrolled");
+  });
+
   test("shows error state", () => {
     const { container } = render(<TextField error />);
     const inputBase = container.querySelector(".MuiInputBase-root");
