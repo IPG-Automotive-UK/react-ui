@@ -25,6 +25,7 @@ export type AutocompleteProps<
     | "size"
     | "helperText"
     | "margin"
+    | "name"
     | "variant"
     | "required"
     | "label"

@@ -29,6 +29,7 @@ export default function Autocomplete<
   limitTags = -1,
   margin = "normal",
   multiple,
+  name,
   onChange,
   options,
   required = false,
@@ -53,6 +54,7 @@ export default function Autocomplete<
           label={label}
           error={error}
           helperText={helperText}
+          name={name}
           margin={margin}
           required={required}
           variant={variant}
