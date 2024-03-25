@@ -25,21 +25,6 @@ const Template = args => {
   );
 };
 
-const UncontrolledTemplate = args => {
-  const onChange = (event, value) => {
-    action("onChange")(event, value);
-  };
-  return (
-    <div>
-      <RadioButtons
-        {...args}
-        onChange={onChange}
-        defaultValue={args.defaultValue}
-      />
-    </div>
-  );
-};
-
 export const Default = {
   args: {
     disabled: false,
@@ -68,5 +53,5 @@ export const Uncontrolled = {
     title: "This is an example"
   },
 
-  render: UncontrolledTemplate
+  render: RadioButtons
 };
