@@ -27,18 +27,6 @@ const Template = args => {
   );
 };
 
-const UncontrolledTemplate = args => {
-  return (
-    <SwitchField
-      {...args}
-      defaultChecked={args.defaultChecked}
-      onChange={(...args) => {
-        action("onChange")(...args);
-      }}
-    />
-  );
-};
-
 export const Default = {
   args: {
     checked: false,
@@ -62,7 +50,7 @@ export const Uncontrolled = {
     size: "medium"
   },
 
-  render: UncontrolledTemplate
+  render: SwitchField
 };
 
 export const Disabled = {
