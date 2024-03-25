@@ -1,4 +1,4 @@
-import { Box, Tooltip, debounce } from "@mui/material";
+import { Box, Tooltip, Typography, debounce } from "@mui/material";
 import React, { useCallback, useEffect, useState } from "react";
 import { TreeItem, TreeView } from "@mui/x-tree-view";
 import { TreeNodeItem, TreeViewListProps } from "./TreeViewList.types";
@@ -275,6 +275,14 @@ const TreeViewList = ({
             }}
           >
             {renderTree(treeDisplayItems)}
+            {treeDisplayItems.length === 0 && (
+              <Typography
+                data-testid="none-selected"
+                sx={{ color: theme => theme.palette.grey[500], pl: 0.5 }}
+              >
+                No search results.
+              </Typography>
+            )}
           </TreeView>
         </Box>
       </Box>

@@ -116,6 +116,10 @@ export {
   type RadioButtonsProps
 } from "./RadioButtons";
 export {
+  default as SelectorButton,
+  type SelectorButtonProps
+} from "./SelectorButton";
+export {
   default as RegistrationForm,
   type RegistrationFormProps
 } from "./RegistrationForm";
