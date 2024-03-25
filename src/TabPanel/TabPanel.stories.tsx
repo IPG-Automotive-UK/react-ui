@@ -1,10 +1,9 @@
+import { Box, TextField } from "@mui/material";
 import { Meta, StoryFn } from "@storybook/react";
 
-import Box from "@mui/material/Box";
 import React from "react";
 import TabPanel from "./TabPanel";
 import { TabPanelProps } from "./TabPanel.types";
-import { TextField } from "@mui/material";
 import { useArgs } from "@storybook/preview-api";
 
 /**
