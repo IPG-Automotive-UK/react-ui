@@ -68,7 +68,7 @@ FormSwitch.propTypes = {
   /**
    * If true, the component is checked.
    */
-  checked: PropTypes.bool.isRequired,
+  checked: PropTypes.bool,
   /**
    * If true, the switch will be disabled.
    */
@@ -91,7 +91,7 @@ FormSwitch.propTypes = {
    *
    * _event_: The event source of the callback. You can pull out the new checked state by accessing event.target.checked (boolean).
    */
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
   /**
    * Options to display either side of the switch. Must be an array of length 2, with type string.
    */

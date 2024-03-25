@@ -32,7 +32,7 @@ export type SwitchFieldProps = {
   /**
    * Function to call when the switch changes
    */
-  onChange: SwitchProps["onChange"];
+  onChange?: SwitchProps["onChange"];
   /**
    * The two toggle options for the switch
    */
