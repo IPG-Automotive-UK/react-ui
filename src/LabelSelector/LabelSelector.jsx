@@ -253,7 +253,7 @@ function LabelSelector({
         noOptionsText="No labels found"
         getOptionLabel={option => option.name}
         isOptionEqualToValue={(option, value) => {
-          return option._id === value._id ?? false;
+          return option._id === value._id;
         }}
         value={value || null}
       />
