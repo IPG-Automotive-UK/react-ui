@@ -60,20 +60,6 @@ const Template: StoryFn<
   );
 };
 
-const UncontrolledTemplate: StoryFn<
-  AutocompleteProps<string | KeyValueOption, boolean | undefined>
-> = args => {
-  // Return the Autocomplete component with the appropriate props
-  return (
-    <Autocomplete
-      {...args}
-      onChange={(event, newValue) => {
-        action("onChange")(newValue);
-      }}
-    />
-  );
-};
-
 // Define the default story
 export const Default: StoryObj<typeof Autocomplete> = {
   args: {
@@ -100,10 +86,11 @@ export const Default: StoryObj<typeof Autocomplete> = {
   },
   render: Template
 };
-// Define the default story
+
+// Define the uncontrolled story
 export const Uncontrolled: StoryObj<typeof Autocomplete> = {
   args: {
-    // Define the default args
+    // Define the uncontrolled args
     defaultValue: "Option 4",
     disabled: false,
     error: false,
@@ -124,7 +111,7 @@ export const Uncontrolled: StoryObj<typeof Autocomplete> = {
     size: "medium",
     variant: "outlined"
   },
-  render: UncontrolledTemplate
+  render: Autocomplete
 };
 
 // Define the story for key-value options
