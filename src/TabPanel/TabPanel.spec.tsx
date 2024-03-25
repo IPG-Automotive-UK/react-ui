@@ -7,7 +7,7 @@ test("should render the content of the initially active tab", async ({
   page
 }) => {
   await page.goto(
-    "http://localhost:6006/?path=/story/selectors-tabpanel--default"
+    "http://localhost:6006/?path=/story/layout-tabpanel--default"
   );
 
   // Check if the content of the first tab is visible
@@ -32,7 +32,7 @@ test("should render the content of the initially active tab", async ({
  */
 test("should switch content when tabs are clicked", async ({ page }) => {
   await page.goto(
-    "http://localhost:6006/?path=/story/selectors-tabpanel--default"
+    "http://localhost:6006/?path=/story/layout-tabpanel--default"
   );
 
   // Click the second tab
