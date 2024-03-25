@@ -10,4 +10,8 @@ export type TabPanelProps = {
    * The active tab index, this is the tab which is currently selected.
    */
   active: number;
+  /**
+   * The callback function that is called when the active tab changes.
+   */
+  onTabChange?: (newActiveTab: number) => void;
 };

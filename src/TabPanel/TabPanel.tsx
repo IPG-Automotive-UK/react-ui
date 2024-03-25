@@ -11,7 +11,7 @@ import { TabPanelProps } from "./TabPanel.types";
  * @property active - The active tab index
  * @returns The tab panel component
  */
-const TabPanel = ({ children, active }: TabPanelProps) => {
+const TabPanel = ({ children, active, onTabChange }: TabPanelProps) => {
   // state for the active tab
   const [activeTab, setActiveTab] = useState(active ?? 0);
 
@@ -23,6 +23,11 @@ const TabPanel = ({ children, active }: TabPanelProps) => {
   // handle tab change
   const handleChange = (event: React.SyntheticEvent, tab: number) => {
     setActiveTab(tab);
+
+    // call the onTabChange callback if it is provided
+    if (onTabChange) {
+      onTabChange(tab);
+    }
   };
 
   return (
