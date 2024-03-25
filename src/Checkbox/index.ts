@@ -1,7 +1,7 @@
 import Checkbox from "./Checkbox";
 
 /**
- * Checkbox component props
+ * Prop type for checkboxes
  */
 export type CheckboxProps = {
   /**
