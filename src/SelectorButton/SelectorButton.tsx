@@ -15,7 +15,7 @@ export default function SelectorButton({
       onClick={onClick}
       sx={{
         "&:hover": {
-          boxShadow: "0 1px 5px 1px rgba(0,0,0,.23)"
+          boxShadow: theme => `0 1px 5px 1px ${theme.palette.action.focus}`
         },
         alignItems: "center",
         background: theme => theme.palette.background.paper,
