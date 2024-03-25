@@ -275,12 +275,20 @@ const TreeViewList = ({
             }}
           >
             {renderTree(treeDisplayItems)}
-            {treeDisplayItems.length === 0 && (
+            {items.length > 0 && treeDisplayItems.length === 0 && (
               <Typography
                 data-testid="none-selected"
                 sx={{ color: theme => theme.palette.grey[500], pl: 0.5 }}
               >
                 No search results.
+              </Typography>
+            )}
+            {items.length === 0 && (
+              <Typography
+                data-testid="none-selected"
+                sx={{ color: theme => theme.palette.grey[500], pl: 0.5 }}
+              >
+                No data is available.
               </Typography>
             )}
           </TreeView>
