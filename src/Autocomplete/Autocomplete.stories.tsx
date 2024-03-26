@@ -54,6 +54,7 @@ const Template: StoryFn<
         updateArgs({ value: newValue });
         action("onChange")(newValue);
       }}
+      onBlur={event => action("onBlur")}
       value={theValue}
       multiple={multiple}
     />
@@ -99,6 +100,7 @@ export const Uncontrolled: StoryObj<typeof Autocomplete> = {
     limitTags: -1,
     margin: "normal",
     multiple: false,
+    onBlur: action("onBlur"),
     options: [
       "Option 1",
       "Option 2",
