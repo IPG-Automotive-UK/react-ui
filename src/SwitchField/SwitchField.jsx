@@ -70,6 +70,10 @@ FormSwitch.propTypes = {
    */
   checked: PropTypes.bool,
   /**
+   * The default value of the input.
+   */
+  defaultChecked: PropTypes.bool,
+  /**
    * If true, the switch will be disabled.
    */
   disabled: PropTypes.bool,
@@ -81,6 +85,10 @@ FormSwitch.propTypes = {
    * The label content.
    */
   label: PropTypes.string,
+  /**
+   * The name of the input.
+   */
+  name: PropTypes.string,
   /**
    * Callback fired when the state is changed.
    *
