@@ -55,6 +55,10 @@ export default function RadioButtons({
 
 RadioButtons.propTypes = {
   /**
+   * The default value of the radio buttons group.
+   */
+  defaultValue: PropTypes.string,
+  /**
    * If true, the radio buttons group will be disabled.
    */
   disabled: PropTypes.bool,
@@ -62,6 +66,10 @@ RadioButtons.propTypes = {
    * The position of the label.
    */
   labelPlacement: PropTypes.oneOf(["start", "end", "top", "bottom"]),
+  /**
+   * The name of the radio buttons group and each radio.
+   */
+  name: PropTypes.string,
   /**
    * Callback fired when the radio button is selected.
    *
