@@ -11,6 +11,7 @@ export type AutocompleteProps<
 > = Pick<
   MuiAutocompleteProps<Value, Multiple, false, false>,
   | "multiple"
+  | "onBlur"
   | "onChange"
   | "options"
   | "value"

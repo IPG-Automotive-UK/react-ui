@@ -30,6 +30,7 @@ export default function Autocomplete<
   margin = "normal",
   multiple,
   name,
+  onBlur,
   onChange,
   options,
   required = false,
@@ -43,6 +44,7 @@ export default function Autocomplete<
       disableCloseOnSelect={disableCloseOnSelect}
       limitTags={limitTags}
       multiple={multiple}
+      onBlur={onBlur}
       onChange={onChange}
       options={options}
       getOptionLabel={option =>
