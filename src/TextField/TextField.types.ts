@@ -28,6 +28,10 @@ export type TextFieldProps = {
    */
   isFieldMasked?: boolean;
   /**
+   * Callback fired on blur.
+   */
+  onBlur?: () => void;
+  /**
    * Callback fired when the value changes.
    */
   onChange?: (

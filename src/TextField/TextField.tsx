@@ -28,6 +28,7 @@ export default function TextField({
   minRows = 2,
   maxRows = 4,
   name,
+  onBlur = () => {},
   onChange = () => {},
   placeholder,
   required = false,
@@ -51,6 +52,7 @@ export default function TextField({
       minRows={multiline ? minRows : undefined}
       maxRows={multiline ? maxRows : undefined}
       name={name}
+      onBlur={onBlur}
       onChange={onChange}
       placeholder={placeholder}
       InputProps={!isFieldMasked ? undefined : InputProps}
