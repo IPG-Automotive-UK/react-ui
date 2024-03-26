@@ -26,13 +26,20 @@ const Template: StoryFn<TextFieldProps> = args => {
     setError(event.target.value.indexOf("_") > 0);
     action("onChange")(event, event.target.value);
   };
-  return (
-    <TextField {...args} onChange={onChange} value={value} error={error} />
-  );
-};
 
-const UncontrolledTemplate: StoryFn<TextFieldProps> = args => {
-  return <TextField {...args} defaultValue={args.defaultValue} />;
+  const onBlur = () => {
+    action("onBlur")();
+  };
+
+  return (
+    <TextField
+      {...args}
+      onBlur={onBlur}
+      onChange={onChange}
+      value={value}
+      error={error}
+    />
+  );
 };
 
 // masked input to be in the form of 225/60R16
@@ -97,12 +104,13 @@ export const UncontrolledDefault = {
     isFieldMasked: false,
     label: "Enter some text here",
     margin: "normal",
+    onBlur: action("onBlur"),
     required: false,
     size: "medium",
     variant: "outlined"
   },
 
-  render: UncontrolledTemplate
+  render: TextField
 };
 
 export const TextFieldWithMaskEnabled = {
