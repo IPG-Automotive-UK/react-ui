@@ -231,6 +231,11 @@ NumberField.propTypes = {
   name: PropTypes.string,
   /**
    * Callback fired when the value is changed.
+   *
+   * **Signature**
+   * ```
+   * function(event: SyntheticBaseEvent) => void
+   * ```
    */
   onBlur: PropTypes.func,
   /**

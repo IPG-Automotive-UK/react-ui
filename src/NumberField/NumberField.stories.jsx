@@ -17,7 +17,7 @@ const Template = args => {
     action("onChange")(event, event.target.value);
   };
   const onBlur = event => {
-    action("onBlur")(event);
+    action("onBlur");
   };
   return (
     <NumberField {...args} onBlur={onBlur} onChange={onChange} value={value} />

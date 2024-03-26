@@ -12,7 +12,7 @@ export type NumberFieldProps = {
   max?: number;
   min?: number;
   name?: string;
-  onBlur?: () => {};
+  onBlur?: TextFieldProps["onBlur"];
   onChange?: TextFieldProps["onChange"];
   placeholder?: number;
   required?: boolean;
