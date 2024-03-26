@@ -49,6 +49,10 @@ Checkbox.propTypes = {
    */
   checked: PropTypes.bool,
   /**
+   * The default value of the input.
+   */
+  defaultChecked: PropTypes.bool,
+  /**
    * If true, the component is disabled.
    */
   disabled: PropTypes.bool,
@@ -56,6 +60,10 @@ Checkbox.propTypes = {
    * Text to be used alongside checkbox.
    */
   label: PropTypes.string,
+  /**
+   * The name of the input.
+   */
+  name: PropTypes.string,
   /**
    * Callback fired when the state is changed.
    *
