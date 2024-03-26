@@ -270,4 +270,26 @@ describe("LabelSelector", () => {
     // expect the add button to be disabled
     expect(screen.getByRole("button", { name: "Add" })).toBeDisabled();
   });
+
+  // It renders with an error and helper text
+  it("renders with an error and helper text", () => {
+    const options = [
+      { _id: 1, color: "#005FA8", description: "first label", name: "label 1" }
+    ];
+
+    // render the label selector
+    render(
+      <LabelSelector
+        error={true}
+        helperText="Label is required"
+        options={options}
+        value={options}
+      />
+    );
+
+    const helperText = screen.getByText("Label is required");
+    // check that the helper text is being rendered correctly
+    expect(helperText).toBeInTheDocument();
+    expect(helperText).toHaveClass("Mui-error");
+  });
 });
