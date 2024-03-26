@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
  * Number fields let users enter and edit numbers.
  */
 export default function NumberField({
+  defaultValue,
   disabled = false,
   endAdornment = null,
   error = false,
@@ -15,6 +16,8 @@ export default function NumberField({
   margin = "normal",
   max = +Infinity,
   min = -Infinity,
+  name,
+  onBlur = () => {},
   onChange = () => {},
   placeholder,
   required = false,
@@ -81,6 +84,7 @@ export default function NumberField({
 
   return (
     <TextField
+      defaultValue={defaultValue}
       data-testid="NumberField"
       disabled={disabled}
       error={!isValid || error}
@@ -88,6 +92,8 @@ export default function NumberField({
       helperText={validationText || helperText}
       label={label}
       margin={margin}
+      name={name}
+      onBlur={onBlur}
       onChange={handleChange}
       placeholder={placeholder}
       required={required}
@@ -178,6 +184,10 @@ const isStep = (value, step) => {
 // prop types
 NumberField.propTypes = {
   /**
+   * The default value of the input.
+   */
+  defaultValue: PropTypes.number,
+  /**
    * If true, the label, input and helper text should be displayed in a disabled state.
    * @default false
    */
@@ -215,6 +225,14 @@ NumberField.propTypes = {
    * if the stepper is enabled this will be the minimum value of the stepper.
    */
   min: PropTypes.number,
+  /**
+   * Name of the input.
+   */
+  name: PropTypes.string,
+  /**
+   * Callback fired when the value is changed.
+   */
+  onBlur: PropTypes.func,
   /**
    * Callback fired when the value is changed.
    *

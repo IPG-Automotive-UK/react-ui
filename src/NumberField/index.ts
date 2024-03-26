@@ -2,6 +2,7 @@ import NumberField from "./NumberField";
 import type { TextFieldProps } from "@mui/material";
 
 export type NumberFieldProps = {
+  defaultValue?: number;
   disabled?: boolean;
   endAdornment?: string;
   error?: boolean;
@@ -10,6 +11,8 @@ export type NumberFieldProps = {
   margin?: "none" | "dense" | "normal";
   max?: number;
   min?: number;
+  name?: string;
+  onBlur?: () => {};
   onChange?: TextFieldProps["onChange"];
   placeholder?: number;
   required?: boolean;
