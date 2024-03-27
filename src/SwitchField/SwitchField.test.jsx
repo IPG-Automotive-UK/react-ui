@@ -23,7 +23,7 @@ describe("SwitchField", () => {
       <SwitchField defaultChecked={true} options={["Option A", "Option B"]} />
     );
     const switchInput = container.querySelector("input");
-    expect(switchInput.checked).toBeTruthy();
+    expect(switchInput.checked).toBe(true);
   });
   it("renders helper text when provided", () => {
     render(
