@@ -54,6 +54,7 @@ const Template: StoryFn<
         updateArgs({ value: newValue });
         action("onChange")(newValue);
       }}
+      onBlur={event => action("onBlur")}
       value={theValue}
       multiple={multiple}
     />
@@ -85,6 +86,34 @@ export const Default: StoryObj<typeof Autocomplete> = {
     variant: "outlined"
   },
   render: Template
+};
+
+// Define the uncontrolled story
+export const Uncontrolled: StoryObj<typeof Autocomplete> = {
+  args: {
+    // Define the uncontrolled args
+    defaultValue: "Option 4",
+    disabled: false,
+    error: false,
+    helperText: "Helper Text",
+    label: "Select options",
+    limitTags: -1,
+    margin: "normal",
+    multiple: false,
+    onBlur: action("onBlur"),
+    options: [
+      "Option 1",
+      "Option 2",
+      "Option 3",
+      "Option 4",
+      "Option 5",
+      "Option 6"
+    ],
+    required: false,
+    size: "medium",
+    variant: "outlined"
+  },
+  render: Autocomplete
 };
 
 // Define the story for key-value options

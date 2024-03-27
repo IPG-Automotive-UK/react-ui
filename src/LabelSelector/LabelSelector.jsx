@@ -88,10 +88,14 @@ function LabelSelector({
   addEnabled = false,
   autocompleteLabel = "",
   deleteEnabled = false,
+  error = false,
   editEnabled = false,
+  helperText,
   limitTags = -1,
   nameMaxLength = 50,
   multiple = true,
+  name,
+  onBlur = () => {},
   onChange = () => {},
   onDelete = () => {},
   onEdit = () => {},
@@ -167,10 +171,18 @@ function LabelSelector({
         disableCloseOnSelect
         limitTags={limitTags}
         multiple={multiple}
+        onBlur={onBlur}
         onChange={(_e, selectedValues) => onChange(selectedValues)}
         options={options}
         renderInput={params => (
-          <TextField {...params} label={autocompleteLabel} variant="outlined" />
+          <TextField
+            {...params}
+            error={error}
+            helperText={helperText}
+            name={name}
+            label={autocompleteLabel}
+            variant="outlined"
+          />
         )}
         filterOptions={(options, params) => {
           const filtered = filter(options, params);
@@ -253,7 +265,7 @@ function LabelSelector({
         noOptionsText="No labels found"
         getOptionLabel={option => option.name}
         isOptionEqualToValue={(option, value) => {
-          return option._id === value._id ?? false;
+          return option._id === value._id;
         }}
         value={value || null}
       />
@@ -318,6 +330,17 @@ LabelSelector.propTypes = {
    */
   editEnabled: PropTypes.bool,
   /**
+   * If true, the label selector will display an error state.
+   * @default false
+   * @type {boolean}
+   */
+  error: PropTypes.bool,
+  /**
+   * The helper text content.
+   * @type {string}
+   */
+  helperText: PropTypes.string,
+  /**
    * The maximum number of tags that will be visible when not focused.
    * Set -1 to disable the limit
    * @default -1
@@ -334,11 +357,29 @@ LabelSelector.propTypes = {
    */
   multiple: PropTypes.bool,
   /**
+   * The name of the input.
+   * @type {string}
+   */
+  name: PropTypes.string,
+  /**
    * The maximum length of a label name.
    * @default 50
    * @type {number}
    */
   nameMaxLength: PropTypes.number,
+  /**
+   * Callback fired when the input is blurred.
+   *
+   * **Signature**
+   * ```
+   * function(event: object) => void
+   * ```
+   *
+   * _event_: The event source of the callback.
+   * @default () => {}
+   * @type {function}
+   */
+  onBlur: PropTypes.func,
   /**
    * Callback fired when the value is changed.
    *

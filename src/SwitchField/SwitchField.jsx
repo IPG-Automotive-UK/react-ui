@@ -7,6 +7,7 @@ import {
   Switch,
   Typography
 } from "@mui/material";
+
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -15,9 +16,11 @@ import React from "react";
  */
 export default function FormSwitch({
   checked,
+  defaultChecked,
   disabled = false,
   helperText,
   label,
+  name,
   onChange,
   options,
   size = "medium"
@@ -33,7 +36,13 @@ export default function FormSwitch({
         >
           <Stack alignItems="center" component="label" direction="row">
             <SwitchOptionLabel disabled={disabled} label={options[0]} />
-            <Switch checked={checked} onChange={onChange} size={size} />
+            <Switch
+              checked={checked}
+              defaultChecked={defaultChecked}
+              name={name}
+              onChange={onChange}
+              size={size}
+            />
             <SwitchOptionLabel disabled={disabled} label={options[1]} />
           </Stack>
         </Typography>
@@ -59,7 +68,11 @@ FormSwitch.propTypes = {
   /**
    * If true, the component is checked.
    */
-  checked: PropTypes.bool.isRequired,
+  checked: PropTypes.bool,
+  /**
+   * The default value of the input.
+   */
+  defaultChecked: PropTypes.bool,
   /**
    * If true, the switch will be disabled.
    */
@@ -73,6 +86,10 @@ FormSwitch.propTypes = {
    */
   label: PropTypes.string,
   /**
+   * The name of the input.
+   */
+  name: PropTypes.string,
+  /**
    * Callback fired when the state is changed.
    *
    * **Signature**
@@ -82,7 +99,7 @@ FormSwitch.propTypes = {
    *
    * _event_: The event source of the callback. You can pull out the new checked state by accessing event.target.checked (boolean).
    */
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
   /**
    * Options to display either side of the switch. Must be an array of length 2, with type string.
    */

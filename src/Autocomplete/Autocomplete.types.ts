@@ -11,9 +11,11 @@ export type AutocompleteProps<
 > = Pick<
   MuiAutocompleteProps<Value, Multiple, false, false>,
   | "multiple"
+  | "onBlur"
   | "onChange"
   | "options"
   | "value"
+  | "defaultValue"
   | "disabled"
   | "size"
   | "limitTags"
@@ -24,6 +26,7 @@ export type AutocompleteProps<
     | "size"
     | "helperText"
     | "margin"
+    | "name"
     | "variant"
     | "required"
     | "label"
