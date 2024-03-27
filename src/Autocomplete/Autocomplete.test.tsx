@@ -202,4 +202,21 @@ describe("Select", () => {
 
     expect(input).toHaveValue("option-one");
   });
+
+  it("can use an onBlur callback", async () => {
+    const onBlur = vi.fn();
+
+    render(
+      <Autocomplete
+        multiple={false}
+        options={keyValueOptions}
+        onBlur={onBlur}
+        label="Select an option"
+      />
+    );
+
+    await userEvent.click(screen.getByRole("button", { name: /open/i }));
+    await userEvent.tab();
+    expect(onBlur).toHaveBeenCalledTimes(1);
+  });
 });
