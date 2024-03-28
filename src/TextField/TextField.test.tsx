@@ -30,6 +30,13 @@ describe("TextField", () => {
     inputBase.value && expect(inputBase.value).toBe("Hello World");
   });
 
+  test("textfield default value", () => {
+    const { getByRole } = render(<TextField defaultValue="uncontrolled" />);
+    const input = getByRole("textbox") as HTMLInputElement;
+
+    expect(input).toHaveValue("uncontrolled");
+  });
+
   test("shows error state", () => {
     const { container } = render(<TextField error />);
     const inputBase = container.querySelector(".MuiInputBase-root");
@@ -98,5 +105,15 @@ Line 5`
     );
 
     expect(textarea).toHaveValue(`Line 1\nLine 2\nLine 3\nLine 4\nLine 5`);
+  });
+
+  it("can use an onBlur callback", async () => {
+    const onBlur = vi.fn();
+
+    render(<TextField onBlur={onBlur} />);
+
+    await userEvent.click(screen.getByRole("textbox"));
+    await userEvent.tab();
+    expect(onBlur).toHaveBeenCalledTimes(1);
   });
 });

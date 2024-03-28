@@ -39,3 +39,19 @@ export const Default = {
 
   render: Template
 };
+
+export const Uncontrolled = {
+  args: {
+    defaultValue: "Option C",
+    disabled: false,
+    labelPlacement: "end",
+    name: "radio",
+    options: ["Option A", "Option B", "Option C"],
+    row: false,
+    size: "medium",
+    style: {},
+    title: "This is an example"
+  },
+
+  render: RadioButtons
+};

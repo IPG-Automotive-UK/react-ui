@@ -17,6 +17,7 @@ MaskedTextField.displayName = "MaskedTextField";
  * TextField components are used for collecting user provided information as a string.
  */
 export default function TextField({
+  defaultValue,
   disabled = false,
   error = false,
   InputProps = { inputComponent: MaskedTextField },
@@ -26,6 +27,8 @@ export default function TextField({
   multiline = false,
   minRows = 2,
   maxRows = 4,
+  name,
+  onBlur = () => {},
   onChange = () => {},
   placeholder,
   required = false,
@@ -38,6 +41,7 @@ export default function TextField({
   return (
     <MuiTextField
       data-testid="text-field"
+      defaultValue={defaultValue}
       disabled={disabled}
       error={error}
       fullWidth
@@ -47,6 +51,8 @@ export default function TextField({
       multiline={multiline}
       minRows={multiline ? minRows : undefined}
       maxRows={multiline ? maxRows : undefined}
+      name={name}
+      onBlur={onBlur}
       onChange={onChange}
       placeholder={placeholder}
       InputProps={!isFieldMasked ? undefined : InputProps}

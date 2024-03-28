@@ -1,6 +1,7 @@
+import { render, screen } from "@testing-library/react";
+
 import NumberField from ".";
 import React from "react";
-import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 /**
@@ -227,5 +228,15 @@ describe("NumberField", () => {
     // there should be no helper text (which parents the error message)
     const errorBase = container.querySelector(".MuiFormHelperText-root");
     expect(errorBase).toBe(null);
+  });
+
+  test("can use an onBlur callback", async () => {
+    const onBlur = vi.fn();
+    const { container } = render(<NumberField onBlur={onBlur} />);
+    const inputBase = container.querySelector(".MuiInputBase-input");
+
+    await userEvent.click(inputBase);
+    await userEvent.tab();
+    expect(onBlur).toHaveBeenCalledTimes(1);
   });
 });

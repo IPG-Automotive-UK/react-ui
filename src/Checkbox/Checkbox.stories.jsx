@@ -31,6 +31,18 @@ export const Default = {
   render: Template
 };
 
+export const Uncontrolled = {
+  args: {
+    defaultChecked: true,
+    disabled: false,
+    label: "Uncontrolled",
+    size: "medium",
+    style: {}
+  },
+
+  render: Checkbox
+};
+
 export const styledCheckbox = {
   args: {
     checked: false,

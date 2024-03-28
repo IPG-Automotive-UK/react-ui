@@ -16,7 +16,12 @@ const Template = args => {
     setValue(value);
     action("onChange")(event, event.target.value);
   };
-  return <NumberField {...args} onChange={onChange} value={value} />;
+  const onBlur = event => {
+    action("onBlur");
+  };
+  return (
+    <NumberField {...args} onBlur={onBlur} onChange={onChange} value={value} />
+  );
 };
 
 export const Default = {
@@ -34,6 +39,23 @@ export const Default = {
   },
 
   render: Template
+};
+
+export const Uncontrolled = {
+  args: {
+    disabled: false,
+    error: false,
+    helperText: "What Number are you going to type?",
+    label: "Enter a Number",
+    margin: "normal",
+    onBlur: action("onBlur"),
+    required: false,
+    showMinMaxErrorMessage: true,
+    size: "medium",
+    stepper: true,
+    variant: "outlined"
+  },
+  render: NumberField
 };
 
 export const StartAdornment = {

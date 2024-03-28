@@ -26,8 +26,19 @@ const Template: StoryFn<TextFieldProps> = args => {
     setError(event.target.value.indexOf("_") > 0);
     action("onChange")(event, event.target.value);
   };
+
+  const onBlur = () => {
+    action("onBlur")();
+  };
+
   return (
-    <TextField {...args} onChange={onChange} value={value} error={error} />
+    <TextField
+      {...args}
+      onBlur={onBlur}
+      onChange={onChange}
+      value={value}
+      error={error}
+    />
   );
 };
 
@@ -83,6 +94,23 @@ export const Default = {
   },
 
   render: Template
+};
+
+export const UncontrolledDefault = {
+  args: {
+    defaultValue: "Uncontrolled",
+    disabled: false,
+    helperText: "What are you going to type?",
+    isFieldMasked: false,
+    label: "Enter some text here",
+    margin: "normal",
+    onBlur: action("onBlur"),
+    required: false,
+    size: "medium",
+    variant: "outlined"
+  },
+
+  render: TextField
 };
 
 export const TextFieldWithMaskEnabled = {

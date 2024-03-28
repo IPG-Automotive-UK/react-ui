@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import {
   FormControl,
   FormControlLabel,
@@ -6,14 +7,17 @@ import {
   Radio,
   RadioGroup
 } from "@mui/material";
+
 import PropTypes from "prop-types";
 
 /**
  * Radio buttons group component
  */
 export default function RadioButtons({
+  defaultValue,
   disabled = false,
   labelPlacement = "end",
+  name,
   onChange = () => {},
   options = [],
   style = {},
@@ -29,6 +33,8 @@ export default function RadioButtons({
       <RadioGroup
         sx={style}
         aria-label={title}
+        defaultValue={defaultValue}
+        name={name}
         onChange={onChange}
         row={row}
         value={value}
@@ -36,7 +42,7 @@ export default function RadioButtons({
         {options.map((item, index) => (
           <FormControlLabel
             key={index}
-            control={<Radio size={size} />}
+            control={<Radio name={name} size={size} />}
             label={item}
             value={item}
             labelPlacement={labelPlacement}
@@ -49,6 +55,10 @@ export default function RadioButtons({
 
 RadioButtons.propTypes = {
   /**
+   * The default value of the radio buttons group.
+   */
+  defaultValue: PropTypes.string,
+  /**
    * If true, the radio buttons group will be disabled.
    */
   disabled: PropTypes.bool,
@@ -56,6 +66,10 @@ RadioButtons.propTypes = {
    * The position of the label.
    */
   labelPlacement: PropTypes.oneOf(["start", "end", "top", "bottom"]),
+  /**
+   * The name of the radio buttons group and each radio.
+   */
+  name: PropTypes.string,
   /**
    * Callback fired when the radio button is selected.
    *

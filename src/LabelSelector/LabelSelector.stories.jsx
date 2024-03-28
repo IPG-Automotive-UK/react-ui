@@ -19,12 +19,14 @@ const Template = args => {
     <Box maxWidth={300}>
       <LabelSelector
         {...args}
+        onBlur={action("onBlur")}
         onChange={selectedValues => {
           setValue(selectedValues);
 
           // fire action
           action("onChange")(selectedValues);
         }}
+        name="label-selector"
         options={options}
         value={value}
         onNew={newLabel => {
@@ -88,6 +90,7 @@ export const Default = {
     limitTags: -1,
     multiple: true,
     nameMaxLength: 50,
+    onBlur: () => {},
     onChange: () => {},
     onDelete: () => {},
     onEdit: () => {},
@@ -117,6 +120,16 @@ export const WithLabelOptions = {
         name: "a really looooooooooooooooooong string"
       }
     ]
+  },
+
+  render: Template
+};
+
+export const WithErrorAndHelperText = {
+  args: {
+    ...Default.args,
+    error: true,
+    helperText: "A label is required"
   },
 
   render: Template
