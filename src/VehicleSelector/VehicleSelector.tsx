@@ -122,7 +122,6 @@ function VehicleSelector({
       </Box>
       <Box flex="40%">
         <Autocomplete
-          disableCloseOnSelect={true}
           disabled={selectedModelYear === null || selectedModelYear === ""}
           label="Vehicle Variant"
           required
@@ -183,12 +182,12 @@ function VehicleSelector({
       {gates.length > 0 && (
         <Box flex="40%">
           <Autocomplete
-            disableCloseOnSelect={true}
+            disableCloseOnSelect={multipleSelection}
             disabled={
               selectedVariants === null || selectedVariants.length === 0
             }
             required={gates.length > 0}
-            multiple={true}
+            multiple={multipleSelection}
             label="Gate"
             options={gates}
             onChange={(_event, value) => {
@@ -199,7 +198,7 @@ function VehicleSelector({
                   selectedVariants.includes(v.variant)
               );
               // if no gates selected keep the project, model year and variant but clear the gate in value
-              if (value.length === 0) {
+              if (!value || value.length === 0) {
                 onChange(
                   newVehicles.map(v => ({
                     _id: v._id,
@@ -211,17 +210,31 @@ function VehicleSelector({
                 );
                 return;
               }
-              // if gates are selected update the value with the new vehicles and gates
-              const newVehiclesWithGate = value.flatMap(gate =>
-                newVehicles.map(v => ({
-                  _id: v._id,
-                  gate,
-                  modelYear: v.modelYear,
-                  projectCode: v.projectCode,
-                  variant: v.variant
-                }))
-              );
-              onChange(newVehiclesWithGate);
+
+              // if multiple selection is enabled, update the value with the new vehicles and gates
+              if (multipleSelection && Array.isArray(value)) {
+                const newVehiclesWithGate = value.flatMap(gate =>
+                  newVehicles.map(v => ({
+                    _id: v._id,
+                    gate,
+                    modelYear: v.modelYear,
+                    projectCode: v.projectCode,
+                    variant: v.variant
+                  }))
+                );
+                onChange(newVehiclesWithGate);
+              } else {
+                // if multiple selection is disabled, update the value with the new vehicles and gate
+                onChange(
+                  newVehicles.map(v => ({
+                    _id: v._id,
+                    gate: value as string,
+                    modelYear: v.modelYear,
+                    projectCode: v.projectCode,
+                    variant: v.variant
+                  }))
+                );
+              }
             }}
             value={selectedGates}
           />

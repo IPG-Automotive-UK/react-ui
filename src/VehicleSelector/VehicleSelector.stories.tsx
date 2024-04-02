@@ -65,6 +65,99 @@ export const Default = {
         modelYear: "2016",
         projectCode: "911",
         variant: "MC - 397kW - 7MT - R20"
+      },
+      {
+        _id: "64c8c4cccc8d6f00130b36a4",
+        modelYear: "2019",
+        projectCode: "CrossoverEV",
+        variant: "Nicolas - FWD - BEV - 150KW - R17"
+      }
+    ]
+  },
+
+  render: Template
+};
+
+export const WithGate = {
+  args: {
+    flexDirection: "column",
+    flexWrap: "nowrap",
+    gates: ["Gate 1", "Gate 2", "Gate 3", "Gate 4", "Gate 5"],
+    value: [],
+    variants: [
+      {
+        _id: "64c8c4cccc8d6f00130b366b",
+        modelYear: "2015",
+        projectCode: "911",
+        variant: "MP - 3.6 l6 - 397kW - 7MT - R20"
+      },
+      {
+        _id: "64c8c4cccc8d6f00130b367e",
+        modelYear: "2015",
+        projectCode: "911",
+        variant: "JS - 3.6 l6 - 397kW - 7MT - R20"
+      },
+      {
+        _id: "64c8c4cccc8d6f00130b3691",
+        modelYear: "2016",
+        projectCode: "911",
+        variant: "DB - 3.6 l6 - 397kW - 7MT - R20"
+      },
+      {
+        _id: "64c8c4cccc8d6f00130b36a4",
+        modelYear: "2016",
+        projectCode: "911",
+        variant: "MC - 397kW - 7MT - R20"
+      },
+      {
+        _id: "64c8c4cccc8d6f00130b36a4",
+        modelYear: "2019",
+        projectCode: "CrossoverEV",
+        variant: "Nicolas - FWD - BEV - 150KW - R17"
+      }
+    ]
+  },
+
+  render: Template
+};
+
+export const MultiselectWithGate = {
+  args: {
+    flexDirection: "column",
+    flexWrap: "nowrap",
+    gates: ["Gate 1", "Gate 2", "Gate 3", "Gate 4", "Gate 5"],
+    multipleSelection: true,
+    value: [],
+    variants: [
+      {
+        _id: "64c8c4cccc8d6f00130b366b",
+        modelYear: "2015",
+        projectCode: "911",
+        variant: "MP - 3.6 l6 - 397kW - 7MT - R20"
+      },
+      {
+        _id: "64c8c4cccc8d6f00130b367e",
+        modelYear: "2015",
+        projectCode: "911",
+        variant: "JS - 3.6 l6 - 397kW - 7MT - R20"
+      },
+      {
+        _id: "64c8c4cccc8d6f00130b3691",
+        modelYear: "2016",
+        projectCode: "911",
+        variant: "DB - 3.6 l6 - 397kW - 7MT - R20"
+      },
+      {
+        _id: "64c8c4cccc8d6f00130b36a4",
+        modelYear: "2016",
+        projectCode: "911",
+        variant: "MC - 397kW - 7MT - R20"
+      },
+      {
+        _id: "64c8c4cccc8d6f00130b36a4",
+        modelYear: "2019",
+        projectCode: "CrossoverEV",
+        variant: "Nicolas - FWD - BEV - 150KW - R17"
       }
     ]
   },
