@@ -1,5 +1,7 @@
 /* eslint-disable no-undef */
 
+import type {} from "@mui/x-data-grid/themeAugmentation";
+
 import {
   ThemeProvider as MuiThemeProvider,
   ThemeOptions,
@@ -85,6 +87,16 @@ const lightTheme = createTheme(
           }
         })
       },
+      MuiDataGrid: {
+        styleOverrides: {
+          root: {
+            background: "#fff"
+          },
+          columnHeader: {
+            background: "#fff"
+          }
+        }
+      },
       MuiIconButton: { styleOverrides: { root: { color: "#9e9e9e" } } },
       MuiStepper: {
         styleOverrides: {
@@ -155,6 +167,16 @@ const darkTheme = createTheme(
         })
       },
 
+      MuiDataGrid: {
+        styleOverrides: {
+          root: {
+            background: "#121212"
+          },
+          columnHeader: {
+            background: "#121212"
+          }
+        }
+      },
       MuiStepper: {
         styleOverrides: {
           root: {
