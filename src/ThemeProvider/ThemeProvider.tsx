@@ -92,7 +92,7 @@ const lightTheme = createTheme(
           root: {
             background: "#fff"
           },
-          columnHeader: {
+          columnHeaders: {
             background: "#fff"
           }
         }
@@ -172,7 +172,7 @@ const darkTheme = createTheme(
           root: {
             background: "#121212"
           },
-          columnHeader: {
+          columnHeaders: {
             background: "#121212"
           }
         }
