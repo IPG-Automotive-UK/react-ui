@@ -92,8 +92,11 @@ const lightTheme = createTheme(
           root: {
             background: "#fff"
           },
-          columnHeaders: {
+          columnHeader: {
             background: "#fff"
+          },
+          scrollbarFiller: {
+            backgroundColor: "#fff"
           }
         }
       },
@@ -172,8 +175,11 @@ const darkTheme = createTheme(
           root: {
             background: "#121212"
           },
-          columnHeaders: {
+          columnHeader: {
             background: "#121212"
+          },
+          scrollbarFiller: {
+            backgroundColor: "#121212"
           }
         }
       },
