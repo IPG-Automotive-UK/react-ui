@@ -2,7 +2,7 @@
  * Properties of the TrafficLight component
  */
 
-export interface TrafficLightProps {
+export type TrafficLightProps = {
   /**
    * A list of two numbers representing the x and y coordinates in Fr0 [x, y]
    */
@@ -45,4 +45,4 @@ export interface TrafficLightProps {
    * An object defining the scale in x and y
    */
   scale?: { x: number; y: number };
-}
+};

@@ -58,7 +58,7 @@ export const WithValue = {
 export const Sized = {
   args: {
     points: [0, 0],
-    size: { x: 10, y: 10 },
+    size: { x: 5, y: 10 },
     type: "highway"
   },
   render: Template

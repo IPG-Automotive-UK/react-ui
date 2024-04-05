@@ -26,8 +26,8 @@ const Figure: React.FC<FigureProps> = ({
       offsetY={size.y / 2}
       x={x}
       y={y}
-      width={size.y}
-      height={size.x}
+      width={size.x}
+      height={size.y}
       image={image}
       rotation={angle}
     />

@@ -2,7 +2,7 @@
  * Properties of the TrafficSign component
  */
 
-export interface TrafficSignProps {
+export type TrafficSignProps = {
   /**
    * The type of the traffic sign
    */
@@ -119,4 +119,4 @@ export interface TrafficSignProps {
     x: number;
     y: number;
   };
-}
+};
