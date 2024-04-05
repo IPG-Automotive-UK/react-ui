@@ -113,7 +113,6 @@
     "react-text-mask": "^5.5.0",
     "use-debouncy": "^5.0.1",
     "use-image": "^1.1.1",
-    "usehooks-ts": "^3.0.2",
     "zxcvbn": "^4.4.2"
   },
   "peerDependencies": {

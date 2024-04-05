@@ -9,6 +9,7 @@ import useImage from "use-image";
  * @returns React Konva Image component
  */
 const Figure: React.FC<FigureProps> = ({
+  angle = 0,
   url,
   x,
   y,
@@ -28,6 +29,7 @@ const Figure: React.FC<FigureProps> = ({
       width={size.y}
       height={size.x}
       image={image}
+      rotation={angle}
     />
   );
 };

@@ -1,5 +1,5 @@
 /**
- * Represents data needed for a single traffic light
+ * Properties of the TrafficLight component
  */
 
 export interface TrafficLightProps {
@@ -41,4 +41,8 @@ export interface TrafficLightProps {
    * 5 - all-on (not a CM state, this only used for display)
    */
   state: 0 | 1 | 2 | 3 | 4 | 5;
+  /**
+   * An object defining the scale in x and y
+   */
+  scale?: { x: number; y: number };
 }

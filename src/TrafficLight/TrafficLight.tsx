@@ -16,11 +16,18 @@ import arrowsUpRightGreen from "./svg/arrows-up-right-green.svg";
 import handStopRed from "./svg/hand-stop.svg";
 import walkGreen from "./svg/walk.svg";
 
+/**
+ * @param type - A string specifying the type of traffic light. Default is "red-yellow-green"
+ * @param state - A number specifying the state of the light. Default is 5 (meaning all lights on)
+ * @param points - A list of two points specifying the x and y coordinates in Fr0 [x, y]
+ * @param angle - The angle of rotation of the traffic light to the origin. Default is 0
+ */
 const TrafficLight = ({
   type = "red-yellow-green",
   state = 5,
   points,
-  angle = 0
+  angle = 0,
+  scale = { x: 0.5, y: 0.5 }
 }: TrafficLightProps) => {
   // enum to help code readability
   const states = Object.freeze({
@@ -31,8 +38,6 @@ const TrafficLight = ({
     yellow: 2,
     "yellow-red": 4
   });
-
-  const scale = 0.5;
   const colours = {
     green: {
       off: "#09280b",
@@ -50,12 +55,7 @@ const TrafficLight = ({
   switch (type) {
     case "red-yellow-green":
       return (
-        <Group
-          x={points[0]}
-          y={points[1]}
-          rotation={angle}
-          scale={{ x: scale, y: scale }}
-        >
+        <Group x={points[0]} y={points[1]} rotation={angle} scale={scale}>
           <Rect
             x={0}
             y={0}
@@ -106,7 +106,7 @@ const TrafficLight = ({
           x={points[0]}
           y={points[1]}
           rotation={angle}
-          scale={{ x: scale * 0.5, y: scale * 0.5 }}
+          scale={{ x: scale.x * 0.5, y: scale.y * 0.5 }}
         >
           <Rect
             x={0}
@@ -154,12 +154,7 @@ const TrafficLight = ({
       );
     case "red-yellow-green-straight":
       return (
-        <Group
-          x={points[0]}
-          y={points[1]}
-          rotation={angle}
-          scale={{ x: scale, y: scale }}
-        >
+        <Group x={points[0]} y={points[1]} rotation={angle} scale={scale}>
           <Rect
             x={0}
             y={0}
@@ -210,12 +205,7 @@ const TrafficLight = ({
       );
     case "red-yellow-green-left":
       return (
-        <Group
-          x={points[0]}
-          y={points[1]}
-          rotation={angle}
-          scale={{ x: scale, y: scale }}
-        >
+        <Group x={points[0]} y={points[1]} rotation={angle} scale={scale}>
           <Rect
             x={0}
             y={0}
@@ -266,12 +256,7 @@ const TrafficLight = ({
       );
     case "red-yellow-green-right":
       return (
-        <Group
-          x={points[0]}
-          y={points[1]}
-          rotation={angle}
-          scale={{ x: scale, y: scale }}
-        >
+        <Group x={points[0]} y={points[1]} rotation={angle} scale={scale}>
           <Rect
             x={0}
             y={0}
@@ -322,12 +307,7 @@ const TrafficLight = ({
       );
     case "red-yellow-green-straight-left":
       return (
-        <Group
-          x={points[0]}
-          y={points[1]}
-          rotation={angle}
-          scale={{ x: scale, y: scale }}
-        >
+        <Group x={points[0]} y={points[1]} rotation={angle} scale={scale}>
           <Rect
             x={0}
             y={0}
@@ -351,7 +331,7 @@ const TrafficLight = ({
           {state === states.red ||
           state === states["yellow-red"] ||
           state === states["all-on"] ? (
-            <Figure url={arrowsUpLeft} x={0} y={8} scale={0.75} />
+            <Figure url={arrowsUpLeft} x={0} y={8} scale={0.6} />
           ) : null}
           <Circle
             x={0}
@@ -368,22 +348,17 @@ const TrafficLight = ({
           {state === states.yellow ||
           state === states["yellow-red"] ||
           state === states["all-on"] ? (
-            <Figure url={arrowsUpLeft} x={0} y={5} scale={0.75} />
+            <Figure url={arrowsUpLeft} x={0} y={5} scale={0.6} />
           ) : null}
           <Circle x={0} y={2} radius={1.2} fill={colours.green.off}></Circle>
           {state === states.green || state === states["all-on"] ? (
-            <Figure url={arrowsUpLeftGreen} x={0} y={2} scale={0.75} />
+            <Figure url={arrowsUpLeftGreen} x={0} y={2} scale={0.6} />
           ) : null}
         </Group>
       );
     case "red-yellow-green-straight-right":
       return (
-        <Group
-          x={points[0]}
-          y={points[1]}
-          rotation={angle}
-          scale={{ x: scale, y: scale }}
-        >
+        <Group x={points[0]} y={points[1]} rotation={angle} scale={scale}>
           <Rect
             x={0}
             y={0}
@@ -407,7 +382,7 @@ const TrafficLight = ({
           {state === states.red ||
           state === states["yellow-red"] ||
           state === states["all-on"] ? (
-            <Figure url={arrowsUpRight} x={0} y={8} scale={0.75} />
+            <Figure url={arrowsUpRight} x={0} y={8} scale={0.6} />
           ) : null}
           <Circle
             x={0}
@@ -424,22 +399,17 @@ const TrafficLight = ({
           {state === states.yellow ||
           state === states["yellow-red"] ||
           state === states["all-on"] ? (
-            <Figure url={arrowsUpRight} x={0} y={5} scale={0.75} />
+            <Figure url={arrowsUpRight} x={0} y={5} scale={0.6} />
           ) : null}
           <Circle x={0} y={2} radius={1.2} fill={colours.green.off}></Circle>
           {state === states.green || state === states["all-on"] ? (
-            <Figure url={arrowsUpRightGreen} x={0} y={2} scale={0.75} />
+            <Figure url={arrowsUpRightGreen} x={0} y={2} scale={0.6} />
           ) : null}
         </Group>
       );
     case "red-yellow":
       return (
-        <Group
-          x={points[0]}
-          y={points[1]}
-          rotation={angle}
-          scale={{ x: scale, y: scale }}
-        >
+        <Group x={points[0]} y={points[1]} rotation={angle} scale={scale}>
           <Rect
             x={0}
             y={0}
@@ -476,12 +446,7 @@ const TrafficLight = ({
       );
     case "yellow-green":
       return (
-        <Group
-          x={points[0]}
-          y={points[1]}
-          rotation={angle}
-          scale={{ x: scale, y: scale }}
-        >
+        <Group x={points[0]} y={points[1]} rotation={angle} scale={scale}>
           <Rect
             x={0}
             y={0}
@@ -514,12 +479,7 @@ const TrafficLight = ({
       );
     case "yellow-green-left":
       return (
-        <Group
-          x={points[0]}
-          y={points[1]}
-          rotation={angle}
-          scale={{ x: scale, y: scale }}
-        >
+        <Group x={points[0]} y={points[1]} rotation={angle} scale={scale}>
           <Rect
             x={0}
             y={0}
@@ -553,12 +513,7 @@ const TrafficLight = ({
       );
     case "yellow-green-right":
       return (
-        <Group
-          x={points[0]}
-          y={points[1]}
-          rotation={angle}
-          scale={{ x: scale, y: scale }}
-        >
+        <Group x={points[0]} y={points[1]} rotation={angle} scale={scale}>
           <Rect
             x={0}
             y={0}
@@ -596,7 +551,7 @@ const TrafficLight = ({
           x={points[0]}
           y={points[1]}
           rotation={angle}
-          scale={{ x: scale * 1.25, y: scale * 1.25 }}
+          scale={{ x: scale.x * 1.25, y: scale.y * 1.25 }}
         >
           <Rect
             x={0}
@@ -635,7 +590,7 @@ const TrafficLight = ({
           x={points[0]}
           y={points[1]}
           rotation={angle}
-          scale={{ x: scale * 1.25, y: scale * 1.25 }}
+          scale={{ x: scale.x * 1.25, y: scale.y * 1.25 }}
         >
           <Rect
             x={0}
@@ -674,7 +629,7 @@ const TrafficLight = ({
           x={points[0]}
           y={points[1]}
           rotation={angle}
-          scale={{ x: scale * 1.25, y: scale * 1.25 }}
+          scale={{ x: scale.x * 1.25, y: scale.y * 1.25 }}
         >
           <Rect
             x={0}
@@ -702,7 +657,7 @@ const TrafficLight = ({
           x={points[0]}
           y={points[1]}
           rotation={angle}
-          scale={{ x: scale * 1, y: scale * 1 }}
+          scale={{ x: scale.x * 1, y: scale.y * 1 }}
         >
           <Rect
             x={0}
@@ -720,12 +675,7 @@ const TrafficLight = ({
       );
     case "red-green-pedestrian":
       return (
-        <Group
-          x={points[0]}
-          y={points[1]}
-          rotation={angle}
-          scale={{ x: scale, y: scale }}
-        >
+        <Group x={points[0]} y={points[1]} rotation={angle} scale={scale}>
           <Rect
             x={0}
             y={0}
