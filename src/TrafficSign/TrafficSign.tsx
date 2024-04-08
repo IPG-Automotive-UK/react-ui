@@ -13,7 +13,7 @@ import { getRoadSignName } from "./TrafficSignHelper";
  * @param size An object that allows sizing x and y independently
  * @returns React Konva Image component
  */
-const RoadViewSign: React.FC<TrafficSignProps> = ({
+const TrafficSign: React.FC<TrafficSignProps> = ({
   angle = 0,
   type,
   value = "",
@@ -33,4 +33,4 @@ const RoadViewSign: React.FC<TrafficSignProps> = ({
   );
 };
 
-export default RoadViewSign;
+export default TrafficSign;
