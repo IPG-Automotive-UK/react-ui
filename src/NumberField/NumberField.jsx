@@ -99,7 +99,7 @@ export default function NumberField({
       required={required}
       size={size}
       type="number"
-      value={currentValue ?? ""}
+      value={currentValue}
       variant={variant}
       InputProps={{
         ...(endAdornment && {

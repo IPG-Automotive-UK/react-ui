@@ -43,6 +43,7 @@ export const Default = {
 
 export const Uncontrolled = {
   args: {
+    defaultValue: 12,
     disabled: false,
     error: false,
     helperText: "What Number are you going to type?",
