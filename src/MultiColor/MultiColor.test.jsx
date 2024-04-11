@@ -29,7 +29,7 @@ const MultiColorWithState = ({
 // returns an array containing all values in a given column
 function getColumnValues(colIndex) {
   return Array.from(
-    document.querySelectorAll(`[role="gridcell"][data-colindex="${colIndex}"]`)
+    document.querySelectorAll(`[role="cell"][data-colindex="${colIndex}"]`)
   ).map(node => node.textContent);
 }
 
