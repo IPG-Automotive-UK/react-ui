@@ -111,7 +111,7 @@ function VehicleSelector({
               {
                 _id: "",
                 gate: "",
-                modelYear: newValue,
+                modelYear: newValue || "",
                 projectCode: selectedProject,
                 variant: ""
               }
@@ -173,9 +173,19 @@ function VehicleSelector({
                 );
                 onChange(newVehiclesWithGates);
               }
+            } else {
+              onChange([
+                {
+                  _id: "",
+                  gate: "",
+                  modelYear: selectedModelYear,
+                  projectCode: selectedProject,
+                  variant: ""
+                }
+              ]);
             }
           }}
-          value={selectedVariants[0]}
+          value={selectedVariants.length > 0 ? selectedVariants[0] : ""}
         />
       </Box>
 
