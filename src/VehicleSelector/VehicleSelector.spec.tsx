@@ -135,3 +135,78 @@ test("Autocomplete components are enabled or disabled based on the selection of 
       .getByLabel("Model Year *")
   ).toBeEnabled();
 });
+
+/**
+ * Test to check that clearing the "Project Code" field also clears the "Model Year", "Vehicle Variant", and "Gate" fields.
+ */
+test("Clearing the 'Project Code' field also clears the 'Model Year', 'Vehicle Variant', and 'Gate' fields", async ({
+  page
+}) => {
+  // Go to the page with the VehicleSelector component
+  await page.goto(
+    "http://localhost:6006/?path=/story/selectors-vehicleselector--with-gate"
+  );
+
+  // Wait for the iframe to be attached in the DOM.
+  await page.waitForSelector('iframe[title="storybook-preview-iframe"]');
+
+  // Select a value from each Autocomplete component
+  await page
+    .frameLocator('iframe[title="storybook-preview-iframe"]')
+    .getByLabel("Project Code *")
+    .click();
+  await page
+    .frameLocator('iframe[title="storybook-preview-iframe"]')
+    .getByRole("option", { name: "911" })
+    .click();
+  await page
+    .frameLocator('iframe[title="storybook-preview-iframe"]')
+    .getByLabel("Model Year *")
+    .click();
+  await page
+    .frameLocator('iframe[title="storybook-preview-iframe"]')
+    .getByRole("option", { name: "2015" })
+    .click();
+  await page
+    .frameLocator('iframe[title="storybook-preview-iframe"]')
+    .getByLabel("Vehicle Variant *")
+    .click();
+  await page
+    .frameLocator('iframe[title="storybook-preview-iframe"]')
+    .getByRole("option", { name: "JS - 3.6 l6 - 397kW - 7MT -" })
+    .click();
+  await page
+    .frameLocator('iframe[title="storybook-preview-iframe"]')
+    .getByLabel("Gate *")
+    .click();
+  await page
+    .frameLocator('iframe[title="storybook-preview-iframe"]')
+    .getByRole("option", { name: "Gate 2" })
+    .click();
+
+  // Clear the "Project Code" field
+  await page
+    .frameLocator('iframe[title="storybook-preview-iframe"]')
+    .getByLabel("Project Code *")
+    .fill("");
+
+  // Check that the "Model Year", "Vehicle Variant", and "Gate" fields are also cleared
+  await expect(
+    page
+      .frameLocator('iframe[title="storybook-preview-iframe"]')
+      .getByTestId("vehicle-select")
+      .getByLabel("Model Year *")
+  ).toHaveValue("");
+  await expect(
+    page
+      .frameLocator('iframe[title="storybook-preview-iframe"]')
+      .getByTestId("vehicle-select")
+      .getByLabel("Vehicle Variant *")
+  ).toHaveValue("");
+  await expect(
+    page
+      .frameLocator('iframe[title="storybook-preview-iframe"]')
+      .getByTestId("vehicle-select")
+      .getByLabel("Gate *")
+  ).toHaveValue("");
+});
