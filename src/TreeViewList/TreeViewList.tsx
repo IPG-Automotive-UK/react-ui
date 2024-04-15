@@ -252,7 +252,7 @@ const TreeViewList = ({
             defaultCollapseIcon={<RemoveIcon />}
             defaultExpandIcon={<AddIcon />}
             expanded={expandedNodes}
-            selected={selectedNode}
+            selected={currentSelection}
             onNodeSelect={(event, nodeId) => {
               const node = getNodeById(treeDisplayItems, nodeId);
               const isChild = Boolean(
@@ -277,7 +277,7 @@ const TreeViewList = ({
               setExpandedNodes(nodeId);
               // call the onNodeToggle function if it is defined
               if (onNodeToggle) {
-                setSelectedNode(currentSelection);
+                setSelectedNode(selectedNode);
                 onNodeToggle(event, nodeId);
               }
             }}
