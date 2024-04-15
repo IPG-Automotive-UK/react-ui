@@ -40,6 +40,9 @@ const TreeViewList = ({
   // state for selected node
   const [selectedNode, setSelectedNode] = useState<string>(selected ?? "");
 
+  // local state for selected node
+  const [currentSelection, setCurrentSelection] = useState(selected ?? "");
+
   // state for search input value
   const [searchValue, setSearchValue] = useState("");
 
@@ -204,8 +207,6 @@ const TreeViewList = ({
           flexDirection: "column",
           height,
           overflow: "hidden",
-          paddingX: "5px",
-          paddingY: "2px",
           width
         })}
       >
@@ -256,6 +257,7 @@ const TreeViewList = ({
                 const nodeDetails = { isChild };
                 // update the selected node when a node is selected and it is a child
                 if (isChild) {
+                  setCurrentSelection(nodeId);
                   setSelectedNode(nodeId);
                 }
                 onNodeSelect(event, nodeId, nodeDetails);
@@ -270,6 +272,7 @@ const TreeViewList = ({
               setExpandedNodes(nodeId);
               // call the onNodeToggle function if it is defined
               if (onNodeToggle) {
+                setSelectedNode(currentSelection);
                 onNodeToggle(event, nodeId);
               }
             }}
@@ -353,7 +356,7 @@ const TooltipTreeItem = (
         {...rest}
         sx={theme => ({
           color: theme.palette.text.primary,
-          padding: "5px"
+          paddingY: "5px"
         })}
         onMouseOver={event => {
           event.stopPropagation();
