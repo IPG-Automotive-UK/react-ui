@@ -16,6 +16,7 @@ const Figure: React.FC<FigureProps> = ({
   size = { x: 3, y: 3 },
   scale = 1
 }) => {
+  // todo need to write some callback so that the canvas is only drawn if the status of the image is "loaded"
   const [image] = useImage(url);
 
   return (

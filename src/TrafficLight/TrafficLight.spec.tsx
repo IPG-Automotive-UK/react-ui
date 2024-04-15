@@ -7,6 +7,13 @@ test("should render default traffic light", async ({ page }) => {
   await page.goto(
     "http://localhost:6006/?path=/story/roadview-trafficlight--default"
   );
+  // todo replace this block with better method
+  // we need to ensure that image is drawn on canvas before the screenshot is taken
+  await page
+    .frameLocator('iframe[title="storybook-preview-iframe"]')
+    .locator("canvas");
+  await page.waitForTimeout(2000);
+
   await expect(
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
