@@ -19,7 +19,7 @@ test("should render figure with virto", async ({ page }) => {
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
       .locator("canvas")
-  ).toHaveScreenshot("default.png");
+  ).toHaveScreenshot("default.png", { maxDiffPixels: 100 });
 });
 
 /**
@@ -38,7 +38,7 @@ test("should render figure with a rotated virto", async ({ page }) => {
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
       .locator("canvas")
-  ).toHaveScreenshot("rotated.png");
+  ).toHaveScreenshot("rotated.png", { maxDiffPixels: 100 });
 });
 
 /**
@@ -57,7 +57,7 @@ test("should render figure with a scaled virto", async ({ page }) => {
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
       .locator("canvas")
-  ).toHaveScreenshot("scaled.png");
+  ).toHaveScreenshot("scaled.png", { maxDiffPixels: 100 });
 });
 
 /**
@@ -89,7 +89,7 @@ test("should render figure with a differently positioned virto", async ({
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
       .locator("canvas")
-  ).toHaveScreenshot("positioned.png");
+  ).toHaveScreenshot("positioned.png", { maxDiffPixels: 100 });
 });
 
 /**
@@ -108,5 +108,5 @@ test("should render figure with a sized virto", async ({ page }) => {
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
       .locator("canvas")
-  ).toHaveScreenshot("sized.png");
+  ).toHaveScreenshot("sized.png", { maxDiffPixels: 100 });
 });

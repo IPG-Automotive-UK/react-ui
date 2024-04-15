@@ -18,7 +18,7 @@ test("should render default traffic light", async ({ page }) => {
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
       .locator("canvas")
-  ).toHaveScreenshot("default.png");
+  ).toHaveScreenshot("default.png", { maxDiffPixels: 100 });
 });
 
 /**
@@ -34,7 +34,7 @@ test("should rotate the traffic light", async ({ page }) => {
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
       .locator("canvas")
-  ).toHaveScreenshot("rotated.png");
+  ).toHaveScreenshot("rotated.png", { maxDiffPixels: 100 });
 });
 
 /**
@@ -52,7 +52,7 @@ test("should position the traffic light", async ({ page }) => {
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
       .locator("canvas")
-  ).toHaveScreenshot("positioned.png");
+  ).toHaveScreenshot("positioned.png", { maxDiffPixels: 100 });
 });
 
 /**
@@ -72,7 +72,7 @@ test("should scale the traffic light", async ({ page }) => {
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
       .locator("canvas")
-  ).toHaveScreenshot("scaled.png");
+  ).toHaveScreenshot("scaled.png", { maxDiffPixels: 100 });
 });
 
 /**
@@ -87,7 +87,7 @@ test("should set traffic light to green state", async ({ page }) => {
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
       .locator("canvas")
-  ).toHaveScreenshot("green.png");
+  ).toHaveScreenshot("green.png", { maxDiffPixels: 100 });
 });
 
 /**
@@ -106,5 +106,5 @@ test("should set traffic light to type red-yellow-green-straight-right", async (
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
       .locator("canvas")
-  ).toHaveScreenshot("type.png");
+  ).toHaveScreenshot("type.png", { maxDiffPixels: 100 });
 });

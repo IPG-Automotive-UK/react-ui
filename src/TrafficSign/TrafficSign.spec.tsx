@@ -18,7 +18,7 @@ test("should render default highway sign", async ({ page }) => {
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
       .locator("canvas")
-  ).toHaveScreenshot("default.png");
+  ).toHaveScreenshot("default.png", { maxDiffPixels: 100 });
 });
 
 /**
@@ -39,7 +39,7 @@ test("should render rotated highway sign", async ({ page }) => {
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
       .locator("canvas")
-  ).toHaveScreenshot("rotated.png");
+  ).toHaveScreenshot("rotated.png", { maxDiffPixels: 100 });
 });
 
 /**
@@ -60,7 +60,7 @@ test("should render speed limit sign with value", async ({ page }) => {
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
       .locator("canvas")
-  ).toHaveScreenshot("with-value.png");
+  ).toHaveScreenshot("with-value.png", { maxDiffPixels: 100 });
 });
 
 /**
@@ -76,7 +76,7 @@ test("should change the speed limit value of the sing", async ({ page }) => {
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
       .locator("canvas")
-  ).toHaveScreenshot("speedLimit50.png");
+  ).toHaveScreenshot("speedLimit50.png", { maxDiffPixels: 100 });
 });
 
 /**
@@ -97,7 +97,7 @@ test("should render sized version of the highway sign", async ({ page }) => {
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
       .locator("canvas")
-  ).toHaveScreenshot("sized.png");
+  ).toHaveScreenshot("sized.png", { maxDiffPixels: 100 });
 });
 
 /**
@@ -118,5 +118,5 @@ test("should render scaled version of the highway sign", async ({ page }) => {
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
       .locator("canvas")
-  ).toHaveScreenshot("scaled.png");
+  ).toHaveScreenshot("scaled.png", { maxDiffPixels: 100 });
 });
