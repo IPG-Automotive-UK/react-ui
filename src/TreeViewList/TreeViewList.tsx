@@ -244,6 +244,11 @@ const TreeViewList = ({
         </Box>
         <Box sx={{ flexGrow: 1, overflowY: "auto" }}>
           <TreeView
+            sx={{
+              "& .css-9l5vo-MuiCollapse-wrapperInner": {
+                width: "auto"
+              }
+            }}
             defaultCollapseIcon={<RemoveIcon />}
             defaultExpandIcon={<AddIcon />}
             expanded={expandedNodes}
@@ -349,7 +354,7 @@ const TooltipTreeItem = (
     <Tooltip
       title={props.tooltip ? <>{props.tooltip}</> : ""}
       placement="right-start"
-      open={props.hoveredNode === props.nodeId}
+      open={hoveredNode === props.nodeId}
       disableFocusListener
     >
       <TreeItem
