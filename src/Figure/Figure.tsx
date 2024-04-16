@@ -1,8 +1,18 @@
+import React, { useLayoutEffect } from "react";
+
 import type { FigureProps } from "./Figure.types";
 import { Image } from "react-konva";
-import React from "react";
 import useImage from "use-image";
 
+declare global {
+  // eslint-disable-next-line no-unused-vars
+  interface Window {
+    ImageLoaded: boolean;
+  }
+}
+
+// todo only set when testing
+window.ImageLoaded = false;
 /**
  * A UI component that displays an SVG of the road sign on a canvas.
  * @param {IFigureProps} data
@@ -16,8 +26,13 @@ const Figure: React.FC<FigureProps> = ({
   size = { x: 3, y: 3 },
   scale = 1
 }) => {
-  // todo need to write some callback so that the canvas is only drawn if the status of the image is "loaded"
   const [image] = useImage(url);
+
+  useLayoutEffect(() => {
+    if (image) {
+      window.ImageLoaded = true;
+    }
+  });
 
   return (
     <Image
