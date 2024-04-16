@@ -1,5 +1,5 @@
 import { Box, Tooltip, Typography, debounce } from "@mui/material";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { TreeItem, TreeView } from "@mui/x-tree-view";
 import { TreeNodeItem, TreeViewListProps } from "./TreeViewList.types";
 
@@ -54,6 +54,25 @@ const TreeViewList = ({
 
   // state for the node we are hovered over
   const [hoveredNode, setHoveredNode] = useState<string>("");
+
+  // reference to the box element
+  const boxRef = useRef<HTMLDivElement>(null);
+  const [boxWidth, setBoxWidth] = useState(0);
+
+  useEffect(() => {
+    const updateWidth = () => {
+      if (boxRef.current) {
+        setBoxWidth(boxRef.current.offsetWidth);
+      }
+    };
+
+    window.addEventListener("resize", updateWidth);
+    updateWidth();
+
+    return () => {
+      window.removeEventListener("resize", updateWidth);
+    };
+  }, [width]);
 
   // update tree display items when the items prop changes or when the search input changes
   useEffect(() => {
@@ -201,6 +220,7 @@ const TreeViewList = ({
   return (
     <>
       <Box
+        ref={boxRef}
         sx={theme => ({
           background: theme.palette.background.paper,
           display: "flex",
@@ -246,7 +266,7 @@ const TreeViewList = ({
           <TreeView
             sx={{
               "& .css-9l5vo-MuiCollapse-wrapperInner": {
-                width: "auto"
+                width: boxWidth <= 280 ? "auto" : "100%"
               }
             }}
             defaultCollapseIcon={<RemoveIcon />}
@@ -365,7 +385,12 @@ const TooltipTreeItem = (
         })}
         onMouseOver={event => {
           event.stopPropagation();
-          setHoveredNode(props.nodeId);
+
+          const target = event.target as Element;
+
+          if (target.classList.contains("MuiTreeItem-label")) {
+            setHoveredNode(props.nodeId);
+          }
         }}
         onMouseOut={event => {
           event.stopPropagation();
