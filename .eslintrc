@@ -34,5 +34,8 @@
     "import/export": 0,
     "sort-imports": "warn",
     "sort-keys": "warn"
+  },
+  "globals": {
+    "window": true
   }
 }

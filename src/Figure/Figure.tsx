@@ -5,7 +5,6 @@ import { Image } from "react-konva";
 import useImage from "use-image";
 
 declare global {
-  // eslint-disable-next-line no-unused-vars
   interface Window {
     ImageLoaded: boolean;
   }
