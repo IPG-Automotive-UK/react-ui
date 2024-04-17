@@ -7,13 +7,6 @@ test("should render default traffic light", async ({ page }) => {
   await page.goto(
     "http://localhost:6006/?path=/story/roadview-trafficlight--default"
   );
-  // todo replace this block with better method
-  // we need to ensure that image is drawn on canvas before the screenshot is taken
-  await page
-    .frameLocator('iframe[title="storybook-preview-iframe"]')
-    .locator("canvas");
-  await page.waitForTimeout(2000);
-
   await expect(
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
@@ -102,6 +95,11 @@ test("should set traffic light to type red-yellow-green-straight-right", async (
   await page
     .locator("#control-type")
     .selectOption("red-yellow-green-straight-right");
+  // 'red-yellow-green-straight-right' uses the an image, thus we must wait
+  // wait until image is drawn to canvas
+  await page.frame("storybook-preview-iframe")?.waitForFunction(() => {
+    return window.ImageLoaded === true;
+  });
   await expect(
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')

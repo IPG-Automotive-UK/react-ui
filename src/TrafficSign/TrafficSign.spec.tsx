@@ -7,12 +7,11 @@ test("should render default highway sign", async ({ page }) => {
   await page.goto(
     "http://localhost:6006/?path=/story/roadview-trafficsign--default"
   );
-  // todo replace this block with better method
-  // we need to ensure that image is drawn on canvas before the screenshot is taken
-  await page
-    .frameLocator('iframe[title="storybook-preview-iframe"]')
-    .locator("canvas");
-  await page.waitForTimeout(2000);
+
+  // wait until image is drawn to canvas
+  await page.frame("storybook-preview-iframe")?.waitForFunction(() => {
+    return window.ImageLoaded === true;
+  });
 
   await expect(
     page
@@ -28,12 +27,11 @@ test("should render rotated highway sign", async ({ page }) => {
   await page.goto(
     "http://localhost:6006/?path=/story/roadview-trafficsign--rotated"
   );
-  // todo replace this block with better method
-  // we need to ensure that image is drawn on canvas before the screenshot is taken
-  await page
-    .frameLocator('iframe[title="storybook-preview-iframe"]')
-    .locator("canvas");
-  await page.waitForTimeout(2000);
+
+  // wait until image is drawn to canvas
+  await page.frame("storybook-preview-iframe")?.waitForFunction(() => {
+    return window.ImageLoaded === true;
+  });
 
   await expect(
     page
@@ -49,12 +47,11 @@ test("should render speed limit sign with value", async ({ page }) => {
   await page.goto(
     "http://localhost:6006/?path=/story/roadview-trafficsign--with-value"
   );
-  // todo replace this block with better method
-  // we need to ensure that image is drawn on canvas before the screenshot is taken
-  await page
-    .frameLocator('iframe[title="storybook-preview-iframe"]')
-    .locator("canvas");
-  await page.waitForTimeout(2000);
+
+  // wait until image is drawn to canvas
+  await page.frame("storybook-preview-iframe")?.waitForFunction(() => {
+    return window.ImageLoaded === true;
+  });
 
   await expect(
     page
@@ -72,6 +69,12 @@ test("should change the speed limit value of the sing", async ({ page }) => {
   );
   await page.getByPlaceholder("Edit string...").click();
   await page.getByPlaceholder("Edit string...").fill("50");
+
+  // wait until image is drawn to canvas
+  await page.frame("storybook-preview-iframe")?.waitForFunction(() => {
+    return window.ImageLoaded === true;
+  });
+
   await expect(
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
@@ -86,12 +89,11 @@ test("should render sized version of the highway sign", async ({ page }) => {
   await page.goto(
     "http://localhost:6006/?path=/story/roadview-trafficsign--sized"
   );
-  // todo replace this block with better method
-  // we need to ensure that image is drawn on canvas before the screenshot is taken
-  await page
-    .frameLocator('iframe[title="storybook-preview-iframe"]')
-    .locator("canvas");
-  await page.waitForTimeout(2000);
+
+  // wait until image is drawn to canvas
+  await page.frame("storybook-preview-iframe")?.waitForFunction(() => {
+    return window.ImageLoaded === true;
+  });
 
   await expect(
     page
@@ -107,12 +109,11 @@ test("should render scaled version of the highway sign", async ({ page }) => {
   await page.goto(
     "http://localhost:6006/?path=/story/roadview-trafficsign--scaled"
   );
-  // todo replace this block with better method
-  // we need to ensure that image is drawn on canvas before the screenshot is taken
-  await page
-    .frameLocator('iframe[title="storybook-preview-iframe"]')
-    .locator("canvas");
-  await page.waitForTimeout(2000);
+
+  // wait until image is drawn to canvas
+  await page.frame("storybook-preview-iframe")?.waitForFunction(() => {
+    return window.ImageLoaded === true;
+  });
 
   await expect(
     page
