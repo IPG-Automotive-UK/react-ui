@@ -133,3 +133,13 @@ export const ValidatingMultipleFiles: Story = {
     isValidating: true
   }
 };
+
+/**
+ * Story which shows the uploader has an error
+ */
+export const WithError: Story = {
+  args: {
+    ...Default.args,
+    error: true
+  }
+};

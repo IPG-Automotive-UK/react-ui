@@ -8,6 +8,10 @@ export type FileUploaderProps = {
    */
   acceptedFiles?: string[] | Accept;
   /**
+   * If true, the dropzone will be in the error state.
+   */
+  error?: boolean;
+  /**
    * Text to display in dropzone
    */
   dropzoneText?: string;
