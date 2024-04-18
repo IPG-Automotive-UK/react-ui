@@ -13,6 +13,7 @@ export default function WizardActions({ children }: WizardActionsProps) {
       direction="row"
       justifyContent="flex-end"
       spacing={2}
+      px={3}
       pt={3}
       pb={2}
       sx={{
