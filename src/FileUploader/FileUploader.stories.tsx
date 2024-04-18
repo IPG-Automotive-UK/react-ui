@@ -29,11 +29,11 @@ const meta: Meta<typeof FileUploader> = {
           // fire action
           action("onAdd")(newFiles);
         }}
-        onDelete={updatedFiles => {
+        onDelete={(updatedFiles, deletedFiles) => {
           setSelectedFiles(updatedFiles);
 
           // fire action
-          action("onDelete")(updatedFiles);
+          action("onDelete")(updatedFiles, deletedFiles);
         }}
       />
     );
@@ -71,6 +71,22 @@ export const WithSingleFileSelected: Story = {
       {
         data: "",
         file: new File([""], "IPGAutomotive.zip")
+      }
+    ]
+  }
+};
+
+/**
+ * Story which shows the uploader in single select mode and the optional id field
+ */
+export const WithSingleFileSelectedAndId: Story = {
+  args: {
+    ...Default.args,
+    selectedFiles: [
+      {
+        data: "",
+        file: new File([""], "IPGAutomotive.zip"),
+        id: "some-id"
       }
     ]
   }
