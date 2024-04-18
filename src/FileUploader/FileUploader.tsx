@@ -112,7 +112,7 @@ export default function FileUploader({
           cursor: "pointer",
           display: "flex",
           fontSize: "16px",
-          height: "70px",
+          height: "56px",
           justifyContent: "center",
           p: 2,
           pointerEvents:
