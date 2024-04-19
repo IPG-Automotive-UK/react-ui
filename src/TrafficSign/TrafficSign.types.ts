@@ -119,4 +119,8 @@ export type TrafficSignProps = {
     x: number;
     y: number;
   };
+  /**
+   * A function that resolves when the traffic sign is fully drawn to the canvas
+   */
+  onTrafficSignLoad?: (loaded: boolean) => void;
 };

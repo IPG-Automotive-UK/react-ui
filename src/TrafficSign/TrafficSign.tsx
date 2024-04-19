@@ -19,7 +19,8 @@ const TrafficSign: React.FC<TrafficSignProps> = ({
   value = "",
   points,
   scale,
-  size
+  size,
+  onTrafficSignLoad
 }) => {
   return (
     <Figure
@@ -29,6 +30,7 @@ const TrafficSign: React.FC<TrafficSignProps> = ({
       scale={scale}
       size={size}
       angle={angle}
+      onImageLoad={onTrafficSignLoad}
     />
   );
 };

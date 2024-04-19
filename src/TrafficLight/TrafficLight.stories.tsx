@@ -55,9 +55,9 @@ export const WithRotation = {
 export const TrafficLightTypes = {
   args: {
     angle: 0,
+    onTrafficLightLoad: (loaded: boolean) => console.log(loaded),
     points: [0, 0],
-    type: "red-yellow-green-straight",
-    onTrafficLightLoad: a => console.log("bishbashbosh")
+    type: "red-yellow-green-straight"
   },
   render: Template
 };

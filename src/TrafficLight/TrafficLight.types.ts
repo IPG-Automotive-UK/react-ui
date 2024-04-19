@@ -46,7 +46,7 @@ export type TrafficLightProps = {
    */
   scale?: { x: number; y: number };
   /**
-   * Resolves on image loaded
+   * A function that resolves when the traffic light is fully drawn to the canvas
    */
   onTrafficLightLoad?: (loaded: boolean) => void;
 };

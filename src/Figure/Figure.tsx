@@ -1,19 +1,9 @@
-/* eslint-disable no-unused-vars */
-
 import React, { useEffect } from "react";
 
 import type { FigureProps } from "./Figure.types";
 import { Image } from "react-konva";
 import useImage from "use-image";
 
-declare global {
-  interface Window {
-    ImageLoaded: boolean;
-  }
-}
-
-// todo only set when testing
-window.ImageLoaded = false;
 /**
  * A UI component that displays an SVG of the road sign on a canvas.
  * @param {IFigureProps} data
@@ -28,10 +18,10 @@ const Figure: React.FC<FigureProps> = ({
   scale = 1,
   onImageLoad
 }) => {
-  const [image] = useImage(url);
+  const [image, status] = useImage(url);
 
   useEffect(() => {
-    if (image && onImageLoad) {
+    if (status === "loaded" && onImageLoad) {
       onImageLoad(true);
     }
   });
