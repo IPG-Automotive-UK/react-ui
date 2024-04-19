@@ -28,6 +28,7 @@ const Template: StoryFn<TrafficLightProps> = args => {
 // Default
 export const Default = {
   args: {
+    onTrafficLightLoad: () => ((window as any).imageLoaded = true),
     points: [0, 0]
   },
   render: Template

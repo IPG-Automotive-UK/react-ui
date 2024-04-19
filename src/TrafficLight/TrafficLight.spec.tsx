@@ -7,6 +7,14 @@ test("should render default traffic light", async ({ page }) => {
   await page.goto(
     "http://localhost:6006/?path=/story/roadview-trafficlight--default"
   );
+  // set imageLoaded to false
+  await page.frame("storybook-preview-iframe")?.evaluate(() => {
+    (window as any).imageLoaded = "false";
+  });
+  // wait till component loads and sets imageLoaded to `true`
+  await page
+    .frame("storybook-preview-iframe")
+    ?.waitForFunction(() => (window as any).imageLoaded === true);
   await expect(
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
@@ -22,7 +30,15 @@ test("should rotate the traffic light", async ({ page }) => {
     "http://localhost:6006/?path=/story/roadview-trafficlight--default"
   );
   await page.getByRole("button", { name: "Set number" }).click();
+  // set imageLoaded to false
+  await page.frame("storybook-preview-iframe")?.evaluate(() => {
+    (window as any).imageLoaded = "false";
+  });
   await page.getByPlaceholder("Edit number...").fill("90");
+  // wait till component loads and sets imageLoaded to `true`
+  await page
+    .frame("storybook-preview-iframe")
+    ?.waitForFunction(() => (window as any).imageLoaded === true);
   await expect(
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
@@ -40,7 +56,16 @@ test("should position the traffic light", async ({ page }) => {
   await page.getByText("RAWpoints : [0 : 01 : 0]").click();
   await page.getByRole("link", { name: "RAW" }).click();
   await page.getByPlaceholder("Edit JSON string...").fill("[\n  1,\n  4\n]");
+  // set imageLoaded to false
+  await page.frame("storybook-preview-iframe")?.evaluate(() => {
+    (window as any).imageLoaded = "false";
+  });
+  // click away to submit string
   await page.getByRole("cell", { name: "points*" }).click();
+  // wait till component loads and sets imageLoaded to `true`
+  await page
+    .frame("storybook-preview-iframe")
+    ?.waitForFunction(() => (window as any).imageLoaded === true);
   await expect(
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
@@ -60,7 +85,16 @@ test("should scale the traffic light", async ({ page }) => {
   await page
     .getByPlaceholder("Edit JSON string...")
     .fill('{\n"x": 2,\n"y": 3\n}');
+  // set imageLoaded to false
+  await page.frame("storybook-preview-iframe")?.evaluate(() => {
+    (window as any).imageLoaded = "false";
+  });
+  // click away so string is submitted
   await page.getByRole("cell", { name: "scale" }).click();
+  // wait till component loads and sets imageLoaded to `true`
+  await page
+    .frame("storybook-preview-iframe")
+    ?.waitForFunction(() => (window as any).imageLoaded === true);
   await expect(
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
@@ -75,7 +109,16 @@ test("should set traffic light to green state", async ({ page }) => {
   await page.goto(
     "http://localhost:6006/?path=/story/roadview-trafficlight--default"
   );
+  // set imageLoaded to false
+  await page.frame("storybook-preview-iframe")?.evaluate(() => {
+    (window as any).imageLoaded = "false";
+  });
+  // change traffic light color
   await page.locator("#control-state").selectOption("1");
+  // wait till component loads and sets imageLoaded to `true`
+  await page
+    .frame("storybook-preview-iframe")
+    ?.waitForFunction(() => (window as any).imageLoaded === true);
   await expect(
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
@@ -91,15 +134,18 @@ test("should set traffic light to type red-yellow-green-straight-right", async (
 }) => {
   await page.goto(
     "http://localhost:6006/?path=/story/roadview-trafficlight--default"
-  );
+  ); // set imageLoaded to false
+  await page.frame("storybook-preview-iframe")?.evaluate(() => {
+    (window as any).imageLoaded = "false";
+  });
+  // change traffic light type
   await page
     .locator("#control-type")
     .selectOption("red-yellow-green-straight-right");
-  // 'red-yellow-green-straight-right' uses the an image, thus we must wait
-  // wait until image is drawn to canvas
-  await page.frame("storybook-preview-iframe")?.waitForFunction(() => {
-    return window.ImageLoaded === true;
-  });
+  // wait till component loads and sets imageLoaded to `true`
+  await page
+    .frame("storybook-preview-iframe")
+    ?.waitForFunction(() => (window as any).imageLoaded === true);
   await expect(
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
