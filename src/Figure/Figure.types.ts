@@ -26,4 +26,8 @@ export type FigureProps = {
    * The scale of the image, similar to size, but can't affect the aspect ratio
    */
   scale?: number;
+  /**
+   * Resolves on image loaded
+   */
+  onImageLoad?: (loaded: boolean) => void;
 };

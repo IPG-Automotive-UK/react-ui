@@ -31,6 +31,7 @@ const Template: StoryFn<FigureProps> = args => {
 // Default
 export const Default = {
   args: {
+    onImageLoad: loaded => console.log(loaded),
     url: ImageURL,
     x: 0,
     y: 0

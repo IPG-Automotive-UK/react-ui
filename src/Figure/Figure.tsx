@@ -1,4 +1,6 @@
-import React, { useLayoutEffect } from "react";
+/* eslint-disable no-unused-vars */
+
+import React, { useEffect } from "react";
 
 import type { FigureProps } from "./Figure.types";
 import { Image } from "react-konva";
@@ -23,13 +25,14 @@ const Figure: React.FC<FigureProps> = ({
   x,
   y,
   size = { x: 3, y: 3 },
-  scale = 1
+  scale = 1,
+  onImageLoad
 }) => {
   const [image] = useImage(url);
 
-  useLayoutEffect(() => {
-    if (image) {
-      window.ImageLoaded = true;
+  useEffect(() => {
+    if (image && onImageLoad) {
+      onImageLoad(true);
     }
   });
 

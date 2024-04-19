@@ -45,4 +45,8 @@ export type TrafficLightProps = {
    * An object defining the scale in x and y
    */
   scale?: { x: number; y: number };
+  /**
+   * Resolves on image loaded
+   */
+  onTrafficLightLoad?: (loaded: boolean) => void;
 };

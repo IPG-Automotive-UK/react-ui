@@ -56,7 +56,8 @@ export const TrafficLightTypes = {
   args: {
     angle: 0,
     points: [0, 0],
-    type: "red-yellow-green-straight"
+    type: "red-yellow-green-straight",
+    onTrafficLightLoad: a => console.log("bishbashbosh")
   },
   render: Template
 };
