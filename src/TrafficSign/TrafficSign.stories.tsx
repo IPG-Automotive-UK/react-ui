@@ -28,6 +28,7 @@ const Template: StoryFn<TrafficSignProps> = args => {
 // Default
 export const Default = {
   args: {
+    onTrafficSignLoad: () => ((window as any).imageLoaded = true),
     points: [0, 0],
     type: "highway"
   },
@@ -38,6 +39,7 @@ export const Default = {
 export const Rotated = {
   args: {
     angle: 90,
+    onTrafficSignLoad: () => ((window as any).imageLoaded = true),
     points: [0, 0],
     type: "highway"
   },
@@ -47,6 +49,7 @@ export const Rotated = {
 // With Value
 export const WithValue = {
   args: {
+    onTrafficSignLoad: () => ((window as any).imageLoaded = true),
     points: [0, 0],
     type: "speedLimit",
     value: "30"
@@ -57,6 +60,7 @@ export const WithValue = {
 // Custom Size
 export const Sized = {
   args: {
+    onTrafficSignLoad: () => ((window as any).imageLoaded = true),
     points: [0, 0],
     size: { x: 5, y: 10 },
     type: "highway"
@@ -67,6 +71,7 @@ export const Sized = {
 // Custom Scale
 export const Scaled = {
   args: {
+    onTrafficSignLoad: () => ((window as any).imageLoaded = true),
     points: [0, 0],
     scale: 5,
     type: "highway"

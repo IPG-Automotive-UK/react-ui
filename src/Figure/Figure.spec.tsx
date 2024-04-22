@@ -7,12 +7,14 @@ test("should render figure with virto", async ({ page }) => {
   await page.goto(
     "http://localhost:6006/?path=/story/roadview-figure--default"
   );
-
-  // wait until image is drawn to canvas
-  await page.frame("storybook-preview-iframe")?.waitForFunction(() => {
-    return window.ImageLoaded === true;
+  // set imageLoaded to false
+  await page.frame("storybook-preview-iframe")?.evaluate(() => {
+    (window as any).imageLoaded = "false";
   });
-
+  // wait till component loads and sets imageLoaded to `true`
+  await page
+    .frame("storybook-preview-iframe")
+    ?.waitForFunction(() => (window as any).imageLoaded === true);
   await expect(
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
@@ -28,15 +30,18 @@ test("should render figure with a rotated virto", async ({ page }) => {
     "http://localhost:6006/?path=/story/roadview-figure--default"
   );
   await page.locator("#set-angle").click();
+  // set imageLoaded to false
+  await page.frame("storybook-preview-iframe")?.evaluate(() => {
+    (window as any).imageLoaded = "false";
+  });
   await page
     .getByRole("row", { name: "angle" })
     .getByPlaceholder("Edit number...")
     .fill("90");
-
-  // wait until image is drawn to canvas
-  await page.frame("storybook-preview-iframe")?.waitForFunction(() => {
-    return window.ImageLoaded === true;
-  });
+  // wait till component loads and sets imageLoaded to `true`
+  await page
+    .frame("storybook-preview-iframe")
+    ?.waitForFunction(() => (window as any).imageLoaded === true);
 
   await expect(
     page
@@ -53,16 +58,19 @@ test("should render figure with a scaled virto", async ({ page }) => {
     "http://localhost:6006/?path=/story/roadview-figure--default"
   );
   await page.locator("#set-scale").click();
+  // set imageLoaded to false
+  await page.frame("storybook-preview-iframe")?.evaluate(() => {
+    (window as any).imageLoaded = "false";
+  });
   await page
     .getByRole("row", { name: "scale" })
     .getByPlaceholder("Edit number...")
     .fill("2");
 
-  // wait until image is drawn to canvas
-  await page.frame("storybook-preview-iframe")?.waitForFunction(() => {
-    return window.ImageLoaded === true;
-  });
-
+  // wait till component loads and sets imageLoaded to `true`
+  await page
+    .frame("storybook-preview-iframe")
+    ?.waitForFunction(() => (window as any).imageLoaded === true);
   await expect(
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
@@ -91,15 +99,18 @@ test("should render figure with a differently positioned virto", async ({
     .getByRole("row", { name: "y*" })
     .getByPlaceholder("Edit number...")
     .click();
+  // set imageLoaded to false
+  await page.frame("storybook-preview-iframe")?.evaluate(() => {
+    (window as any).imageLoaded = "false";
+  });
   await page
     .getByRole("row", { name: "y*" })
     .getByPlaceholder("Edit number...")
     .fill("2");
-
-  // wait until image is drawn to canvas
-  await page.frame("storybook-preview-iframe")?.waitForFunction(() => {
-    return window.ImageLoaded === true;
-  });
+  // wait till component loads and sets imageLoaded to `true`
+  await page
+    .frame("storybook-preview-iframe")
+    ?.waitForFunction(() => (window as any).imageLoaded === true);
   await expect(
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
@@ -118,12 +129,16 @@ test("should render figure with a sized virto", async ({ page }) => {
   await page
     .getByPlaceholder("Edit JSON string...")
     .fill('{\n  "x": 3,\n  "y": 2\n}');
-  await page.getByRole("cell", { name: "size" }).click(); // click away to submit changes
-
-  // wait until image is drawn to canvas
-  await page.frame("storybook-preview-iframe")?.waitForFunction(() => {
-    return window.ImageLoaded === true;
+  // set imageLoaded to false
+  await page.frame("storybook-preview-iframe")?.evaluate(() => {
+    (window as any).imageLoaded = "false";
   });
+  // click away to submit changes
+  await page.getByRole("cell", { name: "size" }).click();
+  // wait till component loads and sets imageLoaded to `true`
+  await page
+    .frame("storybook-preview-iframe")
+    ?.waitForFunction(() => (window as any).imageLoaded === true);
   await expect(
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')

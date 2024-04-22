@@ -7,12 +7,14 @@ test("should render default highway sign", async ({ page }) => {
   await page.goto(
     "http://localhost:6006/?path=/story/roadview-trafficsign--default"
   );
-
-  // wait until image is drawn to canvas
-  await page.frame("storybook-preview-iframe")?.waitForFunction(() => {
-    return window.ImageLoaded === true;
+  // set imageLoaded to false
+  await page.frame("storybook-preview-iframe")?.evaluate(() => {
+    (window as any).imageLoaded = "false";
   });
-
+  // wait till component loads and sets imageLoaded to `true`
+  await page
+    .frame("storybook-preview-iframe")
+    ?.waitForFunction(() => (window as any).imageLoaded === true);
   await expect(
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
@@ -28,10 +30,14 @@ test("should render rotated highway sign", async ({ page }) => {
     "http://localhost:6006/?path=/story/roadview-trafficsign--rotated"
   );
 
-  // wait until image is drawn to canvas
-  await page.frame("storybook-preview-iframe")?.waitForFunction(() => {
-    return window.ImageLoaded === true;
+  // set imageLoaded to false
+  await page.frame("storybook-preview-iframe")?.evaluate(() => {
+    (window as any).imageLoaded = "false";
   });
+  // wait till component loads and sets imageLoaded to `true`
+  await page
+    .frame("storybook-preview-iframe")
+    ?.waitForFunction(() => (window as any).imageLoaded === true);
 
   await expect(
     page
@@ -48,10 +54,14 @@ test("should render speed limit sign with value", async ({ page }) => {
     "http://localhost:6006/?path=/story/roadview-trafficsign--with-value"
   );
 
-  // wait until image is drawn to canvas
-  await page.frame("storybook-preview-iframe")?.waitForFunction(() => {
-    return window.ImageLoaded === true;
+  // set imageLoaded to false
+  await page.frame("storybook-preview-iframe")?.evaluate(() => {
+    (window as any).imageLoaded = "false";
   });
+  // wait till component loads and sets imageLoaded to `true`
+  await page
+    .frame("storybook-preview-iframe")
+    ?.waitForFunction(() => (window as any).imageLoaded === true);
 
   await expect(
     page
@@ -68,12 +78,16 @@ test("should change the speed limit value of the sing", async ({ page }) => {
     "http://localhost:6006/?path=/story/roadview-trafficsign--with-value"
   );
   await page.getByPlaceholder("Edit string...").click();
+  // set imageLoaded to false
+  await page.frame("storybook-preview-iframe")?.evaluate(() => {
+    (window as any).imageLoaded = "false";
+  });
   await page.getByPlaceholder("Edit string...").fill("50");
 
-  // wait until image is drawn to canvas
-  await page.frame("storybook-preview-iframe")?.waitForFunction(() => {
-    return window.ImageLoaded === true;
-  });
+  // wait till component loads and sets imageLoaded to `true`
+  await page
+    .frame("storybook-preview-iframe")
+    ?.waitForFunction(() => (window as any).imageLoaded === true);
 
   await expect(
     page
@@ -89,12 +103,14 @@ test("should render sized version of the highway sign", async ({ page }) => {
   await page.goto(
     "http://localhost:6006/?path=/story/roadview-trafficsign--sized"
   );
-
-  // wait until image is drawn to canvas
-  await page.frame("storybook-preview-iframe")?.waitForFunction(() => {
-    return window.ImageLoaded === true;
+  // set imageLoaded to false
+  await page.frame("storybook-preview-iframe")?.evaluate(() => {
+    (window as any).imageLoaded = "false";
   });
-
+  // wait till component loads and sets imageLoaded to `true`
+  await page
+    .frame("storybook-preview-iframe")
+    ?.waitForFunction(() => (window as any).imageLoaded === true);
   await expect(
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
@@ -110,11 +126,14 @@ test("should render scaled version of the highway sign", async ({ page }) => {
     "http://localhost:6006/?path=/story/roadview-trafficsign--scaled"
   );
 
-  // wait until image is drawn to canvas
-  await page.frame("storybook-preview-iframe")?.waitForFunction(() => {
-    return window.ImageLoaded === true;
+  // set imageLoaded to false
+  await page.frame("storybook-preview-iframe")?.evaluate(() => {
+    (window as any).imageLoaded = "false";
   });
-
+  // wait till component loads and sets imageLoaded to `true`
+  await page
+    .frame("storybook-preview-iframe")
+    ?.waitForFunction(() => (window as any).imageLoaded === true);
   await expect(
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
