@@ -1,8 +1,28 @@
 export type RoadMarkingProps = {
+  /**
+   * The points representing the path of the marking [x0, y0, z0, x1, y1, z1, ...]
+   */
   points: number[];
-  spaceLength?: number;
-  dashLength?: number;
+  /**
+   * In the case of non-solid lines, a list of two number containing the dash and space lengths [<dashLength>, <spaceLength>]
+   */
+  dash: number[];
+  /**
+   * The width of the marking
+   */
   width?: number;
-  type?: string;
+  /**
+   * The type of road marking
+   */
+  type?:
+    | "single-line"
+    | "broken-line"
+    | "dotted-line"
+    | "double-line"
+    | "double-broken-line"
+    | "double-dotted-line";
+  /**
+   * The color of the marking hex or css colour
+   */
   color?: string;
 };

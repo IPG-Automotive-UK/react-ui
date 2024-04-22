@@ -4,7 +4,7 @@
 export type RoadSurfaceProps = {
   /**
    * A list of numbers defining the coordinates of points along the outline of the road
-   * format: [x0, y0, x1, y2, ...]
+   * format: [x0, y0, z0, x1, y1, z1 ...]
    */
   points: number[];
   /**
