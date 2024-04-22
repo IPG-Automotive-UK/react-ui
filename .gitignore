@@ -24,6 +24,10 @@ yarn-error.log*
 
 storybook-static
 
+#ignore non-linux reference snapshots
+src/*win32*
+src/*darwin*
+
 # test reports
 coverage
 /test-results/
