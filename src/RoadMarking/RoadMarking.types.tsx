@@ -14,13 +14,7 @@ export type RoadMarkingProps = {
   /**
    * The type of road marking
    */
-  type?:
-    | "single-line"
-    | "broken-line"
-    | "dotted-line"
-    | "double-line"
-    | "double-broken-line"
-    | "double-dotted-line";
+  type?: "single" | "double";
   /**
    * The color of the marking hex or css colour
    */

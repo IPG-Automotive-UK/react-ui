@@ -45,12 +45,21 @@ export const CustomColor = {
   render: Template
 };
 
-// Custom Color
-export const SingleDashed = {
+// Double
+export const Double = {
+  args: {
+    points: coordinates,
+    type: "double"
+  },
+  render: Template
+};
+
+// Dashed
+export const Dashed = {
   args: {
     dash: [1, 1],
     points: coordinates,
-    type: "broken-line"
+    type: "single"
   },
   render: Template
 };
