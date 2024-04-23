@@ -6,7 +6,7 @@ import RoadMarking from "./RoadMarking";
 import { RoadMarkingProps } from "./RoadMarking.types";
 
 //  dummy data
-const coordinates = [0, 0, 0, 10, 0, 0, 10, 4, 0, 0, 4, 0];
+const coordinates = [0, 0, 0, 10, 0, 0];
 
 /**
  * Story metadata
@@ -20,7 +20,7 @@ export default meta;
 // Story Template
 const Template: StoryFn<RoadMarkingProps> = args => {
   return (
-    <Stage width={200} height={200} scale={{ x: 10, y: -10 }} x={100} y={100}>
+    <Stage width={200} height={200} scale={{ x: 15, y: -15 }} x={100} y={100}>
       <Layer scaleY={-1}>
         <RoadMarking {...args} />
       </Layer>
@@ -48,6 +48,7 @@ export const CustomColor = {
 // Custom Color
 export const SingleDashed = {
   args: {
+    dash: [1, 1],
     points: coordinates,
     type: "broken-line"
   },

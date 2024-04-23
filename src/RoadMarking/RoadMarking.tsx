@@ -3,29 +3,35 @@ import React from "react";
 import { RoadMarkingProps } from "./RoadMarking.types";
 
 const RoadMarking: React.FC<RoadMarkingProps> = (
-  { points, dash, width, type, color },
+  {
+    points,
+    dash = undefined,
+    width = 0.15,
+    type = "single-line",
+    color = "#ffffff"
+  },
   key
 ) => {
-  const pointsXY = marking.points.filter(
+  const pointsXY = points.filter(
     (_, index) => index % 3 === 0 || (index - 1) % 3 === 0
   );
-  if (marking.type.includes("double")) {
+  if (type.includes("double")) {
     // plot symmetrical double lines
     return (
       <>
         <Line
           key={key}
-          strokeWidth={marking.width * 2.5}
+          strokeWidth={width * 2.5}
           scaleY={-1}
-          dash={[marking.dashLength, marking.spaceLength]}
-          stroke={marking.color}
+          dash={dash}
+          stroke={color}
           points={pointsXY}
         />
         <Line
           key={`${key}_cutout`}
-          strokeWidth={marking.width * 0.5}
+          strokeWidth={width * 0.5}
           scaleY={-1}
-          stroke={marking.color}
+          stroke={color}
           globalCompositeOperation="destination-out"
           points={pointsXY}
         />
@@ -36,10 +42,10 @@ const RoadMarking: React.FC<RoadMarkingProps> = (
     return (
       <Line
         key={key}
-        strokeWidth={marking.width}
+        strokeWidth={width}
         scaleY={-1}
-        stroke={marking.color}
-        dash={[marking.dashLength, marking.spaceLength]}
+        stroke={color}
+        dash={dash}
         points={pointsXY}
       />
     );
