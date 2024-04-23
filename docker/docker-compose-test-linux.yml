@@ -1,0 +1,10 @@
+version: "3.7"
+services:
+  infofile-addon-build:
+    container_name: react-ui-testing
+    restart: "no"
+    build:
+      context: .
+      dockerfile: Dockerfile-build-linux
+    volumes:
+      - ..\..\:/addon
