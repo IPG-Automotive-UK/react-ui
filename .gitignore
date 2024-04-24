@@ -24,9 +24,9 @@ yarn-error.log*
 
 storybook-static
 
-#ignore non-linux reference snapshots
-src/*win32*
-src/*darwin*
+# ignore any playwright snapshots from windows and macos (-darwin.png, -win32.png)
+src/**/*-darwin.png
+src/**/*-win32.png
 
 # test reports
 coverage
