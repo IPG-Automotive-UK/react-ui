@@ -12,15 +12,23 @@ export type Trajectory = {
    */
   z: number[];
   /**
+   * A list of the yaw angle of the vehicle
+   */
+  yaw?: number[];
+  /**
+   * A list of s (distance along road) coordinates
+   */
+  s?: number[];
+  /**
    * An object containing the trajectory in real world coordinates (lat, long, elev)
    */
   GCS?: {
     /**
-     * A list of latitudes defining the trajectory
+     * A list of latitudes defining the trajectory (rad)
      */
     lat: number[];
     /**
-     * A list of longitudes defining the trajectory
+     * A list of longitudes defining the trajectory (rad)
      */
     long: number[];
     /**
@@ -28,22 +36,37 @@ export type Trajectory = {
      */
     elev: number[];
   };
-  s: number[];
   /**
-   * A list of the yaw angle of the vehicle
+   * Width of stroke used to draw the trajectory
    */
-  yaw?: number[];
+  strokeWidth?: number;
+  /**
+   * Color used to draw the trajectory (css string or hex value)
+   */
+  color?: string;
 };
 
 export type Vehicle = {
   /**
+   * The x position of the vehicle on the canvas
+   */
+  x: number;
+  /**
+   * The y position of the vehicle on the canvas
+   */
+  y: number;
+  /**
+   * The yaw of the vehicle on the canvas
+   */
+  yaw: number;
+  /**
    * The height of the rectangle
    */
-  height: number;
+  height?: number;
   /**
    * The width of the rectangle
    */
-  width: number;
+  width?: number;
   /**
    * The color fill of the rectangle (css string or hex value)
    */
@@ -56,17 +79,21 @@ export type Vehicle = {
 
 export type Marker = {
   /**
+   * The x position of the vehicle on the canvas
+   */
+  x: number;
+  /**
+   * The y position of the vehicle on the canvas
+   */
+  y: number;
+  /**
    * The radius of the circle
    */
-  radius: number;
+  radius?: number;
   /**
    * The color fill of the circle (css string or hex value)
    */
   color?: string;
-  /**
-   * A label to render next to the rectangle for identification
-   */
-  label?: string;
 };
 
 export type VehiclePathProps = {
@@ -75,9 +102,9 @@ export type VehiclePathProps = {
    */
   path: Trajectory;
   /**
-   * The index of the position along the trajectory to use for the vehicle position
+   * The index of the position along the trajectory to use for the vehicle position (default = 0)
    */
-  index: number;
+  index?: number;
   /**
    * The vehicle position can
    */
