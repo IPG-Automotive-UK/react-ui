@@ -212,6 +212,10 @@ export {
   type VehicleSelectProps
 } from "./VehicleSelect";
 export {
+  default as VehicleSelector,
+  type VehicleSelectorProps
+} from "./VehicleSelector";
+export {
   default as VehicleSelectDialog,
   type VehicleSelectDialogProps
 } from "./VehicleSelectDialog";

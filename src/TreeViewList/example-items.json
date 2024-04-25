@@ -5,18 +5,23 @@
     "tooltip": "Aerodynamics description goes here",
     "children": [
       {
-        "label": "Drag Coefficient",
+        "label": "ConsiderationPointPosition",
+        "nodeId": "AER.ConsiderationPointPosition",
+        "tooltip": "When the vehicle is gripped by side wind, the wind starts to take effect only from a certain point on, e.g. if only the bumper is attacked by side wind the driver will usually not recognize the effects. Ahead of this point, the vehicle body does not offer enough contact surface to the wind to take effect."
+      },
+      {
+        "label": "DragCoefficient",
         "nodeId": "AER.DragCoefficient1D",
         "tooltip": "Defines the drag coefficient of the entire vehicle as a function of wind angle of attack (tau)"
       },
       {
         "disabled": true,
-        "label": "Frontal Area",
+        "label": "FrontalArea",
         "nodeId": "AER.FrontalArea",
         "tooltip": "The vehicle reference area is the projected frontal area including tires and underbody parts"
       },
       {
-        "label": "Reference Length",
+        "label": "ReferenceLength",
         "nodeId": "AER.ReferenceLength",
         "tooltip": "This is the length between VEHICLE.AERODYNAMIC.CONSIDERATION POINT XYZ and the vehicle's rearmost point. It is used to calculate the torques applied to VEHICLE.AERODYNAMIC.RESULTANT FORCE POINT XYZ"
       }
