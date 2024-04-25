@@ -1,5 +1,5 @@
 import { Box, Tooltip, Typography, debounce } from "@mui/material";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { TreeItem, TreeView } from "@mui/x-tree-view";
 import { TreeNodeItem, TreeViewListProps } from "./TreeViewList.types";
 
@@ -40,6 +40,9 @@ const TreeViewList = ({
   // state for selected node
   const [selectedNode, setSelectedNode] = useState<string>(selected ?? "");
 
+  // local state for selected node
+  const [currentSelection, setCurrentSelection] = useState(selected ?? "");
+
   // state for search input value
   const [searchValue, setSearchValue] = useState("");
 
@@ -51,6 +54,25 @@ const TreeViewList = ({
 
   // state for the node we are hovered over
   const [hoveredNode, setHoveredNode] = useState<string>("");
+
+  // reference to the box element
+  const boxRef = useRef<HTMLDivElement>(null);
+  const [boxWidth, setBoxWidth] = useState(0);
+
+  useEffect(() => {
+    const updateWidth = () => {
+      if (boxRef.current) {
+        setBoxWidth(boxRef.current.offsetWidth);
+      }
+    };
+
+    window.addEventListener("resize", updateWidth);
+    updateWidth();
+
+    return () => {
+      window.removeEventListener("resize", updateWidth);
+    };
+  }, [width]);
 
   // update tree display items when the items prop changes or when the search input changes
   useEffect(() => {
@@ -198,14 +220,13 @@ const TreeViewList = ({
   return (
     <>
       <Box
+        ref={boxRef}
         sx={theme => ({
           background: theme.palette.background.paper,
           display: "flex",
           flexDirection: "column",
           height,
           overflow: "hidden",
-          paddingX: "5px",
-          paddingY: "2px",
           width
         })}
       >
@@ -243,10 +264,15 @@ const TreeViewList = ({
         </Box>
         <Box sx={{ flexGrow: 1, overflowY: "auto" }}>
           <TreeView
+            sx={{
+              "& .css-9l5vo-MuiCollapse-wrapperInner": {
+                width: boxWidth <= 280 ? "auto" : "100%"
+              }
+            }}
             defaultCollapseIcon={<RemoveIcon />}
             defaultExpandIcon={<AddIcon />}
             expanded={expandedNodes}
-            selected={selectedNode}
+            selected={currentSelection}
             onNodeSelect={(event, nodeId) => {
               const node = getNodeById(treeDisplayItems, nodeId);
               const isChild = Boolean(
@@ -256,6 +282,7 @@ const TreeViewList = ({
                 const nodeDetails = { isChild };
                 // update the selected node when a node is selected and it is a child
                 if (isChild) {
+                  setCurrentSelection(nodeId);
                   setSelectedNode(nodeId);
                 }
                 onNodeSelect(event, nodeId, nodeDetails);
@@ -270,6 +297,7 @@ const TreeViewList = ({
               setExpandedNodes(nodeId);
               // call the onNodeToggle function if it is defined
               if (onNodeToggle) {
+                setSelectedNode(selectedNode);
                 onNodeToggle(event, nodeId);
               }
             }}
@@ -346,18 +374,23 @@ const TooltipTreeItem = (
     <Tooltip
       title={props.tooltip ? <>{props.tooltip}</> : ""}
       placement="right-start"
-      open={props.hoveredNode === props.nodeId}
+      open={hoveredNode === props.nodeId}
       disableFocusListener
     >
       <TreeItem
         {...rest}
         sx={theme => ({
           color: theme.palette.text.primary,
-          padding: "5px"
+          paddingY: "5px"
         })}
         onMouseOver={event => {
           event.stopPropagation();
-          setHoveredNode(props.nodeId);
+
+          const target = event.target as Element;
+
+          if (target.classList.contains("MuiTreeItem-label")) {
+            setHoveredNode(props.nodeId);
+          }
         }}
         onMouseOut={event => {
           event.stopPropagation();

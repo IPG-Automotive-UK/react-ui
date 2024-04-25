@@ -21,7 +21,7 @@ const Figure: React.FC<FigureProps> = ({
   const [image, status] = useImage(url);
 
   useEffect(() => {
-    if (status === "loaded" && onImageLoad) {
+    if (image && status === "loaded" && onImageLoad) {
       onImageLoad(true);
     }
   });
