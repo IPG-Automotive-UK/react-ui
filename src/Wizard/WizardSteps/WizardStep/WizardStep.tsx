@@ -22,6 +22,7 @@ export default function WizardStep({
   index,
   last,
   helperText,
+  error,
   errorText
 }: WizardStepProps) {
   return (
@@ -29,6 +30,7 @@ export default function WizardStep({
       <WizardStepLabel
         label={label}
         helperText={helperText}
+        error={error}
         errorText={errorText}
       />
     </Step>
@@ -41,8 +43,9 @@ export default function WizardStep({
 function WizardStepLabel({
   label,
   helperText,
+  error,
   errorText
-}: Pick<WizardStepProps, "label" | "helperText" | "errorText">) {
+}: Pick<WizardStepProps, "label" | "helperText" | "error" | "errorText">) {
   // get context state
   const stepContext = useStepContext();
   let active: boolean, completed: boolean;
@@ -75,6 +78,9 @@ function WizardStepLabel({
   // errorText overrides helperText
   if (errorText) {
     stepLabelProps.optional = errorText;
+  }
+
+  if (error || errorText) {
     stepLabelProps.error = true;
     stepLabelProps.icon = (
       <SvgIcon component={ErrorIcon} color="error" fontSize="medium" />

@@ -18,4 +18,9 @@ describe("WizardStep", () => {
     expect(screen.getByTestId("ErrorIcon")).toBeInTheDocument();
     expect(screen.getByText("Step 1")).toHaveClass("Mui-error");
   });
+  it("should render an error boolean is provided", () => {
+    render(<WizardStep label="Step 1" errorText="Step 1 error text" />);
+    expect(screen.getByTestId("ErrorIcon")).toBeInTheDocument();
+    expect(screen.getByText("Step 1")).toHaveClass("Mui-error");
+  });
 });

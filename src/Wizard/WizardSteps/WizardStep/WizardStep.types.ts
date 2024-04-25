@@ -6,6 +6,10 @@ export type WizardStepProps = {
    */
   completed?: boolean;
   /**
+   * If true, the step is marked as errored.
+   */
+  error?: boolean;
+  /**
    * The error text to display.
    * If this prop is set, the helperText prop is ignored.
    */
