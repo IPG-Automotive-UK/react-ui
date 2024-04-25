@@ -23,9 +23,9 @@ const meta: Meta<typeof ImageUploader> = {
           setSelectedFiles(selectedFiles);
           action("onAdd")(selectedFiles);
         }}
-        onDelete={updatedFiles => {
+        onDelete={(updatedFiles, deletedFiles) => {
           setSelectedFiles([]);
-          action("onDelete")(updatedFiles);
+          action("onDelete")(updatedFiles, deletedFiles);
         }}
       />
     );
