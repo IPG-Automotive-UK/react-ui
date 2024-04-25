@@ -11,7 +11,8 @@ export default defineConfig({
         "**/*{.,-}{test,spec,stories,types}.?(c|m)[jt]s?(x)",
         "**/index.[jt]s?(x)"
       ],
-      include: ["src/**/*"]
+      include: ["src/**/*"],
+      reportsDirectory: "./test-artifacts/coverage"
     },
     environment: "jsdom",
     globals: true,
