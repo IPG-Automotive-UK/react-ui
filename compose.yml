@@ -1,0 +1,9 @@
+services:
+  react-ui-testing:
+    container_name: react-ui-testing
+    restart: "no"
+    build:
+      context: .
+    volumes:
+      - ./src:/usr/src/react-ui/src
+      - ./test-artifacts:/usr/src/react-ui/test-artifacts
