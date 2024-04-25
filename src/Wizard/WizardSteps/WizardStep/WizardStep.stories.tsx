@@ -1,9 +1,11 @@
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, StoryFn, StoryObj } from "@storybook/react";
 
 import React from "react";
 import { Typography } from "@mui/material";
 import WizardStep from "./WizardStep";
 import { WizardStepProps } from "./WizardStep.types";
+
+type Story = StoryObj<typeof WizardStep>;
 
 const meta: Meta<typeof WizardStep> = {
   component: WizardStep,
@@ -15,7 +17,7 @@ const Template: StoryFn<WizardStepProps> = args => {
   return <WizardStep {...args} />;
 };
 
-export const Default = {
+export const Default: Story = {
   args: {
     completed: false,
     index: 0,
@@ -26,7 +28,7 @@ export const Default = {
   render: Template
 };
 
-export const WithHelperText = {
+export const WithHelperText: Story = {
   args: {
     ...Default.args,
     helperText: "Helper Text"
@@ -35,7 +37,7 @@ export const WithHelperText = {
   render: Template
 };
 
-export const WithErrorText = {
+export const WithErrorText: Story = {
   args: {
     ...Default.args,
     errorText: (
@@ -43,6 +45,15 @@ export const WithErrorText = {
         Error text
       </Typography>
     )
+  },
+
+  render: Template
+};
+
+export const WithError: Story = {
+  args: {
+    ...Default.args,
+    error: true
   },
 
   render: Template
