@@ -73,7 +73,7 @@ test("should render speed limit sign with value", async ({ page }) => {
 /**
  * Test to check that the speed limit can be changed
  */
-test("should change the speed limit value of the sing", async ({ page }) => {
+test("should change the speed limit value of the string", async ({ page }) => {
   await page.goto(
     "http://localhost:6006/?path=/story/roadview-trafficsign--with-value"
   );
@@ -94,6 +94,32 @@ test("should change the speed limit value of the sing", async ({ page }) => {
       .frameLocator('iframe[title="storybook-preview-iframe"]')
       .locator("canvas")
   ).toHaveScreenshot("speedLimit50.png", { maxDiffPixels: 100 });
+});
+
+/**
+ * Test to check that file unknown renders with unsupported speed value
+ */
+test("should show file unknown icon after speed changed", async ({ page }) => {
+  await page.goto(
+    "http://localhost:6006/?path=/story/roadview-trafficsign--with-value"
+  );
+  await page.getByPlaceholder("Edit string...").click();
+  // set imageLoaded to false
+  await page.frame("storybook-preview-iframe")?.evaluate(() => {
+    (window as any).imageLoaded = "false";
+  });
+  await page.getByPlaceholder("Edit string...").fill("55");
+
+  // wait till component loads and sets imageLoaded to `true`
+  await page
+    .frame("storybook-preview-iframe")
+    ?.waitForFunction(() => (window as any).imageLoaded === true);
+
+  await expect(
+    page
+      .frameLocator('iframe[title="storybook-preview-iframe"]')
+      .locator("canvas")
+  ).toHaveScreenshot("speedLimit55.png", { maxDiffPixels: 100 });
 });
 
 /**
