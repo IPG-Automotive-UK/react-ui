@@ -14,6 +14,7 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   /* Run tests in files in parallel */
   fullyParallel: true,
+  outputDir: "./test-artifacts/playwright/test-results",
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   /* Configure projects for major browsers */
   projects: [
@@ -30,7 +31,9 @@ export default defineConfig({
       use: { ...devices["Desktop Safari"] }
     }
   ],
-  reporter: [["html", { open: "never" }]],
+  reporter: [
+    ["html", { open: "never", outputDir: "./test-artifacts/playwright/report" }]
+  ],
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   testDir: "./src",

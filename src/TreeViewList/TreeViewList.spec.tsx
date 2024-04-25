@@ -36,7 +36,7 @@ test("should display parameter value once expanded", async ({ page }) => {
   await expect(
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
-      .getByText("Drag Coefficient", { exact: true })
+      .getByText("DragCoefficient", { exact: true })
   ).toBeVisible();
 });
 
@@ -147,7 +147,7 @@ test("should hide child when is collapsed", async ({ page }) => {
       await expect(
         page
           .frameLocator('iframe[title="storybook-preview-iframe"]')
-          .getByText("Reference Length", { exact: true })
+          .getByText("ReferenceLength", { exact: true })
       ).toBeVisible();
       await page
         .frameLocator('iframe[title="storybook-preview-iframe"]')
@@ -156,7 +156,7 @@ test("should hide child when is collapsed", async ({ page }) => {
       await expect(
         page
           .frameLocator('iframe[title="storybook-preview-iframe"]')
-          .getByText("Reference Length", { exact: true })
+          .getByText("ReferenceLength", { exact: true })
       ).toBeHidden();
     } else {
       throw new Error("Frame object is null");
