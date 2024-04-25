@@ -62,7 +62,6 @@ const TabPanel = ({ children, active, onTabChange }: TabPanelProps) => {
             key={index}
             id={`tabpanel-${index}`}
             aria-labelledby={`tab-${index}`}
-            sx={{ p: 3 }}
           >
             {activeTab === index && child.props.children}
           </Box>
