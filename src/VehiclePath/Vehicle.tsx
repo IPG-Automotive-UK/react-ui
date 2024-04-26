@@ -4,7 +4,7 @@ import React from "react";
 import type { VehicleProps } from "./VehiclePath.types";
 
 const Vehicle: React.FC<VehicleProps> = (
-  { height = 5, width = 2, x, y, yaw, color = "#5E8AB4", label },
+  { height = 5, width = 2, x, y, yaw, color = "#FFAF2C", label },
   key
 ) => {
   const rotation = ((yaw * 180) / Math.PI - 90) * -1;

@@ -21,7 +21,7 @@ const VehiclePath: React.FC<VehiclePathProps> = (
           key={key}
           strokeWidth={path.strokeWidth ?? 0.1}
           scaleY={-1}
-          stroke={path.color ?? "#5E8AB4"}
+          stroke={path.color ?? "#FFAF2C"}
           // zip the x and y points --> [x0, y0, x1, y1...]
           points={path.x.flatMap((e, i) => [e, path.y[i]])}
         />
