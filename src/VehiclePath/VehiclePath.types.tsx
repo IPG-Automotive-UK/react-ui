@@ -47,6 +47,22 @@ export type Trajectory = {
 };
 
 export type Vehicle = {
+  height?: number;
+  /**
+   * The width of the rectangle
+   */
+  width?: number;
+  /**
+   * The color fill of the rectangle (css string or hex value)
+   */
+  color?: string;
+  /**
+   * A label to render next to the rectangle for identification
+   */
+  label?: string;
+};
+
+export type VehicleProps = {
   /**
    * The x position of the vehicle on the canvas
    */
@@ -77,7 +93,7 @@ export type Vehicle = {
   label?: string;
 };
 
-export type Marker = {
+export type MarkerProps = {
   /**
    * The x position of the vehicle on the canvas
    */
@@ -86,6 +102,17 @@ export type Marker = {
    * The y position of the vehicle on the canvas
    */
   y: number;
+  /**
+   * The radius of the circle
+   */
+  radius?: number;
+  /**
+   * The color fill of the circle (css string or hex value)
+   */
+  color?: string;
+};
+
+export type Marker = {
   /**
    * The radius of the circle
    */

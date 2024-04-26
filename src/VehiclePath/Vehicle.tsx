@@ -1,9 +1,9 @@
 import { Rect, Text } from "react-konva";
 
 import React from "react";
-import type { Vehicle } from "./VehiclePath.types";
+import type { VehicleProps } from "./VehiclePath.types";
 
-const Vehicle: React.FC<Vehicle> = (
+const Vehicle: React.FC<VehicleProps> = (
   { height = 5, width = 2, x, y, yaw, color = "#5E8AB4", label },
   key
 ) => {
@@ -12,7 +12,7 @@ const Vehicle: React.FC<Vehicle> = (
     <>
       <Rect
         x={x}
-        y={-y}
+        y={y}
         offsetX={width / 2}
         offsetY={height}
         width={width}
@@ -30,7 +30,7 @@ const Vehicle: React.FC<Vehicle> = (
           wrap="char"
           ellipsis={true}
           x={x}
-          y={-y}
+          y={y}
           offset={{
             x: 2.5,
             y: 0
