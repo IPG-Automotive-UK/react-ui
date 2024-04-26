@@ -2,11 +2,7 @@ import Autocomplete from "../Autocomplete";
 import { Box } from "@mui/material";
 import React from "react";
 import { VehicleSelectorProps } from "./VehicleSelector.types";
-
-// function to return unique sorted array of values from a string array
-function uniqueSortedArray(values: string[]) {
-  return values.filter((item, i, ar) => ar.indexOf(item) === i).sort();
-}
+import { uniqueSortedArray } from "../utils/common";
 
 // component to select a vehicle
 function VehicleSelector({
@@ -15,6 +11,7 @@ function VehicleSelector({
   gates = [],
   multipleSelection = false,
   onChange = () => {},
+  size = "medium",
   value = [],
   variants = []
 }: VehicleSelectorProps) {
@@ -95,6 +92,7 @@ function VehicleSelector({
               }
             ]);
           }}
+          size={size}
           value={selectedProject === "" ? null : selectedProject}
         />
       </Box>
@@ -117,6 +115,7 @@ function VehicleSelector({
               }
             ]);
           }}
+          size={size}
           value={selectedModelYear === "" ? null : selectedModelYear}
         />
       </Box>
@@ -185,6 +184,7 @@ function VehicleSelector({
               ]);
             }
           }}
+          size={size}
           value={selectedVariants.length > 0 ? selectedVariants[0] : ""}
         />
       </Box>
@@ -246,6 +246,7 @@ function VehicleSelector({
                 );
               }
             }}
+            size={size}
             value={selectedGates}
           />
         </Box>
