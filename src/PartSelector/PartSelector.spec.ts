@@ -8,9 +8,6 @@ test("should render the part selector", async ({ page }) => {
     "http://localhost:6006/?path=/story/selectors-partselector--default"
   );
 
-  // Wait for the iframe to be attached in the DOM.
-  await page.waitForSelector('iframe[title="storybook-preview-iframe"]');
-
   // Check that Part name and part number are displayed.
   await expect(
     page
@@ -19,6 +16,7 @@ test("should render the part selector", async ({ page }) => {
       .filter({ hasText: "Part Name *Part Name *" })
       .nth(3)
   ).toBeVisible();
+
   await expect(
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
@@ -38,9 +36,6 @@ test("Can select a value from each Autocomplete component", async ({
   await page.goto(
     "http://localhost:6006/?path=/story/selectors-partselector--default"
   );
-
-  // Wait for the iframe to be attached in the DOM.
-  await page.waitForSelector('iframe[title="storybook-preview-iframe"]');
 
   // Select a value from each Autocomplete component
   await page
@@ -86,9 +81,6 @@ test("Can enable or disable the Part Number Autocomplete component based on the 
     "http://localhost:6006/?path=/story/selectors-partselector--default"
   );
 
-  // Wait for the iframe to be attached in the DOM.
-  await page.waitForSelector('iframe[title="storybook-preview-iframe"]');
-
   // Check that the Part Number Autocomplete component is disabled
   await expect(
     page
@@ -125,9 +117,6 @@ test("Clearing the 'Part Name' field also clears the 'Part Number' field", async
   await page.goto(
     "http://localhost:6006/?path=/story/selectors-partselector--selected-part"
   );
-
-  // Wait for the iframe to be attached in the DOM.
-  await page.waitForSelector('iframe[title="storybook-preview-iframe"]');
 
   // Check the Part Name and Part Number initial values
   await expect(
@@ -174,9 +163,6 @@ test("Display 'No options available' message when there are no options available
   await page.goto(
     "http://localhost:6006/?path=/story/selectors-partselector--default"
   );
-
-  // Wait for the iframe to be attached in the DOM.
-  await page.waitForSelector('iframe[title="storybook-preview-iframe"]');
 
   // select the option "Wheel Nut" from the Part Name Autocomplete component
   await page
