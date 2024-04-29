@@ -58,6 +58,11 @@ const parts = [
     part_number: "254662178"
   },
   {
+    _id: "63495828bcd57200132d4615",
+    part_name: "Mid Speed Motor 1 Gear",
+    part_number: "254662178"
+  },
+  {
     _id: "63495828bcd57200132d4616",
     part_name: "Mid Speed Motor 1 Gear",
     part_number: "238662132"
