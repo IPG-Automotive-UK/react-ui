@@ -118,7 +118,7 @@ test("Clearing the 'Part Name' field also clears the 'Part Number' field", async
     "http://localhost:6006/?path=/story/selectors-partselector--selected-part"
   );
 
-  // Check the Part Name and Part Number initial values
+  // Check that Part Name and Part Number has initial values
   await expect(
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
@@ -145,6 +145,54 @@ test("Clearing the 'Part Name' field also clears the 'Part Number' field", async
       .getByTestId("part-select")
       .getByLabel("Part Name *")
   ).toHaveValue("");
+  await expect(
+    page
+      .frameLocator('iframe[title="storybook-preview-iframe"]')
+      .getByTestId("part-select")
+      .getByLabel("Part Number *")
+  ).toHaveValue("");
+});
+
+/**
+ * Test to check that clearing the "Part Number" field only clears the "Part Number" field.
+ */
+test("Clearing the 'Part Number' field only clears the 'Part Number' field", async ({
+  page
+}) => {
+  // Go to the page with the PartSelector component
+  await page.goto(
+    "http://localhost:6006/?path=/story/selectors-partselector--selected-part"
+  );
+
+  // Check that Part Name and Part Number has initial values
+  await expect(
+    page
+      .frameLocator('iframe[title="storybook-preview-iframe"]')
+      .getByTestId("part-select")
+      .getByLabel("Part Name *")
+  ).toHaveValue("Mid Speed Motor 1 Gear");
+  await expect(
+    page
+      .frameLocator('iframe[title="storybook-preview-iframe"]')
+      .getByTestId("part-select")
+      .getByLabel("Part Number *")
+  ).toHaveValue("254662132");
+
+  // Clear the "Part Name" field
+  await page
+    .frameLocator('iframe[title="storybook-preview-iframe"]')
+    .getByLabel("Part Number *")
+    .fill("");
+
+  // Check that the "Part Name" field still retains the initial value
+  await expect(
+    page
+      .frameLocator('iframe[title="storybook-preview-iframe"]')
+      .getByTestId("part-select")
+      .getByLabel("Part Name *")
+  ).toHaveValue("Mid Speed Motor 1 Gear");
+
+  // Check that the Part Number field is cleared
   await expect(
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
