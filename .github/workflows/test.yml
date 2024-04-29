@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         node-version: [20.x]
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest]
       fail-fast: false
     runs-on: ${{ matrix.os }}
     steps:
@@ -26,33 +26,16 @@ jobs:
           cache: "pnpm"
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
-      - name: Lint Checks
-        run: pnpm run test:lint
-      - name: Typescript Checks
-        run: pnpm run type-check
-      - name: Unit Tests
-        run: pnpm run test:unit
-        env:
-          CI: true
-      - name: End to End Tests (Linux)
-        if: runner.os == 'Linux'
-        run: sudo apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y xvfb && xvfb-run pnpm run test:playwright:headed
-        env:
-          CI: true
-      - name: End to End Tests (Windows & MacOS)
-        if: runner.os != 'Linux'
-        run: pnpm run test:playwright
-        env:
-          CI: true
+      - name: Run tests
+        run: pnpm run test:docker
       - name: Upload Playwright Report
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: playwright-report-${{ github.sha }}-${{matrix.os}}-${{ matrix.node-version }}
-          path: playwright-report
+          path: ./test-artifacts/playwright
       - name: Upload Coverage Report
         uses: actions/upload-artifact@v4
-        if: matrix.os == 'ubuntu-latest'
         with:
           name: coverage-report-${{ github.sha }}-${{ matrix.node-version }}
-          path: coverage
+          path: ./test-artifacts/coverage
