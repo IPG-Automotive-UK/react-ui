@@ -11,7 +11,13 @@ import { TabPanelProps } from "./TabPanel.types";
  * @property active - The active tab index
  * @returns The tab panel component
  */
-const TabPanel = ({ children, active, onTabChange }: TabPanelProps) => {
+const TabPanel = ({
+  children,
+  active,
+  variant = "fullWidth",
+  onTabChange,
+  customChildren
+}: TabPanelProps) => {
   // state for the active tab
   const [activeTab, setActiveTab] = useState(active ?? 0);
 
@@ -36,7 +42,7 @@ const TabPanel = ({ children, active, onTabChange }: TabPanelProps) => {
         value={activeTab}
         onChange={handleChange}
         indicatorColor="primary"
-        variant="fullWidth"
+        variant={variant}
         aria-label="full width tabs"
         sx={{ borderBottom: 1, borderColor: "divider" }}
       >
@@ -51,6 +57,7 @@ const TabPanel = ({ children, active, onTabChange }: TabPanelProps) => {
             />
           );
         })}
+        {customChildren}
       </Tabs>
       {React.Children.map(children, (child, index) => {
         if (!React.isValidElement(child)) return null;
