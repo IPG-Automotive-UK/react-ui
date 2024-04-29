@@ -132,4 +132,22 @@ describe("NumberField", () => {
     await userEvent.tab();
     expect(onBlur).toHaveBeenCalledTimes(1);
   });
+
+  test("renders a start adornment", () => {
+    const { container } = render(<NumberField startAdornment="£" />);
+    const startAdornment = container.querySelector(
+      ".MuiInputAdornment-positionStart"
+    );
+    // There should be a start adornment with the text £
+    expect(startAdornment).toHaveTextContent("£");
+  });
+
+  test("renders a start adornment", () => {
+    const { container } = render(<NumberField endAdornment="kg" />);
+    const endAdornment = container.querySelector(
+      ".MuiInputAdornment-positionEnd"
+    );
+    // There should be a start adornment with the text kg
+    expect(endAdornment).toHaveTextContent("kg");
+  });
 });
