@@ -57,3 +57,19 @@ test("should switch content when tabs are clicked", async ({ page }) => {
       .first()
   ).not.toBeVisible();
 });
+
+/**
+ * Test to check custom children are rendered correctly.
+ */
+test("should render custom children", async ({ page }) => {
+  await page.goto(
+    "http://localhost:6006/?path=/story/layout-tabpanel--custom-children"
+  );
+
+  // Verify that the custom children are rendered, in this case a ADD TO DOWNLOAD button
+  await expect(
+    page
+      .frameLocator('iframe[title="storybook-preview-iframe"]')
+      .getByRole("button", { name: "ADD TO DOWNLOAD" })
+  ).toBeVisible();
+});
