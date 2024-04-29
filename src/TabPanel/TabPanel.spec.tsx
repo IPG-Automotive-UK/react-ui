@@ -59,6 +59,43 @@ test("should switch content when tabs are clicked", async ({ page }) => {
 });
 
 /**
+ * Test to verify the aria-label attribute based on the variant prop.
+ */
+test("should set the aria-label attribute based on the variant prop", async ({
+  page
+}) => {
+  // Go to the default variant page
+  await page.goto(
+    "http://localhost:6006/?path=/story/layout-tabpanel--default"
+  );
+  await page.waitForSelector('iframe[title="storybook-preview-iframe"]');
+
+  // Verify 'full width tabs' aria-label on default variant
+  const fullWidthFrame = page.frameLocator(
+    'iframe[title="storybook-preview-iframe"]'
+  );
+  await expect(fullWidthFrame.locator('[role="tablist"]')).toHaveAttribute(
+    "aria-label",
+    "full width tabs"
+  );
+
+  // Go to the standard variant page
+  await page.goto(
+    "http://localhost:6006/?path=/story/layout-tabpanel--standard"
+  );
+  await page.waitForSelector('iframe[title="storybook-preview-iframe"]');
+
+  // Verify 'standard width tabs' aria-label on standard variant
+  const standardWidthFrame = page.frameLocator(
+    'iframe[title="storybook-preview-iframe"]'
+  );
+  await expect(standardWidthFrame.locator('[role="tablist"]')).toHaveAttribute(
+    "aria-label",
+    "standard width tabs"
+  );
+});
+
+/**
  * Test to check custom children are rendered correctly.
  */
 test("should render custom children", async ({ page }) => {
