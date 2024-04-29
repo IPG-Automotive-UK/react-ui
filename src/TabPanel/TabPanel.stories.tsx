@@ -1,4 +1,4 @@
-import { Box, TextField } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import { Meta, StoryFn } from "@storybook/react";
 
 import React from "react";
@@ -85,6 +85,122 @@ export const Default = {
         </Box>
       </Box>
     ]
+  },
+  render: Template
+};
+
+// Standard
+export const Standard = {
+  args: {
+    children: [
+      <Box data-label="Select Vehicle" key="1">
+        <Box sx={{ display: "flex", flexDirection: "row" }}>
+          <TextField
+            label="Project Code*"
+            variant="outlined"
+            margin="normal"
+            sx={{ ml: 1 }}
+          />
+          <TextField
+            label="Model Year"
+            variant="outlined"
+            margin="normal"
+            sx={{ ml: 1 }}
+          />
+        </Box>
+        <Box sx={{ display: "flex", flexDirection: "row" }}>
+          <TextField
+            label="Variant"
+            variant="outlined"
+            margin="normal"
+            sx={{ ml: 1 }}
+          />
+        </Box>
+      </Box>,
+      <Box data-label="Select Part" key="2">
+        <Box sx={{ display: "flex" }}>
+          <TextField
+            label="Part Name*"
+            variant="outlined"
+            margin="normal"
+            sx={{ ml: 1 }}
+          />
+        </Box>
+        <Box sx={{ display: "flex" }}>
+          <TextField
+            label="Part Number*"
+            variant="outlined"
+            margin="normal"
+            sx={{ ml: 1 }}
+          />
+        </Box>
+      </Box>
+    ],
+    variant: "standard"
+  },
+  render: Template
+};
+
+// Custom Children
+export const CustomChildren = {
+  args: {
+    children: [
+      <Box data-label="Select Vehicle" key="1">
+        <Box sx={{ display: "flex", flexDirection: "row" }}>
+          <TextField
+            label="Project Code*"
+            variant="outlined"
+            margin="normal"
+            sx={{ ml: 1 }}
+          />
+          <TextField
+            label="Model Year"
+            variant="outlined"
+            margin="normal"
+            sx={{ ml: 1 }}
+          />
+        </Box>
+        <Box sx={{ display: "flex", flexDirection: "row" }}>
+          <TextField
+            label="Variant"
+            variant="outlined"
+            margin="normal"
+            sx={{ ml: 1 }}
+          />
+        </Box>
+      </Box>,
+      <Box data-label="Select Part" key="2">
+        <Box sx={{ display: "flex" }}>
+          <TextField
+            label="Part Name*"
+            variant="outlined"
+            margin="normal"
+            sx={{ ml: 1 }}
+          />
+        </Box>
+        <Box sx={{ display: "flex" }}>
+          <TextField
+            label="Part Number*"
+            variant="outlined"
+            margin="normal"
+            sx={{ ml: 1 }}
+          />
+        </Box>
+      </Box>
+    ],
+    customChildren: (
+      <>
+        <Box flexGrow={1} />
+        <Button
+          color="primary"
+          sx={{ color: "#003063", minWidth: "100px" }}
+          onClick={() => {}}
+        >
+          ADD TO DOWNLOAD
+        </Button>
+      </>
+    ),
+    variant: "standard"
   },
   render: Template
 };
