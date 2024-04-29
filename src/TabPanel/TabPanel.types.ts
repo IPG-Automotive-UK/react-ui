@@ -7,6 +7,10 @@ export type TabPanelProps = {
    */
   children: React.ReactNode;
   /**
+   * Custom children to be rendered in the tab panel.
+   */
+  customChildren?: React.ReactNode;
+  /**
    * The active tab index, this is the tab which is currently selected.
    */
   active: number;
@@ -14,4 +18,8 @@ export type TabPanelProps = {
    * The callback function that is called when the active tab changes.
    */
   onTabChange?: (newActiveTab: number) => void;
+  /**
+   * The variant of the tab panel. This can be either "standard" or "fullWidth".
+   */
+  variant?: "standard" | "fullWidth";
 };
