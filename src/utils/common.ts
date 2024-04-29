@@ -6,6 +6,9 @@ export function isKeyValueOption(obj: unknown): obj is KeyValueOption {
 }
 
 // function to return unique sorted array of values from a string array
-export function uniqueSortedArray(values: string[]) {
-  return values.filter((item, i, ar) => ar.indexOf(item) === i).sort();
+export function uniqueSortedArray(array: string[], sortOrder: "asc" | "desc") {
+  const uniqueArray = Array.from(new Set(array));
+  return uniqueArray.sort((a, b) =>
+    sortOrder === "asc" ? a.localeCompare(b) : b.localeCompare(a)
+  );
 }
