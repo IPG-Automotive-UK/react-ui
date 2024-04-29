@@ -36,6 +36,12 @@ const TabPanel = ({
     }
   };
 
+  // map the variant to the aria label
+  const variantToAriaLabel = {
+    fullWidth: "full width tabs",
+    standard: "standard width tabs"
+  };
+
   return (
     <Box>
       <Tabs
@@ -43,7 +49,7 @@ const TabPanel = ({
         onChange={handleChange}
         indicatorColor="primary"
         variant={variant}
-        aria-label="full width tabs"
+        aria-label={variantToAriaLabel[variant]}
         sx={{ borderBottom: 1, borderColor: "divider" }}
       >
         {React.Children.map(children, (child, index) => {
