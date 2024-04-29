@@ -17,11 +17,11 @@ export type PartSelectorProps = {
   /**
    * FlexDirection of the component
    */
-  flexDirection?: string;
+  flexDirection?: "row" | "column";
   /**
    * FlexWrap of the component
    */
-  flexWrap?: string;
+  flexWrap?: "nowrap" | "wrap";
   /**
    * Callback function fired on each part change
    */
@@ -38,4 +38,8 @@ export type PartSelectorProps = {
    * Size of the field
    */
   size?: "small" | "medium";
+  /**
+   * Sort order of the part names and numbers
+   */
+  sortOrder?: "asc" | "desc";
 };
