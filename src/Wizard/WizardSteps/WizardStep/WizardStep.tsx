@@ -22,17 +22,11 @@ export default function WizardStep({
   index,
   last,
   helperText,
-  error,
-  errorText
+  error
 }: WizardStepProps) {
   return (
     <Step completed={completed} index={index} last={last}>
-      <WizardStepLabel
-        label={label}
-        helperText={helperText}
-        error={error}
-        errorText={errorText}
-      />
+      <WizardStepLabel label={label} helperText={helperText} error={error} />
     </Step>
   );
 }
@@ -43,9 +37,8 @@ export default function WizardStep({
 function WizardStepLabel({
   label,
   helperText,
-  error,
-  errorText
-}: Pick<WizardStepProps, "label" | "helperText" | "error" | "errorText">) {
+  error
+}: Pick<WizardStepProps, "label" | "helperText" | "error">) {
   // get context state
   const stepContext = useStepContext();
   let active: boolean, completed: boolean;
@@ -58,29 +51,28 @@ function WizardStepLabel({
     );
   }
 
-  // support string helper text with default typography
-  if (helperText && typeof helperText === "string") {
-    helperText = (
-      <Typography
-        variant="caption"
-        color={active || completed ? "textPrimary" : "inherit"}
-      >
+  // Initialize step label props
+  const stepLabelProps: StepLabelProps = {};
+
+  // Set optional node for helper text
+  if (helperText) {
+    let textColor = "inherit";
+
+    if (error) {
+      textColor = "error";
+    } else if (active || completed) {
+      textColor = "textPrimary";
+    }
+
+    stepLabelProps.optional = (
+      <Typography variant="caption" color={textColor}>
         {helperText}
       </Typography>
     );
   }
 
-  // stepLabelProps
-  const stepLabelProps: StepLabelProps = {
-    optional: helperText
-  };
-
-  // errorText overrides helperText
-  if (errorText) {
-    stepLabelProps.optional = errorText;
-  }
-
-  if (error || errorText) {
+  // Set error icon
+  if (error) {
     stepLabelProps.error = true;
     stepLabelProps.icon = (
       <SvgIcon component={ErrorIcon} color="error" fontSize="medium" />

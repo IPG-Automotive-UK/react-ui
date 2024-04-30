@@ -1,7 +1,6 @@
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
 
 import React from "react";
-import { Typography } from "@mui/material";
 import WizardStep from "./WizardStep";
 import { WizardStepProps } from "./WizardStep.types";
 
@@ -21,7 +20,6 @@ export const Default: Story = {
   args: {
     completed: false,
     error: false,
-    errorText: "",
     helperText: "",
     index: 0,
     label: "Step 1",
@@ -40,23 +38,20 @@ export const WithHelperText: Story = {
   render: Template
 };
 
-export const WithErrorText: Story = {
+export const WithError: Story = {
   args: {
     ...Default.args,
-    errorText: (
-      <Typography variant="caption" color="error">
-        Error text
-      </Typography>
-    )
+    error: true
   },
 
   render: Template
 };
 
-export const WithError: Story = {
+export const WithErrorAndHelperText: Story = {
   args: {
     ...Default.args,
-    error: true
+    error: true,
+    helperText: "Error Text"
   },
 
   render: Template
