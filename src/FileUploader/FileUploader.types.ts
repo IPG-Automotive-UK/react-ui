@@ -8,6 +8,10 @@ export type FileUploaderProps = {
    */
   acceptedFiles?: string[] | Accept;
   /**
+   * If true, the dropzone will be in the error state. When false, the dropzone will be in the default state and internal validation will still be applied. i.e. the dropzone will still reject files that do not meet the acceptedFiles or maxFileSize criteria.
+   */
+  error?: boolean;
+  /**
    * Text to display in dropzone
    */
   dropzoneText?: string;
@@ -35,7 +39,7 @@ export type FileUploaderProps = {
   /**
    * Callback fired when the file is deleted.
    */
-  onDelete?: (selectedFiles: FileWithData[]) => void;
+  onDelete?: (selectedFiles: FileWithData[], deletedFile: FileWithData) => void;
   /**
    * If true, red star shows on title
    */

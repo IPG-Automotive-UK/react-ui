@@ -26,7 +26,7 @@ export default function NumberField({
   startAdornment = null,
   step,
   stepper = true,
-  value = null,
+  value,
   variant = "outlined"
 }) {
   // state to keep track of the value of the number field even when invalid
@@ -99,7 +99,7 @@ export default function NumberField({
       required={required}
       size={size}
       type="number"
-      value={currentValue ?? ""}
+      value={currentValue}
       variant={variant}
       InputProps={{
         ...(endAdornment && {

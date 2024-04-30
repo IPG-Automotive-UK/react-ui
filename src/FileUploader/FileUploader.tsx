@@ -16,6 +16,7 @@ import useUploader from "../Uploader/useUploader";
 
 export default function FileUploader({
   acceptedFiles,
+  error,
   dropzoneText = "Drag & drop a file here or click",
   filesLimit = 1,
   isValidating = false,
@@ -57,7 +58,7 @@ export default function FileUploader({
   });
 
   // are we rendering an error state?
-  const isError = isDragReject || rejectionMessage;
+  const isError = isDragReject || rejectionMessage || error;
 
   // render
   return (
@@ -103,16 +104,17 @@ export default function FileUploader({
               : theme.palette.text.secondary
           },
           background: theme.palette.background.default,
-          borderColor: isDragReject
-            ? theme.palette.error.main
-            : theme.palette.divider,
+          borderColor:
+            isDragReject || error
+              ? theme.palette.error.main
+              : theme.palette.divider,
           borderStyle: "dashed",
           borderWidth: 1,
           boxSizing: "border-box",
           cursor: "pointer",
           display: "flex",
           fontSize: "16px",
-          height: "70px",
+          height: "56px",
           justifyContent: "center",
           p: 2,
           pointerEvents:

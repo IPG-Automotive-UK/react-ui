@@ -30,7 +30,7 @@ export default function WizardSteps({
       sx={{
         boxSizing: "border-box",
         maxWidth: theme => theme?.layout?.content?.maxWidth,
-        mb: 3,
+        mb: 2,
         mx: "auto",
         p: 3,
         width: "100%"
