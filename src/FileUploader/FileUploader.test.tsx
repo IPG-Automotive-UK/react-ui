@@ -97,4 +97,25 @@ describe("FileUploader", () => {
     const dropzoneElement = screen.getByTestId("dropzone-base");
     expect(dropzoneElement).toHaveTextContent("Validating Selection");
   });
+  test("error styling when error prop is true", () => {
+    render(
+      <FileUploader
+        selectedFiles={[]}
+        dropzoneText={"There is an error"}
+        error
+      />
+    );
+    const dropzoneBox = screen.getByRole("presentation");
+    const fileUploadIcon = screen.getByTestId("FileUploadIcon");
+    const dropzoneText = screen.getByText("There is an error");
+
+    // expect the dropzone box to have a 1px dashed red border
+    expect(dropzoneBox).toHaveStyle("border: 1px dashed #d32f2f");
+
+    // expect the icon to be red
+    expect(fileUploadIcon).toHaveStyle("color: #d32f2f");
+
+    // expect the dropzone text to be red
+    expect(dropzoneText).toHaveStyle("color: #d32f2f");
+  });
 });
