@@ -9,7 +9,6 @@ export type WizardStepProps = {
   error?: boolean;
   /**
    * The helper text to display.
-   * If the errorText prop is set, this prop is ignored.
    */
   helperText?: string;
   /**
