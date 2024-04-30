@@ -75,6 +75,7 @@ const TabPanel = ({
             key={index}
             id={`tabpanel-${index}`}
             aria-labelledby={`tab-${index}`}
+            marginTop={1}
           >
             {activeTab === index && child.props.children}
           </Box>
