@@ -1,7 +1,6 @@
-import { render, screen } from "@testing-library/react";
-
 import NumberField from ".";
 import React from "react";
+import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 /**
@@ -36,6 +35,13 @@ describe("NumberField", () => {
     await user.type(inputBase, "{backspace}{backspace}{backspace}");
     await user.type(inputBase, "123");
     expect(inputBase.value).toBe("123");
+  });
+  test("Numberfield has a default value", () => {
+    const { container } = render(<NumberField defaultValue={22} />);
+
+    const input = container.querySelector(".MuiInputBase-input");
+
+    expect(input).toHaveValue(22);
   });
   test("Numberfield does not allow typing of letters", async () => {
     const user = userEvent.setup();

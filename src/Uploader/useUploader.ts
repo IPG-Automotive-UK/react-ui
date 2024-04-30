@@ -92,7 +92,11 @@ export default function useUploader({
   // handle file deletion
   const handleDelete = (deletedFile: FileWithData) => {
     // delete file from selected files
-    onDelete && onDelete(selectedFiles.filter(i => i !== deletedFile));
+    onDelete &&
+      onDelete(
+        selectedFiles.filter(i => i !== deletedFile),
+        deletedFile
+      );
   };
 
   return {
