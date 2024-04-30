@@ -1,5 +1,8 @@
 import { SelectedVehicle, Vehicle } from "../VehicleSelect/VehicleSelect.types";
 
+/**
+ * This type defines the props for the VehicleSelector component
+ */
 export type VehicleSelectorProps = {
   /**
    * FlexDirection of the component
@@ -29,4 +32,8 @@ export type VehicleSelectorProps = {
    * List of gates to show in the dropdown
    */
   gates?: string[];
+  /**
+   * Size of the field
+   */
+  size?: "small" | "medium";
 };

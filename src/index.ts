@@ -113,6 +113,10 @@ export {
   type PasswordResetFormProps
 } from "./PasswordResetForm";
 export {
+  default as PartSelector,
+  type PartSelectorProps
+} from "./PartSelector";
+export {
   default as RadioButtons,
   type RadioButtonsProps
 } from "./RadioButtons";
