@@ -20,6 +20,9 @@ const Template: StoryFn<WizardStepProps> = args => {
 export const Default: Story = {
   args: {
     completed: false,
+    error: false,
+    errorText: "",
+    helperText: "",
     index: 0,
     label: "Step 1",
     last: false
