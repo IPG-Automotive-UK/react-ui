@@ -12,7 +12,7 @@ describe("WizardStep", () => {
     render(<WizardStep label="Step 1" helperText="Step 1 helper text" />);
     expect(screen.getByText("Step 1 helper text")).toBeInTheDocument();
   });
-  it("should render an error boolean is provided", () => {
+  it("should render an error icon when an error boolean is provided", () => {
     render(
       <WizardStep label="Step 1" error={true} helperText="Step 1 error text" />
     );
