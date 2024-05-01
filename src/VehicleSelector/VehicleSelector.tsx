@@ -60,7 +60,9 @@ function VehicleSelector({
 
   // derive state for selected gates
   const selectedGates = uniqueSortedArray(
-    value.map(vehicle => vehicle.gate)
+    value
+      .filter(vehicle => vehicle.gate !== undefined)
+      .map(vehicle => vehicle.gate!)
   ).filter(v => v !== "");
 
   // create the selector components for project, model year, variant and gate with single select for project and model year and multi select for variant and gate
