@@ -15,6 +15,8 @@ const TabPanel = ({
   children,
   active,
   variant = "fullWidth",
+  display = "block",
+  flexWrap = "nowrap",
   onTabChange,
   customChildren
 }: TabPanelProps) => {
@@ -76,6 +78,8 @@ const TabPanel = ({
             id={`tabpanel-${index}`}
             aria-labelledby={`tab-${index}`}
             marginTop={1}
+            display={display}
+            flexWrap={flexWrap}
           >
             {activeTab === index && child.props.children}
           </Box>
