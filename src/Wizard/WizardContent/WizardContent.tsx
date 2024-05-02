@@ -3,9 +3,10 @@ import * as React from "react";
 import { Box } from "@mui/material";
 import { WizardContentProps } from "./WizardContent.types";
 
-export default function WizardContent({ children }: WizardContentProps) {
+export default function WizardContent({ children, ref }: WizardContentProps) {
   return (
     <Box
+      ref={ref}
       role="region"
       sx={{
         boxSizing: "border-box",
