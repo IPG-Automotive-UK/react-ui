@@ -28,8 +28,12 @@ const Template: StoryFn<TrafficLightProps> = args => {
 // Default
 export const Default = {
   args: {
-    onTrafficLightLoad: () => ((window as any).imageLoaded = true),
-    points: [0, 0]
+    angle: 0,
+    onTrafficLightLoaded: () => ((window as any).imageLoaded = true),
+    points: [0, 0],
+    scale: { x: 0.5, y: 0.5 },
+    state: 5,
+    type: "red-yellow-green"
   },
   render: Template
 };
@@ -37,8 +41,12 @@ export const Default = {
 // With States
 export const WithStates = {
   args: {
+    angle: 0,
+    onTrafficLightLoaded: () => ((window as any).imageLoaded = true),
     points: [0, 0],
-    state: 1
+    scale: { x: 0.5, y: 0.5 },
+    state: 1,
+    type: "red-yellow-green"
   },
   render: Template
 };
@@ -47,7 +55,11 @@ export const WithStates = {
 export const WithRotation = {
   args: {
     angle: 90,
-    points: [1, 2]
+    onTrafficLightLoaded: () => ((window as any).imageLoaded = true),
+    points: [1, 2],
+    scale: { x: 0.5, y: 0.5 },
+    state: 5,
+    type: "red-yellow-green"
   },
   render: Template
 };
@@ -56,8 +68,10 @@ export const WithRotation = {
 export const TrafficLightTypes = {
   args: {
     angle: 0,
-    onTrafficLightLoad: (loaded: boolean) => console.log(loaded),
+    onTrafficLightLoaded: () => ((window as any).imageLoaded = true),
     points: [0, 0],
+    scale: { x: 0.5, y: 0.5 },
+    state: 5,
     type: "red-yellow-green-straight"
   },
   render: Template
@@ -67,8 +81,10 @@ export const TrafficLightTypes = {
 export const WithScale = {
   args: {
     angle: 0,
+    onTrafficLightLoaded: () => ((window as any).imageLoaded = true),
     points: [0, 0],
     scale: { x: 1.2, y: 1.2 },
+    state: 5,
     type: "red-yellow-green-straight"
   },
   render: Template

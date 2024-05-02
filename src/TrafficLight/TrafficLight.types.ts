@@ -4,9 +4,9 @@
 
 export type TrafficLightProps = {
   /**
-   * A list of two numbers representing the x and y coordinates in Fr0 [x, y]
+   * A list of two numbers representing the x and y coordinates in Fr0 [x, y] a 3D list is also accepted, but the z value isn't used
    */
-  points: number[];
+  points: [number, number] | [number, number, number];
   /**
    * The rotation angle of the traffic light to the origin
    */
@@ -48,5 +48,5 @@ export type TrafficLightProps = {
   /**
    * A function that resolves when the traffic light is fully drawn to the canvas
    */
-  onTrafficLightLoad?: (loaded: boolean) => void;
+  onTrafficLightLoaded?: (loaded: boolean) => void;
 };

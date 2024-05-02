@@ -29,7 +29,6 @@ test("should rotate the traffic light", async ({ page }) => {
   await page.goto(
     "http://localhost:6006/?path=/story/roadview-trafficlight--default"
   );
-  await page.getByRole("button", { name: "Set number" }).click();
   // set imageLoaded to false
   await page.frame("storybook-preview-iframe")?.evaluate(() => {
     (window as any).imageLoaded = "false";
@@ -53,15 +52,17 @@ test("should position the traffic light", async ({ page }) => {
   await page.goto(
     "http://localhost:6006/?path=/story/roadview-trafficlight--default"
   );
-  await page.getByText("RAWpoints : [0 : 01 : 0]").click();
-  await page.getByRole("link", { name: "RAW" }).click();
-  await page.getByPlaceholder("Edit JSON string...").fill("[\n  1,\n  4\n]");
+  await page.getByText("0", { exact: true }).first().click();
+  await page.getByRole("textbox").fill("1");
+  await page.locator("span").filter({ hasText: /^0$/ }).click();
+
   // set imageLoaded to false
   await page.frame("storybook-preview-iframe")?.evaluate(() => {
     (window as any).imageLoaded = "false";
   });
-  // click away to submit string
-  await page.getByRole("cell", { name: "points*" }).click();
+  await page.getByRole("textbox").fill("4");
+  await page.getByRole("textbox").press("Enter");
+
   // wait till component loads and sets imageLoaded to `true`
   await page
     .frame("storybook-preview-iframe")
@@ -80,17 +81,15 @@ test("should scale the traffic light", async ({ page }) => {
   await page.goto(
     "http://localhost:6006/?path=/story/roadview-trafficlight--default"
   );
-  await page.getByRole("button", { name: "Set object" }).click();
-  await page.getByPlaceholder("Edit JSON string...").click();
-  await page
-    .getByPlaceholder("Edit JSON string...")
-    .fill('{\n"x": 2,\n"y": 3\n}');
+  await page.getByText("0.5").first().click();
+  await page.getByRole("textbox").fill("2");
+  await page.getByText("0.5").click();
+  await page.getByRole("textbox").fill("3");
   // set imageLoaded to false
   await page.frame("storybook-preview-iframe")?.evaluate(() => {
     (window as any).imageLoaded = "false";
   });
-  // click away so string is submitted
-  await page.getByRole("cell", { name: "scale" }).click();
+  await page.getByRole("textbox").press("Enter");
   // wait till component loads and sets imageLoaded to `true`
   await page
     .frame("storybook-preview-iframe")

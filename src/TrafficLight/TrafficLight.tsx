@@ -9,7 +9,7 @@ import { TrafficLightSelector } from "./TrafficLightSelector";
  * @param state - A number specifying the state of the light. Default is 5 (meaning all lights on)
  * @param points - A list of two points specifying the x and y coordinates in Fr0 [x, y]
  * @param angle - The angle of rotation of the traffic light to the origin. Default is 0
- * @param onTrafficLightLoad - A function that will be called once the traffic light is fully drawn
+ * @param onTrafficLightLoaded - A function that will be called once the traffic light is fully drawn
  */
 
 const TrafficLight = ({
@@ -18,7 +18,7 @@ const TrafficLight = ({
   points,
   angle = 0,
   scale = { x: 0.5, y: 0.5 },
-  onTrafficLightLoad
+  onTrafficLightLoaded
 }: TrafficLightProps) => {
   // Refs holding the number of images to be loaded and the number of images loaded already
   const imagesNeededRef = useRef(0);
@@ -69,20 +69,20 @@ const TrafficLight = ({
     } else imagesNeededRef.current = 0;
   }, [type, state]);
 
-  // calls the onTrafficLightLoad callback once allImagesLoaded state is set to `true`
+  // calls the onTrafficLightLoaded callback once allImagesLoaded state is set to `true`
   useEffect(() => {
-    if (allImagesLoaded && onTrafficLightLoad) {
-      onTrafficLightLoad(true);
+    if (allImagesLoaded && onTrafficLightLoaded) {
+      onTrafficLightLoaded(true);
     }
     // if no images are needed treat this as all images loaded
     if (imagesNeededRef.current === 0) setAllImagesLoaded(true);
-  }, [allImagesLoaded, onTrafficLightLoad, points, angle, scale.x, scale.y]);
+  }, [allImagesLoaded, onTrafficLightLoaded, points, angle, scale.x, scale.y]);
 
   /**
    * A function to be executed whenever an individual
    * image is loaded
    */
-  const onImageLoad = (loaded: boolean | undefined) => {
+  const onImageLoaded = (loaded: boolean | undefined) => {
     // increment images loaded
     if (loaded && !allImagesLoaded) {
       imagesLoadedRef.current += 1;
@@ -96,7 +96,7 @@ const TrafficLight = ({
 
   return TrafficLightSelector({
     angle,
-    onImageLoad,
+    onImageLoaded,
     points,
     scale,
     state,
