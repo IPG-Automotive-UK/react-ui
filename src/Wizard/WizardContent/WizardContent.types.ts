@@ -1,5 +1,3 @@
 import { PropsWithChildren } from "react";
 
-export type WizardContentProps = PropsWithChildren & {
-  ref?: React.Ref<unknown>;
-};
+export type WizardContentProps = PropsWithChildren;

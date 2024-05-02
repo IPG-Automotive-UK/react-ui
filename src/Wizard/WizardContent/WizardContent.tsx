@@ -3,7 +3,10 @@ import * as React from "react";
 import { Box } from "@mui/material";
 import { WizardContentProps } from "./WizardContent.types";
 
-export default function WizardContent({ children, ref }: WizardContentProps) {
+export default React.forwardRef(function WizardContent(
+  { children }: WizardContentProps,
+  ref
+) {
   return (
     <Box
       ref={ref}
@@ -22,4 +25,4 @@ export default function WizardContent({ children, ref }: WizardContentProps) {
       {children}
     </Box>
   );
-}
+});
