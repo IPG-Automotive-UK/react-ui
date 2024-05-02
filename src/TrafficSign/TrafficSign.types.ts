@@ -46,8 +46,8 @@ export type TrafficSignProps = {
     | "limitedAccessRoadEnd"
     | "livingStreet"
     | "livingStreetEnd"
-    | "minimumSpeed"
-    | "minimumSpeedEnd"
+    | "minimumSpeed30"
+    | "minimumSpeedEnd30"
     | "narrowRoad"
     | "narrowRoadL"
     | "narrowRoadR"
@@ -74,12 +74,80 @@ export type TrafficSignProps = {
     | "sCurveL"
     | "sCurveR"
     | "slipperyRoad"
-    | "speedLimit"
-    | "speedLimitEnd"
-    | "speedLimitZone"
-    | "speedLimitZoneEnd"
-    | "steepAscent"
-    | "steepDescent"
+    | "speedLimit10"
+    | "speedLimit100"
+    | "speedLimit110"
+    | "speedLimit120"
+    | "speedLimit130"
+    | "speedLimit20"
+    | "speedLimit30"
+    | "speedLimit40"
+    | "speedLimit5"
+    | "speedLimit50"
+    | "speedLimit60"
+    | "speedLimit70"
+    | "speedLimit80"
+    | "speedLimit90"
+    | "speedLimitEnd10"
+    | "speedLimitEnd100"
+    | "speedLimitEnd110"
+    | "speedLimitEnd120"
+    | "speedLimitEnd130"
+    | "speedLimitEnd20"
+    | "speedLimitEnd30"
+    | "speedLimitEnd40"
+    | "speedLimitEnd5"
+    | "speedLimitEnd50"
+    | "speedLimitEnd60"
+    | "speedLimitEnd70"
+    | "speedLimitEnd80"
+    | "speedLimitEnd90"
+    | "speedLimitZone30"
+    | "speedLimitZoneEnd30"
+    | "steepAscent10"
+    | "steepAscent11"
+    | "steepAscent12"
+    | "steepAscent13"
+    | "steepAscent14"
+    | "steepAscent15"
+    | "steepAscent16"
+    | "steepAscent17"
+    | "steepAscent18"
+    | "steepAscent19"
+    | "steepAscent20"
+    | "steepAscent21"
+    | "steepAscent22"
+    | "steepAscent23"
+    | "steepAscent24"
+    | "steepAscent25"
+    | "steepAscent4"
+    | "steepAscent5"
+    | "steepAscent6"
+    | "steepAscent7"
+    | "steepAscent8"
+    | "steepAscent9"
+    | "steepDescent10"
+    | "steepDescent11"
+    | "steepDescent12"
+    | "steepDescent13"
+    | "steepDescent14"
+    | "steepDescent15"
+    | "steepDescent16"
+    | "steepDescent17"
+    | "steepDescent18"
+    | "steepDescent19"
+    | "steepDescent20"
+    | "steepDescent21"
+    | "steepDescent22"
+    | "steepDescent23"
+    | "steepDescent24"
+    | "steepDescent25"
+    | "steepDescent4"
+    | "steepDescent5"
+    | "steepDescent6"
+    | "steepDescent7"
+    | "steepDescent8"
+    | "steepDescent9"
     | "stop"
     | "straightOrLeft"
     | "straightOrRight"
@@ -97,30 +165,27 @@ export type TrafficSignProps = {
     | "weightLimit"
     | "widthLimit";
   /**
-   * The coordinates of the sign in Fr0 [x,y]
+   * The coordinates of the sign in Fr0 [x|y]
    */
-  points: number[];
-  /**
-   * The value of the sign (e.g., speed limit)
-   */
-  value?: string;
+  points: [number, number];
   /**
    * A rotation angle in degrees
    */
   angle?: number;
   /**
-   * The scale of the image
+   * The scale of the image (a factor the size is multiplied by| keeping the aspect ratio the same)
    */
   scale?: number;
   /**
-   * The size of the image individually in x and y
+   * The width of the traffic sign
    */
-  size?: {
-    x: number;
-    y: number;
-  };
+  width?: number;
+  /**
+   * The height of the traffic sign
+   */
+  height?: number;
   /**
    * A function that resolves when the traffic sign is fully drawn to the canvas
    */
-  onTrafficSignLoad?: (loaded: boolean) => void;
+  onTrafficSignLoaded?: (loaded: boolean) => void;
 };

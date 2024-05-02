@@ -156,11 +156,13 @@ import warningPedestrianCrossing from "./svg/warningPedestrianCrossing.svg";
 import weightLimit from "./svg/weightLimit.svg";
 import widthLimit from "./svg/widthLimit.svg";
 
-interface IRoadSignsObject {
+// type for an object/dictionary to map road sign image urls to the road sign image name
+type RoadSignsObject = {
   [key: string]: string;
-}
+};
 
-const roadSigns: IRoadSignsObject = {
+// object containing all road sign imports
+const roadSigns: RoadSignsObject = {
   barrier,
   barrier2S,
   beaconArrowL,
@@ -321,27 +323,13 @@ const roadSigns: IRoadSignsObject = {
 };
 
 /**
- * For a given sign type and value from the json road file, the function will return the imported instance of the sign. If not an unknownFile will be imported.
+ * For a given sign type and value from the json road file, the function will return the imported instance of the sign. If not, an unknownFile will be imported.
  * @param {string} type The type of sign.
- * @param {string} value The value of the sign.
  * @returns {string} The imported image string.
  */
-const getRoadSignName = (type: string, value: string) => {
-  const signsWithValues = [
-    "speedLimit",
-    "speedLimitEnd",
-    "steepAscent",
-    "steepDescent",
-    "minimumSpeed",
-    "minimumSpeedEnd",
-    "speedLimitZone",
-    "speedLimitZoneEnd"
-  ];
-  if (signsWithValues.some(signWithValue => type === signWithValue)) {
-    return roadSigns[`${type}${value}`] ?? fileUnknown;
-  } else {
-    return roadSigns[`${type}`] ?? fileUnknown;
-  }
+const getRoadSignName = (type: string) => {
+  // no svg exists, return generic unknown file
+  return roadSigns[`${type}`] ?? fileUnknown;
 };
 
 export { getRoadSignName };
