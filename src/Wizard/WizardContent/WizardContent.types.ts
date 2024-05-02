@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
 
 export type WizardContentProps = PropsWithChildren & {
-  ref: React.Ref<HTMLDivElement>;
+  ref?: React.Ref<HTMLDivElement>;
 };
