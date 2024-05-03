@@ -2,15 +2,15 @@ import { Line } from "react-konva";
 import React from "react";
 import { RoadMarkingProps } from "./RoadMarking.types";
 
-const RoadMarking: React.FC<RoadMarkingProps> = (
+const RoadMarking = (
   {
     points,
-    dash = undefined,
+    dash = [],
     width = 0.15,
     type = "single",
     color = "#ffffff"
-  },
-  key
+  }: RoadMarkingProps,
+  key: React.Key
 ) => {
   const pointsXY = points.filter(
     (_, index) => index % 3 === 0 || (index - 1) % 3 === 0

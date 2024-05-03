@@ -31,7 +31,11 @@ const Template: StoryFn<RoadMarkingProps> = args => {
 // Default
 export const Default = {
   args: {
-    points: coordinates
+    color: "#ffffff",
+    dash: [],
+    points: coordinates,
+    type: "single",
+    width: 0.15
   },
   render: Template
 };
@@ -40,7 +44,10 @@ export const Default = {
 export const CustomColor = {
   args: {
     color: "red",
-    points: coordinates
+    dash: [],
+    points: coordinates,
+    type: "single",
+    width: 0.15
   },
   render: Template
 };
@@ -48,8 +55,11 @@ export const CustomColor = {
 // Double
 export const Double = {
   args: {
+    color: "#ffffff",
+    dash: [],
     points: coordinates,
-    type: "double"
+    type: "double",
+    width: 0.15
   },
   render: Template
 };
@@ -57,9 +67,11 @@ export const Double = {
 // Dashed
 export const Dashed = {
   args: {
+    color: "#ffffff",
     dash: [1, 1],
     points: coordinates,
-    type: "single"
+    type: "single",
+    width: 0.15
   },
   render: Template
 };

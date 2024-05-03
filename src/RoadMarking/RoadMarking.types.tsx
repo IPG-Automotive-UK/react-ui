@@ -6,7 +6,8 @@ export type RoadMarkingProps = {
   /**
    * In the case of non-solid lines, a list of two number containing the dash and space lengths [<dashLength>, <spaceLength>]
    */
-  dash: number[];
+
+  dash?: [number, number] | [];
   /**
    * The width of the marking
    */

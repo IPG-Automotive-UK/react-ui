@@ -2,9 +2,9 @@ import { Line } from "react-konva";
 import React from "react";
 import { RoadSurfaceProps } from "./RoadSurface.types";
 
-const RoadSurface: React.FC<RoadSurfaceProps> = (
-  { points, color = "#78736e" },
-  key
+const RoadSurface = (
+  { points, color = "#78736e" }: RoadSurfaceProps,
+  key: React.Key
 ) => {
   return (
     <Line

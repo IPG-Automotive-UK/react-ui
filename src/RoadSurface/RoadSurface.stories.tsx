@@ -31,6 +31,7 @@ const Template: StoryFn<RoadSurfaceProps> = args => {
 // Default
 export const Default = {
   args: {
+    color: "#78736e",
     points: coordinates
   },
   render: Template

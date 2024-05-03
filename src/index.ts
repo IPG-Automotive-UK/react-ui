@@ -26,6 +26,8 @@ export {
 } from "./Autocomplete";
 export { default as Canvas, type CanvasProps } from "./Canvas";
 export { default as CanvasItem, type CanvasItemProps } from "./CanvasItem";
+export { default as RoadMarking, type RoadMarkingProps } from "./RoadMarking";
+export { default as RoadSurface, type RoadSurfaceProps } from "./RoadSurface";
 export {
   DetailCard,
   FileCard,
