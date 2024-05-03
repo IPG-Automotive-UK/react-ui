@@ -13,7 +13,9 @@ import VehiclePath from "./VehiclePath";
 
 // Dummy data
 const path: Trajectory = {
+  color: "#FFAF2C",
   s: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+  strokeWidth: 0.1,
   x: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
   y: [0, 0, 5, 10, 15, 15, 10, 5, 0, 0],
   yaw: [0, 0, 0, 0, 0, 1.57, 1.57, 1.57, 1.57, 1.57],
@@ -21,11 +23,14 @@ const path: Trajectory = {
 };
 
 const vehicle: Vehicle = {
+  color: "#FFAF2C",
   height: 5,
+  label: "",
   width: 2
 };
 
 const marker: Marker = {
+  color: "#FFAF2C",
   radius: 2
 };
 
@@ -53,7 +58,10 @@ const Template: StoryFn<VehiclePathProps> = args => {
 // Default
 export const Default = {
   args: {
-    path
+    index: 0,
+    path,
+    showPath: true,
+    vehicle
   },
   render: Template
 };
@@ -61,7 +69,10 @@ export const Default = {
 // Custom Color
 export const CustomColor = {
   args: {
-    path: { ...path, color: "#ddddaa" }
+    index: 0,
+    path: { ...path, color: "#ddddaa" },
+    showPath: true,
+    vehicle
   },
   render: Template
 };
@@ -69,7 +80,10 @@ export const CustomColor = {
 // Custom Stroke Width
 export const CustomStrokeWidth = {
   args: {
-    path: { ...path, strokeWidth: 1 }
+    index: 0,
+    path: { ...path, strokeWidth: 1 },
+    showPath: true,
+    vehicle
   },
   render: Template
 };
@@ -79,6 +93,7 @@ export const WithVehicle = {
   args: {
     index: 3,
     path,
+    showPath: true,
     vehicle
   },
   render: Template
@@ -89,6 +104,7 @@ export const WithYawedVehicle = {
   args: {
     index: 5,
     path,
+    showPath: true,
     vehicle
   },
   render: Template
@@ -99,6 +115,7 @@ export const WithColoredVehicle = {
   args: {
     index: 3,
     path,
+    showPath: true,
     vehicle: { ...vehicle, color: "red" }
   },
   render: Template
@@ -109,6 +126,7 @@ export const WithLabeledVehicle = {
   args: {
     index: 3,
     path,
+    showPath: true,
     vehicle: { ...vehicle, label: "Vroom" }
   },
   render: Template
@@ -119,6 +137,7 @@ export const WithMarker = {
   args: {
     index: 3,
     path,
+    showPath: true,
     vehicle: marker
   },
   render: Template
@@ -129,6 +148,7 @@ export const WithColoredMarker = {
   args: {
     index: 3,
     path,
+    showPath: true,
     vehicle: { ...marker, color: "#aaaaaa" }
   },
   render: Template

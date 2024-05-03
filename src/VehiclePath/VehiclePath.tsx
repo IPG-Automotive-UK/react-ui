@@ -4,9 +4,9 @@ import React from "react";
 import Vehicle from "./Vehicle";
 import { VehiclePathProps } from "./VehiclePath.types";
 
-const VehiclePath: React.FC<VehiclePathProps> = (
-  { path, index = 0, vehicle, showPath = true },
-  key
+const VehiclePath = (
+  { path, index = 0, vehicle, showPath = true }: VehiclePathProps,
+  key: React.Key
 ) => {
   // compute current x,y and yaw values
   const x = path.x[index];

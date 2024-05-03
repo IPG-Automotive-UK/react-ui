@@ -26,6 +26,7 @@ export {
 } from "./Autocomplete";
 export { default as Canvas, type CanvasProps } from "./Canvas";
 export { default as CanvasItem, type CanvasItemProps } from "./CanvasItem";
+export { default as VehiclePath, type VehiclePathProps } from "./VehiclePath";
 export {
   DetailCard,
   FileCard,

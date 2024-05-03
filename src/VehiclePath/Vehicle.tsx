@@ -3,9 +3,17 @@ import { Rect, Text } from "react-konva";
 import React from "react";
 import type { VehicleProps } from "./VehiclePath.types";
 
-const Vehicle: React.FC<VehicleProps> = (
-  { height = 5, width = 2, x, y, yaw, color = "#FFAF2C", label },
-  key
+const Vehicle = (
+  {
+    height = 5,
+    width = 2,
+    x,
+    y,
+    yaw = 0,
+    color = "#FFAF2C",
+    label = ""
+  }: VehicleProps,
+  key: React.Key
 ) => {
   const rotation = ((yaw * 180) / Math.PI - 90) * -1;
   return (
