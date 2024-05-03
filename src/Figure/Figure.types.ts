@@ -16,12 +16,13 @@ export type FigureProps = {
    */
   angle?: number;
   /**
-   * The size of the image in x and in y
+   * The width of the image
    */
-  size?: {
-    x: number;
-    y: number;
-  };
+  width?: number;
+  /**
+   * The height of the image
+   */
+  height?: number;
   /**
    * The scale of the image, similar to size, but can't affect the aspect ratio
    */
@@ -29,5 +30,5 @@ export type FigureProps = {
   /**
    * Resolves on image loaded
    */
-  onImageLoad?: (loaded: boolean) => void;
+  onImageLoaded?: (loaded: boolean) => void;
 };
