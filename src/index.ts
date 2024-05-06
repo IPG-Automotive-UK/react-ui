@@ -26,6 +26,7 @@ export {
 } from "./Autocomplete";
 export { default as Canvas, type CanvasProps } from "./Canvas";
 export { default as CanvasItem, type CanvasItemProps } from "./CanvasItem";
+export { default as TrafficSign, type TrafficSignProps } from "./TrafficSign";
 export { default as VehiclePath, type VehiclePathProps } from "./VehiclePath";
 export {
   DetailCard,
@@ -43,6 +44,7 @@ export { default as Checkbox, type CheckboxProps } from "./Checkbox";
 export { default as ClientOnly, type ClientOnlyProps } from "./ClientOnly";
 export { default as Copyright, type CopyrightProps } from "./Copyright";
 export { default as Color, type ColorProps } from "./Color";
+export { default as Figure, type FigureProps } from "./Figure";
 export {
   default as DeletableList,
   type DeletableListProps
