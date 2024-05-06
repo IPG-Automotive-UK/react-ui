@@ -31,8 +31,12 @@ const Template: StoryFn<FigureProps> = args => {
 // Default
 export const Default = {
   args: {
-    onImageLoad: () => ((window as any).imageLoaded = true),
+    angle: 0,
+    height: 3,
+    onImageLoaded: () => ((window as any).imageLoaded = true),
+    scale: 1,
     url: ImageURL,
+    width: 3,
     x: 0,
     y: 0
   },
@@ -42,11 +46,12 @@ export const Default = {
 // Variable size (x and y independent)
 export const VariableSize = {
   args: {
-    size: {
-      x: 10,
-      y: 10
-    },
+    angle: 0,
+    height: 10,
+    onImageLoaded: () => ((window as any).imageLoaded = true),
+    scale: 1,
     url: ImageURL,
+    width: 10,
     x: 0,
     y: 0
   },
@@ -56,8 +61,12 @@ export const VariableSize = {
 // Variable scale (aspect ratio fixed)
 export const VariableScale = {
   args: {
+    angle: 0,
+    height: 3,
+    onImageLoaded: () => ((window as any).imageLoaded = true),
     scale: 10,
     url: ImageURL,
+    width: 3,
     x: 0,
     y: 0
   },
