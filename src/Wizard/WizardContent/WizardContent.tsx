@@ -4,9 +4,7 @@ import { Box } from "@mui/material";
 import { WizardContentProps } from "./WizardContent.types";
 
 export default React.forwardRef<HTMLDivElement, WizardContentProps>(
-  { children }: WizardContentProps,
-  ref
-) {
+  function WizardContent({ children }, ref) {
   return (
     <Box
       ref={ref}
