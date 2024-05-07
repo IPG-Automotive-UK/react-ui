@@ -6,7 +6,7 @@ import RoadMarking from "./RoadMarking";
 import { RoadMarkingProps } from "./RoadMarking.types";
 
 //  dummy data
-const coordinates = [0, 0, 0, 10, 0, 0];
+const coordinates = [0, 0, 10, 0];
 
 /**
  * Story metadata

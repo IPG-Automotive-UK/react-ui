@@ -12,9 +12,7 @@ const RoadSurface = (
       scaleY={-1}
       closed
       fill={color}
-      points={points.filter(
-        (_, index) => index % 3 === 0 || (index - 1) % 3 === 0
-      )}
+      points={points}
       globalCompositeOperation="multiply"
     />
   );

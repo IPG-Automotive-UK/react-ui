@@ -12,9 +12,6 @@ const RoadMarking = (
   }: RoadMarkingProps,
   key: React.Key
 ) => {
-  const pointsXY = points.filter(
-    (_, index) => index % 3 === 0 || (index - 1) % 3 === 0
-  );
   switch (type) {
     case "double":
       // plot symmetrical double lines
@@ -26,7 +23,7 @@ const RoadMarking = (
             scaleY={-1}
             dash={dash}
             stroke={color}
-            points={pointsXY}
+            points={points}
           />
           <Line
             key={`${key}_cutout`}
@@ -34,7 +31,7 @@ const RoadMarking = (
             scaleY={-1}
             stroke={color}
             globalCompositeOperation="destination-out"
-            points={pointsXY}
+            points={points}
           />
         </>
       );
@@ -47,7 +44,7 @@ const RoadMarking = (
           scaleY={-1}
           stroke={color}
           dash={dash}
-          points={pointsXY}
+          points={points}
         />
       );
   }

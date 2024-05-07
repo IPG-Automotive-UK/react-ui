@@ -1,6 +1,6 @@
 export type RoadMarkingProps = {
   /**
-   * The points representing the path of the marking [x0, y0, z0, x1, y1, z1, ...]
+   * The points representing the path of the marking [x0, y0, x1, y1, ...]
    */
   points: number[];
   /**

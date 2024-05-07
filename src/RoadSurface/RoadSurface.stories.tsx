@@ -6,7 +6,7 @@ import RoadSurface from "./RoadSurface";
 import { RoadSurfaceProps } from "./RoadSurface.types";
 
 //  dummy data
-const coordinates = [0, 0, 0, 10, 0, 0, 10, 4, 0, 0, 4, 0];
+const coordinates = [0, 0, 10, 0, 10, 4, 0, 4];
 
 /**
  * Story metadata
