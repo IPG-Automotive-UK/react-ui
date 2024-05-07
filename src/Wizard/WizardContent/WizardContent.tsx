@@ -3,7 +3,7 @@ import * as React from "react";
 import { Box } from "@mui/material";
 import { WizardContentProps } from "./WizardContent.types";
 
-export default React.forwardRef(function WizardContent(
+export default React.forwardRef<HTMLDivElement, WizardContentProps>(
   { children }: WizardContentProps,
   ref
 ) {
