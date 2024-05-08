@@ -29,7 +29,6 @@ test("should render figure with a rotated virto", async ({ page }) => {
   await page.goto(
     "http://localhost:6006/?path=/story/roadview-figure--default"
   );
-  await page.locator("#set-angle").click();
   // set imageLoaded to false
   await page.frame("storybook-preview-iframe")?.evaluate(() => {
     (window as any).imageLoaded = "false";
@@ -37,7 +36,15 @@ test("should render figure with a rotated virto", async ({ page }) => {
   await page
     .getByRole("row", { name: "angle" })
     .getByPlaceholder("Edit number...")
+    .click();
+  await page
+    .getByRole("row", { name: "angle" })
+    .getByPlaceholder("Edit number...")
     .fill("90");
+  await page
+    .getByRole("row", { name: "angle" })
+    .getByPlaceholder("Edit number...")
+    .press("Enter");
   // wait till component loads and sets imageLoaded to `true`
   await page
     .frame("storybook-preview-iframe")
@@ -57,7 +64,6 @@ test("should render figure with a scaled virto", async ({ page }) => {
   await page.goto(
     "http://localhost:6006/?path=/story/roadview-figure--default"
   );
-  await page.locator("#set-scale").click();
   // set imageLoaded to false
   await page.frame("storybook-preview-iframe")?.evaluate(() => {
     (window as any).imageLoaded = "false";
@@ -65,8 +71,15 @@ test("should render figure with a scaled virto", async ({ page }) => {
   await page
     .getByRole("row", { name: "scale" })
     .getByPlaceholder("Edit number...")
+    .click();
+  await page
+    .getByRole("row", { name: "scale" })
+    .getByPlaceholder("Edit number...")
     .fill("2");
-
+  await page
+    .getByRole("row", { name: "scale" })
+    .getByPlaceholder("Edit number...")
+    .press("Enter");
   // wait till component loads and sets imageLoaded to `true`
   await page
     .frame("storybook-preview-iframe")
@@ -87,10 +100,10 @@ test("should render figure with a differently positioned virto", async ({
   await page.goto(
     "http://localhost:6006/?path=/story/roadview-figure--default"
   );
-  await page
-    .getByRole("row", { name: "x*" })
-    .getByPlaceholder("Edit number...")
-    .click();
+  // set imageLoaded to false
+  await page.frame("storybook-preview-iframe")?.evaluate(() => {
+    (window as any).imageLoaded = "false";
+  });
   await page
     .getByRole("row", { name: "x*" })
     .getByPlaceholder("Edit number...")
@@ -98,15 +111,11 @@ test("should render figure with a differently positioned virto", async ({
   await page
     .getByRole("row", { name: "y*" })
     .getByPlaceholder("Edit number...")
-    .click();
-  // set imageLoaded to false
-  await page.frame("storybook-preview-iframe")?.evaluate(() => {
-    (window as any).imageLoaded = "false";
-  });
+    .fill("2");
   await page
     .getByRole("row", { name: "y*" })
     .getByPlaceholder("Edit number...")
-    .fill("2");
+    .press("Enter");
   // wait till component loads and sets imageLoaded to `true`
   await page
     .frame("storybook-preview-iframe")
@@ -125,16 +134,22 @@ test("should render figure with a sized virto", async ({ page }) => {
   await page.goto(
     "http://localhost:6006/?path=/story/roadview-figure--default"
   );
-  await page.getByRole("button", { name: "Set object" }).click();
-  await page
-    .getByPlaceholder("Edit JSON string...")
-    .fill('{\n  "x": 3,\n  "y": 2\n}');
   // set imageLoaded to false
   await page.frame("storybook-preview-iframe")?.evaluate(() => {
     (window as any).imageLoaded = "false";
   });
-  // click away to submit changes
-  await page.getByRole("cell", { name: "size" }).click();
+  await page
+    .getByRole("row", { name: "height" })
+    .getByPlaceholder("Edit number...")
+    .fill("2");
+  await page
+    .getByRole("row", { name: "width" })
+    .getByPlaceholder("Edit number...")
+    .fill("3");
+  await page
+    .getByRole("row", { name: "width" })
+    .getByPlaceholder("Edit number...")
+    .press("Enter");
   // wait till component loads and sets imageLoaded to `true`
   await page
     .frame("storybook-preview-iframe")
