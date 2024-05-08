@@ -52,8 +52,7 @@ export default meta;
 type Story = StoryObj<typeof FileUploader>;
 export const Default: Story = {
   args: {
-    acceptedFiles: [],
-    dropzoneText: "Drag & Drop a file here or browse",
+    dropzoneText: "Drag & drop a file here or click",
     filesLimit: 1,
     isValidating: false,
     maxFileSize: 1000000000,
@@ -73,6 +72,9 @@ export const Default: Story = {
 export const WithSingleFileSelected: Story = {
   args: {
     ...Default.args,
+    acceptedFiles: {
+      "application/zip": [".zip"]
+    },
     selectedFiles: [
       {
         data: "",
@@ -88,6 +90,9 @@ export const WithSingleFileSelected: Story = {
 export const WithSingleFileSelectedAndId: Story = {
   args: {
     ...Default.args,
+    acceptedFiles: {
+      "application/zip": [".zip"]
+    },
     selectedFiles: [
       {
         data: "",
