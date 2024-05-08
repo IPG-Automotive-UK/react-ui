@@ -3,6 +3,9 @@ import { Rect, Text } from "react-konva";
 import React from "react";
 import type { VehicleProps } from "./VehiclePath.types";
 
+/**
+ * Component used to mark an x,y position with a vehicle (rectangle) on a 'Konva React' canvas.
+ */
 const Vehicle = (
   {
     height = 5,
