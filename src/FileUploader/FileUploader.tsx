@@ -30,16 +30,6 @@ export default function FileUploader({
   titleVariant,
   subText
 }: FileUploaderProps) {
-  // handle acceptedFiles format
-  // react-dropzone accepts an object of mime types as keys and an array of file extensions as values https://react-dropzone.js.org/#!/Dropzone
-  // in the past we accepted an array of mimetypes/ file extensions, so we need to handle both formats for now
-  // TODO: remove support for array of mimetypes/ file extensions
-  if (Array.isArray(acceptedFiles)) {
-    acceptedFiles = {
-      "": acceptedFiles // this will result in a console warning when the filepicker is launched, and won't restrict the accepted file types in the file picker. react-dropzone will still validate correctly on selection though.
-    };
-  }
-
   // useUploader is a custom hook that handles the logic for uploading files
   const {
     getRootProps,
