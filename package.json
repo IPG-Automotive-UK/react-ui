@@ -30,6 +30,7 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@mui/material": "^5.15.14",
+    "@mui/x-data-grid-generator": "^7.3.2",
     "@playwright/test": "^1.42.1",
     "@storybook/addon-actions": "^7.6.17",
     "@storybook/addon-essentials": "^7.6.17",
@@ -92,7 +93,7 @@
   "dependencies": {
     "@juggle/resize-observer": "^3.4.0",
     "@mui/icons-material": "^5.15.14",
-    "@mui/x-data-grid": "^7.1.0",
+    "@mui/x-data-grid": "^7.3.2",
     "@mui/x-tree-view": "^6.17.0",
     "@types/css-mediaquery": "^0.1.4",
     "@types/plotly.js": "^2.29.2",
