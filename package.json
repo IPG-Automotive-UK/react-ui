@@ -10,9 +10,9 @@
     "node": ">=10"
   },
   "scripts": {
-    "build": "pnpm run clean && pnpm run copy-files && tsc --project ./tsconfig.production.json",
+    "build": "pnpm run clean && tsc --project ./tsconfig.production.json && pnpm run copy-files",
     "clean": "rimraf dist",
-    "copy-files": "copyfiles -e '**/*.test.**' -e '**/*.spec.**' -e '**/*.stories.**' -u 1 src/**/*.html src/**/*.css src/**/*.ts src/**/*.tsx src/**/*/*.svg dist/",
+    "copy-files": "copyfiles -e '**/*.test.**' -e '**/*.spec.**' -e '**/*.stories.**' -u 1 src/**/*.html src/**/*.css src/**/*.ts src/**/*.tsx dist/",
     "prepublishOnly": "pnpm run build",
     "start": "microbundle-crl watch --no-compress --format modern,cjs --jsxFragment React.Fragment",
     "storybook": "storybook dev -p 6006",

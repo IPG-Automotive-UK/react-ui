@@ -1,5 +1,4 @@
 {
-  "files": ["globals.d.ts"],
   "compilerOptions": {
     "allowJs": true,
     "declaration": true,
