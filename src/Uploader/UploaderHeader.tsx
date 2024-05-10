@@ -49,7 +49,7 @@ export default function UploaderHeader({
       flexDirection="row"
       justifyContent="space-between"
       alignItems="center"
-      mb={1}
+      mb={0.5}
       minHeight="40px"
     >
       <Box>
@@ -74,8 +74,8 @@ export default function UploaderHeader({
         </Typography>
       </Box>
       {showDelete ? (
-        <IconButton aria-label="DeleteIcon" onClick={onDelete}>
-          <DeleteIcon color="error" />
+        <IconButton aria-label="DeleteIcon" onClick={onDelete} size="small">
+          <DeleteIcon color="error" fontSize="small" />
         </IconButton>
       ) : null}
     </Stack>
