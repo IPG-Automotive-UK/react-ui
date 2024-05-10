@@ -24,8 +24,9 @@ jobs:
         run: pnpm install
 
       - name: Run Tests
-        run: pnpm test
-        run: pnpm test:docker
+        run: |
+          pnpm test
+          pnpm test:docker
 
       - name: Bump Version and Create Tag
         run: |
@@ -64,3 +65,15 @@ jobs:
           prerelease: true
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Post Release Message to Teams
+        env:
+          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+        run: |
+          curl -H "Content-Type: application/json" -d '{
+            "@type": "MessageCard",
+            "@context": "http://schema.org/extensions",
+            "themeColor": "0078D7",
+            "title": "New Pre-release Published",
+            "text": "A new pre-release version $(node -p "require('./package.json').version") has been published to npm."
+          }' $TEAMS_WEBHOOK_URL
