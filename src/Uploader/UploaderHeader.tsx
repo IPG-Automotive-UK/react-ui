@@ -39,7 +39,7 @@ export default function UploaderHeader({
     };
   } else if (titleVariant === "body") {
     titleTypographyProps = {
-      variant: "body2"
+      variant: "body1"
     };
   }
 
@@ -48,7 +48,7 @@ export default function UploaderHeader({
       gap={2}
       flexDirection="row"
       justifyContent="space-between"
-      alignItems="flex-end"
+      alignItems="center"
       mb={1}
       minHeight="40px"
     >
