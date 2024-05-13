@@ -16,7 +16,7 @@ const BulletGauge = ({ title, value, suffix }: BulletGaugeProps) => {
             axis: {
               range: [null, 100],
               tickfont: {
-                color: "white",
+                color: theme.palette.mode === "light" ? "black" : "white",
                 size: 12
               }
             },
@@ -28,7 +28,7 @@ const BulletGauge = ({ title, value, suffix }: BulletGaugeProps) => {
           mode: "gauge+number",
           number: {
             font: {
-              color: theme.palette.mode === "light" ? "" : "white",
+              color: theme.palette.mode === "light" ? "black" : "white",
               size: 20
             },
             suffix: suffix || ""
