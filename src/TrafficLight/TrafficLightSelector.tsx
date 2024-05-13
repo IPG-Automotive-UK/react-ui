@@ -151,7 +151,7 @@ export const TrafficLightSelector = ({
           {state === states.red ||
           state === states["yellow-red"] ||
           state === states["all-on"] ? (
-            <Figure url={arrowUp} x={0} y={8} onImageLoad={onImageLoaded} />
+            <Figure url={arrowUp} x={0} y={8} onImageLoaded={onImageLoaded} />
           ) : null}
           <Circle
             x={0}
@@ -168,7 +168,7 @@ export const TrafficLightSelector = ({
           {state === states.yellow ||
           state === states["yellow-red"] ||
           state === states["all-on"] ? (
-            <Figure url={arrowUp} x={0} y={5} onImageLoad={onImageLoaded} />
+            <Figure url={arrowUp} x={0} y={5} onImageLoaded={onImageLoaded} />
           ) : null}
           <Circle x={0} y={2} radius={1.2} fill={color.green.off}></Circle>
           {state === states.green || state === states["all-on"] ? (
@@ -176,7 +176,7 @@ export const TrafficLightSelector = ({
               url={arrowUpGreen}
               x={0}
               y={2}
-              onImageLoad={onImageLoaded}
+              onImageLoaded={onImageLoaded}
             />
           ) : null}
         </Group>
@@ -207,7 +207,7 @@ export const TrafficLightSelector = ({
           {state === states.red ||
           state === states["yellow-red"] ||
           state === states["all-on"] ? (
-            <Figure url={arrowLeft} x={0} y={8} onImageLoad={onImageLoaded} />
+            <Figure url={arrowLeft} x={0} y={8} onImageLoaded={onImageLoaded} />
           ) : null}
           <Circle
             x={0}
@@ -224,7 +224,7 @@ export const TrafficLightSelector = ({
           {state === states.yellow ||
           state === states["yellow-red"] ||
           state === states["all-on"] ? (
-            <Figure url={arrowLeft} x={0} y={5} onImageLoad={onImageLoaded} />
+            <Figure url={arrowLeft} x={0} y={5} onImageLoaded={onImageLoaded} />
           ) : null}
           <Circle x={0} y={2} radius={1.2} fill={color.green.off}></Circle>
           {state === states.green || state === states["all-on"] ? (
@@ -232,7 +232,7 @@ export const TrafficLightSelector = ({
               url={arrowLeftGreen}
               x={0}
               y={2}
-              onImageLoad={onImageLoaded}
+              onImageLoaded={onImageLoaded}
             />
           ) : null}
         </Group>
@@ -263,7 +263,12 @@ export const TrafficLightSelector = ({
           {state === states.red ||
           state === states["yellow-red"] ||
           state === states["all-on"] ? (
-            <Figure url={arrowRight} x={0} y={8} onImageLoad={onImageLoaded} />
+            <Figure
+              url={arrowRight}
+              x={0}
+              y={8}
+              onImageLoaded={onImageLoaded}
+            />
           ) : null}
           <Circle
             x={0}
@@ -280,7 +285,12 @@ export const TrafficLightSelector = ({
           {state === states.yellow ||
           state === states["yellow-red"] ||
           state === states["all-on"] ? (
-            <Figure url={arrowRight} x={0} y={5} onImageLoad={onImageLoaded} />
+            <Figure
+              url={arrowRight}
+              x={0}
+              y={5}
+              onImageLoaded={onImageLoaded}
+            />
           ) : null}
           <Circle x={0} y={2} radius={1.2} fill={color.green.off}></Circle>
           {state === states.green || state === states["all-on"] ? (
@@ -288,7 +298,7 @@ export const TrafficLightSelector = ({
               url={arrowRightGreen}
               x={0}
               y={2}
-              onImageLoad={onImageLoaded}
+              onImageLoaded={onImageLoaded}
             />
           ) : null}
         </Group>
@@ -324,7 +334,7 @@ export const TrafficLightSelector = ({
               x={0}
               y={8}
               scale={0.6}
-              onImageLoad={onImageLoaded}
+              onImageLoaded={onImageLoaded}
             />
           ) : null}
           <Circle
@@ -347,7 +357,7 @@ export const TrafficLightSelector = ({
               x={0}
               y={5}
               scale={0.6}
-              onImageLoad={onImageLoaded}
+              onImageLoaded={onImageLoaded}
             />
           ) : null}
           <Circle x={0} y={2} radius={1.2} fill={color.green.off}></Circle>
@@ -357,7 +367,7 @@ export const TrafficLightSelector = ({
               x={0}
               y={2}
               scale={0.6}
-              onImageLoad={onImageLoaded}
+              onImageLoaded={onImageLoaded}
             />
           ) : null}
         </Group>
@@ -393,7 +403,7 @@ export const TrafficLightSelector = ({
               x={0}
               y={8}
               scale={0.6}
-              onImageLoad={onImageLoaded}
+              onImageLoaded={onImageLoaded}
             />
           ) : null}
           <Circle
@@ -416,7 +426,7 @@ export const TrafficLightSelector = ({
               x={0}
               y={5}
               scale={0.6}
-              onImageLoad={onImageLoaded}
+              onImageLoaded={onImageLoaded}
             />
           ) : null}
           <Circle x={0} y={2} radius={1.2} fill={color.green.off}></Circle>
@@ -426,7 +436,7 @@ export const TrafficLightSelector = ({
               x={0}
               y={2}
               scale={0.6}
-              onImageLoad={onImageLoaded}
+              onImageLoaded={onImageLoaded}
             />
           ) : null}
         </Group>
@@ -527,7 +537,7 @@ export const TrafficLightSelector = ({
           {state === states.yellow ||
           state === states["yellow-red"] ||
           state === states["all-on"] ? (
-            <Figure url={arrowLeft} x={0} y={5} onImageLoad={onImageLoaded} />
+            <Figure url={arrowLeft} x={0} y={5} onImageLoaded={onImageLoaded} />
           ) : null}
           <Circle x={0} y={2} radius={1.2} fill={color.green.off}></Circle>
           {state === states.green || state === states["all-on"] ? (
@@ -535,7 +545,7 @@ export const TrafficLightSelector = ({
               url={arrowLeftGreen}
               x={0}
               y={2}
-              onImageLoad={onImageLoaded}
+              onImageLoaded={onImageLoaded}
             />
           ) : null}
         </Group>
@@ -566,7 +576,12 @@ export const TrafficLightSelector = ({
           {state === states.yellow ||
           state === states["yellow-red"] ||
           state === states["all-on"] ? (
-            <Figure url={arrowRight} x={0} y={5} onImageLoad={onImageLoaded} />
+            <Figure
+              url={arrowRight}
+              x={0}
+              y={5}
+              onImageLoaded={onImageLoaded}
+            />
           ) : null}
           <Circle x={0} y={2} radius={1.2} fill={color.green.off}></Circle>
           {state === states.green || state === states["all-on"] ? (
@@ -574,7 +589,7 @@ export const TrafficLightSelector = ({
               url={arrowRightGreen}
               x={0}
               y={2}
-              onImageLoad={onImageLoaded}
+              onImageLoaded={onImageLoaded}
             />
           ) : null}
         </Group>
@@ -610,7 +625,7 @@ export const TrafficLightSelector = ({
           {state === states.yellow ||
           state === states["yellow-red"] ||
           state === states["all-on"] ? (
-            <Figure url={arrowLeft} x={0} y={5} onImageLoad={onImageLoaded} />
+            <Figure url={arrowLeft} x={0} y={5} onImageLoaded={onImageLoaded} />
           ) : null}
           <Circle x={0} y={2} radius={1.2} fill={color.green.off}></Circle>
           {state === states.green || state === states["all-on"] ? (
@@ -618,7 +633,7 @@ export const TrafficLightSelector = ({
               url={arrowLeftGreen}
               x={0}
               y={2}
-              onImageLoad={onImageLoaded}
+              onImageLoaded={onImageLoaded}
             />
           ) : null}
         </Group>
@@ -654,7 +669,12 @@ export const TrafficLightSelector = ({
           {state === states.yellow ||
           state === states["yellow-red"] ||
           state === states["all-on"] ? (
-            <Figure url={arrowRight} x={0} y={5} onImageLoad={onImageLoaded} />
+            <Figure
+              url={arrowRight}
+              x={0}
+              y={5}
+              onImageLoaded={onImageLoaded}
+            />
           ) : null}
           <Circle x={0} y={2} radius={1.2} fill={color.green.off}></Circle>
           {state === states.green || state === states["all-on"] ? (
@@ -662,7 +682,7 @@ export const TrafficLightSelector = ({
               url={arrowRightGreen}
               x={0}
               y={2}
-              onImageLoad={onImageLoaded}
+              onImageLoaded={onImageLoaded}
             />
           ) : null}
         </Group>
@@ -718,7 +738,7 @@ export const TrafficLightSelector = ({
               x={-0.1}
               y={2}
               scale={0.75}
-              onImageLoad={onImageLoaded}
+              onImageLoaded={onImageLoaded}
             />
           ) : null}
         </Group>
@@ -741,7 +761,7 @@ export const TrafficLightSelector = ({
               x={-0.1}
               y={5}
               scale={0.75}
-              onImageLoad={onImageLoaded}
+              onImageLoaded={onImageLoaded}
             />
           ) : null}
           <Circle x={0} y={2} radius={1.2} fill={color.green.off}></Circle>
@@ -751,7 +771,7 @@ export const TrafficLightSelector = ({
               x={0}
               y={2}
               scale={0.75}
-              onImageLoad={onImageLoaded}
+              onImageLoaded={onImageLoaded}
             />
           ) : null}
         </Group>
