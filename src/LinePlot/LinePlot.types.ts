@@ -1,4 +1,4 @@
-export interface LinePlotProps {
+export type LinePlotProps = {
   /*
     markers is a boolean that determines whether or not the points are marked.
   */
@@ -27,4 +27,4 @@ export interface LinePlotProps {
     Label for the Y axis.
   */
   ylabel: string;
-}
+};

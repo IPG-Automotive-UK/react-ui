@@ -1,6 +1,6 @@
 // Surface3D.types.ts
 
-export interface SurfacePlotProps {
+export type SurfacePlotProps = {
   /*
       markers is a boolean that determines whether or not the points are marked.
     */
@@ -37,4 +37,4 @@ export interface SurfacePlotProps {
       Label for the Z axis.
     */
   zlabel: string;
-}
+};
