@@ -30,7 +30,6 @@ const Template: StoryFn<BulletGaugeProps> = args => {
 // Default
 export const Default = {
   args: {
-    markers: false,
     suffix: "%",
     title: "Data Maturity",
     value: 30
@@ -41,7 +40,6 @@ export const Default = {
 // High
 export const High = {
   args: {
-    markers: false,
     suffix: "%",
     title: "Progress",
     value: 99
@@ -52,7 +50,6 @@ export const High = {
 // Low
 export const Low = {
   args: {
-    markers: false,
     suffix: "%",
     title: "Progress",
     value: 5
