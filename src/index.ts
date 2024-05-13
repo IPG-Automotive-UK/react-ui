@@ -48,6 +48,10 @@ export { default as Copyright, type CopyrightProps } from "./Copyright";
 export { default as Color, type ColorProps } from "./Color";
 export { default as Figure, type FigureProps } from "./Figure";
 export {
+  default as TrafficLight,
+  type TrafficLightProps
+} from "./TrafficLight";
+export {
   default as DeletableList,
   type DeletableListProps
 } from "./DeletableList";
