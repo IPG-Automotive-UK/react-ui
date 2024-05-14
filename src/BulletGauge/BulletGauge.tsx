@@ -21,7 +21,12 @@ const BulletGauge = ({ title, value, suffix }: BulletGaugeProps) => {
               }
             },
             bar: {
-              color: value < 30 ? "#f44336" : value > 70 ? "#4caf50" : "#ff9800"
+              color:
+                value < 30
+                  ? theme.palette.error.main
+                  : value > 70
+                    ? theme.palette.success.main
+                    : theme.palette.warning.main
             },
             shape: "bullet"
           },
