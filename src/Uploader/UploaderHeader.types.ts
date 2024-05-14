@@ -1,4 +1,4 @@
-export interface UploaderHeaderProps {
+export type UploaderHeaderProps = {
   /**
    * Callback fired when the delete button is clicked
    *   */
@@ -23,4 +23,4 @@ export interface UploaderHeaderProps {
    * Typography variant for title
    */
   titleVariant?: "title" | "subtitle" | "body";
-}
+};

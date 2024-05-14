@@ -8,6 +8,12 @@ import { action } from "@storybook/addon-actions";
  * Story metadata
  */
 const meta: Meta<typeof FileUploader> = {
+  argTypes: {
+    titleVariant: {
+      control: { type: "radio" },
+      options: ["title", "body", "subtitle"]
+    }
+  },
   component: FileUploader,
   render: function Render(args) {
     // selectedFiles state
