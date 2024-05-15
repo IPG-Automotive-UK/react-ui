@@ -3,6 +3,9 @@ import Plotly from "react-plotly.js";
 import React from "react";
 import { useTheme } from "@mui/material";
 
+/**
+ * This component displays a bullet gauge progress indicator.
+ */
 const BulletGauge = ({ title, value, suffix }: BulletGaugeProps) => {
   // theme hook
   const theme = useTheme();
