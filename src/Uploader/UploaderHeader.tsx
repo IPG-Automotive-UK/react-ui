@@ -39,7 +39,7 @@ export default function UploaderHeader({
     };
   } else if (titleVariant === "body") {
     titleTypographyProps = {
-      variant: "body2"
+      variant: "body1"
     };
   }
 
@@ -48,8 +48,8 @@ export default function UploaderHeader({
       gap={2}
       flexDirection="row"
       justifyContent="space-between"
-      alignItems="flex-end"
-      mb={1}
+      alignItems="center"
+      mb={0.5}
       minHeight="40px"
     >
       <Box>
@@ -74,8 +74,8 @@ export default function UploaderHeader({
         </Typography>
       </Box>
       {showDelete ? (
-        <IconButton aria-label="DeleteIcon" onClick={onDelete}>
-          <DeleteIcon color="error" />
+        <IconButton aria-label="DeleteIcon" onClick={onDelete} size="small">
+          <DeleteIcon color="error" fontSize="small" />
         </IconButton>
       ) : null}
     </Stack>
