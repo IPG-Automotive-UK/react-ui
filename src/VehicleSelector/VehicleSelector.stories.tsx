@@ -1,7 +1,7 @@
 import { Meta, StoryFn } from "@storybook/react";
 
 import React from "react";
-import { SelectedVehicle } from "../VehicleSelect/VehicleSelect.types";
+import { Vehicle } from "../VehicleSelector/VehicleSelector.types";
 import VehicleSelector from "./VehicleSelector";
 import { VehicleSelectorProps } from "./VehicleSelector.types";
 import { action } from "@storybook/addon-actions";
@@ -27,7 +27,7 @@ const Template: StoryFn<VehicleSelectorProps> = args => {
   }, [value, updateArgs]);
 
   // callback for when the selected vehicles change
-  const onChange = (selectedVehicle: SelectedVehicle[]) => {
+  const onChange = (selectedVehicle: Vehicle[]) => {
     updateArgs({ value: selectedVehicle });
     action("onChange")(selectedVehicle);
   };
@@ -121,6 +121,34 @@ export const WithGate = {
   render: Template
 };
 
+export const Selected = {
+  args: {
+    flexDirection: "column",
+    flexWrap: "nowrap",
+    gates: ["Gate 1", "Gate 2", "Gate 3", "Gate 4", "Gate 5"],
+    multipleSelection: true,
+    value: [
+      {
+        _id: "64c8c4cccc8d6f00130b366b",
+        gate: "Gate 3",
+        modelYear: "2015",
+        projectCode: "911",
+        variant: "MP - 3.6 l6 - 397kW - 7MT - R20"
+      }
+    ],
+    variants: [
+      {
+        _id: "64c8c4cccc8d6f00130b366b",
+        modelYear: "2015",
+        projectCode: "911",
+        variant: "MP - 3.6 l6 - 397kW - 7MT - R20"
+      }
+    ]
+  },
+
+  render: Template
+};
+
 export const MultiselectWithGate = {
   args: {
     flexDirection: "column",
@@ -158,6 +186,32 @@ export const MultiselectWithGate = {
         modelYear: "2019",
         projectCode: "CrossoverEV",
         variant: "Nicolas - FWD - BEV - 150KW - R17"
+      }
+    ]
+  },
+
+  render: Template
+};
+
+export const CustomSize = {
+  args: {
+    flexDirection: "column",
+    flexWrap: "nowrap",
+    gates: [],
+    size: "small",
+    value: [],
+    variants: [
+      {
+        _id: "64c8c4cccc8d6f00130b366b",
+        modelYear: "2015",
+        projectCode: "911",
+        variant: "MP - 3.6 l6 - 397kW - 7MT - R20"
+      },
+      {
+        _id: "64c8c4cccc8d6f00130b367e",
+        modelYear: "2015",
+        projectCode: "911",
+        variant: "JS - 3.6 l6 - 397kW - 7MT - R20"
       }
     ]
   },

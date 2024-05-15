@@ -1,0 +1,79 @@
+name: Publish Pre-release to npm
+
+on:
+  push:
+    branches:
+      - "release/v*"
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "20.x"
+          registry-url: "https://registry.npmjs.org/"
+
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Run Tests
+        run: |
+          pnpm test
+          pnpm test:docker
+
+      - name: Bump Version and Create Tag
+        run: |
+          pnpm version prerelease --no-git-tag-version
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git tag -a "v$(node -p "require('./package.json').version")" -m "Version $(node -p "require('./package.json').version")"
+        env:
+          CI: true
+        id: version
+
+      - name: Generate Release Notes from Commit Messages
+        run: |
+          echo "Generating release notes based on commit messages..."
+          # Get the range of commits for this push, typically the last commit message
+          COMMIT_RANGE=$(git rev-parse HEAD^2)..$(git rev-parse HEAD)
+          COMMIT_MESSAGES=$(git log $COMMIT_RANGE --pretty=format:"%s")
+          echo "$COMMIT_MESSAGES" > commit_messages.txt
+        id: release_notes
+
+      - name: Push Tags
+        run: |
+          git push
+          git push --tags
+
+      - name: Publish to npm
+        run: pnpm publish --access=public --tag=next
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.version.outputs.VERSION }}
+          name: Release ${{ steps.version.outputs.VERSION }}
+          body_path: commit_messages.txt
+          draft: false
+          prerelease: true
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Post Release Message to Teams
+        env:
+          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+        run: |
+          curl -H "Content-Type: application/json" -d '{
+            "@type": "MessageCard",
+            "@context": "http://schema.org/extensions",
+            "themeColor": "0078D7",
+            "title": "New Pre-release Published",
+            "text": "A new pre-release version $(node -p "require('./package.json').version") has been published to npm."
+          }' $TEAMS_WEBHOOK_URL

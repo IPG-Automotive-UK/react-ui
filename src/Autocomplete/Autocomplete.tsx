@@ -36,10 +36,12 @@ export default function Autocomplete<
   required = false,
   size = "medium",
   value,
-  variant = "outlined"
+  variant = "outlined",
+  noOptionsText = "No options available"
 }: AutocompleteProps<Value, Multiple>) {
   return (
     <MuiAutocomplete
+      noOptionsText={noOptionsText}
       defaultValue={defaultValue}
       disableCloseOnSelect={disableCloseOnSelect}
       limitTags={limitTags}
