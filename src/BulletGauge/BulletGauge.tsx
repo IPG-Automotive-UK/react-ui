@@ -7,6 +7,9 @@ const BulletGauge = ({ title, value, suffix }: BulletGaugeProps) => {
   // theme hook
   const theme = useTheme();
 
+  // Limit value to 100
+  const limitedValue = Math.min(value, 100);
+
   return (
     <Plotly
       data={[
@@ -22,7 +25,7 @@ const BulletGauge = ({ title, value, suffix }: BulletGaugeProps) => {
             },
             bar: {
               color:
-                value < 30
+                limitedValue < 30
                   ? theme.palette.error.main
                   : value > 70
                     ? theme.palette.success.main
@@ -39,7 +42,7 @@ const BulletGauge = ({ title, value, suffix }: BulletGaugeProps) => {
             suffix: suffix || ""
           },
           type: "indicator",
-          value
+          value: limitedValue
         }
       ]}
       layout={{

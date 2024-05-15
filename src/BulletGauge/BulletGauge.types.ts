@@ -3,7 +3,7 @@
  */
 export type BulletGaugeProps = {
   /**
-   * The value to be displayed on the gauge. The color of the gauge changes based on this value:
+   * The value to be displayed on the gauge. The maximum value is 100. The color of the gauge changes based on this value:
    * - Less than 30: Red
    * - Between 30 and 70: Orange
    * - Greater than 70: Green
