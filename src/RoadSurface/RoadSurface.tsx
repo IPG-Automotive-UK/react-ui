@@ -9,7 +9,6 @@ const RoadSurface = (
   return (
     <Line
       key={key}
-      scaleY={-1}
       closed
       fill={color}
       points={points}

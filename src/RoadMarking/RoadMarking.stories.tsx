@@ -21,7 +21,7 @@ export default meta;
 const Template: StoryFn<RoadMarkingProps> = args => {
   return (
     <Stage width={200} height={200} scale={{ x: 15, y: -15 }} x={100} y={100}>
-      <Layer scaleY={-1}>
+      <Layer>
         <RoadMarking {...args} />
       </Layer>
     </Stage>

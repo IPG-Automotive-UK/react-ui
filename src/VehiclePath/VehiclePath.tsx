@@ -10,7 +10,7 @@ const VehiclePath = (
 ) => {
   // compute current x,y and yaw values
   const x = path.x[index];
-  const y = path.y[index] * -1;
+  const y = path.y[index];
   const yaw = path.yaw ? path.yaw[index] ?? 0 : 0;
 
   return (
@@ -20,7 +20,6 @@ const VehiclePath = (
         <Line
           key={key}
           strokeWidth={path.strokeWidth ?? 0.1}
-          scaleY={-1}
           stroke={path.color ?? "#FFAF2C"}
           // zip the x and y points --> [x0, y0, x1, y1...]
           points={path.x.flatMap((e, i) => [e, path.y[i]])}

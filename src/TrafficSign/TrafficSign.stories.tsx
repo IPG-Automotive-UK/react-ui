@@ -18,7 +18,7 @@ export default meta;
 const Template: StoryFn<TrafficSignProps> = args => {
   return (
     <Stage width={200} height={200} scale={{ x: 10, y: -10 }} x={100} y={100}>
-      <Layer scaleY={-1}>
+      <Layer>
         <TrafficSign {...args} />
       </Layer>
     </Stage>

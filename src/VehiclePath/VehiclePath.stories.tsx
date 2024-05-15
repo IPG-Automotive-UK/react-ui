@@ -48,7 +48,7 @@ const Template: StoryFn<VehiclePathProps> = args => {
   const layerRef = useRef<Konva.Layer>(null);
   return (
     <Stage width={300} height={300} scale={{ x: 5, y: -5 }} x={0} y={150}>
-      <Layer ref={layerRef} scaleY={-1}>
+      <Layer ref={layerRef}>
         <VehiclePath {...args} />
       </Layer>
     </Stage>

@@ -20,7 +20,6 @@ const RoadMarking = (
           <Line
             key={key}
             strokeWidth={width * 2.5}
-            scaleY={-1}
             dash={dash}
             stroke={color}
             points={points}
@@ -28,7 +27,6 @@ const RoadMarking = (
           <Line
             key={`${key}_cutout`}
             strokeWidth={width * 0.5}
-            scaleY={-1}
             stroke={color}
             globalCompositeOperation="destination-out"
             points={points}
@@ -41,7 +39,6 @@ const RoadMarking = (
         <Line
           key={key}
           strokeWidth={width}
-          scaleY={-1}
           stroke={color}
           dash={dash}
           points={points}

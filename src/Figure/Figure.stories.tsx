@@ -21,7 +21,7 @@ const Template: StoryFn<FigureProps> = args => {
   const layerRef = useRef<Konva.Layer>(null);
   return (
     <Stage width={200} height={200} scale={{ x: 10, y: -10 }} x={100} y={100}>
-      <Layer ref={layerRef} scaleY={-1}>
+      <Layer ref={layerRef}>
         <Figure {...args} />
       </Layer>
     </Stage>
