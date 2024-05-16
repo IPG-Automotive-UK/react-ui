@@ -40,6 +40,11 @@ jobs:
         env:
           CI: true
 
+      - name: Configure npm for Scoped Packages
+        run: |
+          echo "@ipguk:registry=https://registry.npmjs.org/" >> .npmrc
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> .npmrc
+
       - name: Publish to npm
         run: pnpm publish --access=public --tag=next --no-git-checks
 
