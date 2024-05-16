@@ -41,7 +41,7 @@ jobs:
           CI: true
 
       - name: Publish to npm
-        run: pnpm publish --access=public --tag=next
+        run: pnpm publish --access=public --tag=next --no-git-checks
 
       - name: Commit Version Changes
         run: |
