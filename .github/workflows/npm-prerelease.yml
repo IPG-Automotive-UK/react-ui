@@ -41,7 +41,7 @@ jobs:
           CI: true
         id: version
 
-      - name: Generate Release Notes from Commit Messages
+      - name: Generate Release Notes from Merge Commit Messages
         run: |
           echo "Generating release notes based on commit messages..."
           # Get the range of commits for this push, typically the last commit message
