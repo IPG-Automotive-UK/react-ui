@@ -10,15 +10,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: "20.x"
           registry-url: "https://registry.npmjs.org/"
+          cache: "pnpm" # Enable automatic caching for pnpm
 
       - name: Install pnpm
         run: npm install -g pnpm
@@ -50,6 +51,14 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
+      - name: Generate Release Notes from Merge Commit Messages
+        run: |
+          echo "Generating release notes based on commit messages..."
+          # Get the last commit
+          COMMIT_RANGE=$(git rev-parse HEAD~1)..$(git rev-parse HEAD)
+          COMMIT_MESSAGES=$(git log $COMMIT_RANGE --pretty=format:"* %s")
+          echo "$COMMIT_MESSAGES" > commit_messages.txt
+
       - name: Commit Version Changes
         run: |
           git add package.json
@@ -62,19 +71,11 @@ jobs:
           git push
           git push --tags
 
-      - name: Generate Release Notes from Merge Commit Messages
-        run: |
-          echo "Generating release notes based on commit messages..."
-          # Get the last commit
-          COMMIT_RANGE=$(git rev-parse HEAD~1)..$(git rev-parse HEAD)
-          COMMIT_MESSAGES=$(git log $COMMIT_RANGE --pretty=format:"%s")
-          echo "$COMMIT_MESSAGES" > commit_messages.txt
-
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: "v${{ env.VERSION }}"
-          name: Release ${{ env.VERSION }}
+          name: "${{ env.VERSION }}"
           body_path: commit_messages.txt
           draft: false
           prerelease: true
