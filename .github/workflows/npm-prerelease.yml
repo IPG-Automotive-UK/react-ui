@@ -58,8 +58,8 @@ jobs:
       - name: Generate Release Notes from Merge Commit Messages
         run: |
           echo "Generating release notes based on commit messages..."
-          # Get the range of commits for this push, typically the last commit message
-          COMMIT_RANGE=$(git rev-parse HEAD^2)..$(git rev-parse HEAD)
+          # Get the last commit
+          COMMIT_RANGE=$(git rev-parse HEAD~1)..$(git rev-parse HEAD)
           COMMIT_MESSAGES=$(git log $COMMIT_RANGE --pretty=format:"%s")
           echo "$COMMIT_MESSAGES" > commit_messages.txt
 
