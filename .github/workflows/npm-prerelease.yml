@@ -31,38 +31,43 @@ jobs:
           pnpm test
           pnpm test:docker
 
-      - name: Bump Version and Create Tag
+      - name: Bump Version
         run: |
           pnpm version prerelease --no-git-tag-version
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git tag -a "v$(node -p "require('./package.json').version")" -m "Version $(node -p "require('./package.json').version")"
+          echo "VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
         env:
           CI: true
-        id: version
-
-      - name: Generate Release Notes from Merge Commit Messages
-        run: |
-          echo "Generating release notes based on commit messages..."
-          # Get the range of commits for this push, typically the last commit message
-          COMMIT_RANGE=$(git rev-parse HEAD^2)..$(git rev-parse HEAD)
-          COMMIT_MESSAGES=$(git log $COMMIT_RANGE --pretty=format:"%s")
-          echo "$COMMIT_MESSAGES" > commit_messages.txt
-        id: release_notes
-
-      - name: Push Tags
-        run: |
-          git push
-          git push --tags
 
       - name: Publish to npm
         run: pnpm publish --access=public --tag=next
 
+      - name: Commit Version Changes
+        run: |
+          git add package.json
+          git commit -m "Bump version to ${{ env.VERSION }}"
+          # Create the Git tag with the version from package.json
+          git tag -a "v${{ env.VERSION }}" -m "Version ${{ env.VERSION }}"
+
+      - name: Push Changes and Tags
+        run: |
+          git push
+          git push --tags
+
+      - name: Generate Release Notes from Merge Commit Messages
+        run: |
+          echo "Generating release notes based on commit messages..."
+          # Get the last commit
+          COMMIT_RANGE=$(git rev-parse HEAD~1)..$(git rev-parse HEAD)
+          COMMIT_MESSAGES=$(git log $COMMIT_RANGE --pretty=format:"%s")
+          echo "$COMMIT_MESSAGES" > commit_messages.txt
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ steps.version.outputs.VERSION }}
-          name: Release ${{ steps.version.outputs.VERSION }}
+          tag_name: "v${{ env.VERSION }}"
+          name: Release ${{ env.VERSION }}
           body_path: commit_messages.txt
           draft: false
           prerelease: true
@@ -78,5 +83,5 @@ jobs:
             "@context": "http://schema.org/extensions",
             "themeColor": "0078D7",
             "title": "New Pre-release Published",
-            "text": "A new pre-release version $(node -p "require('./package.json').version") has been published to npm."
+            "text": "A new pre-release version ${{ env.VERSION }} has been published to npm."
           }' $TEAMS_WEBHOOK_URL
