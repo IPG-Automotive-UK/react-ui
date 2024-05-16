@@ -50,6 +50,14 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
+      - name: Generate Release Notes from Merge Commit Messages
+        run: |
+          echo "Generating release notes based on commit messages..."
+          # Get the last commit
+          COMMIT_RANGE=$(git rev-parse HEAD~1)..$(git rev-parse HEAD)
+          COMMIT_MESSAGES=$(git log $COMMIT_RANGE --pretty=format:"* %s")
+          echo "$COMMIT_MESSAGES" > commit_messages.txt
+
       - name: Commit Version Changes
         run: |
           git add package.json
@@ -62,19 +70,11 @@ jobs:
           git push
           git push --tags
 
-      - name: Generate Release Notes from Merge Commit Messages
-        run: |
-          echo "Generating release notes based on commit messages..."
-          # Get the last commit
-          COMMIT_RANGE=$(git rev-parse HEAD~1)..$(git rev-parse HEAD)
-          COMMIT_MESSAGES=$(git log $COMMIT_RANGE --pretty=format:"%s")
-          echo "$COMMIT_MESSAGES" > commit_messages.txt
-
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: "v${{ env.VERSION }}"
-          name: Release ${{ env.VERSION }}
+          name: "${{ env.VERSION }}"
           body_path: commit_messages.txt
           draft: false
           prerelease: true
