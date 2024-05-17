@@ -14,6 +14,22 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Check for merge commits
+        id: check
+        run: |
+          MERGE_COMMIT_COUNT=$(git log --merges --pretty=format:"%h" | wc -l)
+          if [ "$MERGE_COMMIT_COUNT" -eq "0" ]; then
+            echo "No merge commits found. Cancelling workflow."
+            echo "::set-output name=cancel::true"
+          else
+            echo "::set-output name=cancel::false"
+          fi
+        shell: bash
+
+      - name: Cancel workflow if no merge commits
+        uses: andymckay/cancel-action@0.2
+        if: steps.check.outputs.cancel == 'true'
+
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
@@ -54,9 +70,8 @@ jobs:
         run: |
           echo "Generating release notes based on commit messages..."
           # Get the last commit
-          COMMIT_RANGE=$(git rev-parse HEAD~1)..$(git rev-parse HEAD)
-          COMMIT_MESSAGES=$(git log $COMMIT_RANGE --pretty=format:"* %s")
-          echo "$COMMIT_MESSAGES" > commit_messages.txt
+          LAST_MERGE_COMMIT=$(git log --merges -n 1 --pretty=format:"* %s")
+          echo "$LAST_MERGE_COMMIT" > commit_messages.txt
 
       - name: Commit Version Changes
         run: |
