@@ -98,7 +98,7 @@ export default function ImageUploader({
           },
           justifyContent: "center",
           p: 2,
-          pointerEvenets: selectedFiles.length > 0 ? "none" : "auto"
+          pointerEvents: selectedFiles.length > 0 ? "none" : "auto"
         })}
       >
         <input {...getInputProps()} />
