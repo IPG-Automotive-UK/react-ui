@@ -17,9 +17,11 @@ jobs:
       - name: Check for merge commits
         id: check
         run: |
-          echo "Checking for merge commits since branching from main..."
-          # Find the commit where the current branch diverged from main
-          DIVERGE_POINT=$(git merge-base main HEAD)
+          echo "Checking for merge commits since branching from default branch..."
+          # Find the name of the default branch
+          DEFAULT_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
+          # Find the commit where the current branch diverged from the default branch
+          DIVERGE_POINT=$(git merge-base $DEFAULT_BRANCH HEAD)
           # Get the merge commits since that point, excluding certain patterns
           MERGE_COMMITS=$(git log --merges $DIVERGE_POINT..HEAD --pretty=format:"%h %s" | grep -v -E 'Merge branch .* into .*|Merge pull request .* from .*')
           echo "Merge commits:"
