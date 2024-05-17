@@ -14,6 +14,31 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Check for merge commits
+        id: check
+        run: |
+          echo "Checking for merge commits since branching from main..."
+          # Find the commit where the current branch diverged from main
+          DIVERGE_POINT=$(git merge-base main HEAD)
+          # Get the merge commits since that point, excluding certain patterns
+          MERGE_COMMITS=$(git log --merges $DIVERGE_POINT..HEAD --pretty=format:"%h %s" | grep -v -E 'Merge branch .* into .*|Merge pull request .* from .*')
+          echo "Merge commits:"
+          echo "$MERGE_COMMITS"
+          # Count the merge commits, excluding empty lines
+          MERGE_COMMIT_COUNT=$(echo "$MERGE_COMMITS" | grep -v '^$' | wc -l)
+          if [ "$MERGE_COMMIT_COUNT" -eq "0" ]; then
+            echo "No new merge commits found. Cancelling workflow."
+            echo "::set-output name=cancel::true"
+          else
+            echo "::set-output name=cancel::false"
+            echo "::set-output name=merge_commits::$MERGE_COMMITS"
+          fi
+        shell: bash
+
+      - name: Cancel workflow if no merge commits
+        uses: andymckay/cancel-action@0.2
+        if: steps.check.outputs.cancel == 'true'
+
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
@@ -52,11 +77,8 @@ jobs:
 
       - name: Generate Release Notes from Merge Commit Messages
         run: |
-          echo "Generating release notes based on commit messages..."
-          # Get the last commit
-          COMMIT_RANGE=$(git rev-parse HEAD~1)..$(git rev-parse HEAD)
-          COMMIT_MESSAGES=$(git log $COMMIT_RANGE --pretty=format:"* %s")
-          echo "$COMMIT_MESSAGES" > commit_messages.txt
+          echo "Generating release notes based on merge commits..."
+          echo "${{ steps.check.outputs.merge_commits }}" > merge_commits.txt
 
       - name: Commit Version Changes
         run: |
