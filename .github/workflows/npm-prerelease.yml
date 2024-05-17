@@ -28,6 +28,9 @@ jobs:
           MERGE_COMMITS=$(git log --merges $DIVERGE_POINT..HEAD --pretty=format:"%h %s" | grep -v -E 'Merge branch .* into .*|Merge pull request .* from .*')
           echo "Merge commits:"
           echo "$MERGE_COMMITS"
+          # Write the merge commits to commit_messages.txt in bullet point format
+          COMMIT_MESSAGES=$(git log --merges $DIVERGE_POINT..HEAD --pretty=format:"* %h %s" | grep -v -E 'Merge branch .* into .*|Merge pull request .* from .*')
+          echo "$COMMIT_MESSAGES" > commit_messages.txt
           # Count the merge commits, excluding empty lines
           MERGE_COMMIT_COUNT=$(echo "$MERGE_COMMITS" | grep -v '^$' | wc -l)
           if [ "$MERGE_COMMIT_COUNT" -eq "0" ]; then
