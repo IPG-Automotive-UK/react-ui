@@ -1,4 +1,4 @@
-# Contributing
+# Contributing test
 
 We welcome all contributions to this project. Please read the following guidelines before submitting a pull request.
 
