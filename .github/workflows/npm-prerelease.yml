@@ -94,6 +94,9 @@ jobs:
           # Create the Git tag with the version from package.json
           git tag -a "v${{ env.VERSION }}" -m "Version ${{ env.VERSION }}"
 
+      - name: Fetch latest changes and tags
+        run: git fetch
+
       - name: Push Changes and Tags
         run: |
           git push
