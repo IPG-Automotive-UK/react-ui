@@ -1,4 +1,4 @@
-name: Publish Pre-release to npm
+name: Publish React-UI Pre-release to npm
 
 on:
   push:
@@ -6,8 +6,11 @@ on:
       - "release/v*"
 
 jobs:
-  build-and-publish:
+  publish-pre-release:
     runs-on: ubuntu-latest
+    concurrency:
+      group: "publish-pre-release"
+      cancel-in-progress: false
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -93,6 +96,9 @@ jobs:
           git commit -m "Bump version to ${{ env.VERSION }}"
           # Create the Git tag with the version from package.json
           git tag -a "v${{ env.VERSION }}" -m "Version ${{ env.VERSION }}"
+
+      - name: Fetch latest changes and tags
+        run: git fetch
 
       - name: Push Changes and Tags
         run: |
