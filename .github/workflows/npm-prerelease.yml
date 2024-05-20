@@ -119,5 +119,5 @@ jobs:
             "@context": "http://schema.org/extensions",
             "themeColor": "0078D7",
             "title": "New Pre-release Published",
-            "text": "A new pre-release version ${{ env.VERSION }} has been published to npm."
+            "text": "A new pre-release version ${{ env.VERSION }} has been published to npm. [View Release](https://github.com/IPG-Automotive-UK/react-ui/releases/tag/v${{ env.VERSION }})"
           }' $TEAMS_WEBHOOK_URL
