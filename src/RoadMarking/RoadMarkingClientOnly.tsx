@@ -9,7 +9,7 @@ const LazyImportedRoadMarking = lazy(() => import("./RoadMarking"));
  */
 export default function RoadMarkingClientOnly(props: RoadMarkingProps) {
   return (
-    <Suspense fallback={<div></div>}>
+    <Suspense fallback={null}>
       <LazyImportedRoadMarking {...props} />
     </Suspense>
   );

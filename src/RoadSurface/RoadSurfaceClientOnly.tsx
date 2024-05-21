@@ -9,7 +9,7 @@ const LazyImportedRoadSurface = lazy(() => import("./RoadSurface"));
  */
 export default function RoadSurfaceClientOnly(props: RoadSurfaceProps) {
   return (
-    <Suspense fallback={<div></div>}>
+    <Suspense fallback={null}>
       <LazyImportedRoadSurface {...props} />
     </Suspense>
   );

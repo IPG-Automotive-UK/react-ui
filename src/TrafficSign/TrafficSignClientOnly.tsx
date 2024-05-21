@@ -9,7 +9,7 @@ const LazyImportedTrafficSign = lazy(() => import("./TrafficSign"));
  */
 export default function TrafficSignClientOnly(props: TrafficSignProps) {
   return (
-    <Suspense fallback={<div></div>}>
+    <Suspense fallback={null}>
       <LazyImportedTrafficSign {...props} />
     </Suspense>
   );

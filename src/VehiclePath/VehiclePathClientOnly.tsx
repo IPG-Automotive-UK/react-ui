@@ -9,7 +9,7 @@ const LazyImportedVehiclePath = lazy(() => import("./VehiclePath"));
  */
 export default function VehiclePathClientOnly(props: VehiclePathProps) {
   return (
-    <Suspense fallback={<div></div>}>
+    <Suspense fallback={null}>
       <LazyImportedVehiclePath {...props} />
     </Suspense>
   );

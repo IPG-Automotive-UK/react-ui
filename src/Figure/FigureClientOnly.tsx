@@ -9,7 +9,7 @@ const LazyImportedFigure = lazy(() => import("./Figure"));
  */
 export default function FigureClientOnly(props: FigureProps) {
   return (
-    <Suspense fallback={<div></div>}>
+    <Suspense fallback={null}>
       <LazyImportedFigure {...props} />
     </Suspense>
   );

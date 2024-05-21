@@ -9,7 +9,7 @@ const LazyImportedTrafficLight = lazy(() => import("./TrafficLight"));
  */
 export default function TrafficLightClientOnly(props: TrafficLightProps) {
   return (
-    <Suspense fallback={<div></div>}>
+    <Suspense fallback={null}>
       <LazyImportedTrafficLight {...props} />
     </Suspense>
   );
