@@ -91,6 +91,7 @@ export {
 export { default as TabPanel, type TabPanelProps } from "./TabPanel";
 export { default as LinePlot, type LinePlotProps } from "./LinePlot";
 export { default as SurfacePlot, type SurfacePlotProps } from "./SurfacePlot";
+export { default as BulletGauge, type BulletGaugeProps } from "./BulletGauge";
 export { default as Loading, type LoadingProps } from "./Loading";
 export { default as LoginForm, type LoginFormProps } from "./LoginForm";
 export { default as ModelButton, type ModelButtonProps } from "./ModelButton";
