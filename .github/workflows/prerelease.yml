@@ -1,4 +1,4 @@
-name: Publish React-UI Pre-release to npm
+name: Publish React-UI Pre-release to npm registry
 
 on:
   push:
@@ -13,9 +13,7 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
+        uses: actions/checkout@v4
 
       - name: Fetch main branch
         run: git fetch origin main:main
@@ -38,25 +36,27 @@ jobs:
           MERGE_COMMIT_COUNT=$(echo "$MERGE_COMMITS" | grep -v '^$' | wc -l)
           if [ "$MERGE_COMMIT_COUNT" -eq "0" ]; then
             echo "No new merge commits found. Cancelling workflow."
-            echo "::set-output name=cancel::true"
+            echo "cancel=true" >> $GITHUB_OUTPUT
           else
-            echo "::set-output name=cancel::false"
-            echo "::set-output name=merge_commits::$MERGE_COMMITS"
+            echo "cancel=false" >> $GITHUB_OUTPUT
+            echo "merge_commits=$MERGE_COMMITS" >> $GITHUB_OUTPUT
           fi
         shell: bash
 
       - name: Cancel workflow if no merge commits
-        uses: andymckay/cancel-action@0.2
+        uses: andymckay/cancel-action@0.4
         if: steps.check.outputs.cancel == 'true'
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: "20.x"
-          registry-url: "https://registry.npmjs.org/"
-
       - name: Install pnpm
-        run: npm install -g pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts'
+          cache: 'pnpm'
 
       - name: Install Dependencies
         run: pnpm install
@@ -75,20 +75,10 @@ jobs:
         env:
           CI: true
 
-      - name: Configure npm for Scoped Packages
-        run: |
-          echo "@ipguk:registry=https://registry.npmjs.org/" >> .npmrc
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> .npmrc
-
       - name: Publish to npm
         run: pnpm publish --access=public --tag=next --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Generate Release Notes from Merge Commit Messages
-        run: |
-          echo "Generating release notes based on merge commits..."
-          echo "${{ steps.check.outputs.merge_commits }}" > merge_commits.txt
 
       - name: Commit Version Changes
         run: |
@@ -105,6 +95,11 @@ jobs:
           git push
           git push --tags
 
+      - name: Generate Release Notes from Merge Commit Messages
+        run: |
+          echo "Generating release notes based on merge commits..."
+          echo "${{ steps.check.outputs.merge_commits }}" > merge_commits.txt
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
@@ -113,8 +108,6 @@ jobs:
           body_path: commit_messages.txt
           draft: false
           prerelease: true
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Post Release Message to Teams
         env:
