@@ -1,2 +1,2 @@
-export { default } from "./RoadMarking";
+export { default } from "./RoadMarkingClientOnly";
 export type { RoadMarkingProps } from "./RoadMarking.types";

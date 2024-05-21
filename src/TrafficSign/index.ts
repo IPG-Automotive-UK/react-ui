@@ -1,2 +1,2 @@
-export { default } from "./TrafficSign";
+export { default } from "./TrafficSignClientOnly";
 export type { TrafficSignProps } from "./TrafficSign.types";

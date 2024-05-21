@@ -1,2 +1,2 @@
-export { default } from "./VehiclePath";
+export { default } from "./VehiclePathClientOnly";
 export type { VehiclePathProps } from "./VehiclePath.types";
