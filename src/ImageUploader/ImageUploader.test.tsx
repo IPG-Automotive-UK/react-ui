@@ -24,7 +24,7 @@ describe("ImageUploader", () => {
     const dropzoneElement = screen.getByTestId("dropzone-base");
     expect(dropzoneElement).toBeInTheDocument();
     expect(
-      screen.queryByText("Drag 'n' drop an image file here, or click to select")
+      screen.queryByText("Drag & Drop an image file here or browse")
     ).toBeInTheDocument();
   });
   // show delete button if only one file selected
