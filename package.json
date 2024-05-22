@@ -1,6 +1,6 @@
 {
   "name": "@ipguk/react-ui",
-  "version": "7.6.3",
+  "version": "7.7.0-4",
   "description": "React UI component library for IPG web applications",
   "author": "IPG-Automotive-UK",
   "license": "MIT",
@@ -10,9 +10,9 @@
     "node": ">=10"
   },
   "scripts": {
-    "build": "pnpm run clean &&   tsc --project ./tsconfig.production.json && pnpm run copy-files",
+    "build": "pnpm run clean && pnpm run copy-files && tsc --project ./tsconfig.production.json",
     "clean": "rimraf dist",
-    "copy-files": "copyfiles -e '**/*.test.**' -e '**/*.spec.**' -e '**/*.stories.**' -u 1 src/**/*.html src/**/*.css src/**/*.ts src/**/*.tsx dist/",
+    "copy-files": "copyfiles -e '**/*.test.**' -e '**/*.spec.**' -e '**/*.stories.**' -u 1 src/**/*.html src/**/*.css src/**/*.ts src/**/*.tsx src/**/*/*.svg dist/",
     "prepublishOnly": "pnpm run build",
     "start": "microbundle-crl watch --no-compress --format modern,cjs --jsxFragment React.Fragment",
     "storybook": "storybook dev -p 6006",
