@@ -12,7 +12,7 @@ export default function ImageUploader({
   subText = "A default image will be used if no image is uploaded",
   dropzoneText = "Drag & Drop an image file here or browse",
   isUploading = false,
-  maxFileSize = 1000000000,
+  maxFileSize = 10000000,
   onAdd,
   onDelete,
   selectedFiles = [],
