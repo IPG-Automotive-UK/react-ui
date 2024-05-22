@@ -39,6 +39,7 @@ type Story = StoryObj<typeof ImageUploader>;
 export const Default: Story = {
   args: {
     dropzoneText: "Drag 'n' drop an image file here, or click to select",
+    isUploading: false,
     maxFileSize: 1000000000,
     onAdd: () => {},
     onDelete: () => {},
@@ -60,5 +61,15 @@ export const WithSingleFileSelected: Story = {
         })
       }
     ]
+  }
+};
+
+/**
+ * Story which shows the uploader in loading state with a single file selected.
+ */
+export const SingleFileLoading: Story = {
+  args: {
+    ...WithSingleFileSelected.args,
+    isUploading: true
   }
 };
