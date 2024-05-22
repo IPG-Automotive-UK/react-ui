@@ -10,7 +10,7 @@ export default function ImageUploader({
   title = "Upload Image",
   titleVariant,
   subText = "A default image will be used if no image is uploaded",
-  dropzoneText = "Drag 'n' drop an image file here, or click to select",
+  dropzoneText = "Drag & Drop an image file here or browse",
   isUploading = false,
   maxFileSize = 1000000000,
   onAdd,

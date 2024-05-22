@@ -53,7 +53,7 @@ type Story = StoryObj<typeof FileUploader>;
 export const Default: Story = {
   args: {
     acceptedFiles: [],
-    dropzoneText: "Drag & drop a file here or click",
+    dropzoneText: "Drag & Drop a file here or browse",
     filesLimit: 1,
     isValidating: false,
     maxFileSize: 1000000000,

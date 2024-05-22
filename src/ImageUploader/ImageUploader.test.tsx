@@ -52,7 +52,7 @@ describe("ImageUploader", () => {
     const img = screen.getByAltText("Preview of 1x1.png");
     expect(img).toHaveAttribute("src", singleFile.data);
     expect(
-      screen.queryByText("Drag 'n' drop an image file here, or click to select")
+      screen.queryByText("Drag & Drop an image file here or browse")
     ).not.toBeInTheDocument();
   });
 
@@ -82,7 +82,7 @@ describe("ImageUploader", () => {
 
     // check default text is displayed
     expect(
-      screen.queryByText("Drag 'n' drop an image file here, or click to select")
+      screen.queryByText("Drag & Drop an image file here or browse")
     ).toBeVisible();
 
     // check callback was called
