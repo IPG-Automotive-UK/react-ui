@@ -1,4 +1,4 @@
-import { Box, Stack, Typography, alpha } from "@mui/material";
+import { Box, LinearProgress, Stack, Typography, alpha } from "@mui/material";
 
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { ImageUploaderProps } from "./ImageUploader.types";
@@ -11,7 +11,8 @@ export default function ImageUploader({
   titleVariant,
   subText = "A default image will be used if no image is uploaded",
   dropzoneText = "Drag 'n' drop an image file here, or click to select",
-  maxFileSize = 1000000,
+  isUploading = false,
+  maxFileSize = 1000000000,
   onAdd,
   onDelete,
   selectedFiles = [],
@@ -50,7 +51,7 @@ export default function ImageUploader({
         titleVariant={titleVariant}
         required={required}
         subText={subText}
-        showDelete={selectedFiles.length > 0}
+        showDelete={!isUploading && selectedFiles.length > 0}
         onDelete={() => handleDelete(selectedFiles[0])}
       />
       <Box
@@ -98,11 +99,19 @@ export default function ImageUploader({
           },
           justifyContent: "center",
           p: 2,
-          pointerEvenets: selectedFiles.length > 0 ? "none" : "auto"
+          pointerEvents:
+            isUploading || selectedFiles.length > 0 ? "none" : "auto"
         })}
       >
         <input {...getInputProps()} />
-        {selectedFiles.length === 0 ? (
+        {isUploading ? (
+          <Stack className="dropzoneText">
+            <Typography fontSize="14px">Uploading Image</Typography>
+            <Box width={200}>
+              <LinearProgress />
+            </Box>
+          </Stack>
+        ) : selectedFiles.length === 0 ? (
           <Stack className="dropzoneText">
             <FileUploadIcon />
             <Typography fontSize="15px">
