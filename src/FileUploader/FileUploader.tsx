@@ -17,7 +17,7 @@ import useUploader from "../Uploader/useUploader";
 export default function FileUploader({
   acceptedFiles,
   error,
-  dropzoneText = "Drag & drop a file here or click",
+  dropzoneText = "Drag & Drop a file here or browse",
   filesLimit = 1,
   isValidating = false,
   maxFileSize = Infinity,
