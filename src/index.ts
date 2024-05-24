@@ -84,7 +84,7 @@ export {
 } from "./ImageUploader";
 export {
   LabelChip,
-  LabelSelector,
+  default as LabelSelector,
   type LabelChipProps,
   type LabelSelectorProps
 } from "./LabelSelector";

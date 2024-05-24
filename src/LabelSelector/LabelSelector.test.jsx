@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 
-import { LabelSelector } from "./";
+import LabelSelector from "./";
 import React from "react";
 import userEvent from "@testing-library/user-event";
 

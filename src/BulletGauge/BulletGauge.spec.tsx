@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-import { getIframeContext } from "../utils/common";
+import { getIframeContext } from "../../test/utils";
 
 test("should render the title", async ({ page }) => {
   // Navigate to the page
