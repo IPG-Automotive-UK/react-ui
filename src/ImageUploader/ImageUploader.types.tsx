@@ -7,6 +7,10 @@ export type ImageUploaderProps = {
    */
   dropzoneText?: string;
   /**
+   * Whether the component is in the loading state with the loading indicator and selection disabled.
+   */
+  isUploading?: boolean;
+  /**
    * Maximum file size (in bytes) that the dropzone will accept.
    */
   maxFileSize?: number;

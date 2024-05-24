@@ -60,12 +60,12 @@ describe("FileUploader", () => {
       <FileUploader
         selectedFiles={multipleFiles}
         multiple={true}
-        dropzoneText={"Drag & drop file(s) here or click"}
+        dropzoneText={"Drag & Drop file(s) here or browse"}
       />
     );
     const dropzoneElement = screen.getByTestId("dropzone-base");
     expect(dropzoneElement).toHaveTextContent(
-      "Drag & drop file(s) here or click"
+      "Drag & Drop file(s) here or browse"
     );
     const chips = container.querySelectorAll(".MuiChip-root");
     expect(chips.length).toBe(2);
@@ -77,7 +77,7 @@ describe("FileUploader", () => {
       <FileUploader
         selectedFiles={multipleFiles}
         multiple={true}
-        dropzoneText={"Drag & drop file(s) here or click"}
+        dropzoneText={"Drag & Drop file(s) here or browse"}
         isValidating={true}
       />
     );
@@ -90,7 +90,7 @@ describe("FileUploader", () => {
       <FileUploader
         selectedFiles={multipleFiles}
         multiple={true}
-        dropzoneText={"Drag & drop file(s) here or click"}
+        dropzoneText={"Drag & Drop file(s) here or browse"}
         isValidating={true}
       />
     );

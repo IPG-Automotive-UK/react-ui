@@ -70,12 +70,21 @@ export default function useUploader({
 
   // handle file drops that are rejected by showing the first error message as a rejection message
   const onDropRejected = (fileRejection: FileRejection[]) => {
-    // replace any commas not followed by a whitespace character with a comma followed by a whitespace character
-    const message = fileRejection[0].errors[0].message;
-    const formattedMessage = message.replace(/,(?!\s)/g, ", ");
+    // get the error code
+    const errorCode = fileRejection[0].errors[0].code;
+
+    // get file size limit in MB
+    const bytesToMb = maxFileSize / 1024 / 1024;
+    const limitSize = `${bytesToMb.toFixed()} MB`;
+
+    // set error message based on error code
+    const errorMessage =
+      errorCode === "file-invalid-type"
+        ? "File type must be a .gif, .jpg, .jpeg, .png, .webp"
+        : `File size exceeds the limit of ${limitSize}`;
 
     // set error message
-    setRejectionMessage(formattedMessage);
+    setRejectionMessage(errorMessage);
   };
 
   // use react-dropzone hook

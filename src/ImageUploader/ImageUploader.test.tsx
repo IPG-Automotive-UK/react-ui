@@ -24,7 +24,7 @@ describe("ImageUploader", () => {
     const dropzoneElement = screen.getByTestId("dropzone-base");
     expect(dropzoneElement).toBeInTheDocument();
     expect(
-      screen.queryByText("Drag 'n' drop an image file here, or click to select")
+      screen.queryByText("Drag & Drop an image file here or browse")
     ).toBeInTheDocument();
   });
   // show delete button if only one file selected
@@ -34,13 +34,25 @@ describe("ImageUploader", () => {
     const deleteButton = screen.getByRole("button", { name: /DeleteIcon/i });
     expect(deleteButton).toBeInTheDocument();
   });
+  // hide delete button when image loading
+  test("hide delete button when image loading", () => {
+    render(<ImageUploader selectedFiles={[singleFile]} isUploading={true} />);
+    const deleteButton = screen.queryByRole("button", { name: /delete/i });
+    expect(deleteButton).not.toBeInTheDocument();
+  });
+  // updates dropzone text when uploading single image
+  test("updates dropzone text when uploading single image", () => {
+    render(<ImageUploader selectedFiles={[singleFile]} isUploading />);
+    const dropzoneElement = screen.getByTestId("dropzone-base");
+    expect(dropzoneElement).toHaveTextContent("Uploading Image");
+  });
   // show the selected image and hide dropzone text
   test("show selected image", () => {
     render(<ImageUploader selectedFiles={[singleFile]} />);
     const img = screen.getByAltText("Preview of 1x1.png");
     expect(img).toHaveAttribute("src", singleFile.data);
     expect(
-      screen.queryByText("Drag 'n' drop an image file here, or click to select")
+      screen.queryByText("Drag & Drop an image file here or browse")
     ).not.toBeInTheDocument();
   });
 
@@ -70,7 +82,7 @@ describe("ImageUploader", () => {
 
     // check default text is displayed
     expect(
-      screen.queryByText("Drag 'n' drop an image file here, or click to select")
+      screen.queryByText("Drag & Drop an image file here or browse")
     ).toBeVisible();
 
     // check callback was called
