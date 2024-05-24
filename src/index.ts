@@ -26,6 +26,10 @@ export {
 } from "./Autocomplete";
 export { default as Canvas, type CanvasProps } from "./Canvas";
 export { default as CanvasItem, type CanvasItemProps } from "./CanvasItem";
+export { default as RoadMarking, type RoadMarkingProps } from "./RoadMarking";
+export { default as RoadSurface, type RoadSurfaceProps } from "./RoadSurface";
+export { default as TrafficSign, type TrafficSignProps } from "./TrafficSign";
+export { default as VehiclePath, type VehiclePathProps } from "./VehiclePath";
 export {
   DetailCard,
   FileCard,
@@ -42,6 +46,11 @@ export { default as Checkbox, type CheckboxProps } from "./Checkbox";
 export { default as ClientOnly, type ClientOnlyProps } from "./ClientOnly";
 export { default as Copyright, type CopyrightProps } from "./Copyright";
 export { default as Color, type ColorProps } from "./Color";
+export { default as Figure, type FigureProps } from "./Figure";
+export {
+  default as TrafficLight,
+  type TrafficLightProps
+} from "./TrafficLight";
 export {
   default as DeletableList,
   type DeletableListProps
@@ -75,13 +84,14 @@ export {
 } from "./ImageUploader";
 export {
   LabelChip,
-  LabelSelector,
+  default as LabelSelector,
   type LabelChipProps,
   type LabelSelectorProps
 } from "./LabelSelector";
 export { default as TabPanel, type TabPanelProps } from "./TabPanel";
 export { default as LinePlot, type LinePlotProps } from "./LinePlot";
 export { default as SurfacePlot, type SurfacePlotProps } from "./SurfacePlot";
+export { default as BulletGauge, type BulletGaugeProps } from "./BulletGauge";
 export { default as Loading, type LoadingProps } from "./Loading";
 export { default as LoginForm, type LoginFormProps } from "./LoginForm";
 export { default as ModelButton, type ModelButtonProps } from "./ModelButton";

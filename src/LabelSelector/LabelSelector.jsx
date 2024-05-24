@@ -84,7 +84,7 @@ const CustomPaper = ({
 };
 
 // label selector component
-function LabelSelector({
+export default function LabelSelector({
   addEnabled = false,
   autocompleteLabel = "",
   deleteEnabled = false,
@@ -295,76 +295,46 @@ function LabelSelector({
   );
 }
 
-export default LabelSelector;
-
 // Label Selector Proptypes
 LabelSelector.propTypes = {
   /**
-   * If true, add new label button will be shown in the list of labels
-   * when user clicks on the button, a dialog will be opened to add a
-   * new label.
-   * @default false
-   * @type {boolean}
+   * If true, the "Add New Label" button will be displayed. Clicking this button will open a dialog to add a new label.
    */
   addEnabled: PropTypes.bool,
   /**
    * Label for the autocomplete input field.
-   * @default ""
-   * @type {string}
    */
   autocompleteLabel: PropTypes.string,
   /**
-   * If true, delete icon will be shown against each label in the list
-   * of labels when user clicks on the icon, a dialog will be opened to
-   * confirm the delete action.
-   * @default false
-   * @type {boolean}
+   * If true, a delete icon will be displayed next to each label. Clicking this icon will open a dialog to confirm the deletion of the label.
    */
   deleteEnabled: PropTypes.bool,
   /**
-   * If true, edit icon will be shown against each label in the list
-   * of labels when user clicks on the icon, a dialog will be opened to
-   * edit the label.
-   * @default false
-   * @type {boolean}
+   * If true, an edit icon will be displayed next to each label. Clicking this icon will open a dialog to edit the label.
    */
   editEnabled: PropTypes.bool,
   /**
    * If true, the label selector will display an error state.
-   * @default false
-   * @type {boolean}
    */
   error: PropTypes.bool,
   /**
    * The helper text content.
-   * @type {string}
    */
   helperText: PropTypes.string,
   /**
-   * The maximum number of tags that will be visible when not focused.
-   * Set -1 to disable the limit
-   * @default -1
-   * @type {number}
-   * @see https://material-ui.com/components/autocomplete/#limit-tags
+   * The maximum number of tags that will be visible when not focused. Set to -1 to disable the limit.
    */
   limitTags: PropTypes.number,
   /**
-   * If true, value must be an array and the menu will support
-   * multiple selections.
-   * @default true
-   * @type {boolean}
-   * @see https://material-ui.com/components/autocomplete/#multiple-values
+   * If true, the value must be an array and the menu will support multiple selections.
    */
   multiple: PropTypes.bool,
   /**
    * The name of the input.
-   * @type {string}
    */
   name: PropTypes.string,
   /**
    * The maximum length of a label name.
-   * @default 50
-   * @type {number}
    */
   nameMaxLength: PropTypes.number,
   /**
@@ -374,10 +344,7 @@ LabelSelector.propTypes = {
    * ```
    * function(event: object) => void
    * ```
-   *
    * _event_: The event source of the callback.
-   * @default () => {}
-   * @type {function}
    */
   onBlur: PropTypes.func,
   /**
@@ -387,10 +354,7 @@ LabelSelector.propTypes = {
    * ```
    * function(selectedLabels: array) => void
    * ```
-   *
    * _selectedLabels_: The labels that are currently selected.
-   * @default () => {}
-   * @type {function}
    */
   onChange: PropTypes.func,
   /**
@@ -398,12 +362,9 @@ LabelSelector.propTypes = {
    *
    * **Signature**
    * ```
-   * function(selectedLabels: array) => void
+   * function(deletedLabel: object) => void
    * ```
-   *
-   * _label_: The label that is deleted.
-   * @default () => {}
-   * @type {function}
+   * _deletedLabel_: The label that is deleted.
    */
   onDelete: PropTypes.func,
   /**
@@ -411,12 +372,9 @@ LabelSelector.propTypes = {
    *
    * **Signature**
    * ```
-   * function(label: object) => void
+   * function(editedLabel: object) => void
    * ```
-   *
-   * _label_: The label that is edited.
-   * @default () => {}
-   * @type {function}
+   * _editedLabel_: The label that is edited.
    */
   onEdit: PropTypes.func,
   /**
@@ -424,60 +382,35 @@ LabelSelector.propTypes = {
    *
    * **Signature**
    * ```
-   * function(label: object) => void
+   * function(newLabel: object) => void
    * ```
-   *
-   * _label_: The label that is added.
-   * @default () => {}
-   * @type {function}
+   * _newLabel_: The label that is added.
    */
   onNew: PropTypes.func,
   /**
-   * The array of label objects that are options to render in the listbox.
-   * @default []
-   * @type {array}
-   *
-   * @example
-   * [
-   *  {
-   *   _id: "5f9f1b9b0b5b9c0b8c8b4567",
-   *  name: "Label 1",
-   * description: "Description 1",
-   * color: "#ff0000"
-   * },
-   * {
-   *  _id: "5f9f1b9b0b5b9c0b8c8b4568",
-   * name: "Label 2",
-   * description: "Description 2",
-   * color: "#00ff00"
-   * }
-   * ]
+   * Array of label objects to display in the listbox.
    */
-  options: PropTypes.array,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      color: PropTypes.string,
+      description: PropTypes.string,
+      name: PropTypes.string.isRequired
+    })
+  ).isRequired,
   /**
    * The size of the component.
-   * @default "small"
-   * @type {string}
-   *
-   * Can be one of:
-   * - "small"
-   * - "medium"
    */
   size: PropTypes.oneOf(["small", "medium"]),
   /**
-   * The array of label objects that are currently selected.
-   * @default []
-   * @type {array}
-   *
-   * @example
-   * [
-   * {
-   * _id: "5f9f1b9b0b5b9c0b8c8b4567",
-   * name: "Label 1",
-   * description: "Description 1",
-   * color: "#ff0000"
-   * }
-   * ]
+   * Array of label objects that are currently selected.
    */
-  value: PropTypes.array
+  value: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      color: PropTypes.string,
+      description: PropTypes.string,
+      name: PropTypes.string.isRequired
+    })
+  )
 };
