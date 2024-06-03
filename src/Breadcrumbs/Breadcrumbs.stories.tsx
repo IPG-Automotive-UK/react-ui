@@ -11,7 +11,23 @@ export default {
   title: "General/Breadcrumbs"
 } satisfies Meta<typeof Breadcrumbs>;
 
-export const Default: StoryFn<BreadcrumbsProps> = args => {
+const TemplateWithBreadcrumbProps: StoryFn<BreadcrumbsProps> = args => {
+  return <Breadcrumbs {...args} />;
+};
+
+export const Default: Story = {
+  args: {
+    breadcrumbs: [
+      { label: "Home", to: "/home" },
+      { label: "Garden", to: "/home/garden" },
+      { label: "Shops", to: "home/garden/shops" }
+    ]
+  },
+
+  render: TemplateWithBreadcrumbProps
+};
+
+export const DefaultWithChildren: StoryFn<BreadcrumbsProps> = args => {
   return (
     <Breadcrumbs {...args}>
       <Link href="">Home</Link>
@@ -19,10 +35,6 @@ export const Default: StoryFn<BreadcrumbsProps> = args => {
       <Typography>Shops</Typography>
     </Breadcrumbs>
   );
-};
-
-const TemplateWithBreadcrumbProps: StoryFn<BreadcrumbsProps> = args => {
-  return <Breadcrumbs {...args} />;
 };
 
 export const PropsWithDefaultLinks: Story = {
