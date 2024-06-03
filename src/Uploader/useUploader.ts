@@ -77,11 +77,31 @@ export default function useUploader({
     const bytesToMb = maxFileSize / 1024 / 1024;
     const limitSize = `${bytesToMb.toFixed()} MB`;
 
+    // check if the uploader is for images
+    const isImageUploader = Object.keys(acceptedFiles ?? {}).some(key =>
+      key.includes("image/")
+    );
+
     // set error message based on error code
-    const errorMessage =
-      errorCode === "file-invalid-type"
-        ? "File type must be a .gif, .jpg, .jpeg, .png, .webp"
-        : `File size exceeds the limit of ${limitSize}`;
+    let errorMessage = "";
+    switch (errorCode) {
+      case "file-invalid-type":
+        errorMessage = isImageUploader
+          ? "File type must be a .gif, .jpg, .jpeg, .png, .webp"
+          : fileRejection[0].errors[0].message;
+        break;
+      case "file-too-large":
+        errorMessage = `File size exceeds the limit of ${limitSize}.`;
+        break;
+      case "too-many-files":
+        errorMessage = `You can only upload ${filesLimit} file(s).`;
+        break;
+      case "file-too-small":
+        errorMessage = `File is too small. Please upload a larger file.`;
+        break;
+      default:
+        errorMessage = "An error occurred while uploading the file.";
+    }
 
     // set error message
     setRejectionMessage(errorMessage);
