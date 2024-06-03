@@ -1,4 +1,9 @@
-import { Link, Breadcrumbs as MuiBreadcrumbs } from "@mui/material";
+import {
+  Link,
+  Breadcrumbs as MuiBreadcrumbs,
+  Typography,
+  breadcrumbsClasses
+} from "@mui/material";
 
 import { BreadcrumbsProps } from "./Breadcrumbs.types";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
@@ -16,26 +21,37 @@ function Breadcrumbs({
     <MuiBreadcrumbs
       aria-label="breadcrumbs"
       separator={<NavigateNextIcon fontSize="small" />}
+      sx={{
+        [`& .${breadcrumbsClasses.li} *`]: {
+          color: "text.secondary",
+          textDecoration: "none"
+        },
+        [`& .${breadcrumbsClasses.li}:last-child *`]: {
+          color: "text.primary",
+          textDecoration: "none"
+        },
+        [`& .${breadcrumbsClasses.li}:not(:last-child):hover *`]: {
+          textDecoration: "underline"
+        }
+      }}
     >
       {
         // render children or breadcrumbs
         children ||
-          breadcrumbs?.map(({ to, label }, i) => (
-            <Link
-              sx={{
-                color:
-                  i === breadcrumbs.length - 1
-                    ? "text.primary"
-                    : "text.secondary"
-              }}
-              component={component}
-              key={label}
-              href={to}
-              underline="hover"
-            >
-              {label}
-            </Link>
-          ))
+          breadcrumbs?.map(({ to, label }, i) =>
+            i === breadcrumbs.length - 1 ? (
+              <Typography key={label}>{label}</Typography>
+            ) : (
+              <Link
+                component={component}
+                key={label}
+                href={to}
+                underline="hover"
+              >
+                {label}
+              </Link>
+            )
+          )
       }
     </MuiBreadcrumbs>
   );

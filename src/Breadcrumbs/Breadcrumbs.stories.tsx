@@ -1,7 +1,7 @@
+import { Link, Typography } from "@mui/material";
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import Breadcrumbs from "./Breadcrumbs";
 import { BreadcrumbsProps } from "./Breadcrumbs.types";
-import { Link } from "@mui/material";
 import React from "react";
 
 type Story = StoryObj<typeof Breadcrumbs>;
@@ -16,7 +16,7 @@ export const Default: StoryFn<BreadcrumbsProps> = args => {
     <Breadcrumbs {...args}>
       <Link href="">Home</Link>
       <Link href="">Garden</Link>
-      <Link href="">Shops</Link>
+      <Typography>Shops</Typography>
     </Breadcrumbs>
   );
 };
