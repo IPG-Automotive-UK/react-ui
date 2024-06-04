@@ -21,6 +21,7 @@ function Breadcrumbs({
     <MuiBreadcrumbs
       aria-label="breadcrumbs"
       separator={<NavigateNextIcon fontSize="small" />}
+      // style overrides to style children and breadcrumbs
       sx={{
         [`& .${breadcrumbsClasses.li} *`]: {
           color: "text.secondary",

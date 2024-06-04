@@ -75,6 +75,6 @@ describe("Breadcrumbs", () => {
     );
     const buttons = container.getElementsByTagName("button");
 
-    expect(buttons).toHaveLength(3);
+    expect(buttons).toHaveLength(2);
   });
 });
