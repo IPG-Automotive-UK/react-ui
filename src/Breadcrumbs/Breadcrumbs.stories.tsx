@@ -6,6 +6,14 @@ import React from "react";
 
 type Story = StoryObj<typeof Breadcrumbs>;
 
+const args = {
+  breadcrumbs: [
+    { label: "Home", to: "/home" },
+    { label: "Garden", to: "/home/garden" },
+    { label: "Shops", to: "home/garden/shops" }
+  ]
+};
+
 export default {
   component: Breadcrumbs,
   title: "General/Breadcrumbs"
@@ -16,20 +24,13 @@ const TemplateWithBreadcrumbProps: StoryFn<BreadcrumbsProps> = args => {
 };
 
 export const Default: Story = {
-  args: {
-    breadcrumbs: [
-      { label: "Home", to: "/home" },
-      { label: "Garden", to: "/home/garden" },
-      { label: "Shops", to: "home/garden/shops" }
-    ]
-  },
-
+  args,
   render: TemplateWithBreadcrumbProps
 };
 
 export const DefaultWithChildren: StoryFn<BreadcrumbsProps> = args => {
   return (
-    <Breadcrumbs {...args}>
+    <Breadcrumbs>
       <Link href="">Home</Link>
       <Link href="">Garden</Link>
       <Typography>Shops</Typography>
@@ -38,24 +39,13 @@ export const DefaultWithChildren: StoryFn<BreadcrumbsProps> = args => {
 };
 
 export const PropsWithDefaultLinks: Story = {
-  args: {
-    breadcrumbs: [
-      { label: "Home", to: "/home" },
-      { label: "Garden", to: "/home/garden" },
-      { label: "Shops", to: "home/garden/shops" }
-    ]
-  },
-
+  args,
   render: TemplateWithBreadcrumbProps
 };
 
 export const PropsWithComponentOverride: Story = {
   args: {
-    breadcrumbs: [
-      { label: "Home", to: "/home" },
-      { label: "Garden", to: "/home/garden" },
-      { label: "Shops", to: "home/garden/shops" }
-    ],
+    ...args,
     component: "button"
   },
 
