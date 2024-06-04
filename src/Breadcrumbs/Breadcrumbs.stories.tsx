@@ -38,11 +38,6 @@ export const DefaultWithChildren: StoryFn<BreadcrumbsProps> = args => {
   );
 };
 
-export const PropsWithDefaultLinks: Story = {
-  args,
-  render: TemplateWithBreadcrumbProps
-};
-
 export const PropsWithComponentOverride: Story = {
   args: {
     ...args,
