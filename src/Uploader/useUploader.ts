@@ -92,7 +92,7 @@ export default function useUploader({
         break;
       }
       case "too-many-files":
-        errorMessage = `You can only upload ${filesLimit} file(s).`;
+        errorMessage = `You can only upload ${filesLimit} ${filesLimit > 1 ? "files" : "file"}.`;
         break;
       case "file-too-small":
         errorMessage = `File is too small. Please upload a larger file.`;
