@@ -70,16 +70,16 @@ export default function NumberField({
 
   // callback for value changing
   const handleChange = event => {
-    // get the new value
-    const newValue = string2number(event.target.value);
-    const [isValid] = isValidValue(newValue);
+    const value = event.target.value;
+    if (isValidNumber(value)) {
+      const [isValid] = isValidValue(value);
 
-    // update the current value
-    setCurrentValue(newValue);
+      // update the current value
+      setCurrentValue(value);
 
-    // call the onChange callback if the value is valid
-    isValid &&
-      onChange({ ...event, target: { ...event.target, value: newValue } });
+      // call the onChange callback if the value is valid
+      isValid && onChange({ ...event, target: { ...event.target, value } });
+    }
   };
 
   return (
@@ -98,7 +98,7 @@ export default function NumberField({
       placeholder={placeholder}
       required={required}
       size={size}
-      type="number"
+      type="text"
       value={currentValue}
       variant={variant}
       InputProps={{
@@ -131,16 +131,17 @@ export default function NumberField({
 }
 
 /**
- * Converts a string to a number.
- * @param {*} value - The value to convert.
- * @returns {number} - The converted value.
+ * Checks if a string is a valid number (including standard form).
+ * @param {string} str - The string to check.
+ * @returns {boolean} - True if the string is a valid number, false otherwise.
  */
-const string2number = value => {
-  if (value === "") {
-    return null;
-  } else {
-    return Number(value);
-  }
+const isValidNumber = str => {
+  // return true if there is just a "-" or empty string
+  if (str === "-" || str === "") return true;
+
+  // Return boolean to see if the value is a number
+  const numberRegex = /^-?\d+(?:\.\d*)?(?:[eE][+-]?\d+)?$/;
+  return numberRegex.test(str);
 };
 
 /**
