@@ -40,6 +40,8 @@ function Breadcrumbs({
         // render children or breadcrumbs
         children ||
           breadcrumbs?.map(({ to, label }, i) =>
+            // render last breadcrumb as Typography
+            // render other breadcrumbs as Links or component prop
             i === breadcrumbs.length - 1 ? (
               <Typography key={label}>{label}</Typography>
             ) : (
