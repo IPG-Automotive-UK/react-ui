@@ -70,6 +70,9 @@ export default function useUploader({
 
   // handle file drops that are rejected by showing the first error message as a rejection message
   const onDropRejected = (fileRejection: FileRejection[]) => {
+    // deafult error message
+    const defaultErrorMessage = fileRejection[0].errors[0].message;
+
     // get the error code
     const errorCode = fileRejection[0].errors[0].code;
 
@@ -98,7 +101,7 @@ export default function useUploader({
         errorMessage = `File is too small. Please upload a larger file.`;
         break;
       default:
-        errorMessage = "An error occurred while uploading the file.";
+        errorMessage = defaultErrorMessage;
     }
 
     // set error message
