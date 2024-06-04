@@ -73,18 +73,16 @@ export default function useUploader({
     // get the error code
     const errorCode = fileRejection[0].errors[0].code;
 
-    // check if the uploader is for images
-    const isImageUploader = Object.keys(acceptedFiles ?? {}).some(key =>
-      key.includes("image/")
-    );
+    // get the accepted file type extensions
+    const acceptedFileExtensions = Object.values(acceptedFiles ?? {})
+      .flat()
+      .join(", ");
 
     // set error message based on error code
     let errorMessage = "";
     switch (errorCode) {
       case "file-invalid-type":
-        errorMessage = isImageUploader
-          ? "File type must be a .gif, .jpg, .jpeg, .png, .webp"
-          : fileRejection[0].errors[0].message;
+        errorMessage = `File type must be ${acceptedFileExtensions}.`;
         break;
       case "file-too-large": {
         // get file size limit in MB
