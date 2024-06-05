@@ -18,3 +18,17 @@ export const Default: StoryFn<BreadcrumbsProps> = args => {
     </Breadcrumbs>
   );
 };
+
+export const OverflowEllipses: StoryFn<BreadcrumbsProps> = args => {
+  return (
+    <Breadcrumbs>
+      <Link href="">Painting was a hobby when I was little</Link>
+      <Link href="">I didn't know I had any talent</Link>
+      <Link href="">Talent is just a pursued interest</Link>
+      <Link href="">Anybody can do what I do</Link>
+      <Typography>
+        Just go back and put one little more happy tree in there
+      </Typography>
+    </Breadcrumbs>
+  );
+};

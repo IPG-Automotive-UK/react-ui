@@ -18,20 +18,23 @@ function Breadcrumbs({ children, ...rest }: BreadcrumbsProps) {
       separator={<NavigateNextIcon fontSize="small" />}
       // style overrides to style children
       sx={{
-        [`& .${breadcrumbsClasses.li} *`]: {
-          color: "text.secondary",
-          textDecoration: "none"
+        [`& .${breadcrumbsClasses.ol}`]: {
+          flexWrap: "nowrap",
+          whiteSpace: "nowrap"
+        },
+        [`& .${breadcrumbsClasses.li}`]: {
+          "& *": {
+            color: "text.secondary",
+            display: "block",
+            overflow: "hidden",
+            textDecoration: "none",
+            textOverflow: "ellipsis"
+          },
+          overflow: "hidden"
         },
         [`& .${breadcrumbsClasses.li}:last-child *`]: {
           color: "text.primary",
           textDecoration: "none"
-        },
-        [`& .${breadcrumbsClasses.li}:last-child`]: {
-          "& *": {
-            overflow: "hidden",
-            textOverflow: "ellipsis"
-          },
-          overflow: "hidden"
         },
         [`& .${breadcrumbsClasses.li}:not(:last-child):hover *`]: {
           textDecoration: "underline"
