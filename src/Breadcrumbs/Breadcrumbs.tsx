@@ -1,7 +1,5 @@
 import {
-  Link,
   Breadcrumbs as MuiBreadcrumbs,
-  Typography,
   breadcrumbsClasses
 } from "@mui/material";
 
@@ -12,16 +10,13 @@ import React from "react";
 /**
  * Breadcrumbs component
  */
-function Breadcrumbs({
-  breadcrumbs,
-  children,
-  component = Link
-}: BreadcrumbsProps) {
+function Breadcrumbs({ children, ...rest }: BreadcrumbsProps) {
   return (
     <MuiBreadcrumbs
+      {...rest}
       aria-label="breadcrumbs"
       separator={<NavigateNextIcon fontSize="small" />}
-      // style overrides to style children and breadcrumbs
+      // style overrides to style children
       sx={{
         [`& .${breadcrumbsClasses.li} *`]: {
           color: "text.secondary",
@@ -36,26 +31,7 @@ function Breadcrumbs({
         }
       }}
     >
-      {
-        // render children or breadcrumbs
-        children ||
-          breadcrumbs?.map(({ to, label }, i) =>
-            // render last breadcrumb as Typography
-            // render other breadcrumbs as Links or component prop
-            i === breadcrumbs.length - 1 ? (
-              <Typography key={label}>{label}</Typography>
-            ) : (
-              <Link
-                component={component}
-                key={label}
-                href={to}
-                underline="hover"
-              >
-                {label}
-              </Link>
-            )
-          )
-      }
+      {children}
     </MuiBreadcrumbs>
   );
 }
