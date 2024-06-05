@@ -17,8 +17,12 @@ const LinePlot = ({
   ydata = [],
   xlabel = "",
   ylabel = "",
-  markers = false,
-  showTitle = false
+  markers = true,
+  showTitle = false,
+  minHeight = 400,
+  showgrid = true,
+  labelFontSize,
+  exponentformat
 }: LinePlotProps) => {
   // theme hook
   const theme = useTheme();
@@ -64,10 +68,10 @@ const LinePlot = ({
           data={[
             {
               line: {
-                color: theme.palette.primary.main,
-                width: 2
+                color: "rgb(0, 96, 167)",
+                width: 3
               },
-              marker: { color: theme.palette.primary.main, size: 8 },
+              marker: { color: "rgb(0, 48, 99)", size: 7 },
               mode: markers ? "lines+markers" : "lines",
               type: "scatter",
               x: xdata,
@@ -77,43 +81,39 @@ const LinePlot = ({
           layout={{
             autosize: true,
             margin: {
-              b: 35,
-              l: 80,
-              r: 10,
-              t: 30
+              pad: 4,
+              t: 50
             },
             paper_bgcolor: "rgba(0,0,0,0)",
             plot_bgcolor: "rgba(0,0,0,0)",
             xaxis: {
               color: theme.palette.mode === "light" ? "" : "white",
-              exponentformat: "E",
-              gridcolor:
-                theme.palette.mode === "light" ? "" : theme.palette.grey["500"],
-              showgrid: false,
+              exponentformat,
+              gridcolor: theme.palette.mode === "light" ? "" : "grey",
+              showgrid,
               title: {
                 font: {
                   family: "Montserrat",
-                  size: 12
+                  size: labelFontSize || undefined
                 },
                 text: xlabel || ""
               }
             },
             yaxis: {
-              color: theme.palette.mode === "light" ? "" : "white",
-              exponentformat: "E",
-              gridcolor:
-                theme.palette.mode === "light" ? "" : theme.palette.grey["500"],
+              color: theme.palette.mode === "light" ? "black" : "white",
+              exponentformat,
+              gridcolor: theme.palette.mode === "light" ? "" : "grey",
               ticksuffix: " ",
               title: {
                 font: {
                   family: "Montserrat",
-                  size: 12
+                  size: labelFontSize || undefined
                 },
                 text: ylabel || ""
               }
             }
           }}
-          style={{ flexGrow: 1, height: "100%", minHeight: 0, width: "100%" }}
+          style={{ flexGrow: 1, height: "100%", minHeight, width: "100%" }}
           useResizeHandler={true}
           config={config}
         />
