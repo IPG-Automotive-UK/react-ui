@@ -1,6 +1,6 @@
 import { Box, Tooltip, Typography, debounce } from "@mui/material";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { TreeItem, TreeView } from "@mui/x-tree-view";
+import { SimpleTreeView, TreeItem } from "@mui/x-tree-view";
 import { TreeNodeItem, TreeViewListProps } from "./TreeViewList.types";
 
 import AddIcon from "@mui/icons-material/Add";
@@ -234,6 +234,7 @@ const TreeViewList = ({
           <Box
             sx={theme => ({
               background: theme.palette.background.paper,
+              marginRight: 0.2,
               position: "sticky",
               top: 0,
               zIndex: 2
@@ -263,32 +264,33 @@ const TreeViewList = ({
           </Box>
         </Box>
         <Box sx={{ flexGrow: 1, overflowY: "auto" }}>
-          <TreeView
+          <SimpleTreeView
             sx={{
               "& .css-9l5vo-MuiCollapse-wrapperInner": {
                 width: boxWidth <= 280 ? "auto" : "100%"
               }
             }}
-            defaultCollapseIcon={<RemoveIcon />}
-            defaultExpandIcon={<AddIcon />}
-            expanded={expandedNodes}
-            selected={currentSelection}
-            onNodeSelect={(event, nodeId) => {
-              const node = getNodeById(treeDisplayItems, nodeId);
-              const isChild = Boolean(
-                node && (!node.children || node.children.length === 0)
-              );
-              if (onNodeSelect) {
-                const nodeDetails = { isChild };
-                // update the selected node when a node is selected and it is a child
-                if (isChild) {
-                  setCurrentSelection(nodeId);
-                  setSelectedNode(nodeId);
+            slots={{ collapseIcon: RemoveIcon, expandIcon: AddIcon }}
+            expandedItems={expandedNodes}
+            selectedItems={currentSelection}
+            onSelectedItemsChange={(event, nodeId) => {
+              if (nodeId) {
+                const node = getNodeById(treeDisplayItems, nodeId);
+                const isChild = Boolean(
+                  node && (!node.children || node.children.length === 0)
+                );
+                if (onNodeSelect) {
+                  const nodeDetails = { isChild };
+                  // update the selected node when a node is selected and it is a child
+                  if (isChild) {
+                    setCurrentSelection(nodeId);
+                    setSelectedNode(nodeId);
+                  }
+                  onNodeSelect(event, nodeId, nodeDetails);
                 }
-                onNodeSelect(event, nodeId, nodeDetails);
               }
             }}
-            onNodeToggle={(event, nodeId) => {
+            onExpandedItemsChange={(event, nodeId) => {
               // reset the selected node when a node is toggled
               setSelectedNode("");
               // update the user expanded nodes when a node is toggled
@@ -319,7 +321,7 @@ const TreeViewList = ({
                 No data is available.
               </Typography>
             )}
-          </TreeView>
+          </SimpleTreeView>
         </Box>
       </Box>
     </>
@@ -379,9 +381,13 @@ const TooltipTreeItem = (
     >
       <TreeItem
         {...rest}
+        itemId={props.nodeId}
         sx={theme => ({
-          color: theme.palette.text.primary,
-          paddingY: "5px"
+          "& .MuiTreeItem-label": {
+            margin: 0,
+            padding: "4px 8px"
+          },
+          color: theme.palette.text.primary
         })}
         onMouseOver={event => {
           event.stopPropagation();
