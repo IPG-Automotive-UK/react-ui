@@ -26,6 +26,13 @@ function Breadcrumbs({ children, ...rest }: BreadcrumbsProps) {
           color: "text.primary",
           textDecoration: "none"
         },
+        [`& .${breadcrumbsClasses.li}:last-child`]: {
+          "& *": {
+            overflow: "hidden",
+            textOverflow: "ellipsis"
+          },
+          overflow: "hidden"
+        },
         [`& .${breadcrumbsClasses.li}:not(:last-child):hover *`]: {
           textDecoration: "underline"
         }
