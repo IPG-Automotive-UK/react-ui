@@ -2,10 +2,11 @@ import {
   Breadcrumbs as MuiBreadcrumbs,
   breadcrumbsClasses
 } from "@mui/material";
+import React, { Children, isValidElement } from "react";
 
 import { BreadcrumbsProps } from "./Breadcrumbs.types";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import React from "react";
+import TruncatedTooltip from "../TruncatedTooltip/TruncatedTooltip";
 
 /**
  * Breadcrumbs component
@@ -25,10 +26,7 @@ function Breadcrumbs({ children, ...rest }: BreadcrumbsProps) {
         [`& .${breadcrumbsClasses.li}`]: {
           "& *": {
             color: "text.secondary",
-            display: "block",
-            overflow: "hidden",
-            textDecoration: "none",
-            textOverflow: "ellipsis"
+            textDecoration: "none"
           },
           overflow: "hidden"
         },
@@ -36,12 +34,18 @@ function Breadcrumbs({ children, ...rest }: BreadcrumbsProps) {
           color: "text.primary",
           textDecoration: "none"
         },
-        [`& .${breadcrumbsClasses.li}:not(:last-child):hover *`]: {
+        [`& .${breadcrumbsClasses.li}:not(:last-child):hover a`]: {
           textDecoration: "underline"
         }
       }}
     >
-      {children}
+      {children
+        ? Children.map(children, child =>
+            child && isValidElement(child) ? (
+              <TruncatedTooltip>{child}</TruncatedTooltip>
+            ) : null
+          )
+        : null}
     </MuiBreadcrumbs>
   );
 }
