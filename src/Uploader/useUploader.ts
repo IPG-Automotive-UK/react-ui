@@ -32,7 +32,7 @@ export default function useUploader({
 
   // effect to only show rejection message for 3 seconds
   React.useEffect(() => {
-    // hide message after 5000ms
+    // hide message after 3000ms
     const timer = setTimeout(() => {
       if (rejectionMessage) {
         setRejectionMessage(null);

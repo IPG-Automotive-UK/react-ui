@@ -1,8 +1,10 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 
 import FileUploader from "./FileUploader";
 import { FileWithData } from "../Uploader/Uploader.types";
 import React from "react";
+import userEvent from "@testing-library/user-event";
+import { vi } from "vitest";
 
 // single file for testing
 const singleFile = [
@@ -117,5 +119,38 @@ describe("FileUploader", () => {
 
     // expect the dropzone text to be red
     expect(dropzoneText).toHaveStyle("color: #d32f2f");
+  });
+
+  test("error multiple file upload against single file limit", async () => {
+    const onAdd = vi.fn();
+
+    render(<FileUploader selectedFiles={[]} filesLimit={1} onAdd={onAdd} />);
+
+    const dropzoneBox = screen.getByRole("presentation");
+    const dropInput = dropzoneBox.querySelector("input") ?? dropzoneBox;
+    await userEvent.click(dropInput);
+
+    const files = [
+      new File(
+        ["One"],
+        "https://www.ipg-automotive.com/fileadmin/data/company/news/2024/Japan-Web.png",
+        { type: "image/png" }
+      ),
+      new File(
+        ["Two"],
+        "https://www.ipg-automotive.com/fileadmin/data/company/news/2024/Japan-Web.png",
+        { type: "image/png" }
+      )
+    ];
+
+    // add multiple files to the uploader
+    await userEvent.upload(dropInput, files);
+
+    const dropzoneElement = screen.getByTestId("dropzone-base");
+    await waitFor(() =>
+      expect(dropzoneElement).toHaveTextContent(
+        "You can only upload only 1 file."
+      )
+    );
   });
 });
