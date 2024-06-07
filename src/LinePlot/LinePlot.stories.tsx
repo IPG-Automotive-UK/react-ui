@@ -30,7 +30,8 @@ const Template: StoryFn<LinePlotProps> = args => {
 // Default
 export const Default = {
   args: {
-    markers: false,
+    markers: true,
+    showGrid: true,
     showTitle: false,
     title: "",
     xdata: [0, 1, 2, 3, 4, 5],

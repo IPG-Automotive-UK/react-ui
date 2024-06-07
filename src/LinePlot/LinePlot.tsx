@@ -20,9 +20,9 @@ const LinePlot = ({
   markers = true,
   showTitle = false,
   minHeight = 400,
-  showgrid = true,
+  showGrid = true,
   labelFontSize,
-  exponentformat
+  exponentFormat
 }: LinePlotProps) => {
   // theme hook
   const theme = useTheme();
@@ -88,9 +88,9 @@ const LinePlot = ({
             plot_bgcolor: "rgba(0,0,0,0)",
             xaxis: {
               color: theme.palette.mode === "light" ? "" : "white",
-              exponentformat,
+              exponentformat: exponentFormat,
               gridcolor: theme.palette.mode === "light" ? "" : "grey",
-              showgrid,
+              showgrid: showGrid,
               title: {
                 font: {
                   family: "Montserrat",
@@ -101,7 +101,7 @@ const LinePlot = ({
             },
             yaxis: {
               color: theme.palette.mode === "light" ? "black" : "white",
-              exponentformat,
+              exponentformat: exponentFormat,
               gridcolor: theme.palette.mode === "light" ? "" : "grey",
               ticksuffix: " ",
               title: {
