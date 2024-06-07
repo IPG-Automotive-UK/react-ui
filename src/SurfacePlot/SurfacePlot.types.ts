@@ -5,15 +5,11 @@ export type SurfacePlotProps = {
   /**
    * Exponentformat is a string that determines the format for large numbers.
    */
-  exponentformat?: "none" | "e" | "E" | "power" | "SI" | "B";
+  exponentFormat?: "none" | "e" | "E" | "power" | "SI" | "B";
   /**
    * Label font size
    */
   labelFontSize?: number;
-  /**
-   * markers is a boolean that determines whether or not the points are marked.
-   */
-  markers?: boolean;
   /**
    *  Minimum height of the plot.
    */
@@ -21,7 +17,7 @@ export type SurfacePlotProps = {
   /**
    * Boolean that determines whether or not the grid is shown.
    */
-  showgrid?: boolean;
+  showGrid?: boolean;
   /**
    * showTitle is a boolean that determines whether or not the title is shown on the main view.
    */

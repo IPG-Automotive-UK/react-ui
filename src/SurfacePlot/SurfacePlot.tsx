@@ -15,12 +15,11 @@ const SurfacePlot = ({
   ylabel = "",
   zlabel = "",
   title = "",
-  markers = false,
   showTitle = false,
   minHeight = 400,
   labelFontSize,
-  showgrid = true,
-  exponentformat
+  showGrid = true,
+  exponentFormat
 }: SurfacePlotProps) => {
   // theme hook
   const theme = useTheme();
@@ -72,7 +71,6 @@ const SurfacePlot = ({
                   size: 12
                 }
               },
-              mode: markers ? "lines+markers" : "lines",
               type: "surface",
               x: xdata,
               y: ydata,
@@ -92,12 +90,12 @@ const SurfacePlot = ({
               camera: { eye: { x: 2 } },
               xaxis: {
                 color: theme.palette.mode === "light" ? "" : "white",
-                exponentformat,
+                exponentformat: exponentFormat,
                 gridcolor:
                   theme.palette.mode === "light"
                     ? ""
                     : theme.palette.grey["500"],
-                showgrid,
+                showgrid: showGrid,
                 title: {
                   font: {
                     family: "Montserrat",
@@ -108,7 +106,7 @@ const SurfacePlot = ({
               },
               yaxis: {
                 color: theme.palette.mode === "light" ? "" : "white",
-                exponentformat,
+                exponentformat: exponentFormat,
                 gridcolor:
                   theme.palette.mode === "light"
                     ? ""
@@ -123,7 +121,7 @@ const SurfacePlot = ({
               },
               zaxis: {
                 color: theme.palette.mode === "light" ? "" : "white",
-                exponentformat,
+                exponentformat: exponentFormat,
                 gridcolor:
                   theme.palette.mode === "light"
                     ? ""
