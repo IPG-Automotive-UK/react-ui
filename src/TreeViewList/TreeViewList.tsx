@@ -385,7 +385,7 @@ const TooltipTreeItem = (
         sx={theme => ({
           "& .MuiTreeItem-label": {
             margin: 0,
-            padding: "4px 8px"
+            padding: "2px 8px"
           },
           color: theme.palette.text.primary
         })}
