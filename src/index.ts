@@ -30,7 +30,6 @@ export { default as RoadMarking, type RoadMarkingProps } from "./RoadMarking";
 export { default as RoadSurface, type RoadSurfaceProps } from "./RoadSurface";
 export { default as TrafficSign, type TrafficSignProps } from "./TrafficSign";
 export { default as VehiclePath, type VehiclePathProps } from "./VehiclePath";
-export { default as Breadcrumbs, type BreadcrumbsProps } from "./Breadcrumbs";
 export {
   DetailCard,
   FileCard,
@@ -38,6 +37,7 @@ export {
   TableCard,
   type DetailCardProps,
   type DetailCardHeaderProps,
+  type DetailCardLabelStackProps,
   type FileCardProps,
   type SummaryCardProps,
   type TableCardProps
@@ -60,7 +60,7 @@ export {
   default as FeedbackForm,
   type FeedbackFormProps
 } from "./FeedbackForm";
-export { default as VersionChip, type VersionChipProps } from "./VersionChip";
+export {default as VersionChip, type VersionChipProps} from "./VersionChip";
 export {
   default as FileUploader,
   type FileUploaderProps
@@ -85,10 +85,8 @@ export {
 } from "./ImageUploader";
 export {
   LabelChip,
-  LabelChipGroup,
   default as LabelSelector,
   type LabelChipProps,
-  type LabelChipGroupProps,
   type LabelSelectorProps
 } from "./LabelSelector";
 export { default as TabPanel, type TabPanelProps } from "./TabPanel";
@@ -185,7 +183,6 @@ export {
   default as TreeViewList,
   type TreeViewListProps
 } from "./TreeViewList";
-export { default as TruncatedTooltip } from "./TruncatedTooltip";
 export { default as UserMenu, type UserMenuProps } from "./UserMenu";
 export { UserAvatar, useColorMap, type UserAvatarProps } from "./UserAvatar";
 export {
