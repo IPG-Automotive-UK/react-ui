@@ -1,2 +1,2 @@
-export { default } from "./VersionChip"
-export type {VersionChipProps} from "./VersionChip.types"
+export { default } from "./VersionChip";
+export type { VersionChipProps } from "./VersionChip.types";
