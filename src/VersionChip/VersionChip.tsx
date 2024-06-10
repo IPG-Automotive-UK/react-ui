@@ -40,7 +40,7 @@ const VersionChip = ({
         border: theme =>
           selected
             ? `1px solid ${theme.palette.primary.light}`
-            : `1px solid ${theme.palette.divider}`,
+            : `1px solid ${alpha(theme.palette.divider, 0.23)}`,
         gap: "2px",
         height: 24,
         justifyContent: "center",
