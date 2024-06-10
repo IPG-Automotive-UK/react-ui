@@ -383,8 +383,11 @@ const TooltipTreeItem = (
         {...rest}
         itemId={props.nodeId}
         sx={theme => ({
-          color: theme.palette.text.primary,
-          paddingY: "5px"
+          "& .MuiTreeItem-label": {
+            margin: 0,
+            padding: "2px 8px"
+          },
+          color: theme.palette.text.primary
         })}
         onMouseOver={event => {
           event.stopPropagation();
