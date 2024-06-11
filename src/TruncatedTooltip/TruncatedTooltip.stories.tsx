@@ -33,8 +33,6 @@ const TypographyTemplate: StoryFn<TruncatedTooltipProps> = args => {
   );
 };
 
-// const LinkTemplate: StoryFn<TruncatedTooltipProps> = args => {};
-
 export const Default: StoryObj<typeof TruncatedTooltip> = {
   args: {
     children: "This is a long text that will be truncated",
