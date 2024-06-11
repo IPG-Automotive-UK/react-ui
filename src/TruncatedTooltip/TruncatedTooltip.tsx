@@ -1,33 +1,56 @@
 import { Box, Tooltip } from "@mui/material";
 import React, {
   Children,
-  PropsWithChildren,
   ReactElement,
   isValidElement,
   useRef,
   useState
 } from "react";
 
-type Props = {
-  tooltip?: string;
-  children: React.ReactNode;
-  component?: React.ElementType;
-};
+import { TruncatedTooltipProps } from "./TruncatedTooltip.types";
 
-const TruncatedTooltip = (props: PropsWithChildren<Props>) => {
+/**
+ * Truncates text and shows a tooltip if the text overflows.
+ * Automatically grabs the tooltip from child.
+ * Renders a specified MUI component or element otherwise wraps string in a span.
+ */
+const TruncatedTooltip = <T extends React.ElementType = "span">({
+  children,
+  component,
+  multiline,
+  sx,
+  tooltip,
+  ...rest
+}: TruncatedTooltipProps<T>) => {
+  // Ref to the text element.
   const textElementRef = useRef<HTMLInputElement | null>(null);
+  // State to determine if the tooltip should show.
   const [open, setOpen] = useState(false);
 
-  // if the text overflows its bounding box, then show the tooltip
+  // const { component, sx, tooltip, ...rest } = props;
+
+  /**
+   * If the text overflows, show the tooltip.
+   */
   const handleShouldShow = ({
     currentTarget
   }: React.MouseEvent<HTMLDivElement | null>) => {
-    setOpen(currentTarget.scrollWidth > currentTarget.clientWidth);
+    setOpen(
+      currentTarget.scrollWidth > currentTarget.clientWidth ||
+        currentTarget.scrollHeight > currentTarget.clientHeight
+    );
   };
 
-  // on mouse leave, hide the tooltip
+  /**
+   * Hide the tooltip.
+   */
   const hideTooltip = () => setOpen(false);
 
+  /**
+   * Returns the text from a child element.
+   * @param child Valid React element.
+   * @returns string or null.
+   */
   const getText = (child: ReactElement): string | null => {
     if (isValidElement(child)) {
       const props = child.props as { children?: React.ReactNode };
@@ -41,8 +64,16 @@ const TruncatedTooltip = (props: PropsWithChildren<Props>) => {
     }
   };
 
-  const text = props.children
-    ? Children.map(props.children, child => {
+  /**
+   * Extracted text from children.
+   */
+  const text = children
+    ? Children.map(children, child => {
+        /**
+         * If the child is a string, return the string.
+         * If the child is a valid React element, return the text from the element.
+         * Otherwise, return null.
+         */
         if (typeof child === "string") {
           return child;
         } else if (isValidElement(child)) {
@@ -56,26 +87,41 @@ const TruncatedTooltip = (props: PropsWithChildren<Props>) => {
   return (
     <Tooltip
       open={open}
-      title={text}
+      title={tooltip || text}
       disableHoverListener={!open}
       onMouseEnter={handleShouldShow}
       onMouseLeave={hideTooltip}
     >
       <Box
-        component={"span"}
+        component={component || "span"}
         ref={textElementRef}
-        sx={{
-          "& *": {
-            display: "inline"
+        sx={[
+          {
+            "& > *": {
+              display: "inline"
+            },
+            display: "block",
+            overflow: "hidden",
+            textDecoration: "none",
+            textOverflow: "ellipsis",
+            // Allow wrapping for multiline text
+            whiteSpace: multiline ? "normal" : "nowrap",
+            wordBreak: "break-all"
           },
-          display: "block",
-          overflow: "hidden",
-          textDecoration: "none",
-          textOverflow: "ellipsis",
-          whiteSpace: "nowrap"
-        }}
+          // Ensure multiline clamps to specified number of lines
+          multiline
+            ? {
+                WebkitBoxOrient: "vertical",
+                WebkitLineClamp: multiline,
+                display: "-webkit-box"
+              }
+            : {},
+          // You cannot spread `sx` directly because `SxProps` (typeof sx) can be an array.
+          ...(Array.isArray(sx) ? sx : [sx])
+        ]}
+        {...rest}
       >
-        {props.children}
+        {children}
       </Box>
     </Tooltip>
   );
