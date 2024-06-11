@@ -18,7 +18,6 @@ import { MoreVert } from "@mui/icons-material";
 import NoWrapTypography from "../../NoWrapTypography/NoWrapTypography";
 import { ResizeObserver } from "@juggle/resize-observer";
 import { SummaryCardProps } from "./SummaryCard.types";
-import TruncatedTooltip from "../../TruncatedTooltip/TruncatedTooltip";
 
 function SummaryCard({
   content = null,
@@ -176,16 +175,15 @@ function SummaryCard({
           }
           disableTypography
           title={
-            <TruncatedTooltip tooltip={title}>
-              <Typography
-                sx={{
-                  fontSize: 20,
-                  fontWeight: 500
-                }}
-              >
-                {title}
-              </Typography>
-            </TruncatedTooltip>
+            <NoWrapTypography
+              sx={{
+                fontSize: 20,
+                fontWeight: 500,
+                width: headerContentWidth
+              }}
+            >
+              {title}
+            </NoWrapTypography>
           }
           subheader={
             <NoWrapTypography
