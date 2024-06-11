@@ -1,10 +1,9 @@
 import { describe, expect, test, vi } from "vitest";
-import { render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 import FileUploader from "./FileUploader";
 import { FileWithData } from "../Uploader/Uploader.types";
 import React from "react";
-import userEvent from "@testing-library/user-event";
 
 // single file for testing
 const singleFile = [
@@ -30,6 +29,25 @@ const multipleFiles = [
     }
   }
 ] as FileWithData[];
+
+/**
+ * createDtWithFiles creates a mock data transfer object that can be used for drop events
+ * @param {File[]} files
+ */
+function createDtWithFiles(files: File[] = []) {
+  return {
+    dataTransfer: {
+      files,
+      items: files.map(file => ({
+        getAsFile: () => file,
+        kind: "file",
+        size: file.size,
+        type: file.type
+      })),
+      types: ["Files"]
+    }
+  };
+}
 
 describe("FileUploader", () => {
   test("render fileuploader", () => {
@@ -121,39 +139,79 @@ describe("FileUploader", () => {
     expect(dropzoneText).toHaveStyle("color: #d32f2f");
   });
 
-  test("error multiple file upload against single file limit", async () => {
-    const onAdd = vi.fn();
-    const user = userEvent.setup();
-    render(<FileUploader selectedFiles={[]} filesLimit={1} onAdd={onAdd} />);
+  test("display error uploading multiple files where limit is 1", async () => {
+    const { getByTestId } = render(<FileUploader filesLimit={1} />);
 
-    const dropzoneBox = screen.getByRole("presentation");
-    const dropInput = dropzoneBox.querySelector("input") ?? dropzoneBox;
-
-    // await user.click(dropInput);
-
+    // create two files
     const files = [
-      new File(
-        ["One"],
-        "https://www.ipg-automotive.com/fileadmin/data/company/news/2024/Japan-Web.png",
-        { type: "image/png" }
-      )
-      // new File(
-      //   ["Two"],
-      //   "https://www.ipg-automotive.com/fileadmin/data/company/news/2024/Japan-Web.png",
-      //   { type: "image/png" }
-      // )
+      new File(["ipg1"], "ipg1.png", { type: "image/png" }),
+      new File(["ipg2"], "ipg2.png", { type: "image/png" })
     ];
 
-    await user.upload(dropInput, files);
+    // create a data transfer object with the files
+    const data = createDtWithFiles(files);
 
-    // await waitFor(() => expect(onAdd).toHaveBeenCalled(1));
+    // get the dropzone element
+    const dropzoneElement = getByTestId("dropzone-root");
 
-    const dropzoneElement = screen.getByTestId("dropzone-base");
+    // trigger the drop event
+    fireEvent.drop(dropzoneElement, data);
 
-    const dropzoneText = await screen.findByText("Japan-Web.png");
+    // wait for the error message to be displayed
+    await waitFor(() =>
+      expect(dropzoneElement).toHaveTextContent("You can only upload 1 file.")
+    );
+  });
 
-    console.log("dropzoneText", dropzoneText);
+  test("display error uploading invalid file type", async () => {
+    const { getByTestId } = render(
+      <FileUploader filesLimit={1} acceptedFiles={[".jpg", ".jpeg"]} />
+    );
 
-    expect(dropzoneText).toBeInTheDocument();
+    // create a file with a png extension
+    const files = [new File(["ipg1"], "ipg1.png", { type: "image/png" })];
+
+    // create a data transfer object with the files
+    const data = createDtWithFiles(files);
+
+    // get the dropzone element
+    const dropzoneElement = getByTestId("dropzone-root");
+
+    // trigger the drop event
+    fireEvent.drop(dropzoneElement, data);
+
+    // wait for the error message to be displayed
+    await waitFor(() =>
+      expect(dropzoneElement).toHaveTextContent(
+        "File type must be .jpg, .jpeg."
+      )
+    );
+  });
+
+  test("display error uploading file size exceeds limit", async () => {
+    const { getByTestId } = render(<FileUploader maxFileSize={1000000} />);
+
+    // create a file with a size of 1GB
+    const files = [
+      new File([new ArrayBuffer(1000000000)], "ipg1.png", {
+        type: "image/png"
+      })
+    ];
+
+    // create a data transfer object with the files
+    const data = createDtWithFiles(files);
+
+    // get the dropzone element
+    const dropzoneElement = getByTestId("dropzone-root");
+
+    // trigger the drop event
+    fireEvent.drop(dropzoneElement, data);
+
+    // wait for the error message to be displayed
+    await waitFor(() =>
+      expect(dropzoneElement).toHaveTextContent(
+        "File size exceeds the limit of 1 MB."
+      )
+    );
   });
 });

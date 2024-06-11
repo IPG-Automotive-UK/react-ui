@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 import { FileWithData } from "../Uploader/Uploader.types";
 import ImageUploader from ".";
@@ -16,6 +16,25 @@ const singleFile = {
     type: "image/png"
   }
 } as FileWithData;
+
+/**
+ * createDtWithFiles creates a mock data transfer object that can be used for drop events
+ * @param {File[]} files
+ */
+function createDtWithFiles(files: File[] = []) {
+  return {
+    dataTransfer: {
+      files,
+      items: files.map(file => ({
+        getAsFile: () => file,
+        kind: "file",
+        size: file.size,
+        type: file.type
+      })),
+      types: ["Files"]
+    }
+  };
+}
 
 describe("ImageUploader", () => {
   // render FileUploader component
@@ -88,5 +107,55 @@ describe("ImageUploader", () => {
     // check callback was called
     expect(onDelete).toHaveBeenCalledTimes(1);
     expect(onDelete).toHaveBeenCalledWith([]);
+  });
+
+  test("display error uploading invalid file type", async () => {
+    const { getByTestId } = render(<ImageUploader />);
+
+    // create a file with a png extension
+    const files = [new File(["ipg1"], "ipg1.pdf", { type: "application/pdf" })];
+
+    // create a data transfer object with the files
+    const data = createDtWithFiles(files);
+
+    // get the dropzone element
+    const dropzoneElement = getByTestId("dropzone-root");
+
+    // trigger the drop event
+    fireEvent.drop(dropzoneElement, data);
+
+    // wait for the error message to be displayed
+    await waitFor(() =>
+      expect(dropzoneElement).toHaveTextContent(
+        "File type must be .gif, .jpg, .jpeg, .png, .webp."
+      )
+    );
+  });
+
+  test("display error uploading file size exceeds limit", async () => {
+    const { getByTestId } = render(<ImageUploader maxFileSize={1000000} />);
+
+    // create a file with a size of 1GB
+    const files = [
+      new File([new ArrayBuffer(1000000000)], "ipg1.png", {
+        type: "image/png"
+      })
+    ];
+
+    // create a data transfer object with the files
+    const data = createDtWithFiles(files);
+
+    // get the dropzone element
+    const dropzoneElement = getByTestId("dropzone-root");
+
+    // trigger the drop event
+    fireEvent.drop(dropzoneElement, data);
+
+    // wait for the error message to be displayed
+    await waitFor(() =>
+      expect(dropzoneElement).toHaveTextContent(
+        "File size exceeds the limit of 1 MB."
+      )
+    );
   });
 });
