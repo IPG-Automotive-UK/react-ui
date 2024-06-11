@@ -1,4 +1,4 @@
-import { describe, expect, test, vi } from "vitest";
+import { describe, expect, test } from "vitest";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 import FileUploader from "./FileUploader";
