@@ -369,19 +369,18 @@ const TooltipTreeItem = (
     setHoveredNode: (nodeId: string) => void;
   }
 ) => {
-  // destructure the hoveredNode and setHoveredNode from the props and pass the rest of the props to the TreeItem
-  const { hoveredNode, setHoveredNode, ...rest } = props;
-
+  // Destructure the nodeId and the other props
+  const { hoveredNode, setHoveredNode, nodeId, tooltip, ...rest } = props;
   return (
     <Tooltip
-      title={props.tooltip ? <>{props.tooltip}</> : ""}
+      title={tooltip ? <>{tooltip}</> : ""}
       placement="right-start"
-      open={hoveredNode === props.nodeId}
+      open={hoveredNode === nodeId}
       disableFocusListener
     >
       <TreeItem
         {...rest}
-        itemId={props.nodeId}
+        itemId={nodeId}
         sx={theme => ({
           "& .MuiTreeItem-label": {
             margin: 0,
@@ -395,7 +394,7 @@ const TooltipTreeItem = (
           const target = event.target as Element;
 
           if (target.classList.contains("MuiTreeItem-label")) {
-            setHoveredNode(props.nodeId);
+            setHoveredNode(nodeId);
           }
         }}
         onMouseOut={event => {
