@@ -25,11 +25,21 @@ function isReadOnlyArray<T>(
 
 // Define the template for the story
 const Template: StoryFn<
-  AutocompleteProps<string | KeyValueOption, boolean | undefined>
+  AutocompleteProps<
+    string | KeyValueOption,
+    boolean | undefined,
+    boolean | undefined
+  >
 > = args => {
   // Use the useArgs hook to get and update the args
   const [{ value, multiple }, updateArgs] =
-    useArgs<AutocompleteProps<string | KeyValueOption, boolean | undefined>>();
+    useArgs<
+      AutocompleteProps<
+        string | KeyValueOption,
+        boolean | undefined,
+        boolean | undefined
+      >
+    >();
 
   // Use an effect to update the value arg based on the multiple arg
   React.useEffect(() => {
@@ -192,4 +202,61 @@ export const MultiSelect: StoryObj<typeof Autocomplete> = {
     variant: "outlined"
   },
   render: Template
+};
+
+// Define the read only story
+export const ReadOnly: StoryObj<typeof Autocomplete> = {
+  args: {
+    // Define the default args
+    defaultValue: "Option 6",
+    disabled: false,
+    error: false,
+    helperText: "Helper Text",
+    label: "Select options",
+    limitTags: -1,
+    margin: "normal",
+    multiple: false,
+    options: [
+      "Option 1",
+      "Option 2",
+      "Option 3",
+      "Option 4",
+      "Option 5",
+      "Option 6"
+    ],
+    readOnly: true,
+    required: true,
+    size: "medium",
+    variant: "outlined"
+  },
+  render: Template
+};
+
+// Define the disable clearable story
+export const DisableClearable: StoryObj<typeof Autocomplete> = {
+  args: {
+    // Define the uncontrolled args
+    defaultValue: "Option 4",
+    disableClearable: true,
+    disabled: false,
+    error: false,
+    helperText: "Helper Text",
+    label: "Select options",
+    limitTags: -1,
+    margin: "normal",
+    multiple: false,
+    onBlur: action("onBlur"),
+    options: [
+      "Option 1",
+      "Option 2",
+      "Option 3",
+      "Option 4",
+      "Option 5",
+      "Option 6"
+    ],
+    required: false,
+    size: "medium",
+    variant: "outlined"
+  },
+  render: Autocomplete
 };
