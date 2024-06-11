@@ -59,6 +59,13 @@ const defaultTheme: ThemeOptions = {
         }
       }
     },
+    MuiFormLabel: {
+      styleOverrides: {
+        asterisk: {
+          color: "#d32f2f"
+        }
+      }
+    },
     MuiTooltip: {
       styleOverrides: {
         tooltip: {
