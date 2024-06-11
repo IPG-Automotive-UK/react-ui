@@ -9,24 +9,32 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import TruncatedTooltip from "../TruncatedTooltip/TruncatedTooltip";
 
 /**
- * Breadcrumbs component
+ * Breadcrumbs component.
+ * Renders components passed as children and wraps
+ * them in a truncated tooltip with separators.
  */
-function Breadcrumbs({ children, ...rest }: BreadcrumbsProps) {
+function Breadcrumbs({
+  children,
+  separator = <NavigateNextIcon fontSize="small" />,
+  ...rest
+}: BreadcrumbsProps) {
   return (
     <MuiBreadcrumbs
-      {...rest}
       aria-label="breadcrumbs"
-      separator={<NavigateNextIcon fontSize="small" />}
+      separator={separator}
       // style overrides to style children
       sx={{
+        // Ensure that the breadcrumbs do not wrap
         [`& .${breadcrumbsClasses.ol}`]: {
           flexWrap: "nowrap",
           whiteSpace: "nowrap"
         },
         [`& .${breadcrumbsClasses.li}`]: {
+          // All breadcrumb children have styled text, decoration and block for overflow
           "& *": {
             color: "text.secondary",
             textDecoration: "none"
+            // Ensure children of block level elements are inline for ellipsis rendering
           },
           overflow: "hidden"
         },
@@ -38,6 +46,7 @@ function Breadcrumbs({ children, ...rest }: BreadcrumbsProps) {
           textDecoration: "underline"
         }
       }}
+      {...rest}
     >
       {children
         ? Children.map(children, child =>
