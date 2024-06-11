@@ -21,25 +21,14 @@ const Template: StoryFn<TruncatedTooltipProps> = args => {
   );
 };
 
-const TypographyTemplate: StoryFn<TruncatedTooltipProps> = args => {
-  return (
-    <Box
-      sx={{
-        width: "220px"
-      }}
-    >
-      <TruncatedTooltip component={Typography} {...args} />
-    </Box>
-  );
-};
-
 export const Default: StoryObj<typeof TruncatedTooltip> = {
   args: {
     children: "This is a long text that will be truncated",
+    component: Typography,
     href: "This/can/take/an/href/prop"
   },
 
-  render: TypographyTemplate
+  render: Template
 };
 
 export const LinkUsingChildren = {
@@ -57,7 +46,7 @@ export const LinkUsingChildren = {
 export const LinkUsingComponent: StoryObj<typeof TruncatedTooltip> = {
   args: {
     children: "This is a long text that will be truncated",
-    component: Typography,
+    component: Link,
     href: "This/can/take/an/href/prop"
   },
 
@@ -77,24 +66,4 @@ export const Multiline = {
   },
 
   render: Template
-};
-
-export const WrappedSection = args => {
-  return (
-    <TruncatedTooltip
-      {...args}
-      component="section"
-      sx={{ width: "300px" }}
-      multiline={5}
-    >
-      <Typography variant={"body1"}>
-        Maybe there's a happy little Evergreen that lives here. Automatically,
-        all of these beautiful, beautiful things will happen. We need dark in
-        order to show light. But they're very easily killed. Clouds are
-        delicate. I really believe that if you practice enough you could paint
-        the 'Mona Lisa' with a two-inch brush. Look around, look at what we
-        have. Beauty is everywhere, you only have to look to see it.
-      </Typography>
-    </TruncatedTooltip>
-  );
 };
