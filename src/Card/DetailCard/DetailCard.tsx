@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  Popover,
-  Stack,
-  Tooltip,
-  Typography
-} from "@mui/material";
+import { Box, Button, Popover, Stack, Typography } from "@mui/material";
 import {
   DetailCardHeaderProps,
   DetailCardLabelStackProps,
@@ -16,6 +9,7 @@ import React, { Fragment, useEffect, useRef, useState } from "react";
 import FileCard from "../FileCard/FileCard";
 import { Label } from "../../Common.types";
 import LabelChip from "../../LabelSelector/LabelChip/LabelChip";
+import NoWrapTypography from "../../NoWrapTypography/NoWrapTypography";
 import { ResizeObserver } from "@juggle/resize-observer";
 
 function DetailCard({
@@ -99,32 +93,10 @@ function DetailCardHeader({
   onClickLabel
 }: DetailCardHeaderProps) {
   // title, subtitle,buttonStack and label refs and overflow states
-  const titleRef = useRef<HTMLDivElement>(null);
-  const subtitleRef = useRef<HTMLDivElement>(null);
   const buttonStackRef = useRef<HTMLDivElement>(null);
 
   // label spacing
   const labelSpacing = 8;
-
-  // check if title is overflowing
-  const useTitleWidth = (titleRef: React.RefObject<HTMLDivElement>) => {
-    const [isTitleOverflow, setIsTitleOverflow] = useState(false);
-
-    useEffect(() => {
-      const sizeObserver = new ResizeObserver((entries, observer) => {
-        entries.forEach(({ target }) => {
-          setIsTitleOverflow(target.scrollWidth > target.clientWidth);
-        });
-      });
-      if (titleRef.current) {
-        sizeObserver.observe(titleRef.current);
-      }
-
-      return () => sizeObserver.disconnect();
-    }, [titleRef]);
-
-    return [isTitleOverflow];
-  };
 
   // get the width of the button stack
   const useButtonStackwidth = (
@@ -148,32 +120,6 @@ function DetailCardHeader({
     return [buttonStackWidth];
   };
 
-  // check if subtitle is overflowing
-  const useSubTitleWidth = (subTitleRef: React.RefObject<HTMLDivElement>) => {
-    const [isSubtitleOverflow, setIsSubtitleOverflow] = useState(false);
-
-    useEffect(() => {
-      const sizeObserver = new ResizeObserver((entries, observer) => {
-        entries.forEach(({ target }) => {
-          setIsSubtitleOverflow(target.scrollWidth > target.clientWidth);
-        });
-      });
-      if (subTitleRef.current) {
-        sizeObserver.observe(subTitleRef.current);
-      }
-
-      return () => sizeObserver.disconnect();
-    }, [subTitleRef]);
-
-    return [isSubtitleOverflow];
-  };
-
-  // check if title is overflowing
-  const [titleSizeOverflow] = useTitleWidth(titleRef);
-
-  // check if subtitle is overflowing
-  const [subTitleSizeOverflow] = useSubTitleWidth(subtitleRef);
-
   // get the width of the button stack
   const [buttonsStackWidth] = useButtonStackwidth(buttonStackRef);
 
@@ -190,40 +136,26 @@ function DetailCardHeader({
           justifyContent: "space-between"
         }}
       >
-        <Box>
-          <Tooltip title={title} disableHoverListener={!titleSizeOverflow}>
-            <Typography
-              ref={titleRef}
-              sx={{
-                color: theme =>
-                  theme.palette.mode === "dark" ? "white" : "black",
-                fontSize: 20,
-                fontWeight: 700,
-                width: headerContentWidth
-              }}
-              noWrap
-            >
-              {title}
-            </Typography>
-          </Tooltip>
-          <Tooltip
-            title={subtitle}
-            disableHoverListener={!subTitleSizeOverflow}
+        <Box sx={{ width: headerContentWidth }}>
+          <NoWrapTypography
+            sx={{
+              color: theme =>
+                theme.palette.mode === "dark" ? "white" : "black",
+              fontSize: 20,
+              fontWeight: 700
+            }}
           >
-            <Typography
-              mt={1}
-              ref={subtitleRef}
-              sx={{
-                color: theme => theme.palette.text.secondary,
-                fontSize: 14,
-                fontWeight: 400,
-                width: headerContentWidth
-              }}
-              noWrap
-            >
-              {subtitle}
-            </Typography>
-          </Tooltip>
+            {title}
+          </NoWrapTypography>
+          <NoWrapTypography
+            sx={{
+              color: theme => theme.palette.text.secondary,
+              fontSize: 14,
+              fontWeight: 400
+            }}
+          >
+            {subtitle}
+          </NoWrapTypography>
         </Box>
         <Box
           sx={{ display: "flex", flexDirection: "row", gap: 2 }}
