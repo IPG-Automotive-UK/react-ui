@@ -29,7 +29,6 @@ const config: StorybookConfig = {
       shouldRemoveUndefinedFromOptional: true,
       // Filter out third-party props from node_modules except @mui packages
       propFilter: prop => {
-        console.log(prop);
         return prop.parent
           ? /node_modules\/@mui/.test(prop.parent.fileName)
           : true;
