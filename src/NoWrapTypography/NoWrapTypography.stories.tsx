@@ -34,8 +34,8 @@ export const Default: {
   render: StoryFn<NoWrapTypographyProps>;
 } = {
   args: {
-    children: "text that is too long to fit in the box",
-    sx: { maxWidth: "250px" },
+    children:
+      "This is some text that is far far far too long to fit in the box",
     variant: "body1"
   },
 
