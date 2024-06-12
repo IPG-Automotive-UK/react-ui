@@ -35,8 +35,6 @@ export const Default = {
     content: null,
     labels: [],
     media: "",
-    mediaHeight: 200,
-    mediaWidth: 400,
     onClickDownload: () => {},
     onClickFile: () => {},
     onClickLabel: () => {},

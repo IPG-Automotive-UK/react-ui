@@ -35,6 +35,8 @@ export {
   FileCard,
   SummaryCard,
   TableCard,
+  ImageCard,
+  type ImageCardProps,
   type DetailCardProps,
   type DetailCardHeaderProps,
   type DetailCardLabelStackProps,

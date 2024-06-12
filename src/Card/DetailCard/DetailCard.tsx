@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Card,
   Popover,
   Stack,
   Tooltip,
@@ -66,16 +67,17 @@ function DetailCard({
           }}
         >
           <Box ml={0.5}>
-            <FileCard
-              media={media}
-              width={368}
-              files={files}
-              downloadButtonText={downloadButtonText}
-              downloadButtonTextOnSearch={downloadButtonTextOnSearch}
-              fileTitle={fileTitle}
-              onClickDownload={onClickDownload}
-              onClickFile={onClickFile}
-            />
+            <Card>
+              <FileCard
+                media={media}
+                files={files}
+                downloadButtonText={downloadButtonText}
+                downloadButtonTextOnSearch={downloadButtonTextOnSearch}
+                fileTitle={fileTitle}
+                onClickDownload={onClickDownload}
+                onClickFile={onClickFile}
+              />
+            </Card>
           </Box>
           <Stack
             ml={2}
