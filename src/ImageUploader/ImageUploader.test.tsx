@@ -6,38 +6,9 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { FileWithData } from "../Uploader/Uploader.types";
 import ImageUploader from ".";
 import React from "react";
+import { createDtWithFiles } from "../utils/testUtils/createDtWithFiles";
+import { singleImageFile } from "./__data__/uploaderTestFiles";
 import userEvent from "@testing-library/user-event";
-
-// single file for testing
-// https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png
-const dataUrl =
-  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=";
-const singleFile = {
-  data: dataUrl,
-  file: {
-    name: "1x1.png",
-    type: "image/png"
-  }
-} as FileWithData;
-
-/**
- * createDtWithFiles creates a mock data transfer object that can be used for drop events
- * @param {File[]} files
- */
-function createDtWithFiles(files: File[] = []) {
-  return {
-    dataTransfer: {
-      files,
-      items: files.map(file => ({
-        getAsFile: () => file,
-        kind: "file",
-        size: file.size,
-        type: file.type
-      })),
-      types: ["Files"]
-    }
-  };
-}
 
 describe("ImageUploader", () => {
   // render FileUploader component
@@ -52,27 +23,29 @@ describe("ImageUploader", () => {
   // show delete button if only one file selected
   test("show delete button", () => {
     // render component
-    render(<ImageUploader selectedFiles={[singleFile]} />);
+    render(<ImageUploader selectedFiles={[singleImageFile]} />);
     const deleteButton = screen.getByRole("button", { name: /DeleteIcon/i });
     expect(deleteButton).toBeInTheDocument();
   });
   // hide delete button when image loading
   test("hide delete button when image loading", () => {
-    render(<ImageUploader selectedFiles={[singleFile]} isUploading={true} />);
+    render(
+      <ImageUploader selectedFiles={[singleImageFile]} isUploading={true} />
+    );
     const deleteButton = screen.queryByRole("button", { name: /delete/i });
     expect(deleteButton).not.toBeInTheDocument();
   });
   // updates dropzone text when uploading single image
   test("updates dropzone text when uploading single image", () => {
-    render(<ImageUploader selectedFiles={[singleFile]} isUploading />);
+    render(<ImageUploader selectedFiles={[singleImageFile]} isUploading />);
     const dropzoneElement = screen.getByTestId("dropzone-base");
     expect(dropzoneElement).toHaveTextContent("Uploading Image");
   });
   // show the selected image and hide dropzone text
   test("show selected image", () => {
-    render(<ImageUploader selectedFiles={[singleFile]} />);
-    const img = screen.getByAltText("Preview of 1x1.png");
-    expect(img).toHaveAttribute("src", singleFile.data);
+    render(<ImageUploader selectedFiles={[singleImageFile]} />);
+    const img = screen.getByAltText("Preview of ipg.png");
+    expect(img).toHaveAttribute("src", singleImageFile.data);
     expect(
       screen.queryByText("Drag & Drop an image file here or browse")
     ).not.toBeInTheDocument();
@@ -84,7 +57,7 @@ describe("ImageUploader", () => {
 
     const WithState = () => {
       const [selectedFiles, setSelectedFiles] = React.useState<FileWithData[]>([
-        singleFile
+        singleImageFile
       ]);
       return (
         <ImageUploader
