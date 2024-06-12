@@ -180,6 +180,7 @@ export const MultiSelect: Story = {
 export const ReadOnly: Story = {
   args: {
     // Define the read-only story args
+    ...defaultArgs,
     readOnly: true,
     required: true
   },
@@ -190,6 +191,7 @@ export const ReadOnly: Story = {
 export const DisableClearable: Story = {
   args: {
     // Define the disable clearable story args
+    ...defaultArgs,
     defaultValue: "Option 4",
     disableClearable: true,
     onBlur: action("onBlur")
