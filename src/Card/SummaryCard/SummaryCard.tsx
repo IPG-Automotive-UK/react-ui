@@ -9,7 +9,8 @@ import {
   IconButton,
   Popover,
   Stack,
-  Typography
+  Typography,
+  cardHeaderClasses
 } from "@mui/material";
 import React, { Fragment, useEffect, useRef, useState } from "react";
 
@@ -115,12 +116,6 @@ function SummaryCard({
   // check if label stack is overflowing
   const [lableSize] = useComponentSize(labelStackRef);
 
-  // check if title is overflowing
-  // const [titleSizeOverflow] = useTitleWidth(titleRef);
-
-  // check if subtitle is overflowing
-  // const [subTitleSizeOverflow] = useSubTitleWidth(subtitleRef);
-
   // handle the close of the label overflow popover by setting the label anchor element to null
   const handleLabelOverflowClose = () => {
     setLabelAnchorEl(null);
@@ -158,8 +153,8 @@ function SummaryCard({
       <Card sx={{ height, width }}>
         <CardHeader
           sx={{
-            "& .MuiCardHeader-content": {
-              width: "100%"
+            [` .${cardHeaderClasses.content}`]: {
+              overflowX: "hidden"
             },
             height: 50
           }}
@@ -178,8 +173,7 @@ function SummaryCard({
             <NoWrapTypography
               sx={{
                 fontSize: 20,
-                fontWeight: 500,
-                width: headerContentWidth
+                fontWeight: 500
               }}
             >
               {title}
@@ -189,8 +183,7 @@ function SummaryCard({
             <NoWrapTypography
               sx={{
                 fontSize: 14,
-                fontWeight: 400,
-                width: headerContentWidth
+                fontWeight: 400
               }}
             >
               {subtitle}
