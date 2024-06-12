@@ -1,4 +1,4 @@
-import { Box, Tooltip, Typography, debounce } from "@mui/material";
+import { Box, Tooltip, Typography, alpha, debounce } from "@mui/material";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { SimpleTreeView, TreeItem } from "@mui/x-tree-view";
 import { TreeNodeItem, TreeViewListProps } from "./TreeViewList.types";
@@ -384,9 +384,12 @@ const TooltipTreeItem = (
         sx={theme => ({
           "& .MuiTreeItem-label": {
             margin: 0,
-            padding: "2px 8px"
+            padding: "2px 2px"
           },
-          color: theme.palette.text.primary
+          "& .MuiTreeItem-root": {
+            borderLeft: `1px solid ${alpha(theme.palette.text.primary, 0.1)}`,
+            marginLeft: "4px"
+          }
         })}
         onMouseOver={event => {
           event.stopPropagation();
