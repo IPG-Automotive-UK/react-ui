@@ -4,7 +4,7 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 import FileUploader from "./FileUploader";
 import React from "react";
-import { createDtWithFiles } from "../utils/testUtils/createDtWithFiles";
+import { createDtWithFiles } from "../../test/utils";
 
 describe("FileUploader", () => {
   test("render fileuploader", () => {

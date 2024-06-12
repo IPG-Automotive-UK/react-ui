@@ -6,7 +6,7 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { FileWithData } from "../Uploader/Uploader.types";
 import ImageUploader from ".";
 import React from "react";
-import { createDtWithFiles } from "../utils/testUtils/createDtWithFiles";
+import { createDtWithFiles } from "../../test/utils";
 import { singleImageFile } from "./__data__/uploaderTestFiles";
 import userEvent from "@testing-library/user-event";
 
