@@ -90,6 +90,7 @@ export const Default: StoryObj<typeof Autocomplete> = {
       "Option 5",
       "Option 6"
     ],
+    readOnly: false,
     required: false,
     size: "medium",
     value: "Option 1",
@@ -119,6 +120,7 @@ export const Uncontrolled: StoryObj<typeof Autocomplete> = {
       "Option 5",
       "Option 6"
     ],
+    readOnly: false,
     required: false,
     size: "medium",
     variant: "outlined"
@@ -143,6 +145,7 @@ export const KeyValueOptions: StoryObj<typeof Autocomplete> = {
       { key: 3, value: "Option 3" },
       { key: 4, value: "Option 4" }
     ],
+    readOnly: false,
     required: false,
     size: "medium",
     value: { key: 1, value: "Option 1" },
@@ -168,6 +171,7 @@ export const KeyValueOptionsTooltip: StoryObj<typeof Autocomplete> = {
       { key: 3, tooltip: "Tooltip 3", value: "Option 3" },
       { key: 4, tooltip: "Tooltip 4", value: "Option 4" }
     ],
+    readOnly: false,
     required: false,
     size: "medium",
     value: { key: 1, tooltip: "Tooltip 1", value: "Option 1" },
@@ -196,6 +200,7 @@ export const MultiSelect: StoryObj<typeof Autocomplete> = {
       "Option 5",
       "Option 6"
     ],
+    readOnly: false,
     required: false,
     size: "medium",
     value: [],
@@ -254,6 +259,7 @@ export const DisableClearable: StoryObj<typeof Autocomplete> = {
       "Option 5",
       "Option 6"
     ],
+    readOnly: false,
     required: false,
     size: "medium",
     variant: "outlined"
