@@ -1,11 +1,9 @@
-import "@testing-library/jest-dom/vitest";
-
-import { describe, expect, test, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 
 import ActionDialog from "./ActionDialog";
 import React from "react";
 import { Typography } from "@mui/material";
+import { vi } from "vitest";
 
 // a set of default inputs so that tests can change what theyre testing
 const defaultInputs = {

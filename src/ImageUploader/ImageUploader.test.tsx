@@ -1,6 +1,3 @@
-import "@testing-library/jest-dom/vitest";
-
-import { describe, expect, test, vi } from "vitest";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 import { FileWithData } from "../Uploader/Uploader.types";
