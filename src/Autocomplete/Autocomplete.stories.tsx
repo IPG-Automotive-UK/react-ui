@@ -90,6 +90,7 @@ const Template: StoryFn<
 
 // Define the default args
 const defaultArgs: Story["args"] = {
+  disableClearable: false,
   disabled: false,
   error: false,
   helperText: "Helper Text",
@@ -181,6 +182,7 @@ export const ReadOnly: Story = {
   args: {
     // Define the read-only story args
     ...defaultArgs,
+    defaultValue: "Option 4",
     readOnly: true,
     required: true
   },
