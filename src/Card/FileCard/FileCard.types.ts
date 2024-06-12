@@ -34,11 +34,7 @@ export type FileCardProps = {
    */
   onClickFile?: (file: File) => void;
   /**
-   * An optional inital search term
+   * An optional initial search term
    */
   search?: string;
-  /**
-   * The width of the card in px.
-   */
-  width?: number;
 };

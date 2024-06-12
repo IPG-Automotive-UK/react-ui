@@ -39,14 +39,6 @@ export type DetailCardProps = {
    */
   media?: string;
   /**
-   * The height of the media in px.
-   */
-  mediaHeight?: number;
-  /**
-   * The width of the media in px.
-   */
-  mediaWidth?: number;
-  /**
    * Callback fired when the label is clicked.
    */
   onClickLabel?: (label: Label) => void;

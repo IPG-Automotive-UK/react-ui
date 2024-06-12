@@ -2,10 +2,9 @@ import { AttachFile, Download } from "@mui/icons-material";
 import {
   Box,
   Button,
-  Card,
   CardContent,
-  CardMedia,
   Chip,
+  Stack,
   Tooltip,
   Typography
 } from "@mui/material";
@@ -23,8 +22,7 @@ function FileCard({
   media = "",
   onClickDownload,
   onClickFile,
-  search: searchIn = "",
-  width = 368
+  search: searchIn = ""
 }: FileCardProps) {
   // title ref and overflow state
   const titleRef = useRef<HTMLDivElement>(null);
@@ -99,25 +97,15 @@ function FileCard({
   // render the file card
   return (
     <Fragment>
-      <Card sx={{ width }}>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center"
-          }}
-        >
-          <CardMedia
-            component="img"
-            src={media}
-            sx={{
-              boxSizing: "content-box",
-              height: 190,
-              objectFit: "contain",
-              padding: 2,
-              width: 336
-            }}
-          />
-        </Box>
+      <Stack
+        mt={1}
+        mb={3}
+        sx={{
+          display: "flex",
+          height: "100%",
+          width: 368
+        }}
+      >
         <Box
           sx={{
             alignItems: "center",
@@ -216,7 +204,7 @@ function FileCard({
             ))}
           </Box>
         </CardContent>
-      </Card>
+      </Stack>
     </Fragment>
   );
 }
