@@ -11,10 +11,27 @@ import { useArgs } from "@storybook/preview-api";
  * Story metadata
  */
 const meta: Meta<typeof Autocomplete> = {
+  argTypes: {
+    margin: {
+      control: "select",
+      description: "none | dense | normal",
+      options: ["none", "dense", "normal"]
+    },
+    size: {
+      control: "select",
+      options: ["small", "medium"]
+    },
+    variant: {
+      control: "select",
+      options: ["standard", "outlined", "filled"]
+    }
+  },
   component: Autocomplete,
   title: "Selectors/Autocomplete"
 };
+
 export default meta;
+type Story = StoryObj<typeof Autocomplete>;
 
 // Typescript does not support readonly arrays with Array.isArray so we need a custom type guard for this story
 function isReadOnlyArray<T>(
@@ -71,198 +88,111 @@ const Template: StoryFn<
   );
 };
 
+// Define the default args
+const defaultArgs: Story["args"] = {
+  disabled: false,
+  error: false,
+  helperText: "Helper Text",
+  label: "Select options",
+  limitTags: -1,
+  margin: "normal",
+  multiple: false,
+  options: [
+    "Option 1",
+    "Option 2",
+    "Option 3",
+    "Option 4",
+    "Option 5",
+    "Option 6"
+  ],
+  readOnly: false,
+  required: false,
+  size: "medium",
+  variant: "outlined"
+};
+
 // Define the default story
-export const Default: StoryObj<typeof Autocomplete> = {
+export const Default: Story = {
   args: {
-    // Define the default args
-    disabled: false,
-    error: false,
-    helperText: "Helper Text",
-    label: "Select options",
-    limitTags: -1,
-    margin: "normal",
-    multiple: false,
-    options: [
-      "Option 1",
-      "Option 2",
-      "Option 3",
-      "Option 4",
-      "Option 5",
-      "Option 6"
-    ],
-    readOnly: false,
-    required: false,
-    size: "medium",
-    value: "Option 1",
-    variant: "outlined"
+    // Define the default story args
+    ...defaultArgs,
+    value: "Option 1"
   },
   render: Template
 };
 
 // Define the uncontrolled story
-export const Uncontrolled: StoryObj<typeof Autocomplete> = {
+export const Uncontrolled: Story = {
   args: {
-    // Define the uncontrolled args
+    // Define the uncontrolled story args
+    ...defaultArgs,
     defaultValue: "Option 4",
-    disabled: false,
-    error: false,
-    helperText: "Helper Text",
-    label: "Select options",
-    limitTags: -1,
-    margin: "normal",
-    multiple: false,
-    onBlur: action("onBlur"),
-    options: [
-      "Option 1",
-      "Option 2",
-      "Option 3",
-      "Option 4",
-      "Option 5",
-      "Option 6"
-    ],
-    readOnly: false,
-    required: false,
-    size: "medium",
-    variant: "outlined"
+    onBlur: action("onBlur")
   },
   render: Autocomplete
 };
 
 // Define the story for key-value options
-export const KeyValueOptions: StoryObj<typeof Autocomplete> = {
+export const KeyValueOptions: Story = {
   args: {
-    // Define the args for key-value options
-    disabled: false,
-    error: false,
-    helperText: "Helper Text",
-    label: "Select options",
-    limitTags: -1,
-    margin: "normal",
-    multiple: false,
+    // Define the key-value options story args
+    ...defaultArgs,
     options: [
       { key: 1, value: "Option 1" },
       { key: 2, value: "Option 2" },
       { key: 3, value: "Option 3" },
       { key: 4, value: "Option 4" }
     ],
-    readOnly: false,
-    required: false,
-    size: "medium",
-    value: { key: 1, value: "Option 1" },
-    variant: "outlined"
+    value: { key: 1, value: "Option 1" }
   },
   render: Template
 };
 
 // Define the story for options with tooltips
-export const KeyValueOptionsTooltip: StoryObj<typeof Autocomplete> = {
+export const KeyValueOptionsTooltip: Story = {
   args: {
-    // Define the args for key-value options
-    disabled: false,
-    error: false,
-    helperText: "Helper Text",
-    label: "Select options",
-    limitTags: -1,
-    margin: "normal",
-    multiple: false,
+    // Define the key-value options tooltips story args
+    ...defaultArgs,
     options: [
       { key: 1, tooltip: "Tooltip 1", value: "Option 1" },
       { key: 2, tooltip: "Tooltip 2", value: "Option 2" },
       { key: 3, tooltip: "Tooltip 3", value: "Option 3" },
       { key: 4, tooltip: "Tooltip 4", value: "Option 4" }
     ],
-    readOnly: false,
-    required: false,
-    size: "medium",
-    value: { key: 1, tooltip: "Tooltip 1", value: "Option 1" },
-    variant: "outlined"
+    value: { key: 1, tooltip: "Tooltip 1", value: "Option 1" }
   },
   render: Template
 };
 
 // Define the story for multi-select
-export const MultiSelect: StoryObj<typeof Autocomplete> = {
+export const MultiSelect: Story = {
   args: {
-    // Define the args for multi-select
+    // Define the multi-select story args
+    ...defaultArgs,
     disableCloseOnSelect: true,
-    disabled: false,
-    error: false,
-    helperText: "Helper Text",
-    label: "Select options",
-    limitTags: -1,
-    margin: "normal",
     multiple: true,
-    options: [
-      "Option 1",
-      "Option 2",
-      "Option 3",
-      "Option 4",
-      "Option 5",
-      "Option 6"
-    ],
-    readOnly: false,
-    required: false,
-    size: "medium",
-    value: [],
-    variant: "outlined"
+    value: []
   },
   render: Template
 };
 
 // Define the read only story
-export const ReadOnly: StoryObj<typeof Autocomplete> = {
+export const ReadOnly: Story = {
   args: {
-    // Define the default args
-    defaultValue: "Option 6",
-    disabled: false,
-    error: false,
-    helperText: "Helper Text",
-    label: "Select options",
-    limitTags: -1,
-    margin: "normal",
-    multiple: false,
-    options: [
-      "Option 1",
-      "Option 2",
-      "Option 3",
-      "Option 4",
-      "Option 5",
-      "Option 6"
-    ],
+    // Define the read-only story args
     readOnly: true,
-    required: true,
-    size: "medium",
-    variant: "outlined"
+    required: true
   },
   render: Template
 };
 
 // Define the disable clearable story
-export const DisableClearable: StoryObj<typeof Autocomplete> = {
+export const DisableClearable: Story = {
   args: {
-    // Define the uncontrolled args
+    // Define the disable clearable story args
     defaultValue: "Option 4",
     disableClearable: true,
-    disabled: false,
-    error: false,
-    helperText: "Helper Text",
-    label: "Select options",
-    limitTags: -1,
-    margin: "normal",
-    multiple: false,
-    onBlur: action("onBlur"),
-    options: [
-      "Option 1",
-      "Option 2",
-      "Option 3",
-      "Option 4",
-      "Option 5",
-      "Option 6"
-    ],
-    readOnly: false,
-    required: false,
-    size: "medium",
-    variant: "outlined"
+    onBlur: action("onBlur")
   },
   render: Autocomplete
 };
