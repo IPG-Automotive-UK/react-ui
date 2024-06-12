@@ -3,9 +3,21 @@
  */
 export type SurfacePlotProps = {
   /**
-   * markers is a boolean that determines whether or not the points are marked.
+   * Exponentformat is a string that determines the format for large numbers.
    */
-  markers?: boolean;
+  exponentFormat?: "none" | "e" | "E" | "power" | "SI" | "B";
+  /**
+   * Label font size
+   */
+  labelFontSize?: number;
+  /**
+   *  Minimum height of the plot.
+   */
+  minHeight?: number;
+  /**
+   * Boolean that determines whether or not the grid is shown.
+   */
+  showGrid?: boolean;
   /**
    * showTitle is a boolean that determines whether or not the title is shown on the main view.
    */
