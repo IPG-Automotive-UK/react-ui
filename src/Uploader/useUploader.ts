@@ -97,10 +97,6 @@ export default function useUploader({
       case "too-many-files":
         errorMessage = `You can only upload ${filesLimit} ${filesLimit > 1 ? "files" : "file"}.`;
         break;
-      case "file-too-small":
-        // FUTURE: Update this error message to "File is too small. Please upload a file larger than {x}MB" when we have a requirement for minSize prop.
-        errorMessage = `File is too small. Please upload a larger file.`;
-        break;
       default:
         errorMessage = defaultErrorMessage;
     }
