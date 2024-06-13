@@ -107,23 +107,3 @@ export type DetailCardHeaderProps = {
    */
   width: number;
 };
-
-export type DetailCardLabelStackProps = {
-  /**
-   * The labels to be displayed on the card.
-   * labels should be an array of objects with the following properties:
-   */
-  labels?: Label[];
-  /**
-   * The spacing between the labels in px.
-   */
-  labelSpacing: number;
-  /**
-   * Callback fired when the label is clicked.
-   */
-  onClickLabel?: (label: Label) => void;
-  /**
-   * The width of the card in px.
-   */
-  width: number;
-};
