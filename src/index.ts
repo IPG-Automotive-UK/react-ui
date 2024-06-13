@@ -86,8 +86,10 @@ export {
 } from "./ImageUploader";
 export {
   LabelChip,
+  LabelChipGroup,
   default as LabelSelector,
   type LabelChipProps,
+  type LabelChipGroupProps,
   type LabelSelectorProps
 } from "./LabelSelector";
 export { default as TabPanel, type TabPanelProps } from "./TabPanel";
