@@ -14,7 +14,8 @@ import {
 } from "./DetailCard.types";
 import React, { Fragment, useEffect, useRef, useState } from "react";
 
-import FileCard from "../FileCard/FileCard";
+import FileDetails from "../../CardContent/FileDetails";
+import { Infographic } from "../../CardContent";
 import { Label } from "../../Common.types";
 import LabelChip from "../../LabelSelector/LabelChip/LabelChip";
 import { ResizeObserver } from "@juggle/resize-observer";
@@ -68,8 +69,8 @@ function DetailCard({
         >
           <Box ml={0.5}>
             <Card>
-              <FileCard
-                media={media}
+              <Infographic media={media} />
+              <FileDetails
                 files={files}
                 downloadButtonText={downloadButtonText}
                 downloadButtonTextOnSearch={downloadButtonTextOnSearch}
