@@ -16,6 +16,7 @@ export default function LabelChip({
   return (
     <Chip
       {...props}
+      className="label-chip"
       clickable={clickable}
       sx={{
         "&:hover": {
