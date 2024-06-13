@@ -60,6 +60,7 @@ export {
   default as FeedbackForm,
   type FeedbackFormProps
 } from "./FeedbackForm";
+export { default as VersionChip, type VersionChipProps } from "./VersionChip";
 export {
   default as FileUploader,
   type FileUploaderProps
