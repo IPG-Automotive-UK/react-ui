@@ -11,7 +11,7 @@ import React from "react";
  */
 const meta: Meta<typeof FileDetails> = {
   component: FileDetails,
-  title: "CardContents/FileDetails"
+  title: "CardContent/FileDetails"
 };
 export default meta;
 
