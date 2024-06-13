@@ -19,7 +19,8 @@ const DefaultComponent: StoryFn<LabelChipGroupProps> = args => {
 
 // Template that shows the component inside a box with a slider to change the parent width so we can demonstrate the overflow behavior
 const OverflowComponent: StoryFn<LabelChipGroupProps> = args => {
-  const [width, setWidth] = React.useState(100);
+  const defaultWidth = 200;
+  const [width, setWidth] = React.useState(defaultWidth);
   return (
     <Stack direction="column" spacing={2}>
       <Box
@@ -37,7 +38,7 @@ const OverflowComponent: StoryFn<LabelChipGroupProps> = args => {
           behaviour of the chips.
         </Typography>
         <Slider
-          defaultValue={200}
+          defaultValue={defaultWidth}
           step={1}
           min={100}
           max={300}
