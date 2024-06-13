@@ -52,7 +52,14 @@ const TabPanel = ({
         indicatorColor="primary"
         variant={variant}
         aria-label={variantToAriaLabel[variant]}
-        sx={{ borderBottom: 1, borderColor: "divider" }}
+        sx={{
+          backgroundColor: "background.paper",
+          borderBottom: 1,
+          borderColor: "divider",
+          position: "sticky",
+          top: 0,
+          zIndex: 3
+        }}
       >
         {React.Children.map(children, (child, index) => {
           if (!React.isValidElement(child)) return null;
@@ -67,24 +74,29 @@ const TabPanel = ({
         })}
         {customChildren}
       </Tabs>
-      {React.Children.map(children, (child, index) => {
-        if (!React.isValidElement(child)) return null;
+      <Box
+        sx={{
+          overflowY: "auto"
+        }}
+      >
+        {React.Children.map(children, (child, index) => {
+          if (!React.isValidElement(child)) return null;
 
-        return (
-          <Box
-            role="tabpanel"
-            hidden={activeTab !== index}
-            key={index}
-            id={`tabpanel-${index}`}
-            aria-labelledby={`tab-${index}`}
-            marginTop={1}
-            display={display}
-            flexWrap={flexWrap}
-          >
-            {activeTab === index && child.props.children}
-          </Box>
-        );
-      })}
+          return (
+            <Box
+              role="tabpanel"
+              hidden={activeTab !== index}
+              key={index}
+              id={`tabpanel-${index}`}
+              aria-labelledby={`tab-${index}`}
+              display={display}
+              flexWrap={flexWrap}
+            >
+              {activeTab === index && child.props.children}
+            </Box>
+          );
+        })}
+      </Box>
     </Box>
   );
 };
