@@ -73,6 +73,7 @@ export default function FileUploader({
       />
       <Box
         {...getRootProps()}
+        data-testid="dropzone-root"
         sx={theme => ({
           "&:hover": {
             "& .dropzoneText": {
