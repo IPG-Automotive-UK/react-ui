@@ -7,9 +7,10 @@ import { KeyValueOption } from "../Common.types";
 
 export type AutocompleteProps<
   Value extends string | KeyValueOption,
-  Multiple extends boolean | undefined
+  Multiple extends boolean | undefined,
+  DisableClearable extends boolean | undefined
 > = Pick<
-  MuiAutocompleteProps<Value, Multiple, false, false>,
+  MuiAutocompleteProps<Value, Multiple, DisableClearable, false>,
   | "multiple"
   | "onBlur"
   | "onChange"
@@ -17,9 +18,12 @@ export type AutocompleteProps<
   | "value"
   | "defaultValue"
   | "disabled"
+  | "disableClearable"
   | "size"
   | "limitTags"
   | "disableCloseOnSelect"
+  | "noOptionsText"
+  | "readOnly"
 > &
   Pick<
     TextFieldProps,

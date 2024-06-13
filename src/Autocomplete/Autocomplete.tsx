@@ -18,9 +18,11 @@ import { isKeyValueOption } from "../utils/common";
 
 export default function Autocomplete<
   Value extends KeyValueOption | string,
-  Multiple extends boolean | undefined
+  Multiple extends boolean | undefined,
+  DisableClearable extends boolean | undefined
 >({
   defaultValue,
+  disableClearable,
   disableCloseOnSelect = false,
   disabled = false,
   error = false,
@@ -36,11 +38,15 @@ export default function Autocomplete<
   required = false,
   size = "medium",
   value,
-  variant = "outlined"
-}: AutocompleteProps<Value, Multiple>) {
+  variant = "outlined",
+  noOptionsText = "No options available",
+  readOnly = false
+}: AutocompleteProps<Value, Multiple, DisableClearable>) {
   return (
     <MuiAutocomplete
+      noOptionsText={noOptionsText}
       defaultValue={defaultValue}
+      disableClearable={disableClearable}
       disableCloseOnSelect={disableCloseOnSelect}
       limitTags={limitTags}
       multiple={multiple}
@@ -50,12 +56,23 @@ export default function Autocomplete<
       getOptionLabel={option =>
         isKeyValueOption(option) ? option.value : String(option)
       }
+      sx={{ pointerEvents: readOnly ? "none" : "auto" }}
       renderInput={params => (
         <TextField
           {...params}
           label={label}
           error={error}
           helperText={helperText}
+          InputProps={{
+            ...params.InputProps,
+            className: readOnly ? "Mui-disabled label.Mui-disabled" : undefined
+          }}
+          InputLabelProps={{
+            ...params.InputLabelProps,
+            sx: {
+              pointerEvents: readOnly ? "none" : "auto"
+            }
+          }}
           name={name}
           margin={margin}
           required={required}
@@ -66,6 +83,7 @@ export default function Autocomplete<
       value={value}
       clearIcon={multiple ? null : undefined}
       disabled={disabled}
+      readOnly={readOnly}
       size={size}
       isOptionEqualToValue={(option, value) =>
         isKeyValueOption(option) && isKeyValueOption(value)
@@ -79,12 +97,13 @@ export default function Autocomplete<
 // renderer for a checkbox option
 function Option<
   Value extends KeyValueOption | string,
-  Multiple extends boolean | undefined
+  Multiple extends boolean | undefined,
+  DisableClearable extends boolean | undefined
 >(
   props: React.HTMLAttributes<HTMLLIElement>,
   option: KeyValueOption | string,
   { selected }: AutocompleteRenderOptionState,
-  { multiple }: AutocompleteProps<Value, Multiple>
+  { multiple }: AutocompleteProps<Value, Multiple, DisableClearable>
 ) {
   // handle key value options rendering
   if (isKeyValueOption(option)) {

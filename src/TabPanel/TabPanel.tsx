@@ -11,7 +11,15 @@ import { TabPanelProps } from "./TabPanel.types";
  * @property active - The active tab index
  * @returns The tab panel component
  */
-const TabPanel = ({ children, active, onTabChange }: TabPanelProps) => {
+const TabPanel = ({
+  children,
+  active,
+  variant = "fullWidth",
+  display = "block",
+  flexWrap = "nowrap",
+  onTabChange,
+  customChildren
+}: TabPanelProps) => {
   // state for the active tab
   const [activeTab, setActiveTab] = useState(active ?? 0);
 
@@ -30,15 +38,28 @@ const TabPanel = ({ children, active, onTabChange }: TabPanelProps) => {
     }
   };
 
+  // map the variant to the aria label
+  const variantToAriaLabel = {
+    fullWidth: "full width tabs",
+    standard: "standard width tabs"
+  };
+
   return (
     <Box>
       <Tabs
         value={activeTab}
         onChange={handleChange}
         indicatorColor="primary"
-        variant="fullWidth"
-        aria-label="full width tabs"
-        sx={{ borderBottom: 1, borderColor: "divider" }}
+        variant={variant}
+        aria-label={variantToAriaLabel[variant]}
+        sx={{
+          backgroundColor: "background.paper",
+          borderBottom: 1,
+          borderColor: "divider",
+          position: "sticky",
+          top: 0,
+          zIndex: 3
+        }}
       >
         {React.Children.map(children, (child, index) => {
           if (!React.isValidElement(child)) return null;
@@ -51,22 +72,31 @@ const TabPanel = ({ children, active, onTabChange }: TabPanelProps) => {
             />
           );
         })}
+        {customChildren}
       </Tabs>
-      {React.Children.map(children, (child, index) => {
-        if (!React.isValidElement(child)) return null;
+      <Box
+        sx={{
+          overflowY: "auto"
+        }}
+      >
+        {React.Children.map(children, (child, index) => {
+          if (!React.isValidElement(child)) return null;
 
-        return (
-          <Box
-            role="tabpanel"
-            hidden={activeTab !== index}
-            key={index}
-            id={`tabpanel-${index}`}
-            aria-labelledby={`tab-${index}`}
-          >
-            {activeTab === index && child.props.children}
-          </Box>
-        );
-      })}
+          return (
+            <Box
+              role="tabpanel"
+              hidden={activeTab !== index}
+              key={index}
+              id={`tabpanel-${index}`}
+              aria-labelledby={`tab-${index}`}
+              display={display}
+              flexWrap={flexWrap}
+            >
+              {activeTab === index && child.props.children}
+            </Box>
+          );
+        })}
+      </Box>
     </Box>
   );
 };

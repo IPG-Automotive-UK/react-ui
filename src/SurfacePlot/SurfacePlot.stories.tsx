@@ -32,8 +32,8 @@ const Template: StoryFn<SurfacePlotProps> = args => {
 export const Default = {
   // Set the default values for the story's arguments
   args: {
-    markers: false,
     minHeight: 0,
+    showGrid: true,
     showTitle: false,
     title: "Surface Plot",
     xdata: [0.18, 0.36, 0.55, 0.73, 0.91, 1],

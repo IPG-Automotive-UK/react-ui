@@ -17,7 +17,7 @@ import useUploader from "../Uploader/useUploader";
 export default function FileUploader({
   acceptedFiles,
   error,
-  dropzoneText = "Drag & drop a file here or click",
+  dropzoneText = "Drag & Drop a file here or browse",
   filesLimit = 1,
   isValidating = false,
   maxFileSize = Infinity,
@@ -63,6 +63,7 @@ export default function FileUploader({
       />
       <Box
         {...getRootProps()}
+        data-testid="dropzone-root"
         sx={theme => ({
           "&:hover": {
             "& .dropzoneText": {

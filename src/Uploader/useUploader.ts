@@ -32,7 +32,7 @@ export default function useUploader({
 
   // effect to only show rejection message for 3 seconds
   React.useEffect(() => {
-    // hide message after 5000ms
+    // hide message after 3000ms
     const timer = setTimeout(() => {
       if (rejectionMessage) {
         setRejectionMessage(null);
@@ -70,12 +70,39 @@ export default function useUploader({
 
   // handle file drops that are rejected by showing the first error message as a rejection message
   const onDropRejected = (fileRejection: FileRejection[]) => {
-    // replace any commas not followed by a whitespace character with a comma followed by a whitespace character
-    const message = fileRejection[0].errors[0].message;
-    const formattedMessage = message.replace(/,(?!\s)/g, ", ");
+    // deafult error message
+    const defaultErrorMessage = fileRejection[0].errors[0].message;
+
+    // get the error code
+    const errorCode = fileRejection[0].errors[0].code;
+
+    // get the accepted file type extensions
+    const acceptedFileExtensions = Object.values(acceptedFiles ?? {})
+      .flat()
+      .join(", ");
+
+    // set error message based on error code
+    let errorMessage = "";
+    switch (errorCode) {
+      case "file-invalid-type":
+        errorMessage = `File type must be ${acceptedFileExtensions}.`;
+        break;
+      case "file-too-large": {
+        // get file size limit in MB
+        const bytesToMb = maxFileSize / 1024 / 1024;
+        const limitSize = `${bytesToMb.toFixed()} MB`;
+        errorMessage = `File size exceeds the limit of ${limitSize}.`;
+        break;
+      }
+      case "too-many-files":
+        errorMessage = `You can only upload ${filesLimit} ${filesLimit > 1 ? "files" : "file"}.`;
+        break;
+      default:
+        errorMessage = defaultErrorMessage;
+    }
 
     // set error message
-    setRejectionMessage(formattedMessage);
+    setRejectionMessage(errorMessage);
   };
 
   // use react-dropzone hook

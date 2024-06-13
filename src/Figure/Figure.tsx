@@ -29,7 +29,7 @@ const Figure = ({
 
   return (
     <Image
-      scaleY={scale}
+      scaleY={-scale}
       scaleX={scale}
       offsetX={width / 2}
       offsetY={height / 2}

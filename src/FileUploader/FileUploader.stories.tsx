@@ -8,6 +8,12 @@ import { action } from "@storybook/addon-actions";
  * Story metadata
  */
 const meta: Meta<typeof FileUploader> = {
+  argTypes: {
+    titleVariant: {
+      control: { type: "radio" },
+      options: ["title", "body", "subtitle"]
+    }
+  },
   component: FileUploader,
   render: function Render(args) {
     // selectedFiles state
@@ -46,7 +52,7 @@ export default meta;
 type Story = StoryObj<typeof FileUploader>;
 export const Default: Story = {
   args: {
-    dropzoneText: "Drag & drop a file here or click",
+    dropzoneText: "Drag & Drop a file here or browse",
     filesLimit: 1,
     isValidating: false,
     maxFileSize: 1000000000,

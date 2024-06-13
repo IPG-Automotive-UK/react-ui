@@ -1,5 +1,7 @@
 /* eslint-disable no-undef */
 
+import type {} from "@mui/x-data-grid/themeAugmentation";
+
 import {
   ThemeProvider as MuiThemeProvider,
   ThemeOptions,
@@ -47,6 +49,23 @@ const defaultTheme: ThemeOptions = {
         }
       }
     },
+    MuiDataGrid: {
+      styleOverrides: {
+        root: {
+          "& .MuiDataGrid-cell:focus, .MuiDataGrid-cell:focus-within, .MuiDataGrid-columnHeader:focus, .MuiDataGrid-columnHeader:focus-within":
+            {
+              outline: "none"
+            }
+        }
+      }
+    },
+    MuiFormLabel: {
+      styleOverrides: {
+        asterisk: {
+          color: "#d32f2f"
+        }
+      }
+    },
     MuiTooltip: {
       styleOverrides: {
         tooltip: {
@@ -85,6 +104,16 @@ const lightTheme = createTheme(
           }
         })
       },
+      MuiDataGrid: {
+        styleOverrides: {
+          footerContainer: {
+            backgroundColor: "#fff"
+          },
+          main: {
+            backgroundColor: "#fff"
+          }
+        }
+      },
       MuiIconButton: { styleOverrides: { root: { color: "#9e9e9e" } } },
       MuiStepper: {
         styleOverrides: {
@@ -117,6 +146,12 @@ const lightTheme = createTheme(
             "border-color": "rgb(196, 196, 196)"
           }
         }
+      }
+    },
+    mixins: {
+      MuiDataGrid: {
+        containerBackground: "#fff",
+        pinnedBackground: "#fff"
       }
     },
     palette: {
@@ -154,13 +189,28 @@ const darkTheme = createTheme(
           body: themeParam.palette.mode === "dark" ? darkScrollbar() : null
         })
       },
-
+      MuiDataGrid: {
+        styleOverrides: {
+          footerContainer: {
+            backgroundColor: "#000"
+          },
+          main: {
+            backgroundColor: "#000"
+          }
+        }
+      },
       MuiStepper: {
         styleOverrides: {
           root: {
             backgroundColor: "rgba(255, 255, 255, 0.08)"
           }
         }
+      }
+    },
+    mixins: {
+      MuiDataGrid: {
+        containerBackground: "#000",
+        pinnedBackground: "#000"
       }
     },
     palette: {

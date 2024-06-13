@@ -30,13 +30,14 @@ const Template: StoryFn<LinePlotProps> = args => {
 // Default
 export const Default = {
   args: {
-    markers: false,
+    markers: true,
+    showGrid: true,
     showTitle: false,
     title: "",
     xdata: [0, 1, 2, 3, 4, 5],
-    xlabel: "X",
+    xlabel: "X label (rad)",
     ydata: [0, 20, 30, 40, 50],
-    ylabel: "Y"
+    ylabel: "Y label (-)"
   },
   render: Template
 };

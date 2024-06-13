@@ -26,7 +26,11 @@ export {
 } from "./Autocomplete";
 export { default as Canvas, type CanvasProps } from "./Canvas";
 export { default as CanvasItem, type CanvasItemProps } from "./CanvasItem";
+export { default as RoadMarking, type RoadMarkingProps } from "./RoadMarking";
+export { default as RoadSurface, type RoadSurfaceProps } from "./RoadSurface";
 export { default as TrafficSign, type TrafficSignProps } from "./TrafficSign";
+export { default as VehiclePath, type VehiclePathProps } from "./VehiclePath";
+export { default as Breadcrumbs, type BreadcrumbsProps } from "./Breadcrumbs";
 export {
   DetailCard,
   FileCard,
@@ -45,6 +49,10 @@ export { default as Copyright, type CopyrightProps } from "./Copyright";
 export { default as Color, type ColorProps } from "./Color";
 export { default as Figure, type FigureProps } from "./Figure";
 export {
+  default as TrafficLight,
+  type TrafficLightProps
+} from "./TrafficLight";
+export {
   default as DeletableList,
   type DeletableListProps
 } from "./DeletableList";
@@ -53,6 +61,7 @@ export {
   default as FeedbackForm,
   type FeedbackFormProps
 } from "./FeedbackForm";
+export { default as VersionChip, type VersionChipProps } from "./VersionChip";
 export {
   default as FileUploader,
   type FileUploaderProps
@@ -77,13 +86,14 @@ export {
 } from "./ImageUploader";
 export {
   LabelChip,
-  LabelSelector,
+  default as LabelSelector,
   type LabelChipProps,
   type LabelSelectorProps
 } from "./LabelSelector";
 export { default as TabPanel, type TabPanelProps } from "./TabPanel";
 export { default as LinePlot, type LinePlotProps } from "./LinePlot";
 export { default as SurfacePlot, type SurfacePlotProps } from "./SurfacePlot";
+export { default as BulletGauge, type BulletGaugeProps } from "./BulletGauge";
 export { default as Loading, type LoadingProps } from "./Loading";
 export { default as LoginForm, type LoginFormProps } from "./LoginForm";
 export { default as ModelButton, type ModelButtonProps } from "./ModelButton";
@@ -114,6 +124,10 @@ export {
   default as PasswordResetForm,
   type PasswordResetFormProps
 } from "./PasswordResetForm";
+export {
+  default as PartSelector,
+  type PartSelectorProps
+} from "./PartSelector";
 export {
   default as RadioButtons,
   type RadioButtonsProps
@@ -170,6 +184,7 @@ export {
   default as TreeViewList,
   type TreeViewListProps
 } from "./TreeViewList";
+export { default as TruncatedTooltip } from "./TruncatedTooltip";
 export { default as UserMenu, type UserMenuProps } from "./UserMenu";
 export { UserAvatar, useColorMap, type UserAvatarProps } from "./UserAvatar";
 export {
