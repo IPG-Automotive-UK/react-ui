@@ -9,13 +9,14 @@ import {
   IconButton,
   Popover,
   Stack,
-  Tooltip,
-  Typography
+  Typography,
+  cardHeaderClasses
 } from "@mui/material";
 import React, { Fragment, useEffect, useRef, useState } from "react";
 
 import LabelChip from "../../LabelSelector/LabelChip/LabelChip";
 import { MoreVert } from "@mui/icons-material";
+import NoWrapTypography from "../../NoWrapTypography/NoWrapTypography";
 import { ResizeObserver } from "@juggle/resize-observer";
 import { SummaryCardProps } from "./SummaryCard.types";
 
@@ -34,8 +35,6 @@ function SummaryCard({
   width = 368
 }: SummaryCardProps) {
   // title, subtitle and label refs and overflow states
-  const titleRef = useRef<HTMLDivElement>(null);
-  const subtitleRef = useRef<HTMLDivElement>(null);
   const labelStackRef = useRef<HTMLDivElement>(null);
 
   const [overFlowingLabels, setOverFlowingLabels] = useState<
@@ -103,46 +102,6 @@ function SummaryCard({
     return [isLabelStackOverflow];
   };
 
-  // check if title is overflowing
-  const useTitleWidth = (titleRef: React.RefObject<HTMLDivElement>) => {
-    const [isTitleOverflow, setIsTitleOverflow] = useState(false);
-
-    useEffect(() => {
-      const sizeObserver = new ResizeObserver((entries, observer) => {
-        entries.forEach(({ target }) => {
-          setIsTitleOverflow(target.scrollWidth > target.clientWidth);
-        });
-      });
-      if (titleRef.current) {
-        sizeObserver.observe(titleRef.current);
-      }
-
-      return () => sizeObserver.disconnect();
-    }, [titleRef]);
-
-    return [isTitleOverflow];
-  };
-
-  // check if subtitle is overflowing
-  const useSubTitleWidth = (subTitleRef: React.RefObject<HTMLDivElement>) => {
-    const [isSubtitleOverflow, setIsSubtitleOverflow] = useState(false);
-
-    useEffect(() => {
-      const sizeObserver = new ResizeObserver((entries, observer) => {
-        entries.forEach(({ target }) => {
-          setIsSubtitleOverflow(target.scrollWidth > target.clientWidth);
-        });
-      });
-      if (subTitleRef.current) {
-        sizeObserver.observe(subTitleRef.current);
-      }
-
-      return () => sizeObserver.disconnect();
-    }, [subTitleRef]);
-
-    return [isSubtitleOverflow];
-  };
-
   // determine what labels to show
   const notOverflowingLabels = labels.slice(
     0,
@@ -156,12 +115,6 @@ function SummaryCard({
 
   // check if label stack is overflowing
   const [lableSize] = useComponentSize(labelStackRef);
-
-  // check if title is overflowing
-  const [titleSizeOverflow] = useTitleWidth(titleRef);
-
-  // check if subtitle is overflowing
-  const [subTitleSizeOverflow] = useSubTitleWidth(subtitleRef);
 
   // handle the close of the label overflow popover by setting the label anchor element to null
   const handleLabelOverflowClose = () => {
@@ -199,7 +152,12 @@ function SummaryCard({
     <Fragment>
       <Card sx={{ height, width }}>
         <CardHeader
-          sx={{ height: 50 }}
+          sx={{
+            [` .${cardHeaderClasses.content}`]: {
+              overflowX: "hidden"
+            },
+            height: 50
+          }}
           action={
             moreOptionsPopover ? (
               <IconButton
@@ -212,39 +170,24 @@ function SummaryCard({
           }
           disableTypography
           title={
-            <div>
-              <Tooltip title={title} disableHoverListener={!titleSizeOverflow}>
-                <Typography
-                  ref={titleRef}
-                  sx={{
-                    fontSize: 20,
-                    fontWeight: 500,
-                    width: headerContentWidth
-                  }}
-                  noWrap
-                >
-                  {title}
-                </Typography>
-              </Tooltip>
-            </div>
+            <NoWrapTypography
+              sx={{
+                fontSize: 20,
+                fontWeight: 500
+              }}
+            >
+              {title}
+            </NoWrapTypography>
           }
           subheader={
-            <Tooltip
-              title={subtitle}
-              disableHoverListener={!subTitleSizeOverflow}
+            <NoWrapTypography
+              sx={{
+                fontSize: 14,
+                fontWeight: 400
+              }}
             >
-              <Typography
-                ref={subtitleRef}
-                sx={{
-                  fontSize: 14,
-                  fontWeight: 400,
-                  width: headerContentWidth
-                }}
-                noWrap
-              >
-                {subtitle}
-              </Typography>
-            </Tooltip>
+              {subtitle}
+            </NoWrapTypography>
           }
         />
         <Box

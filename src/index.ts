@@ -30,6 +30,7 @@ export { default as RoadMarking, type RoadMarkingProps } from "./RoadMarking";
 export { default as RoadSurface, type RoadSurfaceProps } from "./RoadSurface";
 export { default as TrafficSign, type TrafficSignProps } from "./TrafficSign";
 export { default as VehiclePath, type VehiclePathProps } from "./VehiclePath";
+export { default as Breadcrumbs, type BreadcrumbsProps } from "./Breadcrumbs";
 export {
   DetailCard,
   FileCard,
@@ -183,6 +184,7 @@ export {
   default as TreeViewList,
   type TreeViewListProps
 } from "./TreeViewList";
+export { default as TruncatedTooltip } from "./TruncatedTooltip";
 export { default as UserMenu, type UserMenuProps } from "./UserMenu";
 export { UserAvatar, useColorMap, type UserAvatarProps } from "./UserAvatar";
 export {
