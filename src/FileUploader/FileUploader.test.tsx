@@ -122,7 +122,10 @@ describe("FileUploader", () => {
 
   test("display error uploading invalid file type", async () => {
     const { getByTestId } = render(
-      <FileUploader filesLimit={1} acceptedFiles={[".jpg", ".jpeg"]} />
+      <FileUploader
+        filesLimit={1}
+        acceptedFiles={{ "image/jpeg": [".jpg", ".jpeg"] }}
+      />
     );
 
     // create a file with a png extension
