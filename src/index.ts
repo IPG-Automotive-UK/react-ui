@@ -32,18 +32,20 @@ export { default as TrafficSign, type TrafficSignProps } from "./TrafficSign";
 export { default as VehiclePath, type VehiclePathProps } from "./VehiclePath";
 export {
   DetailCard,
-  FileCard,
   SummaryCard,
   TableCard,
-  ImageCard,
-  type ImageCardProps,
   type DetailCardProps,
   type DetailCardHeaderProps,
   type DetailCardLabelStackProps,
-  type FileCardProps,
   type SummaryCardProps,
   type TableCardProps
 } from "./Card";
+export {
+  Infographic,
+  FileDetails,
+  type InfographicProps,
+  type FileDetailsProps
+} from "./CardContent";
 export { default as Checkbox, type CheckboxProps } from "./Checkbox";
 export { default as ClientOnly, type ClientOnlyProps } from "./ClientOnly";
 export { default as Copyright, type CopyrightProps } from "./Copyright";

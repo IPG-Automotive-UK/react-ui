@@ -1,2 +1,2 @@
 export { default } from "./Infographic";
-export type { InfographicProps as ImageCardProps } from "./Infographic.types";
+export type { InfographicProps } from "./Infographic.types";

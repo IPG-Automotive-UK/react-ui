@@ -10,20 +10,19 @@ import {
 } from "@mui/material";
 import React, { Fragment, useEffect, useRef, useState } from "react";
 
-import { FileCardProps } from "./FileCard.types";
+import { FileDetailsProps } from "./FileDetails.types";
 import { ResizeObserver } from "@juggle/resize-observer";
 import SearchBar from "../../SearchBar/SearchBar";
 
-function FileCard({
+function FileDetails({
   downloadButtonText = "Download",
   downloadButtonTextOnSearch = "Download Files",
   files: filesIn = [],
   fileTitle = "title",
-  media = "",
   onClickDownload,
   onClickFile,
   search: searchIn = ""
-}: FileCardProps) {
+}: FileDetailsProps) {
   // title ref and overflow state
   const titleRef = useRef<HTMLDivElement>(null);
 
@@ -73,7 +72,7 @@ function FileCard({
         );
       }
 
-      // retrun new file object with filtered files
+      // return new file object with filtered files
       return newFile;
     });
 
@@ -82,7 +81,7 @@ function FileCard({
     setSearch(search);
   };
 
-  // when the donwnload button is clicked return the file paths
+  // when the download button is clicked return the file paths
   const handleDownload = () => {
     // extract file paths
     const paths = files.map(file => file.files.map(file => file.path)).flat();
@@ -210,4 +209,4 @@ function FileCard({
 }
 
 // export the file card
-export default FileCard;
+export default FileDetails;

@@ -12,7 +12,7 @@ import VersionChip from "../../VersionChip/VersionChip";
  */
 const meta: Meta<typeof Infographic> = {
   component: Infographic,
-  title: "Card/ImageCard"
+  title: "CardContents/ImageCard"
 };
 export default meta;
 
@@ -31,9 +31,7 @@ export const Default = {
 export const WithVersionChip = {
   args: {
     media: "https://picsum.photos/336/190",
-    versionChip: (
-      <VersionChip version="1.0" versionType="major" selected={true} />
-    )
+    versionChip: <VersionChip version="1.0" versionType="major" />
   },
 
   render: Template
