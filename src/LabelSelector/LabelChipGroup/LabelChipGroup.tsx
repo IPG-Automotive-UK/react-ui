@@ -87,7 +87,7 @@ export default function LabelChipGroup({ chips }: LabelChipGroupProps) {
   return (
     <Stack
       direction="row"
-      id="label-chip-group-container"
+      className="label-chip-group-container"
       ref={parentRef}
       spacing={`${chipGap}px`}
       sx={{ overflow: "hidden", width: "100%" }}
@@ -98,7 +98,7 @@ export default function LabelChipGroup({ chips }: LabelChipGroupProps) {
       {overflowingChips.length > 0 ? (
         <>
           <Button
-            id="label-chip-group-more-items-button"
+            className="label-chip-group-more-items-button"
             onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
               setPopoverOpen(true);
               setLabelAnchorEl(event.currentTarget);
@@ -113,14 +113,14 @@ export default function LabelChipGroup({ chips }: LabelChipGroupProps) {
             variant="text"
           >
             <Typography
-              id="label-chip-group-more-items-text"
+              className="label-chip-group-more-items-text"
               sx={{ fontSize: 15 }}
             >
               +{overflowingChips.length}
             </Typography>
           </Button>
           <Popover
-            id="label-chip-group-popover"
+            className="label-chip-group-popover"
             open={popoverOpen}
             anchorEl={labelAnchorEl}
             onClose={() => setPopoverOpen(false)}
@@ -131,7 +131,7 @@ export default function LabelChipGroup({ chips }: LabelChipGroupProps) {
           >
             <Stack
               direction="column"
-              id="label-chip-group-popover-container"
+              className="label-chip-group-popover-container"
               m={1}
               spacing={1}
             >
