@@ -4,10 +4,9 @@ import {
   DetailCardLabelStackProps,
   DetailCardProps
 } from "./DetailCard.types";
+import { FileDetails, Infographic } from "../../CardContent";
 import React, { Fragment, useEffect, useRef, useState } from "react";
 
-import FileDetails from "../../CardContent/FileDetails";
-import { Infographic } from "../../CardContent";
 import { Label } from "../../Common.types";
 import LabelChip from "../../LabelSelector/LabelChip/LabelChip";
 import NoWrapTypography from "../../NoWrapTypography/NoWrapTypography";
