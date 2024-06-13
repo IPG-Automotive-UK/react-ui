@@ -15,8 +15,11 @@ const SurfacePlot = ({
   ylabel = "",
   zlabel = "",
   title = "",
-  markers = false,
-  showTitle = false
+  showTitle = false,
+  minHeight = 400,
+  labelFontSize,
+  showGrid = true,
+  exponentFormat
 }: SurfacePlotProps) => {
   // theme hook
   const theme = useTheme();
@@ -68,7 +71,6 @@ const SurfacePlot = ({
                   size: 12
                 }
               },
-              mode: markers ? "lines+markers" : "lines",
               type: "surface",
               x: xdata,
               y: ydata,
@@ -88,23 +90,23 @@ const SurfacePlot = ({
               camera: { eye: { x: 2 } },
               xaxis: {
                 color: theme.palette.mode === "light" ? "" : "white",
-                exponentformat: "E",
+                exponentformat: exponentFormat,
                 gridcolor:
                   theme.palette.mode === "light"
                     ? ""
                     : theme.palette.grey["500"],
-                showgrid: false,
+                showgrid: showGrid,
                 title: {
                   font: {
                     family: "Montserrat",
-                    size: 12
+                    size: labelFontSize || undefined
                   },
                   text: xlabel || ""
                 }
               },
               yaxis: {
                 color: theme.palette.mode === "light" ? "" : "white",
-                exponentformat: "E",
+                exponentformat: exponentFormat,
                 gridcolor:
                   theme.palette.mode === "light"
                     ? ""
@@ -112,14 +114,14 @@ const SurfacePlot = ({
                 title: {
                   font: {
                     family: "Montserrat",
-                    size: 12
+                    size: labelFontSize || undefined
                   },
                   text: ylabel || ""
                 }
               },
               zaxis: {
                 color: theme.palette.mode === "light" ? "" : "white",
-                exponentformat: "E",
+                exponentformat: exponentFormat,
                 gridcolor:
                   theme.palette.mode === "light"
                     ? ""
@@ -127,7 +129,7 @@ const SurfacePlot = ({
                 title: {
                   font: {
                     family: "Montserrat",
-                    size: 12
+                    size: labelFontSize || undefined
                   },
                   text: zlabel || ""
                 }
@@ -138,7 +140,7 @@ const SurfacePlot = ({
             flexGrow: 1,
             fontFamily: "Montserrat",
             height: "100%",
-            minHeight: 0,
+            minHeight,
             width: "100%"
           }}
           useResizeHandler={true}

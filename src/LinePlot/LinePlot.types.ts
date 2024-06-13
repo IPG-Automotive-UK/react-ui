@@ -3,9 +3,25 @@
  */
 export type LinePlotProps = {
   /**
+   * Exponentformat is a string that determines the format for large numbers.
+   */
+  exponentFormat?: "none" | "e" | "E" | "power" | "SI" | "B";
+  /**
+   * Label font size
+   */
+  labelFontSize?: number;
+  /**
    * markers is a boolean that determines whether or not the points are marked.
    */
   markers?: boolean;
+  /**
+   *  Minimum height of the plot.
+   */
+  minHeight?: number;
+  /**
+   * Boolean that determines whether or not the grid is shown.
+   */
+  showGrid?: boolean;
   /**
    *  showTitle is a boolean that determines whether or not the title is shown on main view.
    */
@@ -15,11 +31,11 @@ export type LinePlotProps = {
    */
   title?: string;
   /**
-   *  Arrays of numbers that represent the X coordinates of the points to be plotted.
+   * Arrays of numbers that represent the X coordinates of the points to be plotted.
    */
   xdata: number[];
   /**
-   ** Label for the X axis.
+   * Label for the X axis.
    */
   xlabel: string;
   /**

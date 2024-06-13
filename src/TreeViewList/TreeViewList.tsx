@@ -1,4 +1,4 @@
-import { Box, Tooltip, Typography, debounce } from "@mui/material";
+import { Box, Tooltip, Typography, alpha, debounce } from "@mui/material";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { SimpleTreeView, TreeItem } from "@mui/x-tree-view";
 import { TreeNodeItem, TreeViewListProps } from "./TreeViewList.types";
@@ -369,22 +369,27 @@ const TooltipTreeItem = (
     setHoveredNode: (nodeId: string) => void;
   }
 ) => {
-  // destructure the hoveredNode and setHoveredNode from the props and pass the rest of the props to the TreeItem
-  const { hoveredNode, setHoveredNode, ...rest } = props;
-
+  // Destructure the nodeId and the other props
+  const { hoveredNode, setHoveredNode, nodeId, tooltip, ...rest } = props;
   return (
     <Tooltip
-      title={props.tooltip ? <>{props.tooltip}</> : ""}
+      title={tooltip ? <>{tooltip}</> : ""}
       placement="right-start"
-      open={hoveredNode === props.nodeId}
+      open={hoveredNode === nodeId}
       disableFocusListener
     >
       <TreeItem
         {...rest}
-        itemId={props.nodeId}
+        itemId={nodeId}
         sx={theme => ({
-          color: theme.palette.text.primary,
-          paddingY: "5px"
+          "& .MuiTreeItem-label": {
+            margin: 0,
+            padding: "2px 2px"
+          },
+          "& .MuiTreeItem-root": {
+            borderLeft: `1px solid ${alpha(theme.palette.text.primary, 0.1)}`,
+            marginLeft: "4px"
+          }
         })}
         onMouseOver={event => {
           event.stopPropagation();
@@ -392,7 +397,7 @@ const TooltipTreeItem = (
           const target = event.target as Element;
 
           if (target.classList.contains("MuiTreeItem-label")) {
-            setHoveredNode(props.nodeId);
+            setHoveredNode(nodeId);
           }
         }}
         onMouseOut={event => {
