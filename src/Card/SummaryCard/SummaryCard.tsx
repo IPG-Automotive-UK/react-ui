@@ -35,9 +35,6 @@ function SummaryCard({
   const [moreOptionsAnchorEl, setMoreOptionsAnchorEl] =
     useState<HTMLElement | null>(null);
 
-  // header content width
-  const headerContentWidth = width - 60;
-
   // handle the click of the more options button by setting the more options anchor element
   const handleMoreOptionsClick = (event: React.MouseEvent<HTMLElement>) => {
     setMoreOptionsAnchorEl(event.currentTarget);
@@ -115,15 +112,7 @@ function SummaryCard({
             </NoWrapTypography>
           }
         />
-        <Box
-          ml={2}
-          pr={2}
-          sx={{
-            height: 24,
-            maxWidth: headerContentWidth,
-            overflowX: "hidden"
-          }}
-        >
+        <Box mx={2}>
           <LabelChipGroup chips={labelChips} />
         </Box>
         <Box

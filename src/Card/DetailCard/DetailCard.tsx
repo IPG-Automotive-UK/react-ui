@@ -170,7 +170,9 @@ function DetailCardHeader({
           {buttonsStack}
         </Box>
       </Box>
-      {labels && labels.length > 0 && <LabelChipGroup chips={labelChips} />}
+      <Box mx={1}>
+        {labels && labels.length > 0 && <LabelChipGroup chips={labelChips} />}
+      </Box>
     </Fragment>
   );
 }
