@@ -38,7 +38,6 @@ export {
   TableCard,
   type DetailCardProps,
   type DetailCardHeaderProps,
-  type DetailCardLabelStackProps,
   type FileCardProps,
   type SummaryCardProps,
   type TableCardProps
