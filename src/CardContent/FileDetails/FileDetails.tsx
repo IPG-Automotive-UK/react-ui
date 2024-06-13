@@ -8,7 +8,7 @@ import {
   Tooltip,
   Typography
 } from "@mui/material";
-import React, { Fragment, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { FileDetailsProps } from "./FileDetails.types";
 import { ResizeObserver } from "@juggle/resize-observer";
@@ -95,116 +95,112 @@ function FileDetails({
 
   // render the file card
   return (
-    <Fragment>
-      <Stack
-        mt={1}
-        mb={3}
+    <Stack
+      id="FileDetails"
+      mt={1}
+      mb={3}
+      sx={{
+        display: "flex",
+        height: "100%",
+        width: 368
+      }}
+    >
+      <Box
         sx={{
+          alignItems: "center",
           display: "flex",
-          height: "100%",
-          width: 368
+          flexDirection: "row",
+          justifyContent: "space-between"
         }}
       >
-        <Box
-          sx={{
-            alignItems: "center",
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between"
-          }}
-        >
-          <Box>
-            <Tooltip
-              title={fileTitle}
-              disableHoverListener={!titleSizeOverflow}
+        <Box>
+          <Tooltip title={fileTitle} disableHoverListener={!titleSizeOverflow}>
+            <Typography
+              ref={titleRef}
+              ml={2}
+              sx={{
+                fontSize: 20,
+                fontWeight: 500,
+                height: "32px",
+                width: "48px"
+              }}
+              noWrap
             >
-              <Typography
-                ref={titleRef}
-                ml={2}
-                sx={{
-                  fontSize: 20,
-                  fontWeight: 500,
-                  height: "32px",
-                  width: "48px"
-                }}
-                noWrap
-              >
-                {fileTitle}
-              </Typography>
-            </Tooltip>
-          </Box>
-          <Box>
-            <Button
-              disabled={!files.some(file => file.files.length)}
-              sx={{ maxWidth: "265px", mr: 2 }}
-              variant="outlined"
-              startIcon={<Download />}
-              onClick={handleDownload}
-            >
-              {search === "" ? downloadButtonText : downloadButtonTextOnSearch}
-            </Button>
-          </Box>
+              {fileTitle}
+            </Typography>
+          </Tooltip>
         </Box>
-        <Box pl={2} pr={2}>
-          <SearchBar
-            value={search}
-            onBlur={handleSearch}
-            onChange={handleSearch}
-            placeholder="Search"
-          />
+        <Box>
+          <Button
+            disabled={!files.some(file => file.files.length)}
+            sx={{ maxWidth: "265px", mr: 2 }}
+            variant="outlined"
+            startIcon={<Download />}
+            onClick={handleDownload}
+          >
+            {search === "" ? downloadButtonText : downloadButtonTextOnSearch}
+          </Button>
         </Box>
-        <CardContent
-          sx={{
-            overflowY: "hidden",
-            paddingTop: 0 // override default padding from CardContent
-          }}
-        >
-          <Box height="auto">
-            {files.map(({ header, files }, index) => (
-              <React.Fragment key={index}>
-                {files.length > 0 ? (
-                  <Box key={header} mb={1}>
-                    <Typography
-                      sx={{ fontSize: 14, fontWeight: 500 }}
-                      m={1}
-                      mt={1}
-                    >
-                      {header}
-                    </Typography>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        flexWrap: "wrap",
-                        maxWidth: "100%"
-                      }}
-                    >
-                      {files.map((file, index) => (
-                        <Tooltip
-                          title={file.filename}
+      </Box>
+      <Box pl={2} pr={2}>
+        <SearchBar
+          value={search}
+          onBlur={handleSearch}
+          onChange={handleSearch}
+          placeholder="Search"
+        />
+      </Box>
+      <CardContent
+        sx={{
+          overflowY: "hidden",
+          paddingTop: 0 // override default padding from CardContent
+        }}
+      >
+        <Box height="auto">
+          {files.map(({ header, files }, index) => (
+            <React.Fragment key={index}>
+              {files.length > 0 ? (
+                <Box key={header} mb={1}>
+                  <Typography
+                    sx={{ fontSize: 14, fontWeight: 500 }}
+                    m={1}
+                    mt={1}
+                  >
+                    {header}
+                  </Typography>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      maxWidth: "100%"
+                    }}
+                  >
+                    {files.map((file, index) => (
+                      <Tooltip
+                        title={file.filename}
+                        key={index}
+                        disableHoverListener={file.filename.length < 34}
+                      >
+                        <Chip
+                          clickable
+                          onClick={() => onClickFile && onClickFile(file)}
+                          sx={{ m: 0.5, maxWidth: 330 }}
+                          icon={<AttachFile />}
+                          size="small"
+                          variant="outlined"
                           key={index}
-                          disableHoverListener={file.filename.length < 34}
-                        >
-                          <Chip
-                            clickable
-                            onClick={() => onClickFile && onClickFile(file)}
-                            sx={{ m: 0.5, maxWidth: 330 }}
-                            icon={<AttachFile />}
-                            size="small"
-                            variant="outlined"
-                            key={index}
-                            label={file.filename}
-                          />
-                        </Tooltip>
-                      ))}
-                    </Box>
+                          label={file.filename}
+                        />
+                      </Tooltip>
+                    ))}
                   </Box>
-                ) : null}
-              </React.Fragment>
-            ))}
-          </Box>
-        </CardContent>
-      </Stack>
-    </Fragment>
+                </Box>
+              ) : null}
+            </React.Fragment>
+          ))}
+        </Box>
+      </CardContent>
+    </Stack>
   );
 }
 
