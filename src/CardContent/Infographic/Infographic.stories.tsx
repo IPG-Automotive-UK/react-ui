@@ -12,7 +12,7 @@ import VersionChip from "../../VersionChip/VersionChip";
  */
 const meta: Meta<typeof Infographic> = {
   component: Infographic,
-  title: "CardContents/ImageCard"
+  title: "CardContent/ImageCard"
 };
 export default meta;
 
