@@ -1,9 +1,6 @@
 import {
   Button,
   Divider,
-  List,
-  ListItem,
-  ListItemButton,
   ListItemIcon,
   ListItemText,
   MenuItem,
@@ -42,6 +39,93 @@ const Template: StoryFn<SummaryCardProps> = args => {
     />
   );
 };
+
+/**
+ * Supporting components/data for reuse in stories
+ */
+
+// labels
+const labels = [
+  {
+    _id: "1",
+    color: "#174713",
+    description: "National Highways",
+    name: "National Highways"
+  },
+  {
+    _id: "2",
+    color: "#1D9586",
+    description: "Wet Surface",
+    name: "Wet Surface"
+  },
+  {
+    _id: "3",
+    color: "#fcba03",
+    description: "Test Label 1",
+    name: "Test Label 1"
+  },
+  {
+    _id: "4",
+    color: "#47357a",
+    description: "Test Label 2",
+    name: "Test Label 2"
+  },
+  {
+    _id: "5",
+    color: "#1D9586",
+    description: "Test Label 3",
+    name: "Test Label 3"
+  }
+];
+
+// more options dropdown
+const MoreOptions = (
+  <MenuList>
+    <MenuItem onClick={action("onEditClick")}>
+      <ListItemIcon>
+        <Edit />
+      </ListItemIcon>
+      <ListItemText primary="Edit" />
+    </MenuItem>
+    <MenuItem onClick={action("onDeleteClick")}>
+      <ListItemIcon>
+        <Delete />
+      </ListItemIcon>
+      <ListItemText primary="Delete" />
+    </MenuItem>
+  </MenuList>
+);
+
+// more card actions
+const MoreActions = (
+  <>
+    <Button
+      size="large"
+      variant="text"
+      sx={{ width: "50%" }}
+      onClick={action("onClickMoreDetails")}
+    >
+      MORE DETAILS
+    </Button>
+    <Divider
+      orientation="vertical"
+      flexItem
+      sx={{ background: theme => theme.palette.primary.main }}
+    />
+    <Button
+      size="large"
+      variant="text"
+      sx={{ width: "50%" }}
+      onClick={action("onClickViewFiles")}
+    >
+      VIEW FILES
+    </Button>
+  </>
+);
+
+/**
+ * Stories
+ */
 
 export const Default = {
   args: {
@@ -92,38 +176,7 @@ export const TruncatedTitleAndSubtitle = {
 export const TruncatedLabels = {
   args: {
     ...Default.args,
-    labels: [
-      {
-        _id: "1",
-        color: "#fcba03",
-        description: "Test Label 1",
-        name: "Test Label 1"
-      },
-      {
-        _id: "2",
-        color: "#47357a",
-        description: "Test Label 2",
-        name: "Test Label 2"
-      },
-      {
-        _id: "3",
-        color: "#fcba03",
-        description: "Test Label 3",
-        name: "Test Label 3"
-      },
-      {
-        _id: "4",
-        color: "#47357a",
-        description: "Test Label 4",
-        name: "Test Label 4"
-      },
-      {
-        _id: "5",
-        color: "#fcba03",
-        description: "Test Label 5",
-        name: "Test Label 5"
-      }
-    ]
+    labels
   },
 
   render: Template
@@ -132,31 +185,7 @@ export const TruncatedLabels = {
 export const withMoreCardActions = {
   args: {
     ...Default.args,
-    moreCardActions: (
-      <>
-        <Button
-          size="large"
-          variant="text"
-          sx={{ width: "50%" }}
-          onClick={action("onClickMoreDetails")}
-        >
-          MORE DETAILS
-        </Button>
-        <Divider
-          orientation="vertical"
-          flexItem
-          sx={{ background: theme => theme.palette.primary.main }}
-        />
-        <Button
-          size="large"
-          variant="text"
-          sx={{ width: "50%" }}
-          onClick={action("onClickViewFiles")}
-        >
-          VIEW FILES
-        </Button>
-      </>
-    )
+    moreCardActions: MoreActions
   },
 
   render: Template
@@ -164,23 +193,8 @@ export const withMoreCardActions = {
 
 export const withMoreOptionsPopover = {
   args: {
-    ...Default.args,
-    moreOptionsPopover: (
-      <MenuList>
-        <MenuItem onClick={action("onEditClick")}>
-          <ListItemIcon>
-            <Edit />
-          </ListItemIcon>
-          <ListItemText primary="Edit" />
-        </MenuItem>
-        <MenuItem onClick={action("onDeleteClick")}>
-          <ListItemIcon>
-            <Delete />
-          </ListItemIcon>
-          <ListItemText primary="Delete" />
-        </MenuItem>
-      </MenuList>
-    )
+    ...withMoreCardActions.args,
+    moreOptionsPopover: MoreOptions
   },
 
   render: Template
@@ -217,86 +231,12 @@ export const ScenarioExample = {
         </Table>
       </TableContainer>
     ),
-    labels: [
-      {
-        _id: "1",
-        color: "#174713",
-        description: "National Highways",
-        name: "National Highways"
-      },
-      {
-        _id: "2",
-        color: "#1D9586",
-        description: "Wet Surface",
-        name: "Wet Surface"
-      },
-      {
-        _id: "3",
-        color: "#fcba03",
-        description: "Test Label 1",
-        name: "Test Label 1"
-      },
-      {
-        _id: "4",
-        color: "#47357a",
-        description: "Test Label 2",
-        name: "Test Label 2"
-      },
-      {
-        _id: "5",
-        color: "#1D9586",
-        description: "Test Label 3",
-        name: "Test Label 3"
-      }
-    ],
+    labels,
     media: "https://picsum.photos/400/200",
-    moreCardActions: (
-      <>
-        <Button
-          size="large"
-          variant="text"
-          sx={{ width: "50%" }}
-          onClick={action("onClickMoreDetails")}
-        >
-          MORE DETAILS
-        </Button>
-        <Divider
-          orientation="vertical"
-          flexItem
-          sx={{ background: theme => theme.palette.primary.main }}
-        />
-        <Button
-          size="large"
-          variant="text"
-          sx={{ width: "50%" }}
-          onClick={action("onClickViewFiles")}
-        >
-          VIEW FILES
-        </Button>
-      </>
-    ),
-    moreOptionsPopover: (
-      <List>
-        <ListItem disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
-              <Edit />
-            </ListItemIcon>
-            <ListItemText primary="Edit" />
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
-              <Delete />
-            </ListItemIcon>
-            <ListItemText primary="Delete" />
-          </ListItemButton>
-        </ListItem>
-      </List>
-    ),
-    subtitle: "Uploaded 2 hours ago by Jega Sriskantha ",
-    title: "Expressway_3Lanes "
+    moreCardActions: MoreActions,
+    moreOptionsPopover: MoreOptions,
+    subtitle: "Uploaded 32 minutes ago by Jega Sriskantha ",
+    title: "Expressway 3Lanes Extended Road"
   },
 
   render: Template
