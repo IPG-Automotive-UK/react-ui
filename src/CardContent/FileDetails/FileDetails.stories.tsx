@@ -82,8 +82,6 @@ export const WithFiles = {
         header: "Scenario Infographics"
       }
     ]
-    // onClickDownload={onClickDownload}
-    // onClickFile={onClickFile}
   },
 
   render: Template

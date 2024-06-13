@@ -17,7 +17,7 @@ describe("Infographic", () => {
     expect(infographic).toBeInTheDocument();
   });
 
-  it("render version chip if passed as a prop", () => {
+  it("render `VersionChip` if passed as a prop", () => {
     render(
       <Infographic
         media="https://picsum.photos/336/190"

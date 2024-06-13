@@ -5,8 +5,6 @@ import { InfographicProps } from "./Infographic.types";
 import React from "react";
 import VersionChip from "../../VersionChip/VersionChip";
 
-// import exampleImage from "./exampleRoadImage.png";
-
 /**
  * Story metadata
  */
