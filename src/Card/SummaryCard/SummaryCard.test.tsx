@@ -36,7 +36,7 @@ describe("SummaryCard", () => {
   });
 
   // test that summary card renders with label that can be clicked
-  it("renders label", async () => {
+  it("renders label", () => {
     const labels = [
       {
         _id: "1",
