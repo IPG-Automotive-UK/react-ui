@@ -15,7 +15,6 @@ import { fireEvent, render, screen } from "@testing-library/react";
 
 import React from "react";
 import SummaryCard from ".";
-import VersionChip from "../../VersionChip";
 import { action } from "@storybook/addon-actions";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
@@ -42,7 +41,7 @@ describe("SummaryCard", () => {
         title="summary card title"
         subtitle="summary card subtitle"
         media="https://picsum.photos/336/190"
-        versionChip={<VersionChip version="1.0" versionType="major" />}
+        version="1.0"
       />
     );
     const infographic = screen.getByRole("img");

@@ -25,7 +25,7 @@ function SummaryCard({
   height = 600,
   labels = [],
   media = "",
-  versionChip,
+  version,
   moreOptionsPopover = null,
   onClickLabel = () => {},
   moreCardActions = null,
@@ -246,7 +246,7 @@ function SummaryCard({
             )}
           </Stack>
         </Box>
-        <Infographic media={media} versionChip={versionChip}></Infographic>
+        <Infographic media={media} version={version} />
         <CardContent
           sx={{
             height: height - 386,

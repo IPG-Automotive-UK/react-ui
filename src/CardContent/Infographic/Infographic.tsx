@@ -36,7 +36,7 @@ const Infographic = ({ media, version }: InfographicProps) => {
           width: 336
         }}
       >
-        <Box padding={1}>
+        <Box padding={1} sx={{ maxWidth: 320 }}>
           {version ? <VersionChip version={version}></VersionChip> : null}
         </Box>
       </Box>

@@ -1,6 +1,3 @@
-import type { ReactElement } from "react";
-import type { VersionChipProps } from "../../VersionChip/VersionChip.types";
-
 export type SummaryCardProps = {
   /**
    * The content of the card to be displayed under the media.
@@ -24,9 +21,9 @@ export type SummaryCardProps = {
    */
   media?: string;
   /**
-   * Optional version chip component.
+   * Optional display version chip component.
    */
-  versionChip?: ReactElement<VersionChipProps>;
+  version?: string;
   /**
    * The content of the buttons stack.
    */

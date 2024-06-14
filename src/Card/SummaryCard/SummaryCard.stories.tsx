@@ -18,7 +18,6 @@ import React from "react";
 import SummaryCard from "./SummaryCard";
 import { SummaryCardProps } from "./SummaryCard.types";
 import { Theme } from "@mui/material/styles";
-import VersionChip from "../../VersionChip/VersionChip";
 import { action } from "@storybook/addon-actions";
 
 /**
@@ -236,7 +235,7 @@ export const ScenarioExample = {
     moreOptionsPopover: MoreOptions,
     subtitle: "Uploaded 32 minutes ago by Jega Sriskantha ",
     title: "Expressway 3Lanes Extended Road",
-    versionChip: <VersionChip version="1.0" versionType="major" />
+    version: "1.0"
   },
 
   render: Template
