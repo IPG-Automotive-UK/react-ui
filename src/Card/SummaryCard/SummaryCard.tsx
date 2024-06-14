@@ -5,7 +5,6 @@ import {
   CardActions,
   CardContent,
   CardHeader,
-  CardMedia,
   IconButton,
   Popover,
   Stack,
@@ -14,6 +13,7 @@ import {
 } from "@mui/material";
 import React, { Fragment, useEffect, useRef, useState } from "react";
 
+import { Infographic } from "../../CardContent";
 import LabelChip from "../../LabelSelector/LabelChip/LabelChip";
 import { MoreVert } from "@mui/icons-material";
 import NoWrapTypography from "../../NoWrapTypography/NoWrapTypography";
@@ -25,8 +25,7 @@ function SummaryCard({
   height = 600,
   labels = [],
   media = "",
-  mediaHeight = 190,
-  mediaWidth = 336,
+  versionChip,
   moreOptionsPopover = null,
   onClickLabel = () => {},
   moreCardActions = null,
@@ -114,7 +113,7 @@ function SummaryCard({
   };
 
   // check if label stack is overflowing
-  const [lableSize] = useComponentSize(labelStackRef);
+  const [labelSize] = useComponentSize(labelStackRef);
 
   // handle the close of the label overflow popover by setting the label anchor element to null
   const handleLabelOverflowClose = () => {
@@ -149,7 +148,7 @@ function SummaryCard({
 
   // render the summary card
   return (
-    <Fragment>
+    <Stack id="SummaryCard">
       <Card sx={{ height, width }}>
         <CardHeader
           sx={{
@@ -204,7 +203,7 @@ function SummaryCard({
             direction="row"
             spacing={`${labelSpacing}px`}
           >
-            {!lableSize ? (
+            {!labelSize ? (
               <Fragment>
                 {labels.map(label => (
                   <LabelChip
@@ -247,26 +246,10 @@ function SummaryCard({
             )}
           </Stack>
         </Box>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center"
-          }}
-        >
-          <CardMedia
-            component="img"
-            src={media}
-            sx={{
-              height: mediaHeight,
-              objectFit: "contain",
-              padding: 2,
-              width: mediaWidth
-            }}
-          />
-        </Box>
+        <Infographic media={media} versionChip={versionChip}></Infographic>
         <CardContent
           sx={{
-            height: height - mediaHeight - 196,
+            height: height - 386,
             overflowY: "hidden",
             px: 0,
             py: 1
@@ -323,7 +306,7 @@ function SummaryCard({
       >
         {moreOptionsPopover}
       </Popover>
-    </Fragment>
+    </Stack>
   );
 }
 

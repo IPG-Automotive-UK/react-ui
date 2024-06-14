@@ -15,6 +15,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 
 import React from "react";
 import SummaryCard from ".";
+import VersionChip from "../../VersionChip";
 import { action } from "@storybook/addon-actions";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
@@ -33,6 +34,20 @@ describe("SummaryCard", () => {
     );
     expect(screen.getByText("summary card title")).toBeInTheDocument();
     expect(screen.getByText("summary card subtitle")).toBeInTheDocument();
+  });
+
+  it("renders image with versionChip", () => {
+    render(
+      <SummaryCard
+        title="summary card title"
+        subtitle="summary card subtitle"
+        media="https://picsum.photos/336/190"
+        versionChip={<VersionChip version="1.0" versionType="major" />}
+      />
+    );
+    const infographic = screen.getByRole("img");
+    expect(infographic).toBeInTheDocument();
+    expect(screen.getByText("1.0")).toBeInTheDocument();
   });
 
   // test that summary card renders with label that can be clicked

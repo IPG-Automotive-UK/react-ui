@@ -18,6 +18,7 @@ import React from "react";
 import SummaryCard from "./SummaryCard";
 import { SummaryCardProps } from "./SummaryCard.types";
 import { Theme } from "@mui/material/styles";
+import VersionChip from "../../VersionChip/VersionChip";
 import { action } from "@storybook/addon-actions";
 
 /**
@@ -133,8 +134,6 @@ export const Default = {
     height: 557,
     labels: [],
     media: "",
-    mediaHeight: 190,
-    mediaWidth: 336,
     moreCardActions: null,
     moreOptionsPopover: null,
     onClickLabel: () => {},
@@ -232,11 +231,12 @@ export const ScenarioExample = {
       </TableContainer>
     ),
     labels,
-    media: "https://picsum.photos/400/200",
+    media: "https://picsum.photos/336/190",
     moreCardActions: MoreActions,
     moreOptionsPopover: MoreOptions,
     subtitle: "Uploaded 32 minutes ago by Jega Sriskantha ",
-    title: "Expressway 3Lanes Extended Road"
+    title: "Expressway 3Lanes Extended Road",
+    versionChip: <VersionChip version="1.0" versionType="major" />
   },
 
   render: Template
