@@ -46,16 +46,12 @@ describe("SummaryCard", () => {
       }
     ];
 
-    // mock function to test if label is clicked
-    const onClickLabel = vi.fn();
-
     // render summary card with label
     const { container } = render(
       <SummaryCard
         title="summary card title"
         subtitle="summary card subtitle"
         labels={labels}
-        onClickLabel={onClickLabel}
       />
     );
 
