@@ -81,9 +81,9 @@ export default function LabelChipGroup({ chips }: LabelChipGroupProps) {
     }
   }, [chips, moreItemsRef, parentRef]);
 
-  // render all the chips in a row with a stack component
+  // render all the chips in a row with a stack component, initially all chips invisible
   // if any chips are overflowing, we show how many are hidden and provide a popover to show the list of hidden chips
-  // the resize oberserver effect will hide any overflowing chips and position the more items button next to the last visible chip by changing the order of the hidden chips
+  // the resize oberserver effect will update the visibility of chips and position the more items button next to the last visible chip by changing the order of the hidden chips
   return (
     <Stack
       direction="row"
@@ -136,7 +136,7 @@ export default function LabelChipGroup({ chips }: LabelChipGroupProps) {
               spacing={1}
             >
               {overflowingChips.map((chip, index) => (
-                <LabelChip key={index} {...chip} />
+                <LabelChip key={index} {...chip} visible={false} />
               ))}
             </Stack>
           </Popover>
