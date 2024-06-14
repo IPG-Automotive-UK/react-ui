@@ -93,7 +93,7 @@ export default function LabelChipGroup({ chips }: LabelChipGroupProps) {
       sx={{ overflow: "hidden", width: "100%" }}
     >
       {chips.map((chip, index) => (
-        <LabelChip key={index} {...chip} />
+        <LabelChip key={index} {...chip} visible={false} />
       ))}
       {overflowingChips.length > 0 ? (
         <>
@@ -136,7 +136,7 @@ export default function LabelChipGroup({ chips }: LabelChipGroupProps) {
               spacing={1}
             >
               {overflowingChips.map((chip, index) => (
-                <LabelChip key={index} {...chip} visible={false} />
+                <LabelChip key={index} {...chip} />
               ))}
             </Stack>
           </Popover>
