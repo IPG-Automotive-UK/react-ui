@@ -10,6 +10,7 @@ export default function LabelChip({
   color = "#005FA8",
   size = "medium",
   variant = "filled",
+  visible = true,
   ...props
 }: LabelChipProps) {
   // return the styled chip component
@@ -29,7 +30,8 @@ export default function LabelChip({
         },
         [`& .${chipClasses.deleteIcon}:hover`]: {
           color: theme => theme.palette.getContrastText(color)
-        }
+        },
+        visibility: visible ? "visible" : "hidden"
       }}
       label={label}
       size={size}
