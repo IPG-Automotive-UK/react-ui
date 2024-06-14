@@ -96,7 +96,7 @@ function FileDetails({
   // render the file card
   return (
     <Stack
-      id="FileDetails"
+      className="file-details-container"
       mt={1}
       mb={3}
       sx={{

@@ -3,7 +3,6 @@ import { render, screen } from "@testing-library/react";
 
 import Infographic from "./Infographic";
 import React from "react";
-import VersionChip from "../../VersionChip";
 
 /**
  * Tests
@@ -18,12 +17,7 @@ describe("Infographic", () => {
   });
 
   it("render `VersionChip` if passed as a prop", () => {
-    render(
-      <Infographic
-        media="https://picsum.photos/336/190"
-        versionChip={<VersionChip version="1.0" versionType="major" />}
-      />
-    );
+    render(<Infographic media="https://picsum.photos/336/190" version="1.0" />);
     expect(screen.getByText("1.0")).toBeInTheDocument();
   });
 });
