@@ -29,8 +29,7 @@
     "test:lint": "eslint ./src",
     "test:unit": "vitest --run --coverage",
     "test:watch": "vitest",
-    "type-check": "tsc --noEmit --skipLibCheck",
-    "chromatic": "npx chromatic --project-token=chpt_f8c356de5be8281 --build-script-name=storybook:build"
+    "type-check": "tsc --noEmit --skipLibCheck"
   },
   "devDependencies": {
     "@emotion/react": "^11.11.4",
