@@ -60,7 +60,10 @@ describe("DetailCard", () => {
   // test that image is rendered in detail card
   it("renders image", () => {
     render(
-      <FileCard {...defaultInputs} media="https://picsum.photos/400/200" />
+      <FileCard
+        {...defaultInputs}
+        media="https://picsum.photos/id/191/400/200"
+      />
     );
     // expect image to be in the document
     expect(screen.getByRole("img")).toBeInTheDocument();

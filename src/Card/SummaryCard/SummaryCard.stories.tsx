@@ -232,7 +232,7 @@ export const ScenarioExample = {
       </TableContainer>
     ),
     labels,
-    media: "https://picsum.photos/400/200",
+    media: "https://picsum.photos/id/191/400/200",
     moreCardActions: MoreActions,
     moreOptionsPopover: MoreOptions,
     subtitle: "Uploaded 32 minutes ago by Jega Sriskantha ",
