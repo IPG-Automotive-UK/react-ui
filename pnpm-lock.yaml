@@ -36,8 +36,8 @@ dependencies:
     specifier: ^9.3.11
     version: 9.3.11
   material-ui-confirm:
-    specifier: 3.0.12
-    version: 3.0.12(@mui/material@5.15.19)(react-dom@18.3.1)(react@18.3.1)
+    specifier: 3.0.16
+    version: 3.0.16(@mui/material@5.15.19)(react-dom@18.3.1)(react@18.3.1)
   material-ui-popup-state:
     specifier: ^5.1.2
     version: 5.1.2(@mui/material@5.15.19)(react@18.3.1)
@@ -9712,8 +9712,8 @@ packages:
       react: 18.3.1
     dev: true
 
-  /material-ui-confirm@3.0.12(@mui/material@5.15.19)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-qyWxEy2LfoV/j+eywqIPg11RUaynyfhwe4hYEqFxDnpK9kZy8ef8xo7moF74pW95spF/I5VhOJgpPKd/WT9tEA==}
+  /material-ui-confirm@3.0.16(@mui/material@5.15.19)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-aJoa/FM/U/86qztoljlk8FWmjSJbAMzDWCdWbDqU5WwB0WzcWPyGrhBvIqihR9uKdHKBf1YrvMjn68uOrfsXAg==}
     peerDependencies:
       '@mui/material': '>= 5.0.0'
       react: ^17.0.0 || ^18.0.0
