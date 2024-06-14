@@ -31,7 +31,7 @@ function DetailCard({
   // render the detail card
   return (
     <Stack
-      id="DetailCard"
+      className="detail-card-container"
       mt={1}
       mb={3}
       sx={{

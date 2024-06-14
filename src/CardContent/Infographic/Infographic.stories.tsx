@@ -3,14 +3,13 @@ import { Meta, StoryFn } from "@storybook/react";
 import Infographic from "./Infographic";
 import { InfographicProps } from "./Infographic.types";
 import React from "react";
-import VersionChip from "../../VersionChip/VersionChip";
 
 /**
  * Story metadata
  */
 const meta: Meta<typeof Infographic> = {
   component: Infographic,
-  title: "CardContent/ImageCard"
+  title: "CardContent/Infographic"
 };
 export default meta;
 
@@ -29,7 +28,7 @@ export const Default = {
 export const WithVersionChip = {
   args: {
     media: "https://picsum.photos/336/190",
-    versionChip: <VersionChip version="1.0" versionType="major" />
+    version: "1.0"
   },
 
   render: Template

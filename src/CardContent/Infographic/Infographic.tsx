@@ -2,11 +2,12 @@ import { Box, CardMedia } from "@mui/material";
 
 import { InfographicProps } from "./Infographic.types";
 import React from "react";
+import VersionChip from "../../VersionChip/VersionChip";
 
-const Infographic = ({ media, versionChip }: InfographicProps) => {
+const Infographic = ({ media, version }: InfographicProps) => {
   return (
     <Box
-      id="Infographic"
+      className="infographic-container"
       position={"relative"}
       sx={{
         display: "flex",
@@ -35,7 +36,9 @@ const Infographic = ({ media, versionChip }: InfographicProps) => {
           width: 336
         }}
       >
-        <Box padding={1}>{versionChip}</Box>
+        <Box padding={1}>
+          {version ? <VersionChip version={version}></VersionChip> : null}
+        </Box>
       </Box>
     </Box>
   );

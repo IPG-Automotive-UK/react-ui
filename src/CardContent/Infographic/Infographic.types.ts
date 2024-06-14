@@ -1,6 +1,3 @@
-import type { ReactElement } from "react";
-import type { VersionChipProps } from "../../VersionChip/VersionChip.types";
-
 export type InfographicProps = {
   /**
    * An alias for image property. Available only with media
@@ -10,5 +7,5 @@ export type InfographicProps = {
   /**
    * Optional version chip component.
    */
-  versionChip?: ReactElement<VersionChipProps>;
+  version?: string;
 };
