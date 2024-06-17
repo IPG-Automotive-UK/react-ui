@@ -146,6 +146,24 @@ export const Default = {
   render: Template
 };
 
+export const WithImageAndVersionChip = {
+  args: {
+    content: null,
+    height: 557,
+    labels: [],
+    media: "https://picsum.photos/336/190",
+    moreCardActions: null,
+    moreOptionsPopover: null,
+    onClickLabel: () => {},
+    subtitle: "subtitle",
+    title: "title",
+    version: "1.0",
+    width: 368
+  },
+
+  render: Template
+};
+
 // styling
 const sx = {
   headerTableCell: {
