@@ -33,16 +33,20 @@ export { default as VehiclePath, type VehiclePathProps } from "./VehiclePath";
 export { default as Breadcrumbs, type BreadcrumbsProps } from "./Breadcrumbs";
 export {
   DetailCard,
-  FileCard,
   SummaryCard,
   TableCard,
   type DetailCardProps,
   type DetailCardHeaderProps,
   type DetailCardLabelStackProps,
-  type FileCardProps,
   type SummaryCardProps,
   type TableCardProps
 } from "./Card";
+export {
+  Infographic,
+  FileDetails,
+  type InfographicProps,
+  type FileDetailsProps
+} from "./CardContent";
 export { default as Checkbox, type CheckboxProps } from "./Checkbox";
 export { default as ClientOnly, type ClientOnlyProps } from "./ClientOnly";
 export { default as Copyright, type CopyrightProps } from "./Copyright";
