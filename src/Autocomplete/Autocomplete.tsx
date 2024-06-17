@@ -108,7 +108,7 @@ function Option<
   // handle key value options rendering
   if (isKeyValueOption(option)) {
     return (
-      <Box component="li" {...props}>
+      <Box component="li" {...props} key={option.key}>
         <Box
           sx={{
             alignItems: "center",
@@ -146,7 +146,7 @@ function Option<
 
   // handle string options rendering
   return (
-    <Box component="li" {...props}>
+    <Box component="li" {...props} key={option}>
       <Box
         sx={{
           alignItems: "center",
