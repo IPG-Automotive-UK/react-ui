@@ -33,7 +33,7 @@ export default function LabelChipGroup({ chips }: LabelChipGroupProps) {
   const moreItemsButtonWidth = 40;
 
   // define the pixel gap between chips so we can include it in the width calculations
-  const chipGap = 16;
+  const chipGap = 8;
 
   // setup a resize observer to watch the parent container size changes and calculate if any chips are overflowing
   React.useEffect(() => {
