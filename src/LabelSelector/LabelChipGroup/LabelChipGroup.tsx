@@ -1,4 +1,4 @@
-import { Button, Popover, Stack, Typography } from "@mui/material";
+import { Box, Button, Popover, Stack, Typography } from "@mui/material";
 
 import LabelChip from "../LabelChip/LabelChip";
 import { LabelChipGroupProps } from "./LabelChipGroup.types";
@@ -128,6 +128,7 @@ export default function LabelChipGroup({ chips }: LabelChipGroupProps) {
               horizontal: "left",
               vertical: "bottom"
             }}
+            sx={{ maxWidth: "368px" }}
           >
             <Stack
               direction="column"
@@ -136,7 +137,9 @@ export default function LabelChipGroup({ chips }: LabelChipGroupProps) {
               spacing={1}
             >
               {overflowingChips.map((chip, index) => (
-                <LabelChip key={index} {...chip} />
+                <Box key={index}>
+                  <LabelChip {...chip} />
+                </Box>
               ))}
             </Stack>
           </Popover>

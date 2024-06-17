@@ -64,6 +64,11 @@ export const Default = {
       {
         color: "#fcba03",
         label: "Label 3"
+      },
+      {
+        color: "#47357a",
+        label:
+          "This is a really long label that is so long it will even overflow the popover container so we should see some ellipsis here and a tooltip"
       }
     ]
   },
