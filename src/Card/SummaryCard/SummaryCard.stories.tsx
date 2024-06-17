@@ -133,13 +133,29 @@ export const Default = {
     height: 557,
     labels: [],
     media: "",
-    mediaHeight: 190,
-    mediaWidth: 336,
     moreCardActions: null,
     moreOptionsPopover: null,
     onClickLabel: () => {},
     subtitle: "subtitle",
     title: "title",
+    width: 368
+  },
+
+  render: Template
+};
+
+export const WithImageAndVersionChip = {
+  args: {
+    content: null,
+    height: 557,
+    labels: [],
+    media: "https://picsum.photos/336/190",
+    moreCardActions: null,
+    moreOptionsPopover: null,
+    onClickLabel: () => {},
+    subtitle: "subtitle",
+    title: "title",
+    version: "1.0",
     width: 368
   },
 
@@ -232,11 +248,12 @@ export const ScenarioExample = {
       </TableContainer>
     ),
     labels,
-    media: "https://picsum.photos/400/200",
+    media: "https://picsum.photos/336/190",
     moreCardActions: MoreActions,
     moreOptionsPopover: MoreOptions,
     subtitle: "Uploaded 32 minutes ago by Jega Sriskantha ",
-    title: "Expressway 3Lanes Extended Road"
+    title: "Expressway 3Lanes Extended Road",
+    version: "1.0"
   },
 
   render: Template
