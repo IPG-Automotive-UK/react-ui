@@ -21,9 +21,6 @@ const Template: StoryFn<DetailCardProps> = args => {
   return (
     <DetailCard
       {...args}
-      onClickLabel={label => {
-        action("onLabelClick")(label);
-      }}
       onClickDownload={action("onClickDownload")}
       onClickFile={action("onClickFile")}
     />
@@ -37,7 +34,6 @@ export const Default = {
     media: "",
     onClickDownload: () => {},
     onClickFile: () => {},
-    onClickLabel: () => {},
     subtitle: "subtitle",
     title: "title",
     width: 1150
