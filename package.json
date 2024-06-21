@@ -2,9 +2,14 @@
   "name": "@ipguk/react-ui",
   "version": "7.9.0",
   "description": "React UI component library for IPG web applications",
-  "author": "IPG-Automotive-UK",
+  "author": {
+    "name": "IPG-Automotive-UK"
+  },
   "license": "MIT",
-  "repository": "IPG-Automotive-UK/react-ui",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IPG-Automotive-UK/react-ui.git"
+  },
   "main": "dist/index",
   "engines": {
     "node": ">=10"
@@ -58,6 +63,7 @@
     "@typescript-eslint/parser": "^7.11.0",
     "@vitejs/plugin-react": "^4.3.0",
     "@vitest/coverage-v8": "^1.6.0",
+    "chromatic": "^11.5.4",
     "colord": "^2.9.3",
     "copyfiles": "^2.4.1",
     "cross-env": "^7.0.3",
@@ -124,5 +130,9 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "bugs": {
+    "url": "https://github.com/IPG-Automotive-UK/react-ui/issues"
+  },
+  "homepage": "https://github.com/IPG-Automotive-UK/react-ui#readme"
 }
