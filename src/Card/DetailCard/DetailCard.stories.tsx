@@ -330,7 +330,7 @@ export const ScenarioExample = {
         name: "Test Label 3"
       }
     ],
-    media: "https://picsum.photos/400/200",
+    media: "https://picsum.photos/id/191/400/200",
     subtitle: "Uploaded 2 hours ago by Jega Sriskantha ",
     title: "Expressway_3Lanes "
   },
