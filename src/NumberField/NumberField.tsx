@@ -26,6 +26,7 @@ export default function NumberField(props: NumberFieldProps) {
       {...rest}
       margin={margin}
       variant={variant}
+      InputLabelProps={{ shrink: true }}
       InputProps={{
         ...(endAdornment && {
           endAdornment: (
