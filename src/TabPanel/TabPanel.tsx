@@ -15,8 +15,6 @@ const TabPanel = ({
   children,
   active,
   variant = "fullWidth",
-  display = "block",
-  flexWrap = "nowrap",
   onTabChange,
   customChildren
 }: TabPanelProps) => {
@@ -45,7 +43,7 @@ const TabPanel = ({
   };
 
   return (
-    <Box>
+    <Box height={1} width={1} display={"flex"} flexDirection={"column"}>
       <Tabs
         value={activeTab}
         onChange={handleChange}
@@ -76,7 +74,11 @@ const TabPanel = ({
       </Tabs>
       <Box
         sx={{
-          overflowY: "auto"
+          display: "flex",
+          flexDirection: "column",
+          flexGrow: 1,
+          overflowY: "auto",
+          width: 1
         }}
       >
         {React.Children.map(children, (child, index) => {
@@ -89,8 +91,8 @@ const TabPanel = ({
               key={index}
               id={`tabpanel-${index}`}
               aria-labelledby={`tab-${index}`}
-              display={display}
-              flexWrap={flexWrap}
+              display={"flex"}
+              flexDirection={"column"}
             >
               {activeTab === index && child.props.children}
             </Box>

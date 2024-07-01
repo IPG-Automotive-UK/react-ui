@@ -22,12 +22,4 @@ export type TabPanelProps = {
    * The variant of the tab panel. This can be either "standard" or "fullWidth".
    */
   variant?: "standard" | "fullWidth";
-  /**
-   * The display of the tab content. This can be either "flex" or "block".
-   */
-  display?: "flex" | "block";
-  /**
-   * The flexWrap of the tab content. This can be either "wrap" or "nowrap".
-   */
-  flexWrap?: "wrap" | "nowrap";
 };
