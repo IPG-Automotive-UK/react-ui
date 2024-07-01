@@ -11,6 +11,7 @@ export default function NumberField(props: NumberFieldProps) {
   // Spread the rest of the mui component props
   const {
     endAdornment,
+    margin = "normal",
     startAdornment,
     stepper = true,
     variant = "outlined",
@@ -23,6 +24,7 @@ export default function NumberField(props: NumberFieldProps) {
   return (
     <TextField
       {...rest}
+      margin={margin}
       variant={variant}
       InputProps={{
         ...(endAdornment && {
