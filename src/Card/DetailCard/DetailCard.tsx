@@ -19,7 +19,6 @@ function DetailCard({
   media = "",
   onClickDownload,
   onClickFile,
-  onClickLabel = () => {},
   subtitle = "subtitle",
   title = "title",
   width = 1150
@@ -44,7 +43,6 @@ function DetailCard({
           buttonsStack={buttonsStack}
           labels={labels}
           width={width}
-          onClickLabel={onClickLabel}
         />
         <Box
           sx={{
@@ -85,17 +83,15 @@ function DetailCardHeader({
   title,
   subtitle,
   buttonsStack,
-  labels,
-  onClickLabel
+  labels
 }: DetailCardHeaderProps) {
   // convert the labels to chips
   const labelChips: LabelChipGroupProps["chips"] = labels
     ? labels.map(label => {
         return {
-          clickable: true,
+          clickable: false,
           color: label.color,
           label: label.name,
-          onClick: () => (onClickLabel ? onClickLabel(label) : null),
           size: "small"
         };
       })
