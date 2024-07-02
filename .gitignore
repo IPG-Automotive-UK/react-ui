@@ -34,4 +34,3 @@ coverage
 /playwright-report/
 /playwright/.cache/
 /test-artifacts/
-*.log

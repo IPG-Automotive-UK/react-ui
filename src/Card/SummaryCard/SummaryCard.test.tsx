@@ -35,20 +35,6 @@ describe("SummaryCard", () => {
     expect(screen.getByText("summary card subtitle")).toBeInTheDocument();
   });
 
-  it("renders image with versionChip", () => {
-    render(
-      <SummaryCard
-        title="summary card title"
-        subtitle="summary card subtitle"
-        media="https://picsum.photos/336/190"
-        version="1.0"
-      />
-    );
-    const infographic = screen.getByRole("img");
-    expect(infographic).toBeInTheDocument();
-    expect(screen.getByText("1.0")).toBeInTheDocument();
-  });
-
   // test that summary card renders with label that can be clicked
   it("renders label", () => {
     const labels = [

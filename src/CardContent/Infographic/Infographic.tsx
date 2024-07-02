@@ -26,20 +26,22 @@ const Infographic = ({ media, version }: InfographicProps) => {
           width: 336
         }}
       />
-      <Box
-        position={"absolute"}
-        display={"flex"}
-        alignItems={"end"}
-        sx={{
-          height: 190,
-          padding: 2,
-          width: 336
-        }}
-      >
-        <Box padding={1} sx={{ maxWidth: 320 }}>
-          {version ? <VersionChip version={version}></VersionChip> : null}
+      {version ? (
+        <Box
+          position={"absolute"}
+          display={"flex"}
+          alignItems={"end"}
+          sx={{
+            height: 190,
+            padding: 2,
+            width: 336
+          }}
+        >
+          <Box padding={1}>
+            <VersionChip version={version} />
+          </Box>
         </Box>
-      </Box>
+      ) : null}
     </Box>
   );
 };

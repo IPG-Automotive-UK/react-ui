@@ -2,7 +2,7 @@
 
 > React UI component library for IPG web applications
 
-[![Storybook](https://raw.githubusercontent.com/storybookjs/brand/master/badge/badge-storybook.svg)](https://main--666c1309face6e7c27f20e04.chromatic.com/) [![NPM](https://img.shields.io/npm/v/@ipguk/react-ui.svg)](https://www.npmjs.com/package/@ipguk/react-ui) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) [![Build Status](https://github.com/IPG-Automotive-UK/react-ui/workflows/Tests/badge.svg)](https://github.com/IPG-Automotive-UK/react-ui/actions)
+[![NPM](https://img.shields.io/npm/v/@ipguk/react-ui.svg)](https://www.npmjs.com/package/@ipguk/react-ui) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) [![Build Status](https://github.com/IPG-Automotive-UK/react-ui/workflows/Tests/badge.svg)](https://github.com/IPG-Automotive-UK/react-ui/actions)
 
 ## Install
 
