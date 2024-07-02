@@ -1,4 +1,4 @@
-import { Box, Tab, Tabs } from "@mui/material";
+import { Box, Tab, Tabs, useTheme } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
 import { TabPanelProps } from "./TabPanel.types";
@@ -20,6 +20,9 @@ const TabPanel = ({
 }: TabPanelProps) => {
   // state for the active tab
   const [activeTab, setActiveTab] = useState(active ?? 0);
+
+  // get theme object
+  const theme = useTheme();
 
   // update internal state when the active prop changes
   useEffect(() => {
@@ -50,6 +53,7 @@ const TabPanel = ({
       flexDirection={"column"}
       flexGrow={1}
       minHeight={0}
+      sx={{ border: `1px solid ${theme.palette.divider}`, borderRadius: "4px" }}
     >
       <Tabs
         value={activeTab}
@@ -61,6 +65,8 @@ const TabPanel = ({
           backgroundColor: "background.paper",
           borderBottom: 1,
           borderColor: "divider",
+          borderTopLeftRadius: "4px",
+          borderTopRightRadius: "4px",
           position: "sticky",
           top: 0,
           zIndex: 3
