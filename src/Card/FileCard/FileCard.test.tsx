@@ -1,20 +1,20 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 
-import FileDetails from "./FileDetails";
+import FileCard from "./FileCard";
 import React from "react";
 import { vi } from "vitest";
 
 /**
  * Tests
  */
-describe("FileDetails", () => {
-  // test that file details renders with title
+describe("FileCard", () => {
+  // test that file card renders with title
   it("renders title", () => {
-    render(<FileDetails fileTitle="file card title" />);
+    render(<FileCard fileTitle="file card title" />);
     expect(screen.getByText("file card title")).toBeInTheDocument();
   });
 
-  // test that file details renders chips with file names
+  // test that file card renders chips with file names
   it("renders chips with file names", () => {
     const files = [
       {
@@ -45,8 +45,8 @@ describe("FileDetails", () => {
       }
     ];
 
-    // render file details with files
-    render(<FileDetails fileTitle="file card title" files={files} />);
+    // render file card with files
+    render(<FileCard fileTitle="file card title" files={files} />);
 
     // expect chips to be in the document
     expect(screen.getByText("file1")).toBeInTheDocument();
@@ -86,9 +86,9 @@ describe("FileDetails", () => {
       }
     ];
 
-    // render file details with files
+    // render file card with files
     render(
-      <FileDetails
+      <FileCard
         fileTitle="file card title"
         downloadButtonText="Download All Files"
         files={files}
@@ -129,9 +129,9 @@ describe("FileDetails", () => {
       }
     ];
 
-    // render file details with files
+    // render file card with files
     render(
-      <FileDetails
+      <FileCard
         fileTitle="file card title"
         downloadButtonTextOnSearch="Download Search Files"
         files={files}
@@ -184,7 +184,7 @@ describe("FileDetails", () => {
 
     // render file card with files
     render(
-      <FileDetails
+      <FileCard
         fileTitle="file card title"
         downloadButtonText="Download All Files"
         files={files}
@@ -233,9 +233,9 @@ describe("FileDetails", () => {
       }
     ];
 
-    // render file details with files
+    // render file card with files
     render(
-      <FileDetails
+      <FileCard
         fileTitle="file card title"
         downloadButtonTextOnSearch="Download Search Files"
         files={files}
