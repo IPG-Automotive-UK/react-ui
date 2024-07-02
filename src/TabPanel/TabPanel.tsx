@@ -43,7 +43,14 @@ const TabPanel = ({
   };
 
   return (
-    <Box height={1} width={1} display={"flex"} flexDirection={"column"}>
+    <Box
+      height={1}
+      width={1}
+      display={"flex"}
+      flexDirection={"column"}
+      flexGrow={1}
+      minHeight={0}
+    >
       <Tabs
         value={activeTab}
         onChange={handleChange}
