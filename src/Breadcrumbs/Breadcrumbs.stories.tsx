@@ -11,7 +11,7 @@ export default {
 
 export const Default: StoryFn<BreadcrumbsProps> = args => {
   return (
-    <Breadcrumbs>
+    <Breadcrumbs {...args}>
       <Link href="">Home</Link>
       <Link href="">Garden</Link>
       <Typography>Shops</Typography>
@@ -21,13 +21,14 @@ export const Default: StoryFn<BreadcrumbsProps> = args => {
 
 export const OverflowEllipses: StoryFn<BreadcrumbsProps> = args => {
   return (
-    <Breadcrumbs>
-      <Link href="">Painting was a hobby when I was little</Link>
-      <Link href="">I didn't know I had any talent</Link>
+    <Breadcrumbs {...args}>
+      <Link href="">Item 1</Link>
+      <Link href="">Item 2</Link>
       <Link href="">Talent is just a pursued interest</Link>
       <Link href="">Anybody can do what I do</Link>
       <Typography>
-        Just go back and put one little more happy tree in there
+        Just go back and put one little more happy tree in there Just go back
+        and put one little more happy tree in there
       </Typography>
     </Breadcrumbs>
   );

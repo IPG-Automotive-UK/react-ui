@@ -6,7 +6,7 @@ export type FileUploaderProps = {
   /**
    *  List of file types to accept.
    */
-  acceptedFiles?: string[] | Accept;
+  acceptedFiles?: Accept;
   /**
    * If true, the dropzone will be in the error state. When false, the dropzone will be in the default state and internal validation will still be applied. i.e. the dropzone will still reject files that do not meet the acceptedFiles or maxFileSize criteria.
    */

@@ -20,8 +20,7 @@ const Template: StoryFn<VersionChipProps> = args => {
 export const Default = {
   args: {
     selected: false,
-    version: "1.0",
-    versionType: "major"
+    version: "1.0"
   },
 
   render: Template
@@ -30,8 +29,7 @@ export const Default = {
 export const MinorVersion = {
   args: {
     selected: false,
-    version: "1.1",
-    versionType: "minor"
+    version: "1.1"
   },
 
   render: Template
@@ -40,8 +38,7 @@ export const MinorVersion = {
 export const MajorVersionSelected = {
   args: {
     selected: true,
-    version: "2.0",
-    versionType: "major"
+    version: "2.0"
   },
 
   render: Template
@@ -50,8 +47,7 @@ export const MajorVersionSelected = {
 export const MinorVersionSelected = {
   args: {
     selected: true,
-    version: "2.3",
-    versionType: "minor"
+    version: "2.3"
   },
 
   render: Template

@@ -21,13 +21,9 @@ export type SummaryCardProps = {
    */
   media?: string;
   /**
-   * The height of the media in px.
+   * Optional display version chip component.
    */
-  mediaHeight?: number;
-  /**
-   * The width of the media in px.
-   */
-  mediaWidth?: number;
+  version?: string;
   /**
    * The content of the buttons stack.
    */

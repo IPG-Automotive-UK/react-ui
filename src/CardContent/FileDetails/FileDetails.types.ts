@@ -1,6 +1,6 @@
 import { File } from "../../Common.types";
 
-export type FileCardProps = {
+export type FileDetailsProps = {
   /**
    * The download button text.
    */
@@ -21,11 +21,6 @@ export type FileCardProps = {
     files: File[];
   }>;
   /**
-   * An alias for image property. Available only with media
-   * components. Media components: video, audio, picture, iframe, img.
-   */
-  media?: string;
-  /**
    * Callback fired when the download files button is clicked.
    */
   onClickDownload?: (paths: string[]) => void;
@@ -34,11 +29,7 @@ export type FileCardProps = {
    */
   onClickFile?: (file: File) => void;
   /**
-   * An optional inital search term
+   * An optional initial search term
    */
   search?: string;
-  /**
-   * The width of the card in px.
-   */
-  width?: number;
 };

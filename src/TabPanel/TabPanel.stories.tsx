@@ -200,8 +200,6 @@ export const CustomChildren = {
         </Button>
       </>
     ),
-    display: "flex",
-    flexWrap: "wrap",
     variant: "standard"
   },
   render: Template

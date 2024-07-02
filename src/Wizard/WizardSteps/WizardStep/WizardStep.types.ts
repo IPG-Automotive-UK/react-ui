@@ -1,20 +1,16 @@
-import { ReactNode } from "react";
-
 export type WizardStepProps = {
   /**
    * If true, the step is marked as completed. Is normally set by the WizardSteps parent component.
    */
   completed?: boolean;
   /**
-   * The error text to display.
-   * If this prop is set, the helperText prop is ignored.
+   * If true, the step is marked as errored.
    */
-  errorText?: ReactNode;
+  error?: boolean;
   /**
    * The helper text to display.
-   * If the errorText prop is set, this prop is ignored.
    */
-  helperText?: ReactNode;
+  helperText?: string;
   /**
    * The index of the step. Normally set by the WizardSteps parent component.
    */

@@ -7,7 +7,7 @@ import { readAsDataURL } from "../utils/readAsDataURL";
 
 /**
  * Hook to handle file selection logic for uploaders. It is a wrapper around react-dropzone.
- * @param acceptedFiles - Array of allowed file types
+ * @param acceptedFiles - Definition of acceptable file mime types and extensions
  * @param maxFileSize - Maximum allowed file size in bytes
  * @param multiple - Whether multiple files can be selected
  * @param filesLimit - Maximum number of files that can be selected
@@ -42,10 +42,10 @@ export default function useUploader({
   }, [rejectionMessage]);
 
   // handle file drops by reading them as data URLs, and adding them to the selected files
-  const onDropAccepted = async (acceptedFiles: File[]) => {
+  const onDropAccepted = async (droppedFiles: File[]) => {
     // append preview data to file
     const fileWithPreview = await Promise.all(
-      acceptedFiles.map(async f => ({
+      droppedFiles.map(async f => ({
         data: await readAsDataURL(f),
         file: f
       }))
