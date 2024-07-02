@@ -33,8 +33,8 @@ describe("DetailCard", () => {
     expect(screen.getByText(/detail file title/i)).toBeInTheDocument();
   });
 
-  // test that detail card renders with label that can be clicked
-  it("renders label and can be clicked", () => {
+  // test that detail card renders with label
+  it("renders label", () => {
     const labels = [
       {
         _id: "1",
@@ -43,16 +43,9 @@ describe("DetailCard", () => {
         name: "National Highways"
       }
     ];
-    // mock function to test if label is clicked
-    const onClickLabel = vi.fn();
+
     // render detail card with label
-    render(
-      <DetailCard
-        {...defaultInputs}
-        labels={labels}
-        onClickLabel={onClickLabel}
-      />
-    );
+    render(<DetailCard {...defaultInputs} labels={labels} />);
     // expect label to be in the document
     expect(screen.getByText("National Highways")).toBeInTheDocument();
   });
