@@ -1,6 +1,7 @@
 import { Chip, alpha, chipClasses, darken } from "@mui/material";
 
 import { LabelChipProps } from "./LabelChip.types";
+import NoWrapTypography from "../../NoWrapTypography";
 import React from "react";
 
 // component to display a chip with custom colors
@@ -10,12 +11,14 @@ export default function LabelChip({
   color = "#005FA8",
   size = "medium",
   variant = "filled",
+  visible = true,
   ...props
 }: LabelChipProps) {
   // return the styled chip component
   return (
     <Chip
       {...props}
+      className="label-chip"
       clickable={clickable}
       sx={{
         "&:hover": {
@@ -28,9 +31,10 @@ export default function LabelChip({
         },
         [`& .${chipClasses.deleteIcon}:hover`]: {
           color: theme => theme.palette.getContrastText(color)
-        }
+        },
+        visibility: visible ? "visible" : "hidden"
       }}
-      label={label}
+      label={<NoWrapTypography variant="inherit">{label}</NoWrapTypography>}
       size={size}
       variant={variant}
     />

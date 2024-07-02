@@ -9,4 +9,8 @@ export type LabelChipProps = Omit<ChipProps, "color" | "label"> & {
    * The label content of the chip.
    */
   label: string;
+  /**
+   * The visibility of the chip.
+   */
+  visible?: boolean;
 };

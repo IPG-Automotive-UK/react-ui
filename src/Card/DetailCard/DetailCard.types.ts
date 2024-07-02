@@ -39,18 +39,6 @@ export type DetailCardProps = {
    */
   media?: string;
   /**
-   * The height of the media in px.
-   */
-  mediaHeight?: number;
-  /**
-   * The width of the media in px.
-   */
-  mediaWidth?: number;
-  /**
-   * Callback fired when the label is clicked.
-   */
-  onClickLabel?: (label: Label) => void;
-  /**
    * Callback fired when the download files button is clicked.
    */
   onClickDownload?: (paths: string[]) => void;
@@ -91,10 +79,6 @@ export type DetailCardHeaderProps = {
    */
   labels?: Label[];
   /**
-   * Callback fired when the label is clicked.
-   */
-  onClickLabel?: (label: Label) => void;
-  /**
    * The subheader of the card.
    */
   subtitle: string;
@@ -102,26 +86,6 @@ export type DetailCardHeaderProps = {
    * The title of the card.
    */
   title: string;
-  /**
-   * The width of the card in px.
-   */
-  width: number;
-};
-
-export type DetailCardLabelStackProps = {
-  /**
-   * The labels to be displayed on the card.
-   * labels should be an array of objects with the following properties:
-   */
-  labels?: Label[];
-  /**
-   * The spacing between the labels in px.
-   */
-  labelSpacing: number;
-  /**
-   * Callback fired when the label is clicked.
-   */
-  onClickLabel?: (label: Label) => void;
   /**
    * The width of the card in px.
    */
