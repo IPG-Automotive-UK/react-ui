@@ -1,6 +1,5 @@
 export { default } from "./DetailCard";
 export type {
   DetailCardProps,
-  DetailCardHeaderProps,
-  DetailCardLabelStackProps
+  DetailCardHeaderProps
 } from "./DetailCard.types";
