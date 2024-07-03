@@ -24,6 +24,7 @@ export default function NumberField(props: NumberFieldProps) {
   return (
     <TextField
       {...rest}
+      fullWidth
       margin={margin}
       variant={variant}
       InputLabelProps={{ shrink: true }}
@@ -45,7 +46,10 @@ export default function NumberField(props: NumberFieldProps) {
               "& input::-webkit-clear-button, & input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button":
                 { display: "none" }
             }
-          : {}
+          : {
+              "& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button":
+                { opacity: 1 }
+            }
       }
       type="number"
     />
