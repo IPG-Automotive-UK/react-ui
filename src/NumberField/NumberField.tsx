@@ -23,6 +23,7 @@ export default function NumberField(props: NumberFieldProps) {
   // Spread the rest of the mui component props
   return (
     <TextField
+      fullWidth
       {...rest}
       margin={margin}
       variant={variant}
@@ -45,7 +46,10 @@ export default function NumberField(props: NumberFieldProps) {
               "& input::-webkit-clear-button, & input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button":
                 { display: "none" }
             }
-          : {}
+          : {
+              "& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button":
+                { opacity: 1 }
+            }
       }
       type="number"
     />
