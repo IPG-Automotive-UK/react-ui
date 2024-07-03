@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   Card,
   CardActions,
   CardContent,
@@ -8,16 +7,15 @@ import {
   IconButton,
   Popover,
   Stack,
-  Typography,
   cardHeaderClasses
 } from "@mui/material";
-import React, { Fragment, useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 
 import { Infographic } from "../../CardContent";
-import LabelChip from "../../LabelSelector/LabelChip/LabelChip";
+import LabelChipGroup from "../../LabelSelector/LabelChipGroup/LabelChipGroup";
+import type { LabelChipGroupProps } from "../../LabelSelector/LabelChipGroup/LabelChipGroup.types";
 import { MoreVert } from "@mui/icons-material";
 import NoWrapTypography from "../../NoWrapTypography/NoWrapTypography";
-import { ResizeObserver } from "@juggle/resize-observer";
 import { SummaryCardProps } from "./SummaryCard.types";
 
 function SummaryCard({
@@ -33,92 +31,12 @@ function SummaryCard({
   title = "title",
   width = 368
 }: SummaryCardProps) {
-  // title, subtitle and label refs and overflow states
-  const labelStackRef = useRef<HTMLDivElement>(null);
-
-  const [overFlowingLabels, setOverFlowingLabels] = useState<
-    HTMLElement[] | []
-  >([]);
-
-  // label popover anchor state
-  const [labelAnchorEl, setLabelAnchorEl] = useState<HTMLElement | null>(null);
-
   // more options popover anchor state
   const [moreOptionsAnchorEl, setMoreOptionsAnchorEl] =
     useState<HTMLElement | null>(null);
 
   // header content width
   const headerContentWidth = width - 60;
-
-  // label content width
-  const labelContentWidth = width - 45;
-
-  // label spacing
-  const labelSpacing = 8;
-
-  // overflow button width
-  const overflowButtonWidth = 40;
-
-  // check if label stack is overflowing
-  const useComponentSize = (comRef: React.RefObject<HTMLDivElement>) => {
-    const [isLabelStackOverflow, setIsLabelStackOverflow] = useState(false);
-
-    useEffect(() => {
-      const sizeObserver = new ResizeObserver((entries, observer) => {
-        entries.forEach(({ target }) => {
-          setIsLabelStackOverflow(target.scrollWidth > target.clientWidth);
-        });
-      });
-      if (comRef.current) {
-        sizeObserver.observe(comRef.current);
-      }
-
-      let sum = overflowButtonWidth;
-      const overFlowLabels: HTMLElement[] = [];
-
-      // for each of the labels in the label stack
-      if (labelStackRef.current) {
-        labelStackRef.current.childNodes.forEach(child => {
-          // add the width of the child plus 8px of space between each child to the sum
-          if (child instanceof HTMLElement) {
-            sum += child.offsetWidth + labelSpacing;
-
-            // if the sum is greater than the header contend width, then them this child is overflowing
-            // the header content width
-            if (sum > labelContentWidth) {
-              overFlowLabels.push(child);
-            }
-          }
-        });
-      }
-
-      // set the overflowing labels
-      setOverFlowingLabels(overFlowLabels);
-
-      return () => sizeObserver.disconnect();
-    }, [comRef]);
-
-    return [isLabelStackOverflow];
-  };
-
-  // determine what labels to show
-  const notOverflowingLabels = labels.slice(
-    0,
-    labels.length - overFlowingLabels.length
-  );
-
-  // handle the click of the label overflow button by setting the label anchor element
-  const handleLabelOverflowClick = (event: React.MouseEvent<HTMLElement>) => {
-    setLabelAnchorEl(event.currentTarget);
-  };
-
-  // check if label stack is overflowing
-  const [labelSize] = useComponentSize(labelStackRef);
-
-  // handle the close of the label overflow popover by setting the label anchor element to null
-  const handleLabelOverflowClose = () => {
-    setLabelAnchorEl(null);
-  };
 
   // handle the click of the more options button by setting the more options anchor element
   const handleMoreOptionsClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -130,11 +48,22 @@ function SummaryCard({
     setMoreOptionsAnchorEl(null);
   };
 
-  // determine if the label overflow popover is open
-  const isLabelOverflowOpen = Boolean(labelAnchorEl);
-
   // determine if the more options popover is open
   const isMoreOptionsOpen = Boolean(moreOptionsAnchorEl);
+
+  // sort the labels by their length so that shorter labels are first and have more chance of showing in the card rather than being truncated in the popper
+  const sortedLabels = labels.sort((a, b) => a.name.length - b.name.length);
+
+  // convert the labels to chips
+  const labelChips: LabelChipGroupProps["chips"] = sortedLabels.map(label => {
+    return {
+      clickable: true,
+      color: label.color,
+      label: label.name,
+      onClick: () => handleLabelClick(label),
+      size: "small"
+    };
+  });
 
   // handle label click by calling the onClickLabel prop
   const handleLabelClick = (label: {
@@ -198,53 +127,7 @@ function SummaryCard({
             overflowX: "hidden"
           }}
         >
-          <Stack
-            ref={labelStackRef}
-            direction="row"
-            spacing={`${labelSpacing}px`}
-          >
-            {!labelSize ? (
-              <Fragment>
-                {labels.map(label => (
-                  <LabelChip
-                    clickable
-                    key={label._id}
-                    label={label.name}
-                    color={label.color}
-                    onClick={() => handleLabelClick(label)}
-                    size="small"
-                  />
-                ))}
-              </Fragment>
-            ) : (
-              <Fragment>
-                {notOverflowingLabels.map(label => (
-                  <LabelChip
-                    clickable
-                    key={label._id}
-                    label={label.name}
-                    color={label.color}
-                    onClick={() => handleLabelClick(label)}
-                    size="small"
-                  />
-                ))}
-                <Button
-                  variant="text"
-                  size="large"
-                  onClick={handleLabelOverflowClick}
-                  sx={{
-                    maxWidth: overflowButtonWidth,
-                    minWidth: overflowButtonWidth,
-                    padding: 0
-                  }}
-                >
-                  <Typography sx={{ fontSize: 15 }}>
-                    +{overFlowingLabels.length}
-                  </Typography>
-                </Button>
-              </Fragment>
-            )}
-          </Stack>
+          <LabelChipGroup chips={labelChips} />
         </Box>
         <Infographic media={media} version={version} />
         <CardContent
@@ -261,39 +144,6 @@ function SummaryCard({
           {moreCardActions}
         </CardActions>
       </Card>
-      <Popover
-        open={isLabelOverflowOpen}
-        anchorEl={labelAnchorEl}
-        onClose={handleLabelOverflowClose}
-        anchorOrigin={{
-          horizontal: "left",
-          vertical: "bottom"
-        }}
-      >
-        <Stack
-          sx={{}}
-          m={`${labelSpacing}px`}
-          direction="column"
-          spacing={`${labelSpacing}px`}
-        >
-          {labels.map(label => {
-            if (!notOverflowingLabels.includes(label)) {
-              return (
-                <LabelChip
-                  clickable
-                  key={label._id}
-                  label={label.name}
-                  color={label.color}
-                  size="small"
-                  onClick={() => handleLabelClick(label)}
-                />
-              );
-            } else {
-              return null;
-            }
-          })}
-        </Stack>
-      </Popover>
       <Popover
         open={isMoreOptionsOpen}
         anchorEl={moreOptionsAnchorEl}
