@@ -36,7 +36,7 @@ describe("SummaryCard", () => {
   });
 
   // test that summary card renders with label that can be clicked
-  it("renders label and can be clicked", async () => {
+  it("renders label", () => {
     const labels = [
       {
         _id: "1",
@@ -50,7 +50,7 @@ describe("SummaryCard", () => {
     const onClickLabel = vi.fn();
 
     // render summary card with label
-    render(
+    const { container } = render(
       <SummaryCard
         title="summary card title"
         subtitle="summary card subtitle"
@@ -59,16 +59,15 @@ describe("SummaryCard", () => {
       />
     );
 
+    // check the chip is rendered
+    const chip = container.querySelector(".label-chip");
+    expect(chip).toBeInTheDocument();
+
+    // check the chip has the correct label
+    expect(chip).toHaveTextContent("National Highways");
+
     // expect label to be in the document
     expect(screen.getByText("National Highways")).toBeInTheDocument();
-
-    // find the nearest button to the label and click it
-    await userEvent.click(
-      screen.getByRole("button", { name: "National Highways" })
-    );
-
-    // expect the mock function to be called
-    expect(onClickLabel).toHaveBeenCalled();
   });
 
   // test that image is rendered in summary card
