@@ -85,9 +85,12 @@ function DetailCardHeader({
   buttonsStack,
   labels
 }: DetailCardHeaderProps) {
+  // sort the labels by their length so that shorter labels are first and have more chance of showing in the card rather than being truncated in the popper
+  const sortedLabels = labels?.sort((a, b) => a.name.length - b.name.length);
+
   // convert the labels to chips
-  const labelChips: LabelChipGroupProps["chips"] = labels
-    ? labels.map(label => {
+  const labelChips: LabelChipGroupProps["chips"] = sortedLabels
+    ? sortedLabels.map(label => {
         return {
           clickable: false,
           color: label.color,
