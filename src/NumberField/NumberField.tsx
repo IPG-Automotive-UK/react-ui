@@ -23,8 +23,8 @@ export default function NumberField(props: NumberFieldProps) {
   // Spread the rest of the mui component props
   return (
     <TextField
-      {...rest}
       fullWidth
+      {...rest}
       margin={margin}
       variant={variant}
       InputLabelProps={{ shrink: true }}
