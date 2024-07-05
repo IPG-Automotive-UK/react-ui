@@ -206,6 +206,20 @@ describe("Select", () => {
     expect(input).toHaveValue("option-one");
   });
 
+  it("textfield input value", () => {
+    const { getByRole } = render(
+      <Autocomplete
+        inputValue={"option-one"}
+        options={[]}
+        label="Select an option"
+      />
+    );
+
+    const input = getByRole("combobox") as HTMLInputElement;
+
+    expect(input).toHaveValue("option-one");
+  });
+
   it("can use an onBlur callback", async () => {
     const onBlur = vi.fn();
 

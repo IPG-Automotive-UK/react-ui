@@ -19,6 +19,7 @@ export type AutocompleteProps<
   | "defaultValue"
   | "disabled"
   | "disableClearable"
+  | "inputValue"
   | "size"
   | "limitTags"
   | "disableCloseOnSelect"
