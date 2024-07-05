@@ -94,6 +94,7 @@ const defaultArgs: Story["args"] = {
   disabled: false,
   error: false,
   helperText: "Helper Text",
+  inputValue: undefined,
   label: "Select options",
   limitTags: -1,
   margin: "normal",
@@ -183,6 +184,7 @@ export const ReadOnly: Story = {
     // Define the read-only story args
     ...defaultArgs,
     defaultValue: "Option 4",
+    inputValue: "Option 4",
     readOnly: true,
     required: true
   },
