@@ -27,6 +27,7 @@ export default function Autocomplete<
   disabled = false,
   error = false,
   helperText,
+  inputValue,
   label,
   limitTags = -1,
   margin = "normal",
@@ -48,6 +49,7 @@ export default function Autocomplete<
       defaultValue={defaultValue}
       disableClearable={disableClearable}
       disableCloseOnSelect={disableCloseOnSelect}
+      inputValue={inputValue}
       limitTags={limitTags}
       multiple={multiple}
       onBlur={onBlur}

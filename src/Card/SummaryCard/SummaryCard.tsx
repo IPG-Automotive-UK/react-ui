@@ -4,13 +4,14 @@ import {
   CardActions,
   CardContent,
   CardHeader,
-  CardMedia,
   IconButton,
   Popover,
+  Stack,
   cardHeaderClasses
 } from "@mui/material";
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 
+import { Infographic } from "../../CardContent";
 import LabelChipGroup from "../../LabelSelector/LabelChipGroup/LabelChipGroup";
 import type { LabelChipGroupProps } from "../../LabelSelector/LabelChipGroup/LabelChipGroup.types";
 import { MoreVert } from "@mui/icons-material";
@@ -22,8 +23,7 @@ function SummaryCard({
   height = 600,
   labels = [],
   media = "",
-  mediaHeight = 190,
-  mediaWidth = 336,
+  version,
   moreOptionsPopover = null,
   onClickLabel = () => {},
   moreCardActions = null,
@@ -77,7 +77,7 @@ function SummaryCard({
 
   // render the summary card
   return (
-    <Fragment>
+    <Stack id="SummaryCard">
       <Card sx={{ height, width }}>
         <CardHeader
           sx={{
@@ -129,26 +129,10 @@ function SummaryCard({
         >
           <LabelChipGroup chips={labelChips} />
         </Box>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center"
-          }}
-        >
-          <CardMedia
-            component="img"
-            src={media}
-            sx={{
-              height: mediaHeight,
-              objectFit: "contain",
-              padding: 2,
-              width: mediaWidth
-            }}
-          />
-        </Box>
+        <Infographic media={media} version={version} />
         <CardContent
           sx={{
-            height: height - mediaHeight - 196,
+            height: height - 386,
             overflowY: "hidden",
             px: 0,
             py: 1
@@ -172,7 +156,7 @@ function SummaryCard({
       >
         {moreOptionsPopover}
       </Popover>
-    </Fragment>
+    </Stack>
   );
 }
 

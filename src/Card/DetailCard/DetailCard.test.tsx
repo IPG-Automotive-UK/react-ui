@@ -2,7 +2,6 @@ import { Button, Stack } from "@mui/material";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 import DetailCard from "./DetailCard";
-import FileCard from "../FileCard/FileCard";
 import React from "react";
 import { action } from "@storybook/addon-actions";
 import { vi } from "vitest";
@@ -53,10 +52,7 @@ describe("DetailCard", () => {
   // test that image is rendered in detail card
   it("renders image", () => {
     render(
-      <FileCard
-        {...defaultInputs}
-        media="https://picsum.photos/id/191/400/200"
-      />
+      <DetailCard {...defaultInputs} media="https://picsum.photos/400/200" />
     );
     // expect image to be in the document
     expect(screen.getByRole("img")).toBeInTheDocument();

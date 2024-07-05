@@ -1,4 +1,4 @@
-import { Box, Tab, Tabs } from "@mui/material";
+import { Box, Tab, Tabs, useTheme } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
 import { TabPanelProps } from "./TabPanel.types";
@@ -15,13 +15,14 @@ const TabPanel = ({
   children,
   active,
   variant = "fullWidth",
-  display = "block",
-  flexWrap = "nowrap",
   onTabChange,
   customChildren
 }: TabPanelProps) => {
   // state for the active tab
   const [activeTab, setActiveTab] = useState(active ?? 0);
+
+  // get theme object
+  const theme = useTheme();
 
   // update internal state when the active prop changes
   useEffect(() => {
@@ -45,7 +46,15 @@ const TabPanel = ({
   };
 
   return (
-    <Box>
+    <Box
+      height={1}
+      width={1}
+      display={"flex"}
+      flexDirection={"column"}
+      flexGrow={1}
+      minHeight={0}
+      sx={{ border: `1px solid ${theme.palette.divider}`, borderRadius: "4px" }}
+    >
       <Tabs
         value={activeTab}
         onChange={handleChange}
@@ -56,6 +65,8 @@ const TabPanel = ({
           backgroundColor: "background.paper",
           borderBottom: 1,
           borderColor: "divider",
+          borderTopLeftRadius: "4px",
+          borderTopRightRadius: "4px",
           position: "sticky",
           top: 0,
           zIndex: 3
@@ -76,7 +87,11 @@ const TabPanel = ({
       </Tabs>
       <Box
         sx={{
-          overflowY: "auto"
+          display: "flex",
+          flexDirection: "column",
+          flexGrow: 1,
+          overflowY: "auto",
+          width: 1
         }}
       >
         {React.Children.map(children, (child, index) => {
@@ -89,8 +104,8 @@ const TabPanel = ({
               key={index}
               id={`tabpanel-${index}`}
               aria-labelledby={`tab-${index}`}
-              display={display}
-              flexWrap={flexWrap}
+              display={"flex"}
+              flexDirection={"column"}
             >
               {activeTab === index && child.props.children}
             </Box>

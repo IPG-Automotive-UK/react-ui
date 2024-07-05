@@ -1,8 +1,8 @@
-import { Box, Stack } from "@mui/material";
+import { Box, Card, Stack } from "@mui/material";
 import { DetailCardHeaderProps, DetailCardProps } from "./DetailCard.types";
+import { FileDetails, Infographic } from "../../CardContent";
 import React, { Fragment, useEffect, useRef, useState } from "react";
 
-import FileCard from "../FileCard/FileCard";
 import LabelChipGroup from "../../LabelSelector/LabelChipGroup/LabelChipGroup";
 import type { LabelChipGroupProps } from "../../LabelSelector/LabelChipGroup/LabelChipGroup.types";
 import NoWrapTypography from "../../NoWrapTypography/NoWrapTypography";
@@ -25,38 +25,38 @@ function DetailCard({
 }: DetailCardProps) {
   // render the detail card
   return (
-    <Fragment>
-      <Stack
-        mt={1}
-        mb={3}
+    <Stack
+      className="detail-card-container"
+      mt={1}
+      mb={3}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        flexGrow: 1,
+        height: "100%",
+        width
+      }}
+    >
+      <DetailCardHeader
+        title={title}
+        subtitle={subtitle}
+        buttonsStack={buttonsStack}
+        labels={labels}
+        width={width}
+      />
+      <Box
         sx={{
           display: "flex",
-          flexDirection: "column",
-          flexGrow: 1,
+          flexDirection: "row",
           height: "100%",
-          width
+          my: 2,
+          overflow: "auto"
         }}
       >
-        <DetailCardHeader
-          title={title}
-          subtitle={subtitle}
-          buttonsStack={buttonsStack}
-          labels={labels}
-          width={width}
-        />
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            height: "100%",
-            my: 2,
-            overflow: "auto"
-          }}
-        >
-          <Box ml={0.5}>
-            <FileCard
-              media={media}
-              width={368}
+        <Box ml={0.5}>
+          <Card>
+            <Infographic media={media} />
+            <FileDetails
               files={files}
               downloadButtonText={downloadButtonText}
               downloadButtonTextOnSearch={downloadButtonTextOnSearch}
@@ -64,17 +64,17 @@ function DetailCard({
               onClickDownload={onClickDownload}
               onClickFile={onClickFile}
             />
-          </Box>
-          <Stack
-            ml={2}
-            spacing={2}
-            sx={{ display: "flex", flexGrow: 1, mr: 0.5, width: "100%" }}
-          >
-            {content}
-          </Stack>
+          </Card>
         </Box>
-      </Stack>
-    </Fragment>
+        <Stack
+          ml={2}
+          spacing={2}
+          sx={{ display: "flex", flexGrow: 1, mr: 0.5, width: "100%" }}
+        >
+          {content}
+        </Stack>
+      </Box>
+    </Stack>
   );
 }
 
