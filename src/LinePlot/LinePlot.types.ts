@@ -7,10 +7,6 @@ export type LinePlotProps = {
    */
   exponentFormat?: "none" | "e" | "E" | "power" | "SI" | "B";
   /**
-   * markers is a boolean that determines whether or not the points are marked.
-   */
-  markers?: boolean;
-  /**
    *  Minimum height of the plot.
    */
   minHeight?: number;
@@ -19,7 +15,11 @@ export type LinePlotProps = {
    */
   showGrid?: boolean;
   /**
-   *  showTitle is a boolean that determines whether or not the title is shown on main view.
+   * Boolean that determines whether or not the marker points are shown.
+   */
+  showMarkers?: boolean;
+  /**
+   *  Boolean that determines whether or not the title is shown at the top of the plot.
    */
   showTitle?: boolean;
   /**

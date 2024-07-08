@@ -17,7 +17,7 @@ const LinePlot = ({
   ydata = [],
   xlabel = "",
   ylabel = "",
-  markers = true,
+  showMarkers = true,
   showTitle = false,
   minHeight = 400,
   showGrid = true,
@@ -71,7 +71,7 @@ const LinePlot = ({
                 width: 3
               },
               marker: { color: "rgb(0, 48, 99)", size: 7 },
-              mode: markers ? "lines+markers" : "lines",
+              mode: showMarkers ? "lines+markers" : "lines",
               type: "scatter",
               x: xdata,
               y: ydata
