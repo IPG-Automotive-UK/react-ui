@@ -102,6 +102,7 @@ const LinePlot = ({
               color: theme.palette.mode === "light" ? "black" : "white",
               exponentformat: exponentFormat,
               gridcolor: theme.palette.mode === "light" ? "" : "grey",
+              showgrid: showGrid,
               ticksuffix: " ",
               title: {
                 font: {

@@ -110,6 +110,7 @@ const SurfacePlot = ({
                   theme.palette.mode === "light"
                     ? ""
                     : theme.palette.grey["500"],
+                showgrid: showGrid,
                 title: {
                   font: {
                     family: "Montserrat",
@@ -125,6 +126,7 @@ const SurfacePlot = ({
                   theme.palette.mode === "light"
                     ? ""
                     : theme.palette.grey["500"],
+                showgrid: showGrid,
                 title: {
                   font: {
                     family: "Montserrat",
