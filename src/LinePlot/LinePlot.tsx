@@ -69,7 +69,7 @@ const LinePlot = ({
             {
               line: {
                 color: "rgb(0, 96, 167)",
-                width: 3
+                width: 2
               },
               marker: { color: "rgb(0, 48, 99)", size: 7 },
               mode: showMarkers ? "lines+markers" : "lines",
