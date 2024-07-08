@@ -3,7 +3,6 @@ import { Meta, StoryFn } from "@storybook/react";
 import React from "react";
 import SurfacePlot from "./SurfacePlot";
 import { SurfacePlotProps } from "./SurfacePlot.types";
-import { useArgs } from "@storybook/preview-api";
 
 /**
  * Story metadata
@@ -16,14 +15,6 @@ export default meta;
 
 // Story Template
 const Template: StoryFn<SurfacePlotProps> = args => {
-  // Get the current values of the story's arguments and a function to update them
-  const [{ showTitle }, updateArgs] = useArgs<SurfacePlotProps>();
-
-  // Update the showTitle argument whenever it changes
-  React.useEffect(() => {
-    updateArgs({ showTitle });
-  }, [showTitle, updateArgs]);
-
   // Render the SurfacePlot component with the current arguments
   return <SurfacePlot {...args} />;
 };
@@ -34,7 +25,6 @@ export const Default = {
   args: {
     minHeight: 0,
     showGrid: true,
-    showTitle: false,
     title: "Surface Plot",
     xdata: [0.18, 0.36, 0.55, 0.73, 0.91, 1],
     xlabel: "Normalized Torque (-)",

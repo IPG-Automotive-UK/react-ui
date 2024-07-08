@@ -23,7 +23,6 @@ export const Default = {
   args: {
     showGrid: true,
     showMarkers: true,
-    showTitle: false,
     title: "",
     xdata: [0, 1, 2, 3, 4, 5],
     xlabel: "X label (rad)",
@@ -38,7 +37,6 @@ export const ScientificNotation = {
   args: {
     showGrid: true,
     showMarkers: true,
-    showTitle: true,
     title: "Scientific Notation",
     xdata: [0, 0.0001, 0.0002, 0.0003, 0.0004, 0.0005],
     xlabel: "X label (rad)",

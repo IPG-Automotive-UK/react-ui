@@ -15,7 +15,6 @@ const SurfacePlot = ({
   ylabel = "",
   zlabel = "",
   title = "",
-  showTitle = false,
   minHeight = 400,
   showGrid = true,
   exponentFormat
@@ -38,6 +37,9 @@ const SurfacePlot = ({
 
   // get config for plotly
   const config = getConfig({ handleClickFullscreen, isFullscreen });
+
+  // determine whether to show title
+  const showTitle = title !== "";
 
   return (
     <ConditionalDialog

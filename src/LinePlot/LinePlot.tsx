@@ -18,7 +18,6 @@ const LinePlot = ({
   xlabel = "",
   ylabel = "",
   showMarkers = true,
-  showTitle = false,
   minHeight = 400,
   showGrid = true,
   exponentFormat
@@ -41,6 +40,9 @@ const LinePlot = ({
 
   // get config for plotly
   const config = getConfig({ handleClickFullscreen, isFullscreen });
+
+  // determine whether to show title
+  const showTitle = title !== "";
 
   return (
     <ConditionalDialog

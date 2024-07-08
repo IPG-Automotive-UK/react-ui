@@ -19,10 +19,6 @@ export type LinePlotProps = {
    */
   showMarkers?: boolean;
   /**
-   *  Boolean that determines whether or not the title is shown at the top of the plot.
-   */
-  showTitle?: boolean;
-  /**
    *  Title of the plot
    */
   title?: string;

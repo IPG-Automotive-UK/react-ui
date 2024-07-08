@@ -15,10 +15,6 @@ export type SurfacePlotProps = {
    */
   showGrid?: boolean;
   /**
-   * showTitle is a boolean that determines whether or not the title is shown on the main view.
-   */
-  showTitle?: boolean;
-  /**
    * Title of the plot.
    */
   title?: string;
