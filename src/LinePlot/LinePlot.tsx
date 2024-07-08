@@ -19,8 +19,7 @@ const LinePlot = ({
   ylabel = "",
   showMarkers = true,
   minHeight = 400,
-  showGrid = true,
-  exponentFormat
+  showGrid = true
 }: LinePlotProps) => {
   // theme hook
   const theme = useTheme();
@@ -89,7 +88,7 @@ const LinePlot = ({
             plot_bgcolor: "rgba(0,0,0,0)",
             xaxis: {
               color: theme.palette.mode === "light" ? "" : "white",
-              exponentformat: exponentFormat,
+              exponentformat: "E",
               gridcolor: theme.palette.mode === "light" ? "" : "grey",
               showgrid: showGrid,
               title: {
@@ -102,7 +101,7 @@ const LinePlot = ({
             },
             yaxis: {
               color: theme.palette.mode === "light" ? "black" : "white",
-              exponentformat: exponentFormat,
+              exponentformat: "E",
               gridcolor: theme.palette.mode === "light" ? "" : "grey",
               showgrid: showGrid,
               ticksuffix: " ",

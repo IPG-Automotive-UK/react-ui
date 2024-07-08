@@ -16,8 +16,7 @@ const SurfacePlot = ({
   zlabel = "",
   title = "",
   minHeight = 400,
-  showGrid = true,
-  exponentFormat
+  showGrid = true
 }: SurfacePlotProps) => {
   // theme hook
   const theme = useTheme();
@@ -91,7 +90,7 @@ const SurfacePlot = ({
               camera: { eye: { x: 2 } },
               xaxis: {
                 color: theme.palette.mode === "light" ? "" : "white",
-                exponentformat: exponentFormat,
+                exponentformat: "E",
                 gridcolor:
                   theme.palette.mode === "light"
                     ? ""
@@ -107,7 +106,7 @@ const SurfacePlot = ({
               },
               yaxis: {
                 color: theme.palette.mode === "light" ? "" : "white",
-                exponentformat: exponentFormat,
+                exponentformat: "E",
                 gridcolor:
                   theme.palette.mode === "light"
                     ? ""
@@ -123,7 +122,7 @@ const SurfacePlot = ({
               },
               zaxis: {
                 color: theme.palette.mode === "light" ? "" : "white",
-                exponentformat: exponentFormat,
+                exponentformat: "E",
                 gridcolor:
                   theme.palette.mode === "light"
                     ? ""

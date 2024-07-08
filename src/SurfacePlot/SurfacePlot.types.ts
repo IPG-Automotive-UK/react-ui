@@ -3,10 +3,6 @@
  */
 export type SurfacePlotProps = {
   /**
-   * Exponentformat is a string that determines the format for large numbers.
-   */
-  exponentFormat?: "none" | "e" | "E" | "power" | "SI" | "B";
-  /**
    *  Minimum height of the plot.
    */
   minHeight?: number;
