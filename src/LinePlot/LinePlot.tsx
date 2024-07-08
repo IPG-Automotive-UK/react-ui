@@ -21,7 +21,6 @@ const LinePlot = ({
   showTitle = false,
   minHeight = 400,
   showGrid = true,
-  labelFontSize,
   exponentFormat
 }: LinePlotProps) => {
   // theme hook
@@ -94,7 +93,7 @@ const LinePlot = ({
               title: {
                 font: {
                   family: "Montserrat",
-                  size: labelFontSize || undefined
+                  size: 12
                 },
                 text: xlabel || ""
               }
@@ -107,7 +106,7 @@ const LinePlot = ({
               title: {
                 font: {
                   family: "Montserrat",
-                  size: labelFontSize || undefined
+                  size: 12
                 },
                 text: ylabel || ""
               }

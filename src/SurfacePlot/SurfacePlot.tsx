@@ -17,7 +17,6 @@ const SurfacePlot = ({
   title = "",
   showTitle = false,
   minHeight = 400,
-  labelFontSize,
   showGrid = true,
   exponentFormat
 }: SurfacePlotProps) => {
@@ -99,7 +98,7 @@ const SurfacePlot = ({
                 title: {
                   font: {
                     family: "Montserrat",
-                    size: labelFontSize || undefined
+                    size: 12
                   },
                   text: xlabel || ""
                 }
@@ -114,7 +113,7 @@ const SurfacePlot = ({
                 title: {
                   font: {
                     family: "Montserrat",
-                    size: labelFontSize || undefined
+                    size: 12
                   },
                   text: ylabel || ""
                 }
@@ -129,7 +128,7 @@ const SurfacePlot = ({
                 title: {
                   font: {
                     family: "Montserrat",
-                    size: labelFontSize || undefined
+                    size: 12
                   },
                   text: zlabel || ""
                 }

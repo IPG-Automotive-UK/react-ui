@@ -7,10 +7,6 @@ export type LinePlotProps = {
    */
   exponentFormat?: "none" | "e" | "E" | "power" | "SI" | "B";
   /**
-   * Label font size
-   */
-  labelFontSize?: number;
-  /**
    * markers is a boolean that determines whether or not the points are marked.
    */
   markers?: boolean;

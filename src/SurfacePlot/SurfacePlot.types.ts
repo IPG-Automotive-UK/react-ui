@@ -7,10 +7,6 @@ export type SurfacePlotProps = {
    */
   exponentFormat?: "none" | "e" | "E" | "power" | "SI" | "B";
   /**
-   * Label font size
-   */
-  labelFontSize?: number;
-  /**
    *  Minimum height of the plot.
    */
   minHeight?: number;
