@@ -68,10 +68,10 @@ const LinePlot = ({
           data={[
             {
               line: {
-                color: "rgb(0, 96, 167)",
+                color: theme.palette.primary.main,
                 width: 2
               },
-              marker: { color: "rgb(0, 48, 99)", size: 7 },
+              marker: { color: theme.palette.primary.dark, size: 7 },
               mode: showMarkers ? "lines+markers" : "lines",
               type: "scatter",
               x: xdata,
