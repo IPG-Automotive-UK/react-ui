@@ -18,7 +18,6 @@ const LinePlot = ({
   xlabel = "",
   ylabel = "",
   showMarkers = true,
-  minHeight = 400,
   showGrid = true
 }: LinePlotProps) => {
   // theme hook
@@ -114,7 +113,7 @@ const LinePlot = ({
               }
             }
           }}
-          style={{ flexGrow: 1, height: "100%", minHeight, width: "100%" }}
+          style={{ flexGrow: 1, height: "100%", width: "100%" }}
           useResizeHandler={true}
           config={config}
         />

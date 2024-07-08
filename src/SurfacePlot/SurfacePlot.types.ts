@@ -3,10 +3,6 @@
  */
 export type SurfacePlotProps = {
   /**
-   *  Minimum height of the plot.
-   */
-  minHeight?: number;
-  /**
    * Boolean that determines whether or not the grid is shown.
    */
   showGrid?: boolean;

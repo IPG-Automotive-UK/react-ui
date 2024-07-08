@@ -15,7 +15,6 @@ const SurfacePlot = ({
   ylabel = "",
   zlabel = "",
   title = "",
-  minHeight = 400,
   showGrid = true
 }: SurfacePlotProps) => {
   // theme hook
@@ -142,7 +141,6 @@ const SurfacePlot = ({
             flexGrow: 1,
             fontFamily: "Montserrat",
             height: "100%",
-            minHeight,
             width: "100%"
           }}
           useResizeHandler={true}
