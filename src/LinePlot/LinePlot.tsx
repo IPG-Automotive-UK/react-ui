@@ -79,6 +79,7 @@ const LinePlot = ({
           ]}
           layout={{
             autosize: true,
+            margin: { b: 35, l: 50, r: 0, t: 30 },
             paper_bgcolor: "rgba(0,0,0,0)",
             plot_bgcolor: "rgba(0,0,0,0)",
             xaxis: {
@@ -99,7 +100,6 @@ const LinePlot = ({
               exponentformat: "E",
               gridcolor: theme.palette.mode === "light" ? "" : "grey",
               showgrid: showGrid,
-
               title: {
                 font: {
                   family: "Montserrat",
