@@ -105,6 +105,25 @@ export default function useUploader({
     setRejectionMessage(errorMessage);
   };
 
+  function fileExtensionValidator(file) {
+    // check only when file name is set
+    if (file.name) {
+      const acceptedFileExtensions = Object.values(acceptedFiles ?? {}).flat();
+
+      const fileExtension = file.name.split(".").pop().toLowerCase();
+      console.log(fileExtension);
+
+      if (!acceptedFileExtensions.includes(fileExtension)) {
+        return {
+          code: "file-invalid-type",
+          message: `File type must be ${acceptedFileExtensions}.`
+        };
+      }
+    }
+
+    return null;
+  }
+
   // use react-dropzone hook
   const dropzone = useDropzone({
     accept: acceptedFiles,
@@ -113,7 +132,8 @@ export default function useUploader({
     multiple,
     onDropAccepted,
     onDropRejected,
-    useFsAccessApi: false
+    useFsAccessApi: false,
+    validator: fileExtensionValidator
   });
 
   // handle file deletion
