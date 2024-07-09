@@ -1,4 +1,5 @@
 import { File } from "../../Common.types";
+import { HTMLAttributeAnchorTarget } from "react";
 
 export type FileDetailsProps = {
   /**
@@ -16,7 +17,7 @@ export type FileDetailsProps = {
   /**
    * The download href link target attribute.
    */
-  downloadLinkTarget?: string;
+  downloadLinkTarget?: HTMLAttributeAnchorTarget;
   /**
    * The fileTitle of the card.
    */
