@@ -100,6 +100,7 @@ const LinePlot = ({
               exponentformat: "E",
               gridcolor: theme.palette.mode === "light" ? "" : "grey",
               showgrid: showGrid,
+              ticksuffix: " ",
               title: {
                 font: {
                   family: "Montserrat",
