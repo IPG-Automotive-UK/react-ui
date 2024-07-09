@@ -10,6 +10,10 @@ export type FileDetailsProps = {
    */
   downloadButtonTextOnSearch?: string;
   /**
+   * The download href link.
+   */
+  downloadHref?: string;
+  /**
    * The fileTitle of the card.
    */
   fileTitle: string;
@@ -32,4 +36,8 @@ export type FileDetailsProps = {
    * An optional initial search term
    */
   search?: string;
+  /**
+   * The download link target attribute.
+   */
+  target?: string;
 };

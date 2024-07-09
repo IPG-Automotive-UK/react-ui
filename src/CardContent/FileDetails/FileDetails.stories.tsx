@@ -86,3 +86,30 @@ export const WithFiles = {
 
   render: Template
 };
+
+export const DownloadWithHref = {
+  args: {
+    downloadButtonText: "Download All Files",
+    downloadHref: "/somepath/path/file",
+    fileTitle: "Files",
+    files: [
+      {
+        files: [{ filename: "roadFile.rd5", path: "/somepath/path/file" }],
+        header: "Road Files"
+      },
+      {
+        files: [
+          { filename: "roadInfographic1.png", path: "/somepath/path/file" },
+          {
+            filename: "someOtherRoadInfographic.gif",
+            path: "/somepath/path/file"
+          },
+          { filename: "coolRoadInfographic.jpg", path: "/somepath/path/file" }
+        ],
+        header: "Road Infographics"
+      }
+    ]
+  },
+
+  render: Template
+};
