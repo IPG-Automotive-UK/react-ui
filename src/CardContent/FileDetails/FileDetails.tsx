@@ -16,6 +16,8 @@ import SearchBar from "../../SearchBar/SearchBar";
 
 function FileDetails({
   downloadButtonText = "Download",
+  downloadLinkHref,
+  downloadLinkTarget,
   downloadButtonTextOnSearch = "Download Files",
   files: filesIn = [],
   fileTitle = "title",
@@ -132,11 +134,14 @@ function FileDetails({
         </Box>
         <Box>
           <Button
-            disabled={!files.some(file => file.files.length)}
+            component={downloadLinkHref ? "a" : "button"}
+            disabled={!files?.some(file => file.files.length)}
+            href={downloadLinkHref}
             sx={{ maxWidth: "265px", mr: 2 }}
             variant="outlined"
             startIcon={<Download />}
-            onClick={handleDownload}
+            target={downloadLinkTarget}
+            onClick={downloadLinkHref ? undefined : handleDownload}
           >
             {search === "" ? downloadButtonText : downloadButtonTextOnSearch}
           </Button>

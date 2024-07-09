@@ -251,4 +251,48 @@ describe("FileDetails", () => {
     // expect download button to be disabled
     expect(screen.getByText("Download Search Files")).toBeDisabled();
   });
+
+  it("passes through an href to the download button if provided", () => {
+    const files = [
+      {
+        files: [
+          {
+            filename: "file1",
+            path: "path1"
+          },
+          {
+            filename: "file2",
+            path: "path2"
+          }
+        ],
+        header: "header1"
+      },
+      {
+        files: [
+          {
+            filename: "file3",
+            path: "path3"
+          },
+          {
+            filename: "file4",
+            path: "path4"
+          }
+        ],
+        header: "header2"
+      }
+    ];
+
+    render(
+      <FileDetails
+        fileTitle="file card title"
+        downloadButtonText="Download File"
+        downloadLinkHref="some/path/to/a/download"
+        files={files}
+      />
+    );
+    expect(screen.getByRole("link", { name: "Download File" })).toHaveAttribute(
+      "href",
+      "some/path/to/a/download"
+    );
+  });
 });
