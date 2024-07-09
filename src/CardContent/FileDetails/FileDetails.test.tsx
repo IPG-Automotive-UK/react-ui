@@ -286,7 +286,7 @@ describe("FileDetails", () => {
       <FileDetails
         fileTitle="file card title"
         downloadButtonText="Download File"
-        downloadHref="some/path/to/a/download"
+        downloadLinkHref="some/path/to/a/download"
         files={files}
       />
     );
