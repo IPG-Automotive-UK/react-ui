@@ -90,7 +90,7 @@ export const WithFiles = {
 export const DownloadWithHref = {
   args: {
     downloadButtonText: "Download All Files",
-    downloadHref: "/somepath/path/file",
+    downloadLinkHref: "/somepath/path/file",
     fileTitle: "Files",
     files: [
       {

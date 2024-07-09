@@ -141,7 +141,7 @@ function FileDetails({
             variant="outlined"
             startIcon={<Download />}
             target={downloadLinkTarget}
-            onClick={handleDownload}
+            onClick={downloadLinkHref ? undefined : handleDownload}
           >
             {search === "" ? downloadButtonText : downloadButtonTextOnSearch}
           </Button>
