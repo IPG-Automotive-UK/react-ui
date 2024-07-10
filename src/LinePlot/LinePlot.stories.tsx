@@ -50,6 +50,7 @@ const CardTemplate: StoryFn<LinePlotProps> = args => {
 // Default
 export const Default = {
   args: {
+    fullscreenTitle: "",
     showGrid: true,
     showMarkers: true,
     title: "",
@@ -64,9 +65,10 @@ export const Default = {
 // Inside a Card
 export const InsideACard = {
   args: {
+    fullscreenTitle: "A plot in fullscreen mode",
     showGrid: true,
     showMarkers: true,
-    title: "A plot inside a card",
+    title: "",
     xdata: [0, 1, 2, 3, 4, 5],
     xlabel: "X label (rad)",
     ydata: [0, 1, 200, 3000, 40000, 50000],
@@ -78,6 +80,7 @@ export const InsideACard = {
 // Scientific Notation
 export const ScientificNotation = {
   args: {
+    fullscreenTitle: "A plot in fullscreen mode",
     showGrid: true,
     showMarkers: true,
     title: "Scientific Notation",

@@ -12,6 +12,7 @@ import Plotly from "react-plotly.js";
 import React from "react";
 
 const LinePlot = ({
+  fullscreenTitle = "",
   title = "",
   xdata = [],
   ydata = [],
@@ -39,14 +40,14 @@ const LinePlot = ({
   // get config for plotly
   const config = getConfig({ handleClickFullscreen, isFullscreen });
 
-  // determine whether to show title
+  // determine whether to show plot title
   const showTitle = title !== "";
 
   return (
     <ConditionalDialog
       condition={isFullscreen}
       onClose={handleClose}
-      dialogTitle={title}
+      dialogTitle={fullscreenTitle}
     >
       <Box
         display="flex"
