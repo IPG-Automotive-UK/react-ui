@@ -8,6 +8,7 @@ import { getConfig } from "../utils/plotlyConfig";
 
 // The `SurfacePlot` component renders a 3D surface plot using Plotly.
 const SurfacePlot = ({
+  fullscreenTitle = "",
   xdata = [],
   ydata = [],
   zdata = [],
@@ -15,11 +16,7 @@ const SurfacePlot = ({
   ylabel = "",
   zlabel = "",
   title = "",
-  showTitle = false,
-  minHeight = 400,
-  labelFontSize,
-  showGrid = true,
-  exponentFormat
+  showGrid = true
 }: SurfacePlotProps) => {
   // theme hook
   const theme = useTheme();
@@ -40,11 +37,14 @@ const SurfacePlot = ({
   // get config for plotly
   const config = getConfig({ handleClickFullscreen, isFullscreen });
 
+  // determine whether to show title
+  const showTitle = title !== "";
+
   return (
     <ConditionalDialog
       condition={isFullscreen}
       onClose={handleClose}
-      title={title}
+      title={fullscreenTitle}
     >
       <Box
         display="flex"
@@ -90,7 +90,7 @@ const SurfacePlot = ({
               camera: { eye: { x: 2 } },
               xaxis: {
                 color: theme.palette.mode === "light" ? "" : "white",
-                exponentformat: exponentFormat,
+                exponentformat: "E",
                 gridcolor:
                   theme.palette.mode === "light"
                     ? ""
@@ -99,37 +99,39 @@ const SurfacePlot = ({
                 title: {
                   font: {
                     family: "Montserrat",
-                    size: labelFontSize || undefined
+                    size: 12
                   },
                   text: xlabel || ""
                 }
               },
               yaxis: {
                 color: theme.palette.mode === "light" ? "" : "white",
-                exponentformat: exponentFormat,
+                exponentformat: "E",
                 gridcolor:
                   theme.palette.mode === "light"
                     ? ""
                     : theme.palette.grey["500"],
+                showgrid: showGrid,
                 title: {
                   font: {
                     family: "Montserrat",
-                    size: labelFontSize || undefined
+                    size: 12
                   },
                   text: ylabel || ""
                 }
               },
               zaxis: {
                 color: theme.palette.mode === "light" ? "" : "white",
-                exponentformat: exponentFormat,
+                exponentformat: "E",
                 gridcolor:
                   theme.palette.mode === "light"
                     ? ""
                     : theme.palette.grey["500"],
+                showgrid: showGrid,
                 title: {
                   font: {
                     family: "Montserrat",
-                    size: labelFontSize || undefined
+                    size: 12
                   },
                   text: zlabel || ""
                 }
@@ -140,7 +142,6 @@ const SurfacePlot = ({
             flexGrow: 1,
             fontFamily: "Montserrat",
             height: "100%",
-            minHeight,
             width: "100%"
           }}
           useResizeHandler={true}

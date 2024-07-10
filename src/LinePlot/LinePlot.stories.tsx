@@ -1,9 +1,9 @@
+import { Box, Typography } from "@mui/material";
 import { Meta, StoryFn } from "@storybook/react";
 
 import LinePlot from "./LinePlot";
 import { LinePlotProps } from "./LinePlot.types";
 import React from "react";
-import { useArgs } from "@storybook/preview-api";
 
 /**
  * Story metadata
@@ -14,30 +14,80 @@ const meta: Meta<typeof LinePlot> = {
 };
 export default meta;
 
-// Story Template
+// Basic LinePlot Template
 const Template: StoryFn<LinePlotProps> = args => {
-  // useArgs is a hook that returns the current state of the args object
-  const [{ markers }, updateArgs] = useArgs<LinePlotProps>();
-
-  // update the args object with the new markers value
-  React.useEffect(() => {
-    updateArgs({ markers });
-  }, [markers, updateArgs]);
-
   return <LinePlot {...args} />;
+};
+
+// LinePlot wrapped in a Card, which represents one of our usecases in VIRTO
+const CardTemplate: StoryFn<LinePlotProps> = args => {
+  return (
+    <Box
+      sx={{
+        alignItems: "flex-start",
+        background: theme =>
+          theme.palette.mode === "light" ? "white" : "#1e1e1e",
+        border: theme =>
+          theme.palette.mode === "light"
+            ? `1px solid ${theme.palette.divider}`
+            : "none",
+        borderRadius: "6px",
+        display: "flex",
+        flexDirection: "column",
+        height: "332px",
+        padding: "24px",
+        width: "800px"
+      }}
+    >
+      <Typography sx={{ fontSize: "20px", fontWeight: 500 }} color="primary">
+        {args.title}
+      </Typography>
+      <LinePlot {...args} />
+    </Box>
+  );
 };
 
 // Default
 export const Default = {
   args: {
-    markers: true,
+    fullscreenTitle: "",
     showGrid: true,
-    showTitle: false,
+    showMarkers: true,
     title: "",
     xdata: [0, 1, 2, 3, 4, 5],
     xlabel: "X label (rad)",
     ydata: [0, 20, 30, 40, 50],
-    ylabel: "Y label (-)"
+    ylabel: "Y label (Nm)"
+  },
+  render: Template
+};
+
+// Inside a Card
+export const InsideACard = {
+  args: {
+    fullscreenTitle: "A plot in fullscreen mode",
+    showGrid: true,
+    showMarkers: true,
+    title: "",
+    xdata: [0, 1, 2, 3, 4, 5],
+    xlabel: "X label (rad)",
+    ydata: [0, 1, 200, 3000, 40000, 50000],
+    ylabel: "Y label (Nm)"
+  },
+  render: CardTemplate
+};
+
+// Scientific Notation
+export const ScientificNotation = {
+  args: {
+    fullscreenTitle: "A plot in fullscreen mode",
+    showGrid: true,
+    showMarkers: true,
+    title: "Scientific Notation",
+    xdata: [0, 0.0001, 0.0002, 0.0003, 0.0004, 0.0005],
+    xlabel: "X label (rad)",
+    ydata: [0, 1, 200, 3000, 40000, 50000],
+    ylabel: "Y label (Nm)"
   },
   render: Template
 };
