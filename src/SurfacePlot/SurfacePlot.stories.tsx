@@ -24,7 +24,6 @@ export const Default = {
   // Set the default values for the story's arguments
   args: {
     fullscreenTitle: "",
-    minHeight: 0,
     showGrid: true,
     title: "",
     xdata: [0.18, 0.36, 0.55, 0.73, 0.91, 1],
@@ -54,7 +53,6 @@ export const Default = {
 export const ScientificNotation = {
   args: {
     fullscreenTitle: "A plot in fullscreen mode",
-    minHeight: 0,
     showGrid: true,
     title: "Scientific Notation",
     xdata: [0, 0.0001, 0.0002, 0.0003, 0.0004, 0.0005],
