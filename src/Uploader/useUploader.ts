@@ -108,10 +108,14 @@ export default function useUploader({
   function fileExtensionValidator(file) {
     // check only when file name is set
     if (file.name) {
-      const acceptedFileExtensions = Object.values(acceptedFiles ?? {}).flat();
+      // get the list of accepted file extensions
+      const acceptedFileExtensions = Object.values(acceptedFiles ?? {})
+        .flat()
+        .map(ext => {
+          return ext.split(".").pop()?.toLowerCase();
+        });
 
       const fileExtension = file.name.split(".").pop().toLowerCase();
-      console.log(fileExtension);
 
       if (!acceptedFileExtensions.includes(fileExtension)) {
         return {
