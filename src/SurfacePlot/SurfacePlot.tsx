@@ -8,6 +8,7 @@ import { getConfig } from "../utils/plotlyConfig";
 
 // The `SurfacePlot` component renders a 3D surface plot using Plotly.
 const SurfacePlot = ({
+  fullscreenTitle = "",
   xdata = [],
   ydata = [],
   zdata = [],
@@ -43,7 +44,7 @@ const SurfacePlot = ({
     <ConditionalDialog
       condition={isFullscreen}
       onClose={handleClose}
-      title={title}
+      title={fullscreenTitle}
     >
       <Box
         display="flex"

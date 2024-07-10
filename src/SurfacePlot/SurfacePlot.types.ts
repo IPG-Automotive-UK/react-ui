@@ -3,11 +3,15 @@
  */
 export type SurfacePlotProps = {
   /**
+   *  Title of the dialog when in fullscreen mode. No plot title is shown when in fullscreen mode, only the dialog title if set.
+   */
+  fullscreenTitle?: string;
+  /**
    * Boolean that determines whether or not the grid is shown.
    */
   showGrid?: boolean;
   /**
-   * Title of the plot.
+   * Title of the plot. This is not shown when in fullscreen mode, even if set.
    */
   title?: string;
   /**

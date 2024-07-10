@@ -23,9 +23,10 @@ const Template: StoryFn<SurfacePlotProps> = args => {
 export const Default = {
   // Set the default values for the story's arguments
   args: {
+    fullscreenTitle: "",
     minHeight: 0,
     showGrid: true,
-    title: "Surface Plot",
+    title: "",
     xdata: [0.18, 0.36, 0.55, 0.73, 0.91, 1],
     xlabel: "Normalized Torque (-)",
     ydata: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
@@ -52,6 +53,7 @@ export const Default = {
 // Scientific Notation
 export const ScientificNotation = {
   args: {
+    fullscreenTitle: "A plot in fullscreen mode",
     minHeight: 0,
     showGrid: true,
     title: "Scientific Notation",
