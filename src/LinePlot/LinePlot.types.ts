@@ -3,31 +3,19 @@
  */
 export type LinePlotProps = {
   /**
-   * Exponentformat is a string that determines the format for large numbers.
+   *  Title of the dialog when in fullscreen mode. No plot title is shown when in fullscreen mode, only the dialog title if set.
    */
-  exponentFormat?: "none" | "e" | "E" | "power" | "SI" | "B";
-  /**
-   * Label font size
-   */
-  labelFontSize?: number;
-  /**
-   * markers is a boolean that determines whether or not the points are marked.
-   */
-  markers?: boolean;
-  /**
-   *  Minimum height of the plot.
-   */
-  minHeight?: number;
+  fullscreenTitle?: string;
   /**
    * Boolean that determines whether or not the grid is shown.
    */
   showGrid?: boolean;
   /**
-   *  showTitle is a boolean that determines whether or not the title is shown on main view.
+   * Boolean that determines whether or not the marker points are shown.
    */
-  showTitle?: boolean;
+  showMarkers?: boolean;
   /**
-   *  Title of the plot
+   *  Title of the plot. This is not shown when in fullscreen mode, even if set.
    */
   title?: string;
   /**

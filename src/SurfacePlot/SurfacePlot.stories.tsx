@@ -3,7 +3,6 @@ import { Meta, StoryFn } from "@storybook/react";
 import React from "react";
 import SurfacePlot from "./SurfacePlot";
 import { SurfacePlotProps } from "./SurfacePlot.types";
-import { useArgs } from "@storybook/preview-api";
 
 /**
  * Story metadata
@@ -16,14 +15,6 @@ export default meta;
 
 // Story Template
 const Template: StoryFn<SurfacePlotProps> = args => {
-  // Get the current values of the story's arguments and a function to update them
-  const [{ showTitle }, updateArgs] = useArgs<SurfacePlotProps>();
-
-  // Update the showTitle argument whenever it changes
-  React.useEffect(() => {
-    updateArgs({ showTitle });
-  }, [showTitle, updateArgs]);
-
   // Render the SurfacePlot component with the current arguments
   return <SurfacePlot {...args} />;
 };
@@ -32,10 +23,9 @@ const Template: StoryFn<SurfacePlotProps> = args => {
 export const Default = {
   // Set the default values for the story's arguments
   args: {
-    minHeight: 0,
+    fullscreenTitle: "",
     showGrid: true,
-    showTitle: false,
-    title: "Surface Plot",
+    title: "",
     xdata: [0.18, 0.36, 0.55, 0.73, 0.91, 1],
     xlabel: "Normalized Torque (-)",
     ydata: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
@@ -56,5 +46,33 @@ export const Default = {
     zlabel: "Efficiency (-)"
   },
   // Set the render function to use the story template
+  render: Template
+};
+
+// Scientific Notation
+export const ScientificNotation = {
+  args: {
+    fullscreenTitle: "A plot in fullscreen mode",
+    showGrid: true,
+    title: "Scientific Notation",
+    xdata: [0, 0.0001, 0.0002, 0.0003, 0.0004, 0.0005],
+    xlabel: "X label (rad)",
+    ydata: [0, 1, 200, 3000, 40000, 50000],
+    ylabel: "Y label (Nm)",
+    zdata: [
+      [0.000765, 0.0007676, 0.0007672, 0.000767, 0.0007665, 0.000766],
+      [0.0007686, 0.0007678, 0.0007676, 0.0007674, 0.000767, 0.0007665],
+      [0.000769, 0.000769, 0.0007688, 0.0007686, 0.0007686, 0.0007678],
+      [0.0007692, 0.0007692, 0.0007692, 0.000769, 0.0007688, 0.0007678],
+      [0.0007692, 0.0007692, 0.0007692, 0.0007692, 0.000767, 0.0007665],
+      [0.0007692, 0.0007694, 0.0007694, 0.000767, 0.0007665, 0.000766],
+      [0.0007692, 0.0007694, 0.0007694, 0.000767, 0.0007665, 0.000766],
+      [0.0007692, 0.0007694, 0.000767, 0.0007665, 0.000766, 0.000766],
+      [0.0007692, 0.0007694, 0.000767, 0.0007665, 0.000766, 0.000766],
+      [0.0007692, 0.0007694, 0.000767, 0.0007665, 0.000766, 0.000766],
+      [0.0007692, 0.0007692, 0.000767, 0.000765, 0.000766, 0.000766]
+    ],
+    zlabel: "Efficiency (-)"
+  },
   render: Template
 };
