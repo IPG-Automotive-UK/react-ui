@@ -76,6 +76,7 @@ const TabPanel = ({
       </Tabs>
       <Box
         sx={{
+          backgroundColor: "background.paper",
           overflowY: "auto"
         }}
       >
@@ -91,6 +92,9 @@ const TabPanel = ({
               aria-labelledby={`tab-${index}`}
               display={display}
               flexWrap={flexWrap}
+              sx={{
+                backgroundColor: "background.paper"
+              }}
             >
               {activeTab === index && child.props.children}
             </Box>
