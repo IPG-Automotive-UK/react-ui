@@ -105,6 +105,9 @@ const TabPanel = ({
               key={index}
               id={`tabpanel-${index}`}
               aria-labelledby={`tab-${index}`}
+              sx={{
+                backgroundColor: "background.paper"
+              }}
               display={"flex"}
               flexDirection={"column"}
             >
