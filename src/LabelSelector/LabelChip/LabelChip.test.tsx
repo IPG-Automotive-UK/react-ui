@@ -18,8 +18,8 @@ describe("LabelChip", () => {
     // get the label chip
     const labelChip = screen.getByText(/label/i).parentElement;
 
-    // check the background color
-    expect(labelChip).toHaveStyle("background-color: #46eb34");
+    // check the background color - we check the parent element because the chip itself is the no wrap typography component
+    expect(labelChip?.parentNode).toHaveStyle("background-color: #46eb34");
   });
   // test that the label chip renders with a small size
   it("renders small size", () => {
@@ -27,8 +27,8 @@ describe("LabelChip", () => {
     // get the label chip
     const labelChip = screen.getByText(/label/i).parentElement;
 
-    // check the font size
-    expect(labelChip).toHaveClass("MuiChip-sizeSmall");
+    // check the font size - we check the parent element because the chip itself is the no wrap typography component
+    expect(labelChip?.parentNode).toHaveClass("MuiChip-sizeSmall");
   });
   // test that the label chip renders with a outlined variant
   it("renders outlined variant", () => {
@@ -37,8 +37,8 @@ describe("LabelChip", () => {
     // get the label chip
     const labelChip = screen.getByText(/label/i).parentElement;
 
-    // check that the label chip has the outlined class
-    expect(labelChip).toHaveClass("MuiChip-outlined");
+    // check that the label chip has the outlined class - we check the parent element because the chip itself is the no wrap typography component
+    expect(labelChip?.parentNode).toHaveClass("MuiChip-outlined");
   });
   // test that on click, the callback is called
   it("calls callback onClick", async () => {

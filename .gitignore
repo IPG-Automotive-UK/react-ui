@@ -24,6 +24,8 @@ yarn-error.log*
 
 storybook-static
 
+package-lock.json
+
 # ignore any playwright snapshots from windows and macos (-darwin.png, -win32.png)
 src/**/*-darwin.png
 src/**/*-win32.png

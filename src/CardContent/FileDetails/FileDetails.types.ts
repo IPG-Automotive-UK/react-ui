@@ -1,6 +1,7 @@
 import { File } from "../../Common.types";
+import { HTMLAttributeAnchorTarget } from "react";
 
-export type FileCardProps = {
+export type FileDetailsProps = {
   /**
    * The download button text.
    */
@@ -9,6 +10,14 @@ export type FileCardProps = {
    * The download button text on search.
    */
   downloadButtonTextOnSearch?: string;
+  /**
+   * The download href link.
+   */
+  downloadLinkHref?: string;
+  /**
+   * The download href link target attribute.
+   */
+  downloadLinkTarget?: HTMLAttributeAnchorTarget;
   /**
    * The fileTitle of the card.
    */
@@ -21,11 +30,6 @@ export type FileCardProps = {
     files: File[];
   }>;
   /**
-   * An alias for image property. Available only with media
-   * components. Media components: video, audio, picture, iframe, img.
-   */
-  media?: string;
-  /**
    * Callback fired when the download files button is clicked.
    */
   onClickDownload?: (paths: string[]) => void;
@@ -34,11 +38,7 @@ export type FileCardProps = {
    */
   onClickFile?: (file: File) => void;
   /**
-   * An optional inital search term
+   * An optional initial search term
    */
   search?: string;
-  /**
-   * The width of the card in px.
-   */
-  width?: number;
 };

@@ -1,20 +1,20 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 
-import FileCard from "./FileCard";
+import FileDetails from "./FileDetails";
 import React from "react";
 import { vi } from "vitest";
 
 /**
  * Tests
  */
-describe("FileCard", () => {
-  // test that file card renders with title
+describe("FileDetails", () => {
+  // test that file details renders with title
   it("renders title", () => {
-    render(<FileCard fileTitle="file card title" />);
+    render(<FileDetails fileTitle="file card title" />);
     expect(screen.getByText("file card title")).toBeInTheDocument();
   });
 
-  // test that file card renders chips with file names
+  // test that file details renders chips with file names
   it("renders chips with file names", () => {
     const files = [
       {
@@ -45,8 +45,8 @@ describe("FileCard", () => {
       }
     ];
 
-    // render file card with files
-    render(<FileCard fileTitle="file card title" files={files} />);
+    // render file details with files
+    render(<FileDetails fileTitle="file card title" files={files} />);
 
     // expect chips to be in the document
     expect(screen.getByText("file1")).toBeInTheDocument();
@@ -86,9 +86,9 @@ describe("FileCard", () => {
       }
     ];
 
-    // render file card with files
+    // render file details with files
     render(
-      <FileCard
+      <FileDetails
         fileTitle="file card title"
         downloadButtonText="Download All Files"
         files={files}
@@ -129,9 +129,9 @@ describe("FileCard", () => {
       }
     ];
 
-    // render file card with files
+    // render file details with files
     render(
-      <FileCard
+      <FileDetails
         fileTitle="file card title"
         downloadButtonTextOnSearch="Download Search Files"
         files={files}
@@ -184,7 +184,7 @@ describe("FileCard", () => {
 
     // render file card with files
     render(
-      <FileCard
+      <FileDetails
         fileTitle="file card title"
         downloadButtonText="Download All Files"
         files={files}
@@ -233,9 +233,9 @@ describe("FileCard", () => {
       }
     ];
 
-    // render file card with files
+    // render file details with files
     render(
-      <FileCard
+      <FileDetails
         fileTitle="file card title"
         downloadButtonTextOnSearch="Download Search Files"
         files={files}
@@ -250,5 +250,49 @@ describe("FileCard", () => {
 
     // expect download button to be disabled
     expect(screen.getByText("Download Search Files")).toBeDisabled();
+  });
+
+  it("passes through an href to the download button if provided", () => {
+    const files = [
+      {
+        files: [
+          {
+            filename: "file1",
+            path: "path1"
+          },
+          {
+            filename: "file2",
+            path: "path2"
+          }
+        ],
+        header: "header1"
+      },
+      {
+        files: [
+          {
+            filename: "file3",
+            path: "path3"
+          },
+          {
+            filename: "file4",
+            path: "path4"
+          }
+        ],
+        header: "header2"
+      }
+    ];
+
+    render(
+      <FileDetails
+        fileTitle="file card title"
+        downloadButtonText="Download File"
+        downloadLinkHref="some/path/to/a/download"
+        files={files}
+      />
+    );
+    expect(screen.getByRole("link", { name: "Download File" })).toHaveAttribute(
+      "href",
+      "some/path/to/a/download"
+    );
   });
 });

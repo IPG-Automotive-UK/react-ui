@@ -18,6 +18,19 @@ function Breadcrumbs({
   separator = <NavigateNextIcon fontSize="small" />,
   ...rest
 }: BreadcrumbsProps) {
+  /**
+   *  Map children and wrap the final item in a truncated tooltip with separators
+   */
+  const mappedChildren = Children.map(children, (child, i) =>
+    child && isValidElement(child) ? (
+      Children.count(children) === i + 1 ? (
+        <TruncatedTooltip>{child}</TruncatedTooltip>
+      ) : (
+        child
+      )
+    ) : null
+  );
+
   return (
     <MuiBreadcrumbs
       aria-label="breadcrumbs"
@@ -36,6 +49,10 @@ function Breadcrumbs({
             textDecoration: "none"
             // Ensure children of block level elements are inline for ellipsis rendering
           },
+          "&:last-child": {
+            flexShrink: 1
+          },
+          flexShrink: 0,
           overflow: "hidden"
         },
         [`& .${breadcrumbsClasses.li}:last-child *`]: {
@@ -48,13 +65,7 @@ function Breadcrumbs({
       }}
       {...rest}
     >
-      {children
-        ? Children.map(children, child =>
-            child && isValidElement(child) ? (
-              <TruncatedTooltip>{child}</TruncatedTooltip>
-            ) : null
-          )
-        : null}
+      {children ? mappedChildren : null}
     </MuiBreadcrumbs>
   );
 }

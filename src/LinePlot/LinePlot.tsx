@@ -12,17 +12,14 @@ import Plotly from "react-plotly.js";
 import React from "react";
 
 const LinePlot = ({
+  fullscreenTitle = "",
   title = "",
   xdata = [],
   ydata = [],
   xlabel = "",
   ylabel = "",
-  markers = true,
-  showTitle = false,
-  minHeight = 400,
-  showGrid = true,
-  labelFontSize,
-  exponentFormat
+  showMarkers = true,
+  showGrid = true
 }: LinePlotProps) => {
   // theme hook
   const theme = useTheme();
@@ -43,11 +40,14 @@ const LinePlot = ({
   // get config for plotly
   const config = getConfig({ handleClickFullscreen, isFullscreen });
 
+  // determine whether to show plot title
+  const showTitle = title !== "";
+
   return (
     <ConditionalDialog
       condition={isFullscreen}
       onClose={handleClose}
-      dialogTitle={title}
+      dialogTitle={fullscreenTitle}
     >
       <Box
         display="flex"
@@ -68,11 +68,11 @@ const LinePlot = ({
           data={[
             {
               line: {
-                color: "rgb(0, 96, 167)",
-                width: 3
+                color: theme.palette.primary.main,
+                width: 2
               },
-              marker: { color: "rgb(0, 48, 99)", size: 7 },
-              mode: markers ? "lines+markers" : "lines",
+              marker: { color: theme.palette.primary.dark, size: 7 },
+              mode: showMarkers ? "lines+markers" : "lines",
               type: "scatter",
               x: xdata,
               y: ydata
@@ -80,40 +80,38 @@ const LinePlot = ({
           ]}
           layout={{
             autosize: true,
-            margin: {
-              pad: 4,
-              t: 50
-            },
+            margin: { b: 35, l: 80, r: 10, t: 30 },
             paper_bgcolor: "rgba(0,0,0,0)",
             plot_bgcolor: "rgba(0,0,0,0)",
             xaxis: {
               color: theme.palette.mode === "light" ? "" : "white",
-              exponentformat: exponentFormat,
+              exponentformat: "E",
               gridcolor: theme.palette.mode === "light" ? "" : "grey",
               showgrid: showGrid,
               title: {
                 font: {
                   family: "Montserrat",
-                  size: labelFontSize || undefined
+                  size: 12
                 },
                 text: xlabel || ""
               }
             },
             yaxis: {
               color: theme.palette.mode === "light" ? "black" : "white",
-              exponentformat: exponentFormat,
+              exponentformat: "E",
               gridcolor: theme.palette.mode === "light" ? "" : "grey",
+              showgrid: showGrid,
               ticksuffix: " ",
               title: {
                 font: {
                   family: "Montserrat",
-                  size: labelFontSize || undefined
+                  size: 12
                 },
                 text: ylabel || ""
               }
             }
           }}
-          style={{ flexGrow: 1, height: "100%", minHeight, width: "100%" }}
+          style={{ flexGrow: 1, height: "100%", width: "100%" }}
           useResizeHandler={true}
           config={config}
         />
