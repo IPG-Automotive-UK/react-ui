@@ -77,7 +77,11 @@ const TabPanel = ({
       <Box
         sx={{
           backgroundColor: "background.paper",
-          overflowY: "auto"
+          display: "flex",
+          flexDirection: "column",
+          flexGrow: 1,
+          overflowY: "auto",
+          width: 1
         }}
       >
         {React.Children.map(children, (child, index) => {
@@ -90,11 +94,12 @@ const TabPanel = ({
               key={index}
               id={`tabpanel-${index}`}
               aria-labelledby={`tab-${index}`}
-              display={display}
               flexWrap={flexWrap}
               sx={{
                 backgroundColor: "background.paper"
               }}
+              display={"flex"}
+              flexDirection={"column"}
             >
               {activeTab === index && child.props.children}
             </Box>
