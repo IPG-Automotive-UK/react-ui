@@ -87,7 +87,11 @@ const TabPanel = ({
       </Tabs>
       <Box
         sx={{
-          overflowY: "auto"
+          display: "flex",
+          flexDirection: "column",
+          flexGrow: 1,
+          overflowY: "auto",
+          width: 1
         }}
       >
         {React.Children.map(children, (child, index) => {
