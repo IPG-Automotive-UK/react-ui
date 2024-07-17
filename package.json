@@ -134,5 +134,6 @@
   "bugs": {
     "url": "https://github.com/IPG-Automotive-UK/react-ui/issues"
   },
-  "homepage": "https://github.com/IPG-Automotive-UK/react-ui#readme"
+  "homepage": "https://github.com/IPG-Automotive-UK/react-ui#readme",
+  "packageManager": "pnpm@8.15.8+sha256.691fe176eea9a8a80df20e4976f3dfb44a04841ceb885638fe2a26174f81e65e"
 }
