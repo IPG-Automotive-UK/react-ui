@@ -11,7 +11,7 @@ const VehiclePath = (
   // compute current x,y and yaw values
   const x = path.x[index];
   const y = path.y[index];
-  const yaw = path.yaw ? path.yaw[index] ?? 0 : 0;
+  const yaw = path.yaw ? (path.yaw[index] ?? 0) : 0;
 
   return (
     <>

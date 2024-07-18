@@ -196,7 +196,7 @@ describe("Select", () => {
     const { getByRole } = render(
       <Autocomplete
         defaultValue={"option-one"}
-        options={["optione-one", "option-two", "option-three"]}
+        options={["option-one", "option-two", "option-three"]}
         label="Select an option"
       />
     );
