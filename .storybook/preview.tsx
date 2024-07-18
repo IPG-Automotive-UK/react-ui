@@ -1,19 +1,17 @@
-import { Decorator } from "@storybook/react";
-import { DocsContainer } from "./DocsContainer";
-import React from "react";
-import ThemeProvider from "../src/ThemeProvider/ThemeProvider";
-import { useDarkMode } from "storybook-dark-mode";
+import {
+  DARK_MODE_EVENT_NAME,
+  UPDATE_DARK_MODE_EVENT_NAME
+} from "storybook-dark-mode";
 
-export const decorators: Decorator[] = [
-  renderStory => {
-    const isDark = useDarkMode();
-    return (
-      <ThemeProvider theme={isDark ? "dark" : "light"}>
-        {renderStory()}
-      </ThemeProvider>
-    );
-  }
-];
+import { DocsContainer } from "@storybook/addon-docs";
+import React from "react";
+import { addons } from "@storybook/preview-api";
+import { themeProviderDecorator } from "./decorators";
+import { themes } from "@storybook/theming";
+
+const channel = addons.getChannel();
+
+export const decorators = [themeProviderDecorator];
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -26,10 +24,26 @@ export const parameters = {
     sort: "alpha"
   },
   darkMode: {
-    stylePreview: true
+    current: "light",
+    dark: { ...themes.dark },
+    light: { ...themes.light }
   },
-
   docs: {
-    container: DocsContainer
+    container: props => {
+      const [isDark, setDark] = React.useState();
+
+      const onChangeHandler = () => {
+        channel.emit(UPDATE_DARK_MODE_EVENT_NAME);
+      };
+
+      React.useEffect(() => {
+        channel.on(DARK_MODE_EVENT_NAME, setDark);
+        return () => channel.removeListener(DARK_MODE_EVENT_NAME, setDark);
+      }, [channel, setDark]);
+
+      return (
+        <DocsContainer {...props} theme={isDark ? themes.dark : themes.light} />
+      );
+    }
   }
 };
