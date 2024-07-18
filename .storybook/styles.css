@@ -1,0 +1,70 @@
+.dark {
+  .sb-nopreview_main {
+      background: #1B1C1D;
+  }
+
+  .sb-nopreview_heading {
+      text-align: center;
+  }
+
+  .sb-errordisplay {
+      background: #2c2f33;
+      color: white;
+  }
+
+  .sb-errordisplay_main {
+      background: #1e1e1e;
+      box-shadow: 0 0 64px rgba(255, 255, 255, 0.1);
+  }
+
+  .sb-errordisplay_code {
+      background: #1c1c1c;
+      color: #d4d4d4;
+  }
+
+  .sb-preparing-story,
+  .sb-preparing-docs {
+      background-color: #1B1C1D;
+  }
+
+  .sb-loader {
+      border-color: rgba(158, 158, 158, 0.29);
+  }
+
+  .sb-previewBlock {
+      background: #2c2f33;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: rgba(255, 255, 255, 0.1) 0 1px 3px 0;
+  }
+
+  .sb-previewBlock_header {
+      box-shadow: rgba(255, 255, 255, 0.1) 0 -1px 0 0 inset;
+  }
+
+  .sb-previewBlock_icon {
+      background: #3c3f43;
+  }
+
+  .sb-argstableBlock th span,
+  .sb-argstableBlock td span {
+      background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .sb-argstableBlock-body {
+      box-shadow:
+          rgba(255, 255, 255, 0.1) 0 1px 3px 1px,
+          rgba(255, 255, 255, 0.065) 0 0 0 1px;
+  }
+
+  .sb-argstableBlock-body tr:not(:first-child) {
+      border-top: 1px solid #3c3f43;
+  }
+
+  .sb-argstableBlock-body td {
+      background: #1B1C1D;
+  }
+
+  .sb-argstableBlock-body button {
+      background-color: rgba(255, 255, 255, 0.1);
+  }
+}
