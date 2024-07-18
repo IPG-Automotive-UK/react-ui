@@ -12,6 +12,7 @@ export const decorators = [themeProviderDecorator];
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
+  backgrounds: { disable: true },
   controls: {
     expanded: true, // Adds the description and default columns
     matchers: {
