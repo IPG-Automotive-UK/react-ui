@@ -1,8 +1,4 @@
-import {
-  DARK_MODE_EVENT_NAME,
-  UPDATE_DARK_MODE_EVENT_NAME
-} from "storybook-dark-mode";
-
+import { DARK_MODE_EVENT_NAME } from "storybook-dark-mode";
 import { DocsContainer } from "@storybook/addon-docs";
 import React from "react";
 import { addons } from "@storybook/preview-api";
@@ -24,17 +20,12 @@ export const parameters = {
     sort: "alpha"
   },
   darkMode: {
-    current: "light",
     dark: { ...themes.dark },
     light: { ...themes.light }
   },
   docs: {
     container: props => {
       const [isDark, setDark] = React.useState();
-
-      const onChangeHandler = () => {
-        channel.emit(UPDATE_DARK_MODE_EVENT_NAME);
-      };
 
       React.useEffect(() => {
         channel.on(DARK_MODE_EVENT_NAME, setDark);
