@@ -204,3 +204,32 @@ export const CustomChildren = {
   },
   render: Template
 };
+
+// FullHeightTemplate Template
+const FullHeightTemplate: StoryFn<TabPanelProps> = args => {
+  // useArgs is a hook that returns the current state of the args object
+  const [{ active }, updateArgs] = useArgs<TabPanelProps>();
+
+  // update the args object with the new value value
+  React.useEffect(() => {
+    updateArgs({ active });
+  }, [active, updateArgs]);
+
+  return (
+    <Box height="500px">
+      <TabPanel {...args} active={active} />
+    </Box>
+  );
+};
+
+// TabPanelFullHeight
+export const TabPanelFullHeight = {
+  args: {
+    children: [
+      <Box data-label="Select Vehicle" key="1">
+        <Box height="200px" border="1px solid red" m={2} />
+      </Box>
+    ]
+  },
+  render: FullHeightTemplate
+};
