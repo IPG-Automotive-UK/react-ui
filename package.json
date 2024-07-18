@@ -38,6 +38,7 @@
     "@mui/x-data-grid-generator": "^7.10.0",
     "@playwright/test": "^1.45.2",
     "@storybook/addon-actions": "^8.2.4",
+    "@storybook/addon-docs": "^8.2.4",
     "@storybook/addon-essentials": "^8.2.4",
     "@storybook/addon-interactions": "^8.2.4",
     "@storybook/addon-links": "^8.2.4",
