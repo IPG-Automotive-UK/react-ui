@@ -107,7 +107,7 @@ export default function useUploader({
 
   function fileExtensionValidator(file) {
     // check only when file name is set
-    if (file.name) {
+    if (file.name && acceptedFiles) {
       // get the list of accepted file extensions
       const acceptedFileExtensions = Object.values(acceptedFiles ?? {})
         .flat()
