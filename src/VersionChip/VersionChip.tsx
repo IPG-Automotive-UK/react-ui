@@ -73,7 +73,7 @@ const getMinorVersion = (version: string) => {
   // Check if the input matches the "number.number" format
   if (!regex.test(version)) {
     // check if dev environment and log warning
-    if (process.env.NODE_ENV !== "production") {
+    if (process.env.NODE_ENV === "development") {
       console.warn(
         `Version: ${version} is of a wrong format. Format expected is "<major>.<minor>" (e.g., "1.0").`
       );

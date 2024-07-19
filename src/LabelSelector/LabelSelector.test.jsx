@@ -25,14 +25,24 @@ const LabelSelectorWithState = ({ onChange, value: valueIn = [], ...rest }) => {
 describe("LabelSelector", () => {
   // test that the label selector renders
   it("renders", () => {
-    render(<LabelSelectorWithState />);
+    render(<LabelSelectorWithState options={[]} />);
     expect(screen.getByRole("button")).toBeInTheDocument();
   });
   // test that the label selector renders with options
   it("renders with options", async () => {
     const options = [
-      { _id: 1, color: "#005FA8", description: "first label", name: "label 1" },
-      { _id: 2, color: "#f542e0", description: "second label", name: "label 2" }
+      {
+        _id: "1",
+        color: "#005FA8",
+        description: "first label",
+        name: "label 1"
+      },
+      {
+        _id: "2",
+        color: "#f542e0",
+        description: "second label",
+        name: "label 2"
+      }
     ];
 
     // render the label selector
@@ -50,7 +60,12 @@ describe("LabelSelector", () => {
   // test that the label selector renders with an initial value
   it("renders with an initial value", () => {
     const options = [
-      { _id: 1, color: "#005FA8", description: "first label", name: "label 1" }
+      {
+        _id: "1",
+        color: "#005FA8",
+        description: "first label",
+        name: "label 1"
+      }
     ];
 
     // render the label selector
@@ -68,7 +83,12 @@ describe("LabelSelector", () => {
   // test can select an item and that the onChange event is fired and the chip is rendered
   it("can select an item", async () => {
     const options = [
-      { _id: 1, color: "#005FA8", description: "first label", name: "label 1" }
+      {
+        _id: "1",
+        color: "#005FA8",
+        description: "first label",
+        name: "label 1"
+      }
     ];
 
     // mock the onChange event
@@ -101,8 +121,18 @@ describe("LabelSelector", () => {
   // test can select multiple items and that the onChange event is fired and the chips are rendered
   it("can select multiple items", async () => {
     const options = [
-      { _id: 1, color: "#005FA8", description: "first label", name: "label 1" },
-      { _id: 2, color: "#f542e0", description: "second label", name: "label 2" }
+      {
+        _id: "1",
+        color: "#005FA8",
+        description: "first label",
+        name: "label 1"
+      },
+      {
+        _id: "2",
+        color: "#f542e0",
+        description: "second label",
+        name: "label 2"
+      }
     ];
 
     // mock the onChange event
@@ -152,7 +182,7 @@ describe("LabelSelector", () => {
     const onNew = vi.fn();
 
     // render the label selector
-    render(<LabelSelectorWithState onNew={onNew} addEnabled />);
+    render(<LabelSelectorWithState onNew={onNew} addEnabled options={[]} />);
 
     // click the label selector down arrow
     await userEvent.click(screen.getByTestId("ArrowDropDownIcon"));
@@ -176,7 +206,12 @@ describe("LabelSelector", () => {
   // can edit a  label
   it("can edit a label", async () => {
     const options = [
-      { _id: 1, color: "#005FA8", description: "first label", name: "label 1" }
+      {
+        _id: "1",
+        color: "#005FA8",
+        description: "first label",
+        name: "label 1"
+      }
     ];
 
     // mock the onChange event
@@ -203,7 +238,7 @@ describe("LabelSelector", () => {
 
     // check that the onChange event is fired with the correct arguments
     expect(onEdit).toHaveBeenCalledWith({
-      _id: 1,
+      _id: "1",
       color: "#005FA8",
       description: "first label",
       name: "label 1edit label"
@@ -212,7 +247,12 @@ describe("LabelSelector", () => {
   // can delete a label
   it("can delete a label", async () => {
     const options = [
-      { _id: 1, color: "#005FA8", description: "first label", name: "label 1" }
+      {
+        _id: "1",
+        color: "#005FA8",
+        description: "first label",
+        name: "label 1"
+      }
     ];
 
     // mock the onChange event
@@ -239,7 +279,7 @@ describe("LabelSelector", () => {
 
     // check that the onChange event is fired with the correct arguments
     expect(onDelete).toHaveBeenCalledWith({
-      _id: 1,
+      _id: "1",
       color: "#005FA8",
       description: "first label",
       name: "label 1"
@@ -252,7 +292,12 @@ describe("LabelSelector", () => {
 
     // render the label selector
     render(
-      <LabelSelectorWithState onNew={onNew} addEnabled nameMaxLength={5} />
+      <LabelSelectorWithState
+        onNew={onNew}
+        addEnabled
+        nameMaxLength={5}
+        options={[]}
+      />
     );
 
     // click the label selector down arrow
@@ -274,7 +319,12 @@ describe("LabelSelector", () => {
   // It renders with an error and helper text
   it("renders with an error and helper text", () => {
     const options = [
-      { _id: 1, color: "#005FA8", description: "first label", name: "label 1" }
+      {
+        _id: "1",
+        color: "#005FA8",
+        description: "first label",
+        name: "label 1"
+      }
     ];
 
     // render the label selector
