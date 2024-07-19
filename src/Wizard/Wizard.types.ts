@@ -12,7 +12,7 @@ export type WizardProps = {
   /**
    * Wizard title
    */
-  title?: string;
+  title?: string | JSX.Element;
 };
 
 export type WizardThemeOverrideProps = {
