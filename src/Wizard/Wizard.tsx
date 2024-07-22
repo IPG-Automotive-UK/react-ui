@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Box, ThemeProvider, Typography } from "@mui/material";
+import { Stack, ThemeProvider, Typography } from "@mui/material";
 import { WizardProps, WizardThemeOverrideProps } from "./Wizard.types";
 
 /**
@@ -10,7 +10,7 @@ import { WizardProps, WizardThemeOverrideProps } from "./Wizard.types";
 export default function Wizard({ title, children, maxWidth }: WizardProps) {
   return (
     <ThemeOverride maxWidth={maxWidth}>
-      <Box
+      <Stack
         sx={{
           display: "flex",
           flexDirection: "column",
@@ -18,7 +18,7 @@ export default function Wizard({ title, children, maxWidth }: WizardProps) {
           px: 3
         }}
       >
-        {title ? (
+        {typeof title === "string" ? (
           <Typography
             variant="h5"
             color="textPrimary"
@@ -33,9 +33,11 @@ export default function Wizard({ title, children, maxWidth }: WizardProps) {
           >
             {title}
           </Typography>
-        ) : null}
+        ) : (
+          title
+        )}
         {children}
-      </Box>
+      </Stack>
     </ThemeOverride>
   );
 }

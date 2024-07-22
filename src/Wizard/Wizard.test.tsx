@@ -1,7 +1,9 @@
+import { Box, Typography } from "@mui/material";
 import { render, screen } from "@testing-library/react";
 
 import React from "react";
 import ThemeProvider from "../ThemeProvider/ThemeProvider";
+import VersionChip from "../VersionChip/VersionChip";
 import Wizard from "./Wizard";
 
 describe("Wizard", () => {
@@ -34,5 +36,28 @@ describe("Wizard", () => {
       </ThemeProvider>
     );
     expect(screen.getByText("Wizard Title")).toHaveStyle("max-width: 100px");
+  });
+
+  it("can accept renders custom element in title prop", () => {
+    render(
+      <Wizard
+        title={
+          <Box>
+            <Typography
+              variant="h5"
+              color="textPrimary"
+              sx={{
+                fontWeight: 700
+              }}
+            >
+              Wizard Title
+            </Typography>
+            <VersionChip version="1.0" />
+          </Box>
+        }
+      />
+    );
+    expect(screen.getByText("Wizard Title")).toBeInTheDocument();
+    expect(screen.getByText("1.0")).toBeInTheDocument();
   });
 });
