@@ -51,11 +51,8 @@ function SummaryCard({
   // determine if the more options popover is open
   const isMoreOptionsOpen = Boolean(moreOptionsAnchorEl);
 
-  // sort the labels by their length so that shorter labels are first and have more chance of showing in the card rather than being truncated in the popper
-  const sortedLabels = labels.sort((a, b) => a.name.length - b.name.length);
-
   // convert the labels to chips
-  const labelChips: LabelChipGroupProps["chips"] = sortedLabels.map(label => {
+  const labelChips: LabelChipGroupProps["chips"] = labels.map(label => {
     return {
       clickable: true,
       color: label.color,
