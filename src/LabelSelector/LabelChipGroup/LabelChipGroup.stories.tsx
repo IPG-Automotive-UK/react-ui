@@ -49,6 +49,21 @@ const OverflowComponent: StoryFn<LabelChipGroupProps> = args => {
   );
 };
 
+// Template for the sorted chips story
+const SortedChipsComponent: StoryFn<LabelChipGroupProps> = args => {
+  return (
+    <Box sx={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+      <Typography>
+        This story showcases the built-in sort behavior. Label chips are sorted
+        first by ascending length and then alphabetically if lengths match. The
+        chips below were passed in as props in the order ["Longest", "Short",
+        "Longer", "Cat", "Bat"].
+      </Typography>
+      <LabelChipGroup {...args} />
+    </Box>
+  );
+};
+
 // Arguments for the default story
 export const Default = {
   args: {
@@ -79,4 +94,18 @@ export const Default = {
 export const OverflowingParent = {
   args: Default.args,
   render: OverflowComponent
+};
+
+// Arguments for the sorted chips story
+export const SortedChips = {
+  args: {
+    chips: [
+      { label: "Longest" },
+      { label: "Short" },
+      { label: "Longer" },
+      { label: "Cat" },
+      { label: "Bat" }
+    ]
+  },
+  render: SortedChipsComponent
 };
