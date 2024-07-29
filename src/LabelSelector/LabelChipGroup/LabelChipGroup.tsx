@@ -10,7 +10,10 @@ import { sortLabelChips } from "./sortLabelChips";
  * The LabelChipGroup component. This component displays a group of LabelChip components in a row. If any of the chips overflow the parent container width, they will be hidden and a popover will be used to show the hidden chips.
  */
 export default function LabelChipGroup({ chips }: LabelChipGroupProps) {
-  // sort the chips
+  // take a copy of the chips prop so we can sort them without mutating the original
+  chips = [...chips];
+
+  // sort the chips, shortest first, then alphabetically
   chips = sortLabelChips(chips);
 
   // store a ref to the parent container so we can check size information and calculate if the chips overflow
