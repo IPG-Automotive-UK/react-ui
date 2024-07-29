@@ -4,11 +4,15 @@ import LabelChip from "../LabelChip/LabelChip";
 import { LabelChipGroupProps } from "./LabelChipGroup.types";
 import React from "react";
 import { ResizeObserver } from "@juggle/resize-observer";
+import { sortLabelChips } from "./sortLabelChips";
 
 /**
  * The LabelChipGroup component. This component displays a group of LabelChip components in a row. If any of the chips overflow the parent container width, they will be hidden and a popover will be used to show the hidden chips.
  */
 export default function LabelChipGroup({ chips }: LabelChipGroupProps) {
+  // sort the chips
+  chips = sortLabelChips(chips);
+
   // store a ref to the parent container so we can check size information and calculate if the chips overflow
   const parentRef = React.useRef<HTMLDivElement>(null);
 
