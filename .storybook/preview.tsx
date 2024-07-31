@@ -4,7 +4,6 @@ import { DARK_MODE_EVENT_NAME } from "storybook-dark-mode";
 import { DocsContainer } from "@storybook/addon-docs";
 import React from "react";
 import { addons } from "@storybook/preview-api";
-import { store } from "storybook-dark-mode/src/Tool";
 import { themeProviderDecorator } from "./decorators";
 import { themes } from "@storybook/theming";
 
@@ -28,7 +27,12 @@ export const parameters = {
   },
   docs: {
     container: props => {
-      const [isDark, setDark] = React.useState(store().current === "dark");
+      const [isDark, setDark] = React.useState(() => {
+        // NOTE: This is a bit of a hack to get the initial value of dark mode from localStorage. It relies on the internal implementation of the storybook-dark-mode addon. This is because the exposed useDarkMode hook cannot be used in a decorator like this. https://github.com/hipstersmoothie/storybook-dark-mode/issues/282
+        const storedItem = window.localStorage.getItem("sb-addon-themes-3");
+        const stored = JSON.parse(storedItem!);
+        return stored.current === "dark";
+      });
 
       React.useEffect(() => {
         const channel = addons.getChannel();
