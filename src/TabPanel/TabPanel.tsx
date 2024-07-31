@@ -106,6 +106,7 @@ const TabPanel = ({
               aria-labelledby={`tab-${index}`}
               display={"flex"}
               flexDirection={"column"}
+              height={activeTab === index ? 1 : 0}
             >
               {activeTab === index && child.props.children}
             </Box>
