@@ -174,4 +174,27 @@ describe("FileUploader", () => {
       )
     );
   });
+
+  test("display error when file extension is not accepted", async () => {
+    const { getByTestId } = render(
+      <FileUploader filesLimit={1} acceptedFiles={{ "text/plain": [".rd5"] }} />
+    );
+
+    // create a file with a txt extension
+    const files = [new File(["ipg1"], "ipg1.txt", { type: "text/plain" })];
+
+    // create a data transfer object with the files
+    const data = createDtWithFiles(files);
+
+    // get the dropzone element
+    const dropzoneElement = getByTestId("dropzone-root");
+
+    // trigger the drop event
+    fireEvent.drop(dropzoneElement, data);
+
+    // wait for the error message to be displayed
+    await waitFor(() =>
+      expect(dropzoneElement).toHaveTextContent("File type must be .rd5.")
+    );
+  });
 });

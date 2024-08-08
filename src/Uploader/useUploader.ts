@@ -105,10 +105,12 @@ export default function useUploader({
 
   // validator for file extension
   const validator = (file: File | DataTransferItem) => {
-    // react-dropozne validator types are incorrect https://github.com/react-dropzone/react-dropzone/issues/1333
+    // react-dropzone validator types are incorrect https://github.com/react-dropzone/react-dropzone/issues/1333
     if (
-      file instanceof File &&
-      !acceptedFileExtensions.includes(getFileExtension(file.name))
+      file instanceof File && // if we got a file
+      acceptedFileExtensions && // and we have accepted file extensions
+      acceptedFileExtensions.length > 0 && // and we have accepted file extensions
+      !acceptedFileExtensions.includes(getFileExtension(file.name)) // and file extension is not accepted
     )
       return {
         code: "file-invalid-type",
