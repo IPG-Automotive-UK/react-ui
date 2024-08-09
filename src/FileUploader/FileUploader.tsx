@@ -17,6 +17,7 @@ import useUploader from "../Uploader/useUploader";
 export default function FileUploader({
   acceptedFiles,
   error,
+  disabled = false,
   dropzoneText = "Drag & Drop a file here or browse",
   filesLimit = 1,
   isValidating = false,
@@ -39,6 +40,7 @@ export default function FileUploader({
     rejectionMessage
   } = useUploader({
     acceptedFiles,
+    disabled,
     filesLimit,
     maxFileSize,
     multiple,
@@ -60,6 +62,7 @@ export default function FileUploader({
         required={required}
         showDelete={!isValidating && !multiple && selectedFiles.length === 1}
         onDelete={() => handleDelete(selectedFiles[0])}
+        disabled={disabled}
       />
       <Box
         {...getRootProps()}
@@ -79,8 +82,10 @@ export default function FileUploader({
               : theme.palette.primary.main,
             color: theme.palette.primary.main
           },
-          ".dropzoneSingleFile": {
-            color: theme.palette.primary.main
+          ".dropzoneSingleFile, .dropzoneSingleFile > *": {
+            color: disabled
+              ? theme.palette.text.disabled
+              : theme.palette.primary.main
           },
           ".dropzoneSingleFile, .dropzoneText": {
             alignItems: "center",
@@ -89,10 +94,14 @@ export default function FileUploader({
             height: "100%",
             justifyContent: "center"
           },
-          ".dropzoneText": {
+          ".dropzoneText, .dropzoneText > *": {
             color: isError
               ? theme.palette.error.main
-              : theme.palette.text.secondary
+              : disabled
+                ? theme.palette.text.disabled
+                : theme.palette.mode === "dark"
+                  ? theme.palette.text.primary
+                  : theme.palette.text.secondary
           },
           background: theme.palette.background.default,
           borderColor:
@@ -109,7 +118,9 @@ export default function FileUploader({
           justifyContent: "center",
           p: 2,
           pointerEvents:
-            isValidating || (!multiple && selectedFiles.length === 1)
+            disabled ||
+            isValidating ||
+            (!multiple && selectedFiles.length === 1)
               ? "none"
               : "auto"
         })}
@@ -149,10 +160,10 @@ export default function FileUploader({
             return (
               <Grid item={true} key={`${thisFile.file?.name ?? "file"}-${i}`}>
                 <Chip
-                  disabled={isValidating}
+                  disabled={disabled || isValidating}
                   variant="outlined"
                   label={thisFile.file.name}
-                  onDelete={() => handleDelete(thisFile)}
+                  onDelete={disabled ? undefined : () => handleDelete(thisFile)}
                 />
               </Grid>
             );

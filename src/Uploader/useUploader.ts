@@ -8,6 +8,7 @@ import { readAsDataURL } from "../utils/readAsDataURL";
 /**
  * Hook to handle file selection logic for uploaders. It is a wrapper around react-dropzone.
  * @param acceptedFiles - Definition of acceptable file mime types and extensions
+ * @param disabled - Whether the dropzone is disabled
  * @param maxFileSize - Maximum allowed file size in bytes
  * @param multiple - Whether multiple files can be selected
  * @param filesLimit - Maximum number of files that can be selected
@@ -18,6 +19,7 @@ import { readAsDataURL } from "../utils/readAsDataURL";
  */
 export default function useUploader({
   acceptedFiles,
+  disabled = false,
   maxFileSize = Infinity,
   multiple = false,
   filesLimit = 1,
@@ -108,6 +110,7 @@ export default function useUploader({
   // use react-dropzone hook
   const dropzone = useDropzone({
     accept: acceptedFiles,
+    disabled,
     maxFiles: filesLimit,
     maxSize: maxFileSize,
     multiple,
