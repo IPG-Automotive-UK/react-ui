@@ -69,7 +69,9 @@ export default function useUploader({
   };
 
   // get the accepted file type extensions
-  const acceptedFileExtensions = Object.values(acceptedFiles ?? {}).flat();
+  const acceptedFileExtensions = Object.values(acceptedFiles ?? {})
+    .flat()
+    .map(s => s.toLowerCase());
 
   // handle file drops that are rejected by showing the first error message as a rejection message
   const onDropRejected = (fileRejection: FileRejection[]) => {
@@ -110,7 +112,9 @@ export default function useUploader({
       file instanceof File && // if we got a file
       acceptedFileExtensions && // and we have accepted file extensions
       acceptedFileExtensions.length > 0 && // and we have accepted file extensions
-      !acceptedFileExtensions.includes(getFileExtension(file.name)) // and file extension is not accepted
+      !acceptedFileExtensions.includes(
+        getFileExtension(file.name).toLowerCase()
+      ) // and file extension is not accepted
     )
       return {
         code: "file-invalid-type",
