@@ -134,4 +134,31 @@ describe("ImageUploader", () => {
       )
     );
   });
+
+  test("accepts case insensitive extensions", async () => {
+    const onAdd = vi.fn();
+    const { getByTestId } = render(<ImageUploader onAdd={onAdd} />);
+
+    // create a file with a png extension (uppercase)
+    const files = [new File(["ipg1"], "ipg1.PNG", { type: "image/png" })];
+
+    // create a data transfer object with the files
+    const data = createDtWithFiles(files);
+
+    // get the dropzone element
+    const dropzoneElement = getByTestId("dropzone-root");
+
+    // trigger the drop event
+    fireEvent.drop(dropzoneElement, data);
+
+    // expect the onAdd callback to be called
+    await waitFor(() => {
+      expect(onAdd).toHaveBeenCalledOnce();
+      expect(onAdd).toHaveBeenCalledWith([
+        expect.objectContaining({
+          file: files[0]
+        })
+      ]);
+    });
+  });
 });
