@@ -32,25 +32,20 @@ export default function FileUploader({
   subText
 }: FileUploaderProps) {
   // useUploader is a custom hook that handles the logic for uploading files
-  const {
-    getRootProps,
-    getInputProps,
-    handleDelete,
-    isDragReject,
-    rejectionMessage
-  } = useUploader({
-    acceptedFiles,
-    disabled,
-    filesLimit,
-    maxFileSize,
-    multiple,
-    onAdd,
-    onDelete,
-    selectedFiles
-  });
+  const { getRootProps, getInputProps, handleDelete, rejectionMessage } =
+    useUploader({
+      acceptedFiles,
+      disabled,
+      filesLimit,
+      maxFileSize,
+      multiple,
+      onAdd,
+      onDelete,
+      selectedFiles
+    });
 
   // are we rendering an error state?
-  const isError = isDragReject || rejectionMessage || error;
+  const isError = rejectionMessage || error;
 
   // render
   return (
@@ -104,10 +99,7 @@ export default function FileUploader({
                   : theme.palette.text.secondary
           },
           background: theme.palette.background.default,
-          borderColor:
-            isDragReject || error
-              ? theme.palette.error.main
-              : theme.palette.divider,
+          borderColor: error ? theme.palette.error.main : theme.palette.divider,
           borderStyle: "dashed",
           borderWidth: 1,
           boxSizing: "border-box",
