@@ -1,8 +1,12 @@
 export type UploaderHeaderProps = {
   /**
    * Callback fired when the delete button is clicked
-   *   */
+   */
   onDelete?: React.MouseEventHandler<HTMLButtonElement>;
+  /**
+   * Disables interaction if true
+   */
+  disabled?: boolean;
   /**
    * Is field required?
    */

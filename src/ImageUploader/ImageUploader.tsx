@@ -69,13 +69,17 @@ export default function ImageUploader({
           },
           ".dropzoneText": {
             alignItems: "center",
-            color: isError
-              ? theme.palette.error.main
-              : theme.palette.text.secondary,
             flexDirection: "row",
             gap: 1,
             height: "100%",
             justifyContent: "center"
+          },
+          ".dropzoneText > *": {
+            color: isError
+              ? theme.palette.error.main
+              : theme.palette.mode === "dark"
+                ? theme.palette.text.primary
+                : theme.palette.text.secondary
           },
           backgroundColor: theme.palette.background.default,
           borderColor: theme.palette.divider,

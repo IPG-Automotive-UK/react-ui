@@ -175,6 +175,35 @@ describe("FileUploader", () => {
     );
   });
 
+  test("accepts no files when disabled", () => {
+    const onAdd = vi.fn();
+    const { getByTestId } = render(
+      <FileUploader disabled={true} onAdd={onAdd} />
+    );
+
+    // get the dropzone element
+    const dropzoneElement = getByTestId("dropzone-root");
+
+    // create a file
+    const files = [new File(["ipg1"], "ipg1.png", { type: "image/png" })];
+
+    // trigger the drop event
+    fireEvent.drop(dropzoneElement, createDtWithFiles(files));
+
+    // expect the onAdd function to not be called
+    expect(onAdd).not.toHaveBeenCalled();
+  });
+
+  test("cannot delete files when disabled", () => {
+    const screen = render(<FileUploader disabled={true} />);
+
+    // get the delete button
+    const deleteButton = screen.queryByTestId("delete-button");
+
+    // expect the delete button to not be present
+    expect(deleteButton).toBeNull();
+  });
+
   test("display error when file extension is not accepted", async () => {
     const { getByTestId } = render(
       <FileUploader filesLimit={1} acceptedFiles={{ "text/plain": [".rd5"] }} />
