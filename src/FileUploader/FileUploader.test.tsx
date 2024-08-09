@@ -1,5 +1,5 @@
 import { MultipleFiles, SingleFile } from "./__data__/uploaderTestFiles";
-import { describe, expect, test } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 import FileUploader from "./FileUploader";
@@ -196,5 +196,34 @@ describe("FileUploader", () => {
     await waitFor(() =>
       expect(dropzoneElement).toHaveTextContent("File type must be .rd5.")
     );
+  });
+
+  test("accepts case insensitive extensions", async () => {
+    const onAdd = vi.fn();
+    const { getByTestId } = render(
+      <FileUploader acceptedFiles={{ "text/plain": [".rd5"] }} onAdd={onAdd} />
+    );
+
+    // create a valid file with an uppercase extension
+    const files = [new File(["ipg1"], "ipg1.RD5", { type: "text/plain" })];
+
+    // create a data transfer object with the files
+    const data = createDtWithFiles(files);
+
+    // get the dropzone element
+    const dropzoneElement = getByTestId("dropzone-root");
+
+    // trigger the drop event
+    fireEvent.drop(dropzoneElement, data);
+
+    // expect the onAdd callback to be called
+    await waitFor(() => {
+      expect(onAdd).toHaveBeenCalledOnce();
+      expect(onAdd).toHaveBeenCalledWith([
+        expect.objectContaining({
+          file: files[0]
+        })
+      ]);
+    });
   });
 });
