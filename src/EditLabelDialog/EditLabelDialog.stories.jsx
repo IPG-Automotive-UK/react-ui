@@ -4,6 +4,7 @@ import { Button } from "@mui/material";
 import EditLabelDialog from "./EditLabelDialog";
 import React from "react";
 import { action } from "@storybook/addon-actions";
+import { useArgs } from "@storybook/preview-api";
 
 export default {
   component: EditLabelDialog,
@@ -11,18 +12,36 @@ export default {
 };
 
 const Template = args => {
-  const [open, setOpen] = React.useState(false);
+  const [{ isOpen }, updateArgs] = useArgs();
+
+  // update the args object with the new value value
+  React.useEffect(() => {
+    updateArgs({ isOpen });
+  }, [isOpen, updateArgs]);
+
+  // handle the dialog open
   const handleClickOpen = () => {
-    setOpen(true);
+    updateArgs({ isOpen: true });
   };
-  const handleCancel = args => {
-    setOpen(false);
-    action("cancel")(args);
+
+  // handle the dialog close
+  const handleCancel = () => {
+    updateArgs({ isOpen: false });
+    action("onClose")();
   };
-  const handleSave = args => {
-    setOpen(false);
-    action("save")(args);
+
+  // handle label edit
+  const handleEditLabel = label => {
+    updateArgs({ isOpen: false });
+    action("onEdit")(label);
   };
+
+  // handle add new label
+  const handleAddLabel = label => {
+    updateArgs({ isOpen: false });
+    action("onNew")(label);
+  };
+
   return (
     <>
       <Button variant="outlined" onClick={handleClickOpen}>
@@ -30,10 +49,10 @@ const Template = args => {
       </Button>
       <EditLabelDialog
         {...args}
-        isOpen={open}
+        isOpen={isOpen}
         onClose={handleCancel}
-        onEdit={handleSave}
-        onNew={handleSave}
+        onEdit={handleEditLabel}
+        onNew={handleAddLabel}
       />
     </>
   );
@@ -47,7 +66,8 @@ export const Default = {
       color: "#005FA8",
       description: "",
       name: ""
-    }
+    },
+    title: "Add Label"
   },
   render: Template
 };
@@ -55,13 +75,14 @@ export const Default = {
 // Edit Label
 export const EditLabel = {
   args: {
+    ...Default.args,
     label: {
       _id: "1",
       color: "#005FA8",
       description: "This is a description",
       name: "Label Name"
     },
-    labelDialogTitle: "Edit Label"
+    title: "Edit Label"
   },
   render: Template
 };
