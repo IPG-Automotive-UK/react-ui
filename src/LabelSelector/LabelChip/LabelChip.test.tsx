@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 
 import LabelChip from "./LabelChip";
 import React from "react";
@@ -76,5 +76,32 @@ describe("LabelChip", () => {
 
     // there shouldn't be a cancel icon
     expect(screen.queryByTestId("CancelIcon")).not.toBeInTheDocument();
+  });
+  // test that the selected icon is rendered when selected is true
+  it("renders selected icon", () => {
+    render(<LabelChip label="Label" selected />);
+
+    // get the selected icon
+    const selectedIcon = screen.getByTestId("DoneIcon");
+
+    // check that the selected icon is rendered
+    expect(selectedIcon).toBeInTheDocument();
+  });
+  // renders tooltip on hover of label chip
+  it("renders tooltip on hover", async () => {
+    render(<LabelChip label="Label" description="This is description" />);
+
+    // hover over the label chip
+    userEvent.hover(screen.getByText(/label/i));
+
+    // wait for the tooltip to be visible
+    await waitFor(() => {
+      expect(
+        screen.getByRole("tooltip", {
+          hidden: true,
+          name: "This is description"
+        })
+      ).toBeVisible();
+    });
   });
 });

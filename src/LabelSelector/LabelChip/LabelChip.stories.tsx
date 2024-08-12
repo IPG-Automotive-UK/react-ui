@@ -79,3 +79,21 @@ export const Small = {
 
   render: Template
 };
+
+export const Selected = {
+  args: {
+    ...Default.args,
+    selected: true
+  },
+
+  render: Template
+};
+
+export const Tooltip = {
+  args: {
+    ...Default.args,
+    description: "This is a description"
+  },
+
+  render: Template
+};
