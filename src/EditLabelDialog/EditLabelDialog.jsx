@@ -24,7 +24,7 @@ export default function EditLabelDialog({
   onNew = () => {},
   onEdit = () => {},
   onClose = () => {},
-  labelDialogTitle = "Add Label",
+  labelDialogTitle,
   label = { _id: "", color: "#005FA8", description: "", name: "" },
   nameMaxLength = 50
 }) {
@@ -217,11 +217,56 @@ export default function EditLabelDialog({
 
 // EditLabelDialog Proptypes
 EditLabelDialog.propTypes = {
+  /**
+   * Determines if the dialog is open
+   */
   isOpen: PropTypes.bool,
+  /**
+   * The label object to edit
+   */
   label: PropTypes.object,
-  labelDialogTitle: PropTypes.string,
+  /**
+   * Callback when user clicks cancel or close
+   *
+   * **Signature**
+   *
+   * ```
+   * function(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+   * ```
+   *
+   *  event: The event source of the callback.
+   */
   onClose: PropTypes.func,
+  /**
+   * Callback when user edits a label
+   *
+   * **Signature**
+   *
+   * ```
+   * function(label: object) => void
+   * ```
+   *
+   * label: The label object to edit
+   */
   onEdit: PropTypes.func,
+  /**
+   * Callback when user adds a new label
+   *
+   * **Signature**
+   *
+   * ```
+   * function(label: object) => void
+   * ```
+   *
+   * label: The label object to add
+   */
   onNew: PropTypes.func,
-  options: PropTypes.array
+  /**
+   * The array of label options
+   */
+  options: PropTypes.array,
+  /**
+   * The dialog title
+   */
+  title: PropTypes.string.isRequired
 };
