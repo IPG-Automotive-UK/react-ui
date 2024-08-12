@@ -6,9 +6,17 @@ export type LabelChipProps = Omit<ChipProps, "color" | "label"> & {
    */
   color?: string;
   /**
+   * The description to show in Tootip.
+   */
+  description?: string;
+  /**
    * The label content of the chip.
    */
   label: string;
+  /**
+   * Whether the selected icon should be displayed.
+   */
+  selected?: boolean;
   /**
    * The visibility of the chip.
    */
