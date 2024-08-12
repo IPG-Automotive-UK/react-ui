@@ -84,10 +84,6 @@ export default function EditLabelDialog({
   // variable for label name length
   const isLabelLengthValid = name.trim().length <= nameMaxLength;
 
-  // check description value is not whitespace
-  const isDescriptionValid =
-    description.length > 0 ? description.trim().length > 0 : true;
-
   // name error message helper function
   const nameErrorMessage = () => {
     if (!isLabelNameValid) {
@@ -101,17 +97,28 @@ export default function EditLabelDialog({
 
   // handle save button click and save the label
   const handleSave = event => {
+    // remove any white spaces from start and end of the name and description
+    const trimmedName = name.trim();
+    const trimmedDescription = description.trim();
+
     // if label is new, call onNew otherwise call onEdit
     if (isNew) {
-      onNew({ color, description, name });
+      onNew({ color, description: trimmedDescription, name: trimmedName });
     } else {
-      onEdit({ ...label, color, description, name });
+      onEdit({
+        ...label,
+        color,
+        description: trimmedDescription,
+        name: trimmedName
+      });
     }
 
     // reset all the states
     setName("");
     setDescription("");
     setColor("#005FA8");
+
+    onClose(event, "save");
   };
 
   // handle close button click and close the dialog box
@@ -204,8 +211,7 @@ export default function EditLabelDialog({
             color.length === 0 ||
             !isLabelNameValid ||
             !hasChanged ||
-            !isLabelLengthValid ||
-            !isDescriptionValid
+            !isLabelLengthValid
           }
         >
           {isNew ? "Add" : "Save"}
