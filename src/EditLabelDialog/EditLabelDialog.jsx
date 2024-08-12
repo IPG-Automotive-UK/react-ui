@@ -84,6 +84,10 @@ export default function EditLabelDialog({
   // variable for label name length
   const isLabelLengthValid = name.trim().length <= nameMaxLength;
 
+  // check description value is not whitespace
+  const isDescriptionValid =
+    description.length > 0 ? description.trim().length > 0 : true;
+
   // name error message helper function
   const nameErrorMessage = () => {
     if (!isLabelNameValid) {
@@ -196,11 +200,12 @@ export default function EditLabelDialog({
           onClick={handleSave}
           color="primary"
           disabled={
-            name.length === 0 ||
+            name.trim().length === 0 ||
             color.length === 0 ||
             !isLabelNameValid ||
             !hasChanged ||
-            !isLabelLengthValid
+            !isLabelLengthValid ||
+            !isDescriptionValid
           }
         >
           {isNew ? "Add" : "Save"}
