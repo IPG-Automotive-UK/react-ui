@@ -1,6 +1,6 @@
 import type { DialogProps } from "@mui/material/Dialog";
 import EditLabelDialog from "./EditLabelDialog";
-import type { Label } from "../Label.types";
+import type { Label } from "../LabelSelector/Label.types";
 
 export type EditLabelDialogProps = {
   /**

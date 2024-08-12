@@ -12,9 +12,9 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
-import Color from "../../Color";
-import DialogTitle from "../../DialogTitle";
-import LabelChip from "../LabelChip/LabelChip";
+import Color from "../Color";
+import DialogTitle from "../DialogTitle";
+import LabelChip from "../LabelSelector/LabelChip/LabelChip";
 import PropTypes from "prop-types";
 
 //  edit label dialog allows for the editing and creating new specific label objects
@@ -24,7 +24,7 @@ export default function EditLabelDialog({
   onNew = () => {},
   onEdit = () => {},
   onClose = () => {},
-  labelDialogTitle = "Edit Label",
+  labelDialogTitle = "Add Label",
   label = { _id: "", color: "#005FA8", description: "", name: "" },
   nameMaxLength = 50
 }) {
@@ -108,7 +108,6 @@ export default function EditLabelDialog({
     setName("");
     setDescription("");
     setColor("#005FA8");
-    onClose(event, "save");
   };
 
   // handle close button click and close the dialog box
