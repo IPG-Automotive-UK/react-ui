@@ -104,4 +104,12 @@ describe("LabelChip", () => {
       ).toBeVisible();
     });
   });
+
+  // test that the tooltip is not rendered when description is not passed
+  it("does not render tooltip when description is not passed", () => {
+    render(<LabelChip label="Label" />);
+
+    // there shouldn't be a tooltip
+    expect(screen.queryByRole("tooltip")).not.toBeInTheDocument();
+  });
 });
