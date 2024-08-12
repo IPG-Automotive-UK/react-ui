@@ -19,7 +19,7 @@ export default function LabelChip({
 }: LabelChipProps) {
   // return the styled chip component
   return (
-    <Tooltip title={description}>
+    <Tooltip title={description} placement="bottom-start">
       <Chip
         {...props}
         className="label-chip"
