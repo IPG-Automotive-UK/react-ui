@@ -7,6 +7,10 @@ export interface UseUploaderProps {
    */
   acceptedFiles?: Accept;
   /**
+   * If true, the dropzone will be disabled.
+   */
+  disabled?: boolean;
+  /**
    * Maximum number of files that the dropzone will accept.
    */
   filesLimit?: number;

@@ -12,6 +12,10 @@ export type FileUploaderProps = {
    */
   error?: boolean;
   /**
+   * If true, the dropzone will be disabled.
+   */
+  disabled?: boolean;
+  /**
    * Text to display in dropzone
    */
   dropzoneText?: string;
