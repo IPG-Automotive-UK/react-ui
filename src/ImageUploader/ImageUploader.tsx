@@ -19,29 +19,24 @@ export default function ImageUploader({
   required = false
 }: ImageUploaderProps) {
   // useUploader is a custom hook that handles the logic for uploading files
-  const {
-    getRootProps,
-    getInputProps,
-    handleDelete,
-    isDragReject,
-    rejectionMessage
-  } = useUploader({
-    acceptedFiles: {
-      "image/gif": [".gif"],
-      "image/jpeg": [".jpg", ".jpeg"],
-      "image/png": [".png"],
-      "image/webp": [".webp"]
-    },
-    filesLimit: 1,
-    maxFileSize,
-    multiple: false,
-    onAdd,
-    onDelete,
-    selectedFiles
-  });
+  const { getRootProps, getInputProps, handleDelete, rejectionMessage } =
+    useUploader({
+      acceptedFiles: {
+        "image/gif": [".gif"],
+        "image/jpeg": [".jpg", ".jpeg"],
+        "image/png": [".png"],
+        "image/webp": [".webp"]
+      },
+      filesLimit: 1,
+      maxFileSize,
+      multiple: false,
+      onAdd,
+      onDelete,
+      selectedFiles
+    });
 
   // are we rendering an error state?
-  const isError = isDragReject || rejectionMessage;
+  const isError = rejectionMessage;
 
   // render
   return (
@@ -74,18 +69,20 @@ export default function ImageUploader({
           },
           ".dropzoneText": {
             alignItems: "center",
-            color: isError
-              ? theme.palette.error.main
-              : theme.palette.text.secondary,
             flexDirection: "row",
             gap: 1,
             height: "100%",
             justifyContent: "center"
           },
+          ".dropzoneText > *": {
+            color: isError
+              ? theme.palette.error.main
+              : theme.palette.mode === "dark"
+                ? theme.palette.text.primary
+                : theme.palette.text.secondary
+          },
           backgroundColor: theme.palette.background.default,
-          borderColor: isDragReject
-            ? theme.palette.error.main
-            : theme.palette.divider,
+          borderColor: theme.palette.divider,
           borderStyle: "dashed",
           borderWidth: 1,
           boxSizing: "border-box",

@@ -8,6 +8,7 @@ import { readAsDataURL } from "../utils/readAsDataURL";
 /**
  * Hook to handle file selection logic for uploaders. It is a wrapper around react-dropzone.
  * @param acceptedFiles - Definition of acceptable file mime types and extensions
+ * @param disabled - Whether the dropzone is disabled
  * @param maxFileSize - Maximum allowed file size in bytes
  * @param multiple - Whether multiple files can be selected
  * @param filesLimit - Maximum number of files that can be selected
@@ -18,6 +19,7 @@ import { readAsDataURL } from "../utils/readAsDataURL";
  */
 export default function useUploader({
   acceptedFiles,
+  disabled = false,
   maxFileSize = Infinity,
   multiple = false,
   filesLimit = 1,
@@ -68,6 +70,11 @@ export default function useUploader({
     onAdd && onAdd(newSelection);
   };
 
+  // get the accepted file type extensions
+  const acceptedFileExtensions = Object.values(acceptedFiles ?? {})
+    .flat()
+    .map(s => s.toLowerCase());
+
   // handle file drops that are rejected by showing the first error message as a rejection message
   const onDropRejected = (fileRejection: FileRejection[]) => {
     // deafult error message
@@ -76,16 +83,11 @@ export default function useUploader({
     // get the error code
     const errorCode = fileRejection[0].errors[0].code;
 
-    // get the accepted file type extensions
-    const acceptedFileExtensions = Object.values(acceptedFiles ?? {})
-      .flat()
-      .join(", ");
-
     // set error message based on error code
     let errorMessage = "";
     switch (errorCode) {
       case "file-invalid-type":
-        errorMessage = `File type must be ${acceptedFileExtensions}.`;
+        errorMessage = `File type must be ${acceptedFileExtensions.join(", ")}.`;
         break;
       case "file-too-large": {
         // get file size limit in MB
@@ -105,15 +107,35 @@ export default function useUploader({
     setRejectionMessage(errorMessage);
   };
 
+  // validator for file extension
+  const validator = (file: File | DataTransferItem) => {
+    // react-dropzone validator types are incorrect https://github.com/react-dropzone/react-dropzone/issues/1333
+    if (
+      file instanceof File && // if we got a file
+      acceptedFileExtensions && // and we have accepted file extensions
+      acceptedFileExtensions.length > 0 && // and we have accepted file extensions
+      !acceptedFileExtensions.includes(
+        getFileExtension(file.name).toLowerCase()
+      ) // and file extension is not accepted
+    )
+      return {
+        code: "file-invalid-type",
+        message: `File type must be one of ${acceptedFileExtensions.join(", ")}`
+      };
+    return null;
+  };
+
   // use react-dropzone hook
   const dropzone = useDropzone({
     accept: acceptedFiles,
+    disabled,
     maxFiles: filesLimit,
     maxSize: maxFileSize,
     multiple,
     onDropAccepted,
     onDropRejected,
-    useFsAccessApi: false
+    useFsAccessApi: false,
+    validator
   });
 
   // handle file deletion
@@ -131,4 +153,23 @@ export default function useUploader({
     handleDelete,
     rejectionMessage
   };
+}
+
+/**
+ * Extracts the file extension from a given file name.
+ *
+ * @param fileName - The name of the file.
+ * @return The file extension.
+ *
+ * @example
+ * const fileName = "example.txt";
+ * const extension = getFileExtension(fileName);
+ * console.log(extension); // Output: ".txt"
+ */
+function getFileExtension(fileName: string) {
+  const parts = fileName.split(".");
+  if (parts.length > 1) {
+    return "." + parts.pop();
+  }
+  return "";
 }

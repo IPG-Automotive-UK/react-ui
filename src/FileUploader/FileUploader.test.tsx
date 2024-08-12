@@ -1,5 +1,5 @@
 import { MultipleFiles, SingleFile } from "./__data__/uploaderTestFiles";
-import { describe, expect, test } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 import FileUploader from "./FileUploader";
@@ -173,5 +173,86 @@ describe("FileUploader", () => {
         "File size exceeds the limit of 1 MB."
       )
     );
+  });
+
+  test("accepts no files when disabled", () => {
+    const onAdd = vi.fn();
+    const { getByTestId } = render(
+      <FileUploader disabled={true} onAdd={onAdd} />
+    );
+
+    // get the dropzone element
+    const dropzoneElement = getByTestId("dropzone-root");
+
+    // create a file
+    const files = [new File(["ipg1"], "ipg1.png", { type: "image/png" })];
+
+    // trigger the drop event
+    fireEvent.drop(dropzoneElement, createDtWithFiles(files));
+
+    // expect the onAdd function to not be called
+    expect(onAdd).not.toHaveBeenCalled();
+  });
+
+  test("cannot delete files when disabled", () => {
+    const screen = render(<FileUploader disabled={true} />);
+
+    // get the delete button
+    const deleteButton = screen.queryByTestId("delete-button");
+
+    // expect the delete button to not be present
+    expect(deleteButton).toBeNull();
+  });
+
+  test("display error when file extension is not accepted", async () => {
+    const { getByTestId } = render(
+      <FileUploader filesLimit={1} acceptedFiles={{ "text/plain": [".rd5"] }} />
+    );
+
+    // create a file with a txt extension
+    const files = [new File(["ipg1"], "ipg1.txt", { type: "text/plain" })];
+
+    // create a data transfer object with the files
+    const data = createDtWithFiles(files);
+
+    // get the dropzone element
+    const dropzoneElement = getByTestId("dropzone-root");
+
+    // trigger the drop event
+    fireEvent.drop(dropzoneElement, data);
+
+    // wait for the error message to be displayed
+    await waitFor(() =>
+      expect(dropzoneElement).toHaveTextContent("File type must be .rd5.")
+    );
+  });
+
+  test("accepts case insensitive extensions", async () => {
+    const onAdd = vi.fn();
+    const { getByTestId } = render(
+      <FileUploader acceptedFiles={{ "text/plain": [".rd5"] }} onAdd={onAdd} />
+    );
+
+    // create a valid file with an uppercase extension
+    const files = [new File(["ipg1"], "ipg1.RD5", { type: "text/plain" })];
+
+    // create a data transfer object with the files
+    const data = createDtWithFiles(files);
+
+    // get the dropzone element
+    const dropzoneElement = getByTestId("dropzone-root");
+
+    // trigger the drop event
+    fireEvent.drop(dropzoneElement, data);
+
+    // expect the onAdd callback to be called
+    await waitFor(() => {
+      expect(onAdd).toHaveBeenCalledOnce();
+      expect(onAdd).toHaveBeenCalledWith([
+        expect.objectContaining({
+          file: files[0]
+        })
+      ]);
+    });
   });
 });
