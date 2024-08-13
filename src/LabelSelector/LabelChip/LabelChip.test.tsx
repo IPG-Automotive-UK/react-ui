@@ -2,6 +2,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 
 import LabelChip from "./LabelChip";
 import React from "react";
+import { act } from "react";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 
@@ -99,7 +100,9 @@ describe("LabelChip", () => {
     render(<LabelChip label="Label" description="This is description" />);
 
     // hover over the label chip
-    userEvent.hover(screen.getByText(/label/i));
+    act(() => {
+      userEvent.hover(screen.getByText(/label/i));
+    });
 
     // wait for the tooltip to be visible
     await waitFor(() => {
