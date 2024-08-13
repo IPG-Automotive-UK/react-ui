@@ -79,13 +79,20 @@ describe("LabelChip", () => {
   });
   // test that the selected icon is rendered when selected is true
   it("renders selected icon", () => {
-    render(<LabelChip label="Label" selected />);
+    render(<LabelChip label="Label" selected showIcon />);
 
     // get the selected icon
     const selectedIcon = screen.getByTestId("DoneIcon");
 
     // check that the selected icon is rendered
     expect(selectedIcon).toBeInTheDocument();
+  });
+  // test that the selected icon is not rendered when showIcon is false
+  it("does not render selected icon", () => {
+    render(<LabelChip label="Label" showIcon={false} selected />);
+
+    // there shouldn't be a selected icon
+    expect(screen.queryByTestId("DoneIcon")).not.toBeInTheDocument();
   });
   // renders tooltip on hover of label chip
   it("renders tooltip on hover", async () => {
