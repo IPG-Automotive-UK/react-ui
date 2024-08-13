@@ -30,7 +30,7 @@ export type EditLabelDialogProps = {
   /**
    * The title of the dialog.
    */
-  title?: string;
+  title: string;
 };
 
 export default EditLabelDialog as React.FC<EditLabelDialogProps>;
