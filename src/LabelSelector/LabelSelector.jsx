@@ -276,7 +276,7 @@ export default function LabelSelector({
           setSelectedLabel(defaultLabel);
         }}
         options={options}
-        labelDialogTitle={labelDialogTitle}
+        title={labelDialogTitle}
         label={selectedLabel}
         nameMaxLength={nameMaxLength}
         onNew={onNew}

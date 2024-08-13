@@ -14,7 +14,7 @@ export type EditLabelDialogProps = {
   /**
    * The title of the dialog.
    */
-  labelDialogTitle?: string;
+  title?: string;
   /**
    * Callback fired when the component requests to be closed.
    */
