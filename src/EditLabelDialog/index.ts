@@ -12,10 +12,6 @@ export type EditLabelDialogProps = {
    */
   label?: Label;
   /**
-   * The title of the dialog.
-   */
-  title?: string;
-  /**
    * Callback fired when the component requests to be closed.
    */
   onClose?: DialogProps["onClose"];
@@ -31,6 +27,10 @@ export type EditLabelDialogProps = {
    * The array of label objects that are options to render in the listbox.
    */
   options?: Label[];
+  /**
+   * The title of the dialog.
+   */
+  title?: string;
 };
 
 export default EditLabelDialog as React.FC<EditLabelDialogProps>;

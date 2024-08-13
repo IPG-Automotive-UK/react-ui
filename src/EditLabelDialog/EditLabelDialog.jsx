@@ -224,15 +224,15 @@ export default function EditLabelDialog({
 // EditLabelDialog Proptypes
 EditLabelDialog.propTypes = {
   /**
-   * Determines if the dialog is open
+   * If true, the component is shown.
    */
   isOpen: PropTypes.bool,
   /**
-   * The label object to edit
+   * The label to be edited.
    */
   label: PropTypes.object,
   /**
-   * Callback when user clicks cancel or close
+   * Callback fired when the component requests to be closed.
    *
    * **Signature**
    *
@@ -256,7 +256,7 @@ EditLabelDialog.propTypes = {
    */
   onEdit: PropTypes.func,
   /**
-   * Callback when user adds a new label
+   * Callback fired when a label is edited.
    *
    * **Signature**
    *
@@ -268,11 +268,11 @@ EditLabelDialog.propTypes = {
    */
   onNew: PropTypes.func,
   /**
-   * The array of label options
+   * The array of label objects that are options to render in the listbox.
    */
   options: PropTypes.array,
   /**
-   * The dialog title
+   * The title of the dialog.
    */
   title: PropTypes.string.isRequired
 };
