@@ -87,7 +87,7 @@ describe("LabelChip", () => {
     // check that the selected icon is rendered
     expect(selectedIcon).toBeInTheDocument();
   });
-  // test that the selected icon is not rendered when showIcon is false
+  // test that the selected icon is not rendered when selected is false
   it("does not render selected icon", () => {
     render(<LabelChip label="Label" selected={false} />);
 
