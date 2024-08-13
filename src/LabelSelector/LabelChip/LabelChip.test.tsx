@@ -99,7 +99,7 @@ describe("LabelChip", () => {
   it("renders tooltip on hover", async () => {
     render(<LabelChip label="Label" description="This is description" />);
 
-    // hover over the label chip
+    // trigger hover on the label chip
     act(() => {
       userEvent.hover(screen.getByText(/label/i));
     });
