@@ -79,7 +79,7 @@ describe("LabelChip", () => {
   });
   // test that the selected icon is rendered when selected is true
   it("renders selected icon", () => {
-    render(<LabelChip label="Label" selected showIcon />);
+    render(<LabelChip label="Label" selected />);
 
     // get the selected icon
     const selectedIcon = screen.getByTestId("DoneIcon");
@@ -89,7 +89,7 @@ describe("LabelChip", () => {
   });
   // test that the selected icon is not rendered when showIcon is false
   it("does not render selected icon", () => {
-    render(<LabelChip label="Label" showIcon={false} selected />);
+    render(<LabelChip label="Label" selected={false} />);
 
     // there shouldn't be a selected icon
     expect(screen.queryByTestId("DoneIcon")).not.toBeInTheDocument();
