@@ -24,7 +24,7 @@ export default function EditLabelDialog({
   onNew = () => {},
   onEdit = () => {},
   onClose = () => {},
-  labelDialogTitle,
+  title,
   label = { _id: "", color: "#005FA8", description: "", name: "" },
   nameMaxLength = 50
 }) {
@@ -140,7 +140,7 @@ export default function EditLabelDialog({
   // return the label dialog
   return (
     <Dialog maxWidth="sm" fullWidth onClose={handleClose} open={isOpen}>
-      <DialogTitle onClose={handleClose}>{labelDialogTitle}</DialogTitle>
+      <DialogTitle onClose={handleClose}>{title}</DialogTitle>
       <DialogContent dividers>
         <Grid container spacing={2}>
           <Grid item xs={12}>
