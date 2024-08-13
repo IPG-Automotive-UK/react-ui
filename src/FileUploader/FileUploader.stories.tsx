@@ -52,6 +52,7 @@ export default meta;
 type Story = StoryObj<typeof FileUploader>;
 export const Default: Story = {
   args: {
+    disabled: false,
     dropzoneText: "Drag & Drop a file here or browse",
     filesLimit: 1,
     isValidating: false,

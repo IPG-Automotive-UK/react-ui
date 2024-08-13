@@ -16,6 +16,7 @@ import { UploaderHeaderProps } from "./UploaderHeader.types";
  * @returns
  */
 export default function UploaderHeader({
+  disabled = false,
   title,
   titleVariant = "body",
   subText,
@@ -27,13 +28,11 @@ export default function UploaderHeader({
   let titleTypographyProps: TypographyProps = {};
   if (titleVariant === "title") {
     titleTypographyProps = {
-      color: "textPrimary",
       fontSize: "20px",
       fontWeight: 600
     };
   } else if (titleVariant === "subtitle") {
     titleTypographyProps = {
-      color: "textPrimary",
       fontSize: "14px",
       fontWeight: 500
     };
@@ -42,6 +41,10 @@ export default function UploaderHeader({
       variant: "body1"
     };
   }
+  titleTypographyProps.sx = {
+    color: theme =>
+      disabled ? theme.palette.text.disabled : theme.palette.text.primary
+  };
 
   return (
     <Stack
@@ -69,11 +72,9 @@ export default function UploaderHeader({
             </Typography>
           ) : null}
         </Typography>
-        <Typography variant="caption" color="textPrimary">
-          {subText}
-        </Typography>
+        <Typography variant="caption">{subText}</Typography>
       </Box>
-      {showDelete ? (
+      {showDelete && !disabled ? (
         <IconButton aria-label="DeleteIcon" onClick={onDelete} size="small">
           <DeleteIcon color="error" fontSize="small" />
         </IconButton>
