@@ -6,7 +6,7 @@ export type LabelChipProps = Omit<ChipProps, "color" | "label"> & {
    */
   color?: string;
   /**
-   * The description to show in Tootip.
+   * The description to show in Tooltip.
    */
   description?: string;
   /**

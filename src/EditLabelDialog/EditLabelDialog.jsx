@@ -123,7 +123,7 @@ export default function EditLabelDialog({
 
   // handle close button click and close the dialog box
   const handleClose = (event, reason) => {
-    // dont close if the user clicks outside the dialog
+    // don't close if the user clicks outside the dialog
     if (reason === "backdropClick") {
       return;
     }
@@ -221,7 +221,7 @@ export default function EditLabelDialog({
   );
 }
 
-// EditLabelDialog Proptypes
+// EditLabelDialog PropTypes
 EditLabelDialog.propTypes = {
   /**
    * If true, the component is shown.
