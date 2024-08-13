@@ -15,21 +15,20 @@ const meta: Meta<typeof LabelChip> = {
 };
 export default meta;
 
+// Define the template
 const Template: StoryFn<LabelChipProps> = args => {
+  return <LabelChip {...args} />;
+};
+
+// Define the chip selected with icon template
+const SelectedWithIcon: StoryFn<LabelChipProps> = args => {
   //  useArgs is a hook that returns the current state of the args object
-  const [{ selected, clickable, showIcon }, updateArgs] = useArgs();
+  const [{ selected, clickable }, updateArgs] = useArgs();
 
-  // update the args object with the new selected value
-  React.useEffect(() => {
-    updateArgs({ selected });
-  }, [selected, updateArgs]);
-
-  // update the selected value when the chip is clicked
-  const handleChipclick = (event: React.MouseEvent<HTMLDivElement>) => {
-    // update the selected value only if the chip has an icon
-    if (showIcon) {
-      updateArgs({ selected: !selected });
-    }
+  // handle the click event on the chip
+  const handleChipClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    // update the selected value in the args object
+    updateArgs({ selected: !selected });
 
     // call the onClick action with the event object
     action("onClick")(event);
@@ -39,7 +38,7 @@ const Template: StoryFn<LabelChipProps> = args => {
     <LabelChip
       {...args}
       selected={selected}
-      onClick={clickable ? handleChipclick : undefined}
+      onClick={clickable ? handleChipClick : undefined}
     />
   );
 };
@@ -67,7 +66,8 @@ export const Default = {
 export const Clickable = {
   args: {
     ...Default.args,
-    clickable: true
+    clickable: true,
+    onClick: action("onClick")
   },
 
   render: Template
@@ -92,6 +92,7 @@ export const ClickableAndDeletable = {
   args: {
     ...Default.args,
     clickable: true,
+    onClick: action("onClick"),
     onDelete: action("onDelete")
   },
 
@@ -129,11 +130,10 @@ export const WithSelectedIcon = {
   args: {
     ...Default.args,
     clickable: true,
-    selected: true,
-    showIcon: true
+    selected: true
   },
 
-  render: Template
+  render: SelectedWithIcon
 };
 
 /**
