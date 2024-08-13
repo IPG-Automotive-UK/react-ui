@@ -69,7 +69,7 @@ const defaultTheme: ThemeOptions = {
     MuiTooltip: {
       styleOverrides: {
         tooltip: {
-          fontSize: "14px",
+          fontSize: "12px",
           fontWeight: "normal"
         }
       }
