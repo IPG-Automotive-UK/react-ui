@@ -12,9 +12,10 @@ export default {
 };
 
 const Template = args => {
+  //  useArgs is a hook that returns the current state of the args object
   const [{ isOpen }, updateArgs] = useArgs();
 
-  // update the args object with the new value value
+  // update the args object with the new isOpen value
   React.useEffect(() => {
     updateArgs({ isOpen });
   }, [isOpen, updateArgs]);
