@@ -1,6 +1,6 @@
 import type { DialogProps } from "@mui/material/Dialog";
 import EditLabelDialog from "./EditLabelDialog";
-import type { Label } from "../Label.types";
+import type { Label } from "../LabelSelector/Label.types";
 
 export type EditLabelDialogProps = {
   /**
@@ -11,10 +11,6 @@ export type EditLabelDialogProps = {
    * The label to be edited.
    */
   label?: Label;
-  /**
-   * The title of the dialog.
-   */
-  labelDialogTitle?: string;
   /**
    * Callback fired when the component requests to be closed.
    */
@@ -31,6 +27,10 @@ export type EditLabelDialogProps = {
    * The array of label objects that are options to render in the listbox.
    */
   options?: Label[];
+  /**
+   * The title of the dialog.
+   */
+  title: string;
 };
 
 export default EditLabelDialog as React.FC<EditLabelDialogProps>;

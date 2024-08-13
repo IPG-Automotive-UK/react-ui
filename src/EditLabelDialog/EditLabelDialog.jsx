@@ -12,9 +12,9 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
-import Color from "../../Color";
-import DialogTitle from "../../DialogTitle";
-import LabelChip from "../LabelChip/LabelChip";
+import Color from "../Color";
+import DialogTitle from "../DialogTitle";
+import LabelChip from "../LabelSelector/LabelChip/LabelChip";
 import PropTypes from "prop-types";
 
 //  edit label dialog allows for the editing and creating new specific label objects
@@ -24,7 +24,7 @@ export default function EditLabelDialog({
   onNew = () => {},
   onEdit = () => {},
   onClose = () => {},
-  labelDialogTitle = "Edit Label",
+  title,
   label = { _id: "", color: "#005FA8", description: "", name: "" },
   nameMaxLength = 50
 }) {
@@ -97,23 +97,33 @@ export default function EditLabelDialog({
 
   // handle save button click and save the label
   const handleSave = event => {
+    // remove any white spaces from start and end of the name and description
+    const trimmedName = name.trim();
+    const trimmedDescription = description.trim();
+
     // if label is new, call onNew otherwise call onEdit
     if (isNew) {
-      onNew({ color, description, name });
+      onNew({ color, description: trimmedDescription, name: trimmedName });
     } else {
-      onEdit({ ...label, color, description, name });
+      onEdit({
+        ...label,
+        color,
+        description: trimmedDescription,
+        name: trimmedName
+      });
     }
 
     // reset all the states
     setName("");
     setDescription("");
     setColor("#005FA8");
+
     onClose(event, "save");
   };
 
   // handle close button click and close the dialog box
   const handleClose = (event, reason) => {
-    // dont close if the user clicks outside the dialog
+    // don't close if the user clicks outside the dialog
     if (reason === "backdropClick") {
       return;
     }
@@ -130,7 +140,7 @@ export default function EditLabelDialog({
   // return the label dialog
   return (
     <Dialog maxWidth="sm" fullWidth onClose={handleClose} open={isOpen}>
-      <DialogTitle onClose={handleClose}>{labelDialogTitle}</DialogTitle>
+      <DialogTitle onClose={handleClose}>{title}</DialogTitle>
       <DialogContent dividers>
         <Grid container spacing={2}>
           <Grid item xs={12}>
@@ -197,7 +207,7 @@ export default function EditLabelDialog({
           onClick={handleSave}
           color="primary"
           disabled={
-            name.length === 0 ||
+            name.trim().length === 0 ||
             color.length === 0 ||
             !isLabelNameValid ||
             !hasChanged ||
@@ -211,13 +221,58 @@ export default function EditLabelDialog({
   );
 }
 
-// EditLabelDialog Proptypes
+// EditLabelDialog PropTypes
 EditLabelDialog.propTypes = {
+  /**
+   * If true, the component is shown.
+   */
   isOpen: PropTypes.bool,
+  /**
+   * The label to be edited.
+   */
   label: PropTypes.object,
-  labelDialogTitle: PropTypes.string,
+  /**
+   * Callback fired when the component requests to be closed.
+   *
+   * **Signature**
+   *
+   * ```
+   * function(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+   * ```
+   *
+   *  event: The event source of the callback.
+   */
   onClose: PropTypes.func,
+  /**
+   * Callback when user edits a label
+   *
+   * **Signature**
+   *
+   * ```
+   * function(label: object) => void
+   * ```
+   *
+   * label: The label object to edit
+   */
   onEdit: PropTypes.func,
+  /**
+   * Callback fired when a label is edited.
+   *
+   * **Signature**
+   *
+   * ```
+   * function(label: object) => void
+   * ```
+   *
+   * label: The label object to add
+   */
   onNew: PropTypes.func,
-  options: PropTypes.array
+  /**
+   * The array of label objects that are options to render in the listbox.
+   */
+  options: PropTypes.array,
+  /**
+   * The title of the dialog.
+   */
+  title: PropTypes.string.isRequired
 };
