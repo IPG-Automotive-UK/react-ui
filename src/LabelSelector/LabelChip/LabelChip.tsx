@@ -15,7 +15,6 @@ export default function LabelChip({
   visible = true,
   selected = false,
   description = "",
-  showIcon = false,
   ...props
 }: LabelChipProps) {
   // return the styled chip component
@@ -25,7 +24,7 @@ export default function LabelChip({
         {...props}
         className="label-chip"
         clickable={clickable}
-        icon={showIcon && selected ? <DoneIcon color="inherit" /> : undefined}
+        icon={selected ? <DoneIcon color="inherit" /> : undefined}
         sx={{
           "&:hover": {
             backgroundColor: clickable ? darken(color, 0.2) : color
