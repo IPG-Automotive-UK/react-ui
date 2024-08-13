@@ -15,11 +15,6 @@ const Template = args => {
   //  useArgs is a hook that returns the current state of the args object
   const [{ isOpen }, updateArgs] = useArgs();
 
-  // update the args object with the new isOpen value
-  React.useEffect(() => {
-    updateArgs({ isOpen });
-  }, [isOpen, updateArgs]);
-
   // handle the dialog open
   const handleClickOpen = () => {
     updateArgs({ isOpen: true });
@@ -62,12 +57,14 @@ const Template = args => {
 // Default
 export const Default = {
   args: {
+    isOpen: false,
     label: {
       _id: "",
       color: "#005FA8",
       description: "",
       name: ""
     },
+    options: [],
     title: "Add Label"
   },
   render: Template
