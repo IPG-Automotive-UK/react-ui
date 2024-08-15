@@ -50,7 +50,10 @@ const Template: StoryFn<SummaryCardProps> = args => {
 };
 
 const WithMoreOptionsButton: StoryFn<SummaryCardProps> = args => {
+  // create a ref for the more options button
   const ref = React.useRef<HTMLButtonElement>(null);
+
+  // more options popover anchor state
   const [open, setOpen] = React.useState(false);
 
   // more options dropdown
