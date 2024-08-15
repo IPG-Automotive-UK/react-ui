@@ -1,24 +1,29 @@
 import {
+  Box,
   Button,
   Divider,
   ListItemIcon,
   ListItemText,
   MenuItem,
   MenuList,
+  Popover,
   Table,
   TableBody,
   TableCell,
   TableContainer,
-  TableRow
+  TableRow,
+  Typography
 } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
 import { Meta, StoryFn } from "@storybook/react";
 
+import LabelIcon from "@mui/icons-material/Label";
 import React from "react";
 import SummaryCard from "./SummaryCard";
 import { SummaryCardProps } from "./SummaryCard.types";
 import { Theme } from "@mui/material/styles";
 import { action } from "@storybook/addon-actions";
+import { useArgs } from "@storybook/preview-api";
 
 /**
  * Story metadata
@@ -37,6 +42,64 @@ const Template: StoryFn<SummaryCardProps> = args => {
         action("onLabelClick")(label);
       }}
     />
+  );
+};
+
+const WithMoreOptionsButton: StoryFn<SummaryCardProps> = args => {
+  // Set the anchor element to know where to render the menu
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+  const [{ moreOptionsRef }, updateArgs] = useArgs<SummaryCardProps>();
+
+  // Check if the menu is open
+  const open = Boolean(anchorEl);
+
+  // more options dropdown
+  const MoreOptions = (
+    <MenuList>
+      <MenuItem onClick={e => handleLabelMenuClick(e)}>
+        <ListItemIcon>
+          <LabelIcon />
+        </ListItemIcon>
+        <ListItemText primary="Labels" />
+      </MenuItem>
+      <MenuItem onClick={action("onDeleteClick")}>
+        <ListItemIcon>
+          <Delete />
+        </ListItemIcon>
+        <ListItemText primary="Delete" />
+      </MenuItem>
+    </MenuList>
+  );
+
+  // handle the click of the more options button by setting the more options anchor element
+  const handleLabelMenuClick = event => {
+    updateArgs({ moreOptionsRef: event.currentTarget });
+    setAnchorEl(event.currentTarget);
+    action("onLabelMenuClick")(event);
+  };
+
+  // handle the close of the more options popover by setting the more options anchor element to null
+  const handleMoreOptionsClose = () => {
+    setAnchorEl(null);
+  };
+
+  return (
+    <>
+      <SummaryCard
+        {...args}
+        onClickLabel={label => {
+          action("onLabelClick")(label);
+        }}
+        moreOptionsPopover={MoreOptions}
+        moreOptionsRef={moreOptionsRef}
+      />
+      <Popover open={open} anchorEl={anchorEl} onClose={handleMoreOptionsClose}>
+        <Box p={2}>
+          <Typography>Popover Content</Typography>
+        </Box>
+      </Popover>
+    </>
   );
 };
 
@@ -214,6 +277,14 @@ export const withMoreOptionsPopover = {
   },
 
   render: Template
+};
+
+export const withMoreOptionsButtonRef = {
+  args: {
+    ...withMoreCardActions.args
+  },
+
+  render: WithMoreOptionsButton
 };
 
 export const ScenarioExample = {

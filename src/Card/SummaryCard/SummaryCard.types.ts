@@ -1,3 +1,5 @@
+import { MenuProps } from "@mui/material";
+
 export type SummaryCardProps = {
   /**
    * The content of the card to be displayed under the media.
@@ -32,6 +34,10 @@ export type SummaryCardProps = {
    * The content of the more options popover.
    */
   moreOptionsPopover?: React.ReactNode;
+  /**
+   * a ref to the more options button.
+   */
+  moreOptionsRef?: React.RefObject<HTMLButtonElement>;
   /**
    * Callback fired when the label is clicked.
    */
