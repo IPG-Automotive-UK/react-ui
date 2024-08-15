@@ -43,7 +43,7 @@ const Template: StoryFn<SummaryCardProps> = args => {
     <SummaryCard
       {...args}
       onClickLabel={label => {
-        action("onLabelClick")(label);
+        action("onClickLabel")(label);
       }}
     />
   );
@@ -71,7 +71,7 @@ const WithMoreOptionsButtonRef: StoryFn<SummaryCardProps> = args => {
   // open the popover and call the onLabelMenuClick action
   const handlePopoverMenuClick = event => {
     setOpen(true);
-    action("onLabelMenuClick")(event);
+    action("onLabelsClick")(event);
   };
 
   // close the popover
@@ -84,7 +84,7 @@ const WithMoreOptionsButtonRef: StoryFn<SummaryCardProps> = args => {
       <SummaryCard
         {...args}
         onClickLabel={label => {
-          action("onLabelClick")(label);
+          action("onClickLabel")(label);
         }}
         moreOptionsPopover={MoreOptions}
         moreOptionsRef={ref}
