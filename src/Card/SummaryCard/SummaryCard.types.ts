@@ -1,5 +1,3 @@
-import { MenuProps } from "@mui/material";
-
 export type SummaryCardProps = {
   /**
    * The content of the card to be displayed under the media.
