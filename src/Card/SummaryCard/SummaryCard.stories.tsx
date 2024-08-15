@@ -49,7 +49,7 @@ const Template: StoryFn<SummaryCardProps> = args => {
   );
 };
 
-const WithMoreOptionsButton: StoryFn<SummaryCardProps> = args => {
+const WithMoreOptionsButtonRef: StoryFn<SummaryCardProps> = args => {
   // create a ref for the more options button
   const ref = React.useRef<HTMLButtonElement>(null);
 
@@ -68,13 +68,13 @@ const WithMoreOptionsButton: StoryFn<SummaryCardProps> = args => {
     </MenuList>
   );
 
-  // handle the click of the more options button by setting the more options anchor element
+  // open the popover and call the onLabelMenuClick action
   const handlePopoverMenuClick = event => {
     setOpen(true);
     action("onLabelMenuClick")(event);
   };
 
-  // handle the close of the more options popover by setting the more options anchor element to null
+  // close the popover
   const handleMoreOptionsClose = () => {
     setOpen(false);
   };
@@ -289,7 +289,7 @@ export const withMoreOptionsButtonRef = {
     ...withMoreCardActions.args
   },
 
-  render: WithMoreOptionsButton
+  render: WithMoreOptionsButtonRef
 };
 
 export const ScenarioExample = {
