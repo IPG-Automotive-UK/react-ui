@@ -29,7 +29,8 @@ function SummaryCard({
   moreCardActions = null,
   subtitle = "subtitle",
   title = "title",
-  width = 368
+  width = 368,
+  moreOptionsRef
 }: SummaryCardProps) {
   // more options popover anchor state
   const [moreOptionsAnchorEl, setMoreOptionsAnchorEl] =
@@ -86,6 +87,7 @@ function SummaryCard({
           action={
             moreOptionsPopover ? (
               <IconButton
+                ref={moreOptionsRef}
                 aria-label="settings"
                 onClick={handleMoreOptionsClick}
               >
