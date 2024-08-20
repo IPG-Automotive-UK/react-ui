@@ -261,3 +261,7 @@ export {
   type WizardStepProps,
   type WizardStepsProps
 } from "./Wizard";
+export {
+  default as UploaderHeader,
+  type UploaderHeaderProps
+} from "./Uploader";
