@@ -18,8 +18,8 @@ export const Default: StoryObj<typeof UploaderHeader> = {
     required: true,
     showDelete: true,
     subText: "Please upload your file to continue",
-    title: "CarMaker"
+    title: "CarMaker",
+    titleVariant: "body"
   },
-
   render: Template
 };
