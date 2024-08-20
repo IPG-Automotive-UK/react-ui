@@ -14,6 +14,7 @@ const Template: StoryFn<UploaderHeaderProps> = args => {
 
 export const Default: StoryObj<typeof UploaderHeader> = {
   args: {
+    disabled: false,
     required: true,
     showDelete: true,
     subText: "Please upload your file to continue",
