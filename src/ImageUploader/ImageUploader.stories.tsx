@@ -30,7 +30,7 @@ const meta: Meta<typeof ImageUploader> = {
       />
     );
   },
-  title: "General/ImageUploader"
+  title: "Uploader/ImageUploader"
 };
 export default meta;
 

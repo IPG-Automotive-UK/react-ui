@@ -44,7 +44,7 @@ const meta: Meta<typeof FileUploader> = {
       />
     );
   },
-  title: "General/FileUploader"
+  title: "Uploader/FileUploader"
 };
 export default meta;
 
