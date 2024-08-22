@@ -42,3 +42,12 @@ export const AlwaysOpen = {
 
   render: Template
 };
+
+export const Disabled = {
+  args: {
+    ...Default.args,
+    disabled: true
+  },
+
+  render: Template
+};
