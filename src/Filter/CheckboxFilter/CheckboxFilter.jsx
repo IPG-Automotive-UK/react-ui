@@ -38,7 +38,8 @@ function CheckboxFilterAlwaysOpen({
   name,
   onChange,
   options,
-  value
+  value,
+  disabled = false
 }) {
   return (
     <AlwaysOpenAutocomplete
@@ -60,6 +61,7 @@ function CheckboxFilterAlwaysOpen({
       }}
       renderOption={Option}
       value={value}
+      disabled={disabled}
     />
   );
 }
@@ -73,7 +75,8 @@ function CheckboxFilterPopper({
   name,
   onChange,
   options,
-  value
+  value,
+  disabled = false
 }) {
   return (
     <Autocomplete
@@ -86,6 +89,7 @@ function CheckboxFilterPopper({
       )}
       renderOption={Option}
       value={value}
+      disabled={disabled}
     />
   );
 }

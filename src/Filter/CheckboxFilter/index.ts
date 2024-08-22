@@ -8,6 +8,7 @@ export type CheckboxFilterProps = {
   options: string[];
   value?: string[];
   variant?: "popper" | "always-open";
+  disabled?: boolean;
 };
 
 export default CheckboxFilter as React.FC<CheckboxFilterProps>;

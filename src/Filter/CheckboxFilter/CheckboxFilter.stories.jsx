@@ -22,10 +22,11 @@ const Template = args => {
 
 export const Default = {
   args: {
+    disabled: false,
     label: "Select options",
     limitTags: -1,
     name: "checkbox-filter",
-    options: Array.from(Array(20).keys()).map(i => `Option ${i}`),
+    options: Array.from(Array(5).keys()).map(i => `Option ${i}`),
     value: ["Option 1"],
     variant: "popper"
   },
