@@ -68,6 +68,23 @@ describe("CheckboxFilter", () => {
       // check that the onChange event is fired
       expect(onChange).toHaveBeenLastCalledWith(["option 1", "option 2"]);
     });
+
+    // test that filter is active when we either dont pass the prop
+    it("Filter is active when disabled is undefined", () => {
+      render(<CheckboxFilterWithState options={options} />);
+      expect(screen.getByRole("button", { name: /open/i })).toBeEnabled();
+    });
+    // test that filter is active when we pass disabled = false
+    it("Filter is active when disabled is false", () => {
+      render(<CheckboxFilterWithState options={options} disabled={false} />);
+      expect(screen.getByRole("button", { name: /open/i })).toBeEnabled();
+    });
+
+    // test that filter is active when we pass disabled = true
+    it("Filter is disabled when disabled is true", () => {
+      render(<CheckboxFilterWithState options={options} disabled={true} />);
+      expect(screen.getByRole("button", { name: /open/i })).not.toBeEnabled();
+    });
   });
   describe("variant=always-open", () => {
     it("can single select", async () => {
