@@ -11,6 +11,8 @@ import {
 import { CheckBox, CheckBoxOutlineBlank } from "@mui/icons-material";
 
 import AlwaysOpenAutocomplete from "../AlwaysOpenAutocomplete";
+import { CheckboxFilterProps } from "./CheckboxFilter.types";
+import { HTMLAttributes } from "react";
 
 /**
  * A checkbox filter allows the user to select multiple options from a list.
@@ -18,10 +20,19 @@ import AlwaysOpenAutocomplete from "../AlwaysOpenAutocomplete";
 export default function CheckboxFilter({
   variant = "popper",
   limitTags = -1,
+  options = [],
   value = [],
   ...props
-}) {
-  const defaults = { limitTags, value };
+}: CheckboxFilterProps) {
+  // create default values object
+  const defaults = {
+    limitTags,
+    options,
+    value,
+    variant
+  };
+
+  // return popper components
   return variant === "popper" ? (
     <CheckboxFilterPopper {...props} {...defaults} />
   ) : (
@@ -39,13 +50,13 @@ function CheckboxFilterAlwaysOpen({
   onChange,
   options,
   value,
-  disabled = false
-}) {
+  disabled
+}: CheckboxFilterProps) {
   return (
     <AlwaysOpenAutocomplete
       limitTags={limitTags}
       multiple
-      onChange={(e, newValue) => onChange(newValue)}
+      onChange={onChange}
       options={options}
       renderInput={params => {
         return (
@@ -76,13 +87,13 @@ function CheckboxFilterPopper({
   onChange,
   options,
   value,
-  disabled = false
-}) {
+  disabled
+}: CheckboxFilterProps) {
   return (
     <Autocomplete
       limitTags={limitTags}
       multiple
-      onChange={(e, newValue) => onChange(newValue)}
+      onChange={onChange}
       options={options}
       renderInput={params => (
         <TextField {...params} label={label} name={name} />
@@ -95,7 +106,11 @@ function CheckboxFilterPopper({
 }
 
 // renderer for a checkbox option
-function Option(props, option, { selected }) {
+function Option(
+  props: HTMLAttributes<HTMLLIElement>,
+  option: string,
+  { selected }: { selected: boolean }
+) {
   return (
     <Box component="li" {...props}>
       <Checkbox

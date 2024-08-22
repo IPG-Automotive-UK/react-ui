@@ -1,6 +1,6 @@
 import CheckboxFilter from "./CheckboxFilter";
 import React from "react";
-import { action } from "@storybook/addon-actions";
+import type { SyntheticEvent } from "react";
 
 export default {
   component: CheckboxFilter,
@@ -10,14 +10,16 @@ export default {
 // story template with state for selection
 const Template = args => {
   const [value, setValue] = React.useState(args.value);
-  React.useEffect(() => {
-    setValue(args.value);
-  }, [args.value]);
-  const onChange = newValue => {
-    setValue(newValue);
-    action("onChange")(newValue);
+
+  // onChange handler for the Checkbox Filter
+  const handleChange = (
+    e: SyntheticEvent,
+    selectedValues: string[] | undefined
+  ) => {
+    setValue(selectedValues);
   };
-  return <CheckboxFilter {...args} onChange={onChange} value={value} />;
+
+  return <CheckboxFilter {...args} onChange={handleChange} value={value} />;
 };
 
 export const Default = {
@@ -26,7 +28,7 @@ export const Default = {
     label: "Select options",
     limitTags: -1,
     name: "checkbox-filter",
-    options: Array.from(Array(5).keys()).map(i => `Option ${i}`),
+    options: Array.from(Array(10).keys()).map(i => `Option ${i}`),
     value: ["Option 1"],
     variant: "popper"
   },

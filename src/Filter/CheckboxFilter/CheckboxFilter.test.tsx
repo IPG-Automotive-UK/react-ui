@@ -1,10 +1,11 @@
 import * as React from "react";
 
+import { describe, expect, it, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 
 import CheckboxFilter from "./CheckboxFilter";
+import { CheckboxFilterProps } from "./CheckboxFilter.types";
 import userEvent from "@testing-library/user-event";
-import { vi } from "vitest";
 
 /**
  * Test wrapper for CheckboxFilter
@@ -13,16 +14,22 @@ import { vi } from "vitest";
  */
 const CheckboxFilterWithState = ({
   onChange,
-  value: valueIn = [],
+  variant = "popper",
+  value = [],
   ...rest
-}) => {
-  const [value, setValue] = React.useState(valueIn);
-  const handleChange = selectedValues => {
-    setValue(selectedValues);
-    onChange(selectedValues);
-  };
+}: CheckboxFilterProps) => {
+  const [filterValue, setFilterValue] = React.useState<string[] | undefined>(
+    value
+  );
 
-  return <CheckboxFilter {...rest} onChange={handleChange} value={value} />;
+  return (
+    <CheckboxFilter
+      {...rest}
+      onChange={(e, values) => setFilterValue(values)}
+      value={filterValue}
+      variant={variant}
+    />
+  );
 };
 
 // sample options
@@ -72,19 +79,34 @@ describe("CheckboxFilter", () => {
 
     // test that filter is active when we either dont pass the prop
     it("can disable filter when disabled is undefined", () => {
-      render(<CheckboxFilterWithState options={options} />);
+      const onChange = vi.fn();
+      render(<CheckboxFilterWithState options={options} onChange={onChange} />);
       expect(screen.getByRole("button", { name: /open/i })).toBeEnabled();
     });
 
     // test that filter is active when we pass disabled = false
     it("can disable filter when disabled is false", () => {
-      render(<CheckboxFilterWithState options={options} disabled={false} />);
+      const onChange = vi.fn();
+      render(
+        <CheckboxFilterWithState
+          options={options}
+          onChange={onChange}
+          disabled={false}
+        />
+      );
       expect(screen.getByRole("button", { name: /open/i })).toBeEnabled();
     });
 
     // test that filter is active when we pass disabled = true
     it("can disable filter when disabled is true", () => {
-      render(<CheckboxFilterWithState options={options} disabled={true} />);
+      const onChange = vi.fn();
+      render(
+        <CheckboxFilterWithState
+          options={options}
+          onChange={onChange}
+          disabled={true}
+        />
+      );
       expect(screen.getByRole("button", { name: /open/i })).not.toBeEnabled();
     });
   });
@@ -134,19 +156,34 @@ describe("CheckboxFilter", () => {
     });
     // test that filter is active when we either dont pass the prop
     it("can activate filter when disabled is undefined", () => {
-      render(<CheckboxFilterWithState options={options} />);
+      const onChange = vi.fn();
+      render(<CheckboxFilterWithState options={options} onChange={onChange} />);
       expect(screen.getByRole("button", { name: /open/i })).toBeEnabled();
     });
 
     // test that filter is active when we pass disabled = false
     it("can activate filter when disabled is false", () => {
-      render(<CheckboxFilterWithState options={options} disabled={false} />);
+      const onChange = vi.fn();
+      render(
+        <CheckboxFilterWithState
+          options={options}
+          onChange={onChange}
+          disabled={false}
+        />
+      );
       expect(screen.getByRole("button", { name: /open/i })).toBeEnabled();
     });
 
     // test that filter is active when we pass disabled = true
     it("can disable filter when disabled is true", () => {
-      render(<CheckboxFilterWithState options={options} disabled={true} />);
+      const onChange = vi.fn();
+      render(
+        <CheckboxFilterWithState
+          options={options}
+          disabled={true}
+          onChange={onChange}
+        />
+      );
       expect(screen.getByRole("button", { name: /open/i })).not.toBeEnabled();
     });
   });
