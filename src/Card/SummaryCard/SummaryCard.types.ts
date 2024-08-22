@@ -33,6 +33,10 @@ export type SummaryCardProps = {
    */
   moreOptionsPopover?: React.ReactNode;
   /**
+   * a ref to the more options button.
+   */
+  moreOptionsRef?: React.RefObject<HTMLButtonElement>;
+  /**
    * Callback fired when the label is clicked.
    */
   onClickLabel?: (label: {

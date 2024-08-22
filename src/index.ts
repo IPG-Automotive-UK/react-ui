@@ -26,6 +26,7 @@ export {
 } from "./Autocomplete";
 export { default as Canvas, type CanvasProps } from "./Canvas";
 export { default as CanvasItem, type CanvasItemProps } from "./CanvasItem";
+export { default as EditLabelDialog } from "./EditLabelDialog";
 export { default as RoadMarking, type RoadMarkingProps } from "./RoadMarking";
 export { default as RoadSurface, type RoadSurfaceProps } from "./RoadSurface";
 export { default as TrafficSign, type TrafficSignProps } from "./TrafficSign";
@@ -261,3 +262,7 @@ export {
   type WizardStepProps,
   type WizardStepsProps
 } from "./Wizard";
+export {
+  default as UploaderHeader,
+  type UploaderHeaderProps
+} from "./Uploader";

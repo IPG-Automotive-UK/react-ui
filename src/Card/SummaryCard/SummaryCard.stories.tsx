@@ -1,19 +1,23 @@
 import {
+  Box,
   Button,
   Divider,
   ListItemIcon,
   ListItemText,
   MenuItem,
   MenuList,
+  Popover,
   Table,
   TableBody,
   TableCell,
   TableContainer,
-  TableRow
+  TableRow,
+  Typography
 } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
 import { Meta, StoryFn } from "@storybook/react";
 
+import LabelIcon from "@mui/icons-material/Label";
 import React from "react";
 import SummaryCard from "./SummaryCard";
 import { SummaryCardProps } from "./SummaryCard.types";
@@ -24,6 +28,11 @@ import { action } from "@storybook/addon-actions";
  * Story metadata
  */
 const meta: Meta<typeof SummaryCard> = {
+  argTypes: {
+    moreOptionsRef: {
+      control: false
+    }
+  },
   component: SummaryCard,
   title: "Card/SummaryCard"
 };
@@ -34,9 +43,68 @@ const Template: StoryFn<SummaryCardProps> = args => {
     <SummaryCard
       {...args}
       onClickLabel={label => {
-        action("onLabelClick")(label);
+        action("onClickLabel")(label);
       }}
     />
+  );
+};
+
+const WithMoreOptionsButtonRef: StoryFn<SummaryCardProps> = args => {
+  // create a ref for the more options button
+  const ref = React.useRef<HTMLButtonElement>(null);
+
+  // more options popover anchor state
+  const [open, setOpen] = React.useState(false);
+
+  // more options dropdown
+  const MoreOptions = (
+    <MenuList>
+      <MenuItem onClick={e => handlePopoverMenuClick(e)}>
+        <ListItemIcon>
+          <LabelIcon />
+        </ListItemIcon>
+        <ListItemText primary="Open Popover" />
+      </MenuItem>
+    </MenuList>
+  );
+
+  // open the popover and call the onLabelMenuClick action
+  const handlePopoverMenuClick = event => {
+    setOpen(true);
+    action("onLabelsClick")(event);
+  };
+
+  // close the popover
+  const handleMoreOptionsClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <>
+      <SummaryCard
+        {...args}
+        onClickLabel={label => {
+          action("onClickLabel")(label);
+        }}
+        moreOptionsPopover={MoreOptions}
+        moreOptionsRef={ref}
+      />
+      <Popover
+        open={open}
+        anchorEl={ref.current}
+        onClose={handleMoreOptionsClose}
+        anchorOrigin={{
+          horizontal: "left",
+          vertical: "bottom"
+        }}
+      >
+        <Box p={2}>
+          <Typography>
+            This popover is anchored to the more options button
+          </Typography>
+        </Box>
+      </Popover>
+    </>
   );
 };
 
@@ -214,6 +282,14 @@ export const withMoreOptionsPopover = {
   },
 
   render: Template
+};
+
+export const withMoreOptionsButtonRef = {
+  args: {
+    ...withMoreCardActions.args
+  },
+
+  render: WithMoreOptionsButtonRef
 };
 
 export const ScenarioExample = {

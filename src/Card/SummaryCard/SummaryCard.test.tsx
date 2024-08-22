@@ -263,4 +263,33 @@ describe("SummaryCard", () => {
     // expect the onClickViewFiles function to be called
     expect(onClickViewFiles).toHaveBeenCalledTimes(1);
   });
+
+  // test ref is passed to more options button
+  it("passes ref to more options button", () => {
+    // create a ref
+    const ref = React.createRef<HTMLButtonElement>();
+
+    render(
+      <SummaryCard
+        title="summary card title"
+        subtitle="summary card subtitle"
+        moreOptionsRef={ref}
+        moreOptionsPopover={
+          <List>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <Edit />
+                </ListItemIcon>
+                <ListItemText primary="Edit" />
+              </ListItemButton>
+            </ListItem>
+          </List>
+        }
+      />
+    );
+
+    // expect the ref to be passed to the more options button
+    expect(ref.current).toBeInTheDocument();
+  });
 });

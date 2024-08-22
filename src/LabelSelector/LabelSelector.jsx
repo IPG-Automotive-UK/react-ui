@@ -13,7 +13,7 @@ import React, { useState } from "react";
 
 import Checkbox from "../Checkbox";
 import DeleteLabelDialog from "./DeleteLabelDialog/DeleteLabelDialog";
-import EditLabelDialog from "./EditLabelDialog/EditLabelDialog";
+import EditLabelDialog from "../EditLabelDialog/EditLabelDialog";
 import LabelChip from "./LabelChip/LabelChip";
 import NoWrapTypography from "../NoWrapTypography/NoWrapTypography";
 import PropTypes from "prop-types";
@@ -276,7 +276,7 @@ export default function LabelSelector({
           setSelectedLabel(defaultLabel);
         }}
         options={options}
-        labelDialogTitle={labelDialogTitle}
+        title={labelDialogTitle}
         label={selectedLabel}
         nameMaxLength={nameMaxLength}
         onNew={onNew}

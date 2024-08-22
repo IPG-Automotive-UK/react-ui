@@ -1,7 +1,7 @@
-import { render, screen } from "@testing-library/react";
+import React, { act } from "react";
+import { render, screen, waitFor } from "@testing-library/react";
 
 import LabelChip from "./LabelChip";
-import React from "react";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 
@@ -76,5 +76,49 @@ describe("LabelChip", () => {
 
     // there shouldn't be a cancel icon
     expect(screen.queryByTestId("CancelIcon")).not.toBeInTheDocument();
+  });
+  // test that the selected icon is rendered when selected is true
+  it("renders selected icon", () => {
+    render(<LabelChip label="Label" selected />);
+
+    // get the selected icon
+    const selectedIcon = screen.getByTestId("DoneIcon");
+
+    // check that the selected icon is rendered
+    expect(selectedIcon).toBeInTheDocument();
+  });
+  // test that the selected icon is not rendered when selected is false
+  it("does not render selected icon", () => {
+    render(<LabelChip label="Label" selected={false} />);
+
+    // there shouldn't be a selected icon
+    expect(screen.queryByTestId("DoneIcon")).not.toBeInTheDocument();
+  });
+  // renders tooltip on hover of label chip
+  it("renders tooltip on hover", async () => {
+    render(<LabelChip label="Label" description="This is description" />);
+
+    // trigger hover on the label chip
+    await act(async () => {
+      await userEvent.hover(screen.getByText(/label/i));
+    });
+
+    // wait for the tooltip to be visible
+    await waitFor(() => {
+      expect(
+        screen.getByRole("tooltip", {
+          hidden: true,
+          name: "This is description"
+        })
+      ).toBeVisible();
+    });
+  });
+
+  // test that the tooltip is not rendered when description is not passed
+  it("does not render tooltip when description is not passed", () => {
+    render(<LabelChip label="Label" />);
+
+    // there shouldn't be a tooltip
+    expect(screen.queryByRole("tooltip")).not.toBeInTheDocument();
   });
 });
