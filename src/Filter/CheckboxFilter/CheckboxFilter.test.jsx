@@ -74,6 +74,7 @@ describe("CheckboxFilter", () => {
       render(<CheckboxFilterWithState options={options} />);
       expect(screen.getByRole("button", { name: /open/i })).toBeEnabled();
     });
+
     // test that filter is active when we pass disabled = false
     it("Filter is active when disabled is false", () => {
       render(<CheckboxFilterWithState options={options} disabled={false} />);
