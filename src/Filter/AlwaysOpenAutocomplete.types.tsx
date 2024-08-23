@@ -1,8 +1,9 @@
 import { AutocompleteProps } from "@mui/material";
 
+// Configure the props for the AlwaysOpenAutocomplete component by setting appropriate generics to configure the base MUI Autocomplete component for our use case.
 export type AlwaysOpenAutocompleteProps = AutocompleteProps<
-  string,
-  boolean,
-  boolean,
-  boolean
+  string, // this is the value of the options, which in our case is a string
+  boolean, // this is the multiple value as we want to enable multiple selection
+  boolean, // this is the disable clearable value as we want to be able to control this
+  boolean // this is the free solo value as we want to be able to control this
 >;
