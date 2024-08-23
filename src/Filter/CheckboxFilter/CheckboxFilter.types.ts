@@ -19,7 +19,7 @@ export type CheckboxFilterProps = {
    * @param value the value to add/delete from the filtered values
    * @returns void
    */
-  onChange: (value: string | string[] | null) => void;
+  onChange: (value: string[]) => void;
   /**
    * Options to choose from in the dropdown/ always open box
    */
