@@ -109,14 +109,25 @@ function CheckboxFilterPopper({
 function Option(
   props: HTMLAttributes<HTMLLIElement>,
   option: string,
-  { selected }: { selected: boolean }
+  { selected }: { selected: boolean },
+  { disabled }: Pick<CheckboxFilterProps, "disabled">
 ) {
   return (
-    <Box component="li" {...props}>
+    <Box
+      component="li"
+      {...props}
+      sx={{
+        ...(disabled && {
+          opacity: 0.5,
+          pointerEvents: "none"
+        })
+      }}
+    >
       <Checkbox
-        icon={<CheckBoxOutlineBlank fontSize="small" />}
         checkedIcon={<CheckBox fontSize="small" />}
         checked={selected}
+        disabled={disabled}
+        icon={<CheckBoxOutlineBlank fontSize="small" />}
         value={option}
       />
       <Typography>{option}</Typography>
