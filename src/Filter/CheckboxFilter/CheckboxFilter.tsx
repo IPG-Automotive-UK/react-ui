@@ -52,11 +52,20 @@ function CheckboxFilterAlwaysOpen({
   value,
   disabled
 }: Omit<CheckboxFilterProps, "variant">) {
+  // ensure the onChange value is always an array because we are using a multi-select
+  const handleOnChange = (newValue: string | string[] | null) => {
+    if (newValue === null) {
+      onChange([]);
+    } else {
+      onChange(Array.isArray(newValue) ? newValue : [newValue]);
+    }
+  };
+
   return (
     <AlwaysOpenAutocomplete
       limitTags={limitTags}
       multiple
-      onChange={(_e, newValue) => onChange(newValue)}
+      onChange={(_e, newValue) => handleOnChange(newValue)}
       options={options}
       renderInput={params => {
         return (
