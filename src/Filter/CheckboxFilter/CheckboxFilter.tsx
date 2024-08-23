@@ -24,19 +24,19 @@ export default function CheckboxFilter({
   value = [],
   ...props
 }: CheckboxFilterProps) {
-  // create default values object
+  // create default values object and merge with other props
   const defaults = {
     limitTags,
     options,
-    value,
-    variant
+    value
   };
+  const allProps = { ...props, ...defaults };
 
   // return popper components
   return variant === "popper" ? (
-    <CheckboxFilterPopper {...props} {...defaults} />
+    <CheckboxFilterPopper {...allProps} />
   ) : (
-    <CheckboxFilterAlwaysOpen {...props} {...defaults} />
+    <CheckboxFilterAlwaysOpen {...allProps} />
   );
 }
 
@@ -51,7 +51,7 @@ function CheckboxFilterAlwaysOpen({
   options,
   value,
   disabled
-}: CheckboxFilterProps) {
+}: Omit<CheckboxFilterProps, "variant">) {
   return (
     <AlwaysOpenAutocomplete
       limitTags={limitTags}
@@ -88,7 +88,7 @@ function CheckboxFilterPopper({
   options,
   value,
   disabled
-}: CheckboxFilterProps) {
+}: Omit<CheckboxFilterProps, "variant">) {
   return (
     <Autocomplete
       limitTags={limitTags}
