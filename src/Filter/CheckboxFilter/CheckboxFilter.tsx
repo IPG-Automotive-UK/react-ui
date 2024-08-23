@@ -11,6 +11,8 @@ import {
 import { CheckBox, CheckBoxOutlineBlank } from "@mui/icons-material";
 
 import AlwaysOpenAutocomplete from "../AlwaysOpenAutocomplete";
+import { CheckboxFilterProps } from "./CheckboxFilter.types";
+import { HTMLAttributes } from "react";
 
 /**
  * A checkbox filter allows the user to select multiple options from a list.
@@ -18,14 +20,23 @@ import AlwaysOpenAutocomplete from "../AlwaysOpenAutocomplete";
 export default function CheckboxFilter({
   variant = "popper",
   limitTags = -1,
+  options = [],
   value = [],
   ...props
-}) {
-  const defaults = { limitTags, value };
+}: CheckboxFilterProps) {
+  // create default values object and merge with other props
+  const defaults = {
+    limitTags,
+    options,
+    value
+  };
+  const allProps = { ...props, ...defaults };
+
+  // return popper components
   return variant === "popper" ? (
-    <CheckboxFilterPopper {...props} {...defaults} />
+    <CheckboxFilterPopper {...allProps} />
   ) : (
-    <CheckboxFilterAlwaysOpen {...props} {...defaults} />
+    <CheckboxFilterAlwaysOpen {...allProps} />
   );
 }
 
@@ -38,13 +49,14 @@ function CheckboxFilterAlwaysOpen({
   name,
   onChange,
   options,
-  value
-}) {
+  value,
+  disabled
+}: Omit<CheckboxFilterProps, "variant">) {
   return (
     <AlwaysOpenAutocomplete
       limitTags={limitTags}
       multiple
-      onChange={(e, newValue) => onChange(newValue)}
+      onChange={(_e, newValue) => onChange(newValue)}
       options={options}
       renderInput={params => {
         return (
@@ -60,6 +72,7 @@ function CheckboxFilterAlwaysOpen({
       }}
       renderOption={Option}
       value={value}
+      disabled={disabled}
     />
   );
 }
@@ -73,31 +86,48 @@ function CheckboxFilterPopper({
   name,
   onChange,
   options,
-  value
-}) {
+  value,
+  disabled
+}: Omit<CheckboxFilterProps, "variant">) {
   return (
     <Autocomplete
       limitTags={limitTags}
       multiple
-      onChange={(e, newValue) => onChange(newValue)}
+      onChange={(_e, newValue) => onChange(newValue)}
       options={options}
       renderInput={params => (
         <TextField {...params} label={label} name={name} />
       )}
       renderOption={Option}
       value={value}
+      disabled={disabled}
     />
   );
 }
 
 // renderer for a checkbox option
-function Option(props, option, { selected }) {
+function Option(
+  props: HTMLAttributes<HTMLLIElement>,
+  option: string,
+  { selected }: { selected: boolean },
+  { disabled }: Pick<CheckboxFilterProps, "disabled">
+) {
   return (
-    <Box component="li" {...props}>
+    <Box
+      component="li"
+      {...props}
+      sx={{
+        ...(disabled && {
+          opacity: 0.5,
+          pointerEvents: "none"
+        })
+      }}
+    >
       <Checkbox
-        icon={<CheckBoxOutlineBlank fontSize="small" />}
         checkedIcon={<CheckBox fontSize="small" />}
         checked={selected}
+        disabled={disabled}
+        icon={<CheckBoxOutlineBlank fontSize="small" />}
         value={option}
       />
       <Typography>{option}</Typography>
