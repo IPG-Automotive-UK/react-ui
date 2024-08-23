@@ -1,6 +1,3 @@
-import { AutocompleteChangeReason } from "@mui/material";
-import { SyntheticEvent } from "react";
-
 /**
  * Props definition for the CheckboxFilter component
  */
@@ -22,11 +19,7 @@ export type CheckboxFilterProps = {
    * @param value the value to add/delete from the filtered values
    * @returns void
    */
-  onChange: (
-    event: SyntheticEvent,
-    value: string | string[] | null,
-    reason?: AutocompleteChangeReason
-  ) => void;
+  onChange: (value: string | string[] | null) => void;
   /**
    * Options to choose from in the dropdown/ always open box
    */

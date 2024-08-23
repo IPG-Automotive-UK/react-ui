@@ -56,7 +56,7 @@ function CheckboxFilterAlwaysOpen({
     <AlwaysOpenAutocomplete
       limitTags={limitTags}
       multiple
-      onChange={onChange}
+      onChange={(_e, newValue) => onChange(newValue)}
       options={options}
       renderInput={params => {
         return (
@@ -93,7 +93,7 @@ function CheckboxFilterPopper({
     <Autocomplete
       limitTags={limitTags}
       multiple
-      onChange={onChange}
+      onChange={(_e, newValue) => onChange(newValue)}
       options={options}
       renderInput={params => (
         <TextField {...params} label={label} name={name} />

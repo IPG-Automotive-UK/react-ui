@@ -14,20 +14,16 @@ import userEvent from "@testing-library/user-event";
  */
 const CheckboxFilterWithState = ({
   onChange,
-  variant = "popper",
-  value = [],
+  value: valueIn = [],
   ...rest
 }: CheckboxFilterProps) => {
-  const [filterValue, setFilterValue] = React.useState(value);
+  const [value, setValue] = React.useState(valueIn);
+  const handleChange = selectedValues => {
+    setValue(selectedValues);
+    onChange(selectedValues);
+  };
 
-  return (
-    <CheckboxFilter
-      {...rest}
-      onChange={(e, values) => setFilterValue(values as string[])}
-      value={filterValue}
-      variant={variant}
-    />
-  );
+  return <CheckboxFilter {...rest} onChange={handleChange} value={value} />;
 };
 
 // sample options
