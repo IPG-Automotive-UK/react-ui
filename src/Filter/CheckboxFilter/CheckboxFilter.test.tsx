@@ -18,14 +18,12 @@ const CheckboxFilterWithState = ({
   value = [],
   ...rest
 }: CheckboxFilterProps) => {
-  const [filterValue, setFilterValue] = React.useState<string[] | undefined>(
-    value
-  );
+  const [filterValue, setFilterValue] = React.useState(value);
 
   return (
     <CheckboxFilter
       {...rest}
-      onChange={(e, values) => setFilterValue(values)}
+      onChange={(e, values) => setFilterValue(values as string[])}
       value={filterValue}
       variant={variant}
     />
@@ -46,9 +44,9 @@ describe("CheckboxFilter", () => {
       await userEvent.click(screen.getByRole("button", { name: /open/i }));
 
       // check that the options are rendered
-      expect(screen.getByText("option 1")).toBeInTheDocument();
-      expect(screen.getByText("option 2")).toBeInTheDocument();
-      expect(screen.getByText("option 3")).toBeInTheDocument();
+      expect(screen.getByText("option 1")).toBeEnabled();
+      expect(screen.getByText("option 2")).toBeEnabled();
+      expect(screen.getByText("option 3")).toBeEnabled();
 
       // click the first option
       await userEvent.click(screen.getByText("option 1"));
@@ -64,9 +62,9 @@ describe("CheckboxFilter", () => {
       await userEvent.click(screen.getByRole("button", { name: /open/i }));
 
       // check that the options are rendered
-      expect(screen.getByText("option 1")).toBeInTheDocument();
-      expect(screen.getByText("option 2")).toBeInTheDocument();
-      expect(screen.getByText("option 3")).toBeInTheDocument();
+      expect(screen.getByText("option 1")).toBeEnabled();
+      expect(screen.getByText("option 2")).toBeEnabled();
+      expect(screen.getByText("option 3")).toBeEnabled();
 
       // click the first option
       await userEvent.click(screen.getByText("option 1"));
@@ -81,7 +79,10 @@ describe("CheckboxFilter", () => {
     it("can disable filter when disabled is undefined", () => {
       const onChange = vi.fn();
       render(<CheckboxFilterWithState options={options} onChange={onChange} />);
-      expect(screen.getByRole("button", { name: /open/i })).toBeEnabled();
+      const button: HTMLButtonElement = screen.getByRole("button", {
+        name: /open/i
+      });
+      expect(button).toBeEnabled();
     });
 
     // test that filter is active when we pass disabled = false
