@@ -1,6 +1,5 @@
 import CheckboxFilter from "./CheckboxFilter";
 import React from "react";
-import type { SyntheticEvent } from "react";
 
 export default {
   component: CheckboxFilter,
@@ -12,10 +11,7 @@ const Template = args => {
   const [value, setValue] = React.useState(args.value);
 
   // onChange handler for the Checkbox Filter
-  const handleChange = (
-    e: SyntheticEvent,
-    selectedValues: string[] | undefined
-  ) => {
+  const handleChange = (selectedValues: string[] | undefined) => {
     setValue(selectedValues);
   };
 
