@@ -38,7 +38,7 @@ test.describe("LabelChipGroup", () => {
       "http://localhost:6006/?path=/story/general-labelchipgroup--overflowing-parent"
     );
 
-    // check the first chip is visible
+    // check the first chips are visible
     await expect(
       page
         .frameLocator('iframe[title="storybook-preview-iframe"]')
@@ -61,8 +61,15 @@ test.describe("LabelChipGroup", () => {
     await expect(
       page
         .frameLocator('iframe[title="storybook-preview-iframe"]')
-        .getByRole("button")
-    ).toContainText("+1");
+        .getByRole("button", { name: "+" })
+    ).toContainText("+2");
+
+    // check the popper is not visible
+    await expect(
+      page
+        .frameLocator('iframe[title="storybook-preview-iframe"]')
+        .locator(".label-chip-group-popover")
+    ).not.toBeVisible();
 
     // click the more items button
     await page
@@ -78,5 +85,21 @@ test.describe("LabelChipGroup", () => {
         .filter({ hasText: /^Label 3$/ })
         .nth(1)
     ).toBeVisible();
+    await expect(
+      page
+        .frameLocator('iframe[title="storybook-preview-iframe"]')
+        .locator(".label-chip-group-popover")
+    ).toBeVisible();
+
+    // check we can click on one of the chips in the popper and the poper then closes
+    await page
+      .frameLocator('iframe[title="storybook-preview-iframe"]')
+      .getByRole("button", { name: "Label 3" })
+      .click();
+    await expect(
+      page
+        .frameLocator('iframe[title="storybook-preview-iframe"]')
+        .locator(".label-chip-group-popover")
+    ).not.toBeVisible();
   });
 });
