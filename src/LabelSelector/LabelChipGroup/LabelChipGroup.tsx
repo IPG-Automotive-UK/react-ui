@@ -2,6 +2,7 @@ import { Box, Button, Popover, Stack, Typography } from "@mui/material";
 
 import LabelChip from "../LabelChip/LabelChip";
 import { LabelChipGroupProps } from "./LabelChipGroup.types";
+import type { LabelChipProps } from "../LabelChip/LabelChip.types";
 import React from "react";
 import { ResizeObserver } from "@juggle/resize-observer";
 import { sortLabelChips } from "./sortLabelChips";
@@ -88,6 +89,20 @@ export default function LabelChipGroup({ chips }: LabelChipGroupProps) {
     }
   }, [chips, moreItemsRef, parentRef]);
 
+  // custom onClick event handler for label chips shown in the popper to close the popper on click
+  const handleOverflowingChipClick = (
+    event: React.MouseEvent<HTMLDivElement>,
+    onClick: LabelChipProps["onClick"]
+  ) => {
+    // close the popover
+    setPopoverOpen(false);
+
+    // call the original onClick event handler if it exists
+    if (onClick) {
+      onClick(event);
+    }
+  };
+
   // render all the chips in a row with a stack component, initially all chips invisible
   // if any chips are overflowing, we show how many are hidden and provide a popover to show the list of hidden chips
   // the resize oberserver effect will update the visibility of chips and position the more items button next to the last visible chip by changing the order of the hidden chips
@@ -145,7 +160,12 @@ export default function LabelChipGroup({ chips }: LabelChipGroupProps) {
             >
               {overflowingChips.map((chip, index) => (
                 <Box key={index}>
-                  <LabelChip {...chip} />
+                  <LabelChip
+                    {...chip}
+                    onClick={event =>
+                      handleOverflowingChipClick(event, chip.onClick)
+                    }
+                  />
                 </Box>
               ))}
             </Stack>
