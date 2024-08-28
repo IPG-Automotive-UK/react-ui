@@ -50,10 +50,17 @@ describe("LabelChip", () => {
   });
   // test that on click, the callback is not called when not clickable
   it("does not call callback onClick when not clickable", () => {
-    render(<LabelChip label="Label" onClick={() => {}} />);
+    // render the label chip in a non-clickable state and spy on the onClick callback
+    const user = userEvent.setup();
+    const onClick = vi.fn();
+    render(<LabelChip label="Label" onClick={onClick} clickable={false} />);
 
-    // there shouldn't be a button role
-    expect(screen.queryByRole("button")).not.toBeInTheDocument();
+    // find the label chip with the text "Label" and click it
+    const labelChip = screen.getByText(/label/i);
+    user.click(labelChip);
+
+    // check that the onClick callback was not called
+    expect(onClick).not.toHaveBeenCalled();
   });
   // test that on delete, the callback is called
   it("calls callback onDelete", async () => {

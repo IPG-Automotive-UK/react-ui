@@ -8,13 +8,14 @@ import React from "react";
 // component to display a chip with custom colors
 export default function LabelChip({
   clickable = false,
-  label,
   color = "#005FA8",
+  description = "",
+  label,
+  onClick,
+  selected = false,
   size = "medium",
   variant = "filled",
   visible = true,
-  selected = false,
-  description = "",
   ...props
 }: LabelChipProps) {
   // return the styled chip component
@@ -25,6 +26,8 @@ export default function LabelChip({
         className="label-chip"
         clickable={clickable}
         icon={selected ? <DoneIcon color="inherit" /> : undefined}
+        label={<NoWrapTypography variant="inherit">{label}</NoWrapTypography>}
+        onClick={clickable ? onClick : undefined}
         sx={{
           "&:hover": {
             backgroundColor: clickable ? darken(color, 0.2) : color
@@ -39,7 +42,6 @@ export default function LabelChip({
           },
           visibility: visible ? "visible" : "hidden"
         }}
-        label={<NoWrapTypography variant="inherit">{label}</NoWrapTypography>}
         size={size}
         variant={variant}
       />

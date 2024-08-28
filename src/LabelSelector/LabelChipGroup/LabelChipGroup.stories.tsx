@@ -69,18 +69,22 @@ export const Default = {
   args: {
     chips: [
       {
+        clickable: true,
         color: "#005FA8",
         label: "Label 1"
       },
       {
+        clickable: true,
         color: "#1D9586",
         label: "Label 2"
       },
       {
+        clickable: true,
         color: "#fcba03",
         label: "Label 3"
       },
       {
+        clickable: true,
         color: "#47357a",
         label:
           "This is a really long label that is so long it will even overflow the popover container so we should see some ellipsis here and a tooltip"
