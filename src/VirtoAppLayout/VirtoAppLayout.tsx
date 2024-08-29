@@ -101,7 +101,7 @@ function Layout({
         >
           <Box sx={theme => theme.mixins.toolbar} />
           <Box
-            id="page-content"
+            id="virto-app-layout-page-content"
             sx={theme => ({
               height: `calc(100vh - ${theme.mixins.toolbar.minHeight}px)`,
               overflow: "auto",
