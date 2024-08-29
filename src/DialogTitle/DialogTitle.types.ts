@@ -11,5 +11,5 @@ export type DialogTitleProps = MuiDialogTitleProps & {
   /**
    * Callback fired when the user clicks on Close("X") button. If not provided, the close button will not be displayed.
    */
-  onClose: IconButtonProps["onClick"];
+  onClose?: IconButtonProps["onClick"];
 };
