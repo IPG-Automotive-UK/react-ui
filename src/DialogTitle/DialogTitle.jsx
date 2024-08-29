@@ -30,6 +30,7 @@ function DialogTitle(props) {
               color: theme => theme.palette.grey[500],
               flexGrow: 0,
               height: 40,
+              marginTop: -2,
               width: 40
             }}
           >
