@@ -7,7 +7,7 @@ import React from "react";
 function DialogTitle(props) {
   const { children, onClose, ...other } = props;
   return (
-    <MuiDialogTitle sx={{ m: 0, p: 2 }} {...other}>
+    <MuiDialogTitle sx={{ display: "flex", m: 0, p: 2 }} {...other}>
       {children}
       {onClose ? (
         <IconButton
@@ -15,9 +15,8 @@ function DialogTitle(props) {
           onClick={onClose}
           sx={{
             color: theme => theme.palette.grey[500],
-            position: "absolute",
-            right: 8,
-            top: 8
+            height: 40,
+            width: 40
           }}
         >
           <CloseIcon />
