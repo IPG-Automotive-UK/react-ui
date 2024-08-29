@@ -22,7 +22,7 @@ describe("DialogTitle", () => {
 
     // verify dialog title is correct
     const dialogTitle = baseElement.querySelector(".MuiDialogTitle-root");
-    expect(dialogTitle.textContent).toBe(title);
+    expect(dialogTitle && dialogTitle.textContent).toBe(title);
   });
 
   test("close button is shown when onClose is set", () => {

@@ -7,6 +7,7 @@ export default function WizardContent({ children }: WizardContentProps) {
   return (
     <Box
       role="region"
+      id="wizard-content"
       sx={{
         boxSizing: "border-box",
         height: "100%",
