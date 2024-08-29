@@ -38,6 +38,9 @@ export const Default: Story = {
     children: "An example title",
     onClose: () => null
   },
+  parameters: {
+    controls: { include: ["children", "onClose"] }
+  },
   render: Template
 };
 
@@ -46,6 +49,9 @@ export const WithoutCloseButton: Story = {
   args: {
     children: "An example title",
     onClose: undefined
+  },
+  parameters: {
+    controls: { include: ["children"] }
   },
   render: Template
 };
@@ -57,6 +63,9 @@ export const LongTitle: Story = {
       "An example title with a very long string that should be wrapping to the next line",
     onClose: () => null
   },
+  parameters: {
+    controls: { include: ["children", "onClose"] }
+  },
   render: Template
 };
 
@@ -66,6 +75,9 @@ export const LongTitleWithoutCloseButton: Story = {
     children:
       "An example title with a very long string that should be wrapping to the next line",
     onClose: undefined
+  },
+  parameters: {
+    controls: { include: ["children"] }
   },
   render: Template
 };
