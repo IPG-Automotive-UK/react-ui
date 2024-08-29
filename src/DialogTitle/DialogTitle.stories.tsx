@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, StoryFn, StoryObj } from "@storybook/react";
 
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
@@ -7,14 +7,16 @@ import DialogTitle from "./DialogTitle";
 import type { DialogTitleProps } from "./DialogTitle.types";
 import React from "react";
 
+// Story object type
+type Story = StoryObj<typeof DialogTitle>;
+
 /**
  * Story metadata
  */
-const meta: Meta<typeof DialogTitle> = {
+export default {
   component: DialogTitle,
   title: "Dialog/DialogTitle"
-};
-export default meta;
+} satisfies Meta<typeof DialogTitle>;
 
 // Story Template
 const Template: StoryFn<DialogTitleProps> = ({ children, ...rest }) => {
@@ -31,7 +33,7 @@ const Template: StoryFn<DialogTitleProps> = ({ children, ...rest }) => {
 };
 
 // Default story
-export const Default = {
+export const Default: Story = {
   args: {
     children: "An example title",
     onClose: () => null
@@ -40,16 +42,16 @@ export const Default = {
 };
 
 // Story to show the dialog title without close button
-export const WithoutCloseButton = {
+export const WithoutCloseButton: Story = {
   args: {
     children: "An example title",
-    onClose: null
+    onClose: undefined
   },
   render: Template
 };
 
 // Story to show the dialog title with a very long string
-export const LongTitle = {
+export const LongTitle: Story = {
   args: {
     children:
       "An example title with a very long string that should be wrapping to the next line",
@@ -59,11 +61,11 @@ export const LongTitle = {
 };
 
 // Story to show the dialog title with a very long string without close button
-export const LongTitleWithoutCloseButton = {
+export const LongTitleWithoutCloseButton: Story = {
   args: {
     children:
       "An example title with a very long string that should be wrapping to the next line",
-    onClose: null
+    onClose: undefined
   },
   render: Template
 };
