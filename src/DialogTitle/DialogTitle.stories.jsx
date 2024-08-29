@@ -27,6 +27,22 @@ export const Default = {
     children: "An example title",
     onClose: () => null
   },
+  render: Template
+};
 
+export const WithoutCloseButton = {
+  args: {
+    children: "An example title",
+    onClose: null
+  },
+  render: Template
+};
+
+export const WithLongTitle = {
+  args: {
+    children:
+      "An example title with a very long string that should be wrapping to the next line",
+    onClose: () => null
+  },
   render: Template
 };
