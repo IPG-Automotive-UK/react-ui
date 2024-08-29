@@ -1,11 +1,10 @@
 import { Box, IconButton, DialogTitle as MuiDialogTitle } from "@mui/material";
 
 import CloseIcon from "@mui/icons-material/Close";
-import PropTypes from "prop-types";
+import type { DialogTitleProps } from "./DialogTitle.types";
 import React from "react";
 
-function DialogTitle(props) {
-  const { children, onClose, ...other } = props;
+const DialogTitle = ({ children, onClose, ...other }: DialogTitleProps) => {
   return (
     <MuiDialogTitle
       sx={{
@@ -40,11 +39,6 @@ function DialogTitle(props) {
       ) : null}
     </MuiDialogTitle>
   );
-}
+};
 
 export default DialogTitle;
-
-DialogTitle.propTypes = {
-  children: PropTypes.node,
-  onClose: PropTypes.func
-};
