@@ -18,7 +18,14 @@ const DialogTitle = ({ children, onClose, ...other }: DialogTitleProps) => {
       }}
       {...other}
     >
-      <Box sx={{ flexGrow: 1 }}>{children}</Box>
+      <Box
+        sx={{
+          flexGrow: 1,
+          overflowWrap: "anywhere"
+        }}
+      >
+        {children}
+      </Box>
       {onClose ? (
         <Box
           sx={{
