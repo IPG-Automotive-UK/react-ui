@@ -101,6 +101,7 @@ function Layout({
         >
           <Box sx={theme => theme.mixins.toolbar} />
           <Box
+            id="page-content"
             sx={theme => ({
               height: `calc(100vh - ${theme.mixins.toolbar.minHeight}px)`,
               overflow: "auto",
