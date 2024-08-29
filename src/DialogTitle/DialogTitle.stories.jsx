@@ -38,11 +38,20 @@ export const WithoutCloseButton = {
   render: Template
 };
 
-export const WithLongTitle = {
+export const LongTitle = {
   args: {
     children:
       "An example title with a very long string that should be wrapping to the next line",
     onClose: () => null
+  },
+  render: Template
+};
+
+export const LongTitleWithoutCloseButton = {
+  args: {
+    children:
+      "An example title with a very long string that should be wrapping to the next line",
+    onClose: null
   },
   render: Template
 };
