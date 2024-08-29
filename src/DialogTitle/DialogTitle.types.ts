@@ -1,6 +1,9 @@
-import type { IconButtonProps } from "@mui/material";
+import type {
+  IconButtonProps,
+  DialogTitleProps as MuiDialogTitleProps
+} from "@mui/material";
 
-export type DialogTitleProps = {
+export type DialogTitleProps = MuiDialogTitleProps & {
   /**
    * Children of the component, i.e. the title to be displayed.
    */

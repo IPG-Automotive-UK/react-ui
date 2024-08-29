@@ -4,6 +4,9 @@ import CloseIcon from "@mui/icons-material/Close";
 import type { DialogTitleProps } from "./DialogTitle.types";
 import React from "react";
 
+/**
+ * This component is based on the mterial DialogTitle. It supports all the props that the material DialogTitle supports and adds extra functionality to show a close button.
+ */
 const DialogTitle = ({ children, onClose, ...other }: DialogTitleProps) => {
   return (
     <MuiDialogTitle
