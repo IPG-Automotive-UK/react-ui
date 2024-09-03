@@ -67,3 +67,41 @@ export const Multiline = {
 
   render: Template
 };
+
+export const LinkUsingComponentWithoutTruncation: StoryObj<
+  typeof TruncatedTooltip
+> = {
+  args: {
+    alwaysShowTooltip: true,
+    children: "No truncation",
+    component: Link,
+    href: "This/can/take/an/href/prop"
+  },
+
+  render: Template
+};
+
+export const LinkUsingComponentAlwaysShowingTooltipTextTruncated: StoryObj<
+  typeof TruncatedTooltip
+> = {
+  args: {
+    alwaysShowTooltip: true,
+    children: "This is a long text that will be truncated",
+    component: Link,
+    href: "This/can/take/an/href/prop"
+  },
+
+  render: Template
+};
+
+export const ComponentUsesTooltipProps: StoryObj<typeof TruncatedTooltip> = {
+  args: {
+    TooltipProps: { placement: "bottom-start" },
+    alwaysShowTooltip: true,
+    children: "No truncation",
+    component: Link,
+    href: "This/can/take/an/href/prop"
+  },
+
+  render: Template
+};
