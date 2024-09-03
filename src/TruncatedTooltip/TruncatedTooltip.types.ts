@@ -1,4 +1,4 @@
-import { SxProps, Theme } from "@mui/material";
+import { SxProps, Theme, TooltipProps } from "@mui/material";
 
 /**
  * Props for the TruncatedTooltip component
@@ -24,6 +24,14 @@ export type TruncatedTooltipProps<T extends React.ElementType = "span"> = {
    * Component to render
    */
   component?: T;
+  /**
+   * Optional prop to enable showing the tooltip also when the element is not truncated. Default value is false.
+   */
+  alwaysShowTooltip?: boolean;
+  /**
+   * Props for the MUI Tooltip component.
+   */
+  TooltipProps?: TooltipProps;
   /**
    * The additional types ensure the TruncatedTooltipProps is inferring props based on the passed component
    */
