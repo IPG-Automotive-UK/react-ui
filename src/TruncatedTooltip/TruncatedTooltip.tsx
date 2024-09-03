@@ -20,6 +20,8 @@ const TruncatedTooltip = <T extends React.ElementType = "span">({
   multiline,
   sx,
   tooltip,
+  alwaysShowTooltip = false,
+  TooltipProps = undefined,
   ...rest
 }: TruncatedTooltipProps<T>) => {
   // Ref to the text element.
@@ -35,7 +37,8 @@ const TruncatedTooltip = <T extends React.ElementType = "span">({
   }: React.MouseEvent<HTMLDivElement | null>) => {
     setOpen(
       currentTarget.scrollWidth > currentTarget.clientWidth ||
-        currentTarget.scrollHeight > currentTarget.clientHeight
+        currentTarget.scrollHeight > currentTarget.clientHeight ||
+        alwaysShowTooltip
     );
   };
 
@@ -84,6 +87,7 @@ const TruncatedTooltip = <T extends React.ElementType = "span">({
 
   return (
     <Tooltip
+      {...TooltipProps}
       open={open}
       title={tooltip || text}
       disableHoverListener={!open}
