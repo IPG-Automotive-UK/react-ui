@@ -14,7 +14,7 @@ const DialogTitle = ({ children, onClose, ...other }: DialogTitleProps) => {
         display: "flex",
         m: 0,
         p: 2,
-        width: "100%"
+        pr: 1
       }}
       {...other}
     >
@@ -29,7 +29,7 @@ const DialogTitle = ({ children, onClose, ...other }: DialogTitleProps) => {
       {onClose ? (
         <Box
           sx={{
-            minWidth: 60
+            textAlign: "right"
           }}
         >
           <IconButton
@@ -38,9 +38,9 @@ const DialogTitle = ({ children, onClose, ...other }: DialogTitleProps) => {
             sx={{
               color: theme => theme.palette.grey[500],
               flexGrow: 0,
-              height: 40,
-              marginTop: -2,
-              width: 40
+              height: 35,
+              marginTop: -1,
+              width: 35
             }}
           >
             <CloseIcon />
