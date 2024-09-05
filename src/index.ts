@@ -47,7 +47,6 @@ export { default as Checkbox, type CheckboxProps } from "./Checkbox";
 export { default as ClientOnly, type ClientOnlyProps } from "./ClientOnly";
 export { default as Copyright, type CopyrightProps } from "./Copyright";
 export { default as Color, type ColorProps } from "./Color";
-export { default as Figure, type FigureProps } from "./Figure";
 export {
   default as DeletableList,
   type DeletableListProps
@@ -264,6 +263,7 @@ export {
 
   Ticket: https://sce.myjetbrains.com/youtrack/issue/TD-2804/Cannot-build-CRA-based-apps-with-latest-RUI
 */
+// export { default as Figure, type FigureProps } from "./Figure";
 // export {
 //   default as TrafficLight,
 //   type TrafficLightProps
