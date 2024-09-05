@@ -23,7 +23,7 @@ const useConfirm = (): UseConfirm => {
   const parentId = useConfirmId();
   const { confirmBase, closeOnParentUnmount } = useContext(ConfirmContext);
 
-  // Confirm function uses the context's confirmBase
+  // confirm function uses the context's confirmBase
   const confirm = useCallback(
     (options: Partial<ConfirmationDialogOptions>) => {
       return confirmBase(parentId, options);
@@ -31,7 +31,7 @@ const useConfirm = (): UseConfirm => {
     [parentId, confirmBase]
   );
 
-  // Clean up by calling closeOnParentUnmount when component unmounts
+  // clean up by calling closeOnParentUnmount when component unmounts
   useEffect(() => {
     return () => {
       closeOnParentUnmount(parentId);

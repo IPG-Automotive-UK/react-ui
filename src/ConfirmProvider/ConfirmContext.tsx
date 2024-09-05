@@ -10,7 +10,6 @@ interface ConfirmContextProps {
 }
 
 // create context with default value
-
 const ConfirmContext = createContext<ConfirmContextProps>({
   closeOnParentUnmount() {},
   confirmBase() {

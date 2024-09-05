@@ -17,11 +17,11 @@ const meta: Meta<typeof ConfirmProvider> = {
 };
 export default meta;
 
-// Create an action for the confirm and cancel buttons
+// create an action for the confirm and cancel buttons
 const confirmationAction = action("confirmed");
 const cancellationAction = action("cancelled");
 
-// ConfirmDialog component using the useConfirm hook
+// confirmDialog component using the useConfirm hook
 const ConfirmDialog: React.FC = options => {
   const confirm = useConfirm();
 
@@ -37,7 +37,7 @@ const ConfirmDialog: React.FC = options => {
   );
 };
 
-// Story template
+// story template
 const Template: StoryFn = args => {
   return (
     <ConfirmProvider>
@@ -46,7 +46,7 @@ const Template: StoryFn = args => {
   );
 };
 
-// Default story
+// default story
 export const Default = Template.bind({});
 Default.args = {
   defaultOptions: {
@@ -74,13 +74,13 @@ export const StaticMethod = {
   }
 };
 
-// Story with custom button order
+// story with custom button order
 export const WithCustomButtonOrder = Template.bind({});
 WithCustomButtonOrder.args = {
   buttonOrder: ["confirm", "cancel"]
 };
 
-// Story with custom confirmation keyword
+// story with custom confirmation keyword
 export const WithCustomConfirmationKeyword = Template.bind({});
 WithCustomConfirmationKeyword.args = {
   confirmationKeyword: "confirm"
@@ -135,6 +135,7 @@ export const WithNaturalCloseDisabled = Template.bind({});
 WithNaturalCloseDisabled.args = {
   allowClose: false
 };
+
 // story with confirmation keyword
 export const WithConfirmationKeyword = Template.bind({});
 WithConfirmationKeyword.args = {
@@ -189,9 +190,9 @@ function ParentUnmountComponent(options) {
     <Fragment>
       {flip && (
         <ConfirmationDialog
-          open={dialogOpen} // Controls dialog visibility
-          onConfirm={handleConfirm} // Called when confirm is clicked
-          onCancel={handleCancel} // Called when cancel is clicked
+          open={dialogOpen}
+          onConfirm={handleConfirm}
+          onCancel={handleCancel}
           options={{
             description: "This is the description for Dialog A.",
             title: "Dialog A"
@@ -200,9 +201,9 @@ function ParentUnmountComponent(options) {
       )}
       {!flip && (
         <ConfirmationDialog
-          open={dialogOpen} // Controls dialog visibility
-          onConfirm={handleConfirm} // Called when confirm is clicked
-          onCancel={handleCancel} // Called when cancel is clicked
+          open={dialogOpen}
+          onConfirm={handleConfirm}
+          onCancel={handleCancel}
           options={{
             description: "This is the description for Dialog B.",
             title: "Dialog B"
