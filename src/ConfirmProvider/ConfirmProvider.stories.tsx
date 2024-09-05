@@ -48,7 +48,17 @@ const Template: StoryFn = args => {
 
 // Default story
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  defaultOptions: {
+    buttonOrder: ["cancel", "confirm"],
+    cancellationText: "No",
+    confirmationText: "Yes",
+    description: "This is the default description",
+    onCancel: () => {},
+    onConfirm: () => {},
+    title: "Dialog Title"
+  }
+};
 
 // story with static method
 export const StaticMethod = {
