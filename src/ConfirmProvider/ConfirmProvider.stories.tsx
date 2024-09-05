@@ -125,7 +125,6 @@ export const WithNaturalCloseDisabled = Template.bind({});
 WithNaturalCloseDisabled.args = {
   allowClose: false
 };
-
 // story with confirmation keyword
 export const WithConfirmationKeyword = Template.bind({});
 WithConfirmationKeyword.args = {
@@ -147,7 +146,7 @@ WithConfirmationKeywordTextFieldProps.args = {
 // story with reversed button order
 export const WithReversedButtonOrder = Template.bind({});
 WithReversedButtonOrder.args = {
-  buttonOrder: ["cancel", "confirm"]
+  buttonOrder: ["confirm", "cancel"]
 };
 
 // function to demonstrate unmounting of the parent component

@@ -1,3 +1,4 @@
+import { Box, Divider } from "@mui/material";
 import Button, { ButtonProps } from "@mui/material/Button";
 import Dialog, { DialogProps } from "@mui/material/Dialog";
 import DialogActions, { DialogActionsProps } from "@mui/material/DialogActions";
@@ -5,7 +6,9 @@ import DialogContent, { DialogContentProps } from "@mui/material/DialogContent";
 import DialogTitle, { DialogTitleProps } from "@mui/material/DialogTitle";
 import TextField, { TextFieldProps } from "@mui/material/TextField";
 
+import CloseIcon from "@mui/icons-material/Close";
 import DialogContentText from "@mui/material/DialogContentText";
+import IconButton from "@mui/material/IconButton";
 import React from "react";
 
 interface ConfirmationDialogOptions {
@@ -124,7 +127,27 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
       open={open}
       onClose={allowClose ? onClose : undefined}
     >
-      {title && <DialogTitle {...titleProps}>{title}</DialogTitle>}
+      {title && (
+        <Box
+          sx={{
+            alignItems: "center",
+            display: "flex",
+            justifyContent: "space-between",
+            pr: "20px"
+          }}
+        >
+          <DialogTitle {...titleProps}>{title}</DialogTitle>
+          <IconButton
+            edge="end"
+            color="inherit"
+            onClick={onCancel}
+            aria-label="close"
+          >
+            <CloseIcon />
+          </IconButton>
+        </Box>
+      )}
+      <Divider />
       {content ? (
         <DialogContent {...contentProps}>
           {content}
@@ -140,6 +163,7 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
           <DialogContent {...contentProps}>{confirmationContent}</DialogContent>
         )
       )}
+      <Divider />
       <DialogActions {...dialogActionsProps}>{dialogActions}</DialogActions>
     </Dialog>
   );

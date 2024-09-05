@@ -6,6 +6,7 @@ import React, { Fragment, useCallback, useState } from "react";
 
 import ConfirmContext from "./ConfirmContext";
 import ConfirmationDialog from "./ConfirmationDialog";
+import { Theme } from "@mui/material/styles";
 
 interface ConfirmState {
   parentId: string;
@@ -91,7 +92,49 @@ let confirmGlobal: (
 const ConfirmProvider: React.FC<ConfirmProviderProps> = ({
   children,
   defaultOptions = {
-    buttonOrder: ["cancel", "confirm"] // default button order *************
+    allowClose: true,
+    buttonOrder: ["cancel", "confirm"],
+    cancellationText: "No",
+    confirmationButtonProps: {
+      sx: {
+        bgcolor: (theme: Theme) =>
+          theme.palette.mode === "light" ? "" : "#87a5d2"
+      },
+      variant: "contained"
+    },
+    confirmationText: "Yes",
+    description: "Would you like to continue?",
+    dialogActionsProps: {
+      sx: {
+        ">:not(:first-of-type)": {
+          ml: 3
+        },
+        p: 2
+      }
+    },
+    dialogProps: {
+      PaperProps: {
+        // change background colour of dialog
+        sx: {
+          bgcolor: (theme: Theme) =>
+            theme.palette.mode === "light" ? "" : "#383838",
+          color: (theme: Theme) =>
+            theme.palette.mode === "light" ? "" : "#fff"
+        }
+      },
+      maxWidth: "xs",
+      sx: {
+        p: 3
+      }
+    },
+    hideCancelButton: false,
+    title: "Dialog Title",
+    titleProps: {
+      sx: {
+        color: (theme: any) =>
+          theme.palette.mode === "light" ? "#000" : "#fff"
+      }
+    }
   }
 }) => {
   // State that we clear on close (to avoid dangling references to resolve and
