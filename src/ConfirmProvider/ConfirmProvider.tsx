@@ -137,10 +137,10 @@ const ConfirmProvider: React.FC<ConfirmProviderProps> = ({
     }
   }
 }) => {
-  // State that we clear on close (to avoid dangling references to resolve and
+  // state that we clear on close (to avoid dangling references to resolve and
   // reject). If this is null, the dialog is closed.
   const [state, setState] = useState<ConfirmState | null>(null);
-  // Options for rendering the dialog, which aren't reset on close so that we
+  // options for rendering the dialog, which aren't reset on close so that we
   // keep rendering the same modal during close animation
   const [options, setOptions] = useState({});
   const [key, setKey] = useState(0);

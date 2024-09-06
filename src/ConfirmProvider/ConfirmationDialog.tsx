@@ -1,42 +1,19 @@
-import { Box, Divider } from "@mui/material";
-import Button, { ButtonProps } from "@mui/material/Button";
-import Dialog, { DialogProps } from "@mui/material/Dialog";
-import DialogActions, { DialogActionsProps } from "@mui/material/DialogActions";
-import DialogContent, { DialogContentProps } from "@mui/material/DialogContent";
-import DialogTitle, { DialogTitleProps } from "@mui/material/DialogTitle";
-import TextField, { TextFieldProps } from "@mui/material/TextField";
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Divider,
+  TextField
+} from "@mui/material";
 
 import CloseIcon from "@mui/icons-material/Close";
+import { ConfirmationDialogProps } from "./ConfirmProvider.types";
 import DialogContentText from "@mui/material/DialogContentText";
 import IconButton from "@mui/material/IconButton";
 import React from "react";
-
-interface ConfirmationDialogOptions {
-  title?: React.ReactNode;
-  description?: React.ReactNode;
-  content?: React.ReactNode;
-  confirmationText?: React.ReactNode;
-  cancellationText?: React.ReactNode;
-  dialogProps?: DialogProps;
-  dialogActionsProps?: DialogActionsProps;
-  confirmationButtonProps?: ButtonProps;
-  cancellationButtonProps?: ButtonProps;
-  titleProps?: DialogTitleProps;
-  contentProps?: DialogContentProps;
-  allowClose?: boolean;
-  confirmationKeyword?: string;
-  confirmationKeywordTextFieldProps?: TextFieldProps;
-  hideCancelButton?: boolean;
-  buttonOrder?: Array<"confirm" | "cancel">;
-}
-
-interface ConfirmationDialogProps {
-  open: boolean;
-  options: ConfirmationDialogOptions;
-  onCancel: () => void;
-  onConfirm: () => void;
-  onClose?: () => void;
-}
 
 const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
   open,

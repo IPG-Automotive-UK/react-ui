@@ -5,7 +5,7 @@ import { ConfirmationDialogOptions } from "./ConfirmProvider.types"; // Ensure t
 
 let idCounter = 0;
 
-// Generate a unique id for each confirmation dialog
+// generate a unique id for each confirmation dialog
 const useConfirmId = (): string => {
   const id = useMemo(() => {
     return idCounter++;
@@ -14,7 +14,7 @@ const useConfirmId = (): string => {
   return `confirm-${id}`;
 };
 
-// Define the type for the confirm function options
+// define the type for the confirm function options
 interface UseConfirm {
   (options: Partial<ConfirmationDialogOptions>): Promise<void>;
 }
