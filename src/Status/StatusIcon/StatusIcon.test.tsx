@@ -1,9 +1,9 @@
-import * as React from "react";
-
+import React, { act } from "react";
+import { render, screen, waitFor } from "@testing-library/react";
 import statuses, { statusTypes } from "../statuses";
 
 import StatusIcon from "./StatusIcon";
-import { render } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 describe("StatusIcon", () => {
   test.each(statusTypes)("renders correct icon for %s", statusType => {
@@ -23,5 +23,33 @@ describe("StatusIcon", () => {
     expect(container.querySelector("svg")?.getAttribute("data-testid")).toEqual(
       iconContainer.querySelector("svg")?.getAttribute("data-testid")
     );
+  });
+
+  // renders tooltip on hover of an Icon
+  test("renders tooltip on hover", async () => {
+    render(<StatusIcon status={"disrupted"} title={"This a tooltip title"} />);
+
+    // trigger hover on the Icon
+    await act(async () => {
+      await userEvent.hover(screen.getByTestId("ErrorIcon"));
+    });
+
+    // wait for the tooltip to be visible
+    await waitFor(() => {
+      expect(
+        screen.getByRole("tooltip", {
+          hidden: true,
+          name: "This a tooltip title"
+        })
+      ).toBeVisible();
+    });
+  });
+
+  // test that the tooltip is not rendered when title is not passed
+  test("does not render tooltip when description is not passed", () => {
+    render(<StatusIcon status={"disrupted"} />);
+
+    // there shouldn't be a tooltip
+    expect(screen.queryByRole("tooltip")).not.toBeInTheDocument();
   });
 });

@@ -21,11 +21,26 @@ const Template: StoryFn<StatusIconProps> = args => {
   return <StatusIcon {...args} />;
 };
 
+/**
+ * Default story
+ */
 export const Default = {
   args: {
     height: 40,
     status: statusTypes[0],
     width: 40
+  },
+  render: Template
+};
+
+/**
+ * This story will display a tooltip on hover of the Icon
+ */
+export const WithTooltip = {
+  args: {
+    ...Default.args,
+    status: statusTypes[2],
+    title: "Last update: 2 days ago"
   },
   render: Template
 };

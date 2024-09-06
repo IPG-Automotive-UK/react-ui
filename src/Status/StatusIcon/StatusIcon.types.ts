@@ -15,4 +15,8 @@ export type StatusIconProps = {
    * The status type.
    */
   status: Status;
+  /**
+   * Tooltip text to display on hover of the icon
+   */
+  title?: string;
 };
