@@ -34,6 +34,15 @@ const statuses = {
       text: "Completed"
     }
   },
+  disrupted: {
+    icon: {
+      color: red[700],
+      type: Error
+    },
+    label: {
+      text: "Disrupted"
+    }
+  },
   errored: {
     icon: {
       color: red[700],
@@ -77,6 +86,15 @@ const statuses = {
     },
     label: {
       text: "Not Run"
+    }
+  },
+  operational: {
+    icon: {
+      color: green[800],
+      type: CheckCircle
+    },
+    label: {
+      text: "Operational"
     }
   },
   passed: {
