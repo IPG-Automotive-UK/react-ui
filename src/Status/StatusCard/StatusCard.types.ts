@@ -9,4 +9,8 @@ export type StatusCardProps = {
    * The status message.
    */
   name: string;
+  /**
+   * Tooltip text to display on hover of the icon
+   */
+  title?: string;
 };
