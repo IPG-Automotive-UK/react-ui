@@ -164,6 +164,18 @@ function AppLauncher({
           );
         })}
       </Box>
+      <Divider sx={{ margin: theme => theme.spacing(0, 0, 3, 0) }} />
+      <Box sx={{ textAlign: "center" }}>
+        <Link
+          data-testid="virto-status-link"
+          href={`${baseUrl}/status`}
+          variant="body1"
+          underline="none"
+          target="_blank"
+        >
+          VIRTO Status
+        </Link>
+      </Box>
       <Box flexGrow={1} />
     </Box>
   );
