@@ -13,10 +13,18 @@ export {
   type VirtoVehicleProps
 } from "./VirtoVehicle";
 export {
-  default as VirtoThinking,
+  VirtoHeadScratching,
+  type VirtoHeadScratchingProps
+} from "./VirtoMascots/VirtoHeadScratching";
+export {
+  VirtoThinking,
   type VirtoThinkingProps
 } from "./VirtoMascots/VirtoThinking";
 export {
-  default as VirtoShrugging,
+  VirtoShrugging,
   type VirtoShruggingProps
 } from "./VirtoMascots/VirtoShrugging";
+export {
+  VirtoThumbsUpLeft,
+  type VirtoThumbsUpLeftProps
+} from "./VirtoMascots/VirtoThumbsUpLeft";

@@ -1,8 +1,8 @@
-import SvgIcon, { SvgIconProps } from "@mui/material/SvgIcon";
-
 import React from "react";
+import SvgIcon from "@mui/material/SvgIcon";
+import { VirtoShruggingProps } from "./VirtoShrugging.types";
 
-export default function Icon({ sx }: SvgIconProps) {
+export function VirtoShrugging({ sx }: VirtoShruggingProps) {
   return (
     <SvgIcon
       viewBox="0 0 356 300"
