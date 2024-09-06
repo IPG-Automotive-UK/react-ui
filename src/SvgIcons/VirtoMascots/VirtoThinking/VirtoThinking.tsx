@@ -1,8 +1,8 @@
-import SvgIcon, { SvgIconProps } from "@mui/material/SvgIcon";
-
 import React from "react";
+import SvgIcon from "@mui/material/SvgIcon";
+import { VirtoThinkingProps } from "./VirtoThinking.types";
 
-export default function Icon({ sx }: SvgIconProps) {
+export default function Icon({ sx }: VirtoThinkingProps) {
   return (
     <SvgIcon
       viewBox="0 0 356 300"
