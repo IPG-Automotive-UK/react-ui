@@ -219,23 +219,23 @@ describe("useConfirm", () => {
 
       fireEvent.click(getByText("Delete"));
 
-      // Fix to ensure boolean is always returned
+      // fix to ensure boolean is always returned
       const textfield = getAllByText((content, element) => {
         return element !== null && element.tagName.toLowerCase() === "input";
       })[0];
 
       const confirmationButton = getByText("Yes") as HTMLButtonElement;
 
-      // Ensure text field is found
+      // ensure text field is found
       expect(textfield).toBeTruthy();
 
-      // Ensure confirmation button is disabled initially
+      // ensure confirmation button is disabled initially
       expect(confirmationButton.disabled).toBe(true);
 
-      // Simulate typing the confirmation keyword
+      // simulate typing the confirmation keyword
       fireEvent.change(textfield, { target: { value: "DELETE" } });
 
-      // Ensure confirmation button is now enabled
+      // ensure confirmation button is now enabled
       expect(confirmationButton.disabled).toBe(false);
     });
 
@@ -318,56 +318,58 @@ describe("useConfirm", () => {
     });
   });
 
-  test("closes the modal when the opening component is unmounted", async () => {
-    const ParentComponent = () => {
-      const [alive, setAlive] = useState(true);
+  describe("closeOnParentUnmount", () => {
+    test("closes the modal when the opening component is unmounted", async () => {
+      const ParentComponent = () => {
+        const [alive, setAlive] = useState(true);
 
-      return (
-        <ConfirmProvider>
-          {alive && <DeleteButton confirmOptions={{}} />}
-          <button onClick={() => setAlive(false)}>Unmount child</button>
-        </ConfirmProvider>
-      );
-    };
+        return (
+          <ConfirmProvider>
+            {alive && <DeleteButton confirmOptions={{}} />}
+            <button onClick={() => setAlive(false)}>Unmount child</button>
+          </ConfirmProvider>
+        );
+      };
 
-    const { getByText, queryByText } = render(<ParentComponent />);
+      const { getByText, queryByText } = render(<ParentComponent />);
 
-    fireEvent.click(getByText("Delete"));
-    expect(queryByText("Dialog Title")).toBeTruthy();
+      fireEvent.click(getByText("Delete"));
+      expect(queryByText("Dialog Title")).toBeTruthy();
 
-    // remove <DeleteButton /> from the tree
-    fireEvent.click(getByText("Unmount child"));
+      // remove <DeleteButton /> from the tree
+      fireEvent.click(getByText("Unmount child"));
 
-    await waitFor(() => queryByText("Dialog Title"));
+      await waitFor(() => queryByText("Dialog Title"));
 
-    expect(deleteConfirmed).not.toHaveBeenCalled();
-    expect(deleteCancelled).not.toHaveBeenCalled();
-  });
+      expect(deleteConfirmed).not.toHaveBeenCalled();
+      expect(deleteCancelled).not.toHaveBeenCalled();
+    });
 
-  test("does not close the modal when another component with useConfirm is unmounted", async () => {
-    const ParentComponent = () => {
-      const [alive, setAlive] = useState(true);
+    test("does not close the modal when another component with useConfirm is unmounted", async () => {
+      const ParentComponent = () => {
+        const [alive, setAlive] = useState(true);
 
-      return (
-        <ConfirmProvider>
-          {alive && <DeleteButton confirmOptions={{}} text="Delete 1" />}
-          <DeleteButton confirmOptions={{}} text="Delete 2" />
-          <button onClick={() => setAlive(false)}>Unmount child</button>
-        </ConfirmProvider>
-      );
-    };
+        return (
+          <ConfirmProvider>
+            {alive && <DeleteButton confirmOptions={{}} text="Delete 1" />}
+            <DeleteButton confirmOptions={{}} text="Delete 2" />
+            <button onClick={() => setAlive(false)}>Unmount child</button>
+          </ConfirmProvider>
+        );
+      };
 
-    const { getByText, queryByText } = render(<ParentComponent />);
+      const { getByText, queryByText } = render(<ParentComponent />);
 
-    fireEvent.click(getByText("Delete 2"));
-    expect(queryByText("Dialog Title")).toBeTruthy();
+      fireEvent.click(getByText("Delete 2"));
+      expect(queryByText("Dialog Title")).toBeTruthy();
 
-    // remove the first <DeleteButton /> from the tree
-    fireEvent.click(getByText("Unmount child"));
+      // remove the first <DeleteButton /> from the tree
+      fireEvent.click(getByText("Unmount child"));
 
-    fireEvent.click(getByText("Yes"));
-    await waitFor(() => queryByText("Dialog Title"));
-    expect(deleteConfirmed).toHaveBeenCalled();
+      fireEvent.click(getByText("Yes"));
+      await waitFor(() => queryByText("Dialog Title"));
+      expect(deleteConfirmed).toHaveBeenCalled();
+    });
   });
 
   describe("missing ConfirmProvider", () => {
