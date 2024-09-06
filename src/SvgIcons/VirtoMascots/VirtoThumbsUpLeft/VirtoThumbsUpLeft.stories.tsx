@@ -1,7 +1,7 @@
 import { Meta, StoryFn } from "@storybook/react";
 
 import React from "react";
-import VirtoThumbsUpLeft from "./VirtoThumbsUpLeft";
+import { VirtoThumbsUpLeft } from "./VirtoThumbsUpLeft";
 import { VirtoThumbsUpLeftProps } from "./VirtoThumbsUpLeft.types";
 
 /**

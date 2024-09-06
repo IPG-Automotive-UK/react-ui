@@ -21,6 +21,6 @@ export {
   type VirtoShruggingProps
 } from "./VirtoMascots/VirtoShrugging";
 export {
-  default as VirtoThumbsUpLeft,
+  VirtoThumbsUpLeft,
   type VirtoThumbsUpLeftProps
 } from "./VirtoMascots/VirtoThumbsUpLeft";
