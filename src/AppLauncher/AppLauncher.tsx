@@ -164,7 +164,7 @@ function AppLauncher({
           );
         })}
       </Box>
-      <Divider sx={{ margin: theme => theme.spacing(0, 0, 3, 0) }} />
+      <Divider sx={{ margin: theme => theme.spacing(0, 0, 2.5, 0) }} />
       <Box sx={{ textAlign: "center" }}>
         <Link
           data-testid="virto-status-link"
