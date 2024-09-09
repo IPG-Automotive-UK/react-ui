@@ -5,8 +5,7 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  Divider,
-  TextField
+  Divider
 } from "@mui/material";
 
 import CloseIcon from "@mui/icons-material/Close";
@@ -30,80 +29,28 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
     cancellationText,
     dialogProps,
     dialogActionsProps,
-    confirmationButtonProps,
-    cancellationButtonProps,
-    titleProps,
-    contentProps,
-    allowClose,
-    confirmationKeyword,
-    confirmationKeywordTextFieldProps,
-    hideCancelButton,
-    buttonOrder
+    titleProps
   } = options;
 
-  const [confirmationKeywordValue, setConfirmationKeywordValue] =
-    React.useState("");
-
-  const confirmationButtonDisabled = Boolean(
-    confirmationKeyword && confirmationKeywordValue !== confirmationKeyword
-  );
-
-  const confirmationContent = (
+  // dialog actions for the confirmation dialog component (confirm and cancel buttons)
+  const dialogActions = (
     <>
-      {confirmationKeyword && (
-        <TextField
-          onChange={e => setConfirmationKeywordValue(e.target.value)}
-          value={confirmationKeywordValue}
-          fullWidth
-          {...confirmationKeywordTextFieldProps}
-        />
-      )}
+      <Button onClick={onCancel} {...options.cancellationButtonProps}>
+        {cancellationText || "Cancel"}
+      </Button>
+      <Button
+        onClick={onConfirm}
+        color="primary"
+        variant="contained"
+        {...options.confirmationButtonProps}
+      >
+        {confirmationText || "Confirm"}
+      </Button>
     </>
   );
 
-  const dialogActions = buttonOrder
-    ? buttonOrder.map(buttonType => {
-        if (buttonType === "cancel") {
-          return (
-            !hideCancelButton && (
-              <Button
-                key="cancel"
-                {...cancellationButtonProps}
-                onClick={onCancel}
-              >
-                {cancellationText}
-              </Button>
-            )
-          );
-        }
-
-        if (buttonType === "confirm") {
-          return (
-            <Button
-              key="confirm"
-              color="primary"
-              disabled={confirmationButtonDisabled}
-              {...confirmationButtonProps}
-              onClick={onConfirm}
-            >
-              {confirmationText}
-            </Button>
-          );
-        }
-
-        throw new Error(
-          `Supported button types are only "confirm" and "cancel", got: ${buttonType}`
-        );
-      })
-    : [];
-
   return (
-    <Dialog
-      fullWidth
-      {...dialogProps}
-      open={open}
-      onClose={allowClose ? onClose : undefined}
-    >
+    <Dialog fullWidth {...dialogProps} open={open} onClose={onClose}>
       {title && (
         <Box
           sx={{
@@ -126,22 +73,21 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
       )}
       <Divider />
       {content ? (
-        <DialogContent {...contentProps}>
-          {content}
-          {confirmationContent}
-        </DialogContent>
-      ) : description ? (
-        <DialogContent {...contentProps}>
-          <DialogContentText>{description}</DialogContentText>
-          {confirmationContent}
-        </DialogContent>
+        <DialogContent>{content}</DialogContent>
       ) : (
-        confirmationKeyword && (
-          <DialogContent {...contentProps}>{confirmationContent}</DialogContent>
+        description && (
+          <DialogContent>
+            <DialogContentText>{description}</DialogContentText>
+          </DialogContent>
         )
       )}
       <Divider />
-      <DialogActions {...dialogActionsProps}>{dialogActions}</DialogActions>
+      <DialogActions
+        sx={{ justifyContent: "flex-end", padding: "16px" }}
+        {...dialogActionsProps}
+      >
+        {dialogActions}
+      </DialogActions>
     </Dialog>
   );
 };

@@ -16,72 +16,28 @@ interface ConfirmState {
 
 // define default props
 const DEFAULT_OPTIONS: ConfirmationDialogOptions = {
-  allowClose: true,
-  buttonOrder: ["cancel", "confirm"],
-  cancellationButtonProps: {},
   cancellationText: "Cancel",
-  confirmationButtonProps: {},
-  confirmationKeyword: "",
-  confirmationKeywordTextFieldProps: {},
   confirmationText: "Ok",
   content: null,
-  contentProps: {},
   description: "Test Description",
-  dialogActionsProps: {},
-  dialogProps: {},
-  hideCancelButton: false,
-  title: "Are you sure?",
-  titleProps: {}
+  title: "Are you sure?"
 };
 
 const buildOptions = (
   defaultOptions: Partial<ConfirmationDialogOptions>,
   options: Partial<ConfirmationDialogOptions>
 ) => {
-  const dialogProps = {
-    ...(defaultOptions.dialogProps || DEFAULT_OPTIONS.dialogProps),
-    ...(options.dialogProps || {}),
-    open: true
-  };
-  const dialogActionsProps = {
-    ...(defaultOptions.dialogActionsProps ||
-      DEFAULT_OPTIONS.dialogActionsProps),
-    ...(options.dialogActionsProps || {})
-  };
   const confirmationButtonProps = {
     ...(defaultOptions.confirmationButtonProps ||
       DEFAULT_OPTIONS.confirmationButtonProps),
     ...(options.confirmationButtonProps || {})
   };
-  const cancellationButtonProps = {
-    ...(defaultOptions.cancellationButtonProps ||
-      DEFAULT_OPTIONS.cancellationButtonProps),
-    ...(options.cancellationButtonProps || {})
-  };
-  const titleProps = {
-    ...(defaultOptions.titleProps || DEFAULT_OPTIONS.titleProps),
-    ...(options.titleProps || {})
-  };
-  const contentProps = {
-    ...(defaultOptions.contentProps || DEFAULT_OPTIONS.contentProps),
-    ...(options.contentProps || {})
-  };
-  const confirmationKeywordTextFieldProps = {
-    ...(defaultOptions.confirmationKeywordTextFieldProps ||
-      DEFAULT_OPTIONS.confirmationKeywordTextFieldProps),
-    ...(options.confirmationKeywordTextFieldProps || {})
-  };
+
   return {
     ...DEFAULT_OPTIONS,
     ...defaultOptions,
     ...options,
-    cancellationButtonProps,
-    confirmationButtonProps,
-    confirmationKeywordTextFieldProps,
-    contentProps,
-    dialogActionsProps,
-    dialogProps,
-    titleProps
+    confirmationButtonProps
   };
 };
 
@@ -92,8 +48,6 @@ let confirmGlobal: (
 const ConfirmProvider: React.FC<ConfirmProviderProps> = ({
   children,
   defaultOptions = {
-    allowClose: true,
-    buttonOrder: ["cancel", "confirm"],
     cancellationText: "No",
     confirmationButtonProps: {
       sx: {
@@ -104,37 +58,8 @@ const ConfirmProvider: React.FC<ConfirmProviderProps> = ({
     },
     confirmationText: "Yes",
     description: "Would you like to continue?",
-    dialogActionsProps: {
-      sx: {
-        ">:not(:first-of-type)": {
-          ml: 3
-        },
-        p: 2
-      }
-    },
-    dialogProps: {
-      PaperProps: {
-        // change background colour of dialog
-        sx: {
-          bgcolor: (theme: Theme) =>
-            theme.palette.mode === "light" ? "" : "#383838",
-          color: (theme: Theme) =>
-            theme.palette.mode === "light" ? "" : "#fff"
-        }
-      },
-      maxWidth: "xs",
-      sx: {
-        p: 3
-      }
-    },
-    hideCancelButton: false,
-    title: "Dialog Title",
-    titleProps: {
-      sx: {
-        color: (theme: any) =>
-          theme.palette.mode === "light" ? "#000" : "#fff"
-      }
-    }
+
+    title: "Dialog Title"
   }
 }) => {
   // state that we clear on close (to avoid dangling references to resolve and

@@ -54,8 +54,6 @@ Default.args = {
     cancellationText: "No",
     confirmationText: "Yes",
     description: "This is the default description",
-    onCancel: () => {},
-    onConfirm: () => {},
     title: "Dialog Title"
   }
 };
@@ -64,26 +62,16 @@ Default.args = {
 export const StaticMethod = {
   render: options => {
     return (
-      <Button
-        onClick={() => staticConfirm(options).then(confirmationAction)}
-        variant="contained"
-      >
-        Click
-      </Button>
+      <ConfirmProvider>
+        <Button
+          onClick={() => staticConfirm(options).then(confirmationAction)}
+          variant="contained"
+        >
+          Click
+        </Button>
+      </ConfirmProvider>
     );
   }
-};
-
-// story with custom button order
-export const WithCustomButtonOrder = Template.bind({});
-WithCustomButtonOrder.args = {
-  buttonOrder: ["confirm", "cancel"]
-};
-
-// story with custom confirmation keyword
-export const WithCustomConfirmationKeyword = Template.bind({});
-WithCustomConfirmationKeyword.args = {
-  confirmationKeyword: "confirm"
 };
 
 // story with custom text
@@ -93,18 +81,6 @@ WithCustomText.args = {
   confirmationText: "Yes",
   description: "This is a custom description",
   title: "Custom Title"
-};
-
-// story with dialog props
-export const WithDialogProps = Template.bind({});
-WithDialogProps.args = {
-  dialogProps: { disableEscapeKeyDown: true, fullWidth: false }
-};
-
-// story with dialog actions props
-export const WithDialogActionsProps = Template.bind({});
-WithDialogActionsProps.args = {
-  dialogActionsProps: { sx: { justifyContent: "flex-start" } }
 };
 
 // story with confirmation button props
@@ -128,36 +104,6 @@ WithCustomContent.args = {
       <Box p={2}>This isn't wrapped in DialogContentText.</Box>
     </div>
   )
-};
-
-// story with natural close disabled
-export const WithNaturalCloseDisabled = Template.bind({});
-WithNaturalCloseDisabled.args = {
-  allowClose: false
-};
-
-// story with confirmation keyword
-export const WithConfirmationKeyword = Template.bind({});
-WithConfirmationKeyword.args = {
-  confirmationKeyword: "DELETE",
-  description:
-    'This action is permanent. Please enter "DELETE" to confirm the action.'
-};
-
-// story with confirmation keyword and custom text field props
-export const WithConfirmationKeywordTextFieldProps = Template.bind({});
-WithConfirmationKeywordTextFieldProps.args = {
-  confirmationKeyword: "DELETE",
-  confirmationKeywordTextFieldProps: {
-    label: "Enter DELETE",
-    variant: "standard"
-  }
-};
-
-// story with reversed button order
-export const WithReversedButtonOrder = Template.bind({});
-WithReversedButtonOrder.args = {
-  buttonOrder: ["confirm", "cancel"]
 };
 
 // function to demonstrate unmounting of the parent component
@@ -188,7 +134,7 @@ function ParentUnmountComponent(options) {
 
   return (
     <Fragment>
-      {flip && (
+      {flip ? (
         <ConfirmationDialog
           open={dialogOpen}
           onConfirm={handleConfirm}
@@ -198,8 +144,7 @@ function ParentUnmountComponent(options) {
             title: "Dialog A"
           }}
         />
-      )}
-      {!flip && (
+      ) : (
         <ConfirmationDialog
           open={dialogOpen}
           onConfirm={handleConfirm}
