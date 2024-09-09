@@ -113,14 +113,16 @@ export default function RoadPreview(
               <Box>
                 <VersionChip version={version} />
               </Box>
+
               <NoWrapTypography>
-                <Typography variant="subtitle2" color="textPrimary">
-                  <Tooltip title={name}>
-                    <Link href={href} target="_blank">
-                      {name}
-                    </Link>
-                  </Tooltip>
-                </Typography>
+                <Link
+                  href={href}
+                  target="_blank"
+                  color="primary"
+                  variant="subtitle2"
+                >
+                  {name}
+                </Link>
               </NoWrapTypography>
             </Stack>
             <Stack direction="row">
