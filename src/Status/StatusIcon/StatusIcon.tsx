@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { StatusIconProps } from "./StatusIcon.types";
+import { Tooltip } from "@mui/material";
 import statuses from "../statuses";
 
 /**
@@ -9,19 +10,22 @@ import statuses from "../statuses";
 export default function StatusIcon({
   status,
   width = 40,
-  height = 40
+  height = 40,
+  iconTooltipText
 }: StatusIconProps) {
   const {
     icon: { type: Icon, color }
   } = statuses[status];
   return (
-    <Icon
-      sx={{
-        color,
-        height,
-        padding: "2px",
-        width
-      }}
-    />
+    <Tooltip title={iconTooltipText} placement="bottom">
+      <Icon
+        sx={{
+          color,
+          height,
+          padding: "2px",
+          width
+        }}
+      />
+    </Tooltip>
   );
 }

@@ -4,35 +4,40 @@ import { Box, Card, CardContent, Typography } from "@mui/material";
 
 import { StatusCardProps } from "./StatusCard.types";
 import StatusIcon from "../StatusIcon/StatusIcon";
-import { grey } from "@mui/material/colors";
 import statuses from "../statuses";
 
 // custom card component that will be used to display status information
-const card = ({ status, name }: StatusCardProps) => {
+const card = ({ status, name, iconTooltipText }: StatusCardProps) => {
   const {
     label: { text }
   } = statuses[status];
   return (
     <CardContent
       sx={{
-        ":last-child": { pb: 2 }
+        ":last-child": { pb: "14px" },
+        px: 3,
+        py: "14px"
       }}
     >
       <Box
         sx={{
           alignItems: "center",
-          display: "flex",
-          gap: "8px"
+          display: "flex"
         }}
       >
-        <StatusIcon status={status} width={39} height={39} />
+        <StatusIcon
+          status={status}
+          width={39}
+          height={39}
+          iconTooltipText={iconTooltipText}
+        />
         <Box
           sx={{ display: "flex", flexDirection: "column", marginLeft: "8px" }}
         >
-          <Typography variant="subtitle2" color="text.primary">
+          <Typography variant="h6" color="text.primary" fontWeight={600}>
             {name}
           </Typography>
-          <Typography variant="body1" sx={{ color: grey[500] }}>
+          <Typography variant="caption" color="text.primary">
             {text}
           </Typography>
         </Box>
@@ -44,15 +49,22 @@ const card = ({ status, name }: StatusCardProps) => {
 // create a custom card component that will be used to display status information
 export default function StatusCard({
   status = "passed",
-  name = "Test"
+  name = "Test",
+  iconTooltipText = ""
 }: StatusCardProps) {
   // return components
   return (
     <Card
       variant="outlined"
-      sx={{ borderRadius: "6px", minWidth: "337px", width: "337px" }}
+      sx={{
+        // border: theme =>
+        //   `1px solid ${alpha(theme.palette.background.default, 0.23)}`,
+        borderRadius: "6px",
+        minWidth: "337px",
+        width: "337px"
+      }}
     >
-      {card({ name, status })}
+      {card({ iconTooltipText, name, status })}
     </Card>
   );
 }

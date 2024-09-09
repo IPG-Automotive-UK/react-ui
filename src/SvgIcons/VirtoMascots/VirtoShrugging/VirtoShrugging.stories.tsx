@@ -1,7 +1,7 @@
 import { Meta, StoryFn } from "@storybook/react";
 
 import React from "react";
-import VirtoShrugging from "./VirtoShrugging";
+import { VirtoShrugging } from "./VirtoShrugging";
 import { VirtoShruggingProps } from "./VirtoShrugging.types";
 
 /**

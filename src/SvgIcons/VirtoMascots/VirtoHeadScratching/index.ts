@@ -1,2 +1,2 @@
-export { default } from "./VirtoHeadScratching";
+export { VirtoHeadScratching } from "./VirtoHeadScratching";
 export type { VirtoHeadScratchingProps } from "./VirtoHeadScratching.types";
