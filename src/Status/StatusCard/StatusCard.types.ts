@@ -12,5 +12,5 @@ export type StatusCardProps = {
   /**
    * Tooltip text to display on hover of the icon
    */
-  title?: string;
+  iconTooltipText?: string;
 };

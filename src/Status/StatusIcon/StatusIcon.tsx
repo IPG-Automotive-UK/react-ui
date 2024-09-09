@@ -11,13 +11,13 @@ export default function StatusIcon({
   status,
   width = 40,
   height = 40,
-  title
+  iconTooltipText
 }: StatusIconProps) {
   const {
     icon: { type: Icon, color }
   } = statuses[status];
   return (
-    <Tooltip title={title} placement="bottom">
+    <Tooltip title={iconTooltipText} placement="bottom">
       <Icon
         sx={{
           color,

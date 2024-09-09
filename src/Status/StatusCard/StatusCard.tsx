@@ -7,15 +7,15 @@ import StatusIcon from "../StatusIcon/StatusIcon";
 import statuses from "../statuses";
 
 // custom card component that will be used to display status information
-const card = ({ status, name, title }: StatusCardProps) => {
+const card = ({ status, name, iconTooltipText }: StatusCardProps) => {
   const {
     label: { text }
   } = statuses[status];
   return (
     <CardContent
       sx={{
-        ":last-child": { pb: 2 },
-        px: 2.5,
+        ":last-child": { pb: "14px" },
+        px: 3,
         py: "14px"
       }}
     >
@@ -25,7 +25,12 @@ const card = ({ status, name, title }: StatusCardProps) => {
           display: "flex"
         }}
       >
-        <StatusIcon status={status} width={39} height={39} title={title} />
+        <StatusIcon
+          status={status}
+          width={39}
+          height={39}
+          iconTooltipText={iconTooltipText}
+        />
         <Box
           sx={{ display: "flex", flexDirection: "column", marginLeft: "8px" }}
         >
@@ -45,15 +50,21 @@ const card = ({ status, name, title }: StatusCardProps) => {
 export default function StatusCard({
   status = "passed",
   name = "Test",
-  title = ""
+  iconTooltipText = ""
 }: StatusCardProps) {
   // return components
   return (
     <Card
       variant="outlined"
-      sx={{ borderRadius: "6px", minWidth: "337px", width: "337px" }}
+      sx={{
+        // border: theme =>
+        //   `1px solid ${alpha(theme.palette.background.default, 0.23)}`,
+        borderRadius: "6px",
+        minWidth: "337px",
+        width: "337px"
+      }}
     >
-      {card({ name, status, title })}
+      {card({ iconTooltipText, name, status })}
     </Card>
   );
 }

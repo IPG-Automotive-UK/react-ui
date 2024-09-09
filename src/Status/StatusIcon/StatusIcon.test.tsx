@@ -27,7 +27,12 @@ describe("StatusIcon", () => {
 
   // renders tooltip on hover of an Icon
   test("renders tooltip on hover", async () => {
-    render(<StatusIcon status={"disrupted"} title={"This a tooltip title"} />);
+    render(
+      <StatusIcon
+        status={"disrupted"}
+        iconTooltipText={"This a tooltip title"}
+      />
+    );
 
     // trigger hover on the Icon
     await act(async () => {
