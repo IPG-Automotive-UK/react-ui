@@ -39,8 +39,8 @@ export const Default = {
 export const WithTooltip = {
   args: {
     ...Default.args,
-    status: statusTypes[2],
-    title: "Last update: 2 days ago"
+    iconTooltipText: "Last update: 2 days ago",
+    status: statusTypes[2]
   },
   render: Template
 };

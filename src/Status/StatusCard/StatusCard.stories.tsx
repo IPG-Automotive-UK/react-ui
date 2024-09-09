@@ -38,8 +38,8 @@ export const Default = {
 export const WithIconTooltip = {
   args: {
     ...Default.args,
-    status: "failed",
-    title: "Last update: 2 days ago"
+    iconTooltipText: "Last update: 2 days ago",
+    status: "failed"
   },
 
   render: Template
