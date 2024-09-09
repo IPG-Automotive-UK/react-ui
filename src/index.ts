@@ -29,6 +29,7 @@ export { default as CanvasItem, type CanvasItemProps } from "./CanvasItem";
 export { default as EditLabelDialog } from "./EditLabelDialog";
 export { default as RoadMarking, type RoadMarkingProps } from "./RoadMarking";
 export { default as RoadSurface, type RoadSurfaceProps } from "./RoadSurface";
+export { default as RoadPreview, type RoadPreviewProps } from "./RoadPreview";
 export { default as TrafficSign, type TrafficSignProps } from "./TrafficSign";
 export { default as VehiclePath, type VehiclePathProps } from "./VehiclePath";
 export { default as Breadcrumbs, type BreadcrumbsProps } from "./Breadcrumbs";
