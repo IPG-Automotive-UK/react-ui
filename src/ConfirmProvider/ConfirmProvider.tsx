@@ -1,5 +1,6 @@
 import {
   ConfirmProviderProps,
+  ConfirmState,
   ConfirmationDialogOptions
 } from "./ConfirmProvider.types";
 import React, { Fragment, useCallback, useState } from "react";
@@ -7,12 +8,6 @@ import React, { Fragment, useCallback, useState } from "react";
 import ConfirmContext from "./ConfirmContext";
 import ConfirmationDialog from "./ConfirmationDialog";
 import { Theme } from "@mui/material/styles";
-
-interface ConfirmState {
-  parentId: string;
-  resolve: (value?: unknown) => void;
-  reject: () => void;
-}
 
 // define default props
 const DEFAULT_OPTIONS: ConfirmationDialogOptions = {

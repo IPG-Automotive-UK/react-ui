@@ -24,7 +24,6 @@ const cancellationAction = action("cancelled");
 // confirmDialog component using the useConfirm hook
 const ConfirmDialog: React.FC = options => {
   const confirm = useConfirm();
-
   return (
     <Button
       onClick={() => {

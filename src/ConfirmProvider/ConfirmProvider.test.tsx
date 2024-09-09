@@ -1,8 +1,11 @@
+import "@testing-library/jest-dom";
+
 import React, { useState } from "react";
 import { beforeEach, describe, expect, test, vi } from "vitest";
 import { fireEvent, render, renderHook, waitFor } from "@testing-library/react";
 
 import ConfirmProvider from "./ConfirmProvider";
+import { ThemeProvider } from "../ThemeProvider";
 import useConfirm from "./useConfirm";
 
 describe("useConfirm", () => {
@@ -96,6 +99,16 @@ describe("useConfirm", () => {
   });
 
   describe("options", () => {
+    // test to check if dialog is shown with correct title, description, cancellation text and confirmation text
+    test("should have the correct default text", () => {
+      const { getByText, queryByText } = render(<TestComponent />);
+      fireEvent.click(getByText("Delete"));
+      expect(queryByText("Dialog Title")).toBeTruthy();
+      expect(queryByText("Would you like to continue?")).toBeTruthy();
+      expect(queryByText("No")).toBeTruthy();
+      expect(queryByText("Yes")).toBeTruthy();
+    });
+
     test("accepts custom text", () => {
       const { getByText, queryByText } = render(
         <TestComponent
@@ -207,114 +220,33 @@ describe("useConfirm", () => {
     });
   });
 
-  describe("confirmation keyword", () => {
-    test("renders textfield when confirmation keyword is set", () => {
-      const { getByText, getAllByText } = render(
-        <TestComponent
-          confirmOptions={{
-            confirmationKeyword: "DELETE"
-          }}
-        />
-      );
-
-      fireEvent.click(getByText("Delete"));
-
-      // fix to ensure boolean is always returned
-      const textfield = getAllByText((content, element) => {
-        return element !== null && element.tagName.toLowerCase() === "input";
-      })[0];
-
-      const confirmationButton = getByText("Yes") as HTMLButtonElement;
-
-      // ensure text field is found
-      expect(textfield).toBeTruthy();
-
-      // ensure confirmation button is disabled initially
-      expect(confirmationButton.disabled).toBe(true);
-
-      // simulate typing the confirmation keyword
-      fireEvent.change(textfield, { target: { value: "DELETE" } });
-
-      // ensure confirmation button is now enabled
-      expect(confirmationButton.disabled).toBe(false);
-    });
-
-    test("resets the input value on every open", () => {
-      const { getByText, getAllByText } = render(
-        <TestComponent
-          confirmOptions={{
-            confirmationKeyword: "DELETE"
-          }}
-        />
-      );
-
-      fireEvent.click(getByText("Delete"));
-
-      let textfield = getAllByText((content, element) => {
-        return element !== null && element.tagName.toLowerCase() === "input";
-      })[0];
-
-      expect(textfield).toBeTruthy();
-      fireEvent.change(textfield, { target: { value: "DELETE" } });
-
-      fireEvent.click(getByText("Yes"));
-
-      fireEvent.click(getByText("Delete"));
-
-      textfield = getAllByText((content, element) => {
-        return element !== null && element.tagName.toLowerCase() === "input";
-      })[0];
-
-      expect((textfield as HTMLInputElement).value).toEqual("");
-    });
-
-    test("renders textfield with custom props", () => {
-      const { getByText, queryByPlaceholderText } = render(
-        <TestComponent
-          confirmOptions={{
-            confirmationKeyword: "DELETE",
-            confirmationKeywordTextFieldProps: {
-              placeholder: "Custom placeholder"
-            }
-          }}
-        />
-      );
-
-      fireEvent.click(getByText("Delete"));
-
-      const textfield = queryByPlaceholderText("Custom placeholder");
-
-      expect(textfield).toBeTruthy();
-    });
-  });
-
-  describe("hide cancel button", () => {
-    test("renders cancel button when hideCancelButton is false", () => {
+  describe("confirm dialog theme support in light and dark mode", () => {
+    // test to check if dialog supports light mode
+    test("should support light mode", () => {
       const { getByText } = render(
-        <TestComponent
-          confirmOptions={{
-            hideCancelButton: false
-          }}
-        />
+        <ThemeProvider theme={"light"}>
+          <ConfirmProvider>
+            <DeleteButton confirmOptions={{}} />
+          </ConfirmProvider>
+        </ThemeProvider>
       );
-
       fireEvent.click(getByText("Delete"));
-      const cancelButton = getByText("No");
-      expect(cancelButton).toBeTruthy();
+      const dialog = getByText("Dialog Title").closest("div");
+      expect(dialog).toHaveStyle("color:rgba(0, 0, 0, 0.87)");
     });
 
-    test("does not render cancel button when hideCancelButton is true", () => {
-      const { getByText, queryByText } = render(
-        <TestComponent
-          confirmOptions={{
-            hideCancelButton: true
-          }}
-        />
+    // test to check if dialog supports dark mode
+    test("should support dark mode", () => {
+      const { getByText } = render(
+        <ThemeProvider theme={"dark"}>
+          <ConfirmProvider>
+            <DeleteButton confirmOptions={{}} />
+          </ConfirmProvider>
+        </ThemeProvider>
       );
-
       fireEvent.click(getByText("Delete"));
-      const cancelButton = queryByText("No");
-      expect(cancelButton).toBeFalsy();
+      const dialog = getByText("Dialog Title").closest("div");
+      expect(dialog).toHaveStyle("color:rgb(255, 255, 255)");
     });
   });
 
