@@ -164,13 +164,13 @@ function AppLauncher({
           );
         })}
       </Box>
-      <Divider sx={{ margin: theme => theme.spacing(0, 0, 2.5, 0) }} />
+      <Divider sx={{ mb: 2.5 }} />
       <Box sx={{ textAlign: "center" }}>
         <Link
-          data-testid="virto-status-link"
+          data-testid="app-launcher-status-link"
           href={`${baseUrl}/status`}
           variant="body1"
-          underline="none"
+          underline="hover"
           target="_blank"
         >
           VIRTO Status
