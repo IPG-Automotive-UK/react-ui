@@ -24,7 +24,6 @@ import VersionChip from "../VersionChip/VersionChip";
 /**
  * RoadPreview component for visualizing Road information about specific road
  */
-
 export function RoadPreview({
   name,
   href,
