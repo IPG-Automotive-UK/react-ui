@@ -1,8 +1,3 @@
-/**
- * styles applied to the svg element
- */
-export type CarMakerLogoProps = {
-  sx?: {
-    [key: string]: number | string;
-  };
-};
+import { SvgIconProps } from "../SvgIcons.types";
+
+export type CarMakerLogoProps = SvgIconProps & {};

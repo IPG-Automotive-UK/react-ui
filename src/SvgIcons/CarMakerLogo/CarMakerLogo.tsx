@@ -4,9 +4,9 @@ import { CarMakerLogoProps } from "./CarMakerLogo.types";
 import SvgIcon from "@mui/material/SvgIcon";
 
 // CarMaker icon svg
-function Icon(props: CarMakerLogoProps) {
+function Icon({ sx }: CarMakerLogoProps) {
   return (
-    <SvgIcon viewBox="0 0 73 74" data-testid="car-maker-icon" {...props}>
+    <SvgIcon viewBox="0 0 73 74" data-testid="car-maker-icon" sx={{ ...sx }}>
       <rect
         fill="url(#pattern0_10679_30122)"
         x="3"

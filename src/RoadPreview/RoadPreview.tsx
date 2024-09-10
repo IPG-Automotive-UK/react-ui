@@ -9,9 +9,9 @@ import {
 } from "@mui/material";
 import { LabelChipGroup, LabelChipGroupProps } from "../LabelSelector";
 
-import AsamLogo from "../SvgIcons/AsamLogo";
+import { AsamLogo } from "../SvgIcons/AsamLogo";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
-import CarMakerLogo from "../SvgIcons/CarMakerLogo";
+import { CarMakerLogo } from "../SvgIcons/CarMakerLogo";
 import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";
 import NoWrapTypography from "../NoWrapTypography/NoWrapTypography";
 import NumbersIcon from "@mui/icons-material/Numbers";
