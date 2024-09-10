@@ -56,16 +56,30 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
       )}
       <Divider />
       {content ? (
-        <DialogContent sx={{ ml: -1 }}>
-          <DialogContentText sx={{ color: "rgba(0, 0, 0, 0.8)" }}>
+        <DialogContent sx={{ p: 2 }}>
+          <DialogContentText
+            sx={{
+              color: theme =>
+                theme.palette.mode === "light"
+                  ? "rgba(0, 0, 0, 0.8)"
+                  : "rgb(f,f,f)"
+            }}
+          >
             {content}
             <DialogContentText />
           </DialogContentText>
         </DialogContent>
       ) : (
         description && (
-          <DialogContent sx={{ ml: -1 }}>
-            <DialogContentText sx={{ color: "rgba(0, 0, 0, 0.8)" }}>
+          <DialogContent sx={{ p: 2 }}>
+            <DialogContentText
+              sx={{
+                color: theme =>
+                  theme.palette.mode === "light"
+                    ? "rgba(0, 0, 0, 0.8)"
+                    : "rgb(f,f,f)"
+              }}
+            >
               {description}
             </DialogContentText>
           </DialogContent>
