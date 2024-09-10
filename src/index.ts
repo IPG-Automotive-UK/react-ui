@@ -29,6 +29,7 @@ export { default as CanvasItem, type CanvasItemProps } from "./CanvasItem";
 export { default as EditLabelDialog } from "./EditLabelDialog";
 export { default as RoadMarking, type RoadMarkingProps } from "./RoadMarking";
 export { default as RoadSurface, type RoadSurfaceProps } from "./RoadSurface";
+export { RoadPreview, type RoadPreviewProps } from "./RoadPreview";
 export { default as TrafficSign, type TrafficSignProps } from "./TrafficSign";
 export { default as VehiclePath, type VehiclePathProps } from "./VehiclePath";
 export { default as Breadcrumbs, type BreadcrumbsProps } from "./Breadcrumbs";
@@ -51,11 +52,6 @@ export { default as Checkbox, type CheckboxProps } from "./Checkbox";
 export { default as ClientOnly, type ClientOnlyProps } from "./ClientOnly";
 export { default as Copyright, type CopyrightProps } from "./Copyright";
 export { default as Color, type ColorProps } from "./Color";
-export { default as Figure, type FigureProps } from "./Figure";
-export {
-  default as TrafficLight,
-  type TrafficLightProps
-} from "./TrafficLight";
 export {
   default as DeletableList,
   type DeletableListProps
@@ -270,3 +266,18 @@ export {
   default as UploaderHeader,
   type UploaderHeaderProps
 } from "./Uploader";
+/*
+  The following components are temporarily commented out to prevent CRA build failures.
+  For more details, refer to the related ticket:
+
+  Ticket: https://sce.myjetbrains.com/youtrack/issue/TD-2804/Cannot-build-CRA-based-apps-with-latest-RUI
+*/
+// export { default as Figure, type FigureProps } from "./Figure";
+// export {
+//   default as TrafficLight,
+//   type TrafficLightProps
+// } from "./TrafficLight";
+// export { default as RoadMarking, type RoadMarkingProps } from "./RoadMarking";
+// export { default as RoadSurface, type RoadSurfaceProps } from "./RoadSurface";
+// export { default as TrafficSign, type TrafficSignProps } from "./TrafficSign";
+// export { default as VehiclePath, type VehiclePathProps } from "./VehiclePath";
