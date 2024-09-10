@@ -213,6 +213,7 @@ export {
   VirtoResult,
   VirtoScene,
   VirtoTest,
+  VirtoThumbsUpLeft,
   VirtoVehicle,
   type IpgLogoProps,
   type VirtoBuildProps,
@@ -224,6 +225,7 @@ export {
   type VirtoResultProps,
   type VirtoSceneProps,
   type VirtoTestProps,
+  type VirtoThumbsUpLeftProps,
   type VirtoVehicleProps
 } from "./SvgIcons";
 export {

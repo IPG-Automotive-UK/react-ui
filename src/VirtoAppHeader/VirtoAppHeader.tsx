@@ -155,7 +155,7 @@ function VirtoAppHeader({
         onClose={() => setAppOpen(false)}
         sx={{
           "& .MuiDrawer-paper": {
-            height: theme => `calc(100% - ${theme.mixins.toolbar.minHeight})`,
+            height: theme => `calc(100% - ${theme.mixins.toolbar.minHeight}px)`,
             top: theme => theme.mixins.toolbar.minHeight,
             width: applancherWidth
           }
