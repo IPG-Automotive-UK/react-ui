@@ -1,7 +1,7 @@
 import { Meta, StoryFn } from "@storybook/react";
 
 import React from "react";
-import VirtoThinking from "./VirtoThinking";
+import { VirtoThinking } from "./VirtoThinking";
 import { VirtoThinkingProps } from "./VirtoThinking.types";
 
 /**
