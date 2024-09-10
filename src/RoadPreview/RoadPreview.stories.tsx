@@ -89,8 +89,8 @@ export const WithoutOverflowDescription = {
   render: Template
 };
 
-// CustomNoOptionalProps without label, user and createdOn properties
-export const CustomNoOptionalProps = {
+// WithoutOptionalProps without label, user and createdOn properties
+export const WithoutOptionalProps = {
   args: {
     description: "Short description",
     file: {
