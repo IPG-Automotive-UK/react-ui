@@ -1,17 +1,14 @@
 import {
-  Box,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
-  DialogTitle,
   Divider
 } from "@mui/material";
 
-import CloseIcon from "@mui/icons-material/Close";
 import { ConfirmationDialogProps } from "./ConfirmProvider.types";
 import DialogContentText from "@mui/material/DialogContentText";
-import IconButton from "@mui/material/IconButton";
+import DialogTitle from "../DialogTitle";
 import React from "react";
 
 const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
@@ -52,24 +49,10 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
   return (
     <Dialog fullWidth {...dialogProps} open={open} onClose={onClose}>
       {title && (
-        <Box
-          sx={{
-            alignItems: "center",
-            display: "flex",
-            justifyContent: "space-between",
-            pr: "20px"
-          }}
-        >
-          <DialogTitle {...titleProps}>{title}</DialogTitle>
-          <IconButton
-            edge="end"
-            color="inherit"
-            onClick={onCancel}
-            aria-label="close"
-          >
-            <CloseIcon />
-          </IconButton>
-        </Box>
+        // use the dialog title from the dialog title component
+        <DialogTitle onClose={onCancel} {...titleProps}>
+          {title}
+        </DialogTitle>
       )}
       <Divider />
       {content ? (

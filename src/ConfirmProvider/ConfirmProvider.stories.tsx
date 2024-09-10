@@ -1,10 +1,9 @@
 import { Box, Button } from "@mui/material";
 import ConfirmProvider, { confirm as staticConfirm } from "./ConfirmProvider";
 import { Meta, StoryFn } from "@storybook/react";
-import React, { Fragment } from "react";
 
-import ConfirmationDialog from "./ConfirmationDialog";
 import LinearProgress from "@mui/material/LinearProgress";
+import React from "react";
 import { action } from "@storybook/addon-actions";
 import useConfirm from "./useConfirm";
 
@@ -49,7 +48,6 @@ const Template: StoryFn = args => {
 export const Default = Template.bind({});
 Default.args = {
   defaultOptions: {
-    buttonOrder: ["cancel", "confirm"],
     cancellationText: "No",
     confirmationText: "Yes",
     description: "This is the default description",
@@ -103,61 +101,4 @@ WithCustomContent.args = {
       <Box p={2}>This isn't wrapped in DialogContentText.</Box>
     </div>
   )
-};
-
-// function to demonstrate unmounting of the parent component
-function ParentUnmountComponent(options) {
-  const [flip, setFlip] = React.useState(false);
-
-  // state to control the dialog is open or not
-  const [dialogOpen, setDialogOpen] = React.useState(true);
-
-  // toggle the flip state every 2 seconds
-  React.useEffect(() => {
-    const interval = setInterval(() => setFlip(flip => !flip), 2000);
-    return () => {
-      clearInterval(interval);
-    };
-  });
-
-  // handlers for onConfirm and onCancel
-  const handleConfirm = () => {
-    console.log("Confirmed");
-    setDialogOpen(false); // Close the dialog
-  };
-
-  const handleCancel = () => {
-    console.log("Cancelled");
-    setDialogOpen(false); // Close the dialog
-  };
-
-  return (
-    <Fragment>
-      {flip ? (
-        <ConfirmationDialog
-          open={dialogOpen}
-          onConfirm={handleConfirm}
-          onCancel={handleCancel}
-          options={{
-            description: "This is the description for Dialog A.",
-            title: "Dialog A"
-          }}
-        />
-      ) : (
-        <ConfirmationDialog
-          open={dialogOpen}
-          onConfirm={handleConfirm}
-          onCancel={handleCancel}
-          options={{
-            description: "This is the description for Dialog B.",
-            title: "Dialog B"
-          }}
-        />
-      )}
-    </Fragment>
-  );
-}
-
-export const WithParentUnmount = {
-  render: () => <ParentUnmountComponent />
 };
