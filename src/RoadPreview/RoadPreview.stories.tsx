@@ -1,7 +1,7 @@
 import { Meta, StoryFn } from "@storybook/react";
 
 import React from "react";
-import RoadPreview from "./RoadPreview";
+import { RoadPreview } from "./RoadPreview";
 import { RoadPreviewProps } from "./RoadPreview.types";
 
 /**

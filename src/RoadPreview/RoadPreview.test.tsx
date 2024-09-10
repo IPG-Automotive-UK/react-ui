@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 
 import { Default } from "./RoadPreview.stories";
 import React from "react";
-import RoadPreview from ".";
+import { RoadPreview } from ".";
 
 // tests for the RoadPreview component
 describe("RoadPreview", () => {
