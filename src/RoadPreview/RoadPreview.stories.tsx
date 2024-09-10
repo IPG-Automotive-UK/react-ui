@@ -18,15 +18,16 @@ const Template: StoryFn<RoadPreviewProps> = args => {
   return <RoadPreview {...args} />;
 };
 
-// Default props with overflow for description, filename, labels and username
+/**
+ * Default story
+ */
 export const Default = {
   args: {
     createdAt: "10-09-24 10:24:08",
-    description:
-      "stationäre Kreisfahrt: DIN ISO 4138 Es wird innerhalb von 18 Sekunden auf 180° Lenkradwinkel eingelenkt.stationäre Kreisfahrt: DIN ISO 4138 Es wird innerhalb von 18 Sekunden auf 180° Lenkradwinkel eingelenkt.",
+    description: "Small Description",
     file: {
       _id: "66d6cc4a33eb2f57a28d36f7",
-      name: "A very looooooooooong Road File Name",
+      name: "TestingRoad.rd5",
       type: "road"
     },
     format: "CarMaker",
@@ -67,31 +68,36 @@ export const Default = {
         updatedAt: "2024-08-27T14:36:53.275Z"
       }
     ],
-    name: "SanFrancisco_AEB_A looooong Road Name",
-    user: "James a very long middle name Harper",
+    name: "SanFrancisco_AEB",
+    user: "James Harper",
     version: "1.1"
   },
   render: Template
 };
 
-// PropsWithoutOverflow props without overflowing content
-export const PropsWithoutOverflow = {
+/**
+ * This story shows a road preview with a very long name, description, file name and user name
+ */
+export const WithOverflowText = {
   args: {
     ...Default.args,
-    description: "Small Description",
+    description:
+      "Stationäre Kreisfahrt: DIN ISO 4138 Es wird innerhalb von 18 Sekunden auf 180° Lenkradwinkel eingelenkt.stationäre Kreisfahrt: DIN ISO 4138 Es wird innerhalb von 18 Sekunden auf 180° Lenkradwinkel eingelenkt.",
     file: {
       ...Default.args.file,
-      name: "IPGRoad.rd5"
+      name: "A very looooooooooong Road File Name"
     },
     format: "ASAM OpenDRIVE",
     label: [Default.args.label.pop()],
-    name: "SanFrancisco_AEB",
-    user: "James Harper"
+    name: "SanFrancisco_AEB_A looooong Road Name",
+    user: "James a very long middle name Harper"
   },
   render: Template
 };
 
-// WithoutOptionalProps without label, user and createdOn properties
+/**
+ * This story shows a road preview without optional properties
+ */
 export const WithoutOptionalProps = {
   args: {
     description: "Short description",
