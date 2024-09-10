@@ -57,11 +57,7 @@ export default function StatusCard({
     <Card
       variant="outlined"
       sx={{
-        // border: theme =>
-        //   `1px solid ${alpha(theme.palette.background.default, 0.23)}`,
-        borderRadius: "6px",
-        minWidth: "337px",
-        width: "337px"
+        borderRadius: "6px"
       }}
     >
       {card({ iconTooltipText, name, status })}
