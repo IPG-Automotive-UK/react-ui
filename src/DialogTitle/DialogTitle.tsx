@@ -34,7 +34,7 @@ const DialogTitle = ({ children, onClose, ...other }: DialogTitleProps) => {
             color: theme => theme.palette.grey[500],
             flexGrow: 0,
             height: 35,
-            marginTop: -1,
+            marginTop: -0.3,
             width: 35
           }}
         >

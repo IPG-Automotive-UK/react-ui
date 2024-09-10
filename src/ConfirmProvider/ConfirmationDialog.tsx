@@ -56,10 +56,10 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
       )}
       <Divider />
       {content ? (
-        <DialogContent>{content}</DialogContent>
+        <DialogContent sx={{ ml: -1 }}>{content}</DialogContent>
       ) : (
         description && (
-          <DialogContent>
+          <DialogContent sx={{ ml: -1 }}>
             <DialogContentText>{description}</DialogContentText>
           </DialogContent>
         )

@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import ConfirmProvider, { confirm as staticConfirm } from "./ConfirmProvider";
 import { Meta, StoryFn } from "@storybook/react";
 
@@ -98,7 +98,9 @@ WithCustomContent.args = {
   content: (
     <div>
       <LinearProgress />
-      <Box p={2}>This isn't wrapped in DialogContentText.</Box>
+      <Typography p={2} pl={0}>
+        This isn't wrapped in DialogContentText.
+      </Typography>
     </div>
   )
 };
