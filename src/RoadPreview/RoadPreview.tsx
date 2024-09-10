@@ -40,18 +40,6 @@ export function RoadPreview({
   // theme hook for returning specific colors from the theme to MUI icon
   const theme = useTheme();
 
-  /** Render the appropriate icon for the road format according tho the format property */
-  function getRoadformatIcon() {
-    switch (format) {
-      case "ASAM OpenSCENARIO XML":
-        return <AsamLogo sx={{ height: 22, width: 22 }} />;
-      case "CarMaker":
-        return <CarMakerLogo sx={{ height: 22, width: 22 }} />;
-      default:
-        return <CarMakerLogo sx={{ height: 22, width: 22 }} />;
-    }
-  }
-
   /** Checking if we have optional properties for conditional rendering according to: label, createdAt, user */
   function hasOptionalProperty() {
     return (label?.length && label?.length > 0) || createdAt || user;
@@ -133,7 +121,13 @@ export function RoadPreview({
           <Box flexShrink={0} display="flex" gap="4px" alignItems="center">
             <Tooltip title="Road Format">
               {/* need div element, because tooltip is not shown without it */}
-              <div style={{ display: "flex" }}>{getRoadformatIcon()}</div>
+              <div style={{ display: "flex" }}>
+                {format === "CarMaker" ? (
+                  <CarMakerLogo sx={{ height: "20px", width: "20px" }} />
+                ) : (
+                  <AsamLogo sx={{ height: "20px", width: "20px" }} />
+                )}
+              </div>
             </Tooltip>
             <Typography
               variant="caption"

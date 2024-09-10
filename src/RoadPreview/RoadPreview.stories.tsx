@@ -29,7 +29,7 @@ export const Default = {
       name: "A very looooooooooong Road File Name",
       type: "road"
     },
-    format: "ASAM OpenSCENARIO XML",
+    format: "CarMaker",
     formatVersion: "11.1",
     href: "test",
     image: "https://picsum.photos/id/191/400/200",
@@ -83,7 +83,7 @@ export const PropsWithoutOverflow = {
       ...Default.args.file,
       name: "IPGRoad.rd5"
     },
-    format: "CarMaker",
+    format: "ASAM OpenDRIVE",
     label: [Default.args.label.pop()],
     name: "SanFrancisco_AEB",
     user: "James Harper"
