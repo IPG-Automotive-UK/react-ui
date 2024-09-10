@@ -14,7 +14,7 @@ const DialogTitle = ({ children, onClose, ...other }: DialogTitleProps) => {
         display: "flex",
         m: 0,
         p: 2,
-        width: "100%"
+        pr: 1
       }}
       {...other}
     >
@@ -27,25 +27,19 @@ const DialogTitle = ({ children, onClose, ...other }: DialogTitleProps) => {
         {children}
       </Box>
       {onClose ? (
-        <Box
+        <IconButton
+          aria-label="close"
+          onClick={onClose}
           sx={{
-            minWidth: 60
+            color: theme => theme.palette.grey[500],
+            flexGrow: 0,
+            height: 35,
+            marginTop: -1,
+            width: 35
           }}
         >
-          <IconButton
-            aria-label="close"
-            onClick={onClose}
-            sx={{
-              color: theme => theme.palette.grey[500],
-              flexGrow: 0,
-              height: 40,
-              marginTop: -2,
-              width: 40
-            }}
-          >
-            <CloseIcon />
-          </IconButton>
-        </Box>
+          <CloseIcon />
+        </IconButton>
       ) : null}
     </MuiDialogTitle>
   );
