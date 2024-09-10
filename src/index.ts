@@ -216,6 +216,8 @@ export {
   VirtoTest,
   VirtoThumbsUpLeft,
   VirtoVehicle,
+  CarMakerLogo,
+  AsamLogo,
   type IpgLogoProps,
   type VirtoBuildProps,
   type VirtoDataProps,
@@ -228,7 +230,9 @@ export {
   type VirtoSceneProps,
   type VirtoTestProps,
   type VirtoThumbsUpLeftProps,
-  type VirtoVehicleProps
+  type VirtoVehicleProps,
+  type CarMakerLogoProps,
+  type AsamLogoProps
 } from "./SvgIcons";
 export {
   default as VehicleSelect,

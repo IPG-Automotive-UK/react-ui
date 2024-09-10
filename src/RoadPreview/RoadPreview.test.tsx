@@ -72,7 +72,7 @@ describe("RoadPreview", () => {
       />
     );
     // Get the current icon by alt text, so we can test the src attribute value
-    const iconElement = screen.getByAltText("Road Format Icon");
+    const iconElement = screen.getByTestId("asam-icon");
 
     // Get the current rendered road image element from html
     const roadImageElement = screen.getByAltText("road-image");
@@ -94,9 +94,8 @@ describe("RoadPreview", () => {
       "road-preview-format-version"
     );
 
-    // Check if src of  the road format is rendered with the correct image according to the format param to the component
+    // Check if AsamIcon component rendered
     expect(iconElement).toBeInTheDocument();
-    expect(iconElement.getAttribute("src")).toContain("asam.png");
 
     // Check if road image is the correct rendered image
     expect(roadImageElement).toBeInTheDocument();

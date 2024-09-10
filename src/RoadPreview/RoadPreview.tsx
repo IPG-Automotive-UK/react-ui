@@ -9,9 +9,9 @@ import {
 } from "@mui/material";
 import { LabelChipGroup, LabelChipGroupProps } from "../LabelSelector";
 
-import Asam from "../../static/asam.png";
+import AsamLogo from "../SvgIcons/AsamLogo";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
-import CarMaker from "../../static/carMaker.svg";
+import CarMakerLogo from "../SvgIcons/CarMakerLogo";
 import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";
 import NoWrapTypography from "../NoWrapTypography/NoWrapTypography";
 import NumbersIcon from "@mui/icons-material/Numbers";
@@ -44,11 +44,11 @@ export function RoadPreview({
   function getRoadformatIcon() {
     switch (format) {
       case "ASAM OpenSCENARIO XML":
-        return Asam;
+        return <AsamLogo sx={{ height: 22, width: 22 }} />;
       case "CarMaker":
-        return CarMaker;
+        return <CarMakerLogo sx={{ height: 22, width: 22 }} />;
       default:
-        return CarMaker;
+        return <CarMakerLogo sx={{ height: 22, width: 22 }} />;
     }
   }
 
@@ -132,12 +132,8 @@ export function RoadPreview({
         <Stack direction={"row"} spacing={2}>
           <Box flexShrink={0} display="flex" gap="4px" alignItems="center">
             <Tooltip title="Road Format">
-              <img
-                width={20}
-                height={20}
-                src={getRoadformatIcon()}
-                alt="Road Format Icon"
-              />
+              {/* need div element, because tooltip is not shown without it */}
+              <div style={{ display: "flex" }}>{getRoadformatIcon()}</div>
             </Tooltip>
             <Typography
               variant="caption"
