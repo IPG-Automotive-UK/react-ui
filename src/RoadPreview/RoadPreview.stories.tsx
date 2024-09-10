@@ -18,7 +18,7 @@ const Template: StoryFn<RoadPreviewProps> = args => {
   return <RoadPreview {...args} />;
 };
 
-// Default props with long description, short file name, labels with overflow and long user name
+// Default props with overflow for description, filename, labels and username
 export const Default = {
   args: {
     createdAt: "10-09-24 10:24:08",
@@ -26,10 +26,10 @@ export const Default = {
       "stationäre Kreisfahrt: DIN ISO 4138 Es wird innerhalb von 18 Sekunden auf 180° Lenkradwinkel eingelenkt.stationäre Kreisfahrt: DIN ISO 4138 Es wird innerhalb von 18 Sekunden auf 180° Lenkradwinkel eingelenkt.",
     file: {
       _id: "66d6cc4a33eb2f57a28d36f7",
-      name: "IPGRoad.rd5",
+      name: "A very looooooooooong Road File Name",
       type: "road"
     },
-    format: "CarMaker",
+    format: "ASAM OpenSCENARIO XML",
     formatVersion: "11.1",
     href: "test",
     image: "https://picsum.photos/id/191/400/200",
@@ -67,23 +67,25 @@ export const Default = {
         updatedAt: "2024-08-27T14:36:53.275Z"
       }
     ],
-    name: "SanFrancisco_AEB",
+    name: "SanFrancisco_AEB_A looooong Road Name",
     user: "James a very long middle name Harper",
     version: "1.1"
   },
   render: Template
 };
 
-// WithoutOverflowDescription props with short description, short file name, labels with overflow and short user name
-export const WithoutOverflowDescription = {
+// PropsWithoutOverflow props without overflowing content
+export const PropsWithoutOverflow = {
   args: {
     ...Default.args,
     description: "Small Description",
     file: {
       ...Default.args.file,
-      name: "A very looooooooooong Road File Name"
+      name: "IPGRoad.rd5"
     },
-    format: "ASAM OpenSCENARIO XML",
+    format: "CarMaker",
+    label: [Default.args.label.pop()],
+    name: "SanFrancisco_AEB",
     user: "James Harper"
   },
   render: Template
@@ -102,7 +104,7 @@ export const WithoutOptionalProps = {
     formatVersion: "11.1",
     href: "test",
     image: "https://picsum.photos/id/191/400/200",
-    name: "SanFrancisco_AEB_A looooong Road Name",
+    name: "SanFrancisco_AEB",
     version: "1.1"
   },
   render: Template

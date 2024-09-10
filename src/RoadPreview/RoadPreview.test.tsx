@@ -57,8 +57,8 @@ describe("RoadPreview", () => {
     expect(container.querySelector(".MuiDivider-root")).toBeInTheDocument();
   });
 
-  // test if correct icon is added for road format
-  test("render the currect icon", () => {
+  // test if correct properties are rendered
+  test("render the correct properties", () => {
     render(
       <RoadPreview
         name={Default.args.name}
@@ -74,7 +74,55 @@ describe("RoadPreview", () => {
     // Get the current icon by alt text, so we can test the src attribute value
     const iconElement = screen.getByAltText("Road Format Icon");
 
+    // Get the current rendered road image element from html
+    const roadImageElement = screen.getByAltText("road-image");
+
+    // Get the road name element from html
+    const roadNameElement = screen.getByTestId("road-preview-name");
+
+    // Get description element from html
+    const descriptionElement = screen.getByTestId("road-preview-description");
+
+    // Get file name element from html
+    const filenameElement = screen.getByTestId("road-preview-filename");
+
+    // Get format element from html
+    const formatElement = screen.getByTestId("road-preview-format");
+
+    // Get formatVersion element from html
+    const formatVersionElement = screen.getByTestId(
+      "road-preview-format-version"
+    );
+
     // Check if src of  the road format is rendered with the correct image according to the format param to the component
+    expect(iconElement).toBeInTheDocument();
     expect(iconElement.getAttribute("src")).toContain("asam.png");
+
+    // Check if road image is the correct rendered image
+    expect(roadImageElement).toBeInTheDocument();
+    expect(roadImageElement.getAttribute("src")).toContain(Default.args.image);
+
+    // Check if road name element is rendering the correct content
+    expect(roadNameElement).toBeInTheDocument();
+    expect(roadNameElement).toHaveTextContent(Default.args.name);
+
+    // Check if description element is rendering the correct content
+    expect(descriptionElement).toBeInTheDocument();
+    expect(descriptionElement).toHaveTextContent(Default.args.description);
+
+    // Check if filename element is rendering the correct content
+    expect(filenameElement).toBeInTheDocument();
+    expect(filenameElement).toHaveTextContent(Default.args.file.name);
+
+    // Check if format element is rendering the correct content
+    expect(formatElement).toBeInTheDocument();
+    expect(formatElement).toHaveTextContent(Default.args.format);
+
+    // Check if formatVersion element is rendering the correct content
+    expect(formatVersionElement).toBeInTheDocument();
+    expect(formatVersionElement).toHaveTextContent(Default.args.formatVersion);
+
+    // Check if href attribute of the road name element matches with the correct link
+    expect(roadNameElement.getAttribute("href")).toContain(Default.args.href);
   });
 });

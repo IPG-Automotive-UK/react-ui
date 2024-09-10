@@ -109,6 +109,7 @@ export default function RoadPreview({
                   color="primary"
                   variant="subtitle2"
                   underline="hover"
+                  data-testid="road-preview-name"
                 >
                   {name}
                 </Link>
@@ -116,7 +117,11 @@ export default function RoadPreview({
             </Stack>
             <Stack direction="row">
               <TruncatedTooltip multiline={2}>
-                <Typography variant="caption" color="textPrimary">
+                <Typography
+                  variant="caption"
+                  color="textPrimary"
+                  data-testid="road-preview-description"
+                >
                   {description}
                 </Typography>
               </TruncatedTooltip>
@@ -135,7 +140,11 @@ export default function RoadPreview({
                 alt="Road Format Icon"
               />
             </Tooltip>
-            <Typography variant="caption" color="textSecondary">
+            <Typography
+              variant="caption"
+              color="textSecondary"
+              data-testid="road-preview-format"
+            >
               {format}
             </Typography>
           </Box>
@@ -149,7 +158,11 @@ export default function RoadPreview({
                 }}
               ></NumbersIcon>
             </Tooltip>
-            <Typography variant="caption" color="textSecondary">
+            <Typography
+              variant="caption"
+              color="textSecondary"
+              data-testid="road-preview-format-version"
+            >
               {formatVersion}
             </Typography>
           </Box>
@@ -164,7 +177,11 @@ export default function RoadPreview({
               />
             </Tooltip>
             <NoWrapTypography>
-              <Typography variant="caption" color="textSecondary">
+              <Typography
+                variant="caption"
+                color="textSecondary"
+                data-testid="road-preview-filename"
+              >
                 {file.name}
               </Typography>
             </NoWrapTypography>
