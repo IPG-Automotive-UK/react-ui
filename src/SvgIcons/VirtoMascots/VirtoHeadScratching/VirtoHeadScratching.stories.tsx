@@ -1,7 +1,7 @@
 import { Meta, StoryFn } from "@storybook/react";
 
 import React from "react";
-import VirtoHeadScratching from "./VirtoHeadScratching";
+import { VirtoHeadScratching } from "./VirtoHeadScratching";
 import { VirtoHeadScratchingProps } from "./VirtoHeadScratching.types";
 
 /**

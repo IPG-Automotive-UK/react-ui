@@ -164,6 +164,18 @@ function AppLauncher({
           );
         })}
       </Box>
+      <Divider sx={{ mb: 2.5 }} />
+      <Box sx={{ textAlign: "center" }}>
+        <Link
+          data-testid="app-launcher-status-link"
+          href={`${baseUrl}/status`}
+          variant="body1"
+          underline="hover"
+          target="_blank"
+        >
+          VIRTO Status
+        </Link>
+      </Box>
       <Box flexGrow={1} />
     </Box>
   );
