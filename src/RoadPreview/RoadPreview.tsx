@@ -21,26 +21,28 @@ import TruncatedTooltip from "../TruncatedTooltip";
 import UserAvatar from "../UserAvatar/UserAvatar";
 import VersionChip from "../VersionChip/VersionChip";
 
-export default function RoadPreview(
-  {
-    name,
-    href,
-    version,
-    image,
-    description,
-    format,
-    formatVersion,
-    file,
-    createdAt,
-    user,
-    label
-  }: RoadPreviewProps,
-  key: React.Key
-) {
-  // theme hook
+/**
+ * RoadPreview component for visualizing Road information about specific road
+ */
+
+export default function RoadPreview({
+  name,
+  href,
+  version,
+  image,
+  description,
+  format,
+  formatVersion,
+  file,
+  createdAt,
+  user,
+  label = []
+}: RoadPreviewProps) {
+  // theme hook for returning specific colors from the theme to MUI icon
   const theme = useTheme();
 
-  function getCurrentIcon() {
+  /** Render the appropriate icon for the road format according tho the format property */
+  function getRoadformatIcon() {
     switch (format) {
       case "ASAM OpenSCENARIO XML":
         return Asam;
@@ -51,23 +53,13 @@ export default function RoadPreview(
     }
   }
 
+  /** Checking if we have optional properties for conditional rendering according to: label, createdAt, user */
   function hasOptionalProperty() {
     return (label?.length && label?.length > 0) || createdAt || user;
   }
 
-  function getCurrentDateFormatted() {
-    if (!createdAt) return;
-    const day = String(createdAt.getDate()).padStart(2, "0");
-    const month = String(createdAt.getMonth() + 1).padStart(2, "0");
-    const year = String(createdAt.getFullYear()).slice(-2);
-    const hours = String(createdAt.getHours()).padStart(2, "0");
-    const minutes = String(createdAt.getMinutes()).padStart(2, "0");
-    const seconds = String(createdAt.getSeconds()).padStart(2, "0");
-
-    return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
-  }
-
-  const labelChips: LabelChipGroupProps["chips"] | undefined = label?.map(l => {
+  /** Map the label chip array in format expected from LabelChipGroup Component */
+  const labelChips: LabelChipGroupProps["chips"] = label?.map(l => {
     return {
       clickable: false,
       color: l.color,
@@ -83,13 +75,10 @@ export default function RoadPreview(
       gap={2}
       minWidth={0}
       fontFamily="Montserrat"
+      data-testid="road-preview-wrapper"
       sx={{
         borderRadius: "8px",
-        boxShadow: `
-        0px 1px 18px 0px #0000001F,
-        0px 6px 10px 0px #00000024,
-        0px 3px 5px -1px #00000033
-        `,
+        boxShadow: 3,
         boxSizing: "border-box",
         maxWidth: "480px",
         padding: "16px"
@@ -113,13 +102,13 @@ export default function RoadPreview(
               <Box>
                 <VersionChip version={version} />
               </Box>
-
               <NoWrapTypography>
                 <Link
                   href={href}
                   target="_blank"
                   color="primary"
                   variant="subtitle2"
+                  underline="hover"
                 >
                   {name}
                 </Link>
@@ -142,7 +131,7 @@ export default function RoadPreview(
               <img
                 width={20}
                 height={20}
-                src={getCurrentIcon()}
+                src={getRoadformatIcon()}
                 alt="Road Format Icon"
               />
             </Tooltip>
@@ -182,74 +171,76 @@ export default function RoadPreview(
           </Box>
         </Stack>
       </Box>
-      {hasOptionalProperty() && <Divider />}
-      {hasOptionalProperty() && (
-        <Box display="flex" flexDirection="column" gap={2}>
-          {(createdAt || user) && (
-            <Stack direction="row" spacing={2}>
-              {createdAt && (
-                <Box flexShrink={0}>
-                  <Stack
-                    direction="row"
-                    display="flex"
-                    alignItems="center"
-                    gap="4px"
-                  >
-                    <Tooltip title="Created On">
-                      <DateRangeOutlinedIcon
-                        sx={{ color: theme.palette.text.secondary }}
-                      />
-                    </Tooltip>
+      {hasOptionalProperty() ? (
+        <>
+          <Divider />
+          <Box display="flex" flexDirection="column" gap={2}>
+            {(createdAt || user) && (
+              <Stack direction="row" spacing={2}>
+                {createdAt && (
+                  <Box flexShrink={0}>
+                    <Stack
+                      direction="row"
+                      display="flex"
+                      alignItems="center"
+                      gap="4px"
+                    >
+                      <Tooltip title="Created On">
+                        <DateRangeOutlinedIcon
+                          sx={{ color: theme.palette.text.secondary }}
+                        />
+                      </Tooltip>
 
-                    <Typography color="textSecondary" variant="caption">
-                      {getCurrentDateFormatted()}
-                    </Typography>
-                  </Stack>
-                </Box>
-              )}
-              {user && (
-                <Box minWidth={0}>
-                  <Stack
-                    direction="row"
-                    display="flex"
-                    alignItems="center"
-                    gap="4px"
-                  >
-                    <Tooltip title="Created By">
-                      {/* needs div element otherwise tooltip is not showing when user as wrapper of custom component */}
-                      <div>
-                        <UserAvatar
-                          sx={{ height: "24px", width: "24px" }}
-                          color="#EC407A"
-                          name={user}
-                        ></UserAvatar>
-                      </div>
-                    </Tooltip>
-                    <NoWrapTypography>
                       <Typography color="textSecondary" variant="caption">
-                        {user}
+                        {createdAt}
                       </Typography>
-                    </NoWrapTypography>
-                  </Stack>
-                </Box>
-              )}
-            </Stack>
-          )}
-          {label && label.length > 0 && (
-            <Stack
-              direction="row"
-              spacing={1}
-              sx={{
-                height: 24,
-                maxWidth: "calc(100% - 16px)",
-                overflowX: "hidden"
-              }}
-            >
-              <LabelChipGroup chips={labelChips || []} />
-            </Stack>
-          )}
-        </Box>
-      )}
+                    </Stack>
+                  </Box>
+                )}
+                {user && (
+                  <Box minWidth={0}>
+                    <Stack
+                      direction="row"
+                      display="flex"
+                      alignItems="center"
+                      gap="4px"
+                    >
+                      <Tooltip title="Created By">
+                        {/* needs div element otherwise tooltip is not showing when user as wrapper of custom component */}
+                        <div>
+                          <UserAvatar
+                            sx={{ height: "24px", width: "24px" }}
+                            color="#EC407A"
+                            name={user}
+                          ></UserAvatar>
+                        </div>
+                      </Tooltip>
+                      <NoWrapTypography>
+                        <Typography color="textSecondary" variant="caption">
+                          {user}
+                        </Typography>
+                      </NoWrapTypography>
+                    </Stack>
+                  </Box>
+                )}
+              </Stack>
+            )}
+            {label && label.length > 0 && (
+              <Stack
+                direction="row"
+                spacing={1}
+                sx={{
+                  height: 24,
+                  maxWidth: "calc(100% - 16px)",
+                  overflowX: "hidden"
+                }}
+              >
+                <LabelChipGroup chips={labelChips || []} />
+              </Stack>
+            )}
+          </Box>
+        </>
+      ) : null}
     </Box>
   );
 }

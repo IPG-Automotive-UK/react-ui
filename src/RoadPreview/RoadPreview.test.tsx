@@ -71,8 +71,10 @@ describe("RoadPreview", () => {
         file={Default.args.file}
       />
     );
+    // Get the current icon by alt text, so we can test the src attribute value
     const iconElement = screen.getByAltText("Road Format Icon");
 
+    // Check if src of  the road format is rendered with the correct image according to the format param to the component
     expect(iconElement.getAttribute("src")).toContain("asam.png");
   });
 });
