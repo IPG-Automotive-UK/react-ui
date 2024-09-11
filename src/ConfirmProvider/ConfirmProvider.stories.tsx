@@ -83,7 +83,7 @@ WithCustomText.args = {
 // story with confirmation button props
 export const WithConfirmationButtonProps = Template.bind({});
 WithConfirmationButtonProps.args = {
-  confirmationButtonProps: { color: "success" }
+  confirmationButtonProps: { color: "error" }
 };
 
 // story with custom Elements
