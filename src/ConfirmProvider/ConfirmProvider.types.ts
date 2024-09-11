@@ -113,7 +113,7 @@ type ConfirmState = {
   reject: () => void;
 };
 
-export {
+export type {
   ConfirmContextProps,
   ConfirmationDialogProps,
   ConfirmationDialogOptions,
