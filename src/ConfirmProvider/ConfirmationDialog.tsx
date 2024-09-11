@@ -32,7 +32,11 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
   // dialog actions for the confirmation dialog component (confirm and cancel buttons)
   const dialogActions = (
     <>
-      <Button onClick={onCancel} {...options.cancellationButtonProps}>
+      <Button
+        onClick={onCancel}
+        {...options.cancellationButtonProps}
+        data-testid="confirm-dialog-cancel-button"
+      >
         {cancellationText || "Cancel"}
       </Button>
       <Button
@@ -40,6 +44,7 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
         color="primary"
         variant="contained"
         {...options.confirmationButtonProps}
+        data-testid="confirm-dialog-confirm-button"
       >
         {confirmationText || "Confirm"}
       </Button>
@@ -47,7 +52,13 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
   );
 
   return (
-    <Dialog fullWidth {...dialogProps} open={open} onClose={onClose}>
+    <Dialog
+      fullWidth
+      {...dialogProps}
+      open={open}
+      onClose={onClose}
+      data-testid="confirm-dialog"
+    >
       {title && (
         // use the dialog title from the dialog title component
         <DialogTitle onClose={onCancel} {...titleProps}>
