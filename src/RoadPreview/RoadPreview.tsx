@@ -9,9 +9,9 @@ import {
 } from "@mui/material";
 import { LabelChipGroup, LabelChipGroupProps } from "../LabelSelector";
 
-import Asam from "../../static/asam.png";
+import { AsamLogo } from "../SvgIcons/AsamLogo";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
-import CarMaker from "../../static/carMaker.svg";
+import { CarMakerLogo } from "../SvgIcons/CarMakerLogo";
 import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";
 import NoWrapTypography from "../NoWrapTypography/NoWrapTypography";
 import NumbersIcon from "@mui/icons-material/Numbers";
@@ -39,18 +39,6 @@ export function RoadPreview({
 }: RoadPreviewProps) {
   // theme hook for returning specific colors from the theme to MUI icon
   const theme = useTheme();
-
-  /** Render the appropriate icon for the road format according tho the format property */
-  function getRoadformatIcon() {
-    switch (format) {
-      case "ASAM OpenSCENARIO XML":
-        return Asam;
-      case "CarMaker":
-        return CarMaker;
-      default:
-        return CarMaker;
-    }
-  }
 
   /** Checking if we have optional properties for conditional rendering according to: label, createdAt, user */
   function hasOptionalProperty() {
@@ -132,12 +120,14 @@ export function RoadPreview({
         <Stack direction={"row"} spacing={2}>
           <Box flexShrink={0} display="flex" gap="4px" alignItems="center">
             <Tooltip title="Road Format">
-              <img
-                width={20}
-                height={20}
-                src={getRoadformatIcon()}
-                alt="Road Format Icon"
-              />
+              {/* need div element, because tooltip is not shown without it */}
+              <div style={{ display: "flex" }}>
+                {format === "CarMaker" ? (
+                  <CarMakerLogo sx={{ height: "20px", width: "20px" }} />
+                ) : (
+                  <AsamLogo sx={{ height: "20px", width: "20px" }} />
+                )}
+              </div>
             </Tooltip>
             <Typography
               variant="caption"

@@ -59,6 +59,7 @@ describe("RoadPreview", () => {
 
   // test if correct properties are rendered
   test("render the correct properties", () => {
+    const currentTestFormat = "ASAM OpenDRIVE";
     render(
       <RoadPreview
         name={Default.args.name}
@@ -66,13 +67,13 @@ describe("RoadPreview", () => {
         version={Default.args.version}
         image={Default.args.image}
         description={Default.args.description}
-        format="ASAM OpenSCENARIO XML"
+        format={currentTestFormat}
         formatVersion={Default.args.formatVersion}
         file={Default.args.file}
       />
     );
     // Get the current icon by alt text, so we can test the src attribute value
-    const iconElement = screen.getByAltText("Road Format Icon");
+    const iconElement = screen.getByTestId("asam-logo");
 
     // Get the current rendered road image element from html
     const roadImageElement = screen.getByAltText("road-image");
@@ -94,9 +95,8 @@ describe("RoadPreview", () => {
       "road-preview-format-version"
     );
 
-    // Check if src of  the road format is rendered with the correct image according to the format param to the component
+    // Check if AsamIcon component rendered
     expect(iconElement).toBeInTheDocument();
-    expect(iconElement.getAttribute("src")).toContain("asam.png");
 
     // Check if road image is the correct rendered image
     expect(roadImageElement).toBeInTheDocument();
@@ -116,7 +116,7 @@ describe("RoadPreview", () => {
 
     // Check if format element is rendering the correct content
     expect(formatElement).toBeInTheDocument();
-    expect(formatElement).toHaveTextContent(Default.args.format);
+    expect(formatElement).toHaveTextContent(currentTestFormat);
 
     // Check if formatVersion element is rendering the correct content
     expect(formatVersionElement).toBeInTheDocument();
