@@ -11,6 +11,7 @@ function Icon({ sx }: CarMakerLogoProps) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
+      data-testid="car-maker-logo"
       sx={{ ...sx }}
     >
       <rect x="0" width="56" height="56" fill="url(#img_virto)" />

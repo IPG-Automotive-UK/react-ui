@@ -10,6 +10,7 @@ export function AsamLogo({ sx }: AsamLogoProps) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
+      data-testid="asam-logo"
       sx={{ ...sx }}
     >
       <rect x="0" width="73" height="74" fill="url(#img_virto)" />
