@@ -1,4 +1,4 @@
-import { SxProps } from "@mui/material";
+import { SxProps, Theme } from "@mui/material";
 
 export type File = {
   /**
@@ -77,7 +77,7 @@ export type RoadPreviewProps = {
    */
   label?: Label[];
   /**
-   * Style props for wrapper of the component road preview
+   * Additional styles to apply for the road preview wrapper
    */
-  sx?: SxProps & {};
+  sx?: SxProps<Theme>;
 };
