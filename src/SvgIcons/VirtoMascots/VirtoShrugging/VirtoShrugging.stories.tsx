@@ -19,7 +19,7 @@ const Template: StoryFn<VirtoShruggingProps> = args => {
 
 export const Default = {
   args: {
-    sx: { height: 126, width: 150 }
+    sx: { height: 600, width: 600 }
   },
 
   render: Template
