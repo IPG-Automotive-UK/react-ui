@@ -1,3 +1,5 @@
+import { SxProps } from "@mui/material";
+
 export type File = {
   /**
    * Unique identifier of the file
@@ -74,4 +76,8 @@ export type RoadPreviewProps = {
    * Label/s which are set to this road
    */
   label?: Label[];
+  /**
+   * Style props for wrapper of the component road preview
+   */
+  sx?: SxProps & {};
 };
