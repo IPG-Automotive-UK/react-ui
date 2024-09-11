@@ -69,6 +69,12 @@ export const Default = {
       }
     ],
     name: "SanFrancisco_AEB",
+    sx: {
+      borderRadius: "8px",
+      boxShadow: 3,
+      maxWidth: "480px",
+      padding: "16px"
+    },
     user: "James Harper",
     version: "1.1"
   },
@@ -111,6 +117,7 @@ export const WithoutOptionalProps = {
     href: "test",
     image: "https://picsum.photos/id/191/400/200",
     name: "SanFrancisco_AEB",
+    sx: { ...Default.args.sx },
     version: "1.1"
   },
   render: Template

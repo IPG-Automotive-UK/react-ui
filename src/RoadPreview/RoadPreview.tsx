@@ -35,7 +35,8 @@ export function RoadPreview({
   file,
   createdAt,
   user,
-  label = []
+  label = [],
+  sx
 }: RoadPreviewProps) {
   // theme hook for returning specific colors from the theme to MUI icon
   const theme = useTheme();
@@ -63,13 +64,7 @@ export function RoadPreview({
       minWidth={0}
       fontFamily="Montserrat"
       data-testid="road-preview-wrapper"
-      sx={{
-        borderRadius: "8px",
-        boxShadow: 3,
-        boxSizing: "border-box",
-        maxWidth: "480px",
-        padding: "16px"
-      }}
+      sx={{ ...sx }}
     >
       <Box gap={1}>
         <Stack direction="row" spacing={1} minWidth={0}>
