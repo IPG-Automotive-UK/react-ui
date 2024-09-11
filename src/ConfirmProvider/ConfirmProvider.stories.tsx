@@ -12,7 +12,7 @@ import useConfirm from "./useConfirm";
  */
 const meta: Meta<typeof ConfirmProvider> = {
   component: ConfirmProvider,
-  title: "General/ConfirmProvider"
+  title: "Dialog/ConfirmProvider"
 };
 export default meta;
 
