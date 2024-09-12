@@ -50,7 +50,7 @@ const statusList = [
 ] as const;
 
 /**
- * Story template for the StatusCard with a fixed width wrapper
+ * Story template for the StatusCard with grid layout
  */
 const WithGrid: StoryFn<StatusCardProps> = args => {
   return (
