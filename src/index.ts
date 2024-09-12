@@ -27,6 +27,7 @@ export {
 export { default as Canvas, type CanvasProps } from "./Canvas";
 export { default as CanvasItem, type CanvasItemProps } from "./CanvasItem";
 export { default as EditLabelDialog } from "./EditLabelDialog";
+export { RoadPreview, type RoadPreviewProps } from "./RoadPreview";
 export { default as Breadcrumbs, type BreadcrumbsProps } from "./Breadcrumbs";
 export {
   DetailCard,
@@ -202,24 +203,32 @@ export {
   VirtoBuild,
   VirtoData,
   VirtoFleet,
+  VirtoHeadScratching,
   VirtoID,
   VirtoLogo,
   VirtoModel,
   VirtoResult,
   VirtoScene,
   VirtoTest,
+  VirtoThumbsUpLeft,
   VirtoVehicle,
+  CarMakerLogo,
+  AsamLogo,
   type IpgLogoProps,
   type VirtoBuildProps,
   type VirtoDataProps,
   type VirtoFleetProps,
+  type VirtoHeadScratchingProps,
   type VirtoIDProps,
   type VirtoLogoProps,
   type VirtoModelProps,
   type VirtoResultProps,
   type VirtoSceneProps,
   type VirtoTestProps,
-  type VirtoVehicleProps
+  type VirtoThumbsUpLeftProps,
+  type VirtoVehicleProps,
+  type CarMakerLogoProps,
+  type AsamLogoProps
 } from "./SvgIcons";
 export {
   default as VehicleSelect,
@@ -257,10 +266,10 @@ export {
   default as UploaderHeader,
   type UploaderHeaderProps
 } from "./Uploader";
+
 /*
   The following components are temporarily commented out to prevent CRA build failures.
   For more details, refer to the related ticket:
-
   Ticket: https://sce.myjetbrains.com/youtrack/issue/TD-2804/Cannot-build-CRA-based-apps-with-latest-RUI
 */
 // export { default as Figure, type FigureProps } from "./Figure";

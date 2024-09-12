@@ -1,7 +1,7 @@
 import { Meta, StoryFn } from "@storybook/react";
 
 import React from "react";
-import VirtoShrugging from "./VirtoShrugging";
+import { VirtoShrugging } from "./VirtoShrugging";
 import { VirtoShruggingProps } from "./VirtoShrugging.types";
 
 /**
@@ -19,7 +19,7 @@ const Template: StoryFn<VirtoShruggingProps> = args => {
 
 export const Default = {
   args: {
-    sx: { height: 126, width: 150 }
+    sx: { height: 600, width: 600 }
   },
 
   render: Template

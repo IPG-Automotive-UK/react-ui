@@ -8,15 +8,25 @@ export { default as VirtoModel, type VirtoModelProps } from "./VirtoModel";
 export { default as VirtoResult, type VirtoResultProps } from "./VirtoResult";
 export { default as VirtoScene, type VirtoSceneProps } from "./VirtoScene";
 export { default as VirtoTest, type VirtoTestProps } from "./VirtoTest";
+export { CarMakerLogo, type CarMakerLogoProps } from "./CarMakerLogo";
+export { AsamLogo, type AsamLogoProps } from "./AsamLogo";
 export {
   default as VirtoVehicle,
   type VirtoVehicleProps
 } from "./VirtoVehicle";
 export {
-  default as VirtoThinking,
+  VirtoHeadScratching,
+  type VirtoHeadScratchingProps
+} from "./VirtoMascots/VirtoHeadScratching";
+export {
+  VirtoThinking,
   type VirtoThinkingProps
 } from "./VirtoMascots/VirtoThinking";
 export {
-  default as VirtoShrugging,
+  VirtoShrugging,
   type VirtoShruggingProps
 } from "./VirtoMascots/VirtoShrugging";
+export {
+  VirtoThumbsUpLeft,
+  type VirtoThumbsUpLeftProps
+} from "./VirtoMascots/VirtoThumbsUpLeft";
