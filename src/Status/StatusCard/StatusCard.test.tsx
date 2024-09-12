@@ -45,4 +45,22 @@ describe("StatusCard", () => {
       );
     }
   );
+
+  test("renders titleVariant prop", () => {
+    // data to render
+    const status = "passed";
+    const name = "Test title";
+    const titleVariant = "h6";
+
+    // render the component
+    render(
+      <StatusCard status={status} name={name} titleVariant={titleVariant} />
+    );
+
+    // find the title element
+    const titleElement = screen.getByText(name);
+
+    // expect the titleElement has font size of h6
+    expect(titleElement).toHaveStyle("font-size: 1.25rem");
+  });
 });
