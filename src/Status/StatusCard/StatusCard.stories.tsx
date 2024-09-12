@@ -52,7 +52,7 @@ const statusList = [
 /**
  * Story template for the StatusCard with a fixed width wrapper
  */
-const WithFixedWidth: StoryFn<StatusCardProps> = args => {
+const WithGrid: StoryFn<StatusCardProps> = args => {
   return (
     <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
       {statusList.map(s => {
@@ -110,9 +110,19 @@ export const WithIconTooltip = {
  * This story will display a different title variant and truncated title with tooltip if it is too long
  */
 export const WithGridLayout = {
+  argTypes: {
+    iconTooltipText: {
+      control: false
+    },
+    name: {
+      control: false
+    },
+    status: {
+      control: false
+    }
+  },
   args: {
     ...Default.args
   },
-
-  render: WithFixedWidth
+  render: WithGrid
 };
