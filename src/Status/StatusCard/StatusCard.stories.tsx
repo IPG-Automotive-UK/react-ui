@@ -54,29 +54,24 @@ const statusList = [
  */
 const WithGrid: StoryFn<StatusCardProps> = args => {
   return (
-    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
-      {statusList.map(s => {
-        return (
-          <Box
-            key={s.name}
-            sx={theme => ({
-              flex: "1 1 100%",
-              [theme.breakpoints.up("lg")]: {
-                flex: "1 1 30%"
-              },
-              [theme.breakpoints.up("md")]: {
-                flex: "1 1 40%"
-              }
-            })}
-          >
-            <StatusCard
-              name={s.name}
-              status={s.status}
-              titleVariant={args.titleVariant}
-            />
-          </Box>
-        );
+    <Box
+      sx={theme => ({
+        display: "grid",
+        gap: 1,
+        [theme.breakpoints.up("lg")]: {
+          gridTemplateColumns: "repeat(3, 1fr)"
+        },
+        [theme.breakpoints.up("sm")]: { gridTemplateColumns: "repeat(2, 1fr)" }
       })}
+    >
+      {statusList.map(s => (
+        <StatusCard
+          key={s.name}
+          name={s.name}
+          status={s.status}
+          titleVariant={args.titleVariant}
+        />
+      ))}
     </Box>
   );
 };
