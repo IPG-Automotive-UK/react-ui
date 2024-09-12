@@ -93,6 +93,7 @@ const TabPanel = ({
           overflowY: "auto",
           width: 1
         }}
+        className="tabpanel-container"
       >
         {React.Children.map(children, (child, index) => {
           if (!React.isValidElement(child)) return null;
