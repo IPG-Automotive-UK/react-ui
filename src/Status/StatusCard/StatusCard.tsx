@@ -4,10 +4,16 @@ import { Box, Card, CardContent, Typography } from "@mui/material";
 
 import { StatusCardProps } from "./StatusCard.types";
 import StatusIcon from "../StatusIcon/StatusIcon";
+import TruncatedTooltip from "../../TruncatedTooltip";
 import statuses from "../statuses";
 
 // custom card component that will be used to display status information
-const card = ({ status, name, iconTooltipText }: StatusCardProps) => {
+const card = ({
+  status,
+  name,
+  iconTooltipText,
+  titleVariant
+}: StatusCardProps) => {
   const {
     label: { text }
   } = statuses[status];
@@ -15,7 +21,6 @@ const card = ({ status, name, iconTooltipText }: StatusCardProps) => {
     <CardContent
       sx={{
         ":last-child": { pb: "14px" },
-        px: 3,
         py: "14px"
       }}
     >
@@ -32,11 +37,21 @@ const card = ({ status, name, iconTooltipText }: StatusCardProps) => {
           iconTooltipText={iconTooltipText}
         />
         <Box
-          sx={{ display: "flex", flexDirection: "column", marginLeft: "8px" }}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            marginLeft: "8px"
+          }}
         >
-          <Typography variant="h6" color="text.primary" fontWeight={600}>
-            {name}
-          </Typography>
+          <TruncatedTooltip multiline={1}>
+            <Typography
+              variant={titleVariant}
+              color="text.primary"
+              fontWeight={600}
+            >
+              {name}
+            </Typography>
+          </TruncatedTooltip>
           <Typography variant="caption" color="text.primary">
             {text}
           </Typography>
@@ -50,7 +65,8 @@ const card = ({ status, name, iconTooltipText }: StatusCardProps) => {
 export default function StatusCard({
   status = "passed",
   name = "Test",
-  iconTooltipText = ""
+  iconTooltipText = "",
+  titleVariant = "subtitle2"
 }: StatusCardProps) {
   // return components
   return (
@@ -60,7 +76,7 @@ export default function StatusCard({
         borderRadius: "6px"
       }}
     >
-      {card({ iconTooltipText, name, status })}
+      {card({ iconTooltipText, name, status, titleVariant })}
     </Card>
   );
 }
