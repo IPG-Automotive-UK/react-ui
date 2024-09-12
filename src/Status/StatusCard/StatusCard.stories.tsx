@@ -1,5 +1,6 @@
 import { Meta, StoryFn } from "@storybook/react";
 
+import { Box } from "@mui/material";
 import React from "react";
 import StatusCard from "./StatusCard";
 import { StatusCardProps } from "./StatusCard.types";
@@ -18,6 +19,66 @@ export default meta;
  */
 const Template: StoryFn<StatusCardProps> = args => {
   return <StatusCard {...args} />;
+};
+
+// List of statuses to display
+const statusList = [
+  {
+    name: "Test title 1",
+    status: "failed"
+  },
+  {
+    name: "This is a long title that will be truncated as this is a long title that will be truncated",
+    status: "passed"
+  },
+  {
+    name: "Test title 2",
+    status: "pending"
+  },
+  {
+    name: "Test title 3",
+    status: "completed"
+  },
+  {
+    name: "Test title 4",
+    status: "queued"
+  },
+  {
+    name: "Another title that will be truncated as this is a long title that will be truncated",
+    status: "cancelled"
+  }
+] as const;
+
+/**
+ * Story template for the StatusCard with a fixed width wrapper
+ */
+const WithFixedWidth: StoryFn<StatusCardProps> = args => {
+  return (
+    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+      {statusList.map(s => {
+        return (
+          <Box
+            key={s.name}
+            sx={theme => ({
+              flex: "1 1 100%",
+              [theme.breakpoints.up("lg")]: {
+                flex: "1 1 30%"
+              },
+              [theme.breakpoints.up("md")]: {
+                flex: "1 1 40%"
+              }
+            })}
+          >
+            <StatusCard
+              name={s.name}
+              status={s.status}
+              titleVariant={args.titleVariant}
+            />
+          </Box>
+        );
+      })}
+    </Box>
+  );
 };
 
 /**
@@ -43,4 +104,15 @@ export const WithIconTooltip = {
   },
 
   render: Template
+};
+
+/**
+ * This story will display a different title variant and truncated title with tooltip if it is too long
+ */
+export const WithGridLayout = {
+  args: {
+    ...Default.args
+  },
+
+  render: WithFixedWidth
 };
