@@ -60,6 +60,7 @@ describe("RoadPreview", () => {
   // test if correct properties are rendered
   test("render the correct properties", () => {
     const currentTestFormat = "ASAM OpenDRIVE";
+    const currentLabel = Default.args.label[0];
     render(
       <RoadPreview
         name={Default.args.name}
@@ -70,6 +71,8 @@ describe("RoadPreview", () => {
         format={currentTestFormat}
         formatVersion={Default.args.formatVersion}
         file={Default.args.file}
+        label={[currentLabel]}
+        user={Default.args.user}
       />
     );
     // Get the current icon by alt text, so we can test the src attribute value
@@ -94,6 +97,12 @@ describe("RoadPreview", () => {
     const formatVersionElement = screen.getByTestId(
       "road-preview-format-version"
     );
+
+    // Get label rendered
+    const label = screen.getByText(currentLabel.name);
+
+    // Get user name rendered
+    const user = screen.getByTestId("road-preview-user");
 
     // Check if AsamIcon component rendered
     expect(iconElement).toBeInTheDocument();
@@ -124,5 +133,12 @@ describe("RoadPreview", () => {
 
     // Check if href attribute of the road name element matches with the correct link
     expect(roadNameElement.getAttribute("href")).toContain(Default.args.href);
+
+    // Check if label is rendered
+    expect(label).toBeInTheDocument();
+
+    // Check if user name is rendered with correct value
+    expect(user).toBeInTheDocument();
+    expect(user).toHaveTextContent(Default.args.user);
   });
 });

@@ -217,7 +217,11 @@ export function RoadPreview({
                         </div>
                       </Tooltip>
                       <NoWrapTypography>
-                        <Typography color="textSecondary" variant="caption">
+                        <Typography
+                          color="textSecondary"
+                          variant="caption"
+                          data-testid="road-preview-user"
+                        >
                           {user}
                         </Typography>
                       </NoWrapTypography>
