@@ -92,7 +92,7 @@ export const WithOverflowText = {
       name: "A very looooooooooong Road File Name"
     },
     format: "ASAM OpenDRIVE",
-    label: [Default.args?.label[Default?.args?.label?.length - 1]],
+    label: [Default.args.label[0]],
     name: "SanFrancisco_AEB_A looooong Road Name",
     user: "James a very long middle name Harper"
   },
