@@ -60,8 +60,8 @@ describe("RoadPreview", () => {
   // test if correct properties are rendered
   test("render the correct properties", () => {
     const currentTestFormat = "ASAM OpenDRIVE";
-    const currentLabel = Default.args.label[0];
-    render(
+    const firstLabel = Default.args.label[0];
+    const { container } = render(
       <RoadPreview
         name={Default.args.name}
         href={Default.args.href}
@@ -71,8 +71,9 @@ describe("RoadPreview", () => {
         format={currentTestFormat}
         formatVersion={Default.args.formatVersion}
         file={Default.args.file}
-        label={[currentLabel]}
+        label={Default.args.label}
         user={Default.args.user}
+        createdAt={Default.args.createdAt}
       />
     );
     // Get the current icon by alt text, so we can test the src attribute value
@@ -98,11 +99,15 @@ describe("RoadPreview", () => {
       "road-preview-format-version"
     );
 
-    // Get label rendered
-    const label = screen.getByText(currentLabel.name);
+    // Get first label and all labels
+    const label = screen.getByText(firstLabel.name);
+    const allLabels = container.querySelectorAll(".MuiChip-root");
 
     // Get user name rendered
     const user = screen.getByTestId("road-preview-user");
+
+    // Get created at date
+    const createdAt = screen.getByTestId("road-preview-created");
 
     // Check if AsamIcon component rendered
     expect(iconElement).toBeInTheDocument();
@@ -134,11 +139,16 @@ describe("RoadPreview", () => {
     // Check if href attribute of the road name element matches with the correct link
     expect(roadNameElement.getAttribute("href")).toContain(Default.args.href);
 
-    // Check if label is rendered
+    // Check if labels are rendered
     expect(label).toBeInTheDocument();
+    expect(allLabels.length).toBeGreaterThan(1);
 
     // Check if user name is rendered with correct value
     expect(user).toBeInTheDocument();
     expect(user).toHaveTextContent(Default.args.user);
+
+    // Check if created date is rendered with correct value
+    expect(createdAt).toBeInTheDocument();
+    expect(createdAt).toHaveTextContent(Default.args.createdAt);
   });
 });

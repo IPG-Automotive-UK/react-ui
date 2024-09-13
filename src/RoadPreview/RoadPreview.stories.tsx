@@ -51,7 +51,7 @@ export const Default = {
         _id: "66cde4855d45d85421f8620e",
         color: "rgb(121, 0, 168)",
         description: "desc for hi",
-        name: "Test label 3"
+        name: "Test label 4"
       },
       {
         _id: "66cde4855d45d85421f8620e",

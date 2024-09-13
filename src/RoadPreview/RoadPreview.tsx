@@ -192,7 +192,11 @@ export function RoadPreview({
                         />
                       </Tooltip>
 
-                      <Typography color="textSecondary" variant="caption">
+                      <Typography
+                        color="textSecondary"
+                        variant="caption"
+                        data-testid="road-preview-created"
+                      >
                         {createdAt}
                       </Typography>
                     </Stack>
