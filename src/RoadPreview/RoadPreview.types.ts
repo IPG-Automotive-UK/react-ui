@@ -1,5 +1,7 @@
 import { SxProps, Theme } from "@mui/material";
 
+import { Label } from "../LabelSelector/Label.types";
+
 export type File = {
   /**
    * Unique identifier of the file
@@ -17,15 +19,6 @@ export type File = {
    * Path to the file on file-service. This is an internal only field and should not be exposed to the client.
    */
   path?: string;
-};
-
-export type Label = {
-  _id: string;
-  name: string;
-  description: string;
-  color: string;
-  createdAt: string;
-  updatedAt: string;
 };
 
 /**
