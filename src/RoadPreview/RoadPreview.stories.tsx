@@ -54,10 +54,16 @@ export const Default = {
         name: "Test label 4"
       },
       {
-        _id: "66cde4855d45d85421f8620e",
-        color: "rgb(121, 0, 168)",
-        description: "desc for hi",
+        _id: "66cd24823d45d85421f8620c",
+        color: "#005FA8",
+        description: "desc for 1 hi",
         name: "Test label 3"
+      },
+      {
+        _id: "66cd24823f15d85421f8620s",
+        color: "#005FA8",
+        description: "last",
+        name: "last"
       }
     ],
     name: "SanFrancisco_AEB",
@@ -86,7 +92,7 @@ export const WithOverflowText = {
       name: "A very looooooooooong Road File Name"
     },
     format: "ASAM OpenDRIVE",
-    label: [Default.args.label.pop()],
+    label: [Default.args?.label[Default?.args?.label?.length - 1]],
     name: "SanFrancisco_AEB_A looooong Road Name",
     user: "James a very long middle name Harper"
   },
