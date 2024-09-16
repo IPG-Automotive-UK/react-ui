@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import { InfographicProps } from "./Infographic.types";
-import LazyLoadCardMedia from "../../LazyLoadInfographic/LazyLoadCardMedia/LazyLoadCardMedia";
+import LazyLoadCardMedia from "../../LazyLoadImage/LazyLoadCardMedia/LazyLoadCardMedia";
 import React from "react";
 import VersionChip from "../../VersionChip/VersionChip";
 
