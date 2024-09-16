@@ -7,12 +7,10 @@ import { LazyLoadCardMediaProps } from "./LazyLoadCardMedia.types";
  * Lazy load wrapper for MUI CardMedia component. Used for lazy loading infographics inside a card component.
  * @param LazyLoadCardMediaProps The input object of the component
  * @param @param LazyLoadCardMediaProps.src string Source of the image
- * @param @param LazyLoadCardMediaProps.alt string Alternative text for the image
  * @param @param LazyLoadCardMediaProps.CardMediaProps object ImgProps Any other prop of the <img> component
  */
 export default function LazyLoadCardMedia({
   src,
-  alt,
   CardMediaProps
 }: LazyLoadCardMediaProps) {
   // state variable to decide whether to show the image or not
@@ -50,7 +48,6 @@ export default function LazyLoadCardMedia({
       component="img"
       ref={imgRef}
       src={isVisible ? src : undefined}
-      alt={alt}
       {...CardMediaProps}
     />
   );

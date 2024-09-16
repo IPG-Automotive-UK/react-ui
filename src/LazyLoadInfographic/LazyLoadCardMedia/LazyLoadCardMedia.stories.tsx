@@ -1,102 +1,47 @@
+import { Infographic, InfographicProps } from "../../CardContent";
 import { Meta, StoryFn } from "@storybook/react";
-import { SummaryCard, SummaryCardProps } from "../../Card";
 
 import React from "react";
 
 /**
  * Wrapper to lazy load a CardMedia component
  */
-const meta: Meta<typeof SummaryCard> = {
-  argTypes: {
-    moreOptionsRef: {
-      control: false
-    }
-  },
-  component: SummaryCard,
+const meta: Meta<typeof Infographic> = {
+  component: Infographic,
   title: "LazyLoadInfographic/LazyLoadCardMedia"
 };
 export default meta;
 
-const Template: StoryFn<SummaryCardProps> = args => {
+const Template: StoryFn<InfographicProps> = args => {
   return (
     <>
-      <SummaryCard
+      <Infographic
         {...{
-          content: null,
-          height: 557,
-          labels: [],
-          media: "https://picsum.photos/336/190",
-          moreCardActions: null,
-          moreOptionsPopover: null,
-          onClickLabel: () => {},
-          subtitle: "subtitle",
-          title: "title",
-          version: "1.0",
-          width: 368
+          media: "https://picsum.photos/336/190"
         }}
       />
       <br />
-      <SummaryCard
+      <Infographic
         {...{
-          content: null,
-          height: 557,
-          labels: [],
-          media: "https://picsum.photos/336/189",
-          moreCardActions: null,
-          moreOptionsPopover: null,
-          onClickLabel: () => {},
-          subtitle: "subtitle",
-          title: "title",
-          version: "1.0",
-          width: 368
+          media: "https://picsum.photos/336/191"
         }}
       />
       <br />
-      <SummaryCard
+      <Infographic
         {...{
-          content: null,
-          height: 557,
-          labels: [],
-          media: "https://picsum.photos/336/188",
-          moreCardActions: null,
-          moreOptionsPopover: null,
-          onClickLabel: () => {},
-          subtitle: "subtitle",
-          title: "title",
-          version: "1.0",
-          width: 368
+          media: "https://picsum.photos/336/192"
         }}
       />
       <br />
-      <SummaryCard
+      <Infographic
         {...{
-          content: null,
-          height: 557,
-          labels: [],
-          media: "https://picsum.photos/336/187",
-          moreCardActions: null,
-          moreOptionsPopover: null,
-          onClickLabel: () => {},
-          subtitle: "subtitle",
-          title: "title",
-          version: "1.0",
-          width: 368
+          media: "https://picsum.photos/336/193"
         }}
       />
       <br />
-      <SummaryCard
+      <Infographic
         {...{
-          content: null,
-          height: 557,
-          labels: [],
-          media: "https://picsum.photos/336/186",
-          moreCardActions: null,
-          moreOptionsPopover: null,
-          onClickLabel: () => {},
-          subtitle: "subtitle",
-          title: "title",
-          version: "1.0",
-          width: 368
+          media: "https://picsum.photos/336/194"
         }}
       />
       <br />

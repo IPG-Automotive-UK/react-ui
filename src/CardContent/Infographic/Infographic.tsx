@@ -16,14 +16,16 @@ const Infographic = ({ media, version }: InfographicProps) => {
       }}
     >
       <LazyLoadCardMedia
-        src={media}
-        sx={{
-          boxSizing: "content-box",
-          height: 190,
-          objectFit: "contain",
-          padding: 200,
-          width: 336
+        CardMediaProps={{
+          sx: {
+            boxSizing: "content-box",
+            height: 190,
+            objectFit: "contain",
+            padding: 200,
+            width: 336
+          }
         }}
+        src={media}
       />
       {version ? (
         <Box
