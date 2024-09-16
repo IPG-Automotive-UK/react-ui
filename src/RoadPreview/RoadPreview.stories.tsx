@@ -38,34 +38,32 @@ export const Default = {
       {
         _id: "66cd9b326217e44d2810e9d3",
         color: "#005FA8",
-        createdAt: "2024-08-27T09:24:02.096Z",
         description: "Label 1 desc",
-        name: "Label 1--------------rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr",
-        updatedAt: "2024-08-28T09:39:02.748Z"
+        name: "&test 09999"
       },
       {
         _id: "66cd9b8d6217e44d2810e9f7",
         color: "#005FA8",
-        createdAt: "2024-08-27T09:25:33.849Z",
         description: "one2three4",
-        name: "&1234",
-        updatedAt: "2024-09-03T08:42:18.213Z"
+        name: "&1234"
       },
       {
         _id: "66cde4855d45d85421f8620e",
         color: "rgb(121, 0, 168)",
-        createdAt: "2024-08-27T14:36:53.275Z",
         description: "desc for hi",
-        name: "Test label 3",
-        updatedAt: "2024-08-27T14:36:53.275Z"
+        name: "Test label 4"
       },
       {
-        _id: "66cde4855d45d85421f8620e",
-        color: "rgb(121, 0, 168)",
-        createdAt: "2024-08-27T14:36:53.275Z",
-        description: "desc for hi",
-        name: "Test label 3",
-        updatedAt: "2024-08-27T14:36:53.275Z"
+        _id: "66cd24823d45d85421f8620c",
+        color: "#005FA8",
+        description: "desc for 1 hi",
+        name: "Test label 3"
+      },
+      {
+        _id: "66cd24823f15d85421f8620s",
+        color: "#005FA8",
+        description: "last",
+        name: "last"
       }
     ],
     name: "SanFrancisco_AEB",
@@ -94,7 +92,7 @@ export const WithOverflowText = {
       name: "A very looooooooooong Road File Name"
     },
     format: "ASAM OpenDRIVE",
-    label: [Default.args.label.pop()],
+    label: [Default.args.label[0]],
     name: "SanFrancisco_AEB_A looooong Road Name",
     user: "James a very long middle name Harper"
   },
