@@ -1,14 +1,14 @@
 import { Meta, StoryFn } from "@storybook/react";
 
-import LazyLoadImg from "./LazyLoadImage";
+import LazyLoadImage from "./LazyLoadImage";
 import { LazyLoadImgProps } from "./LazyLoadImage.types";
 import React from "react";
 
 /**
  * Wrapper to lazy load an image
  */
-const meta: Meta<typeof LazyLoadImg> = {
-  component: LazyLoadImg,
+const meta: Meta<typeof LazyLoadImage> = {
+  component: LazyLoadImage,
   title: "LazyLoadImage/LazyLoadImg"
 };
 export default meta;
@@ -16,7 +16,7 @@ export default meta;
 const Template: StoryFn<LazyLoadImgProps> = args => {
   return (
     <>
-      <LazyLoadImg
+      <LazyLoadImage
         {...{
           ImgProps: {
             style: { aspectRatio: "2/1", objectFit: "contain", width: "80%" }
@@ -26,7 +26,7 @@ const Template: StoryFn<LazyLoadImgProps> = args => {
         }}
       />
       <br />
-      <LazyLoadImg
+      <LazyLoadImage
         {...{
           ImgProps: {
             style: { aspectRatio: "2/1", objectFit: "contain", width: "80%" }
@@ -36,7 +36,7 @@ const Template: StoryFn<LazyLoadImgProps> = args => {
         }}
       />
       <br />
-      <LazyLoadImg
+      <LazyLoadImage
         {...{
           ImgProps: {
             style: { aspectRatio: "2/1", objectFit: "contain", width: "80%" }
@@ -46,7 +46,7 @@ const Template: StoryFn<LazyLoadImgProps> = args => {
         }}
       />
       <br />
-      <LazyLoadImg
+      <LazyLoadImage
         {...{
           ImgProps: {
             style: { aspectRatio: "2/1", objectFit: "contain", width: "80%" }
@@ -56,7 +56,7 @@ const Template: StoryFn<LazyLoadImgProps> = args => {
         }}
       />
       <br />
-      <LazyLoadImg
+      <LazyLoadImage
         {...{
           ImgProps: {
             style: { aspectRatio: "2/1", objectFit: "contain", width: "80%" }
@@ -66,7 +66,7 @@ const Template: StoryFn<LazyLoadImgProps> = args => {
         }}
       />
       <br />
-      <LazyLoadImg
+      <LazyLoadImage
         {...{
           ImgProps: {
             style: { aspectRatio: "2/1", objectFit: "contain", width: "80%" }
@@ -76,7 +76,7 @@ const Template: StoryFn<LazyLoadImgProps> = args => {
         }}
       />
       <br />
-      <LazyLoadImg
+      <LazyLoadImage
         {...{
           ImgProps: {
             style: { aspectRatio: "2/1", objectFit: "contain", width: "80%" }
