@@ -8,7 +8,7 @@ import React from "react";
  */
 const meta: Meta<typeof Infographic> = {
   component: Infographic,
-  title: "LazyLoadInfographic/LazyLoadCardMedia"
+  title: "LazyLoadImage/LazyLoadCardMedia"
 };
 export default meta;
 
