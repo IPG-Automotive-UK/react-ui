@@ -15,5 +15,5 @@ export type LazyLoadImgProps = {
   /**
    * Any other prop of the <img> component
    */
-  ImgProps?: React.ComponentProps<"img">;
+  ImgProps?: Omit<React.ComponentProps<"img">, "src" | "alt">;
 };

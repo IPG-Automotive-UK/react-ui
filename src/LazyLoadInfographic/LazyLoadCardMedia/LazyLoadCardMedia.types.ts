@@ -9,11 +9,7 @@ export type LazyLoadCardMediaProps = {
    */
   src: string;
   /**
-   * Alternative text for the image
-   */
-  alt: string;
-  /**
    * Any other prop of the CardContent component
    */
-  CardMediaProps?: CardMediaProps;
+  CardMediaProps?: Omit<CardMediaProps, "src">;
 };
