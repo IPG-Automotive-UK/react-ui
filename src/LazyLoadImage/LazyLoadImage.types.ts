@@ -3,7 +3,7 @@ import React from "react";
 /**
  * Props for the LazyLoadImg component
  */
-export type LazyLoadImgProps = {
+export type LazyLoadImageProps = {
   /**
    * Source of the image
    */
