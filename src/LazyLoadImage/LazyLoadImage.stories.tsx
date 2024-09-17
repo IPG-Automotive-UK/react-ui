@@ -1,7 +1,7 @@
 import { Meta, StoryFn } from "@storybook/react";
 
 import LazyLoadImage from "./LazyLoadImage";
-import { LazyLoadImgProps } from "./LazyLoadImage.types";
+import { LazyLoadImageProps } from "./LazyLoadImage.types";
 import React from "react";
 
 /**
@@ -13,7 +13,7 @@ const meta: Meta<typeof LazyLoadImage> = {
 };
 export default meta;
 
-const Template: StoryFn<LazyLoadImgProps> = args => {
+const Template: StoryFn<LazyLoadImageProps> = args => {
   return (
     <>
       <LazyLoadImage

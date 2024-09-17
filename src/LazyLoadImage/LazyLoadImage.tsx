@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import type { LazyLoadImgProps } from "./LazyLoadImage.types";
+import type { LazyLoadImageProps } from "./LazyLoadImage.types";
 
 /**
  * Lazy load wrapper for HTML image brackets. Used for lazy loading images.
@@ -9,7 +9,11 @@ import type { LazyLoadImgProps } from "./LazyLoadImage.types";
  * @param LazyLoadImgProps.alt string Alternative text for the image
  * @param LazyLoadImgProps.ImgProps object ImgProps Any other prop of the <img> component
  */
-export default function LazyLoadImg({ src, alt, ImgProps }: LazyLoadImgProps) {
+export default function LazyLoadImage({
+  src,
+  alt,
+  ImgProps
+}: LazyLoadImageProps) {
   // state to track if the image is visible
   const [isVisible, setIsVisible] = useState(false);
 
