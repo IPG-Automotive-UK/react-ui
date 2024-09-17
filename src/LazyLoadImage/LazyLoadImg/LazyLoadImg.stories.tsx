@@ -5,7 +5,7 @@ import { LazyLoadImgProps } from "./LazyLoadImg.types";
 import React from "react";
 
 /**
- * Wrapper to lazy load an <img> tag
+ * Wrapper to lazy load an image
  */
 const meta: Meta<typeof LazyLoadImg> = {
   component: LazyLoadImg,
