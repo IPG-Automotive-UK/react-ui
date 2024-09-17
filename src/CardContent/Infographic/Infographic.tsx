@@ -17,7 +17,7 @@ const Infographic = ({ media, version }: InfographicProps) => {
     >
       <LazyLoadCardMedia
         CardMediaProps={{
-          sx: {
+          style: {
             boxSizing: "content-box",
             height: 190,
             objectFit: "contain",
