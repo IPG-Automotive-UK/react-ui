@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import type { LazyLoadImgProps } from "./LazyLoadImg.types";
+import type { LazyLoadImgProps } from "./LazyLoadImage.types";
 
 /**
- * Lazy load wrapper for HTML image brackets. Used for lazy loading infographics which are loaded as an <img> component.
+ * Lazy load wrapper for HTML image brackets. Used for lazy loading images.
  * @param LazyLoadImgProps The input object of the component
  * @param LazyLoadImgProps.src string Source of the image
  * @param LazyLoadImgProps.alt string Alternative text for the image
@@ -38,6 +38,7 @@ export default function LazyLoadImg({ src, alt, ImgProps }: LazyLoadImgProps) {
     <img
       alt={alt || ""}
       ref={imgRef}
+      loading="lazy"
       src={isVisible ? src : undefined}
       style={{ display: isVisible ? "block" : "none" }}
       {...ImgProps}
