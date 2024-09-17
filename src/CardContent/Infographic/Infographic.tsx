@@ -4,6 +4,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { InfographicProps } from "./Infographic.types";
 import VersionChip from "../../VersionChip/VersionChip";
 
+// TODO: add tests in browser once we are done with the migration to cypress. The old tests live in a txt file in this folder until then.
+
 const Infographic = ({ media, version }: InfographicProps) => {
   // state to track if the image is visible
   const [isVisible, setIsVisible] = useState(false);

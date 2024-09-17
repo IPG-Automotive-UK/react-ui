@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 
 import type { LazyLoadImageProps } from "./LazyLoadImage.types";
 
+// TODO: add tests in browser once we are done with the migration to cypress
+
 /**
  * Lazy load wrapper for HTML image brackets. Used for lazy loading images.
  * @param LazyLoadImgProps The input object of the component
