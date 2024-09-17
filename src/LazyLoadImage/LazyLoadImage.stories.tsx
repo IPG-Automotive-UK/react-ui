@@ -1,7 +1,7 @@
 import { Meta, StoryFn } from "@storybook/react";
 
-import LazyLoadImg from "./LazyLoadImg";
-import { LazyLoadImgProps } from "./LazyLoadImg.types";
+import LazyLoadImg from "./LazyLoadImage";
+import { LazyLoadImgProps } from "./LazyLoadImage.types";
 import React from "react";
 
 /**
