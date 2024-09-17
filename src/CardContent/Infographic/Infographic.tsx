@@ -1,6 +1,6 @@
-import { Box, CardMedia } from "@mui/material";
-
+import { Box } from "@mui/material";
 import { InfographicProps } from "./Infographic.types";
+import LazyLoadCardMedia from "../../LazyLoadInfographic/LazyLoadCardMedia/LazyLoadCardMedia";
 import React from "react";
 import VersionChip from "../../VersionChip/VersionChip";
 
@@ -15,14 +15,13 @@ const Infographic = ({ media, version }: InfographicProps) => {
         width: 368
       }}
     >
-      <CardMedia
-        component="img"
+      <LazyLoadCardMedia
         src={media}
         sx={{
           boxSizing: "content-box",
           height: 190,
           objectFit: "contain",
-          padding: 2,
+          padding: 200,
           width: 336
         }}
       />
