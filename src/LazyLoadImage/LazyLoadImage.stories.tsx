@@ -79,7 +79,12 @@ const Template: StoryFn<LazyLoadImageProps> = args => {
       <LazyLoadImage
         {...{
           ImgProps: {
-            style: { aspectRatio: "2/1", objectFit: "contain", width: "80%" }
+            style: {
+              aspectRatio: "2/1",
+              display: "none",
+              objectFit: "contain",
+              width: "80%"
+            }
           },
           alt: "alternative text 1",
           src: "https://picsum.photos/336/196"

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import type { LazyLoadImageProps } from "./LazyLoadImage.types";
+import { Skeleton } from "@mui/material";
 
 // TODO: add tests in browser once we are done with the migration to cypress
 
@@ -14,10 +15,17 @@ import type { LazyLoadImageProps } from "./LazyLoadImage.types";
 export default function LazyLoadImage({
   src,
   alt,
-  ImgProps
+  ImgProps = {}
 }: LazyLoadImageProps) {
   // state to track if the image is visible
   const [isVisible, setIsVisible] = useState(false);
+
+  // states to track the status of the image load, these influence whether to display alt, or MUI Skeleton
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [hasError, setHasError] = useState(false);
+
+  // state variable to set the size for the skeleton to be displayed
+  const [dimensions, setDimensions] = useState({ height: 0, width: 0 });
 
   // reference to the image element
   const imgRef = useRef(null);
@@ -34,20 +42,47 @@ export default function LazyLoadImage({
       { threshold: 0.1 }
     );
     if (imgRef.current) {
+      const { offsetWidth, offsetHeight } = imgRef.current;
+      setDimensions({ height: offsetHeight, width: offsetWidth });
       observer.observe(imgRef.current);
     }
     return () => observer.disconnect();
   }, []);
 
+  // a variable to decide whether to show the Skeleton, or the image (or the alt text in case an error happened during loading)
+  const showSkeleton = isVisible && !isLoaded && !hasError;
+
+  // deconstruct ImgProps and the style
+  // this is done so that by default we can set the display prop to block, but this can be overwritten if explicitly specified
+  const { style, ...restImgProps } = ImgProps || {};
+  const { display, ...restStyle } = style || {};
+
+  const customDisplayValue = display;
+
   // render the image
   return (
-    <img
-      alt={alt || ""}
-      ref={imgRef}
-      loading="lazy"
-      src={isVisible ? src : undefined}
-      style={{ display: isVisible ? "block" : "none" }}
-      {...ImgProps}
-    />
+    <>
+      {showSkeleton && (
+        <Skeleton
+          sx={{
+            height: dimensions.height,
+            width: dimensions.width
+          }}
+        />
+      )}
+      <img
+        alt={showSkeleton ? undefined : alt}
+        ref={imgRef}
+        loading="lazy"
+        src={isVisible ? src : undefined}
+        style={{
+          ...restStyle,
+          display: customDisplayValue ? display : "block"
+        }}
+        onLoad={() => setIsLoaded(true)}
+        onError={() => setHasError(true)}
+        {...restImgProps}
+      />
+    </>
   );
 }

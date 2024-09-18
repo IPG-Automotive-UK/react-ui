@@ -1,4 +1,4 @@
-import { Box, CardMedia } from "@mui/material";
+import { Box, CardMedia, Skeleton } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 
 import { InfographicProps } from "./Infographic.types";
@@ -9,6 +9,10 @@ import VersionChip from "../../VersionChip/VersionChip";
 const Infographic = ({ media, version }: InfographicProps) => {
   // state to track if the image is visible
   const [isVisible, setIsVisible] = useState(false);
+
+  // states to track the status of the image load, these influence whether to display alt, or MUI Skeleton
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   // reference to the bounding box of the infographic
   const boxRef = useRef(null);
@@ -30,6 +34,9 @@ const Infographic = ({ media, version }: InfographicProps) => {
     return () => observer.disconnect();
   }, []);
 
+  // a variable to decide whether to show the Skeleton, or the image (or the alt text in case an error happened during loading)
+  const showSkeleton = isVisible && !isLoaded && !hasError;
+
   // render the card infographic content
   // CardMedia and the version chip is rendered conditionally
   return (
@@ -43,10 +50,13 @@ const Infographic = ({ media, version }: InfographicProps) => {
         width: 368
       }}
     >
+      {showSkeleton && <Skeleton width="100%" />}
       <CardMedia
         component="img"
         image={isVisible ? media : undefined}
         loading="lazy"
+        onLoad={() => setIsLoaded(true)}
+        onError={() => setHasError(true)}
         sx={{
           boxSizing: "content-box",
           display: isVisible ? "block" : "none",
@@ -59,7 +69,7 @@ const Infographic = ({ media, version }: InfographicProps) => {
       {version ? (
         <Box
           position={"absolute"}
-          display={isVisible ? "flex" : "none"}
+          display={showSkeleton ? "none" : "flex"}
           alignItems={"end"}
           sx={{
             height: 190,
