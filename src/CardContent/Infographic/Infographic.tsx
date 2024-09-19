@@ -53,7 +53,8 @@ const Infographic = ({ media, version }: InfographicProps) => {
       {showSkeleton && <Skeleton width="100%" />}
       <CardMedia
         component="img"
-        image={isVisible ? media : undefined}
+        alt={hasError ? "card-infographic" : ""}
+        src={isVisible ? media : undefined}
         onLoad={() => setIsLoaded(true)}
         onError={() => setHasError(true)}
         sx={{
