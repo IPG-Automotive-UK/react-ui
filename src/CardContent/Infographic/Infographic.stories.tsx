@@ -33,12 +33,3 @@ export const WithVersionChip = {
 
   render: Template
 };
-
-export const LazyLoadTest = {
-  args: {
-    media: "https://picsum.photos/336/192",
-    version: "1.0"
-  },
-
-  render: Template
-};
