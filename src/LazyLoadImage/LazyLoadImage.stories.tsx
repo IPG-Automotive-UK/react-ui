@@ -16,55 +16,69 @@ export default meta;
 const Template: StoryFn<LazyLoadImageProps> = args => {
   return (
     <>
-      <LazyLoadImage
-        {...{
-          ImgProps: {
-            style: { aspectRatio: "2/1", objectFit: "contain", width: "80%" }
-          },
-          alt: "alternative text 1",
-          src: "https://picsum.photos/336/191"
-        }}
-      />
+      <div style={{ height: 200, width: 400 }}>
+        <LazyLoadImage
+          {...{
+            ImgProps: {
+              style: { aspectRatio: "2/1", objectFit: "contain", width: "80%" }
+            },
+            alt: "alternative text 1",
+            src: "https://picsum.photos/336/191"
+          }}
+        />
+      </div>
       <br />
-      <LazyLoadImage
-        {...{
-          ImgProps: {
-            style: { aspectRatio: "2/1", objectFit: "contain", width: "80%" }
-          },
-          alt: "alternative text 1",
-          src: "https://picsum.photos/336/191"
-        }}
-      />
+      <div style={{ height: 300, width: 500 }}>
+        <LazyLoadImage
+          {...{
+            ImgProps: {
+              style: { aspectRatio: "2/1", objectFit: "contain", width: "80%" }
+            },
+            alt: "alternative text 1",
+            src: "https://picsum.photos/336/191"
+          }}
+        />
+      </div>
       <br />
-      <LazyLoadImage
-        {...{
-          ImgProps: {
-            style: { aspectRatio: "2/1", objectFit: "contain", width: "80%" }
-          },
-          alt: "alternative text 1",
-          src: "https://picsum.photos/336/192"
-        }}
-      />
+      <div style={{ height: 400, width: 600 }}>
+        <LazyLoadImage
+          {...{
+            ImgProps: {
+              style: {
+                aspectRatio: "2/1",
+                objectFit: "contain",
+                width: "80%"
+              }
+            },
+            alt: "alternative text 1",
+            src: "https://picsum.photos/336/192"
+          }}
+        />
+      </div>
       <br />
-      <LazyLoadImage
-        {...{
-          ImgProps: {
-            style: { aspectRatio: "2/1", objectFit: "contain", width: "80%" }
-          },
-          alt: "alternative text 1",
-          src: "https://picsum.photos/336/193"
-        }}
-      />
+      <div style={{ width: 600 }}>
+        <LazyLoadImage
+          {...{
+            ImgProps: {
+              style: { aspectRatio: "2/1", objectFit: "contain", width: "80%" }
+            },
+            alt: "alternative text 1",
+            src: "https://picsum.photos/336/193"
+          }}
+        />
+      </div>
       <br />
-      <LazyLoadImage
-        {...{
-          ImgProps: {
-            style: { aspectRatio: "2/1", objectFit: "contain", width: "80%" }
-          },
-          alt: "alternative text 1",
-          src: "https://picsum.photos/336/194"
-        }}
-      />
+      <div style={{ height: 200, width: 200 }}>
+        <LazyLoadImage
+          {...{
+            ImgProps: {
+              style: { aspectRatio: "2/1", objectFit: "contain", width: "80%" }
+            },
+            alt: "alternative text 1",
+            src: "https://picsum.photos/336/194"
+          }}
+        />
+      </div>
       <br />
       <LazyLoadImage
         {...{
