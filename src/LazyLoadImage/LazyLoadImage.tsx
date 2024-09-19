@@ -68,9 +68,8 @@ export default function LazyLoadImage({
         />
       )}
       <img
-        alt={!isVisible || showSkeleton ? "" : alt}
+        alt={hasError ? alt : ""}
         ref={imgRef}
-        loading="lazy"
         src={isVisible ? src : undefined}
         style={{
           ...restStyle,

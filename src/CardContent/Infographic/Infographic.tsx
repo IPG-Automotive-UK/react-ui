@@ -54,7 +54,6 @@ const Infographic = ({ media, version }: InfographicProps) => {
       <CardMedia
         component="img"
         image={isVisible ? media : undefined}
-        loading="lazy"
         onLoad={() => setIsLoaded(true)}
         onError={() => setHasError(true)}
         sx={{
