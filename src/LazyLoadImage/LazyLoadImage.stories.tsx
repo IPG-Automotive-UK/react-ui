@@ -9,7 +9,7 @@ import React from "react";
  */
 const meta: Meta<typeof LazyLoadImage> = {
   component: LazyLoadImage,
-  title: "LazyLoadImage/LazyLoadImg"
+  title: "LazyLoadImage/LazyLoadImage"
 };
 export default meta;
 

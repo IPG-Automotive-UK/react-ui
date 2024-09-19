@@ -52,12 +52,9 @@ export default function LazyLoadImage({
   // a variable to decide whether to show the Skeleton, or the image (or the alt text in case an error happened during loading)
   const showSkeleton = isVisible && !isLoaded && !hasError;
 
-  // deconstruct ImgProps and the style
-  // this is done so that by default we can set the display prop to block, but this can be overwritten if explicitly specified
+  // deconstruct ImgProps and the style, to apply the needed style.display prop for the image to lazy load without issues
   const { style, ...restImgProps } = ImgProps || {};
   const { display, ...restStyle } = style || {};
-
-  const customDisplayValue = display;
 
   // render the image
   return (
@@ -71,13 +68,13 @@ export default function LazyLoadImage({
         />
       )}
       <img
-        alt={showSkeleton ? undefined : alt}
+        alt={!isVisible || showSkeleton ? "" : alt}
         ref={imgRef}
         loading="lazy"
         src={isVisible ? src : undefined}
         style={{
           ...restStyle,
-          display: customDisplayValue ? display : "block"
+          display: showSkeleton ? "none" : "block"
         }}
         onLoad={() => setIsLoaded(true)}
         onError={() => setHasError(true)}
