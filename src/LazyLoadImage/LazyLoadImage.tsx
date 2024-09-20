@@ -54,7 +54,7 @@ export default function LazyLoadImage({
     if (imgRef.current && imgRef.current.complete) {
       setIsLoaded(true);
     }
-  }, [src]);
+  }, [imgRef]);
 
   // a variable to decide whether to show the Skeleton, or the image (or the alt text in case an error happened during loading)
   const showSkeleton = isVisible && !isLoaded && !hasError;

@@ -44,7 +44,7 @@ const Infographic = ({ media, version }: InfographicProps) => {
     if (imgRef.current && imgRef.current.complete) {
       setIsLoaded(true);
     }
-  }, [media]);
+  }, [imgRef]);
 
   // a variable to decide whether to show the Skeleton, or the image (or the alt text in case an error happened during loading)
   const showSkeleton = !isVisible || (isVisible && !isLoaded && !hasError);
