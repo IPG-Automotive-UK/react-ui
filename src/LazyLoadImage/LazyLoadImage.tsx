@@ -59,18 +59,19 @@ export default function LazyLoadImage({
   // render the image
   return (
     <>
-      {showSkeleton && (
+      {showSkeleton ? (
         <Skeleton
           sx={{
             height: dimensions.height,
             width: dimensions.width
           }}
         />
-      )}
+      ) : null}
       <img
         alt={hasError ? alt : ""}
+        loading="lazy"
         ref={imgRef}
-        src={isVisible ? src : undefined}
+        src={src}
         style={{
           ...restStyle,
           display: showSkeleton ? "none" : "block"

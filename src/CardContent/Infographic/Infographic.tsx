@@ -50,11 +50,12 @@ const Infographic = ({ media, version }: InfographicProps) => {
         width: 368
       }}
     >
-      {showSkeleton && <Skeleton width="100%" />}
+      {showSkeleton ? <Skeleton width="100%" /> : null}
       <CardMedia
         component="img"
         alt={hasError ? "card-infographic" : ""}
-        src={isVisible ? media : undefined}
+        loading="lazy"
+        src={media}
         onLoad={() => setIsLoaded(true)}
         onError={() => setHasError(true)}
         sx={{
