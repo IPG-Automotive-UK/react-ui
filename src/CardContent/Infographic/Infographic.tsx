@@ -50,7 +50,7 @@ const Infographic = ({ media, version }: InfographicProps) => {
         width: 368
       }}
     >
-      {showSkeleton ? <Skeleton width="100%" /> : null}
+      {showSkeleton ? <Skeleton height="190px" width="336px" /> : null}
       <CardMedia
         component="img"
         alt={hasError ? "card-infographic" : ""}
