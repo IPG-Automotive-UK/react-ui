@@ -35,7 +35,7 @@ const Infographic = ({ media, version }: InfographicProps) => {
   }, []);
 
   // a variable to decide whether to show the Skeleton, or the image (or the alt text in case an error happened during loading)
-  const showSkeleton = isVisible && !isLoaded && !hasError;
+  const showSkeleton = !isVisible || (isVisible && !isLoaded && !hasError);
 
   // render the card infographic content
   // CardMedia and the version chip is rendered conditionally
@@ -64,7 +64,7 @@ const Infographic = ({ media, version }: InfographicProps) => {
           height: 190,
           objectFit: "contain",
           padding: 2,
-          width: 336
+          width: showSkeleton ? 0 : 336
         }}
       />
       {version ? (
