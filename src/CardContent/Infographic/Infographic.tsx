@@ -17,6 +17,10 @@ const Infographic = ({ media, version }: InfographicProps) => {
   // reference to the bounding box of the infographic
   const boxRef = useRef(null);
 
+  // variables to store the pre-defined image (and skeleton) dimensions
+  const imageHeight = 190;
+  const imageWidth = 336;
+
   // when the image is in view, set isVisible to true
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -50,7 +54,17 @@ const Infographic = ({ media, version }: InfographicProps) => {
         width: 368
       }}
     >
-      {showSkeleton ? <Skeleton height="190px" width="336px" /> : null}
+      {showSkeleton ? (
+        <Skeleton
+          sx={{
+            boxSizing: "content-box",
+            height: imageHeight,
+            objectFit: "contain",
+            padding: 2,
+            width: imageWidth
+          }}
+        />
+      ) : null}
       <CardMedia
         component="img"
         alt={hasError ? "card-infographic" : ""}
@@ -61,10 +75,10 @@ const Infographic = ({ media, version }: InfographicProps) => {
         sx={{
           boxSizing: "content-box",
           display: isVisible ? "block" : "none",
-          height: 190,
+          height: imageHeight,
           objectFit: "contain",
           padding: 2,
-          width: showSkeleton ? 0 : 336
+          width: showSkeleton ? 0 : imageWidth
         }}
       />
       {version ? (
