@@ -28,7 +28,7 @@ export default function LazyLoadImage({
   const [dimensions, setDimensions] = useState({ height: 0, width: 0 });
 
   // reference to the image element
-  const imgRef = useRef(null);
+  const imgRef = useRef<HTMLImageElement | null>(null);
 
   // when the image is in view, set isVisible to true
   useEffect(() => {
@@ -48,6 +48,13 @@ export default function LazyLoadImage({
     }
     return () => observer.disconnect();
   }, []);
+
+  // Check if the image is already loaded from cache
+  useEffect(() => {
+    if (imgRef.current && imgRef.current.complete) {
+      setIsLoaded(true);
+    }
+  }, [src]);
 
   // a variable to decide whether to show the Skeleton, or the image (or the alt text in case an error happened during loading)
   const showSkeleton = isVisible && !isLoaded && !hasError;

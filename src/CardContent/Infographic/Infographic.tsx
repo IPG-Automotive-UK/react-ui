@@ -15,7 +15,8 @@ const Infographic = ({ media, version }: InfographicProps) => {
   const [hasError, setHasError] = useState(false);
 
   // reference to the bounding box of the infographic
-  const boxRef = useRef(null);
+  const boxRef = useRef<HTMLDivElement | null>(null);
+  const imgRef = useRef<HTMLImageElement | null>(null);
 
   // variables to store the pre-defined image (and skeleton) dimensions
   const imageHeight = 190;
@@ -37,6 +38,13 @@ const Infographic = ({ media, version }: InfographicProps) => {
     }
     return () => observer.disconnect();
   }, []);
+
+  // Check if the image is already loaded from cache
+  useEffect(() => {
+    if (imgRef.current && imgRef.current.complete) {
+      setIsLoaded(true);
+    }
+  }, [media]);
 
   // a variable to decide whether to show the Skeleton, or the image (or the alt text in case an error happened during loading)
   const showSkeleton = !isVisible || (isVisible && !isLoaded && !hasError);
@@ -72,6 +80,7 @@ const Infographic = ({ media, version }: InfographicProps) => {
         src={media}
         onLoad={() => setIsLoaded(true)}
         onError={() => setHasError(true)}
+        ref={imgRef}
         sx={{
           boxSizing: "content-box",
           display: isVisible ? "block" : "none",
