@@ -128,7 +128,7 @@ export default function NumberField(props: NumberFieldProps) {
  * @param {*} value - The value to convert.
  * @returns {number} - The converted value.
  */
-const string2number = value => {
+const string2number = (value: string) => {
   if (value === "") {
     return null;
   } else {
@@ -141,7 +141,7 @@ const string2number = value => {
  * @param {number} value - The value to get the precision of.
  * @returns {number} - The precision of the value.
  */
-const precision = value => {
+const precision = (value: number) => {
   if (Math.floor(value) === value) return 0;
   return value.toString().split(".")[1].length || 0;
 };
@@ -152,7 +152,7 @@ const precision = value => {
  * @param {number} step - The step size.
  * @returns {number[]} - The two nearest steps.
  */
-const getNearestSteps = (value, step) => {
+const getNearestSteps = (value: number, step: number) => {
   // handle floating point math with a conversion to integer math
   const precisionValue = precision(step);
   const m = Math.pow(10, precisionValue);
@@ -167,7 +167,7 @@ const getNearestSteps = (value, step) => {
  * @param {number} step - The step size.
  * @returns {boolean} - Whether the value is a step.
  */
-const isStep = (value, step) => {
+const isStep = (value: number, step: number) => {
   // handle floating point math with a conversion to integer math
   const precisionValue = precision(step);
   const m = Math.pow(10, precisionValue);
