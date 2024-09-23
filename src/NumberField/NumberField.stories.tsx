@@ -1,7 +1,7 @@
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
-import React, { ChangeEvent } from "react";
 import NumberField from "./NumberField";
 import { NumberFieldProps } from "./NumberField.types";
+import React from "react";
 import { action } from "@storybook/addon-actions";
 
 type Story = StoryObj<typeof NumberField>;
@@ -18,11 +18,9 @@ const Template: StoryFn<NumberFieldProps> = args => {
     setValue(args.value);
   }, [args.value]);
 
-  const onChange = (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const onChange = value => {
     setValue(value);
-    action("onChange")(event, event.target.value);
+    action("onChange")(value);
   };
 
   const onBlur = () => {

@@ -6,6 +6,11 @@ import { TextFieldProps } from "@mui/material";
  */
 export type NumberFieldProps = Omit<TextFieldProps, "sx" | "type"> & {
   endAdornment?: string;
+  min?: number;
+  max?: number;
+  onChange?: (value: number | null) => void;
+  showMinMaxErrorMessage?: boolean;
   startAdornment?: string;
+  step?: number;
   stepper?: boolean;
 };

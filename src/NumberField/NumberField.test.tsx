@@ -1,5 +1,5 @@
 import NumberField, { NumberFieldProps } from ".";
-import React, { ChangeEvent, useState } from "react";
+import React, { useState } from "react";
 
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -14,14 +14,14 @@ const NumberFieldWithState = ({
   valueIn = 100,
   ...rest
 }: {
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (value: number) => void;
   valueIn?: number;
 } & NumberFieldProps) => {
   const [value, setValue] = useState(valueIn);
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setValue(Number(event.target.value));
-    onChange && onChange(event);
+  const handleChange = value => {
+    setValue(value);
+    onChange && onChange(value);
   };
 
   return <NumberField {...rest} onChange={handleChange} value={value} />;
@@ -56,7 +56,7 @@ describe("NumberField", () => {
     inputBase &&
       (await user.type(inputBase, "{backspace}{backspace}{backspace}"));
     inputBase && (await user.type(inputBase, "abc"));
-    expect(inputBase).toHaveValue(0);
+    expect(inputBase).toHaveValue(null);
   });
 
   test("shows error state", () => {
