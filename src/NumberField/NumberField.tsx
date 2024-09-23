@@ -34,8 +34,8 @@ export default function NumberField(props: NumberFieldProps) {
   }, [value, min, max]);
 
   // method to return value validitity and error message
-  const isValidValue = value => {
-    if (value === null) {
+  const isValidValue = (value?: number | null) => {
+    if (value === null || value === undefined) {
       // accept empty string as null
       return [true, ""];
     } else if (value < min) {

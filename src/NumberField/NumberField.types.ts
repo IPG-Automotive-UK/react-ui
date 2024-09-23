@@ -13,4 +13,5 @@ export type NumberFieldProps = Omit<TextFieldProps, "sx" | "type"> & {
   startAdornment?: string;
   step?: number;
   stepper?: boolean;
+  value?: number | null;
 };
