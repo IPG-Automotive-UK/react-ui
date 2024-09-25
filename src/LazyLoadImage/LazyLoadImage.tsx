@@ -69,7 +69,9 @@ export default function LazyLoadImage({
       {showSkeleton ? (
         <Skeleton
           sx={{
+            borderRadius: 0,
             height: dimensions.height,
+            transform: "none",
             width: dimensions.width
           }}
         />

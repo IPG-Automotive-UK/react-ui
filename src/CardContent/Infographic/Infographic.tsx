@@ -65,10 +65,11 @@ const Infographic = ({ media, version }: InfographicProps) => {
       {showSkeleton ? (
         <Skeleton
           sx={{
+            borderRadius: 0,
             boxSizing: "content-box",
             height: imageHeight,
             objectFit: "contain",
-            padding: 2,
+            transform: "none",
             width: imageWidth
           }}
         />
@@ -86,7 +87,7 @@ const Infographic = ({ media, version }: InfographicProps) => {
           display: isVisible ? "block" : "none",
           height: imageHeight,
           objectFit: "contain",
-          padding: 2,
+          padding: showSkeleton ? 0 : 2,
           width: showSkeleton ? 0 : imageWidth
         }}
       />
