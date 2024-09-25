@@ -63,16 +63,18 @@ const Infographic = ({ media, version }: InfographicProps) => {
       }}
     >
       {showSkeleton ? (
-        <Skeleton
-          sx={{
-            borderRadius: 0,
-            boxSizing: "content-box",
-            height: imageHeight,
-            objectFit: "contain",
-            transform: "none",
-            width: imageWidth
-          }}
-        />
+        <Box p={2}>
+          <Skeleton
+            sx={{
+              borderRadius: 0,
+              boxSizing: "content-box",
+              height: imageHeight,
+              objectFit: "contain",
+              transform: "none",
+              width: imageWidth
+            }}
+          />
+        </Box>
       ) : null}
       <CardMedia
         component="img"
