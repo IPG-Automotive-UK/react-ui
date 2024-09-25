@@ -159,9 +159,11 @@ export {
   StatusCard,
   StatusIcon,
   StatusLabel,
+  StatusCountTable,
   type StatusCardProps,
   type StatusIconProps,
-  type StatusLabelProps
+  type StatusLabelProps,
+  type StatusCountTableProps
 } from "./Status";
 export { default as SwitchField, type SwitchFieldProps } from "./SwitchField";
 export { default as TextField, type TextFieldProps } from "./TextField";
