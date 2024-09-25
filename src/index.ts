@@ -159,9 +159,11 @@ export {
   StatusCard,
   StatusIcon,
   StatusLabel,
+  StatusCountBar,
   type StatusCardProps,
   type StatusIconProps,
-  type StatusLabelProps
+  type StatusLabelProps,
+  type StatusCountBarProps
 } from "./Status";
 export { default as SwitchField, type SwitchFieldProps } from "./SwitchField";
 export { default as TextField, type TextFieldProps } from "./TextField";
@@ -266,6 +268,7 @@ export {
   default as UploaderHeader,
   type UploaderHeaderProps
 } from "./Uploader";
+export { useDelayedHover } from "./hover";
 
 /*
   The following components are temporarily commented out to prevent CRA build failures.
