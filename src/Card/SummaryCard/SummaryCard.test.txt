@@ -1,0 +1,295 @@
+// import {
+//   Button,
+//   Divider,
+//   List,
+//   ListItem,
+//   ListItemButton,
+//   ListItemIcon,
+//   ListItemText,
+//   MenuItem,
+//   MenuList,
+//   Stack
+// } from "@mui/material";
+// import { Delete, Edit } from "@mui/icons-material";
+// import { fireEvent, render, screen } from "@testing-library/react";
+
+// import React from "react";
+// import SummaryCard from ".";
+// import { action } from "@storybook/addon-actions";
+// import userEvent from "@testing-library/user-event";
+// import { vi } from "vitest";
+
+// /**
+//  * Tests
+//  */
+// describe("SummaryCard", () => {
+//   // test that the summary card renders with title
+//   it("renders title and subtitle ", () => {
+//     render(
+//       <SummaryCard
+//         title="summary card title"
+//         subtitle="summary card subtitle"
+//       />
+//     );
+//     expect(screen.getByText("summary card title")).toBeInTheDocument();
+//     expect(screen.getByText("summary card subtitle")).toBeInTheDocument();
+//   });
+
+//   it("renders image with versionChip", () => {
+//     render(
+//       <SummaryCard
+//         title="summary card title"
+//         subtitle="summary card subtitle"
+//         media="https://picsum.photos/336/190"
+//         version="1.0"
+//       />
+//     );
+//     const infographic = screen.getByRole("img");
+//     expect(infographic).toBeInTheDocument();
+//     expect(screen.getByText("1.0")).toBeInTheDocument();
+//   });
+
+//   // test that summary card renders with label that can be clicked
+//   it("renders label", () => {
+//     const labels = [
+//       {
+//         _id: "1",
+//         color: "#174713",
+//         description: "",
+//         name: "National Highways"
+//       }
+//     ];
+
+//     // mock function to test if label is clicked
+//     const onClickLabel = vi.fn();
+
+//     // render summary card with label
+//     const { container } = render(
+//       <SummaryCard
+//         title="summary card title"
+//         subtitle="summary card subtitle"
+//         labels={labels}
+//         onClickLabel={onClickLabel}
+//       />
+//     );
+
+//     // check the chip is rendered
+//     const chip = container.querySelector(".label-chip");
+//     expect(chip).toBeInTheDocument();
+
+//     // check the chip has the correct label
+//     expect(chip).toHaveTextContent("National Highways");
+
+//     // expect label to be in the document
+//     expect(screen.getByText("National Highways")).toBeInTheDocument();
+//   });
+
+//   // test that image is rendered in summary card
+//   it("renders image", () => {
+//     render(
+//       <SummaryCard
+//         title="summary card title"
+//         subtitle="summary card subtitle"
+//         media="https://picsum.photos/200/300"
+//       />
+//     );
+
+//     // expect image to be in the document
+//     expect(screen.getByRole("img")).toBeInTheDocument();
+//   });
+
+//   // test that more options popover is rendered
+//   it("renders more options popover", async () => {
+//     render(
+//       <SummaryCard
+//         title="summary card title"
+//         subtitle="summary card subtitle"
+//         moreOptionsPopover={
+//           <List>
+//             <ListItem disablePadding>
+//               <ListItemButton>
+//                 <ListItemIcon>
+//                   <Edit />
+//                 </ListItemIcon>
+//                 <ListItemText primary="Edit" />
+//               </ListItemButton>
+//             </ListItem>
+//             <ListItem disablePadding>
+//               <ListItemButton>
+//                 <ListItemIcon>
+//                   <Delete />
+//                 </ListItemIcon>
+//                 <ListItemText primary="Delete" />
+//               </ListItemButton>
+//             </ListItem>
+//           </List>
+//         }
+//       />
+//     );
+
+//     // find the ... button and click it
+//     await userEvent.click(screen.getByRole("button", { name: "settings" }));
+
+//     // expect the popover to be in the document
+//     expect(screen.getByText("Edit")).toBeVisible();
+//     expect(screen.getByText("Delete")).toBeVisible();
+//   });
+
+//   it("closes more options popover when clicked", async () => {
+//     const editFcn = vi.fn();
+
+//     render(
+//       <SummaryCard
+//         title="summary card title"
+//         subtitle="summary card subtitle"
+//         moreOptionsPopover={
+//           <MenuList>
+//             <MenuItem onClick={editFcn}>Test Menu</MenuItem>
+//           </MenuList>
+//         }
+//       />
+//     );
+
+//     // find the ... button and click it
+//     await userEvent.click(screen.getByRole("button", { name: "settings" }));
+
+//     // expect the popover to be in the document
+//     expect(screen.getByText("Test Menu")).toBeInTheDocument();
+
+//     // click one of the options
+//     await userEvent.click(screen.getByText("Test Menu"));
+
+//     // expect callback to be called
+//     expect(editFcn).toHaveBeenCalledTimes(1);
+
+//     // expect the popover to be removed from the document
+//     expect(screen.queryByText("Test Menu")).not.toBeInTheDocument();
+//   });
+
+//   // test that a content is rendered in summary card
+//   it("renders content", () => {
+//     render(
+//       <SummaryCard
+//         title="summary card title"
+//         subtitle="summary card subtitle"
+//         content={<div>Some content on the card </div>}
+//       />
+//     );
+//     // expect the content to be in the document
+//     expect(screen.getByText("Some content on the card")).toBeInTheDocument();
+//   });
+
+//   // test that the onClickMoreDetails function is called when more details button is clicked
+//   it("calls onClickMoreDetails when more details button is clicked", () => {
+//     const onClickMoreDetails = vi.fn();
+//     render(
+//       <SummaryCard
+//         title="summary card title"
+//         subtitle="summary card subtitle"
+//         moreCardActions={
+//           <Stack direction="row" spacing={1}>
+//             <Button
+//               size="large"
+//               variant="text"
+//               sx={{ width: "50%" }}
+//               onClick={onClickMoreDetails}
+//             >
+//               MORE DETAILS
+//             </Button>
+//             <Divider
+//               orientation="vertical"
+//               flexItem
+//               sx={{ background: theme => theme.palette.primary.main }}
+//             />
+//             <Button
+//               size="large"
+//               variant="text"
+//               sx={{ width: "50%" }}
+//               onClick={action("onClickViewFiles")}
+//             >
+//               VIEW FILES
+//             </Button>
+//           </Stack>
+//         }
+//       />
+//     );
+//     // find the more details button and click it
+//     fireEvent.click(screen.getByText(/more details/i));
+
+//     // expect the onClickMoreDetails function to be called
+//     expect(onClickMoreDetails).toHaveBeenCalledTimes(1);
+//   });
+
+//   // // test that the onClickViewFiles function is called when view files button is clicked
+//   it("calls onClickViewFiles when view files button is clicked", () => {
+//     const onClickViewFiles = vi.fn();
+
+//     render(
+//       <SummaryCard
+//         title="summary card title"
+//         subtitle="summary card subtitle"
+//         content={<div>Some content on the card </div>}
+//         moreCardActions={
+//           <Stack direction="row" spacing={1}>
+//             <Button
+//               size="large"
+//               variant="text"
+//               sx={{ width: "50%" }}
+//               onClick={action("onClickMoreDetails")}
+//             >
+//               MORE DETAILS
+//             </Button>
+//             <Divider
+//               orientation="vertical"
+//               flexItem
+//               sx={{ background: theme => theme.palette.primary.main }}
+//             />
+//             <Button
+//               size="large"
+//               variant="text"
+//               sx={{ width: "50%" }}
+//               onClick={onClickViewFiles}
+//             >
+//               VIEW FILES
+//             </Button>
+//           </Stack>
+//         }
+//       />
+//     );
+
+//     // find the view files button and click it
+//     fireEvent.click(screen.getByText(/view files/i));
+
+//     // expect the onClickViewFiles function to be called
+//     expect(onClickViewFiles).toHaveBeenCalledTimes(1);
+//   });
+
+//   // test ref is passed to more options button
+//   it("passes ref to more options button", () => {
+//     // create a ref
+//     const ref = React.createRef<HTMLButtonElement>();
+
+//     render(
+//       <SummaryCard
+//         title="summary card title"
+//         subtitle="summary card subtitle"
+//         moreOptionsRef={ref}
+//         moreOptionsPopover={
+//           <List>
+//             <ListItem disablePadding>
+//               <ListItemButton>
+//                 <ListItemIcon>
+//                   <Edit />
+//                 </ListItemIcon>
+//                 <ListItemText primary="Edit" />
+//               </ListItemButton>
+//             </ListItem>
+//           </List>
+//         }
+//       />
+//     );
+
+//     // expect the ref to be passed to the more options button
+//     expect(ref.current).toBeInTheDocument();
+//   });
+// });

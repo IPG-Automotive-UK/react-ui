@@ -45,7 +45,7 @@ const statusList = [
   },
   {
     name: "Another title that will be truncated as this is a long title that will be truncated",
-    status: "cancelled"
+    status: "aborted"
   }
 ] as const;
 
