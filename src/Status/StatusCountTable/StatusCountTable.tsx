@@ -12,30 +12,19 @@ import React from "react";
 import { Status } from "../statuses.types";
 import { StatusCountTableProps } from "./StatusCountTable.types";
 import StatusIcon from "../StatusIcon";
+import statuses from "../statuses";
 
-// custom status count table component, which will be used in the status bar component on hover to show aditional data about statuses
-export function StatusCountTable({
-  title,
-  count,
-  tableSx = { borderRadius: "4px", boxShadow: 8, maxWidth: "280px" }
-}: StatusCountTableProps) {
+/**
+ * Table that renders statuses vs. the number of items that match that status. Header row shows the total count alongside a title.
+ */
+export function StatusCountTable({ title, count }: StatusCountTableProps) {
+  /** Calculate the total cound of the statuses */
   const totalCount = Object.values(count).reduce((a, b) => a + b, 0);
 
-  /** Render every status name with first letter Capital and replace dashes with empty space */
-  function capitalizeFirstLetterAndRemoveDashes(str: string): string {
-    // Handle empty string case
-    if (!str) return str;
-    // Capitalize the first letter of a status
-    const capitalized = str.charAt(0).toUpperCase() + str.slice(1);
-    // replace dashes with empty space
-    if (capitalized.includes("-")) {
-      return capitalized.replace("-", " ");
-    }
-    return capitalized;
-  }
-
   return (
-    <TableContainer sx={tableSx}>
+    <TableContainer
+      sx={{ borderRadius: "4px", boxShadow: 8, maxWidth: "280px" }}
+    >
       <Table size="small">
         <TableHead>
           <TableRow
@@ -44,12 +33,12 @@ export function StatusCountTable({
               height: "41px"
             }}
           >
-            <TableCell style={{ paddingLeft: "16px" }}>
+            <TableCell sx={{ pl: 2 }}>
               <Typography variant="subtitle2" data-testid="status-count-title">
                 {title}
               </Typography>
             </TableCell>
-            <TableCell align="right" style={{ paddingRight: "16px" }}>
+            <TableCell align="right" sx={{ pr: 2 }}>
               <Typography
                 variant="subtitle2"
                 data-testid="status-count-total-count"
@@ -67,11 +56,7 @@ export function StatusCountTable({
                 key={row}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell
-                  style={{ paddingLeft: "16px" }}
-                  component="th"
-                  scope="row"
-                >
+                <TableCell sx={{ pl: "16px" }} component="th" scope="row">
                   <Typography
                     variant="body2"
                     display="flex"
@@ -79,10 +64,10 @@ export function StatusCountTable({
                     gap="8px"
                   >
                     <StatusIcon status={row as Status} width={24} height={24} />
-                    {capitalizeFirstLetterAndRemoveDashes(row)}
+                    {statuses[row].label.text}
                   </Typography>
                 </TableCell>
-                <TableCell align="right" style={{ paddingRight: "16px" }}>
+                <TableCell align="right" sx={{ pr: "16px" }}>
                   <Typography variant="body2">{count[row]}</Typography>
                 </TableCell>
               </TableRow>

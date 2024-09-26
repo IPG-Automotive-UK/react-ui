@@ -1,4 +1,4 @@
-import { SxProps, Theme } from "@mui/material";
+import { Status } from "../statuses.types";
 
 export type StatusCountTableProps = {
   /**
@@ -8,9 +8,5 @@ export type StatusCountTableProps = {
   /**
    * Count is an object which contains objects with key status name and status count
    */
-  count: { [status: string]: number };
-  /**
-   * Optional style properties for the table element
-   */
-  tableSx?: SxProps<Theme>;
+  count: Record<Status, number>;
 };

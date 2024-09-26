@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 
 import React from "react";
+import { Status } from "../statuses.types";
 import { StatusCountTable } from "./StatusCountTable";
 
 describe("StatusCountTable", () => {
@@ -12,7 +13,7 @@ describe("StatusCountTable", () => {
       "not-ready": 1,
       operational: 5,
       ready: 3
-    };
+    } as Record<Status, number>;
 
     // get the correct value for total count of status count
     const totalCount = Object.values(count).reduce((a, b) => a + b, 0);
@@ -21,8 +22,8 @@ describe("StatusCountTable", () => {
     render(<StatusCountTable title={title} count={count} />);
 
     // find no-metrics and not-ready status elements
-    const noMetricsElement = screen.getByText("No metrics");
-    const notReadyElement = screen.getByText("Not ready");
+    const noMetricsElement = screen.getByText("No Metrics");
+    const notReadyElement = screen.getByText("Not Ready");
 
     // get total count element
     const totalCountElement = screen.getByTestId("status-count-total-count");
@@ -34,11 +35,11 @@ describe("StatusCountTable", () => {
     // find the title of the table
     const titleElement = screen.getByTestId("status-count-title");
 
-    // check if no-metrics and not-ready are rendered without dashes and with first letter capital
+    // check if no-metrics and not-ready are rendered correctly with text from statuses object
     expect(noMetricsElement).toBeInTheDocument();
-    expect(noMetricsElement).toHaveTextContent("No metrics");
+    expect(noMetricsElement).toHaveTextContent("No Metrics");
     expect(notReadyElement).toBeInTheDocument();
-    expect(notReadyElement).toHaveTextContent("Not ready");
+    expect(notReadyElement).toHaveTextContent("Not Ready");
 
     // check if title element is in document and rendered with correct value
     expect(titleElement).toBeInTheDocument();
@@ -48,7 +49,7 @@ describe("StatusCountTable", () => {
     expect(totalCountElement).toBeInTheDocument();
     expect(totalCountElement).toHaveTextContent(totalCount);
 
-    // expect the name of ready and operational are in the document and with correct values
+    // expect the name of ready and operational are rendered correctly with text from statuses object
     expect(readyStatus).toBeInTheDocument();
     expect(readyStatus).toHaveTextContent("Ready");
     expect(operationalStatus).toBeInTheDocument();
@@ -72,7 +73,8 @@ describe("StatusCountTable", () => {
       passed: 5,
       pending: 2,
       ready: 1
-    };
+    } as Record<Status, number>;
+
     // render component
     const { container } = render(
       <StatusCountTable count={count} title={title} />
