@@ -56,7 +56,7 @@ export function StatusCountTable({ title, count }: StatusCountTableProps) {
                 key={row}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell sx={{ pl: "16px" }} component="th" scope="row">
+                <TableCell sx={{ pl: 2 }} component="th" scope="row">
                   <Typography
                     variant="body2"
                     display="flex"
@@ -67,7 +67,7 @@ export function StatusCountTable({ title, count }: StatusCountTableProps) {
                     {statuses[row].label.text}
                   </Typography>
                 </TableCell>
-                <TableCell align="right" sx={{ pr: "16px" }}>
+                <TableCell align="right" sx={{ pr: 2 }}>
                   <Typography variant="body2">{count[row]}</Typography>
                 </TableCell>
               </TableRow>
