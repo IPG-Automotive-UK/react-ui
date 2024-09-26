@@ -88,6 +88,10 @@ export {
   type LabelChipGroupProps,
   type LabelSelectorProps
 } from "./LabelSelector";
+export {
+  default as LazyLoadImage,
+  type LazyLoadImageProps
+} from "./LazyLoadImage";
 export { default as TabPanel, type TabPanelProps } from "./TabPanel";
 export { default as LinePlot, type LinePlotProps } from "./LinePlot";
 export { default as SurfacePlot, type SurfacePlotProps } from "./SurfacePlot";
