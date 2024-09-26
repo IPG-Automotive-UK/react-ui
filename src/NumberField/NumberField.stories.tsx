@@ -18,7 +18,7 @@ const Template: StoryFn<NumberFieldProps> = args => {
     setValue(args.value);
   }, [args.value]);
 
-  const onChange = value => {
+  const onChange = (value: number | null) => {
     setValue(value);
     action("onChange")(value);
   };
