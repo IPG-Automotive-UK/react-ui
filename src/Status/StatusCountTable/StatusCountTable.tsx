@@ -21,6 +21,9 @@ export function StatusCountTable({ title, count }: StatusCountTableProps) {
   /** Calculate the total cound of the statuses */
   const totalCount = Object.values(count).reduce((a, b) => a + b, 0);
 
+  /** Keys of the count object */
+  const countKeys = Object.keys(count) as (keyof typeof count)[];
+
   return (
     <TableContainer
       sx={{ borderRadius: "4px", boxShadow: 8, maxWidth: "280px" }}
@@ -49,29 +52,27 @@ export function StatusCountTable({ title, count }: StatusCountTableProps) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {Object.keys(count)
-            .reverse()
-            .map(row => (
-              <TableRow
-                key={row}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell sx={{ pl: 2 }} component="th" scope="row">
-                  <Typography
-                    variant="body2"
-                    display="flex"
-                    alignItems="center"
-                    gap="8px"
-                  >
-                    <StatusIcon status={row as Status} width={24} height={24} />
-                    {statuses[row].label.text}
-                  </Typography>
-                </TableCell>
-                <TableCell align="right" sx={{ pr: 2 }}>
-                  <Typography variant="body2">{count[row]}</Typography>
-                </TableCell>
-              </TableRow>
-            ))}
+          {countKeys.reverse().map(row => (
+            <TableRow
+              key={row}
+              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+            >
+              <TableCell sx={{ pl: 2 }} component="th" scope="row">
+                <Typography
+                  variant="body2"
+                  display="flex"
+                  alignItems="center"
+                  gap="8px"
+                >
+                  <StatusIcon status={row as Status} width={24} height={24} />
+                  {statuses[row].label.text}
+                </Typography>
+              </TableCell>
+              <TableCell align="right" sx={{ pr: 2 }}>
+                <Typography variant="body2">{count[row]}</Typography>
+              </TableCell>
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
     </TableContainer>
