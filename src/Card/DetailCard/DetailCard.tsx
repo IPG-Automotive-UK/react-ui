@@ -8,6 +8,8 @@ import type { LabelChipGroupProps } from "../../LabelSelector/LabelChipGroup/Lab
 import NoWrapTypography from "../../NoWrapTypography/NoWrapTypography";
 import { ResizeObserver } from "@juggle/resize-observer";
 
+// TODO: add tests in browser once we are done with the migration to cypress. The old tests live in a txt file in this folder until then.
+
 function DetailCard({
   buttonsStack = null,
   content = null,
