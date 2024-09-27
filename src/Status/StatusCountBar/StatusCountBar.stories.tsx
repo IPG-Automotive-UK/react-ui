@@ -78,12 +78,7 @@ const GridTemplate: StoryFn<StatusCountBarProps> = args => {
           <StatusCountBar
             key={index}
             title={`Simulation Status ${index + 1}`}
-            count={{
-              running: Math.floor(Math.random() * 4),
-              completed: Math.floor(Math.random() * 4),
-              //   aborted: Math.floor(Math.random() * 2)
-              cancelled: Math.floor(Math.random() * 2)
-            }}
+            count={args.count}
           />
         ))}
     </Box>

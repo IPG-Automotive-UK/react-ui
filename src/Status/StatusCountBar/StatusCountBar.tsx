@@ -33,7 +33,8 @@ const StatusCountBar = ({ title, count }: StatusCountBarProps) => {
       >
         {Object.entries(count).map(([status, countValue]) => {
           const percentage = (countValue / totalCount) * 100;
-          const color = statuses[status]?.icon?.color || "grey"; // Get the color from statuses config
+          const statusKey = status as keyof typeof statuses;
+          const color = statuses[statusKey]?.icon?.color || "grey"; // Get the color from statuses config
           return (
             <Box
               key={status}
