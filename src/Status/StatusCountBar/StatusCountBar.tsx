@@ -1,14 +1,16 @@
-// StatusCountBar.tsx
-
 import { Box, Fade } from "@mui/material";
 import { bindPopper, usePopupState } from "material-ui-popup-state/hooks";
 
 import Popper from "@mui/material/Popper";
 import React from "react";
 import { StatusCountBarProps } from "./StatusCountBar.types";
+import { StatusCountTable } from "../StatusCountTable";
 import statuses from "../statuses";
 import { useDelayedHover } from "../../hover/useDelayedHover";
 
+/**
+ * Bar component that renders statuses with width depending on the number of items that match that status and color.
+ */
 const StatusCountBar = ({ title, count }: StatusCountBarProps) => {
   // Popup state for hover interaction
   const popupState = usePopupState({
@@ -24,9 +26,9 @@ const StatusCountBar = ({ title, count }: StatusCountBarProps) => {
     <>
       <Box
         display="flex"
-        height="15px"
+        height="18px"
         width="100%"
-        gap={0.5}
+        gap="2px"
         {...hoverHandler} // Attach the hover handlers
       >
         {Object.entries(count).map(([status, countValue]) => {
@@ -39,7 +41,7 @@ const StatusCountBar = ({ title, count }: StatusCountBarProps) => {
                 backgroundColor: color,
                 width: `${percentage}%`
               }}
-              title={`${status}: ${countValue}`} // Tooltip as fallback for hover
+              data-testid={`status-bar-${status}`}
             />
           );
         })}
@@ -47,8 +49,7 @@ const StatusCountBar = ({ title, count }: StatusCountBarProps) => {
       <Popper {...bindPopper(popupState)} sx={{ py: "3px" }}>
         {({ TransitionProps }) => (
           <Fade {...TransitionProps}>
-            {/* <StatusCountTable /> */}
-            <h2>Hello table</h2>
+            <StatusCountTable title={title} count={count} />
           </Fade>
         )}
       </Popper>

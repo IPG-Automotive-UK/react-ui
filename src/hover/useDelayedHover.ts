@@ -20,7 +20,7 @@ export function useDelayedHover(popupState: PopupState, delayMs = 200) {
         onMouseOver(e);
       }, delayMs);
     },
-    [onMouseOver]
+    [onMouseOver, delayMs]
   );
 
   const handleMouseLeave = useCallback(
