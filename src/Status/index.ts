@@ -5,3 +5,7 @@ export {
   default as StatusCountBar,
   type StatusCountBarProps
 } from "./StatusCountBar";
+export {
+  StatusCountTable,
+  type StatusCountTableProps
+} from "./StatusCountTable";

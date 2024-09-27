@@ -18,6 +18,8 @@ import { MoreVert } from "@mui/icons-material";
 import NoWrapTypography from "../../NoWrapTypography/NoWrapTypography";
 import { SummaryCardProps } from "./SummaryCard.types";
 
+// TODO: add tests in browser once we are done with the migration to cypress. The old tests live in a txt file in this folder until then.
+
 function SummaryCard({
   content = null,
   height = 600,

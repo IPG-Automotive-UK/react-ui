@@ -27,7 +27,7 @@ export const Default = {
 
 export const WithVersionChip = {
   args: {
-    media: "https://picsum.photos/336/190",
+    media: "https://picsum.photos/336/191",
     version: "1.0"
   },
 

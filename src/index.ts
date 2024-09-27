@@ -88,6 +88,10 @@ export {
   type LabelChipGroupProps,
   type LabelSelectorProps
 } from "./LabelSelector";
+export {
+  default as LazyLoadImage,
+  type LazyLoadImageProps
+} from "./LazyLoadImage";
 export { default as TabPanel, type TabPanelProps } from "./TabPanel";
 export { default as LinePlot, type LinePlotProps } from "./LinePlot";
 export { default as SurfacePlot, type SurfacePlotProps } from "./SurfacePlot";
@@ -160,10 +164,12 @@ export {
   StatusIcon,
   StatusLabel,
   StatusCountBar,
+  type StatusCountBarProps,
+  StatusCountTable,
   type StatusCardProps,
   type StatusIconProps,
   type StatusLabelProps,
-  type StatusCountBarProps
+  type StatusCountTableProps
 } from "./Status";
 export { default as SwitchField, type SwitchFieldProps } from "./SwitchField";
 export { default as TextField, type TextFieldProps } from "./TextField";
