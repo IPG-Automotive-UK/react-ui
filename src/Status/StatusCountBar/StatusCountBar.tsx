@@ -47,7 +47,10 @@ const StatusCountBar = ({ title, count }: StatusCountBarProps) => {
           );
         })}
       </Box>
-      <Popper {...bindPopper(popupState)} sx={{ py: "3px" }}>
+      <Popper
+        {...bindPopper(popupState)}
+        sx={{ py: "3px", zIndex: theme => theme.zIndex.modal }}
+      >
         {({ TransitionProps }) => (
           <Fade {...TransitionProps}>
             <StatusCountTable title={title} count={count} />
