@@ -11,14 +11,16 @@ import { useDelayedHover } from "../../hover/useDelayedHover";
 /**
  * Bar component that renders statuses with width depending on the number of items that match that status and color.
  */
-const StatusCountBar = ({ title, count }: StatusCountBarProps) => {
+export function StatusCountBar({ title, count }: StatusCountBarProps) {
   // Popup state for hover interaction
   const popupState = usePopupState({
     popupId: "statusCountPopup",
     variant: "popper"
   });
+
   // Calculate the total count
   const totalCount = Object.values(count).reduce((a, b) => a + b, 0);
+
   // Use hover hook
   const hoverHandler = useDelayedHover(popupState, 1000);
 
@@ -26,8 +28,9 @@ const StatusCountBar = ({ title, count }: StatusCountBarProps) => {
     <>
       <Box
         display="flex"
-        height="18px"
+        height="14px"
         width="100%"
+        padding="2px"
         gap="2px"
         {...hoverHandler} // Attach the hover handlers
       >
@@ -59,6 +62,4 @@ const StatusCountBar = ({ title, count }: StatusCountBarProps) => {
       </Popper>
     </>
   );
-};
-
-export default StatusCountBar;
+}

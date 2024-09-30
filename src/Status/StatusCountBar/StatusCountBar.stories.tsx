@@ -2,7 +2,7 @@ import { Meta, StoryFn } from "@storybook/react";
 
 import { Box } from "@mui/material";
 import React from "react";
-import StatusCountBar from "./StatusCountBar";
+import { StatusCountBar } from "./StatusCountBar";
 import { StatusCountBarProps } from "./StatusCountBar.types";
 
 /**

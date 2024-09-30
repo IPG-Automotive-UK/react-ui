@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 
 import React from "react";
 import { Status } from "../statuses.types";
-import StatusCountBar from "./StatusCountBar";
+import { StatusCountBar } from "./StatusCountBar";
 
 describe("StatusCountBar", () => {
   /* eslint-disable sort-keys */
@@ -16,7 +16,7 @@ describe("StatusCountBar", () => {
   };
   /* eslint-enable sort-keys */
 
-  test("should render the status bar with the correct title and counts", () => {
+  test("should render the status bar with the correct test ids", () => {
     render(<StatusCountBar {...defaultProps} />);
 
     // Assert that the status bar is rendered with proper count and title
