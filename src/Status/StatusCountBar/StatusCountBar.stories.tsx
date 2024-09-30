@@ -24,6 +24,7 @@ const Template: StoryFn<StatusCountBarProps> = args => {
 /**
  * Default story for the StatusCountBar component
  */
+// The component will accept the count object in perticular order from Virto that is why we have to disable the sort-keys from the eslint.
 /* eslint-disable sort-keys */
 export const Default = {
   args: {
