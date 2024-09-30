@@ -24,24 +24,34 @@ export function StatusCountTable({ title, count }: StatusCountTableProps) {
   /** Keys of the count object */
   const countKeys = Object.keys(count) as (keyof typeof count)[];
 
+  // Color of the header
+  const headerColor = "#5E8AB414";
+
   return (
     <TableContainer
-      sx={{ borderRadius: "4px", boxShadow: 8, maxWidth: "280px" }}
+      sx={{
+        backgroundColor: theme => theme.palette.background.default,
+        borderRadius: "4px",
+        boxShadow: 8,
+        maxWidth: "280px"
+      }}
     >
       <Table size="small">
         <TableHead>
           <TableRow
             sx={{
-              background: theme => theme.palette.background.default,
-              height: "41px"
+              height: "40px"
             }}
           >
-            <TableCell sx={{ pl: 2 }}>
+            <TableCell sx={{ background: headerColor, pl: 2 }}>
               <Typography variant="subtitle2" data-testid="status-count-title">
                 {title}
               </Typography>
             </TableCell>
-            <TableCell align="right" sx={{ pr: 2 }}>
+            <TableCell
+              align="right"
+              sx={{ backgroundColor: headerColor, pr: 2 }}
+            >
               <Typography
                 variant="subtitle2"
                 data-testid="status-count-total-count"
@@ -55,9 +65,19 @@ export function StatusCountTable({ title, count }: StatusCountTableProps) {
           {countKeys.reverse().map(row => (
             <TableRow
               key={row}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              sx={{
+                "&:last-child td, &:last-child th": { border: 0 },
+                height: "40px"
+              }}
             >
-              <TableCell sx={{ pl: 2 }} component="th" scope="row">
+              <TableCell
+                sx={{
+                  backgroundColor: theme => theme.palette.background.default,
+                  pl: 2
+                }}
+                component="th"
+                scope="row"
+              >
                 <Typography
                   variant="body2"
                   display="flex"
@@ -68,7 +88,13 @@ export function StatusCountTable({ title, count }: StatusCountTableProps) {
                   {statuses[row].label.text}
                 </Typography>
               </TableCell>
-              <TableCell align="right" sx={{ pr: 2 }}>
+              <TableCell
+                align="right"
+                sx={{
+                  backgroundColor: theme => theme.palette.background.default,
+                  pr: 2
+                }}
+              >
                 <Typography variant="body2">{count[row]}</Typography>
               </TableCell>
             </TableRow>
