@@ -77,7 +77,8 @@ export default function NumberField(props: NumberFieldProps) {
 
     // call the onChange callback if the value is valid
     if (onChange && isValid) {
-      isValid && onChange(newValue);
+      isValid &&
+        onChange({ ...event, target: { ...event.target, value: newValue } });
     }
   };
 
