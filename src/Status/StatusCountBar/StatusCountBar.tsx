@@ -28,7 +28,6 @@ export function StatusCountBar({ title, count }: StatusCountBarProps) {
     <>
       <Box
         display="flex"
-        height="14px"
         width="100%"
         padding="2px"
         gap="2px"
@@ -43,6 +42,7 @@ export function StatusCountBar({ title, count }: StatusCountBarProps) {
               key={status}
               sx={{
                 backgroundColor: color,
+                height: "14px",
                 width: `${percentage}%`
               }}
               data-testid={`status-bar-${status}`}
