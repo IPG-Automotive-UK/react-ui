@@ -8,5 +8,5 @@ export type StatusCountBarProps = {
   /**
    * The status count object of different statuses.
    */
-  count: Record<Status, number>;
+  count: Record<Partial<Status>, number>;
 };
