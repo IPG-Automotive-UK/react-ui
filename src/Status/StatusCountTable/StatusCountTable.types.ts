@@ -1,7 +1,5 @@
 import { Status } from "../statuses.types";
 
-export type StatusCount = Partial<Record<Status, number>>;
-
 export type StatusCountTableProps = {
   /**
    * Title of the table
@@ -10,5 +8,5 @@ export type StatusCountTableProps = {
   /**
    * Count is an object which contains objects with partial key status name and status count
    */
-  count: StatusCount;
+  count: Partial<Record<Status, number>>;
 };
