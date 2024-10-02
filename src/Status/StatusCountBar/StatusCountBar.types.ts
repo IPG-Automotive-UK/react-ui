@@ -1,4 +1,4 @@
-import { Status } from "../statuses.types";
+import { StatusCount } from "../StatusCountTable";
 
 export type StatusCountBarProps = {
   /**
@@ -8,5 +8,5 @@ export type StatusCountBarProps = {
   /**
    * The status count object of different statuses.
    */
-  count: Record<Partial<Status>, number>;
+  count: StatusCount;
 };
