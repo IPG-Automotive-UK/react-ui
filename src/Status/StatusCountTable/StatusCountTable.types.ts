@@ -8,5 +8,5 @@ export type StatusCountTableProps = {
   /**
    * Count is an object which contains objects with key status name and status count
    */
-  count: Record<Status, number>;
+  count: Record<Partial<Status>, number>;
 };
