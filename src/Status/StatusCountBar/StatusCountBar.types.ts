@@ -1,12 +1,4 @@
-import { Status } from "../statuses.types";
+import type { StatusCountTableProps } from "../StatusCountTable";
 
-export type StatusCountBarProps = {
-  /**
-   * The status bar title.
-   */
-  title: string;
-  /**
-   * The status count object of different statuses.
-   */
-  count: Record<Status, number>;
-};
+// StatusCountBar shares the same props as StatusCountTable
+export type StatusCountBarProps = StatusCountTableProps;
