@@ -13,6 +13,7 @@ export default defineConfig({
       ],
       include: ["src/**/*"],
       reporter: ["text", "json-summary", "json"],
+      reportsDirectory: "./test-artifacts/coverage",
       thresholds: {
         branches: 80,
         functions: 80,

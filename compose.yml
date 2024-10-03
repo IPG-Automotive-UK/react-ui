@@ -6,4 +6,4 @@ services:
       context: .
     volumes:
       - ./src:/usr/src/react-ui/src
-      - ./coverage:/usr/src/react-ui/coverage
+      - ./test-artifacts:/usr/src/react-ui/test-artifacts

@@ -37,3 +37,5 @@ jobs:
         uses: davelosert/vitest-coverage-report-action@v2
         with:
           file-coverage-mode: all
+          json-summary-path: test-artifacts/coverage/coverage-summary.json
+          json-final-path: test-artifacts/coverage/coverage-final.json
