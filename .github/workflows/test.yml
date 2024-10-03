@@ -35,6 +35,7 @@ jobs:
         run: pnpm run test:docker
       - name: "Report coverage"
         uses: davelosert/vitest-coverage-report-action@v2
+        if: always()
         with:
           file-coverage-mode: all
           json-summary-path: test-artifacts/coverage/coverage-summary.json
