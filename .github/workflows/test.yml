@@ -12,6 +12,11 @@ jobs:
         os: [ubuntu-latest]
       fail-fast: false
     runs-on: ${{ matrix.os }}
+    permissions:
+      # Required to checkout the code
+      contents: read
+      # Required to put a comment into the pull-request
+      pull-requests: write
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
@@ -28,17 +33,7 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Run tests
         run: pnpm run test:docker
-
-      # Remove Playwright report upload step.
-      # - name: Upload Playwright Report
-      #   uses: actions/upload-artifact@v4
-      #   if: always()
-      #   with:
-      #     name: playwright-report-${{ github.sha }}-${{matrix.os}}-${{ matrix.node-version }}
-      #     path: ./test-artifacts/playwright
-
-      - name: Upload Coverage Report
-        uses: actions/upload-artifact@v4
+      - name: "Report coverage"
+        uses: davelosert/vitest-coverage-report-action@v2
         with:
-          name: coverage-report-${{ github.sha }}-${{ matrix.node-version }}
-          path: ./test-artifacts/coverage
+          file-coverage-mode: all

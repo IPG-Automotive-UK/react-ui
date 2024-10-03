@@ -12,7 +12,13 @@ export default defineConfig({
         "**/index.[jt]s?(x)"
       ],
       include: ["src/**/*"],
-      reportsDirectory: "./test-artifacts/coverage"
+      reporter: ["text", "json-summary", "json"],
+      thresholds: {
+        branches: 80,
+        functions: 80,
+        lines: 80,
+        statements: 80
+      }
     },
     environment: "jsdom",
     globals: true,
