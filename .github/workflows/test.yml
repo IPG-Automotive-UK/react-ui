@@ -36,7 +36,7 @@ jobs:
           # Replace /usr/src/react-ui/ with the current working directory in all coverage reports files
           sudo chmod -R 777 test-artifacts/coverage
           for file in test-artifacts/coverage/coverage-summary.json test-artifacts/coverage/coverage-final.json; do
-            sed -i "s#/usr/src/react-ui/#$(pwd)#g" "$file"
+            sed -i "s#/usr/src/react-ui#$(pwd)#g" "$file"
           done
       - name: "Report coverage"
         uses: davelosert/vitest-coverage-report-action@v2
