@@ -13,9 +13,7 @@ jobs:
       fail-fast: false
     runs-on: ${{ matrix.os }}
     permissions:
-      # Required to checkout the code
       contents: write
-      # Required to put a comment into the pull-request
       pull-requests: write
     steps:
       - name: Checkout Repo
@@ -34,7 +32,11 @@ jobs:
       - name: Run tests
         run: pnpm run test:docker
       - name: Modify coverage report
-        run: pnpm run test:rename-coverage-paths"
+        run: |
+          # Replace /usr/src/react-ui/ with the current working directory in all coverage reports files
+          for file in test-artifacts/coverage/coverage-summary.json test-artifacts/coverage/coverage-final.json; do
+            sed -i "s#/usr/src/react-ui/#$(pwd)#g" "$file"
+          done
       - name: "Report coverage"
         uses: davelosert/vitest-coverage-report-action@v2
         if: always()
