@@ -163,6 +163,8 @@ export {
   StatusCard,
   StatusIcon,
   StatusLabel,
+  StatusCountBar,
+  type StatusCountBarProps,
   StatusCountTable,
   type StatusCardProps,
   type StatusIconProps,
@@ -272,6 +274,7 @@ export {
   default as UploaderHeader,
   type UploaderHeaderProps
 } from "./Uploader";
+export { useDelayedHover } from "./hover";
 
 /*
   The following components are temporarily commented out to prevent CRA build failures.
