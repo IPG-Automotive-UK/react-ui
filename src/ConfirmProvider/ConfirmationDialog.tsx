@@ -73,7 +73,7 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
               color: theme =>
                 theme.palette.mode === "light"
                   ? "rgba(0, 0, 0, 0.8)"
-                  : "rgb(f,f,f)"
+                  : "rgba(255,255,255, 1)"
             }}
           >
             {content}
@@ -88,7 +88,7 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
                 color: theme =>
                   theme.palette.mode === "light"
                     ? "rgba(0, 0, 0, 0.8)"
-                    : "rgb(f,f,f)"
+                    : "rgba(255,255,255, 1)"
               }}
             >
               {description}

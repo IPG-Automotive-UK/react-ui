@@ -1,7 +1,7 @@
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
-import React, { ChangeEvent } from "react";
+import { NumberFieldChangeEvent, NumberFieldProps } from "./NumberField.types";
 import NumberField from "./NumberField";
-import { NumberFieldProps } from "./NumberField.types";
+import React from "react";
 import { action } from "@storybook/addon-actions";
 
 type Story = StoryObj<typeof NumberField>;
@@ -18,9 +18,7 @@ const Template: StoryFn<NumberFieldProps> = args => {
     setValue(args.value);
   }, [args.value]);
 
-  const onChange = (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const onChange = (event: NumberFieldChangeEvent) => {
     setValue(value);
     action("onChange")(event, event.target.value);
   };
@@ -42,6 +40,7 @@ export const Default: Story = {
     label: "Enter a Number",
     margin: "normal",
     required: false,
+    showMinMaxErrorMessage: true,
     size: "medium",
     stepper: true,
     variant: "outlined"
@@ -75,6 +74,7 @@ export const StartAdornment: Story = {
     label: "Enter a Number",
     margin: "normal",
     required: false,
+    showMinMaxErrorMessage: true,
     size: "medium",
     startAdornment: "$",
     stepper: true,
@@ -93,6 +93,7 @@ export const EndAdornment: Story = {
     label: "Enter a Number",
     margin: "normal",
     required: false,
+    showMinMaxErrorMessage: true,
     size: "medium",
     stepper: true,
     variant: "outlined"
@@ -109,6 +110,7 @@ export const SmallAndDense: Story = {
     label: "Enter a Number",
     margin: "dense",
     required: false,
+    showMinMaxErrorMessage: true,
     size: "small",
     stepper: false,
     variant: "outlined"
@@ -125,6 +127,7 @@ export const NoStepper: Story = {
     label: "Enter a Number",
     margin: "normal",
     required: false,
+    showMinMaxErrorMessage: true,
     size: "medium",
     stepper: false,
     variant: "outlined"
@@ -133,7 +136,7 @@ export const NoStepper: Story = {
   render: Template
 };
 
-export const CustomStep: Story = {
+export const CustomMinMaxAndStep: Story = {
   args: {
     disabled: false,
     error: false,
@@ -142,8 +145,12 @@ export const CustomStep: Story = {
     },
     label: "Enter a Number",
     margin: "normal",
+    max: 1,
+    min: 0,
     required: false,
+    showMinMaxErrorMessage: true,
     size: "medium",
+    step: 0.1,
     variant: "outlined"
   },
 
@@ -157,8 +164,31 @@ export const InitialError: Story = {
     helperText: "Oh no you've made a mistake!",
     label: "Enter a Number",
     margin: "normal",
+    max: 1,
+    min: 0,
     required: false,
+    showMinMaxErrorMessage: true,
     size: "medium",
+    step: 0.1,
+    value: 2,
+    variant: "outlined"
+  },
+
+  render: Template
+};
+
+export const NoMinMaxErrorMessage = {
+  args: {
+    disabled: false,
+    error: false,
+    label: "Enter a Number",
+    margin: "normal",
+    max: 1,
+    min: 0,
+    required: false,
+    showMinMaxErrorMessage: false,
+    size: "medium",
+    step: 0.1,
     value: 2,
     variant: "outlined"
   },
