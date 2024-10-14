@@ -33,7 +33,7 @@ export default function NumberField(props: NumberFieldProps) {
     setCurrentValue(value);
   }, [value, min, max]);
 
-  // method to return value validitity and error message
+  // method to return value validity and error message
   const isValidValue = (value?: number | null) => {
     if (value === null || value === undefined) {
       // accept empty string as null
@@ -126,8 +126,9 @@ export default function NumberField(props: NumberFieldProps) {
 
 /**
  * Converts a string to a number.
- * @param {*} value - The value to convert.
- * @returns {number} - The converted value.
+ * @param value - The value to convert.
+ * @returns The converted value (either a number or null)
+
  */
 const string2number = (value: string) => {
   if (value === "") {
@@ -139,8 +140,8 @@ const string2number = (value: string) => {
 
 /**
  * Returns the precision of a number.
- * @param {number} value - The value to get the precision of.
- * @returns {number} - The precision of the value.
+ * @param value - The value to get the precision of.
+ * @returns The precision of the value.
  */
 const precision = (value: number) => {
   if (Math.floor(value) === value) return 0;
@@ -149,9 +150,9 @@ const precision = (value: number) => {
 
 /**
  * Returns the two nearest steps to a value.
- * @param {number} value - The value to get the nearest steps for.
- * @param {number} step - The step size.
- * @returns {number[]} - The two nearest steps.
+ * @param value - The value to get the nearest steps for.
+ * @param step - The step size.
+ * @returns The two nearest steps.
  */
 const getNearestSteps = (value: number, step: number) => {
   // handle floating point math with a conversion to integer math
@@ -164,9 +165,9 @@ const getNearestSteps = (value: number, step: number) => {
 
 /**
  * Returns whether a value is a step.
- * @param {number} value - The value to check.
- * @param {number} step - The step size.
- * @returns {boolean} - Whether the value is a step.
+ * @param value - The value to check.
+ * @param step - The step size.
+ * @returns Whether the value is a step.
  */
 const isStep = (value: number, step: number) => {
   // handle floating point math with a conversion to integer math

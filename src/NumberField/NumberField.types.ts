@@ -1,6 +1,6 @@
 import { TextFieldProps } from "@mui/material";
 
-export type NumberFieldChangeEvent = Omit<
+type NumberFieldChangeEvent = Omit<
   React.ChangeEvent<HTMLInputElement>,
   "target"
 > & {
@@ -11,18 +11,11 @@ export type NumberFieldChangeEvent = Omit<
 
 /**
  * Give acccess to MUI TextField props and custom props
- * Omit `sx` and `type` from MUI TextField props
+ * Omit `multiline`, `rows`, `select` and `type` from MUI TextField props
  */
 export type NumberFieldProps = Omit<
   TextFieldProps,
-  | "maxRows"
-  | "minRows"
-  | "multiline"
-  | "onChange"
-  | "rows"
-  | "select"
-  | "sx"
-  | "type"
+  "multiline" | "onChange" | "rows" | "select" | "sx" | "type"
 > & {
   endAdornment?: string;
   min?: number;

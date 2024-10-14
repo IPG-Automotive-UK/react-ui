@@ -1,6 +1,6 @@
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
-import { NumberFieldChangeEvent, NumberFieldProps } from "./NumberField.types";
 import NumberField from "./NumberField";
+import { NumberFieldProps } from "./NumberField.types";
 import React from "react";
 import { action } from "@storybook/addon-actions";
 
@@ -18,18 +18,12 @@ const Template: StoryFn<NumberFieldProps> = args => {
     setValue(args.value);
   }, [args.value]);
 
-  const onChange = (event: NumberFieldChangeEvent) => {
+  const onChange: NumberFieldProps["onChange"] = event => {
     setValue(value);
-    action("onChange")(event, event.target.value);
+    action("onChange")(event);
   };
 
-  const onBlur = () => {
-    action("onBlur");
-  };
-
-  return (
-    <NumberField {...args} onBlur={onBlur} onChange={onChange} value={value} />
-  );
+  return <NumberField {...args} onChange={onChange} value={value} />;
 };
 
 export const Default: Story = {
@@ -57,7 +51,6 @@ export const Uncontrolled: Story = {
     helperText: "What Number are you going to type?",
     label: "Enter a Number",
     margin: "normal",
-    onBlur: action("onBlur"),
     required: false,
     size: "medium",
     stepper: true,
@@ -164,8 +157,6 @@ export const InitialError: Story = {
     helperText: "Oh no you've made a mistake!",
     label: "Enter a Number",
     margin: "normal",
-    max: 1,
-    min: 0,
     required: false,
     showMinMaxErrorMessage: true,
     size: "medium",

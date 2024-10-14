@@ -14,7 +14,6 @@ const NumberFieldWithState = ({
   valueIn = 100,
   ...rest
 }: {
-  onChange?: (value: number) => void;
   valueIn?: number | null;
 } & NumberFieldProps) => {
   const [value, setValue] = useState(valueIn);
