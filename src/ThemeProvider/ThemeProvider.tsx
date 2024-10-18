@@ -143,7 +143,7 @@ const lightTheme = createTheme(
             "&:hover": {
               backgroundColor: "rgba(0, 95, 168, 0.15)"
             },
-            "border-color": "rgb(196, 196, 196)"
+            borderColor: "rgb(196, 196, 196)"
           }
         }
       }
