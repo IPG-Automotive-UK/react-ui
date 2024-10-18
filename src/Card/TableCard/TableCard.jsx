@@ -45,7 +45,7 @@ function TableCard({ action = null, tableContent = [], title = "Table" }) {
                 >
                   <TableCell
                     sx={{
-                      width: 100
+                      width: "50%"
                     }}
                   >
                     {row[0]}
@@ -53,7 +53,7 @@ function TableCard({ action = null, tableContent = [], title = "Table" }) {
                   <TableCell
                     sx={{
                       overflowWrap: "anywhere",
-                      width: 100
+                      width: "50%"
                     }}
                   >
                     {row[1]}
