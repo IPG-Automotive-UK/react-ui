@@ -9,7 +9,8 @@ function VehicleSelector({
   flexDirection = "column",
   flexWrap = "nowrap",
   gates = [],
-  multipleSelection = false,
+  multipleVariant = false,
+  multipleGates = false,
   onChange = () => {},
   size = "medium",
   value = [],
@@ -123,10 +124,11 @@ function VehicleSelector({
       </Box>
       <Box flex="40%">
         <Autocomplete
+          disableCloseOnSelect={multipleVariant}
           disabled={selectedModelYear === null || selectedModelYear === ""}
           label="Vehicle Variant"
+          multiple={multipleVariant}
           required
-          multiple={false}
           options={allVariants}
           onChange={(_event, value) => {
             if (value) {
@@ -187,19 +189,19 @@ function VehicleSelector({
             }
           }}
           size={size}
-          value={selectedVariants.length > 0 ? selectedVariants[0] : ""}
+          value={selectedVariants}
         />
       </Box>
 
       {gates.length > 0 && (
         <Box flex="40%">
           <Autocomplete
-            disableCloseOnSelect={multipleSelection}
+            disableCloseOnSelect={multipleGates}
             disabled={
               selectedVariants === null || selectedVariants.length === 0
             }
             required={gates.length > 0}
-            multiple={multipleSelection}
+            multiple={multipleGates}
             label="Gate"
             options={gates}
             onChange={(_event, value) => {
@@ -224,7 +226,7 @@ function VehicleSelector({
               }
 
               // if multiple selection is enabled, update the value with the new vehicles and gates
-              if (multipleSelection && Array.isArray(value)) {
+              if (multipleGates && Array.isArray(value)) {
                 const newVehiclesWithGate = value.flatMap(gate =>
                   newVehicles.map(v => ({
                     _id: v._id,
