@@ -64,4 +64,8 @@ export type VehicleSelectorProps = {
    * Size of the field
    */
   size?: "small" | "medium";
+  /**
+   * limit the number of tags that are visible when not focused
+   */
+  limitTags?: number;
 };
