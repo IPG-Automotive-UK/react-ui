@@ -1,2 +1,2 @@
-export { RoadPreview } from "./RoadPreview";
-export type { RoadPreviewProps } from "./RoadPreview.types";
+export { RoadPreview } from "./RoadPreview.js";
+export type { RoadPreviewProps } from "./RoadPreview.types.js";

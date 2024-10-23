@@ -1,5 +1,5 @@
-export { default as Wizard } from "./Wizard";
-export type { WizardProps } from "./Wizard.types";
+export { default as Wizard } from "./Wizard.js";
+export type { WizardProps } from "./Wizard.types.js";
 export {
   default as WizardActions,
   type WizardActionsProps,
@@ -7,14 +7,14 @@ export {
   NextButton,
   BackButton,
   CancelButton
-} from "./WizardActions";
+} from "./WizardActions/index.js";
 export {
   default as WizardContent,
   type WizardContentProps
-} from "./WizardContent";
+} from "./WizardContent/index.js";
 export {
   default as WizardSteps,
   type WizardStepsProps,
   WizardStep,
   type WizardStepProps
-} from "./WizardSteps";
+} from "./WizardSteps/index.js";

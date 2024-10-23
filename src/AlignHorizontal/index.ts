@@ -1,2 +1,2 @@
-export { default } from "./AlignHorizontal";
-export type { AlignHorizontalProps } from "./AlignHorizontal.types";
+export { default } from "./AlignHorizontal.js";
+export type { AlignHorizontalProps } from "./AlignHorizontal.types.js";

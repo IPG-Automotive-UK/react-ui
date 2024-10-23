@@ -1,2 +1,2 @@
-export { default } from "./TabPanel";
-export type { TabPanelProps } from "./TabPanel.types";
+export { default } from "./TabPanel.js";
+export type { TabPanelProps } from "./TabPanel.types.js";

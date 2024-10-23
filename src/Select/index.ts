@@ -1,5 +1,5 @@
 import Select from "./Select";
-import type { TextFieldProps } from "../TextField";
+import type { TextFieldProps } from "../TextField/index";
 
 export type SelectProps = {
   disabled?: boolean;

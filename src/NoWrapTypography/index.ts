@@ -1,2 +1,2 @@
-export { default } from "./NoWrapTypography";
-export type { NoWrapTypographyProps } from "./NoWrapTypography.types";
+export { default } from "./NoWrapTypography.js";
+export type { NoWrapTypographyProps } from "./NoWrapTypography.types.js";

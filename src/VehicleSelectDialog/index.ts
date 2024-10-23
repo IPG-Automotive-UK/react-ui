@@ -1,2 +1,2 @@
-export { default } from "./VehicleSelectDialog";
-export type { VehicleSelectDialogProps } from "./VehicleSelectDialog.types";
+export { default } from "./VehicleSelectDialog.js";
+export type { VehicleSelectDialogProps } from "./VehicleSelectDialog.types.js";

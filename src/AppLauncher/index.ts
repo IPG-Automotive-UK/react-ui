@@ -1,2 +1,2 @@
-export { default } from "./AppLauncher";
-export type { AppLauncherProps } from "./AppLauncher.types";
+export { default } from "./AppLauncher.js";
+export type { AppLauncherProps } from "./AppLauncher.types.js";

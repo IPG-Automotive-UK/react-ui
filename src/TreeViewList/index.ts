@@ -1,2 +1,2 @@
-export { default } from "./TreeViewList";
-export type { TreeViewListProps } from "./TreeViewList.types";
+export { default } from "./TreeViewList.js";
+export type { TreeViewListProps } from "./TreeViewList.types.js";

@@ -1,2 +1,2 @@
-export { default } from "./ConditionalDialog";
-export type { ConditionalDialogProps } from "./ConditionalDialog.types";
+export { default } from "./ConditionalDialog.js";
+export type { ConditionalDialogProps } from "./ConditionalDialog.types.js";

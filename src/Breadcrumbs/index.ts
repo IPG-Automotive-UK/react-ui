@@ -1,2 +1,2 @@
-export { default } from "./Breadcrumbs";
-export type { BreadcrumbsProps } from "./Breadcrumbs.types";
+export { default } from "./Breadcrumbs.js";
+export type { BreadcrumbsProps } from "./Breadcrumbs.types.js";

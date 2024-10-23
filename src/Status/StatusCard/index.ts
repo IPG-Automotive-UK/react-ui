@@ -1,2 +1,2 @@
-export { default } from "./StatusCard";
-export type { StatusCardProps } from "./StatusCard.types";
+export { default } from "./StatusCard.js";
+export type { StatusCardProps } from "./StatusCard.types.js";

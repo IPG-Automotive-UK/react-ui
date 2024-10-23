@@ -1,2 +1,2 @@
-export { default } from "./LinePlotClientOnly";
-export type { LinePlotProps } from "./LinePlot.types";
+export { default } from "./LinePlotClientOnly.js";
+export type { LinePlotProps } from "./LinePlot.types.js";

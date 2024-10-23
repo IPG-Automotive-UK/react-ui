@@ -1,2 +1,2 @@
-export { default } from "./LazyLoadImage";
-export type { LazyLoadImageProps } from "./LazyLoadImage.types";
+export { default } from "./LazyLoadImage.js";
+export type { LazyLoadImageProps } from "./LazyLoadImage.types.js";

@@ -1,2 +1,2 @@
-export { VirtoThumbsUpLeft } from "./VirtoThumbsUpLeft";
-export type { VirtoThumbsUpLeftProps } from "./VirtoThumbsUpLeft.types";
+export { VirtoThumbsUpLeft } from "./VirtoThumbsUpLeft.js";
+export type { VirtoThumbsUpLeftProps } from "./VirtoThumbsUpLeft.types.js";

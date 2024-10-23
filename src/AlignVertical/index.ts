@@ -1,2 +1,2 @@
-export { default } from "./AlignVertical";
-export type { AlignVerticalProps } from "./AlignVertical.types";
+export { default } from "./AlignVertical.js";
+export type { AlignVerticalProps } from "./AlignVertical.types.js";

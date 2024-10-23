@@ -1,2 +1,2 @@
-export { default } from "./VirtoAppHeader";
-export type { VirtoAppHeaderProps } from "./VirtoAppHeader.types";
+export { default } from "./VirtoAppHeader.js";
+export type { VirtoAppHeaderProps } from "./VirtoAppHeader.types.js";

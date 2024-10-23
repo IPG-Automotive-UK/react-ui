@@ -1,2 +1,2 @@
-export { default } from "./TruncatedTooltip";
-export type { TruncatedTooltipProps } from "./TruncatedTooltip.types";
+export { default } from "./TruncatedTooltip.js";
+export type { TruncatedTooltipProps } from "./TruncatedTooltip.types.js";

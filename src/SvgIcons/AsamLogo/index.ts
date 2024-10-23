@@ -1,2 +1,2 @@
-export { AsamLogo } from "./AsamLogo";
-export type { AsamLogoProps } from "./AsamLogo.types";
+export { AsamLogo } from "./AsamLogo.js";
+export type { AsamLogoProps } from "./AsamLogo.types.js";

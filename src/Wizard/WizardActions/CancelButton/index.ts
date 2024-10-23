@@ -1,1 +1,1 @@
-export { default } from "./CancelButton";
+export { default } from "./CancelButton.js";

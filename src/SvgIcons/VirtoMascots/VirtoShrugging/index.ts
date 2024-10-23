@@ -1,2 +1,2 @@
-export { VirtoShrugging } from "./VirtoShrugging";
-export type { VirtoShruggingProps } from "./VirtoShrugging.types";
+export { VirtoShrugging } from "./VirtoShrugging.js";
+export type { VirtoShruggingProps } from "./VirtoShrugging.types.js";

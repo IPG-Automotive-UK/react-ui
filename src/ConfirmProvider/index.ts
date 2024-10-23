@@ -1,3 +1,3 @@
-export { default as ConfirmProvider, confirm } from "./ConfirmProvider";
-export { default as useConfirm } from "./useConfirm";
-export type { ConfirmProviderProps } from "./ConfirmProvider.types";
+export { default as ConfirmProvider, confirm } from "./ConfirmProvider.js";
+export { default as useConfirm } from "./useConfirm.js";
+export type { ConfirmProviderProps } from "./ConfirmProvider.types.js";

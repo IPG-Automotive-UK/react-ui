@@ -1,2 +1,2 @@
-export { default } from "./StatusIcon";
-export type { StatusIconProps } from "./StatusIcon.types";
+export { default } from "./StatusIcon.js";
+export type { StatusIconProps } from "./StatusIcon.types.js";

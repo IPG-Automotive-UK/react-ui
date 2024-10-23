@@ -1,3 +1,3 @@
-export { default as UserAvatar } from "./UserAvatar";
-export { default as useColorMap } from "./colorMap";
-export type { UserAvatarProps } from "./UserAvatar.types";
+export { default as UserAvatar } from "./UserAvatar.js";
+export { default as useColorMap } from "./colorMap.js";
+export type { UserAvatarProps } from "./UserAvatar.types.js";

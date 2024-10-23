@@ -1,2 +1,2 @@
-export { VirtoThinking } from "./VirtoThinking";
-export type { VirtoThinkingProps } from "./VirtoThinking.types";
+export { VirtoThinking } from "./VirtoThinking.js";
+export type { VirtoThinkingProps } from "./VirtoThinking.types.js";

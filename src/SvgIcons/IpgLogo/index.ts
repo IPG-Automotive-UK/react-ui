@@ -1,2 +1,2 @@
-export { default } from "./IpgLogo";
-export type { IpgLogoProps } from "./IpgLogo.types";
+export { default } from "./IpgLogo.js";
+export type { IpgLogoProps } from "./IpgLogo.types.js";

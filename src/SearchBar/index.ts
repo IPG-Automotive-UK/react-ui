@@ -1,2 +1,2 @@
-export { default } from "./SearchBar";
-export type { SearchBarProps } from "./SearchBar.types";
+export { default } from "./SearchBar.js";
+export type { SearchBarProps } from "./SearchBar.types.js";

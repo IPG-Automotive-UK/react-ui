@@ -1,2 +1,2 @@
-export { CarMakerLogo } from "./CarMakerLogo";
-export type { CarMakerLogoProps } from "./CarMakerLogo.types";
+export { CarMakerLogo } from "./CarMakerLogo.js";
+export type { CarMakerLogoProps } from "./CarMakerLogo.types.js";

@@ -1,8 +1,20 @@
-export { default as StatusIcon, type StatusIconProps } from "./StatusIcon";
-export { default as StatusLabel, type StatusLabelProps } from "./StatusLabel";
-export { default as StatusCard, type StatusCardProps } from "./StatusCard";
-export { StatusCountBar, type StatusCountBarProps } from "./StatusCountBar";
+export {
+  default as StatusIcon,
+  type StatusIconProps
+} from "./StatusIcon/index.js";
+export {
+  default as StatusLabel,
+  type StatusLabelProps
+} from "./StatusLabel/index.js";
+export {
+  default as StatusCard,
+  type StatusCardProps
+} from "./StatusCard/index.js";
+export {
+  StatusCountBar,
+  type StatusCountBarProps
+} from "./StatusCountBar/index.js";
 export {
   StatusCountTable,
   type StatusCountTableProps
-} from "./StatusCountTable";
+} from "./StatusCountTable/index.js";

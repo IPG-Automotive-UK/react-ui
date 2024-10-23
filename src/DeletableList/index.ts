@@ -1,2 +1,2 @@
-export { default } from "./DeletableList";
-export type { DeletableListProps } from "./DeletableList.types";
+export { default } from "./DeletableList.js";
+export type { DeletableListProps } from "./DeletableList.types.js";

@@ -1,2 +1,2 @@
-export { default } from "./StatusLabel";
-export type { StatusLabelProps } from "./StatusLabel.types";
+export { default } from "./StatusLabel.js";
+export type { StatusLabelProps } from "./StatusLabel.types.js";

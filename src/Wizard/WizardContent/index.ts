@@ -1,2 +1,2 @@
-export { default } from "./WizardContent";
-export type { WizardContentProps } from "./WizardContent.types";
+export { default } from "./WizardContent.js";
+export type { WizardContentProps } from "./WizardContent.types.js";

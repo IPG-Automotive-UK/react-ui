@@ -1,1 +1,1 @@
-export { useDelayedHover } from "./useDelayedHover";
+export { useDelayedHover } from "./useDelayedHover.js";

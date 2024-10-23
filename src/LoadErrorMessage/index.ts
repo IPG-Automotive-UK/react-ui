@@ -1,2 +1,2 @@
-export { default } from "./LoadErrorMessage";
-export type { LoadErrorMessageProps } from "./LoadErrorMessage.types";
+export { default } from "./LoadErrorMessage.js";
+export type { LoadErrorMessageProps } from "./LoadErrorMessage.types.js";

@@ -1,2 +1,2 @@
-export { default } from "./PartSelector";
-export type { PartSelectorProps } from "./PartSelector.types";
+export { default } from "./PartSelector.js";
+export type { PartSelectorProps } from "./PartSelector.types.js";

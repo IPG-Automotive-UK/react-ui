@@ -1,2 +1,2 @@
-export { default } from "./VehicleSelector";
-export type { VehicleSelectorProps } from "./VehicleSelector.types";
+export { default } from "./VehicleSelector.js";
+export type { VehicleSelectorProps } from "./VehicleSelector.types.js";

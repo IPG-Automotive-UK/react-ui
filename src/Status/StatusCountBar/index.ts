@@ -1,2 +1,2 @@
-export { StatusCountBar } from "./StatusCountBar";
-export type { StatusCountBarProps } from "./StatusCountBar.types";
+export { StatusCountBar } from "./StatusCountBar.js";
+export type { StatusCountBarProps } from "./StatusCountBar.types.js";

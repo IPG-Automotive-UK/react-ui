@@ -1,2 +1,2 @@
-export { default } from "./TrafficLightClientOnly";
-export type { TrafficLightProps } from "./TrafficLight.types";
+export { default } from "./TrafficLightClientOnly.js";
+export type { TrafficLightProps } from "./TrafficLight.types.js";

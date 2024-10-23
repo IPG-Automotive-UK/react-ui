@@ -1,2 +1,2 @@
-export { default } from "./RoadSurfaceClientOnly";
-export { type RoadSurfaceProps } from "./RoadSurface.types";
+export { default } from "./RoadSurfaceClientOnly.js";
+export { type RoadSurfaceProps } from "./RoadSurface.types.js";

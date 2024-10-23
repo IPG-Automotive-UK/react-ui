@@ -1,2 +1,2 @@
-export { VirtoHeadScratching } from "./VirtoHeadScratching";
-export type { VirtoHeadScratchingProps } from "./VirtoHeadScratching.types";
+export { VirtoHeadScratching } from "./VirtoHeadScratching.js";
+export type { VirtoHeadScratchingProps } from "./VirtoHeadScratching.types.js";

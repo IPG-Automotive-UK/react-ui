@@ -1,4 +1,4 @@
-export { default } from "./ThemeProvider";
-export { default as ThemeProvider } from "./ThemeProvider";
-export type { ThemeProviderProps } from "./ThemeProvider.types";
-export { default as useTheme } from "./useTheme";
+export { default } from "./ThemeProvider.js";
+export { default as ThemeProvider } from "./ThemeProvider.js";
+export type { ThemeProviderProps } from "./ThemeProvider.types.js";
+export { default as useTheme } from "./useTheme.js";

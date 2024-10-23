@@ -1,2 +1,2 @@
-export { default } from "./CheckboxFilter";
-export type { CheckboxFilterProps } from "./CheckboxFilter.types";
+export { default } from "./CheckboxFilter.js";
+export type { CheckboxFilterProps } from "./CheckboxFilter.types.js";

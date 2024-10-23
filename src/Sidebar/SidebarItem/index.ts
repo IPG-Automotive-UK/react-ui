@@ -1,2 +1,2 @@
-export { default } from "./SidebarItem";
-export type { SidebarItemProps } from "./SidebarItem.types";
+export { default } from "./SidebarItem.js";
+export type { SidebarItemProps } from "./SidebarItem.types.js";
