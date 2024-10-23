@@ -6,4 +6,4 @@ export { default } from "./BulletGaugeClientOnly.js";
 /**
  * Export the BulletGaugeProps type from the BulletGauge.types module.
  */
-export type { BulletGaugeProps } from "./BulletGauge.types.js";
+export type { BulletGaugeProps } from "./BulletGauge.types";

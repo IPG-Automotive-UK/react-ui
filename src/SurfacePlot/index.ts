@@ -4,4 +4,4 @@
 export { default } from "./SurfacePlotClientOnly.js";
 
 // Import the SurfacePlotProps type from the SurfacePlot.types module
-export type { SurfacePlotProps } from "./SurfacePlot.types.js";
+export type { SurfacePlotProps } from "./SurfacePlot.types";
