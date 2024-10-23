@@ -1,6 +1,6 @@
 {
   "name": "@ipguk/react-ui",
-  "version": "8.11.0",
+  "version": "9.0.0-2",
   "description": "React UI component library for IPG web applications",
   "author": {
     "name": "IPG-Automotive-UK"
@@ -18,7 +18,7 @@
   "engines": {
     "node": ">=10"
   },
-  "sideEffects": "true",
+  "sideEffects": true,
   "type": "module",
   "scripts": {
     "build": "pnpm run clean && pnpm run copy-files && tsc --project ./tsconfig.production.json",
