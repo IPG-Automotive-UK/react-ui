@@ -4,4 +4,4 @@ export {
   type DetailCardHeaderProps
 } from "./DetailCard";
 export { default as SummaryCard, type SummaryCardProps } from "./SummaryCard";
-export { default as TableCard, type TableCardProps } from "./TableCard";
+export { TableCard, type TableCardProps } from "./TableCard";
