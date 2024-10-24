@@ -2,7 +2,7 @@ import React, { Suspense, lazy } from "react";
 
 import { RoadMarkingProps } from "./RoadMarking.types";
 
-const LazyImportedRoadMarking = lazy(() => import("./RoadMarking"));
+const LazyImportedRoadMarking = lazy(() => import("./RoadMarking.js"));
 
 /**
  * RoadMarking component wrapped in suspense to avoid import problems with canvas

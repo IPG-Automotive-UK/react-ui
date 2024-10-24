@@ -2,7 +2,7 @@ import React, { Suspense, lazy } from "react";
 
 import { VehiclePathProps } from "./VehiclePath.types";
 
-const LazyImportedVehiclePath = lazy(() => import("./VehiclePath"));
+const LazyImportedVehiclePath = lazy(() => import("./VehiclePath.js"));
 
 /**
  * VehiclePath component wrapped in suspense to avoid import problems with canvas

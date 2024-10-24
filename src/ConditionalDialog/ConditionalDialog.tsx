@@ -1,7 +1,7 @@
-import { Box, Dialog, DialogContent } from "@mui/material";
+import { Box, Dialog, DialogContent } from "@mui/material/index.js";
 
 import { ConditionalDialogProps } from "./ConditionalDialog.types";
-import DialogTitle from "../DialogTitle";
+import DialogTitle from "../DialogTitle/index.js";
 import React from "react";
 
 // This component is used to render a dialog that uses the full width (if the condition is true)

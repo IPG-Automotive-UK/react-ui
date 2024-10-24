@@ -1,5 +1,5 @@
 import { SvgIconProps } from "../SvgIcons.types";
-import VirtoID from "./VirtoID";
+import VirtoID from "./VirtoID.js";
 
 export type VirtoIDProps = SvgIconProps;
 

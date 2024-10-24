@@ -1,5 +1,5 @@
 import type { DialogProps } from "@mui/material/Dialog";
-import EditLabelDialog from "./EditLabelDialog";
+import EditLabelDialog from "./EditLabelDialog.js";
 import type { Label } from "../LabelSelector/Label.types";
 
 export type EditLabelDialogProps = {

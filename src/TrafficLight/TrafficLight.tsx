@@ -1,8 +1,8 @@
-import { states, trafficLightsWithImages } from "./trafficLightUtils";
+import { states, trafficLightsWithImages } from "./trafficLightUtils.js";
 import { useEffect, useRef, useState } from "react";
 
 import { TrafficLightProps } from "./TrafficLight.types";
-import { TrafficLightSelector } from "./TrafficLightSelector";
+import { TrafficLightSelector } from "./TrafficLightSelector.js";
 
 /**
  * @param type - A string specifying the type of traffic light. Default is "red-yellow-green"

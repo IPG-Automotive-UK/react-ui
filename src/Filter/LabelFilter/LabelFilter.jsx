@@ -7,10 +7,10 @@ import {
   TextField,
   Typography,
   autocompleteClasses
-} from "@mui/material";
+} from "@mui/material/index.js";
 
-import AlwaysOpenAutocomplete from "../AlwaysOpenAutocomplete";
-import LabelChip from "../../LabelSelector/LabelChip/LabelChip";
+import AlwaysOpenAutocomplete from "../AlwaysOpenAutocomplete.js";
+import LabelChip from "../../LabelSelector/LabelChip/index.js";
 
 /**
  * A label filter allows the user to select multiple labels from a list.

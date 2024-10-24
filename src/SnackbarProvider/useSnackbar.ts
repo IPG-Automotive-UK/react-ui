@@ -1,5 +1,5 @@
 import React from "react";
-import SnackbarContext from "./SnackbarContext";
+import SnackbarContext from "./SnackbarContext.js";
 
 /**
  * Hook to control snackbar from within a SnackbarProvider

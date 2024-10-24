@@ -1,5 +1,5 @@
-import Snackbar, { SnackbarProps } from "../Snackbar";
-import SnackbarContext, { SnackbarContextType } from "./SnackbarContext";
+import Snackbar, { SnackbarProps } from "../Snackbar/index.js";
+import SnackbarContext, { SnackbarContextType } from "./SnackbarContext.js";
 
 import React from "react";
 import { SnackbarProviderProps } from "./SnackbarProvider.types";

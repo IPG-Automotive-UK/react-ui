@@ -1,5 +1,5 @@
-import type { DialogProps } from "@mui/material";
-import PasswordChangeDialog from "./PasswordChangeDialog";
+import type { DialogProps } from "@mui/material/index.js";
+import PasswordChangeDialog from "./PasswordChangeDialog.js";
 
 export type PasswordChangeDialogProps = {
   errorMessage?: string;

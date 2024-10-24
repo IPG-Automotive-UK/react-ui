@@ -1,7 +1,7 @@
-import { Box, Link, Typography, useTheme } from "@mui/material";
+import { Box, Link, Typography, useTheme } from "@mui/material/index.js";
 import React, { Fragment } from "react";
 
-import IpgLogo from "../SvgIcons/IpgLogo";
+import IpgLogo from "../SvgIcons/IpgLogo/index.js";
 import { SidebarProps } from "./Sidebar.types";
 
 // sidebar component for app which displays logo, list of items and app version

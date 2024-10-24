@@ -5,10 +5,11 @@ import {
   FormHelperText,
   Grid,
   TextField
-} from "@mui/material";
-import PropTypes from "prop-types";
+} from "@mui/material/index.js";
+
+import PropTypes from "prop-types/index.js";
 import React from "react";
-import { useMaterialForm } from "../utils/form";
+import { useMaterialForm } from "../utils/form.js";
 import zxcvbn from "zxcvbn";
 
 /**

@@ -13,10 +13,10 @@ import {
   SvgIcon,
   Typography,
   iconButtonClasses
-} from "@mui/material";
-import { alpha, useTheme } from "@mui/material/styles";
+} from "@mui/material/index.js";
+import { alpha, useTheme } from "@mui/material/styles/index.js";
 
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown.js";
 
 /**
  * SvgIcon for use with the ModelButton. Square shape with a 2px border and 20px border radius.

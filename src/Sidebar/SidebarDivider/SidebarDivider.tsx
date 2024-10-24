@@ -1,4 +1,4 @@
-import { Divider } from "@mui/material";
+import { Divider } from "@mui/material/index.js";
 import React from "react";
 
 /**

@@ -1,9 +1,9 @@
-import { Box, useTheme } from "@mui/material";
+import { Box, useTheme } from "@mui/material/index.js";
 
 import { ModelButtonImageProps } from "./ModelButtonImage.types";
 import React from "react";
 import { colord } from "colord";
-import solve from "./color2filter";
+import solve from "./color2filter.js";
 
 // ModelButtonImage component is used to display the model icon in the ModelButton component.
 export default function ModelButtonImage({

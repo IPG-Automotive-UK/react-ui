@@ -1,5 +1,5 @@
 import { SvgIconProps } from "../SvgIcons.types";
-import VirtoData from "./VirtoData";
+import VirtoData from "./VirtoData.js";
 
 export type VirtoDataProps = SvgIconProps;
 

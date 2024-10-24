@@ -1,4 +1,4 @@
-import FilterPopper from "./FilterPopper";
+import FilterPopper from "./FilterPopper.js";
 
 export type FilterPopperProps = {
   children?: React.ReactNode;

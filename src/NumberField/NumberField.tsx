@@ -1,4 +1,4 @@
-import { InputAdornment, TextField } from "@mui/material";
+import { InputAdornment, TextField } from "@mui/material/index.js";
 import React, { ChangeEvent, useEffect, useState } from "react";
 
 import { NumberFieldProps } from "./NumberField.types";

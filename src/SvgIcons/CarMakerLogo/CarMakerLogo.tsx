@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { CarMakerLogoProps } from "./CarMakerLogo.types";
-import SvgIcon from "@mui/material/SvgIcon";
+import SvgIcon from "@mui/material/SvgIcon/index.js";
 
 // CarMaker icon svg
 function Icon({ sx }: CarMakerLogoProps) {

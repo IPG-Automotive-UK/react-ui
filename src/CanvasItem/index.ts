@@ -1,4 +1,4 @@
-import CanvasItem from "./CanvasItem";
+import CanvasItem from "./CanvasItem.js";
 
 export type CanvasItemProps = {
   /**

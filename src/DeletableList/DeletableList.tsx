@@ -1,6 +1,11 @@
-import { IconButton, List, ListItem, ListItemText } from "@mui/material";
+import {
+  IconButton,
+  List,
+  ListItem,
+  ListItemText
+} from "@mui/material/index.js";
 
-import CloseIcon from "@mui/icons-material/Close";
+import CloseIcon from "@mui/icons-material/Close.js";
 import { DeletableListProps } from "./DeletableList.types";
 import React from "react";
 

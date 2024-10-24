@@ -1,4 +1,4 @@
-import MultiColor from "./MultiColor";
+import MultiColor from "./MultiColor.js";
 
 type Row = {
   color: string;

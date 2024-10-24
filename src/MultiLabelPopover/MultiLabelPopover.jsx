@@ -1,9 +1,9 @@
 import * as React from "react";
 
-import { Box, Popover, Typography } from "@mui/material";
+import { Box, Popover, Typography } from "@mui/material/index.js";
 
-import LabelChip from "../LabelSelector/LabelChip";
-import PropTypes from "prop-types";
+import LabelChip from "../LabelSelector/LabelChip/index.js";
+import PropTypes from "prop-types/index.js";
 
 /**
  * Handles the rendering of multiple labels. If there is only one label, it will render a single label chip. If there are multiple labels, it will render a popover with all the labels inside when the label is hovered.

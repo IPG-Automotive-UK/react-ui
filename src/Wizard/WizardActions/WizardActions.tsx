@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Stack } from "@mui/material";
+import { Stack } from "@mui/material/index.js";
 import { WizardActionsProps } from "./WizardActions.types";
 
 /**

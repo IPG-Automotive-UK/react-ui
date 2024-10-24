@@ -3,13 +3,19 @@ import {
   IconButton,
   Snackbar as MuiSnackbar,
   SnackbarContent
-} from "@mui/material";
-import { CheckCircle, Close, Error, Info, Warning } from "@mui/icons-material";
-import { amber, green } from "@mui/material/colors";
+} from "@mui/material/index.js";
+import {
+  CheckCircle,
+  Close,
+  Error,
+  Info,
+  Warning
+} from "@mui/icons-material/index.js";
+import { amber, green } from "@mui/material/colors/index.js";
 
 import React from "react";
 import type { SnackbarProps } from "./Snackbar.types";
-import { Theme } from "@mui/material/styles";
+import { Theme } from "@mui/material/styles/index.js";
 
 // icon map
 const icons = {

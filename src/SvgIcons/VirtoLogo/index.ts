@@ -1,5 +1,5 @@
 import { SvgIconProps } from "../SvgIcons.types";
-import VirtoLogo from "./VirtoLogo";
+import VirtoLogo from "./VirtoLogo.js";
 
 export type VirtoLogoProps = SvgIconProps;
 

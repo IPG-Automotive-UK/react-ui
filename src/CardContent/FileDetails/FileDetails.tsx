@@ -7,12 +7,12 @@ import {
   Stack,
   Tooltip,
   Typography
-} from "@mui/material";
+} from "@mui/material/index.js";
 import React, { useEffect, useRef, useState } from "react";
 
 import { FileDetailsProps } from "./FileDetails.types";
-import { ResizeObserver } from "@juggle/resize-observer";
-import SearchBar from "../../SearchBar/SearchBar";
+import { ResizeObserver } from "@juggle/resize-observer/lib/exports/resize-observer.js";
+import SearchBar from "../../SearchBar/index.js";
 
 function FileDetails({
   downloadButtonText = "Download",

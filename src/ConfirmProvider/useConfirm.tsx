@@ -1,6 +1,6 @@
 import { useCallback, useContext, useEffect, useMemo } from "react";
 
-import ConfirmContext from "./ConfirmContext";
+import ConfirmContext from "./ConfirmContext.js";
 import { ConfirmationDialogOptions } from "./ConfirmProvider.types"; // Ensure this type exists in your types file
 
 let idCounter = 0;

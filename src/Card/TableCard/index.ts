@@ -1,4 +1,4 @@
-import TableCard from "./TableCard";
+import TableCard from "./TableCard.js";
 
 export type TableCardProps = {
   action?: React.ReactNode;

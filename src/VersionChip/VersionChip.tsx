@@ -1,5 +1,5 @@
-import { AccountTree, Layers } from "@mui/icons-material";
-import { Chip, alpha, chipClasses, useTheme } from "@mui/material";
+import { AccountTree, Layers } from "@mui/icons-material/index.js";
+import { Chip, alpha, chipClasses, useTheme } from "@mui/material/index.js";
 
 import React from "react";
 import { VersionChipProps } from "./VersionChip.types";

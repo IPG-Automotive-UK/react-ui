@@ -1,2 +1,2 @@
-export { default } from "./LabelChip";
+export { default } from "./LabelChip.js";
 export type { LabelChipProps } from "./LabelChip.types";

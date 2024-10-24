@@ -1,19 +1,19 @@
 /* eslint-disable no-undef */
 
-import type {} from "@mui/x-data-grid/themeAugmentation";
+import type {} from "@mui/x-data-grid/themeAugmentation/index.js";
 
 import {
   ThemeProvider as MuiThemeProvider,
   ThemeOptions,
   createTheme
-} from "@mui/material/styles";
+} from "@mui/material/styles/index.js";
 import React, { useEffect } from "react";
 
-import PropTypes from "prop-types";
-import ThemeContext from "./ThemeContext";
+import PropTypes from "prop-types/index.js";
+import ThemeContext from "./ThemeContext.js";
 import { ThemeProviderProps } from "./ThemeProvider.types";
-import darkScrollbar from "@mui/material/darkScrollbar";
-import { grey } from "@mui/material/colors";
+import darkScrollbar from "@mui/material/darkScrollbar/index.js";
+import { grey } from "@mui/material/colors/index.js";
 
 // extend the theme to include custom properties
 // https://mui.com/material-ui/customization/theming/#custom-variables

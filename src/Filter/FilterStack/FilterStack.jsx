@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import { Box } from "@mui/material";
-import ClearFilterButton from "./ClearFilterButton";
-import PropTypes from "prop-types";
+import { Box } from "@mui/material/index.js";
+import ClearFilterButton from "./ClearFilterButton.js";
+import PropTypes from "prop-types/index.js";
 
 /**
  * Stacks filters horizontally. If the filter count is positive, a "Clear Filters" button is shown. Responsively flows filters to the next line if they don't fit on the current line.

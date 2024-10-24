@@ -5,8 +5,8 @@ import {
   FormatAlignJustify,
   FormatAlignLeft,
   FormatAlignRight
-} from "@mui/icons-material";
-import { ToggleButton, ToggleButtonGroup } from "@mui/material";
+} from "@mui/icons-material/index.js";
+import { ToggleButton, ToggleButtonGroup } from "@mui/material/index.js";
 
 import { AlignHorizontalProps } from "./AlignHorizontal.types";
 

@@ -1,12 +1,12 @@
-import { Box, CssBaseline, Drawer, Hidden } from "@mui/material";
+import { Box, CssBaseline, Drawer, Hidden } from "@mui/material/index.js";
 import React, { Fragment, useState } from "react";
 
-import AppHeader from "../AppHeader";
+import AppHeader from "../AppHeader/index.js";
 import { AppLayoutProps } from "./AppLayout.types";
-import { ConfirmProvider } from "../ConfirmProvider";
-import Sidebar from "../Sidebar";
-import { SnackbarProvider } from "../SnackbarProvider";
-import ThemeProvider from "../ThemeProvider";
+import { ConfirmProvider } from "../ConfirmProvider/index.js";
+import Sidebar from "../Sidebar/index.js";
+import { SnackbarProvider } from "../SnackbarProvider/index.js";
+import ThemeProvider from "../ThemeProvider/index.js";
 
 // app layout component
 function Layout({

@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import { centerToTL, degToRadian, getNewStyle, tLToCenter } from "./utils";
+import { centerToTL, degToRadian, getNewStyle, tLToCenter } from "./utils.js";
 
-import Rect from "./Rect";
+import Rect from "./Rect.js";
 
 /**
  * CanvasItem is a component that can be used for as part of a drawing application. It includes features such as resize, rotate, and drag.

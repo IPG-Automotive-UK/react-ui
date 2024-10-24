@@ -8,13 +8,13 @@ import {
   TextField,
   Tooltip,
   Typography
-} from "@mui/material";
-import { CheckBox, CheckBoxOutlineBlank } from "@mui/icons-material";
+} from "@mui/material/index.js";
+import { CheckBox, CheckBoxOutlineBlank } from "@mui/icons-material/index.js";
 
 import { AutocompleteProps } from "./Autocomplete.types";
-import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline.js";
 import { KeyValueOption } from "../Common.types";
-import { isKeyValueOption } from "../utils/common";
+import { isKeyValueOption } from "../utils/common.js";
 
 export default function Autocomplete<
   Value extends KeyValueOption | string,

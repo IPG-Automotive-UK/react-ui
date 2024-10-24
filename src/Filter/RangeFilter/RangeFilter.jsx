@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import { Box, InputLabel, Slider } from "@mui/material";
+import { Box, InputLabel, Slider } from "@mui/material/index.js";
 
-import PropTypes from "prop-types";
+import PropTypes from "prop-types/index.js";
 
 /**
  * A range filter allows to filter between two values.

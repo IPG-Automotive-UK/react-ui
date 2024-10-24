@@ -1,11 +1,13 @@
 import * as React from "react";
+
 import {
   FormatBold,
   FormatItalic,
   FormatUnderlined
 } from "@mui/icons-material";
-import { ToggleButton, ToggleButtonGroup } from "@mui/material";
-import PropTypes from "prop-types";
+import { ToggleButton, ToggleButtonGroup } from "@mui/material/index.js";
+
+import PropTypes from "prop-types/index.js";
 
 /**
  * Font style button group component to toggle between bold, italic and underline

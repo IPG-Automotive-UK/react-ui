@@ -9,7 +9,7 @@ import {
   TableContainer,
   TableRow,
   Typography
-} from "@mui/material";
+} from "@mui/material/index.js";
 
 import React from "react";
 

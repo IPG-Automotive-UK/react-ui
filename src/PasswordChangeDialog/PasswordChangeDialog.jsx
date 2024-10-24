@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import {
   Alert,
   Button,
@@ -12,10 +13,11 @@ import {
   DialogTitle as MuiDialogTitle,
   TextField,
   Typography
-} from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
-import PropTypes from "prop-types";
-import { useMaterialForm } from "../utils/form";
+} from "@mui/material/index.js";
+
+import CloseIcon from "@mui/icons-material/Close.js";
+import PropTypes from "prop-types/index.js";
+import { useMaterialForm } from "../utils/form.js";
 import zxcvbn from "zxcvbn";
 
 /**

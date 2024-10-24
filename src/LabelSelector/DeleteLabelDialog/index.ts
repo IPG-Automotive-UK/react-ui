@@ -1,5 +1,5 @@
-import DeleteLabelDialog from "./DeleteLabelDialog";
-import type { DialogProps } from "@mui/material/Dialog";
+import DeleteLabelDialog from "./DeleteLabelDialog.js";
+import type { DialogProps } from "@mui/material/Dialog/index.js";
 import type { Label } from "../Label.types";
 
 export type DeleteLabelDialogProps = {

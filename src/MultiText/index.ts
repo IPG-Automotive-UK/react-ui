@@ -1,4 +1,4 @@
-import MultiText from "./MultiText";
+import MultiText from "./MultiText.js";
 
 type Row = {
   label: string;

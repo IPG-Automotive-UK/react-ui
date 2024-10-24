@@ -3,7 +3,7 @@ import { FileRejection, useDropzone } from "react-dropzone";
 import { FileWithData } from "./Uploader.types";
 import React from "react";
 import { UseUploaderProps } from "./useUploader.types";
-import { readAsDataURL } from "../utils/readAsDataURL";
+import { readAsDataURL } from "../utils/readAsDataURL.js";
 
 /**
  * Hook to handle file selection logic for uploaders. It is a wrapper around react-dropzone.

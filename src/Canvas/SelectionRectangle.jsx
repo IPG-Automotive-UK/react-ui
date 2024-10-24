@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import { Box, alpha } from "@mui/material";
+import { Box, alpha } from "@mui/material/index.js";
 
-import PropTypes from "prop-types";
+import PropTypes from "prop-types/index.js";
 
 /**
  * Rectangle that is drawn when the user is selecting a region of the canvas.

@@ -1,4 +1,4 @@
-export { default } from "./DetailCard";
+export { default } from "./DetailCard.js";
 export type {
   DetailCardProps,
   DetailCardHeaderProps

@@ -1,11 +1,17 @@
-import { Box, Button, Popover, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Popover,
+  Stack,
+  Typography
+} from "@mui/material/index.js";
 
-import LabelChip from "../LabelChip/LabelChip";
+import LabelChip from "../LabelChip/index.js";
 import { LabelChipGroupProps } from "./LabelChipGroup.types";
 import type { LabelChipProps } from "../LabelChip/LabelChip.types";
 import React from "react";
-import { ResizeObserver } from "@juggle/resize-observer";
-import { sortLabelChips } from "./sortLabelChips";
+import { ResizeObserver } from "@juggle/resize-observer/lib/exports/resize-observer.js";
+import { sortLabelChips } from "./sortLabelChips.js";
 
 /**
  * The LabelChipGroup component. This component displays a group of LabelChip components in a row. If any of the chips overflow the parent container width, they will be hidden and a popover will be used to show the hidden chips. The chips are sorted by length first, then alphabetically.

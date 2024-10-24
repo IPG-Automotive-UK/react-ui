@@ -1,7 +1,7 @@
-import { ButtonBase, Typography } from "@mui/material";
+import { ButtonBase, Typography } from "@mui/material/index.js";
 
 import React from "react";
-import { SelectorButtonProps } from ".";
+import { SelectorButtonProps } from "./index.js";
 
 // Selector Buttons for scene/upload page
 export default function SelectorButton({

@@ -6,8 +6,8 @@ import {
   Menu,
   MenuItem,
   Typography
-} from "@mui/material";
-import { ExitToApp, VpnKey } from "@mui/icons-material";
+} from "@mui/material/index.js";
+import { ExitToApp, VpnKey } from "@mui/icons-material/index.js";
 import React, { Fragment } from "react";
 import {
   bindMenu,
@@ -15,8 +15,8 @@ import {
   usePopupState
 } from "material-ui-popup-state/hooks";
 
-import { Theme } from "@mui/material/styles";
-import { UserAvatar } from "../UserAvatar";
+import { Theme } from "@mui/material/styles/index.js";
+import { UserAvatar } from "../UserAvatar/index.js";
 import { UserMenuProps } from "./UserMenu.types";
 
 // styling

@@ -1,4 +1,4 @@
-import PasswordChangeForm from "./PasswordChangeForm";
+import PasswordChangeForm from "./PasswordChangeForm.js";
 
 export type PasswordChangeFormProps = {
   loading?: boolean;

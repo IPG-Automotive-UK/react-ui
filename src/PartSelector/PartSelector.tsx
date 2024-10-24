@@ -1,8 +1,8 @@
-import Autocomplete from "../Autocomplete";
-import { Box } from "@mui/material";
+import Autocomplete from "../Autocomplete/index.js";
+import { Box } from "@mui/material/index.js";
 import { PartSelectorProps } from "./PartSelector.types";
 import React from "react";
-import { uniqueSortedArray } from "../utils/common";
+import { uniqueSortedArray } from "../utils/common.js";
 
 // component to select a part
 function PartSelector({

@@ -5,8 +5,8 @@ import {
 import React, { Children, isValidElement } from "react";
 
 import { BreadcrumbsProps } from "./Breadcrumbs.types";
-import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import TruncatedTooltip from "../TruncatedTooltip/TruncatedTooltip";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext.js";
+import TruncatedTooltip from "../TruncatedTooltip/index.js";
 
 /**
  * Breadcrumbs component.

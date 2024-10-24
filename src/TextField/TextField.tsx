@@ -1,5 +1,5 @@
 import MaskedInput from "react-text-mask";
-import { TextField as MuiTextField } from "@mui/material";
+import { TextField as MuiTextField } from "@mui/material/index.js";
 import React from "react";
 import { TextFieldProps } from "./TextField.types";
 

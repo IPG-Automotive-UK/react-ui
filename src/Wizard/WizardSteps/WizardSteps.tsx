@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Stepper } from "@mui/material";
+import { Stepper } from "@mui/material/index.js";
 import { WizardStepProps } from "./WizardStep/WizardStep.types";
 import { WizardStepsProps } from "./WizardSteps.types";
 

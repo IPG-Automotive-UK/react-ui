@@ -1,4 +1,4 @@
-import RangeFilter from "./RangeFilter";
+import RangeFilter from "./RangeFilter.js";
 
 export type RangeFilterProps = {
   label?: string;

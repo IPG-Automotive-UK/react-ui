@@ -1,9 +1,14 @@
 import * as React from "react";
 
-import { ClickAwayListener, Paper, Popper, Stack } from "@mui/material";
+import {
+  ClickAwayListener,
+  Paper,
+  Popper,
+  Stack
+} from "@mui/material/index.js";
 
-import FilterButton from "./FilterButton";
-import PropTypes from "prop-types";
+import FilterButton from "./FilterButton.js";
+import PropTypes from "prop-types/index.js";
 
 /**
  * A button that represents a filter state. Clicking opens a popper containing children.

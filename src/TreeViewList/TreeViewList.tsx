@@ -1,11 +1,17 @@
-import { Box, Tooltip, Typography, alpha, debounce } from "@mui/material";
+import {
+  Box,
+  Tooltip,
+  Typography,
+  alpha,
+  debounce
+} from "@mui/material/index.js";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { SimpleTreeView, TreeItem } from "@mui/x-tree-view";
+import { SimpleTreeView, TreeItem } from "@mui/x-tree-view/index.js";
 import { TreeNodeItem, TreeViewListProps } from "./TreeViewList.types";
 
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
-import SearchBar from "../SearchBar/SearchBar";
+import AddIcon from "@mui/icons-material/Add.js";
+import RemoveIcon from "@mui/icons-material/Remove.js";
+import SearchBar from "../SearchBar/index.js";
 
 /**
  * A component that renders a tree view list.

@@ -1,6 +1,12 @@
-import { Autocomplete, Box, TextField, Typography } from "@mui/material";
+import {
+  Autocomplete,
+  Box,
+  TextField,
+  Typography
+} from "@mui/material/index.js";
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+
+import PropTypes from "prop-types/index.js";
 
 // default font options list
 const defaultFonts = new Set(

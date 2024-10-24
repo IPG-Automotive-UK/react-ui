@@ -1,6 +1,10 @@
-import { Box, IconButton, DialogTitle as MuiDialogTitle } from "@mui/material";
+import {
+  Box,
+  IconButton,
+  DialogTitle as MuiDialogTitle
+} from "@mui/material/index.js";
 
-import CloseIcon from "@mui/icons-material/Close";
+import CloseIcon from "@mui/icons-material/Close.js";
 import type { DialogTitleProps } from "./DialogTitle.types";
 import React from "react";
 

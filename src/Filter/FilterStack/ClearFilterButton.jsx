@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Button } from "@mui/material";
+import { Button } from "@mui/material/index.js";
 
 export default function ClearFilterButton({ onClick }) {
   return (

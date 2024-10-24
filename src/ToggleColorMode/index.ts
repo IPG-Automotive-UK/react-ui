@@ -1,4 +1,4 @@
-import ToggleColorMode from "./ToggleColorMode";
+import ToggleColorMode from "./ToggleColorMode.js";
 
 export type ToggleColorModeProps = {
   mode?: "light" | "dark";

@@ -1,4 +1,4 @@
-import SwitchField from "./SwitchField";
+import SwitchField from "./SwitchField.js";
 import type { SwitchProps } from "@mui/material";
 
 /**

@@ -1,7 +1,7 @@
 import * as React from "react";
 
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { Button } from "@mui/material";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward.js";
+import { Button } from "@mui/material/index.js";
 import { WizardActionButtonProps } from "../WizardActions.types";
 
 /**

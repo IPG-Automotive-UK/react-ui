@@ -1,9 +1,9 @@
 import * as React from "react";
 
-import { Box, SvgIcon } from "@mui/material";
+import { Box, SvgIcon } from "@mui/material/index.js";
 
-import PropTypes from "prop-types";
-import useResize from "./useResize";
+import PropTypes from "prop-types/index.js";
+import useResize from "./useResize.js";
 
 /**
  * Diagonal resize handle for the bottom right corner of a box.

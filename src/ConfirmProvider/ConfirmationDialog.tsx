@@ -4,11 +4,11 @@ import {
   DialogActions,
   DialogContent,
   Divider
-} from "@mui/material";
+} from "@mui/material/index.js";
 
 import { ConfirmationDialogProps } from "./ConfirmProvider.types";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "../DialogTitle";
+import DialogContentText from "@mui/material/DialogContentText/index.js";
+import DialogTitle from "../DialogTitle/index.js";
 import React from "react";
 
 const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({

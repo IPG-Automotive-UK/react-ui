@@ -1,11 +1,11 @@
 import * as React from "react";
 
-import { ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { ToggleButton, ToggleButtonGroup } from "@mui/material/index.js";
 import {
   VerticalAlignBottom,
   VerticalAlignCenter,
   VerticalAlignTop
-} from "@mui/icons-material";
+} from "@mui/icons-material/index.js";
 
 import { AlignVerticalProps } from "./AlignVertical.types";
 

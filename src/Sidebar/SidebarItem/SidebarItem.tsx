@@ -6,12 +6,12 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText
-} from "@mui/material";
+} from "@mui/material/index.js";
 
-import type { BadgeProps } from "@mui/material";
+import type { BadgeProps } from "@mui/material/index.js";
 import React from "react";
 import { SidebarItemProps } from "./SidebarItem.types";
-import { Theme } from "@mui/material/styles";
+import { Theme } from "@mui/material/styles/index.js";
 
 /**
  * Sidebar list item with icon.

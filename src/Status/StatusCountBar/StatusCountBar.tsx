@@ -1,12 +1,12 @@
-import { Box, Fade } from "@mui/material";
+import { Box, Fade } from "@mui/material/index.js";
 import { bindPopper, usePopupState } from "material-ui-popup-state/hooks";
 
-import Popper from "@mui/material/Popper";
+import Popper from "@mui/material/Popper/index.js";
 import React from "react";
 import { StatusCountBarProps } from "./StatusCountBar.types";
-import { StatusCountTable } from "../StatusCountTable";
-import statuses from "../statuses";
-import { useDelayedHover } from "../../hover/useDelayedHover";
+import { StatusCountTable } from "../StatusCountTable/index.js";
+import statuses from "../statuses.js";
+import { useDelayedHover } from "../../hover/useDelayedHover.js";
 
 /**
  * Bar component that renders statuses with width depending on the number of items that match that status and color.

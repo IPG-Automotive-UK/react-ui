@@ -1,5 +1,5 @@
 import React from "react";
-import SvgIcon from "@mui/material/SvgIcon";
+import SvgIcon from "@mui/material/SvgIcon/index.js";
 import { VirtoHeadScratchingProps } from "./VirtoHeadScratching.types";
 
 export function VirtoHeadScratching({ sx }: VirtoHeadScratchingProps) {

@@ -1,11 +1,14 @@
 import { BaseSyntheticEvent } from "react";
 import type { Label } from "./Label.types";
-import LabelSelector from "./LabelSelector";
-export { default as LabelChip, type LabelChipProps } from "./LabelChip";
+import LabelSelector from "./LabelSelector.js";
+export {
+  default as LabelChip,
+  type LabelChipProps
+} from "./LabelChip/index.js";
 export {
   default as LabelChipGroup,
   type LabelChipGroupProps
-} from "./LabelChipGroup";
+} from "./LabelChipGroup/index.js";
 
 export type LabelSelectorProps = {
   addEnabled?: boolean;

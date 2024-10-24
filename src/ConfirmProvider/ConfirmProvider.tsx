@@ -5,9 +5,9 @@ import {
 } from "./ConfirmProvider.types";
 import React, { Fragment, useCallback, useState } from "react";
 
-import ConfirmContext from "./ConfirmContext";
-import ConfirmationDialog from "./ConfirmationDialog";
-import { Theme } from "@mui/material/styles";
+import ConfirmContext from "./ConfirmContext.js";
+import ConfirmationDialog from "./ConfirmationDialog.js";
+import { Theme } from "@mui/material/styles/index.js";
 
 // define default props
 const DEFAULT_OPTIONS: ConfirmationDialogOptions = {

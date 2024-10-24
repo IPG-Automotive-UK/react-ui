@@ -1,4 +1,4 @@
-import FeedbackForm from "./FeedbackForm";
+import FeedbackForm from "./FeedbackForm.js";
 
 export type FeedbackFormProps = {
   dialogPosition?: "rightTop" | "bottomLeft" | "leftTop" | "leftBottom";

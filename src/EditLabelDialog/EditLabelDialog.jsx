@@ -9,13 +9,13 @@ import {
   Grid,
   TextField,
   Typography
-} from "@mui/material";
+} from "@mui/material/index.js";
 import React, { useEffect, useState } from "react";
 
-import Color from "../Color";
-import DialogTitle from "../DialogTitle";
-import LabelChip from "../LabelSelector/LabelChip/LabelChip";
-import PropTypes from "prop-types";
+import Color from "../Color/index.js";
+import DialogTitle from "../DialogTitle/index.js";
+import LabelChip from "../LabelSelector/LabelChip/index.js";
+import PropTypes from "prop-types/index.js";
 
 //  edit label dialog allows for the editing and creating new specific label objects
 export default function EditLabelDialog({

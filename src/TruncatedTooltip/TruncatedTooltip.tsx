@@ -1,4 +1,4 @@
-import { Box, Tooltip } from "@mui/material";
+import { Box, Tooltip } from "@mui/material/index.js";
 import React, {
   Children,
   ReactElement,

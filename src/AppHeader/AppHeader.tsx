@@ -1,9 +1,9 @@
-import { AppBar, Box, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, Toolbar, Typography } from "@mui/material/index.js";
 
 import { AppHeaderProps } from "./AppHeader.types";
-import IpgLogo from "../SvgIcons/IpgLogo";
+import IpgLogo from "../SvgIcons/IpgLogo/index.js";
 import React from "react";
-import UserMenu from "../UserMenu";
+import UserMenu from "../UserMenu/index.js";
 
 // appbar component
 function AppHeader({

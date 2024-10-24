@@ -8,10 +8,10 @@ import {
   DialogTitle,
   IconButton,
   Stack
-} from "@mui/material";
+} from "@mui/material/index.js";
 
 import { ActionDialogProps } from "./ActionDialog.types";
-import CloseIcon from "@mui/icons-material/Close";
+import CloseIcon from "@mui/icons-material/Close.js";
 
 /**
  * ActionDialog component is used to show a dialog with title, content and action buttons.

@@ -1,4 +1,4 @@
-import FilterStack from "./FilterStack";
+import FilterStack from "./FilterStack.js";
 
 export type FilterStackProps = {
   children?: React.ReactNode;

@@ -6,13 +6,13 @@ import {
   TableHead,
   TableRow,
   Typography
-} from "@mui/material";
+} from "@mui/material/index.js";
 
 import React from "react";
 import { Status } from "../statuses.types";
 import { StatusCountTableProps } from "./StatusCountTable.types";
-import StatusIcon from "../StatusIcon";
-import statuses from "../statuses";
+import StatusIcon from "../StatusIcon/index.js";
+import statuses from "../statuses.js";
 
 /**
  * Table that renders statuses vs. the number of items that match that status. Header row shows the total count alongside a title.

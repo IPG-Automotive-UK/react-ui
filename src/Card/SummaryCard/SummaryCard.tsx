@@ -8,14 +8,14 @@ import {
   Popover,
   Stack,
   cardHeaderClasses
-} from "@mui/material";
+} from "@mui/material/index.js";
 import React, { useState } from "react";
 
-import { Infographic } from "../../CardContent";
-import LabelChipGroup from "../../LabelSelector/LabelChipGroup/LabelChipGroup";
+import { Infographic } from "../../CardContent/index.js";
+import LabelChipGroup from "../../LabelSelector/LabelChipGroup/index.js";
 import type { LabelChipGroupProps } from "../../LabelSelector/LabelChipGroup/LabelChipGroup.types";
-import { MoreVert } from "@mui/icons-material";
-import NoWrapTypography from "../../NoWrapTypography/NoWrapTypography";
+import { MoreVert } from "@mui/icons-material/index.js";
+import NoWrapTypography from "../../NoWrapTypography/index.js";
 import { SummaryCardProps } from "./SummaryCard.types";
 
 // TODO: add tests in browser once we are done with the migration to cypress. The old tests live in a txt file in this folder until then.

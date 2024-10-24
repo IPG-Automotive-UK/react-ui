@@ -1,10 +1,16 @@
-import { Box, LinearProgress, Stack, Typography, alpha } from "@mui/material";
+import {
+  Box,
+  LinearProgress,
+  Stack,
+  Typography,
+  alpha
+} from "@mui/material/index.js";
 
-import FileUploadIcon from "@mui/icons-material/FileUpload";
+import FileUploadIcon from "@mui/icons-material/FileUpload.js";
 import { ImageUploaderProps } from "./ImageUploader.types";
 import React from "react";
-import UploaderHeader from "../Uploader/UploaderHeader";
-import useUploader from "../Uploader/useUploader";
+import UploaderHeader from "../Uploader/UploaderHeader.js";
+import useUploader from "../Uploader/useUploader.js";
 
 export default function ImageUploader({
   title = "Upload Image",

@@ -1,8 +1,8 @@
-import Autocomplete from "../Autocomplete";
-import { Box } from "@mui/material";
+import Autocomplete from "../Autocomplete/index.js";
+import { Box } from "@mui/material/index.js";
 import React from "react";
 import { VehicleSelectorProps } from "./VehicleSelector.types";
-import { uniqueSortedArray } from "../utils/common";
+import { uniqueSortedArray } from "../utils/common.js";
 
 // component to select a vehicle
 function VehicleSelector({

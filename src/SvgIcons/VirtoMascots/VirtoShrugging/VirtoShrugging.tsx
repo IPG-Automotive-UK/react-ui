@@ -1,5 +1,5 @@
 import React from "react";
-import SvgIcon from "@mui/material/SvgIcon";
+import SvgIcon from "@mui/material/SvgIcon/index.js";
 import { VirtoShruggingProps } from "./VirtoShrugging.types";
 
 export function VirtoShrugging({ sx }: VirtoShruggingProps) {

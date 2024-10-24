@@ -1,8 +1,8 @@
-import { Box, Switch } from "@mui/material";
+import { Box, Switch } from "@mui/material/index.js";
 
-import PropTypes from "prop-types";
+import PropTypes from "prop-types/index.js";
 import React from "react";
-import { styled } from "@mui/material/styles";
+import { styled } from "@mui/material/styles/index.js";
 
 export default function ToggleColorMode({ mode, onChange }) {
   // handle switch change

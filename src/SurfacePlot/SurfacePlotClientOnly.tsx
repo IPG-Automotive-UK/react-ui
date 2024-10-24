@@ -1,9 +1,9 @@
 import React, { Suspense, lazy } from "react";
 
-import ClientOnly from "../ClientOnly";
+import ClientOnly from "../ClientOnly/index.js";
 import { SurfacePlotProps } from "./SurfacePlot.types";
 
-const LazyImportedSurfacePlot = lazy(() => import("./SurfacePlot"));
+const LazyImportedSurfacePlot = lazy(() => import("./SurfacePlot.js"));
 
 /**
  * SurfacePlot component wrapped in ClientOnly for use with server side rendering.

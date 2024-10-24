@@ -1,6 +1,6 @@
-import { MenuItem, TextField } from "@mui/material";
+import { MenuItem, TextField } from "@mui/material/index.js";
 
-import PropTypes from "prop-types";
+import PropTypes from "prop-types/index.js";
 import React from "react";
 
 /**

@@ -1,5 +1,5 @@
 import type { Label } from "../../LabelSelector/Label.types";
-import LabelFilter from "./LabelFilter";
+import LabelFilter from "./LabelFilter.js";
 
 export type LabelFilterProps = {
   label?: string;

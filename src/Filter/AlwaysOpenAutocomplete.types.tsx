@@ -1,4 +1,4 @@
-import { AutocompleteProps } from "@mui/material";
+import { AutocompleteProps } from "@mui/material/index.js";
 
 // Configure the props for the AlwaysOpenAutocomplete component by setting appropriate generics to configure the base MUI Autocomplete component for our use case.
 export type AlwaysOpenAutocompleteProps = AutocompleteProps<

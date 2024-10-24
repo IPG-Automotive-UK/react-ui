@@ -4,11 +4,11 @@ import {
   DialogContent,
   Typography,
   useTheme
-} from "@mui/material";
+} from "@mui/material/index.js";
 
-import DialogTitle from "../DialogTitle";
+import DialogTitle from "../DialogTitle/index.js";
 import { LinePlotProps } from "./LinePlot.types";
-import Plotly from "react-plotly.js";
+import Plotly from "react-plotly.js/index.js";
 import React from "react";
 
 const LinePlot = ({

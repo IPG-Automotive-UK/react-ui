@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { AsamLogoProps } from "./AsamLogo.types";
-import SvgIcon from "@mui/material/SvgIcon";
+import SvgIcon from "@mui/material/SvgIcon/index.js";
 
 export function AsamLogo({ sx }: AsamLogoProps) {
   return (

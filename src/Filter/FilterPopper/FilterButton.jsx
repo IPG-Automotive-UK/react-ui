@@ -1,9 +1,9 @@
 import * as React from "react";
 
-import { Button, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material/index.js";
 
-import { FilterList } from "@mui/icons-material";
-import PropTypes from "prop-types";
+import { FilterList } from "@mui/icons-material/index.js";
+import PropTypes from "prop-types/index.js";
 
 /**
  * A button that represents a filter state. It accepts an onClick callback, and renders a label and a filter count.

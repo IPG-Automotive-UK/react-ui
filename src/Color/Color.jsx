@@ -1,8 +1,8 @@
 import { Box, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
-import Checkbox from "../Checkbox/Checkbox";
-import PropTypes from "prop-types";
+import Checkbox from "../Checkbox/index.js";
+import PropTypes from "prop-types/index.js";
 import { RgbaColorPicker } from "react-colorful";
 import { colord } from "colord";
 import { useDebouncyFn } from "use-debouncy";

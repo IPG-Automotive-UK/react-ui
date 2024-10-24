@@ -1,10 +1,17 @@
-import { Alert, Button, Link, Paper, Typography, lighten } from "@mui/material";
+import {
+  Alert,
+  Button,
+  Link,
+  Paper,
+  Typography,
+  lighten
+} from "@mui/material/index.js";
 import React, { useState } from "react";
 
 import { LoadErrorMessageProps } from "./LoadErrorMessage.types";
-import { VirtoHeadScratching } from "../SvgIcons/VirtoMascots/VirtoHeadScratching";
-import { VirtoShrugging } from "../SvgIcons";
-import { VirtoThinking } from "../SvgIcons/VirtoMascots/VirtoThinking";
+import { VirtoHeadScratching } from "../SvgIcons/VirtoMascots/VirtoHeadScratching/index.js";
+import { VirtoShrugging } from "../SvgIcons/index.js";
+import { VirtoThinking } from "../SvgIcons/VirtoMascots/VirtoThinking/index.js";
 
 // LoadErrorMessage component
 const LoadErrorMessage = ({

@@ -1,4 +1,6 @@
-import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
+import Autocomplete, {
+  createFilterOptions
+} from "@mui/material/Autocomplete/index.js";
 import {
   Box,
   Button,
@@ -7,16 +9,16 @@ import {
   Stack,
   TextField,
   Tooltip
-} from "@mui/material";
-import { Delete, Edit } from "@mui/icons-material";
+} from "@mui/material/index.js";
+import { Delete, Edit } from "@mui/icons-material/index.js";
 import React, { useState } from "react";
 
-import Checkbox from "../Checkbox";
-import DeleteLabelDialog from "./DeleteLabelDialog/DeleteLabelDialog";
-import EditLabelDialog from "../EditLabelDialog/EditLabelDialog";
-import LabelChip from "./LabelChip/LabelChip";
-import NoWrapTypography from "../NoWrapTypography/NoWrapTypography";
-import PropTypes from "prop-types";
+import Checkbox from "../Checkbox/index.js";
+import DeleteLabelDialog from "./DeleteLabelDialog/index.js";
+import EditLabelDialog from "../EditLabelDialog/index.js";
+import LabelChip from "./LabelChip/index.js";
+import NoWrapTypography from "../NoWrapTypography/index.js";
+import PropTypes from "prop-types/index.js";
 
 // custom styling
 const styles = {

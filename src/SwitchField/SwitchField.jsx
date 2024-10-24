@@ -6,9 +6,9 @@ import {
   Stack,
   Switch,
   Typography
-} from "@mui/material";
+} from "@mui/material/index.js";
 
-import PropTypes from "prop-types";
+import PropTypes from "prop-types/index.js";
 import React from "react";
 
 /**

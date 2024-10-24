@@ -7,19 +7,19 @@ import {
   Typography,
   useTheme
 } from "@mui/material";
-import { LabelChipGroup, LabelChipGroupProps } from "../LabelSelector";
+import { LabelChipGroup, LabelChipGroupProps } from "../LabelSelector/index.js";
 
-import { AsamLogo } from "../SvgIcons/AsamLogo";
-import AttachFileIcon from "@mui/icons-material/AttachFile";
-import { CarMakerLogo } from "../SvgIcons/CarMakerLogo";
-import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";
-import NoWrapTypography from "../NoWrapTypography/NoWrapTypography";
-import NumbersIcon from "@mui/icons-material/Numbers";
+import { AsamLogo } from "../SvgIcons/AsamLogo/index.js";
+import AttachFileIcon from "@mui/icons-material/AttachFile.js";
+import { CarMakerLogo } from "../SvgIcons/CarMakerLogo/index.js";
+import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined.js";
+import NoWrapTypography from "../NoWrapTypography/index.js";
+import NumbersIcon from "@mui/icons-material/Numbers.js";
 import React from "react";
 import { RoadPreviewProps } from "./RoadPreview.types";
-import TruncatedTooltip from "../TruncatedTooltip";
-import UserAvatar from "../UserAvatar/UserAvatar";
-import VersionChip from "../VersionChip/VersionChip";
+import TruncatedTooltip from "../TruncatedTooltip/index.js";
+import { UserAvatar } from "../UserAvatar/index.js";
+import VersionChip from "../VersionChip/index.js";
 
 /**
  * RoadPreview component for visualizing Road information about specific road

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 import type { FigureProps } from "./Figure.types";
 import { Image } from "react-konva";
-import useImage from "use-image";
+import useImage from "use-image/index.js";
 
 /**
  * A UI component that displays an SVG of the road sign on a canvas.

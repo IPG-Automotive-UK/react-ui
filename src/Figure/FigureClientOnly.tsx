@@ -2,7 +2,7 @@ import React, { Suspense, lazy } from "react";
 
 import { FigureProps } from "./Figure.types";
 
-const LazyImportedFigure = lazy(() => import("./Figure"));
+const LazyImportedFigure = lazy(() => import("./Figure.js"));
 
 /**
  * Figure component wrapped in Suspense to prevent import errors.

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Stack, ThemeProvider, Typography } from "@mui/material";
+import { Stack, ThemeProvider, Typography } from "@mui/material/index.js";
 import { WizardProps, WizardThemeOverrideProps } from "./Wizard.types";
 
 /**

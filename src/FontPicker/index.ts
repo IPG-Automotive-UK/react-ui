@@ -1,4 +1,4 @@
-import FontPicker from "./FontPicker";
+import FontPicker from "./FontPicker.js";
 
 export type FontPickerProps = {
   disabled?: boolean;

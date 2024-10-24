@@ -1,13 +1,13 @@
-import { Box, CssBaseline, Drawer, Hidden } from "@mui/material";
+import { Box, CssBaseline, Drawer, Hidden } from "@mui/material/index.js";
 import React, { Fragment, useState } from "react";
 
-import { ConfirmProvider } from "../ConfirmProvider";
-import Sidebar from "../Sidebar";
-import { SnackbarProvider } from "../SnackbarProvider";
-import ThemeProvider from "../ThemeProvider";
-import VirtoAppHeader from "../VirtoAppHeader";
+import { ConfirmProvider } from "../ConfirmProvider/index.js";
+import Sidebar from "../Sidebar/index.js";
+import { SnackbarProvider } from "../SnackbarProvider/index.js";
+import ThemeProvider from "../ThemeProvider/index.js";
+import VirtoAppHeader from "../VirtoAppHeader/index.js";
 import { VirtoAppLayoutProps } from "./VirtoAppLayout.types";
-import useTheme from "../ThemeProvider/useTheme";
+import useTheme from "../ThemeProvider/useTheme.js";
 
 // app layout component
 function Layout({

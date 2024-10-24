@@ -1,4 +1,4 @@
-import SelectorButton from "./SelectorButton";
+import SelectorButton from "./SelectorButton.js";
 
 export type SelectorButtonProps = {
   /**

@@ -2,7 +2,7 @@ import React, { Suspense, lazy } from "react";
 
 import { TrafficLightProps } from "./TrafficLight.types";
 
-const LazyImportedTrafficLight = lazy(() => import("./TrafficLight"));
+const LazyImportedTrafficLight = lazy(() => import("./TrafficLight.js"));
 
 /**
  * TrafficLight component wrapped in Suspense to prevent import errors.

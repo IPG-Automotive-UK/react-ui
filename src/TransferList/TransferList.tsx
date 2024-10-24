@@ -9,12 +9,12 @@ import {
   ListItemIcon,
   ListItemText,
   Typography
-} from "@mui/material";
+} from "@mui/material/index.js";
 import React, { useEffect, useState } from "react";
 
-import CloseIcon from "@mui/icons-material/Close";
-import DeletableList from "../DeletableList/DeletableList";
-import SearchIcon from "@mui/icons-material/Search";
+import CloseIcon from "@mui/icons-material/Close.js";
+import DeletableList from "../DeletableList/index.js";
+import SearchIcon from "@mui/icons-material/Search.js";
 import { TransferListProps } from "./TransferList.types";
 
 export default function TransferList({

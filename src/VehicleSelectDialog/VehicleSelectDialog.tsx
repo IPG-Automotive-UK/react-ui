@@ -8,13 +8,13 @@ import {
   DialogTitle,
   Divider,
   IconButton
-} from "@mui/material";
+} from "@mui/material/index.js";
 import React, { useEffect, useState } from "react";
 
-import CloseIcon from "@mui/icons-material/Close";
+import CloseIcon from "@mui/icons-material/Close.js";
 import { CombinedVehicleProps } from "./VehicleSelectDialog.types";
 import type { SelectedVehicle } from "../VehicleSelect/VehicleSelect.types";
-import VehicleSelect from "../VehicleSelect/VehicleSelect";
+import VehicleSelect from "../VehicleSelect/index.js";
 
 const VehicleSelectDialog = ({
   onCancelClick = () => {},

@@ -1,9 +1,9 @@
 import * as React from "react";
 
-import { GridView, TableRowsOutlined } from "@mui/icons-material";
-import { ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { GridView, TableRowsOutlined } from "@mui/icons-material/index.js";
+import { ToggleButton, ToggleButtonGroup } from "@mui/material/index.js";
 
-import PropTypes from "prop-types";
+import PropTypes from "prop-types/index.js";
 
 /**
  * Horizontal alignment button group component to toggle between card/table view

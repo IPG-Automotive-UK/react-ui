@@ -1,4 +1,4 @@
-import PasswordResetForm from "./PasswordResetForm";
+import PasswordResetForm from "./PasswordResetForm.js";
 
 export type PasswordResetFormProps = {
   loading?: boolean;

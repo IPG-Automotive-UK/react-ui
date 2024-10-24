@@ -1,10 +1,10 @@
-import { Box, IconButton, Paper, Popover } from "@mui/material";
-import { DataGrid, useGridApiContext } from "@mui/x-data-grid";
+import { Box, IconButton, Paper, Popover } from "@mui/material/index.js";
+import { DataGrid, useGridApiContext } from "@mui/x-data-grid/index.js";
 
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import Color from "../Color";
-import DeleteIcon from "@mui/icons-material/Delete";
-import PropTypes from "prop-types";
+import AddCircleIcon from "@mui/icons-material/AddCircle.js";
+import Color from "../Color/index.js";
+import DeleteIcon from "@mui/icons-material/Delete.js";
+import PropTypes from "prop-types/index.js";
 import React from "react";
 
 /**

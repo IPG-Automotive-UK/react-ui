@@ -7,9 +7,9 @@ import {
   SvgIcon,
   Typography,
   useStepContext
-} from "@mui/material";
+} from "@mui/material/index.js";
 
-import { Error as ErrorIcon } from "@mui/icons-material";
+import { Error as ErrorIcon } from "@mui/icons-material/index.js";
 import { WizardStepProps } from "./WizardStep.types";
 
 /**

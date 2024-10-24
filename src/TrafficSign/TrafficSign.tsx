@@ -1,7 +1,7 @@
-import Figure from "../Figure";
+import Figure from "../Figure/index.js";
 import React from "react";
 import { TrafficSignProps } from "./TrafficSign.types";
-import { getRoadSignName } from "./TrafficSignHelper";
+import { getRoadSignName } from "./TrafficSignHelper.js";
 
 /**
  * A UI component that displays an svg of the road sign on the canvas

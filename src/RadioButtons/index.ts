@@ -1,6 +1,6 @@
 import type { RadioGroupProps, SxProps, Theme } from "@mui/material";
 
-import RadioButtons from "./RadioButtons";
+import RadioButtons from "./RadioButtons.js";
 
 /**
  * Prop type for radio buttons

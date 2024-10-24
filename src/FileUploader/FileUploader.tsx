@@ -6,13 +6,13 @@ import {
   Stack,
   Typography,
   alpha
-} from "@mui/material";
+} from "@mui/material/index.js";
 
-import FileUploadIcon from "@mui/icons-material/FileUpload";
+import FileUploadIcon from "@mui/icons-material/FileUpload.js";
 import { FileUploaderProps } from "./FileUploader.types";
 import React from "react";
-import UploaderHeader from "../Uploader/UploaderHeader";
-import useUploader from "../Uploader/useUploader";
+import UploaderHeader from "../Uploader/UploaderHeader.js";
+import useUploader from "../Uploader/useUploader.js";
 
 export default function FileUploader({
   acceptedFiles,

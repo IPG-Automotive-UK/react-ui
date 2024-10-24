@@ -1,8 +1,8 @@
 import * as React from "react";
 
 import { StatusIconProps } from "./StatusIcon.types";
-import { Tooltip } from "@mui/material";
-import statuses from "../statuses";
+import { Tooltip } from "@mui/material/index.js";
+import statuses from "../statuses.js";
 
 /**
  * Displays a status icon.

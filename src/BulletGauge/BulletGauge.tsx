@@ -1,7 +1,7 @@
 import { BulletGaugeProps } from "./BulletGauge.types";
 import Plotly from "react-plotly.js";
 import React from "react";
-import { useTheme } from "@mui/material";
+import { useTheme } from "@mui/material/index.js";
 
 /**
  * This component displays a bullet gauge progress indicator.

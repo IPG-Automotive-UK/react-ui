@@ -9,17 +9,17 @@ import {
   TextField,
   Typography,
   styled
-} from "@mui/material";
+} from "@mui/material/index.js";
 import {
   MessageOutlined,
   SentimentSatisfiedAlt,
   SentimentVeryDissatisfied,
   TextsmsOutlined
-} from "@mui/icons-material";
+} from "@mui/icons-material/index.js";
 import React, { useState } from "react";
 
-import DialogTitle from "../DialogTitle";
-import PropTypes from "prop-types";
+import DialogTitle from "../DialogTitle/index.js";
+import PropTypes from "prop-types/index.js";
 
 // styling for the dialog
 const Dialog = styled(MuiDialog)(({ theme }) => ({

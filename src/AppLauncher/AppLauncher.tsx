@@ -1,4 +1,4 @@
-import { Box, Divider, Link, Paper, Typography } from "@mui/material";
+import { Box, Divider, Link, Paper, Typography } from "@mui/material/index.js";
 import React, { Fragment } from "react";
 import {
   VirtoBuild,
@@ -10,10 +10,10 @@ import {
   VirtoScene,
   VirtoTest,
   VirtoVehicle
-} from "../SvgIcons";
+} from "../SvgIcons/index.js";
 
-import { Theme } from "@mui/material/styles";
-import VirtoLogo from "../SvgIcons/VirtoLogo";
+import { Theme } from "@mui/material/styles/index.js";
+import VirtoLogo from "../SvgIcons/VirtoLogo/index.js";
 
 // AppLauncher component for app which displays logo, list of items and app version
 function AppLauncher({

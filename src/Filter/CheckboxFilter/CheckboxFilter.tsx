@@ -7,10 +7,10 @@ import {
   TextField,
   Typography,
   autocompleteClasses
-} from "@mui/material";
-import { CheckBox, CheckBoxOutlineBlank } from "@mui/icons-material";
+} from "@mui/material/index.js";
+import { CheckBox, CheckBoxOutlineBlank } from "@mui/icons-material/index.js";
 
-import AlwaysOpenAutocomplete from "../AlwaysOpenAutocomplete";
+import AlwaysOpenAutocomplete from "../AlwaysOpenAutocomplete.js";
 import { CheckboxFilterProps } from "./CheckboxFilter.types";
 import { HTMLAttributes } from "react";
 

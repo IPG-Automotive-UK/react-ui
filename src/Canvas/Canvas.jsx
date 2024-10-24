@@ -1,11 +1,11 @@
 import * as React from "react";
 
-import { Box } from "@mui/material";
-import Grid from "./Grid";
-import PropTypes from "prop-types";
-import ResizeHandle from "./ResizeHandle";
-import SelectionRectangle from "./SelectionRectangle";
-import useSelectionRectangle from "./useSelectionRectangle";
+import { Box } from "@mui/material/index.js";
+import Grid from "./Grid.js";
+import PropTypes from "prop-types/index.js";
+import ResizeHandle from "./ResizeHandle.js";
+import SelectionRectangle from "./SelectionRectangle.js";
+import useSelectionRectangle from "./useSelectionRectangle.js";
 
 /**
  * A canvas component that can be used for as part of a drawing application. It includes features such as resize, grid, and selection rectangle.

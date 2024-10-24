@@ -7,7 +7,7 @@ import {
   purple,
   red,
   teal
-} from "@mui/material/colors";
+} from "@mui/material/colors/index.js";
 
 import { useMemo } from "react";
 

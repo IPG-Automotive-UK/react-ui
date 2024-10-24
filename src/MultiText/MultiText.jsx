@@ -1,9 +1,9 @@
-import { Box, IconButton } from "@mui/material";
+import { Box, IconButton } from "@mui/material/index.js";
 
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { DataGrid } from "@mui/x-data-grid";
-import DeleteIcon from "@mui/icons-material/Delete";
-import PropTypes from "prop-types";
+import AddCircleIcon from "@mui/icons-material/AddCircle.js";
+import { DataGrid } from "@mui/x-data-grid/index.js";
+import DeleteIcon from "@mui/icons-material/Delete.js";
+import PropTypes from "prop-types/index.js";
 import React from "react";
 
 /**

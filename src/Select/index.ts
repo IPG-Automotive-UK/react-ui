@@ -1,4 +1,4 @@
-import Select from "./Select";
+import Select from "./Select.js";
 import type { TextFieldProps } from "../TextField/index";
 
 export type SelectProps = {

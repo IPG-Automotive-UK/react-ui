@@ -4,9 +4,9 @@ import {
   Stack,
   Typography,
   TypographyProps
-} from "@mui/material";
+} from "@mui/material/index.js";
 
-import DeleteIcon from "@mui/icons-material/Delete";
+import DeleteIcon from "@mui/icons-material/Delete.js";
 import React from "react";
 import { UploaderHeaderProps } from "./UploaderHeader.types";
 

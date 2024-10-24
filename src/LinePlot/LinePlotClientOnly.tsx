@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from "react";
 
-import ClientOnly from "../ClientOnly";
+import ClientOnly from "../ClientOnly/index.js";
 import { LinePlotProps } from "./LinePlot.types";
 
 const LazyImportedLinePlot = lazy(() => import("./LinePlot"));

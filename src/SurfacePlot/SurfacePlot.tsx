@@ -1,10 +1,10 @@
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material/index.js";
 import React, { useState } from "react";
 
-import ConditionalDialog from "../ConditionalDialog";
-import Plotly from "react-plotly.js";
+import ConditionalDialog from "../ConditionalDialog/index.js";
+import Plotly from "react-plotly.js/index.js";
 import { SurfacePlotProps } from "./SurfacePlot.types";
-import { getConfig } from "../utils/plotlyConfig";
+import { getConfig } from "../utils/plotlyConfig.js";
 
 // The `SurfacePlot` component renders a 3D surface plot using Plotly.
 const SurfacePlot = ({

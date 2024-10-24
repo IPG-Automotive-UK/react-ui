@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import { Box } from "@mui/material";
-import PropTypes from "prop-types";
-import { getCursor } from "./utils";
+import { Box } from "@mui/material/index.js";
+import PropTypes from "prop-types/index.js";
+import { getCursor } from "./utils.js";
 
 /**
  * Resize handle for a given location on a rectangle (corner or side defined by a compass direction).

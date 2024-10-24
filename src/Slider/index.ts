@@ -4,7 +4,7 @@ import type {
   Theme
 } from "@mui/material";
 
-import Slider from "./Slider";
+import Slider from "./Slider.js";
 
 export type SliderProps = {
   color?: string;

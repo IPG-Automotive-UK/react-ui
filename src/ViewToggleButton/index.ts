@@ -1,5 +1,5 @@
 import type { ToggleButtonGroupProps } from "@mui/material";
-import ViewToggleButton from "./ViewToggleButton";
+import ViewToggleButton from "./ViewToggleButton.js";
 
 export type ViewToggleButtonProps = {
   disabled?: boolean;

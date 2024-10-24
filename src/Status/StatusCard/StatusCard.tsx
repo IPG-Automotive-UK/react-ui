@@ -1,11 +1,11 @@
 import * as React from "react";
 
-import { Box, Card, CardContent, Typography } from "@mui/material";
+import { Box, Card, CardContent, Typography } from "@mui/material/index.js";
 
 import { StatusCardProps } from "./StatusCard.types";
-import StatusIcon from "../StatusIcon/StatusIcon";
-import TruncatedTooltip from "../../TruncatedTooltip";
-import statuses from "../statuses";
+import StatusIcon from "../StatusIcon/StatusIcon.js";
+import TruncatedTooltip from "../../TruncatedTooltip/index.js";
+import statuses from "../statuses.js";
 
 // custom card component that will be used to display status information
 const card = ({

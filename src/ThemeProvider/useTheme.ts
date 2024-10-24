@@ -1,5 +1,5 @@
 import React from "react";
-import ThemeContext from "./ThemeContext";
+import ThemeContext from "./ThemeContext.js";
 
 /**
  * Hook to control theme from within a theme provider

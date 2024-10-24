@@ -1,8 +1,14 @@
-import { Chip, Tooltip, alpha, chipClasses, darken } from "@mui/material";
+import {
+  Chip,
+  Tooltip,
+  alpha,
+  chipClasses,
+  darken
+} from "@mui/material/index.js";
 
-import DoneIcon from "@mui/icons-material/Done";
+import DoneIcon from "@mui/icons-material/Done.js";
 import { LabelChipProps } from "./LabelChip.types";
-import NoWrapTypography from "../../NoWrapTypography";
+import NoWrapTypography from "../../NoWrapTypography/index.js";
 import React from "react";
 
 // component to display a chip with custom colors

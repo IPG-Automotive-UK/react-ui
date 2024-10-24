@@ -13,15 +13,15 @@ import {
   TableContainer,
   TableRow,
   Typography
-} from "@mui/material";
-import { Delete, Edit } from "@mui/icons-material";
+} from "@mui/material/index.js";
+import { Delete, Edit } from "@mui/icons-material/index.js";
 import { Meta, StoryFn } from "@storybook/react";
 
-import LabelIcon from "@mui/icons-material/Label";
+import LabelIcon from "@mui/icons-material/Label.js";
 import React from "react";
-import SummaryCard from "./SummaryCard";
+import SummaryCard from "./SummaryCard.js";
 import { SummaryCardProps } from "./SummaryCard.types";
-import { Theme } from "@mui/material/styles";
+import { Theme } from "@mui/material/styles/index.js";
 import { action } from "@storybook/addon-actions";
 
 /**

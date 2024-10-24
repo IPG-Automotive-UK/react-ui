@@ -1,4 +1,4 @@
-import LoginForm from "./LoginForm";
+import LoginForm from "./LoginForm.js";
 
 export type LoginFormProps = {
   loading?: boolean;

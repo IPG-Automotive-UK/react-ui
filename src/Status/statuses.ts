@@ -8,8 +8,15 @@ import {
   Task,
   Timelapse,
   Warning
-} from "@mui/icons-material";
-import { amber, green, grey, indigo, red, teal } from "@mui/material/colors";
+} from "@mui/icons-material/index.js";
+import {
+  amber,
+  green,
+  grey,
+  indigo,
+  red,
+  teal
+} from "@mui/material/colors/index.js";
 
 /**
  * Single source of truth for status definitions

@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { IpgLogoProps } from "./IpgLogo.types";
-import SvgIcon from "@mui/material/SvgIcon";
+import SvgIcon from "@mui/material/SvgIcon/index.js";
 
 // IPG logo svg
 function Icon(props: IpgLogoProps) {

@@ -1,12 +1,12 @@
-import { Box, Card, Stack } from "@mui/material";
+import { Box, Card, Stack } from "@mui/material/index.js";
 import { DetailCardHeaderProps, DetailCardProps } from "./DetailCard.types";
-import { FileDetails, Infographic } from "../../CardContent";
+import { FileDetails, Infographic } from "../../CardContent/index.js";
 import React, { Fragment, useEffect, useRef, useState } from "react";
 
-import LabelChipGroup from "../../LabelSelector/LabelChipGroup/LabelChipGroup";
+import LabelChipGroup from "../../LabelSelector/LabelChipGroup/index.js";
 import type { LabelChipGroupProps } from "../../LabelSelector/LabelChipGroup/LabelChipGroup.types";
-import NoWrapTypography from "../../NoWrapTypography/NoWrapTypography";
-import { ResizeObserver } from "@juggle/resize-observer";
+import NoWrapTypography from "../../NoWrapTypography/index.js";
+import { ResizeObserver } from "@juggle/resize-observer/lib/exports/resize-observer.js";
 
 // TODO: add tests in browser once we are done with the migration to cypress. The old tests live in a txt file in this folder until then.
 

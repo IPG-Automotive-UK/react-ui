@@ -1,10 +1,10 @@
 import * as React from "react";
 
-import { Box, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material/index.js";
 
-import StatusIcon from "../StatusIcon";
+import StatusIcon from "../StatusIcon/index.js";
 import { StatusLabelProps } from "./StatusLabel.types";
-import statuses from "../statuses";
+import statuses from "../statuses.js";
 
 /**
  * Displays a status icon and text label.

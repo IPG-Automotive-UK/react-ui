@@ -1,7 +1,7 @@
 import { Circle, Group, Rect } from "react-konva";
 import { color, states } from "./trafficLightUtils";
 
-import Figure from "../Figure";
+import Figure from "../Figure/index.js";
 import React from "react";
 import { TrafficLightSelectorProps } from "./TrafficLightSelector.types";
 import arrowLeft from "./svg/arrow-left.svg";

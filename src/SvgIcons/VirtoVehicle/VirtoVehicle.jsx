@@ -1,7 +1,7 @@
 import * as React from "react";
 
-import PropTypes from "prop-types";
-import SvgIcon from "@mui/material/SvgIcon";
+import PropTypes from "prop-types/index.js";
+import SvgIcon from "@mui/material/SvgIcon/index.js";
 
 // vehicle icon svg
 function Icon(props) {

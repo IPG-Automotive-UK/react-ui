@@ -1,4 +1,5 @@
-import { Link, Typography } from "@mui/material";
+import { Link, Typography } from "@mui/material/index.js";
+
 import React from "react";
 
 /**

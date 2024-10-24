@@ -1,4 +1,4 @@
-import { Box, Tab, Tabs, useTheme } from "@mui/material";
+import { Box, Tab, Tabs, useTheme } from "@mui/material/index.js";
 import React, { useEffect, useState } from "react";
 
 import { TabPanelProps } from "./TabPanel.types";

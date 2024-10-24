@@ -1,5 +1,5 @@
-import Autocomplete from "../Autocomplete";
-import { Box } from "@mui/material";
+import Autocomplete from "../Autocomplete/index.js";
+import { Box } from "@mui/material/index.js";
 import React from "react";
 import { VehicleSelectProps } from "./VehicleSelect.types";
 

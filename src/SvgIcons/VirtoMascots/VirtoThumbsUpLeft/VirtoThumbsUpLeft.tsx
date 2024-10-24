@@ -1,5 +1,5 @@
 import React from "react";
-import SvgIcon from "@mui/material/SvgIcon";
+import SvgIcon from "@mui/material/SvgIcon/index.js";
 import { VirtoThumbsUpLeftProps } from "./VirtoThumbsUpLeft.types";
 
 export function VirtoThumbsUpLeft({ sx }: VirtoThumbsUpLeftProps) {

@@ -1,4 +1,4 @@
-import { Avatar } from "@mui/material";
+import { Avatar } from "@mui/material/index.js";
 import React from "react";
 import { UserAvatarProps } from "./UserAvatar.types";
 

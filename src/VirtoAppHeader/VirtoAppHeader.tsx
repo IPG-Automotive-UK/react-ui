@@ -6,17 +6,17 @@ import {
   Link,
   Toolbar,
   Typography
-} from "@mui/material";
+} from "@mui/material/index.js";
 import React, { Fragment, useState } from "react";
 
-import AppLauncher from "../AppLauncher";
-import AppsIcon from "@mui/icons-material/Apps";
-import Menu from "@mui/icons-material/Menu";
-import { Theme } from "@mui/material/styles";
-import ToggleColorMode from "../ToggleColorMode";
-import UserMenu from "../UserMenu";
+import AppLauncher from "../AppLauncher/index.js";
+import AppsIcon from "@mui/icons-material/Apps.js";
+import Menu from "@mui/icons-material/Menu.js";
+import { Theme } from "@mui/material/styles/index.js";
+import ToggleColorMode from "../ToggleColorMode/index.js";
+import UserMenu from "../UserMenu/index.js";
 import { VirtoAppHeaderProps } from "./VirtoAppHeader.types";
-import VirtoLogo from "../SvgIcons/VirtoLogo";
+import VirtoLogo from "../SvgIcons/VirtoLogo/index.js";
 
 // appbar component
 function Header({

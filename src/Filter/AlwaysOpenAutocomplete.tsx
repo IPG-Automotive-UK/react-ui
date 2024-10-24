@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Autocomplete, Stack } from "@mui/material";
+import { Autocomplete, Stack } from "@mui/material/index.js";
 
 import type { AlwaysOpenAutocompleteProps } from "./AlwaysOpenAutocomplete.types";
 

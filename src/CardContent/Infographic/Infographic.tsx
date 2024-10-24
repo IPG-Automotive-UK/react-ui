@@ -1,8 +1,8 @@
-import { Box, CardMedia, Skeleton } from "@mui/material";
+import { Box, CardMedia, Skeleton } from "@mui/material/index.js";
 import React, { useEffect, useRef, useState } from "react";
 
 import { InfographicProps } from "./Infographic.types";
-import VersionChip from "../../VersionChip/VersionChip";
+import VersionChip from "../../VersionChip/index.js";
 
 // TODO: add tests in browser once we are done with the migration to cypress. The old tests live in a txt file in this folder until then.
 

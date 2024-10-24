@@ -1,7 +1,7 @@
 import { Line } from "react-konva";
-import Marker from "./Marker";
+import Marker from "./Marker.js";
 import React from "react";
-import Vehicle from "./Vehicle";
+import Vehicle from "./Vehicle.js";
 import { VehiclePathProps } from "./VehiclePath.types";
 
 const VehiclePath = (

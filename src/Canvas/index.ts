@@ -1,6 +1,6 @@
 import { SxProps, Theme } from "@mui/material/styles";
 
-import Canvas from "./Canvas";
+import Canvas from "./Canvas.js";
 
 export type CanvasProps = {
   backgroundColor?: string;

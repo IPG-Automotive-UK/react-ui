@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import type { LazyLoadImageProps } from "./LazyLoadImage.types";
-import { Skeleton } from "@mui/material";
+import { Skeleton } from "@mui/material/index.js";
 
 // TODO: add tests in browser once we are done with the migration to cypress
 

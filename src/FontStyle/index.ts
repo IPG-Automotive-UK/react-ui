@@ -1,4 +1,4 @@
-import FontStyle from "./FontStyle";
+import FontStyle from "./FontStyle.js";
 
 export type FontStyleProps = {
   disabled?: boolean;
