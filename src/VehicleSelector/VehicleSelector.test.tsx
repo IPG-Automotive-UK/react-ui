@@ -222,12 +222,12 @@ describe("VehicleSelector", () => {
 
     render(
       <VehicleSelectorWithState
+        limitTags={2}
         {...defaultProps}
         value={value}
         multipleVariant={true}
       />
     );
-
     expect(screen.getByRole("button", { name: /NN/i })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /JS/i })).toBeInTheDocument();
   });
