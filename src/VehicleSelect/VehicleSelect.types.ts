@@ -40,4 +40,8 @@ export type VehicleSelectProps = {
    * Array of all vehicle variants with fields _id, modelYear, projectCode, variant
    */
   variants: Vehicle[];
+  /**
+   * limit the number of tags that can be selected
+   */
+  limitTags?: number;
 };
