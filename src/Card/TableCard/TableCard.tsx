@@ -12,8 +12,13 @@ import {
 } from "@mui/material";
 
 import React from "react";
+import { TableCardProps } from "./TableCard.types";
 
-function TableCard({ action = null, tableContent = [], title = "Table" }) {
+export function TableCard({
+  action = null,
+  tableContent = [],
+  title = "Table"
+}: TableCardProps) {
   return (
     <Card>
       <CardHeader
@@ -68,5 +73,3 @@ function TableCard({ action = null, tableContent = [], title = "Table" }) {
     </Card>
   );
 }
-
-export default TableCard;

@@ -1,18 +1,31 @@
+import { Meta, StoryFn } from "@storybook/react";
+
 import { Button } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import React from "react";
-import TableCard from "./TableCard";
+import { TableCard } from "./TableCard";
+import { TableCardProps } from "./TableCard.types";
 import { action } from "@storybook/addon-actions";
 
-export default {
+/**
+ * Story metadata
+ */
+const meta: Meta<typeof TableCard> = {
   component: TableCard,
   title: "Card/TableCard"
 };
+export default meta;
 
-const Template = args => {
+/*
+ * Template
+ */
+const Template: StoryFn<TableCardProps> = args => {
   return <TableCard {...args} />;
 };
 
+/*
+ * Default story
+ */
 export const Default = {
   argTypes: {
     action: {
@@ -21,7 +34,6 @@ export const Default = {
   },
   args: {
     action: null,
-    height: "100%",
     tableContent: [],
     title: "Table"
   },
@@ -29,6 +41,9 @@ export const Default = {
   render: Template
 };
 
+/*
+ *  Story with text content
+ */
 export const TableWithContent = {
   argTypes: {
     ...Default.argTypes
@@ -44,7 +59,10 @@ export const TableWithContent = {
   render: Template
 };
 
-export const TableWithCustomComponets = {
+/*
+ *  Story with action and custom components
+ */
+export const TableWithCustomComponents = {
   argTypes: {
     ...Default.argTypes,
     tableContent: {

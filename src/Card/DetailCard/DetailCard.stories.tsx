@@ -5,7 +5,7 @@ import { Meta, StoryFn } from "@storybook/react";
 import DetailCard from ".";
 import { DetailCardProps } from "./DetailCard.types";
 import React from "react";
-import TableCard from "../TableCard";
+import { TableCard } from "../TableCard";
 import { action } from "@storybook/addon-actions";
 
 /**
