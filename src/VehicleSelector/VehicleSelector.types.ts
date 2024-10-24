@@ -39,7 +39,7 @@ export type VehicleSelectorProps = {
   /**
    * Allow multiple selections
    */
-  multipleSelection?: boolean;
+  multipleGates?: boolean;
   /**
    * Callback function fired on each vehicle metadata change
    */
@@ -53,6 +53,10 @@ export type VehicleSelectorProps = {
    */
   variants: Vehicle[];
   /**
+   * Allow multiple selections for the variant
+   */
+  multipleVariant?: boolean;
+  /**
    * List of gates to show in the dropdown
    */
   gates?: string[];
@@ -60,4 +64,8 @@ export type VehicleSelectorProps = {
    * Size of the field
    */
   size?: "small" | "medium";
+  /**
+   * limit the number of tags that are visible when not focused
+   */
+  limitTags?: number;
 };

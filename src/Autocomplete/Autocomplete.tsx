@@ -1,9 +1,11 @@
 import * as React from "react";
 
 import {
+  AutocompleteRenderGetTagProps,
   AutocompleteRenderOptionState,
   Box,
   Checkbox,
+  Chip,
   Autocomplete as MuiAutocomplete,
   TextField,
   Tooltip,
@@ -43,6 +45,36 @@ export default function Autocomplete<
   noOptionsText = "No options available",
   readOnly = false
 }: AutocompleteProps<Value, Multiple, DisableClearable>) {
+  // helper function to render tags
+  function Tags<Value extends KeyValueOption | string>(
+    value: Value[],
+    getTagProps: AutocompleteRenderGetTagProps,
+    limitTags: number
+  ) {
+    const numTags = value.length;
+    return (
+      <>
+        {value.slice(0, limitTags).map((option, index) => (
+          <Chip
+            {...getTagProps({ index })}
+            key={index}
+            label={
+              // truncate the tag label
+              isKeyValueOption(option)
+                ? option.value.length > 20
+                  ? `${option.value.slice(0, 10)}...`
+                  : option.value
+                : option.length > 20
+                  ? `${option.slice(0, 10)}...`
+                  : option
+            }
+            size="small"
+          />
+        ))}
+        {numTags > limitTags && `+${numTags - limitTags}`}
+      </>
+    );
+  }
   return (
     <MuiAutocomplete
       noOptionsText={noOptionsText}
@@ -59,6 +91,7 @@ export default function Autocomplete<
         isKeyValueOption(option) ? option.value : String(option)
       }
       sx={{ pointerEvents: readOnly ? "none" : "auto" }}
+      renderTags={(value, getTagProps) => Tags(value, getTagProps, limitTags)}
       renderInput={params => (
         <TextField
           {...params}
