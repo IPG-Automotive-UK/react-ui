@@ -25,24 +25,18 @@ export const Default = {
 };
 
 export const TableWithContent = {
-  argTypes: {
-    tableContent: {
-      control: false
-    }
-  },
   args: {
     ...Default.args,
     tableContent: [
       ["Name", "Example Name"],
-      ["Description", "Example Description"],
-      ["Component", <CircularProgress key={"component"} />]
+      ["Description", "Example Description"]
     ]
   },
 
   render: Template
 };
 
-export const TableWithAction = {
+export const TableWithCustomComponets = {
   argTypes: {
     tableContent: {
       control: false
