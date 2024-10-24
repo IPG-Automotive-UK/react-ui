@@ -25,6 +25,11 @@ export const Default = {
 };
 
 export const TableWithContent = {
+  argTypes: {
+    tableContent: {
+      control: false
+    }
+  },
   args: {
     ...Default.args,
     tableContent: [
@@ -38,6 +43,11 @@ export const TableWithContent = {
 };
 
 export const TableWithAction = {
+  argTypes: {
+    tableContent: {
+      control: false
+    }
+  },
   args: {
     ...Default.args,
     action: (
