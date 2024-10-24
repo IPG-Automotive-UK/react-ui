@@ -28,6 +28,14 @@ const Template: StoryFn<DetailCardProps> = args => {
 };
 
 export const Default = {
+  argTypes: {
+    buttonsStack: {
+      control: false
+    },
+    content: {
+      control: false
+    }
+  },
   args: {
     content: null,
     labels: [],
@@ -43,6 +51,9 @@ export const Default = {
 };
 
 export const TruncatedTitleAndSubtitle = {
+  argTypes: {
+    ...Default.argTypes
+  },
   args: {
     ...Default.args,
     subtitle:
@@ -55,6 +66,9 @@ export const TruncatedTitleAndSubtitle = {
 };
 
 export const withMoreButtons = {
+  argTypes: {
+    ...Default.argTypes
+  },
   args: {
     ...Default.args,
     buttonsStack: (
@@ -84,6 +98,9 @@ export const withMoreButtons = {
 };
 
 export const TruncatedLabels = {
+  argTypes: {
+    ...Default.argTypes
+  },
   args: {
     ...Default.args,
     labels: [
@@ -166,6 +183,9 @@ export const TruncatedLabels = {
 };
 
 export const ScenarioExample = {
+  argTypes: {
+    ...Default.argTypes
+  },
   args: {
     ...Default.args,
     buttonsStack: (

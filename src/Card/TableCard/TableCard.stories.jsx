@@ -14,6 +14,11 @@ const Template = args => {
 };
 
 export const Default = {
+  argTypes: {
+    action: {
+      control: false
+    }
+  },
   args: {
     action: null,
     height: "100%",
@@ -25,6 +30,9 @@ export const Default = {
 };
 
 export const TableWithContent = {
+  argTypes: {
+    ...Default.argTypes
+  },
   args: {
     ...Default.args,
     tableContent: [
@@ -38,6 +46,7 @@ export const TableWithContent = {
 
 export const TableWithCustomComponets = {
   argTypes: {
+    ...Default.argTypes,
     tableContent: {
       control: false
     }
