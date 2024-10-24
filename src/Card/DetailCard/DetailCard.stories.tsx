@@ -17,6 +17,9 @@ const meta: Meta<typeof DetailCard> = {
 };
 export default meta;
 
+/**
+ * Template
+ */
 const Template: StoryFn<DetailCardProps> = args => {
   return (
     <DetailCard
@@ -27,6 +30,9 @@ const Template: StoryFn<DetailCardProps> = args => {
   );
 };
 
+/**
+ * Default story
+ */
 export const Default = {
   argTypes: {
     buttonsStack: {
@@ -50,6 +56,9 @@ export const Default = {
   render: Template
 };
 
+/**
+ * Story with truncated title and subtitle
+ */
 export const TruncatedTitleAndSubtitle = {
   argTypes: {
     ...Default.argTypes
@@ -65,6 +74,9 @@ export const TruncatedTitleAndSubtitle = {
   render: Template
 };
 
+/**
+ * Story with buttons stack
+ */
 export const withMoreButtons = {
   argTypes: {
     ...Default.argTypes
@@ -97,6 +109,9 @@ export const withMoreButtons = {
   render: Template
 };
 
+/**
+ * Story with truncated labels
+ */
 export const TruncatedLabels = {
   argTypes: {
     ...Default.argTypes
@@ -182,6 +197,9 @@ export const TruncatedLabels = {
   render: Template
 };
 
+/**
+ * Story with scenario details example
+ */
 export const ScenarioExample = {
   argTypes: {
     ...Default.argTypes
