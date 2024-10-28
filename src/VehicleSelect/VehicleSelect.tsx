@@ -11,7 +11,6 @@ function uniqueSortedArray(values: string[]) {
 // component to select a vehicle
 function VehicleSelect({
   flexDirection = "column",
-  limitTags = 1,
   flexWrap = "nowrap",
   gates = [],
   onChange = () => {},
@@ -128,7 +127,6 @@ function VehicleSelect({
           required
           multiple={true}
           options={allVariants}
-          limitTags={limitTags}
           onChange={(_event, value) => {
             const newVehicles = variants.filter(
               v =>
@@ -183,7 +181,6 @@ function VehicleSelect({
           disableCloseOnSelect={true}
           disabled={selectedVariants === null || selectedVariants.length === 0}
           required
-          limitTags={limitTags}
           multiple={true}
           label="Gate"
           options={gates}

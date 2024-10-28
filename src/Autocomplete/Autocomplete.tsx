@@ -31,7 +31,7 @@ export default function Autocomplete<
   helperText,
   inputValue,
   label,
-  limitTags = -1,
+  limitTags,
   margin = "normal",
   multiple,
   name,
@@ -91,7 +91,12 @@ export default function Autocomplete<
         isKeyValueOption(option) ? option.value : String(option)
       }
       sx={{ pointerEvents: readOnly ? "none" : "auto" }}
-      renderTags={(value, getTagProps) => Tags(value, getTagProps, limitTags)}
+      renderTags={
+        limitTags
+          ? (value, getTagProps) =>
+              limitTags && Tags(value, getTagProps, limitTags)
+          : undefined
+      }
       renderInput={params => (
         <TextField
           {...params}
