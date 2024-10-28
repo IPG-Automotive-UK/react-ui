@@ -5,7 +5,7 @@ import { Meta, StoryFn } from "@storybook/react";
 import DetailCard from ".";
 import { DetailCardProps } from "./DetailCard.types";
 import React from "react";
-import TableCard from "../TableCard";
+import { TableCard } from "../TableCard";
 import { action } from "@storybook/addon-actions";
 
 /**
@@ -17,6 +17,9 @@ const meta: Meta<typeof DetailCard> = {
 };
 export default meta;
 
+/**
+ * Template
+ */
 const Template: StoryFn<DetailCardProps> = args => {
   return (
     <DetailCard
@@ -27,7 +30,18 @@ const Template: StoryFn<DetailCardProps> = args => {
   );
 };
 
+/**
+ * Default story
+ */
 export const Default = {
+  argTypes: {
+    buttonsStack: {
+      control: false
+    },
+    content: {
+      control: false
+    }
+  },
   args: {
     content: null,
     labels: [],
@@ -42,7 +56,13 @@ export const Default = {
   render: Template
 };
 
+/**
+ * Story with truncated title and subtitle
+ */
 export const TruncatedTitleAndSubtitle = {
+  argTypes: {
+    ...Default.argTypes
+  },
   args: {
     ...Default.args,
     subtitle:
@@ -54,7 +74,13 @@ export const TruncatedTitleAndSubtitle = {
   render: Template
 };
 
+/**
+ * Story with buttons stack
+ */
 export const withMoreButtons = {
+  argTypes: {
+    ...Default.argTypes
+  },
   args: {
     ...Default.args,
     buttonsStack: (
@@ -83,7 +109,13 @@ export const withMoreButtons = {
   render: Template
 };
 
+/**
+ * Story with truncated labels
+ */
 export const TruncatedLabels = {
+  argTypes: {
+    ...Default.argTypes
+  },
   args: {
     ...Default.args,
     labels: [
@@ -165,7 +197,13 @@ export const TruncatedLabels = {
   render: Template
 };
 
+/**
+ * Story with scenario details example
+ */
 export const ScenarioExample = {
+  argTypes: {
+    ...Default.argTypes
+  },
   args: {
     ...Default.args,
     buttonsStack: (
