@@ -90,7 +90,6 @@ export default function Autocomplete<
       getOptionLabel={option =>
         isKeyValueOption(option) ? option.value : String(option)
       }
-      sx={{ pointerEvents: readOnly ? "none" : "auto" }}
       renderTags={
         limitTags
           ? (value, getTagProps) =>
@@ -108,10 +107,7 @@ export default function Autocomplete<
             className: readOnly ? "Mui-disabled label.Mui-disabled" : undefined
           }}
           InputLabelProps={{
-            ...params.InputLabelProps,
-            sx: {
-              pointerEvents: readOnly ? "none" : "auto"
-            }
+            ...params.InputLabelProps
           }}
           name={name}
           margin={margin}
