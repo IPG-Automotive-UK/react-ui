@@ -11,13 +11,13 @@ import {
   Typography
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { TransferListItem, TransferListProps } from "./TransferList.types";
 
 import CloseIcon from "@mui/icons-material/Close";
 import SearchIcon from "@mui/icons-material/Search";
-import { TransferListProps } from "./TransferList.types";
 
 export default function TransferList<T>({
-  filterKey,
+  filterKey: customFilterKey,
   initialTargetItemKeys = [],
   items = [],
   itemLabel,
@@ -36,6 +36,43 @@ export default function TransferList<T>({
     initialTargetItemKeys
   );
 
+  // Get item label from any item structure
+  const getItemLabel = (item: TransferListItem | T) => {
+    if (typeof item === "string") {
+      return item;
+    }
+
+    if (typeof item === "object" && item !== null && "label" in item) {
+      return item.label;
+    }
+
+    if (itemLabel) {
+      return itemLabel(item as T);
+    }
+
+    throw new Error(
+      "Item is missing a 'label' property or an itemLabel function is not defined"
+    );
+  };
+
+  const filterKey = (item: TransferListItem | T) => {
+    if (typeof item === "string") {
+      return item;
+    }
+
+    if (typeof item === "object" && item !== null && "id" in item) {
+      return item.id;
+    }
+
+    if (customFilterKey) {
+      return customFilterKey(item);
+    }
+
+    throw new Error(
+      "Item is missing an 'id' property or a filterKey function is not defined"
+    );
+  };
+
   /**
    * Source list logic
    */
@@ -47,7 +84,7 @@ export default function TransferList<T>({
 
   // Filtered source items
   const filteredSourceItems = allSourceItems.filter(item =>
-    itemLabel(item).toLowerCase().includes(sourceFilter.toLowerCase())
+    getItemLabel(item).toLowerCase().includes(sourceFilter.toLowerCase())
   );
 
   // All checked source list items
@@ -70,7 +107,7 @@ export default function TransferList<T>({
 
   // Filtered target items
   const filteredTargetItems = allTargetItems.filter(item =>
-    itemLabel(item).toLowerCase().includes(targetFilter.toLowerCase())
+    getItemLabel(item).toLowerCase().includes(targetFilter.toLowerCase())
   );
 
   // All checked target list items
@@ -227,7 +264,7 @@ export default function TransferList<T>({
         >
           <SingleList
             checked={sourceItemsToTransfer}
-            items={filteredSourceItems.map(item => itemLabel(item))}
+            items={filteredSourceItems.map(item => getItemLabel(item))}
             handleToggle={handleToggle}
             role="source-list"
           />
@@ -317,7 +354,7 @@ export default function TransferList<T>({
           >
             <SingleList
               checked={targetItemsToTransfer}
-              items={filteredTargetItems.map(item => itemLabel(item))}
+              items={filteredTargetItems.map(item => getItemLabel(item))}
               handleToggle={handleToggle}
               role="target-list"
             />

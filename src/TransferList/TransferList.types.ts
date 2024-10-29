@@ -1,12 +1,14 @@
+export type TransferListItem = string | { label: string; id: string };
+
 export type TransferListProps<T> = {
   /**
    * The key to be used for the filter.
    */
-  filterKey: (item: T) => string;
+  filterKey?: (item: T) => string;
   /**
    * Array of Items.
    */
-  items?: T[];
+  items?: TransferListItem[] | T[];
   /**
    * Array of keys for the items on the right side.
    */
@@ -26,7 +28,7 @@ export type TransferListProps<T> = {
   /**
    * The key to be used for the label.
    */
-  itemLabel: (item: T) => string;
+  itemLabel?: (item: T) => string;
   /**
    * Callback fired when the items are transferred.
    */
