@@ -57,7 +57,7 @@ export default function Autocomplete<
         {value.slice(0, limitTags).map((option, index) => (
           <Chip
             {...getTagProps({ index })}
-            key={index}
+            key={isKeyValueOption(option) ? option.key : option}
             label={
               // truncate the tag label
               isKeyValueOption(option)

@@ -225,7 +225,7 @@ describe("VehicleSelector", () => {
         limitTags={2}
         {...defaultProps}
         value={value}
-        multipleVariant={true}
+        multipleSelection={true}
       />
     );
     expect(screen.getByRole("button", { name: /NN/i })).toBeInTheDocument();

@@ -39,7 +39,7 @@ export type VehicleSelectorProps = {
   /**
    * Allow multiple selections
    */
-  multipleGates?: boolean;
+  multipleSelection?: boolean;
   /**
    * Callback function fired on each vehicle metadata change
    */
@@ -52,10 +52,6 @@ export type VehicleSelectorProps = {
    * Array of all vehicle variants with fields _id, modelYear, projectCode, variant
    */
   variants: Vehicle[];
-  /**
-   * Allow multiple selections for the variant
-   */
-  multipleVariant?: boolean;
   /**
    * List of gates to show in the dropdown
    */
