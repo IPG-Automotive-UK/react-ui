@@ -1,50 +1,101 @@
-import { Meta, StoryFn } from "@storybook/react";
-
-import { Box } from "@mui/material";
+import { Meta, StoryObj } from "@storybook/react";
 import React from "react";
+
 import TransferList from "./TransferList";
-import { TransferListProps } from "./TransferList.types";
-import { action } from "@storybook/addon-actions";
+import { TransferListItem } from "./TransferList.types";
 
 /**
  * Story metadata
  */
 const meta: Meta<typeof TransferList> = {
   component: TransferList,
+  decorators: Story => (
+    <div style={{ height: "400px" }}>
+      <Story />
+    </div>
+  ),
   title: "Lists/TransferList"
 };
 export default meta;
 
-const Template: StoryFn<TransferListProps> = args => {
-  // local state for selected items
-  const [selectedItems, setSelectedItems] = React.useState(["Apples"]);
-  React.useEffect(() => {
-    if (args.selectedItems) {
-      setSelectedItems(args.selectedItems);
-    }
-  }, [args.selectedItems]);
-  const onChange: TransferListProps["onChange"] = newItems => {
-    setSelectedItems(newItems);
-    action("onChange")(newItems);
-  };
-
-  return (
-    <Box sx={{ height: 200 }}>
-      <TransferList
-        {...args}
-        selectedItems={selectedItems}
-        onChange={onChange}
-      />
-    </Box>
-  );
+type CustomTransferListItemType = {
+  key: string;
+  name: string;
 };
 
-export const Default = {
+const defaultArgs: StoryObj<typeof TransferList<TransferListItem>>["args"] = {
+  sourceListLabel: "Source List Label",
+  targetListLabel: "Target List Label"
+};
+
+export const WithDefaultObjectArray: StoryObj<
+  typeof TransferList<TransferListItem>
+> = {
   args: {
-    items: ["Apples", "Pears", "Oranges", "Banana", "Mangoes"],
-    onChange: () => {},
-    selectedItems: ["Apples"]
+    ...defaultArgs,
+    items: [
+      { id: "Apples", label: "Apples" },
+      { id: "Pears", label: "Pears" },
+      { id: "Oranges", label: "Oranges" },
+      { id: "Bananas", label: "Bananas" },
+      { id: "Mangoes", label: "Mangoes" },
+      { id: "Kiwi", label: "Kiwi" },
+      { id: "Dragonfruit", label: "Dragonfruit" },
+      { id: "Plum", label: "Plum" },
+      { id: "Grapes", label: "Grapes" },
+      { id: "Cherry", label: "Cherry" }
+    ],
+    selectedItems: ["Apples"],
+    sourceListLabel: "Source List Label",
+    targetListLabel: "Target List Label"
   },
 
-  render: Template
+  render: TransferList
 };
+
+export const WithCustomObjectArray: StoryObj<
+  typeof TransferList<CustomTransferListItemType>
+> = {
+  args: {
+    ...defaultArgs,
+    filterKey: item => item.key,
+    itemLabel: item => item.name,
+    items: [
+      { key: "Apples", name: "Apples" },
+      { key: "Pears", name: "Pears" },
+      { key: "Oranges", name: "Oranges" },
+      { key: "Bananas", name: "Bananas" },
+      { key: "Mangoes", name: "Mangoes" },
+      { key: "Kiwi", name: "Kiwi" },
+      { key: "Dragonfruit", name: "Dragonfruit" },
+      { key: "Plum", name: "Plum" },
+      { key: "Grapes", name: "Grapes" },
+      { key: "Cherry", name: "Cherry" }
+    ],
+    selectedItems: ["Apples"],
+    sourceListLabel: "Source List Label",
+    targetListLabel: "Target List Label"
+  },
+
+  render: TransferList
+};
+
+export const WithStringArray: StoryObj<typeof TransferList<TransferListItem>> =
+  {
+    args: {
+      ...defaultArgs,
+      items: [
+        "Apples",
+        "Pears",
+        "Oranges",
+        "Bananas",
+        "Mangoes",
+        "Kiwi",
+        "Dragonfruit",
+        "Plum",
+        "Grapes",
+        "Cherry"
+      ]
+    },
+    render: TransferList
+  };
