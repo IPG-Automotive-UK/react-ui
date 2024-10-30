@@ -2,22 +2,19 @@ import {
   Box,
   Button,
   Checkbox,
-  IconButton,
-  InputBase,
   List,
   ListItem,
-  ListItemIcon,
   ListItemText,
   Typography
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { TransferListItem, TransferListProps } from "./TransferList.types";
 
-import CloseIcon from "@mui/icons-material/Close";
-import SearchIcon from "@mui/icons-material/Search";
+import SearchBar from "../SearchBar";
 
 export default function TransferList<T>({
   filterKey: customFilterKey,
+  handleTransfer,
   initialTargetItemKeys = [],
   items = [],
   itemLabel,
@@ -157,7 +154,18 @@ export default function TransferList<T>({
    * Transfer items to the target list
    */
   const transferToTarget = () => {
-    // Call the onTransfer callback
+    // Get checked items
+    const checkedSourceItems = checked.filter(
+      item => !targetItemKeys.includes(item)
+    );
+
+    // Call handle hook if using controlled
+    if (handleTransfer) {
+      handleTransfer(checkedSourceItems, "ltr");
+      return;
+    }
+
+    // Call the onTransfer callback if using optimistic updates
     onTransfer &&
       onTransfer(
         checked.filter(item => !targetItemKeys.includes(item)),
@@ -174,7 +182,18 @@ export default function TransferList<T>({
    * Transfer items to the source list
    */
   const transferToSource = () => {
-    // Call the onTransfer callback
+    // get checked Items
+    const checkedTargetItems = targetItemKeys.filter(
+      item => !targetItemsToTransfer.includes(item)
+    );
+
+    // Call handle hook if using controlled
+    if (handleTransfer) {
+      handleTransfer(checkedTargetItems, "rtl");
+      return;
+    }
+
+    // Call the onTransfer callback if using optimistic
     onTransfer && onTransfer(targetItemsToTransfer, "rtl");
 
     // Remove the checked items from the target list
@@ -207,7 +226,6 @@ export default function TransferList<T>({
   return (
     <Box
       sx={{
-        border: theme => `1px solid ${theme.palette.divider}`,
         display: "flex",
         height: "100%",
         width: "100%"
@@ -215,6 +233,7 @@ export default function TransferList<T>({
     >
       <Box
         sx={{
+          border: theme => `1px solid ${theme.palette.divider}`,
           display: "flex",
           flexDirection: "column",
           height: "100%",
@@ -224,42 +243,48 @@ export default function TransferList<T>({
         <Box
           sx={{
             alignItems: "center",
+            borderBottom: theme => `1px solid ${theme.palette.divider}`,
             display: "flex",
-            py: 2
+            p: 2
           }}
         >
           <Checkbox
-            onClick={handleCheckAllSource}
             checked={sourceItemsToTransfer.length > 0}
+            disabled={allSourceItems.length === 0}
+            disableRipple
             indeterminate={
               sourceItemsToTransfer.length > 0 &&
               allSourceItems.length !== sourceItemsToTransfer.length
             }
-            disableRipple
+            onClick={handleCheckAllSource}
+            sx={{ pl: 1 }}
           />
           <Box
             sx={{
               display: "flex",
               flexDirection: "column",
-              justifyContent: "center"
+              justifyContent: "center",
+              pl: 1
             }}
           >
             <Typography variant="body1">{sourceListLabel}</Typography>
-            <Typography variant="body2">{`${sourceItemsToTransfer.length}/${allSourceItems.length} selected`}</Typography>
+            <Typography
+              variant="body2"
+              sx={{ color: "text.secondary" }}
+            >{`${sourceItemsToTransfer.length}/${allSourceItems.length} selected`}</Typography>
           </Box>
         </Box>
 
-        <Box sx={{ p: 2 }}>
+        <Box sx={{ px: 3 }}>
           <Search title="source-filter" onChange={setSourceFilter} />
         </Box>
 
         <Box
           sx={{
-            borderRight: theme => `1px solid ${theme.palette.divider}`,
             height: "100%",
             overflowX: "hidden",
             overflowY: "auto",
-            width: "100%"
+            px: 2
           }}
         >
           <SingleList
@@ -302,6 +327,7 @@ export default function TransferList<T>({
 
       <Box
         sx={{
+          border: theme => `1px solid ${theme.palette.divider}`,
           display: "flex",
           flexDirection: "column",
           height: "100%",
@@ -311,32 +337,39 @@ export default function TransferList<T>({
         <Box
           sx={{
             alignItems: "center",
+            borderBottom: theme => `1px solid ${theme.palette.divider}`,
             display: "flex",
-            py: 2
+            p: 2
           }}
         >
           <Checkbox
-            onClick={handleCheckAllTarget}
             checked={targetItemsToTransfer.length > 0}
+            disabled={allTargetItems.length === 0}
+            disableRipple
             indeterminate={
               targetItemsToTransfer.length > 0 &&
               allTargetItems.length !== targetItemsToTransfer.length
             }
-            disableRipple
+            onClick={handleCheckAllTarget}
+            sx={{ pl: 1 }}
           />
           <Box
             sx={{
               display: "flex",
               flexDirection: "column",
-              justifyContent: "center"
+              justifyContent: "center",
+              pl: 1
             }}
           >
             <Typography variant="body1">{targetListLabel}</Typography>
-            <Typography variant="body2">{`${targetItemsToTransfer.length}/${allTargetItems.length} selected`}</Typography>
+            <Typography
+              variant="body2"
+              sx={{ color: "text.secondary" }}
+            >{`${targetItemsToTransfer.length}/${allTargetItems.length} selected`}</Typography>
           </Box>
         </Box>
 
-        <Box sx={{ p: 2 }}>
+        <Box sx={{ px: 3 }}>
           <Search title="target-filter" onChange={setTargetFilter} />
         </Box>
         <Box
@@ -344,14 +377,10 @@ export default function TransferList<T>({
             height: "100%",
             overflowX: "hidden",
             overflowY: "auto",
-            width: "100%"
+            px: 2
           }}
         >
-          <Box
-            sx={{
-              width: "100%"
-            }}
-          >
+          <Box>
             <SingleList
               checked={targetItemsToTransfer}
               items={filteredTargetItems.map(item => getItemLabel(item))}
@@ -391,30 +420,11 @@ const Search = ({
     <Box
       sx={{
         alignItems: "center",
-        border: theme => `1px solid ${theme.palette.divider}`,
         display: "flex",
         width: "100%"
       }}
     >
-      <InputBase
-        title={title}
-        placeholder="Search..."
-        value={search}
-        onChange={handleChange}
-        size="small"
-        sx={{
-          flex: 1,
-          pl: 1,
-          pt: 0.5
-        }}
-      />
-      {search.length > 0 ? (
-        <IconButton onClick={() => setSearch("")}>
-          <CloseIcon />
-        </IconButton>
-      ) : (
-        <SearchIcon color="action" sx={{ mr: 1 }} />
-      )}
+      <SearchBar value={search} onChange={handleChange} />
     </Box>
   );
 };
@@ -436,22 +446,18 @@ const SingleList = ({
         width: "100%"
       }}
     >
-      <List dense component="div" role={role}>
+      <List dense component="div" role={role} sx={{ py: 0 }}>
         {items.map(value => {
           return (
             <ListItem
               key={value}
               role="listitem1"
+              sx={{ py: 0.5 }}
               onClick={() => handleToggle(value)}
               disablePadding
             >
-              <ListItemIcon>
-                <Checkbox
-                  checked={checked.indexOf(value) !== -1}
-                  disableRipple
-                />
-              </ListItemIcon>
-              <ListItemText primary={value} />
+              <Checkbox checked={checked.indexOf(value) !== -1} disableRipple />
+              <ListItemText sx={{ pl: 1 }} primary={value} />
             </ListItem>
           );
         })}

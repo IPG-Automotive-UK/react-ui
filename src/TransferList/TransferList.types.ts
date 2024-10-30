@@ -6,6 +6,10 @@ export type TransferListProps<T> = {
    */
   filterKey?: (item: T) => string;
   /**
+   * Control the transfer of the items
+   */
+  handleTransfer?: (value: string[], intent: "ltr" | "rtl") => void;
+  /**
    * Array of Items.
    */
   items?: TransferListItem[] | T[];
