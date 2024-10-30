@@ -61,7 +61,7 @@ export type VehicleSelectorProps = {
    */
   size?: "small" | "medium";
   /**
-   * limit the number of tags that are visible when not focused
+   * The maximum number of tags that will be visible. Set -1 to disable the limit.
    */
   limitTags?: number;
 };

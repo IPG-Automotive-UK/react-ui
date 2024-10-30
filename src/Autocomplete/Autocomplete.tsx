@@ -91,7 +91,7 @@ export default function Autocomplete<
         isKeyValueOption(option) ? option.value : String(option)
       }
       renderTags={
-        limitTags
+        limitTags && limitTags > 0
           ? (value, getTagProps) =>
               limitTags && Tags(value, getTagProps, limitTags)
           : undefined
