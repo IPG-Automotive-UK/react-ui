@@ -59,6 +59,7 @@ export const WithCustomObjectArray: StoryObj<
   args: {
     ...defaultArgs,
     filterKey: item => item.key,
+    initialTargetItemKeys: ["Cherry", "Kiwi"],
     itemLabel: item => item.name,
     items: [
       { key: "Apples", name: "Apples" },
@@ -84,6 +85,7 @@ export const WithStringArray: StoryObj<typeof TransferList<TransferListItem>> =
   {
     args: {
       ...defaultArgs,
+      initialTargetItemKeys: ["Apples", "Grapes"],
       items: [
         "Apples",
         "Pears",
