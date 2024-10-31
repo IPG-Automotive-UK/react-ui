@@ -33,16 +33,21 @@ export default function TransferList<T>({
     initialTargetItemKeys
   );
 
-  // Get item label from any item structure
+  /**
+   * Get item label from any item structure
+   **/
   const getItemLabel = (item: TransferListItem | T) => {
+    // If item is a string return it
     if (typeof item === "string") {
       return item;
     }
 
+    // If item is default object, return the label property
     if (typeof item === "object" && item !== null && "label" in item) {
       return item.label;
     }
 
+    // If item is a custom T use the provided function to return the label
     if (itemLabel) {
       return itemLabel(item as T);
     }
@@ -52,15 +57,21 @@ export default function TransferList<T>({
     );
   };
 
+  /**
+   * Get key from any item structure
+   **/
   const filterKey = (item: TransferListItem | T) => {
+    // If item is a string return it as an id
     if (typeof item === "string") {
       return item;
     }
 
+    // If item is a default object return the id
     if (typeof item === "object" && item !== null && "id" in item) {
       return item.id;
     }
 
+    // If item is a custom object use the provided function to get a key
     if (customFilterKey) {
       return customFilterKey(item);
     }
@@ -126,11 +137,12 @@ export default function TransferList<T>({
       ? setChecked(
           checked.filter(item => !sourceItemsToTransfer.includes(item))
         )
-      : setChecked(
-          items
+      : setChecked([
+          ...checked.filter(item => !sourceItemsToTransfer.includes(item)),
+          ...items
             .map(item => filterKey(item))
             .filter(item => !targetItemKeys.includes(item))
-        );
+        ]);
   };
 
   /**
@@ -143,11 +155,12 @@ export default function TransferList<T>({
       ? setChecked(
           checked.filter(item => !targetItemsToTransfer.includes(item))
         )
-      : setChecked(
-          items
+      : setChecked([
+          ...checked.filter(item => !targetItemsToTransfer.includes(item)),
+          ...items
             .map(item => filterKey(item))
             .filter(item => targetItemKeys.includes(item))
-        );
+        ]);
   };
 
   /**
@@ -234,6 +247,7 @@ export default function TransferList<T>({
       <Box
         sx={{
           border: theme => `1px solid ${theme.palette.divider}`,
+          borderRadius: 1,
           display: "flex",
           flexDirection: "column",
           height: "100%",
@@ -245,7 +259,8 @@ export default function TransferList<T>({
             alignItems: "center",
             borderBottom: theme => `1px solid ${theme.palette.divider}`,
             display: "flex",
-            p: 2
+            px: 2,
+            py: 1.5
           }}
         >
           <Checkbox
@@ -328,6 +343,7 @@ export default function TransferList<T>({
       <Box
         sx={{
           border: theme => `1px solid ${theme.palette.divider}`,
+          borderRadius: 1,
           display: "flex",
           flexDirection: "column",
           height: "100%",
@@ -339,7 +355,8 @@ export default function TransferList<T>({
             alignItems: "center",
             borderBottom: theme => `1px solid ${theme.palette.divider}`,
             display: "flex",
-            p: 2
+            px: 2,
+            py: 1.5
           }}
         >
           <Checkbox
