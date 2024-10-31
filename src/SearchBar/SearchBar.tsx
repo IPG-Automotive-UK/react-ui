@@ -25,6 +25,7 @@ export default function SearchBar({
       }}
     >
       <InputBase
+        aria-label={"Search"}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
