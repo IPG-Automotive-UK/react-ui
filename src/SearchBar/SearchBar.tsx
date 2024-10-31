@@ -34,6 +34,7 @@ export default function SearchBar({
       />
       {hasValue ? (
         <IconButton
+          aria-label="clear search"
           onClick={() => {
             onChange({ target: { value: "" } });
           }}
