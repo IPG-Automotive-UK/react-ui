@@ -45,7 +45,6 @@ export const WithDefaultObjectArray: StoryObj<
       { id: "Grapes", label: "Grapes" },
       { id: "Cherry", label: "Cherry" }
     ],
-    selectedItems: ["Apples"],
     sourceListLabel: "Source List Label",
     targetListLabel: "Target List Label"
   },
@@ -59,7 +58,6 @@ export const WithCustomObjectArray: StoryObj<
   args: {
     ...defaultArgs,
     filterKey: item => item.key,
-    initialTargetItemKeys: ["Cherry", "Kiwi"],
     itemLabel: item => item.name,
     items: [
       { key: "Apples", name: "Apples" },
@@ -73,8 +71,8 @@ export const WithCustomObjectArray: StoryObj<
       { key: "Grapes", name: "Grapes" },
       { key: "Cherry", name: "Cherry" }
     ],
-    selectedItems: ["Apples"],
     sourceListLabel: "Source List Label",
+    targetListKeys: ["Cherry", "Kiwi"],
     targetListLabel: "Target List Label"
   },
 
@@ -85,7 +83,6 @@ export const WithStringArray: StoryObj<typeof TransferList<TransferListItem>> =
   {
     args: {
       ...defaultArgs,
-      initialTargetItemKeys: ["Apples", "Grapes"],
       items: [
         "Apples",
         "Pears",
@@ -97,7 +94,8 @@ export const WithStringArray: StoryObj<typeof TransferList<TransferListItem>> =
         "Plum",
         "Grapes",
         "Cherry"
-      ]
+      ],
+      targetListKeys: ["Apples", "Grapes"]
     },
     render: TransferList
   };
