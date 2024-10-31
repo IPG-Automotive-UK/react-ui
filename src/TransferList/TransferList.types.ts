@@ -16,11 +16,7 @@ export type TransferListProps<T> = {
   /**
    * Array of keys for the items on the right side.
    */
-  initialTargetItemKeys?: string[];
-  /**
-   * Array of selectedItems.
-   */
-  selectedItems?: string[];
+  targetListKeys?: string[];
   /**
    * Source list label
    */

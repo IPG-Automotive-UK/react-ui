@@ -15,7 +15,7 @@ import SearchBar from "../SearchBar";
 export default function TransferList<T>({
   filterKey: customFilterKey,
   handleTransfer,
-  initialTargetItemKeys = [],
+  targetListKeys = [],
   items = [],
   itemLabel,
   onTransfer,
@@ -29,9 +29,8 @@ export default function TransferList<T>({
   // Target list search filter
   const [targetFilter, setTargetFilter] = useState<string>("");
   // All item keys
-  const [targetItemKeys, setTargetItemKeys] = useState<string[]>(
-    initialTargetItemKeys
-  );
+  const [targetItemKeys, setTargetItemKeys] =
+    useState<string[]>(targetListKeys);
 
   /**
    * Get item label from any item structure
@@ -264,6 +263,7 @@ export default function TransferList<T>({
           }}
         >
           <Checkbox
+            aria-label="select all source list items"
             checked={sourceItemsToTransfer.length > 0}
             disabled={allSourceItems.length === 0}
             disableRipple
@@ -290,9 +290,11 @@ export default function TransferList<T>({
           </Box>
         </Box>
 
-        <Box sx={{ px: 3 }}>
-          <Search title="source-filter" onChange={setSourceFilter} />
-        </Box>
+        {allSourceItems.length > 0 ? (
+          <Box sx={{ px: 3 }}>
+            <Search title="source-filter" onChange={setSourceFilter} />
+          </Box>
+        ) : null}
 
         <Box
           sx={{
@@ -321,6 +323,7 @@ export default function TransferList<T>({
         p={2}
       >
         <Button
+          aria-label={"transfer to target list"}
           variant="outlined"
           size="small"
           sx={{ m: 0.5 }}
@@ -330,6 +333,7 @@ export default function TransferList<T>({
           &gt;
         </Button>
         <Button
+          aria-label={"transfer to source list"}
           variant="outlined"
           size="small"
           sx={{ m: 0.5 }}
@@ -360,6 +364,7 @@ export default function TransferList<T>({
           }}
         >
           <Checkbox
+            aria-label="select all target list items"
             checked={targetItemsToTransfer.length > 0}
             disabled={allTargetItems.length === 0}
             disableRipple
@@ -386,9 +391,12 @@ export default function TransferList<T>({
           </Box>
         </Box>
 
-        <Box sx={{ px: 3 }}>
-          <Search title="target-filter" onChange={setTargetFilter} />
-        </Box>
+        {allTargetItems.length > 0 ? (
+          <Box sx={{ px: 3 }}>
+            <Search title="target-filter" onChange={setTargetFilter} />
+          </Box>
+        ) : null}
+
         <Box
           sx={{
             height: "100%",
@@ -468,7 +476,7 @@ const SingleList = ({
           return (
             <ListItem
               key={value}
-              role="listitem1"
+              role={`${role}-item`}
               sx={{ py: 0.5 }}
               onClick={() => handleToggle(value)}
               disablePadding
