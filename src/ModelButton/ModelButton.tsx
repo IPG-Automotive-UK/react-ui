@@ -16,6 +16,9 @@ import {
 } from "@mui/material";
 import { alpha, useTheme } from "@mui/material/styles";
 
+import CancelIcon from "@mui/icons-material/Cancel";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import ErrorIcon from "@mui/icons-material/Error";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 /**
@@ -101,6 +104,7 @@ export default function ModelButton({
 
   // set border color based on status
   let borderColor = theme.palette.text.secondary;
+
   if (disabled) {
     borderColor =
       theme.palette.mode === "light"
@@ -114,6 +118,9 @@ export default function ModelButton({
     borderColor = theme.palette.success.main;
   }
 
+  // set background color if status is different than 'none' and not disabled, background color equals border color
+  const backgroundColor = !disabled && status !== "none" ? borderColor : "";
+
   // ensure children are always an array
   const arrayChildren = React.Children.toArray(children);
   const hasChildren = arrayChildren && arrayChildren.length > 0;
@@ -121,8 +128,30 @@ export default function ModelButton({
   // is button being hovered over
   const [isHover, setIsHover] = React.useState(false);
 
+  // styles for icon which will be shown only when status is available
+  const iconStyles = {
+    color: isHover ? theme.palette.primary.main : backgroundColor,
+    height: "20px",
+    position: "absolute",
+    right: "6%",
+    top: "6%",
+    width: "20px"
+  };
+
   // which background to show. if there are nested children, show a cutout background, otherwise the normal background
   const Background = hasChildren ? CutOutBackground : CompleteBackground;
+
+  /** Get the correct icon for model button, according to the status  */
+  const getCurrentStatusIcon = () => {
+    switch (status) {
+      case "error":
+        return <CancelIcon sx={iconStyles} />;
+      case "success":
+        return <ErrorIcon sx={iconStyles} />;
+      case "warning":
+        return <CheckCircleIcon sx={iconStyles} />;
+    }
+  };
 
   // render component
   return (
@@ -177,10 +206,11 @@ export default function ModelButton({
         >
           <Background
             borderColor={isHover ? theme.palette.primary.main : borderColor}
-            backgroundColor={alpha(
-              theme.palette.primary.main,
-              isHover ? 0.04 : 0
-            )}
+            backgroundColor={
+              status !== "none"
+                ? alpha(backgroundColor, isHover ? 0.04 : 0.12)
+                : alpha(theme.palette.primary.main, isHover ? 0.04 : 0)
+            }
           />
           {icon
             ? React.cloneElement(icon, {
@@ -191,6 +221,7 @@ export default function ModelButton({
                     : theme.palette.common.white
               })
             : null}
+          {status !== "none" && getCurrentStatusIcon()}
         </IconButton>
         <Typography
           sx={{
