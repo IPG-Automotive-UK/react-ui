@@ -76,7 +76,6 @@ export default function TransferList<T>({
 
     // If item is a custom object use the provided function to get a key
     if (customFilterKey) {
-      console.log(customFilterKey(item));
       return customFilterKey(item);
     }
 
@@ -311,9 +310,10 @@ export default function TransferList<T>({
         >
           <SingleList
             checked={sourceItemsToTransfer}
-            filterKey={filterKey}
-            items={filteredSourceItems}
-            itemLabel={getItemLabel}
+            items={filteredSourceItems.map(item => ({
+              key: filterKey(item),
+              label: getItemLabel(item)
+            }))}
             handleToggle={handleToggle}
             role="source-list"
           />
@@ -414,10 +414,11 @@ export default function TransferList<T>({
         >
           <Box>
             <SingleList
-              filterKey={filterKey}
               checked={targetItemsToTransfer}
-              items={filteredTargetItems}
-              itemLabel={getItemLabel}
+              items={filteredTargetItems.map(item => ({
+                key: filterKey(item),
+                label: getItemLabel(item)
+              }))}
               handleToggle={handleToggle}
               role="target-list"
             />
@@ -458,14 +459,7 @@ const Search = ({ onChange }: { onChange: (value: string) => void }) => {
   );
 };
 
-function SingleList<T>({
-  checked,
-  filterKey,
-  items,
-  itemLabel,
-  handleToggle,
-  role
-}: SingleListProps<T>) {
+function SingleList({ checked, items, handleToggle, role }: SingleListProps) {
   return (
     <Box
       sx={{
@@ -476,17 +470,14 @@ function SingleList<T>({
         {items.map(item => {
           return (
             <ListItem
-              key={filterKey(item)}
+              key={item.key}
               role={`${role}-item`}
               sx={{ py: 0.5 }}
-              onClick={() => handleToggle(filterKey(item))}
+              onClick={() => handleToggle(item.key)}
               disablePadding
             >
-              <Checkbox
-                checked={checked.includes(filterKey(item))}
-                disableRipple
-              />
-              <ListItemText sx={{ pl: 1 }} primary={itemLabel(item)} />
+              <Checkbox checked={checked.includes(item.key)} disableRipple />
+              <ListItemText sx={{ pl: 1 }} primary={item.label} />
             </ListItem>
           );
         })}

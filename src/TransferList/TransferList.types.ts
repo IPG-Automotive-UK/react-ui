@@ -35,11 +35,12 @@ export type TransferListProps<T> = {
   onTransfer?: (value: string[], intent: "toTarget" | "toSource") => void;
 };
 
-export type SingleListProps<T> = {
+export type SingleListProps = {
   checked: string[];
-  filterKey: (item: T) => string;
-  items: TransferListItem[] | T[];
-  itemLabel: (item: T) => string;
-  handleToggle: (x: string) => void;
+  items: {
+    key: string;
+    label: string;
+  }[];
+  handleToggle: (key: string) => void;
   role: string;
 };

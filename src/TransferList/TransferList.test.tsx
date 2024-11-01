@@ -103,7 +103,7 @@ describe("TransferList", () => {
     );
 
     // get search bar
-    const input = screen.getAllByPlaceholderText("Search");
+    const input = screen.getAllByLabelText("Search");
 
     // get list entries
     const list = screen.getByRole("source-list");
@@ -124,6 +124,23 @@ describe("TransferList", () => {
 
     // check that the selected items title remains the same
     expect(screen.getByText("0/3 selected"));
+  });
+
+  test("Search only appears when the list has entries", () => {
+    render(
+      <TransferList
+        items={defaultItemArray}
+        targetListKeys={["Apples", "Pears", "Oranges"]}
+        sourceListLabel="My Source List"
+        targetListLabel="My Target List"
+      />
+    );
+
+    // get search bar
+    const inputs = screen.getAllByLabelText("Search");
+
+    // Check that only one search bar is rendered
+    expect(inputs.length).toBe(1);
   });
 
   test("Clearing the source filter brings back the full source list", async () => {
