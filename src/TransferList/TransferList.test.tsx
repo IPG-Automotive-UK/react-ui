@@ -5,14 +5,17 @@ import React from "react";
 import TransferList from ".";
 import userEvent from "@testing-library/user-event";
 
+// item array using the default object array structure
 const defaultItemArray = [
   { id: "Apples", label: "Apples" },
   { id: "Pears", label: "Pears" },
   { id: "Oranges", label: "Oranges" }
 ];
 
+// item array using strings
 const stringItemArray = ["Apples", "Pears", "Oranges"];
 
+// item array using custom object array structure
 const customItemArray = [
   {
     fruit: "Apples",
@@ -29,7 +32,7 @@ const customItemArray = [
 ];
 
 describe("TransferList", () => {
-  test("Renders a list of unfiltered items in the source list", () => {
+  test("list of unfiltered items in the source list", () => {
     // render component
     render(
       <TransferList
@@ -41,17 +44,18 @@ describe("TransferList", () => {
 
     // get list
     const list = screen.getByRole("source-list");
+
     // get all list entries
     const { getAllByRole } = within(list);
     const items = getAllByRole("source-list-item");
 
-    // test existence of list items
+    // test existence of correct list items
     expect(items[0].textContent).toBe("Apples");
     expect(items[1].textContent).toBe("Pears");
     expect(items[2].textContent).toBe("Oranges");
   });
 
-  test("Renders correct heading text", () => {
+  test("list heading text", () => {
     // render component
     render(
       <TransferList
@@ -61,16 +65,16 @@ describe("TransferList", () => {
       />
     );
 
-    // test existence of list items
+    // test the source list heading and subheading
     expect(screen.getByText("My Source List"));
     expect(screen.getByText("0/3 selected"));
 
-    // test existence of list items
+    // test the target list heading and subheading
     expect(screen.getByText("My Target List"));
     expect(screen.getByText("0/0 selected"));
   });
 
-  test("Renders disabled transfer buttons by default", () => {
+  test("transfer buttons are disabled by default", () => {
     // render component
     render(
       <TransferList
@@ -91,7 +95,7 @@ describe("TransferList", () => {
     );
   });
 
-  test("Source search filters the source list", async () => {
+  test("source search bar filters the source list", async () => {
     // render component
     const user = userEvent.setup();
     render(
@@ -126,7 +130,7 @@ describe("TransferList", () => {
     expect(screen.getByText("0/3 selected"));
   });
 
-  test("Search only appears when the list has entries", () => {
+  test("search bar only appears when the list has entries", () => {
     render(
       <TransferList
         items={defaultItemArray}
@@ -143,7 +147,7 @@ describe("TransferList", () => {
     expect(inputs.length).toBe(1);
   });
 
-  test("Clearing the source filter brings back the full source list", async () => {
+  test("clearing the source filter brings back the full source list", async () => {
     // render component
     const user = userEvent.setup();
     render(
@@ -155,7 +159,7 @@ describe("TransferList", () => {
     );
 
     // get search bar
-    const input = screen.getAllByPlaceholderText("Search");
+    const input = screen.getAllByLabelText("Search");
 
     // get list entries
     const list = screen.getByRole("source-list");
@@ -175,7 +179,7 @@ describe("TransferList", () => {
     expect(items[2].textContent).toBe("Oranges");
   });
 
-  test("Renders items in target list and not source list if keys provided in prop", () => {
+  test("renders items in target list and not source list if keys provided in prop", () => {
     // render component
     render(
       <TransferList
@@ -208,7 +212,7 @@ describe("TransferList", () => {
     expect(screen.getByText("0/1 selected"));
   });
 
-  test("Clicked items check correctly, enable transfer and update the heading", async () => {
+  test("clicked items check correctly, enable transfer button and update the heading", async () => {
     // render component
     const user = userEvent.setup();
     render(
@@ -222,8 +226,6 @@ describe("TransferList", () => {
     // get list entries
     const list = screen.getByRole("source-list");
     const { getAllByRole } = within(list);
-
-    // check if the source list has been unfiltered
     const items = getAllByRole("source-list-item");
 
     // click first two items in list
@@ -249,12 +251,15 @@ describe("TransferList", () => {
       "checked",
       false
     );
+
+    // test subheading is correct
     expect(screen.getByText("2/3 selected"));
   });
 
-  test("Checked items transfer from source to target and uncheck", async () => {
+  test("checked items transfer from source to target list and uncheck", async () => {
     // render component
     const user = userEvent.setup();
+
     render(
       <TransferList
         items={defaultItemArray}
@@ -313,7 +318,7 @@ describe("TransferList", () => {
     );
   });
 
-  test("Check all checkboxes are disabled unless the list has entries", () => {
+  test("header check all checkboxes are disabled unless the list has entries", () => {
     // render component
     render(
       <TransferList
@@ -323,9 +328,11 @@ describe("TransferList", () => {
       />
     );
 
+    // get both check all checkboxes
     const selectAllSourceCheckbox = within(
       screen.getByLabelText("select all source list items")
     ).getByRole("checkbox");
+
     const selectAllTargetCheckbox = within(
       screen.getByLabelText("select all target list items")
     ).getByRole("checkbox");
@@ -335,7 +342,7 @@ describe("TransferList", () => {
     expect(selectAllTargetCheckbox).toHaveProperty("disabled", true);
   });
 
-  test("Source list check all checks all the source list items", async () => {
+  test("source list check all checkbox selects all the source list items", async () => {
     // render component
     const user = userEvent.setup();
 
@@ -351,14 +358,11 @@ describe("TransferList", () => {
     const selectAllSourceCheckbox = within(
       screen.getByLabelText("select all source list items")
     ).getByRole("checkbox");
-    const selectAllTargetCheckbox = within(
-      screen.getByLabelText("select all target list items")
-    ).getByRole("checkbox");
 
     // test transfer buttons exist and are disabled and enabled correctly
     expect(selectAllSourceCheckbox).toHaveProperty("disabled", false);
-    expect(selectAllTargetCheckbox).toHaveProperty("disabled", true);
 
+    // click select all source checkbox
     await user.click(selectAllSourceCheckbox);
 
     // check updated source entries
@@ -380,7 +384,7 @@ describe("TransferList", () => {
     );
   });
 
-  test("Target list check all checks all the target list items", async () => {
+  test("target list check all checks all the target list items", async () => {
     // render component
     const user = userEvent.setup();
 
@@ -394,17 +398,14 @@ describe("TransferList", () => {
     );
 
     // get checkboxes
-    const selectAllSourceCheckbox = within(
-      screen.getByLabelText("select all source list items")
-    ).getByRole("checkbox");
     const selectAllTargetCheckbox = within(
       screen.getByLabelText("select all target list items")
     ).getByRole("checkbox");
 
     // test transfer buttons exist and are disabled and enabled correctly
-    expect(selectAllSourceCheckbox).toHaveProperty("disabled", true);
     expect(selectAllTargetCheckbox).toHaveProperty("disabled", false);
 
+    // click select all target checkbox
     await user.click(selectAllTargetCheckbox);
 
     // check updated source entries
@@ -416,17 +417,19 @@ describe("TransferList", () => {
       "checked",
       true
     );
+
     expect(within(targetItems[1]).getByRole("checkbox")).toHaveProperty(
       "checked",
       true
     );
+
     expect(within(targetItems[2]).getByRole("checkbox")).toHaveProperty(
       "checked",
       true
     );
   });
 
-  test("Calls onTransfer callback with data and intent", async () => {
+  test("call onTransfer callback with data and intent", async () => {
     // render component
     const user = userEvent.setup();
     // transfer function
@@ -446,6 +449,7 @@ describe("TransferList", () => {
     const selectAllSourceCheckbox = within(
       screen.getByLabelText("select all source list items")
     ).getByRole("checkbox");
+
     const selectAllTargetCheckbox = within(
       screen.getByLabelText("select all target list items")
     ).getByRole("checkbox");
@@ -489,7 +493,7 @@ describe("TransferList", () => {
     );
   });
 
-  test("Calls handleTransfer callback with data and intent", async () => {
+  test("call handleTransfer callback with data and intent", async () => {
     // render component
     const user = userEvent.setup();
     // transfer function
@@ -505,6 +509,7 @@ describe("TransferList", () => {
       />
     );
 
+    // get select all target checkbox
     const selectAllTargetCheckbox = within(
       screen.getByLabelText("select all target list items")
     ).getByRole("checkbox");
@@ -583,6 +588,7 @@ describe("TransferList", () => {
       />
     );
 
+    // get select all target checkbox
     const selectAllTargetCheckbox = within(
       screen.getByLabelText("select all target list items")
     ).getByRole("checkbox");
