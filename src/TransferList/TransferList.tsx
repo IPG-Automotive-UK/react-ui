@@ -8,7 +8,11 @@ import {
   Typography
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { TransferListItem, TransferListProps } from "./TransferList.types";
+import {
+  SingleListProps,
+  TransferListItem,
+  TransferListProps
+} from "./TransferList.types";
 
 import SearchBar from "../SearchBar";
 
@@ -72,6 +76,7 @@ export default function TransferList<T>({
 
     // If item is a custom object use the provided function to get a key
     if (customFilterKey) {
+      console.log(customFilterKey(item));
       return customFilterKey(item);
     }
 
@@ -130,8 +135,8 @@ export default function TransferList<T>({
    * Handle check all items in the source list
    */
   const handleCheckAllSource = () => {
-    // If all items are checked, uncheck them
-    // Otherwise, check all items
+    // If all source items are checked, uncheck them
+    // Otherwise, check all source items
     allSourceItemsChecked
       ? setChecked(
           checked.filter(item => !sourceItemsToTransfer.includes(item))
@@ -148,8 +153,8 @@ export default function TransferList<T>({
    * Handle check all items in the target list
    */
   const handleCheckAllTarget = () => {
-    // If all items are checked, uncheck them
-    // Otherwise, check all items
+    // If all target items are checked, uncheck them
+    // Otherwise, check all target items
     allTargetItemsChecked
       ? setChecked(
           checked.filter(item => !targetItemsToTransfer.includes(item))
@@ -173,7 +178,7 @@ export default function TransferList<T>({
 
     // Call handle hook if using controlled
     if (handleTransfer) {
-      handleTransfer(checkedSourceItems, "ltr");
+      handleTransfer(checkedSourceItems, "toTarget");
       return;
     }
 
@@ -181,7 +186,7 @@ export default function TransferList<T>({
     onTransfer &&
       onTransfer(
         checked.filter(item => !targetItemKeys.includes(item)),
-        "ltr"
+        "toTarget"
       );
 
     // Add the checked items to the target list
@@ -201,12 +206,12 @@ export default function TransferList<T>({
 
     // Call handle hook if using controlled
     if (handleTransfer) {
-      handleTransfer(checkedTargetItems, "rtl");
+      handleTransfer(checkedTargetItems, "toSource");
       return;
     }
 
     // Call the onTransfer callback if using optimistic
-    onTransfer && onTransfer(targetItemsToTransfer, "rtl");
+    onTransfer && onTransfer(targetItemsToTransfer, "toSource");
 
     // Remove the checked items from the target list
     setTargetItemKeys(
@@ -292,7 +297,7 @@ export default function TransferList<T>({
 
         {allSourceItems.length > 0 ? (
           <Box sx={{ px: 3 }}>
-            <Search title="source-filter" onChange={setSourceFilter} />
+            <Search onChange={setSourceFilter} />
           </Box>
         ) : null}
 
@@ -306,7 +311,9 @@ export default function TransferList<T>({
         >
           <SingleList
             checked={sourceItemsToTransfer}
-            items={filteredSourceItems.map(item => getItemLabel(item))}
+            filterKey={filterKey}
+            items={filteredSourceItems}
+            itemLabel={getItemLabel}
             handleToggle={handleToggle}
             role="source-list"
           />
@@ -393,7 +400,7 @@ export default function TransferList<T>({
 
         {allTargetItems.length > 0 ? (
           <Box sx={{ px: 3 }}>
-            <Search title="target-filter" onChange={setTargetFilter} />
+            <Search onChange={setTargetFilter} />
           </Box>
         ) : null}
 
@@ -407,8 +414,10 @@ export default function TransferList<T>({
         >
           <Box>
             <SingleList
+              filterKey={filterKey}
               checked={targetItemsToTransfer}
-              items={filteredTargetItems.map(item => getItemLabel(item))}
+              items={filteredTargetItems}
+              itemLabel={getItemLabel}
               handleToggle={handleToggle}
               role="target-list"
             />
@@ -419,13 +428,7 @@ export default function TransferList<T>({
   );
 }
 
-const Search = ({
-  title,
-  onChange
-}: {
-  title: string;
-  onChange: (value: string) => void;
-}) => {
+const Search = ({ onChange }: { onChange: (value: string) => void }) => {
   const [search, setSearch] = useState("");
 
   // handle change
@@ -437,6 +440,7 @@ const Search = ({
     setSearch(event.target.value);
   };
 
+  // Call on change on every search
   useEffect(() => {
     onChange(search);
   }, [onChange, search]);
@@ -454,17 +458,14 @@ const Search = ({
   );
 };
 
-const SingleList = ({
+function SingleList<T>({
   checked,
+  filterKey,
   items,
+  itemLabel,
   handleToggle,
   role
-}: {
-  checked: string[];
-  items: string[];
-  handleToggle: (x: string) => void;
-  role: string;
-}) => {
+}: SingleListProps<T>) {
   return (
     <Box
       sx={{
@@ -472,17 +473,20 @@ const SingleList = ({
       }}
     >
       <List dense component="div" role={role} sx={{ py: 0 }}>
-        {items.map(value => {
+        {items.map(item => {
           return (
             <ListItem
-              key={value}
+              key={filterKey(item)}
               role={`${role}-item`}
               sx={{ py: 0.5 }}
-              onClick={() => handleToggle(value)}
+              onClick={() => handleToggle(filterKey(item))}
               disablePadding
             >
-              <Checkbox checked={checked.indexOf(value) !== -1} disableRipple />
-              <ListItemText sx={{ pl: 1 }} primary={value} />
+              <Checkbox
+                checked={checked.includes(filterKey(item))}
+                disableRipple
+              />
+              <ListItemText sx={{ pl: 1 }} primary={itemLabel(item)} />
             </ListItem>
           );
         })}
@@ -490,4 +494,4 @@ const SingleList = ({
       </List>
     </Box>
   );
-};
+}
