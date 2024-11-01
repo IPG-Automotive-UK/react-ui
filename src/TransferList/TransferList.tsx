@@ -198,14 +198,9 @@ export default function TransferList<T>({
    * Transfer items to the source list
    */
   const transferToSource = () => {
-    // get checked Items
-    const checkedTargetItems = targetItemKeys.filter(
-      item => !targetItemsToTransfer.includes(item)
-    );
-
     // Call handle hook if using controlled
     if (handleTransfer) {
-      handleTransfer(checkedTargetItems, "toSource");
+      handleTransfer(targetItemsToTransfer, "toSource");
       return;
     }
 
@@ -216,6 +211,7 @@ export default function TransferList<T>({
     setTargetItemKeys(
       targetItemKeys.filter(item => !targetItemsToTransfer.includes(item))
     );
+
     // Uncheck all items
     setChecked([]);
   };

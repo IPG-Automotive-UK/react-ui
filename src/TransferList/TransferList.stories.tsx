@@ -3,6 +3,7 @@ import React from "react";
 
 import TransferList from "./TransferList";
 import { TransferListItem } from "./TransferList.types";
+import { action } from "@storybook/addon-actions";
 
 /**
  * Story metadata
@@ -18,16 +19,19 @@ const meta: Meta<typeof TransferList> = {
 };
 export default meta;
 
+// type for custom object
 type CustomTransferListItemType = {
   key: string;
   name: string;
 };
 
+// default args for every test
 const defaultArgs: StoryObj<typeof TransferList<TransferListItem>>["args"] = {
   sourceListLabel: "Source List Label",
   targetListLabel: "Target List Label"
 };
 
+// use a pre-defined object shape sarry with no additional confiuration
 export const WithDefaultObjectArray: StoryObj<
   typeof TransferList<TransferListItem>
 > = {
@@ -44,14 +48,35 @@ export const WithDefaultObjectArray: StoryObj<
       { id: "Plum", label: "Plum" },
       { id: "Grapes", label: "Grapes" },
       { id: "Cherry", label: "Cherry" }
-    ],
-    sourceListLabel: "Source List Label",
-    targetListLabel: "Target List Label"
+    ]
   },
 
   render: TransferList
 };
 
+// use an array of strings with pre-transferred items
+export const WithStringArray: StoryObj<typeof TransferList<TransferListItem>> =
+  {
+    args: {
+      ...defaultArgs,
+      items: [
+        "Apples",
+        "Pears",
+        "Oranges",
+        "Bananas",
+        "Mangoes",
+        "Kiwi",
+        "Dragonfruit",
+        "Plum",
+        "Grapes",
+        "Cherry"
+      ],
+      targetListKeys: ["Apples", "Grapes"]
+    },
+    render: TransferList
+  };
+
+// use a custom object shape array with filterKey and itemLabel configurations
 export const WithCustomObjectArray: StoryObj<
   typeof TransferList<CustomTransferListItemType>
 > = {
@@ -79,23 +104,24 @@ export const WithCustomObjectArray: StoryObj<
   render: TransferList
 };
 
-export const WithStringArray: StoryObj<typeof TransferList<TransferListItem>> =
-  {
-    args: {
-      ...defaultArgs,
-      items: [
-        "Apples",
-        "Pears",
-        "Oranges",
-        "Bananas",
-        "Mangoes",
-        "Kiwi",
-        "Dragonfruit",
-        "Plum",
-        "Grapes",
-        "Cherry"
-      ],
-      targetListKeys: ["Apples", "Grapes"]
-    },
-    render: TransferList
-  };
+// controlled component that calls the handleTransfer callback with data
+export const Controlled: StoryObj<typeof TransferList<TransferListItem>> = {
+  args: {
+    ...defaultArgs,
+    handleTransfer: (data, intent) => action("handleTransfer")(data, intent),
+    items: [
+      "Apples",
+      "Pears",
+      "Oranges",
+      "Bananas",
+      "Mangoes",
+      "Kiwi",
+      "Dragonfruit",
+      "Plum",
+      "Grapes",
+      "Cherry"
+    ],
+    targetListKeys: ["Apples", "Grapes"]
+  },
+  render: TransferList
+};

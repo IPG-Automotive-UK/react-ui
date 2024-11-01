@@ -489,6 +489,44 @@ describe("TransferList", () => {
     );
   });
 
+  test("Calls handleTransfer callback with data and intent", async () => {
+    // render component
+    const user = userEvent.setup();
+    // transfer function
+    const transferFn = vi.fn();
+
+    render(
+      <TransferList
+        items={defaultItemArray}
+        handleTransfer={transferFn}
+        targetListKeys={["Apples", "Pears", "Oranges"]}
+        sourceListLabel="My Source List"
+        targetListLabel="My Target List"
+      />
+    );
+
+    const selectAllTargetCheckbox = within(
+      screen.getByLabelText("select all target list items")
+    ).getByRole("checkbox");
+
+    // select all the target list items
+    await user.click(selectAllTargetCheckbox);
+
+    // get transfer to source button
+    const transferToSourceButton = screen.getByLabelText(
+      "transfer to source list"
+    );
+
+    // transfer all target list items to source
+    await user.click(transferToSourceButton);
+
+    // check the callback data
+    expect(transferFn).toHaveBeenCalledWith(
+      ["Apples", "Pears", "Oranges"],
+      "toSource"
+    );
+  });
+
   test("accepts array of strings as items", async () => {
     // render component
     const user = userEvent.setup();
