@@ -60,19 +60,19 @@ export const WithCustomObjectArray: StoryObj<
     filterKey: item => item.key,
     itemLabel: item => item.name,
     items: [
-      { key: "Apples", name: "Apples" },
-      { key: "Pears", name: "Pears" },
-      { key: "Oranges", name: "Oranges" },
-      { key: "Bananas", name: "Bananas" },
-      { key: "Mangoes", name: "Mangoes" },
-      { key: "Kiwi", name: "Kiwi" },
-      { key: "Dragonfruit", name: "Dragonfruit" },
-      { key: "Plum", name: "Plum" },
-      { key: "Grapes", name: "Grapes" },
-      { key: "Cherry", name: "Cherry" }
+      { key: "A", name: "Apples" },
+      { key: "P", name: "Pears" },
+      { key: "O", name: "Oranges" },
+      { key: "B", name: "Bananas" },
+      { key: "M", name: "Mangoes" },
+      { key: "K", name: "Kiwi" },
+      { key: "D", name: "Dragonfruit" },
+      { key: "Pl", name: "Plum" },
+      { key: "G", name: "Grapes" },
+      { key: "C", name: "Cherry" }
     ],
     sourceListLabel: "Source List Label",
-    targetListKeys: ["Cherry", "Kiwi"],
+    targetListKeys: ["C", "K"],
     targetListLabel: "Target List Label"
   },
 
