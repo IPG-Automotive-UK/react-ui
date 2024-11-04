@@ -21,7 +21,7 @@ export default function TransferList<T>({
   handleTransfer,
   targetListKeys = [],
   items = [],
-  itemLabel,
+  itemProps,
   onTransfer,
   sourceListLabel,
   targetListLabel
@@ -39,24 +39,54 @@ export default function TransferList<T>({
   /**
    * Get item label from any item structure
    **/
-  const getItemLabel = (item: TransferListItem | T) => {
-    // If item is a string return it
-    if (typeof item === "string") {
-      return item;
+  const getItemLabel = (
+    item: TransferListItem | T,
+    type: "primary" | "secondary" = "primary"
+  ) => {
+    const itemIsObject = typeof item === "object" && item !== null;
+
+    // If getting a primary label
+    if (type === "primary") {
+      // If item is a string return the item
+      if (typeof item === "string") {
+        return item;
+      }
+
+      // Check the primaryLabel prop
+      // If it exists return the primaryLabel prop
+      if (itemIsObject && "primaryLabel" in item) {
+        return item.primaryLabel;
+      }
+
+      // If the object is a custom shape and item props exist return the primary label function
+      if (itemProps) {
+        return itemProps.primaryLabel(item as T);
+      }
     }
 
-    // If item is default object, return the label property
-    if (typeof item === "object" && item !== null && "label" in item) {
-      return item.label;
-    }
+    // If getting a secondary label
+    if (type === "secondary") {
+      // If item is a string secondary label is ignored
+      if (typeof item === "string") {
+        return "";
+      }
 
-    // If item is a custom T use the provided function to return the label
-    if (itemLabel) {
-      return itemLabel(item as T);
+      // Check the secondary label prop
+      // If it exists return the secondary label prop
+      if (itemIsObject) {
+        return "secondaryLabel" in item && item.secondaryLabel
+          ? item.secondaryLabel
+          : "";
+      }
+
+      // If the object is a custom shape  and itemProps exist use the get label function
+      if (itemProps && itemProps.secondaryLabel) {
+        return itemProps?.secondaryLabel(item as T);
+      }
     }
 
     throw new Error(
-      "Item is missing a 'label' property or an itemLabel function is not defined"
+      "Item is missing a primaryLabel property or a label function is not defined"
     );
   };
 
@@ -308,7 +338,8 @@ export default function TransferList<T>({
             checked={sourceItemsToTransfer}
             items={filteredSourceItems.map(item => ({
               key: filterKey(item),
-              label: getItemLabel(item)
+              primaryLabel: getItemLabel(item),
+              secondaryLabel: getItemLabel(item, "secondary")
             }))}
             handleToggle={handleToggle}
             role="source-list"
@@ -413,7 +444,8 @@ export default function TransferList<T>({
               checked={targetItemsToTransfer}
               items={filteredTargetItems.map(item => ({
                 key: filterKey(item),
-                label: getItemLabel(item)
+                primaryLabel: getItemLabel(item),
+                secondaryLabel: getItemLabel(item, "secondary")
               }))}
               handleToggle={handleToggle}
               role="target-list"
@@ -473,7 +505,11 @@ function SingleList({ checked, items, handleToggle, role }: SingleListProps) {
               disablePadding
             >
               <Checkbox checked={checked.includes(item.key)} disableRipple />
-              <ListItemText sx={{ pl: 1 }} primary={item.label} />
+              <ListItemText
+                sx={{ pl: 1 }}
+                primary={item.primaryLabel}
+                secondary={item.secondaryLabel}
+              />
             </ListItem>
           );
         })}

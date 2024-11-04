@@ -1,4 +1,6 @@
-export type TransferListItem = string | { label: string; id: string };
+export type TransferListItem =
+  | string
+  | { primaryLabel: string; secondaryLabel?: string; id: string };
 
 export type TransferListProps<T> = {
   /**
@@ -26,9 +28,18 @@ export type TransferListProps<T> = {
    */
   targetListLabel: string;
   /**
-   * The key to be used for the label.
+   * Props for the default item
    */
-  itemLabel?: (item: T) => string;
+  itemProps?: {
+    /**
+     * The key to be used for the primary label
+     */
+    primaryLabel: (item: T) => string;
+    /**
+     * The key to be used for the secondary label
+     */
+    secondaryLabel?: (item: T) => string;
+  };
   /**
    * Callback fired when the items are transferred.
    */
@@ -39,7 +50,8 @@ export type SingleListProps = {
   checked: string[];
   items: {
     key: string;
-    label: string;
+    primaryLabel: string;
+    secondaryLabel: string;
   }[];
   handleToggle: (key: string) => void;
   role: string;

@@ -38,16 +38,16 @@ export const WithDefaultObjectArray: StoryObj<
   args: {
     ...defaultArgs,
     items: [
-      { id: "Apples", label: "Apples" },
-      { id: "Pears", label: "Pears" },
-      { id: "Oranges", label: "Oranges" },
-      { id: "Bananas", label: "Bananas" },
-      { id: "Mangoes", label: "Mangoes" },
-      { id: "Kiwi", label: "Kiwi" },
-      { id: "Dragonfruit", label: "Dragonfruit" },
-      { id: "Plum", label: "Plum" },
-      { id: "Grapes", label: "Grapes" },
-      { id: "Cherry", label: "Cherry" }
+      { id: "Apples", primaryLabel: "Apples" },
+      { id: "Pears", primaryLabel: "Pears", secondaryLabel: "Conference" },
+      { id: "Oranges", primaryLabel: "Oranges" },
+      { id: "Bananas", primaryLabel: "Bananas", secondaryLabel: "Blue Java" },
+      { id: "Mangoes", primaryLabel: "Mangoes" },
+      { id: "Kiwi", primaryLabel: "Kiwi" },
+      { id: "Dragonfruit", primaryLabel: "Dragonfruit" },
+      { id: "Plum", primaryLabel: "Plum" },
+      { id: "Grapes", primaryLabel: "Grapes" },
+      { id: "Cherry", primaryLabel: "Cherry" }
     ]
   },
 
@@ -83,7 +83,9 @@ export const WithCustomObjectArray: StoryObj<
   args: {
     ...defaultArgs,
     filterKey: item => item.key,
-    itemLabel: item => item.name,
+    itemProps: {
+      primaryLabel: item => item.name
+    },
     items: [
       { key: "A", name: "Apples" },
       { key: "P", name: "Pears" },
@@ -99,6 +101,29 @@ export const WithCustomObjectArray: StoryObj<
     sourceListLabel: "Source List Label",
     targetListKeys: ["C", "K"],
     targetListLabel: "Target List Label"
+  },
+
+  render: TransferList
+};
+
+// use a pre-defined object shape sarry with no additional confiuration
+export const WithSecondaryLabel: StoryObj<
+  typeof TransferList<TransferListItem>
+> = {
+  args: {
+    ...defaultArgs,
+    items: [
+      { id: "Apples", primaryLabel: "Apples", secondaryLabel: "Granny Smith" },
+      { id: "Pears", primaryLabel: "Pears", secondaryLabel: "Conference" },
+      { id: "Oranges", primaryLabel: "Oranges", secondaryLabel: "Jaffa" },
+      { id: "Bananas", primaryLabel: "Bananas", secondaryLabel: "Blue Java" },
+      { id: "Mangoes", primaryLabel: "Mangoes", secondaryLabel: "Alphonso" },
+      { id: "Kiwi", primaryLabel: "Kiwi", secondaryLabel: "Golden" },
+      { id: "Dragonfruit", primaryLabel: "Dragonfruit" },
+      { id: "Plum", primaryLabel: "Plum" },
+      { id: "Grapes", primaryLabel: "Grapes", secondaryLabel: "Mixed" },
+      { id: "Cherry", primaryLabel: "Cherry", secondaryLabel: "Black" }
+    ]
   },
 
   render: TransferList

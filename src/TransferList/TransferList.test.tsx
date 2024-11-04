@@ -7,9 +7,9 @@ import userEvent from "@testing-library/user-event";
 
 // item array using the default object array structure
 const defaultItemArray = [
-  { id: "Apples", label: "Apples" },
-  { id: "Pears", label: "Pears" },
-  { id: "Oranges", label: "Oranges" }
+  { id: "Apples", primaryLabel: "Apples" },
+  { id: "Pears", primaryLabel: "Pears", secondaryLabel: "Conference" },
+  { id: "Oranges", primaryLabel: "Oranges" }
 ];
 
 // item array using strings
@@ -23,7 +23,8 @@ const customItemArray = [
   },
   {
     fruit: "Pears",
-    key: "b"
+    key: "b",
+    type: "Conference"
   },
   {
     fruit: "Oranges",
@@ -51,7 +52,7 @@ describe("TransferList", () => {
 
     // test existence of correct list items
     expect(items[0].textContent).toBe("Apples");
-    expect(items[1].textContent).toBe("Pears");
+    expect(items[1].textContent).toBe("PearsConference");
     expect(items[2].textContent).toBe("Oranges");
   });
 
@@ -116,7 +117,7 @@ describe("TransferList", () => {
 
     // get initially rendered list
     expect(items[0].textContent).toBe("Apples");
-    expect(items[1].textContent).toBe("Pears");
+    expect(items[1].textContent).toBe("PearsConference");
     expect(items[2].textContent).toBe("Oranges");
 
     // Filter the list
@@ -175,7 +176,7 @@ describe("TransferList", () => {
     // check if the source list has been unfiltered
     const items = getAllByRole("source-list-item");
     expect(items[0].textContent).toBe("Apples");
-    expect(items[1].textContent).toBe("Pears");
+    expect(items[1].textContent).toBe("PearsConference");
     expect(items[2].textContent).toBe("Oranges");
   });
 
@@ -196,7 +197,7 @@ describe("TransferList", () => {
     const sourceItems = within(sourceList).getAllByRole("source-list-item");
 
     // test existence of source list items
-    expect(sourceItems[0].textContent).toBe("Pears");
+    expect(sourceItems[0].textContent).toBe("PearsConference");
     expect(sourceItems[1].textContent).toBe("Oranges");
 
     // test selected items heading remains the same
@@ -280,7 +281,7 @@ describe("TransferList", () => {
     // click first two items in list
     expect(sourceItems.length).toBe(3);
     expect(sourceItems[0].textContent).toBe("Apples");
-    expect(sourceItems[1].textContent).toBe("Pears");
+    expect(sourceItems[1].textContent).toBe("PearsConference");
     expect(sourceItems[2].textContent).toBe("Oranges");
     await user.click(sourceItems[0]);
     await user.click(sourceItems[1]);
@@ -293,7 +294,7 @@ describe("TransferList", () => {
     const targetItems = within(targetList).getAllByRole("target-list-item");
     expect(targetItems.length).toBe(2);
     expect(targetItems[0].textContent).toBe("Apples");
-    expect(targetItems[1].textContent).toBe("Pears");
+    expect(targetItems[1].textContent).toBe("PearsConference");
 
     // check updated source entries
     const updatedSourceList = screen.getByRole("source-list");
@@ -579,7 +580,10 @@ describe("TransferList", () => {
     render(
       <TransferList
         filterKey={item => item.key}
-        itemLabel={item => item.fruit}
+        itemProps={{
+          primaryLabel: item => item.fruit,
+          secondaryLabel: item => item.type || ""
+        }}
         items={customItemArray}
         onTransfer={transferFn}
         targetListKeys={["a", "b", "c"]}
