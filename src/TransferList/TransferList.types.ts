@@ -47,12 +47,33 @@ export type TransferListProps<T> = {
 };
 
 export type SingleListProps = {
+  /**
+   * Checked items
+   */
   checked: string[];
+  /**
+   * Item array
+   */
   items: {
+    /**
+     * Unique identifier
+     */
     key: string;
+    /**
+     * Primary label of the item
+     */
     primaryLabel: string;
+    /**
+     * Secondary label of the item
+     */
     secondaryLabel: string;
   }[];
+  /**
+   * Toggle function
+   */
   handleToggle: (key: string) => void;
+  /**
+   * Role of the list
+   */
   role: string;
 };
