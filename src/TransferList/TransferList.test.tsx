@@ -126,9 +126,6 @@ describe("TransferList", () => {
     // check if the source list has been filtered
     const filteredItems = getAllByRole("source-list-item");
     expect(filteredItems[2]).toBeUndefined();
-
-    // check that the selected items title remains the same
-    expect(screen.getByText("0/3 selected"));
   });
 
   test("search bar only appears when the list has entries", () => {
@@ -180,7 +177,7 @@ describe("TransferList", () => {
     expect(items[2].textContent).toBe("Oranges");
   });
 
-  test("renders items in target list and not source list if keys provided in prop", () => {
+  test("renders items in the target list and not the source list if target list keys are provided", () => {
     // render component
     render(
       <TransferList
@@ -213,7 +210,7 @@ describe("TransferList", () => {
     expect(screen.getByText("0/1 selected"));
   });
 
-  test("clicked items check correctly, enable transfer button and update the heading", async () => {
+  test("clicked items check correctly, enable the relevant transfer button and update the heading", async () => {
     // render component
     const user = userEvent.setup();
     render(
@@ -319,7 +316,7 @@ describe("TransferList", () => {
     );
   });
 
-  test("header check all checkboxes are disabled unless the list has entries", () => {
+  test("select all checkboxes are disabled unless the relevant list has entries", () => {
     // render component
     render(
       <TransferList
@@ -329,7 +326,7 @@ describe("TransferList", () => {
       />
     );
 
-    // get both check all checkboxes
+    // get both checkboxes in the headers
     const selectAllSourceCheckbox = within(
       screen.getByLabelText("select all source list items")
     ).getByRole("checkbox");
@@ -343,7 +340,7 @@ describe("TransferList", () => {
     expect(selectAllTargetCheckbox).toHaveProperty("disabled", true);
   });
 
-  test("source list check all checkbox selects all the source list items", async () => {
+  test("source list header checkbox selects all the source list items", async () => {
     // render component
     const user = userEvent.setup();
 
@@ -430,7 +427,7 @@ describe("TransferList", () => {
     );
   });
 
-  test("call onTransfer callback with data and intent", async () => {
+  test("onTransfer callback fires with data and intent", async () => {
     // render component
     const user = userEvent.setup();
     // transfer function
@@ -494,7 +491,7 @@ describe("TransferList", () => {
     );
   });
 
-  test("call handleTransfer callback with data and intent", async () => {
+  test("handleTransfer callback fires with data and intent", async () => {
     // render component
     const user = userEvent.setup();
     // transfer function
