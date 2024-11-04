@@ -96,7 +96,6 @@ const defaultArgs: Story["args"] = {
   helperText: "Helper Text",
   inputValue: undefined,
   label: "Select options",
-  limitTags: -1,
   margin: "normal",
   multiple: false,
   options: [
@@ -176,6 +175,16 @@ export const MultiSelect: Story = {
     value: []
   },
   render: Template
+};
+
+// Define story for multi-select with limit tags
+export const MultiSelectWithLimitTags: Story = {
+  args: {
+    ...defaultArgs,
+    disableCloseOnSelect: true,
+    limitTags: 1,
+    multiple: true
+  }
 };
 
 // Define the read only story
