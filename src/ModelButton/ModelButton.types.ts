@@ -1,3 +1,6 @@
+/**
+ * The props needed to define Background component
+ */
 type BackgroundProps = {
   /**
    * The color of the border
@@ -9,6 +12,9 @@ type BackgroundProps = {
   backgroundColor: string;
 };
 
+/**
+ * The props needed to define Model Button
+ */
 type ModelButtonProps = {
   /**
    * Children
@@ -39,15 +45,26 @@ type ModelButtonProps = {
   status?: "none" | "error" | "warning" | "success";
 };
 
+/**
+ * The props needed to define Model Button Popup
+ */
 type ModelButtonPopupProps = {
+  /**
+   * Current status
+   */
+  status: string;
   /**
    * Children
    */
   children?: React.ReactNode;
   /**
-   * The color of the button
+   * The color of the button border
    */
   color: string;
+  /**
+   * The color of the button border when hovered
+   */
+  colorHover: string;
   /**
    * If `true`, the button will be disabled. Default is `false`.
    */

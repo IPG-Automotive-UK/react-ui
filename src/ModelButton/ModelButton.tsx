@@ -14,7 +14,7 @@ import {
   Typography,
   iconButtonClasses
 } from "@mui/material";
-import { alpha, useTheme } from "@mui/material/styles";
+import { Theme, alpha, useTheme } from "@mui/material/styles";
 
 import CancelIcon from "@mui/icons-material/Cancel";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
@@ -102,35 +102,39 @@ export default function ModelButton({
   // use theme hook
   const theme = useTheme();
 
-  // set border color based on status
+  // is button being hovered over
+  const [isHover, setIsHover] = React.useState(false);
+
+  // set default border color based
   let borderColor = theme.palette.text.secondary;
+
+  // set default border color on hover
+  let borderColorHover = theme.palette.primary.main;
 
   if (disabled) {
     borderColor =
       theme.palette.mode === "light"
         ? "rgba(0, 0, 0, 0.38)"
         : "rgba(255, 255, 255, 0.5)";
+    borderColorHover = borderColor;
   } else if (status === "error") {
     borderColor = theme.palette.error.main;
+    borderColorHover = theme.palette.error.dark;
   } else if (status === "warning") {
     borderColor = theme.palette.warning.main;
+    borderColorHover = theme.palette.warning.dark;
   } else if (status === "success") {
     borderColor = theme.palette.success.main;
+    borderColorHover = theme.palette.success.dark;
   }
-
-  // set background color if status is different than 'none' and not disabled, background color equals border color
-  const backgroundColor = !disabled && status !== "none" ? borderColor : "";
 
   // ensure children are always an array
   const arrayChildren = React.Children.toArray(children);
   const hasChildren = arrayChildren && arrayChildren.length > 0;
 
-  // is button being hovered over
-  const [isHover, setIsHover] = React.useState(false);
-
-  // styles for icon which will be shown only when status is available
+  // styles for icon which will be shown only when status is available, border color matches icon color
   const iconStyles = {
-    color: isHover ? theme.palette.primary.main : backgroundColor,
+    color: isHover ? borderColorHover : borderColor,
     height: "20px",
     position: "absolute",
     right: "6%",
@@ -145,12 +149,24 @@ export default function ModelButton({
   const getCurrentStatusIcon = () => {
     switch (status) {
       case "error":
-        return <CancelIcon sx={iconStyles} />;
+        return <CancelIcon data-testid="error-icon" sx={iconStyles} />;
       case "success":
-        return <ErrorIcon sx={iconStyles} />;
+        return <ErrorIcon data-testid="success-icon" sx={iconStyles} />;
       case "warning":
-        return <CheckCircleIcon sx={iconStyles} />;
+        return <CheckCircleIcon data-testid="warning-icon" sx={iconStyles} />;
     }
+  };
+
+  /** Get the correct image icon color default and on hover, according to the condition if there is a status and where is rendered  */
+  const getCurrentIconImageColor = () => {
+    const iconColor =
+      theme.palette.mode === "light"
+        ? theme.palette.common.black
+        : theme.palette.common.white;
+    if (status !== "none") {
+      return iconColor;
+    }
+    return isHover ? theme.palette.primary.main : iconColor;
   };
 
   // render component
@@ -205,23 +221,19 @@ export default function ModelButton({
           }}
         >
           <Background
-            borderColor={isHover ? theme.palette.primary.main : borderColor}
-            backgroundColor={
-              status !== "none"
-                ? alpha(backgroundColor, isHover ? 0.04 : 0.12)
-                : alpha(theme.palette.primary.main, isHover ? 0.04 : 0)
-            }
+            borderColor={isHover ? borderColorHover : borderColor}
+            backgroundColor={getCurrentIconBackgroundColor(
+              isHover,
+              status,
+              theme
+            )}
           />
           {icon
             ? React.cloneElement(icon, {
-                color: isHover
-                  ? theme.palette.primary.main
-                  : theme.palette.mode === "light"
-                    ? theme.palette.common.black
-                    : theme.palette.common.white
+                color: getCurrentIconImageColor()
               })
             : null}
-          {status !== "none" && getCurrentStatusIcon()}
+          {status !== "none" && !disabled ? getCurrentStatusIcon() : null}
         </IconButton>
         <Typography
           sx={{
@@ -250,7 +262,9 @@ export default function ModelButton({
         </Typography>
         {hasChildren ? (
           <ModelButtonPopup
+            status={status}
             color={borderColor}
+            colorHover={borderColorHover}
             disabled={disabled}
             label={label}
           >
@@ -262,9 +276,13 @@ export default function ModelButton({
   );
 }
 
-// component to display children in a popup dialog
+/**
+ * ModelButtonPopup component to display children in a popup dialog
+ */
 const ModelButtonPopup = ({
+  status,
   color,
+  colorHover,
   children,
   disabled,
   label
@@ -289,12 +307,17 @@ const ModelButtonPopup = ({
         disableRipple
         sx={{
           "&:hover": {
-            backgroundColor: theme => theme.palette.primary.main
+            backgroundColor: theme =>
+              getCurrentIconBackgroundColor(true, status, theme),
+            borderColor: colorHover
           },
           [`&.${iconButtonClasses.disabled}`]: {
-            backgroundColor: color
+            color
           },
-          background: color,
+          backgroundColor: theme =>
+            getCurrentIconBackgroundColor(false, status, theme),
+          border: "2px solid",
+          borderColor: color,
           borderRadius: "50%",
           height: "24px",
           left: "83px",
@@ -305,14 +328,10 @@ const ModelButtonPopup = ({
       >
         <KeyboardArrowDownIcon
           sx={{
-            color: theme =>
-              theme.palette.mode === "light"
-                ? disabled
-                  ? "rgba(0, 0, 0, 0.38)"
-                  : "#fff"
-                : disabled
-                  ? "rgba(255, 255, 255, 0.5)"
-                  : "#000"
+            "&:hover": {
+              color: colorHover
+            },
+            color
           }}
         />
       </IconButton>
@@ -335,4 +354,26 @@ const ModelButtonPopup = ({
       </Popover>
     </React.Fragment>
   );
+};
+
+/** Get the correct icon button background color, according to the theme and hover behaviour  */
+const getCurrentIconBackgroundColor = (
+  isHover: boolean,
+  status: string,
+  theme: Theme
+) => {
+  // calculate opacity depending on the hover
+  const backgroundOpacity = isHover ? 0.12 : 0.04;
+
+  // get appropriate color and opacity by status
+  switch (status) {
+    case "error":
+      return alpha(theme.palette.error.main, backgroundOpacity);
+    case "success":
+      return alpha(theme.palette.success.main, backgroundOpacity);
+    case "warning":
+      return alpha(theme.palette.warning.main, backgroundOpacity);
+    default:
+      return alpha(theme.palette.primary.main, isHover ? 0.04 : 0);
+  }
 };
