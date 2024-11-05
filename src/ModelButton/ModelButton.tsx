@@ -151,9 +151,9 @@ export default function ModelButton({
       case "error":
         return <CancelIcon data-testid="error-icon" sx={iconStyles} />;
       case "success":
-        return <ErrorIcon data-testid="success-icon" sx={iconStyles} />;
+        return <CheckCircleIcon data-testid="success-icon" sx={iconStyles} />;
       case "warning":
-        return <CheckCircleIcon data-testid="warning-icon" sx={iconStyles} />;
+        return <ErrorIcon data-testid="warning-icon" sx={iconStyles} />;
     }
   };
 
