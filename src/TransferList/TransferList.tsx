@@ -7,7 +7,7 @@ import {
   ListItemText,
   Typography
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchBar, { SearchBarProps } from "../SearchBar";
 import {
   SingleListProps,
@@ -25,13 +25,22 @@ export default function TransferList({
 }: TransferListProps) {
   // All checked item keys
   const [checked, setChecked] = useState<string[]>([]);
+
   // Source list search filter
   const [sourceFilter, setSourceFilter] = useState<string>("");
+
   // Target list search filter
   const [targetFilter, setTargetFilter] = useState<string>("");
+
   // All item keys
   const [targetItemKeys, setTargetItemKeys] =
     useState<string[]>(targetListKeys);
+
+  // Update target keys state when the prop updates and uncheck
+  useEffect(() => {
+    setTargetItemKeys(targetListKeys);
+    setChecked([]);
+  }, [targetListKeys]);
 
   /**
    * Get primary label from item

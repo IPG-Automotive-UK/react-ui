@@ -1,7 +1,8 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryFn, StoryObj } from "@storybook/react";
 
 import React from "react";
 import TransferList from "./TransferList";
+import { TransferListProps } from "./TransferList.types";
 import { action } from "@storybook/addon-actions";
 
 /**
@@ -17,6 +18,45 @@ const meta: Meta<typeof TransferList> = {
   title: "Lists/TransferList"
 };
 export default meta;
+
+const TransferListWithState: StoryFn<TransferListProps> = () => {
+  const [targetKeys, setTargetKeys] = React.useState<string[]>([]);
+
+  // Create function to transfer items
+  const handleTransfer: TransferListProps["handleTransfer"] = (
+    newKeys,
+    intent
+  ) => {
+    // Move list items in state based on intent
+    if (intent === "toTarget") {
+      setTargetKeys([...newKeys, ...targetKeys]);
+    } else {
+      setTargetKeys(targetKeys.filter(key => !newKeys.includes(key)));
+    }
+    action("handleTransfer")(newKeys, intent);
+  };
+
+  return (
+    <TransferList
+      sourceListLabel={"Source List Label"}
+      targetListLabel={"Target List Label"}
+      targetListKeys={targetKeys}
+      items={[
+        { id: "Apples", primaryLabel: "Apples" },
+        { id: "Pears", primaryLabel: "Pears", secondaryLabel: "Conference" },
+        { id: "Oranges", primaryLabel: "Oranges" },
+        { id: "Bananas", primaryLabel: "Bananas", secondaryLabel: "Blue Java" },
+        { id: "Mangoes", primaryLabel: "Mangoes" },
+        { id: "Kiwi", primaryLabel: "Kiwi" },
+        { id: "Dragonfruit", primaryLabel: "Dragonfruit" },
+        { id: "Plum", primaryLabel: "Plum" },
+        { id: "Grapes", primaryLabel: "Grapes" },
+        { id: "Cherry", primaryLabel: "Cherry" }
+      ]}
+      handleTransfer={handleTransfer}
+    />
+  );
+};
 
 // default args for every test
 const defaultArgs: StoryObj<typeof TransferList>["args"] = {
@@ -89,22 +129,5 @@ export const WithSecondaryLabel: StoryObj<typeof TransferList> = {
 
 // controlled component that calls the handleTransfer callback with data
 export const Controlled: StoryObj<typeof TransferList> = {
-  args: {
-    ...defaultArgs,
-    handleTransfer: (data, intent) => action("handleTransfer")(data, intent),
-    items: [
-      "Apples",
-      "Pears",
-      "Oranges",
-      "Bananas",
-      "Mangoes",
-      "Kiwi",
-      "Dragonfruit",
-      "Plum",
-      "Grapes",
-      "Cherry"
-    ],
-    targetListKeys: ["Apples", "Grapes"]
-  },
-  render: TransferList
+  render: TransferListWithState
 };
