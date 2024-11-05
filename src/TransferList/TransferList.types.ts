@@ -1,12 +1,10 @@
-export type TransferListItem =
-  | string
-  | { primaryLabel: string; secondaryLabel?: string; id: string };
+export type TransferListItem = {
+  primaryLabel: string;
+  secondaryLabel?: string;
+  id: string;
+};
 
-export type TransferListProps<T> = {
-  /**
-   * The key to be used for the filter.
-   */
-  filterKey?: (item: T) => string;
+export type TransferListProps = {
   /**
    * Control the transfer of the items
    */
@@ -14,7 +12,7 @@ export type TransferListProps<T> = {
   /**
    * Array of Items.
    */
-  items: TransferListItem[] | T[];
+  items: string[] | TransferListItem[];
   /**
    * Array of keys for the items on the right side.
    */
@@ -27,19 +25,6 @@ export type TransferListProps<T> = {
    * Target list label
    */
   targetListLabel: string;
-  /**
-   * Props for the default item
-   */
-  itemProps?: {
-    /**
-     * The key to be used for the primary label
-     */
-    primaryLabel: (item: T) => string;
-    /**
-     * The key to be used for the secondary label
-     */
-    secondaryLabel?: (item: T) => string;
-  };
   /**
    * Callback fired when the items are transferred.
    */

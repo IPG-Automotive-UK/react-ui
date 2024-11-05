@@ -7,25 +7,22 @@ import {
   ListItemText,
   Typography
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import SearchBar, { SearchBarProps } from "../SearchBar";
 import {
   SingleListProps,
   TransferListItem,
   TransferListProps
 } from "./TransferList.types";
 
-import SearchBar from "../SearchBar";
-
-export default function TransferList<T>({
-  filterKey: customFilterKey,
+export default function TransferList({
   handleTransfer,
   targetListKeys = [],
   items = [],
-  itemProps,
   onTransfer,
   sourceListLabel,
   targetListLabel
-}: TransferListProps<T>) {
+}: TransferListProps) {
   // All checked item keys
   const [checked, setChecked] = useState<string[]>([]);
   // Source list search filter
@@ -40,78 +37,37 @@ export default function TransferList<T>({
    * Get item label from any item structure
    **/
   const getItemLabel = (
-    item: TransferListItem | T,
+    item: TransferListItem | string,
     type: "primary" | "secondary" = "primary"
   ) => {
-    const itemIsObject = typeof item === "object" && item !== null;
-
-    // If getting a primary label
-    if (type === "primary") {
-      // If item is a string return the item
-      if (typeof item === "string") {
-        return item;
-      }
-
-      // Check the primaryLabel prop
-      // If it exists return the primaryLabel prop
-      if (itemIsObject && "primaryLabel" in item) {
-        return item.primaryLabel;
-      }
-
-      // If the object is a custom shape and item props exist return the primary label function
-      if (itemProps) {
-        return itemProps.primaryLabel(item as T);
-      }
-    }
-
     // If getting a secondary label
     if (type === "secondary") {
       // If item is a string secondary label is ignored
       if (typeof item === "string") {
         return "";
-      }
-
-      // Check the secondary label prop
-      // If it exists return the secondary label prop
-      if (itemIsObject) {
-        return "secondaryLabel" in item && item.secondaryLabel
-          ? item.secondaryLabel
-          : "";
-      }
-
-      // If the object is a custom shape  and itemProps exist use the get label function
-      if (itemProps && itemProps.secondaryLabel) {
-        return itemProps?.secondaryLabel(item as T);
+      } else {
+        return item.secondaryLabel || "";
       }
     }
 
-    throw new Error(
-      "Item is missing a primaryLabel property or a label function is not defined"
-    );
+    // Return a primary label
+    if (typeof item === "string") {
+      return item;
+    } else {
+      return item.primaryLabel;
+    }
   };
 
   /**
    * Get key from any item structure
    **/
-  const filterKey = (item: TransferListItem | T) => {
+  const filterKey = (item: TransferListItem | string) => {
     // If item is a string return it as an id
     if (typeof item === "string") {
       return item;
     }
 
-    // If item is a default object return the id
-    if (typeof item === "object" && item !== null && "id" in item) {
-      return item.id;
-    }
-
-    // If item is a custom object use the provided function to get a key
-    if (customFilterKey) {
-      return customFilterKey(item);
-    }
-
-    throw new Error(
-      "Item is missing an 'id' property or a filterKey function is not defined"
-    );
+    return item.id;
   };
 
   /**
@@ -457,22 +413,17 @@ export default function TransferList<T>({
   );
 }
 
+/**
+ * Search bar for the transfer list
+ */
 const Search = ({ onChange }: { onChange: (value: string) => void }) => {
   const [search, setSearch] = useState("");
 
   // handle change
-  const handleChange = (event: {
-    target: {
-      value: string;
-    };
-  }) => {
+  const handleChange: SearchBarProps["onChange"] = event => {
     setSearch(event.target.value);
+    onChange(event.target.value);
   };
-
-  // Call on change on every search
-  useEffect(() => {
-    onChange(search);
-  }, [onChange, search]);
 
   return (
     <Box
@@ -487,6 +438,9 @@ const Search = ({ onChange }: { onChange: (value: string) => void }) => {
   );
 };
 
+/**
+ * Single list component for the transfer list
+ */
 function SingleList({ checked, items, handleToggle, role }: SingleListProps) {
   return (
     <Box

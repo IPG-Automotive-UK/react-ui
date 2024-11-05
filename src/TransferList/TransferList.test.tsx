@@ -15,23 +15,6 @@ const defaultItemArray = [
 // item array using strings
 const stringItemArray = ["Apples", "Pears", "Oranges"];
 
-// item array using custom object array structure
-const customItemArray = [
-  {
-    fruit: "Apples",
-    key: "a"
-  },
-  {
-    fruit: "Pears",
-    key: "b",
-    type: "Conference"
-  },
-  {
-    fruit: "Oranges",
-    key: "c"
-  }
-];
-
 describe("TransferList", () => {
   test("list of unfiltered items in the source list", () => {
     // render component
@@ -566,46 +549,5 @@ describe("TransferList", () => {
       ["Apples", "Pears", "Oranges"],
       "toSource"
     );
-  });
-
-  test("accepts any object type with a filterKey and item label function", async () => {
-    // render component
-    const user = userEvent.setup();
-    // transfer function
-    const transferFn = vi.fn();
-
-    render(
-      <TransferList
-        filterKey={item => item.key}
-        itemProps={{
-          primaryLabel: item => item.fruit,
-          secondaryLabel: item => item.type || ""
-        }}
-        items={customItemArray}
-        onTransfer={transferFn}
-        targetListKeys={["a", "b", "c"]}
-        sourceListLabel="My Source List"
-        targetListLabel="My Target List"
-      />
-    );
-
-    // get select all target checkbox
-    const selectAllTargetCheckbox = within(
-      screen.getByLabelText("select all target list items")
-    ).getByRole("checkbox");
-
-    // select all the target list items
-    await user.click(selectAllTargetCheckbox);
-
-    // get transfer to source button
-    const transferToSourceButton = screen.getByLabelText(
-      "transfer to source list"
-    );
-
-    // transfer all target list items to source
-    await user.click(transferToSourceButton);
-
-    // check the callback data
-    expect(transferFn).toHaveBeenCalledWith(["a", "b", "c"], "toSource");
   });
 });
