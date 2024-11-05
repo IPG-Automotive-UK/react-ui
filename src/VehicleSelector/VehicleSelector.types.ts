@@ -60,4 +60,8 @@ export type VehicleSelectorProps = {
    * Size of the field
    */
   size?: "small" | "medium";
+  /**
+   * The maximum number of tags that will be visible. Set -1 to disable the limit.
+   */
+  limitTags?: number;
 };
