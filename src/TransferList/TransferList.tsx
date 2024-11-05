@@ -73,7 +73,7 @@ export default function TransferList({
       return item;
     }
 
-    return item.id;
+    return item.key;
   };
 
   /**

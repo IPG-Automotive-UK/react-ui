@@ -1,7 +1,7 @@
 export type TransferListItem = {
   primaryLabel: string;
   secondaryLabel?: string;
-  id: string;
+  key: string;
 };
 
 export type TransferListProps = {

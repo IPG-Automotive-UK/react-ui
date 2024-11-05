@@ -42,16 +42,20 @@ const TransferListWithState: StoryFn<TransferListProps> = () => {
       targetListLabel={"Target List Label"}
       targetListKeys={targetKeys}
       items={[
-        { id: "Apples", primaryLabel: "Apples" },
-        { id: "Pears", primaryLabel: "Pears", secondaryLabel: "Conference" },
-        { id: "Oranges", primaryLabel: "Oranges" },
-        { id: "Bananas", primaryLabel: "Bananas", secondaryLabel: "Blue Java" },
-        { id: "Mangoes", primaryLabel: "Mangoes" },
-        { id: "Kiwi", primaryLabel: "Kiwi" },
-        { id: "Dragonfruit", primaryLabel: "Dragonfruit" },
-        { id: "Plum", primaryLabel: "Plum" },
-        { id: "Grapes", primaryLabel: "Grapes" },
-        { id: "Cherry", primaryLabel: "Cherry" }
+        { key: "Apples", primaryLabel: "Apples" },
+        { key: "Pears", primaryLabel: "Pears", secondaryLabel: "Conference" },
+        { key: "Oranges", primaryLabel: "Oranges" },
+        {
+          key: "Bananas",
+          primaryLabel: "Bananas",
+          secondaryLabel: "Blue Java"
+        },
+        { key: "Mangoes", primaryLabel: "Mangoes" },
+        { key: "Kiwi", primaryLabel: "Kiwi" },
+        { key: "Dragonfruit", primaryLabel: "Dragonfruit" },
+        { key: "Plum", primaryLabel: "Plum" },
+        { key: "Grapes", primaryLabel: "Grapes" },
+        { key: "Cherry", primaryLabel: "Cherry" }
       ]}
       handleTransfer={handleTransfer}
     />
@@ -69,16 +73,16 @@ export const WithDefaultObjectArray: StoryObj<typeof TransferList> = {
   args: {
     ...defaultArgs,
     items: [
-      { id: "Apples", primaryLabel: "Apples" },
-      { id: "Pears", primaryLabel: "Pears", secondaryLabel: "Conference" },
-      { id: "Oranges", primaryLabel: "Oranges" },
-      { id: "Bananas", primaryLabel: "Bananas", secondaryLabel: "Blue Java" },
-      { id: "Mangoes", primaryLabel: "Mangoes" },
-      { id: "Kiwi", primaryLabel: "Kiwi" },
-      { id: "Dragonfruit", primaryLabel: "Dragonfruit" },
-      { id: "Plum", primaryLabel: "Plum" },
-      { id: "Grapes", primaryLabel: "Grapes" },
-      { id: "Cherry", primaryLabel: "Cherry" }
+      { key: "Apples", primaryLabel: "Apples" },
+      { key: "Pears", primaryLabel: "Pears", secondaryLabel: "Conference" },
+      { key: "Oranges", primaryLabel: "Oranges" },
+      { key: "Bananas", primaryLabel: "Bananas", secondaryLabel: "Blue Java" },
+      { key: "Mangoes", primaryLabel: "Mangoes" },
+      { key: "Kiwi", primaryLabel: "Kiwi" },
+      { key: "Dragonfruit", primaryLabel: "Dragonfruit" },
+      { key: "Plum", primaryLabel: "Plum" },
+      { key: "Grapes", primaryLabel: "Grapes" },
+      { key: "Cherry", primaryLabel: "Cherry" }
     ]
   },
 
@@ -111,16 +115,16 @@ export const WithSecondaryLabel: StoryObj<typeof TransferList> = {
   args: {
     ...defaultArgs,
     items: [
-      { id: "Apples", primaryLabel: "Apples", secondaryLabel: "Granny Smith" },
-      { id: "Pears", primaryLabel: "Pears", secondaryLabel: "Conference" },
-      { id: "Oranges", primaryLabel: "Oranges", secondaryLabel: "Jaffa" },
-      { id: "Bananas", primaryLabel: "Bananas", secondaryLabel: "Blue Java" },
-      { id: "Mangoes", primaryLabel: "Mangoes", secondaryLabel: "Alphonso" },
-      { id: "Kiwi", primaryLabel: "Kiwi", secondaryLabel: "Golden" },
-      { id: "Dragonfruit", primaryLabel: "Dragonfruit" },
-      { id: "Plum", primaryLabel: "Plum" },
-      { id: "Grapes", primaryLabel: "Grapes", secondaryLabel: "Mixed" },
-      { id: "Cherry", primaryLabel: "Cherry", secondaryLabel: "Black" }
+      { key: "Apples", primaryLabel: "Apples", secondaryLabel: "Granny Smith" },
+      { key: "Pears", primaryLabel: "Pears", secondaryLabel: "Conference" },
+      { key: "Oranges", primaryLabel: "Oranges", secondaryLabel: "Jaffa" },
+      { key: "Bananas", primaryLabel: "Bananas", secondaryLabel: "Blue Java" },
+      { key: "Mangoes", primaryLabel: "Mangoes", secondaryLabel: "Alphonso" },
+      { key: "Kiwi", primaryLabel: "Kiwi", secondaryLabel: "Golden" },
+      { key: "Dragonfruit", primaryLabel: "Dragonfruit" },
+      { key: "Plum", primaryLabel: "Plum" },
+      { key: "Grapes", primaryLabel: "Grapes", secondaryLabel: "Mixed" },
+      { key: "Cherry", primaryLabel: "Cherry", secondaryLabel: "Black" }
     ]
   },
 

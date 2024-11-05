@@ -7,9 +7,9 @@ import userEvent from "@testing-library/user-event";
 
 // item array using the default object array structure
 const defaultItemArray = [
-  { id: "Apples", primaryLabel: "Apples" },
-  { id: "Pears", primaryLabel: "Pears", secondaryLabel: "Conference" },
-  { id: "Oranges", primaryLabel: "Oranges" }
+  { key: "Apples", primaryLabel: "Apples" },
+  { key: "Pears", primaryLabel: "Pears", secondaryLabel: "Conference" },
+  { key: "Oranges", primaryLabel: "Oranges" }
 ];
 
 // item array using strings
