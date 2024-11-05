@@ -7,7 +7,7 @@ import {
   ListItemText,
   Typography
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import SearchBar, { SearchBarProps } from "../SearchBar";
 import {
   SingleListProps,
@@ -16,10 +16,10 @@ import {
 } from "./TransferList.types";
 
 export default function TransferList({
-  handleTransfer,
-  targetListKeys = [],
+  handleChange,
+  selectedItems = [],
   items = [],
-  onTransfer,
+  onChange,
   sourceListLabel,
   targetListLabel
 }: TransferListProps) {
@@ -33,14 +33,14 @@ export default function TransferList({
   const [targetFilter, setTargetFilter] = useState<string>("");
 
   // All item keys
-  const [targetItemKeys, setTargetItemKeys] =
-    useState<string[]>(targetListKeys);
+  const [selectedItemKeys, setSelectedItemKeys] =
+    useState<string[]>(selectedItems);
 
-  // Update target keys state when the prop updates and uncheck
-  useEffect(() => {
-    setTargetItemKeys(targetListKeys);
-    setChecked([]);
-  }, [targetListKeys]);
+  // // Update target keys state when the prop updates and uncheck
+  // useEffect(() => {
+  //   setSelectedItemKeys(selectedItems);
+  //   setChecked([]);
+  // }, [selectedItems]);
 
   /**
    * Get primary label from item
@@ -76,14 +76,15 @@ export default function TransferList({
     return item.key;
   };
 
+  // Keys to be used for updates
+  const keys = handleChange ? selectedItems : selectedItemKeys;
+
   /**
    * Source list logic
    */
 
   // All source items
-  const allSourceItems = items.filter(
-    item => !targetItemKeys.includes(filterKey(item))
-  );
+  const allSourceItems = items.filter(item => !keys.includes(filterKey(item)));
 
   // Filtered source items
   const filteredSourceItems = allSourceItems.filter(item =>
@@ -91,9 +92,7 @@ export default function TransferList({
   );
 
   // All checked source list items
-  const sourceItemsToTransfer = checked.filter(
-    item => !targetItemKeys.includes(item)
-  );
+  const sourceItemsToTransfer = checked.filter(item => !keys.includes(item));
 
   // Boolean to indicate if all items are checked
   const allSourceItemsChecked =
@@ -104,9 +103,7 @@ export default function TransferList({
    */
 
   // All target items
-  const allTargetItems = items.filter(item =>
-    targetItemKeys.includes(filterKey(item))
-  );
+  const allTargetItems = items.filter(item => keys.includes(filterKey(item)));
 
   // Filtered target items
   const filteredTargetItems = allTargetItems.filter(item =>
@@ -114,9 +111,7 @@ export default function TransferList({
   );
 
   // All checked target list items
-  const targetItemsToTransfer = checked.filter(item =>
-    targetItemKeys.includes(item)
-  );
+  const targetItemsToTransfer = checked.filter(item => keys.includes(item));
 
   // Boolean to indicate if all target items are checked
   const allTargetItemsChecked =
@@ -136,7 +131,7 @@ export default function TransferList({
           ...checked.filter(item => !sourceItemsToTransfer.includes(item)),
           ...items
             .map(item => filterKey(item))
-            .filter(item => !targetItemKeys.includes(item))
+            .filter(item => !keys.includes(item))
         ]);
   };
 
@@ -154,7 +149,7 @@ export default function TransferList({
           ...checked.filter(item => !targetItemsToTransfer.includes(item)),
           ...items
             .map(item => filterKey(item))
-            .filter(item => targetItemKeys.includes(item))
+            .filter(item => keys.includes(item))
         ]);
   };
 
@@ -162,26 +157,25 @@ export default function TransferList({
    * Transfer items to the target list
    */
   const transferToTarget = () => {
-    // Get checked items
-    const checkedSourceItems = checked.filter(
-      item => !targetItemKeys.includes(item)
-    );
+    // Get checked source items
+    const checkedSourceItems = checked.filter(item => !keys.includes(item));
+
+    // Updated target list keys
+    const updatedTargetList = [...keys, ...checkedSourceItems];
 
     // Call handle hook if using controlled
-    if (handleTransfer) {
-      handleTransfer(checkedSourceItems, "toTarget");
+    if (handleChange) {
+      handleChange(updatedTargetList);
+      setChecked([]);
       return;
     }
 
-    // Call the onTransfer callback if using optimistic updates
-    onTransfer &&
-      onTransfer(
-        checked.filter(item => !targetItemKeys.includes(item)),
-        "toTarget"
-      );
+    // Call the onChange callback if using optimistic updates
+    onChange && onChange(updatedTargetList);
 
     // Add the checked items to the target list
-    setTargetItemKeys([...targetItemKeys, ...sourceItemsToTransfer]);
+    setSelectedItemKeys(updatedTargetList);
+
     // Uncheck all items
     setChecked([]);
   };
@@ -190,19 +184,23 @@ export default function TransferList({
    * Transfer items to the source list
    */
   const transferToSource = () => {
+    // Target item selection
+    const newTargetSelection = keys.filter(
+      item => !targetItemsToTransfer.includes(item)
+    );
+
     // Call handle hook if using controlled
-    if (handleTransfer) {
-      handleTransfer(targetItemsToTransfer, "toSource");
+    if (handleChange) {
+      handleChange(newTargetSelection);
+      setChecked([]);
       return;
     }
 
-    // Call the onTransfer callback if using optimistic
-    onTransfer && onTransfer(targetItemsToTransfer, "toSource");
+    // Call the onChange callback if using optimistic
+    onChange && onChange(newTargetSelection);
 
     // Remove the checked items from the target list
-    setTargetItemKeys(
-      targetItemKeys.filter(item => !targetItemsToTransfer.includes(item))
-    );
+    setSelectedItemKeys(newTargetSelection);
 
     // Uncheck all items
     setChecked([]);

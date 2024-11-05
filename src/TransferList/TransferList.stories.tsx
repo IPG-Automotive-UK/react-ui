@@ -23,24 +23,17 @@ const TransferListWithState: StoryFn<TransferListProps> = () => {
   const [targetKeys, setTargetKeys] = React.useState<string[]>([]);
 
   // Create function to transfer items
-  const handleTransfer: TransferListProps["handleTransfer"] = (
-    newKeys,
-    intent
-  ) => {
+  const handleChange: TransferListProps["handleChange"] = value => {
     // Move list items in state based on intent
-    if (intent === "toTarget") {
-      setTargetKeys([...newKeys, ...targetKeys]);
-    } else {
-      setTargetKeys(targetKeys.filter(key => !newKeys.includes(key)));
-    }
-    action("handleTransfer")(newKeys, intent);
+    setTargetKeys(value);
+    action("handleChange")(value);
   };
 
   return (
     <TransferList
       sourceListLabel={"Source List Label"}
       targetListLabel={"Target List Label"}
-      targetListKeys={targetKeys}
+      selectedItems={targetKeys}
       items={[
         { key: "Apples", primaryLabel: "Apples" },
         { key: "Pears", primaryLabel: "Pears", secondaryLabel: "Conference" },
@@ -57,7 +50,7 @@ const TransferListWithState: StoryFn<TransferListProps> = () => {
         { key: "Grapes", primaryLabel: "Grapes" },
         { key: "Cherry", primaryLabel: "Cherry" }
       ]}
-      handleTransfer={handleTransfer}
+      handleChange={handleChange}
     />
   );
 };
@@ -105,7 +98,7 @@ export const WithStringArray: StoryObj<typeof TransferList> = {
       "Grapes",
       "Cherry"
     ],
-    targetListKeys: ["Apples", "Grapes"]
+    selectedItems: ["Apples", "Grapes"]
   },
   render: TransferList
 };
@@ -131,7 +124,7 @@ export const WithSecondaryLabel: StoryObj<typeof TransferList> = {
   render: TransferList
 };
 
-// controlled component that calls the handleTransfer callback with data
+// controlled component that calls the handleChange callback with data
 export const Controlled: StoryObj<typeof TransferList> = {
   render: TransferListWithState
 };

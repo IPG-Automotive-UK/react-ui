@@ -115,7 +115,7 @@ describe("TransferList", () => {
     render(
       <TransferList
         items={defaultItemArray}
-        targetListKeys={["Apples", "Pears", "Oranges"]}
+        selectedItems={["Apples", "Pears", "Oranges"]}
         sourceListLabel="My Source List"
         targetListLabel="My Target List"
       />
@@ -165,7 +165,7 @@ describe("TransferList", () => {
     render(
       <TransferList
         items={defaultItemArray}
-        targetListKeys={["Apples"]}
+        selectedItems={["Apples"]}
         sourceListLabel="My Source List"
         targetListLabel="My Target List"
       />
@@ -372,7 +372,7 @@ describe("TransferList", () => {
     render(
       <TransferList
         items={defaultItemArray}
-        targetListKeys={["Apples", "Pears", "Oranges"]}
+        selectedItems={["Apples", "Pears", "Oranges"]}
         sourceListLabel="My Source List"
         targetListLabel="My Target List"
       />
@@ -410,7 +410,7 @@ describe("TransferList", () => {
     );
   });
 
-  test("onTransfer callback fires with data and intent", async () => {
+  test("onChange callback fires with data and intent", async () => {
     // render component
     const user = userEvent.setup();
     // transfer function
@@ -419,8 +419,8 @@ describe("TransferList", () => {
     render(
       <TransferList
         items={defaultItemArray}
-        onTransfer={transferFn}
-        targetListKeys={["Apples", "Pears", "Oranges"]}
+        onChange={transferFn}
+        selectedItems={["Apples", "Pears", "Oranges"]}
         sourceListLabel="My Source List"
         targetListLabel="My Target List"
       />
@@ -451,10 +451,7 @@ describe("TransferList", () => {
     await user.click(transferToSourceButton);
 
     // check the callback data
-    expect(transferFn).toHaveBeenCalledWith(
-      ["Apples", "Pears", "Oranges"],
-      "toSource"
-    );
+    expect(transferFn).toHaveBeenCalledWith(["Apples", "Pears", "Oranges"]);
 
     // select all the source list items
     await user.click(selectAllSourceCheckbox);
@@ -468,13 +465,10 @@ describe("TransferList", () => {
     await user.click(transferToTargetButton);
 
     // check the callback data
-    expect(transferFn).toHaveBeenCalledWith(
-      ["Apples", "Pears", "Oranges"],
-      "toTarget"
-    );
+    expect(transferFn).toHaveBeenCalledWith(["Apples", "Pears", "Oranges"]);
   });
 
-  test("handleTransfer callback fires with data and intent", async () => {
+  test("handleChange callback fires with data and intent", async () => {
     // render component
     const user = userEvent.setup();
     // transfer function
@@ -483,8 +477,8 @@ describe("TransferList", () => {
     render(
       <TransferList
         items={defaultItemArray}
-        handleTransfer={transferFn}
-        targetListKeys={["Apples", "Pears", "Oranges"]}
+        handleChange={transferFn}
+        selectedItems={["Apples", "Pears", "Oranges"]}
         sourceListLabel="My Source List"
         targetListLabel="My Target List"
       />
@@ -507,10 +501,7 @@ describe("TransferList", () => {
     await user.click(transferToSourceButton);
 
     // check the callback data
-    expect(transferFn).toHaveBeenCalledWith(
-      ["Apples", "Pears", "Oranges"],
-      "toSource"
-    );
+    expect(transferFn).toHaveBeenCalledWith(["Apples", "Pears", "Oranges"]);
   });
 
   test("accepts array of strings as items", async () => {
@@ -522,8 +513,8 @@ describe("TransferList", () => {
     render(
       <TransferList
         items={stringItemArray}
-        onTransfer={transferFn}
-        targetListKeys={["Apples", "Pears", "Oranges"]}
+        onChange={transferFn}
+        selectedItems={["Apples", "Pears", "Oranges"]}
         sourceListLabel="My Source List"
         targetListLabel="My Target List"
       />
@@ -545,9 +536,6 @@ describe("TransferList", () => {
     await user.click(transferToSourceButton);
 
     // check the callback data
-    expect(transferFn).toHaveBeenCalledWith(
-      ["Apples", "Pears", "Oranges"],
-      "toSource"
-    );
+    expect(transferFn).toHaveBeenCalledWith(["Apples", "Pears", "Oranges"]);
   });
 });

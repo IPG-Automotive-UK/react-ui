@@ -8,7 +8,7 @@ export type TransferListProps = {
   /**
    * Control the transfer of the items
    */
-  handleTransfer?: (value: string[], intent: "toTarget" | "toSource") => void;
+  handleChange?: (value: string[]) => void;
   /**
    * Array of Items.
    */
@@ -16,7 +16,7 @@ export type TransferListProps = {
   /**
    * Array of keys for the items on the right side.
    */
-  targetListKeys?: string[];
+  selectedItems?: string[];
   /**
    * Source list label
    */
@@ -28,7 +28,7 @@ export type TransferListProps = {
   /**
    * Callback fired when the items are transferred.
    */
-  onTransfer?: (value: string[], intent: "toTarget" | "toSource") => void;
+  onChange?: (value: string[]) => void;
 };
 
 export type SingleListProps = {
