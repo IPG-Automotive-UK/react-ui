@@ -34,22 +34,9 @@ export default function TransferList({
     useState<string[]>(targetListKeys);
 
   /**
-   * Get item label from any item structure
+   * Get primary label from item
    **/
-  const getItemLabel = (
-    item: TransferListItem | string,
-    type: "primary" | "secondary" = "primary"
-  ) => {
-    // If getting a secondary label
-    if (type === "secondary") {
-      // If item is a string secondary label is ignored
-      if (typeof item === "string") {
-        return "";
-      } else {
-        return item.secondaryLabel || "";
-      }
-    }
-
+  const getPrimaryLabel = (item: TransferListItem | string) => {
     // Return a primary label
     if (typeof item === "string") {
       return item;
@@ -59,7 +46,17 @@ export default function TransferList({
   };
 
   /**
-   * Get key from any item structure
+   * Get secondary label from item
+   **/
+  const getSecondaryLabel = (item: TransferListItem | string) => {
+    // Return a primary label
+    if (typeof item !== "string") {
+      return item.secondaryLabel;
+    }
+  };
+
+  /**
+   * Get key from from item
    **/
   const filterKey = (item: TransferListItem | string) => {
     // If item is a string return it as an id
@@ -81,7 +78,7 @@ export default function TransferList({
 
   // Filtered source items
   const filteredSourceItems = allSourceItems.filter(item =>
-    getItemLabel(item).toLowerCase().includes(sourceFilter.toLowerCase())
+    getPrimaryLabel(item).toLowerCase().includes(sourceFilter.toLowerCase())
   );
 
   // All checked source list items
@@ -104,7 +101,7 @@ export default function TransferList({
 
   // Filtered target items
   const filteredTargetItems = allTargetItems.filter(item =>
-    getItemLabel(item).toLowerCase().includes(targetFilter.toLowerCase())
+    getPrimaryLabel(item).toLowerCase().includes(targetFilter.toLowerCase())
   );
 
   // All checked target list items
@@ -294,8 +291,8 @@ export default function TransferList({
             checked={sourceItemsToTransfer}
             items={filteredSourceItems.map(item => ({
               key: filterKey(item),
-              primaryLabel: getItemLabel(item),
-              secondaryLabel: getItemLabel(item, "secondary")
+              primaryLabel: getPrimaryLabel(item),
+              secondaryLabel: getSecondaryLabel(item)
             }))}
             handleToggle={handleToggle}
             role="source-list"
@@ -400,8 +397,8 @@ export default function TransferList({
               checked={targetItemsToTransfer}
               items={filteredTargetItems.map(item => ({
                 key: filterKey(item),
-                primaryLabel: getItemLabel(item),
-                secondaryLabel: getItemLabel(item, "secondary")
+                primaryLabel: getPrimaryLabel(item),
+                secondaryLabel: getSecondaryLabel(item)
               }))}
               handleToggle={handleToggle}
               role="target-list"

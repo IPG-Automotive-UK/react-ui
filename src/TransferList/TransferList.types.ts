@@ -51,7 +51,7 @@ export type SingleListProps = {
     /**
      * Secondary label of the item
      */
-    secondaryLabel: string;
+    secondaryLabel?: string;
   }[];
   /**
    * Toggle function
