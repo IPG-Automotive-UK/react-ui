@@ -20,12 +20,12 @@ const meta: Meta<typeof TransferList> = {
 export default meta;
 
 const TransferListWithState: StoryFn<TransferListProps> = () => {
-  const [targetKeys, setTargetKeys] = React.useState<string[]>([]);
+  const [selectedKeys, setSelectedKeys] = React.useState<string[]>([]);
 
   // Create function to transfer items
   const handleChange: TransferListProps["handleChange"] = value => {
-    // Move list items in state based on intent
-    setTargetKeys(value);
+    // Set the selected item keys
+    setSelectedKeys(value);
     action("handleChange")(value);
   };
 
@@ -33,7 +33,7 @@ const TransferListWithState: StoryFn<TransferListProps> = () => {
     <TransferList
       sourceListLabel={"Source List Label"}
       targetListLabel={"Target List Label"}
-      selectedItems={targetKeys}
+      selectedItems={selectedKeys}
       items={[
         { key: "Apples", primaryLabel: "Apples" },
         { key: "Pears", primaryLabel: "Pears", secondaryLabel: "Conference" },
@@ -55,13 +55,13 @@ const TransferListWithState: StoryFn<TransferListProps> = () => {
   );
 };
 
-// default args for every test
+// default args for every story
 const defaultArgs: StoryObj<typeof TransferList>["args"] = {
   sourceListLabel: "Source List Label",
   targetListLabel: "Target List Label"
 };
 
-// use a pre-defined object shape array with no additional configuration
+// use an object array to render the transfer list
 export const WithDefaultObjectArray: StoryObj<typeof TransferList> = {
   args: {
     ...defaultArgs,
@@ -103,7 +103,7 @@ export const WithStringArray: StoryObj<typeof TransferList> = {
   render: TransferList
 };
 
-// use a pre-defined object shape sarry with no additional confiuration
+// use an object array with secondary labels
 export const WithSecondaryLabel: StoryObj<typeof TransferList> = {
   args: {
     ...defaultArgs,

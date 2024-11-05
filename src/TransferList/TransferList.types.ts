@@ -4,19 +4,34 @@ export type TransferListItem = {
   key: string;
 };
 
-export type TransferListProps = {
-  /**
-   * Control the transfer of the items
-   */
-  handleChange?: (value: string[]) => void;
+// Ensure selected items are provided if using handleChange
+type ControlledProps =
+  | {
+      /**
+       * Control the transfer of the items
+       */
+      handleChange: (value: string[]) => void;
+      /**
+       * Array of keys for the items on the right side.
+       */
+      selectedItems: string[];
+    }
+  | {
+      /**
+       * Control the transfer of the items
+       */
+      handleChange?: never;
+      /**
+       * Array of keys for the items on the right side.
+       */
+      selectedItems?: string[];
+    };
+
+export type TransferListProps = ControlledProps & {
   /**
    * Array of Items.
    */
   items: string[] | TransferListItem[];
-  /**
-   * Array of keys for the items on the right side.
-   */
-  selectedItems?: string[];
   /**
    * Source list label
    */

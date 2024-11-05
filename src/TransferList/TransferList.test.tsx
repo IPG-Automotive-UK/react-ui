@@ -160,7 +160,7 @@ describe("TransferList", () => {
     expect(items[2].textContent).toBe("Oranges");
   });
 
-  test("renders items in the target list and not the source list if target list keys are provided", () => {
+  test("renders items in the target list and not the source list if selected items are provided", () => {
     // render component
     render(
       <TransferList
@@ -365,7 +365,7 @@ describe("TransferList", () => {
     );
   });
 
-  test("target list check all checks all the target list items", async () => {
+  test("target list check all checks all the selected list items", async () => {
     // render component
     const user = userEvent.setup();
 
@@ -410,7 +410,7 @@ describe("TransferList", () => {
     );
   });
 
-  test("onChange callback fires with data and intent", async () => {
+  test("onChange callback fires with selected items", async () => {
     // render component
     const user = userEvent.setup();
     // transfer function
@@ -451,7 +451,7 @@ describe("TransferList", () => {
     await user.click(transferToSourceButton);
 
     // check the callback data
-    expect(transferFn).toHaveBeenCalledWith(["Apples", "Pears", "Oranges"]);
+    expect(transferFn).toHaveBeenCalledWith([]);
 
     // select all the source list items
     await user.click(selectAllSourceCheckbox);
@@ -468,7 +468,7 @@ describe("TransferList", () => {
     expect(transferFn).toHaveBeenCalledWith(["Apples", "Pears", "Oranges"]);
   });
 
-  test("handleChange callback fires with data and intent", async () => {
+  test("handleChange callback fires with selected items array", async () => {
     // render component
     const user = userEvent.setup();
     // transfer function
@@ -501,7 +501,7 @@ describe("TransferList", () => {
     await user.click(transferToSourceButton);
 
     // check the callback data
-    expect(transferFn).toHaveBeenCalledWith(["Apples", "Pears", "Oranges"]);
+    expect(transferFn).toHaveBeenCalledWith([]);
   });
 
   test("accepts array of strings as items", async () => {
@@ -536,6 +536,6 @@ describe("TransferList", () => {
     await user.click(transferToSourceButton);
 
     // check the callback data
-    expect(transferFn).toHaveBeenCalledWith(["Apples", "Pears", "Oranges"]);
+    expect(transferFn).toHaveBeenCalledWith([]);
   });
 });
