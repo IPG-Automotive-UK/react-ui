@@ -1,6 +1,10 @@
 {
   "name": "@ipguk/react-ui",
+<<<<<<< HEAD
   "version": "8.12.0-3",
+=======
+  "version": "8.11.1",
+>>>>>>> main
   "description": "React UI component library for IPG web applications",
   "author": {
     "name": "IPG-Automotive-UK"
