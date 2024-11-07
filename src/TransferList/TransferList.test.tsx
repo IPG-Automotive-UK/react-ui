@@ -370,7 +370,10 @@ describe("TransferList", () => {
     const unchangedTargetItems = within(targetList).queryAllByRole("listitem");
 
     // test onChange was called with the correct items
-    expect(transferFn).toHaveBeenCalledWith(["Apples", "Pears"]);
+    expect(transferFn).toHaveBeenCalledWith([
+      { key: "Apples", primaryLabel: "Apples" },
+      { key: "Pears", primaryLabel: "Pears", secondaryLabel: "Conference" }
+    ]);
 
     // test the list lengths remain the same
     expect(unchangedSourceItems.length).toBe(3);
@@ -665,7 +668,11 @@ describe("TransferList", () => {
     await user.click(transferToTargetButton);
 
     // check the callback data
-    expect(transferFn).toHaveBeenCalledWith(["Apples", "Pears", "Oranges"]);
+    expect(transferFn).toHaveBeenCalledWith([
+      { key: "Apples", primaryLabel: "Apples" },
+      { key: "Pears", primaryLabel: "Pears", secondaryLabel: "Conference" },
+      { key: "Oranges", primaryLabel: "Oranges" }
+    ]);
   });
 
   test("transfer to source fires onChange callback with selected items array", async () => {
@@ -704,9 +711,10 @@ describe("TransferList", () => {
     expect(transferFn).toHaveBeenCalledWith([]);
   });
 
-  test("accepts array of strings as items", async () => {
+  test("accepts array of strings as items and returns them", async () => {
     // render component
     const user = userEvent.setup();
+
     // transfer function
     const transferFn = vi.fn();
 
@@ -714,28 +722,28 @@ describe("TransferList", () => {
       <TransferList
         items={stringItemArray}
         onChange={transferFn}
-        selectedItems={["Apples", "Pears", "Oranges"]}
         sourceListLabel="Source List Label"
         targetListLabel="Target List Label"
       />
     );
 
-    const selectAllTargetCheckbox = within(
-      screen.getByLabelText("select all target list items")
+    // get all source checkbox
+    const selectAllSourceCheckbox = within(
+      screen.getByLabelText("select all source list items")
     ).getByRole("checkbox");
 
     // select all the target list items
-    await user.click(selectAllTargetCheckbox);
+    await user.click(selectAllSourceCheckbox);
 
     // get transfer to source button
-    const transferToSourceButton = screen.getByLabelText(
-      "transfer to source list"
+    const transferToTargetButton = screen.getByLabelText(
+      "transfer to target list"
     );
 
     // transfer all target list items to source
-    await user.click(transferToSourceButton);
+    await user.click(transferToTargetButton);
 
     // check the callback data
-    expect(transferFn).toHaveBeenCalledWith([]);
+    expect(transferFn).toHaveBeenCalledWith(["Apples", "Pears", "Oranges"]);
   });
 });

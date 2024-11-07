@@ -156,6 +156,30 @@ export default function TransferList({
   };
 
   /**
+   * Determine with items are an array of objects or strings
+   */
+  const itemsAreStrings = (
+    items: string[] | TransferListItem[]
+  ): items is string[] => {
+    return items.every(item => typeof item === "string");
+  };
+
+  /**
+   * Get transferred items
+   */
+  const getTransferredItems = (
+    items: string[] | TransferListItem[],
+    selectedKeys: string[]
+  ) => {
+    // Return transferred items if they are strings or objects
+    if (itemsAreStrings(items)) {
+      return items.filter(item => selectedKeys.includes(item));
+    } else {
+      return items.filter(item => selectedKeys.includes(item.key));
+    }
+  };
+
+  /**
    * Transfer items to the target list
    */
   const transferToTarget = () => {
@@ -165,8 +189,11 @@ export default function TransferList({
     // Updated target list keys
     const updatedTargetList = [...keys, ...checkedSourceItems];
 
+    // Get the items that have been transferred
+    const updatedSelectedItems = getTransferredItems(items, updatedTargetList);
+
     // Call the onChange callback
-    onChange && onChange(updatedTargetList);
+    onChange && onChange(updatedSelectedItems);
 
     // If component is controlled, end the function
     if (selectedItems) {
@@ -189,8 +216,11 @@ export default function TransferList({
       item => !targetItemsToTransfer.includes(item)
     );
 
+    // Get the items that have been transferred
+    const updatedSelectedItems = getTransferredItems(items, newTargetSelection);
+
     // Call the onChange callback
-    onChange && onChange(newTargetSelection);
+    onChange && onChange(updatedSelectedItems);
 
     // If component is controlled, end the function
     if (selectedItems) {
