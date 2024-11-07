@@ -82,7 +82,7 @@ describe("ModelButton", () => {
     ["warning", "rgb(237, 108, 2)"],
     ["success", "rgb(46, 125, 50)"]
   ] as const)(
-    "renrers correct background based on the status",
+    "renders correct background based on the status",
     (status, color) => {
       render(<ModelButton status={status} />);
       const svgElement = screen.getByTestId("background");
