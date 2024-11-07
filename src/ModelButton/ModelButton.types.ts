@@ -1,3 +1,5 @@
+import { Theme } from "@mui/material";
+
 /**
  * The props needed to define Background component
  */
@@ -75,4 +77,27 @@ type ModelButtonPopupProps = {
   label: string;
 };
 
-export type { BackgroundProps, ModelButtonProps, ModelButtonPopupProps };
+/**
+ * The props needed to call getCurrentIconBackgroundColor function
+ */
+type CurrentIconBackgroundColorProps = {
+  /**
+   * Whether hover effect is available
+   */
+  isHover: boolean;
+  /**
+   * Status of the current ModelButton
+   */
+  status: ModelButtonProps["status"];
+  /**
+   * Theme refrence
+   */
+  theme: Theme;
+};
+
+export type {
+  BackgroundProps,
+  ModelButtonProps,
+  ModelButtonPopupProps,
+  CurrentIconBackgroundColorProps
+};

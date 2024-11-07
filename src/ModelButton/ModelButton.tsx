@@ -343,8 +343,10 @@ const ModelButtonPopup = ({
         }}
         onClose={() => setPopperOpen(false)}
         open={popperOpen}
-        PaperProps={{
-          sx: { borderRadius: 2, padding: 2 }
+        slotProps={{
+          paper: {
+            sx: { borderRadius: 2, padding: 2 }
+          }
         }}
       >
         <Typography sx={{ fontSize: "14px", pb: 2 }}>{label}</Typography>

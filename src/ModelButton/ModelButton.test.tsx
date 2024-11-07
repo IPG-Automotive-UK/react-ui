@@ -50,11 +50,15 @@ describe("ModelButton", () => {
     expect(svgElement).toHaveAttribute("stroke-width", "2");
   });
 
-  // test when status different than 'none' icon is rendered
+  // test when no status property applied, icon is not rendered
   test("does show status icon", () => {
-    render(<ModelButton status="error" />);
+    render(<ModelButton />);
+    const successIcon = screen.queryByTestId("success-icon");
+    const warningIcon = screen.queryByTestId("warning-icon");
     const errorIcon = screen.queryByTestId("error-icon");
-    expect(errorIcon).toBeInTheDocument();
+    expect(successIcon).not.toBeInTheDocument();
+    expect(warningIcon).not.toBeInTheDocument();
+    expect(errorIcon).not.toBeInTheDocument();
   });
 
   // test status icon is correctly set
@@ -86,13 +90,20 @@ describe("ModelButton", () => {
     }
   );
 
-  // test when status different than 'none' appropriate background is added to icon button
-  test("does apply background color", () => {
-    render(<ModelButton status="error" />);
-    const svgElement = screen.getByTestId("background");
-    expect(svgElement).toBeInTheDocument();
-    expect(svgElement).toHaveAttribute("fill", "rgba(211, 47, 47, 0.04)");
-  });
+  // test when no status property is passed, status background is not added to icon button
+  test.each([
+    ["rgba(211, 47, 47)"],
+    ["rgb(237, 108, 2)"],
+    ["rgb(46, 125, 50)"]
+  ] as const)(
+    "does not apply one of the status backgrounds color to the svg fill",
+    color => {
+      render(<ModelButton />);
+      const svgElement = screen.queryByTestId("background");
+      expect(svgElement).toBeInTheDocument();
+      expect(svgElement).not.toHaveAttribute("fill", alpha(color, 0.04));
+    }
+  );
 
   // test that popup button is not shown when no children are provided
   test("does not show popup button when no children are provided", () => {
