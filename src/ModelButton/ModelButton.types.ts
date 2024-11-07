@@ -1,3 +1,8 @@
+import { Theme } from "@mui/material";
+
+/**
+ * The props needed to define Background component
+ */
 type BackgroundProps = {
   /**
    * The color of the border
@@ -9,6 +14,9 @@ type BackgroundProps = {
   backgroundColor: string;
 };
 
+/**
+ * The props needed to define Model Button
+ */
 type ModelButtonProps = {
   /**
    * Children
@@ -39,15 +47,26 @@ type ModelButtonProps = {
   status?: "none" | "error" | "warning" | "success";
 };
 
+/**
+ * The props needed to define Model Button Popup
+ */
 type ModelButtonPopupProps = {
+  /**
+   * Current status
+   */
+  status: ModelButtonProps["status"];
   /**
    * Children
    */
   children?: React.ReactNode;
   /**
-   * The color of the button
+   * The color of the button border
    */
   color: string;
+  /**
+   * The color of the button border when hovered
+   */
+  colorHover: string;
   /**
    * If `true`, the button will be disabled. Default is `false`.
    */
@@ -58,4 +77,27 @@ type ModelButtonPopupProps = {
   label: string;
 };
 
-export type { BackgroundProps, ModelButtonProps, ModelButtonPopupProps };
+/**
+ * The props needed to call getCurrentIconBackgroundColor function
+ */
+type CurrentIconBackgroundColorProps = {
+  /**
+   * Whether hover effect is available
+   */
+  isHover: boolean;
+  /**
+   * Status of the current ModelButton
+   */
+  status: ModelButtonProps["status"];
+  /**
+   * Theme refrence
+   */
+  theme: Theme;
+};
+
+export type {
+  BackgroundProps,
+  ModelButtonProps,
+  ModelButtonPopupProps,
+  CurrentIconBackgroundColorProps
+};
