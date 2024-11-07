@@ -9,3 +9,4 @@ export {
   type FilterPopperProps
 } from "./FilterPopper";
 export { default as FilterStack, type FilterStackProps } from "./FilterStack";
+export { SidebarFilter, type SidebarFilterProps } from "./SidebarFilter";
