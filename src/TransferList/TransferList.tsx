@@ -16,10 +16,10 @@ import {
 } from "./TransferList.types";
 
 export default function TransferList({
-  handleChange,
-  selectedItems = [],
+  defaultSelectedItems,
   items = [],
   onChange,
+  selectedItems,
   sourceListLabel,
   targetListLabel
 }: TransferListProps) {
@@ -33,14 +33,9 @@ export default function TransferList({
   const [targetFilter, setTargetFilter] = useState<string>("");
 
   // All item keys
-  const [selectedItemKeys, setSelectedItemKeys] =
-    useState<string[]>(selectedItems);
-
-  // // Update target keys state when the prop updates and uncheck
-  // useEffect(() => {
-  //   setSelectedItemKeys(selectedItems);
-  //   setChecked([]);
-  // }, [selectedItems]);
+  const [selectedItemKeys, setSelectedItemKeys] = useState<string[]>(
+    defaultSelectedItems || selectedItems || []
+  );
 
   /**
    * Get primary label from item
@@ -77,7 +72,7 @@ export default function TransferList({
   };
 
   // Keys to be used for updates
-  const keys = handleChange ? selectedItems : selectedItemKeys;
+  const keys = selectedItems || selectedItemKeys;
 
   /**
    * Source list logic
@@ -164,8 +159,8 @@ export default function TransferList({
     const updatedTargetList = [...keys, ...checkedSourceItems];
 
     // Call handle hook if using controlled
-    if (handleChange) {
-      handleChange(updatedTargetList);
+    if (selectedItems) {
+      onChange(updatedTargetList);
       setChecked([]);
       return;
     }
@@ -190,8 +185,8 @@ export default function TransferList({
     );
 
     // Call handle hook if using controlled
-    if (handleChange) {
-      handleChange(newTargetSelection);
+    if (selectedItems) {
+      onChange(newTargetSelection);
       setChecked([]);
       return;
     }
@@ -272,7 +267,9 @@ export default function TransferList({
               pl: 1
             }}
           >
-            <Typography variant="body1">{sourceListLabel}</Typography>
+            <Typography id="source-list-label" variant="body1">
+              {sourceListLabel}
+            </Typography>
             <Typography
               variant="body2"
               sx={{ color: "text.secondary" }}
@@ -296,13 +293,13 @@ export default function TransferList({
         >
           <SingleList
             checked={sourceItemsToTransfer}
+            id="source-list"
             items={filteredSourceItems.map(item => ({
               key: filterKey(item),
               primaryLabel: getPrimaryLabel(item),
               secondaryLabel: getSecondaryLabel(item)
             }))}
             handleToggle={handleToggle}
-            role="source-list"
           />
         </Box>
       </Box>
@@ -377,7 +374,9 @@ export default function TransferList({
               pl: 1
             }}
           >
-            <Typography variant="body1">{targetListLabel}</Typography>
+            <Typography id="target-list-label" variant="body1">
+              {targetListLabel}
+            </Typography>
             <Typography
               variant="body2"
               sx={{ color: "text.secondary" }}
@@ -402,13 +401,13 @@ export default function TransferList({
           <Box>
             <SingleList
               checked={targetItemsToTransfer}
+              id="target-list"
               items={filteredTargetItems.map(item => ({
                 key: filterKey(item),
                 primaryLabel: getPrimaryLabel(item),
                 secondaryLabel: getSecondaryLabel(item)
               }))}
               handleToggle={handleToggle}
-              role="target-list"
             />
           </Box>
         </Box>
@@ -445,19 +444,18 @@ const Search = ({ onChange }: { onChange: (value: string) => void }) => {
 /**
  * Single list component for the transfer list
  */
-function SingleList({ checked, items, handleToggle, role }: SingleListProps) {
+function SingleList({ checked, id, items, handleToggle }: SingleListProps) {
   return (
     <Box
       sx={{
         width: "100%"
       }}
     >
-      <List dense component="div" role={role} sx={{ py: 0 }}>
+      <List aria-labelledby={`${id}-label`} dense sx={{ py: 0 }}>
         {items.map(item => {
           return (
             <ListItem
               key={item.key}
-              role={`${role}-item`}
               sx={{ py: 0.5 }}
               onClick={() => handleToggle(item.key)}
               disablePadding
@@ -471,7 +469,6 @@ function SingleList({ checked, items, handleToggle, role }: SingleListProps) {
             </ListItem>
           );
         })}
-        <ListItem />
       </List>
     </Box>
   );

@@ -5,7 +5,7 @@ import React from "react";
 import TransferList from ".";
 import userEvent from "@testing-library/user-event";
 
-// item array using the default object array structure
+// item array using an object array structure
 const defaultItemArray = [
   { key: "Apples", primaryLabel: "Apples" },
   { key: "Pears", primaryLabel: "Pears", secondaryLabel: "Conference" },
@@ -21,17 +21,17 @@ describe("TransferList", () => {
     render(
       <TransferList
         items={defaultItemArray}
-        sourceListLabel="My Source List"
-        targetListLabel="My Target List"
+        sourceListLabel="Source List Label"
+        targetListLabel="Target List Label"
       />
     );
 
     // get list
-    const list = screen.getByRole("source-list");
+    const list = screen.getByLabelText("Source List Label");
 
     // get all list entries
     const { getAllByRole } = within(list);
-    const items = getAllByRole("source-list-item");
+    const items = getAllByRole("listitem");
 
     // test existence of correct list items
     expect(items[0].textContent).toBe("Apples");
@@ -44,17 +44,17 @@ describe("TransferList", () => {
     render(
       <TransferList
         items={defaultItemArray}
-        sourceListLabel="My Source List"
-        targetListLabel="My Target List"
+        sourceListLabel="Source List Label"
+        targetListLabel="Target List Label"
       />
     );
 
     // test the source list heading and subheading
-    expect(screen.getByText("My Source List"));
+    expect(screen.getByText("Source List Label"));
     expect(screen.getByText("0/3 selected"));
 
     // test the target list heading and subheading
-    expect(screen.getByText("My Target List"));
+    expect(screen.getByText("Target List Label"));
     expect(screen.getByText("0/0 selected"));
   });
 
@@ -63,8 +63,8 @@ describe("TransferList", () => {
     render(
       <TransferList
         items={defaultItemArray}
-        sourceListLabel="My Source List"
-        targetListLabel="My Target List"
+        sourceListLabel="Source List Label"
+        targetListLabel="Target List Label"
       />
     );
 
@@ -85,8 +85,8 @@ describe("TransferList", () => {
     render(
       <TransferList
         items={defaultItemArray}
-        sourceListLabel="My Source List"
-        targetListLabel="My Target List"
+        sourceListLabel="Source List Label"
+        targetListLabel="Target List Label"
       />
     );
 
@@ -94,9 +94,9 @@ describe("TransferList", () => {
     const input = screen.getAllByLabelText("Search");
 
     // get list entries
-    const list = screen.getByRole("source-list");
+    const list = screen.getByLabelText("Source List Label");
     const { getAllByRole } = within(list);
-    const items = getAllByRole("source-list-item");
+    const items = getAllByRole("listitem");
 
     // get initially rendered list
     expect(items[0].textContent).toBe("Apples");
@@ -107,7 +107,7 @@ describe("TransferList", () => {
     await user.type(input[0], "p");
 
     // check if the source list has been filtered
-    const filteredItems = getAllByRole("source-list-item");
+    const filteredItems = getAllByRole("listitem");
     expect(filteredItems[2]).toBeUndefined();
   });
 
@@ -115,9 +115,9 @@ describe("TransferList", () => {
     render(
       <TransferList
         items={defaultItemArray}
-        selectedItems={["Apples", "Pears", "Oranges"]}
-        sourceListLabel="My Source List"
-        targetListLabel="My Target List"
+        defaultSelectedItems={["Apples", "Pears", "Oranges"]}
+        sourceListLabel="Source List Label"
+        targetListLabel="Target List Label"
       />
     );
 
@@ -134,8 +134,8 @@ describe("TransferList", () => {
     render(
       <TransferList
         items={defaultItemArray}
-        sourceListLabel="My Source List"
-        targetListLabel="My Target List"
+        sourceListLabel="Source List Label"
+        targetListLabel="Target List Label"
       />
     );
 
@@ -143,7 +143,7 @@ describe("TransferList", () => {
     const input = screen.getAllByLabelText("Search");
 
     // get list entries
-    const list = screen.getByRole("source-list");
+    const list = screen.getByLabelText("Source List Label");
     const { getAllByRole } = within(list);
 
     // filter the list
@@ -154,7 +154,7 @@ describe("TransferList", () => {
     await user.click(clearButton);
 
     // check if the source list has been unfiltered
-    const items = getAllByRole("source-list-item");
+    const items = getAllByRole("listitem");
     expect(items[0].textContent).toBe("Apples");
     expect(items[1].textContent).toBe("PearsConference");
     expect(items[2].textContent).toBe("Oranges");
@@ -165,16 +165,16 @@ describe("TransferList", () => {
     render(
       <TransferList
         items={defaultItemArray}
-        selectedItems={["Apples"]}
-        sourceListLabel="My Source List"
-        targetListLabel="My Target List"
+        defaultSelectedItems={["Apples"]}
+        sourceListLabel="Source List Label"
+        targetListLabel="Target List Label"
       />
     );
 
     // get source list
-    const sourceList = screen.getByRole("source-list");
+    const sourceList = screen.getByLabelText("Source List Label");
     // get all list entries
-    const sourceItems = within(sourceList).getAllByRole("source-list-item");
+    const sourceItems = within(sourceList).getAllByRole("listitem");
 
     // test existence of source list items
     expect(sourceItems[0].textContent).toBe("PearsConference");
@@ -184,9 +184,9 @@ describe("TransferList", () => {
     expect(screen.getByText("0/2 selected"));
 
     // get target list
-    const targetList = screen.getByRole("target-list");
+    const targetList = screen.getByLabelText("Target List Label");
     // get all list entries
-    const targetItems = within(targetList).getAllByRole("target-list-item");
+    const targetItems = within(targetList).getAllByRole("listitem");
 
     // test existence of target list items
     expect(targetItems[0].textContent).toBe("Apples");
@@ -199,15 +199,15 @@ describe("TransferList", () => {
     render(
       <TransferList
         items={defaultItemArray}
-        sourceListLabel="My Source List"
-        targetListLabel="My Target List"
+        sourceListLabel="Source List Label"
+        targetListLabel="Target List Label"
       />
     );
 
     // get list entries
-    const list = screen.getByRole("source-list");
+    const list = screen.getByLabelText("Source List Label");
     const { getAllByRole } = within(list);
-    const items = getAllByRole("source-list-item");
+    const items = getAllByRole("listitem");
 
     // click first two items in list
     await user.click(items[0]);
@@ -244,14 +244,14 @@ describe("TransferList", () => {
     render(
       <TransferList
         items={defaultItemArray}
-        sourceListLabel="My Source List"
-        targetListLabel="My Target List"
+        sourceListLabel="Source List Label"
+        targetListLabel="Target List Label"
       />
     );
 
     // get list entries
-    const sourceList = screen.getByRole("source-list");
-    const sourceItems = within(sourceList).getAllByRole("source-list-item");
+    const sourceList = screen.getByLabelText("Source List Label");
+    const sourceItems = within(sourceList).getAllByRole("listitem");
 
     // get transfer to target button
     const transferToTargetButton = screen.getByLabelText(
@@ -270,16 +270,16 @@ describe("TransferList", () => {
     await user.click(transferToTargetButton);
 
     // get target entries
-    const targetList = screen.getByRole("target-list");
-    const targetItems = within(targetList).getAllByRole("target-list-item");
+    const targetList = screen.getByLabelText("Target List Label");
+    const targetItems = within(targetList).getAllByRole("listitem");
     expect(targetItems.length).toBe(2);
     expect(targetItems[0].textContent).toBe("Apples");
     expect(targetItems[1].textContent).toBe("PearsConference");
 
     // check updated source entries
-    const updatedSourceList = screen.getByRole("source-list");
+    const updatedSourceList = screen.getByLabelText("Source List Label");
     const updatedSourceItems =
-      within(updatedSourceList).getAllByRole("source-list-item");
+      within(updatedSourceList).getAllByRole("listitem");
 
     expect(updatedSourceItems.length).toBe(1);
     expect(updatedSourceItems[0].textContent).toBe("Oranges");
@@ -304,8 +304,8 @@ describe("TransferList", () => {
     render(
       <TransferList
         items={[]}
-        sourceListLabel="My Source List"
-        targetListLabel="My Target List"
+        sourceListLabel="Source List Label"
+        targetListLabel="Target List Label"
       />
     );
 
@@ -330,8 +330,8 @@ describe("TransferList", () => {
     render(
       <TransferList
         items={defaultItemArray}
-        sourceListLabel="My Source List"
-        targetListLabel="My Target List"
+        sourceListLabel="Source List Label"
+        targetListLabel="Target List Label"
       />
     );
 
@@ -347,8 +347,8 @@ describe("TransferList", () => {
     await user.click(selectAllSourceCheckbox);
 
     // check updated source entries
-    const sourceList = screen.getByRole("source-list");
-    const sourceItems = within(sourceList).getAllByRole("source-list-item");
+    const sourceList = screen.getByLabelText("Source List Label");
+    const sourceItems = within(sourceList).getAllByRole("listitem");
 
     // all source list elements should be checked
     expect(within(sourceItems[0]).getByRole("checkbox")).toHaveProperty(
@@ -372,9 +372,9 @@ describe("TransferList", () => {
     render(
       <TransferList
         items={defaultItemArray}
-        selectedItems={["Apples", "Pears", "Oranges"]}
-        sourceListLabel="My Source List"
-        targetListLabel="My Target List"
+        defaultSelectedItems={["Apples", "Pears", "Oranges"]}
+        sourceListLabel="Source List Label"
+        targetListLabel="Target List Label"
       />
     );
 
@@ -390,8 +390,8 @@ describe("TransferList", () => {
     await user.click(selectAllTargetCheckbox);
 
     // check updated source entries
-    const targetList = screen.getByRole("target-list");
-    const targetItems = within(targetList).getAllByRole("target-list-item");
+    const targetList = screen.getByLabelText("Target List Label");
+    const targetItems = within(targetList).getAllByRole("listitem");
 
     // all source list elements should be checked
     expect(within(targetItems[0]).getByRole("checkbox")).toHaveProperty(
@@ -420,9 +420,9 @@ describe("TransferList", () => {
       <TransferList
         items={defaultItemArray}
         onChange={transferFn}
-        selectedItems={["Apples", "Pears", "Oranges"]}
-        sourceListLabel="My Source List"
-        targetListLabel="My Target List"
+        defaultSelectedItems={["Apples", "Pears", "Oranges"]}
+        sourceListLabel="Source List Label"
+        targetListLabel="Target List Label"
       />
     );
 
@@ -477,10 +477,10 @@ describe("TransferList", () => {
     render(
       <TransferList
         items={defaultItemArray}
-        handleChange={transferFn}
+        onChange={transferFn}
         selectedItems={["Apples", "Pears", "Oranges"]}
-        sourceListLabel="My Source List"
-        targetListLabel="My Target List"
+        sourceListLabel="Source List Label"
+        targetListLabel="Target List Label"
       />
     );
 
@@ -515,8 +515,8 @@ describe("TransferList", () => {
         items={stringItemArray}
         onChange={transferFn}
         selectedItems={["Apples", "Pears", "Oranges"]}
-        sourceListLabel="My Source List"
-        targetListLabel="My Target List"
+        sourceListLabel="Source List Label"
+        targetListLabel="Target List Label"
       />
     );
 

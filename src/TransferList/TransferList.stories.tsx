@@ -4,6 +4,7 @@ import React from "react";
 import TransferList from "./TransferList";
 import { TransferListProps } from "./TransferList.types";
 import { action } from "@storybook/addon-actions";
+import { useArgs } from "@storybook/preview-api";
 
 /**
  * Story metadata
@@ -19,46 +20,30 @@ const meta: Meta<typeof TransferList> = {
 };
 export default meta;
 
-const TransferListWithState: StoryFn<TransferListProps> = () => {
-  const [selectedKeys, setSelectedKeys] = React.useState<string[]>([]);
+// default args for every story
+const defaultArgs: StoryObj<typeof TransferList>["args"] = {
+  sourceListLabel: "Source List Label",
+  targetListLabel: "Target List Label"
+};
+
+const TransferListWithState: StoryFn<TransferListProps> = args => {
+  const [{ selectedKeys }, updateArgs] = useArgs();
 
   // Create function to transfer items
-  const handleChange: TransferListProps["handleChange"] = value => {
+  const handleChange: TransferListProps["onChange"] = value => {
     // Set the selected item keys
-    setSelectedKeys(value);
+    updateArgs({ selectedKeys: value });
     action("handleChange")(value);
   };
 
   return (
     <TransferList
-      sourceListLabel={"Source List Label"}
-      targetListLabel={"Target List Label"}
+      {...defaultArgs}
+      {...args}
       selectedItems={selectedKeys}
-      items={[
-        { key: "Apples", primaryLabel: "Apples" },
-        { key: "Pears", primaryLabel: "Pears", secondaryLabel: "Conference" },
-        { key: "Oranges", primaryLabel: "Oranges" },
-        {
-          key: "Bananas",
-          primaryLabel: "Bananas",
-          secondaryLabel: "Blue Java"
-        },
-        { key: "Mangoes", primaryLabel: "Mangoes" },
-        { key: "Kiwi", primaryLabel: "Kiwi" },
-        { key: "Dragonfruit", primaryLabel: "Dragonfruit" },
-        { key: "Plum", primaryLabel: "Plum" },
-        { key: "Grapes", primaryLabel: "Grapes" },
-        { key: "Cherry", primaryLabel: "Cherry" }
-      ]}
-      handleChange={handleChange}
+      onChange={handleChange}
     />
   );
-};
-
-// default args for every story
-const defaultArgs: StoryObj<typeof TransferList>["args"] = {
-  sourceListLabel: "Source List Label",
-  targetListLabel: "Target List Label"
 };
 
 // use an object array to render the transfer list
@@ -85,7 +70,7 @@ export const WithDefaultObjectArray: StoryObj<typeof TransferList> = {
 // use an array of strings with pre-transferred items
 export const WithStringArray: StoryObj<typeof TransferList> = {
   args: {
-    ...defaultArgs,
+    defaultSelectedItems: ["Apples", "Grapes"],
     items: [
       "Apples",
       "Pears",
@@ -98,7 +83,8 @@ export const WithStringArray: StoryObj<typeof TransferList> = {
       "Grapes",
       "Cherry"
     ],
-    selectedItems: ["Apples", "Grapes"]
+    sourceListLabel: "Source List Label",
+    targetListLabel: "Target List Label"
   },
   render: TransferList
 };
@@ -126,5 +112,24 @@ export const WithSecondaryLabel: StoryObj<typeof TransferList> = {
 
 // controlled component that calls the handleChange callback with data
 export const Controlled: StoryObj<typeof TransferList> = {
+  args: {
+    ...defaultArgs,
+    items: [
+      { key: "Apples", primaryLabel: "Apples" },
+      { key: "Pears", primaryLabel: "Pears", secondaryLabel: "Conference" },
+      { key: "Oranges", primaryLabel: "Oranges" },
+      {
+        key: "Bananas",
+        primaryLabel: "Bananas",
+        secondaryLabel: "Blue Java"
+      },
+      { key: "Mangoes", primaryLabel: "Mangoes" },
+      { key: "Kiwi", primaryLabel: "Kiwi" },
+      { key: "Dragonfruit", primaryLabel: "Dragonfruit" },
+      { key: "Plum", primaryLabel: "Plum" },
+      { key: "Grapes", primaryLabel: "Grapes" },
+      { key: "Cherry", primaryLabel: "Cherry" }
+    ]
+  },
   render: TransferListWithState
 };
