@@ -131,6 +131,7 @@ describe("TransferList", () => {
   test("clearing the source filter brings back the full source list", async () => {
     // render component
     const user = userEvent.setup();
+
     render(
       <TransferList
         items={defaultItemArray}
@@ -153,7 +154,7 @@ describe("TransferList", () => {
     const clearButton = screen.getByLabelText("clear search");
     await user.click(clearButton);
 
-    // check if the source list has been unfiltered
+    // test if the source list has been unfiltered
     const items = getAllByRole("listitem");
     expect(items[0].textContent).toBe("Apples");
     expect(items[1].textContent).toBe("PearsConference");
@@ -193,7 +194,7 @@ describe("TransferList", () => {
     expect(screen.getByText("0/1 selected"));
   });
 
-  test("clicked items check correctly, enable the relevant transfer button and update the heading", async () => {
+  test("clicked items toggle correctly, enable the relevant transfer button and update the heading", async () => {
     // render component
     const user = userEvent.setup();
     render(
@@ -235,9 +236,30 @@ describe("TransferList", () => {
 
     // test subheading is correct
     expect(screen.getByText("2/3 selected"));
+
+    // click first two items in list for a second time
+    await user.click(items[0]);
+    await user.click(items[1]);
+
+    // test checked status of checkboxes
+    expect(within(items[0]).getByRole("checkbox")).toHaveProperty(
+      "checked",
+      false
+    );
+    expect(within(items[1]).getByRole("checkbox")).toHaveProperty(
+      "checked",
+      false
+    );
+    expect(within(items[2]).getByRole("checkbox")).toHaveProperty(
+      "checked",
+      false
+    );
+
+    // test subheading is correct
+    expect(screen.getByText("0/3 selected"));
   });
 
-  test("checked items transfer from source to target list and uncheck", async () => {
+  test("if uncontrolled, checked items transfer from source to target list and uncheck", async () => {
     // render component
     const user = userEvent.setup();
 
@@ -258,11 +280,13 @@ describe("TransferList", () => {
       "transfer to target list"
     );
 
-    // click first two items in list
+    // test the list entries
     expect(sourceItems.length).toBe(3);
     expect(sourceItems[0].textContent).toBe("Apples");
     expect(sourceItems[1].textContent).toBe("PearsConference");
     expect(sourceItems[2].textContent).toBe("Oranges");
+
+    // click first two items in list
     await user.click(sourceItems[0]);
     await user.click(sourceItems[1]);
 
@@ -272,6 +296,8 @@ describe("TransferList", () => {
     // get target entries
     const targetList = screen.getByLabelText("Target List Label");
     const targetItems = within(targetList).getAllByRole("listitem");
+
+    // test the target entries
     expect(targetItems.length).toBe(2);
     expect(targetItems[0].textContent).toBe("Apples");
     expect(targetItems[1].textContent).toBe("PearsConference");
@@ -281,10 +307,11 @@ describe("TransferList", () => {
     const updatedSourceItems =
       within(updatedSourceList).getAllByRole("listitem");
 
+    // test the updated entries
     expect(updatedSourceItems.length).toBe(1);
     expect(updatedSourceItems[0].textContent).toBe("Oranges");
 
-    // ensure everything is unchecked
+    // test that everything is unchecked
     expect(within(updatedSourceItems[0]).getByRole("checkbox")).toHaveProperty(
       "checked",
       false
@@ -294,6 +321,89 @@ describe("TransferList", () => {
       false
     );
     expect(within(targetItems[1]).getByRole("checkbox")).toHaveProperty(
+      "checked",
+      false
+    );
+  });
+
+  test("if controlled, checked items do not transfer unless selected items is updated", async () => {
+    // render component
+    const user = userEvent.setup();
+
+    // transfer function
+    const transferFn = vi.fn();
+
+    const { rerender } = render(
+      <TransferList
+        items={defaultItemArray}
+        onChange={transferFn}
+        selectedItems={[]}
+        sourceListLabel="Source List Label"
+        targetListLabel="Target List Label"
+      />
+    );
+
+    // get list entries
+    const sourceList = screen.getByLabelText("Source List Label");
+    const sourceItems = within(sourceList).getAllByRole("listitem");
+    const targetList = screen.getByLabelText("Target List Label");
+    const targetItems = within(targetList).queryAllByRole("listitem");
+
+    // get transfer to target button
+    const transferToTargetButton = screen.getByLabelText(
+      "transfer to target list"
+    );
+
+    // Test the list lengths
+    expect(sourceItems.length).toBe(3);
+    expect(targetItems.length).toBe(0);
+
+    // click first two items in list
+    await user.click(sourceItems[0]);
+    await user.click(sourceItems[1]);
+
+    // click transfer button
+    await user.click(transferToTargetButton);
+
+    // get unchanged list entries
+    const unchangedSourceItems = within(sourceList).getAllByRole("listitem");
+    const unchangedTargetItems = within(targetList).queryAllByRole("listitem");
+
+    // test onChange was called with the correct items
+    expect(transferFn).toHaveBeenCalledWith(["Apples", "Pears"]);
+
+    // test the list lengths remain the same
+    expect(unchangedSourceItems.length).toBe(3);
+    expect(unchangedTargetItems.length).toBe(0);
+
+    rerender(
+      <TransferList
+        items={defaultItemArray}
+        onChange={transferFn}
+        selectedItems={["Apples", "Pears"]}
+        sourceListLabel="Source List Label"
+        targetListLabel="Target List Label"
+      />
+    );
+
+    // get updated target entries
+    const updatedSourceItems = within(sourceList).queryAllByRole("listitem");
+    const updatedTargetItems = within(targetList).getAllByRole("listitem");
+
+    // test that selected items has updated the lists
+    expect(updatedSourceItems.length).toBe(1);
+    expect(updatedTargetItems.length).toBe(2);
+
+    // test that everything is unchecked
+    expect(within(updatedSourceItems[0]).getByRole("checkbox")).toHaveProperty(
+      "checked",
+      false
+    );
+    expect(within(updatedTargetItems[0]).getByRole("checkbox")).toHaveProperty(
+      "checked",
+      false
+    );
+    expect(within(updatedTargetItems[1]).getByRole("checkbox")).toHaveProperty(
       "checked",
       false
     );
@@ -323,7 +433,7 @@ describe("TransferList", () => {
     expect(selectAllTargetCheckbox).toHaveProperty("disabled", true);
   });
 
-  test("source list header checkbox selects all the source list items", async () => {
+  test("source list select all checkbox selects all the source list items", async () => {
     // render component
     const user = userEvent.setup();
 
@@ -365,7 +475,52 @@ describe("TransferList", () => {
     );
   });
 
-  test("target list check all checks all the selected list items", async () => {
+  test("source list select all checkbox clears the source list items if all are selected", async () => {
+    // render component
+    const user = userEvent.setup();
+
+    render(
+      <TransferList
+        items={defaultItemArray}
+        sourceListLabel="Source List Label"
+        targetListLabel="Target List Label"
+      />
+    );
+
+    // get checkboxes
+    const selectAllSourceCheckbox = within(
+      screen.getByLabelText("select all source list items")
+    ).getByRole("checkbox");
+
+    // test transfer buttons exist and are disabled and enabled correctly
+    expect(selectAllSourceCheckbox).toHaveProperty("disabled", false);
+
+    // click select all source checkbox
+    await user.click(selectAllSourceCheckbox);
+
+    // click select all source checkbox a second time
+    await user.click(selectAllSourceCheckbox);
+
+    // check updated source entries
+    const sourceList = screen.getByLabelText("Source List Label");
+    const sourceItems = within(sourceList).getAllByRole("listitem");
+
+    // all source list elements should be checked
+    expect(within(sourceItems[0]).getByRole("checkbox")).toHaveProperty(
+      "checked",
+      false
+    );
+    expect(within(sourceItems[1]).getByRole("checkbox")).toHaveProperty(
+      "checked",
+      false
+    );
+    expect(within(sourceItems[2]).getByRole("checkbox")).toHaveProperty(
+      "checked",
+      false
+    );
+  });
+
+  test("target list select all checkbox checks all the selected list items", async () => {
     // render component
     const user = userEvent.setup();
 
@@ -410,7 +565,52 @@ describe("TransferList", () => {
     );
   });
 
-  test("onChange callback fires with selected items", async () => {
+  test("target list select all checkbox clears the selected list items if all are selected", async () => {
+    // render component
+    const user = userEvent.setup();
+
+    render(
+      <TransferList
+        items={defaultItemArray}
+        defaultSelectedItems={["Apples", "Pears", "Oranges"]}
+        sourceListLabel="Source List Label"
+        targetListLabel="Target List Label"
+      />
+    );
+
+    // get checkboxes
+    const selectAllTargetCheckbox = within(
+      screen.getByLabelText("select all target list items")
+    ).getByRole("checkbox");
+
+    // click select all target checkbox
+    await user.click(selectAllTargetCheckbox);
+
+    // click select all target checkbox a second time
+    await user.click(selectAllTargetCheckbox);
+
+    // check updated source entries
+    const targetList = screen.getByLabelText("Target List Label");
+    const targetItems = within(targetList).getAllByRole("listitem");
+
+    // all source list elements should be checked
+    expect(within(targetItems[0]).getByRole("checkbox")).toHaveProperty(
+      "checked",
+      false
+    );
+
+    expect(within(targetItems[1]).getByRole("checkbox")).toHaveProperty(
+      "checked",
+      false
+    );
+
+    expect(within(targetItems[2]).getByRole("checkbox")).toHaveProperty(
+      "checked",
+      false
+    );
+  });
+
+  test("transfer to target fires onChange callback with selected items", async () => {
     // render component
     const user = userEvent.setup();
     // transfer function
@@ -468,7 +668,7 @@ describe("TransferList", () => {
     expect(transferFn).toHaveBeenCalledWith(["Apples", "Pears", "Oranges"]);
   });
 
-  test("handleChange callback fires with selected items array", async () => {
+  test("transfer to source fires onChange callback with selected items array", async () => {
     // render component
     const user = userEvent.setup();
     // transfer function

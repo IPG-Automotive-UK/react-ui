@@ -7,7 +7,7 @@ import {
   ListItemText,
   Typography
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchBar, { SearchBarProps } from "../SearchBar";
 import {
   SingleListProps,
@@ -36,6 +36,13 @@ export default function TransferList({
   const [selectedItemKeys, setSelectedItemKeys] = useState<string[]>(
     defaultSelectedItems || selectedItems || []
   );
+
+  /**
+   * useEffect unselects items in the controlled component
+   */
+  useEffect(() => {
+    setChecked([]);
+  }, [selectedItems]);
 
   /**
    * Get primary label from item
@@ -158,15 +165,13 @@ export default function TransferList({
     // Updated target list keys
     const updatedTargetList = [...keys, ...checkedSourceItems];
 
-    // Call handle hook if using controlled
+    // Call the onChange callback
+    onChange && onChange(updatedTargetList);
+
+    // If component is controlled, end the function
     if (selectedItems) {
-      onChange(updatedTargetList);
-      setChecked([]);
       return;
     }
-
-    // Call the onChange callback if using optimistic updates
-    onChange && onChange(updatedTargetList);
 
     // Add the checked items to the target list
     setSelectedItemKeys(updatedTargetList);
@@ -184,15 +189,13 @@ export default function TransferList({
       item => !targetItemsToTransfer.includes(item)
     );
 
-    // Call handle hook if using controlled
+    // Call the onChange callback
+    onChange && onChange(newTargetSelection);
+
+    // If component is controlled, end the function
     if (selectedItems) {
-      onChange(newTargetSelection);
-      setChecked([]);
       return;
     }
-
-    // Call the onChange callback if using optimistic
-    onChange && onChange(newTargetSelection);
 
     // Remove the checked items from the target list
     setSelectedItemKeys(newTargetSelection);
