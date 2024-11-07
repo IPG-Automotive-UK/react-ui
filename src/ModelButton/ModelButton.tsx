@@ -2,6 +2,7 @@ import * as React from "react";
 
 import {
   BackgroundProps,
+  CurrentIconBackgroundColorProps,
   ModelButtonPopupProps,
   ModelButtonProps
 } from "./ModelButton.types";
@@ -14,7 +15,7 @@ import {
   Typography,
   iconButtonClasses
 } from "@mui/material";
-import { Theme, alpha, useTheme } from "@mui/material/styles";
+import { alpha, useTheme } from "@mui/material/styles";
 
 import CancelIcon from "@mui/icons-material/Cancel";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
@@ -222,11 +223,11 @@ export default function ModelButton({
         >
           <Background
             borderColor={isHover ? borderColorHover : borderColor}
-            backgroundColor={getCurrentIconBackgroundColor(
+            backgroundColor={getCurrentIconBackgroundColor({
               isHover,
               status,
               theme
-            )}
+            })}
           />
           {icon
             ? React.cloneElement(icon, {
@@ -308,14 +309,18 @@ const ModelButtonPopup = ({
         sx={{
           "&:hover": {
             backgroundColor: theme =>
-              getCurrentIconBackgroundColor(true, status, theme),
+              getCurrentIconBackgroundColor({
+                isHover: true,
+                status,
+                theme
+              }),
             borderColor: colorHover
           },
           [`&.${iconButtonClasses.disabled}`]: {
             color
           },
           backgroundColor: theme =>
-            getCurrentIconBackgroundColor(false, status, theme),
+            getCurrentIconBackgroundColor({ isHover: false, status, theme }),
           border: "2px solid",
           borderColor: color,
           borderRadius: "50%",
@@ -359,11 +364,11 @@ const ModelButtonPopup = ({
 };
 
 /** Get the correct icon button background color, according to the theme and hover behaviour  */
-const getCurrentIconBackgroundColor = (
-  isHover: boolean,
-  status: string,
-  theme: Theme
-) => {
+const getCurrentIconBackgroundColor = ({
+  isHover,
+  status,
+  theme
+}: CurrentIconBackgroundColorProps) => {
   // calculate opacity depending on the hover
   const backgroundOpacity = isHover ? 0.12 : 0.04;
 

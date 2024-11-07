@@ -54,7 +54,7 @@ type ModelButtonPopupProps = {
   /**
    * Current status
    */
-  status: string;
+  status: ModelButtonProps["status"];
   /**
    * Children
    */
