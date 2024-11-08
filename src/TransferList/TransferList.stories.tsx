@@ -26,21 +26,21 @@ const defaultArgs: StoryObj<typeof TransferList>["args"] = {
   targetListLabel: "Target List Label"
 };
 
+// set up state for controlled stories
 const TransferListWithState: StoryFn<TransferListProps> = args => {
-  const [{ selectedKeys }, updateArgs] = useArgs();
+  const [{ selectedItems }, updateArgs] = useArgs<TransferListProps>();
 
   // Create function to transfer items
   const handleChange: TransferListProps["onChange"] = value => {
     // Set the selected item keys
-    updateArgs({ selectedKeys: value });
+    updateArgs({ selectedItems: value.map(item => item.key || item) });
     action("handleChange")(value);
   };
 
   return (
     <TransferList
-      {...defaultArgs}
       {...args}
-      selectedItems={selectedKeys}
+      selectedItems={selectedItems}
       onChange={handleChange}
     />
   );
