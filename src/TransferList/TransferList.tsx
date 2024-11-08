@@ -7,7 +7,7 @@ import {
   ListItemText,
   Typography
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import SearchBar, { SearchBarProps } from "../SearchBar";
 import {
   SingleListProps,
@@ -34,13 +34,13 @@ export default function TransferList({
 
   // All item keys
   const [selectedItemKeys, setSelectedItemKeys] = useState<string[]>(
-    defaultSelectedItems || selectedItems || []
+    defaultSelectedItems || []
   );
 
   /**
    * useEffect unselects items in the controlled component
    */
-  useEffect(() => {
+  useLayoutEffect(() => {
     setChecked([]);
   }, [selectedItems]);
 
@@ -263,6 +263,7 @@ export default function TransferList({
     >
       <Box
         sx={{
+          backgroundColor: "background.paper",
           border: theme => `1px solid ${theme.palette.divider}`,
           borderRadius: 1,
           display: "flex",
@@ -370,6 +371,7 @@ export default function TransferList({
 
       <Box
         sx={{
+          backgroundColor: "background.paper",
           border: theme => `1px solid ${theme.palette.divider}`,
           borderRadius: 1,
           display: "flex",
@@ -495,7 +497,7 @@ function SingleList({ checked, id, items, handleToggle }: SingleListProps) {
             >
               <Checkbox checked={checked.includes(item.key)} disableRipple />
               <ListItemText
-                sx={{ pl: 1 }}
+                sx={{ pl: 1, wordBreak: "break-word" }}
                 primary={item.primaryLabel}
                 secondary={item.secondaryLabel}
               />

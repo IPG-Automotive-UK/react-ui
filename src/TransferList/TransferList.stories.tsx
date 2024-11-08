@@ -40,7 +40,7 @@ const TransferListWithState: StoryFn<TransferListProps> = args => {
   return (
     <TransferList
       {...args}
-      selectedItems={selectedItems}
+      selectedItems={selectedItems || []}
       onChange={handleChange}
     />
   );
