@@ -4,27 +4,15 @@ export type TransferListItem = {
   key: string;
 };
 
-// Controlled component props
-// Ensure onChange is required if using selected items
-// Ensure defaultSelectedItems and selectedItems cannot exist together
-type ControlledProps = {
-  /**
-   * Callback fired when the items are transferred.
-   */
-  onChange: (value: string[] | TransferListItem[]) => void;
-  /**
-   * Array of keys for the items on the right side for controlled use
-   */
-  selectedItems: string[];
+export type TransferListProps = {
   /**
    * Array of default keys to initialist the right hand side for uncontrolled use
    */
-  defaultSelectedItems?: never;
-};
-
-// Uncontrolled component props
-// Ensure selectedItems and defaultSelectedItems cannot exist together
-type UncontrolledProps = {
+  defaultSelectedItems?: string[];
+  /**
+   * Array of Items.
+   */
+  items: string[] | TransferListItem[];
   /**
    * Callback fired when the items are transferred.
    */
@@ -32,26 +20,15 @@ type UncontrolledProps = {
   /**
    * Array of keys for the items on the right side for controlled use
    */
-  selectedItems?: undefined;
-  /**
-   * Array of default keys to initialist the right hand side for uncontrolled use
-   */
-  defaultSelectedItems?: string[];
-};
-
-export type TransferListProps = (ControlledProps | UncontrolledProps) & {
-  /**
-   * Array of Items.
-   */
-  items: string[] | TransferListItem[];
+  selectedItems?: string[];
   /**
    * Source list label
    */
-  sourceListLabel: string;
+  sourceListLabel?: string;
   /**
    * Target list label
    */
-  targetListLabel: string;
+  targetListLabel?: string;
 };
 
 export type SingleListProps = {
