@@ -25,6 +25,15 @@ const statuses = {
       text: "Aborted"
     }
   },
+  aborting: {
+    icon: {
+      color: grey[300],
+      type: Block
+    },
+    label: {
+      text: "Aborting"
+    }
+  },
   completed: {
     icon: {
       color: green[800],
