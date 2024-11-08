@@ -1,12 +1,21 @@
 export type TransferListItem = {
-  primaryLabel: string;
-  secondaryLabel?: string;
+  /**
+   * Unique key
+   */
   key: string;
+  /**
+   * Primary label rendered in an item
+   */
+  primaryLabel: string;
+  /**
+   * Secondary label rendered in an item
+   */
+  secondaryLabel?: string;
 };
 
 export type TransferListProps = {
   /**
-   * Array of default keys to initialist the right hand side for uncontrolled use
+   * Array of default keys to initialise the right hand side for uncontrolled use
    */
   defaultSelectedItems?: string[];
   /**
