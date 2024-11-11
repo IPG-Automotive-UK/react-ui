@@ -24,6 +24,8 @@ const Template: StoryFn<StatusCountTableProps> = args => {
 export const Default = {
   args: {
     count: {
+      aborted: 2,
+      aborting: 1,
       completed: 15,
       errored: 1,
       failed: 1,
