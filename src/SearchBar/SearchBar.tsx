@@ -25,6 +25,7 @@ export default function SearchBar({
       }}
     >
       <InputBase
+        aria-label={"Search"}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
@@ -33,6 +34,7 @@ export default function SearchBar({
       />
       {hasValue ? (
         <IconButton
+          aria-label="clear search"
           onClick={() => {
             onChange({ target: { value: "" } });
           }}
