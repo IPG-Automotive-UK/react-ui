@@ -64,15 +64,13 @@ export {
 } from "./FileUploader";
 export {
   CheckboxFilter,
-  FilterPopper,
-  FilterStack,
   LabelFilter,
   RangeFilter,
+  SidebarFilter,
   type CheckboxFilterProps,
-  type FilterPopperProps,
-  type FilterStackProps,
   type LabelFilterProps,
-  type RangeFilterProps
+  type RangeFilterProps,
+  type SidebarFilterProps
 } from "./Filter";
 export { default as FontPicker, type FontPickerProps } from "./FontPicker";
 export { default as FontStyle, type FontStyleProps } from "./FontStyle";
