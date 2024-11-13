@@ -1,17 +1,17 @@
 import { Button, Typography } from "@mui/material";
 
-import { FilterButtonProps } from "./FilterButton.types";
 import { FilterList } from "@mui/icons-material";
 import React from "react";
+import { SetFilterButtonProps } from "./SetFilterButton.types";
 
 /**
  * A button that represents a filter state. It accepts an onClick callback, and renders a label and a filter count.
  */
-export function FilterButton({
+export function SetFilterButton({
   onClick,
   count = 0,
   label = "Filters"
-}: FilterButtonProps) {
+}: SetFilterButtonProps) {
   // filter button label, with count if available (e.g. "Filters (3)")
   const displayLabel = count > 0 ? `${label} (${count})` : `${label}`;
   // color of the icon and text based on the filter count

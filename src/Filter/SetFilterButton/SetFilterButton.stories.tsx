@@ -1,27 +1,29 @@
 import { Meta, StoryFn } from "@storybook/react";
 
-import { FilterButton } from "./FilterButton";
-import { FilterButtonProps } from "./FilterButton.types";
 import React from "react";
+import { SetFilterButton } from "./SetFilterButton";
+import { SetFilterButtonProps } from "./SetFilterButton.types";
 import { action } from "@storybook/addon-actions";
 
 /**
  * Story metadata
  */
-const meta: Meta<typeof FilterButton> = {
-  component: FilterButton,
-  title: "Filters/FilterButton"
+const meta: Meta<typeof SetFilterButton> = {
+  component: SetFilterButton,
+  title: "Filters/SetFilterButton"
 };
 
 export default meta;
 
 /**
- * Story template for the FilterButton component
+ * Story template for the SetFilterButton component
  */
-const Template: StoryFn<FilterButtonProps> = args => <FilterButton {...args} />;
+const Template: StoryFn<SetFilterButtonProps> = args => (
+  <SetFilterButton {...args} />
+);
 
 /**
- * Default story for the FilterButton component
+ * Default story for the SetFilterButton component
  */
 export const Default = {
   args: {

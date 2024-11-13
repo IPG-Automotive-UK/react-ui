@@ -1,5 +1,5 @@
-// FilterButton props type
-export type FilterButtonProps = {
+// SetFilterButton props type
+export type SetFilterButtonProps = {
   /**
    * The number of filters that are active.
    */

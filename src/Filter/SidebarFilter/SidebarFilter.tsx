@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 import { ClearFilterButton } from "../ClearFilterButton";
 import { Close } from "@mui/icons-material";
-import { FilterButton } from "../FilterButton";
+import { SetFilterButton } from "../SetFilterButton";
 import { SidebarFilterProps } from "./SidebarFilter.types";
 
 /**
@@ -19,7 +19,7 @@ export function SidebarFilter({
 
   return (
     <>
-      <FilterButton
+      <SetFilterButton
         count={count}
         label="Filters"
         onClick={() => setOpen(true)}
