@@ -6,10 +6,15 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { SidebarFilter } from "./SidebarFilter";
 import userEvent from "@testing-library/user-event";
 
+// Default props
+const defaultProps = {
+  onClear: vi.fn()
+};
+
 // Tests
 describe("SidebarFilter", () => {
   test("Render children in sidebar", async () => {
-    render(<SidebarFilter>Child text</SidebarFilter>);
+    render(<SidebarFilter {...defaultProps}>Child text</SidebarFilter>);
 
     // Check that the children are not initially rendered
     expect(screen.queryByText("Child text")).not.toBeInTheDocument();
@@ -24,7 +29,11 @@ describe("SidebarFilter", () => {
   });
 
   test("Clear button does not render if count is 0", async () => {
-    render(<SidebarFilter count={0}>Child text</SidebarFilter>);
+    render(
+      <SidebarFilter {...defaultProps} count={0}>
+        Child text
+      </SidebarFilter>
+    );
 
     // Open sidebar
     const filterButton = screen.getByTestId("filter-open-button");
@@ -35,7 +44,11 @@ describe("SidebarFilter", () => {
   });
 
   test("Shows clear button when count is greater than 0", async () => {
-    render(<SidebarFilter count={1}>Child text</SidebarFilter>);
+    render(
+      <SidebarFilter {...defaultProps} count={1}>
+        Child text
+      </SidebarFilter>
+    );
 
     // Open sidebar
     const filterButton = screen.getByTestId("filter-open-button");
@@ -64,7 +77,11 @@ describe("SidebarFilter", () => {
   });
 
   test("Close sidebar on click of close button", async () => {
-    render(<SidebarFilter count={1}>Child text</SidebarFilter>);
+    render(
+      <SidebarFilter {...defaultProps} count={1}>
+        Child text
+      </SidebarFilter>
+    );
 
     // Open sidebar
     const filterButton = screen.getByTestId("filter-open-button");

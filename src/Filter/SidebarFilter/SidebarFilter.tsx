@@ -1,13 +1,7 @@
-import {
-  Button,
-  Divider,
-  Drawer,
-  IconButton,
-  Stack,
-  Typography
-} from "@mui/material";
+import { Divider, Drawer, IconButton, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
 
+import { ClearFilterButton } from "../ClearFilterButton";
 import { Close } from "@mui/icons-material";
 import { FilterButton } from "../FilterButton";
 import { SidebarFilterProps } from "./SidebarFilter.types";
@@ -74,21 +68,7 @@ export function SidebarFilter({
           {count > 0 ? (
             <>
               <Divider />
-              <Stack
-                sx={{
-                  alignItems: "center",
-                  px: 3,
-                  py: 1.5
-                }}
-              >
-                <Button
-                  sx={{ width: "fit-content" }}
-                  onClick={onClear}
-                  data-testid="filter-clear-button"
-                >
-                  CLEAR ALL FILTERS
-                </Button>
-              </Stack>
+              <ClearFilterButton onClick={onClear} />
             </>
           ) : null}
         </Stack>

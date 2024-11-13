@@ -11,5 +11,5 @@ export type SidebarFilterProps = {
   /**
    * Callback function to clear all filters.
    */
-  onClear?: (event: React.MouseEvent<HTMLElement>) => void;
+  onClear: (event: React.MouseEvent<HTMLElement>) => void;
 };

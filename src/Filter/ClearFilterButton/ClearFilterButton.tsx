@@ -1,6 +1,7 @@
 import * as React from "react";
 
-import { Button } from "@mui/material";
+import { Button, Stack } from "@mui/material";
+
 import { ClearFilterButtonProps } from "./ClearFilterButton.types";
 
 /**
@@ -11,12 +12,20 @@ export function ClearFilterButton({
   onClick
 }: ClearFilterButtonProps) {
   return (
-    <Button
-      sx={{ width: "fit-content" }}
-      onClick={onClick}
-      data-testid="filter-clear-button"
+    <Stack
+      sx={{
+        alignItems: "center",
+        px: 3,
+        py: 1.5
+      }}
     >
-      {label}
-    </Button>
+      <Button
+        sx={{ width: "fit-content" }}
+        onClick={onClick}
+        data-testid="filter-clear-button"
+      >
+        {label}
+      </Button>
+    </Stack>
   );
 }
