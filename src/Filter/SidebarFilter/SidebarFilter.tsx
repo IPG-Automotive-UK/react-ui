@@ -6,9 +6,11 @@ import {
   Stack,
   Typography
 } from "@mui/material";
-import { Close, FilterList } from "@mui/icons-material";
-import { FilterButtonProps, SidebarFilterProps } from "./SidebarFilter.types";
 import React, { useState } from "react";
+
+import { Close } from "@mui/icons-material";
+import { FilterButton } from "../FilterButton";
+import { SidebarFilterProps } from "./SidebarFilter.types";
 
 /**
  * SidebarFilter component that displays a filter in the sidebar
@@ -92,36 +94,5 @@ export function SidebarFilter({
         </Stack>
       </Drawer>
     </>
-  );
-}
-
-/**
- * A button that represents a filter state. It accepts an onClick callback, and renders a label and a filter count.
- */
-function FilterButton({ onClick, count, label, ...props }: FilterButtonProps) {
-  // filter button label, with count if available (e.g. "Filters (3)")
-  const displayLabel = count > 0 ? `${label} (${count})` : `${label}`;
-  // color of the icon and text based on the filter count
-  const iconColor = count > 0 ? "primary" : "action";
-  const textColor = count > 0 ? "primary" : "textSecondary";
-  return (
-    <Button
-      data-testid="filter-open-button"
-      sx={{ width: "fit-content" }}
-      disableRipple
-      onClick={onClick}
-      {...props}
-    >
-      <FilterList color={iconColor} />
-      <Typography
-        variant="button"
-        flexGrow={1}
-        ml={1}
-        color={textColor}
-        data-testid="filter-open-text"
-      >
-        {displayLabel}
-      </Typography>
-    </Button>
   );
 }

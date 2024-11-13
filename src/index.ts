@@ -67,10 +67,12 @@ export {
   LabelFilter,
   RangeFilter,
   SidebarFilter,
+  FilterButton,
   type CheckboxFilterProps,
   type LabelFilterProps,
   type RangeFilterProps,
-  type SidebarFilterProps
+  type SidebarFilterProps,
+  type FilterButtonProps
 } from "./Filter";
 export { default as FontPicker, type FontPickerProps } from "./FontPicker";
 export { default as FontStyle, type FontStyleProps } from "./FontStyle";
