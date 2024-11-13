@@ -86,7 +86,7 @@ export function SidebarFilter({
                   onClick={onClear}
                   data-testid="filter-clear-button"
                 >
-                  CLEAR ALL FILTER
+                  CLEAR ALL FILTERS
                 </Button>
               </Stack>
             </>
