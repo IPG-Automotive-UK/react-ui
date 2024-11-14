@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 
 import ModelButton from "./ModelButton";
 import React from "react";
+import { alpha } from "@mui/material";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 
@@ -48,6 +49,61 @@ describe("ModelButton", () => {
     expect(svgElement).toHaveAttribute("stroke", color);
     expect(svgElement).toHaveAttribute("stroke-width", "2");
   });
+
+  // test when no status property applied, icon is not rendered
+  test("does show status icon", () => {
+    render(<ModelButton />);
+    const successIcon = screen.queryByTestId("success-icon");
+    const warningIcon = screen.queryByTestId("warning-icon");
+    const errorIcon = screen.queryByTestId("error-icon");
+    expect(successIcon).not.toBeInTheDocument();
+    expect(warningIcon).not.toBeInTheDocument();
+    expect(errorIcon).not.toBeInTheDocument();
+  });
+
+  // test status icon is correctly set
+  test.each([
+    ["error", "rgb(211, 47, 47)"],
+    ["warning", "rgb(237, 108, 2)"],
+    ["success", "rgb(46, 125, 50)"]
+  ] as const)(
+    "renders correct status icon based on the status",
+    (status, color) => {
+      render(<ModelButton status={status} />);
+      const currentStatusIcon = screen.getByTestId(`${status}-icon`);
+      expect(currentStatusIcon).toBeInTheDocument();
+      expect(window.getComputedStyle(currentStatusIcon).color).toEqual(color);
+    }
+  );
+
+  // test background is correctly set to IconButton when status is other than 'none'
+  test.each([
+    ["error", "rgba(211, 47, 47)"],
+    ["warning", "rgb(237, 108, 2)"],
+    ["success", "rgb(46, 125, 50)"]
+  ] as const)(
+    "renders correct background based on the status",
+    (status, color) => {
+      render(<ModelButton status={status} />);
+      const svgElement = screen.getByTestId("background");
+      expect(svgElement).toHaveAttribute("fill", alpha(color, 0.04));
+    }
+  );
+
+  // test when no status property is passed, status background is not added to icon button
+  test.each([
+    ["rgba(211, 47, 47)"],
+    ["rgb(237, 108, 2)"],
+    ["rgb(46, 125, 50)"]
+  ] as const)(
+    "does not apply one of the status backgrounds color to the svg fill",
+    color => {
+      render(<ModelButton />);
+      const svgElement = screen.queryByTestId("background");
+      expect(svgElement).toBeInTheDocument();
+      expect(svgElement).not.toHaveAttribute("fill", alpha(color, 0.04));
+    }
+  );
 
   // test that popup button is not shown when no children are provided
   test("does not show popup button when no children are provided", () => {
