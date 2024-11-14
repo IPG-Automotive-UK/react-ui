@@ -149,7 +149,7 @@ export const Selected = {
   render: Template
 };
 
-export const MultiselectWithGate = {
+export const MultipleSelection = {
   args: {
     flexDirection: "column",
     flexWrap: "nowrap",

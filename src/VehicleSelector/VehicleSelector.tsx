@@ -7,6 +7,7 @@ import { uniqueSortedArray } from "../utils/common";
 // component to select a vehicle
 function VehicleSelector({
   flexDirection = "column",
+  limitTags = 1,
   flexWrap = "nowrap",
   gates = [],
   multipleSelection = false,
@@ -123,10 +124,12 @@ function VehicleSelector({
       </Box>
       <Box flex="40%">
         <Autocomplete
+          disableCloseOnSelect={multipleSelection}
+          limitTags={limitTags}
           disabled={selectedModelYear === null || selectedModelYear === ""}
           label="Vehicle Variant"
+          multiple={multipleSelection}
           required
-          multiple={false}
           options={allVariants}
           onChange={(_event, value) => {
             if (value) {
@@ -187,7 +190,7 @@ function VehicleSelector({
             }
           }}
           size={size}
-          value={selectedVariants.length > 0 ? selectedVariants[0] : ""}
+          value={selectedVariants}
         />
       </Box>
 
@@ -201,6 +204,7 @@ function VehicleSelector({
             required={gates.length > 0}
             multiple={multipleSelection}
             label="Gate"
+            limitTags={limitTags}
             options={gates}
             onChange={(_event, value) => {
               const newVehicles = variants.filter(

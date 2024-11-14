@@ -2,68 +2,260 @@ import {
   Box,
   Button,
   Checkbox,
-  IconButton,
-  InputBase,
   List,
   ListItem,
-  ListItemIcon,
   ListItemText,
   Typography
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
-
-import CloseIcon from "@mui/icons-material/Close";
-import DeletableList from "../DeletableList/DeletableList";
-import SearchIcon from "@mui/icons-material/Search";
-import { TransferListProps } from "./TransferList.types";
+import React, { useLayoutEffect, useState } from "react";
+import SearchBar, { SearchBarProps } from "../SearchBar";
+import {
+  SingleListProps,
+  TransferListItem,
+  TransferListProps
+} from "./TransferList.types";
 
 export default function TransferList({
+  defaultSelectedItems,
   items = [],
-  onChange = () => null,
-  selectedItems = []
+  onChange,
+  selectedItems,
+  sourceListLabel,
+  targetListLabel
 }: TransferListProps) {
-  // search state
-  const [filteredItems, setFilteredItems] = useState<string[]>([]);
-  const [search, setSearch] = useState("");
+  // All checked item keys
+  const [checked, setChecked] = useState<string[]>([]);
 
-  // update filtered items when search state changes
-  useEffect(() => {
-    if (search.length === 0) {
-      // no search so show all items
-      setFilteredItems(items);
+  // Source list search filter
+  const [sourceFilter, setSourceFilter] = useState<string>("");
+
+  // Target list search filter
+  const [targetFilter, setTargetFilter] = useState<string>("");
+
+  // All item keys
+  const [selectedItemKeys, setSelectedItemKeys] = useState<string[]>(
+    defaultSelectedItems || []
+  );
+
+  /**
+   * useEffect unselects items in the controlled component
+   */
+  useLayoutEffect(() => {
+    setChecked([]);
+  }, [selectedItems]);
+
+  /**
+   * Get primary label from item
+   **/
+  const getPrimaryLabel = (item: TransferListItem | string) => {
+    // Return a primary label
+    if (typeof item === "string") {
+      return item;
     } else {
-      // only show items that contain the search
-      setFilteredItems(
-        items.filter(item => item.toLowerCase().includes(search.toLowerCase()))
-      );
+      return item.primaryLabel;
     }
-  }, [items, search]);
-
-  // handle search change
-  const handleSearch = (event: {
-    target: {
-      value: string;
-    };
-  }) => {
-    setSearch(event.target.value);
   };
 
-  // handle list item toggle
+  /**
+   * Get secondary label from item
+   **/
+  const getSecondaryLabel = (item: TransferListItem | string) => {
+    // Return a primary label
+    if (typeof item !== "string") {
+      return item.secondaryLabel;
+    }
+  };
+
+  /**
+   * Get key from from item
+   **/
+  const filterKey = (item: TransferListItem | string) => {
+    // If item is a string return it as an id
+    if (typeof item === "string") {
+      return item;
+    }
+
+    return item.key;
+  };
+
+  // Keys to be used for updates
+  const keys = selectedItems || selectedItemKeys;
+
+  /**
+   * Source list logic
+   */
+
+  // All source items
+  const allSourceItems = items.filter(item => !keys.includes(filterKey(item)));
+
+  // Filtered source items
+  const filteredSourceItems = allSourceItems.filter(item =>
+    getPrimaryLabel(item).toLowerCase().includes(sourceFilter.toLowerCase())
+  );
+
+  // All checked source list items
+  const sourceItemsToTransfer = checked.filter(item => !keys.includes(item));
+
+  // Boolean to indicate if all items are checked
+  const allSourceItemsChecked =
+    allSourceItems.length === sourceItemsToTransfer.length;
+
+  /**
+   * Target list logic
+   */
+
+  // All target items
+  const allTargetItems = items.filter(item => keys.includes(filterKey(item)));
+
+  // Filtered target items
+  const filteredTargetItems = allTargetItems.filter(item =>
+    getPrimaryLabel(item).toLowerCase().includes(targetFilter.toLowerCase())
+  );
+
+  // All checked target list items
+  const targetItemsToTransfer = checked.filter(item => keys.includes(item));
+
+  // Boolean to indicate if all target items are checked
+  const allTargetItemsChecked =
+    allTargetItems.length === targetItemsToTransfer.length;
+
+  /**
+   * Handle check all items in the source list
+   */
+  const handleCheckAllSource = () => {
+    // If all source items are checked, uncheck them
+    // Otherwise, check all source items
+    allSourceItemsChecked
+      ? setChecked(
+          checked.filter(item => !sourceItemsToTransfer.includes(item))
+        )
+      : setChecked([
+          ...checked.filter(item => !sourceItemsToTransfer.includes(item)),
+          ...items
+            .map(item => filterKey(item))
+            .filter(item => !keys.includes(item))
+        ]);
+  };
+
+  /**
+   * Handle check all items in the target list
+   */
+  const handleCheckAllTarget = () => {
+    // If all target items are checked, uncheck them
+    // Otherwise, check all target items
+    allTargetItemsChecked
+      ? setChecked(
+          checked.filter(item => !targetItemsToTransfer.includes(item))
+        )
+      : setChecked([
+          ...checked.filter(item => !targetItemsToTransfer.includes(item)),
+          ...items
+            .map(item => filterKey(item))
+            .filter(item => keys.includes(item))
+        ]);
+  };
+
+  /**
+   * Determine with items are an array of objects or strings
+   */
+  const itemsAreStrings = (
+    items: string[] | TransferListItem[]
+  ): items is string[] => {
+    return items.every(item => typeof item === "string");
+  };
+
+  /**
+   * Get transferred items
+   */
+  const getTransferredItems = (
+    items: string[] | TransferListItem[],
+    selectedKeys: string[]
+  ) => {
+    // Return transferred items if they are strings or objects
+    if (itemsAreStrings(items)) {
+      return items.filter(item => selectedKeys.includes(item));
+    } else {
+      return items.filter(item => selectedKeys.includes(item.key));
+    }
+  };
+
+  /**
+   * Transfer items to the target list
+   */
+  const transferToTarget = () => {
+    // Get checked source items
+    const checkedSourceItems = checked.filter(item => !keys.includes(item));
+
+    // Updated target list keys
+    const updatedTargetList = [...keys, ...checkedSourceItems];
+
+    // Get the items that have been transferred
+    const updatedSelectedItems = getTransferredItems(items, updatedTargetList);
+
+    // Call the onChange callback
+    onChange && onChange(updatedSelectedItems);
+
+    // If component is controlled, end the function
+    if (selectedItems) {
+      return;
+    }
+
+    // Add the checked items to the target list
+    setSelectedItemKeys(updatedTargetList);
+
+    // Uncheck all items
+    setChecked([]);
+  };
+
+  /**
+   * Transfer items to the source list
+   */
+  const transferToSource = () => {
+    // Target item selection
+    const newTargetSelection = keys.filter(
+      item => !targetItemsToTransfer.includes(item)
+    );
+
+    // Get the items that have been transferred
+    const updatedSelectedItems = getTransferredItems(items, newTargetSelection);
+
+    // Call the onChange callback
+    onChange && onChange(updatedSelectedItems);
+
+    // If component is controlled, end the function
+    if (selectedItems) {
+      return;
+    }
+
+    // Remove the checked items from the target list
+    setSelectedItemKeys(newTargetSelection);
+
+    // Uncheck all items
+    setChecked([]);
+  };
+
+  /**
+   * Handle toggle of item checkboxes
+   */
   const handleToggle = (value: string) => {
-    const currentIndex = selectedItems.indexOf(value);
-    const newSelectedItems = [...selectedItems];
+    // Current index of the item
+    const currentIndex = checked.indexOf(value);
+    // New checked items
+    const newChecked = [...checked];
+    // If the item is not checked, add it to the list
     if (currentIndex === -1) {
-      newSelectedItems.push(value);
+      newChecked.push(value);
     } else {
-      newSelectedItems.splice(currentIndex, 1);
+      // If the item is checked, remove it from the list
+      newChecked.splice(currentIndex, 1);
     }
-    onChange(newSelectedItems.sort());
+    // Update the checked items
+    setChecked(newChecked);
   };
-  // define list components
+
   return (
     <Box
       sx={{
-        border: theme => `1px solid ${theme.palette.divider}`,
         display: "flex",
         height: "100%",
         width: "100%"
@@ -71,6 +263,9 @@ export default function TransferList({
     >
       <Box
         sx={{
+          backgroundColor: "background.paper",
+          border: theme => `1px solid ${theme.palette.divider}`,
+          borderRadius: 1,
           display: "flex",
           flexDirection: "column",
           height: "100%",
@@ -79,74 +274,106 @@ export default function TransferList({
       >
         <Box
           sx={{
+            alignItems: "center",
             borderBottom: theme => `1px solid ${theme.palette.divider}`,
-            borderRight: theme => `1px solid ${theme.palette.divider}`,
             display: "flex",
-            height: "50px",
-            width: "100%"
+            px: 2,
+            py: 1.5
           }}
         >
-          <InputBase
-            placeholder="Search..."
-            value={search}
-            onChange={handleSearch}
-            sx={{ flex: 1, pl: 1, pt: 0.5 }}
+          <Checkbox
+            aria-label="select all source list items"
+            checked={sourceItemsToTransfer.length > 0}
+            disabled={allSourceItems.length === 0}
+            disableRipple
+            indeterminate={
+              sourceItemsToTransfer.length > 0 &&
+              allSourceItems.length !== sourceItemsToTransfer.length
+            }
+            onClick={handleCheckAllSource}
+            sx={{ pl: 1 }}
           />
-          {search.length > 0 ? (
-            <IconButton
-              onClick={() => setSearch("")}
-              sx={{ padding: theme => theme.spacing(1) }}
-            >
-              <CloseIcon />
-            </IconButton>
-          ) : (
-            <SearchIcon
-              color="action"
-              sx={{ margin: theme => theme.spacing(1) }}
-            />
-          )}
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              pl: 1
+            }}
+          >
+            <Typography id="source-list-label" variant="body1">
+              {sourceListLabel}
+            </Typography>
+            <Typography
+              variant="body2"
+              sx={{ color: "text.secondary" }}
+            >{`${sourceItemsToTransfer.length}/${allSourceItems.length} selected`}</Typography>
+          </Box>
         </Box>
+
+        {allSourceItems.length > 0 ? (
+          <Box sx={{ px: 3 }}>
+            <Search onChange={setSourceFilter} />
+          </Box>
+        ) : null}
+
         <Box
           sx={{
-            borderRight: theme => `1px solid ${theme.palette.divider}`,
             height: "100%",
             overflowX: "hidden",
             overflowY: "auto",
-            width: "100%"
+            px: 2
           }}
         >
-          <Box
-            sx={{
-              width: "100%"
-            }}
-          >
-            <List dense component="div" role="list">
-              {filteredItems.map(value => {
-                return (
-                  <ListItem
-                    key={value}
-                    role="listitem1"
-                    button
-                    onClick={() => handleToggle(value)}
-                    disablePadding
-                  >
-                    <ListItemIcon>
-                      <Checkbox
-                        checked={selectedItems.indexOf(value) !== -1}
-                        disableRipple
-                      />
-                    </ListItemIcon>
-                    <ListItemText primary={value} />
-                  </ListItem>
-                );
-              })}
-              <ListItem />
-            </List>
-          </Box>
+          <SingleList
+            checked={sourceItemsToTransfer}
+            id="source-list"
+            items={filteredSourceItems.map(item => ({
+              key: filterKey(item),
+              primaryLabel: getPrimaryLabel(item),
+              secondaryLabel: getSecondaryLabel(item)
+            }))}
+            handleToggle={handleToggle}
+          />
         </Box>
       </Box>
+
+      <Box
+        height="100%"
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        flexGrow={1}
+        p={2}
+      >
+        <Button
+          aria-label={"transfer to target list"}
+          variant="outlined"
+          size="small"
+          sx={{ m: 0.5 }}
+          onClick={transferToTarget}
+          disabled={sourceItemsToTransfer.length === 0}
+        >
+          &gt;
+        </Button>
+        <Button
+          aria-label={"transfer to source list"}
+          variant="outlined"
+          size="small"
+          sx={{ m: 0.5 }}
+          onClick={transferToSource}
+          disabled={targetItemsToTransfer.length === 0}
+        >
+          &lt;
+        </Button>
+      </Box>
+
       <Box
         sx={{
+          backgroundColor: "background.paper",
+          border: theme => `1px solid ${theme.palette.divider}`,
+          borderRadius: 1,
           display: "flex",
           flexDirection: "column",
           height: "100%",
@@ -155,51 +382,129 @@ export default function TransferList({
       >
         <Box
           sx={{
+            alignItems: "center",
             borderBottom: theme => `1px solid ${theme.palette.divider}`,
-            disply: "flex",
-            flexDirection: "column",
-            height: "50px",
-            position: "relative",
-            width: "100%"
+            display: "flex",
+            px: 2,
+            py: 1.5
           }}
         >
-          {selectedItems.length === 0 ? (
-            <Typography data-testid="none-selected" sx={{ pl: 1, pt: 1 }}>
-              None Selected
+          <Checkbox
+            aria-label="select all target list items"
+            checked={targetItemsToTransfer.length > 0}
+            disabled={allTargetItems.length === 0}
+            disableRipple
+            indeterminate={
+              targetItemsToTransfer.length > 0 &&
+              allTargetItems.length !== targetItemsToTransfer.length
+            }
+            onClick={handleCheckAllTarget}
+            sx={{ pl: 1 }}
+          />
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              pl: 1
+            }}
+          >
+            <Typography id="target-list-label" variant="body1">
+              {targetListLabel}
             </Typography>
-          ) : (
-            <Box>
-              <Typography sx={{ pl: 1, pt: 1 }}>
-                {`${selectedItems.length} selected`}
-              </Typography>
-              <Button
-                data-testid="clear-all-button"
-                variant="text"
-                sx={{ position: "absolute", right: 2, top: 2 }}
-                onClick={() => onChange([])}
-              >
-                Clear All
-              </Button>
-            </Box>
-          )}
+            <Typography
+              variant="body2"
+              sx={{ color: "text.secondary" }}
+            >{`${targetItemsToTransfer.length}/${allTargetItems.length} selected`}</Typography>
+          </Box>
         </Box>
+
+        {allTargetItems.length > 0 ? (
+          <Box sx={{ px: 3 }}>
+            <Search onChange={setTargetFilter} />
+          </Box>
+        ) : null}
+
         <Box
           sx={{
             height: "100%",
             overflowX: "hidden",
             overflowY: "auto",
-            width: "100%"
+            px: 2
           }}
         >
-          <Box
-            sx={{
-              width: "100%"
-            }}
-          >
-            <DeletableList items={selectedItems} onDelete={handleToggle} />
+          <Box>
+            <SingleList
+              checked={targetItemsToTransfer}
+              id="target-list"
+              items={filteredTargetItems.map(item => ({
+                key: filterKey(item),
+                primaryLabel: getPrimaryLabel(item),
+                secondaryLabel: getSecondaryLabel(item)
+              }))}
+              handleToggle={handleToggle}
+            />
           </Box>
         </Box>
       </Box>
+    </Box>
+  );
+}
+
+/**
+ * Search bar for the transfer list
+ */
+const Search = ({ onChange }: { onChange: (value: string) => void }) => {
+  const [search, setSearch] = useState("");
+
+  // handle change
+  const handleChange: SearchBarProps["onChange"] = event => {
+    setSearch(event.target.value);
+    onChange(event.target.value);
+  };
+
+  return (
+    <Box
+      sx={{
+        alignItems: "center",
+        display: "flex",
+        width: "100%"
+      }}
+    >
+      <SearchBar value={search} onChange={handleChange} />
+    </Box>
+  );
+};
+
+/**
+ * Single list component for the transfer list
+ */
+function SingleList({ checked, id, items, handleToggle }: SingleListProps) {
+  return (
+    <Box
+      sx={{
+        width: "100%"
+      }}
+    >
+      <List aria-labelledby={`${id}-label`} dense sx={{ py: 0 }}>
+        {items.map(item => {
+          return (
+            <ListItem
+              key={item.key}
+              sx={{ py: 0.5 }}
+              onClick={() => handleToggle(item.key)}
+              disablePadding
+            >
+              <Checkbox checked={checked.includes(item.key)} disableRipple />
+              <ListItemText
+                sx={{ pl: 1, wordBreak: "break-word" }}
+                primary={item.primaryLabel}
+                secondary={item.secondaryLabel}
+              />
+            </ListItem>
+          );
+        })}
+      </List>
     </Box>
   );
 }

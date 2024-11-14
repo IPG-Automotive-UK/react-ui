@@ -32,7 +32,8 @@ export const Default = {
     count: {
       running: 2,
       completed: 3,
-      aborted: 1
+      aborted: 1,
+      aborting: 2
     }
   },
   render: Template
@@ -50,6 +51,7 @@ export const AllStatuses = {
       completed: 4,
       errored: 1,
       aborted: 2,
+      aborting: 2,
       ready: 1
     }
   },
@@ -95,7 +97,8 @@ export const WithGridLayout = {
     count: {
       running: 2,
       completed: 4,
-      aborted: 1
+      aborted: 1,
+      aborting: 2
     }
   },
   render: GridTemplate
