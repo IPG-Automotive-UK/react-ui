@@ -31,13 +31,6 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Run tests
         run: pnpm run test:docker
-      - name: Modify coverage report
-        run: |
-          # Replace /usr/src/react-ui/ with the current working directory in all coverage reports files
-          sudo chmod -R 777 test-artifacts/coverage
-          for file in test-artifacts/coverage/coverage-summary.json test-artifacts/coverage/coverage-final.json; do
-            sed -i "s#/usr/src/react-ui#$(pwd)#g" "$file"
-          done
       - name: "Report coverage"
         uses: davelosert/vitest-coverage-report-action@v2
         if: always()
@@ -45,3 +38,4 @@ jobs:
           file-coverage-mode: all
           json-summary-path: test-artifacts/coverage/coverage-summary.json
           json-final-path: test-artifacts/coverage/coverage-final.json
+          file-coverage-root-path: /usr/src/react-ui/
