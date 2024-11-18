@@ -1,14 +1,10 @@
-import {
-  Button,
-  Divider,
-  Drawer,
-  IconButton,
-  Stack,
-  Typography
-} from "@mui/material";
-import { Close, FilterList } from "@mui/icons-material";
-import { FilterButtonProps, SidebarFilterProps } from "./SidebarFilter.types";
+import { Divider, Drawer, IconButton, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
+
+import { ClearFilterButton } from "../ClearFilterButton";
+import { Close } from "@mui/icons-material";
+import { SetFilterButton } from "../SetFilterButton";
+import { SidebarFilterProps } from "./SidebarFilter.types";
 
 /**
  * SidebarFilter component that displays a filter in the sidebar
@@ -23,7 +19,7 @@ export function SidebarFilter({
 
   return (
     <>
-      <FilterButton
+      <SetFilterButton
         count={count}
         label="Filters"
         onClick={() => setOpen(true)}
@@ -72,56 +68,11 @@ export function SidebarFilter({
           {count > 0 ? (
             <>
               <Divider />
-              <Stack
-                sx={{
-                  alignItems: "center",
-                  px: 3,
-                  py: 1.5
-                }}
-              >
-                <Button
-                  sx={{ width: "fit-content" }}
-                  onClick={onClear}
-                  data-testid="filter-clear-button"
-                >
-                  CLEAR ALL FILTER
-                </Button>
-              </Stack>
+              <ClearFilterButton onClick={onClear} />
             </>
           ) : null}
         </Stack>
       </Drawer>
     </>
-  );
-}
-
-/**
- * A button that represents a filter state. It accepts an onClick callback, and renders a label and a filter count.
- */
-function FilterButton({ onClick, count, label, ...props }: FilterButtonProps) {
-  // filter button label, with count if available (e.g. "Filters (3)")
-  const displayLabel = count > 0 ? `${label} (${count})` : `${label}`;
-  // color of the icon and text based on the filter count
-  const iconColor = count > 0 ? "primary" : "action";
-  const textColor = count > 0 ? "primary" : "textSecondary";
-  return (
-    <Button
-      data-testid="filter-open-button"
-      sx={{ width: "fit-content" }}
-      disableRipple
-      onClick={onClick}
-      {...props}
-    >
-      <FilterList color={iconColor} />
-      <Typography
-        variant="button"
-        flexGrow={1}
-        ml={1}
-        color={textColor}
-        data-testid="filter-open-text"
-      >
-        {displayLabel}
-      </Typography>
-    </Button>
   );
 }
