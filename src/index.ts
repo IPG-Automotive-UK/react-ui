@@ -113,7 +113,11 @@ export {
   type MultiLabelPopoverProps
 } from "./MultiLabelPopover";
 export { default as MultiText, type MultiTextProps } from "./MultiText";
-export { default as NumberField, type NumberFieldProps } from "./NumberField";
+export {
+  default as NumberField,
+  type NumberFieldProps,
+  type NumberFieldChangeEvent
+} from "./NumberField";
 export {
   default as PasswordChangeDialog,
   type PasswordChangeDialogProps

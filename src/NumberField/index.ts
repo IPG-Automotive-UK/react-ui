@@ -1,2 +1,5 @@
 export { default } from "./NumberField";
-export type { NumberFieldProps } from "./NumberField.types";
+export type {
+  NumberFieldProps,
+  NumberFieldChangeEvent
+} from "./NumberField.types";

@@ -1,6 +1,6 @@
 import { TextFieldProps } from "@mui/material";
 
-type NumberFieldChangeEvent = Omit<
+export type NumberFieldChangeEvent = Omit<
   React.ChangeEvent<HTMLInputElement>,
   "target"
 > & {
