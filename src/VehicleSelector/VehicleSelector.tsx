@@ -6,6 +6,7 @@ import { uniqueSortedArray } from "../utils/common";
 
 // component to select a vehicle
 function VehicleSelector({
+  disabled = false,
   flexDirection = "column",
   limitTags = 1,
   flexWrap = "nowrap",
@@ -83,6 +84,7 @@ function VehicleSelector({
           required
           multiple={false}
           options={allProjects}
+          disabled={disabled}
           onChange={(_event, value) => {
             const newValue = value === null ? "" : value;
             onChange([
@@ -101,7 +103,9 @@ function VehicleSelector({
       </Box>
       <Box flex="40%">
         <Autocomplete
-          disabled={selectedProject === null || selectedProject === ""}
+          disabled={
+            selectedProject === null || selectedProject === "" || disabled
+          }
           label="Model Year"
           required
           multiple={false}
@@ -126,7 +130,9 @@ function VehicleSelector({
         <Autocomplete
           disableCloseOnSelect={multipleSelection}
           limitTags={limitTags}
-          disabled={selectedModelYear === null || selectedModelYear === ""}
+          disabled={
+            selectedModelYear === null || selectedModelYear === "" || disabled
+          }
           label="Vehicle Variant"
           multiple={multipleSelection}
           required
@@ -199,7 +205,9 @@ function VehicleSelector({
           <Autocomplete
             disableCloseOnSelect={multipleSelection}
             disabled={
-              selectedVariants === null || selectedVariants.length === 0
+              selectedVariants === null ||
+              selectedVariants.length === 0 ||
+              disabled
             }
             required={gates.length > 0}
             multiple={multipleSelection}

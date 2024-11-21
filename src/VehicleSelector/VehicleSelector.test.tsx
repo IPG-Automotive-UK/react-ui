@@ -231,4 +231,18 @@ describe("VehicleSelector", () => {
     expect(screen.getByRole("button", { name: /NN/i })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /JS/i })).toBeInTheDocument();
   });
+
+  it("disbale autocomplete when disabled is true", () => {
+    render(<VehicleSelectorWithState {...defaultProps} disabled={true} />);
+    expect(
+      screen.getByRole("combobox", { name: /project code/i })
+    ).toBeDisabled();
+    expect(
+      screen.getByRole("combobox", { name: /model year/i })
+    ).toBeDisabled();
+    expect(
+      screen.getByRole("combobox", { name: /vehicle variant/i })
+    ).toBeDisabled();
+    expect(screen.getByRole("combobox", { name: /gate/i })).toBeDisabled();
+  });
 });
