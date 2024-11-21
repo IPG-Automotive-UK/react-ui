@@ -87,9 +87,10 @@ function Header({
               letterSpacing="0.05em"
               textTransform="uppercase"
               fontWeight="700"
-              color={theme =>
-                theme.palette.mode === "dark" ? "#003063" : "white"
-              }
+              sx={{
+                color: theme =>
+                  theme.palette.mode === "dark" ? "#003063" : "white"
+              }}
             >
               {`.`}
               <span style={{ marginLeft: "7px" }}>{appName}</span>

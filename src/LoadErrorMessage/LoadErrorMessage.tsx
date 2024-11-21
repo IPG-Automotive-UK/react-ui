@@ -69,7 +69,9 @@ const LoadErrorMessage = ({
         variant="h6"
         fontWeight="600"
         textAlign="center"
-        color={theme => theme.palette.error.main}
+        sx={{
+          color: theme => theme.palette.error.main
+        }}
       >
         {title}
       </Typography>
@@ -77,11 +79,12 @@ const LoadErrorMessage = ({
       <Typography
         variant="body2"
         textAlign="center"
-        color={theme =>
-          theme.palette.mode === "dark"
-            ? lighten(theme.palette.text.secondary, 0.7)
-            : theme.palette.text.primary
-        }
+        sx={{
+          color: theme =>
+            theme.palette.mode === "dark"
+              ? lighten(theme.palette.text.secondary, 0.7)
+              : theme.palette.text.primary
+        }}
       >
         {message}
       </Typography>
@@ -97,8 +100,10 @@ const LoadErrorMessage = ({
           {/* Render the "Hide More Details" text */}
           <Typography
             variant="body2"
-            color={theme => theme.palette.primary.main}
-            sx={{ cursor: "pointer" }}
+            sx={{
+              color: theme => theme.palette.primary.main,
+              cursor: "pointer"
+            }}
             onClick={handleDetailsClick}
           >
             Hide More Details
@@ -114,8 +119,10 @@ const LoadErrorMessage = ({
       {errorDetails && !detailsVisible && (
         <Typography
           variant="body2"
-          color={theme => theme.palette.primary.main}
-          sx={{ cursor: "pointer" }}
+          sx={{
+            color: theme => theme.palette.primary.main,
+            cursor: "pointer"
+          }}
           onClick={handleDetailsClick}
         >
           View More Details
@@ -125,11 +132,12 @@ const LoadErrorMessage = ({
       {contactTeam !== "none" ? (
         <Typography
           variant="caption"
-          color={theme =>
-            theme.palette.mode === "dark"
-              ? lighten(theme.palette.text.secondary, 0.7)
-              : theme.palette.text.primary
-          }
+          sx={{
+            color: theme =>
+              theme.palette.mode === "dark"
+                ? lighten(theme.palette.text.secondary, 0.7)
+                : theme.palette.text.primary
+          }}
         >
           If this persists, contact {/* Render the contact team link */}
           {contactUrl ? (

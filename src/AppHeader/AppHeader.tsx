@@ -41,9 +41,10 @@ function AppHeader({
               lineHeight="34px"
               letterSpacing="0.05em"
               fontWeight="600"
-              color={theme =>
-                theme.palette.mode === "dark" ? "#003063" : "white"
-              }
+              sx={{
+                color: theme =>
+                  theme.palette.mode === "dark" ? "#003063" : "white"
+              }}
             >
               <span>{appName}</span>
             </Typography>
