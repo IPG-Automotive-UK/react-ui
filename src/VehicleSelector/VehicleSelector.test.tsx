@@ -232,7 +232,7 @@ describe("VehicleSelector", () => {
     expect(screen.getByRole("button", { name: /JS/i })).toBeInTheDocument();
   });
 
-  it("disbale autocomplete when disabled is true", () => {
+  it("disbale all autocomplete when the disabled prop is true", () => {
     render(<VehicleSelectorWithState {...defaultProps} disabled={true} />);
     expect(
       screen.getByRole("combobox", { name: /project code/i })
