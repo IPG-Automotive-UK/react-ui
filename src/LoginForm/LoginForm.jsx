@@ -1,4 +1,11 @@
-import { Box, Button, CircularProgress, Grid, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Grid2 as Grid,
+  TextField
+} from "@mui/material";
+
 import PropTypes from "prop-types";
 import React from "react";
 import { useMaterialForm } from "../utils/form";
@@ -18,7 +25,7 @@ export default function LoginForm({ loading = false, onLogin = () => {} }) {
   return (
     <form onSubmit={handleSubmit(onLogin)} noValidate>
       <Grid container spacing={2}>
-        <Grid item xs={12}>
+        <Grid size={12}>
           <TextField
             variant="outlined"
             required
@@ -26,7 +33,7 @@ export default function LoginForm({ loading = false, onLogin = () => {} }) {
             label="Email Address"
             autoComplete="username"
             autoFocus={!loading}
-            inputProps={{ "aria-label": "email" }}
+            slotProps={{ input: { "aria-label": "email" } }}
             error={Boolean(errors.email)}
             helperText={errors.email && errors.email.message}
             disabled={loading}
@@ -40,7 +47,7 @@ export default function LoginForm({ loading = false, onLogin = () => {} }) {
             })}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>
           <TextField
             variant="outlined"
             required
@@ -48,7 +55,7 @@ export default function LoginForm({ loading = false, onLogin = () => {} }) {
             label="Password"
             type="password"
             autoComplete="current-password"
-            inputProps={{ "aria-label": "password" }}
+            slotProps={{ input: { "aria-label": "password" } }}
             error={Boolean(errors.password)}
             disabled={loading}
             {...register("password", { required: true })}
