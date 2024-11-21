@@ -34,7 +34,7 @@
   "devDependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
-    "@mui/material": "^5.16.4",
+    "@mui/material": "^6.0.0",
     "@mui/x-data-grid-generator": "^7.10.0",
     "@playwright/test": "^1.45.2",
     "@storybook/addon-actions": "^8.2.6",
@@ -101,7 +101,7 @@
   },
   "dependencies": {
     "@juggle/resize-observer": "^3.4.0",
-    "@mui/icons-material": "^5.16.4",
+    "@mui/icons-material": "^6.0.0",
     "@mui/x-data-grid": "^7.10.0",
     "@mui/x-tree-view": "^7.10.0",
     "@types/css-mediaquery": "^0.1.4",
@@ -125,7 +125,7 @@
   "peerDependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
-    "@mui/material": "^5.15.14",
+    "@mui/material": "^6.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
