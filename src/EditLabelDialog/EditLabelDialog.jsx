@@ -6,7 +6,7 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  Grid,
+  Grid2 as Grid,
   TextField,
   Typography
 } from "@mui/material";
@@ -143,34 +143,30 @@ export default function EditLabelDialog({
       <DialogTitle onClose={handleClose}>{title}</DialogTitle>
       <DialogContent dividers>
         <Grid container spacing={2}>
-          <Grid item xs={12}>
+          <Grid size={12}>
             <TextField
               label="Label Name"
               variant="outlined"
               required
               fullWidth
-              InputLabelProps={{
-                shrink: true
-              }}
+              slotProps={{ inputLabel: { shrink: true } }}
               value={name}
               onChange={event => setName(event.target.value)}
               error={!isLabelNameValid || !isLabelLengthValid}
               helperText={nameErrorMessage()}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid size={12}>
             <TextField
               label="Label Description"
               variant="outlined"
               fullWidth
-              InputLabelProps={{
-                shrink: true
-              }}
+              slotProps={{ inputLabel: { shrink: true } }}
               value={description}
               onChange={event => setDescription(event.target.value)}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid size={12}>
             <Typography
               sx={{
                 color: theme => theme.palette.text.secondary,
@@ -182,14 +178,14 @@ export default function EditLabelDialog({
               Label Color *
             </Typography>
           </Grid>
-          <Grid item xs={12}>
+          <Grid size={12}>
             <Color
               value={color}
               onChange={color => setColor(color)}
               showNoColor={false}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid size={12}>
             <Box width="100%" display="flex" justifyContent="center">
               {name ? (
                 <LabelChip label={name} color={color} size="small" />
