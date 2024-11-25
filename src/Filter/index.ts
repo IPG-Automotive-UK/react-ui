@@ -4,8 +4,10 @@ export {
 } from "./CheckboxFilter";
 export { default as LabelFilter, type LabelFilterProps } from "./LabelFilter";
 export { default as RangeFilter, type RangeFilterProps } from "./RangeFilter";
+
+export { SidebarFilter, type SidebarFilterProps } from "./SidebarFilter";
+export { SetFilterButton, type SetFilterButtonProps } from "./SetFilterButton";
 export {
-  default as FilterPopper,
-  type FilterPopperProps
-} from "./FilterPopper";
-export { default as FilterStack, type FilterStackProps } from "./FilterStack";
+  ClearFilterButton,
+  type ClearFilterButtonProps
+} from "./ClearFilterButton";
