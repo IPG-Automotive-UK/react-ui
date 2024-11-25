@@ -52,12 +52,12 @@ export default function ActionDialog({
             data-testid="close-icon"
             aria-label="close"
             onClick={onCancelClick}
-            sx={{
-              color: theme => theme.palette.grey[500],
+            sx={theme => ({
+              color: theme.palette.grey[500],
               position: "absolute",
               right: 8,
               top: 8
-            }}
+            })}
           >
             <CloseIcon />
           </IconButton>

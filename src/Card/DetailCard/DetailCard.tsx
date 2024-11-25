@@ -142,21 +142,23 @@ function DetailCardHeader({
       >
         <Box sx={{ width: headerContentWidth }}>
           <NoWrapTypography
-            sx={{
-              color: theme =>
-                theme.palette.mode === "dark" ? "white" : "black",
+            sx={theme => ({
+              color: "black",
               fontSize: 20,
-              fontWeight: 700
-            }}
+              fontWeight: 700,
+              ...theme.applyStyles("dark", {
+                color: "white"
+              })
+            })}
           >
             {title}
           </NoWrapTypography>
           <NoWrapTypography
-            sx={{
-              color: theme => theme.palette.text.secondary,
+            sx={theme => ({
+              color: theme.palette.text.secondary,
               fontSize: 14,
               fontWeight: 400
-            }}
+            })}
           >
             {subtitle}
           </NoWrapTypography>

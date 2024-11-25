@@ -13,7 +13,9 @@ const DeletableList = ({
       {items?.map(value => {
         return (
           <ListItem
-            sx={{ py: theme => theme.spacing(1) }}
+            sx={theme => ({
+              py: theme.spacing(1)
+            })}
             divider={true}
             data-testid="deletableList"
             key={value}

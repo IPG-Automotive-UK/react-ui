@@ -69,9 +69,9 @@ const LoadErrorMessage = ({
         variant="h6"
         fontWeight="600"
         textAlign="center"
-        sx={{
-          color: theme => theme.palette.error.main
-        }}
+        sx={theme => ({
+          color: theme.palette.error.main
+        })}
       >
         {title}
       </Typography>
@@ -79,12 +79,12 @@ const LoadErrorMessage = ({
       <Typography
         variant="body2"
         textAlign="center"
-        sx={{
-          color: theme =>
-            theme.palette.mode === "dark"
-              ? lighten(theme.palette.text.secondary, 0.7)
-              : theme.palette.text.primary
-        }}
+        sx={theme => ({
+          color: theme.palette.text.primary,
+          ...theme.applyStyles("dark", {
+            color: lighten(theme.palette.text.secondary, 0.7)
+          })
+        })}
       >
         {message}
       </Typography>
@@ -100,10 +100,10 @@ const LoadErrorMessage = ({
           {/* Render the "Hide More Details" text */}
           <Typography
             variant="body2"
-            sx={{
-              color: theme => theme.palette.primary.main,
+            sx={theme => ({
+              color: theme.palette.primary.main,
               cursor: "pointer"
-            }}
+            })}
             onClick={handleDetailsClick}
           >
             Hide More Details
@@ -114,15 +114,14 @@ const LoadErrorMessage = ({
           </Alert>
         </>
       )}
-
       {/* Render the "View More Details" text if errorDetails isn't empty and detailsVisible state is false */}
       {errorDetails && !detailsVisible && (
         <Typography
           variant="body2"
-          sx={{
-            color: theme => theme.palette.primary.main,
+          sx={theme => ({
+            color: theme.palette.primary.main,
             cursor: "pointer"
-          }}
+          })}
           onClick={handleDetailsClick}
         >
           View More Details
@@ -132,12 +131,12 @@ const LoadErrorMessage = ({
       {contactTeam !== "none" ? (
         <Typography
           variant="caption"
-          sx={{
-            color: theme =>
-              theme.palette.mode === "dark"
-                ? lighten(theme.palette.text.secondary, 0.7)
-                : theme.palette.text.primary
-          }}
+          sx={theme => ({
+            color: theme.palette.text.primary,
+            ...theme.applyStyles("dark", {
+              color: lighten(theme.palette.text.secondary, 0.7)
+            })
+          })}
         >
           If this persists, contact {/* Render the contact team link */}
           {contactUrl ? (

@@ -178,7 +178,9 @@ const MoreActions = (
     <Divider
       orientation="vertical"
       flexItem
-      sx={{ background: theme => theme.palette.primary.main }}
+      sx={theme => ({
+        background: theme.palette.primary.main
+      })}
     />
     <Button
       size="large"

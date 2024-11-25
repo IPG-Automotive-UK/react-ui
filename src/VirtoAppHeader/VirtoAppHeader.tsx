@@ -12,7 +12,6 @@ import React, { Fragment, useState } from "react";
 import AppLauncher from "../AppLauncher";
 import AppsIcon from "@mui/icons-material/Apps";
 import Menu from "@mui/icons-material/Menu";
-import { Theme } from "@mui/material/styles";
 import ToggleColorMode from "../ToggleColorMode";
 import UserMenu from "../UserMenu";
 import { VirtoAppHeaderProps } from "./VirtoAppHeader.types";
@@ -71,13 +70,15 @@ function Header({
             <Link href={virtoLogoLinkUrl} underline="none" display="flex">
               <VirtoLogo
                 data-testid="virto-logo"
-                sx={{
-                  color: (theme: Theme) =>
-                    theme.palette.mode === "dark" ? "#003063" : "white",
+                sx={theme => ({
+                  color: "white",
                   height: 22,
                   mr: 0.4,
-                  width: 110
-                }}
+                  width: 110,
+                  ...theme.applyStyles("dark", {
+                    color: "#003063"
+                  })
+                })}
               />
             </Link>
             <Typography
@@ -87,10 +88,12 @@ function Header({
               letterSpacing="0.05em"
               textTransform="uppercase"
               fontWeight="700"
-              sx={{
-                color: theme =>
-                  theme.palette.mode === "dark" ? "#003063" : "white"
-              }}
+              sx={theme => ({
+                color: "white",
+                ...theme.applyStyles("dark", {
+                  color: "#003063"
+                })
+              })}
             >
               {`.`}
               <span style={{ marginLeft: "7px" }}>{appName}</span>
@@ -154,13 +157,13 @@ function VirtoAppHeader({
         data-testid="app-launcher"
         open={appOpen}
         onClose={() => setAppOpen(false)}
-        sx={{
+        sx={theme => ({
           "& .MuiDrawer-paper": {
-            height: theme => `calc(100% - ${theme.mixins.toolbar.minHeight}px)`,
-            top: theme => theme.mixins.toolbar.minHeight,
+            height: `calc(100% - ${theme.mixins.toolbar.minHeight}px)`,
+            top: theme.mixins.toolbar.minHeight,
             width: applancherWidth
           }
-        }}
+        })}
       >
         <AppLauncher
           baseUrl={baseUrl}

@@ -94,9 +94,9 @@ function Layout({
           flexGrow={1}
           display="flex"
           flexDirection="column"
-          sx={{
-            background: theme => theme.palette.background.default
-          }}
+          sx={theme => ({
+            background: theme.palette.background.default
+          })}
         >
           <Box sx={theme => theme.mixins.toolbar} />
           <Box

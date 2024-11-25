@@ -5,5 +5,11 @@ import React from "react";
  * Divider with specific spacing for usage within Sidebar
  */
 export default function SidebarDivider() {
-  return <Divider sx={{ margin: theme => theme.spacing(1, 0) }} />;
+  return (
+    <Divider
+      sx={theme => ({
+        margin: theme.spacing(1, 0)
+      })}
+    />
+  );
 }
