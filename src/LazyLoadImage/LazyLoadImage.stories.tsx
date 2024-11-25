@@ -143,32 +143,40 @@ const FlexSizeComponent: StoryFn<LazyLoadImageProps> = args => {
           width: "100%"
         }}
       >
-        <NoWrapTypography
-          variant="h5"
+        <Box>
+          <NoWrapTypography
+            variant="h5"
+            sx={{
+              fontWeight: 700
+            }}
+          >
+            {"Example project code"}
+          </NoWrapTypography>
+          <Typography color="text.secondary" variant="body2">
+            11 Prototype
+          </Typography>
+        </Box>
+        <Box
           sx={{
-            fontWeight: 700
+            height: "100%",
+            pt: 1
           }}
         >
-          {"Example project code"}
-        </NoWrapTypography>
-        <Typography color="text.secondary" variant="body2">
-          11 Prototype
-        </Typography>
-        <LazyLoadImage
-          src={"https://picsum.photos/336/197"}
-          alt={"Example project code"}
-          autoFitSkeleton={true}
-          ImgProps={{
-            style: {
-              display: "block",
-              margin: "auto",
-              maxHeight: "142px",
-              objectFit: "cover",
-              paddingTop: 1,
-              width: "100%"
-            }
-          }}
-        />
+          <LazyLoadImage
+            src={"https://picsum.photos/336/197"}
+            alt={"Example project code"}
+            autoFitSkeleton={true}
+            ImgProps={{
+              style: {
+                display: "block",
+                margin: "auto",
+                maxHeight: "142px",
+                objectFit: "cover",
+                width: "100%"
+              }
+            }}
+          />
+        </Box>
       </Box>
     </Grid>
   );
