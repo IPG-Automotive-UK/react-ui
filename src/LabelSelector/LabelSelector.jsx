@@ -188,16 +188,6 @@ export default function LabelSelector({
           const filtered = filter(options, params);
           return filtered;
         }}
-        PaperComponent={props => {
-          return (
-            <CustomPaper
-              addEnabled={addEnabled}
-              setIsLabelDialogOpen={setIsLabelDialogOpen}
-              setLabelDialogTitle={setLabelDialogTitle}
-              {...props}
-            />
-          );
-        }}
         renderOption={(props, option, { selected }) => (
           <Box key={option._id} component="li" {...props}>
             <Stack
@@ -268,6 +258,18 @@ export default function LabelSelector({
           return option._id === value._id;
         }}
         value={value || null}
+        slots={{
+          paper: props => {
+            return (
+              <CustomPaper
+                addEnabled={addEnabled}
+                setIsLabelDialogOpen={setIsLabelDialogOpen}
+                setLabelDialogTitle={setLabelDialogTitle}
+                {...props}
+              />
+            );
+          }
+        }}
       />
       <EditLabelDialog
         isOpen={isLabelDialogOpen !== false}

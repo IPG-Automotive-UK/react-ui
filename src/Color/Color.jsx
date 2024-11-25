@@ -170,11 +170,13 @@ export default function Color({
                 marginRight: theme.spacing(1),
                 width: "33%"
               })}
-              InputLabelProps={{
-                shrink: true
-              }}
               onChange={handleRedChange}
-              inputProps={{ max: 255, min: 0 }}
+              slotProps={{
+                input: { max: 255, min: 0 },
+                inputLabel: {
+                  shrink: true
+                }
+              }}
             />
             <TextField
               data-testid="greenTextField"
@@ -191,11 +193,13 @@ export default function Color({
                 marginRight: theme.spacing(1),
                 width: "33%"
               })}
-              InputLabelProps={{
-                shrink: true
-              }}
               onChange={handleGreenChange}
-              inputProps={{ max: 255, min: 0 }}
+              slotProps={{
+                input: { max: 255, min: 0 },
+                inputLabel: {
+                  shrink: true
+                }
+              }}
             />
             <TextField
               data-testid="blueTextField"
@@ -209,11 +213,13 @@ export default function Color({
               error={rgbaObj.b > 255}
               value={noColorChecked ? "" : rgbaObj.b}
               sx={{ width: "33%" }}
-              InputLabelProps={{
-                shrink: true
-              }}
               onChange={handleBlueChange}
-              inputProps={{ max: 255, min: 0 }}
+              slotProps={{
+                input: { max: 255, min: 0 },
+                inputLabel: {
+                  shrink: true
+                }
+              }}
             />
           </Box>
           <TextField
@@ -228,11 +234,13 @@ export default function Color({
             error={rgbaObj.a > 1}
             value={noColorChecked ? "" : rgbaObj.a}
             fullWidth
-            InputLabelProps={{
-              shrink: true
-            }}
             onChange={handleAlphaChange}
-            inputProps={{ max: 1, min: 0, step: 0.1 }}
+            slotProps={{
+              input: { max: 1, min: 0, step: 0.1 },
+              inputLabel: {
+                shrink: true
+              }
+            }}
           />
         </div>
       )}
