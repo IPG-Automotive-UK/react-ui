@@ -214,6 +214,7 @@ export {
 } from "./ConfirmProvider";
 export {
   IpgLogo,
+  RoadOutlined,
   VirtoBuild,
   VirtoData,
   VirtoFleet,
@@ -229,6 +230,7 @@ export {
   CarMakerLogo,
   AsamLogo,
   type IpgLogoProps,
+  type RoadOutlinedProps,
   type VirtoBuildProps,
   type VirtoDataProps,
   type VirtoFleetProps,

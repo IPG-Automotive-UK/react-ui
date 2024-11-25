@@ -10,6 +10,7 @@ export { default as VirtoScene, type VirtoSceneProps } from "./VirtoScene";
 export { default as VirtoTest, type VirtoTestProps } from "./VirtoTest";
 export { CarMakerLogo, type CarMakerLogoProps } from "./CarMakerLogo";
 export { AsamLogo, type AsamLogoProps } from "./AsamLogo";
+export { RoadOutlined, type RoadOutlinedProps } from "./RoadOutlined";
 export {
   default as VirtoVehicle,
   type VirtoVehicleProps
