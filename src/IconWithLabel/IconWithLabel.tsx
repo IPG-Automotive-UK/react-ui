@@ -1,8 +1,7 @@
-import { Box, Link, Stack, alpha, useTheme } from "@mui/material";
+import { Box, Link, Stack, Typography, alpha, useTheme } from "@mui/material";
 import React, { cloneElement } from "react";
 
 import { IconWithLabelProps } from "./IconWithLabel.types";
-import { NoWrapTypography } from "../index";
 
 /**
  * A component to display an image with a label to the right
@@ -25,27 +24,51 @@ export default function IconWithLabel({
   };
   const customizedIcon = cloneElement(icon, iconProps);
 
-  const LabelComponent = ({ label: string }) => (
-    <NoWrapTypography
-      variant="caption"
-      sx={{
-        color: alpha(theme.palette.text.secondary, 0.6),
-        fontWeight: 400
-      }}
-    >
-      {label}
-    </NoWrapTypography>
-  );
   return (
-    <Stack data-testid={"icon-with-label"} direction={"row"} gap={"4px"}>
+    <Stack
+      data-testid={"icon-with-label"}
+      direction={"row"}
+      gap={"4px"}
+      display={"flex"}
+    >
       <Box display={"flex"}>{customizedIcon}</Box>
-      {href ? (
-        <Link href={href}>
-          <LabelComponent label={label} />
-        </Link>
-      ) : (
-        <LabelComponent label={label} />
-      )}
+      <Box minWidth={0}>
+        {href ? (
+          <Link
+            href={href}
+            underline="hover"
+            sx={theme => ({
+              "&:hover": {
+                color: theme.palette.primary.main
+              }
+            })}
+          >
+            <Typography
+              noWrap
+              component={"p"}
+              variant="caption"
+              sx={{
+                color: theme.palette.primary.main,
+                fontWeight: 400
+              }}
+            >
+              {label}
+            </Typography>
+          </Link>
+        ) : (
+          <Typography
+            noWrap
+            component={"p"}
+            variant="caption"
+            sx={{
+              color: alpha(theme.palette.text.secondary, 0.6),
+              fontWeight: 400
+            }}
+          >
+            {label}
+          </Typography>
+        )}
+      </Box>
     </Stack>
   );
 }

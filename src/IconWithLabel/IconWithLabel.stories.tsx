@@ -1,5 +1,6 @@
 import { Meta, StoryFn } from "@storybook/react";
 
+import { Box } from "@mui/material";
 import { CarMakerLogo } from "../SvgIcons";
 import IconWithLabel from "./IconWithLabel";
 import { IconWithLabelProps } from "./IconWithLabel.types";
@@ -21,7 +22,11 @@ export default meta;
 
 // Story Template
 const Template: StoryFn<IconWithLabelProps> = args => {
-  return <IconWithLabel {...args} />;
+  return (
+    <Box maxWidth={100}>
+      <IconWithLabel {...args} />
+    </Box>
+  );
 };
 
 // Default
@@ -39,6 +44,15 @@ export const WithoutHref = {
   args: {
     icon: <CarMakerLogo />,
     label: "Example"
+  },
+  render: Template
+};
+
+// Truncation example
+export const TruncatesLabel = {
+  args: {
+    icon: <CarMakerLogo />,
+    label: "Very Long Label That Needs to be Truncated"
   },
   render: Template
 };
