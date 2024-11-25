@@ -70,10 +70,7 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
         <DialogContent sx={{ p: 2 }}>
           <DialogContentText
             sx={theme => ({
-              color: "rgba(255,255,255, 1)",
-              ...theme.applyStyles("light", {
-                color: "rgba(0, 0, 0, 0.8)"
-              })
+              color: theme.palette.text.primary
             })}
           >
             {content}
@@ -85,10 +82,7 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
           <DialogContent sx={{ p: 2 }}>
             <DialogContentText
               sx={theme => ({
-                color: "rgba(255,255,255, 1)",
-                ...theme.applyStyles("light", {
-                  color: "rgba(0, 0, 0, 0.8)"
-                })
+                color: theme.palette.text.primary
               })}
             >
               {description}
