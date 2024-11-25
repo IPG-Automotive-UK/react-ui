@@ -39,6 +39,10 @@ export {
   type TableCardProps
 } from "./Card";
 export {
+  default as IconWithLabel,
+  type IconWithLabelProps
+} from "./IconWithLabel";
+export {
   Infographic,
   FileDetails,
   type InfographicProps,
