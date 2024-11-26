@@ -29,6 +29,10 @@ export type Vehicle = {
  */
 export type VehicleSelectorProps = {
   /**
+   * Disable the component if true (default is false)
+   */
+  disabled?: boolean;
+  /**
    * FlexDirection of the component
    */
   flexDirection?: string;
