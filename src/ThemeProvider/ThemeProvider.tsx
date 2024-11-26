@@ -80,6 +80,11 @@ const defaultTheme: ThemeOptions = {
       maxWidth: 1152
     }
   },
+  mixins: {
+    toolbar: {
+      minHeight: 64
+    }
+  },
   typography: {
     fontFamily: "Montserrat"
   }

@@ -1,4 +1,4 @@
-import { Box, CssBaseline, Drawer, Hidden } from "@mui/material";
+import { Box, CssBaseline, Drawer, useMediaQuery } from "@mui/material";
 import React, { Fragment, useState } from "react";
 
 import { ConfirmProvider } from "../ConfirmProvider";
@@ -32,6 +32,9 @@ function Layout({
   // use theme context hook
   const [theme, setTheme] = useTheme();
 
+  // check if screen is medium
+  const isMediumScreen = useMediaQuery(theme => theme.breakpoints.down("md"));
+
   return (
     <Fragment>
       <Box
@@ -61,40 +64,22 @@ function Layout({
             }
           })}
         >
-          <Hidden mdUp>
-            <Drawer
-              variant="temporary"
-              anchor="left"
-              open={mobileOpen}
-              onClose={() => setMobileOpen(false)}
-              sx={{
-                "& .MuiDrawer-paper": {
-                  height: `calc(100% - 64px)`,
-                  paddingTop: "8px",
-                  top: "64px",
-                  width: sidebarWidth
-                }
-              }}
-            >
-              <Sidebar appVersion={appVersion}>{sidebarContent}</Sidebar>
-            </Drawer>
-          </Hidden>
-          <Hidden mdDown>
-            <Drawer
-              sx={{
-                "& .MuiDrawer-paper": {
-                  height: `calc(100% - 64px)`,
-                  paddingTop: "8px",
-                  top: "64px",
-                  width: sidebarWidth
-                }
-              }}
-              variant="permanent"
-              open
-            >
-              <Sidebar appVersion={appVersion}>{sidebarContent}</Sidebar>
-            </Drawer>
-          </Hidden>
+          <Drawer
+            variant={isMediumScreen ? "temporary" : "permanent"}
+            anchor="left"
+            open={isMediumScreen ? mobileOpen : true}
+            onClose={isMediumScreen ? () => setMobileOpen(false) : undefined}
+            sx={theme => ({
+              "& .MuiDrawer-paper": {
+                height: `calc(100vh - ${theme.mixins.toolbar.minHeight}px) `,
+                paddingTop: "8px",
+                top: theme.mixins.toolbar.minHeight,
+                width: sidebarWidth
+              }
+            })}
+          >
+            <Sidebar appVersion={appVersion}>{sidebarContent}</Sidebar>
+          </Drawer>
         </Box>
         <Box
           sx={{
