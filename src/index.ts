@@ -47,9 +47,10 @@ export {
   type RoadIconWithLabelProps
 } from "./RoadIconWithLabel";
 export {
-  default as IconWithLabel,
-  type IconWithLabelProps
-} from "./IconWithLabel";
+  FormatVersionIconWithLabel,
+  type FormatVersionIconWithLabelProps
+} from "./FormatVersionIconWithLabel";
+export { IconWithLabel, type IconWithLabelProps } from "./IconWithLabel";
 export {
   Infographic,
   FileDetails,
