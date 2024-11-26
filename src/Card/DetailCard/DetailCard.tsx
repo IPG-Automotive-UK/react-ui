@@ -29,13 +29,13 @@ function DetailCard({
   return (
     <Stack
       className="detail-card-container"
-      mt={1}
-      mb={3}
       sx={{
         display: "flex",
         flexDirection: "column",
         flexGrow: 1,
         height: "100%",
+        mb: 3,
+        mt: 1,
         width
       }}
     >
@@ -55,7 +55,11 @@ function DetailCard({
           overflow: "auto"
         }}
       >
-        <Box ml={0.5}>
+        <Box
+          sx={{
+            ml: 0.5
+          }}
+        >
           <Card>
             <Infographic media={media} />
             <FileDetails
@@ -69,9 +73,14 @@ function DetailCard({
           </Card>
         </Box>
         <Stack
-          ml={2}
           spacing={2}
-          sx={{ display: "flex", flexGrow: 1, mr: 0.5, width: "100%" }}
+          sx={{
+            display: "flex",
+            flexGrow: 1,
+            ml: 2,
+            mr: 0.5,
+            width: "100%"
+          }}
         >
           {content}
         </Stack>
@@ -133,11 +142,11 @@ function DetailCardHeader({
   return (
     <Fragment>
       <Box
-        m={1}
         sx={{
           display: "flex",
           flexDirection: "row",
-          justifyContent: "space-between"
+          justifyContent: "space-between",
+          m: 1
         }}
       >
         <Box sx={{ width: headerContentWidth }}>
@@ -170,7 +179,11 @@ function DetailCardHeader({
           {buttonsStack}
         </Box>
       </Box>
-      <Box mx={1}>
+      <Box
+        sx={{
+          mx: 1
+        }}
+      >
         {labels && labels.length > 0 && <LabelChipGroup chips={labelChips} />}
       </Box>
     </Fragment>

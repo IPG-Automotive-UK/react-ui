@@ -34,8 +34,8 @@ export const Default = {
     color: "primary",
     disabled: false,
     labelPosition: "bottom",
-    labelStyle: {},
     labels: [],
+    labelStyle: {},
     max: 10,
     min: 1,
     orientation: "horizontal",
@@ -54,12 +54,12 @@ export const CustomLabels = {
     color: "primary",
     disabled: false,
     labelPosition: "bottom",
-    labelStyle: {},
     labels: [
       { label: "low", value: 1 },
       { label: "mid", value: 5 },
       { label: "high", value: 10 }
     ],
+    labelStyle: {},
     max: 10,
     min: 1,
     orientation: "horizontal",
@@ -78,16 +78,16 @@ export const StyledLabels = {
     color: "primary",
     disabled: false,
     labelPosition: "top",
-    labelStyle: {
-      color: "blue",
-      fontFamily: "Montserrat",
-      fontStyle: "italic"
-    },
     labels: [
       { label: "low", value: 1 },
       { label: "mid", value: 5 },
       { label: "high", value: 10 }
     ],
+    labelStyle: {
+      color: "blue",
+      fontFamily: "Montserrat",
+      fontStyle: "italic"
+    },
     max: 10,
     min: 1,
     orientation: "horizontal",
@@ -106,12 +106,12 @@ export const StyledSlider = {
     color: "green",
     disabled: false,
     labelPosition: "bottom",
-    labelStyle: {},
     labels: [
       { label: "low", value: 1 },
       { label: "mid", value: 5 },
       { label: "high", value: 10 }
     ],
+    labelStyle: {},
     max: 10,
     min: 1,
     orientation: "horizontal",
@@ -130,8 +130,8 @@ export const Disabled = {
     color: "primary",
     disabled: true,
     labelPosition: "bottom",
-    labelStyle: {},
     labels: [],
+    labelStyle: {},
     max: 10,
     min: 1,
     orientation: "horizontal",
@@ -150,8 +150,8 @@ export const VerticalSlider = {
     color: "primary",
     disabled: false,
     labelPosition: "right",
-    labelStyle: {},
     labels: [],
+    labelStyle: {},
     max: 10,
     min: 1,
     orientation: "vertical",

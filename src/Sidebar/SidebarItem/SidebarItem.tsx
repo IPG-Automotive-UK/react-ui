@@ -100,12 +100,20 @@ export default function SidebarItem({
   const SidebarStacked = () => {
     return (
       <Box
-        display="flex"
-        width="100%"
-        flexDirection="row"
-        justifyContent="center"
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          width: "100%"
+        }}
       >
-        <Box display="flex" flexDirection="column" justifyContent="center">
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center"
+          }}
+        >
           <ListItemIcon
             sx={{
               display: "flex",
@@ -137,7 +145,12 @@ export default function SidebarItem({
 
   // return the sidebar item component
   return (
-    <Box display="flex" flexDirection="column">
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column"
+      }}
+    >
       <ListItemButton
         selected={selected}
         onClick={handleClick}

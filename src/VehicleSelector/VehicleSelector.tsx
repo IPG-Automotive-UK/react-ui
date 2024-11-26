@@ -77,7 +77,11 @@ function VehicleSelector({
         gap: flexDirection === "row" ? "0 24px" : 0
       }}
     >
-      <Box flex="40%">
+      <Box
+        sx={{
+          flex: "40%"
+        }}
+      >
         <Autocomplete
           label="Project Code"
           required
@@ -99,7 +103,11 @@ function VehicleSelector({
           value={selectedProject === "" ? null : selectedProject}
         />
       </Box>
-      <Box flex="40%">
+      <Box
+        sx={{
+          flex: "40%"
+        }}
+      >
         <Autocomplete
           disabled={selectedProject === null || selectedProject === ""}
           label="Model Year"
@@ -122,7 +130,11 @@ function VehicleSelector({
           value={selectedModelYear === "" ? null : selectedModelYear}
         />
       </Box>
-      <Box flex="40%">
+      <Box
+        sx={{
+          flex: "40%"
+        }}
+      >
         <Autocomplete
           disableCloseOnSelect={multipleSelection}
           limitTags={limitTags}
@@ -193,9 +205,12 @@ function VehicleSelector({
           value={selectedVariants}
         />
       </Box>
-
       {gates.length > 0 && (
-        <Box flex="40%">
+        <Box
+          sx={{
+            flex: "40%"
+          }}
+        >
           <Autocomplete
             disableCloseOnSelect={multipleSelection}
             disabled={

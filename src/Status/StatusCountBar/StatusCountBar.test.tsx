@@ -8,12 +8,12 @@ describe("StatusCountBar", () => {
   // The component will accept the count object in perticular order from Virto that is why we have to disable the sort-keys from the eslint.
   /* eslint-disable sort-keys */
   const defaultProps = {
-    title: "Total Simulations",
     count: {
-      running: 2,
+      aborted: 1,
       completed: 3,
-      aborted: 1
-    } as Record<Status, number>
+      running: 2
+    } as Record<Status, number>,
+    title: "Total Simulations"
   };
   /* eslint-enable sort-keys */
 

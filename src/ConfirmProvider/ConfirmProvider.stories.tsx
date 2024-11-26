@@ -98,7 +98,12 @@ WithCustomContent.args = {
   content: (
     <div>
       <LinearProgress />
-      <Typography p={2} pl={0}>
+      <Typography
+        sx={{
+          p: 2,
+          pl: 0
+        }}
+      >
         This isn't wrapped in DialogContentText.
       </Typography>
     </div>

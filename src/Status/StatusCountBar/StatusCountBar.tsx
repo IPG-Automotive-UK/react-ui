@@ -27,11 +27,19 @@ export function StatusCountBar({ title, count }: StatusCountBarProps) {
   return (
     <>
       <Box
-        display="flex"
-        width="100%"
-        padding="2px"
-        gap="2px"
-        {...hoverHandler} // Attach the hover handlers
+        // Attach the hover handlers
+        {...hoverHandler}
+        sx={[
+          {
+            display: "flex",
+            gap: "2px",
+            padding: "2px",
+            width: "100%"
+          },
+          ...(Array.isArray(hoverHandler.sx)
+            ? hoverHandler.sx
+            : [hoverHandler.sx])
+        ]}
       >
         {Object.entries(count).map(([status, countValue]) => {
           const percentage = (countValue / totalCount) * 100;

@@ -155,8 +155,10 @@ export default function LabelChipGroup({ chips }: LabelChipGroupProps) {
             <Stack
               direction="column"
               className="label-chip-group-popover-container"
-              m={1}
               spacing={1}
+              sx={{
+                m: 1
+              }}
             >
               {overflowingChips.map((chip, index) => (
                 <Box key={index}>

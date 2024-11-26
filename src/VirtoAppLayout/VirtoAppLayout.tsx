@@ -34,7 +34,12 @@ function Layout({
 
   return (
     <Fragment>
-      <Box height="100vh" display="flex">
+      <Box
+        sx={{
+          display: "flex",
+          height: "100vh"
+        }}
+      >
         <CssBaseline />
         <VirtoAppHeader
           appName={appName}
@@ -92,11 +97,11 @@ function Layout({
           </Hidden>
         </Box>
         <Box
-          flexGrow={1}
-          display="flex"
-          flexDirection="column"
           sx={{
-            background: theme => theme.palette.background.default
+            background: theme => theme.palette.background.default,
+            display: "flex",
+            flexDirection: "column",
+            flexGrow: 1
           }}
         >
           <Box sx={theme => theme.mixins.toolbar} />

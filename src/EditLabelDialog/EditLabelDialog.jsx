@@ -186,7 +186,13 @@ export default function EditLabelDialog({
             />
           </Grid>
           <Grid size={12}>
-            <Box width="100%" display="flex" justifyContent="center">
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                width: "100%"
+              }}
+            >
               {name ? (
                 <LabelChip label={name} color={color} size="small" />
               ) : null}

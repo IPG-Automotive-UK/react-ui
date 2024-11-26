@@ -69,7 +69,13 @@ export default function Slider({
   }
   // return components
   return (
-    <Box sx={{ height: "100%" }} display="flex" flexDirection="column">
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%"
+      }}
+    >
       <Typography>{title}</Typography>
       <Box
         sx={{
@@ -128,15 +134,17 @@ Slider.propTypes = {
    * Tick label position respective to slide
    */
   labelPosition: PropTypes.oneOf(["bottom", "top", "left", "right"]),
-  /**
-   * Custom style to apply to the labels
-   */
-  labelStyle: PropTypes.object,
+
   /**
    * Indicates predeterminated values to which the user can move the slider.
    * It should contain objects with "value" and optional "label" keys.
    */
   labels: PropTypes.array,
+
+  /**
+   * Custom style to apply to the labels
+   */
+  labelStyle: PropTypes.object,
   /**
    * The maximum allowed value of the slider
    */

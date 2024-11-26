@@ -68,7 +68,12 @@ const CustomPaper = ({
     <Paper {...props} onMouseDown={handleMouseDown}>
       {props.children}
       {addEnabled && (
-        <Box marginLeft={2} marginBottom={1}>
+        <Box
+          sx={{
+            marginBottom: 1,
+            marginLeft: 2
+          }}
+        >
           <Button
             size={props.size}
             color="primary"
@@ -192,9 +197,11 @@ export default function LabelSelector({
           <Box key={option._id} component="li" {...props}>
             <Stack
               direction="row"
-              alignItems="center"
-              overflow="hidden"
-              flexGrow={1}
+              sx={{
+                alignItems: "center",
+                flexGrow: 1,
+                overflow: "hidden"
+              }}
             >
               <Checkbox
                 checked={selected}
@@ -204,7 +211,13 @@ export default function LabelSelector({
                   color: option.color
                 }}
               />
-              <Stack direction="column" flexGrow={1} overflow="hidden">
+              <Stack
+                direction="column"
+                sx={{
+                  flexGrow: 1,
+                  overflow: "hidden"
+                }}
+              >
                 <NoWrapTypography>{option.name}</NoWrapTypography>
                 <NoWrapTypography variant="caption">
                   {option.description}

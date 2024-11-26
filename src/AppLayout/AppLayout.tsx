@@ -28,7 +28,12 @@ function Layout({
 
   return (
     <Fragment>
-      <Box height="100vh" display="flex">
+      <Box
+        sx={{
+          display: "flex",
+          height: "100vh"
+        }}
+      >
         <CssBaseline />
         <AppHeader
           appName={appName}
@@ -91,12 +96,16 @@ function Layout({
           </Hidden>
         </Box>
         <Box
-          flexGrow={1}
-          display="flex"
-          flexDirection="column"
-          sx={theme => ({
-            background: theme.palette.background.default
-          })}
+          sx={[
+            {
+              display: "flex",
+              flexDirection: "column",
+              flexGrow: 1
+            },
+            theme => ({
+              background: theme.palette.background.default
+            })
+          ]}
         >
           <Box sx={theme => theme.mixins.toolbar} />
           <Box

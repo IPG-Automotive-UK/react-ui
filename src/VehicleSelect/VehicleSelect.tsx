@@ -76,7 +76,11 @@ function VehicleSelect({
         gap: flexDirection === "row" ? "0 24px" : 0
       }}
     >
-      <Box flex="40%">
+      <Box
+        sx={{
+          flex: "40%"
+        }}
+      >
         <Autocomplete
           label="Project Code"
           required
@@ -97,7 +101,11 @@ function VehicleSelect({
           value={selectedProject === "" ? null : selectedProject}
         />
       </Box>
-      <Box flex="40%">
+      <Box
+        sx={{
+          flex: "40%"
+        }}
+      >
         <Autocomplete
           disabled={selectedProject === null || selectedProject === ""}
           label="Model Year"
@@ -119,7 +127,11 @@ function VehicleSelect({
           value={selectedModelYear === "" ? null : selectedModelYear}
         />
       </Box>
-      <Box flex="40%">
+      <Box
+        sx={{
+          flex: "40%"
+        }}
+      >
         <Autocomplete
           disableCloseOnSelect={true}
           disabled={selectedModelYear === null || selectedModelYear === ""}
@@ -176,7 +188,11 @@ function VehicleSelect({
           value={selectedVariants}
         />
       </Box>
-      <Box flex="40%">
+      <Box
+        sx={{
+          flex: "40%"
+        }}
+      >
         <Autocomplete
           disableCloseOnSelect={true}
           disabled={selectedVariants === null || selectedVariants.length === 0}

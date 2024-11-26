@@ -67,24 +67,32 @@ const LoadErrorMessage = ({
       {/* Render the error title */}
       <Typography
         variant="h6"
-        fontWeight="600"
-        textAlign="center"
-        sx={theme => ({
-          color: theme.palette.error.main
-        })}
+        sx={[
+          {
+            fontWeight: "600",
+            textAlign: "center"
+          },
+          theme => ({
+            color: theme.palette.error.main
+          })
+        ]}
       >
         {title}
       </Typography>
       {/* Render the error message */}
       <Typography
         variant="body2"
-        textAlign="center"
-        sx={theme => ({
-          color: theme.palette.text.primary,
-          ...theme.applyStyles("dark", {
-            color: lighten(theme.palette.text.secondary, 0.7)
+        sx={[
+          {
+            textAlign: "center"
+          },
+          theme => ({
+            color: theme.palette.text.primary,
+            ...theme.applyStyles("dark", {
+              color: lighten(theme.palette.text.secondary, 0.7)
+            })
           })
-        })}
+        ]}
       >
         {message}
       </Typography>

@@ -137,7 +137,13 @@ function Option(props, option, { selected }) {
           flexGrow: 1
         }}
       >
-        <Typography mb={-0.5}>{option.name}</Typography>
+        <Typography
+          sx={{
+            mb: -0.5
+          }}
+        >
+          {option.name}
+        </Typography>
         <Typography variant="caption">
           {option.description || "No description"}
         </Typography>
