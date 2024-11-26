@@ -38,18 +38,13 @@ export {
   type SummaryCardProps,
   type TableCardProps
 } from "./Card";
+export { VersionLabel, type VersionLabelProps } from "./VersionLabel";
+export { FormatLabel, type FormatLabelProps } from "./FormatLabel";
+export { RoadLabel, type RoadLabelProps } from "./RoadLabel";
 export {
-  FormatIconWithLabel,
-  type FormatIconWithLabelProps
-} from "./FormatIconWithLabel";
-export {
-  RoadIconWithLabel,
-  type RoadIconWithLabelProps
-} from "./RoadIconWithLabel";
-export {
-  FormatVersionIconWithLabel,
-  type FormatVersionIconWithLabelProps
-} from "./FormatVersionIconWithLabel";
+  FormatVersionLabel,
+  type FormatVersionLabelProps
+} from "./FormatVersionLabel";
 export { IconWithLabel, type IconWithLabelProps } from "./IconWithLabel";
 export {
   Infographic,

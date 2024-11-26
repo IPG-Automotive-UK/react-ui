@@ -1,11 +1,9 @@
-import { FormatVersionIconWithLabelProps } from "./FormatVersionIconWithLabel.types";
+import { FormatVersionLabelProps } from "./FormatVersionLabel.types";
 import { IconWithLabel } from "../IconWithLabel";
 import NumbersOutlinedIcon from "@mui/icons-material/NumbersOutlined";
 import React from "react";
 
-export default function FormatVersionIconWithLabel({
-  label
-}: FormatVersionIconWithLabelProps) {
+export default function FormatVersionLabel({ label }: FormatVersionLabelProps) {
   return IconWithLabel({
     icon: (
       <NumbersOutlinedIcon

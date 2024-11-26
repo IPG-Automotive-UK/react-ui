@@ -1,21 +1,21 @@
 import { Meta, StoryFn } from "@storybook/react";
 
-import FormatIconWithLabel from "./FormatIconWithLabel";
-import { FormatIconWithLabelProps } from "./FormatIconWithLabel.types";
+import FormatLabel from "./FormatLabel";
+import { FormatLabelProps } from "./FormatLabel.types";
 import React from "react";
 
 /**
  * Story metadata
  */
-const meta: Meta<typeof FormatIconWithLabel> = {
-  component: FormatIconWithLabel,
-  title: "General/FormatIconWithLabel"
+const meta: Meta<typeof FormatLabel> = {
+  component: FormatLabel,
+  title: "Label/FormatLabel"
 };
 export default meta;
 
 // Story Template
-const Template: StoryFn<FormatIconWithLabelProps> = args => {
-  return <FormatIconWithLabel {...args} />;
+const Template: StoryFn<FormatLabelProps> = args => {
+  return <FormatLabel {...args} />;
 };
 
 // Default

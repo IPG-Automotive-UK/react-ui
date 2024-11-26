@@ -1,13 +1,15 @@
 import { AsamLogo, CarMakerLogo } from "../SvgIcons";
 
-import { FormatIconWithLabelProps } from "./FormatIconWithLabel.types";
+import { FormatLabelProps } from "./FormatLabel.types";
 import { IconWithLabel } from "../IconWithLabel";
 import React from "react";
 import TerminalOutlinedIcon from "@mui/icons-material/TerminalOutlined";
 
-export default function FormatIconWithLabel({
-  label
-}: FormatIconWithLabelProps) {
+/**
+ * Component that renders a format icon and the name of the format to the right
+ * @param label The name of the format
+ */
+export default function FormatLabel({ label }: FormatLabelProps) {
   // based on the label choose the correct icon
   switch (label) {
     // If format is "CarMaker" then render "CarMaker" icon

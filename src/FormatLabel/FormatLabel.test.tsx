@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
 import { render, screen } from "@testing-library/react";
 
-import FormatWithIconLabel from "./FormatIconWithLabel";
+import FormatLabel from "./FormatLabel";
 import React from "react";
 
 describe("IconWithLabel tests", () => {
@@ -36,7 +36,7 @@ describe("IconWithLabel tests", () => {
     }
   ])("Can render correct label", data => {
     const { label, iconTestId } = data;
-    render(<FormatWithIconLabel label={label} />);
+    render(<FormatLabel label={label} />);
 
     // capture elements of interest
     const iconWithLabelElement = screen.getByTestId("icon-with-label");

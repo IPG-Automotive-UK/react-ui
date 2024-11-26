@@ -1,21 +1,21 @@
 import { Meta, StoryFn } from "@storybook/react";
 
 import React from "react";
-import RoadIconWithLabel from "./RoadIconWithLabel";
-import { RoadIconWithLabelProps } from "./RoadIconWithLabel.types";
+import RoadLabel from "./RoadLabel";
+import { RoadLabelProps } from "./RoadLabel.types";
 
 /**
  * Story metadata
  */
-const meta: Meta<typeof RoadIconWithLabel> = {
-  component: RoadIconWithLabel,
-  title: "General/RoadIconWithLabel"
+const meta: Meta<typeof RoadLabel> = {
+  component: RoadLabel,
+  title: "Label/RoadLabel"
 };
 export default meta;
 
 // Story Template
-const Template: StoryFn<RoadIconWithLabelProps> = args => {
-  return <RoadIconWithLabel {...args} />;
+const Template: StoryFn<RoadLabelProps> = args => {
+  return <RoadLabel {...args} />;
 };
 
 // Default

@@ -2,11 +2,11 @@ import { describe, expect, test } from "vitest";
 import { render, screen } from "@testing-library/react";
 
 import React from "react";
-import RoadIconWithLabel from "./RoadIconWithLabel";
+import RoadLabel from "./RoadLabel";
 
 describe("IconWithLabel tests", () => {
   test("renders `IconWithLabel` with a href", () => {
-    render(<RoadIconWithLabel label="My Road" href={"https://example.com"} />);
+    render(<RoadLabel label="My Road" href={"https://example.com"} />);
 
     // find the elements of interest
     const iconWithLabelElement = screen.getByTestId("icon-with-label");
@@ -21,7 +21,7 @@ describe("IconWithLabel tests", () => {
     expect(anchorElement).toHaveAttribute("href", "https://example.com");
   });
   test("renders `IconWithLabel` without an href", () => {
-    render(<RoadIconWithLabel label="My Road" />);
+    render(<RoadLabel label="My Road" />);
 
     // find the elements of interest
     const iconWithLabelElement = screen.getByTestId("icon-with-label");
