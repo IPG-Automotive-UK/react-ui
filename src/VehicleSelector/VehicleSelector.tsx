@@ -78,7 +78,14 @@ function VehicleSelector({
         gap: flexDirection === "row" ? "0 24px" : 0
       }}
     >
-      <Box flex="40%">
+      <Box
+        flex="40%"
+        sx={{
+          "& .MuiFormLabel-asterisk": {
+            color: disabled ? "#9e9e9e" : "#d32f2f"
+          }
+        }}
+      >
         <Autocomplete
           label="Project Code"
           required
@@ -101,7 +108,17 @@ function VehicleSelector({
           value={selectedProject === "" ? null : selectedProject}
         />
       </Box>
-      <Box flex="40%">
+      <Box
+        flex="40%"
+        sx={{
+          "& .MuiFormLabel-asterisk": {
+            color:
+              selectedProject === null || selectedProject === "" || disabled
+                ? "#9e9e9e"
+                : "#d32f2f"
+          }
+        }}
+      >
         <Autocomplete
           disabled={
             selectedProject === null || selectedProject === "" || disabled
@@ -126,7 +143,17 @@ function VehicleSelector({
           value={selectedModelYear === "" ? null : selectedModelYear}
         />
       </Box>
-      <Box flex="40%">
+      <Box
+        flex="40%"
+        sx={{
+          "& .MuiFormLabel-asterisk": {
+            color:
+              selectedModelYear === null || selectedModelYear === "" || disabled
+                ? "#9e9e9e"
+                : "#d32f2f"
+          }
+        }}
+      >
         <Autocomplete
           disableCloseOnSelect={multipleSelection}
           limitTags={limitTags}
@@ -201,7 +228,19 @@ function VehicleSelector({
       </Box>
 
       {gates.length > 0 && (
-        <Box flex="40%">
+        <Box
+          flex="40%"
+          sx={{
+            "& .MuiFormLabel-asterisk": {
+              color:
+                selectedVariants === null ||
+                selectedVariants.length === 0 ||
+                disabled
+                  ? "#9e9e9e"
+                  : "#d32f2f"
+            }
+          }}
+        >
           <Autocomplete
             disableCloseOnSelect={multipleSelection}
             disabled={
