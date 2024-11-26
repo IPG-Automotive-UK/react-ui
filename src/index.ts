@@ -39,6 +39,14 @@ export {
   type TableCardProps
 } from "./Card";
 export {
+  FormatIconWithLabel,
+  type FormatIconWithLabelProps
+} from "./FormatIconWithLabel";
+export {
+  RoadIconWithLabel,
+  type RoadIconWithLabelProps
+} from "./RoadIconWithLabel";
+export {
   default as IconWithLabel,
   type IconWithLabelProps
 } from "./IconWithLabel";

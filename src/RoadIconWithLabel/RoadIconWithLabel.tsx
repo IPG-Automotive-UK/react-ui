@@ -1,4 +1,4 @@
-import IconWithLabel from "../IconWithLabel";
+import { IconWithLabel } from "../IconWithLabel";
 import React from "react";
 import { RoadIconWithLabelProps } from "./RoadIconWithLabel.types";
 import { RoadOutlined } from "../SvgIcons";
