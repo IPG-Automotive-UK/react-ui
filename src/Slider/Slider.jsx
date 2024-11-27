@@ -1,4 +1,5 @@
 import { Box, Slider as MuiSlider, Typography } from "@mui/material";
+
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -134,17 +135,15 @@ Slider.propTypes = {
    * Tick label position respective to slide
    */
   labelPosition: PropTypes.oneOf(["bottom", "top", "left", "right"]),
-
+  /**
+   * Custom style to apply to the labels
+   */
+  labelStyle: PropTypes.object,
   /**
    * Indicates predeterminated values to which the user can move the slider.
    * It should contain objects with "value" and optional "label" keys.
    */
   labels: PropTypes.array,
-
-  /**
-   * Custom style to apply to the labels
-   */
-  labelStyle: PropTypes.object,
   /**
    * The maximum allowed value of the slider
    */
