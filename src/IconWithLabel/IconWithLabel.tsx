@@ -27,6 +27,7 @@ export default function IconWithLabel({
   return (
     <Stack
       data-testid={"icon-with-label"}
+      alignItems={"center"}
       direction={"row"}
       gap={"4px"}
       display={"flex"}
