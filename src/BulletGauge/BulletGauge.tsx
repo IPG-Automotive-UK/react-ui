@@ -50,6 +50,7 @@ const BulletGauge = ({ title, value, suffix }: BulletGaugeProps) => {
       ]}
       layout={{
         font: {
+          family: "Montserrat, sans-serif",
           size: 16
         },
         height: 80,
