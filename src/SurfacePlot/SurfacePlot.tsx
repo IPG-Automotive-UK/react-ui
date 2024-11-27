@@ -79,6 +79,9 @@ const SurfacePlot = ({
           ]}
           layout={{
             autosize: true,
+            font: {
+              family: "Montserrat"
+            },
             margin: {
               b: 5,
               l: 5,
@@ -98,7 +101,6 @@ const SurfacePlot = ({
                 showgrid: showGrid,
                 title: {
                   font: {
-                    family: "Montserrat",
                     size: 12
                   },
                   text: xlabel || ""
@@ -114,7 +116,6 @@ const SurfacePlot = ({
                 showgrid: showGrid,
                 title: {
                   font: {
-                    family: "Montserrat",
                     size: 12
                   },
                   text: ylabel || ""
@@ -130,7 +131,6 @@ const SurfacePlot = ({
                 showgrid: showGrid,
                 title: {
                   font: {
-                    family: "Montserrat",
                     size: 12
                   },
                   text: zlabel || ""
@@ -140,7 +140,6 @@ const SurfacePlot = ({
           }}
           style={{
             flexGrow: 1,
-            fontFamily: "Montserrat",
             height: "100%",
             width: "100%"
           }}
