@@ -4,7 +4,7 @@ import { render, screen } from "@testing-library/react";
 import FormatVersionLabel from "./FormatVersionLabel";
 import React from "react";
 
-describe("IconWithLabel tests", () => {
+describe("`FormatVersionLabel` tests", () => {
   test("renders `FormatVersionLabel`", () => {
     render(<FormatVersionLabel label="11.1" />);
 

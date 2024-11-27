@@ -4,7 +4,7 @@ import { render, screen } from "@testing-library/react";
 import FormatLabel from "./FormatLabel";
 import React from "react";
 
-describe("IconWithLabel tests", () => {
+describe("`FormatLabel` tests", () => {
   test.each([
     {
       iconTestId: "car-maker-logo",

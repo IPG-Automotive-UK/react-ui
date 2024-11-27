@@ -4,8 +4,8 @@ import { render, screen } from "@testing-library/react";
 import React from "react";
 import RoadLabel from "./RoadLabel";
 
-describe("IconWithLabel tests", () => {
-  test("renders `IconWithLabel` with a href", () => {
+describe("`RoadLabel` tests", () => {
+  test("renders `RoadLabel` with a href", () => {
     render(<RoadLabel label="My Road" href={"https://example.com"} />);
 
     // find the elements of interest
@@ -20,7 +20,7 @@ describe("IconWithLabel tests", () => {
     expect(anchorElement).toBeInTheDocument();
     expect(anchorElement).toHaveAttribute("href", "https://example.com");
   });
-  test("renders `IconWithLabel` without an href", () => {
+  test("renders `RoadLabel` without an href", () => {
     render(<RoadLabel label="My Road" />);
 
     // find the elements of interest
