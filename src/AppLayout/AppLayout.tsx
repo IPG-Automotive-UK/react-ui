@@ -60,14 +60,14 @@ function Layout({
             anchor="left"
             open={isMediumScreen ? mobileOpen : true}
             onClose={isMediumScreen ? () => setMobileOpen(false) : undefined}
-            sx={{
+            sx={theme => ({
               "& .MuiDrawer-paper": {
-                height: `calc(100% - 64px)`,
+                height: `calc(100vh - ${theme.mixins.toolbar.minHeight}px)`,
                 paddingTop: "8px",
-                top: "64px",
+                top: theme.mixins.toolbar.minHeight,
                 width: sidebarWidth
               }
-            }}
+            })}
           >
             <Sidebar
               showLogo={false}
