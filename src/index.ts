@@ -38,6 +38,7 @@ export {
   type SummaryCardProps,
   type TableCardProps
 } from "./Card";
+export { DateLabel, type DateLabelProps } from "./DateLabel";
 export { FileLabel, type FileLabelProps } from "./FileLabel";
 export { VersionLabel, type VersionLabelProps } from "./VersionLabel";
 export { FormatLabel, type FormatLabelProps } from "./FormatLabel";
