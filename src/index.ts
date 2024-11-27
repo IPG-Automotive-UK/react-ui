@@ -235,6 +235,7 @@ export {
   VirtoThumbsUpLeft,
   VirtoVehicle,
   CarMakerLogo,
+  TruckMakerLogo,
   AsamLogo,
   type IpgLogoProps,
   type RoadOutlinedProps,
@@ -251,6 +252,7 @@ export {
   type VirtoThumbsUpLeftProps,
   type VirtoVehicleProps,
   type CarMakerLogoProps,
+  type TruckMakerLogoProps,
   type AsamLogoProps
 } from "./SvgIcons";
 export {
