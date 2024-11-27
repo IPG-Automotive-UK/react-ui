@@ -9,7 +9,7 @@ import { RoadPreviewProps } from "./RoadPreview.types";
  */
 const meta: Meta<typeof RoadPreview> = {
   component: RoadPreview,
-  title: "RoadView/RoadPreview"
+  title: "Preview/RoadPreview"
 };
 export default meta;
 
@@ -25,11 +25,7 @@ export const Default = {
   args: {
     createdAt: "10-09-24 10:24:08",
     description: "Small Description",
-    file: {
-      _id: "66d6cc4a33eb2f57a28d36f7",
-      name: "TestingRoad.rd5",
-      type: "road"
-    },
+    file: "TestingRoad.rd5",
     format: "CarMaker",
     formatVersion: "11.1",
     href: "test",
@@ -87,10 +83,7 @@ export const WithOverflowText = {
     ...Default.args,
     description:
       "Stationäre Kreisfahrt: DIN ISO 4138 Es wird innerhalb von 18 Sekunden auf 180° Lenkradwinkel eingelenkt.stationäre Kreisfahrt: DIN ISO 4138 Es wird innerhalb von 18 Sekunden auf 180° Lenkradwinkel eingelenkt.",
-    file: {
-      ...Default.args.file,
-      name: "A very looooooooooong Road File Name"
-    },
+    file: "A very looooooooooong Road File Name",
     format: "ASAM OpenDRIVE",
     label: [Default.args.label[0]],
     name: "SanFrancisco_AEB_A looooong Road Name",
@@ -105,11 +98,7 @@ export const WithOverflowText = {
 export const WithoutOptionalProps = {
   args: {
     description: "Short description",
-    file: {
-      _id: "66d6cc4a33eb2f57a28d36f7",
-      name: "TestingRoad.rd5",
-      type: "road"
-    },
+    file: "TestingRoad.rd5",
     format: "CarMaker",
     formatVersion: "11.1",
     href: "test",

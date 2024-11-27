@@ -1,24 +1,15 @@
-import {
-  Box,
-  Divider,
-  Link,
-  Stack,
-  Tooltip,
-  Typography,
-  useTheme
-} from "@mui/material";
+import { Box, Divider, Link, Stack, Typography } from "@mui/material";
 import { LabelChipGroup, LabelChipGroupProps } from "../LabelSelector";
 
-import { AsamLogo } from "../SvgIcons/AsamLogo";
-import AttachFileIcon from "@mui/icons-material/AttachFile";
-import { CarMakerLogo } from "../SvgIcons/CarMakerLogo";
-import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";
+import DateLabel from "../DateLabel/DateLabel";
+import FileLabel from "../FileLabel/FileLabel";
+import FormatLabel from "../FormatLabel/FormatLabel";
+import FormatVersionLabel from "../FormatVersionLabel/FormatVersionLabel";
 import NoWrapTypography from "../NoWrapTypography/NoWrapTypography";
-import NumbersIcon from "@mui/icons-material/Numbers";
 import React from "react";
 import { RoadPreviewProps } from "./RoadPreview.types";
 import TruncatedTooltip from "../TruncatedTooltip";
-import UserAvatar from "../UserAvatar/UserAvatar";
+import UserLabel from "../UserLabel/UserLabel";
 import VersionChip from "../VersionChip/VersionChip";
 
 /**
@@ -38,9 +29,6 @@ export function RoadPreview({
   label = [],
   sx
 }: RoadPreviewProps) {
-  // theme hook for returning specific colors from the theme to MUI icon
-  const theme = useTheme();
-
   /** Checking if we have optional properties for conditional rendering according to: label, createdAt, user */
   function hasOptionalProperty() {
     return (label?.length && label?.length > 0) || createdAt || user;
@@ -112,63 +100,18 @@ export function RoadPreview({
         </Stack>
       </Box>
       <Box gap={1}>
-        <Stack direction={"row"} spacing={2}>
-          <Box flexShrink={0} display="flex" gap="4px" alignItems="center">
-            <Tooltip title="Road Format">
-              {/* need div element, because tooltip is not shown without it */}
-              <div style={{ display: "flex" }}>
-                {format === "CarMaker" ? (
-                  <CarMakerLogo sx={{ height: "20px", width: "20px" }} />
-                ) : (
-                  <AsamLogo sx={{ height: "20px", width: "20px" }} />
-                )}
-              </div>
-            </Tooltip>
-            <Typography
-              variant="caption"
-              color="textSecondary"
-              data-testid="road-preview-format"
-            >
-              {format}
-            </Typography>
+        <Stack direction={"row"} spacing={2} maxWidth={1}>
+          <Box flex="1 1 auto" minWidth={0} gap="4px" alignItems="center">
+            <FormatLabel data-testid="format-label" label={format} />
           </Box>
-          <Box flexShrink={0} display="flex" gap="4px" alignItems="center">
-            <Tooltip title="Format Version">
-              <NumbersIcon
-                sx={{
-                  color: theme.palette.text.secondary,
-                  height: "20px",
-                  width: "20px"
-                }}
-              ></NumbersIcon>
-            </Tooltip>
-            <Typography
-              variant="caption"
-              color="textSecondary"
-              data-testid="road-preview-format-version"
-            >
-              {formatVersion}
-            </Typography>
+          <Box flex="1 1 auto" minWidth={0} gap="4px" alignItems="center">
+            <FormatVersionLabel
+              data-testid="format-version-label"
+              label={formatVersion}
+            />
           </Box>
-          <Box display="flex" gap="4px" alignItems="center" minWidth={0}>
-            <Tooltip title="Road File">
-              <AttachFileIcon
-                sx={{
-                  color: theme.palette.text.secondary,
-                  height: "20px",
-                  width: "20px"
-                }}
-              />
-            </Tooltip>
-            <NoWrapTypography>
-              <Typography
-                variant="caption"
-                color="textSecondary"
-                data-testid="road-preview-filename"
-              >
-                {file.name}
-              </Typography>
-            </NoWrapTypography>
+          <Box flex="1 1 auto" minWidth={0} gap="4px" alignItems="center">
+            <FileLabel data-testid="file-label" label={file} />
           </Box>
         </Stack>
       </Box>
@@ -179,59 +122,9 @@ export function RoadPreview({
             {(createdAt || user) && (
               <Stack direction="row" spacing={2}>
                 {createdAt && (
-                  <Box flexShrink={0}>
-                    <Stack
-                      direction="row"
-                      display="flex"
-                      alignItems="center"
-                      gap="4px"
-                    >
-                      <Tooltip title="Created On">
-                        <DateRangeOutlinedIcon
-                          sx={{ color: theme.palette.text.secondary }}
-                        />
-                      </Tooltip>
-
-                      <Typography
-                        color="textSecondary"
-                        variant="caption"
-                        data-testid="road-preview-created"
-                      >
-                        {createdAt}
-                      </Typography>
-                    </Stack>
-                  </Box>
+                  <DateLabel data-testid="date-label" label={createdAt} />
                 )}
-                {user && (
-                  <Box minWidth={0}>
-                    <Stack
-                      direction="row"
-                      display="flex"
-                      alignItems="center"
-                      gap="4px"
-                    >
-                      <Tooltip title="Created By">
-                        {/* needs div element otherwise tooltip is not showing when user as wrapper of custom component */}
-                        <div>
-                          <UserAvatar
-                            sx={{ height: "24px", width: "24px" }}
-                            color="#EC407A"
-                            name={user}
-                          ></UserAvatar>
-                        </div>
-                      </Tooltip>
-                      <NoWrapTypography>
-                        <Typography
-                          color="textSecondary"
-                          variant="caption"
-                          data-testid="road-preview-user"
-                        >
-                          {user}
-                        </Typography>
-                      </NoWrapTypography>
-                    </Stack>
-                  </Box>
-                )}
+                {user && <UserLabel data-testid="user-label" label={user} />}
               </Stack>
             )}
             {label && label.length > 0 && (

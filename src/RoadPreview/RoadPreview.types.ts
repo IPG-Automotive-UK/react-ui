@@ -2,25 +2,6 @@ import { SxProps, Theme } from "@mui/material";
 
 import { Label } from "../LabelSelector/Label.types";
 
-export type File = {
-  /**
-   * Unique identifier of the file
-   */
-  _id: string;
-  /**
-   * Name of the file
-   */
-  name: string;
-  /**
-   * Type of the file e.g. road, scenario, roadInfographic etc.
-   */
-  type: string;
-  /**
-   * Path to the file on file-service. This is an internal only field and should not be exposed to the client.
-   */
-  path?: string;
-};
-
 /**
  * The props needed to define a road preview
  */
@@ -56,7 +37,7 @@ export type RoadPreviewProps = {
   /**
    * Name of the road file
    */
-  file: File;
+  file: string;
   /**
    * Date of creation of road
    */

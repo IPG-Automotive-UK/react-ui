@@ -89,25 +89,23 @@ describe("RoadPreview", () => {
     const descriptionElement = screen.getByTestId("road-preview-description");
 
     // Get file name element from html
-    const filenameElement = screen.getByTestId("road-preview-filename");
+    const filenameElement = screen.getByTestId("file-label");
 
     // Get format element from html
-    const formatElement = screen.getByTestId("road-preview-format");
+    const formatElement = screen.getByTestId("format-label");
 
     // Get formatVersion element from html
-    const formatVersionElement = screen.getByTestId(
-      "road-preview-format-version"
-    );
+    const formatVersionElement = screen.getByTestId("format-version-label");
 
     // Get first label and all labels
     const label = screen.getByText(firstLabel.name);
     const allLabels = container.querySelectorAll(".MuiChip-root");
 
     // Get user name rendered
-    const user = screen.getByTestId("road-preview-user");
+    const user = screen.getByTestId("user-label");
 
     // Get created at date
-    const createdAt = screen.getByTestId("road-preview-created");
+    const createdAt = screen.getByTestId("date-label");
 
     // Check if AsamIcon component rendered
     expect(iconElement).toBeInTheDocument();
