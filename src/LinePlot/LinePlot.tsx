@@ -80,6 +80,9 @@ const LinePlot = ({
           ]}
           layout={{
             autosize: true,
+            font: {
+              family: "Montserrat"
+            },
             margin: { b: 35, l: 80, r: 10, t: 30 },
             paper_bgcolor: "rgba(0,0,0,0)",
             plot_bgcolor: "rgba(0,0,0,0)",
@@ -90,7 +93,6 @@ const LinePlot = ({
               showgrid: showGrid,
               title: {
                 font: {
-                  family: "Montserrat",
                   size: 12
                 },
                 text: xlabel || ""
@@ -104,7 +106,6 @@ const LinePlot = ({
               ticksuffix: " ",
               title: {
                 font: {
-                  family: "Montserrat",
                   size: 12
                 },
                 text: ylabel || ""
