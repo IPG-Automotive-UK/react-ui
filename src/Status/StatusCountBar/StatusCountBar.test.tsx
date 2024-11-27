@@ -9,9 +9,9 @@ describe("StatusCountBar", () => {
   /* eslint-disable sort-keys */
   const defaultProps = {
     count: {
-      aborted: 1,
+      running: 2,
       completed: 3,
-      running: 2
+      aborted: 1
     } as Record<Status, number>,
     title: "Total Simulations"
   };

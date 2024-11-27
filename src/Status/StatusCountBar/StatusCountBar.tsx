@@ -35,10 +35,7 @@ export function StatusCountBar({ title, count }: StatusCountBarProps) {
             gap: "2px",
             padding: "2px",
             width: "100%"
-          },
-          ...(Array.isArray(hoverHandler.sx)
-            ? hoverHandler.sx
-            : [hoverHandler.sx])
+          }
         ]}
       >
         {Object.entries(count).map(([status, countValue]) => {
