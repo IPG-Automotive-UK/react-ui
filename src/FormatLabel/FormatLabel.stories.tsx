@@ -1,5 +1,6 @@
 import { Meta, StoryFn } from "@storybook/react";
 
+import { Box } from "@mui/material";
 import FormatLabel from "./FormatLabel";
 import { FormatLabelProps } from "./FormatLabel.types";
 import React from "react";
@@ -15,13 +16,25 @@ export default meta;
 
 // Story Template
 const Template: StoryFn<FormatLabelProps> = args => {
-  return <FormatLabel {...args} />;
+  return (
+    <Box width={200}>
+      <FormatLabel {...args} />
+    </Box>
+  );
 };
 
 // Default
 export const Default = {
   args: {
     label: "My Custom Format"
+  },
+  render: Template
+};
+
+// Long Custom Format
+export const LongCustomFormat = {
+  args: {
+    label: "My Custom Very Long Format"
   },
   render: Template
 };
