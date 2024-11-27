@@ -1,4 +1,4 @@
-import { AsamLogo, CarMakerLogo } from "../SvgIcons";
+import { AsamLogo, CarMakerLogo, TruckMakerLogo } from "../SvgIcons";
 
 import { FormatLabelProps } from "./FormatLabel.types";
 import { IconWithLabel } from "../IconWithLabel";
@@ -24,7 +24,7 @@ export default function FormatLabel({ label }: FormatLabelProps) {
     case "TM4SL":
       // TODO should return TM logo
       return IconWithLabel({
-        icon: <CarMakerLogo sx={{ height: 20, width: 20 }} />,
+        icon: <TruckMakerLogo sx={{ height: 20, width: 20 }} />,
         label
       });
     // If format is "ASAM" then render the "ASAM" icon
