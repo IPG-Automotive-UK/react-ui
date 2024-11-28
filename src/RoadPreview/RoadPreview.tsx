@@ -109,8 +109,7 @@ export function RoadPreview({
           <Box
             data-testid="format-label"
             flex="0 1 auto"
-            minWidth={0}
-            maxWidth={0.38}
+            maxWidth={"calc(40% - 12px)"}
             alignItems="center"
           >
             <FormatLabel label={format} />
@@ -118,8 +117,7 @@ export function RoadPreview({
           <Box
             data-testid="format-version-label"
             flex="0 1 auto"
-            minWidth={0}
-            maxWidth={0.18}
+            maxWidth={0.2}
             alignItems="center"
           >
             <FormatVersionLabel label={formatVersion} />
@@ -127,8 +125,7 @@ export function RoadPreview({
           <Box
             data-testid="file-label"
             flex="0 1 auto"
-            minWidth={0}
-            maxWidth={0.38}
+            maxWidth={"calc(40% - 12px)"}
             alignItems="center"
           >
             <FileLabel label={file} />
@@ -145,7 +142,7 @@ export function RoadPreview({
                   <Box
                     data-testid="date-label"
                     flex="0 1 auto"
-                    maxWidth={0.38}
+                    maxWidth={"calc(40% - 12px)"}
                     alignItems="center"
                   >
                     <DateLabel label={createdAt} />
@@ -155,8 +152,8 @@ export function RoadPreview({
                   <Box
                     data-testid="user-label"
                     flex="1 1 auto"
-                    minWidth={0}
                     alignItems="center"
+                    minWidth={0}
                   >
                     <UserLabel label={user.name} color={user.color} />
                   </Box>
