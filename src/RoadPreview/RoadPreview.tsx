@@ -100,17 +100,22 @@ export function RoadPreview({
         </Stack>
       </Box>
       <Box gap={1}>
-        <Stack direction={"row"} spacing={2} maxWidth={1}>
-          <Box flex="1 1 auto" minWidth={0} gap="4px" alignItems="center">
+        <Stack
+          direction={"row"}
+          gap={"12px"}
+          maxWidth={1}
+          justifyContent={"left"}
+        >
+          <Box flex="0 1 auto" minWidth={0} maxWidth={0.38} alignItems="center">
             <FormatLabel data-testid="format-label" label={format} />
           </Box>
-          <Box flex="1 1 auto" minWidth={0} gap="4px" alignItems="center">
+          <Box flex="0 1 auto" minWidth={0} maxWidth={0.18} alignItems="center">
             <FormatVersionLabel
               data-testid="format-version-label"
               label={formatVersion}
             />
           </Box>
-          <Box flex="1 1 auto" minWidth={0} gap="4px" alignItems="center">
+          <Box flex="0 1 auto" minWidth={0} maxWidth={0.38} alignItems="center">
             <FileLabel data-testid="file-label" label={file} />
           </Box>
         </Stack>
@@ -120,11 +125,17 @@ export function RoadPreview({
           <Divider />
           <Box display="flex" flexDirection="column" gap={2}>
             {(createdAt || user) && (
-              <Stack direction="row" spacing={2}>
+              <Stack direction="row" gap={"12px"} width={1}>
                 {createdAt && (
-                  <DateLabel data-testid="date-label" label={createdAt} />
+                  <Box display="flex" maxWidth={0.38} alignItems="center">
+                    <DateLabel data-testid="date-label" label={createdAt} />
+                  </Box>
                 )}
-                {user && <UserLabel data-testid="user-label" label={user} />}
+                {user && (
+                  <Box flex="1 1 auto" minWidth={0} alignItems="center">
+                    <UserLabel data-testid="user-label" label={user} />
+                  </Box>
+                )}
               </Stack>
             )}
             {label && label.length > 0 && (

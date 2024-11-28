@@ -3,6 +3,20 @@ import { SxProps, Theme } from "@mui/material";
 import { Label } from "../LabelSelector/Label.types";
 
 /**
+ * Type of user
+ */
+type User = {
+  /**
+   * The name of the user
+   */
+  name: string;
+  /**
+   * The background color of the user avatar
+   */
+  color?: string;
+};
+
+/**
  * The props needed to define a road preview
  */
 export type RoadPreviewProps = {
@@ -45,7 +59,7 @@ export type RoadPreviewProps = {
   /**
    * User name of the creator
    */
-  user?: string;
+  user?: User;
   /**
    * Label/s which are set to this road
    */

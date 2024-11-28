@@ -84,10 +84,10 @@ export const WithOverflowText = {
     description:
       "Stationäre Kreisfahrt: DIN ISO 4138 Es wird innerhalb von 18 Sekunden auf 180° Lenkradwinkel eingelenkt.stationäre Kreisfahrt: DIN ISO 4138 Es wird innerhalb von 18 Sekunden auf 180° Lenkradwinkel eingelenkt.",
     file: "A very looooooooooong Road File Name",
-    format: "ASAM OpenDRIVE",
+    format: "My Custom Overly Long Format",
     label: [Default.args.label[0]],
     name: "SanFrancisco_AEB_A looooong Road Name",
-    user: "James a very long middle name Harper"
+    user: "James a very long middle name Harper that should be truncated"
   },
   render: Template
 };
