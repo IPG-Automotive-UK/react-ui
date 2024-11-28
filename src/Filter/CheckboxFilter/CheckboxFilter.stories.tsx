@@ -24,8 +24,8 @@ export const Default = {
     label: "Select options",
     limitTags: -1,
     name: "checkbox-filter",
-    options: Array.from(Array(10).keys()).map(i => `Option ${i}`),
-    value: ["Option 1"],
+    options: ["!", "2", "1", "10", "@", "3", "b", "A", "C", "B"],
+    value: ["A", "b"],
     variant: "popper"
   },
 

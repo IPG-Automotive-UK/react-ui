@@ -183,5 +183,49 @@ describe("CheckboxFilter", () => {
       );
       expect(screen.getByRole("button", { name: /open/i })).not.toBeEnabled();
     });
+
+    // test that the filter options are sorted alphabetically when the component is rendered
+    it("can sort filter options alphabetically", () => {
+      const onChange = vi.fn();
+      const unsortedOptions = [
+        "!",
+        "2",
+        "1",
+        "10",
+        "@",
+        "3",
+        "b",
+        "A",
+        "C",
+        "B"
+      ];
+      render(
+        <CheckboxFilterWithState
+          options={unsortedOptions}
+          onChange={onChange}
+          variant="always-open"
+        />
+      );
+
+      // find all the list items in the filter popper which have test id filter-option-label
+      const filterOptions = screen.getAllByTestId("filter-option-label");
+
+      // get the text content of the filter option paragraph components
+      const filterOptionText = filterOptions.map(option => option.textContent);
+
+      // check that the options are sorted alphabetically
+      expect(filterOptionText).toEqual([
+        "!",
+        "@",
+        "1",
+        "2",
+        "3",
+        "10",
+        "A",
+        "b",
+        "B",
+        "C"
+      ]);
+    });
   });
 });

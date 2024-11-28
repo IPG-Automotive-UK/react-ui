@@ -13,6 +13,7 @@ import { CheckBox, CheckBoxOutlineBlank } from "@mui/icons-material";
 import AlwaysOpenAutocomplete from "../AlwaysOpenAutocomplete";
 import { CheckboxFilterProps } from "./CheckboxFilter.types";
 import { HTMLAttributes } from "react";
+import { sortFilterOptions } from "../sortFilterOptions";
 
 /**
  * A checkbox filter allows the user to select multiple options from a list.
@@ -66,7 +67,7 @@ function CheckboxFilterAlwaysOpen({
       limitTags={limitTags}
       multiple
       onChange={(_e, newValue) => handleOnChange(newValue)}
-      options={options}
+      options={sortFilterOptions(options)}
       renderInput={params => {
         return (
           <TextField
@@ -103,7 +104,7 @@ function CheckboxFilterPopper({
       limitTags={limitTags}
       multiple
       onChange={(_e, newValue) => onChange(newValue)}
-      options={options}
+      options={sortFilterOptions(options)}
       renderInput={params => (
         <TextField {...params} label={label} name={name} />
       )}
@@ -139,7 +140,7 @@ function Option(
         icon={<CheckBoxOutlineBlank fontSize="small" />}
         value={option}
       />
-      <Typography>{option}</Typography>
+      <Typography data-testid="filter-option-label">{option}</Typography>
     </Box>
   );
 }
