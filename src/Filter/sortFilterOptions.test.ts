@@ -50,6 +50,30 @@ describe("sortFilterOptions", () => {
     ]);
   });
 
+  // sorts semantic versioning strings
+  it("sorts semantic versioning strings", () => {
+    const filterOptions = [
+      "11.0.0",
+      "10.0.0",
+      "100.0.0",
+      "1.0.0",
+      "1.0.1",
+      "1.0.10",
+      "1.0.2",
+      "1.1.0"
+    ];
+    expect(sortFilterOptions(filterOptions)).toEqual([
+      "1.0.0",
+      "1.0.1",
+      "1.0.2",
+      "1.0.10",
+      "1.1.0",
+      "10.0.0",
+      "11.0.0",
+      "100.0.0"
+    ]);
+  });
+
   // sort with all types of characters
   it("sorts filter options with all types of characters", () => {
     const filterOptions = [
