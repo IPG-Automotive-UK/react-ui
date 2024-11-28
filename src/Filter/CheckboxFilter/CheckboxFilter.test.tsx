@@ -192,12 +192,16 @@ describe("CheckboxFilter", () => {
         "2",
         "1",
         "10",
+        "Gate 10",
+        "Gate 4",
+        "Gate 5",
         "@",
         "3",
         "b",
         "A",
         "C",
-        "B"
+        "B",
+        "Gate 1"
       ];
       render(
         <CheckboxFilterWithState
@@ -224,7 +228,11 @@ describe("CheckboxFilter", () => {
         "A",
         "b",
         "B",
-        "C"
+        "C",
+        "Gate 1",
+        "Gate 4",
+        "Gate 5",
+        "Gate 10"
       ]);
     });
   });

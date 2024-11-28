@@ -39,9 +39,35 @@ describe("sortFilterOptions", () => {
     expect(sortFilterOptions(filterOptions)).toEqual([]);
   });
 
+  // sorts alpha-numeric mix
+  it("sorts alpha-numeric mix", () => {
+    const filterOptions = ["Gate 10", "Gate 4", "Gate 5", "Gate 1"];
+    expect(sortFilterOptions(filterOptions)).toEqual([
+      "Gate 1",
+      "Gate 4",
+      "Gate 5",
+      "Gate 10"
+    ]);
+  });
+
   // sort with all types of characters
   it("sorts filter options with all types of characters", () => {
-    const filterOptions = ["!", "2", "1", "10", "@", "3", "b", "A", "C", "B"];
+    const filterOptions = [
+      "!",
+      "2",
+      "1",
+      "10",
+      "Gate 10",
+      "Gate 4",
+      "Gate 5",
+      "@",
+      "3",
+      "b",
+      "A",
+      "C",
+      "B",
+      "Gate 1"
+    ];
     expect(sortFilterOptions(filterOptions)).toEqual([
       "!",
       "@",
@@ -52,7 +78,11 @@ describe("sortFilterOptions", () => {
       "A",
       "b",
       "B",
-      "C"
+      "C",
+      "Gate 1",
+      "Gate 4",
+      "Gate 5",
+      "Gate 10"
     ]);
   });
 });
