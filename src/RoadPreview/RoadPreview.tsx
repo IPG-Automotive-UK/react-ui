@@ -144,7 +144,7 @@ export function RoadPreview({
                 {createdAt && (
                   <Box
                     data-testid="date-label"
-                    display="flex"
+                    flex="0 1 auto"
                     maxWidth={0.38}
                     alignItems="center"
                   >
