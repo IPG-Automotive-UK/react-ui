@@ -57,7 +57,7 @@ export type RoadPreviewProps = {
    */
   createdAt?: string;
   /**
-   * User name of the creator
+   * User object of the creator of the road
    */
   user?: User;
   /**
