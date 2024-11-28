@@ -81,7 +81,7 @@ const LinePlot = ({
           layout={{
             autosize: true,
             font: {
-              family: "Montserrat"
+              family: "Montserrat, sans-serif"
             },
             margin: { b: 35, l: 80, r: 10, t: 30 },
             paper_bgcolor: "rgba(0,0,0,0)",

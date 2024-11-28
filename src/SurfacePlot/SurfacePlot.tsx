@@ -67,7 +67,7 @@ const SurfacePlot = ({
               colorbar: {
                 tickfont: {
                   color: theme.palette.mode === "light" ? "" : "white",
-                  family: "Montserrat",
+                  family: "Montserrat, sans-serif",
                   size: 12
                 }
               },
@@ -80,7 +80,7 @@ const SurfacePlot = ({
           layout={{
             autosize: true,
             font: {
-              family: "Montserrat"
+              family: "Montserrat, sans-serif"
             },
             margin: {
               b: 5,
