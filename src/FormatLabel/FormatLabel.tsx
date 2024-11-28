@@ -22,7 +22,6 @@ export default function FormatLabel({ label }: FormatLabelProps) {
     // If format is "TruckMaker" then render "TruckMaker" icon
     case "TruckMaker":
     case "TM4SL":
-      // TODO should return TM logo
       return IconWithLabel({
         icon: <TruckMakerLogo sx={{ height: 20, width: 20 }} />,
         label

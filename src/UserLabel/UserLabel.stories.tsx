@@ -31,6 +31,15 @@ export const Default = {
   render: Template
 };
 
+// Custom color
+export const CustomColor = {
+  args: {
+    color: "#EC407A",
+    label: "James Harper"
+  },
+  render: Template
+};
+
 // Long Name
 export const LongName = {
   args: {
