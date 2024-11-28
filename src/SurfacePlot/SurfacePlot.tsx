@@ -68,7 +68,9 @@ const SurfacePlot = ({
                 tickfont: {
                   color: theme.palette.mode === "light" ? "" : "white",
                   family: "Montserrat, sans-serif",
-                  size: 12
+                  shadow: "none",
+                  size: 12,
+                  weight: 400
                 }
               },
               type: "surface",
