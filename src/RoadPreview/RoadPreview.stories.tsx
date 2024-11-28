@@ -69,7 +69,7 @@ export const Default = {
       maxWidth: "480px",
       padding: "16px"
     },
-    user: "James Harper",
+    user: { name: "James Harper" },
     version: "1.1"
   },
   render: Template
@@ -87,7 +87,10 @@ export const WithOverflowText = {
     format: "My Custom Overly Long Format",
     label: [Default.args.label[0]],
     name: "SanFrancisco_AEB_A looooong Road Name",
-    user: "James a very long middle name Harper that should be truncated"
+    user: {
+      color: "rgb(236, 64, 122)",
+      name: "James a very long middle name that should be truncated Harper"
+    }
   },
   render: Template
 };

@@ -106,17 +106,32 @@ export function RoadPreview({
           maxWidth={1}
           justifyContent={"left"}
         >
-          <Box flex="0 1 auto" minWidth={0} maxWidth={0.38} alignItems="center">
-            <FormatLabel data-testid="format-label" label={format} />
+          <Box
+            data-testid="format-label"
+            flex="0 1 auto"
+            minWidth={0}
+            maxWidth={0.38}
+            alignItems="center"
+          >
+            <FormatLabel label={format} />
           </Box>
-          <Box flex="0 1 auto" minWidth={0} maxWidth={0.18} alignItems="center">
-            <FormatVersionLabel
-              data-testid="format-version-label"
-              label={formatVersion}
-            />
+          <Box
+            data-testid="format-version-label"
+            flex="0 1 auto"
+            minWidth={0}
+            maxWidth={0.18}
+            alignItems="center"
+          >
+            <FormatVersionLabel label={formatVersion} />
           </Box>
-          <Box flex="0 1 auto" minWidth={0} maxWidth={0.38} alignItems="center">
-            <FileLabel data-testid="file-label" label={file} />
+          <Box
+            data-testid="file-label"
+            flex="0 1 auto"
+            minWidth={0}
+            maxWidth={0.38}
+            alignItems="center"
+          >
+            <FileLabel label={file} />
           </Box>
         </Stack>
       </Box>
@@ -127,13 +142,23 @@ export function RoadPreview({
             {(createdAt || user) && (
               <Stack direction="row" gap={"12px"} width={1}>
                 {createdAt && (
-                  <Box display="flex" maxWidth={0.38} alignItems="center">
-                    <DateLabel data-testid="date-label" label={createdAt} />
+                  <Box
+                    data-testid="date-label"
+                    display="flex"
+                    maxWidth={0.38}
+                    alignItems="center"
+                  >
+                    <DateLabel label={createdAt} />
                   </Box>
                 )}
                 {user && (
-                  <Box flex="1 1 auto" minWidth={0} alignItems="center">
-                    <UserLabel data-testid="user-label" label={user} />
+                  <Box
+                    data-testid="user-label"
+                    flex="1 1 auto"
+                    minWidth={0}
+                    alignItems="center"
+                  >
+                    <UserLabel label={user.name} color={user.color} />
                   </Box>
                 )}
               </Stack>
