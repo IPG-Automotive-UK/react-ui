@@ -8,14 +8,16 @@ import { Skeleton } from "@mui/material";
 /**
  * Lazy load wrapper for HTML image brackets. Used for lazy loading images.
  * @param LazyLoadImgProps The input object of the component
- * @param LazyLoadImgProps.src string Source of the image
  * @param LazyLoadImgProps.alt string Alternative text for the image
+ * @param LazyLoadImgProps.autoFitSkeleton boolean Flag to enable the skeleton adjusting size to the bounding element. Default is false.
  * @param LazyLoadImgProps.ImgProps object ImgProps Any other prop of the <img> component
+ * @param LazyLoadImgProps.src string Source of the image
  */
 export default function LazyLoadImage({
-  src,
   alt,
-  ImgProps = {}
+  autoFitSkeleton = false,
+  ImgProps = {},
+  src
 }: LazyLoadImageProps) {
   // state to track if the image is visible
   const [isVisible, setIsVisible] = useState(false);
@@ -70,9 +72,10 @@ export default function LazyLoadImage({
         <Skeleton
           sx={{
             borderRadius: 0,
-            height: dimensions.height,
+            display: "block",
+            height: autoFitSkeleton ? "100%" : dimensions.height,
             transform: "none",
-            width: dimensions.width
+            width: autoFitSkeleton ? "100%" : dimensions.width
           }}
         />
       ) : null}
