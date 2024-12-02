@@ -1,6 +1,6 @@
 {
   "name": "@ipguk/react-ui",
-  "version": "9.0.1",
+  "version": "9.0.2",
   "description": "React UI component library for IPG web applications",
   "author": {
     "name": "IPG-Automotive-UK"
@@ -55,6 +55,7 @@
     "@testing-library/user-event": "^14.5.2",
     "@types/css-mediaquery": "^0.1.4",
     "@types/node": "^20.14.11",
+    "@types/plotly.js": "^2.35.1",
     "@types/prop-types": "^15.7.12",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
@@ -104,14 +105,10 @@
     "@mui/icons-material": "^5.16.4",
     "@mui/x-data-grid": "^7.10.0",
     "@mui/x-tree-view": "^7.10.0",
-    "@types/css-mediaquery": "^0.1.4",
-    "@types/plotly.js": "^2.33.0",
-    "@types/react-plotly.js": "^2.6.3",
-    "@types/react-text-mask": "^5.4.14",
     "colord": "^2.9.3",
     "material-ui-confirm": "3.0.16",
     "material-ui-popup-state": "^5.1.2",
-    "plotly.js": "^2.33.0",
+    "plotly.js": "^2.35.2",
     "prop-types": "^15.8.1",
     "react-colorful": "^5.6.1",
     "react-dropzone": "^14.2.3",
