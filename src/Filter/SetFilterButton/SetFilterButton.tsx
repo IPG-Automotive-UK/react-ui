@@ -22,7 +22,7 @@ export function SetFilterButton({
       data-testid="filter-open-button"
       sx={theme => ({
         "&:focus-visible": {
-          border: `1px solid ${alpha(theme.palette.text.primary, 0.23)}`
+          outline: `1px solid ${alpha(theme.palette.text.primary, 0.23)}`
         },
         width: "fit-content"
       })}
