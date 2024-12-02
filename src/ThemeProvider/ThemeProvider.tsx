@@ -153,7 +153,7 @@ const lightTheme = createTheme(
         }
       }
     },
-    cssVariables: true,
+    // cssVariables: true,
     mixins: {
       MuiDataGrid: {
         containerBackground: "#fff",
@@ -214,7 +214,7 @@ const darkTheme = createTheme(
         }
       }
     },
-    cssVariables: true,
+    // cssVariables: true,
     mixins: {
       MuiDataGrid: {
         containerBackground: "#000",
