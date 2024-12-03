@@ -26,13 +26,13 @@ export default function IconWithLabel({
 
   return (
     <Stack
-      data-testid={"icon-with-label"}
-      alignItems={"center"}
-      direction={"row"}
-      gap={"4px"}
-      display={"flex"}
+      data-testid="icon-with-label"
+      alignItems="center"
+      direction="row"
+      gap="4px"
+      display="flex"
     >
-      <Box display={"flex"}>{customizedIcon}</Box>
+      <Box display="flex">{customizedIcon}</Box>
       <Box minWidth={0}>
         {href ? (
           <Link
@@ -46,7 +46,7 @@ export default function IconWithLabel({
           >
             <Typography
               noWrap
-              component={"p"}
+              component="p"
               variant="caption"
               sx={{
                 color: theme.palette.primary.main,
@@ -59,7 +59,7 @@ export default function IconWithLabel({
         ) : (
           <Typography
             noWrap
-            component={"p"}
+            component="p"
             variant="caption"
             sx={{
               color: alpha(theme.palette.text.secondary, 0.6),

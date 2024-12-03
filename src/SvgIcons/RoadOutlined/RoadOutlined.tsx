@@ -2,6 +2,11 @@ import React from "react";
 import { RoadOutlinedProps } from "./RoadOutlined.types";
 import { SvgIcon } from "@mui/material";
 
+/**
+ * Renders a road outline icon
+ * @param sx Optional prop to render with custom styles
+ * @returns Renders a road outline icon
+ */
 export default function RoadOutlinedIcon({ sx }: RoadOutlinedProps) {
   return (
     <SvgIcon
