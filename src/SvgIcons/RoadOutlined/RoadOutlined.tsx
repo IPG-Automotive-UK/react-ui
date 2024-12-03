@@ -10,7 +10,7 @@ import { SvgIcon } from "@mui/material";
 export default function RoadOutlinedIcon({ sx }: RoadOutlinedProps) {
   return (
     <SvgIcon
-      data-testid={"road-outlined-icon"}
+      data-testid="road-outlined-icon"
       width="16"
       height="16"
       viewBox="0 0 16 16"
