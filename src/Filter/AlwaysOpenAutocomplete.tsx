@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import { Autocomplete, Stack } from "@mui/material";
-
 import type { AlwaysOpenAutocompleteProps } from "./AlwaysOpenAutocomplete.types";
+import { Stack } from "@mui/material";
+import { VirtualizedAutocomplete } from "./VirtualizedAutocomplete";
 
 /**
  * An overriden Autocomplete component that is always open
@@ -13,7 +13,7 @@ export default function AlwaysOpenAutocomplete(
   // NOTE: The stack is required because the Autocomplete component inserts the "PopperComponent" as a sibling.
   return (
     <Stack direction="column">
-      <Autocomplete open disableCloseOnSelect {...props} />
+      <VirtualizedAutocomplete open disableCloseOnSelect {...props} />
     </Stack>
   );
 }

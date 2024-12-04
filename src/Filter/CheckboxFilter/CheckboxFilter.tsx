@@ -12,7 +12,7 @@ import { CheckBox, CheckBoxOutlineBlank } from "@mui/icons-material";
 import AlwaysOpenAutocomplete from "../AlwaysOpenAutocomplete";
 import { CheckboxFilterProps } from "./CheckboxFilter.types";
 import { HTMLAttributes } from "react";
-import { VirtualizedAutocomplete } from "./VirtualizedAutocomplete";
+import { VirtualizedAutocomplete } from "../VirtualizedAutocomplete";
 import { sortFilterOptions } from "../sortFilterOptions";
 
 /**
