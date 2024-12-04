@@ -11,6 +11,10 @@ export type StatusIconProps = {
    */
   width?: CSSProperties["width"];
   /**
+   * Icon padding
+   */
+  padding?: CSSProperties["padding"];
+  /**
    *
    * The status type.
    */

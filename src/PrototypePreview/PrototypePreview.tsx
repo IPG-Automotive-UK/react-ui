@@ -10,7 +10,6 @@ import React from "react";
 import { StatusLabel } from "../Status";
 import TruncatedTooltip from "../TruncatedTooltip";
 import UserLabel from "../UserLabel/UserLabel";
-import VersionChip from "../VersionChip/VersionChip";
 import { VersionLabel } from "../VersionLabel";
 
 /**
@@ -69,23 +68,18 @@ export function PrototypePreview({
             }}
           />
           <Stack direction="column" minWidth={0}>
-            <Stack direction="row" gap={1} display="flex">
-              <Box>
-                <VersionChip version={version} />
-              </Box>
-              <NoWrapTypography>
-                <Link
-                  href={href}
-                  target="_blank"
-                  color="primary"
-                  variant="subtitle2"
-                  underline="hover"
-                  data-testid="prototype-preview-name"
-                >
-                  {name}
-                </Link>
-              </NoWrapTypography>
-            </Stack>
+            <NoWrapTypography>
+              <Link
+                href={href}
+                target="_blank"
+                color="primary"
+                variant="subtitle2"
+                underline="hover"
+                data-testid="prototype-preview-name"
+              >
+                {name}
+              </Link>
+            </NoWrapTypography>
             <Stack direction="row">
               <TruncatedTooltip multiline={2}>
                 <Typography
@@ -106,12 +100,12 @@ export function PrototypePreview({
           gap={"12px"}
           maxWidth={1}
           justifyContent={"left"}
+          alignContent={"center"}
         >
           <Box
             data-testid="format-label"
             flex="0 1 auto"
-            maxWidth={"calc(40% - 12px)"}
-            alignItems="center"
+            maxWidth="calc(40% - 24px)"
           >
             <FormatLabel label={format} />
           </Box>
@@ -119,25 +113,24 @@ export function PrototypePreview({
             data-testid="format-version-label"
             flex="0 1 auto"
             maxWidth={0.2}
-            alignItems="center"
           >
             <FormatVersionLabel label={formatVersion} />
           </Box>
-          <Box
-            data-testid="version-label"
-            flex="0 1 auto"
-            maxWidth={"calc(40% - 12px)"}
-            alignItems="center"
-          >
+          <Box data-testid="version-label" flex="0 1 auto" maxWidth={0.2}>
             <VersionLabel label={version} />
           </Box>
           <Box
             data-testid="status-label"
-            flex="0 1 auto"
-            maxWidth={"calc(40% - 12px)"}
-            alignItems="center"
+            flex="0 0 auto"
+            maxWidth="calc(20% - 12px)"
           >
-            <StatusLabel status={quality} variant="caption" />
+            <StatusLabel
+              gap={0.5}
+              iconProps={{ height: 20, padding: 0, width: 20 }}
+              color="text.secondary"
+              status={quality}
+              variant="caption"
+            />
           </Box>
         </Stack>
       </Box>
@@ -150,6 +143,7 @@ export function PrototypePreview({
                 {createdAt && (
                   <Box
                     data-testid="date-label"
+                    display="flex"
                     flex="0 1 auto"
                     maxWidth={"calc(40% - 12px)"}
                     alignItems="center"
@@ -160,6 +154,7 @@ export function PrototypePreview({
                 {user && (
                   <Box
                     data-testid="user-label"
+                    display="flex"
                     flex="1 1 auto"
                     alignItems="center"
                     minWidth={0}

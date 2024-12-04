@@ -1,5 +1,5 @@
 import React, { act } from "react";
-import { render, screen, waitFor } from "@testing-library/react";
+import { getByTestId, render, screen, waitFor } from "@testing-library/react";
 import statuses, { statusTypes } from "../statuses";
 
 import StatusIcon from "./StatusIcon";
@@ -19,6 +19,9 @@ describe("StatusIcon", () => {
       container.querySelector("svg")?.getAttribute("data-testid")
     ).not.toBeUndefined();
 
+    console.log(
+      iconContainer.querySelector("svg")?.getAttribute("data-testid")
+    );
     // expect the icon to be the same as the raw icon
     expect(container.querySelector("svg")?.getAttribute("data-testid")).toEqual(
       iconContainer.querySelector("svg")?.getAttribute("data-testid")
@@ -56,5 +59,16 @@ describe("StatusIcon", () => {
 
     // there shouldn't be a tooltip
     expect(screen.queryByRole("tooltip")).not.toBeInTheDocument();
+  });
+
+  // test icon can be rendered with custom padding
+  test("`StatusIcon` renders with custom padding", () => {
+    render(<StatusIcon status="disrupted" padding={1} />);
+
+    const icon = screen.getByTestId("ErrorIcon");
+    const iconStyle = getComputedStyle(icon);
+
+    expect(icon).toBeInTheDocument();
+    expect(iconStyle.padding).toBe("8px");
   });
 });
