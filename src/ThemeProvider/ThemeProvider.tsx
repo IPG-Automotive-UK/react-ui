@@ -49,207 +49,7 @@ declare module "@mui/material/styles" {
   }
 }
 
-// theme defaults regardless of color mode. these are provided as an object that can be merged during color mode theme creation
-// const defaultTheme: ThemeOptions = {
-//   components: {
-//     MuiAccordionSummary: {
-//       styleOverrides: {
-//         root: {
-//           "&$expanded": {
-//             marginBottom: -20
-//           }
-//         }
-//       }
-//     },
-//     MuiDataGrid: {
-//       styleOverrides: {
-//         root: {
-//           "& .MuiDataGrid-cell:focus, .MuiDataGrid-cell:focus-within, .MuiDataGrid-columnHeader:focus, .MuiDataGrid-columnHeader:focus-within":
-//             {
-//               outline: "none"
-//             }
-//         }
-//       }
-//     },
-//     MuiFormLabel: {
-//       styleOverrides: {
-//         asterisk: {
-//           color: "#d32f2f"
-//         }
-//       }
-//     },
-//     MuiTooltip: {
-//       styleOverrides: {
-//         tooltip: {
-//           fontSize: "12px",
-//           fontWeight: "normal"
-//         }
-//       }
-//     }
-//   },
-//   layout: {
-//     content: {
-//       maxWidth: 1152
-//     }
-//   },
-//   mixins: {
-//     toolbar: {
-//       minHeight: 64
-//     }
-//   },
-//   typography: {
-//     fontFamily: "Montserrat"
-//   }
-// };
-
-// // custom material-ui theme for light mode
-// const lightTheme = createTheme(
-//   {
-//     components: {
-//       MuiCssBaseline: {
-//         styleOverrides: themeParam => ({
-//           body: {
-//             ...darkScrollbar(
-//               themeParam.palette.mode === "light"
-//                 ? {
-//                     active: grey[400],
-//                     thumb: grey[400],
-//                     track: grey[200]
-//                   }
-//                 : undefined
-//             )
-//           }
-//         })
-//       },
-//       MuiDataGrid: {
-//         styleOverrides: {
-//           footerContainer: {
-//             backgroundColor: "#fff"
-//           },
-//           main: {
-//             backgroundColor: "#fff"
-//           }
-//         }
-//       },
-//       MuiIconButton: { styleOverrides: { root: { color: "#9e9e9e" } } },
-//       MuiStepper: {
-//         styleOverrides: {
-//           root: {
-//             backgroundColor: "rgba(144, 202, 249, 0.08)"
-//           }
-//         }
-//       },
-//       MuiTableRow: {
-//         styleOverrides: {
-//           root: {
-//             "&$selected": {
-//               backgroundColor: "rgba(0, 95, 168, 0.08)"
-//             }
-//           }
-//         }
-//       },
-//       MuiToggleButton: {
-//         styleOverrides: {
-//           root: {
-//             "&$selected": {
-//               "&:hover": {
-//                 backgroundColor: "rgba(0, 95, 168, 0.15)"
-//               },
-//               backgroundColor: "rgba(0, 95, 168, 0.08)"
-//             },
-//             "&:hover": {
-//               backgroundColor: "rgba(0, 95, 168, 0.15)"
-//             },
-//             borderColor: "rgb(196, 196, 196)"
-//           }
-//         }
-//       }
-//     },
-//     // cssVariables: true,
-//     mixins: {
-//       MuiDataGrid: {
-//         containerBackground: "#fff",
-//         pinnedBackground: "#fff"
-//       }
-//     },
-//     palette: {
-//       action: {
-//         selected: "rgba(0, 95, 168, 0.08)"
-//       },
-//       background: {
-//         default: "rgb(250, 250, 250)"
-//       },
-//       primary: { main: "#003063" },
-//       secondary: { main: "#005FA8" }
-//     },
-//     typography: {
-//       allVariants: {
-//         fontFamily: "Montserrat"
-//       }
-//     }
-//   },
-//   defaultTheme
-// );
-
-// // custom theme for dark mode
-// const darkTheme = createTheme(
-//   {
-//     // colorSchemes: { dark: true },
-//     components: {
-//       MuiAlertTitle: {
-//         styleOverrides: {
-//           root: {
-//             color: "inherit"
-//           }
-//         }
-//       },
-//       MuiCssBaseline: {
-//         styleOverrides: themeParam => ({
-//           body: themeParam.palette.mode === "dark" ? darkScrollbar() : null
-//         })
-//       },
-//       MuiDataGrid: {
-//         styleOverrides: {
-//           footerContainer: {
-//             backgroundColor: "#000"
-//           },
-//           main: {
-//             backgroundColor: "#000"
-//           }
-//         }
-//       },
-//       MuiStepper: {
-//         styleOverrides: {
-//           root: {
-//             backgroundColor: "rgba(255, 255, 255, 0.08)"
-//           }
-//         }
-//       }
-//     },
-//     // cssVariables: true,
-//     mixins: {
-//       MuiDataGrid: {
-//         containerBackground: "#000",
-//         pinnedBackground: "#000"
-//       }
-//     },
-//     palette: {
-//       background: {
-//         default: "#121212"
-//       },
-//       mode: "dark",
-//       primary: { main: "#87A5D2" }
-//     },
-//     typography: {
-//       allVariants: {
-//         color: "#fff",
-//         fontFamily: "Montserrat"
-//       }
-//     }
-//   },
-//   defaultTheme
-// );
-
+// Define the main theme
 const mainTheme: ThemeOptions = {
   colorSchemes: {
     dark: {
@@ -277,7 +77,6 @@ const mainTheme: ThemeOptions = {
       },
       palette: {
         background: { default: "#121212" },
-        mode: "dark",
         primary: { main: "#87A5D2" }
       },
       typography: {
@@ -336,7 +135,6 @@ const mainTheme: ThemeOptions = {
           selected: "rgba(0, 95, 168, 0.08)"
         },
         background: { default: "rgb(250, 250, 250)" },
-        mode: "light",
         primary: { main: "#003063" },
         secondary: { main: "#005FA8" }
       },
@@ -381,6 +179,7 @@ const mainTheme: ThemeOptions = {
   }
 };
 
+// create the main theme with color schemes
 const mainThemeWithColorSchemes = createTheme({
   // cssVariables: true,
   ...mainTheme
@@ -401,15 +200,22 @@ export default function ThemeProvider({
   );
 }
 
+/**
+ * Child wrapper to handle controlled theme changes
+ */
 function ChildWrapper({
   children,
   theme: controlledTheme
 }: ThemeProviderProps) {
+  // get the current theme mode
   const { mode, setMode } = useColorScheme();
+
+  // update the theme mode when the controlled theme changes
   useEffect(() => {
     if (controlledTheme && mode !== controlledTheme) {
       setMode(controlledTheme);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [controlledTheme]);
   return children;
 }
