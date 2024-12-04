@@ -312,16 +312,16 @@ const mainTheme: ThemeOptions = {
         MuiToggleButton: {
           styleOverrides: {
             root: {
-              borderColor: "rgb(196, 196, 196)",
+              "&$selected": {
+                "&:hover": {
+                  backgroundColor: "rgba(0, 95, 168, 0.15)"
+                },
+                backgroundColor: "rgba(0, 95, 168, 0.08)"
+              },
               "&:hover": {
                 backgroundColor: "rgba(0, 95, 168, 0.15)"
               },
-              "&$selected": {
-                backgroundColor: "rgba(0, 95, 168, 0.08)",
-                "&:hover": {
-                  backgroundColor: "rgba(0, 95, 168, 0.15)"
-                }
-              }
+              borderColor: "rgb(196, 196, 196)"
             }
           }
         }
