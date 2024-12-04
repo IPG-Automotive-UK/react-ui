@@ -54,10 +54,17 @@ const mainTheme: ThemeOptions = {
   colorSchemes: {
     dark: {
       components: {
+        MuiAlertTitle: {
+          styleOverrides: {
+            root: {
+              color: "inherit"
+            }
+          }
+        },
         MuiCssBaseline: {
-          styleOverrides: theme => ({
+          styleOverrides: {
             body: darkScrollbar()
-          })
+          }
         },
         MuiDataGrid: {
           styleOverrides: {
@@ -68,11 +75,13 @@ const mainTheme: ThemeOptions = {
               backgroundColor: "#000"
             }
           }
-        }
-      },
-      mixins: {
-        toolbar: {
-          minHeight: 64
+        },
+        MuiStepper: {
+          styleOverrides: {
+            root: {
+              backgroundColor: "rgba(255, 255, 255, 0.08)"
+            }
+          }
         }
       },
       palette: {
@@ -81,22 +90,20 @@ const mainTheme: ThemeOptions = {
       },
       typography: {
         allVariants: {
-          color: "#fff",
-          fontFamily: "Montserrat"
-        },
-        fontFamily: "Montserrat"
+          color: "#fff"
+        }
       }
     },
     light: {
       components: {
         MuiCssBaseline: {
-          styleOverrides: theme => ({
+          styleOverrides: {
             body: darkScrollbar({
               active: grey[400],
               thumb: grey[400],
               track: grey[200]
             })
-          })
+          }
         },
         MuiDataGrid: {
           styleOverrides: {
@@ -105,6 +112,23 @@ const mainTheme: ThemeOptions = {
             },
             main: {
               backgroundColor: "#fff"
+            }
+          }
+        },
+        MuiIconButton: { styleOverrides: { root: { color: "#9e9e9e" } } },
+        MuiStepper: {
+          styleOverrides: {
+            root: {
+              backgroundColor: "rgba(144, 202, 249, 0.08)"
+            }
+          }
+        },
+        MuiTableRow: {
+          styleOverrides: {
+            root: {
+              "&$selected": {
+                backgroundColor: "rgba(0, 95, 168, 0.08)"
+              }
             }
           }
         },
@@ -126,8 +150,9 @@ const mainTheme: ThemeOptions = {
         }
       },
       mixins: {
-        toolbar: {
-          minHeight: 64
+        MuiDataGrid: {
+          containerBackground: "#fff",
+          pinnedBackground: "#fff"
         }
       },
       palette: {
@@ -137,12 +162,6 @@ const mainTheme: ThemeOptions = {
         background: { default: "rgb(250, 250, 250)" },
         primary: { main: "#003063" },
         secondary: { main: "#005FA8" }
-      },
-      typography: {
-        allVariants: {
-          fontFamily: "Montserrat"
-        },
-        fontFamily: "Montserrat"
       }
     }
   },
@@ -153,6 +172,16 @@ const mainTheme: ThemeOptions = {
           "&$expanded": {
             marginBottom: -20
           }
+        }
+      }
+    },
+    MuiDataGrid: {
+      styleOverrides: {
+        root: {
+          "& .MuiDataGrid-cell:focus, .MuiDataGrid-cell:focus-within, .MuiDataGrid-columnHeader:focus, .MuiDataGrid-columnHeader:focus-within":
+            {
+              outline: "none"
+            }
         }
       }
     },
@@ -176,6 +205,17 @@ const mainTheme: ThemeOptions = {
     content: {
       maxWidth: 1152
     }
+  },
+  mixins: {
+    toolbar: {
+      minHeight: 64
+    }
+  },
+  typography: {
+    allVariants: {
+      fontFamily: "Montserrat"
+    },
+    fontFamily: "Montserrat"
   }
 };
 
