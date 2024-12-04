@@ -153,7 +153,6 @@ const lightTheme = createTheme(
         }
       }
     },
-    // cssVariables: true,
     mixins: {
       MuiDataGrid: {
         containerBackground: "#fff",
@@ -182,7 +181,6 @@ const lightTheme = createTheme(
 // custom theme for dark mode
 const darkTheme = createTheme(
   {
-    colorSchemes: { dark: true },
     components: {
       MuiAlertTitle: {
         styleOverrides: {
@@ -214,7 +212,6 @@ const darkTheme = createTheme(
         }
       }
     },
-    // cssVariables: true,
     mixins: {
       MuiDataGrid: {
         containerBackground: "#000",
