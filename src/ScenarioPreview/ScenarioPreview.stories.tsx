@@ -23,33 +23,21 @@ const Template: StoryFn<ScenarioPreviewProps> = args => {
  */
 export const Default = {
   args: {
-    createdAt: "2024-11-13 08:24:08",
-    description: "Small Description",
-    file: "TestScenarioFile.scn",
-    format: "AnyRandom Format",
-    formatVersion: "1.0",
+    name: "718-2024-CaymanS",
     href: "https://example.com",
     image: "https://picsum.photos/id/101/400/200",
-    label: [
-      {
-        name: "Scenario Label 1",
-        color: "#FF5722"
-      },
-      {
-        name: "Scenario Label 2",
-        color: "#4CAF50"
-      }
-    ],
-    name: "718-2024-CaymanS",
-    roadName: "Test Road Name",
-    roadHref: "https://example.com/road",
+    description: "Small Description",
+    format: "AnyRandom Format",
+    formatVersion: "1.0",
+    file: { _id: "1", name: "TestScenarioFile.scn", type: "scenario" },
+    createdAt: "2024-11-13 08:24:08",
+    user: "James Harper",
     sx: {
       borderRadius: "8px",
       boxShadow: 3,
-      maxWidth: "480px",
+      maxWidth: "480px", // this limits the width of th ecomponent
       padding: "16px"
-    },
-    user: "James Harper"
+    }
   },
   render: Template
 };
@@ -62,7 +50,11 @@ export const WithOverflowText = {
     ...Default.args,
     description:
       "This is a very long description that might overflow the card container if not handled properly. The description highlights a scenario with intricate details about the simulation.",
-    file: "A_very_loooooong_scenario_file_name.scn",
+    file: {
+      _id: "2",
+      name: "A_very_loooooong_scenario_file_name.scn",
+      type: "scenario"
+    },
     name: "A_very_long_scenario_name_2024_with_extra_details",
     user: "James A Very Long Middle Name Harper"
   },
@@ -74,13 +66,13 @@ export const WithOverflowText = {
  */
 export const WithoutOptionalProps = {
   args: {
-    description: "Short description of the scenario",
-    file: "ScenarioFile.scn",
-    format: "Format",
-    formatVersion: "1.0",
+    name: "SimpleScenario",
     href: "https://example.com",
     image: "https://picsum.photos/id/101/400/200",
-    name: "SimpleScenario",
+    description: "Short description of the scenario",
+    format: "Format",
+    formatVersion: "1.0",
+    file: { _id: "3", name: "ScenarioFile.scn", type: "scenario" },
     sx: { ...Default.args.sx }
   },
   render: Template

@@ -15,7 +15,9 @@ describe("ScenarioPreview", () => {
         description={Default.args.description}
         format={Default.args.format}
         formatVersion={Default.args.formatVersion}
-        file={Default.args.file}
+        file={Default.args.file} // Pass the file object
+        createdAt={Default.args.createdAt}
+        user={Default.args.user}
       />
     );
   });
@@ -36,7 +38,7 @@ describe("ScenarioPreview", () => {
     expect(container.querySelector(".MuiDivider-root")).not.toBeInTheDocument();
   });
 
-  // test that the divider renders when at least one optional prop is provided
+  // Test that the divider renders when at least one optional prop is provided
   test("renders divider when optional props are present", () => {
     const { container } = render(
       <ScenarioPreview
@@ -74,7 +76,7 @@ describe("ScenarioPreview", () => {
     const descriptionElement = screen.getByText(Default.args.description);
     const formatElement = screen.getByText(Default.args.format);
     const formatVersionElement = screen.getByText(Default.args.formatVersion);
-    const fileElement = screen.getByText(Default.args.file);
+    const fileElement = screen.getByText(Default.args.file.name); // Use file.name
     const createdAtElement = screen.getByText(Default.args.createdAt);
     const userElement = screen.getByText(Default.args.user);
 
@@ -111,7 +113,7 @@ describe("ScenarioPreview", () => {
         description={longDescription}
         format={Default.args.format}
         formatVersion={Default.args.formatVersion}
-        file={longFileName}
+        file={{ _id: "123", name: longFileName, type: "scenario" }}
         createdAt={Default.args.createdAt}
         user={longUser}
       />
