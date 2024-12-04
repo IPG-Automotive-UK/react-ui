@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import {
-  Autocomplete,
   Box,
   Checkbox,
   TextField,
@@ -13,6 +12,7 @@ import { CheckBox, CheckBoxOutlineBlank } from "@mui/icons-material";
 import AlwaysOpenAutocomplete from "../AlwaysOpenAutocomplete";
 import { CheckboxFilterProps } from "./CheckboxFilter.types";
 import { HTMLAttributes } from "react";
+import { VirtualizedAutocomplete } from "./VirtualizedAutocomplete";
 import { sortFilterOptions } from "../sortFilterOptions";
 
 /**
@@ -100,7 +100,7 @@ function CheckboxFilterPopper({
   disabled
 }: Omit<CheckboxFilterProps, "variant">) {
   return (
-    <Autocomplete
+    <VirtualizedAutocomplete
       limitTags={limitTags}
       multiple
       onChange={(_e, newValue) => onChange(newValue)}
@@ -126,6 +126,7 @@ function Option(
     <Box
       component="li"
       {...props}
+      key={option}
       sx={{
         ...(disabled && {
           opacity: 0.5,
