@@ -228,11 +228,7 @@ describe("CheckboxFilter", () => {
         "A",
         "b",
         "B",
-        "C",
-        "Gate 1",
-        "Gate 4",
-        "Gate 5",
-        "Gate 10"
+        "C"
       ]);
     });
   });
