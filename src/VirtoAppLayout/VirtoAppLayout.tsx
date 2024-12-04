@@ -1,10 +1,4 @@
-import {
-  Box,
-  CssBaseline,
-  Drawer,
-  useColorScheme,
-  useMediaQuery
-} from "@mui/material";
+import { Box, CssBaseline, Drawer, useMediaQuery } from "@mui/material";
 import React, { Fragment, useState } from "react";
 
 import { ConfirmProvider } from "../ConfirmProvider";
@@ -39,9 +33,6 @@ function Layout({
   // check if screen is medium
   const isMediumScreen = useMediaQuery(theme => theme.breakpoints.down("md"));
 
-  // get color mode
-  const { mode, setMode } = useColorScheme();
-
   return (
     <Fragment>
       <Box
@@ -57,9 +48,7 @@ function Layout({
           onAppClick={() => setAppOpen(!appOpen)}
           onChangePassword={onChangePassword}
           onLogout={onLogout}
-          onColourModeChange={newMode => setMode(newMode)}
           username={username}
-          mode={mode as "light" | "dark"}
           baseUrl={baseUrl}
           virtoLogoLinkUrl={virtoLogoLinkUrl}
         />
