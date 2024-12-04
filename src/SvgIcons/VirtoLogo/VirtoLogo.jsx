@@ -25,5 +25,5 @@ VirtoLogo.propTypes = {
   /**
    * styles applied to the svg element
    */
-  sx: PropTypes.object
+  sx: PropTypes.func
 };
