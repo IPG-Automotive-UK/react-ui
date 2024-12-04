@@ -5,12 +5,12 @@ import type {} from "@mui/x-data-grid/themeAugmentation";
 import {
   ThemeProvider as MuiThemeProvider,
   ThemeOptions,
-  createTheme
+  createTheme,
+  useColorScheme
 } from "@mui/material/styles";
-import React, { useEffect } from "react";
 
 import PropTypes from "prop-types";
-import ThemeContext from "./ThemeContext";
+import React from "react";
 import { ThemeProviderProps } from "./ThemeProvider.types";
 import darkScrollbar from "@mui/material/darkScrollbar";
 import { grey } from "@mui/material/colors";
@@ -35,10 +35,319 @@ declare module "@mui/material/styles" {
       };
     };
   }
+  interface Theme {
+    colorSchemes: {
+      light: ThemeOptions;
+      dark: ThemeOptions;
+    };
+  }
+  interface ThemeOptions {
+    colorSchemes?: {
+      light?: ThemeOptions;
+      dark?: ThemeOptions;
+    };
+  }
 }
 
 // theme defaults regardless of color mode. these are provided as an object that can be merged during color mode theme creation
-const defaultTheme: ThemeOptions = {
+// const defaultTheme: ThemeOptions = {
+//   components: {
+//     MuiAccordionSummary: {
+//       styleOverrides: {
+//         root: {
+//           "&$expanded": {
+//             marginBottom: -20
+//           }
+//         }
+//       }
+//     },
+//     MuiDataGrid: {
+//       styleOverrides: {
+//         root: {
+//           "& .MuiDataGrid-cell:focus, .MuiDataGrid-cell:focus-within, .MuiDataGrid-columnHeader:focus, .MuiDataGrid-columnHeader:focus-within":
+//             {
+//               outline: "none"
+//             }
+//         }
+//       }
+//     },
+//     MuiFormLabel: {
+//       styleOverrides: {
+//         asterisk: {
+//           color: "#d32f2f"
+//         }
+//       }
+//     },
+//     MuiTooltip: {
+//       styleOverrides: {
+//         tooltip: {
+//           fontSize: "12px",
+//           fontWeight: "normal"
+//         }
+//       }
+//     }
+//   },
+//   layout: {
+//     content: {
+//       maxWidth: 1152
+//     }
+//   },
+//   mixins: {
+//     toolbar: {
+//       minHeight: 64
+//     }
+//   },
+//   typography: {
+//     fontFamily: "Montserrat"
+//   }
+// };
+
+// // custom material-ui theme for light mode
+// const lightTheme = createTheme(
+//   {
+//     components: {
+//       MuiCssBaseline: {
+//         styleOverrides: themeParam => ({
+//           body: {
+//             ...darkScrollbar(
+//               themeParam.palette.mode === "light"
+//                 ? {
+//                     active: grey[400],
+//                     thumb: grey[400],
+//                     track: grey[200]
+//                   }
+//                 : undefined
+//             )
+//           }
+//         })
+//       },
+//       MuiDataGrid: {
+//         styleOverrides: {
+//           footerContainer: {
+//             backgroundColor: "#fff"
+//           },
+//           main: {
+//             backgroundColor: "#fff"
+//           }
+//         }
+//       },
+//       MuiIconButton: { styleOverrides: { root: { color: "#9e9e9e" } } },
+//       MuiStepper: {
+//         styleOverrides: {
+//           root: {
+//             backgroundColor: "rgba(144, 202, 249, 0.08)"
+//           }
+//         }
+//       },
+//       MuiTableRow: {
+//         styleOverrides: {
+//           root: {
+//             "&$selected": {
+//               backgroundColor: "rgba(0, 95, 168, 0.08)"
+//             }
+//           }
+//         }
+//       },
+//       MuiToggleButton: {
+//         styleOverrides: {
+//           root: {
+//             "&$selected": {
+//               "&:hover": {
+//                 backgroundColor: "rgba(0, 95, 168, 0.15)"
+//               },
+//               backgroundColor: "rgba(0, 95, 168, 0.08)"
+//             },
+//             "&:hover": {
+//               backgroundColor: "rgba(0, 95, 168, 0.15)"
+//             },
+//             borderColor: "rgb(196, 196, 196)"
+//           }
+//         }
+//       }
+//     },
+//     // cssVariables: true,
+//     mixins: {
+//       MuiDataGrid: {
+//         containerBackground: "#fff",
+//         pinnedBackground: "#fff"
+//       }
+//     },
+//     palette: {
+//       action: {
+//         selected: "rgba(0, 95, 168, 0.08)"
+//       },
+//       background: {
+//         default: "rgb(250, 250, 250)"
+//       },
+//       primary: { main: "#003063" },
+//       secondary: { main: "#005FA8" }
+//     },
+//     typography: {
+//       allVariants: {
+//         fontFamily: "Montserrat"
+//       }
+//     }
+//   },
+//   defaultTheme
+// );
+
+// // custom theme for dark mode
+// const darkTheme = createTheme(
+//   {
+//     // colorSchemes: { dark: true },
+//     components: {
+//       MuiAlertTitle: {
+//         styleOverrides: {
+//           root: {
+//             color: "inherit"
+//           }
+//         }
+//       },
+//       MuiCssBaseline: {
+//         styleOverrides: themeParam => ({
+//           body: themeParam.palette.mode === "dark" ? darkScrollbar() : null
+//         })
+//       },
+//       MuiDataGrid: {
+//         styleOverrides: {
+//           footerContainer: {
+//             backgroundColor: "#000"
+//           },
+//           main: {
+//             backgroundColor: "#000"
+//           }
+//         }
+//       },
+//       MuiStepper: {
+//         styleOverrides: {
+//           root: {
+//             backgroundColor: "rgba(255, 255, 255, 0.08)"
+//           }
+//         }
+//       }
+//     },
+//     // cssVariables: true,
+//     mixins: {
+//       MuiDataGrid: {
+//         containerBackground: "#000",
+//         pinnedBackground: "#000"
+//       }
+//     },
+//     palette: {
+//       background: {
+//         default: "#121212"
+//       },
+//       mode: "dark",
+//       primary: { main: "#87A5D2" }
+//     },
+//     typography: {
+//       allVariants: {
+//         color: "#fff",
+//         fontFamily: "Montserrat"
+//       }
+//     }
+//   },
+//   defaultTheme
+// );
+
+const mainTheme: ThemeOptions = {
+  colorSchemes: {
+    dark: {
+      components: {
+        MuiCssBaseline: {
+          styleOverrides: theme => ({
+            body: darkScrollbar()
+          })
+        },
+        MuiDataGrid: {
+          styleOverrides: {
+            footerContainer: {
+              backgroundColor: "#000"
+            },
+            main: {
+              backgroundColor: "#000"
+            }
+          }
+        }
+      },
+      mixins: {
+        toolbar: {
+          minHeight: 64
+        }
+      },
+      palette: {
+        background: { default: "#121212" },
+        mode: "dark",
+        primary: { main: "#87A5D2" }
+      },
+      typography: {
+        allVariants: {
+          color: "#fff",
+          fontFamily: "Montserrat"
+        },
+        fontFamily: "Montserrat"
+      }
+    },
+    light: {
+      components: {
+        MuiCssBaseline: {
+          styleOverrides: theme => ({
+            body: darkScrollbar({
+              active: grey[400],
+              thumb: grey[400],
+              track: grey[200]
+            })
+          })
+        },
+        MuiDataGrid: {
+          styleOverrides: {
+            footerContainer: {
+              backgroundColor: "#fff"
+            },
+            main: {
+              backgroundColor: "#fff"
+            }
+          }
+        },
+        MuiToggleButton: {
+          styleOverrides: {
+            root: {
+              borderColor: "rgb(196, 196, 196)",
+              "&:hover": {
+                backgroundColor: "rgba(0, 95, 168, 0.15)"
+              },
+              "&$selected": {
+                backgroundColor: "rgba(0, 95, 168, 0.08)",
+                "&:hover": {
+                  backgroundColor: "rgba(0, 95, 168, 0.15)"
+                }
+              }
+            }
+          }
+        }
+      },
+      mixins: {
+        toolbar: {
+          minHeight: 64
+        }
+      },
+      palette: {
+        action: {
+          selected: "rgba(0, 95, 168, 0.08)"
+        },
+        background: { default: "rgb(250, 250, 250)" },
+        mode: "light",
+        primary: { main: "#003063" },
+        secondary: { main: "#005FA8" }
+      },
+      typography: {
+        allVariants: {
+          fontFamily: "Montserrat"
+        },
+        fontFamily: "Montserrat"
+      }
+    }
+  },
   components: {
     MuiAccordionSummary: {
       styleOverrides: {
@@ -46,16 +355,6 @@ const defaultTheme: ThemeOptions = {
           "&$expanded": {
             marginBottom: -20
           }
-        }
-      }
-    },
-    MuiDataGrid: {
-      styleOverrides: {
-        root: {
-          "& .MuiDataGrid-cell:focus, .MuiDataGrid-cell:focus-within, .MuiDataGrid-columnHeader:focus, .MuiDataGrid-columnHeader:focus-within":
-            {
-              outline: "none"
-            }
         }
       }
     },
@@ -79,164 +378,13 @@ const defaultTheme: ThemeOptions = {
     content: {
       maxWidth: 1152
     }
-  },
-  mixins: {
-    toolbar: {
-      minHeight: 64
-    }
-  },
-  typography: {
-    fontFamily: "Montserrat"
   }
 };
 
-// custom material-ui theme for light mode
-const lightTheme = createTheme(
-  {
-    components: {
-      MuiCssBaseline: {
-        styleOverrides: themeParam => ({
-          body: {
-            ...darkScrollbar(
-              themeParam.palette.mode === "light"
-                ? {
-                    active: grey[400],
-                    thumb: grey[400],
-                    track: grey[200]
-                  }
-                : undefined
-            )
-          }
-        })
-      },
-      MuiDataGrid: {
-        styleOverrides: {
-          footerContainer: {
-            backgroundColor: "#fff"
-          },
-          main: {
-            backgroundColor: "#fff"
-          }
-        }
-      },
-      MuiIconButton: { styleOverrides: { root: { color: "#9e9e9e" } } },
-      MuiStepper: {
-        styleOverrides: {
-          root: {
-            backgroundColor: "rgba(144, 202, 249, 0.08)"
-          }
-        }
-      },
-      MuiTableRow: {
-        styleOverrides: {
-          root: {
-            "&$selected": {
-              backgroundColor: "rgba(0, 95, 168, 0.08)"
-            }
-          }
-        }
-      },
-      MuiToggleButton: {
-        styleOverrides: {
-          root: {
-            "&$selected": {
-              "&:hover": {
-                backgroundColor: "rgba(0, 95, 168, 0.15)"
-              },
-              backgroundColor: "rgba(0, 95, 168, 0.08)"
-            },
-            "&:hover": {
-              backgroundColor: "rgba(0, 95, 168, 0.15)"
-            },
-            borderColor: "rgb(196, 196, 196)"
-          }
-        }
-      }
-    },
-    // cssVariables: true,
-    mixins: {
-      MuiDataGrid: {
-        containerBackground: "#fff",
-        pinnedBackground: "#fff"
-      }
-    },
-    palette: {
-      action: {
-        selected: "rgba(0, 95, 168, 0.08)"
-      },
-      background: {
-        default: "rgb(250, 250, 250)"
-      },
-      primary: { main: "#003063" },
-      secondary: { main: "#005FA8" }
-    },
-    typography: {
-      allVariants: {
-        fontFamily: "Montserrat"
-      }
-    }
-  },
-  defaultTheme
-);
-
-// custom theme for dark mode
-const darkTheme = createTheme(
-  {
-    colorSchemes: { dark: true },
-    components: {
-      MuiAlertTitle: {
-        styleOverrides: {
-          root: {
-            color: "inherit"
-          }
-        }
-      },
-      MuiCssBaseline: {
-        styleOverrides: themeParam => ({
-          body: themeParam.palette.mode === "dark" ? darkScrollbar() : null
-        })
-      },
-      MuiDataGrid: {
-        styleOverrides: {
-          footerContainer: {
-            backgroundColor: "#000"
-          },
-          main: {
-            backgroundColor: "#000"
-          }
-        }
-      },
-      MuiStepper: {
-        styleOverrides: {
-          root: {
-            backgroundColor: "rgba(255, 255, 255, 0.08)"
-          }
-        }
-      }
-    },
-    // cssVariables: true,
-    mixins: {
-      MuiDataGrid: {
-        containerBackground: "#000",
-        pinnedBackground: "#000"
-      }
-    },
-    palette: {
-      background: {
-        default: "#121212"
-      },
-      mode: "dark",
-      primary: { main: "#87A5D2" }
-    },
-    typography: {
-      allVariants: {
-        color: "#fff",
-        fontFamily: "Montserrat"
-      }
-    }
-  },
-  defaultTheme
-);
+const mainThemeWithColorSchemes = createTheme({
+  // cssVariables: true,
+  ...mainTheme
+});
 
 /**
  * IPG Material-ui theme provider and hook.
@@ -245,49 +393,33 @@ export default function ThemeProvider({
   children,
   theme: controlledTheme
 }: ThemeProviderProps) {
-  // theme state
-  const [theme, setTheme] = React.useState("light");
-
-  // effect to set the theme on mount
-  useEffect(() => {
-    // theme preference is decided in the following order:
-    // 1. controlled theme prop
-    // 2. local storage
-    // 3. default to light
-    const storedThemeMode = localStorage.getItem("theme");
-    if (controlledTheme !== undefined) {
-      setTheme(controlledTheme);
-    } else if (storedThemeMode !== null) {
-      setTheme(storedThemeMode);
-    } else {
-      setTheme("light");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // get color mode
+  const { mode, setMode } = useColorScheme();
 
   // effect to update theme when controlled theme prop changes
-  useEffect(() => {
-    if (controlledTheme && theme !== controlledTheme) {
-      setTheme(controlledTheme);
+  React.useEffect(() => {
+    if (controlledTheme && mode !== controlledTheme) {
+      setMode(controlledTheme);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [controlledTheme]);
 
   // effect to update local storage when theme changes
-  useEffect(() => {
-    localStorage.setItem("theme", theme);
-  }, [theme]);
+  // React.useEffect(() => {
+  //   localStorage.setItem("mui-mode", controlledTheme || "light");
+  // }, [controlledTheme]);
 
-  // define context value
-  const value = [theme, setTheme] as const;
+  // get current theme
+  const currentTheme = {
+    ...mainThemeWithColorSchemes,
+    ...mainThemeWithColorSchemes.colorSchemes[mode || "light"]
+  };
 
   // wrap mui theme provider and children in theme context
   return (
-    <ThemeContext.Provider value={value}>
-      <MuiThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
-        {children}
-      </MuiThemeProvider>
-    </ThemeContext.Provider>
+    // <ThemeContext.Provider value={value}>
+    <MuiThemeProvider theme={currentTheme}>{children}</MuiThemeProvider>
+    // </ThemeContext.Provider>
   );
 }
 

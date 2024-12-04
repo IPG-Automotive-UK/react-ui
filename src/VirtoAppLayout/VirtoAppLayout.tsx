@@ -1,4 +1,10 @@
-import { Box, CssBaseline, Drawer, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  CssBaseline,
+  Drawer,
+  useColorScheme,
+  useMediaQuery
+} from "@mui/material";
 import React, { Fragment, useState } from "react";
 
 import { ConfirmProvider } from "../ConfirmProvider";
@@ -7,7 +13,8 @@ import { SnackbarProvider } from "../SnackbarProvider";
 import ThemeProvider from "../ThemeProvider";
 import VirtoAppHeader from "../VirtoAppHeader";
 import { VirtoAppLayoutProps } from "./VirtoAppLayout.types";
-import useTheme from "../ThemeProvider/useTheme";
+
+// import useTheme from "../ThemeProvider/useTheme";
 
 // app layout component
 function Layout({
@@ -29,11 +36,11 @@ function Layout({
 
   const [appOpen, setAppOpen] = useState(false);
 
-  // use theme context hook
-  const [theme, setTheme] = useTheme();
-
   // check if screen is medium
   const isMediumScreen = useMediaQuery(theme => theme.breakpoints.down("md"));
+
+  // get color mode
+  const { mode, setMode } = useColorScheme();
 
   return (
     <Fragment>
@@ -50,9 +57,9 @@ function Layout({
           onAppClick={() => setAppOpen(!appOpen)}
           onChangePassword={onChangePassword}
           onLogout={onLogout}
-          onColourModeChange={newMode => setTheme(newMode)}
+          onColourModeChange={newMode => setMode(newMode)}
           username={username}
-          mode={theme as "light" | "dark"}
+          mode={mode as "light" | "dark"}
           baseUrl={baseUrl}
           virtoLogoLinkUrl={virtoLogoLinkUrl}
         />
