@@ -1,7 +1,7 @@
 import ToggleColorMode from "./ToggleColorMode";
 
 export type ToggleColorModeProps = {
-  mode?: "light" | "dark";
+  mode?: "light" | "dark" | "system" | undefined;
   onChange: (mode: "light" | "dark") => void;
 };
 
