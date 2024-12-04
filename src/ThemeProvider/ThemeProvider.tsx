@@ -8,9 +8,9 @@ import {
   createTheme,
   useColorScheme
 } from "@mui/material/styles";
+import React, { useEffect } from "react";
 
 import PropTypes from "prop-types";
-import React from "react";
 import { ThemeProviderProps } from "./ThemeProvider.types";
 import darkScrollbar from "@mui/material/darkScrollbar";
 import { grey } from "@mui/material/colors";
@@ -393,34 +393,25 @@ export default function ThemeProvider({
   children,
   theme: controlledTheme
 }: ThemeProviderProps) {
-  // get color mode
-  const { mode, setMode } = useColorScheme();
+  // wrap mui theme provider and children in theme context
+  return (
+    <MuiThemeProvider theme={mainThemeWithColorSchemes}>
+      <ChildWrapper theme={controlledTheme}>{children}</ChildWrapper>
+    </MuiThemeProvider>
+  );
+}
 
-  // effect to update theme when controlled theme prop changes
-  React.useEffect(() => {
+function ChildWrapper({
+  children,
+  theme: controlledTheme
+}: ThemeProviderProps) {
+  const { mode, setMode } = useColorScheme();
+  useEffect(() => {
     if (controlledTheme && mode !== controlledTheme) {
       setMode(controlledTheme);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [controlledTheme]);
-
-  // effect to update local storage when theme changes
-  // React.useEffect(() => {
-  //   localStorage.setItem("mui-mode", controlledTheme || "light");
-  // }, [controlledTheme]);
-
-  // get current theme
-  const currentTheme = {
-    ...mainThemeWithColorSchemes,
-    ...mainThemeWithColorSchemes.colorSchemes[mode || "light"]
-  };
-
-  // wrap mui theme provider and children in theme context
-  return (
-    // <ThemeContext.Provider value={value}>
-    <MuiThemeProvider theme={currentTheme}>{children}</MuiThemeProvider>
-    // </ThemeContext.Provider>
-  );
+  return children;
 }
 
 // prop types
