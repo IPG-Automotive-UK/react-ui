@@ -29,6 +29,8 @@ jobs:
           cache: "pnpm"
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
+      - name: Test build
+        run: pnpm run build
       - name: Run tests
         run: pnpm run test:docker
       - name: "Report coverage"

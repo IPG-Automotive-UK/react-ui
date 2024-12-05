@@ -6,6 +6,7 @@ import { uniqueSortedArray } from "../utils/common";
 
 // component to select a vehicle
 function VehicleSelector({
+  disabled = false,
   flexDirection = "column",
   limitTags = 1,
   flexWrap = "nowrap",
@@ -77,12 +78,20 @@ function VehicleSelector({
         gap: flexDirection === "row" ? "0 24px" : 0
       }}
     >
-      <Box flex="40%">
+      <Box
+        flex="40%"
+        sx={{
+          "& .MuiFormLabel-asterisk": {
+            color: disabled ? "#9e9e9e" : "#d32f2f"
+          }
+        }}
+      >
         <Autocomplete
           label="Project Code"
           required
           multiple={false}
           options={allProjects}
+          disabled={disabled}
           onChange={(_event, value) => {
             const newValue = value === null ? "" : value;
             onChange([
@@ -99,9 +108,21 @@ function VehicleSelector({
           value={selectedProject === "" ? null : selectedProject}
         />
       </Box>
-      <Box flex="40%">
+      <Box
+        flex="40%"
+        sx={{
+          "& .MuiFormLabel-asterisk": {
+            color:
+              selectedProject === null || selectedProject === "" || disabled
+                ? "#9e9e9e"
+                : "#d32f2f"
+          }
+        }}
+      >
         <Autocomplete
-          disabled={selectedProject === null || selectedProject === ""}
+          disabled={
+            selectedProject === null || selectedProject === "" || disabled
+          }
           label="Model Year"
           required
           multiple={false}
@@ -122,11 +143,23 @@ function VehicleSelector({
           value={selectedModelYear === "" ? null : selectedModelYear}
         />
       </Box>
-      <Box flex="40%">
+      <Box
+        flex="40%"
+        sx={{
+          "& .MuiFormLabel-asterisk": {
+            color:
+              selectedModelYear === null || selectedModelYear === "" || disabled
+                ? "#9e9e9e"
+                : "#d32f2f"
+          }
+        }}
+      >
         <Autocomplete
           disableCloseOnSelect={multipleSelection}
           limitTags={limitTags}
-          disabled={selectedModelYear === null || selectedModelYear === ""}
+          disabled={
+            selectedModelYear === null || selectedModelYear === "" || disabled
+          }
           label="Vehicle Variant"
           multiple={multipleSelection}
           required
@@ -195,11 +228,25 @@ function VehicleSelector({
       </Box>
 
       {gates.length > 0 && (
-        <Box flex="40%">
+        <Box
+          flex="40%"
+          sx={{
+            "& .MuiFormLabel-asterisk": {
+              color:
+                selectedVariants === null ||
+                selectedVariants.length === 0 ||
+                disabled
+                  ? "#9e9e9e"
+                  : "#d32f2f"
+            }
+          }}
+        >
           <Autocomplete
             disableCloseOnSelect={multipleSelection}
             disabled={
-              selectedVariants === null || selectedVariants.length === 0
+              selectedVariants === null ||
+              selectedVariants.length === 0 ||
+              disabled
             }
             required={gates.length > 0}
             multiple={multipleSelection}

@@ -1,4 +1,4 @@
-import { Button, Typography } from "@mui/material";
+import { Button, Typography, alpha } from "@mui/material";
 
 import { FilterList } from "@mui/icons-material";
 import React from "react";
@@ -20,7 +20,12 @@ export function SetFilterButton({
   return (
     <Button
       data-testid="filter-open-button"
-      sx={{ width: "fit-content" }}
+      sx={theme => ({
+        "&:focus-visible": {
+          outline: `1px solid ${alpha(theme.palette.text.primary, 0.23)}`
+        },
+        width: "fit-content"
+      })}
       disableRipple
       onClick={onClick}
     >
