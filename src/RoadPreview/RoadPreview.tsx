@@ -8,7 +8,6 @@ import FormatVersionLabel from "../FormatVersionLabel/FormatVersionLabel";
 import NoWrapTypography from "../NoWrapTypography/NoWrapTypography";
 import React from "react";
 import { RoadPreviewProps } from "./RoadPreview.types";
-import TruncatedTooltip from "../TruncatedTooltip";
 import UserLabel from "../UserLabel/UserLabel";
 import VersionChip from "../VersionChip/VersionChip";
 
@@ -48,7 +47,7 @@ export function RoadPreview({
     <Box
       display="flex"
       flexDirection="column"
-      gap={2}
+      gap={1}
       minWidth={0}
       fontFamily="Montserrat"
       data-testid="road-preview-wrapper"
@@ -86,15 +85,13 @@ export function RoadPreview({
               </NoWrapTypography>
             </Stack>
             <Stack direction="row">
-              <TruncatedTooltip multiline={2}>
-                <Typography
-                  variant="caption"
-                  color="textPrimary"
-                  data-testid="road-preview-description"
-                >
-                  {description}
-                </Typography>
-              </TruncatedTooltip>
+              <Typography
+                variant="caption"
+                color="textPrimary"
+                data-testid="road-preview-description"
+              >
+                {description}
+              </Typography>
             </Stack>
           </Stack>
         </Stack>
@@ -135,7 +132,7 @@ export function RoadPreview({
       {hasOptionalProperty() ? (
         <>
           <Divider />
-          <Box display="flex" flexDirection="column" gap={2}>
+          <Box display="flex" flexDirection="column" gap={1}>
             {(createdAt || user) && (
               <Stack direction="row" gap={"12px"} width={1}>
                 {createdAt && (
