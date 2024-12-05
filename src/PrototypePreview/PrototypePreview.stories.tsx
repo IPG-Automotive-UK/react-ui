@@ -61,7 +61,7 @@ export const Default = {
         name: "last"
       }
     ],
-    name: "SanFrancisco_AEB",
+    name: "Porsche 911 GT2 RS",
     prototypeVersion: "1.1",
     quality: "not-run",
     sx: {
@@ -86,7 +86,7 @@ export const WithOverflowText = {
     format: "My Custom Overly Long Format",
     formatVersion: "1000.1000.1000a",
     label: [Default.args.label[0]],
-    name: "SanFrancisco_AEB_A looooong Prototype Name",
+    name: "Porsche 911 looooong Prototype Name",
     prototypeVersion: "77.77.77.77.77",
     quality: "passed",
     user: {
@@ -107,7 +107,7 @@ export const WithoutOptionalProps = {
     formatVersion: "11.1",
     href: "https://example.com",
     image: "https://picsum.photos/id/191/400/200",
-    name: "SanFrancisco_AEB",
+    name: "Porsche 911 GT2 RS",
     prototypeVersion: "1.1",
     quality: "errored",
     sx: { ...Default.args.sx }
