@@ -126,9 +126,7 @@ describe("Vehicle Select", () => {
     expect(
       screen.getByRole("combobox", { name: /model year/i })
     ).toBeDisabled();
-    expect(
-      screen.getByRole("combobox", { name: /vehicle variant/i })
-    ).toBeDisabled();
+    expect(screen.getByRole("combobox", { name: /Variant/i })).toBeDisabled();
     expect(screen.getByRole("combobox", { name: /gate/i })).toBeDisabled();
   });
 
@@ -152,9 +150,7 @@ describe("Vehicle Select", () => {
       screen.getByRole("combobox", { name: /project code/i })
     ).toBeEnabled();
     expect(screen.getByRole("combobox", { name: /model year/i })).toBeEnabled();
-    expect(
-      screen.getByRole("combobox", { name: /vehicle variant/i })
-    ).toBeEnabled();
+    expect(screen.getByRole("combobox", { name: /Variant/i })).toBeEnabled();
     expect(screen.getByRole("combobox", { name: /gate/i })).toBeDisabled();
   });
 
@@ -178,9 +174,7 @@ describe("Vehicle Select", () => {
       screen.getByRole("combobox", { name: /project code/i })
     ).toBeEnabled();
     expect(screen.getByRole("combobox", { name: /model year/i })).toBeEnabled();
-    expect(
-      screen.getByRole("combobox", { name: /vehicle variant/i })
-    ).toBeDisabled();
+    expect(screen.getByRole("combobox", { name: /Variant/i })).toBeDisabled();
     expect(screen.getByRole("combobox", { name: /gate/i })).toBeDisabled();
   });
 
@@ -204,9 +198,7 @@ describe("Vehicle Select", () => {
       screen.getByRole("combobox", { name: /project code/i })
     ).toBeEnabled();
     expect(screen.getByRole("combobox", { name: /model year/i })).toBeEnabled();
-    expect(
-      screen.getByRole("combobox", { name: /vehicle variant/i })
-    ).toBeEnabled();
+    expect(screen.getByRole("combobox", { name: /Variant/i })).toBeEnabled();
     expect(screen.getByRole("combobox", { name: /gate/i })).toBeEnabled();
   });
 });
