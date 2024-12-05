@@ -19,9 +19,6 @@ describe("StatusIcon", () => {
       container.querySelector("svg")?.getAttribute("data-testid")
     ).not.toBeUndefined();
 
-    console.log(
-      iconContainer.querySelector("svg")?.getAttribute("data-testid")
-    );
     // expect the icon to be the same as the raw icon
     expect(container.querySelector("svg")?.getAttribute("data-testid")).toEqual(
       iconContainer.querySelector("svg")?.getAttribute("data-testid")

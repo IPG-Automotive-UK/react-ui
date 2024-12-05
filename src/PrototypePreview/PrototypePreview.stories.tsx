@@ -76,7 +76,7 @@ export const Default = {
 };
 
 /**
- * This story shows a prototype preview with a very long name, description, file name and user name
+ * This story shows a prototype preview with a very long name, description, format, format version, prototype version and user name
  */
 export const WithOverflowText = {
   args: {
