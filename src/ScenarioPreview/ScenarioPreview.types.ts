@@ -61,9 +61,13 @@ export type ScenarioPreviewProps = {
    */
   label?: Label[];
   /**
-   * Label for the road, if applicable
+   * Name for the road
    */
-  roadLabel?: string;
+  roadName: string;
+  /**
+   * Link to open the current road
+   */
+  roadHref: string;
   /**
    * Additional styles to apply to the scenario preview wrapper
    */

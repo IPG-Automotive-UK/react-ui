@@ -5,7 +5,6 @@ import DateLabel from "../DateLabel/DateLabel";
 import FileLabel from "../FileLabel/FileLabel";
 import FormatLabel from "../FormatLabel/FormatLabel";
 import FormatVersionLabel from "../FormatVersionLabel/FormatVersionLabel";
-import NoWrapTypography from "../NoWrapTypography/NoWrapTypography";
 import React from "react";
 import RoadLabel from "../RoadLabel/RoadLabel";
 import { ScenarioPreviewProps } from "./ScenarioPreview.types";
@@ -22,7 +21,8 @@ export function ScenarioPreview({
   createdAt,
   user,
   label = [],
-  roadLabel,
+  roadName,
+  roadHref,
   sx
 }: ScenarioPreviewProps) {
   function hasOptionalProperty() {
@@ -60,47 +60,55 @@ export function ScenarioPreview({
             }}
           />
           <Stack direction="column" minWidth={0}>
-            <NoWrapTypography>
-              <Link
-                href={href}
-                target="_blank"
-                color="primary"
-                variant="subtitle2"
-                underline="hover"
-                data-testid="scenario-preview-name"
-              >
-                {name}
-              </Link>
-            </NoWrapTypography>
-
-            <Typography
-              color="textPrimary"
-              data-testid="scenario-preview-description"
-              sx={{
-                WebkitBoxOrient: "vertical",
-                WebkitLineClamp: 2,
-                display: "-webkit-box",
-                overflow: "hidden",
-                textOverflow: "ellipsis"
-              }}
-              variant="caption"
+            <Link
+              href={href}
+              target="_blank"
+              color="primary"
+              variant="subtitle2"
+              underline="hover"
+              textOverflow="ellipsis"
+              overflow="hidden"
+              data-testid="scenario-preview-name"
+              noWrap
             >
-              {description}
-            </Typography>
+              {name}
+            </Link>
+
+            <Stack direction="row">
+              <Typography
+                variant="caption"
+                color="textPrimary"
+                data-testid="scenario-preview-description"
+                sx={{
+                  WebkitBoxOrient: "vertical",
+                  WebkitLineClamp: 2,
+                  display: "-webkit-box",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis"
+                }}
+              >
+                {description}
+              </Typography>
+            </Stack>
           </Stack>
         </Stack>
       </Box>
-      <Box>
+      <Box gap={1}>
         <Stack
-          direction="row"
-          gap={1}
-          justifyContent="left"
-          alignItems="center"
+          direction={"row"}
+          gap={"12px"}
+          maxHeight={1}
+          justifyContent={"left"}
+          alignItems={"center"}
         >
           <Box data-testid="format-label" flex="0 1 auto">
             <FormatLabel label={format} />
           </Box>
-          <Box data-testid="format-version-label" flex="0 1 auto">
+          <Box
+            data-testid="format-version-label"
+            flex="0 1 auto"
+            maxWidth={0.2}
+          >
             <FormatVersionLabel label={formatVersion} />
           </Box>
           <Box
@@ -111,11 +119,18 @@ export function ScenarioPreview({
           >
             <FileLabel label={file} />
           </Box>
-          {roadLabel && (
-            <Box data-testid="road-label">
-              <RoadLabel label={roadLabel} href={href} />
-            </Box>
-          )}
+          <Box
+            data-testid="road-label"
+            sx={{
+              display: "inline-block",
+              maxWidth: "calc(40% - 12px)",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap"
+            }}
+          >
+            <RoadLabel label={roadName} href={roadHref} />
+          </Box>
         </Stack>
       </Box>
       {hasOptionalProperty() && (

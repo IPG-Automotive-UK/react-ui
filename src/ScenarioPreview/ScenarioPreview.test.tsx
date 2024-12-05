@@ -22,31 +22,12 @@ describe("ScenarioPreview", () => {
         file={Default.args.file}
         createdAt={Default.args.createdAt}
         user={Default.args.user}
-        roadLabel={Default.args.roadLabel}
+        roadName={Default.args.roadName}
+        roadHref={Default.args.roadHref}
       />
     );
 
     expect(screen.getByTestId("scenario-preview-wrapper")).toBeInTheDocument();
-  });
-
-  // Test that the road label renders correctly
-  test("renders road label correctly", () => {
-    render(
-      <ScenarioPreview
-        name={Default.args.name}
-        href={Default.args.href}
-        image={Default.args.image}
-        description={Default.args.description}
-        format={Default.args.format}
-        formatVersion={Default.args.formatVersion}
-        file={Default.args.file}
-        roadLabel="Test Road Name"
-      />
-    );
-
-    const roadLabelElement = screen.getByTestId("road-label");
-    expect(roadLabelElement).toBeInTheDocument();
-    expect(roadLabelElement).toHaveTextContent("Test Road Name");
   });
 
   // Test that the divider renders when optional props are present
@@ -62,7 +43,8 @@ describe("ScenarioPreview", () => {
         file={Default.args.file}
         createdAt={Default.args.createdAt}
         user={Default.args.user}
-        roadLabel={Default.args.roadLabel}
+        roadName={Default.args.roadName}
+        roadHref={Default.args.roadHref}
       />
     );
 
@@ -80,6 +62,8 @@ describe("ScenarioPreview", () => {
         format={WithoutOptionalProps.args.format}
         formatVersion={WithoutOptionalProps.args.formatVersion}
         file={WithoutOptionalProps.args.file}
+        roadName={WithoutOptionalProps.args.roadName}
+        roadHref={WithoutOptionalProps.args.roadHref}
       />
     );
 
@@ -97,7 +81,8 @@ describe("ScenarioPreview", () => {
         format={WithOverflowText.args.format}
         formatVersion={WithOverflowText.args.formatVersion}
         file={WithOverflowText.args.file}
-        roadLabel={WithOverflowText.args.roadLabel}
+        roadName={WithOverflowText.args.roadName}
+        roadHref={WithOverflowText.args.roadHref}
       />
     );
 
@@ -107,7 +92,7 @@ describe("ScenarioPreview", () => {
     ).toBeInTheDocument();
     expect(screen.getByText(WithOverflowText.args.file)).toBeInTheDocument();
     expect(
-      screen.getByText(WithOverflowText.args.roadLabel)
+      screen.getByText(WithOverflowText.args.roadName)
     ).toBeInTheDocument();
   });
 
@@ -124,7 +109,8 @@ describe("ScenarioPreview", () => {
         file={Default.args.file}
         createdAt={Default.args.createdAt}
         user={Default.args.user}
-        roadLabel={Default.args.roadLabel}
+        roadName={Default.args.roadName}
+        roadHref={Default.args.roadHref}
       />
     );
 
@@ -138,14 +124,18 @@ describe("ScenarioPreview", () => {
     const roadLabelElement = screen.getByTestId("road-label");
     const createdAtElement = screen.getByTestId("date-label");
     const userElement = screen.getByTestId("user-label");
+    const imageElement = screen.getByAltText("scenario-image");
 
+    // Assertions
     expect(nameElement).toHaveTextContent(Default.args.name);
     expect(descriptionElement).toHaveTextContent(Default.args.description);
     expect(formatElement).toHaveTextContent(Default.args.format);
     expect(formatVersionElement).toHaveTextContent(Default.args.formatVersion);
     expect(fileElement).toHaveTextContent(Default.args.file);
-    expect(roadLabelElement).toHaveTextContent(Default.args.roadLabel);
+    expect(roadLabelElement).toBeInTheDocument();
     expect(createdAtElement).toHaveTextContent(Default.args.createdAt);
     expect(userElement).toHaveTextContent(Default.args.user.name);
+    expect(imageElement).toBeInTheDocument();
+    expect(imageElement).toHaveAttribute("src", Default.args.image);
   });
 });

@@ -28,12 +28,13 @@ Default.args = {
   href: "https://example.com",
   image: "https://picsum.photos/id/191/400/200",
   name: "CityDriving",
-  roadLabel: "RoadName", // Updated to use Road Label
+  roadHref: "https://example.com/road-long",
+  roadName: "A very long road name that might overflow",
   sx: {
-    borderRadius: "8px",
+    borderRadius: 1,
     boxShadow: 3,
     maxWidth: "480px",
-    padding: "16px"
+    padding: 2
   },
   user: { name: "James Harper" }
 };
@@ -46,8 +47,12 @@ WithOverflowText.args = {
   ...Default.args,
   description:
     "This is a very long description that might cause overflow issues if not handled properly. The description highlights a scenario with intricate details about the simulation.",
-  file: "A_very_long_scenario_file_name_that_exceeds_typical_length.scn",
-  name: "A very long scenario name that is unlikely to fit in a single line.",
+  file: "A_very_very_very_very_very_very_long_long_long_long_long_long_long_long_long_long_long_long_long_long_long_long_scenario_file_name_that_exceeds_typical_length.scn",
+  name: "A very very very very very very very very very very very long long long long long scenario name that is unlikely to fit in a single line.",
+  roadHref:
+    "https://example.com/road-long-long-long-long-long-long-long-long-long-long-long-long-long-long-long-long-long-long-long-long-long-long-long",
+  roadName:
+    "A very long road long road long road long road long road name that might overflow",
   user: {
     color: "rgb(236, 64, 122)",
     name: "A very long user name that might overflow the container"
@@ -66,7 +71,8 @@ WithoutOptionalProps.args = {
   href: "https://example.com",
   image: "https://picsum.photos/id/514/400/200",
   name: "Minimal Scenario",
-  roadLabel: "Minimal Road",
+  roadHref: "https://example.com/minimal-road",
+  roadName: "Minimal Road",
   sx: {
     borderRadius: "8px",
     boxShadow: 3,
