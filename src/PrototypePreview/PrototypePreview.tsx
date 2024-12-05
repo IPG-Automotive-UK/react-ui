@@ -8,7 +8,6 @@ import NoWrapTypography from "../NoWrapTypography/NoWrapTypography";
 import { PrototypePreviewProps } from "./PrototypePreview.types";
 import React from "react";
 import { StatusLabel } from "../Status";
-import TruncatedTooltip from "../TruncatedTooltip";
 import UserLabel from "../UserLabel/UserLabel";
 import { VersionLabel } from "../VersionLabel";
 
@@ -48,7 +47,7 @@ export function PrototypePreview({
     <Box
       display="flex"
       flexDirection="column"
-      gap={2}
+      gap={1}
       minWidth={0}
       fontFamily="Montserrat"
       data-testid="prototype-preview-wrapper"
@@ -81,15 +80,13 @@ export function PrototypePreview({
               </Link>
             </NoWrapTypography>
             <Stack direction="row">
-              <TruncatedTooltip multiline={2}>
-                <Typography
-                  variant="caption"
-                  color="textPrimary"
-                  data-testid="prototype-preview-description"
-                >
-                  {description}
-                </Typography>
-              </TruncatedTooltip>
+              <Typography
+                variant="caption"
+                color="textPrimary"
+                data-testid="prototype-preview-description"
+              >
+                {description}
+              </Typography>
             </Stack>
           </Stack>
         </Stack>
@@ -133,7 +130,7 @@ export function PrototypePreview({
       {hasOptionalProperty() ? (
         <>
           <Divider />
-          <Box display="flex" flexDirection="column" gap={2}>
+          <Box display="flex" flexDirection="column" gap={1}>
             {(createdAt || user) && (
               <Stack direction="row" gap={"12px"} width={1}>
                 {createdAt && (
