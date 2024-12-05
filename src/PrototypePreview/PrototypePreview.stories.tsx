@@ -86,7 +86,7 @@ export const WithOverflowText = {
     format: "My Custom Overly Long Format",
     formatVersion: "1000.1000.1000a",
     label: [Default.args.label[0]],
-    name: "Porsche 911 looooong Prototype Name",
+    name: "Porsche 911 looooonoooooooooooooooooooooooooooooooooooooooog Prototype Name",
     prototypeVersion: "77.77.77.77.77",
     quality: "passed",
     user: {

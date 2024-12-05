@@ -4,7 +4,6 @@ import { LabelChipGroup, LabelChipGroupProps } from "../LabelSelector";
 import DateLabel from "../DateLabel/DateLabel";
 import FormatLabel from "../FormatLabel/FormatLabel";
 import FormatVersionLabel from "../FormatVersionLabel/FormatVersionLabel";
-import NoWrapTypography from "../NoWrapTypography/NoWrapTypography";
 import { PrototypePreviewProps } from "./PrototypePreview.types";
 import React from "react";
 import { StatusLabel } from "../Status";
@@ -67,23 +66,29 @@ export function PrototypePreview({
             }}
           />
           <Stack direction="column" minWidth={0}>
-            <NoWrapTypography>
-              <Link
-                href={href}
-                target="_blank"
-                color="primary"
-                variant="subtitle2"
-                underline="hover"
-                data-testid="prototype-preview-name"
-              >
-                {name}
-              </Link>
-            </NoWrapTypography>
+            <Link
+              href={href}
+              target="_blank"
+              color="primary"
+              variant="subtitle2"
+              underline="hover"
+              textOverflow="ellipsis"
+              overflow="hidden"
+              data-testid="prototype-preview-name"
+              noWrap
+            >
+              {name}
+            </Link>
             <Stack direction="row">
               <Typography
                 variant="caption"
                 color="textPrimary"
                 data-testid="prototype-preview-description"
+                sx={{
+                  WebkitBoxOrient: "vertical",
+                  WebkitLineClamp: 2,
+                  display: "-webkit-box"
+                }}
               >
                 {description}
               </Typography>
