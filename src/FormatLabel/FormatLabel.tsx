@@ -10,7 +10,7 @@ import TerminalOutlinedIcon from "@mui/icons-material/TerminalOutlined";
  * @param label The name of the format
  */
 export default function FormatLabel({ label }: FormatLabelProps) {
-  // based on the label choose the correct icon
+  // Based on the label choose the correct icon
   switch (label) {
     // If format is "CarMaker" then render "CarMaker" icon
     case "CarMaker":

@@ -3,7 +3,11 @@ import * as React from "react";
 import SvgIcon from "@mui/material/SvgIcon";
 import { TruckMakerLogoProps } from "./TruckMakerLogo.types";
 
-// TruckMakerLogo icon component
+/**
+ * Renders a truck maker logo icon
+ * @param sx Optional prop to render with custom styles
+ * @returns Renders a truck maker logo icon
+ */
 export function TruckMakerLogo({ sx }: TruckMakerLogoProps) {
   return (
     <SvgIcon

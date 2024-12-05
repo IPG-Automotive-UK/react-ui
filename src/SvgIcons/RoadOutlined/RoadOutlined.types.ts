@@ -1,5 +1,3 @@
-import { SxProps } from "@mui/material";
+import { SvgIconProps } from "../SvgIcons.types";
 
-export type RoadOutlinedProps = {
-  sx?: SxProps;
-};
+export type RoadOutlinedProps = SvgIconProps & {};
