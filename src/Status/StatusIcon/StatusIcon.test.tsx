@@ -1,5 +1,5 @@
 import React, { act } from "react";
-import { getByTestId, render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import statuses, { statusTypes } from "../statuses";
 
 import StatusIcon from "./StatusIcon";
