@@ -27,7 +27,7 @@ export const Default = {
     description: "Small Description",
     format: "CarMaker",
     formatVersion: "11.1",
-    href: "test",
+    href: "https://example.com",
     image: "https://picsum.photos/id/191/400/200",
     label: [
       {
@@ -105,7 +105,7 @@ export const WithoutOptionalProps = {
     description: "Short description",
     format: "CarMaker",
     formatVersion: "11.1",
-    href: "test",
+    href: "https://example.com",
     image: "https://picsum.photos/id/191/400/200",
     name: "SanFrancisco_AEB",
     prototypeVersion: "1.1",
