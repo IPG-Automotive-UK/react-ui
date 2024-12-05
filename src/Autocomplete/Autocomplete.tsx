@@ -102,17 +102,21 @@ export default function Autocomplete<
           label={label}
           error={error}
           helperText={helperText}
-          InputProps={{
-            ...params.InputProps,
-            className: readOnly ? "Mui-disabled label.Mui-disabled" : undefined
-          }}
-          InputLabelProps={{
-            ...params.InputLabelProps
-          }}
           name={name}
           margin={margin}
           required={required}
           variant={variant}
+          slotProps={{
+            input: {
+              ...params.InputProps,
+              className: readOnly
+                ? "Mui-disabled label.Mui-disabled"
+                : undefined
+            },
+            inputLabel: {
+              ...params.InputLabelProps
+            }
+          }}
         />
       )}
       renderOption={Option}

@@ -190,7 +190,11 @@ export const CustomChildren = {
     ],
     customChildren: (
       <>
-        <Box flexGrow={1} />
+        <Box
+          sx={{
+            flexGrow: 1
+          }}
+        />
         <Button
           color="primary"
           sx={{ color: "#003063", minWidth: "100px" }}
@@ -216,7 +220,11 @@ const FullHeightTemplate: StoryFn<TabPanelProps> = args => {
   }, [active, updateArgs]);
 
   return (
-    <Box height="500px">
+    <Box
+      sx={{
+        height: "500px"
+      }}
+    >
       <TabPanel {...args} active={active} />
     </Box>
   );
@@ -227,7 +235,13 @@ export const TabPanelFullHeight = {
   args: {
     children: [
       <Box data-label="Select Vehicle" key="1">
-        <Box height="200px" border="1px solid red" m={2} />
+        <Box
+          sx={{
+            border: "1px solid red",
+            height: "200px",
+            m: 2
+          }}
+        />
       </Box>
     ]
   },

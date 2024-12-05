@@ -16,19 +16,27 @@ function Sidebar({
   return (
     <Fragment>
       {children}
-      <Box flexGrow={1} />
       <Box
-        display="flex"
-        alignItems="center"
-        justifyContent="space-between"
-        p={theme => theme.spacing(2)}
+        sx={{
+          flexGrow: 1
+        }}
+      />
+      <Box
+        sx={{
+          alignItems: "center",
+          display: "flex",
+          justifyContent: "space-between",
+          p: theme => theme.spacing(2)
+        }}
       >
         {showLogo ? (
           <Link
             href={"https://ipg-automotive.com"}
             underline="none"
-            display="flex"
             target="_blank"
+            sx={{
+              display: "flex"
+            }}
           >
             <IpgLogo
               textColour={theme.palette.mode === "light" ? "black" : "white"}

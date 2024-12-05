@@ -103,7 +103,12 @@ const VehicleSelectDialog = ({
           onChange={setValue}
         />
         {errorMessage ? (
-          <Box display={"flex"} mt={2}>
+          <Box
+            sx={{
+              display: "flex",
+              mt: 2
+            }}
+          >
             <Alert variant="filled" severity="error">
               {errorMessage}
             </Alert>

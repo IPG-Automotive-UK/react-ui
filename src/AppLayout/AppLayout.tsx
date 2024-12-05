@@ -1,4 +1,4 @@
-import { Box, CssBaseline, Drawer, Hidden } from "@mui/material";
+import { Box, CssBaseline, Drawer, useMediaQuery } from "@mui/material";
 import React, { Fragment, useState } from "react";
 
 import AppHeader from "../AppHeader";
@@ -26,9 +26,17 @@ function Layout({
   // define state for managing dynamic sidebar
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  // check if screen is medium
+  const isMediumScreen = useMediaQuery(theme => theme.breakpoints.down("md"));
+
   return (
     <Fragment>
-      <Box height="100vh" display="flex">
+      <Box
+        sx={{
+          display: "flex",
+          height: "100vh"
+        }}
+      >
         <CssBaseline />
         <AppHeader
           appName={appName}
@@ -47,56 +55,40 @@ function Layout({
             }
           })}
         >
-          <Hidden mdUp>
-            <Drawer
-              variant="temporary"
-              anchor="left"
-              open={mobileOpen}
-              onClose={() => setMobileOpen(false)}
-              sx={{
-                "& .MuiDrawer-paper": {
-                  height: `calc(100% - 64px)`,
-                  paddingTop: "8px",
-                  top: "64px",
-                  width: sidebarWidth
-                }
-              }}
+          <Drawer
+            variant={isMediumScreen ? "temporary" : "permanent"}
+            anchor="left"
+            open={isMediumScreen ? mobileOpen : true}
+            onClose={isMediumScreen ? () => setMobileOpen(false) : undefined}
+            sx={theme => ({
+              "& .MuiDrawer-paper": {
+                height: `calc(100vh - ${theme.mixins.toolbar.minHeight}px)`,
+                paddingTop: "8px",
+                top: theme.mixins.toolbar.minHeight,
+                width: sidebarWidth
+              }
+            })}
+          >
+            <Sidebar
+              showLogo={false}
+              showVersion={isMediumScreen ? false : appVersion !== undefined}
+              appVersion={appVersion}
             >
-              <Sidebar showLogo={false} showVersion={false}>
-                {sidebarContent}
-              </Sidebar>
-            </Drawer>
-          </Hidden>
-          <Hidden mdDown>
-            <Drawer
-              sx={{
-                "& .MuiDrawer-paper": {
-                  height: `calc(100% - 64px)`,
-                  paddingTop: "8px",
-                  top: "64px",
-                  width: sidebarWidth
-                }
-              }}
-              variant="permanent"
-              open
-            >
-              <Sidebar
-                showLogo={false}
-                showVersion={appVersion !== undefined}
-                appVersion={appVersion}
-              >
-                {sidebarContent}
-              </Sidebar>
-            </Drawer>
-          </Hidden>
+              {sidebarContent}
+            </Sidebar>
+          </Drawer>
         </Box>
         <Box
-          flexGrow={1}
-          display="flex"
-          flexDirection="column"
-          sx={theme => ({
-            background: theme.palette.background.default
-          })}
+          sx={[
+            {
+              display: "flex",
+              flexDirection: "column",
+              flexGrow: 1
+            },
+            theme => ({
+              background: theme.palette.background.default
+            })
+          ]}
         >
           <Box sx={theme => theme.mixins.toolbar} />
           <Box

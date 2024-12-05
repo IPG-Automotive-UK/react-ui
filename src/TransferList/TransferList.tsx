@@ -338,13 +338,15 @@ export default function TransferList({
         </Box>
       </Box>
       <Box
-        height="100%"
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-        flexGrow={1}
-        p={2}
+        sx={{
+          alignItems: "center",
+          display: "flex",
+          flexDirection: "column",
+          flexGrow: 1,
+          height: "100%",
+          justifyContent: "center",
+          p: 2
+        }}
       >
         <Button
           aria-label={"transfer to target list"}

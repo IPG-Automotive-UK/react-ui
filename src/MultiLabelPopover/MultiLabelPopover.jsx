@@ -72,12 +72,14 @@ export default function MultiLabelPopover({ labels = [] }) {
         disableRestoreFocus
       >
         <Box
-          display="flex"
-          flexDirection="row"
-          flexWrap="wrap"
-          gap={1}
-          p={1}
-          maxWidth={250}
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "wrap",
+            gap: 1,
+            maxWidth: 250,
+            p: 1
+          }}
         >
           {labels.map(label => (
             // loop through all labels and return a label for each

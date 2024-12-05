@@ -118,10 +118,13 @@ export default function MultiColor({ onChange = () => {}, rows = [] }) {
   // return components
   return (
     <Box
-      display="flex"
-      flexDirection="column"
       key={rows.length}
-      sx={{ height: "100%", width: "100%" }}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        width: "100%"
+      }}
     >
       <DataGrid
         data-testid="dataGrid"

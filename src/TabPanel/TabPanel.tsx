@@ -44,16 +44,20 @@ const TabPanel = ({
 
   return (
     <Box
-      height={1}
-      width={1}
-      display={"flex"}
-      flexDirection={"column"}
-      flexGrow={1}
-      minHeight={0}
-      sx={theme => ({
-        border: `1px solid ${theme.palette.divider}`,
-        borderRadius: "4px"
-      })}
+      sx={[
+        {
+          display: "flex",
+          flexDirection: "column",
+          flexGrow: 1,
+          height: 1,
+          minHeight: 0,
+          width: 1
+        },
+        theme => ({
+          border: `1px solid ${theme.palette.divider}`,
+          borderRadius: "4px"
+        })
+      ]}
     >
       <Tabs
         value={activeTab}
@@ -105,9 +109,11 @@ const TabPanel = ({
               key={index}
               id={`tabpanel-${index}`}
               aria-labelledby={`tab-${index}`}
-              display={"flex"}
-              flexDirection={"column"}
-              height={activeTab === index ? 1 : 0}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                height: activeTab === index ? 1 : 0
+              }}
             >
               {activeTab === index && child.props.children}
             </Box>

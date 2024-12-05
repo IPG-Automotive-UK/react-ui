@@ -101,7 +101,11 @@ export const ComplexMessage = {
     message: (
       <>
         Showing some progress
-        <Box mt={1}>
+        <Box
+          sx={{
+            mt: 1
+          }}
+        >
           <LinearProgress />
         </Box>
       </>
