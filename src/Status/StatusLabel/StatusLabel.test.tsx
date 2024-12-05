@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { getByTestId, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import statuses, { statusTypes } from "../statuses";
 
 import StatusLabel from "./StatusLabel";
