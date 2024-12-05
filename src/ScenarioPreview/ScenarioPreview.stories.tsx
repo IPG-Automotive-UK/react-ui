@@ -4,12 +4,9 @@ import React from "react";
 import { ScenarioPreview } from "./ScenarioPreview";
 import { ScenarioPreviewProps } from "./ScenarioPreview.types";
 
-/**
- * Story metadata
- */
 const meta: Meta<typeof ScenarioPreview> = {
   component: ScenarioPreview,
-  title: "ScenarioView/ScenarioPreview"
+  title: "Preview/ScenarioPreview"
 };
 export default meta;
 
@@ -21,70 +18,71 @@ const Template: StoryFn<ScenarioPreviewProps> = args => {
 /**
  * Default story
  */
-export const Default = {
-  args: {
-    name: "718-2024-CaymanS",
-    href: "https://example.com",
-    image: "https://picsum.photos/id/101/400/200",
-    description: "Small Description",
-    format: "AnyRandom Format",
-    formatVersion: "1.0",
-    file: { _id: "1", name: "TestScenarioFile.scn", type: "scenario" },
-    createdAt: "2024-11-13 08:24:08",
-    user: "James Harper",
-    sx: {
-      borderRadius: "8px",
-      boxShadow: 3,
-      maxWidth: "480px", // this limits the width of th ecomponent
-      padding: "16px"
-    }
+export const Default = Template.bind({});
+Default.args = {
+  createdAt: "23-06-06 08:09:24",
+  description: "Small Description",
+  file: "RoadName",
+  format: "CarMaker",
+  formatVersion: "11.1",
+  href: "https://example.com",
+  image: "https://picsum.photos/id/191/400/200",
+  name: "CityDriving",
+  roadLabel: "RoadName", // Updated to use Road Label
+  sx: {
+    borderRadius: "8px",
+    boxShadow: 3,
+    maxWidth: "480px",
+    padding: "16px"
   },
-  render: Template
+  user: { name: "James Harper" }
 };
 
 /**
- * This story shows a scenario preview with a very long name, description, and file name
+ * Story with long text to test overflow handling
  */
-export const WithOverflowText = {
-  args: {
-    ...Default.args,
-    description:
-      "This is a very long description that might overflow the card container if not handled properly. The description highlights a scenario with intricate details about the simulation.",
-    file: {
-      _id: "2",
-      name: "A_very_loooooong_scenario_file_name.scn",
-      type: "scenario"
-    },
-    name: "A_very_long_scenario_name_2024_with_extra_details",
-    user: "James A Very Long Middle Name Harper"
-  },
-  render: Template
+export const WithOverflowText = Template.bind({});
+WithOverflowText.args = {
+  ...Default.args,
+  description:
+    "This is a very long description that might cause overflow issues if not handled properly. The description highlights a scenario with intricate details about the simulation.",
+  file: "A_very_long_scenario_file_name_that_exceeds_typical_length.scn",
+  name: "A very long scenario name that is unlikely to fit in a single line.",
+  user: {
+    color: "rgb(236, 64, 122)",
+    name: "A very long user name that might overflow the container"
+  }
 };
 
 /**
- * This story shows a scenario preview without optional properties
+ * Story without optional properties
  */
-export const WithoutOptionalProps = {
-  args: {
-    name: "SimpleScenario",
-    href: "https://example.com",
-    image: "https://picsum.photos/id/101/400/200",
-    description: "Short description of the scenario",
-    format: "Format",
-    formatVersion: "1.0",
-    file: { _id: "3", name: "ScenarioFile.scn", type: "scenario" },
-    sx: { ...Default.args.sx }
-  },
-  render: Template
+export const WithoutOptionalProps = Template.bind({});
+WithoutOptionalProps.args = {
+  description: "A minimal scenario description.",
+  file: "MinimalFile.scn",
+  format: "Format",
+  formatVersion: "1.0",
+  href: "https://example.com",
+  image: "https://picsum.photos/id/514/400/200",
+  name: "Minimal Scenario",
+  roadLabel: "Minimal Road",
+  sx: {
+    borderRadius: "8px",
+    boxShadow: 3,
+    maxWidth: "480px",
+    padding: "16px"
+  }
 };
 
 /**
- * This story shows a scenario preview with minimal labels and a single icon
+ * Story with custom labels
  */
-export const MinimalLabels = {
-  args: {
-    ...Default.args,
-    label: [{ name: "Minimal Label", color: "#FFC107" }]
-  },
-  render: Template
+export const WithLabels = Template.bind({});
+WithLabels.args = {
+  ...Default.args,
+  label: [
+    { color: "#FFC107", name: "Label 1" },
+    { color: "#4CAF50", name: "Label 2" }
+  ]
 };

@@ -2,23 +2,18 @@ import { SxProps, Theme } from "@mui/material";
 
 import { Label } from "../LabelSelector/Label.types";
 
-export type File = {
+/**
+ * Type of user associated with the scenario
+ */
+export type User = {
   /**
-   * Unique identifier of the file
-   */
-  _id: string;
-  /**
-   * Name of the file
+   * Name of the user
    */
   name: string;
   /**
-   * Type of the file e.g. road, scenario, roadInfographic etc.
+   * Optional color for the user's avatar
    */
-  type: string;
-  /**
-   * Path to the file on file-service. This is an internal only field and should not be exposed to the client.
-   */
-  path?: string;
+  color?: string;
 };
 
 /**
@@ -26,15 +21,15 @@ export type File = {
  */
 export type ScenarioPreviewProps = {
   /**
-   * The name of the scenario
+   * Name of the scenario
    */
   name: string;
   /**
-   * The link for opening the current scenario
+   * Link to open the current scenario
    */
   href: string;
   /**
-   * Image of the current scenario
+   * Image URL of the scenario
    */
   image: string;
   /**
@@ -42,7 +37,7 @@ export type ScenarioPreviewProps = {
    */
   description: string;
   /**
-   * Format of the scenario
+   * Format of the scenario (e.g., ASAM OpenDRIVE)
    */
   format: string;
   /**
@@ -50,23 +45,27 @@ export type ScenarioPreviewProps = {
    */
   formatVersion: string;
   /**
-   * Name of the scenario file
+   * File object representing the scenario file
    */
-  file: File;
+  file: string;
   /**
-   * Date of creation of the scenario
+   * Date of creation of the scenario in ISO-8601 format
    */
   createdAt?: string;
   /**
-   * User name of the creator
+   * Optional user who created the scenario
    */
-  user?: string;
+  user?: User;
   /**
-   * Label/s which are set to this scenario
+   * Optional labels associated with the scenario
    */
   label?: Label[];
   /**
-   * Additional styles to apply for the scenario preview wrapper
+   * Label for the road, if applicable
+   */
+  roadLabel?: string;
+  /**
+   * Additional styles to apply to the scenario preview wrapper
    */
   sx?: SxProps<Theme>;
 };

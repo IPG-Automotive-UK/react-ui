@@ -1,66 +1,65 @@
-import {
-  Avatar,
-  Box,
-  Divider,
-  Link,
-  Stack,
-  Tooltip,
-  Typography,
-  useTheme
-} from "@mui/material";
+import { Box, Divider, Link, Stack, Typography } from "@mui/material";
+import { LabelChipGroup, LabelChipGroupProps } from "../LabelSelector";
 
-import AttachFileIcon from "@mui/icons-material/AttachFile";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import DateRangeIcon from "@mui/icons-material/DateRange";
+import DateLabel from "../DateLabel/DateLabel";
+import FileLabel from "../FileLabel/FileLabel";
+import FormatLabel from "../FormatLabel/FormatLabel";
+import FormatVersionLabel from "../FormatVersionLabel/FormatVersionLabel";
 import NoWrapTypography from "../NoWrapTypography/NoWrapTypography";
-import NumbersIcon from "@mui/icons-material/Numbers";
 import React from "react";
+import RoadLabel from "../RoadLabel/RoadLabel";
 import { ScenarioPreviewProps } from "./ScenarioPreview.types";
+import UserLabel from "../UserLabel/UserLabel";
 
 export function ScenarioPreview({
   name,
-  description,
   href,
   image,
+  description,
   format,
   formatVersion,
   file,
   createdAt,
   user,
+  label = [],
+  roadLabel,
   sx
 }: ScenarioPreviewProps) {
-  const theme = useTheme();
+  function hasOptionalProperty() {
+    return label?.length > 0 || createdAt || user;
+  }
+
+  const labelChips: LabelChipGroupProps["chips"] = label?.map(l => ({
+    clickable: false,
+    color: l.color,
+    label: l.name,
+    size: "small"
+  }));
 
   return (
     <Box
       display="flex"
-      flexDirection="row"
-      gap={2}
-      alignItems="center"
-      padding={2}
-      border="1px solid"
-      borderColor={theme.palette.divider}
-      borderRadius={2}
+      flexDirection="column"
+      gap={1}
+      minWidth={0}
+      fontFamily="Montserrat"
+      data-testid="scenario-preview-wrapper"
       sx={{ ...sx }}
     >
-      {/* left image */}
-      <Box
-        component="img"
-        src={image}
-        alt={`${name}-preview`}
-        sx={{
-          width: 80,
-          height: 80,
-          objectFit: "cover",
-          borderRadius: 1
-        }}
-      />
-
-      {/* right content */}
-      <Box flex={1} overflow="hidden">
-        <Stack direction="column" spacing={1}>
-          {/* title and Link */}
-          <Tooltip title={name}>
+      <Box>
+        <Stack direction="row" spacing={1} minWidth={0}>
+          <img
+            src={image}
+            alt="scenario-image"
+            style={{
+              height: "44px",
+              marginBottom: "auto",
+              marginTop: "auto",
+              objectFit: "contain",
+              width: "78px"
+            }}
+          />
+          <Stack direction="column" minWidth={0}>
             <NoWrapTypography>
               <Link
                 href={href}
@@ -69,170 +68,85 @@ export function ScenarioPreview({
                 variant="subtitle2"
                 underline="hover"
                 data-testid="scenario-preview-name"
-                sx={{
-                  fontWeight: "bold",
-                  whiteSpace: "nowrap",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis"
-                }}
               >
                 {name}
               </Link>
             </NoWrapTypography>
-          </Tooltip>
 
-          {/* description */}
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            sx={{
-              display: "-webkit-box",
-              WebkitBoxOrient: "vertical",
-              WebkitLineClamp: 2,
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              maxWidth: "100%"
-            }}
-            data-testid="scenario-preview-description"
-          >
-            {description}
-          </Typography>
-
-          {/* format, file info and status icon */}
-          <Stack
-            direction="row"
-            spacing={2}
-            alignItems="center"
-            overflow="hidden"
-          >
-            {/* format */}
-            <Box display="flex" alignItems="center" gap={1} flexShrink={0}>
-              <Tooltip title="Scenario Format">
-                <AttachFileIcon fontSize="small" />
-              </Tooltip>
-              <Typography
-                variant="caption"
-                color="textSecondary"
-                noWrap
-                data-testid="scenario-preview-format"
-              >
-                {format}
-              </Typography>
-            </Box>
-
-            {/* format version */}
-            <Box display="flex" alignItems="center" gap={1} flexShrink={0}>
-              <Tooltip title="Format Version">
-                <NumbersIcon
-                  sx={{
-                    color: theme.palette.text.secondary,
-                    height: "20px",
-                    width: "20px"
-                  }}
-                />
-              </Tooltip>
-              <Typography
-                variant="caption"
-                color="textSecondary"
-                noWrap
-                data-testid="scenario-preview-format-version"
-              >
-                {formatVersion}
-              </Typography>
-            </Box>
-
-            {/* file */}
-            <Box
-              display="flex"
-              alignItems="center"
-              gap={1}
-              flexShrink={1}
-              overflow="hidden"
+            <Typography
+              color="textPrimary"
+              data-testid="scenario-preview-description"
+              sx={{
+                WebkitBoxOrient: "vertical",
+                WebkitLineClamp: 2,
+                display: "-webkit-box",
+                overflow: "hidden",
+                textOverflow: "ellipsis"
+              }}
+              variant="caption"
             >
-              <Tooltip title="Scenario File">
-                <CheckCircleIcon fontSize="small" color="success" />
-              </Tooltip>
-
-              <Typography
-                variant="caption"
-                color="textSecondary"
-                noWrap
-                sx={{
-                  overflow: "hidden",
-                  textOverflow: "ellipsis"
-                }}
-                data-testid="scenario-preview-file"
-              >
-                {file.name}
-              </Typography>
-            </Box>
+              {description}
+            </Typography>
           </Stack>
         </Stack>
-
-        {/* conditional divider and info */}
-        {(createdAt || user) && (
-          <>
-            <Divider sx={{ marginY: 1 }} />
-
-            {/* date and user info */}
-            <Stack direction="row" spacing={2} alignItems="center">
+      </Box>
+      <Box>
+        <Stack
+          direction="row"
+          gap={"12px"}
+          justifyContent="left"
+          alignItems="center"
+        >
+          <Box data-testid="format-label" flex="0 1 auto">
+            <FormatLabel label={format} />
+          </Box>
+          <Box data-testid="format-version-label" flex="0 1 auto">
+            <FormatVersionLabel label={formatVersion} />
+          </Box>
+          <Box
+            data-testid="file-label"
+            flex="0 1 auto"
+            maxWidth={"calc(40% - 12px)"}
+            alignItems="center"
+          >
+            <FileLabel label={file} />
+          </Box>
+          {roadLabel && (
+            <Box data-testid="road-label">
+              <RoadLabel label={roadLabel} href={href} />
+            </Box>
+          )}
+        </Stack>
+      </Box>
+      {hasOptionalProperty() && (
+        <>
+          <Divider />
+          <Box display="flex" flexDirection="column" gap={1}>
+            <Stack direction="row" gap={"12px"}>
               {createdAt && (
-                <Box display="flex" alignItems="center" gap={1}>
-                  <Tooltip title="Created On">
-                    <DateRangeIcon fontSize="small" color="action" />
-                  </Tooltip>
-                  <Typography
-                    variant="caption"
-                    color="textSecondary"
-                    noWrap
-                    data-testid="scenario-preview-created"
-                  >
-                    {createdAt}
-                  </Typography>
+                <Box data-testid="date-label" flex="0 1 auto">
+                  <DateLabel label={createdAt} />
                 </Box>
               )}
-
               {user && (
                 <Box
-                  display="flex"
+                  data-testid="user-label"
+                  flex="1 1 auto"
                   alignItems="center"
-                  gap={1}
-                  overflow="hidden"
+                  minWidth={0}
                 >
-                  <Tooltip title="Created By">
-                    <div>
-                      <Avatar
-                        alt={user}
-                        sx={{
-                          width: 24,
-                          height: 24,
-                          fontSize: 12
-                        }}
-                      >
-                        {user[0]}
-                      </Avatar>
-                    </div>
-                  </Tooltip>
-                  <NoWrapTypography>
-                    <Typography
-                      variant="caption"
-                      color="textSecondary"
-                      noWrap
-                      sx={{
-                        overflow: "hidden",
-                        textOverflow: "ellipsis"
-                      }}
-                      data-testid="scenario-preview-user"
-                    >
-                      {user}
-                    </Typography>
-                  </NoWrapTypography>
+                  <UserLabel label={user.name} color={user.color} />
                 </Box>
               )}
             </Stack>
-          </>
-        )}
-      </Box>
+            {label?.length > 0 && (
+              <Stack direction="row" spacing={1}>
+                <LabelChipGroup chips={labelChips} />
+              </Stack>
+            )}
+          </Box>
+        </>
+      )}
     </Box>
   );
 }
