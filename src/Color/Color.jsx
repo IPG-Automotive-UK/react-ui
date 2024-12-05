@@ -166,10 +166,10 @@ export default function Color({
               label="Red"
               error={rgbaObj.r > 255}
               value={noColorChecked ? "" : rgbaObj.r}
-              sx={{
-                marginRight: theme => theme.spacing(1),
+              sx={theme => ({
+                marginRight: theme.spacing(1),
                 width: "33%"
-              }}
+              })}
               InputLabelProps={{
                 shrink: true
               }}
@@ -187,10 +187,10 @@ export default function Color({
               label="Green"
               error={rgbaObj.g > 255}
               value={noColorChecked ? "" : rgbaObj.g}
-              sx={{
-                marginRight: theme => theme.spacing(1),
+              sx={theme => ({
+                marginRight: theme.spacing(1),
                 width: "33%"
-              }}
+              })}
               InputLabelProps={{
                 shrink: true
               }}

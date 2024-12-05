@@ -100,7 +100,9 @@ const Template = args => {
         onClick={onClick}
       >
         <Box
-          sx={{ background: theme => theme.palette.grey[100] }}
+          sx={theme => ({
+            background: theme.palette.grey[100]
+          })}
           width="100%"
           height="100%"
         ></Box>

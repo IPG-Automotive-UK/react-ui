@@ -56,7 +56,7 @@ const SurfacePlot = ({
         {!isFullscreen && showTitle ? (
           <Typography
             align="center"
-            style={{ padding: "0 16px", wordWrap: "break-word" }}
+            sx={{ padding: "0 16px", wordWrap: "break-word" }}
           >
             {title || ""}
           </Typography>

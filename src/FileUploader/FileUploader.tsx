@@ -1,7 +1,7 @@
 import {
   Box,
   Chip,
-  Grid,
+  Grid2 as Grid,
   LinearProgress,
   Stack,
   Typography,
@@ -150,7 +150,7 @@ export default function FileUploader({
         <Grid spacing={1} direction="row" container={true} mt={0.5}>
           {selectedFiles.map((thisFile, i) => {
             return (
-              <Grid item={true} key={`${thisFile.file?.name ?? "file"}-${i}`}>
+              <Grid key={`${thisFile.file?.name ?? "file"}-${i}`}>
                 <Chip
                   disabled={disabled || isValidating}
                   variant="outlined"

@@ -262,24 +262,24 @@ export default function TransferList({
       }}
     >
       <Box
-        sx={{
+        sx={theme => ({
           backgroundColor: "background.paper",
-          border: theme => `1px solid ${theme.palette.divider}`,
+          border: `1px solid ${theme.palette.divider}`,
           borderRadius: 1,
           display: "flex",
           flexDirection: "column",
           height: "100%",
           width: "100%"
-        }}
+        })}
       >
         <Box
-          sx={{
+          sx={theme => ({
             alignItems: "center",
-            borderBottom: theme => `1px solid ${theme.palette.divider}`,
+            borderBottom: `1px solid ${theme.palette.divider}`,
             display: "flex",
             px: 2,
             py: 1.5
-          }}
+          })}
         >
           <Checkbox
             aria-label="select all source list items"
@@ -337,7 +337,6 @@ export default function TransferList({
           />
         </Box>
       </Box>
-
       <Box
         height="100%"
         display="flex"
@@ -368,26 +367,25 @@ export default function TransferList({
           &lt;
         </Button>
       </Box>
-
       <Box
-        sx={{
+        sx={theme => ({
           backgroundColor: "background.paper",
-          border: theme => `1px solid ${theme.palette.divider}`,
+          border: `1px solid ${theme.palette.divider}`,
           borderRadius: 1,
           display: "flex",
           flexDirection: "column",
           height: "100%",
           width: "100%"
-        }}
+        })}
       >
         <Box
-          sx={{
+          sx={theme => ({
             alignItems: "center",
-            borderBottom: theme => `1px solid ${theme.palette.divider}`,
+            borderBottom: `1px solid ${theme.palette.divider}`,
             display: "flex",
             px: 2,
             py: 1.5
-          }}
+          })}
         >
           <Checkbox
             aria-label="select all target list items"

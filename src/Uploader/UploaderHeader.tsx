@@ -60,10 +60,10 @@ export default function UploaderHeader({
           {title}
           {required ? (
             <Typography
-              color={theme => theme.palette.error.main}
               component="span"
               lineHeight="inherit"
               sx={{
+                color: theme => theme.palette.error.main,
                 marginLeft: "4px",
                 verticalAlign: "text-top"
               }}
