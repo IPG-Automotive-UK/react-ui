@@ -86,7 +86,7 @@ export const WithOverflowText = {
     file: "A very looooooooooong Road File Name",
     format: "My Custom Overly Long Format",
     label: [Default.args.label[0]],
-    name: "SanFrancisco_AEB_A looooong Road Name",
+    name: "SanFrancisco_AEB_A loooooooooooooooooooooooooooooooong Road Name",
     user: {
       color: "rgb(236, 64, 122)",
       name: "James a very long middle name that should be truncated Harper"

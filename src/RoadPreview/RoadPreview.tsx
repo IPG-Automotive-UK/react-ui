@@ -5,7 +5,6 @@ import DateLabel from "../DateLabel/DateLabel";
 import FileLabel from "../FileLabel/FileLabel";
 import FormatLabel from "../FormatLabel/FormatLabel";
 import FormatVersionLabel from "../FormatVersionLabel/FormatVersionLabel";
-import NoWrapTypography from "../NoWrapTypography/NoWrapTypography";
 import React from "react";
 import { RoadPreviewProps } from "./RoadPreview.types";
 import UserLabel from "../UserLabel/UserLabel";
@@ -53,7 +52,7 @@ export function RoadPreview({
       data-testid="road-preview-wrapper"
       sx={{ ...sx }}
     >
-      <Box gap={1}>
+      <Box gap={1} width={1}>
         <Stack direction="row" spacing={1} minWidth={0}>
           <img
             src={image}
@@ -66,33 +65,39 @@ export function RoadPreview({
               width: "78px"
             }}
           />
-          <Stack direction="column" minWidth={0}>
-            <Stack direction="row" gap={1} display="flex">
-              <Box>
+          <Stack direction="column" minWidth={0} flex={1}>
+            <Stack direction="row" gap={1} display="flex" maxWidth={1}>
+              <Box flex="0 1 auto">
                 <VersionChip version={version} />
               </Box>
-              <NoWrapTypography>
-                <Link
-                  href={href}
-                  target="_blank"
-                  color="primary"
-                  variant="subtitle2"
-                  underline="hover"
-                  data-testid="road-preview-name"
-                >
-                  {name}
-                </Link>
-              </NoWrapTypography>
+              <Link
+                flex="1 1 auto"
+                href={href}
+                target="_blank"
+                color="primary"
+                variant="subtitle2"
+                underline="hover"
+                textOverflow="ellipsis"
+                data-testid="road-preview-name"
+                noWrap
+              >
+                {name}
+              </Link>
             </Stack>
-            <Stack direction="row">
+            <Box display="flex" flexDirection="column">
               <Typography
                 variant="caption"
                 color="textPrimary"
                 data-testid="road-preview-description"
+                sx={{
+                  WebkitBoxOrient: "vertical",
+                  WebkitLineClamp: 2,
+                  display: "-webkit-box"
+                }}
               >
                 {description}
               </Typography>
-            </Stack>
+            </Box>
           </Stack>
         </Stack>
       </Box>
