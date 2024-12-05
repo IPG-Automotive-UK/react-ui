@@ -18,7 +18,7 @@ import { VersionLabel } from "../VersionLabel";
 export function PrototypePreview({
   name,
   href,
-  version,
+  prototypeVersion,
   image,
   description,
   format,
@@ -117,13 +117,9 @@ export function PrototypePreview({
             <FormatVersionLabel label={formatVersion} />
           </Box>
           <Box data-testid="version-label" flex="0 1 auto" maxWidth={0.2}>
-            <VersionLabel label={version} />
+            <VersionLabel label={prototypeVersion} />
           </Box>
-          <Box
-            data-testid="status-label"
-            flex="0 0 auto"
-            maxWidth="calc(20% - 12px)"
-          >
+          <Box flex="0 0 auto" maxWidth="calc(20% - 12px)">
             <StatusLabel
               gap={0.5}
               iconProps={{ height: 20, padding: 0, width: 20 }}
@@ -154,7 +150,6 @@ export function PrototypePreview({
                 {user && (
                   <Box
                     data-testid="user-label"
-                    display="flex"
                     flex="1 1 auto"
                     alignItems="center"
                     minWidth={0}

@@ -62,6 +62,7 @@ export const Default = {
       }
     ],
     name: "SanFrancisco_AEB",
+    prototypeVersion: "1.1",
     quality: "not-run",
     sx: {
       borderRadius: "8px",
@@ -69,8 +70,7 @@ export const Default = {
       maxWidth: "480px",
       padding: "16px"
     },
-    user: { name: "James Harper" },
-    version: "1.1"
+    user: { name: "James Harper" }
   },
   render: Template
 };
@@ -84,8 +84,10 @@ export const WithOverflowText = {
     description:
       "Stationäre Kreisfahrt: DIN ISO 4138 Es wird innerhalb von 18 Sekunden auf 180° Lenkradwinkel eingelenkt.stationäre Kreisfahrt: DIN ISO 4138 Es wird innerhalb von 18 Sekunden auf 180° Lenkradwinkel eingelenkt.",
     format: "My Custom Overly Long Format",
+    formatVersion: "1000.1000.1000a",
     label: [Default.args.label[0]],
     name: "SanFrancisco_AEB_A looooong Prototype Name",
+    prototypeVersion: "77.77.77.77.77",
     quality: "passed",
     user: {
       color: "rgb(236, 64, 122)",
@@ -106,9 +108,9 @@ export const WithoutOptionalProps = {
     href: "test",
     image: "https://picsum.photos/id/191/400/200",
     name: "SanFrancisco_AEB",
+    prototypeVersion: "1.1",
     quality: "errored",
-    sx: { ...Default.args.sx },
-    version: "1.1"
+    sx: { ...Default.args.sx }
   },
   render: Template
 };

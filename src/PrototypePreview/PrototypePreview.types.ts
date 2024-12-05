@@ -30,10 +30,6 @@ export type PrototypePreviewProps = {
    */
   href: string;
   /**
-   * Version of the prototype
-   */
-  version: string;
-  /**
    * Image of the current prototype
    */
   image: string;
@@ -57,10 +53,6 @@ export type PrototypePreviewProps = {
    * The quality of the prototype
    */
   quality: "not-run" | "passed" | "errored";
-  /**
-   * Name of the prototype file
-   */
-  file: string;
   /**
    * Date of creation of prototype
    */
