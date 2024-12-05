@@ -36,6 +36,8 @@ export default function IconWithLabel({
       <Box minWidth={0}>
         {href ? (
           <Link
+            target="_blank"
+            rel="noopener noreferrer"
             href={href}
             underline="hover"
             sx={theme => ({
