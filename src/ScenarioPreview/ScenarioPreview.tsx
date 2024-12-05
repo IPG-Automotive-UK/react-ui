@@ -93,7 +93,7 @@ export function ScenarioPreview({
       <Box>
         <Stack
           direction="row"
-          gap={"12px"}
+          gap={1}
           justifyContent="left"
           alignItems="center"
         >
@@ -122,7 +122,7 @@ export function ScenarioPreview({
         <>
           <Divider />
           <Box display="flex" flexDirection="column" gap={1}>
-            <Stack direction="row" gap={"12px"}>
+            <Stack direction="row" gap={1}>
               {createdAt && (
                 <Box data-testid="date-label" flex="0 1 auto">
                   <DateLabel label={createdAt} />
