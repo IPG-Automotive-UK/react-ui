@@ -1,5 +1,6 @@
 import { CSSProperties } from "react";
 import { Status } from "../statuses.types";
+import { TypographyProps } from "@mui/material";
 
 export type StatusLabelProps = {
   /**
@@ -23,6 +24,14 @@ export type StatusLabelProps = {
     | "inherit"
     | "subtitle1"
     | "subtitle2";
+  /**
+   * The gap between icon and label
+   */
+  gap?: any;
+  /**
+   * The color of the text
+   */
+  color?: TypographyProps["color"];
   iconProps?: {
     /**
      * Icon height
@@ -32,5 +41,9 @@ export type StatusLabelProps = {
      * Icon width
      */
     width?: CSSProperties["width"];
+    /**
+     * Icon padding
+     */
+    padding?: CSSProperties["padding"];
   };
 };

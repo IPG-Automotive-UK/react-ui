@@ -57,4 +57,15 @@ describe("StatusIcon", () => {
     // there shouldn't be a tooltip
     expect(screen.queryByRole("tooltip")).not.toBeInTheDocument();
   });
+
+  // test icon can be rendered with custom padding
+  test("`StatusIcon` renders with custom padding", () => {
+    render(<StatusIcon status="disrupted" padding={1} />);
+
+    const icon = screen.getByTestId("ErrorIcon");
+    const iconStyle = getComputedStyle(icon);
+
+    expect(icon).toBeInTheDocument();
+    expect(iconStyle.padding).toBe("8px");
+  });
 });

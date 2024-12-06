@@ -28,6 +28,10 @@ export { default as Canvas, type CanvasProps } from "./Canvas";
 export { default as CanvasItem, type CanvasItemProps } from "./CanvasItem";
 export { default as EditLabelDialog } from "./EditLabelDialog";
 export { RoadPreview, type RoadPreviewProps } from "./RoadPreview";
+export {
+  PrototypePreview,
+  type PrototypePreviewProps
+} from "./PrototypePreview";
 export { default as Breadcrumbs, type BreadcrumbsProps } from "./Breadcrumbs";
 export {
   DetailCard,
