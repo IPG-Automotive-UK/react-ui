@@ -2,23 +2,18 @@ import { SxProps, Theme } from "@mui/material";
 
 import { Label } from "../LabelSelector/Label.types";
 
-export type File = {
+/**
+ * Type of user
+ */
+type User = {
   /**
-   * Unique identifier of the file
-   */
-  _id: string;
-  /**
-   * Name of the file
+   * The name of the user
    */
   name: string;
   /**
-   * Type of the file e.g. road, scenario, roadInfographic etc.
+   * The background color of the user avatar
    */
-  type: string;
-  /**
-   * Path to the file on file-service. This is an internal only field and should not be exposed to the client.
-   */
-  path?: string;
+  color?: string;
 };
 
 /**
@@ -56,15 +51,15 @@ export type RoadPreviewProps = {
   /**
    * Name of the road file
    */
-  file: File;
+  file: string;
   /**
    * Date of creation of road
    */
   createdAt?: string;
   /**
-   * User name of the creator
+   * User object of the creator of the road
    */
-  user?: string;
+  user?: User;
   /**
    * Label/s which are set to this road
    */
