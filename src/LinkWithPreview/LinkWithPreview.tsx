@@ -107,6 +107,7 @@ export default function LinkWithPreview({
   return (
     <>
       <Typography
+        data-test="link-text"
         ref={anchorEl}
         onMouseEnter={handleLabelEnter}
         onMouseLeave={handleLabelLeave}
@@ -132,6 +133,7 @@ export default function LinkWithPreview({
         }
       </Typography>
       <Popper
+        data-testid="preview-popper"
         open={open}
         anchorEl={anchorEl.current}
         onMouseEnter={handlePopperEnter}
@@ -150,7 +152,7 @@ export default function LinkWithPreview({
         }}
         sx={{ width: "480px", zIndex: theme.zIndex.modal }}
       >
-        <Card sx={{ boxShadow: "none", overflow: "unset" }}>{content}</Card>
+        <Card data-testid="preview-content">{content}</Card>
       </Popper>
     </>
   );
