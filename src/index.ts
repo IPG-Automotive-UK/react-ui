@@ -38,10 +38,17 @@ export {
   type SummaryCardProps,
   type TableCardProps
 } from "./Card";
+export { UserLabel, type UserLabelProps } from "./UserLabel";
+export { DateLabel, type DateLabelProps } from "./DateLabel";
+export { FileLabel, type FileLabelProps } from "./FileLabel";
+export { VersionLabel, type VersionLabelProps } from "./VersionLabel";
+export { FormatLabel, type FormatLabelProps } from "./FormatLabel";
+export { RoadLabel, type RoadLabelProps } from "./RoadLabel";
 export {
-  default as IconWithLabel,
-  type IconWithLabelProps
-} from "./IconWithLabel";
+  FormatVersionLabel,
+  type FormatVersionLabelProps
+} from "./FormatVersionLabel";
+export { IconWithLabel, type IconWithLabelProps } from "./IconWithLabel";
 export {
   Infographic,
   FileDetails,
@@ -214,6 +221,7 @@ export {
 } from "./ConfirmProvider";
 export {
   IpgLogo,
+  RoadOutlined,
   VirtoBuild,
   VirtoData,
   VirtoFleet,
@@ -227,8 +235,10 @@ export {
   VirtoThumbsUpLeft,
   VirtoVehicle,
   CarMakerLogo,
+  TruckMakerLogo,
   AsamLogo,
   type IpgLogoProps,
+  type RoadOutlinedProps,
   type VirtoBuildProps,
   type VirtoDataProps,
   type VirtoFleetProps,
@@ -242,6 +252,7 @@ export {
   type VirtoThumbsUpLeftProps,
   type VirtoVehicleProps,
   type CarMakerLogoProps,
+  type TruckMakerLogoProps,
   type AsamLogoProps
 } from "./SvgIcons";
 export {

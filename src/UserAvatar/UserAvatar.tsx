@@ -28,9 +28,10 @@ export default function UserAvatar({
   return (
     <>
       {img ? (
-        <Avatar src={img} sx={sx} />
+        <Avatar data-testid="user-avatar-img" src={img} sx={sx} />
       ) : (
         <Avatar
+          data-testid="user-avatar"
           sx={[
             {
               backgroundColor: color,

@@ -16,7 +16,7 @@ const meta: Meta<typeof IconWithLabel> = {
     }
   },
   component: IconWithLabel,
-  title: "General/IconWithLabel"
+  title: "Label/IconWithLabel"
 };
 export default meta;
 
