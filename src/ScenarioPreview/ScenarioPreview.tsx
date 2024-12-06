@@ -101,7 +101,11 @@ export function ScenarioPreview({
           justifyContent={"left"}
           alignItems={"center"}
         >
-          <Box data-testid="format-label" flex="0 1 auto">
+          <Box
+            data-testid="format-label"
+            flex="0 1 auto"
+            maxWidth={"calc(20% - 12px)"}
+          >
             <FormatLabel label={format} />
           </Box>
           <Box
@@ -114,7 +118,7 @@ export function ScenarioPreview({
           <Box
             data-testid="file-label"
             flex="0 1 auto"
-            maxWidth={"calc(40% - 12px)"}
+            maxWidth={"calc(30% - 12px)"}
             alignItems="center"
           >
             <FileLabel label={file} />
@@ -123,7 +127,7 @@ export function ScenarioPreview({
             data-testid="road-label"
             sx={{
               display: "inline-block",
-              maxWidth: "calc(40% - 12px)",
+              maxWidth: "calc(30% - 12px)",
               overflow: "hidden",
               textOverflow: "ellipsis",
               whiteSpace: "nowrap"
@@ -137,9 +141,14 @@ export function ScenarioPreview({
         <>
           <Divider />
           <Box display="flex" flexDirection="column" gap={1}>
-            <Stack direction="row" gap={1}>
+            <Stack direction="row" gap={1} alignItems={"center"}>
               {createdAt && (
-                <Box data-testid="date-label" flex="0 1 auto">
+                <Box
+                  data-testid="date-label"
+                  flex="0 1 auto"
+                  alignItems="center"
+                  maxWidth={0.3}
+                >
                   <DateLabel label={createdAt} />
                 </Box>
               )}

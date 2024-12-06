@@ -74,10 +74,10 @@ WithoutOptionalProps.args = {
   roadHref: "https://example.com/minimal-road",
   roadName: "Minimal Road",
   sx: {
-    borderRadius: "8px",
+    borderRadius: 1,
     boxShadow: 3,
     maxWidth: "480px",
-    padding: "16px"
+    padding: 2
   }
 };
 

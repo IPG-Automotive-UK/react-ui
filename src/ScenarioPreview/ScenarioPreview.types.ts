@@ -49,6 +49,14 @@ export type ScenarioPreviewProps = {
    */
   file: string;
   /**
+   * Name for the road
+   */
+  roadName: string;
+  /**
+   * Link to open the current road
+   */
+  roadHref: string;
+  /**
    * Date of creation of the scenario in ISO-8601 format
    */
   createdAt?: string;
@@ -60,14 +68,6 @@ export type ScenarioPreviewProps = {
    * Optional labels associated with the scenario
    */
   label?: Label[];
-  /**
-   * Name for the road
-   */
-  roadName: string;
-  /**
-   * Link to open the current road
-   */
-  roadHref: string;
   /**
    * Additional styles to apply to the scenario preview wrapper
    */
