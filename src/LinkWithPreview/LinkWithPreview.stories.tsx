@@ -21,7 +21,11 @@ export default meta;
 
 // Story Template
 const Template: StoryFn<LinkWithPreviewProps> = args => {
-  return <LinkWithPreview {...args} />;
+  return (
+    <Box maxWidth="100px">
+      <LinkWithPreview {...args} />
+    </Box>
+  );
 };
 
 const content = (
@@ -67,6 +71,18 @@ export const Default = {
 export const RoadPreviewOnHover = {
   args: {
     children: "MyLink",
+    content,
+    href: "https://example.com"
+  },
+  render: Template
+};
+
+/**
+ * Long link text to show truncation
+ */
+export const LongLinkText = {
+  args: {
+    children: "MyVeryLooooooooongLink",
     content,
     href: "https://example.com"
   },

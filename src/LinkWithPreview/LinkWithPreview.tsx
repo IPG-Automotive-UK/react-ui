@@ -107,6 +107,7 @@ export default function LinkWithPreview({
   return (
     <>
       <Typography
+        display="flex"
         data-test="link-text"
         ref={anchorEl}
         onMouseEnter={handleLabelEnter}
