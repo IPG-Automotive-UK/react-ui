@@ -87,7 +87,9 @@ export function PrototypePreview({
                 sx={{
                   WebkitBoxOrient: "vertical",
                   WebkitLineClamp: 2,
-                  display: "-webkit-box"
+                  display: "-webkit-box",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis"
                 }}
               >
                 {description}
