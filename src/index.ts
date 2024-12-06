@@ -32,6 +32,7 @@ export {
   PrototypePreview,
   type PrototypePreviewProps
 } from "./PrototypePreview";
+export { LinkWithPreview, type LinkWithPreviewProps } from "./LinkWithPreview";
 export { default as Breadcrumbs, type BreadcrumbsProps } from "./Breadcrumbs";
 export {
   DetailCard,
