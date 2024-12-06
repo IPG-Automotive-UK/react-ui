@@ -28,6 +28,7 @@ const Template: StoryFn<LinkWithPreviewProps> = args => {
   );
 };
 
+// filled RoadPreview component
 const content = (
   <RoadPreview
     name="MyRoad"

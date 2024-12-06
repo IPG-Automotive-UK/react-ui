@@ -4,8 +4,8 @@ import { LinkWithPreview } from ".";
 import React from "react";
 import { userEvent } from "@testing-library/user-event";
 
-// tests for the RoadPreview component
-describe("RoadPreview", () => {
+// tests for the LinkWithPreview component
+describe("LinkWithPreview", () => {
   // test to check the component renders
   test("renders", () => {
     render(
@@ -17,12 +17,12 @@ describe("RoadPreview", () => {
       </LinkWithPreview>
     );
 
-    const linkText = screen.getByText("My Link");
+    const linkComponent = screen.getByText("My Link");
     const link = screen.getByRole("link");
 
     expect(link.getAttribute("href")).toContain("https://example.com");
-    expect(linkText).toBeInTheDocument();
-    expect(linkText).toHaveTextContent("My Link");
+    expect(linkComponent).toBeInTheDocument();
+    expect(linkComponent).toHaveTextContent("My Link");
   });
   test("popover opens/closes on hover enter/leave", async () => {
     const wait = (ms: number) =>

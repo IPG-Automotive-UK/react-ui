@@ -3,6 +3,13 @@ import React, { useEffect, useRef, useState } from "react";
 
 import type { LinkWithPreviewProps } from "./LinkWithPreview.types";
 
+/**
+ * A component that behaves like a link, but on hover renders a component
+ * @param href The url to which the link points to
+ * @param sx The MUI styles object used to control the look of the link
+ * @param content The component that will render on hover
+ * @param children The text that will be wrapped in a link
+ */
 export default function LinkWithPreview({
   href,
   sx,
