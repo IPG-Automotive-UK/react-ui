@@ -50,7 +50,9 @@ describe("RoadPreview", () => {
     await userEvent.hover(linkComponent);
 
     // wait for 1000ms (1s) popper should appear after 1000ms of hovering
-    await wait(1000);
+    await wait(900);
+    expect(screen.queryByTestId("preview-popper")).not.toBeInTheDocument(); // check that the popper hasn't rendered yet
+    await wait(100);
     expect(screen.getByTestId("preview-popper")).toBeInTheDocument();
 
     // check that the contents of the popper match the contents passed
@@ -61,7 +63,9 @@ describe("RoadPreview", () => {
     await userEvent.unhover(linkComponent);
 
     // wait for 300ms (0.3s) poppers should disappear after 300ms on mouse leave
-    await wait(300);
+    await wait(200);
+    expect(screen.queryByTestId("preview-popper")).toBeInTheDocument(); // check that the popper is still there
+    await wait(100);
     expect(screen.queryByTestId("preview-popper")).not.toBeInTheDocument();
   });
 });
