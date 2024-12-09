@@ -11,13 +11,13 @@ export default function WizardActions({ children }: WizardActionsProps) {
     <Stack
       role="toolbar"
       direction="row"
-      justifyContent="flex-end"
       spacing={2}
-      p={3}
       sx={{
-        backgroundColor: theme => theme.palette.background.paper
+        backgroundColor: theme => theme.palette.background.paper,
+        justifyContent: "flex-end",
+        mx: -3,
+        p: 3
       }}
-      mx={-3}
     >
       {children}
     </Stack>

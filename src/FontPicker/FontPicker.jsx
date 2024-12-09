@@ -189,16 +189,18 @@ export default function FontPicker({
         <TextField
           {...params}
           error={error}
-          inputProps={{
-            ...params.inputProps,
-            sx: {
-              fontFamily: `${value}, Arial, sans-serif`
-            }
-          }}
           label={label}
           margin={margin}
           required={required}
           variant={variant}
+          slotProps={{
+            input: {
+              ...params.inputProps,
+              sx: {
+                fontFamily: `${value}, Arial, sans-serif`
+              }
+            }
+          }}
         />
       )}
       renderOption={(props, option) => (

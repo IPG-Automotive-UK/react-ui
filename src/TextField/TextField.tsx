@@ -55,12 +55,14 @@ export default function TextField({
       onBlur={onBlur}
       onChange={onChange}
       placeholder={placeholder}
-      InputProps={!isFieldMasked ? undefined : InputProps}
       required={required}
       size={size}
       type="string"
       value={value}
       variant={variant}
+      slotProps={{
+        input: !isFieldMasked ? undefined : InputProps
+      }}
     />
   );
 }

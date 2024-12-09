@@ -99,7 +99,12 @@ export default function PasswordChangeForm({ loading, onSubmit }) {
           />
         </Grid>
       </Grid>
-      <Box mt={2} mb={1}>
+      <Box
+        sx={{
+          mb: 1,
+          mt: 2
+        }}
+      >
         <Button
           type="submit"
           fullWidth

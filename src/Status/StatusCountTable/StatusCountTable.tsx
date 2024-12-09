@@ -80,9 +80,11 @@ export function StatusCountTable({ title, count }: StatusCountTableProps) {
               >
                 <Typography
                   variant="body2"
-                  display="flex"
-                  alignItems="center"
-                  gap="8px"
+                  sx={{
+                    alignItems: "center",
+                    display: "flex",
+                    gap: "8px"
+                  }}
                 >
                   <StatusIcon status={row as Status} width={24} height={24} />
                   {statuses[row].label.text}

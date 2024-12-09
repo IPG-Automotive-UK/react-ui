@@ -40,7 +40,11 @@ function PartSelector({
         gap: flexDirection === "row" ? "0 24px" : 0
       }}
     >
-      <Box flex="40%">
+      <Box
+        sx={{
+          flex: "40%"
+        }}
+      >
         <Autocomplete
           label="Part Name"
           required
@@ -59,7 +63,11 @@ function PartSelector({
           value={value.part_name === "" ? null : value.part_name}
         />
       </Box>
-      <Box flex="40%">
+      <Box
+        sx={{
+          flex: "40%"
+        }}
+      >
         <Autocomplete
           disabled={value.part_name === null || value.part_name === ""}
           label="Part Number"

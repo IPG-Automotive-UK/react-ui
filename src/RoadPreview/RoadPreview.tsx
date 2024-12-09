@@ -58,16 +58,28 @@ export function RoadPreview({
 
   return (
     <Box
-      display="flex"
-      flexDirection="column"
-      gap={2}
-      minWidth={0}
-      fontFamily="Montserrat"
       data-testid="road-preview-wrapper"
-      sx={{ ...sx }}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        fontFamily: "Montserrat",
+        gap: 2,
+        minWidth: 0,
+        ...sx
+      }}
     >
-      <Box gap={1}>
-        <Stack direction="row" spacing={1} minWidth={0}>
+      <Box
+        sx={{
+          gap: 1
+        }}
+      >
+        <Stack
+          direction="row"
+          spacing={1}
+          sx={{
+            minWidth: 0
+          }}
+        >
           <img
             src={image}
             alt="road-image"
@@ -79,8 +91,19 @@ export function RoadPreview({
               width: "78px"
             }}
           />
-          <Stack direction="column" minWidth={0}>
-            <Stack direction="row" gap={1} display="flex">
+          <Stack
+            direction="column"
+            sx={{
+              minWidth: 0
+            }}
+          >
+            <Stack
+              direction="row"
+              sx={{
+                display: "flex",
+                gap: 1
+              }}
+            >
               <Box>
                 <VersionChip version={version} />
               </Box>
@@ -111,9 +134,20 @@ export function RoadPreview({
           </Stack>
         </Stack>
       </Box>
-      <Box gap={1}>
+      <Box
+        sx={{
+          gap: 1
+        }}
+      >
         <Stack direction={"row"} spacing={2}>
-          <Box flexShrink={0} display="flex" gap="4px" alignItems="center">
+          <Box
+            sx={{
+              alignItems: "center",
+              display: "flex",
+              flexShrink: 0,
+              gap: "4px"
+            }}
+          >
             <Tooltip title="Road Format">
               {/* need div element, because tooltip is not shown without it */}
               <div style={{ display: "flex" }}>
@@ -132,7 +166,14 @@ export function RoadPreview({
               {format}
             </Typography>
           </Box>
-          <Box flexShrink={0} display="flex" gap="4px" alignItems="center">
+          <Box
+            sx={{
+              alignItems: "center",
+              display: "flex",
+              flexShrink: 0,
+              gap: "4px"
+            }}
+          >
             <Tooltip title="Format Version">
               <NumbersIcon
                 sx={{
@@ -150,7 +191,14 @@ export function RoadPreview({
               {formatVersion}
             </Typography>
           </Box>
-          <Box display="flex" gap="4px" alignItems="center" minWidth={0}>
+          <Box
+            sx={{
+              alignItems: "center",
+              display: "flex",
+              gap: "4px",
+              minWidth: 0
+            }}
+          >
             <Tooltip title="Road File">
               <AttachFileIcon
                 sx={{
@@ -175,16 +223,28 @@ export function RoadPreview({
       {hasOptionalProperty() ? (
         <>
           <Divider />
-          <Box display="flex" flexDirection="column" gap={2}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 2
+            }}
+          >
             {(createdAt || user) && (
               <Stack direction="row" spacing={2}>
                 {createdAt && (
-                  <Box flexShrink={0}>
+                  <Box
+                    sx={{
+                      flexShrink: 0
+                    }}
+                  >
                     <Stack
                       direction="row"
-                      display="flex"
-                      alignItems="center"
-                      gap="4px"
+                      sx={{
+                        alignItems: "center",
+                        display: "flex",
+                        gap: "4px"
+                      }}
                     >
                       <Tooltip title="Created On">
                         <DateRangeOutlinedIcon
@@ -203,12 +263,18 @@ export function RoadPreview({
                   </Box>
                 )}
                 {user && (
-                  <Box minWidth={0}>
+                  <Box
+                    sx={{
+                      minWidth: 0
+                    }}
+                  >
                     <Stack
                       direction="row"
-                      display="flex"
-                      alignItems="center"
-                      gap="4px"
+                      sx={{
+                        alignItems: "center",
+                        display: "flex",
+                        gap: "4px"
+                      }}
                     >
                       <Tooltip title="Created By">
                         {/* needs div element otherwise tooltip is not showing when user as wrapper of custom component */}

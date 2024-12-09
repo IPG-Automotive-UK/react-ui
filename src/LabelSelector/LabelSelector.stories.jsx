@@ -16,7 +16,11 @@ const Template = args => {
   const [options, setOptions] = React.useState(args.options);
 
   return (
-    <Box maxWidth={300}>
+    <Box
+      sx={{
+        maxWidth: 300
+      }}
+    >
       <LabelSelector
         {...args}
         onBlur={action("onBlur")}

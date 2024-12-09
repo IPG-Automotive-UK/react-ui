@@ -40,7 +40,12 @@ export default function RangeFilter({
 
   // return component
   return (
-    <Box px={2} mb={-0.5}>
+    <Box
+      sx={{
+        mb: -0.5,
+        px: 2
+      }}
+    >
       <InputLabel
         sx={{
           mb: -1,
