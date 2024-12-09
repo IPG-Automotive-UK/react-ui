@@ -14,7 +14,9 @@ export default function LinkWithPreview({
   href,
   sx,
   content,
-  children
+  children,
+  color = "primary",
+  variant = "body2"
 }: LinkWithPreviewProps) {
   const theme = useTheme();
 
@@ -76,6 +78,7 @@ export default function LinkWithPreview({
       const mouseX = event.clientX;
       const mouseY = event.clientY;
 
+      // flag to indicate if pointer inside the popper
       const isInsidePopper =
         mouseX >= left && mouseX <= right && mouseY >= top && mouseY <= bottom;
       return isInsidePopper;
@@ -120,9 +123,8 @@ export default function LinkWithPreview({
         onMouseEnter={handleLabelEnter}
         onMouseLeave={handleLabelLeave}
         onClick={event => event.stopPropagation()}
-        variant="body2"
+        variant={variant}
         fontWeight={400}
-        color="primary"
         sx={sx}
       >
         {
@@ -130,6 +132,7 @@ export default function LinkWithPreview({
             href={href}
             target="_blank"
             underline="hover"
+            color={color}
             sx={{
               overflow: "hidden",
               textOverflow: "ellipsis",

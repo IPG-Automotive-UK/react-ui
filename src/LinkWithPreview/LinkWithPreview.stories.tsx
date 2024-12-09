@@ -33,12 +33,14 @@ const Template: StoryFn<LinkWithPreviewProps> = args => {
 export const Default = {
   args: {
     children: "MyLink",
+    color: "primary",
     content: (
       <Box boxShadow={2}>
         <Typography>Hello World!</Typography>
       </Box>
     ),
-    href: "https://example.com"
+    href: "https://example.com",
+    variant: "body2"
   },
   render: Template
 };

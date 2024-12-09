@@ -5,7 +5,7 @@ import { LinkProps } from "@mui/material";
  */
 export type LinkWithPreviewProps = Pick<
   LinkProps,
-  "href" | "sx" | "variant"
+  "href" | "sx" | "variant" | "color"
 > & {
   /**
    * The type of the content to be displayed on hover in the popper
