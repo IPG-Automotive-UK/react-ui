@@ -21,7 +21,7 @@ describe("`UserLabel` tests", () => {
     expect(iconElementStyle.backgroundColor).toBe("rgb(0, 0, 0)");
     expect(anchorElement).not.toBeInTheDocument();
   });
-  test("renders `UserLabel` with a custom colour", () => {
+  test("renders `UserLabel` with a custom color", () => {
     render(<UserLabel label="James Harper" color="#EC407A" />);
 
     // find the elements of interest

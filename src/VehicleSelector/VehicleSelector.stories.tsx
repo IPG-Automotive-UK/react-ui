@@ -218,3 +218,29 @@ export const CustomSize = {
 
   render: Template
 };
+
+export const Disabled = {
+  args: {
+    disabled: true,
+    flexDirection: "column",
+    flexWrap: "nowrap",
+    gates: [],
+    value: [],
+    variants: [
+      {
+        _id: "64c8c4cccc8d6f00130b366b",
+        modelYear: "2015",
+        projectCode: "911",
+        variant: "MP - 3.6 l6 - 397kW - 7MT - R20"
+      },
+      {
+        _id: "64c8c4cccc8d6f00130b367e",
+        modelYear: "2015",
+        projectCode: "911",
+        variant: "JS - 3.6 l6 - 397kW - 7MT - R20"
+      }
+    ]
+  },
+
+  render: Template
+};
