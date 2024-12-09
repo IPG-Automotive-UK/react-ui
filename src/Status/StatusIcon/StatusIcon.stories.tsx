@@ -27,6 +27,7 @@ const Template: StoryFn<StatusIconProps> = args => {
 export const Default = {
   args: {
     height: 40,
+    padding: "2px",
     status: statusTypes[0],
     width: 40
   },
