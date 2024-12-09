@@ -89,23 +89,25 @@ describe("RoadPreview", () => {
     const descriptionElement = screen.getByTestId("road-preview-description");
 
     // Get file name element from html
-    const filenameElement = screen.getByTestId("file-label");
+    const filenameElement = screen.getByTestId("road-preview-filename");
 
     // Get format element from html
-    const formatElement = screen.getByTestId("format-label");
+    const formatElement = screen.getByTestId("road-preview-format");
 
     // Get formatVersion element from html
-    const formatVersionElement = screen.getByTestId("format-version-label");
+    const formatVersionElement = screen.getByTestId(
+      "road-preview-format-version"
+    );
 
     // Get first label and all labels
     const label = screen.getByText(firstLabel.name);
     const allLabels = container.querySelectorAll(".MuiChip-root");
 
     // Get user name rendered
-    const user = screen.getByTestId("user-label");
+    const user = screen.getByTestId("road-preview-user");
 
     // Get created at date
-    const createdAt = screen.getByTestId("date-label");
+    const createdAt = screen.getByTestId("road-preview-created");
 
     // Check if AsamIcon component rendered
     expect(iconElement).toBeInTheDocument();
@@ -124,7 +126,7 @@ describe("RoadPreview", () => {
 
     // Check if filename element is rendering the correct content
     expect(filenameElement).toBeInTheDocument();
-    expect(filenameElement).toHaveTextContent(Default.args.file);
+    expect(filenameElement).toHaveTextContent(Default.args.file.name);
 
     // Check if format element is rendering the correct content
     expect(formatElement).toBeInTheDocument();
@@ -143,8 +145,7 @@ describe("RoadPreview", () => {
 
     // Check if user name is rendered with correct value
     expect(user).toBeInTheDocument();
-    // the user avatar also contains text hence the initials + full name
-    expect(user).toHaveTextContent("JHJames Harper");
+    expect(user).toHaveTextContent(Default.args.user);
 
     // Check if created date is rendered with correct value
     expect(createdAt).toBeInTheDocument();

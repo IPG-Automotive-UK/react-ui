@@ -9,7 +9,7 @@ import { RoadPreviewProps } from "./RoadPreview.types";
  */
 const meta: Meta<typeof RoadPreview> = {
   component: RoadPreview,
-  title: "Preview/RoadPreview"
+  title: "RoadView/RoadPreview"
 };
 export default meta;
 
@@ -25,7 +25,11 @@ export const Default = {
   args: {
     createdAt: "10-09-24 10:24:08",
     description: "Small Description",
-    file: "TestingRoad.rd5",
+    file: {
+      _id: "66d6cc4a33eb2f57a28d36f7",
+      name: "TestingRoad.rd5",
+      type: "road"
+    },
     format: "CarMaker",
     formatVersion: "11.1",
     href: "test",
@@ -69,7 +73,7 @@ export const Default = {
       maxWidth: "480px",
       padding: "16px"
     },
-    user: { name: "James Harper" },
+    user: "James Harper",
     version: "1.1"
   },
   render: Template
@@ -83,14 +87,14 @@ export const WithOverflowText = {
     ...Default.args,
     description:
       "Stationäre Kreisfahrt: DIN ISO 4138 Es wird innerhalb von 18 Sekunden auf 180° Lenkradwinkel eingelenkt.stationäre Kreisfahrt: DIN ISO 4138 Es wird innerhalb von 18 Sekunden auf 180° Lenkradwinkel eingelenkt.",
-    file: "A very looooooooooong Road File Name",
-    format: "My Custom Overly Long Format",
+    file: {
+      ...Default.args.file,
+      name: "A very looooooooooong Road File Name"
+    },
+    format: "ASAM OpenDRIVE",
     label: [Default.args.label[0]],
     name: "SanFrancisco_AEB_A looooong Road Name",
-    user: {
-      color: "rgb(236, 64, 122)",
-      name: "James a very long middle name that should be truncated Harper"
-    }
+    user: "James a very long middle name Harper"
   },
   render: Template
 };
@@ -101,7 +105,11 @@ export const WithOverflowText = {
 export const WithoutOptionalProps = {
   args: {
     description: "Short description",
-    file: "TestingRoad.rd5",
+    file: {
+      _id: "66d6cc4a33eb2f57a28d36f7",
+      name: "TestingRoad.rd5",
+      type: "road"
+    },
     format: "CarMaker",
     formatVersion: "11.1",
     href: "test",
