@@ -11,7 +11,7 @@ test("should render the vehicle selector", async ({ page }) => {
   // Wait for the iframe to be attached in the DOM.
   await page.waitForSelector('iframe[title="storybook-preview-iframe"]');
 
-  // Check that Project Code, Model Year and Vehicle Variant are displayed.
+  // Check that Project Code, Model Year and Variant are displayed.
   await expect(
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
@@ -32,7 +32,7 @@ test("should render the vehicle selector", async ({ page }) => {
       .frameLocator('iframe[title="storybook-preview-iframe"]')
       .getByTestId("vehicle-select")
       .locator("div")
-      .filter({ hasText: "Vehicle Variant *" })
+      .filter({ hasText: "Variant *" })
       .nth(3)
   ).toBeVisible();
 });
@@ -70,7 +70,7 @@ test("Can select a value from each Autocomplete component", async ({
     .click();
   await page
     .frameLocator('iframe[title="storybook-preview-iframe"]')
-    .getByLabel("Vehicle Variant *")
+    .getByLabel("Variant *")
     .click();
   await page
     .frameLocator('iframe[title="storybook-preview-iframe"]')
@@ -94,7 +94,7 @@ test("Can select a value from each Autocomplete component", async ({
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
       .getByTestId("vehicle-select")
-      .getByLabel("Vehicle Variant *")
+      .getByLabel("Variant *")
   ).toHaveValue("JS - 3.6 l6 - 397kW - 7MT - R20");
 });
 
@@ -137,9 +137,9 @@ test("Autocomplete components are enabled or disabled based on the selection of 
 });
 
 /**
- * Test to check that clearing the "Project Code" field also clears the "Model Year", "Vehicle Variant", and "Gate" fields.
+ * Test to check that clearing the "Project Code" field also clears the "Model Year", "Variant", and "Gate" fields.
  */
-test("Clearing the 'Project Code' field also clears the 'Model Year', 'Vehicle Variant', and 'Gate' fields", async ({
+test("Clearing the 'Project Code' field also clears the 'Model Year', 'Variant', and 'Gate' fields", async ({
   page
 }) => {
   // Go to the page with the VehicleSelector component
@@ -169,7 +169,7 @@ test("Clearing the 'Project Code' field also clears the 'Model Year', 'Vehicle V
     .click();
   await page
     .frameLocator('iframe[title="storybook-preview-iframe"]')
-    .getByLabel("Vehicle Variant *")
+    .getByLabel("Variant *")
     .click();
   await page
     .frameLocator('iframe[title="storybook-preview-iframe"]')
@@ -190,7 +190,7 @@ test("Clearing the 'Project Code' field also clears the 'Model Year', 'Vehicle V
     .getByLabel("Project Code *")
     .fill("");
 
-  // Check that the "Model Year", "Vehicle Variant", and "Gate" fields are also cleared
+  // Check that the "Model Year", "Variant", and "Gate" fields are also cleared
   await expect(
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
@@ -201,7 +201,7 @@ test("Clearing the 'Project Code' field also clears the 'Model Year', 'Vehicle V
     page
       .frameLocator('iframe[title="storybook-preview-iframe"]')
       .getByTestId("vehicle-select")
-      .getByLabel("Vehicle Variant *")
+      .getByLabel("Variant *")
   ).toHaveValue("");
   await expect(
     page
