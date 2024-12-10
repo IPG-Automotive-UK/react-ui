@@ -139,12 +139,12 @@ export default function PasswordChangeDialog({
             </Grid>
           )}
           {status === "success" && (
-            <Alert severity="success" sx={{ marginBottom: 1 }}>
+            <Alert severity="success" sx={{ mb: 1 }}>
               {successMessage}
             </Alert>
           )}
           {status === "error" && (
-            <Alert severity="error" sx={{ marginBottom: 1, marginTop: 2 }}>
+            <Alert severity="error" sx={{ mb: 1, mt: 2 }}>
               {errorMessage}
             </Alert>
           )}

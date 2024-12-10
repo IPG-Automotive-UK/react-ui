@@ -17,7 +17,7 @@
   "scripts": {
     "build": "pnpm run clean && pnpm run copy-files && tsc --project ./tsconfig.production.json",
     "clean": "rimraf dist",
-    "copy-files": "copyfiles -e '**/*.test.**' -e '**/*.spec.**' -e '**/*.stories.**' -u 1 src/**/*.html src/**/*.css src/**/*.ts src/**/*.tsx src/**/*/*.svg dist/",
+    "copy-files": "copyfiles -e '**/*.test.**' -e '**/*.spec.**' -e '**/*.stories.**' -u 1 src/**/*.html src/**/*.css src/**/*/*.svg dist/",
     "prepublishOnly": "pnpm run build",
     "start": "microbundle-crl watch --no-compress --format modern,cjs --jsxFragment React.Fragment",
     "storybook": "storybook dev -p 6006",
@@ -34,7 +34,7 @@
   "devDependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
-    "@mui/material": "^6.0.0",
+    "@mui/material": "^6.1.9",
     "@mui/x-data-grid-generator": "^7.10.0",
     "@playwright/test": "^1.45.2",
     "@storybook/addon-actions": "^8.2.6",
@@ -102,7 +102,7 @@
   },
   "dependencies": {
     "@juggle/resize-observer": "^3.4.0",
-    "@mui/icons-material": "^6.0.0",
+    "@mui/icons-material": "^6.1.9",
     "@mui/x-data-grid": "^7.10.0",
     "@mui/x-tree-view": "^7.10.0",
     "colord": "^2.9.3",
@@ -122,7 +122,7 @@
   "peerDependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
-    "@mui/material": "^6.0.0",
+    "@mui/material": "^6.1.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

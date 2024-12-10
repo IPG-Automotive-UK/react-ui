@@ -160,7 +160,7 @@ function VehicleSelector({
           disabled={
             selectedModelYear === null || selectedModelYear === "" || disabled
           }
-          label="Vehicle Variant"
+          label="Variant"
           multiple={multipleSelection}
           required
           options={allVariants}
