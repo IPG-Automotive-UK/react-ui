@@ -26,7 +26,7 @@ function Sidebar({
           alignItems: "center",
           display: "flex",
           justifyContent: "space-between",
-          p: theme => theme.spacing(2)
+          p: 2
         }}
       >
         {showLogo ? (
