@@ -123,7 +123,6 @@ export default function PasswordChangeDialog({
                   label="Confirm new password"
                   type="password"
                   autoComplete="new-password"
-                  inputProps={{ "aria-label": "newPasswordRepeat" }}
                   error={Boolean(errors.newPasswordRepeat)}
                   helperText={errors?.newPasswordRepeat?.message}
                   disabled={status === "loading"}
@@ -132,17 +131,20 @@ export default function PasswordChangeDialog({
                     validate: value =>
                       value === password.current || "Password does not match"
                   })}
+                  slotProps={{
+                    input: { "aria-label": "newPasswordRepeat" }
+                  }}
                 />
               </Grid>
             </Grid>
           )}
           {status === "success" && (
-            <Alert severity="success" style={{ marginBottom: 16 }}>
+            <Alert severity="success" sx={{ mb: 2 }}>
               {successMessage}
             </Alert>
           )}
           {status === "error" && (
-            <Alert severity="error" style={{ marginBottom: 8, marginTop: 16 }}>
+            <Alert severity="error" sx={{ mb: 1, mt: 2 }}>
               {errorMessage}
             </Alert>
           )}

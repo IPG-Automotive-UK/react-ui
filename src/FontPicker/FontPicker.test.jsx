@@ -1,6 +1,7 @@
+import { render, waitFor } from "@testing-library/react";
+
 import FontPicker from ".";
 import React from "react";
-import { render } from "@testing-library/react";
 
 // list of options to display
 const options = ["Arial", "Helvetica", "Times New Roman"];
@@ -38,6 +39,6 @@ describe("FontPicker", () => {
     const actualFont = window
       .getComputedStyle(inputBase, null)
       .getPropertyValue("font-family");
-    expect(actualFont).toBe("Arial,Arial,sans-serif");
+    waitFor(() => expect(actualFont).toBe("Arial,Arial,sans-serif"));
   });
 });

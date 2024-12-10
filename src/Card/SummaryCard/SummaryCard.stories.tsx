@@ -98,7 +98,11 @@ const WithMoreOptionsButtonRef: StoryFn<SummaryCardProps> = args => {
           vertical: "bottom"
         }}
       >
-        <Box p={2}>
+        <Box
+          sx={{
+            p: 2
+          }}
+        >
           <Typography>
             This popover is anchored to the more options button
           </Typography>

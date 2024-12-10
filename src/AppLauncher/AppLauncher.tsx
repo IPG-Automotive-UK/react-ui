@@ -82,7 +82,12 @@ function AppLauncher({
   // header logo
   const logoBox = (
     <Fragment>
-      <Box display="flex" justifyContent="center">
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center"
+        }}
+      >
         <VirtoLogo
           sx={theme => ({
             color: theme.palette.primary.main,
@@ -103,7 +108,12 @@ function AppLauncher({
   );
 
   return (
-    <Box px={2} py={3}>
+    <Box
+      sx={{
+        px: 2,
+        py: 3
+      }}
+    >
       {showLogo ? (
         <Fragment>
           {logoLinkUrl ? (
@@ -122,7 +132,13 @@ function AppLauncher({
           )}
         </Fragment>
       ) : null}
-      <Box display="flex" flexWrap="wrap" justifyContent="space-between">
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "space-between"
+        }}
+      >
         {appList.map(app => {
           return (
             <Paper
@@ -179,7 +195,11 @@ function AppLauncher({
           VIRTO Status
         </Link>
       </Box>
-      <Box flexGrow={1} />
+      <Box
+        sx={{
+          flexGrow: 1
+        }}
+      />
     </Box>
   );
 }

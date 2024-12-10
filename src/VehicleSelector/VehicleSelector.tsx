@@ -226,7 +226,6 @@ function VehicleSelector({
           value={selectedVariants}
         />
       </Box>
-
       {gates.length > 0 && (
         <Box
           flex="40%"

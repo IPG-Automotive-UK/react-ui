@@ -36,7 +36,12 @@ function Header({
       })}
     >
       <Toolbar style={{ justifyContent: "space-between" }}>
-        <Box display="flex" alignItems="center">
+        <Box
+          sx={{
+            alignItems: "center",
+            display: "flex"
+          }}
+        >
           <IconButton sx={{ pl: 0 }} onClick={onAppClick} disableRipple>
             <AppsIcon
               sx={theme => ({
@@ -66,8 +71,20 @@ function Header({
               })}
             />
           </IconButton>
-          <Box ml={1} display="flex" alignItems="center">
-            <Link href={virtoLogoLinkUrl} underline="none" display="flex">
+          <Box
+            sx={{
+              alignItems: "center",
+              display: "flex",
+              ml: 1
+            }}
+          >
+            <Link
+              href={virtoLogoLinkUrl}
+              underline="none"
+              sx={{
+                display: "flex"
+              }}
+            >
               <VirtoLogo
                 data-testid="virto-logo"
                 sx={theme => ({
@@ -83,24 +100,33 @@ function Header({
             </Link>
             <Typography
               variant="h6"
-              fontSize="28px"
-              lineHeight="34px"
-              letterSpacing="0.05em"
-              textTransform="uppercase"
-              fontWeight="700"
-              sx={theme => ({
-                color: "white",
-                ...theme.applyStyles("dark", {
-                  color: "#003063"
+              sx={[
+                {
+                  fontSize: "28px",
+                  fontWeight: "700",
+                  letterSpacing: "0.05em",
+                  lineHeight: "34px",
+                  textTransform: "uppercase"
+                },
+                theme => ({
+                  color: "white",
+                  ...theme.applyStyles("dark", {
+                    color: "#003063"
+                  })
                 })
-              })}
+              ]}
             >
               {`.`}
               <span style={{ marginLeft: "7px" }}>{appName}</span>
             </Typography>
           </Box>
         </Box>
-        <Box display="flex" alignItems="center">
+        <Box
+          sx={{
+            alignItems: "center",
+            display: "flex"
+          }}
+        >
           <ToggleColorMode mode={mode} onChange={onColourModeChange} />
           <UserMenu
             username={username}
@@ -159,7 +185,7 @@ function VirtoAppHeader({
         onClose={() => setAppOpen(false)}
         sx={theme => ({
           "& .MuiDrawer-paper": {
-            height: `calc(100% - ${theme.mixins.toolbar.minHeight}px)`,
+            height: `calc(100vh - ${theme.mixins.toolbar.minHeight}px)`,
             top: theme.mixins.toolbar.minHeight,
             width: applancherWidth
           }

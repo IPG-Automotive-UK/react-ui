@@ -54,16 +54,20 @@ const Infographic = ({ media, version }: InfographicProps) => {
   return (
     <Box
       className="infographic-container"
-      position={"relative"}
       ref={boxRef}
       sx={{
         display: "flex",
         justifyContent: "center",
+        position: "relative",
         width: 368
       }}
     >
       {showSkeleton ? (
-        <Box p={2}>
+        <Box
+          sx={{
+            p: 2
+          }}
+        >
           <Skeleton
             sx={{
               borderRadius: 0,
@@ -95,16 +99,21 @@ const Infographic = ({ media, version }: InfographicProps) => {
       />
       {version ? (
         <Box
-          position={"absolute"}
-          display={showSkeleton ? "none" : "flex"}
-          alignItems={"end"}
           sx={{
+            alignItems: "end",
+            display: showSkeleton ? "none" : "flex",
             height: 190,
             padding: 2,
+            position: "absolute",
             width: 336
           }}
         >
-          <Box padding={1} sx={{ maxWidth: 320 }}>
+          <Box
+            sx={{
+              maxWidth: 320,
+              padding: 1
+            }}
+          >
             <VersionChip version={version} />
           </Box>
         </Box>

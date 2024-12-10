@@ -28,13 +28,13 @@ const Template: StoryFn<StatusCountBarProps> = args => {
 /* eslint-disable sort-keys */
 export const Default = {
   args: {
-    title: "Total Simulations",
     count: {
       running: 2,
       completed: 3,
       aborted: 1,
       aborting: 2
-    }
+    },
+    title: "Total Simulations"
   },
   render: Template
 };
@@ -44,7 +44,6 @@ export const Default = {
  */
 export const AllStatuses = {
   args: {
-    title: "Simulation Statuses",
     count: {
       running: 3,
       queued: 2,
@@ -53,7 +52,8 @@ export const AllStatuses = {
       aborted: 2,
       aborting: 2,
       ready: 1
-    }
+    },
+    title: "Simulation Statuses"
   },
   render: Template
 };
@@ -93,13 +93,13 @@ const GridTemplate: StoryFn<StatusCountBarProps> = args => {
  */
 export const WithGridLayout = {
   args: {
-    title: "Simulation Status Grid",
     count: {
       running: 2,
       completed: 4,
       aborted: 1,
       aborting: 2
-    }
+    },
+    title: "Simulation Status Grid"
   },
   render: GridTemplate
 };

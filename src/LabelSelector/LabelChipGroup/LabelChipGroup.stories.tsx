@@ -24,9 +24,9 @@ const OverflowComponent: StoryFn<LabelChipGroupProps> = args => {
   return (
     <Stack direction="column" spacing={2}>
       <Box
-        py={1}
         sx={{
           border: "1px dashed red",
+          py: 1,
           width
         }}
       >

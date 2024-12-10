@@ -42,8 +42,18 @@ export function SidebarFilter({
             overflow: "hidden"
           }}
         >
-          <Stack px={3} py={2}>
-            <Typography variant="h6" fontWeight={600}>
+          <Stack
+            sx={{
+              px: 3,
+              py: 2
+            }}
+          >
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: 600
+              }}
+            >
               Filters
             </Typography>
             <IconButton

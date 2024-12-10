@@ -120,10 +120,18 @@ export default function FileUploader({
         <input {...getInputProps()} />
         {isValidating ? (
           <Stack className="dropzoneText">
-            <Typography fontSize="14px">
+            <Typography
+              sx={{
+                fontSize: "14px"
+              }}
+            >
               {multiple ? `Validating Selection(s)` : `Validating Selection`}
             </Typography>
-            <Box width={200}>
+            <Box
+              sx={{
+                width: 200
+              }}
+            >
               <LinearProgress />
             </Box>
           </Stack>
@@ -131,14 +139,22 @@ export default function FileUploader({
           <>
             {!multiple && selectedFiles.length === 1 ? (
               <Stack className="dropzoneSingleFile">
-                <Typography fontSize="15px">
+                <Typography
+                  sx={{
+                    fontSize: "15px"
+                  }}
+                >
                   {selectedFiles[0].file.name}
                 </Typography>
               </Stack>
             ) : (
               <Stack className="dropzoneText">
                 <FileUploadIcon />
-                <Typography fontSize="15px">
+                <Typography
+                  sx={{
+                    fontSize: "15px"
+                  }}
+                >
                   {rejectionMessage ?? dropzoneText}
                 </Typography>
               </Stack>
@@ -147,7 +163,14 @@ export default function FileUploader({
         )}
       </Box>
       {multiple && selectedFiles.length > 0 ? (
-        <Grid spacing={1} direction="row" container={true} mt={0.5}>
+        <Grid
+          spacing={1}
+          direction="row"
+          container={true}
+          sx={{
+            mt: 0.5
+          }}
+        >
           {selectedFiles.map((thisFile, i) => {
             return (
               <Grid key={`${thisFile.file?.name ?? "file"}-${i}`}>

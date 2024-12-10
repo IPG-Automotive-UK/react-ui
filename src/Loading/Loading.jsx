@@ -6,11 +6,13 @@ export default function Loading({ label }) {
   // return components
   return (
     <Box
-      height="100%"
-      width="100%"
-      display="flex"
-      alignItems="center"
-      justifyContent="center"
+      sx={{
+        alignItems: "center",
+        display: "flex",
+        height: "100%",
+        justifyContent: "center",
+        width: "100%"
+      }}
     >
       {label && label.length > 0 ? (
         <div
