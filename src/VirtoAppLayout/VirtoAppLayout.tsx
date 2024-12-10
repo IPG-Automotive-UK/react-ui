@@ -67,7 +67,7 @@ function Layout({
             onClose={isMediumScreen ? () => setMobileOpen(false) : undefined}
             sx={theme => ({
               "& .MuiDrawer-paper": {
-                height: `calc(100vh - ${theme.mixins.toolbar.minHeight}px) `,
+                height: `calc(100vh - ${theme.mixins.toolbar.minHeight}px)`,
                 paddingTop: "8px",
                 top: theme.mixins.toolbar.minHeight,
                 width: sidebarWidth
@@ -79,7 +79,7 @@ function Layout({
         </Box>
         <Box
           sx={{
-            background: theme => theme.palette.background.default,
+            background: `var(--ipg-rui-palette-background-paper)`,
             display: "flex",
             flexDirection: "column",
             flexGrow: 1

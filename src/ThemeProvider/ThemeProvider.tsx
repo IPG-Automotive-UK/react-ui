@@ -13,7 +13,6 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { ThemeProviderProps } from "./ThemeProvider.types";
 import darkScrollbar from "@mui/material/darkScrollbar";
-import { grey } from "@mui/material/colors";
 
 // extend the theme to include custom properties
 // https://mui.com/material-ui/customization/theming/#custom-variables
@@ -73,16 +72,6 @@ const mainTheme: ThemeOptions = {
             body: darkScrollbar()
           }
         },
-        MuiDataGrid: {
-          styleOverrides: {
-            footerContainer: {
-              backgroundColor: "#000"
-            },
-            main: {
-              backgroundColor: "#000"
-            }
-          }
-        },
         MuiStepper: {
           styleOverrides: {
             root: {
@@ -92,7 +81,9 @@ const mainTheme: ThemeOptions = {
         }
       },
       palette: {
-        background: { default: "#121212" },
+        background: {
+          default: "#121212"
+        },
         primary: { main: "#87A5D2" }
       }
     },
@@ -101,20 +92,10 @@ const mainTheme: ThemeOptions = {
         MuiCssBaseline: {
           styleOverrides: {
             body: darkScrollbar({
-              active: grey[400],
-              thumb: grey[400],
-              track: grey[200]
+              active: `var(--ipg-rui-palette-grey-400)`,
+              thumb: `var(--ipg-rui-palette-grey-400)`,
+              track: `var(--ipg-rui-palette-grey-200)`
             })
-          }
-        },
-        MuiDataGrid: {
-          styleOverrides: {
-            footerContainer: {
-              backgroundColor: "#fff"
-            },
-            main: {
-              backgroundColor: "#fff"
-            }
           }
         },
         MuiIconButton: { styleOverrides: { root: { color: "#9e9e9e" } } },
@@ -155,7 +136,9 @@ const mainTheme: ThemeOptions = {
         action: {
           selected: "rgba(0, 95, 168, 0.08)"
         },
-        background: { default: "rgb(250, 250, 250)" },
+        background: {
+          default: "rgb(250, 250, 250)"
+        },
         primary: { main: "#003063" },
         secondary: { main: "#005FA8" }
       }
@@ -173,6 +156,12 @@ const mainTheme: ThemeOptions = {
     },
     MuiDataGrid: {
       styleOverrides: {
+        footerContainer: {
+          backgroundColor: `var(--ipg-rui-palette-common-background)`
+        },
+        main: {
+          backgroundColor: `var(--ipg-rui-palette-common-background)`
+        },
         root: {
           "& .MuiDataGrid-cell:focus, .MuiDataGrid-cell:focus-within, .MuiDataGrid-columnHeader:focus, .MuiDataGrid-columnHeader:focus-within":
             {
