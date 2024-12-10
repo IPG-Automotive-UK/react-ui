@@ -8,8 +8,6 @@ import ThemeProvider from "../ThemeProvider";
 import VirtoAppHeader from "../VirtoAppHeader";
 import { VirtoAppLayoutProps } from "./VirtoAppLayout.types";
 
-// import useTheme from "../ThemeProvider/useTheme";
-
 // app layout component
 function Layout({
   appVersion,
