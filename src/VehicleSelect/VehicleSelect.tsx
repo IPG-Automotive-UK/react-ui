@@ -123,7 +123,7 @@ function VehicleSelect({
         <Autocomplete
           disableCloseOnSelect={true}
           disabled={selectedModelYear === null || selectedModelYear === ""}
-          label="Vehicle Variant"
+          label="Variant"
           required
           multiple={true}
           options={allVariants}
