@@ -5,8 +5,8 @@ test.describe("Vehicle Select tests", () => {
     const selectors = [
       { label: "Project Code *", option: "911" },
       { label: "Model Year *", option: "2015" },
-      { label: "Vehicle Variant *", option: "JS - 3.6 l6 - 397kW - 7MT -" },
-      { label: "Vehicle Variant *", option: "MP - 3.6 l6 - 397kW - 7MT -" },
+      { label: "Variant *", option: "JS - 3.6 l6 - 397kW - 7MT -" },
+      { label: "Variant *", option: "MP - 3.6 l6 - 397kW - 7MT -" },
       { label: "Gate *", option: "Gate 1" },
       { label: "Gate *", option: "Gate 2" }
     ];
