@@ -235,7 +235,7 @@ function ChildWrapper({
   children,
   theme: controlledTheme
 }: ThemeProviderProps) {
-  // get the current theme mode
+  // use hook from MUI to get and set the theme mode
   const { mode, setMode } = useColorScheme();
 
   // update the theme mode when the controlled theme changes

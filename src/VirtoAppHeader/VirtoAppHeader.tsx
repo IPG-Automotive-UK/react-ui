@@ -28,6 +28,7 @@ function Header({
   username,
   virtoLogoLinkUrl
 }: VirtoAppHeaderProps) {
+  // use hook from MUI to get and set the theme mode
   const { mode, setMode } = useColorScheme();
   return (
     <AppBar
