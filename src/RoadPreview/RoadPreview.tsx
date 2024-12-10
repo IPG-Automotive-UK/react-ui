@@ -109,6 +109,7 @@ export function RoadPreview({
           gap={"12px"}
           maxWidth={1}
           justifyContent={"left"}
+          alignItems={"center"}
         >
           <Box
             data-testid="format-label"
@@ -141,7 +142,12 @@ export function RoadPreview({
           <Divider />
           <Box display="flex" flexDirection="column" gap={1}>
             {(createdAt || user) && (
-              <Stack direction="row" gap={"12px"} width={1}>
+              <Stack
+                direction="row"
+                gap={"12px"}
+                width={1}
+                alignItems={"center"}
+              >
                 {createdAt && (
                   <Box
                     data-testid="date-label"
