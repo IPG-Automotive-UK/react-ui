@@ -208,7 +208,7 @@ const mainTheme: ThemeOptions = {
 const mainThemeWithColorSchemes = createTheme({
   cssVariables: {
     colorSchemeSelector: "data",
-    cssVarPrefix: "ipg-rui"
+    cssVarPrefix: "ipg"
   },
   ...mainTheme
 });
