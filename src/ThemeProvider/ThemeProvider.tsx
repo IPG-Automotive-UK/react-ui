@@ -63,7 +63,7 @@ const mainTheme: ThemeOptions = {
         MuiAppBar: {
           styleOverrides: {
             root: {
-              "--ipg-rui-palette-AppBar-darkBg": "#87a5d2"
+              "--ipg-palette-AppBar-darkBg": "#87a5d2"
             }
           }
         },
@@ -92,9 +92,9 @@ const mainTheme: ThemeOptions = {
         MuiCssBaseline: {
           styleOverrides: {
             body: darkScrollbar({
-              active: `var(--ipg-rui-palette-grey-400)`,
-              thumb: `var(--ipg-rui-palette-grey-400)`,
-              track: `var(--ipg-rui-palette-grey-200)`
+              active: `var(--ipg-palette-grey-400)`,
+              thumb: `var(--ipg-palette-grey-400)`,
+              track: `var(--ipg-palette-grey-200)`
             })
           }
         },
@@ -157,10 +157,10 @@ const mainTheme: ThemeOptions = {
     MuiDataGrid: {
       styleOverrides: {
         footerContainer: {
-          backgroundColor: `var(--ipg-rui-palette-common-background)`
+          backgroundColor: `var(--ipg-palette-common-background)`
         },
         main: {
-          backgroundColor: `var(--ipg-rui-palette-common-background)`
+          backgroundColor: `var(--ipg-palette-common-background)`
         },
         root: {
           "& .MuiDataGrid-cell:focus, .MuiDataGrid-cell:focus-within, .MuiDataGrid-columnHeader:focus, .MuiDataGrid-columnHeader:focus-within":
@@ -198,7 +198,7 @@ const mainTheme: ThemeOptions = {
   },
   typography: {
     allVariants: {
-      color: `var(--ipg-rui-palette-text-primary)`
+      color: `var(--ipg-palette-text-primary)`
     },
     fontFamily: "Montserrat"
   }

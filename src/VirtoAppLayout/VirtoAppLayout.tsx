@@ -79,7 +79,7 @@ function Layout({
         </Box>
         <Box
           sx={{
-            background: `var(--ipg-rui-palette-background-paper)`,
+            background: `var(--ipg-palette-background-paper)`,
             display: "flex",
             flexDirection: "column",
             flexGrow: 1
