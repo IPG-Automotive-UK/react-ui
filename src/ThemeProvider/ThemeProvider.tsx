@@ -61,6 +61,13 @@ const mainTheme: ThemeOptions = {
             }
           }
         },
+        MuiAppBar: {
+          styleOverrides: {
+            root: {
+              "--ipg-rui-palette-AppBar-darkBg": "#87a5d2"
+            }
+          }
+        },
         MuiCssBaseline: {
           styleOverrides: {
             body: darkScrollbar()
@@ -87,11 +94,6 @@ const mainTheme: ThemeOptions = {
       palette: {
         background: { default: "#121212" },
         primary: { main: "#87A5D2" }
-      },
-      typography: {
-        allVariants: {
-          color: "#fff"
-        }
       }
     },
     light: {
@@ -147,12 +149,6 @@ const mainTheme: ThemeOptions = {
               borderColor: "rgb(196, 196, 196)"
             }
           }
-        }
-      },
-      mixins: {
-        MuiDataGrid: {
-          containerBackground: "#fff",
-          pinnedBackground: "#fff"
         }
       },
       palette: {
@@ -213,7 +209,7 @@ const mainTheme: ThemeOptions = {
   },
   typography: {
     allVariants: {
-      fontFamily: "Montserrat"
+      color: `var(--ipg-rui-palette-text-primary)`
     },
     fontFamily: "Montserrat"
   }
@@ -221,7 +217,10 @@ const mainTheme: ThemeOptions = {
 
 // create the main theme with color schemes
 const mainThemeWithColorSchemes = createTheme({
-  // cssVariables: true,
+  cssVariables: {
+    colorSchemeSelector: "data",
+    cssVarPrefix: "ipg-rui"
+  },
   ...mainTheme
 });
 
