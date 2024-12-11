@@ -29,18 +29,10 @@ const colors = [
  */
 export default function useColorMap(allOptions: string[]) {
   // generate color map from options
-  const colorMap = useMemo(() => {
-    // create color map
-    const colorMap: { [key: string]: string } = {};
-    for (let i = 0; i < allOptions.length; i++) {
-      colorMap[allOptions[i]] = colors[i % colors.length];
-    }
-    return colorMap;
+  const memoisedColorMap = useMemo(() => {
+    return colorMap(allOptions);
   }, [allOptions]);
-
-  // return function to get color for a given option
-  const getColor = (option: string) => colorMap[option];
-  return getColor;
+  return memoisedColorMap;
 }
 
 /**
