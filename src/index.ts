@@ -206,7 +206,12 @@ export {
 } from "./TreeViewList";
 export { default as TruncatedTooltip } from "./TruncatedTooltip";
 export { default as UserMenu, type UserMenuProps } from "./UserMenu";
-export { UserAvatar, useColorMap, type UserAvatarProps } from "./UserAvatar";
+export {
+  UserAvatar,
+  colorMap,
+  useColorMap,
+  type UserAvatarProps
+} from "./UserAvatar";
 export {
   default as NoWrapTypography,
   type NoWrapTypographyProps

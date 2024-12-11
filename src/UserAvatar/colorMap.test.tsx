@@ -2,7 +2,6 @@ import { render, screen } from "@testing-library/react";
 import useColorMap, { colorMap } from "./colorMap";
 
 import React from "react";
-import { vi } from "vitest";
 
 describe("colorMap", () => {
   // check background color is set when color prop is set
