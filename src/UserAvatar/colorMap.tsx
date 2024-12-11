@@ -48,28 +48,23 @@ export default function useColorMap(allOptions: string[]) {
  * @param allOptions A list of all values that should be assigned a color
  */
 export function colorMap(allOptions: string[]) {
-  // generate color map from options
-  const colorMap = () => {
-    // define list of colors
-    const colors = [
-      indigo[500],
-      green[700],
-      deepOrange[500],
-      cyan[700],
-      pink[600],
-      teal[600],
-      purple[500],
-      red[600]
-    ];
+  // define list of colors
+  const colors = [
+    indigo[500],
+    green[700],
+    deepOrange[500],
+    cyan[700],
+    pink[600],
+    teal[600],
+    purple[500],
+    red[600]
+  ];
 
-    // create color map
-    const colorMap: { [key: string]: string } = {};
-    for (let i = 0; i < allOptions.length; i++) {
-      colorMap[allOptions[i]] = colors[i % colors.length];
-    }
-    return colorMap;
-  };
-
+  // create color map
+  const colorMap: { [key: string]: string } = {};
+  for (let i = 0; i < allOptions.length; i++) {
+    colorMap[allOptions[i]] = colors[i % colors.length];
+  }
   // return function to get color for a given option
   const getColor = (option: string) => colorMap[option];
   return getColor;
