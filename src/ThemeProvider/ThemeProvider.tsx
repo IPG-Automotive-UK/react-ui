@@ -209,9 +209,9 @@ const mainTheme: ThemeOptions = {
   },
   typography: {
     allVariants: {
-      color: `var(--ipg-palette-text-primary)`,
-      fontFamily: "Montserrat, Arial, sans-serif"
-    }
+      color: `var(--ipg-palette-text-primary)`
+    },
+    fontFamily: "Montserrat, Arial, sans-serif"
   }
 };
 

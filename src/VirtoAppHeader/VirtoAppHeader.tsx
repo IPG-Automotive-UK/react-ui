@@ -16,7 +16,7 @@ import Menu from "@mui/icons-material/Menu";
 import ToggleColorMode from "../ToggleColorMode";
 import UserMenu from "../UserMenu";
 import { VirtoAppHeaderProps } from "./VirtoAppHeader.types";
-import VirtoLogo from "../SvgIcons/VirtoLogo";
+import { VirtoLogo } from "../SvgIcons/VirtoLogo";
 
 // appbar component
 function Header({

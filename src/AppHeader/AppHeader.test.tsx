@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 
 import AppHeader from ".";
 import React from "react";
-import VirtoLogo from "../SvgIcons/VirtoLogo";
+import { VirtoLogo } from "../SvgIcons/VirtoLogo";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 

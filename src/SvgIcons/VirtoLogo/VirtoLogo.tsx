@@ -1,10 +1,10 @@
 import * as React from "react";
 
-import PropTypes from "prop-types";
 import SvgIcon from "@mui/material/SvgIcon";
+import { VirtoLogoProps } from "./VirtoLogo.types";
 
 // Virto logo svg
-function Icon(props) {
+function Icon(props: VirtoLogoProps) {
   return (
     <SvgIcon viewBox="0 0 164 36" {...props}>
       <path d="M124.58 0H93.2086C92.5382 0.00459184 92.0928 0.707143 92.3775 1.31327L94.88 6.68112C95.0316 7.00255 95.3576 7.21378 95.7112 7.21378H105.556V35.077C105.556 35.5867 105.969 35.9954 106.474 35.9954H111.314C111.819 35.9954 112.233 35.5821 112.233 35.077V7.21378H122.077C122.436 7.20918 122.757 6.99796 122.909 6.67653L125.411 1.30867C125.696 0.697959 125.25 0 124.58 0Z" />
@@ -17,13 +17,6 @@ function Icon(props) {
 }
 
 // Virto logo component
-export default function VirtoLogo({ sx }) {
+export function VirtoLogo({ sx }: VirtoLogoProps) {
   return <Icon sx={sx} />;
 }
-
-VirtoLogo.propTypes = {
-  /**
-   * styles applied to the svg element
-   */
-  sx: PropTypes.func
-};
