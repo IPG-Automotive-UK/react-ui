@@ -27,7 +27,7 @@ const colors = [
  * Custom hook (with memo) to generate a color map for a list of options
  * @param allOptions A list of all values that should be assigned a color
  */
-export default function useColorMap(allOptions: string[]) {
+export function useColorMap(allOptions: string[]) {
   // generate color map from options
   const memoisedColorMap = useMemo(() => {
     return colorMap(allOptions);
