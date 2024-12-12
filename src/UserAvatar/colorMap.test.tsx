@@ -1,5 +1,5 @@
+import { colorMap, useColorMap } from "./colorMap";
 import { render, screen } from "@testing-library/react";
-import useColorMap, { colorMap } from "./colorMap";
 
 import React from "react";
 
