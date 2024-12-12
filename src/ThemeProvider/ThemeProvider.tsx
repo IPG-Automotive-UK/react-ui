@@ -238,6 +238,14 @@ function ChildWrapper({
   // use hook from MUI to get and set the theme mode
   const { mode, setMode } = useColorScheme();
 
+  // update the theme mode to "light" if current mode is "system"
+  useEffect(() => {
+    if (mode === "system") {
+      setMode("light");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mode]);
+
   // update the theme mode when the controlled theme changes
   useEffect(() => {
     if (controlledTheme && mode !== controlledTheme) {
@@ -245,6 +253,7 @@ function ChildWrapper({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [controlledTheme]);
+
   return children;
 }
 
