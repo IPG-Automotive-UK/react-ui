@@ -1,24 +1,25 @@
 import React, { act } from "react";
-import ThemeProvider, { useTheme } from ".";
 import { render, screen, waitFor } from "@testing-library/react";
 
+import ThemeProvider from ".";
+import { useColorScheme } from "@mui/material";
 import { userEvent } from "@testing-library/user-event";
 
 /**
  * Test component to render the current theme as text
  */
 function ThemeText() {
-  const [theme] = useTheme();
-  return <p>{theme}</p>;
+  const { mode } = useColorScheme();
+  return <p>{mode}</p>;
 }
 
 /**
  * Test component to toggle the current theme
  */
 function ThemeToggle() {
-  const [theme, setTheme] = useTheme();
+  const { mode, setMode } = useColorScheme();
   const onClick = () => {
-    setTheme(theme === "light" ? "dark" : "light");
+    setMode(mode === "light" ? "dark" : "light");
   };
   return (
     <>
@@ -44,7 +45,7 @@ describe("ThemeProvider", () => {
   test("renders light theme by default", () => {
     // render the component
     render(
-      <ThemeProvider>
+      <ThemeProvider theme="light">
         <ThemeText />
       </ThemeProvider>
     );
@@ -70,24 +71,28 @@ describe("ThemeProvider", () => {
   );
   test.each(["light", "dark"])("renders %s theme from local storage", mode => {
     // set the theme in local storage
-    window.localStorage.setItem("theme", mode);
+    window.localStorage.setItem("mui-theme", mode);
 
     // render the component
     render(
-      <ThemeProvider>
+      <ThemeProvider theme={mode}>
         <ThemeText />
       </ThemeProvider>
     );
 
     // check that the theme is the mode we want to test
     const text = screen.getByText(mode);
+
     expect(text).toBeInTheDocument();
   });
   test.each(["light", "dark"])(
     "renders %s theme when theme toggled",
     async mode => {
       // first set the theme to the opposite of the mode we want to test
-      window.localStorage.setItem("theme", mode === "light" ? "dark" : "light");
+      window.localStorage.setItem(
+        "mui-theme",
+        mode === "light" ? "dark" : "light"
+      );
 
       // render the toggle button
       render(

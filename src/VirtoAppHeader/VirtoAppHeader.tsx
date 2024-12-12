@@ -5,7 +5,8 @@ import {
   IconButton,
   Link,
   Toolbar,
-  Typography
+  Typography,
+  useColorScheme
 } from "@mui/material";
 import React, { Fragment, useState } from "react";
 
@@ -20,15 +21,15 @@ import VirtoLogo from "../SvgIcons/VirtoLogo";
 // appbar component
 function Header({
   appName,
-  mode,
   onAppClick,
-  onColourModeChange,
   onChangePassword,
   onLogout,
   onMenuClick,
   username,
   virtoLogoLinkUrl
 }: VirtoAppHeaderProps) {
+  // use hook from MUI to get and set the theme mode
+  const { mode, setMode } = useColorScheme();
   return (
     <AppBar
       sx={theme => ({
@@ -127,7 +128,7 @@ function Header({
             display: "flex"
           }}
         >
-          <ToggleColorMode mode={mode} onChange={onColourModeChange} />
+          <ToggleColorMode mode={mode} onChange={mode => setMode(mode)} />
           <UserMenu
             username={username}
             onChangePassword={onChangePassword}
@@ -143,11 +144,9 @@ function Header({
 function VirtoAppHeader({
   appName,
   baseUrl,
-  mode,
   onChangePassword,
   onLogout,
   onMenuClick,
-  onColourModeChange,
   username,
   virtoLogoLinkUrl = ""
 }: VirtoAppHeaderProps) {
@@ -168,9 +167,7 @@ function VirtoAppHeader({
     <Fragment>
       <Header
         appName={appName}
-        mode={mode}
         onAppClick={() => setAppOpen(!appOpen)}
-        onColourModeChange={onColourModeChange}
         onChangePassword={onChangePassword}
         onLogout={onLogout}
         onMenuClick={handleMenuClick(onMenuClick)}
