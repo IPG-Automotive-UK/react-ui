@@ -48,11 +48,63 @@ declare module "@mui/material/styles" {
   }
 }
 
+// Define default components
+const defaultComponents = {
+  MuiAccordionSummary: {
+    styleOverrides: {
+      root: {
+        "&$expanded": {
+          marginBottom: -20
+        }
+      }
+    }
+  },
+  MuiChip: {
+    styleOverrides: {
+      root: {
+        fontFamily: "Montserrat, Arial, sans-serif"
+      }
+    }
+  },
+  MuiDataGrid: {
+    styleOverrides: {
+      footerContainer: {
+        backgroundColor: `var(--ipg-palette-common-background)`
+      },
+      main: {
+        backgroundColor: `var(--ipg-palette-common-background)`
+      },
+      root: {
+        "& .MuiDataGrid-cell:focus, .MuiDataGrid-cell:focus-within, .MuiDataGrid-columnHeader:focus, .MuiDataGrid-columnHeader:focus-within":
+          {
+            outline: "none"
+          }
+      }
+    }
+  },
+  MuiFormLabel: {
+    styleOverrides: {
+      asterisk: {
+        color: "#d32f2f"
+      }
+    }
+  },
+  MuiTooltip: {
+    styleOverrides: {
+      tooltip: {
+        fontFamily: "Montserrat, Arial, sans-serif",
+        fontSize: "12px"
+      }
+    }
+  }
+};
+
 // Define the main theme
 const mainTheme: ThemeOptions = {
   colorSchemes: {
     dark: {
       components: {
+        ...defaultComponents,
         MuiAlertTitle: {
           styleOverrides: {
             root: {
@@ -89,6 +141,7 @@ const mainTheme: ThemeOptions = {
     },
     light: {
       components: {
+        ...defaultComponents,
         MuiCssBaseline: {
           styleOverrides: {
             body: darkScrollbar({
@@ -144,48 +197,6 @@ const mainTheme: ThemeOptions = {
       }
     }
   },
-  components: {
-    MuiAccordionSummary: {
-      styleOverrides: {
-        root: {
-          "&$expanded": {
-            marginBottom: -20
-          }
-        }
-      }
-    },
-    MuiDataGrid: {
-      styleOverrides: {
-        footerContainer: {
-          backgroundColor: `var(--ipg-palette-common-background)`
-        },
-        main: {
-          backgroundColor: `var(--ipg-palette-common-background)`
-        },
-        root: {
-          "& .MuiDataGrid-cell:focus, .MuiDataGrid-cell:focus-within, .MuiDataGrid-columnHeader:focus, .MuiDataGrid-columnHeader:focus-within":
-            {
-              outline: "none"
-            }
-        }
-      }
-    },
-    MuiFormLabel: {
-      styleOverrides: {
-        asterisk: {
-          color: "#d32f2f"
-        }
-      }
-    },
-    MuiTooltip: {
-      styleOverrides: {
-        tooltip: {
-          fontSize: "12px",
-          fontWeight: "normal"
-        }
-      }
-    }
-  },
   layout: {
     content: {
       maxWidth: 1152
@@ -198,9 +209,9 @@ const mainTheme: ThemeOptions = {
   },
   typography: {
     allVariants: {
-      color: `var(--ipg-palette-text-primary)`
-    },
-    fontFamily: "Montserrat"
+      color: `var(--ipg-palette-text-primary)`,
+      fontFamily: "Montserrat, Arial, sans-serif"
+    }
   }
 };
 
