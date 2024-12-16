@@ -253,29 +253,33 @@ export default function ThemeProvider({
 }: ThemeProviderProps) {
   // wrap mui theme provider and children in theme context
   return (
-    <MuiThemeProvider theme={mainThemeWithColorSchemes}>
-      <ChildWrapper theme={controlledTheme}>{children}</ChildWrapper>
+    <MuiThemeProvider theme={mainThemeWithColorSchemes} defaultMode="light">
+      <ControlledThemeWrapper theme={controlledTheme}>
+        {children}
+      </ControlledThemeWrapper>
     </MuiThemeProvider>
   );
 }
 
 /**
- * Child wrapper to handle controlled theme changes
+ * ControlledThemeWrapper Component
+ *
+ * This component is used to enforce a specific theme mode (`light` or `dark`)
+ * for its child components based on the `controlledTheme` prop. It synchronizes
+ * the theme mode with the provided value and ensures the children use the correct
+ * theme. The wrapper relies on MuI's `useColorScheme` hook for theme mode management.
+ *
+ * @param props.children - The child components to render inside the wrapper.
+ * @param props.theme - The desired theme mode (`light` or `dark`) to enforce.
+ *
+ * @returns The wrapped children with the enforced theme mode.
  */
-function ChildWrapper({
+function ControlledThemeWrapper({
   children,
   theme: controlledTheme
 }: ThemeProviderProps) {
   // use hook from MUI to get and set the theme mode
   const { mode, setMode } = useColorScheme();
-
-  // update the theme mode to "light" if current mode is "system"
-  useEffect(() => {
-    if (mode === "system") {
-      setMode("light");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mode]);
 
   // update the theme mode when the controlled theme changes
   useEffect(() => {
