@@ -82,6 +82,15 @@ const defaultComponents = {
       }
     }
   },
+  MuiFormControl: {
+    styleOverrides: {
+      root: {
+        "& .MuiFormLabel-root, .MuiFormHelperText-root ": {
+          color: "var(--ipg-palette-text-secondary)"
+        }
+      }
+    }
+  },
   MuiFormLabel: {
     styleOverrides: {
       asterisk: {
@@ -89,11 +98,13 @@ const defaultComponents = {
       }
     }
   },
+  MuiIconButton: { styleOverrides: { root: { color: "#9e9e9e" } } },
   MuiTooltip: {
     styleOverrides: {
       tooltip: {
         fontFamily: "Montserrat, Arial, sans-serif",
-        fontSize: "12px"
+        fontSize: "12px",
+        fontWeight: 400
       }
     }
   }
@@ -119,11 +130,22 @@ const mainTheme: ThemeOptions = {
             }
           }
         },
+        MuiAutocomplete: {
+          styleOverrides: {
+            clearIndicator: {
+              color: "#ffffff"
+            },
+            popupIndicator: {
+              color: "#ffffff"
+            }
+          }
+        },
         MuiCssBaseline: {
           styleOverrides: {
             body: darkScrollbar()
           }
         },
+        MuiIconButton: { styleOverrides: { root: { color: "#87A5D2" } } },
         MuiStepper: {
           styleOverrides: {
             root: {
@@ -151,7 +173,6 @@ const mainTheme: ThemeOptions = {
             })
           }
         },
-        MuiIconButton: { styleOverrides: { root: { color: "#9e9e9e" } } },
         MuiStepper: {
           styleOverrides: {
             root: {
@@ -179,8 +200,7 @@ const mainTheme: ThemeOptions = {
               },
               "&:hover": {
                 backgroundColor: "rgba(0, 95, 168, 0.15)"
-              },
-              borderColor: "rgb(196, 196, 196)"
+              }
             }
           }
         }
