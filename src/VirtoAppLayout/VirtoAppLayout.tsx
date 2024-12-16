@@ -77,7 +77,7 @@ function Layout({
         </Box>
         <Box
           sx={{
-            background: `var(--ipg-palette-background-paper)`,
+            background: theme => theme.vars.palette.background.default,
             display: "flex",
             flexDirection: "column",
             flexGrow: 1
