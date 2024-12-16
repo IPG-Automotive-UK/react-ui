@@ -95,7 +95,6 @@ const defaultComponents = {
       }
     }
   },
-  MuiIconButton: { styleOverrides: { root: { color: "#9e9e9e" } } },
   MuiTooltip: {
     styleOverrides: {
       tooltip: {
@@ -142,7 +141,6 @@ const mainTheme: ThemeOptions = {
             body: darkScrollbar()
           }
         },
-        MuiIconButton: { styleOverrides: { root: { color: "#87A5D2" } } },
         MuiStepper: {
           styleOverrides: {
             root: {
