@@ -45,7 +45,7 @@ describe("ThemeProvider", () => {
   test("renders light theme by default", () => {
     // render the component
     render(
-      <ThemeProvider theme="light">
+      <ThemeProvider>
         <ThemeText />
       </ThemeProvider>
     );
@@ -73,9 +73,16 @@ describe("ThemeProvider", () => {
     // set the theme in local storage
     window.localStorage.setItem("mui-theme", mode);
 
+    // get the theme from local storage
+    const defaultMode = window.localStorage.getItem("mui-theme") as
+      | "light"
+      | "dark";
+
+    console.log(defaultMode);
+
     // render the component
     render(
-      <ThemeProvider theme={mode}>
+      <ThemeProvider theme={defaultMode}>
         <ThemeText />
       </ThemeProvider>
     );
