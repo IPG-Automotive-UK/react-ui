@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 
 import type {} from "@mui/x-data-grid/themeAugmentation";
+import type {} from "@mui/material/themeCssVarsAugmentation";
 
 import {
   ThemeProvider as MuiThemeProvider,
@@ -17,14 +18,6 @@ import darkScrollbar from "@mui/material/darkScrollbar";
 // extend the theme to include custom properties
 // https://mui.com/material-ui/customization/theming/#custom-variables
 declare module "@mui/material/styles" {
-  // eslint-disable-next-line no-unused-vars
-  interface Theme {
-    layout: {
-      content: {
-        maxWidth: number;
-      };
-    };
-  }
   // allow configuration using `createTheme`
   // eslint-disable-next-line no-unused-vars
   interface ThemeOptions {
@@ -33,17 +26,21 @@ declare module "@mui/material/styles" {
         maxWidth?: number;
       };
     };
-  }
-  interface Theme {
-    colorSchemes: {
-      light: ThemeOptions;
-      dark: ThemeOptions;
+    colorSchemes?: {
+      dark?: ThemeOptions;
+      light?: ThemeOptions;
     };
   }
-  interface ThemeOptions {
+  // eslint-disable-next-line no-unused-vars
+  interface Theme {
+    layout: {
+      content: {
+        maxWidth: number;
+      };
+    };
     colorSchemes?: {
-      light?: ThemeOptions;
       dark?: ThemeOptions;
+      light?: ThemeOptions;
     };
   }
 }
