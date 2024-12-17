@@ -78,8 +78,6 @@ describe("ThemeProvider", () => {
       | "light"
       | "dark";
 
-    console.log(defaultMode);
-
     // render the component
     render(
       <ThemeProvider theme={defaultMode}>
