@@ -42,7 +42,6 @@ export default function LabelSetter({ onChange = () => {}, rows = [] }) {
       renderCell: params => (
         <IconButton
           sx={theme => ({
-            color: "#9e9e9e",
             ...theme.applyStyles("dark", {
               color: theme.palette.primary.main
             })
@@ -104,7 +103,7 @@ export default function LabelSetter({ onChange = () => {}, rows = [] }) {
       <Box>
         <IconButton
           sx={theme => ({
-            color: "#9e9e9e",
+            color: theme.palette.action.active,
             ...theme.applyStyles("dark", {
               color: theme.palette.primary.main
             })

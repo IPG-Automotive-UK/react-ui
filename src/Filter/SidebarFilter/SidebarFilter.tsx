@@ -59,15 +59,11 @@ export function SidebarFilter({
             <IconButton
               data-testid="filter-close-button"
               onClick={() => setOpen(false)}
-              sx={theme => ({
-                color: "#9e9e9e",
+              sx={{
                 position: "absolute",
                 right: 12,
-                top: 12,
-                ...theme.applyStyles("dark", {
-                  color: "#ffffff"
-                })
-              })}
+                top: 12
+              }}
             >
               <Close />
             </IconButton>
