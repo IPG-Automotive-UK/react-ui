@@ -71,16 +71,11 @@ describe("ThemeProvider", () => {
   );
   test.each(["light", "dark"])("renders %s theme from local storage", mode => {
     // set the theme in local storage
-    window.localStorage.setItem("mui-theme", mode);
-
-    // get the theme from local storage
-    const defaultMode = window.localStorage.getItem("mui-theme") as
-      | "light"
-      | "dark";
+    window.localStorage.setItem("mui-mode", mode);
 
     // render the component
     render(
-      <ThemeProvider theme={defaultMode}>
+      <ThemeProvider>
         <ThemeText />
       </ThemeProvider>
     );
@@ -95,7 +90,7 @@ describe("ThemeProvider", () => {
     async mode => {
       // first set the theme to the opposite of the mode we want to test
       window.localStorage.setItem(
-        "mui-theme",
+        "mui-mode",
         mode === "light" ? "dark" : "light"
       );
 
