@@ -36,4 +36,24 @@ describe("IconWithLabel tests", () => {
     expect(iconWithLabelElement).toHaveTextContent("Example");
     expect(anchorElement).not.toBeInTheDocument();
   });
+  test("renders `IconWithLabel` without props such that text will truncate", () => {
+    render(<IconWithLabel {...defaultInputs} />);
+
+    // find the elements of interest
+    const text = screen.getByText("Example");
+    const parentElement = text.parentElement;
+    const textStyle = window.getComputedStyle(text);
+
+    // error if parent element is null
+    if (parentElement === null) {
+      throw new Error("The parent element did not render!");
+    }
+    const parentStyle = window.getComputedStyle(parentElement);
+
+    // check if elements captured match expectations
+    expect(textStyle.whiteSpace).toBe("nowrap");
+    expect(textStyle.overflow).toBe("hidden");
+    expect(textStyle.textOverflow).toBe("ellipsis");
+    expect(parentStyle.minWidth).toBe("0");
+  });
 });
