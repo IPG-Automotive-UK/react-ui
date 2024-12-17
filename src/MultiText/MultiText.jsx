@@ -41,11 +41,6 @@ export default function LabelSetter({ onChange = () => {}, rows = [] }) {
       headerName: "Action",
       renderCell: params => (
         <IconButton
-          sx={theme => ({
-            ...theme.applyStyles("dark", {
-              color: theme.palette.primary.main
-            })
-          })}
           data-testid="deleteButton"
           onClick={event => handleOnDeleteClick(event, params)}
         >
@@ -101,16 +96,7 @@ export default function LabelSetter({ onChange = () => {}, rows = [] }) {
         onCellEditCommit={handleEditCell}
       />
       <Box>
-        <IconButton
-          sx={theme => ({
-            color: theme.palette.action.active,
-            ...theme.applyStyles("dark", {
-              color: theme.palette.primary.main
-            })
-          })}
-          data-testid="addButton"
-          onClick={handleOnAddClick}
-        >
+        <IconButton data-testid="addButton" onClick={handleOnAddClick}>
           <AddCircleIcon />
         </IconButton>
       </Box>
