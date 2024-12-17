@@ -29,7 +29,7 @@ export default function RadioButtons({
   // return components
   return (
     <FormControl disabled={disabled} component="fieldset">
-      <FormLabel component="legend" color={"textSecondary"}>
+      <FormLabel component="legend" color="textSecondary">
         {title}
       </FormLabel>
       <RadioGroup
