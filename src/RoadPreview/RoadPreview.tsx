@@ -70,19 +70,34 @@ export function RoadPreview({
               <Box flex="0 1 auto">
                 <VersionChip version={version} />
               </Box>
-              <Link
+              <Box
+                display="flex"
                 flex="1 1 auto"
-                href={href}
-                target="_blank"
-                color="primary"
-                variant="subtitle2"
-                underline="hover"
-                textOverflow="ellipsis"
-                data-testid="road-preview-name"
-                noWrap
+                alignItems="center"
+                justifyItems="left"
+                flexDirection={"row"}
+                overflow={"hidden"}
               >
-                {name}
-              </Link>
+                <Link
+                  flexShrink={1}
+                  flexGrow={0}
+                  minWidth={0}
+                  href={href}
+                  target="_blank"
+                  underline="hover"
+                  textOverflow="ellipsis"
+                  data-testid="road-preview-name"
+                >
+                  <Typography
+                    noWrap
+                    variant="subtitle2"
+                    fontWeight={500}
+                    color="primary"
+                  >
+                    {name}
+                  </Typography>
+                </Link>
+              </Box>
             </Stack>
             <Box display="flex" flexDirection="column">
               <Typography
