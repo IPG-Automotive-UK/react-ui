@@ -56,6 +56,13 @@ const defaultComponents = {
       }
     }
   },
+  MuiAvatar: {
+    styleOverrides: {
+      root: {
+        fontFamily: "Montserrat, Arial, sans-serif"
+      }
+    }
+  },
   MuiChip: {
     styleOverrides: {
       root: {

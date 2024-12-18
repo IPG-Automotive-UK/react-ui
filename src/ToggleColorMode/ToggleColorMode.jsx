@@ -58,7 +58,6 @@ export default function ToggleColorMode({ mode, onChange }) {
       backgroundColor: "rgba(255, 255, 255, 0.16)",
       borderRadius: 20 / 2,
       opacity: 1,
-
       ...theme.applyStyles("dark", {
         backgroundColor: "rgba(0, 0, 0, 0.3)"
       })
