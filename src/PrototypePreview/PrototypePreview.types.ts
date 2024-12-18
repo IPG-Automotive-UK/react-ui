@@ -52,7 +52,7 @@ export type PrototypePreviewProps = {
   /**
    * The quality of the prototype
    */
-  quality: "not-run" | "passed" | "errored";
+  quality: "errored" | "failed" | "not-run" | "passed" | "pending";
   /**
    * Date of creation of prototype
    */
