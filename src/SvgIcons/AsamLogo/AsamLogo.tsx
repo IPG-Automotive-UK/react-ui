@@ -3,6 +3,11 @@ import * as React from "react";
 import { AsamLogoProps } from "./AsamLogo.types";
 import SvgIcon from "@mui/material/SvgIcon";
 
+/**
+ * A component that renders the ASAM logo
+ * @param sx Optional prop to render with custom styles
+ * @returns Renders the ASAM logo
+ */
 export function AsamLogo({ sx }: AsamLogoProps) {
   return (
     <SvgIcon
