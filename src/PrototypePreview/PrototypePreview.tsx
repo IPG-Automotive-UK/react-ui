@@ -65,36 +65,41 @@ export function PrototypePreview({
               width: "78px"
             }}
           />
-          <Stack direction="column" minWidth={0}>
-            <Link
-              href={href}
-              target="_blank"
-              color="primary"
-              variant="subtitle2"
-              underline="hover"
-              textOverflow="ellipsis"
-              overflow="hidden"
-              data-testid="prototype-preview-name"
-              noWrap
-            >
-              {name}
-            </Link>
-            <Stack direction="row">
-              <Typography
-                variant="caption"
-                color="textPrimary"
-                data-testid="prototype-preview-description"
-                sx={{
-                  WebkitBoxOrient: "vertical",
-                  WebkitLineClamp: 2,
-                  display: "-webkit-box",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis"
-                }}
+          <Stack direction="column" minWidth={0} display="flex">
+            <Box display="flex" minWidth={0} flex={"0 1 auto"}>
+              <Link
+                href={href}
+                overflow="hidden"
+                target="_blank"
+                underline="hover"
+                textOverflow="ellipsis"
+                data-testid="prototype-preview-name"
               >
-                {description}
-              </Typography>
-            </Stack>
+                <Typography
+                  noWrap
+                  variant="subtitle2"
+                  fontWeight={500}
+                  color="primary"
+                  minWidth={0}
+                >
+                  {name}
+                </Typography>
+              </Link>
+            </Box>
+            <Typography
+              variant="caption"
+              color="textPrimary"
+              data-testid="prototype-preview-description"
+              sx={{
+                WebkitBoxOrient: "vertical",
+                WebkitLineClamp: 2,
+                display: "-webkit-box",
+                overflow: "hidden",
+                textOverflow: "ellipsis"
+              }}
+            >
+              {description}
+            </Typography>
           </Stack>
         </Stack>
       </Box>
