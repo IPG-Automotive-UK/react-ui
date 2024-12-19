@@ -152,7 +152,7 @@ describe("useConfirm", () => {
       fireEvent.click(getByText("Delete"));
       expect(queryByText("Remove this item?")).toBeTruthy();
       fireEvent.click(getByText("Yes"));
-      expect(queryByText("Remove this item?")).toBeTruthy();
+      expect(queryByText("Remove this item?")).toBeFalsy();
     });
 
     test("honours default options passed to the provider", () => {
