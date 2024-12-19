@@ -12,7 +12,7 @@ import {
   VirtoVehicle
 } from "../SvgIcons";
 
-import VirtoLogo from "../SvgIcons/VirtoLogo";
+import { VirtoLogo } from "../SvgIcons/VirtoLogo";
 
 // AppLauncher component for app which displays logo, list of items and app version
 function AppLauncher({

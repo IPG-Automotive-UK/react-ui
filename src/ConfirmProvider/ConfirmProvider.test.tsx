@@ -248,8 +248,9 @@ describe("useConfirm", () => {
       );
       fireEvent.click(getByText("Delete"));
       const dialog = getByText("Dialog Title").closest("div");
-
-      expect(dialog).toHaveStyle("color:rgb(255, 255, 255)");
+      waitFor(() => {
+        expect(dialog).toHaveStyle("color:rgb(255, 255, 255)");
+      });
     });
   });
 

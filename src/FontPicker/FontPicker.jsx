@@ -194,7 +194,7 @@ export default function FontPicker({
           required={required}
           variant={variant}
           slotProps={{
-            input: {
+            htmlInput: {
               ...params.inputProps,
               sx: {
                 fontFamily: `${value}, Arial, sans-serif`
@@ -203,13 +203,17 @@ export default function FontPicker({
           }}
         />
       )}
-      renderOption={(props, option) => (
-        <Box {...props}>
-          <Typography sx={{ fontFamily: `${option}, Arial, sans-serif` }}>
-            {option}
-          </Typography>
-        </Box>
-      )}
+      renderOption={(props, option) => {
+        // Destructure to separate key
+        const { key, ...otherProps } = props;
+        return (
+          <Box {...otherProps} key={key}>
+            <Typography sx={{ fontFamily: `${option}, Arial, sans-serif` }}>
+              {option}
+            </Typography>
+          </Box>
+        );
+      }}
     />
   );
 }

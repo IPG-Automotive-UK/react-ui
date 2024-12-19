@@ -68,7 +68,6 @@ export default function MultiColor({ onChange = () => {}, rows = [] }) {
       headerName: "Action",
       renderCell: params => (
         <IconButton
-          color="primary"
           data-testid="deleteButton"
           onClick={event => handleOnDeleteClick(event, params)}
         >
@@ -136,11 +135,7 @@ export default function MultiColor({ onChange = () => {}, rows = [] }) {
         onCellEditCommit={handleEditCell}
       />
       <Box>
-        <IconButton
-          color="primary"
-          data-testid="addButton"
-          onClick={handleOnAddClick}
-        >
+        <IconButton data-testid="addButton" onClick={handleOnAddClick}>
           <AddCircleIcon />
         </IconButton>
       </Box>

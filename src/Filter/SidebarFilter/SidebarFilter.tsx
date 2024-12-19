@@ -59,7 +59,11 @@ export function SidebarFilter({
             <IconButton
               data-testid="filter-close-button"
               onClick={() => setOpen(false)}
-              sx={{ position: "absolute", right: 12, top: 12 }}
+              sx={{
+                position: "absolute",
+                right: 12,
+                top: 12
+              }}
             >
               <Close />
             </IconButton>

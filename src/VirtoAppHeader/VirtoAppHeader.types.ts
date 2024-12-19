@@ -8,11 +8,6 @@ export type VirtoAppHeaderProps = {
    */
   baseUrl?: string;
   /**
-   * The color mode selection
-   * @default "light"
-   */
-  mode?: "light" | "dark";
-  /**
    * Callback fired when the user clicks on "Change password".
    */
   onChangePassword: (event: React.MouseEvent<HTMLElement>) => void;
@@ -20,10 +15,6 @@ export type VirtoAppHeaderProps = {
    * Callback fired when the user clicks on "Logout".
    */
   onLogout: (event: React.MouseEvent<HTMLElement>) => void;
-  /**
-   * Callback fired when the color mode is changed.
-   */
-  onColourModeChange: (newMode: "light" | "dark") => void;
   /**
    * Name of currently logged in user.
    */

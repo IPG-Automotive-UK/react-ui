@@ -30,13 +30,12 @@ const DialogTitle = ({ children, onClose, ...other }: DialogTitleProps) => {
         <IconButton
           aria-label="close"
           onClick={onClose}
-          sx={theme => ({
-            color: theme.palette.grey[500],
+          sx={{
             flexGrow: 0,
             height: 35,
             marginTop: -0.3,
             width: 35
-          })}
+          }}
         >
           <CloseIcon />
         </IconButton>

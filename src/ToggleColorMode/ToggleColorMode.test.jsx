@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import React from "react";
 import ThemeProvider from "../ThemeProvider/ThemeProvider";
 import ToggleColorMode from ".";
-import useTheme from "../ThemeProvider/useTheme";
+import { useColorScheme } from "@mui/material";
 import userEvent from "@testing-library/user-event";
 
 /**
@@ -23,8 +23,10 @@ const ColorModeWithState = ({ onChange, mode: modeIn = "light", ...rest }) => {
  * Test wrapper for integration with ThemeProvider
  */
 const ToggleWithContext = props => {
-  const [theme, setTheme] = useTheme();
-  return <ToggleColorMode {...props} mode={theme} onChange={setTheme} />;
+  const { mode, setMode } = useColorScheme();
+  return (
+    <ToggleColorMode {...props} mode={mode} onChange={mode => setMode(mode)} />
+  );
 };
 
 describe("ToggleColorMode", () => {
