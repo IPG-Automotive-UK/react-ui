@@ -155,7 +155,12 @@ export function PrototypePreview({
           <Divider />
           <Box display="flex" flexDirection="column" gap={1}>
             {(createdAt || user) && (
-              <Stack direction="row" gap={"12px"} width={1}>
+              <Stack
+                direction="row"
+                gap={"12px"}
+                width={1}
+                alignItems={"center"}
+              >
                 {createdAt && (
                   <Box
                     data-testid="date-label"
