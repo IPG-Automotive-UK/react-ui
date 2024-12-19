@@ -126,6 +126,7 @@ export default function LinkWithPreview({
         variant={variant}
         fontWeight={400}
         sx={sx}
+        noWrap
       >
         {
           <Link
@@ -136,7 +137,7 @@ export default function LinkWithPreview({
             sx={{
               overflow: "hidden",
               textOverflow: "ellipsis",
-              whiteSpace: "nowrap"
+              whiteSpace: "inherit"
             }}
           >
             {children}

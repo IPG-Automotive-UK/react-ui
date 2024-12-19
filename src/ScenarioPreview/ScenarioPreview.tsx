@@ -60,20 +60,26 @@ export function ScenarioPreview({
             }}
           />
           <Stack direction="column" minWidth={0}>
-            <Link
-              href={href}
-              target="_blank"
-              color="primary"
-              variant="subtitle2"
-              underline="hover"
-              textOverflow="ellipsis"
-              overflow="hidden"
-              data-testid="scenario-preview-name"
-              noWrap
-            >
-              {name}
-            </Link>
-
+            <Box display="flex" minWidth={0} flex={"0 1 auto"}>
+              <Link
+                href={href}
+                overflow="hidden"
+                target="_blank"
+                underline="hover"
+                textOverflow="ellipsis"
+                data-testid="scenario-preview-name"
+              >
+                <Typography
+                  noWrap
+                  variant="subtitle2"
+                  fontWeight={500}
+                  color="primary"
+                  minWidth={0}
+                >
+                  {name}
+                </Typography>
+              </Link>
+            </Box>
             <Stack direction="row">
               <Typography
                 variant="caption"
