@@ -102,6 +102,13 @@ const defaultComponents = {
       }
     }
   },
+  MuiStepIcon: {
+    styleOverrides: {
+      text: {
+        fontFamily: "Montserrat, Arial, sans-serif"
+      }
+    }
+  },
   MuiTooltip: {
     styleOverrides: {
       tooltip: {
