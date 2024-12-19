@@ -147,28 +147,35 @@ export function ScenarioPreview({
         <>
           <Divider />
           <Box display="flex" flexDirection="column" gap={1}>
-            <Stack direction="row" gap={1} alignItems={"center"}>
-              {createdAt && (
-                <Box
-                  data-testid="date-label"
-                  flex="0 1 auto"
-                  alignItems="center"
-                  maxWidth={0.3}
-                >
-                  <DateLabel label={createdAt} />
-                </Box>
-              )}
-              {user && (
-                <Box
-                  data-testid="user-label"
-                  flex="1 1 auto"
-                  alignItems="center"
-                  minWidth={0}
-                >
-                  <UserLabel label={user.name} color={user.color} />
-                </Box>
-              )}
-            </Stack>
+            {(createdAt || user) && (
+              <Stack
+                direction="row"
+                gap={"12px"}
+                width={1}
+                alignItems={"center"}
+              >
+                {createdAt && (
+                  <Box
+                    data-testid="date-label"
+                    flex="0 1 auto"
+                    maxWidth={"calc(40% - 12px)"}
+                    alignItems="center"
+                  >
+                    <DateLabel label={createdAt} />
+                  </Box>
+                )}
+                {user && (
+                  <Box
+                    data-testid="user-label"
+                    flex="1 1 auto"
+                    alignItems="center"
+                    minWidth={0}
+                  >
+                    <UserLabel label={user.name} color={user.color} />
+                  </Box>
+                )}
+              </Stack>
+            )}
             {label?.length > 0 && (
               <Stack direction="row" spacing={1}>
                 <LabelChipGroup chips={labelChips} />
