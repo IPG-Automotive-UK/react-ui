@@ -41,6 +41,8 @@ export function PrototypePreview({
       size: "small"
     };
   });
+  const qualityRelativeWidth = 0.2;
+  const widthCompensator = quality ? 1 : 1 / (1 - qualityRelativeWidth);
 
   return (
     <Box
@@ -114,29 +116,38 @@ export function PrototypePreview({
           <Box
             data-testid="format-label"
             flex="0 1 auto"
-            maxWidth="calc(40% - 24px)"
+            maxWidth={`calc(${40 * widthCompensator}% - 24px)`}
           >
             <FormatLabel label={format} />
           </Box>
           <Box
             data-testid="format-version-label"
             flex="0 1 auto"
-            maxWidth={0.2}
+            maxWidth={0.2 * widthCompensator}
           >
             <FormatVersionLabel label={formatVersion} />
           </Box>
-          <Box data-testid="version-label" flex="0 1 auto" maxWidth={0.2}>
+          <Box
+            data-testid="version-label"
+            flex="0 1 auto"
+            maxWidth={0.2 * widthCompensator}
+          >
             <VersionLabel label={prototypeVersion} />
           </Box>
-          <Box flex="0 0 auto" maxWidth="calc(20% - 12px)">
-            <StatusLabel
-              gap={0.5}
-              iconProps={{ height: 20, padding: 0, width: 20 }}
-              color="text.secondary"
-              status={quality}
-              variant="caption"
-            />
-          </Box>
+          {quality ? (
+            <Box
+              flex="0 0 auto"
+              maxWidth={`calc(${qualityRelativeWidth * 100}% - 12px)`}
+            >
+              <StatusLabel
+                gap={0.5}
+                iconProps={{ height: 20, padding: 0, width: 20 }}
+                color="text.secondary"
+                status={quality}
+                variant="caption"
+              />
+            </Box>
+          ) : null}
         </Stack>
       </Box>
       {hasOptionalProperty() ? (

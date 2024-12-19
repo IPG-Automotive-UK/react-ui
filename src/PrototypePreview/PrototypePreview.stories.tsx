@@ -8,6 +8,12 @@ import React from "react";
  * Story metadata
  */
 const meta: Meta<typeof PrototypePreview> = {
+  argTypes: {
+    quality: {
+      control: { type: "radio" },
+      options: ["errored", "failed", "not-run", "passed", "pending", null]
+    }
+  },
   component: PrototypePreview,
   title: "Preview/PrototypePreview"
 };
@@ -109,7 +115,6 @@ export const WithoutOptionalProps = {
     image: "https://picsum.photos/id/191/400/200",
     name: "Porsche 911 GT2 RS",
     prototypeVersion: "1.1",
-    quality: "errored",
     sx: { ...Default.args.sx }
   },
   render: Template
