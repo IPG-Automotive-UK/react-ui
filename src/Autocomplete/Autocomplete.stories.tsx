@@ -98,14 +98,13 @@ const defaultArgs: Story["args"] = {
   label: "Select options",
   margin: "normal",
   multiple: false,
-  options: [
-    "Option 1",
-    "Option 2",
-    "Option 3",
-    "Option 4",
-    "Option 5",
-    "Option 6"
-  ],
+  options: (() => {
+    const options: string[] = [];
+    for (let i = 1; i <= 100; i++) {
+      options.push(`Option ${i}`);
+    }
+    return options;
+  })(),
   readOnly: false,
   required: false,
   size: "medium",
@@ -138,12 +137,13 @@ export const KeyValueOptions: Story = {
   args: {
     // Define the key-value options story args
     ...defaultArgs,
-    options: [
-      { key: 1, value: "Option 1" },
-      { key: 2, value: "Option 2" },
-      { key: 3, value: "Option 3" },
-      { key: 4, value: "Option 4" }
-    ],
+    options: (() => {
+      const options: { key: number; value: string }[] = [];
+      for (let i = 1; i <= 100; i++) {
+        options.push({ key: i, value: `Option ${i}` });
+      }
+      return options;
+    })(),
     value: { key: 1, value: "Option 1" }
   },
   render: Template
@@ -154,12 +154,13 @@ export const KeyValueOptionsTooltip: Story = {
   args: {
     // Define the key-value options tooltips story args
     ...defaultArgs,
-    options: [
-      { key: 1, tooltip: "Tooltip 1", value: "Option 1" },
-      { key: 2, tooltip: "Tooltip 2", value: "Option 2" },
-      { key: 3, tooltip: "Tooltip 3", value: "Option 3" },
-      { key: 4, tooltip: "Tooltip 4", value: "Option 4" }
-    ],
+    options: (() => {
+      const options: { key: number; tooltip: string; value: string }[] = [];
+      for (let i = 1; i <= 100; i++) {
+        options.push({ key: i, tooltip: `Tooltip ${i}`, value: `Option ${i}` });
+      }
+      return options;
+    })(),
     value: { key: 1, tooltip: "Tooltip 1", value: "Option 1" }
   },
   render: Template

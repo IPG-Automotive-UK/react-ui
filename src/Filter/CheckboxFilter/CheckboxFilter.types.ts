@@ -29,10 +29,6 @@ export type CheckboxFilterProps = {
    */
   value?: string[];
   /**
-   * The variant of the filter, popper or always open
-   */
-  variant?: "popper" | "always-open";
-  /**
    * Whether the filter is disabled or not
    */
   disabled?: boolean;
