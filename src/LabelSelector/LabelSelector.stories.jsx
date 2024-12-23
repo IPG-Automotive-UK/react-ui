@@ -164,7 +164,6 @@ export const WithAddingEditingAndDeleteEnabled = {
     deleteEnabled: true,
     editEnabled: true
   },
-
   render: Template
 };
 

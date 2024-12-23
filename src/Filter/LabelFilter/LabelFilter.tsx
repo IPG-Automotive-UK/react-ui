@@ -11,7 +11,7 @@ import {
 
 import { Label } from "../../LabelSelector/Label.types";
 import LabelChip from "../../LabelSelector/LabelChip/LabelChip";
-import { LabelFilterProps } from ".";
+import { LabelFilterProps } from "./LabelFilter.types";
 import { VirtualizedAutocomplete } from "../../Autocomplete/Autocomplete";
 
 /**
