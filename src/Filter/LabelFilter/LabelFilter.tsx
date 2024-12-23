@@ -1,32 +1,29 @@
 import * as React from "react";
 
 import {
-  Autocomplete,
+  AutocompleteOwnerState,
+  AutocompleteRenderGetTagProps,
   Box,
   Checkbox,
   TextField,
-  Typography,
-  autocompleteClasses
+  Typography
 } from "@mui/material";
 
-import AlwaysOpenAutocomplete from "../AlwaysOpenAutocomplete";
+import { Label } from "../../LabelSelector/Label.types";
 import LabelChip from "../../LabelSelector/LabelChip/LabelChip";
+import { LabelFilterProps } from ".";
+import { VirtualizedAutocomplete } from "../../Autocomplete/Autocomplete";
 
 /**
  * A label filter allows the user to select multiple labels from a list.
  */
 export default function LabelFilter({
-  variant = "popper",
   value = [],
   limitTags = -1,
   ...props
-}) {
+}: LabelFilterProps) {
   const defaults = { limitTags, value };
-  return variant === "popper" ? (
-    <LabelFilterPopper {...props} {...defaults} />
-  ) : (
-    <LabelFilterAlwaysOpen {...props} {...defaults} />
-  );
+  return <LabelFilterPopper {...props} {...defaults} />;
 }
 
 /**
@@ -39,15 +36,15 @@ function LabelFilterPopper({
   options,
   value,
   limitTags
-}) {
+}: LabelFilterProps) {
   return (
-    <Autocomplete
+    <VirtualizedAutocomplete
       getOptionLabel={option => option.name}
       isOptionEqualToValue={(option, value) => option._id === value._id}
       limitTags={limitTags}
       multiple
       noOptionsText="No labels"
-      onChange={(e, newValue) => onChange(newValue)}
+      onChange={(e, newValue) => onChange?.(newValue)}
       options={options}
       value={value}
       renderInput={params => (
@@ -59,68 +56,41 @@ function LabelFilterPopper({
   );
 }
 
-/**
- * An inline label filter is always open and the popper does not sit above other elements.
- */
-function LabelFilterAlwaysOpen({
-  name,
-  label,
-  options,
-  value,
-  limitTags,
-  onChange
-}) {
-  return (
-    <AlwaysOpenAutocomplete
-      getOptionLabel={option => option.name}
-      isOptionEqualToValue={(option, value) => option._id === value._id}
-      limitTags={limitTags}
-      multiple
-      noOptionsText="No labels"
-      onChange={(e, newValue) => onChange(newValue)}
-      options={options}
-      renderInput={params => {
-        return (
-          <TextField
-            {...params}
-            label={label}
-            name={name}
-            sx={{
-              [`& .${autocompleteClasses.popupIndicator}`]: { display: "none" }
-            }}
-          />
-        );
-      }}
-      renderOption={Option}
-      renderTags={Tags}
-      value={value}
-    />
-  );
-}
-
 // render for label chips
-function Tags(labels, getTagProps, { onChange, value }) {
-  return labels.map(label => (
+function Tags(
+  labels: Label[],
+  getTagProps: AutocompleteRenderGetTagProps,
+  ownerState: AutocompleteOwnerState<Label, true, undefined, undefined, "div">
+) {
+  const value = ownerState.value || []; // Current selected labels
+  const onChange = ownerState.onChange || (() => {}); // No-op if onChange is not provided
+  return labels.map((label, index) => (
     <LabelChip
       key={label._id}
       label={label.name}
       color={label.color}
       style={{ marginLeft: 2 }}
-      onDelete={e =>
-        onChange(
-          e,
-          value.filter(l => l._id !== label._id)
-        )
-      }
+      onDelete={e => {
+        const updatedValue = value.filter(l => l._id !== label._id); // Remove label from the value
+        // Trigger onChange with event, updated value, reason, and details
+        onChange(e as React.SyntheticEvent, updatedValue, "removeOption", {
+          option: label
+        });
+      }}
       clickable={false}
     />
   ));
 }
 
-// render for label options
-function Option(props, option, { selected }) {
+// Render label options
+function Option(
+  props: React.HTMLAttributes<HTMLLIElement>,
+  option: Label,
+  { selected }: { selected: boolean }
+) {
+  const { key, ...restProps } = props as { key?: React.Key }; // Extract key explicitly
   return (
-    <li {...props}>
+    <li key={key} {...restProps}>
       <Checkbox
         checked={selected}
         sx={{
