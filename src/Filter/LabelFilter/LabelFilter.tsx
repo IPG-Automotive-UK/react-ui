@@ -56,14 +56,21 @@ function LabelFilterPopper({
   );
 }
 
-// render for label chips
+// Render for label chips
+/**
+ * Renders the selected labels as chips with delete functionality.
+ * @param labels - The array of selected labels to display as chips.
+ * @param getTagProps - A function provided by Material-UI to generate props for each tag.
+ * @param ownerState - The owner state of the Autocomplete component, including `value` and `onChange` handler.
+ * @returns An array of LabelChip components representing the selected labels.
+ */
 function Tags(
   labels: Label[],
   getTagProps: AutocompleteRenderGetTagProps,
   ownerState: AutocompleteOwnerState<Label, true, undefined, undefined, "div">
 ) {
-  const value = ownerState.value || []; // Current selected labels
-  const onChange = ownerState.onChange || (() => {}); // No-op if onChange is not provided
+  // Extract current selected labels and onChange handler from ownerState
+  const { value = [], onChange = () => {} } = ownerState;
   return labels.map((label, index) => (
     <LabelChip
       key={label._id}
@@ -71,9 +78,10 @@ function Tags(
       color={label.color}
       style={{ marginLeft: 2 }}
       onDelete={e => {
-        const updatedValue = value.filter(l => l._id !== label._id); // Remove label from the value
+        // Remove label from the value
+        const updatedValue = value.filter(l => l._id !== label._id);
         // Trigger onChange with event, updated value, reason, and details
-        onChange(e as React.SyntheticEvent, updatedValue, "removeOption", {
+        onChange(e, updatedValue, "removeOption", {
           option: label
         });
       }}
@@ -83,12 +91,20 @@ function Tags(
 }
 
 // Render label options
+/**
+ * Renders a single option in the dropdown for selection.
+ * @param props - HTML attributes for the list item element.
+ * @param option - The label object representing the current option.
+ * @param selected - Indicates whether the current option is selected.
+ * @returns A list item element representing the label option.
+ */
 function Option(
   props: React.HTMLAttributes<HTMLLIElement>,
   option: Label,
   { selected }: { selected: boolean }
 ) {
-  const { key, ...restProps } = props as { key?: React.Key }; // Extract key explicitly
+  // Extract key explicitly
+  const { key, ...restProps } = props as { key?: React.Key };
   return (
     <li key={key} {...restProps}>
       <Checkbox
