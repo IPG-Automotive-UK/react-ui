@@ -13,6 +13,7 @@ import { Label } from "../../LabelSelector/Label.types";
 import LabelChip from "../../LabelSelector/LabelChip/LabelChip";
 import { LabelFilterProps } from "./LabelFilter.types";
 import { VirtualizedAutocomplete } from "../../Autocomplete/Autocomplete";
+import { sortLabelOptions } from "../sortLabelOptions";
 
 /**
  * A label filter allows the user to select multiple labels from a list.
@@ -45,7 +46,7 @@ function LabelFilterPopper({
       multiple
       noOptionsText="No labels"
       onChange={(e, newValue) => onChange?.(newValue)}
-      options={options}
+      options={sortLabelOptions(options)}
       value={value}
       renderInput={params => (
         <TextField {...params} label={label} name={name} />
