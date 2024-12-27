@@ -102,6 +102,7 @@ const TruncatedTooltip = <T extends React.ElementType = "span">({
             "& > *": {
               display: "inline"
             },
+            color: "primary.main",
             display: "block",
             overflow: "hidden",
             textDecoration: "none",
