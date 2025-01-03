@@ -1,5 +1,4 @@
 import type { Label } from "../../LabelSelector/Label.types";
-import LabelFilter from "./LabelFilter";
 
 /**
  * Props definition for the LabelFilter component
@@ -32,5 +31,3 @@ export type LabelFilterProps = {
    */
   value?: Label[];
 };
-
-export default LabelFilter as React.FC<LabelFilterProps>;

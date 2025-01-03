@@ -3,7 +3,7 @@ import * as React from "react";
 import { describe, expect, it, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 
-import LabelFilter from "./LabelFilter";
+import { LabelFilter } from "./LabelFilter";
 import { LabelFilterProps } from "./LabelFilter.types";
 import userEvent from "@testing-library/user-event";
 

@@ -17,7 +17,7 @@ import { VirtualizedAutocomplete } from "../../Autocomplete/Autocomplete";
 /**
  * A label filter allows the user to select multiple labels from a list.
  */
-export default function LabelFilter({
+export function LabelFilter({
   value = [],
   limitTags = -1,
   ...props
@@ -73,10 +73,11 @@ function Tags(
   const { value = [], onChange = () => {} } = ownerState;
   return labels.map((label, index) => (
     <LabelChip
+      {...getTagProps({ index })}
       key={label._id}
       label={label.name}
       color={label.color}
-      style={{ marginLeft: 2 }}
+      sx={{ marginLeft: 2 }}
       onDelete={e => {
         // Remove label from the value
         const updatedValue = value.filter(l => l._id !== label._id);
@@ -90,7 +91,6 @@ function Tags(
   ));
 }
 
-// Render label options
 /**
  * Renders a single option in the dropdown for selection.
  * @param props - HTML attributes for the list item element.

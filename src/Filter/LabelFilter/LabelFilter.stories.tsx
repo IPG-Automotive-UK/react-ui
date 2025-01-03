@@ -1,5 +1,5 @@
 import { Label } from "../../LabelSelector/Label.types";
-import LabelFilter from "./LabelFilter";
+import { LabelFilter } from "./LabelFilter";
 import React from "react";
 import { action } from "@storybook/addon-actions";
 
