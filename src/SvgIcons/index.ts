@@ -3,7 +3,7 @@ export { default as VirtoBuild, type VirtoBuildProps } from "./VirtoBuild";
 export { default as VirtoData, type VirtoDataProps } from "./VirtoData";
 export { default as VirtoFleet, type VirtoFleetProps } from "./VirtoFleet";
 export { default as VirtoID, type VirtoIDProps } from "./VirtoID";
-export { default as VirtoLogo, type VirtoLogoProps } from "./VirtoLogo";
+export { VirtoLogo, type VirtoLogoProps } from "./VirtoLogo";
 export { default as VirtoModel, type VirtoModelProps } from "./VirtoModel";
 export { default as VirtoResult, type VirtoResultProps } from "./VirtoResult";
 export { default as VirtoScene, type VirtoSceneProps } from "./VirtoScene";

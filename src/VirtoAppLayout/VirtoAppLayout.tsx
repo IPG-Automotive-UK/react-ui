@@ -7,7 +7,6 @@ import { SnackbarProvider } from "../SnackbarProvider";
 import ThemeProvider from "../ThemeProvider";
 import VirtoAppHeader from "../VirtoAppHeader";
 import { VirtoAppLayoutProps } from "./VirtoAppLayout.types";
-import useTheme from "../ThemeProvider/useTheme";
 
 // app layout component
 function Layout({
@@ -29,9 +28,6 @@ function Layout({
 
   const [appOpen, setAppOpen] = useState(false);
 
-  // use theme context hook
-  const [theme, setTheme] = useTheme();
-
   // check if screen is medium
   const isMediumScreen = useMediaQuery(theme => theme.breakpoints.down("md"));
 
@@ -50,9 +46,7 @@ function Layout({
           onAppClick={() => setAppOpen(!appOpen)}
           onChangePassword={onChangePassword}
           onLogout={onLogout}
-          onColourModeChange={newMode => setTheme(newMode)}
           username={username}
-          mode={theme as "light" | "dark"}
           baseUrl={baseUrl}
           virtoLogoLinkUrl={virtoLogoLinkUrl}
         />
@@ -71,7 +65,7 @@ function Layout({
             onClose={isMediumScreen ? () => setMobileOpen(false) : undefined}
             sx={theme => ({
               "& .MuiDrawer-paper": {
-                height: `calc(100vh - ${theme.mixins.toolbar.minHeight}px) `,
+                height: `calc(100vh - ${theme.mixins.toolbar.minHeight}px)`,
                 paddingTop: "8px",
                 top: theme.mixins.toolbar.minHeight,
                 width: sidebarWidth
@@ -83,7 +77,7 @@ function Layout({
         </Box>
         <Box
           sx={{
-            background: theme => theme.palette.background.default,
+            background: theme => theme.vars.palette.background.default,
             display: "flex",
             flexDirection: "column",
             flexGrow: 1

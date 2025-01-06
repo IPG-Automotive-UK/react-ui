@@ -218,7 +218,6 @@ PasswordChangeDialog.propTypes = {
 // theming for dialog title
 const dialogTitleStyles = {
   closeButton: {
-    color: theme => theme.palette.grey[500],
     position: "absolute",
     right: theme => theme.spacing(1),
     top: theme => theme.spacing(1)
