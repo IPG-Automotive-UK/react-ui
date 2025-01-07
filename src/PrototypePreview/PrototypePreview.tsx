@@ -2,39 +2,47 @@ import { Box, Divider, Link, Stack, Typography } from "@mui/material";
 import { LabelChipGroup, LabelChipGroupProps } from "../LabelSelector";
 
 import DateLabel from "../DateLabel/DateLabel";
-import FileLabel from "../FileLabel/FileLabel";
 import FormatLabel from "../FormatLabel/FormatLabel";
 import FormatVersionLabel from "../FormatVersionLabel/FormatVersionLabel";
+import { PrototypePreviewProps } from "./PrototypePreview.types";
 import React from "react";
-import RoadLabel from "../RoadLabel/RoadLabel";
-import { ScenarioPreviewProps } from "./ScenarioPreview.types";
+import { StatusLabel } from "../Status";
 import UserLabel from "../UserLabel/UserLabel";
+import { VersionLabel } from "../VersionLabel";
 
-export function ScenarioPreview({
+/**
+ * PrototypePreview component for visualizing Prototype information about specific prototype
+ */
+export function PrototypePreview({
   name,
   href,
+  prototypeVersion,
   image,
   description,
   format,
   formatVersion,
-  file,
+  quality,
   createdAt,
   user,
   label = [],
-  roadName,
-  roadHref,
   sx
-}: ScenarioPreviewProps) {
+}: PrototypePreviewProps) {
+  /** Checking if we have optional properties for conditional rendering according to: label, createdAt, user */
   function hasOptionalProperty() {
-    return label?.length > 0 || createdAt || user;
+    return (label?.length && label?.length > 0) || createdAt || user;
   }
 
-  const labelChips: LabelChipGroupProps["chips"] = label?.map(l => ({
-    clickable: false,
-    color: l.color,
-    label: l.name,
-    size: "small"
-  }));
+  /** Map the label chip array in format expected from LabelChipGroup Component */
+  const labelChips: LabelChipGroupProps["chips"] = label?.map(l => {
+    return {
+      clickable: false,
+      color: l.color,
+      label: l.name,
+      size: "small"
+    };
+  });
+  const qualityRelativeWidth = 0.2;
+  const widthCompensator = quality ? 1 : 1 / (1 - qualityRelativeWidth);
 
   return (
     <Box
@@ -43,14 +51,14 @@ export function ScenarioPreview({
       gap={1}
       minWidth={0}
       fontFamily="Montserrat"
-      data-testid="scenario-preview-wrapper"
+      data-testid="prototype-preview-wrapper"
       sx={{ ...sx }}
     >
-      <Box>
+      <Box gap={1}>
         <Stack direction="row" spacing={1} minWidth={0}>
           <img
             src={image}
-            alt="scenario-image"
+            alt="prototype-image"
             style={{
               height: "44px",
               marginBottom: "auto",
@@ -59,7 +67,7 @@ export function ScenarioPreview({
               width: "78px"
             }}
           />
-          <Stack direction="column" minWidth={0}>
+          <Stack direction="column" minWidth={0} display="flex">
             <Box display="flex" minWidth={0} flex={"0 1 auto"}>
               <Link
                 href={href}
@@ -67,7 +75,7 @@ export function ScenarioPreview({
                 target="_blank"
                 underline="hover"
                 textOverflow="ellipsis"
-                data-testid="scenario-preview-name"
+                data-testid="prototype-preview-name"
               >
                 <Typography
                   noWrap
@@ -80,22 +88,20 @@ export function ScenarioPreview({
                 </Typography>
               </Link>
             </Box>
-            <Stack direction="row">
-              <Typography
-                variant="caption"
-                color="textPrimary"
-                data-testid="scenario-preview-description"
-                sx={{
-                  WebkitBoxOrient: "vertical",
-                  WebkitLineClamp: 2,
-                  display: "-webkit-box",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis"
-                }}
-              >
-                {description}
-              </Typography>
-            </Stack>
+            <Typography
+              variant="caption"
+              color="textPrimary"
+              data-testid="prototype-preview-description"
+              sx={{
+                WebkitBoxOrient: "vertical",
+                WebkitLineClamp: 2,
+                display: "-webkit-box",
+                overflow: "hidden",
+                textOverflow: "ellipsis"
+              }}
+            >
+              {description}
+            </Typography>
           </Stack>
         </Stack>
       </Box>
@@ -103,47 +109,48 @@ export function ScenarioPreview({
         <Stack
           direction={"row"}
           gap={"12px"}
-          maxHeight={1}
+          maxWidth={1}
           justifyContent={"left"}
-          alignItems={"center"}
+          alignContent={"center"}
         >
           <Box
             data-testid="format-label"
             flex="0 1 auto"
-            maxWidth={"calc(20% - 12px)"}
+            maxWidth={`calc(${40 * widthCompensator}% - 24px)`}
           >
             <FormatLabel label={format} />
           </Box>
           <Box
             data-testid="format-version-label"
             flex="0 1 auto"
-            maxWidth={0.2}
+            maxWidth={0.2 * widthCompensator}
           >
             <FormatVersionLabel label={formatVersion} />
           </Box>
           <Box
-            data-testid="file-label"
+            data-testid="version-label"
             flex="0 1 auto"
-            maxWidth={"calc(30% - 12px)"}
-            alignItems="center"
+            maxWidth={0.2 * widthCompensator}
           >
-            <FileLabel label={file} />
+            <VersionLabel label={prototypeVersion} />
           </Box>
-          <Box
-            data-testid="road-label"
-            sx={{
-              display: "inline-block",
-              maxWidth: "calc(30% - 12px)",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              whiteSpace: "nowrap"
-            }}
-          >
-            <RoadLabel label={roadName} href={roadHref} />
-          </Box>
+          {quality ? (
+            <Box
+              flex="0 0 auto"
+              maxWidth={`calc(${qualityRelativeWidth * 100}% - 12px)`}
+            >
+              <StatusLabel
+                gap={0.5}
+                iconProps={{ height: 20, padding: 0, width: 20 }}
+                color="text.secondary"
+                status={quality}
+                variant="caption"
+              />
+            </Box>
+          ) : null}
         </Stack>
       </Box>
-      {hasOptionalProperty() && (
+      {hasOptionalProperty() ? (
         <>
           <Divider />
           <Box display="flex" flexDirection="column" gap={1}>
@@ -158,7 +165,7 @@ export function ScenarioPreview({
                   <Box
                     data-testid="date-label"
                     flex="0 1 auto"
-                    maxWidth={"calc(40% - 12px)"}
+                    maxWidth="calc(40% - 12px)"
                     alignItems="center"
                   >
                     <DateLabel label={createdAt} />
@@ -176,14 +183,22 @@ export function ScenarioPreview({
                 )}
               </Stack>
             )}
-            {label?.length > 0 && (
-              <Stack direction="row" spacing={1}>
-                <LabelChipGroup chips={labelChips} />
+            {label && label.length > 0 && (
+              <Stack
+                direction="row"
+                spacing={1}
+                sx={{
+                  height: 24,
+                  maxWidth: "calc(100% - 16px)",
+                  overflowX: "hidden"
+                }}
+              >
+                <LabelChipGroup chips={labelChips || []} />
               </Stack>
             )}
           </Box>
         </>
-      )}
+      ) : null}
     </Box>
   );
 }

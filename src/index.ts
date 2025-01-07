@@ -29,6 +29,11 @@ export { default as CanvasItem, type CanvasItemProps } from "./CanvasItem";
 export { default as EditLabelDialog } from "./EditLabelDialog";
 export { LinkWithPreview, type LinkWithPreviewProps } from "./LinkWithPreview";
 export { RoadPreview, type RoadPreviewProps } from "./RoadPreview";
+export {
+  PrototypePreview,
+  type PrototypePreviewProps
+} from "./PrototypePreview";
+export { ScenarioPreview, type ScenarioPreviewProps } from "./ScenarioPreview";
 export { default as Breadcrumbs, type BreadcrumbsProps } from "./Breadcrumbs";
 export {
   DetailCard,
