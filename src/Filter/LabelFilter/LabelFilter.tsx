@@ -3,15 +3,15 @@ import * as React from "react";
 import {
   AutocompleteOwnerState,
   AutocompleteRenderGetTagProps,
-  Box,
   Checkbox,
-  TextField,
-  Typography
+  Stack,
+  TextField
 } from "@mui/material";
 
 import { Label } from "../../LabelSelector/Label.types";
 import LabelChip from "../../LabelSelector/LabelChip/LabelChip";
 import { LabelFilterProps } from "./LabelFilter.types";
+import NoWrapTypography from "../../NoWrapTypography";
 import { VirtualizedAutocomplete } from "../../Autocomplete/Autocomplete";
 import { sortLabelOptions } from "../sortLabelOptions";
 
@@ -119,16 +119,12 @@ function Option(
           mr: 1
         }}
       />
-      <Box
-        sx={{
-          flexGrow: 1
-        }}
-      >
-        <Typography mb={-0.5}>{option.name}</Typography>
-        <Typography variant="caption">
+      <Stack direction="column" flexGrow={1} overflow="hidden">
+        <NoWrapTypography>{option.name}</NoWrapTypography>
+        <NoWrapTypography variant="caption">
           {option.description || "No description"}
-        </Typography>
-      </Box>
+        </NoWrapTypography>
+      </Stack>
     </li>
   );
 }
