@@ -11,6 +11,7 @@ export default function StatusIcon({
   status,
   width = 40,
   height = 40,
+  padding = "2px",
   iconTooltipText
 }: StatusIconProps) {
   const {
@@ -22,7 +23,7 @@ export default function StatusIcon({
         sx={{
           color,
           height,
-          padding: "2px",
+          padding,
           width
         }}
       />

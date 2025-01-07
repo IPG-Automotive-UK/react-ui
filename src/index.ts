@@ -27,7 +27,13 @@ export {
 export { default as Canvas, type CanvasProps } from "./Canvas";
 export { default as CanvasItem, type CanvasItemProps } from "./CanvasItem";
 export { default as EditLabelDialog } from "./EditLabelDialog";
+export { LinkWithPreview, type LinkWithPreviewProps } from "./LinkWithPreview";
 export { RoadPreview, type RoadPreviewProps } from "./RoadPreview";
+export {
+  PrototypePreview,
+  type PrototypePreviewProps
+} from "./PrototypePreview";
+export { ScenarioPreview, type ScenarioPreviewProps } from "./ScenarioPreview";
 export { default as Breadcrumbs, type BreadcrumbsProps } from "./Breadcrumbs";
 export {
   DetailCard,
@@ -38,6 +44,17 @@ export {
   type SummaryCardProps,
   type TableCardProps
 } from "./Card";
+export { UserLabel, type UserLabelProps } from "./UserLabel";
+export { DateLabel, type DateLabelProps } from "./DateLabel";
+export { FileLabel, type FileLabelProps } from "./FileLabel";
+export { VersionLabel, type VersionLabelProps } from "./VersionLabel";
+export { FormatLabel, type FormatLabelProps } from "./FormatLabel";
+export { RoadLabel, type RoadLabelProps } from "./RoadLabel";
+export {
+  FormatVersionLabel,
+  type FormatVersionLabelProps
+} from "./FormatVersionLabel";
+export { IconWithLabel, type IconWithLabelProps } from "./IconWithLabel";
 export {
   Infographic,
   FileDetails,
@@ -194,7 +211,12 @@ export {
 } from "./TreeViewList";
 export { default as TruncatedTooltip } from "./TruncatedTooltip";
 export { default as UserMenu, type UserMenuProps } from "./UserMenu";
-export { UserAvatar, useColorMap, type UserAvatarProps } from "./UserAvatar";
+export {
+  UserAvatar,
+  colorMap,
+  useColorMap,
+  type UserAvatarProps
+} from "./UserAvatar";
 export {
   default as NoWrapTypography,
   type NoWrapTypographyProps
@@ -210,6 +232,7 @@ export {
 } from "./ConfirmProvider";
 export {
   IpgLogo,
+  RoadOutlined,
   VirtoBuild,
   VirtoData,
   VirtoFleet,
@@ -223,8 +246,10 @@ export {
   VirtoThumbsUpLeft,
   VirtoVehicle,
   CarMakerLogo,
+  TruckMakerLogo,
   AsamLogo,
   type IpgLogoProps,
+  type RoadOutlinedProps,
   type VirtoBuildProps,
   type VirtoDataProps,
   type VirtoFleetProps,
@@ -238,6 +263,7 @@ export {
   type VirtoThumbsUpLeftProps,
   type VirtoVehicleProps,
   type CarMakerLogoProps,
+  type TruckMakerLogoProps,
   type AsamLogoProps
 } from "./SvgIcons";
 export {
