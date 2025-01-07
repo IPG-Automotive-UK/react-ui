@@ -12,8 +12,11 @@ import statuses from "../statuses";
 export default function StatusLabel({
   status,
   variant = "body2",
+  gap = 1,
+  color = "text.primary",
   iconProps = {
     height: 20,
+    padding: "2px",
     width: 20
   }
 }: StatusLabelProps) {
@@ -22,16 +25,19 @@ export default function StatusLabel({
   } = statuses[status];
   return (
     <Box
+      data-testid="status-label"
       sx={{
         alignItems: "center",
         display: "inline-flex",
         flexDirection: "row",
-        gap: 1,
+        gap,
         justifyContent: "center"
       }}
     >
       <StatusIcon status={status} {...iconProps} />
-      <Typography variant={variant}>{text}</Typography>
+      <Typography color={color} variant={variant}>
+        {text}
+      </Typography>
     </Box>
   );
 }

@@ -21,7 +21,7 @@ export default meta;
 // Story Template
 const Template: StoryFn<LinkWithPreviewProps> = args => {
   return (
-    <Box maxWidth="100px">
+    <Box maxWidth={100} sx={{ overflowWrap: "anywhere" }}>
       <LinkWithPreview {...args} />
     </Box>
   );
@@ -57,6 +57,23 @@ export const LongLinkText = {
       </Box>
     ),
     href: "https://example.com"
+  },
+  render: Template
+};
+
+/**
+ * Long link text to show wrapping
+ */
+export const LongLinkTextWrap = {
+  args: {
+    children: "MyVeryLooooooooongLink",
+    content: (
+      <Box boxShadow={2}>
+        <Typography>Hello World!</Typography>
+      </Box>
+    ),
+    href: "https://example.com",
+    sx: { whiteSpace: "wrap" }
   },
   render: Template
 };
