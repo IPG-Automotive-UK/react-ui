@@ -3,6 +3,7 @@ import React, {
   Children,
   ReactElement,
   isValidElement,
+  useEffect,
   useRef,
   useState
 } from "react";
@@ -26,6 +27,15 @@ const TruncatedTooltip = <T extends React.ElementType = "span">({
 }: TruncatedTooltipProps<T>) => {
   // Ref to the text element.
   const textElementRef = useRef<HTMLInputElement | null>(null);
+  const [computedColor, setComputedColor] = useState<string>("inherit");
+  useEffect(() => {
+    if (textElementRef.current?.children.length) {
+      // Fetch the computed styles dynamically
+      const firstChild = textElementRef.current.children[0] as HTMLElement;
+      const color = window.getComputedStyle(firstChild).color;
+      setComputedColor(color);
+    }
+  }, []);
   // State to determine if the tooltip should show.
   const [open, setOpen] = useState(false);
 
@@ -98,11 +108,13 @@ const TruncatedTooltip = <T extends React.ElementType = "span">({
         component={component || "span"}
         ref={textElementRef}
         sx={[
+          // You cannot spread `sx` directly because `SxProps` (typeof sx) can be an array.
+          ...(Array.isArray(sx) ? sx : [sx]),
           {
             "& > *": {
               display: "inline"
             },
-            color: "primary.main",
+            color: computedColor,
             display: "block",
             overflow: "hidden",
             textDecoration: "none",
@@ -118,9 +130,7 @@ const TruncatedTooltip = <T extends React.ElementType = "span">({
                 WebkitLineClamp: multiline,
                 display: "-webkit-box"
               }
-            : {},
-          // You cannot spread `sx` directly because `SxProps` (typeof sx) can be an array.
-          ...(Array.isArray(sx) ? sx : [sx])
+            : {}
         ]}
         {...rest}
       >
