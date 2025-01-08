@@ -77,41 +77,69 @@ export function RoadPreview({
               width: "78px"
             }}
           />
-          <Stack direction="column" minWidth={0} flex={1}>
-            <Stack direction="row" gap={1} display="flex" maxWidth={1}>
-              <Box flex="0 1 auto">
+          <Stack
+            direction="column"
+            sx={{
+              flex: 1,
+              minWidth: 0
+            }}
+          >
+            <Stack
+              direction="row"
+              sx={{
+                display: "flex",
+                gap: 1,
+                maxWidth: 1
+              }}
+            >
+              <Box
+                sx={{
+                  flex: "0 1 auto"
+                }}
+              >
                 <VersionChip version={version} />
               </Box>
               <Box
-                display="flex"
-                flex="1 1 auto"
-                alignItems="center"
-                justifyItems="left"
-                flexDirection={"row"}
-                overflow={"hidden"}
+                sx={{
+                  alignItems: "center",
+                  display: "flex",
+                  flex: "1 1 auto",
+                  flexDirection: "row",
+                  justifyItems: "left",
+                  overflow: "hidden"
+                }}
               >
                 <Link
-                  flexShrink={1}
-                  flexGrow={0}
-                  minWidth={0}
                   href={href}
                   target="_blank"
                   underline="hover"
-                  textOverflow="ellipsis"
                   data-testid="road-preview-name"
+                  sx={{
+                    flexGrow: 0,
+                    flexShrink: 1,
+                    minWidth: 0,
+                    textOverflow: "ellipsis"
+                  }}
                 >
                   <Typography
                     noWrap
                     variant="subtitle2"
-                    fontWeight={500}
                     color="primary"
+                    sx={{
+                      fontWeight: 500
+                    }}
                   >
                     {name}
                   </Typography>
                 </Link>
               </Box>
             </Stack>
-            <Box display="flex" flexDirection="column">
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column"
+              }}
+            >
               <Typography
                 variant="caption"
                 color="textPrimary"
@@ -130,35 +158,47 @@ export function RoadPreview({
           </Stack>
         </Stack>
       </Box>
-      <Box gap={1}>
+      <Box
+        sx={{
+          gap: 1
+        }}
+      >
         <Stack
           direction={"row"}
-          gap={"12px"}
-          maxWidth={1}
-          justifyContent={"left"}
-          alignItems={"center"}
+          sx={{
+            alignItems: "center",
+            gap: "12px",
+            justifyContent: "left",
+            maxWidth: 1
+          }}
         >
           <Box
             data-testid="format-label"
-            flex="0 1 auto"
-            maxWidth={"calc(40% - 12px)"}
-            alignItems="center"
+            sx={{
+              alignItems: "center",
+              flex: "0 1 auto",
+              maxWidth: "calc(40% - 12px)"
+            }}
           >
             <FormatLabel label={format} />
           </Box>
           <Box
             data-testid="format-version-label"
-            flex="0 1 auto"
-            maxWidth={0.2}
-            alignItems="center"
+            sx={{
+              alignItems: "center",
+              flex: "0 1 auto",
+              maxWidth: 0.2
+            }}
           >
             <FormatVersionLabel label={formatVersion} />
           </Box>
           <Box
             data-testid="file-label"
-            flex="0 1 auto"
-            maxWidth={"calc(40% - 12px)"}
-            alignItems="center"
+            sx={{
+              alignItems: "center",
+              flex: "0 1 auto",
+              maxWidth: "calc(40% - 12px)"
+            }}
           >
             <FileLabel label={file} />
           </Box>
@@ -167,20 +207,30 @@ export function RoadPreview({
       {hasOptionalProperty() ? (
         <>
           <Divider />
-          <Box display="flex" flexDirection="column" gap={1}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 1
+            }}
+          >
             {(createdAt || user) && (
               <Stack
                 direction="row"
-                gap={"12px"}
-                width={1}
-                alignItems={"center"}
+                sx={{
+                  alignItems: "center",
+                  gap: "12px",
+                  width: 1
+                }}
               >
                 {createdAt && (
                   <Box
                     data-testid="date-label"
-                    flex="0 1 auto"
-                    maxWidth={"calc(40% - 12px)"}
-                    alignItems="center"
+                    sx={{
+                      alignItems: "center",
+                      flex: "0 1 auto",
+                      maxWidth: "calc(40% - 12px)"
+                    }}
                   >
                     <DateLabel label={createdAt} />
                   </Box>
@@ -188,9 +238,11 @@ export function RoadPreview({
                 {user && (
                   <Box
                     data-testid="user-label"
-                    flex="1 1 auto"
-                    alignItems="center"
-                    minWidth={0}
+                    sx={{
+                      alignItems: "center",
+                      flex: "1 1 auto",
+                      minWidth: 0
+                    }}
                   >
                     <UserLabel label={user.name} color={user.color} />
                   </Box>

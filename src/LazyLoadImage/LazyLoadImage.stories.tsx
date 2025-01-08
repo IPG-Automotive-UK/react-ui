@@ -152,7 +152,12 @@ const FlexSizeComponent: StoryFn<LazyLoadImageProps> = args => {
           >
             {"Example project code"}
           </NoWrapTypography>
-          <Typography color="text.secondary" variant="body2">
+          <Typography
+            variant="body2"
+            sx={{
+              color: "text.secondary"
+            }}
+          >
             11 Prototype
           </Typography>
         </Box>
