@@ -84,7 +84,9 @@ function Option(
         icon={<CheckBoxOutlineBlank fontSize="small" />}
         value={option}
       />
-      <NoWrapTypography>{option}</NoWrapTypography>
+      <NoWrapTypography data-testid="filter-option-label">
+        {option}
+      </NoWrapTypography>
     </Box>
   );
 }
