@@ -39,8 +39,6 @@ const TruncatedTooltip = <T extends React.ElementType = "span">({
   // State to determine if the tooltip should show.
   const [open, setOpen] = useState(false);
 
-  console.log(computedColor);
-
   /**
    * If the text overflows, show the tooltip.
    */
