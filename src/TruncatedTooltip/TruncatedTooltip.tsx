@@ -30,8 +30,9 @@ const TruncatedTooltip = <T extends React.ElementType = "span">({
   const [computedColor, setComputedColor] = useState<string>("");
   useEffect(() => {
     if (textElementRef.current?.children.length) {
-      // Fetch the computed styles dynamically
+      // Get the child element of the reference node
       const firstChild = textElementRef.current.children[0] as HTMLElement;
+      // Retrieve the computed color style of the child element
       const color = window.getComputedStyle(firstChild).color;
       setComputedColor(color);
     }
