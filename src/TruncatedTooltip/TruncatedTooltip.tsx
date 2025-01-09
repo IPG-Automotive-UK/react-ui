@@ -3,7 +3,6 @@ import React, {
   Children,
   ReactElement,
   isValidElement,
-  useEffect,
   useRef,
   useState
 } from "react";
@@ -27,16 +26,7 @@ const TruncatedTooltip = <T extends React.ElementType = "span">({
 }: TruncatedTooltipProps<T>) => {
   // Ref to the text element.
   const textElementRef = useRef<HTMLInputElement | null>(null);
-  const [computedColor, setComputedColor] = useState<string>("");
-  useEffect(() => {
-    if (textElementRef.current?.children.length) {
-      // Get the child element of the reference node
-      const firstChild = textElementRef.current.children[0] as HTMLElement;
-      // Retrieve the computed color style of the child element
-      const color = window.getComputedStyle(firstChild).color;
-      setComputedColor(color);
-    }
-  }, []);
+
   // State to determine if the tooltip should show.
   const [open, setOpen] = useState(false);
 
@@ -115,7 +105,6 @@ const TruncatedTooltip = <T extends React.ElementType = "span">({
             "& > *": {
               display: "inline"
             },
-            color: computedColor,
             display: "block",
             overflow: "hidden",
             textDecoration: "none",
