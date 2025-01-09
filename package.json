@@ -10,16 +10,18 @@
     "type": "git",
     "url": "git+https://github.com/IPG-Automotive-UK/react-ui.git"
   },
+  "type": "module",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "exports": {
     ".": {
       "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js"
+      "require": "./dist/cjs/index.js",
+      "default": "./dist/cjs/index.js"
     }
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=16"
   },
   "scripts": {
     "build": "pnpm run clean && pnpm run copy-files && pnpm run build:cjs && pnpm run build:esm",
