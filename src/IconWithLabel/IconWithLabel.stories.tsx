@@ -23,7 +23,11 @@ export default meta;
 // Story Template
 const Template: StoryFn<IconWithLabelProps> = args => {
   return (
-    <Box maxWidth={100}>
+    <Box
+      sx={{
+        maxWidth: 100
+      }}
+    >
       <IconWithLabel {...args} />
     </Box>
   );

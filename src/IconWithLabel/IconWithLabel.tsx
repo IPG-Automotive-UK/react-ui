@@ -1,4 +1,4 @@
-import { Box, Link, Stack, Typography, alpha, useTheme } from "@mui/material";
+import { Box, Link, Stack, Theme, Typography, alpha } from "@mui/material";
 import React, { cloneElement } from "react";
 
 import { IconWithLabelProps } from "./IconWithLabel.types";
@@ -14,26 +14,37 @@ export default function IconWithLabel({
   label,
   href
 }: IconWithLabelProps) {
-  const theme = useTheme();
   const iconProps = {
-    sx: {
+    sx: (theme: Theme) => ({
       color: alpha(theme.palette.action.active, 0.54),
       height: "20px",
       width: "20px"
-    }
+    })
   };
   const customizedIcon = cloneElement(icon, iconProps);
 
   return (
     <Stack
       data-testid="icon-with-label"
-      alignItems="center"
       direction="row"
-      gap="4px"
-      display="flex"
+      sx={{
+        alignItems: "center",
+        display: "flex",
+        gap: "4px"
+      }}
     >
-      <Box display="flex">{customizedIcon}</Box>
-      <Box minWidth={0}>
+      <Box
+        sx={{
+          display: "flex"
+        }}
+      >
+        {customizedIcon}
+      </Box>
+      <Box
+        sx={{
+          minWidth: 0
+        }}
+      >
         {href ? (
           <Link
             target="_blank"
@@ -50,10 +61,10 @@ export default function IconWithLabel({
               noWrap
               component="p"
               variant="caption"
-              sx={{
+              sx={theme => ({
                 color: theme.palette.primary.main,
                 fontWeight: 400
-              }}
+              })}
             >
               {label}
             </Typography>
@@ -63,10 +74,10 @@ export default function IconWithLabel({
             noWrap
             component="p"
             variant="caption"
-            sx={{
+            sx={theme => ({
               color: alpha(theme.palette.text.secondary, 0.6),
               fontWeight: 400
-            }}
+            })}
           >
             {label}
           </Typography>
