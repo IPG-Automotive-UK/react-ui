@@ -1,6 +1,6 @@
 {
   "name": "@ipguk/react-ui",
-  "version": "10.0.1-0",
+  "version": "10.1.0-0",
   "description": "React UI component library for IPG web applications",
   "author": {
     "name": "IPG-Automotive-UK"
@@ -61,6 +61,7 @@
     "@types/react-dom": "^18.3.0",
     "@types/react-plotly.js": "^2.6.3",
     "@types/react-text-mask": "^5.4.14",
+    "@types/react-window": "^1.8.8",
     "@typescript-eslint/eslint-plugin": "^7.16.1",
     "@typescript-eslint/parser": "^7.16.1",
     "@vitejs/plugin-react": "^4.3.1",
@@ -115,6 +116,7 @@
     "react-hook-form": "^7.52.1",
     "react-plotly.js": "^2.6.0",
     "react-text-mask": "^5.5.0",
+    "react-window": "^1.8.10",
     "use-debouncy": "^5.0.1",
     "use-image": "^1.1.1",
     "zxcvbn": "^4.4.2"

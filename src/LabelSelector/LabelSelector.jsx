@@ -1,4 +1,3 @@
-import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
 import {
   Box,
   Button,
@@ -17,6 +16,8 @@ import EditLabelDialog from "../EditLabelDialog/EditLabelDialog";
 import LabelChip from "./LabelChip/LabelChip";
 import NoWrapTypography from "../NoWrapTypography/NoWrapTypography";
 import PropTypes from "prop-types";
+import { VirtualizedAutocomplete } from "../Autocomplete/Autocomplete";
+import { createFilterOptions } from "@mui/material/Autocomplete";
 
 // custom styling
 const styles = {
@@ -166,7 +167,7 @@ export default function LabelSelector({
 
   return (
     <>
-      <Autocomplete
+      <VirtualizedAutocomplete
         size={size}
         disableCloseOnSelect
         limitTags={limitTags}
