@@ -99,8 +99,6 @@ const TruncatedTooltip = <T extends React.ElementType = "span">({
         component={component || "span"}
         ref={textElementRef}
         sx={[
-          // You cannot spread `sx` directly because `SxProps` (typeof sx) can be an array.
-          ...(Array.isArray(sx) ? sx : [sx]),
           {
             "& > *": {
               display: "inline"
@@ -120,7 +118,9 @@ const TruncatedTooltip = <T extends React.ElementType = "span">({
                 WebkitLineClamp: multiline,
                 display: "-webkit-box"
               }
-            : {}
+            : {},
+          // You cannot spread `sx` directly because `SxProps` (typeof sx) can be an array.
+          ...(Array.isArray(sx) ? sx : [sx])
         ]}
         {...rest}
       >
