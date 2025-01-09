@@ -98,7 +98,7 @@ const defaultComponents = {
   MuiFormLabel: {
     styleOverrides: {
       asterisk: {
-        color: "#d32f2f"
+        color: "var(--ipg-palette-error-main)"
       }
     }
   },

@@ -5,7 +5,8 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Typography
+  Typography,
+  lighten
 } from "@mui/material";
 
 import React from "react";
@@ -43,7 +44,12 @@ export function StatusCountTable({ title, count }: StatusCountTableProps) {
               height: "40px"
             }}
           >
-            <TableCell sx={{ background: headerColor, pl: 2 }}>
+            <TableCell
+              sx={{
+                background: theme => lighten(theme.palette.primary.main, 0.9),
+                pl: 2
+              }}
+            >
               <Typography variant="subtitle2" data-testid="status-count-title">
                 {title}
               </Typography>

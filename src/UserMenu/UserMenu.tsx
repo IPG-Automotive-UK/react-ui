@@ -61,11 +61,11 @@ export default function UserMenu({
         <UserAvatar
           name={username}
           color="#bdbdbd"
-          sx={{
-            color: "#fff",
+          sx={theme => ({
+            color: theme.palette.common.white,
             height: 34,
             width: 34
-          }}
+          })}
         />
       </IconButton>
       <Menu

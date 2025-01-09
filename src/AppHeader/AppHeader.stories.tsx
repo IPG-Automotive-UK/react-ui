@@ -84,10 +84,11 @@ export const MultipleChildrenAndLogo = {
   args: {
     appLogo: (
       <VirtoLogo
-        sx={{
+        sx={theme => ({
+          color: theme.vars.palette.primary.contrastText,
           height: 50,
           width: 140
-        }}
+        })}
       />
     ),
     children: (

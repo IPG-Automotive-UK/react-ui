@@ -1,4 +1,4 @@
-import "./colorSelector.css";
+// import "./colorSelector.css";
 
 import {
   Box,
@@ -25,13 +25,13 @@ export default function EditLabelDialog({
   onEdit = () => {},
   onClose = () => {},
   title,
-  label = { _id: "", color: "#005FA8", description: "", name: "" },
+  label = { _id: "", color: "#003063", description: "", name: "" },
   nameMaxLength = 50
 }) {
   // define label states for user input
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [color, setColor] = useState("#005FA8");
+  const [color, setColor] = useState("#003063");
 
   // check if label is new and not being edited
   const isNew = label._id === "" && label.name === "";
@@ -44,7 +44,7 @@ export default function EditLabelDialog({
     // reset all the states
     setName("");
     setDescription("");
-    setColor("#005FA8");
+    setColor("#003063");
   };
 
   // if the label changes, update the dependent states
@@ -116,7 +116,7 @@ export default function EditLabelDialog({
     // reset all the states
     setName("");
     setDescription("");
-    setColor("#005FA8");
+    setColor("#003063");
 
     onClose(event, "save");
   };
@@ -133,7 +133,7 @@ export default function EditLabelDialog({
     // reset all the states
     setName("");
     setDescription("");
-    setColor("#005FA8");
+    setColor("#003063");
     onClose();
   };
 

@@ -8,7 +8,7 @@ import React from "react";
 // component to display a chip with custom colors
 export default function LabelChip({
   clickable = false,
-  color = "#005FA8",
+  color = "#003063",
   description = "",
   label,
   onClick,
