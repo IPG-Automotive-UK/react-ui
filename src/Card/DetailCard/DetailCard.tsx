@@ -5,8 +5,10 @@ import React, { Fragment, useEffect, useRef, useState } from "react";
 
 import LabelChipGroup from "../../LabelSelector/LabelChipGroup/LabelChipGroup";
 import type { LabelChipGroupProps } from "../../LabelSelector/LabelChipGroup/LabelChipGroup.types";
-import NoWrapTypography from "../../NoWrapTypography/NoWrapTypography";
 import { ResizeObserver } from "@juggle/resize-observer";
+import TruncatedTooltip from "../../TruncatedTooltip/TruncatedTooltip";
+
+// import NoWrapTypography from "../../NoWrapTypography/NoWrapTypography";
 
 // TODO: add tests in browser once we are done with the migration to cypress. The old tests live in a txt file in this folder until then.
 
@@ -141,7 +143,7 @@ function DetailCardHeader({
         }}
       >
         <Box sx={{ width: headerContentWidth }}>
-          <NoWrapTypography
+          <TruncatedTooltip
             sx={{
               color: theme =>
                 theme.palette.mode === "dark" ? "white" : "black",
@@ -150,8 +152,8 @@ function DetailCardHeader({
             }}
           >
             {title}
-          </NoWrapTypography>
-          <NoWrapTypography
+          </TruncatedTooltip>
+          <TruncatedTooltip
             sx={{
               color: theme => theme.palette.text.secondary,
               fontSize: 14,
@@ -159,7 +161,7 @@ function DetailCardHeader({
             }}
           >
             {subtitle}
-          </NoWrapTypography>
+          </TruncatedTooltip>
         </Box>
         <Box
           sx={{ display: "flex", flexDirection: "row", gap: 2 }}

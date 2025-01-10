@@ -2,8 +2,10 @@ import { Chip, Tooltip, alpha, chipClasses, darken } from "@mui/material";
 
 import DoneIcon from "@mui/icons-material/Done";
 import { LabelChipProps } from "./LabelChip.types";
-import NoWrapTypography from "../../NoWrapTypography";
 import React from "react";
+import TruncatedTooltip from "../../TruncatedTooltip/TruncatedTooltip";
+
+// import NoWrapTypography from "../../NoWrapTypography";
 
 // component to display a chip with custom colors
 export default function LabelChip({
@@ -26,7 +28,7 @@ export default function LabelChip({
         className="label-chip"
         clickable={clickable}
         icon={selected ? <DoneIcon color="inherit" /> : undefined}
-        label={<NoWrapTypography variant="inherit">{label}</NoWrapTypography>}
+        label={<TruncatedTooltip component="inherit">{label}</TruncatedTooltip>}
         onClick={clickable ? onClick : undefined}
         sx={{
           "&:hover": {
