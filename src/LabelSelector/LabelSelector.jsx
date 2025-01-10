@@ -14,10 +14,12 @@ import Checkbox from "../Checkbox";
 import DeleteLabelDialog from "./DeleteLabelDialog/DeleteLabelDialog";
 import EditLabelDialog from "../EditLabelDialog/EditLabelDialog";
 import LabelChip from "./LabelChip/LabelChip";
-import NoWrapTypography from "../NoWrapTypography/NoWrapTypography";
 import PropTypes from "prop-types";
+import TruncatedTooltip from "../TruncatedTooltip/TruncatedTooltip";
 import { VirtualizedAutocomplete } from "../Autocomplete/Autocomplete";
 import { createFilterOptions } from "@mui/material/Autocomplete";
+
+// import NoWrapTypography from "../NoWrapTypography/NoWrapTypography";
 
 // custom styling
 const styles = {
@@ -216,10 +218,10 @@ export default function LabelSelector({
                 }}
               />
               <Stack direction="column" flexGrow={1} overflow="hidden">
-                <NoWrapTypography>{option.name}</NoWrapTypography>
-                <NoWrapTypography variant="caption">
+                <TruncatedTooltip>{option.name}</TruncatedTooltip>
+                <TruncatedTooltip variant="caption">
                   {option.description}
-                </NoWrapTypography>
+                </TruncatedTooltip>
               </Stack>
               <>
                 {editEnabled && (
