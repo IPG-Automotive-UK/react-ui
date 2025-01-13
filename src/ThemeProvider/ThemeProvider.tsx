@@ -3,9 +3,9 @@
 import type {} from "@mui/x-data-grid/themeAugmentation";
 import type {} from "@mui/material/themeCssVarsAugmentation";
 
+import { MuiTheme, ThemeProviderProps } from "./ThemeProvider.types";
 import {
   ThemeProvider as MuiThemeProvider,
-  Theme,
   ThemeOptions,
   alpha,
   createTheme,
@@ -14,7 +14,6 @@ import {
 import React, { useEffect } from "react";
 
 import PropTypes from "prop-types";
-import { ThemeProviderProps } from "./ThemeProvider.types";
 import darkScrollbar from "@mui/material/darkScrollbar";
 
 // extend the theme to include custom properties
@@ -89,13 +88,13 @@ const defaultComponents = {
   },
   MuiDataGrid: {
     styleOverrides: {
-      footerContainer: ({ theme }: { theme: Theme }) => ({
+      footerContainer: ({ theme }: MuiTheme) => ({
         backgroundColor: theme.palette.common.background
       }),
-      main: ({ theme }: { theme: Theme }) => ({
+      main: ({ theme }: MuiTheme) => ({
         backgroundColor: theme.palette.common.background
       }),
-      root: ({ theme }: { theme: Theme }) => ({
+      root: ({ theme }: MuiTheme) => ({
         "& .MuiDataGrid-cell:focus, .MuiDataGrid-cell:focus-within, .MuiDataGrid-columnHeader:focus, .MuiDataGrid-columnHeader:focus-within":
           {
             outline: "none"
@@ -109,8 +108,8 @@ const defaultComponents = {
   },
   MuiFormControl: {
     styleOverrides: {
-      root: ({ theme }: { theme: Theme }) => ({
-        "& .MuiFormLabel-root, .MuiFormHelperText-root ": {
+      root: ({ theme }: MuiTheme) => ({
+        "& .MuiFormHelperText-root ": {
           color: theme.palette.text.secondary
         }
       })
@@ -118,7 +117,7 @@ const defaultComponents = {
   },
   MuiFormLabel: {
     styleOverrides: {
-      asterisk: ({ theme }: { theme: Theme }) => ({
+      asterisk: ({ theme }: MuiTheme) => ({
         color: theme.palette.error.main
       })
     }
