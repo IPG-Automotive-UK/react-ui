@@ -1,5 +1,3 @@
-// import "./colorSelector.css";
-
 import {
   Box,
   Button,
