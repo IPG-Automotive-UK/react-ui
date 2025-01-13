@@ -109,7 +109,7 @@ const defaultComponents = {
   MuiFormControl: {
     styleOverrides: {
       root: ({ theme }: MuiTheme) => ({
-        "& .MuiFormHelperText-root ": {
+        "& .MuiFormLabel-root, .MuiFormHelperText-root ": {
           color: theme.palette.text.secondary
         }
       })
