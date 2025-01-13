@@ -56,6 +56,9 @@ const primaryDarkMain = "#87A5D2";
 // secondary main dark
 const secondaryDarkMain = "#005FA8";
 
+// palette default background light
+const paletteDefaultBackgroundLight = "#fafafa";
+
 // 0.08 % of the primary light main
 const primaryLightColor08 = alpha(primaryLightMain, 0.08);
 
@@ -214,6 +217,9 @@ const mainTheme: ThemeOptions = {
       palette: {
         action: {
           selected: primaryLightColor08
+        },
+        background: {
+          default: paletteDefaultBackgroundLight
         },
         primary: { main: primaryLightMain },
         secondary: { main: secondaryDarkMain }
