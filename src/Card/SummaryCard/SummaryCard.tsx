@@ -7,6 +7,7 @@ import {
   IconButton,
   Popover,
   Stack,
+  Typography,
   cardHeaderClasses
 } from "@mui/material";
 import React, { useState } from "react";
@@ -17,8 +18,6 @@ import type { LabelChipGroupProps } from "../../LabelSelector/LabelChipGroup/Lab
 import { MoreVert } from "@mui/icons-material";
 import { SummaryCardProps } from "./SummaryCard.types";
 import TruncatedTooltip from "../../TruncatedTooltip/TruncatedTooltip";
-
-// import NoWrapTypography from "../../NoWrapTypography/NoWrapTypography";
 
 // TODO: add tests in browser once we are done with the migration to cypress. The old tests live in a txt file in this folder until then.
 
@@ -102,6 +101,7 @@ function SummaryCard({
           disableTypography
           title={
             <TruncatedTooltip
+              component={Typography}
               sx={{
                 fontSize: 20,
                 fontWeight: 500
@@ -112,6 +112,7 @@ function SummaryCard({
           }
           subheader={
             <TruncatedTooltip
+              component={Typography}
               sx={{
                 fontSize: 14,
                 fontWeight: 400

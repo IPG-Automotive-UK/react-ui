@@ -1,4 +1,4 @@
-import { Box, Card, Stack } from "@mui/material";
+import { Box, Card, Stack, Typography } from "@mui/material";
 import { DetailCardHeaderProps, DetailCardProps } from "./DetailCard.types";
 import { FileDetails, Infographic } from "../../CardContent";
 import React, { Fragment, useEffect, useRef, useState } from "react";
@@ -7,8 +7,6 @@ import LabelChipGroup from "../../LabelSelector/LabelChipGroup/LabelChipGroup";
 import type { LabelChipGroupProps } from "../../LabelSelector/LabelChipGroup/LabelChipGroup.types";
 import { ResizeObserver } from "@juggle/resize-observer";
 import TruncatedTooltip from "../../TruncatedTooltip/TruncatedTooltip";
-
-// import NoWrapTypography from "../../NoWrapTypography/NoWrapTypography";
 
 // TODO: add tests in browser once we are done with the migration to cypress. The old tests live in a txt file in this folder until then.
 
@@ -144,6 +142,7 @@ function DetailCardHeader({
       >
         <Box sx={{ width: headerContentWidth }}>
           <TruncatedTooltip
+            component={Typography}
             sx={{
               color: theme =>
                 theme.palette.mode === "dark" ? "white" : "black",
@@ -154,6 +153,7 @@ function DetailCardHeader({
             {title}
           </TruncatedTooltip>
           <TruncatedTooltip
+            component={Typography}
             sx={{
               color: theme => theme.palette.text.secondary,
               fontSize: 14,
