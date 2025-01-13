@@ -77,7 +77,7 @@ describe("LabelSelector", () => {
     });
 
     // check that the chip is rendered with the correct name and color
-    expect(chip).toHaveStyle("background-color: rgb(0, 95, 168)");
+    expect(chip).toHaveStyle("background-color: rgb(0, 48, 99)");
     expect(chip).toHaveTextContent("label 1");
   });
   // test can select an item and that the onChange event is fired and the chip is rendered
@@ -115,7 +115,7 @@ describe("LabelSelector", () => {
     });
 
     // check that the chip is rendered with the correct name and color
-    expect(chip).toHaveStyle("background-color: rgb(0, 95, 168)");
+    expect(chip).toHaveStyle("background-color: rgb(0, 48, 99)");
     expect(chip).toHaveTextContent("label 1");
   });
   // test can select multiple items and that the onChange event is fired and the chips are rendered
@@ -164,7 +164,7 @@ describe("LabelSelector", () => {
     });
 
     // check that the first chip is rendered with the correct name and color
-    expect(chip1).toHaveStyle("background-color: rgb(0, 95, 168)");
+    expect(chip1).toHaveStyle("background-color: rgb(0, 48, 99)");
     expect(chip1).toHaveTextContent("label 1");
 
     // find the second chip
