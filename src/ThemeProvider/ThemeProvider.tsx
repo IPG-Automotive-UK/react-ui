@@ -5,6 +5,7 @@ import type {} from "@mui/material/themeCssVarsAugmentation";
 
 import {
   ThemeProvider as MuiThemeProvider,
+  Theme,
   ThemeOptions,
   alpha,
   createTheme,
@@ -85,10 +86,10 @@ const defaultComponents = {
   },
   MuiDataGrid: {
     styleOverrides: {
-      footerContainer: ({ theme }) => ({
+      footerContainer: ({ theme }: { theme: Theme }) => ({
         backgroundColor: theme.palette.background.paper
       }),
-      main: ({ theme }) => ({
+      main: ({ theme }: { theme: Theme }) => ({
         backgroundColor: theme.palette.background.paper
       }),
       root: {
@@ -101,7 +102,7 @@ const defaultComponents = {
   },
   MuiFormControl: {
     styleOverrides: {
-      root: ({ theme }) => ({
+      root: ({ theme }: { theme: Theme }) => ({
         "& .MuiFormLabel-root, .MuiFormHelperText-root ": {
           color: theme.palette.text.secondary
         }
@@ -110,7 +111,7 @@ const defaultComponents = {
   },
   MuiFormLabel: {
     styleOverrides: {
-      asterisk: ({ theme }) => ({
+      asterisk: ({ theme }: { theme: Theme }) => ({
         color: theme.palette.error.main
       })
     }
