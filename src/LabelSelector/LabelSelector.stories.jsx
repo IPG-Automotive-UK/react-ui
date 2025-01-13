@@ -113,7 +113,7 @@ export const WithLabelOptions = {
     options: [
       {
         _id: 1,
-        color: "#005FA8",
+        color: "#003063",
         description: "a really looooooooooooooooooong string",
         name: "label 1"
       },
@@ -143,7 +143,7 @@ export const MediumSizeWithOptions = {
   args: {
     ...Default.args,
     options: [
-      { _id: 1, color: "#005FA8", description: "first label", name: "label 1" },
+      { _id: 1, color: "#003063", description: "first label", name: "label 1" },
       { _id: 2, color: "#f542e0", description: "second label", name: "label 2" }
     ],
     size: "medium"
