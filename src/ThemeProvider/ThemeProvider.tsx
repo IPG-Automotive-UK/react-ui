@@ -90,17 +90,21 @@ const defaultComponents = {
   MuiDataGrid: {
     styleOverrides: {
       footerContainer: ({ theme }: { theme: Theme }) => ({
-        backgroundColor: theme.palette.background.paper
+        backgroundColor: theme.palette.common.background
       }),
       main: ({ theme }: { theme: Theme }) => ({
-        backgroundColor: theme.palette.background.paper
+        backgroundColor: theme.palette.common.background
       }),
-      root: {
+      root: ({ theme }: { theme: Theme }) => ({
         "& .MuiDataGrid-cell:focus, .MuiDataGrid-cell:focus-within, .MuiDataGrid-columnHeader:focus, .MuiDataGrid-columnHeader:focus-within":
           {
             outline: "none"
+          },
+        "& .MuiDataGrid-container--top [role='row'], & .MuiDataGrid-container--bottom [role='row']":
+          {
+            backgroundColor: theme.palette.common.background
           }
-      }
+      })
     }
   },
   MuiFormControl: {
