@@ -33,7 +33,7 @@ describe("LabelSelector", () => {
     const options = [
       {
         _id: "1",
-        color: "#005FA8",
+        color: "#003063",
         description: "first label",
         name: "label 1"
       },
@@ -62,7 +62,7 @@ describe("LabelSelector", () => {
     const options = [
       {
         _id: "1",
-        color: "#005FA8",
+        color: "#003063",
         description: "first label",
         name: "label 1"
       }
@@ -85,7 +85,7 @@ describe("LabelSelector", () => {
     const options = [
       {
         _id: "1",
-        color: "#005FA8",
+        color: "#003063",
         description: "first label",
         name: "label 1"
       }
@@ -123,7 +123,7 @@ describe("LabelSelector", () => {
     const options = [
       {
         _id: "1",
-        color: "#005FA8",
+        color: "#003063",
         description: "first label",
         name: "label 1"
       },
@@ -208,7 +208,7 @@ describe("LabelSelector", () => {
     const options = [
       {
         _id: "1",
-        color: "#005FA8",
+        color: "#003063",
         description: "first label",
         name: "label 1"
       }
@@ -239,7 +239,7 @@ describe("LabelSelector", () => {
     // check that the onChange event is fired with the correct arguments
     expect(onEdit).toHaveBeenCalledWith({
       _id: "1",
-      color: "#005FA8",
+      color: "#003063",
       description: "first label",
       name: "label 1edit label"
     });
@@ -249,7 +249,7 @@ describe("LabelSelector", () => {
     const options = [
       {
         _id: "1",
-        color: "#005FA8",
+        color: "#003063",
         description: "first label",
         name: "label 1"
       }
@@ -280,7 +280,7 @@ describe("LabelSelector", () => {
     // check that the onChange event is fired with the correct arguments
     expect(onDelete).toHaveBeenCalledWith({
       _id: "1",
-      color: "#005FA8",
+      color: "#003063",
       description: "first label",
       name: "label 1"
     });
@@ -321,7 +321,7 @@ describe("LabelSelector", () => {
     const options = [
       {
         _id: "1",
-        color: "#005FA8",
+        color: "#003063",
         description: "first label",
         name: "label 1"
       }
