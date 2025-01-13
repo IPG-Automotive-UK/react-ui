@@ -6,8 +6,6 @@ import { LazyLoadImageProps } from "./LazyLoadImage.types";
 import React from "react";
 import TruncatedTooltip from "../TruncatedTooltip/TruncatedTooltip";
 
-// import NoWrapTypography from "../NoWrapTypography/NoWrapTypography";
-
 /**
  * Wrapper to lazy load an image
  */
@@ -147,7 +145,8 @@ const FlexSizeComponent: StoryFn<LazyLoadImageProps> = args => {
       >
         <Box>
           <TruncatedTooltip
-            component="h5"
+            component={Typography}
+            variant="h5"
             sx={{
               fontWeight: 700
             }}
