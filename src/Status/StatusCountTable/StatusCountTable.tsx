@@ -6,7 +6,7 @@ import {
   TableHead,
   TableRow,
   Typography,
-  lighten
+  alpha
 } from "@mui/material";
 
 import React from "react";
@@ -24,9 +24,6 @@ export function StatusCountTable({ title, count }: StatusCountTableProps) {
 
   /** Keys of the count object */
   const countKeys = Object.keys(count) as (keyof typeof count)[];
-
-  // Color of the header
-  const headerColor = "#5E8AB414";
 
   return (
     <TableContainer
@@ -46,7 +43,7 @@ export function StatusCountTable({ title, count }: StatusCountTableProps) {
           >
             <TableCell
               sx={{
-                background: theme => lighten(theme.palette.primary.main, 0.9),
+                background: theme => alpha(theme.palette.primary.main, 0.05),
                 pl: 2
               }}
             >
@@ -56,7 +53,10 @@ export function StatusCountTable({ title, count }: StatusCountTableProps) {
             </TableCell>
             <TableCell
               align="right"
-              sx={{ backgroundColor: headerColor, pr: 2 }}
+              sx={{
+                background: theme => alpha(theme.palette.primary.main, 0.05),
+                pr: 2
+              }}
             >
               <Typography
                 variant="subtitle2"
