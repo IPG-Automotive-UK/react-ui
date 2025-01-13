@@ -109,8 +109,11 @@ const defaultComponents = {
   MuiFormControl: {
     styleOverrides: {
       root: ({ theme }: MuiTheme) => ({
-        "& .MuiFormLabel-root, .MuiFormHelperText-root ": {
+        "& .MuiFormLabel-root,  .MuiFormHelperText-root ": {
           color: theme.palette.text.secondary
+        },
+        "& .MuiFormLabel-root.Mui-error": {
+          color: theme.palette.error.main
         }
       })
     }
