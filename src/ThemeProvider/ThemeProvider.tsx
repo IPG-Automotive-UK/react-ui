@@ -58,9 +58,6 @@ const secondaryDarkMain = "#005FA8";
 // 0.08 % of the primary light main
 const primaryLightColor08 = alpha(primaryLightMain, 0.08);
 
-// palette background
-const paletteBackgroundDefault = `var(--ipg-palette-background-paper)`;
-
 // Define default components
 const defaultComponents = {
   MuiAccordionSummary: {
@@ -89,10 +86,10 @@ const defaultComponents = {
   MuiDataGrid: {
     styleOverrides: {
       footerContainer: ({ theme }) => ({
-        backgroundColor: theme.vars.palette.background.paper
+        backgroundColor: theme.palette.background.paper
       }),
       main: ({ theme }) => ({
-        backgroundColor: theme.vars.palette.background.paper
+        backgroundColor: theme.palette.background.paper
       }),
       root: {
         "& .MuiDataGrid-cell:focus, .MuiDataGrid-cell:focus-within, .MuiDataGrid-columnHeader:focus, .MuiDataGrid-columnHeader:focus-within":
@@ -106,7 +103,7 @@ const defaultComponents = {
     styleOverrides: {
       root: ({ theme }) => ({
         "& .MuiFormLabel-root, .MuiFormHelperText-root ": {
-          color: theme.vars.palette.text.secondary
+          color: theme.palette.text.secondary
         }
       })
     }
@@ -114,7 +111,7 @@ const defaultComponents = {
   MuiFormLabel: {
     styleOverrides: {
       asterisk: ({ theme }) => ({
-        color: theme.vars.palette.error.main
+        color: theme.palette.error.main
       })
     }
   },
@@ -152,17 +149,17 @@ const mainTheme: ThemeOptions = {
         MuiAppBar: {
           styleOverrides: {
             root: ({ theme }) => ({
-              "--ipg-palette-AppBar-darkBg": theme.vars.palette.primary.main
+              "--ipg-palette-AppBar-darkBg": theme.palette.primary.main
             })
           }
         },
         MuiAutocomplete: {
           styleOverrides: {
             clearIndicator: ({ theme }) => ({
-              color: theme.vars.palette.common.white
+              color: theme.palette.common.white
             }),
             popupIndicator: ({ theme }) => ({
-              color: theme.vars.palette.common.white
+              color: theme.palette.common.white
             })
           }
         },
@@ -174,15 +171,12 @@ const mainTheme: ThemeOptions = {
         MuiStepper: {
           styleOverrides: {
             root: ({ theme }) => ({
-              backgroundColor: alpha(theme.vars.palette.primary.main, 0.08)
+              backgroundColor: alpha(theme.palette.primary.main, 0.08)
             })
           }
         }
       },
       palette: {
-        background: {
-          default: paletteBackgroundDefault
-        },
         primary: { main: primaryDarkMain }
       }
     },
@@ -198,10 +192,11 @@ const mainTheme: ThemeOptions = {
             })
           }
         },
+
         MuiStepper: {
           styleOverrides: {
             root: ({ theme }) => ({
-              backgroundColor: alpha(theme.vars.palette.primary.main, 0.08)
+              backgroundColor: alpha(theme.palette.primary.main, 0.08)
             })
           }
         },
@@ -209,7 +204,7 @@ const mainTheme: ThemeOptions = {
           styleOverrides: {
             root: ({ theme }) => ({
               "&$selected": {
-                backgroundColor: alpha(theme.vars.palette.primary.main, 0.08)
+                backgroundColor: alpha(theme.palette.primary.main, 0.08)
               }
             })
           }
@@ -218,9 +213,6 @@ const mainTheme: ThemeOptions = {
       palette: {
         action: {
           selected: primaryLightColor08
-        },
-        background: {
-          default: paletteBackgroundDefault
         },
         primary: { main: primaryLightMain },
         secondary: { main: secondaryDarkMain }
