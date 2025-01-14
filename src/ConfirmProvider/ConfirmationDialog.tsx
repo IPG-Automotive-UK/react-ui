@@ -52,52 +52,56 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
   );
 
   return (
-    <Dialog
-      fullWidth
-      {...dialogProps}
-      open={open}
-      onClose={onClose}
-      data-testid="confirm-dialog"
-    >
-      {title && (
-        // use the dialog title from the dialog title component
-        <DialogTitle onClose={onCancel} {...titleProps}>
-          {title}
-        </DialogTitle>
-      )}
-      <Divider />
-      {content ? (
-        <DialogContent sx={{ p: 2 }}>
-          <DialogContentText
-            sx={theme => ({
-              color: theme.palette.text.primary
-            })}
+    <>
+      {open ? (
+        <Dialog
+          fullWidth
+          {...dialogProps}
+          open={true}
+          onClose={onClose}
+          data-testid="confirm-dialog"
+        >
+          {title && (
+            // use the dialog title from the dialog title component
+            <DialogTitle onClose={onCancel} {...titleProps}>
+              {title}
+            </DialogTitle>
+          )}
+          <Divider />
+          {content ? (
+            <DialogContent sx={{ p: 2 }}>
+              <DialogContentText
+                sx={theme => ({
+                  color: theme.palette.text.primary
+                })}
+              >
+                {content}
+                <DialogContentText />
+              </DialogContentText>
+            </DialogContent>
+          ) : (
+            description && (
+              <DialogContent sx={{ p: 2 }}>
+                <DialogContentText
+                  sx={theme => ({
+                    color: theme.palette.text.primary
+                  })}
+                >
+                  {description}
+                </DialogContentText>
+              </DialogContent>
+            )
+          )}
+          <Divider />
+          <DialogActions
+            sx={{ justifyContent: "flex-end", padding: "16px" }}
+            {...dialogActionsProps}
           >
-            {content}
-            <DialogContentText />
-          </DialogContentText>
-        </DialogContent>
-      ) : (
-        description && (
-          <DialogContent sx={{ p: 2 }}>
-            <DialogContentText
-              sx={theme => ({
-                color: theme.palette.text.primary
-              })}
-            >
-              {description}
-            </DialogContentText>
-          </DialogContent>
-        )
-      )}
-      <Divider />
-      <DialogActions
-        sx={{ justifyContent: "flex-end", padding: "16px" }}
-        {...dialogActionsProps}
-      >
-        {dialogActions}
-      </DialogActions>
-    </Dialog>
+            {dialogActions}
+          </DialogActions>
+        </Dialog>
+      ) : null}
+    </>
   );
 };
 
