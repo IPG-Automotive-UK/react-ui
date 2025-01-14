@@ -61,7 +61,7 @@ export default function UserMenu({
         <UserAvatar
           name={username}
           sx={theme => ({
-            backgroundColor: theme.vars.palette.grey[400],
+            backgroundColor: theme.palette.grey[400],
             height: 34,
             width: 34
           })}
