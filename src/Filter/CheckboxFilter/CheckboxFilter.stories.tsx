@@ -40,17 +40,7 @@ export const Default = {
       "B",
       "Gate 1"
     ],
-    value: ["A", "b"],
-    variant: "popper"
-  },
-
-  render: Template
-};
-
-export const AlwaysOpen = {
-  args: {
-    ...Default.args,
-    variant: "always-open"
+    value: ["A", "b"]
   },
 
   render: Template

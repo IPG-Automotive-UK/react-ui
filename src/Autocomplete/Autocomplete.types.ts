@@ -1,9 +1,11 @@
 import {
+  AutocompleteRenderInputParams,
   AutocompleteProps as MuiAutocompleteProps,
   TextFieldProps
 } from "@mui/material";
 
 import { KeyValueOption } from "../Common.types";
+import React from "react";
 
 export type AutocompleteProps<
   Value extends string | KeyValueOption,
@@ -25,6 +27,11 @@ export type AutocompleteProps<
   | "disableCloseOnSelect"
   | "noOptionsText"
   | "readOnly"
+  | "getOptionLabel"
+  | "renderTags"
+  | "renderOption"
+  | "open"
+  | "isOptionEqualToValue"
 > &
   Pick<
     TextFieldProps,
@@ -36,4 +43,11 @@ export type AutocompleteProps<
     | "required"
     | "label"
     | "error"
-  >;
+  > & {
+    renderInput?: (params: AutocompleteRenderInputParams) => React.ReactNode; // Optional
+  };
+
+// Type definition for the custom Listbox component props
+export type ListboxComponentProps = React.HTMLAttributes<HTMLDivElement> & {
+  children?: React.ReactNode;
+};

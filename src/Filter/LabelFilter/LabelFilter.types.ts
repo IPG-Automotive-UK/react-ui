@@ -1,9 +1,11 @@
+import type { Label } from "../../LabelSelector/Label.types";
+
 /**
- * Props definition for the CheckboxFilter component
+ * Props definition for the LabelFilter component
  */
-export type CheckboxFilterProps = {
+export type LabelFilterProps = {
   /**
-   * Label for filter
+   * Label for the filter
    */
   label?: string;
   /**
@@ -19,17 +21,13 @@ export type CheckboxFilterProps = {
    * @param value the value to add/delete from the filtered values
    * @returns void
    */
-  onChange: (value: string[]) => void;
+  onChange?: (value: Label[]) => void;
   /**
-   * Options to choose from in the dropdown/ always open box
+   * Options to choose from in the dropdown box
    */
-  options: string[];
+  options: Label[];
   /**
    * Current value of what's been selected
    */
-  value?: string[];
-  /**
-   * Whether the filter is disabled or not
-   */
-  disabled?: boolean;
+  value?: Label[];
 };
