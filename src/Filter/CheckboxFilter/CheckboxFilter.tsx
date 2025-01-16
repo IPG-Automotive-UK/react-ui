@@ -6,7 +6,7 @@ import { CheckBox, CheckBoxOutlineBlank } from "@mui/icons-material";
 import Autocomplete from "../../Autocomplete/Autocomplete";
 import { CheckboxFilterProps } from "./CheckboxFilter.types";
 import { HTMLAttributes } from "react";
-import NoWrapTypography from "../../NoWrapTypography";
+import TruncatedTooltip from "../../TruncatedTooltip/TruncatedTooltip";
 import { sortFilterOptions } from "../sortFilterOptions";
 
 /**
@@ -84,9 +84,9 @@ function Option(
         icon={<CheckBoxOutlineBlank fontSize="small" />}
         value={option}
       />
-      <NoWrapTypography data-testid="filter-option-label">
+      <TruncatedTooltip data-testid="filter-option-label">
         {option}
-      </NoWrapTypography>
+      </TruncatedTooltip>
     </Box>
   );
 }
