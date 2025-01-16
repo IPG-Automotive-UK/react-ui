@@ -49,7 +49,7 @@ const SelectedWithIcon: StoryFn<LabelChipProps> = args => {
 export const Default = {
   args: {
     clickable: false,
-    color: "#005FA8",
+    color: "#003063",
     label: "Label",
     onClick: undefined,
     onDelete: undefined,

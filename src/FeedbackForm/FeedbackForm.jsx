@@ -125,7 +125,7 @@ export default function FeedbackForm({
                 variant="outlined"
                 sx={{
                   "&:hover": {
-                    border: "1px solid #cccccc",
+                    border: `1px solid ${theme => theme.palette.divider}`,
                     boxShadow: "0px 4px 8px rgba(38, 38, 38, 0.5)",
                     cursor: "pointer",
                     top: "-4px",
@@ -164,7 +164,7 @@ export default function FeedbackForm({
                 variant="outlined"
                 sx={{
                   "&:hover": {
-                    border: "1px solid #cccccc",
+                    border: `1px solid ${theme => theme.palette.divider}`,
                     boxShadow: "0px 4px 8px rgba(38, 38, 38, 0.5)",
                     cursor: "pointer",
                     top: "-4px",
@@ -204,7 +204,7 @@ export default function FeedbackForm({
                 variant="outlined"
                 sx={{
                   "&:hover": {
-                    border: "1px solid #cccccc",
+                    border: `1px solid ${theme => theme.palette.divider}`,
                     boxShadow: "0px 4px 8px rgba(38, 38, 38, 0.5)",
                     cursor: "pointer",
                     top: "-4px",

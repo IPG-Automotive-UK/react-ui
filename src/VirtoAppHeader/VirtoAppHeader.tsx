@@ -89,33 +89,23 @@ function Header({
               <VirtoLogo
                 data-testid="virto-logo"
                 sx={theme => ({
-                  color: "white",
+                  color: theme.palette.primary.contrastText,
                   height: 22,
                   mr: 0.4,
-                  width: 110,
-                  ...theme.applyStyles("dark", {
-                    color: "#003063"
-                  })
+                  width: 110
                 })}
               />
             </Link>
             <Typography
               variant="h6"
-              sx={[
-                {
-                  fontSize: "28px",
-                  fontWeight: "700",
-                  letterSpacing: "0.05em",
-                  lineHeight: "34px",
-                  textTransform: "uppercase"
-                },
-                theme => ({
-                  color: "white",
-                  ...theme.applyStyles("dark", {
-                    color: "#003063"
-                  })
-                })
-              ]}
+              sx={theme => ({
+                color: theme.palette.primary.contrastText,
+                fontSize: "28px",
+                fontWeight: "700",
+                letterSpacing: "0.05em",
+                lineHeight: "34px",
+                textTransform: "uppercase"
+              })}
             >
               {`.`}
               <span style={{ marginLeft: "7px" }}>{appName}</span>

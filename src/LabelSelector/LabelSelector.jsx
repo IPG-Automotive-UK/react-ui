@@ -113,7 +113,7 @@ export default function LabelSelector({
   // default label object
   const defaultLabel = {
     _id: "",
-    color: "#005FA8",
+    color: "#003063",
     description: "",
     name: ""
   };

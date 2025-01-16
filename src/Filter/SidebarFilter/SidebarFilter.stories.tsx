@@ -24,7 +24,7 @@ const meta: Meta<typeof SidebarFilter> = {
 
 // standard options
 const labelOptions = [
-  { _id: "1", color: "#005FA8", description: "first label", name: "label 1" },
+  { _id: "1", color: "#003063", description: "first label", name: "label 1" },
   { _id: "2", color: "#f542e0", description: "second label", name: "label 2" }
 ];
 const checkboxOptions = ["Option 1", "Option 2", "Option 3"];

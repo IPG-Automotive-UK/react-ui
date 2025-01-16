@@ -38,13 +38,13 @@ export const Default = {
     label: [
       {
         _id: "66cd9b326217e44d2810e9d3",
-        color: "#005FA8",
+        color: "#003063",
         description: "Label 1 desc",
         name: "&test 09999"
       },
       {
         _id: "66cd9b8d6217e44d2810e9f7",
-        color: "#005FA8",
+        color: "#003063",
         description: "one2three4",
         name: "&1234"
       },
@@ -56,13 +56,13 @@ export const Default = {
       },
       {
         _id: "66cd24823d45d85421f8620c",
-        color: "#005FA8",
+        color: "#003063",
         description: "desc for 1 hi",
         name: "Test label 3"
       },
       {
         _id: "66cd24823f15d85421f8620s",
-        color: "#005FA8",
+        color: "#003063",
         description: "last",
         name: "last"
       }

@@ -128,11 +128,11 @@ export default function Color({
         <Box sx={sx.colorPicker}>
           {noColorChecked ? (
             <Box
-              sx={{
-                border: "1px solid #bdbdbd",
+              sx={theme => ({
+                border: `1px solid ${theme.palette.divider}`,
                 borderRadius: "4px",
                 height: "238px"
-              }}
+              })}
             />
           ) : (
             <RgbaColorPicker

@@ -60,12 +60,11 @@ export default function UserMenu({
       <IconButton {...bindTrigger(popupState)} size="large" sx={sx.button}>
         <UserAvatar
           name={username}
-          color="#bdbdbd"
-          sx={{
-            color: "#fff",
+          sx={theme => ({
+            backgroundColor: theme.palette.grey[400],
             height: 34,
             width: 34
-          }}
+          })}
         />
       </IconButton>
       <Menu

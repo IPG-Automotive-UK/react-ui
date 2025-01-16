@@ -2,6 +2,7 @@ import * as React from "react";
 
 import PropTypes from "prop-types";
 import SvgIcon from "@mui/material/SvgIcon";
+import { lightBlue } from "@mui/material/colors";
 
 // fleet icon svg
 function Icon(props) {
@@ -14,7 +15,7 @@ function Icon(props) {
           width="67"
           height="67"
           rx="12"
-          fill="#0277BD"
+          fill={lightBlue[800]}
           shapeRendering="crispEdges"
         />
         <g clipPath="url(#clip0_1329_9291)">

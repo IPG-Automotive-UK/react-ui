@@ -2,6 +2,7 @@ import * as React from "react";
 
 import PropTypes from "prop-types";
 import SvgIcon from "@mui/material/SvgIcon";
+import { indigo } from "@mui/material/colors";
 
 // build icon svg
 function Icon(props) {
@@ -14,7 +15,7 @@ function Icon(props) {
           width="67"
           height="67"
           rx="12"
-          fill="#283593"
+          fill={indigo[800]}
           shapeRendering="crispEdges"
         />
         <path

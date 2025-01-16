@@ -70,7 +70,7 @@ export const Default = {
     chips: [
       {
         clickable: true,
-        color: "#005FA8",
+        color: "#003063",
         label: "Label 1"
       },
       {

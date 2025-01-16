@@ -2,6 +2,7 @@ import * as React from "react";
 
 import PropTypes from "prop-types";
 import SvgIcon from "@mui/material/SvgIcon";
+import { lightGreen } from "@mui/material/colors";
 
 // scene result svg
 function Icon(props) {
@@ -14,7 +15,7 @@ function Icon(props) {
           width="67"
           height="67"
           rx="12"
-          fill="#558B2F"
+          fill={lightGreen[800]}
           shapeRendering="crispEdges"
         />
         <g clipPath="url(#clip0_1329_9359)">
