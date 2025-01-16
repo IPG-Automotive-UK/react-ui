@@ -18,8 +18,6 @@ import LabelChip from "./LabelChip/LabelChip";
 import PropTypes from "prop-types";
 import TruncatedTooltip from "../TruncatedTooltip/TruncatedTooltip";
 
-// import NoWrapTypography from "../NoWrapTypography/NoWrapTypography";
-
 // custom styling
 const styles = {
   color: {
