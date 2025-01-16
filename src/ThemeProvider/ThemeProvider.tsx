@@ -79,6 +79,13 @@ const defaultComponents = {
       }
     }
   },
+  MuiBadge: {
+    styleOverrides: {
+      badge: {
+        fontFamily: "Montserrat, Arial, sans-serif"
+      }
+    }
+  },
   MuiChip: {
     styleOverrides: {
       root: {
@@ -103,18 +110,6 @@ const defaultComponents = {
           {
             backgroundColor: theme.palette.common.background
           }
-      })
-    }
-  },
-  MuiFormControl: {
-    styleOverrides: {
-      root: ({ theme }: MuiTheme) => ({
-        "& .MuiFormLabel-root,  .MuiFormHelperText-root ": {
-          color: theme.palette.text.secondary
-        },
-        "& .MuiFormLabel-root.Mui-error": {
-          color: theme.palette.error.main
-        }
       })
     }
   },
@@ -160,16 +155,6 @@ const mainTheme: ThemeOptions = {
           styleOverrides: {
             root: ({ theme }) => ({
               "--ipg-palette-AppBar-darkBg": theme.palette.primary.main
-            })
-          }
-        },
-        MuiAutocomplete: {
-          styleOverrides: {
-            clearIndicator: ({ theme }) => ({
-              color: theme.palette.common.white
-            }),
-            popupIndicator: ({ theme }) => ({
-              color: theme.palette.common.white
             })
           }
         },
@@ -244,7 +229,6 @@ const mainTheme: ThemeOptions = {
   },
   typography: {
     allVariants: {
-      color: `var(--ipg-palette-text-primary)`,
       fontFamily: "Montserrat, Arial, sans-serif"
     }
   }
