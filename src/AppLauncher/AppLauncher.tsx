@@ -94,7 +94,7 @@ function AppLauncher({
             height: 40,
             width: 160,
             ...theme.applyStyles("dark", {
-              color: "white"
+              color: theme.palette.common.white
             })
           })}
         />
