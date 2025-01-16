@@ -19,8 +19,6 @@ import TruncatedTooltip from "../TruncatedTooltip/TruncatedTooltip";
 import { VirtualizedAutocomplete } from "../Autocomplete/Autocomplete";
 import { createFilterOptions } from "@mui/material/Autocomplete";
 
-// import NoWrapTypography from "../NoWrapTypography/NoWrapTypography";
-
 // custom styling
 const styles = {
   color: {
