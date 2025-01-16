@@ -148,6 +148,13 @@ export default function useUploader({
       );
   };
 
+  // override getInputProps to hide the input element. https://github.com/react-dropzone/react-dropzone/releases/tag/v14.3.3 changed the way to hide the input element in the DOM which caused unwanted scrollbars in our applications. We've had no issues with display:none; so stick with this for now.
+  const originalGetInputProps = dropzone.getInputProps;
+  dropzone.getInputProps = () => ({
+    ...originalGetInputProps(),
+    style: { display: "none" }
+  });
+
   return {
     ...dropzone,
     handleDelete,

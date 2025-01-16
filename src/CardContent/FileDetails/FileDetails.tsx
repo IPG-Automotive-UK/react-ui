@@ -99,11 +99,11 @@ function FileDetails({
   return (
     <Stack
       className="file-details-container"
-      mt={1}
-      mb={3}
       sx={{
         display: "flex",
         height: "100%",
+        mb: 3,
+        mt: 1,
         width: 368
       }}
     >
@@ -119,14 +119,14 @@ function FileDetails({
           <Tooltip title={fileTitle} disableHoverListener={!titleSizeOverflow}>
             <Typography
               ref={titleRef}
-              ml={2}
+              noWrap
               sx={{
                 fontSize: 20,
                 fontWeight: 500,
                 height: "32px",
+                ml: 2,
                 width: "48px"
               }}
-              noWrap
             >
               {fileTitle}
             </Typography>
@@ -147,7 +147,12 @@ function FileDetails({
           </Button>
         </Box>
       </Box>
-      <Box pl={2} pr={2}>
+      <Box
+        sx={{
+          pl: 2,
+          pr: 2
+        }}
+      >
         <SearchBar
           value={search}
           onBlur={handleSearch}
@@ -161,15 +166,27 @@ function FileDetails({
           paddingTop: 0 // override default padding from CardContent
         }}
       >
-        <Box height="auto">
+        <Box
+          sx={{
+            height: "auto"
+          }}
+        >
           {files.map(({ header, files }, index) => (
             <React.Fragment key={index}>
               {files.length > 0 ? (
-                <Box key={header} mb={1}>
+                <Box
+                  key={header}
+                  sx={{
+                    mb: 1
+                  }}
+                >
                   <Typography
-                    sx={{ fontSize: 14, fontWeight: 500 }}
-                    m={1}
-                    mt={1}
+                    sx={{
+                      fontSize: 14,
+                      fontWeight: 500,
+                      m: 1,
+                      mt: 1
+                    }}
                   >
                     {header}
                   </Typography>

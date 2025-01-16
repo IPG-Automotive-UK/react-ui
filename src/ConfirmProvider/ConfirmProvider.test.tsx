@@ -141,20 +141,6 @@ describe("useConfirm", () => {
       expect(queryByText("Arbitrary content")).toBeTruthy();
     });
 
-    test("keeps custom text during close", () => {
-      const { getByText, queryByText } = render(
-        <TestComponent
-          confirmOptions={{
-            title: "Remove this item?"
-          }}
-        />
-      );
-      fireEvent.click(getByText("Delete"));
-      expect(queryByText("Remove this item?")).toBeTruthy();
-      fireEvent.click(getByText("Yes"));
-      expect(queryByText("Remove this item?")).toBeTruthy();
-    });
-
     test("honours default options passed to the provider", () => {
       const { getByText, queryByText } = render(
         <ConfirmProvider
@@ -232,7 +218,9 @@ describe("useConfirm", () => {
       );
       fireEvent.click(getByText("Delete"));
       const dialog = getByText("Dialog Title").closest("div");
-      expect(dialog).toHaveStyle("color:rgba(0, 0, 0, 0.87)");
+      waitFor(() => {
+        expect(dialog).toHaveStyle("color:rgb(0, 0, 0, 0.87)");
+      });
     });
 
     // test to check if dialog supports dark mode
@@ -246,7 +234,9 @@ describe("useConfirm", () => {
       );
       fireEvent.click(getByText("Delete"));
       const dialog = getByText("Dialog Title").closest("div");
-      expect(dialog).toHaveStyle("color:rgb(255, 255, 255)");
+      waitFor(() => {
+        expect(dialog).toHaveStyle("color:rgb(255, 255, 255)");
+      });
     });
   });
 

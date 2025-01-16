@@ -192,11 +192,7 @@ export {
 } from "./Status";
 export { default as SwitchField, type SwitchFieldProps } from "./SwitchField";
 export { default as TextField, type TextFieldProps } from "./TextField";
-export {
-  ThemeProvider,
-  type ThemeProviderProps,
-  useTheme
-} from "./ThemeProvider";
+export { ThemeProvider, type ThemeProviderProps } from "./ThemeProvider";
 export {
   default as ToggleColorMode,
   type ToggleColorModeProps

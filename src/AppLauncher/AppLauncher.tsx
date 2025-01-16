@@ -12,8 +12,7 @@ import {
   VirtoVehicle
 } from "../SvgIcons";
 
-import { Theme } from "@mui/material/styles";
-import VirtoLogo from "../SvgIcons/VirtoLogo";
+import { VirtoLogo } from "../SvgIcons/VirtoLogo";
 
 // AppLauncher component for app which displays logo, list of items and app version
 function AppLauncher({
@@ -83,24 +82,38 @@ function AppLauncher({
   // header logo
   const logoBox = (
     <Fragment>
-      <Box display="flex" justifyContent="center">
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center"
+        }}
+      >
         <VirtoLogo
-          sx={{
-            color: (theme: Theme) =>
-              theme.palette.mode === "dark"
-                ? "white"
-                : theme.palette.primary.main,
+          sx={theme => ({
+            color: theme.palette.primary.main,
             height: 40,
-            width: 160
-          }}
+            width: 160,
+            ...theme.applyStyles("dark", {
+              color: "white"
+            })
+          })}
         />
       </Box>
-      <Divider sx={{ margin: theme => theme.spacing(3, 0, 1.5, 0) }} />
+      <Divider
+        sx={theme => ({
+          margin: theme.spacing(3, 0, 1.5, 0)
+        })}
+      />
     </Fragment>
   );
 
   return (
-    <Box px={2} py={3}>
+    <Box
+      sx={{
+        px: 2,
+        py: 3
+      }}
+    >
       {showLogo ? (
         <Fragment>
           {logoLinkUrl ? (
@@ -119,7 +132,13 @@ function AppLauncher({
           )}
         </Fragment>
       ) : null}
-      <Box display="flex" flexWrap="wrap" justifyContent="space-between">
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "space-between"
+        }}
+      >
         {appList.map(app => {
           return (
             <Paper
@@ -132,11 +151,11 @@ function AppLauncher({
               data-testid={app.name}
               sx={theme => ({
                 "&:hover": {
-                  backgroundColor:
-                    theme.palette.mode === "dark"
-                      ? theme.palette.action.hover
-                      : "white",
-                  boxShadow: theme.shadows[2]
+                  backgroundColor: "white",
+                  boxShadow: theme.shadows[2],
+                  ...theme.applyStyles("dark", {
+                    backgroundColor: theme.palette.action.hover
+                  })
                 },
                 background: "transparent",
                 boxShadow: "none",
@@ -176,7 +195,11 @@ function AppLauncher({
           VIRTO Status
         </Link>
       </Box>
-      <Box flexGrow={1} />
+      <Box
+        sx={{
+          flexGrow: 1
+        }}
+      />
     </Box>
   );
 }

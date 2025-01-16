@@ -57,7 +57,11 @@ describe("LinkWithPreview", () => {
   test("renders with truncation and wrap", () => {
     // render default (nowrap is enabled)
     const { rerender } = render(
-      <Box width={100}>
+      <Box
+        sx={{
+          width: 100
+        }}
+      >
         <LinkWithPreview
           href="https://example.com"
           content={<h1>Hello World!</h1>}
@@ -83,7 +87,11 @@ describe("LinkWithPreview", () => {
 
     // render with wrapping allowed (overwrite normal behaviour)
     rerender(
-      <Box width={100}>
+      <Box
+        sx={{
+          width: 100
+        }}
+      >
         <LinkWithPreview
           href="https://example.com"
           content={<h1>Hello World!</h1>}

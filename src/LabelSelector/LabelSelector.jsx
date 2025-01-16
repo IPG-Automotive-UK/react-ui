@@ -1,4 +1,3 @@
-import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
 import {
   Box,
   Button,
@@ -17,6 +16,8 @@ import EditLabelDialog from "../EditLabelDialog/EditLabelDialog";
 import LabelChip from "./LabelChip/LabelChip";
 import PropTypes from "prop-types";
 import TruncatedTooltip from "../TruncatedTooltip/TruncatedTooltip";
+import { VirtualizedAutocomplete } from "../Autocomplete/Autocomplete";
+import { createFilterOptions } from "@mui/material/Autocomplete";
 
 // custom styling
 const styles = {
@@ -68,7 +69,12 @@ const CustomPaper = ({
     <Paper {...props} onMouseDown={handleMouseDown}>
       {props.children}
       {addEnabled && (
-        <Box marginLeft={2} marginBottom={1}>
+        <Box
+          sx={{
+            marginBottom: 1,
+            marginLeft: 2
+          }}
+        >
           <Button
             size={props.size}
             color="primary"
@@ -166,7 +172,7 @@ export default function LabelSelector({
 
   return (
     <>
-      <Autocomplete
+      <VirtualizedAutocomplete
         size={size}
         disableCloseOnSelect
         limitTags={limitTags}
@@ -188,23 +194,15 @@ export default function LabelSelector({
           const filtered = filter(options, params);
           return filtered;
         }}
-        PaperComponent={props => {
-          return (
-            <CustomPaper
-              addEnabled={addEnabled}
-              setIsLabelDialogOpen={setIsLabelDialogOpen}
-              setLabelDialogTitle={setLabelDialogTitle}
-              {...props}
-            />
-          );
-        }}
         renderOption={(props, option, { selected }) => (
           <Box key={option._id} component="li" {...props}>
             <Stack
               direction="row"
-              alignItems="center"
-              overflow="hidden"
-              flexGrow={1}
+              sx={{
+                alignItems: "center",
+                flexGrow: 1,
+                overflow: "hidden"
+              }}
             >
               <Checkbox
                 checked={selected}
@@ -268,6 +266,18 @@ export default function LabelSelector({
           return option._id === value._id;
         }}
         value={value || null}
+        slots={{
+          paper: props => {
+            return (
+              <CustomPaper
+                addEnabled={addEnabled}
+                setIsLabelDialogOpen={setIsLabelDialogOpen}
+                setLabelDialogTitle={setLabelDialogTitle}
+                {...props}
+              />
+            );
+          }
+        }}
       />
       <EditLabelDialog
         isOpen={isLabelDialogOpen !== false}

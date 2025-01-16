@@ -1,6 +1,6 @@
 {
   "name": "@ipguk/react-ui",
-  "version": "10.0.0",
+  "version": "10.0.0-8",
   "description": "React UI component library for IPG web applications",
   "author": {
     "name": "IPG-Automotive-UK"
@@ -34,7 +34,7 @@
   "devDependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
-    "@mui/material": "^5.16.4",
+    "@mui/material": "^6.1.9",
     "@mui/x-data-grid-generator": "^7.10.0",
     "@playwright/test": "^1.45.2",
     "@storybook/addon-actions": "^8.2.6",
@@ -61,6 +61,7 @@
     "@types/react-dom": "^18.3.0",
     "@types/react-plotly.js": "^2.6.3",
     "@types/react-text-mask": "^5.4.14",
+    "@types/react-window": "^1.8.8",
     "@typescript-eslint/eslint-plugin": "^7.16.1",
     "@typescript-eslint/parser": "^7.16.1",
     "@vitejs/plugin-react": "^4.3.1",
@@ -102,7 +103,7 @@
   },
   "dependencies": {
     "@juggle/resize-observer": "^3.4.0",
-    "@mui/icons-material": "^5.16.4",
+    "@mui/icons-material": "^6.1.9",
     "@mui/x-data-grid": "^7.10.0",
     "@mui/x-tree-view": "^7.10.0",
     "colord": "^2.9.3",
@@ -111,10 +112,11 @@
     "plotly.js": "^2.35.2",
     "prop-types": "^15.8.1",
     "react-colorful": "^5.6.1",
-    "react-dropzone": "^14.2.3",
+    "react-dropzone": "^14.3.5",
     "react-hook-form": "^7.52.1",
     "react-plotly.js": "^2.6.0",
     "react-text-mask": "^5.5.0",
+    "react-window": "^1.8.10",
     "use-debouncy": "^5.0.1",
     "use-image": "^1.1.1",
     "zxcvbn": "^4.4.2"
@@ -122,7 +124,7 @@
   "peerDependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
-    "@mui/material": "^5.15.14",
+    "@mui/material": "^6.1.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

@@ -29,12 +29,12 @@ export function StatusCountTable({ title, count }: StatusCountTableProps) {
 
   return (
     <TableContainer
-      sx={{
-        backgroundColor: theme => theme.palette.background.default,
+      sx={theme => ({
+        backgroundColor: theme.palette.background.default,
         borderRadius: "4px",
         boxShadow: 8,
         maxWidth: "280px"
-      }}
+      })}
     >
       <Table size="small">
         <TableHead>
@@ -71,18 +71,20 @@ export function StatusCountTable({ title, count }: StatusCountTableProps) {
               }}
             >
               <TableCell
-                sx={{
-                  backgroundColor: theme => theme.palette.background.default,
+                sx={theme => ({
+                  backgroundColor: theme.palette.background.default,
                   pl: 2
-                }}
+                })}
                 component="th"
                 scope="row"
               >
                 <Typography
                   variant="body2"
-                  display="flex"
-                  alignItems="center"
-                  gap="8px"
+                  sx={{
+                    alignItems: "center",
+                    display: "flex",
+                    gap: "8px"
+                  }}
                 >
                   <StatusIcon status={row as Status} width={24} height={24} />
                   {statuses[row].label.text}
@@ -90,10 +92,10 @@ export function StatusCountTable({ title, count }: StatusCountTableProps) {
               </TableCell>
               <TableCell
                 align="right"
-                sx={{
-                  backgroundColor: theme => theme.palette.background.default,
+                sx={theme => ({
+                  backgroundColor: theme.palette.background.default,
                   pr: 2
-                }}
+                })}
               >
                 <Typography variant="body2">{count[row]}</Typography>
               </TableCell>

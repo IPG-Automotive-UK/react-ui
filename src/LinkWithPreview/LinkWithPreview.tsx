@@ -117,16 +117,20 @@ export default function LinkWithPreview({
   return (
     <>
       <Typography
-        display="flex"
         data-test="link-text"
         ref={anchorEl}
         onMouseEnter={handleLabelEnter}
         onMouseLeave={handleLabelLeave}
         onClick={event => event.stopPropagation()}
         variant={variant}
-        fontWeight={400}
-        sx={sx}
         noWrap
+        sx={[
+          {
+            display: "flex",
+            fontWeight: 400
+          },
+          ...(Array.isArray(sx) ? sx : [sx])
+        ]}
       >
         {
           <Link

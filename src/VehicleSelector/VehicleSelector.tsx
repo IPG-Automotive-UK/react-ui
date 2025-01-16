@@ -79,11 +79,11 @@ function VehicleSelector({
       }}
     >
       <Box
-        flex="40%"
         sx={{
           "& .MuiFormLabel-asterisk": {
             color: disabled ? "#9e9e9e" : "#d32f2f"
-          }
+          },
+          flex: "40%"
         }}
       >
         <Autocomplete
@@ -109,14 +109,14 @@ function VehicleSelector({
         />
       </Box>
       <Box
-        flex="40%"
         sx={{
           "& .MuiFormLabel-asterisk": {
             color:
               selectedProject === null || selectedProject === "" || disabled
                 ? "#9e9e9e"
                 : "#d32f2f"
-          }
+          },
+          flex: "40%"
         }}
       >
         <Autocomplete
@@ -144,14 +144,14 @@ function VehicleSelector({
         />
       </Box>
       <Box
-        flex="40%"
         sx={{
           "& .MuiFormLabel-asterisk": {
             color:
               selectedModelYear === null || selectedModelYear === "" || disabled
                 ? "#9e9e9e"
                 : "#d32f2f"
-          }
+          },
+          flex: "40%"
         }}
       >
         <Autocomplete
@@ -226,10 +226,8 @@ function VehicleSelector({
           value={selectedVariants}
         />
       </Box>
-
       {gates.length > 0 && (
         <Box
-          flex="40%"
           sx={{
             "& .MuiFormLabel-asterisk": {
               color:
@@ -238,7 +236,8 @@ function VehicleSelector({
                 disabled
                   ? "#9e9e9e"
                   : "#d32f2f"
-            }
+            },
+            flex: "40%"
           }}
         >
           <Autocomplete
