@@ -212,7 +212,13 @@ export default function LabelSelector({
                   color: option.color
                 }}
               />
-              <Stack direction="column" flexGrow={1} overflow="hidden">
+              <Stack
+                direction="column"
+                sx={{
+                  flexGrow: 1,
+                  overflow: "hidden"
+                }}
+              >
                 <TruncatedTooltip>{option.name}</TruncatedTooltip>
                 <TruncatedTooltip variant="caption">
                   {option.description}
