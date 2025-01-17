@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid2 as Grid, Typography } from "@mui/material";
 import { Meta, StoryFn } from "@storybook/react";
 
 import LazyLoadImage from "./LazyLoadImage";
@@ -126,7 +126,7 @@ const FlexSizeComponent: StoryFn<LazyLoadImageProps> = args => {
           transition: "color 0.1s"
         },
         backgroundColor: theme.palette.background.paper,
-        border: `1px solid`,
+        border: `1px solid ${theme.palette.divider}`,
         borderRadius: "6px",
         cursor: "pointer",
         height: "238px",
@@ -153,14 +153,18 @@ const FlexSizeComponent: StoryFn<LazyLoadImageProps> = args => {
           >
             {"Example project code"}
           </TruncatedTooltip>
-          <Typography color="text.secondary" variant="body2">
+          <Typography
+            sx={{
+              color: "text.secondary"
+            }}
+            variant="body2"
+          >
             11 Prototype
           </Typography>
         </Box>
         <Box
           sx={{
             height: "100%",
-            overflow: "hidden",
             pt: 1
           }}
         >
