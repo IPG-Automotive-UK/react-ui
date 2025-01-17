@@ -5,7 +5,8 @@ import {
   Paper,
   Stack,
   TextField,
-  Tooltip
+  Tooltip,
+  Typography
 } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
 import React, { useState } from "react";
@@ -219,8 +220,10 @@ export default function LabelSelector({
                   overflow: "hidden"
                 }}
               >
-                <TruncatedTooltip>{option.name}</TruncatedTooltip>
-                <TruncatedTooltip variant="caption">
+                <TruncatedTooltip component={Typography}>
+                  {option.name}
+                </TruncatedTooltip>
+                <TruncatedTooltip component={Typography} variant="caption">
                   {option.description}
                 </TruncatedTooltip>
               </Stack>
