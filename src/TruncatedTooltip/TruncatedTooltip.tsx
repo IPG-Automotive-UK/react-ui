@@ -26,7 +26,6 @@ const TruncatedTooltip = <T extends React.ElementType = "span">({
 }: TruncatedTooltipProps<T>) => {
   // Ref to the text element.
   const textElementRef = useRef<HTMLInputElement | null>(null);
-
   // State to determine if the tooltip should show.
   const [open, setOpen] = useState(false);
 

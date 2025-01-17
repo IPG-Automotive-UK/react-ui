@@ -121,7 +121,9 @@ function Option(
         }}
       />
       <Stack direction="column" flexGrow={1} overflow="hidden">
-        <TruncatedTooltip>{option.name}</TruncatedTooltip>
+        <TruncatedTooltip component={Typography}>
+          {option.name}
+        </TruncatedTooltip>
         <TruncatedTooltip component={Typography} variant="caption">
           {option.description || "No description"}
         </TruncatedTooltip>

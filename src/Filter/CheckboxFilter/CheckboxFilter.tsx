@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Box, Checkbox, TextField } from "@mui/material";
+import { Box, Checkbox, TextField, Typography } from "@mui/material";
 import { CheckBox, CheckBoxOutlineBlank } from "@mui/icons-material";
 
 import Autocomplete from "../../Autocomplete/Autocomplete";
@@ -84,7 +84,10 @@ function Option(
         icon={<CheckBoxOutlineBlank fontSize="small" />}
         value={option}
       />
-      <TruncatedTooltip data-testid="filter-option-label">
+      <TruncatedTooltip
+        component={Typography}
+        data-testid="filter-option-label"
+      >
         {option}
       </TruncatedTooltip>
     </Box>
