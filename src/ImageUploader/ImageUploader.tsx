@@ -25,6 +25,7 @@ export default function ImageUploader({
         "image/gif": [".gif"],
         "image/jpeg": [".jpg", ".jpeg"],
         "image/png": [".png"],
+        "image/svg": [".svg"],
         "image/webp": [".webp"]
       },
       filesLimit: 1,

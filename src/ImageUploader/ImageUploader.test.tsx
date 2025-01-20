@@ -103,7 +103,7 @@ describe("ImageUploader", () => {
     // wait for the error message to be displayed
     await waitFor(() =>
       expect(dropzoneElement).toHaveTextContent(
-        "File type must be .gif, .jpg, .jpeg, .png, .webp."
+        "File type must be .gif, .jpg, .jpeg, .png, .svg, .webp."
       )
     );
   });

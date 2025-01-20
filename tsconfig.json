@@ -2,18 +2,29 @@
   "files": ["globals.d.ts"],
   "compilerOptions": {
     "allowJs": true,
-    "declaration": true,
+    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
     "lib": ["DOM", "DOM.Iterable", "ES2019"],
+    "module": "ESNext",
     "moduleResolution": "node",
-    "module": "ES2022",
-    "outDir": "dist",
     "resolveJsonModule": true,
+    "skipLibCheck": true,
     "strict": true,
     "target": "ES2019",
-    "types": ["vitest/globals"]
-  }
+    "types": ["vitest/globals"],
+    "downlevelIteration": true
+  },
+  "include": ["src/**/*.tsx", "src/**/*.ts", "src/**/*.jsx", "src/**/*.js"],
+  "exclude": [
+    "src/**/*.test.**",
+    "src/**/*.spec.**",
+    "src/**/*.stories.**",
+    "dist",
+    "vitest-setup.ts",
+    "vite.config.ts",
+    "vite.config.ts"
+  ]
 }
