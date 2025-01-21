@@ -17,7 +17,7 @@ export default meta;
 // Story Template
 const Template: StoryFn<FormatLabelProps> = args => {
   return (
-    <Box width={200}>
+    <Box sx={{ width: 200 }}>
       <FormatLabel {...args} />
     </Box>
   );

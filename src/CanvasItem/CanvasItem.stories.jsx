@@ -89,7 +89,13 @@ const Template = args => {
   };
 
   return (
-    <Box width="100%" height="100%" onClick={onCanvasClick}>
+    <Box
+      onClick={onCanvasClick}
+      sx={{
+        height: "100%",
+        width: "100%"
+      }}
+    >
       <CanvasItem
         {...args}
         {...rectangle}
@@ -100,9 +106,15 @@ const Template = args => {
         onClick={onClick}
       >
         <Box
-          sx={{ background: theme => theme.palette.grey[100] }}
-          width="100%"
-          height="100%"
+          sx={[
+            {
+              height: "100%",
+              width: "100%"
+            },
+            theme => ({
+              background: theme.palette.grey[100]
+            })
+          ]}
         ></Box>
       </CanvasItem>
     </Box>

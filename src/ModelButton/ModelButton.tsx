@@ -191,18 +191,16 @@ export default function ModelButton({
           disabled={disabled}
           disableRipple
           onClick={onClick}
-          sx={{
+          sx={theme => ({
             "&:hover": {
               cursor: "pointer"
             },
+
             alignItems: "center",
             borderRadius: 0,
             bottom: "30.56%",
             boxSizing: "border-box",
-            color: theme =>
-              theme.palette.mode === "light"
-                ? theme.palette.common.black
-                : theme.palette.common.white,
+            color: theme.palette.common.white,
             display: "flex",
             flexDirection: "row",
             fontSize: "40px",
@@ -212,8 +210,11 @@ export default function ModelButton({
             position: "absolute",
             right: "0%",
             top: "0%",
-            width: "100%"
-          }}
+            width: "100%",
+            ...theme.applyStyles("light", {
+              color: theme.palette.common.black
+            })
+          })}
           onMouseOver={() => {
             setIsHover(true);
           }}
@@ -237,25 +238,32 @@ export default function ModelButton({
           {status !== "none" && !disabled ? getCurrentStatusIcon() : null}
         </IconButton>
         <Typography
-          sx={{
-            alignItems: "center",
-            bottom: "0%",
-            color: disabled
-              ? theme.palette.mode === "light"
-                ? "rgba(0, 0, 0, 0.38)"
-                : "rgba(255, 255, 255, 0.5)"
-              : theme => theme.palette.text.secondary,
-            display: "flex",
-            flexDirection: "row",
-            fontSize: "13px",
-            gap: "10px",
-            justifyContent: "center",
-            left: "0%",
-            position: "absolute",
-            right: "0%",
-            textAlign: "center",
-            top: "69.44%"
-          }}
+          sx={[
+            {
+              alignItems: "center",
+              bottom: "0%",
+              display: "flex",
+              flexDirection: "row",
+              fontSize: "13px",
+              gap: "10px",
+              justifyContent: "center",
+              left: "0%",
+              position: "absolute",
+              right: "0%",
+              textAlign: "center",
+              top: "69.44%"
+            },
+            disabled
+              ? {
+                  color:
+                    theme.palette.mode === "light"
+                      ? "rgba(0, 0, 0, 0.38)"
+                      : "rgba(255, 255, 255, 0.5)"
+                }
+              : {
+                  color: theme => theme.palette.text.secondary
+                }
+          ]}
           color="textSecondary"
           variant="body2"
         >

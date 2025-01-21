@@ -3,9 +3,10 @@ import {
   Button,
   CircularProgress,
   FormHelperText,
-  Grid,
+  Grid2 as Grid,
   TextField
 } from "@mui/material";
+
 import PropTypes from "prop-types";
 import React from "react";
 import { useMaterialForm } from "../utils/form";
@@ -40,7 +41,7 @@ export default function PasswordChangeForm({ loading, onSubmit }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <Grid container spacing={2}>
-        <Grid item xs={12}>
+        <Grid size={12}>
           <TextField
             variant="outlined"
             required
@@ -49,7 +50,7 @@ export default function PasswordChangeForm({ loading, onSubmit }) {
             label="New password"
             type="password"
             autoComplete="new-password"
-            inputProps={{ "aria-label": "password" }}
+            slotProps={{ input: { "aria-label": "password" } }}
             error={Boolean(errors.password)}
             helperText={errors?.password?.message}
             disabled={loading}
@@ -76,7 +77,7 @@ export default function PasswordChangeForm({ loading, onSubmit }) {
             </FormHelperText>
           )}
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>
           <TextField
             variant="outlined"
             required
@@ -86,7 +87,7 @@ export default function PasswordChangeForm({ loading, onSubmit }) {
             label="Confirm new password"
             type="password"
             autoComplete="new-password"
-            inputProps={{ "aria-label": "passwordRepeat" }}
+            slotProps={{ input: { "aria-label": "passwordRepeat" } }}
             error={Boolean(errors.passwordRepeat)}
             helperText={errors?.passwordRepeat?.message}
             disabled={loading}
@@ -98,7 +99,12 @@ export default function PasswordChangeForm({ loading, onSubmit }) {
           />
         </Grid>
       </Grid>
-      <Box mt={2} mb={1}>
+      <Box
+        sx={{
+          mb: 1,
+          mt: 2
+        }}
+      >
         <Button
           type="submit"
           fullWidth

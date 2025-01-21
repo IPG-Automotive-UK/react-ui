@@ -22,7 +22,12 @@ function AppHeader({
       })}
     >
       <Toolbar style={{ justifyContent: "space-between" }}>
-        <Box display="flex" alignItems="center">
+        <Box
+          sx={{
+            alignItems: "center",
+            display: "flex"
+          }}
+        >
           <IpgLogo
             textColour={mode === "light" ? "white" : "black"}
             sx={{
@@ -31,25 +36,42 @@ function AppHeader({
             }}
           />
         </Box>
-        <Box display="flex" alignItems="center">
+        <Box
+          sx={{
+            alignItems: "center",
+            display: "flex"
+          }}
+        >
           {appLogo ? (
             <span>{appLogo}</span>
           ) : (
             <Typography
               variant="h6"
-              fontSize="20px"
-              lineHeight="34px"
-              letterSpacing="0.05em"
-              fontWeight="600"
-              color={theme =>
-                theme.palette.mode === "dark" ? "#003063" : "white"
-              }
+              sx={[
+                {
+                  fontSize: "20px",
+                  fontWeight: "600",
+                  letterSpacing: "0.05em",
+                  lineHeight: "34px"
+                },
+                theme => ({
+                  color: "white",
+                  ...theme.applyStyles("dark", {
+                    color: "#003063"
+                  })
+                })
+              ]}
             >
               <span>{appName}</span>
             </Typography>
           )}
         </Box>
-        <Box display="flex" alignItems="center">
+        <Box
+          sx={{
+            alignItems: "center",
+            display: "flex"
+          }}
+        >
           {children}
           <UserMenu
             username={username}

@@ -21,7 +21,12 @@ export default meta;
 // Story Template
 const Template: StoryFn<LinkWithPreviewProps> = args => {
   return (
-    <Box maxWidth={100} sx={{ overflowWrap: "anywhere" }}>
+    <Box
+      sx={{
+        maxWidth: 100,
+        overflowWrap: "anywhere"
+      }}
+    >
       <LinkWithPreview {...args} />
     </Box>
   );
@@ -35,11 +40,15 @@ export const Default = {
     children: "MyLink",
     color: "primary",
     content: (
-      <Box boxShadow={2}>
+      <Box
+        sx={{
+          boxShadow: 2
+        }}
+      >
         <Typography>Hello World!</Typography>
       </Box>
     ),
-    href: "https://example.com",
+    href: "https://ipg-automotive.com",
     variant: "body2"
   },
   render: Template
@@ -52,11 +61,15 @@ export const LongLinkText = {
   args: {
     children: "MyVeryLooooooooongLink",
     content: (
-      <Box boxShadow={2}>
+      <Box
+        sx={{
+          boxShadow: 2
+        }}
+      >
         <Typography>Hello World!</Typography>
       </Box>
     ),
-    href: "https://example.com"
+    href: "https://ipg-automotive.com"
   },
   render: Template
 };
@@ -68,11 +81,15 @@ export const LongLinkTextWrap = {
   args: {
     children: "MyVeryLooooooooongLink",
     content: (
-      <Box boxShadow={2}>
+      <Box
+        sx={{
+          boxShadow: 2
+        }}
+      >
         <Typography>Hello World!</Typography>
       </Box>
     ),
-    href: "https://example.com",
+    href: "https://ipg-automotive.com",
     sx: { whiteSpace: "wrap" }
   },
   render: Template

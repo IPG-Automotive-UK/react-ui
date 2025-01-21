@@ -13,13 +13,14 @@ export default function SelectorButton({
   return (
     <ButtonBase
       onClick={onClick}
-      sx={{
+      sx={theme => ({
         "&:hover": {
-          boxShadow: theme => `0 1px 5px 1px ${theme.palette.action.focus}`
+          boxShadow: `0 1px 5px 1px ${theme.palette.action.focus}`
         },
+
         alignItems: "center",
-        background: theme => theme.palette.background.paper,
-        border: theme => `1px solid ${theme.palette.divider}`,
+        background: theme.palette.background.paper,
+        border: `1px solid ${theme.palette.divider}`,
         borderRadius: 4,
         display: "flex",
         flexDirection: "column",
@@ -28,7 +29,7 @@ export default function SelectorButton({
         textAlign: "left",
         transition: ".2s ease-in-out",
         width: 336
-      }}
+      })}
     >
       {icon}
       <Typography

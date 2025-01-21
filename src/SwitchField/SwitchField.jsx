@@ -28,7 +28,16 @@ export default function FormSwitch({
   // return components
   return (
     <FormControl disabled={disabled}>
-      {label && <FormLabel style={{ fontSize: "0.75rem" }}>{label}</FormLabel>}
+      {label && (
+        <FormLabel
+          sx={{
+            fontSize: "0.75rem"
+          }}
+          color="textSecondary"
+        >
+          {label}
+        </FormLabel>
+      )}
       <FormGroup>
         <Typography
           component="div"

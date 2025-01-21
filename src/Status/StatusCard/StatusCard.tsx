@@ -46,13 +46,20 @@ const card = ({
           <TruncatedTooltip multiline={1}>
             <Typography
               variant={titleVariant}
-              color="text.primary"
-              fontWeight={600}
+              sx={{
+                color: "text.primary",
+                fontWeight: 600
+              }}
             >
               {name}
             </Typography>
           </TruncatedTooltip>
-          <Typography variant="caption" color="text.primary">
+          <Typography
+            variant="caption"
+            sx={{
+              color: "text.primary"
+            }}
+          >
             {text}
           </Typography>
         </Box>

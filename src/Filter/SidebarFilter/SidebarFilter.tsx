@@ -42,14 +42,28 @@ export function SidebarFilter({
             overflow: "hidden"
           }}
         >
-          <Stack px={3} py={2}>
-            <Typography variant="h6" fontWeight={600}>
+          <Stack
+            sx={{
+              px: 3,
+              py: 2
+            }}
+          >
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: 600
+              }}
+            >
               Filters
             </Typography>
             <IconButton
               data-testid="filter-close-button"
               onClick={() => setOpen(false)}
-              sx={{ position: "absolute", right: 12, top: 12 }}
+              sx={{
+                position: "absolute",
+                right: 12,
+                top: 12
+              }}
             >
               <Close />
             </IconButton>

@@ -53,7 +53,6 @@ export default function ActionDialog({
             aria-label="close"
             onClick={onCancelClick}
             sx={{
-              color: theme => theme.palette.grey[500],
               position: "absolute",
               right: 8,
               top: 8

@@ -28,7 +28,7 @@ export const Default = {
     file: "TestingRoad.rd5",
     format: "CarMaker",
     formatVersion: "11.1",
-    href: "test",
+    href: "https://ipg-automotive.com",
     image: "https://picsum.photos/id/191/400/200",
     label: [
       {
@@ -104,7 +104,7 @@ export const WithoutOptionalProps = {
     file: "TestingRoad.rd5",
     format: "CarMaker",
     formatVersion: "11.1",
-    href: "test",
+    href: "https://ipg-automotive.com",
     image: "https://picsum.photos/id/191/400/200",
     name: "SanFrancisco_AEB",
     sx: { ...Default.args.sx },

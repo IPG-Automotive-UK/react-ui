@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import {
   Alert,
   Button,
@@ -7,19 +8,20 @@ import {
   DialogActions,
   DialogContent,
   FormHelperText,
-  Grid,
+  Grid2 as Grid,
   IconButton,
   DialogTitle as MuiDialogTitle,
   TextField,
   Typography
 } from "@mui/material";
+
 import CloseIcon from "@mui/icons-material/Close";
 import PropTypes from "prop-types";
 import { useMaterialForm } from "../utils/form";
 import zxcvbn from "zxcvbn";
 
 /**
- * Dialog for authenticated users to change their password. Requries reauthentication using existing password.
+ * Dialog for authenticated users to change their password. Requires re-authentication using existing password.
  */
 export default function PasswordChangeDialog({
   errorMessage = "Woops, something went wrong. Please try again.",
@@ -27,7 +29,7 @@ export default function PasswordChangeDialog({
   onSubmit,
   open,
   status = "init",
-  successMessage = "Password succesfully changed."
+  successMessage = "Password successfully changed."
 }) {
   // form state
   const {
@@ -59,7 +61,7 @@ export default function PasswordChangeDialog({
         <DialogContent>
           {["init", "loading", "error"].includes(status) && (
             <Grid container spacing={2}>
-              <Grid item xs={12}>
+              <Grid size={12}>
                 <TextField
                   variant="outlined"
                   required
@@ -68,7 +70,7 @@ export default function PasswordChangeDialog({
                   label="Current password"
                   type="password"
                   autoComplete="off"
-                  inputProps={{ "aria-label": "currentPassword" }}
+                  slotProps={{ input: { "aria-label": "currentPassword" } }}
                   error={Boolean(errors.currentPassword)}
                   helperText={errors?.currentPassword?.message}
                   disabled={status === "loading"}
@@ -76,7 +78,7 @@ export default function PasswordChangeDialog({
                   {...register("currentPassword", { required: true })}
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid size={12}>
                 <TextField
                   variant="outlined"
                   required
@@ -85,7 +87,7 @@ export default function PasswordChangeDialog({
                   label="New password"
                   type="password"
                   autoComplete="new-password"
-                  inputProps={{ "aria-label": "newPassword" }}
+                  slotProps={{ input: { "aria-label": "newPassword" } }}
                   error={Boolean(errors.newPassword)}
                   helperText={errors?.newPassword?.message}
                   disabled={status === "loading"}
@@ -112,7 +114,7 @@ export default function PasswordChangeDialog({
                   </FormHelperText>
                 )}
               </Grid>
-              <Grid item xs={12}>
+              <Grid size={12}>
                 <TextField
                   variant="outlined"
                   required
@@ -121,7 +123,6 @@ export default function PasswordChangeDialog({
                   label="Confirm new password"
                   type="password"
                   autoComplete="new-password"
-                  inputProps={{ "aria-label": "newPasswordRepeat" }}
                   error={Boolean(errors.newPasswordRepeat)}
                   helperText={errors?.newPasswordRepeat?.message}
                   disabled={status === "loading"}
@@ -130,17 +131,20 @@ export default function PasswordChangeDialog({
                     validate: value =>
                       value === password.current || "Password does not match"
                   })}
+                  slotProps={{
+                    input: { "aria-label": "newPasswordRepeat" }
+                  }}
                 />
               </Grid>
             </Grid>
           )}
           {status === "success" && (
-            <Alert severity="success" style={{ marginBottom: 16 }}>
+            <Alert severity="success" sx={{ mb: 2 }}>
               {successMessage}
             </Alert>
           )}
           {status === "error" && (
-            <Alert severity="error" style={{ marginBottom: 8, marginTop: 16 }}>
+            <Alert severity="error" sx={{ mb: 1, mt: 2 }}>
               {errorMessage}
             </Alert>
           )}
@@ -211,10 +215,9 @@ PasswordChangeDialog.propTypes = {
   successMessage: PropTypes.string
 };
 
-// themeing for dialog title
+// theming for dialog title
 const dialogTitleStyles = {
   closeButton: {
-    color: theme => theme.palette.grey[500],
     position: "absolute",
     right: theme => theme.spacing(1),
     top: theme => theme.spacing(1)

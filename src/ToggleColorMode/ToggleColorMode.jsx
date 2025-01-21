@@ -16,11 +16,11 @@ export default function ToggleColorMode({ mode, onChange }) {
     "& .MuiSwitch-switchBase": {
       "&.Mui-checked": {
         "& + .MuiSwitch-track": {
-          backgroundColor:
-            theme.palette.mode === "dark"
-              ? "rgba(0, 0, 0, 0.3)"
-              : "rgba(255, 255, 255, 0.16)",
-          opacity: 1
+          backgroundColor: "rgba(255, 255, 255, 0.16)",
+          opacity: 1,
+          ...theme.applyStyles("dark", {
+            backgroundColor: "rgba(0, 0, 0, 0.3)"
+          })
         },
         "& .MuiSwitch-thumb": {
           "&:before": {
@@ -55,12 +55,12 @@ export default function ToggleColorMode({ mode, onChange }) {
       width: 32.5
     },
     "& .MuiSwitch-track": {
-      backgroundColor:
-        theme.palette.mode === "dark"
-          ? "rgba(0, 0, 0, 0.3)"
-          : "rgba(255, 255, 255, 0.16)",
+      backgroundColor: "rgba(255, 255, 255, 0.16)",
       borderRadius: 20 / 2,
-      opacity: 1
+      opacity: 1,
+      ...theme.applyStyles("dark", {
+        backgroundColor: "rgba(0, 0, 0, 0.3)"
+      })
     },
     height: 34,
     padding: 7,

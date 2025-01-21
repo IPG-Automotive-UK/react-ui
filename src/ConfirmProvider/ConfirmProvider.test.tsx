@@ -218,7 +218,9 @@ describe("useConfirm", () => {
       );
       fireEvent.click(getByText("Delete"));
       const dialog = getByText("Dialog Title").closest("div");
-      expect(dialog).toHaveStyle("color:rgba(0, 0, 0, 0.87)");
+      waitFor(() => {
+        expect(dialog).toHaveStyle("color:rgb(0, 0, 0, 0.87)");
+      });
     });
 
     // test to check if dialog supports dark mode
@@ -232,7 +234,9 @@ describe("useConfirm", () => {
       );
       fireEvent.click(getByText("Delete"));
       const dialog = getByText("Dialog Title").closest("div");
-      expect(dialog).toHaveStyle("color:rgb(255, 255, 255)");
+      waitFor(() => {
+        expect(dialog).toHaveStyle("color:rgb(255, 255, 255)");
+      });
     });
   });
 

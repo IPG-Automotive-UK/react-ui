@@ -41,7 +41,6 @@ export default function LabelSetter({ onChange = () => {}, rows = [] }) {
       headerName: "Action",
       renderCell: params => (
         <IconButton
-          color="primary"
           data-testid="deleteButton"
           onClick={event => handleOnDeleteClick(event, params)}
         >
@@ -79,10 +78,13 @@ export default function LabelSetter({ onChange = () => {}, rows = [] }) {
   // return components
   return (
     <Box
-      display="flex"
-      flexDirection="column"
       key={rows.length}
-      sx={{ height: "100%", width: "100%" }}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        width: "100%"
+      }}
     >
       <DataGrid
         data-testid="dataGrid"
@@ -94,11 +96,7 @@ export default function LabelSetter({ onChange = () => {}, rows = [] }) {
         onCellEditCommit={handleEditCell}
       />
       <Box>
-        <IconButton
-          color="primary"
-          data-testid="addButton"
-          onClick={handleOnAddClick}
-        >
+        <IconButton data-testid="addButton" onClick={handleOnAddClick}>
           <AddCircleIcon />
         </IconButton>
       </Box>

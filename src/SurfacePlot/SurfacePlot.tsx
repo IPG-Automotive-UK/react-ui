@@ -47,16 +47,18 @@ const SurfacePlot = ({
       title={fullscreenTitle}
     >
       <Box
-        display="flex"
-        flexDirection="column"
-        overflow="hidden"
-        height="100%"
-        width="100%"
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          height: "100%",
+          overflow: "hidden",
+          width: "100%"
+        }}
       >
         {!isFullscreen && showTitle ? (
           <Typography
             align="center"
-            style={{ padding: "0 16px", wordWrap: "break-word" }}
+            sx={{ padding: "0 16px", wordWrap: "break-word" }}
           >
             {title || ""}
           </Typography>

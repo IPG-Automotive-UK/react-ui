@@ -68,7 +68,6 @@ export default function MultiColor({ onChange = () => {}, rows = [] }) {
       headerName: "Action",
       renderCell: params => (
         <IconButton
-          color="primary"
           data-testid="deleteButton"
           onClick={event => handleOnDeleteClick(event, params)}
         >
@@ -118,10 +117,13 @@ export default function MultiColor({ onChange = () => {}, rows = [] }) {
   // return components
   return (
     <Box
-      display="flex"
-      flexDirection="column"
       key={rows.length}
-      sx={{ height: "100%", width: "100%" }}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        width: "100%"
+      }}
     >
       <DataGrid
         data-testid="dataGrid"
@@ -133,11 +135,7 @@ export default function MultiColor({ onChange = () => {}, rows = [] }) {
         onCellEditCommit={handleEditCell}
       />
       <Box>
-        <IconButton
-          color="primary"
-          data-testid="addButton"
-          onClick={handleOnAddClick}
-        >
+        <IconButton data-testid="addButton" onClick={handleOnAddClick}>
           <AddCircleIcon />
         </IconButton>
       </Box>

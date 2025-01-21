@@ -67,21 +67,32 @@ const LoadErrorMessage = ({
       {/* Render the error title */}
       <Typography
         variant="h6"
-        fontWeight="600"
-        textAlign="center"
-        color={theme => theme.palette.error.main}
+        sx={[
+          {
+            fontWeight: "600",
+            textAlign: "center"
+          },
+          theme => ({
+            color: theme.palette.error.main
+          })
+        ]}
       >
         {title}
       </Typography>
       {/* Render the error message */}
       <Typography
         variant="body2"
-        textAlign="center"
-        color={theme =>
-          theme.palette.mode === "dark"
-            ? lighten(theme.palette.text.secondary, 0.7)
-            : theme.palette.text.primary
-        }
+        sx={[
+          {
+            textAlign: "center"
+          },
+          theme => ({
+            color: theme.palette.text.primary,
+            ...theme.applyStyles("dark", {
+              color: lighten(theme.palette.text.secondary, 0.7)
+            })
+          })
+        ]}
       >
         {message}
       </Typography>
@@ -97,8 +108,10 @@ const LoadErrorMessage = ({
           {/* Render the "Hide More Details" text */}
           <Typography
             variant="body2"
-            color={theme => theme.palette.primary.main}
-            sx={{ cursor: "pointer" }}
+            sx={theme => ({
+              color: theme.palette.primary.main,
+              cursor: "pointer"
+            })}
             onClick={handleDetailsClick}
           >
             Hide More Details
@@ -109,13 +122,14 @@ const LoadErrorMessage = ({
           </Alert>
         </>
       )}
-
       {/* Render the "View More Details" text if errorDetails isn't empty and detailsVisible state is false */}
       {errorDetails && !detailsVisible && (
         <Typography
           variant="body2"
-          color={theme => theme.palette.primary.main}
-          sx={{ cursor: "pointer" }}
+          sx={theme => ({
+            color: theme.palette.primary.main,
+            cursor: "pointer"
+          })}
           onClick={handleDetailsClick}
         >
           View More Details
@@ -125,11 +139,12 @@ const LoadErrorMessage = ({
       {contactTeam !== "none" ? (
         <Typography
           variant="caption"
-          color={theme =>
-            theme.palette.mode === "dark"
-              ? lighten(theme.palette.text.secondary, 0.7)
-              : theme.palette.text.primary
-          }
+          sx={theme => ({
+            color: theme.palette.text.primary,
+            ...theme.applyStyles("dark", {
+              color: lighten(theme.palette.text.secondary, 0.7)
+            })
+          })}
         >
           If this persists, contact {/* Render the contact team link */}
           {contactUrl ? (

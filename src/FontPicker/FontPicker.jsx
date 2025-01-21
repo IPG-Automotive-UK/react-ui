@@ -190,25 +190,31 @@ export default function FontPicker({
         <TextField
           {...params}
           error={error}
-          inputProps={{
-            ...params.inputProps,
-            sx: {
-              fontFamily: `${value}, Arial, sans-serif`
-            }
-          }}
           label={label}
           margin={margin}
           required={required}
           variant={variant}
+          slotProps={{
+            htmlInput: {
+              ...params.inputProps,
+              sx: {
+                fontFamily: `${value}, Arial, sans-serif`
+              }
+            }
+          }}
         />
       )}
-      renderOption={(props, option) => (
-        <Box {...props}>
-          <Typography sx={{ fontFamily: `${option}, Arial, sans-serif` }}>
-            {option}
-          </Typography>
-        </Box>
-      )}
+      renderOption={(props, option) => {
+        // Destructure to separate key
+        const { key, ...otherProps } = props;
+        return (
+          <Box {...otherProps} key={key}>
+            <Typography sx={{ fontFamily: `${option}, Arial, sans-serif` }}>
+              {option}
+            </Typography>
+          </Box>
+        );
+      }}
     />
   );
 }

@@ -16,13 +16,13 @@ export default function SearchBar({
   return (
     <Paper
       variant="outlined"
-      sx={{
+      sx={theme => ({
         alignItems: "center",
         display: "flex",
-        marginBottom: theme => theme.spacing(2),
-        marginTop: theme => theme.spacing(2),
+        marginBottom: theme.spacing(2),
+        marginTop: theme.spacing(2),
         width
-      }}
+      })}
     >
       <InputBase
         aria-label={"Search"}
@@ -30,7 +30,10 @@ export default function SearchBar({
         value={value}
         onChange={onChange}
         onBlur={onBlur}
-        sx={{ flex: 1, marginLeft: theme => theme.spacing(1) }}
+        sx={theme => ({
+          flex: 1,
+          marginLeft: theme.spacing(1)
+        })}
       />
       {hasValue ? (
         <IconButton
@@ -39,12 +42,19 @@ export default function SearchBar({
             onChange({ target: { value: "" } });
           }}
           size="large"
-          sx={{ padding: theme => theme.spacing(1) }}
+          sx={theme => ({
+            padding: theme.spacing(1)
+          })}
         >
           <CloseIcon />
         </IconButton>
       ) : (
-        <SearchIcon color="action" sx={{ margin: theme => theme.spacing(1) }} />
+        <SearchIcon
+          color="action"
+          sx={theme => ({
+            margin: theme.spacing(1)
+          })}
+        />
       )}
     </Paper>
   );

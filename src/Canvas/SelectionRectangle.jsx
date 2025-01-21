@@ -15,16 +15,16 @@ export default function SelectionRectangle({
 }) {
   return (
     <Box
-      sx={{
+      sx={theme => ({
         backgroundColor: theme => alpha(theme.palette.primary.light, 0.1),
         cursor: "crosshair",
         height: `${height}px`,
         left,
-        outline: theme => `1px solid ${theme.palette.primary.main}`,
+        outline: `1px solid ${theme.palette.primary.main}`,
         position: "absolute",
         top,
         width: `${width}px`
-      }}
+      })}
     />
   );
 }

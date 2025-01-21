@@ -17,7 +17,11 @@ export default meta;
 // Story Template
 const Template: StoryFn<RoadLabelProps> = args => {
   return (
-    <Box width={150}>
+    <Box
+      sx={{
+        width: 150
+      }}
+    >
       <RoadLabel {...args} />
     </Box>
   );

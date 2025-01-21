@@ -46,16 +46,27 @@ export function PrototypePreview({
 
   return (
     <Box
-      display="flex"
-      flexDirection="column"
-      gap={1}
-      minWidth={0}
-      fontFamily="Montserrat"
       data-testid="prototype-preview-wrapper"
-      sx={{ ...sx }}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 1,
+        minWidth: 0,
+        ...sx
+      }}
     >
-      <Box gap={1}>
-        <Stack direction="row" spacing={1} minWidth={0}>
+      <Box
+        sx={{
+          gap: 1
+        }}
+      >
+        <Stack
+          direction="row"
+          spacing={1}
+          sx={{
+            minWidth: 0
+          }}
+        >
           <img
             src={image}
             alt="prototype-image"
@@ -67,22 +78,38 @@ export function PrototypePreview({
               width: "78px"
             }}
           />
-          <Stack direction="column" minWidth={0} display="flex">
-            <Box display="flex" minWidth={0} flex={"0 1 auto"}>
+          <Stack
+            direction="column"
+            sx={{
+              display: "flex",
+              minWidth: 0
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                flex: "0 1 auto",
+                minWidth: 0
+              }}
+            >
               <Link
                 href={href}
-                overflow="hidden"
                 target="_blank"
                 underline="hover"
-                textOverflow="ellipsis"
                 data-testid="prototype-preview-name"
+                sx={{
+                  overflow: "hidden",
+                  textOverflow: "ellipsis"
+                }}
               >
                 <Typography
                   noWrap
                   variant="subtitle2"
-                  fontWeight={500}
                   color="primary"
-                  minWidth={0}
+                  sx={{
+                    fontWeight: 500,
+                    minWidth: 0
+                  }}
                 >
                   {name}
                 </Typography>
@@ -105,39 +132,53 @@ export function PrototypePreview({
           </Stack>
         </Stack>
       </Box>
-      <Box gap={1}>
+      <Box
+        sx={{
+          gap: 1
+        }}
+      >
         <Stack
           direction={"row"}
-          gap={"12px"}
-          maxWidth={1}
-          justifyContent={"left"}
-          alignContent={"center"}
+          sx={{
+            alignContent: "center",
+            gap: "12px",
+            justifyContent: "left",
+            maxWidth: 1
+          }}
         >
           <Box
             data-testid="format-label"
-            flex="0 1 auto"
-            maxWidth={`calc(${40 * widthCompensator}% - 24px)`}
+            sx={{
+              flex: "0 1 auto",
+              maxWidth: `calc(${40 * widthCompensator}% - 24px)`
+            }}
           >
             <FormatLabel label={format} />
           </Box>
           <Box
             data-testid="format-version-label"
-            flex="0 1 auto"
-            maxWidth={0.2 * widthCompensator}
+            sx={{
+              flex: "0 1 auto",
+              maxWidth: 0.2 * widthCompensator
+            }}
           >
             <FormatVersionLabel label={formatVersion} />
           </Box>
           <Box
             data-testid="version-label"
-            flex="0 1 auto"
-            maxWidth={0.2 * widthCompensator}
+            sx={{
+              flex: "0 1 auto",
+              maxWidth: 0.2 * widthCompensator
+            }}
           >
             <VersionLabel label={prototypeVersion} />
           </Box>
           {quality ? (
             <Box
-              flex="0 0 auto"
-              maxWidth={`calc(${qualityRelativeWidth * 100}% - 12px)`}
+              sx={{
+                flex: "0 0 auto",
+                maxWidth: `calc(${qualityRelativeWidth * 100}% - 12px)`
+              }}
             >
               <StatusLabel
                 gap={0.5}
@@ -153,20 +194,30 @@ export function PrototypePreview({
       {hasOptionalProperty() ? (
         <>
           <Divider />
-          <Box display="flex" flexDirection="column" gap={1}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 1
+            }}
+          >
             {(createdAt || user) && (
               <Stack
                 direction="row"
-                gap={"12px"}
-                width={1}
-                alignItems={"center"}
+                sx={{
+                  alignItems: "center",
+                  gap: "12px",
+                  width: 1
+                }}
               >
                 {createdAt && (
                   <Box
                     data-testid="date-label"
-                    flex="0 1 auto"
-                    maxWidth="calc(40% - 12px)"
-                    alignItems="center"
+                    sx={{
+                      alignItems: "center",
+                      flex: "0 1 auto",
+                      maxWidth: "calc(40% - 12px)"
+                    }}
                   >
                     <DateLabel label={createdAt} />
                   </Box>
@@ -174,9 +225,11 @@ export function PrototypePreview({
                 {user && (
                   <Box
                     data-testid="user-label"
-                    flex="1 1 auto"
-                    alignItems="center"
-                    minWidth={0}
+                    sx={{
+                      alignItems: "center",
+                      flex: "1 1 auto",
+                      minWidth: 0
+                    }}
                   >
                     <UserLabel label={user.name} color={user.color} />
                   </Box>
