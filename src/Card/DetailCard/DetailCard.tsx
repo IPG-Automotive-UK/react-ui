@@ -1,12 +1,12 @@
-import { Box, Card, Stack } from "@mui/material";
+import { Box, Card, Stack, Typography } from "@mui/material";
 import { DetailCardHeaderProps, DetailCardProps } from "./DetailCard.types";
 import { FileDetails, Infographic } from "../../CardContent";
 import React, { Fragment, useEffect, useRef, useState } from "react";
 
 import LabelChipGroup from "../../LabelSelector/LabelChipGroup/LabelChipGroup";
 import type { LabelChipGroupProps } from "../../LabelSelector/LabelChipGroup/LabelChipGroup.types";
-import NoWrapTypography from "../../NoWrapTypography/NoWrapTypography";
 import { ResizeObserver } from "@juggle/resize-observer";
+import TruncatedTooltip from "../../TruncatedTooltip/TruncatedTooltip";
 
 // TODO: add tests in browser once we are done with the migration to cypress. The old tests live in a txt file in this folder until then.
 
@@ -55,11 +55,7 @@ function DetailCard({
           overflow: "auto"
         }}
       >
-        <Box
-          sx={{
-            ml: 0.5
-          }}
-        >
+        <Box sx={{ ml: 0.5 }}>
           <Card>
             <Infographic media={media} />
             <FileDetails
@@ -74,13 +70,7 @@ function DetailCard({
         </Box>
         <Stack
           spacing={2}
-          sx={{
-            display: "flex",
-            flexGrow: 1,
-            ml: 2,
-            mr: 0.5,
-            width: "100%"
-          }}
+          sx={{ display: "flex", flexGrow: 1, ml: 2, mr: 0.5, width: "100%" }}
         >
           {content}
         </Stack>
@@ -150,7 +140,8 @@ function DetailCardHeader({
         }}
       >
         <Box sx={{ width: headerContentWidth }}>
-          <NoWrapTypography
+          <TruncatedTooltip
+            component={Typography}
             sx={theme => ({
               color: "black",
               fontSize: 20,
@@ -161,8 +152,9 @@ function DetailCardHeader({
             })}
           >
             {title}
-          </NoWrapTypography>
-          <NoWrapTypography
+          </TruncatedTooltip>
+          <TruncatedTooltip
+            component={Typography}
             sx={theme => ({
               color: theme.palette.text.secondary,
               fontSize: 14,
@@ -170,7 +162,7 @@ function DetailCardHeader({
             })}
           >
             {subtitle}
-          </NoWrapTypography>
+          </TruncatedTooltip>
         </Box>
         <Box
           sx={{ display: "flex", flexDirection: "row", gap: 2 }}
@@ -179,11 +171,7 @@ function DetailCardHeader({
           {buttonsStack}
         </Box>
       </Box>
-      <Box
-        sx={{
-          mx: 1
-        }}
-      >
+      <Box sx={{ mx: 1 }}>
         {labels && labels.length > 0 && <LabelChipGroup chips={labelChips} />}
       </Box>
     </Fragment>
