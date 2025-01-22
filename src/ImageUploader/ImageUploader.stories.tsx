@@ -49,6 +49,21 @@ export const Default: Story = {
   }
 };
 
+// Story only allowing svg uploads
+export const AllowOnlySvg: Story = {
+  args: {
+    acceptedImageTypes: { "image/svg": [".svg"] },
+    dropzoneText: "Drag & Drop an image file here or browse",
+    isUploading: false,
+    maxFileSize: 1000000000,
+    onAdd: () => {},
+    onDelete: () => {},
+    selectedFiles: [],
+    subText: "A default image will be used if no image is uploaded",
+    title: "Upload Image"
+  }
+};
+
 // Story which shows the component with a single file selected
 export const WithSingleFileSelected: Story = {
   args: {

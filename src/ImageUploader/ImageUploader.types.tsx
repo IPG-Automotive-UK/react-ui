@@ -1,7 +1,19 @@
 import { FileWithData } from "../Uploader/Uploader.types";
 import { UploaderHeaderProps } from "../Uploader/UploaderHeader.types";
 
+export type AcceptedFiles = {
+  "image/gif": [".gif"];
+  "image/jpeg": [".jpg", ".jpeg"];
+  "image/png": [".png"];
+  "image/svg": [".svg"];
+  "image/webp": [".webp"];
+};
+
 export type ImageUploaderProps = {
+  /**
+   * The accepted file types by the image uploader
+   */
+  acceptedImageTypes?: Partial<AcceptedFiles>;
   /**
    * Text to display in dropzone
    */
