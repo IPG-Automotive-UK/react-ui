@@ -235,7 +235,7 @@ const mainTheme: ThemeOptions = {
 };
 
 // create the main theme with color schemes
-const mainThemeWithColorSchemes = createTheme({
+export const theme = createTheme({
   cssVariables: {
     colorSchemeSelector: "data",
     cssVarPrefix: "ipg"
@@ -252,7 +252,7 @@ export default function ThemeProvider({
 }: ThemeProviderProps) {
   // wrap mui theme provider and children in theme context
   return (
-    <MuiThemeProvider theme={mainThemeWithColorSchemes} defaultMode="light">
+    <MuiThemeProvider theme={theme} defaultMode="light">
       <ControlledThemeWrapper theme={controlledTheme}>
         {children}
       </ControlledThemeWrapper>
