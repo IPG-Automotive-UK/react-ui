@@ -15,7 +15,7 @@ const defaultAcceptedFiles: AcceptedFiles = {
 };
 
 export default function ImageUploader({
-  acceptedImageTypes = defaultAcceptedFiles,
+  acceptedFiles = defaultAcceptedFiles,
   title = "Upload Image",
   titleVariant,
   subText = "A default image will be used if no image is uploaded",
@@ -30,7 +30,7 @@ export default function ImageUploader({
   // useUploader is a custom hook that handles the logic for uploading files
   const { getRootProps, getInputProps, handleDelete, rejectionMessage } =
     useUploader({
-      acceptedFiles: acceptedImageTypes,
+      acceptedFiles,
       filesLimit: 1,
       maxFileSize,
       multiple: false,

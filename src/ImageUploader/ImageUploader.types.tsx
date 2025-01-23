@@ -13,7 +13,7 @@ export type ImageUploaderProps = {
   /**
    * The accepted file types by the image uploader
    */
-  acceptedImageTypes?: Partial<AcceptedFiles>;
+  acceptedFiles?: Partial<AcceptedFiles>;
   /**
    * Text to display in dropzone
    */

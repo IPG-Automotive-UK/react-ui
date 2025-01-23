@@ -110,10 +110,7 @@ describe("ImageUploader", () => {
   test("allow restricting file types", async () => {
     const onAdd = vi.fn();
     const { getByTestId } = render(
-      <ImageUploader
-        acceptedImageTypes={{ "image/svg": [".svg"] }}
-        onAdd={onAdd}
-      />
+      <ImageUploader acceptedFiles={{ "image/svg": [".svg"] }} onAdd={onAdd} />
     );
 
     // create a file with a png extension

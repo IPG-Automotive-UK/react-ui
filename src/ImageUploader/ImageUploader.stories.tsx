@@ -52,7 +52,7 @@ export const Default: Story = {
 // Story only allowing svg uploads
 export const AllowOnlySvg: Story = {
   args: {
-    acceptedImageTypes: { "image/svg": [".svg"] },
+    acceptedFiles: { "image/svg": [".svg"] },
     dropzoneText: "Drag & Drop an image file here or browse",
     isUploading: false,
     maxFileSize: 1000000000,
