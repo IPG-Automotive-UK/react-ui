@@ -3,8 +3,8 @@ import { Meta, StoryFn } from "@storybook/react";
 
 import LazyLoadImage from "./LazyLoadImage";
 import { LazyLoadImageProps } from "./LazyLoadImage.types";
-import NoWrapTypography from "../NoWrapTypography/NoWrapTypography";
 import React from "react";
+import TruncatedTooltip from "../TruncatedTooltip/TruncatedTooltip";
 
 /**
  * Wrapper to lazy load an image
@@ -144,19 +144,20 @@ const FlexSizeComponent: StoryFn<LazyLoadImageProps> = args => {
         }}
       >
         <Box>
-          <NoWrapTypography
+          <TruncatedTooltip
+            component={Typography}
             variant="h5"
             sx={{
               fontWeight: 700
             }}
           >
             {"Example project code"}
-          </NoWrapTypography>
+          </TruncatedTooltip>
           <Typography
-            variant="body2"
             sx={{
               color: "text.secondary"
             }}
+            variant="body2"
           >
             11 Prototype
           </Typography>
