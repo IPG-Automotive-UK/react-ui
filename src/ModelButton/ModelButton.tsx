@@ -113,10 +113,7 @@ export default function ModelButton({
   let borderColorHover = theme.palette.primary.main;
 
   if (disabled) {
-    borderColor =
-      theme.palette.mode === "light"
-        ? "rgba(0, 0, 0, 0.38)"
-        : "rgba(255, 255, 255, 0.5)";
+    borderColor = theme.palette.text.disabled;
     borderColorHover = borderColor;
   } else if (status === "error") {
     borderColor = theme.palette.error.main;
@@ -238,33 +235,23 @@ export default function ModelButton({
           {status !== "none" && !disabled ? getCurrentStatusIcon() : null}
         </IconButton>
         <Typography
-          sx={[
-            {
-              alignItems: "center",
-              bottom: "0%",
-              display: "flex",
-              flexDirection: "row",
-              fontSize: "13px",
-              gap: "10px",
-              justifyContent: "center",
-              left: "0%",
-              position: "absolute",
-              right: "0%",
-              textAlign: "center",
-              top: "69.44%"
-            },
-            disabled
-              ? {
-                  color:
-                    theme.palette.mode === "light"
-                      ? "rgba(0, 0, 0, 0.38)"
-                      : "rgba(255, 255, 255, 0.5)"
-                }
-              : {
-                  color: theme => theme.palette.text.secondary
-                }
-          ]}
-          color="textSecondary"
+          sx={theme => ({
+            alignItems: "center",
+            bottom: "0%",
+            color: disabled
+              ? theme.palette.text.disabled
+              : theme.palette.text.secondary,
+            display: "flex",
+            flexDirection: "row",
+            fontSize: "13px",
+            gap: "10px",
+            justifyContent: "center",
+            left: "0%",
+            position: "absolute",
+            right: "0%",
+            textAlign: "center",
+            top: "69.44%"
+          })}
           variant="body2"
         >
           {label}
