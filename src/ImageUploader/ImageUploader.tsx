@@ -1,12 +1,21 @@
+import { AcceptedFiles, ImageUploaderProps } from "./ImageUploader.types";
 import { Box, LinearProgress, Stack, Typography, alpha } from "@mui/material";
 
 import FileUploadIcon from "@mui/icons-material/FileUpload";
-import { ImageUploaderProps } from "./ImageUploader.types";
 import React from "react";
 import UploaderHeader from "../Uploader/UploaderHeader";
 import useUploader from "../Uploader/useUploader";
 
+const defaultAcceptedFiles: AcceptedFiles = {
+  "image/gif": [".gif"],
+  "image/jpeg": [".jpg", ".jpeg"],
+  "image/png": [".png"],
+  "image/svg": [".svg"],
+  "image/webp": [".webp"]
+};
+
 export default function ImageUploader({
+  acceptedFiles = defaultAcceptedFiles,
   title = "Upload Image",
   titleVariant,
   subText = "A default image will be used if no image is uploaded",
@@ -21,13 +30,7 @@ export default function ImageUploader({
   // useUploader is a custom hook that handles the logic for uploading files
   const { getRootProps, getInputProps, handleDelete, rejectionMessage } =
     useUploader({
-      acceptedFiles: {
-        "image/gif": [".gif"],
-        "image/jpeg": [".jpg", ".jpeg"],
-        "image/png": [".png"],
-        "image/svg": [".svg"],
-        "image/webp": [".webp"]
-      },
+      acceptedFiles,
       filesLimit: 1,
       maxFileSize,
       multiple: false,
