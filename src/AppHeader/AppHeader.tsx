@@ -47,20 +47,13 @@ function AppHeader({
           ) : (
             <Typography
               variant="h6"
-              sx={[
-                {
-                  fontSize: "20px",
-                  fontWeight: "600",
-                  letterSpacing: "0.05em",
-                  lineHeight: "34px"
-                },
-                theme => ({
-                  color: "white",
-                  ...theme.applyStyles("dark", {
-                    color: "#003063"
-                  })
-                })
-              ]}
+              sx={theme => ({
+                color: theme.palette.primary.contrastText,
+                fontSize: "20px",
+                fontWeight: "600",
+                letterSpacing: "0.05em",
+                lineHeight: "34px"
+              })}
             >
               <span>{appName}</span>
             </Typography>

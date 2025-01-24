@@ -92,16 +92,13 @@ const SurfacePlot = ({
               r: 5,
               t: 20
             },
-            paper_bgcolor: "rgba(0,0,0,0)",
+            paper_bgcolor: "transparent",
             scene: {
               camera: { eye: { x: 2 } },
               xaxis: {
-                color: theme.palette.mode === "light" ? "" : "white",
+                color: theme.palette.text.primary,
                 exponentformat: "E",
-                gridcolor:
-                  theme.palette.mode === "light"
-                    ? ""
-                    : theme.palette.grey["500"],
+                gridcolor: theme.palette.divider,
                 showgrid: showGrid,
                 title: {
                   font: {
@@ -111,12 +108,9 @@ const SurfacePlot = ({
                 }
               },
               yaxis: {
-                color: theme.palette.mode === "light" ? "" : "white",
+                color: theme.palette.text.primary,
                 exponentformat: "E",
-                gridcolor:
-                  theme.palette.mode === "light"
-                    ? ""
-                    : theme.palette.grey["500"],
+                gridcolor: theme.palette.divider,
                 showgrid: showGrid,
                 title: {
                   font: {
@@ -126,12 +120,9 @@ const SurfacePlot = ({
                 }
               },
               zaxis: {
-                color: theme.palette.mode === "light" ? "" : "white",
+                color: theme.palette.text.primary,
                 exponentformat: "E",
-                gridcolor:
-                  theme.palette.mode === "light"
-                    ? ""
-                    : theme.palette.grey["500"],
+                gridcolor: theme.palette.divider,
                 showgrid: showGrid,
                 title: {
                   font: {

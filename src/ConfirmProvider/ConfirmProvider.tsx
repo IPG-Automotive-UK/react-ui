@@ -7,7 +7,6 @@ import React, { Fragment, useCallback, useState } from "react";
 
 import ConfirmContext from "./ConfirmContext";
 import ConfirmationDialog from "./ConfirmationDialog";
-import { Theme } from "@mui/material/styles";
 
 // define default props
 const DEFAULT_OPTIONS: ConfirmationDialogOptions = {
@@ -45,10 +44,6 @@ const ConfirmProvider: React.FC<ConfirmProviderProps> = ({
   defaultOptions = {
     cancellationText: "No",
     confirmationButtonProps: {
-      sx: {
-        bgcolor: (theme: Theme) =>
-          theme.palette.mode === "light" ? "" : "#87a5d2"
-      },
       variant: "contained"
     },
     confirmationText: "Yes",

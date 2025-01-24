@@ -3,16 +3,17 @@
 import type {} from "@mui/x-data-grid/themeAugmentation";
 import type {} from "@mui/material/themeCssVarsAugmentation";
 
+import { MuiTheme, ThemeProviderProps } from "./ThemeProvider.types";
 import {
   ThemeProvider as MuiThemeProvider,
   ThemeOptions,
+  alpha,
   createTheme,
   useColorScheme
 } from "@mui/material/styles";
 import React, { useEffect } from "react";
 
 import PropTypes from "prop-types";
-import { ThemeProviderProps } from "./ThemeProvider.types";
 import darkScrollbar from "@mui/material/darkScrollbar";
 
 // extend the theme to include custom properties
@@ -45,6 +46,21 @@ declare module "@mui/material/styles" {
   }
 }
 
+// primary main light
+const primaryLightMain = "#003063";
+
+// primary main dark
+const primaryDarkMain = "#87A5D2";
+
+// secondary main dark
+const secondaryDarkMain = "#005FA8";
+
+// palette default background light
+const paletteDefaultBackgroundLight = "#fafafa";
+
+// 0.08 % of the primary light main
+const primaryLightColor08 = alpha(primaryLightMain, 0.08);
+
 // Define default components
 const defaultComponents = {
   MuiAccordionSummary: {
@@ -63,6 +79,13 @@ const defaultComponents = {
       }
     }
   },
+  MuiBadge: {
+    styleOverrides: {
+      badge: {
+        fontFamily: "Montserrat, Arial, sans-serif"
+      }
+    }
+  },
   MuiChip: {
     styleOverrides: {
       root: {
@@ -72,34 +95,29 @@ const defaultComponents = {
   },
   MuiDataGrid: {
     styleOverrides: {
-      footerContainer: {
-        backgroundColor: `var(--ipg-palette-common-background)`
-      },
-      main: {
-        backgroundColor: `var(--ipg-palette-common-background)`
-      },
-      root: {
+      footerContainer: ({ theme }: MuiTheme) => ({
+        backgroundColor: theme.palette.common.background
+      }),
+      main: ({ theme }: MuiTheme) => ({
+        backgroundColor: theme.palette.common.background
+      }),
+      root: ({ theme }: MuiTheme) => ({
         "& .MuiDataGrid-cell:focus, .MuiDataGrid-cell:focus-within, .MuiDataGrid-columnHeader:focus, .MuiDataGrid-columnHeader:focus-within":
           {
             outline: "none"
+          },
+        "& .MuiDataGrid-container--top [role='row'], & .MuiDataGrid-container--bottom [role='row']":
+          {
+            backgroundColor: theme.palette.common.background
           }
-      }
-    }
-  },
-  MuiFormControl: {
-    styleOverrides: {
-      root: {
-        "& .MuiFormLabel-root, .MuiFormHelperText-root ": {
-          color: "var(--ipg-palette-text-secondary)"
-        }
-      }
+      })
     }
   },
   MuiFormLabel: {
     styleOverrides: {
-      asterisk: {
-        color: "#d32f2f"
-      }
+      asterisk: ({ theme }: MuiTheme) => ({
+        color: theme.palette.error.main
+      })
     }
   },
   MuiStepIcon: {
@@ -135,19 +153,9 @@ const mainTheme: ThemeOptions = {
         },
         MuiAppBar: {
           styleOverrides: {
-            root: {
-              "--ipg-palette-AppBar-darkBg": "#87a5d2"
-            }
-          }
-        },
-        MuiAutocomplete: {
-          styleOverrides: {
-            clearIndicator: {
-              color: "#ffffff"
-            },
-            popupIndicator: {
-              color: "#ffffff"
-            }
+            root: ({ theme }) => ({
+              "--ipg-palette-AppBar-darkBg": theme.palette.primary.main
+            })
           }
         },
         MuiCssBaseline: {
@@ -157,17 +165,14 @@ const mainTheme: ThemeOptions = {
         },
         MuiStepper: {
           styleOverrides: {
-            root: {
-              backgroundColor: "rgba(255, 255, 255, 0.08)"
-            }
+            root: ({ theme }) => ({
+              backgroundColor: alpha(theme.palette.primary.main, 0.08)
+            })
           }
         }
       },
       palette: {
-        background: {
-          default: "#121212"
-        },
-        primary: { main: "#87A5D2" }
+        primary: { main: primaryDarkMain }
       }
     },
     light: {
@@ -182,47 +187,33 @@ const mainTheme: ThemeOptions = {
             })
           }
         },
+
         MuiStepper: {
           styleOverrides: {
-            root: {
-              backgroundColor: "rgba(144, 202, 249, 0.08)"
-            }
+            root: ({ theme }) => ({
+              backgroundColor: alpha(theme.palette.primary.main, 0.08)
+            })
           }
         },
         MuiTableRow: {
           styleOverrides: {
-            root: {
+            root: ({ theme }) => ({
               "&$selected": {
-                backgroundColor: "rgba(0, 95, 168, 0.08)"
+                backgroundColor: alpha(theme.palette.primary.main, 0.08)
               }
-            }
-          }
-        },
-        MuiToggleButton: {
-          styleOverrides: {
-            root: {
-              "&$selected": {
-                "&:hover": {
-                  backgroundColor: "rgba(0, 95, 168, 0.15)"
-                },
-                backgroundColor: "rgba(0, 95, 168, 0.08)"
-              },
-              "&:hover": {
-                backgroundColor: "rgba(0, 95, 168, 0.15)"
-              }
-            }
+            })
           }
         }
       },
       palette: {
         action: {
-          selected: "rgba(0, 95, 168, 0.08)"
+          selected: primaryLightColor08
         },
         background: {
-          default: "rgb(250, 250, 250)"
+          default: paletteDefaultBackgroundLight
         },
-        primary: { main: "#003063" },
-        secondary: { main: "#005FA8" }
+        primary: { main: primaryLightMain },
+        secondary: { main: secondaryDarkMain }
       }
     }
   },
@@ -238,14 +229,13 @@ const mainTheme: ThemeOptions = {
   },
   typography: {
     allVariants: {
-      color: `var(--ipg-palette-text-primary)`,
       fontFamily: "Montserrat, Arial, sans-serif"
     }
   }
 };
 
 // create the main theme with color schemes
-const mainThemeWithColorSchemes = createTheme({
+export const theme = createTheme({
   cssVariables: {
     colorSchemeSelector: "data",
     cssVarPrefix: "ipg"
@@ -262,7 +252,7 @@ export default function ThemeProvider({
 }: ThemeProviderProps) {
   // wrap mui theme provider and children in theme context
   return (
-    <MuiThemeProvider theme={mainThemeWithColorSchemes} defaultMode="light">
+    <MuiThemeProvider theme={theme} defaultMode="light">
       <ControlledThemeWrapper theme={controlledTheme}>
         {children}
       </ControlledThemeWrapper>

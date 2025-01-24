@@ -79,12 +79,15 @@ function VehicleSelector({
       }}
     >
       <Box
-        sx={{
+        flex="40%"
+        sx={theme => ({
           "& .MuiFormLabel-asterisk": {
-            color: disabled ? "#9e9e9e" : "#d32f2f"
+            color: disabled
+              ? theme.palette.text.disabled
+              : theme.palette.error.main
           },
           flex: "40%"
-        }}
+        })}
       >
         <Autocomplete
           label="Project Code"
@@ -109,15 +112,15 @@ function VehicleSelector({
         />
       </Box>
       <Box
-        sx={{
+        sx={theme => ({
           "& .MuiFormLabel-asterisk": {
             color:
               selectedProject === null || selectedProject === "" || disabled
-                ? "#9e9e9e"
-                : "#d32f2f"
+                ? theme.palette.text.disabled
+                : theme.palette.error.main
           },
           flex: "40%"
-        }}
+        })}
       >
         <Autocomplete
           disabled={
@@ -144,15 +147,16 @@ function VehicleSelector({
         />
       </Box>
       <Box
-        sx={{
+        flex="40%"
+        sx={theme => ({
           "& .MuiFormLabel-asterisk": {
             color:
               selectedModelYear === null || selectedModelYear === "" || disabled
-                ? "#9e9e9e"
-                : "#d32f2f"
+                ? theme.palette.text.disabled
+                : theme.palette.error.main
           },
           flex: "40%"
-        }}
+        })}
       >
         <Autocomplete
           disableCloseOnSelect={multipleSelection}
@@ -228,17 +232,17 @@ function VehicleSelector({
       </Box>
       {gates.length > 0 && (
         <Box
-          sx={{
+          sx={theme => ({
             "& .MuiFormLabel-asterisk": {
               color:
                 selectedVariants === null ||
                 selectedVariants.length === 0 ||
                 disabled
-                  ? "#9e9e9e"
-                  : "#d32f2f"
+                  ? theme.palette.text.disabled
+                  : theme.palette.error.main
             },
             flex: "40%"
-          }}
+          })}
         >
           <Autocomplete
             disableCloseOnSelect={multipleSelection}
