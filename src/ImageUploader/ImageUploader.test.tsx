@@ -107,6 +107,50 @@ describe("ImageUploader", () => {
       )
     );
   });
+  test("allow restricting file types", async () => {
+    const onAdd = vi.fn();
+    const { getByTestId } = render(
+      <ImageUploader acceptedFiles={{ "image/svg": [".svg"] }} onAdd={onAdd} />
+    );
+
+    // create a file with a png extension
+    const files = [new File(["ipg1"], "ipg1.png", { type: "image/png" })];
+
+    // create a data transfer object with the files
+    const data = createDtWithFiles(files);
+
+    // get the dropzone element
+    const dropzoneElement = getByTestId("dropzone-root");
+
+    // trigger the drop event
+    fireEvent.drop(dropzoneElement, data);
+
+    // wait for the error message to be displayed
+    await waitFor(() =>
+      expect(dropzoneElement).toHaveTextContent("File type must be .svg.")
+    );
+
+    // create an svg file that should be accepted
+    const filesToBeAccepted = [
+      new File(["ipg2"], "ipg2.svg", { type: "image/svg+xml" })
+    ];
+
+    // create a data transfer object with the files
+    const dataToBeAccepted = createDtWithFiles(filesToBeAccepted);
+
+    // trigger the drop event
+    fireEvent.drop(dropzoneElement, dataToBeAccepted);
+
+    // expect the onAdd callback to be called
+    await waitFor(() => {
+      expect(onAdd).toHaveBeenCalledOnce();
+      expect(onAdd).toHaveBeenCalledWith([
+        expect.objectContaining({
+          file: filesToBeAccepted[0]
+        })
+      ]);
+    });
+  });
 
   test("display error uploading file size exceeds limit", async () => {
     const { getByTestId } = render(<ImageUploader maxFileSize={1000000} />);
