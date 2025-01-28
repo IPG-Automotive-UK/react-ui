@@ -2,14 +2,13 @@ import { Box, Link as MuiLink, Typography } from "@mui/material";
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import React from "react";
 import TruncatedTooltip from "./TruncatedTooltip";
-import { TruncatedTooltipProps } from "./TruncatedTooltip.types";
 
 export default {
   component: TruncatedTooltip,
   title: "General/TruncatedTooltip"
 } satisfies Meta<typeof TruncatedTooltip>;
 
-const Template: StoryFn<TruncatedTooltipProps> = args => {
+const Template: StoryFn<typeof TruncatedTooltip> = args => {
   return (
     <Box
       sx={{
