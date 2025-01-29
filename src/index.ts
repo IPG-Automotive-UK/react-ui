@@ -199,7 +199,8 @@ export {
 } from "./ToggleColorMode";
 export {
   default as TransferList,
-  type TransferListProps
+  type TransferListProps,
+  type TransferListItem
 } from "./TransferList";
 export {
   default as TreeViewList,

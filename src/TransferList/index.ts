@@ -1,2 +1,2 @@
 export { default } from "./TransferList";
-export type { TransferListProps } from "./TransferList.types";
+export type { TransferListProps, TransferListItem } from "./TransferList.types";
