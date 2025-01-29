@@ -6,7 +6,6 @@ import React, { Fragment, useEffect, useRef, useState } from "react";
 import LabelChipGroup from "../../LabelSelector/LabelChipGroup/LabelChipGroup";
 import type { LabelChipGroupProps } from "../../LabelSelector/LabelChipGroup/LabelChipGroup.types";
 import { ResizeObserver } from "@juggle/resize-observer";
-import { Theme } from "@mui/material/styles";
 import TruncatedTooltip from "../../TruncatedTooltip/TruncatedTooltip";
 
 // TODO: add tests in browser once we are done with the migration to cypress. The old tests live in a txt file in this folder until then.
@@ -143,7 +142,7 @@ function DetailCardHeader({
         <Box sx={{ width: headerContentWidth }}>
           <TruncatedTooltip
             component={Typography}
-            sx={(theme: Theme) => ({
+            sx={theme => ({
               color: "black",
               fontSize: 20,
               fontWeight: 700,
@@ -156,7 +155,7 @@ function DetailCardHeader({
           </TruncatedTooltip>
           <TruncatedTooltip
             component={Typography}
-            sx={(theme: Theme) => ({
+            sx={theme => ({
               color: theme.palette.text.secondary,
               fontSize: 14,
               fontWeight: 400

@@ -3,14 +3,21 @@ import React, { Children, ReactElement, isValidElement, useState } from "react";
 
 import { TruncatedTooltipProps } from "./TruncatedTooltip.types";
 
+// https://fettblog.eu/typescript-react-generic-forward-refs/#option-3%3A-augment-forwardref
+// Note; In React 19 we will no longer need to use (or augment) the forwardRef type.
+declare module "react" {
+  // eslint-disable-next-line no-unused-vars
+  function forwardRef<T, P = {}>(
+    render: (props: P, ref: React.Ref<T>) => React.ReactNode | null
+  ): (props: P & React.RefAttributes<T>) => React.ReactNode | null;
+}
+
 /**
  * Truncates text and shows a tooltip if the text overflows.
  * Automatically grabs the tooltip from child.
  * Renders a specified MUI component or element otherwise wraps string in a span.
  */
-const TruncatedTooltip = React.forwardRef(function TruncateTooltip<
-  T extends React.ElementType = "span"
->(
+function TruncatedTooltipInner<T extends React.ElementType = "span">(
   {
     children,
     component,
@@ -21,7 +28,7 @@ const TruncatedTooltip = React.forwardRef(function TruncateTooltip<
     TooltipProps = undefined,
     ...rest
   }: TruncatedTooltipProps<T>,
-  ref: React.Ref<T>
+  ref: React.ForwardedRef<T>
 ) {
   // State to determine if the tooltip should show.
   const [open, setOpen] = useState(false);
@@ -93,7 +100,6 @@ const TruncatedTooltip = React.forwardRef(function TruncateTooltip<
     >
       <Box
         component={component || "span"}
-        ref={ref}
         sx={[
           {
             "& > *": {
@@ -118,12 +124,16 @@ const TruncatedTooltip = React.forwardRef(function TruncateTooltip<
           // You cannot spread `sx` directly because `SxProps` (typeof sx) can be an array.
           ...(Array.isArray(sx) ? sx : [sx])
         ]}
+        ref={ref}
         {...rest}
       >
         {children}
       </Box>
     </Tooltip>
   );
-});
+}
+
+// forward ref
+const TruncatedTooltip = React.forwardRef(TruncatedTooltipInner);
 
 export default TruncatedTooltip;
