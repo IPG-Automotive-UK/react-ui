@@ -223,7 +223,7 @@ function VehicleSelector({
             }
           }}
           size={size}
-          // if array is empty set to null to avoid rendereing the clear button
+          // if array is empty, set value to null to avoid rendering the clear button
           value={
             multipleSelection ? selectedVariants : selectedVariants[0] || null
           }

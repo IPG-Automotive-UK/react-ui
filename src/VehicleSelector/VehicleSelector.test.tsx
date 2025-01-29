@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Vehicle, VehicleSelectorProps } from "./VehicleSelector.types";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 
 import VehicleSelector from "./VehicleSelector";
 
@@ -234,5 +234,49 @@ describe("VehicleSelector", () => {
     ).toBeDisabled();
     expect(screen.getByRole("combobox", { name: /variant/i })).toBeDisabled();
     expect(screen.getByRole("combobox", { name: /gate/i })).toBeDisabled();
+  });
+
+  it("removes clear button when variant is deselected in single selection mode", async () => {
+    const value = [
+      {
+        _id: "64c8c4cccc8d6f00130b366b",
+        gate: "Gate 1",
+        modelYear: "2015",
+        projectCode: "911",
+        variant: "NN"
+      }
+    ];
+
+    render(
+      <VehicleSelectorWithState
+        {...defaultProps}
+        value={value}
+        multipleSelection={false}
+      />
+    );
+
+    // check the variant is initially selected
+    expect(screen.getByRole("combobox", { name: /variant/i })).toHaveValue(
+      "NN"
+    );
+
+    // find and click the clear button
+    const variantField = screen.getByRole("combobox", { name: /variant/i });
+    const clearButton = variantField.parentElement?.querySelector(
+      '[aria-label="Clear"]'
+    );
+
+    expect(clearButton).toBeInTheDocument();
+    clearButton?.click();
+
+    // wait until the clear button disappears
+    await waitFor(() =>
+      expect(
+        variantField.parentElement?.querySelector('[aria-label="Clear"]')
+      ).not.toBeInTheDocument()
+    );
+
+    // Ensure the variant field is empty
+    expect(variantField).toHaveValue("");
   });
 });
