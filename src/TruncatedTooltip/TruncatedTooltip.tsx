@@ -1,11 +1,5 @@
 import { Box, Tooltip } from "@mui/material";
-import React, {
-  Children,
-  ReactElement,
-  isValidElement,
-  useRef,
-  useState
-} from "react";
+import React, { Children, ReactElement, isValidElement, useState } from "react";
 
 import { TruncatedTooltipProps } from "./TruncatedTooltip.types";
 
@@ -14,18 +8,21 @@ import { TruncatedTooltipProps } from "./TruncatedTooltip.types";
  * Automatically grabs the tooltip from child.
  * Renders a specified MUI component or element otherwise wraps string in a span.
  */
-const TruncatedTooltip = <T extends React.ElementType = "span">({
-  children,
-  component,
-  multiline,
-  sx,
-  tooltip,
-  alwaysShowTooltip = false,
-  TooltipProps = undefined,
-  ...rest
-}: TruncatedTooltipProps<T>) => {
-  // Ref to the text element.
-  const textElementRef = useRef<HTMLInputElement | null>(null);
+const TruncatedTooltip = React.forwardRef(function TruncateTooltip<
+  T extends React.ElementType = "span"
+>(
+  {
+    children,
+    component,
+    multiline,
+    sx,
+    tooltip,
+    alwaysShowTooltip = false,
+    TooltipProps = undefined,
+    ...rest
+  }: TruncatedTooltipProps<T>,
+  ref: React.Ref<T>
+) {
   // State to determine if the tooltip should show.
   const [open, setOpen] = useState(false);
 
@@ -96,7 +93,7 @@ const TruncatedTooltip = <T extends React.ElementType = "span">({
     >
       <Box
         component={component || "span"}
-        ref={textElementRef}
+        ref={ref}
         sx={[
           {
             "& > *": {
@@ -127,6 +124,6 @@ const TruncatedTooltip = <T extends React.ElementType = "span">({
       </Box>
     </Tooltip>
   );
-};
+});
 
 export default TruncatedTooltip;
