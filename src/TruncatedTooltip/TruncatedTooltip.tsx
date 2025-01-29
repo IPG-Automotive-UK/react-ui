@@ -8,8 +8,8 @@ import { TruncatedTooltipProps } from "./TruncatedTooltip.types";
 declare module "react" {
   // eslint-disable-next-line no-unused-vars
   function forwardRef<T, P = {}>(
-    render: (props: P, ref: React.Ref<T>) => React.ReactNode | null
-  ): (props: P & React.RefAttributes<T>) => React.ReactNode | null;
+    render: (props: P, ref: React.ForwardedRef<T>) => React.ReactNode
+  ): (props: P & React.RefAttributes<T>) => React.ReactNode;
 }
 
 /**
