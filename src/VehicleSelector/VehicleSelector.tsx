@@ -223,7 +223,10 @@ function VehicleSelector({
             }
           }}
           size={size}
-          value={selectedVariants}
+          // if array is empty set to null to avoid rendereing the clear button
+          value={
+            multipleSelection ? selectedVariants : selectedVariants[0] || null
+          }
         />
       </Box>
 
