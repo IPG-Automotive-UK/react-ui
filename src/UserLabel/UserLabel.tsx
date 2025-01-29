@@ -12,7 +12,7 @@ export default function UserLabel({ label, color }: UserLabelProps) {
     icon: (
       <div>
         <UserAvatar
-          sx={{ height: "24px", width: "24px" }}
+          sx={{ fontSize: "10px", height: "24px", width: "24px" }}
           color={color}
           name={label}
         />
