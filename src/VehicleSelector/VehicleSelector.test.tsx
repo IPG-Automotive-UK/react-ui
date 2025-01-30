@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Vehicle, VehicleSelectorProps } from "./VehicleSelector.types";
-import { render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 import VehicleSelector from "./VehicleSelector";
 
@@ -255,28 +255,44 @@ describe("VehicleSelector", () => {
       />
     );
 
-    // check the variant is initially selected
     expect(screen.getByRole("combobox", { name: /variant/i })).toHaveValue(
       "NN"
     );
 
-    // find and click the clear button
     const variantField = screen.getByRole("combobox", { name: /variant/i });
     const clearButton = variantField.parentElement?.querySelector(
       '[aria-label="Clear"]'
     );
 
     expect(clearButton).toBeInTheDocument();
-    clearButton?.click();
+    (clearButton as HTMLElement)?.click();
 
-    // wait until the clear button disappears
     await waitFor(() =>
       expect(
         variantField.parentElement?.querySelector('[aria-label="Clear"]')
       ).not.toBeInTheDocument()
     );
 
-    // Ensure the variant field is empty
     expect(variantField).toHaveValue("");
+  });
+
+  it("filters model years based on selected project", async () => {
+    render(<VehicleSelectorWithState {...defaultProps} />);
+
+    const projectInput = screen.getByRole("combobox", {
+      name: /project code/i
+    });
+    fireEvent.mouseDown(projectInput);
+    fireEvent.click(screen.getByText("911"));
+
+    const modelYearInput = screen.getByRole("combobox", {
+      name: /model year/i
+    });
+    fireEvent.mouseDown(modelYearInput);
+
+    await waitFor(() => {
+      expect(screen.getByText("2015")).toBeInTheDocument();
+      expect(screen.getByText("2016")).toBeInTheDocument();
+    });
   });
 });
