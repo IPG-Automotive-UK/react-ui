@@ -5,7 +5,8 @@ import {
   Paper,
   Stack,
   TextField,
-  Tooltip
+  Tooltip,
+  Typography
 } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
 import React, { useState } from "react";
@@ -14,8 +15,8 @@ import Checkbox from "../Checkbox";
 import DeleteLabelDialog from "./DeleteLabelDialog/DeleteLabelDialog";
 import EditLabelDialog from "../EditLabelDialog/EditLabelDialog";
 import LabelChip from "./LabelChip/LabelChip";
-import NoWrapTypography from "../NoWrapTypography/NoWrapTypography";
 import PropTypes from "prop-types";
+import TruncatedTooltip from "../TruncatedTooltip/TruncatedTooltip";
 import { VirtualizedAutocomplete } from "../Autocomplete/Autocomplete";
 import { createFilterOptions } from "@mui/material/Autocomplete";
 
@@ -215,11 +216,19 @@ export default function LabelSelector({
                   color: option.color
                 }}
               />
-              <Stack direction="column" flexGrow={1} overflow="hidden">
-                <NoWrapTypography>{option.name}</NoWrapTypography>
-                <NoWrapTypography variant="caption">
+              <Stack
+                direction="column"
+                sx={{
+                  flexGrow: 1,
+                  overflow: "hidden"
+                }}
+              >
+                <TruncatedTooltip component={Typography}>
+                  {option.name}
+                </TruncatedTooltip>
+                <TruncatedTooltip component={Typography} variant="caption">
                   {option.description}
-                </NoWrapTypography>
+                </TruncatedTooltip>
               </Stack>
               <>
                 {editEnabled && (
