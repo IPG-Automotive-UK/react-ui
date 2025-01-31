@@ -8,12 +8,13 @@ import {
   Typography
 } from "@mui/material";
 import React, { useLayoutEffect, useState } from "react";
-import SearchBar, { SearchBarProps } from "../SearchBar";
 import {
   SingleListProps,
   TransferListItem,
   TransferListProps
 } from "./TransferList.types";
+
+import SearchBar from "../SearchBar";
 
 export default function TransferList({
   defaultSelectedItems,
@@ -96,10 +97,6 @@ export default function TransferList({
   // All checked source list items
   const sourceItemsToTransfer = checked.filter(item => !keys.includes(item));
 
-  // Boolean to indicate if all items are checked
-  const allSourceItemsChecked =
-    allSourceItems.length === sourceItemsToTransfer.length;
-
   /**
    * Target list logic
    */
@@ -115,44 +112,52 @@ export default function TransferList({
   // All checked target list items
   const targetItemsToTransfer = checked.filter(item => keys.includes(item));
 
-  // Boolean to indicate if all target items are checked
-  const allTargetItemsChecked =
-    allTargetItems.length === targetItemsToTransfer.length;
-
   /**
    * Handle check all items in the source list
    */
   const handleCheckAllSource = () => {
-    // If all source items are checked, uncheck them
-    // Otherwise, check all source items
-    allSourceItemsChecked
-      ? setChecked(
-          checked.filter(item => !sourceItemsToTransfer.includes(item))
-        )
-      : setChecked([
-          ...checked.filter(item => !sourceItemsToTransfer.includes(item)),
-          ...items
-            .map(item => filterKey(item))
-            .filter(item => !keys.includes(item))
-        ]);
+    // Get the items depending on if there is a search
+    const sourceItemsToCheck = sourceFilter
+      ? filteredSourceItems
+      : allSourceItems;
+
+    // Get the items keys
+    const sourceItemKeys = sourceItemsToCheck.map(item => filterKey(item));
+
+    if (sourceItemKeys.every(item => checked.includes(item))) {
+      // If all filtered items are checked, uncheck only those
+      setChecked(checked.filter(item => !sourceItemKeys.includes(item)));
+    } else {
+      // Otherwise, check all filtered items
+      setChecked([
+        ...checked,
+        ...sourceItemKeys.filter(item => !checked.includes(item))
+      ]);
+    }
   };
 
   /**
    * Handle check all items in the target list
    */
   const handleCheckAllTarget = () => {
-    // If all target items are checked, uncheck them
-    // Otherwise, check all target items
-    allTargetItemsChecked
-      ? setChecked(
-          checked.filter(item => !targetItemsToTransfer.includes(item))
-        )
-      : setChecked([
-          ...checked.filter(item => !targetItemsToTransfer.includes(item)),
-          ...items
-            .map(item => filterKey(item))
-            .filter(item => keys.includes(item))
-        ]);
+    // Get the items depending on if there is a search
+    const targetItemsToCheck = targetFilter
+      ? filteredTargetItems
+      : allTargetItems;
+
+    // Get the items keys
+    const targetItemKeys = targetItemsToCheck.map(item => filterKey(item));
+
+    if (targetItemKeys.every(item => checked.includes(item))) {
+      // If all filtered items are checked, uncheck only those
+      setChecked(checked.filter(item => !targetItemKeys.includes(item)));
+    } else {
+      // Otherwise, check all filtered items
+      setChecked([
+        ...checked,
+        ...targetItemKeys.filter(item => !checked.includes(item))
+      ]);
+    }
   };
 
   /**
@@ -186,6 +191,12 @@ export default function TransferList({
     // Get checked source items
     const checkedSourceItems = checked.filter(item => !keys.includes(item));
 
+    // Remove the source search string on transfer
+    setSourceFilter("");
+
+    // Remove the target search string on transfer
+    setTargetFilter("");
+
     // Updated target list keys
     const updatedTargetList = [...keys, ...checkedSourceItems];
 
@@ -215,6 +226,12 @@ export default function TransferList({
     const newTargetSelection = keys.filter(
       item => !targetItemsToTransfer.includes(item)
     );
+
+    // Remove the source search string on transfer
+    setSourceFilter("");
+
+    // Remove the target search string on transfer
+    setTargetFilter("");
 
     // Get the items that have been transferred
     const updatedSelectedItems = getTransferredItems(items, newTargetSelection);
@@ -307,13 +324,13 @@ export default function TransferList({
             <Typography
               variant="body2"
               sx={{ color: "text.secondary" }}
-            >{`${sourceItemsToTransfer.length}/${allSourceItems.length} selected`}</Typography>
+            >{`${sourceItemsToTransfer.length} selected`}</Typography>
           </Box>
         </Box>
 
         {allSourceItems.length > 0 ? (
           <Box sx={{ px: 3 }}>
-            <Search onChange={setSourceFilter} />
+            <Search value={sourceFilter} onChange={setSourceFilter} />
           </Box>
         ) : null}
 
@@ -415,13 +432,13 @@ export default function TransferList({
             <Typography
               variant="body2"
               sx={{ color: "text.secondary" }}
-            >{`${targetItemsToTransfer.length}/${allTargetItems.length} selected`}</Typography>
+            >{`${targetItemsToTransfer.length} selected`}</Typography>
           </Box>
         </Box>
 
         {allTargetItems.length > 0 ? (
           <Box sx={{ px: 3 }}>
-            <Search onChange={setTargetFilter} />
+            <Search value={targetFilter} onChange={setTargetFilter} />
           </Box>
         ) : null}
 
@@ -454,27 +471,17 @@ export default function TransferList({
 /**
  * Search bar for the transfer list
  */
-const Search = ({ onChange }: { onChange: (value: string) => void }) => {
-  const [search, setSearch] = useState("");
-
-  // handle change
-  const handleChange: SearchBarProps["onChange"] = event => {
-    setSearch(event.target.value);
-    onChange(event.target.value);
-  };
-
-  return (
-    <Box
-      sx={{
-        alignItems: "center",
-        display: "flex",
-        width: "100%"
-      }}
-    >
-      <SearchBar value={search} onChange={handleChange} />
-    </Box>
-  );
-};
+const Search = ({
+  value,
+  onChange
+}: {
+  value: string;
+  onChange: (value: string) => void;
+}) => (
+  <Box sx={{ alignItems: "center", display: "flex", width: "100%" }}>
+    <SearchBar value={value} onChange={e => onChange(e.target.value)} />
+  </Box>
+);
 
 /**
  * Single list component for the transfer list
