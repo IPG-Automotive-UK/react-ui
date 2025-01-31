@@ -1,31 +1,35 @@
 import { Box, Tooltip } from "@mui/material";
-import React, {
-  Children,
-  ReactElement,
-  isValidElement,
-  useRef,
-  useState
-} from "react";
+import React, { Children, ReactElement, isValidElement, useState } from "react";
 
 import { TruncatedTooltipProps } from "./TruncatedTooltip.types";
+
+// https://fettblog.eu/typescript-react-generic-forward-refs/#option-3%3A-augment-forwardref
+// Note; In React 19 we will no longer need to use (or augment) the forwardRef type.
+declare module "react" {
+  // eslint-disable-next-line no-unused-vars
+  function forwardRef<T, P = {}>(
+    render: (props: P, ref: React.ForwardedRef<T>) => React.ReactNode
+  ): (props: P & React.RefAttributes<T>) => React.ReactNode;
+}
 
 /**
  * Truncates text and shows a tooltip if the text overflows.
  * Automatically grabs the tooltip from child.
  * Renders a specified MUI component or element otherwise wraps string in a span.
  */
-const TruncatedTooltip = <T extends React.ElementType = "span">({
-  children,
-  component,
-  multiline,
-  sx,
-  tooltip,
-  alwaysShowTooltip = false,
-  TooltipProps = undefined,
-  ...rest
-}: TruncatedTooltipProps<T>) => {
-  // Ref to the text element.
-  const textElementRef = useRef<HTMLInputElement | null>(null);
+function TruncatedTooltipInner<T extends React.ElementType = "span">(
+  {
+    children,
+    component,
+    multiline,
+    sx,
+    tooltip,
+    alwaysShowTooltip = false,
+    TooltipProps = undefined,
+    ...rest
+  }: TruncatedTooltipProps<T>,
+  ref: React.ForwardedRef<T>
+) {
   // State to determine if the tooltip should show.
   const [open, setOpen] = useState(false);
 
@@ -96,7 +100,6 @@ const TruncatedTooltip = <T extends React.ElementType = "span">({
     >
       <Box
         component={component || "span"}
-        ref={textElementRef}
         sx={[
           {
             "& > *": {
@@ -121,12 +124,16 @@ const TruncatedTooltip = <T extends React.ElementType = "span">({
           // You cannot spread `sx` directly because `SxProps` (typeof sx) can be an array.
           ...(Array.isArray(sx) ? sx : [sx])
         ]}
+        ref={ref}
         {...rest}
       >
         {children}
       </Box>
     </Tooltip>
   );
-};
+}
+
+// forward ref
+const TruncatedTooltip = React.forwardRef(TruncatedTooltipInner);
 
 export default TruncatedTooltip;

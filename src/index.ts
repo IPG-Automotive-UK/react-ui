@@ -219,10 +219,6 @@ export {
   type UserAvatarProps
 } from "./UserAvatar";
 export {
-  default as NoWrapTypography,
-  type NoWrapTypographyProps
-} from "./NoWrapTypography";
-export {
   default as ModelButtonImage,
   type ModelButtonImageProps
 } from "./ModelButtonImage";
