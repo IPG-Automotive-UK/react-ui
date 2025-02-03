@@ -1,12 +1,19 @@
-import React from "react";
-import RoadOutlined from "./RoadOutlined";
+import { Meta, StoryFn } from "@storybook/react";
 
-export default {
+import React from "react";
+import { RoadOutlined } from "./RoadOutlined";
+import { RoadOutlinedProps } from "./RoadOutlined.types";
+
+/**
+ * Story metadata
+ */
+const meta: Meta<typeof RoadOutlined> = {
   component: RoadOutlined,
   title: "General/SvgIcons/RoadOutlined"
 };
+export default meta;
 
-const Template = args => {
+const Template: StoryFn<RoadOutlinedProps> = args => {
   return <RoadOutlined {...args} />;
 };
 

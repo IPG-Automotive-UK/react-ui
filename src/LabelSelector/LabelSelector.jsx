@@ -70,7 +70,12 @@ const CustomPaper = ({
     <Paper {...props} onMouseDown={handleMouseDown}>
       {props.children}
       {addEnabled && (
-        <Box marginLeft={2} marginBottom={1}>
+        <Box
+          sx={{
+            marginBottom: 1,
+            marginLeft: 2
+          }}
+        >
           <Button
             size={props.size}
             color="primary"
@@ -109,7 +114,7 @@ export default function LabelSelector({
   // default label object
   const defaultLabel = {
     _id: "",
-    color: "#005FA8",
+    color: "#003063",
     description: "",
     name: ""
   };
@@ -190,23 +195,15 @@ export default function LabelSelector({
           const filtered = filter(options, params);
           return filtered;
         }}
-        PaperComponent={props => {
-          return (
-            <CustomPaper
-              addEnabled={addEnabled}
-              setIsLabelDialogOpen={setIsLabelDialogOpen}
-              setLabelDialogTitle={setLabelDialogTitle}
-              {...props}
-            />
-          );
-        }}
         renderOption={(props, option, { selected }) => (
           <Box key={option._id} component="li" {...props}>
             <Stack
               direction="row"
-              alignItems="center"
-              overflow="hidden"
-              flexGrow={1}
+              sx={{
+                alignItems: "center",
+                flexGrow: 1,
+                overflow: "hidden"
+              }}
             >
               <Checkbox
                 checked={selected}
@@ -278,6 +275,18 @@ export default function LabelSelector({
           return option._id === value._id;
         }}
         value={value || null}
+        slots={{
+          paper: props => {
+            return (
+              <CustomPaper
+                addEnabled={addEnabled}
+                setIsLabelDialogOpen={setIsLabelDialogOpen}
+                setLabelDialogTitle={setLabelDialogTitle}
+                {...props}
+              />
+            );
+          }
+        }}
       />
       <EditLabelDialog
         isOpen={isLabelDialogOpen !== false}

@@ -123,12 +123,12 @@ function SummaryCard({
           }
         />
         <Box
-          ml={2}
-          pr={2}
           sx={{
             height: 24,
             maxWidth: headerContentWidth,
-            overflowX: "hidden"
+            ml: 2,
+            overflowX: "hidden",
+            pr: 2
           }}
         >
           <LabelChipGroup chips={labelChips} />

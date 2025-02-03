@@ -48,22 +48,24 @@ export default function UploaderHeader({
 
   return (
     <Stack
-      gap={2}
-      flexDirection="row"
-      justifyContent="space-between"
-      alignItems="center"
-      mb={0.5}
-      minHeight="40px"
+      sx={{
+        alignItems: "center",
+        flexDirection: "row",
+        gap: 2,
+        justifyContent: "space-between",
+        mb: 0.5,
+        minHeight: "40px"
+      }}
     >
       <Box>
         <Typography {...titleTypographyProps}>
           {title}
           {required ? (
             <Typography
-              color={theme => theme.palette.error.main}
               component="span"
-              lineHeight="inherit"
               sx={{
+                color: theme => theme.palette.error.main,
+                lineHeight: "inherit",
                 marginLeft: "4px",
                 verticalAlign: "text-top"
               }}

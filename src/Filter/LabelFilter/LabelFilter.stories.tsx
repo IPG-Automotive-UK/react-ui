@@ -10,7 +10,7 @@ export default {
 
 // example options
 const options = [
-  { _id: "1", color: "#005FA8", description: "first label", name: "label 1" },
+  { _id: "1", color: "#003063", description: "first label", name: "label 1" },
   { _id: "2", color: "#f542e0", description: "second label", name: "label 2" },
   { _id: "3", color: "#ffa500", description: "third label", name: "label 3" }
 ];

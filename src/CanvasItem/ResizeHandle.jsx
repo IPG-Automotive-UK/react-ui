@@ -72,15 +72,15 @@ export default function ResizeHandle({ onResize, direction, rotateAngle }) {
 
   return (
     <Box
-      sx={{
-        background: theme => theme.palette.primary.main,
+      sx={theme => ({
+        background: theme.palette.primary.main,
         cursor: `${cursor}-resize`,
         height: "10px",
-        outline: theme => `2px solid ${theme.palette.background.paper}`,
+        outline: `2px solid ${theme.palette.background.paper}`,
         position: "absolute",
         width: "10px",
         ...getOffset(direction)
-      }}
+      })}
       onMouseDown={handleResize}
       onDragStart={e => e.preventDefault()}
       onDrag={e => e.preventDefault()}

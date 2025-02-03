@@ -192,11 +192,7 @@ export {
 } from "./Status";
 export { default as SwitchField, type SwitchFieldProps } from "./SwitchField";
 export { default as TextField, type TextFieldProps } from "./TextField";
-export {
-  ThemeProvider,
-  type ThemeProviderProps,
-  useTheme
-} from "./ThemeProvider";
+export { theme, ThemeProvider, type ThemeProviderProps } from "./ThemeProvider";
 export {
   default as ToggleColorMode,
   type ToggleColorModeProps
@@ -218,10 +214,6 @@ export {
   useColorMap,
   type UserAvatarProps
 } from "./UserAvatar";
-export {
-  default as NoWrapTypography,
-  type NoWrapTypographyProps
-} from "./NoWrapTypography";
 export {
   default as ModelButtonImage,
   type ModelButtonImageProps

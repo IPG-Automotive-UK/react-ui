@@ -82,7 +82,6 @@ const VehicleSelectDialog = ({
             aria-label="close"
             onClick={onCancelClick}
             sx={{
-              color: theme => theme.palette.grey[500],
               position: "absolute",
               right: 8,
               top: 8
@@ -103,7 +102,12 @@ const VehicleSelectDialog = ({
           onChange={setValue}
         />
         {errorMessage ? (
-          <Box display={"flex"} mt={2}>
+          <Box
+            sx={{
+              display: "flex",
+              mt: 2
+            }}
+          >
             <Alert variant="filled" severity="error">
               {errorMessage}
             </Alert>

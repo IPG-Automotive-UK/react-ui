@@ -5,7 +5,8 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Typography
+  Typography,
+  alpha
 } from "@mui/material";
 
 import React from "react";
@@ -24,17 +25,14 @@ export function StatusCountTable({ title, count }: StatusCountTableProps) {
   /** Keys of the count object */
   const countKeys = Object.keys(count) as (keyof typeof count)[];
 
-  // Color of the header
-  const headerColor = "#5E8AB414";
-
   return (
     <TableContainer
-      sx={{
-        backgroundColor: theme => theme.palette.background.default,
+      sx={theme => ({
+        backgroundColor: theme.palette.background.default,
         borderRadius: "4px",
         boxShadow: 8,
         maxWidth: "280px"
-      }}
+      })}
     >
       <Table size="small">
         <TableHead>
@@ -43,14 +41,22 @@ export function StatusCountTable({ title, count }: StatusCountTableProps) {
               height: "40px"
             }}
           >
-            <TableCell sx={{ background: headerColor, pl: 2 }}>
+            <TableCell
+              sx={{
+                background: theme => alpha(theme.palette.primary.main, 0.05),
+                pl: 2
+              }}
+            >
               <Typography variant="subtitle2" data-testid="status-count-title">
                 {title}
               </Typography>
             </TableCell>
             <TableCell
               align="right"
-              sx={{ backgroundColor: headerColor, pr: 2 }}
+              sx={{
+                background: theme => alpha(theme.palette.primary.main, 0.05),
+                pr: 2
+              }}
             >
               <Typography
                 variant="subtitle2"
@@ -71,18 +77,20 @@ export function StatusCountTable({ title, count }: StatusCountTableProps) {
               }}
             >
               <TableCell
-                sx={{
-                  backgroundColor: theme => theme.palette.background.default,
+                sx={theme => ({
+                  backgroundColor: theme.palette.background.default,
                   pl: 2
-                }}
+                })}
                 component="th"
                 scope="row"
               >
                 <Typography
                   variant="body2"
-                  display="flex"
-                  alignItems="center"
-                  gap="8px"
+                  sx={{
+                    alignItems: "center",
+                    display: "flex",
+                    gap: "8px"
+                  }}
                 >
                   <StatusIcon status={row as Status} width={24} height={24} />
                   {statuses[row].label.text}
@@ -90,10 +98,10 @@ export function StatusCountTable({ title, count }: StatusCountTableProps) {
               </TableCell>
               <TableCell
                 align="right"
-                sx={{
-                  backgroundColor: theme => theme.palette.background.default,
+                sx={theme => ({
+                  backgroundColor: theme.palette.background.default,
                   pr: 2
-                }}
+                })}
               >
                 <Typography variant="body2">{count[row]}</Typography>
               </TableCell>

@@ -23,21 +23,21 @@ const Template: StoryFn<LinePlotProps> = args => {
 const CardTemplate: StoryFn<LinePlotProps> = args => {
   return (
     <Box
-      sx={{
+      sx={theme => ({
         alignItems: "flex-start",
-        background: theme =>
-          theme.palette.mode === "light" ? "white" : "#1e1e1e",
-        border: theme =>
-          theme.palette.mode === "light"
-            ? `1px solid ${theme.palette.divider}`
-            : "none",
+        background: "#1e1e1e",
+        border: "none",
         borderRadius: "6px",
         display: "flex",
         flexDirection: "column",
         height: "332px",
         padding: "24px",
-        width: "800px"
-      }}
+        width: "800px",
+        ...theme.applyStyles("light", {
+          background: "white",
+          border: `1px solid ${theme.palette.divider}`
+        })
+      })}
     >
       <Typography sx={{ fontSize: "20px", fontWeight: 500 }} color="primary">
         {args.title}

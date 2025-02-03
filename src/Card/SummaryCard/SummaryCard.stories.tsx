@@ -98,7 +98,11 @@ const WithMoreOptionsButtonRef: StoryFn<SummaryCardProps> = args => {
           vertical: "bottom"
         }}
       >
-        <Box p={2}>
+        <Box
+          sx={{
+            p: 2
+          }}
+        >
           <Typography>
             This popover is anchored to the more options button
           </Typography>
@@ -178,7 +182,9 @@ const MoreActions = (
     <Divider
       orientation="vertical"
       flexItem
-      sx={{ background: theme => theme.palette.primary.main }}
+      sx={theme => ({
+        background: theme.palette.primary.main
+      })}
     />
     <Button
       size="large"

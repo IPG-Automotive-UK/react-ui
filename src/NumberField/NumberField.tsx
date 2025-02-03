@@ -93,19 +93,6 @@ export default function NumberField(props: NumberFieldProps) {
       helperText={validationText || helperText}
       margin={margin}
       variant={variant}
-      InputLabelProps={{ shrink: true }}
-      InputProps={{
-        ...(endAdornment && {
-          endAdornment: (
-            <InputAdornment position="end">{endAdornment}</InputAdornment>
-          )
-        }),
-        ...(startAdornment && {
-          startAdornment: (
-            <InputAdornment position="start">{startAdornment}</InputAdornment>
-          )
-        })
-      }}
       onChange={handleChange}
       sx={
         !stepper
@@ -120,6 +107,22 @@ export default function NumberField(props: NumberFieldProps) {
       }
       type="number"
       value={currentValue}
+      slotProps={{
+        input: {
+          ...(endAdornment && {
+            endAdornment: (
+              <InputAdornment position="end">{endAdornment}</InputAdornment>
+            )
+          }),
+          ...(startAdornment && {
+            startAdornment: (
+              <InputAdornment position="start">{startAdornment}</InputAdornment>
+            )
+          })
+        },
+
+        inputLabel: { shrink: true }
+      }}
     />
   );
 }

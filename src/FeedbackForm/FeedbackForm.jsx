@@ -125,8 +125,8 @@ export default function FeedbackForm({
                 variant="outlined"
                 sx={{
                   "&:hover": {
-                    border: "1px solid #cccccc",
-                    boxShadow: "0px 4px 8px rgba(38, 38, 38, 0.5)",
+                    border: `1px solid ${theme => theme.palette.divider}`,
+                    boxShadow: 5,
                     cursor: "pointer",
                     top: "-4px",
                     transition: "all 0.2s ease-out"
@@ -138,19 +138,24 @@ export default function FeedbackForm({
               >
                 <CardContent>
                   <Typography
+                    gutterBottom
                     sx={{
                       alignItems: "center",
+                      color: "text.primary",
                       display: "flex",
                       flexWrap: "wrap",
                       fontSize: 18
                     }}
-                    color="text.primary"
-                    gutterBottom
                   >
                     <SentimentSatisfiedAlt sx={{ fontSize: 40, mr: 1.5 }} />
                     <span>I like Something</span>
                   </Typography>
-                  <Typography sx={{ mb: 1 }} color="text.primary">
+                  <Typography
+                    sx={{
+                      color: "text.primary",
+                      mb: 1
+                    }}
+                  >
                     We like to hear what we're doing right.
                   </Typography>
                 </CardContent>
@@ -159,8 +164,8 @@ export default function FeedbackForm({
                 variant="outlined"
                 sx={{
                   "&:hover": {
-                    border: "1px solid #cccccc",
-                    boxShadow: "0px 4px 8px rgba(38, 38, 38, 0.5)",
+                    border: `1px solid ${theme => theme.palette.divider}`,
+                    boxShadow: 5,
                     cursor: "pointer",
                     top: "-4px",
                     transition: "all 0.2s ease-out"
@@ -173,19 +178,24 @@ export default function FeedbackForm({
               >
                 <CardContent>
                   <Typography
+                    gutterBottom
                     sx={{
                       alignItems: "center",
+                      color: "text.primary",
                       display: "flex",
                       flexWrap: "wrap",
                       fontSize: 18
                     }}
-                    color="text.primary"
-                    gutterBottom
                   >
                     <SentimentVeryDissatisfied sx={{ fontSize: 40, mr: 1.5 }} />
                     <span>I don't like Something</span>
                   </Typography>
-                  <Typography sx={{ mb: 1 }} color="text.primary">
+                  <Typography
+                    sx={{
+                      color: "text.primary",
+                      mb: 1
+                    }}
+                  >
                     If something's not right, we want to know about it.
                   </Typography>
                 </CardContent>
@@ -194,8 +204,8 @@ export default function FeedbackForm({
                 variant="outlined"
                 sx={{
                   "&:hover": {
-                    border: "1px solid #cccccc",
-                    boxShadow: "0px 4px 8px rgba(38, 38, 38, 0.5)",
+                    border: `1px solid ${theme => theme.palette.divider}`,
+                    boxShadow: 5,
                     cursor: "pointer",
                     top: "-4px",
                     transition: "all 0.2s ease-out"
@@ -208,19 +218,24 @@ export default function FeedbackForm({
               >
                 <CardContent>
                   <Typography
+                    gutterBottom
                     sx={{
                       alignItems: "center",
+                      color: "text.primary",
                       display: "flex",
                       flexWrap: "wrap",
                       fontSize: 18
                     }}
-                    color="text.primary"
-                    gutterBottom
                   >
                     <TextsmsOutlined sx={{ fontSize: 40, mr: 1.5 }} />
                     <span>I have a suggestion</span>
                   </Typography>
-                  <Typography sx={{ mb: 1 }} color="text.primary">
+                  <Typography
+                    sx={{
+                      color: "text.primary",
+                      mb: 1
+                    }}
+                  >
                     Share an idea or improvement.
                   </Typography>
                 </CardContent>
