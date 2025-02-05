@@ -51,6 +51,7 @@ describe("VehicleSelector Auto-Selection", () => {
           onChange={handleChange}
         />
       );
+      await Promise.resolve();
     });
 
     // open the Project Code dropdown
@@ -59,11 +60,13 @@ describe("VehicleSelector Auto-Selection", () => {
     });
     await act(async () => {
       fireEvent.mouseDown(projectInput);
+      await Promise.resolve();
     });
     // wait for the option 911 to appear and click it
     const option911 = await screen.findByRole("option", { name: "911" });
     await act(async () => {
       fireEvent.click(option911);
+      await Promise.resolve();
     });
 
     // wait for auto selection to occur
@@ -99,6 +102,7 @@ describe("VehicleSelector Auto-Selection Additional Scenarios", () => {
     const handleChange = vi.fn();
     await act(async () => {
       render(<VehicleSelectorWithState {...props} onChange={handleChange} />);
+      await Promise.resolve();
     });
 
     // open the Project Code dropdown and select 911
@@ -107,10 +111,12 @@ describe("VehicleSelector Auto-Selection Additional Scenarios", () => {
     });
     await act(async () => {
       fireEvent.mouseDown(projectInput);
+      await Promise.resolve();
     });
     const option911 = await screen.findByRole("option", { name: "911" });
     await act(async () => {
       fireEvent.click(option911);
+      await Promise.resolve();
     });
 
     // wait for auto selection: model year should auto-select 2015 because its the only option
@@ -148,6 +154,7 @@ describe("VehicleSelector Auto-Selection Additional Scenarios", () => {
     const handleChange = vi.fn();
     await act(async () => {
       render(<VehicleSelectorWithState {...props} onChange={handleChange} />);
+      await Promise.resolve();
     });
 
     // Open the Project Code dropdown and select "911".
@@ -156,10 +163,12 @@ describe("VehicleSelector Auto-Selection Additional Scenarios", () => {
     });
     await act(async () => {
       fireEvent.mouseDown(projectInput);
+      await Promise.resolve();
     });
     const option911 = await screen.findByRole("option", { name: "911" });
     await act(async () => {
       fireEvent.click(option911);
+      await Promise.resolve();
     });
 
     // manually select model year "2016".
@@ -168,10 +177,12 @@ describe("VehicleSelector Auto-Selection Additional Scenarios", () => {
     });
     await act(async () => {
       fireEvent.mouseDown(modelYearInput);
+      await Promise.resolve();
     });
     const option2016 = await screen.findByRole("option", { name: "2016" });
     await act(async () => {
       fireEvent.click(option2016);
+      await Promise.resolve();
     });
     await waitFor(() => {
       expect(modelYearInput).toHaveValue("2016");
@@ -186,10 +197,12 @@ describe("VehicleSelector Auto-Selection Additional Scenarios", () => {
     // Now manually select variant "DB".
     await act(async () => {
       fireEvent.mouseDown(variantInput);
+      await Promise.resolve();
     });
     const optionDB = await screen.findByRole("option", { name: "DB" });
     await act(async () => {
       fireEvent.click(optionDB);
+      await Promise.resolve();
     });
     await waitFor(() => {
       expect(variantInput).toHaveValue("DB");
