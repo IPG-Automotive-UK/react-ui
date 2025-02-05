@@ -305,7 +305,12 @@ describe("VehicleSelector", () => {
 describe("VehicleSelector utilities", () => {
   describe("createVehicleRecord", () => {
     it("should create a vehicle record with all provided values", () => {
-      const record = createVehicleRecord("911", "2015", "NN", "Gate 1");
+      const record = createVehicleRecord({
+        gate: "Gate 1",
+        modelYear: "2015",
+        projectCode: "911",
+        variant: "NN"
+      });
       expect(record).toEqual({
         _id: "",
         gate: "Gate 1",
@@ -316,7 +321,12 @@ describe("VehicleSelector utilities", () => {
     });
 
     it("should default variant and gate to empty strings when not provided", () => {
-      const record = createVehicleRecord("911", "2015");
+      const record = createVehicleRecord({
+        gate: "",
+        modelYear: "2015",
+        projectCode: "911",
+        variant: ""
+      });
       expect(record).toEqual({
         _id: "",
         gate: "",
@@ -329,19 +339,43 @@ describe("VehicleSelector utilities", () => {
 
   describe("shouldAutoSelect", () => {
     it("returns true when selectedValue is empty, exactly one option is available, and userCleared is false", () => {
-      expect(shouldAutoSelect("", ["2015"], false)).toBe(true);
+      expect(
+        shouldAutoSelect({
+          availableOptions: ["2015"],
+          selectedValue: "",
+          userCleared: false
+        })
+      ).toBe(true);
     });
 
     it("returns false when selectedValue is not empty", () => {
-      expect(shouldAutoSelect("2015", ["2015"], false)).toBe(false);
+      expect(
+        shouldAutoSelect({
+          availableOptions: ["2015"],
+          selectedValue: "2015",
+          userCleared: false
+        })
+      ).toBe(false);
     });
 
     it("returns false when availableOptions length is not exactly 1", () => {
-      expect(shouldAutoSelect("", ["2015", "2016"], false)).toBe(false);
+      expect(
+        shouldAutoSelect({
+          availableOptions: ["2015", "2016"],
+          selectedValue: "",
+          userCleared: false
+        })
+      ).toBe(false);
     });
 
     it("returns false when userCleared is true", () => {
-      expect(shouldAutoSelect("", ["2015"], true)).toBe(false);
+      expect(
+        shouldAutoSelect({
+          availableOptions: ["2015"],
+          selectedValue: "",
+          userCleared: true
+        })
+      ).toBe(false);
     });
   });
 
@@ -360,7 +394,11 @@ describe("VehicleSelector utilities", () => {
     ];
 
     it("filters vehicles by projectCode and modelYear", () => {
-      const filtered = filterVehicles(vehicles, "911", "2015");
+      const filtered = filterVehicles({
+        modelYear: "2015",
+        projectCode: "911",
+        variants: vehicles
+      });
       expect(filtered).toEqual([
         { _id: "1", modelYear: "2015", projectCode: "911", variant: "NN" },
         { _id: "2", modelYear: "2015", projectCode: "911", variant: "JS" }
@@ -368,14 +406,24 @@ describe("VehicleSelector utilities", () => {
     });
 
     it("filters vehicles by projectCode, modelYear, and variant", () => {
-      const filtered = filterVehicles(vehicles, "911", "2015", "NN");
+      const filtered = filterVehicles({
+        modelYear: "2015",
+        projectCode: "911",
+        variant: "NN",
+        variants: vehicles
+      });
       expect(filtered).toEqual([
         { _id: "1", modelYear: "2015", projectCode: "911", variant: "NN" }
       ]);
     });
 
     it("returns an empty array when no vehicles match the criteria", () => {
-      const filtered = filterVehicles(vehicles, "911", "2015", "NonExistent");
+      const filtered = filterVehicles({
+        modelYear: "2015",
+        projectCode: "911",
+        variant: "NonExistent",
+        variants: vehicles
+      });
       expect(filtered).toEqual([]);
     });
   });

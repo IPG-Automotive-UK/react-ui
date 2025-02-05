@@ -69,3 +69,48 @@ export type VehicleSelectorProps = {
    */
   limitTags?: number;
 };
+
+/**
+ * Props for determining auto‑selection.
+ */
+export type ShouldAutoSelectProps = {
+  /**
+   * The currently selected field value.
+   */
+  selectedValue: string;
+  /**
+   * The list of available options.
+   */
+  availableOptions: string[];
+  /**
+   * Whether the user has manually cleared the field.
+   */
+  userCleared: boolean;
+};
+
+/**
+ * Props for filtering vehicles.
+ */
+export type FilterVehiclesProps = {
+  /**
+   * The complete list of vehicles.
+   */
+  variants: Vehicle[];
+  /**
+   * The selected project code.
+   */
+  projectCode: string;
+  /**
+   * The selected model year.
+   */
+  modelYear: string;
+  /**
+   * (Optional) The variant to filter on.
+   */
+  variant?: string;
+};
+
+/**
+ * Props for creating a vehicle record.
+ */
+export type CreateVehicleRecordProps = Omit<Vehicle, "_id">;

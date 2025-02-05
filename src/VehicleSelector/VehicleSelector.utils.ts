@@ -1,3 +1,10 @@
+import {
+  CreateVehicleRecordProps,
+  FilterVehiclesProps,
+  ShouldAutoSelectProps,
+  Vehicle
+} from "./VehicleSelector.types";
+
 /**
  * Creates a default vehicle record.
  *
@@ -7,12 +14,12 @@
  * @param gate - The gate (default is an empty string).
  * @returns A new vehicle record.
  */
-export const createVehicleRecord = (
-  projectCode: string,
-  modelYear: string,
-  variant: string = "",
-  gate: string = ""
-) => {
+export const createVehicleRecord = ({
+  projectCode,
+  modelYear,
+  variant,
+  gate
+}: CreateVehicleRecordProps): Vehicle => {
   return { _id: "", gate, modelYear, projectCode, variant };
 };
 
@@ -24,11 +31,11 @@ export const createVehicleRecord = (
  * @param userCleared - Whether the user has manually cleared the field.
  * @returns True if auto‑selection should happen.
  */
-export const shouldAutoSelect = (
-  selectedValue: string,
-  availableOptions: string[],
-  userCleared: boolean
-): boolean => {
+export const shouldAutoSelect = ({
+  selectedValue,
+  availableOptions,
+  userCleared
+}: ShouldAutoSelectProps): boolean => {
   return selectedValue === "" && availableOptions.length === 1 && !userCleared;
 };
 
@@ -41,18 +48,12 @@ export const shouldAutoSelect = (
  * @param variant - (Optional) The variant to filter on.
  * @returns An array of vehicle records that match the criteria.
  */
-export const filterVehicles = (
-  variants: Array<{
-    _id: string;
-    projectCode: string;
-    modelYear: string;
-    variant: string;
-    gate?: string;
-  }>,
-  projectCode: string,
-  modelYear: string,
-  variant?: string
-) => {
+export const filterVehicles = ({
+  variants,
+  projectCode,
+  modelYear,
+  variant
+}: FilterVehiclesProps) => {
   return variants.filter(
     v =>
       v.projectCode === projectCode &&

@@ -98,9 +98,20 @@ function VehicleSelector({
 
     // auto select model year when theres exactly one option and the field hasnt been cleared
     if (
-      shouldAutoSelect(selectedModelYear, allModelYears, userClearedModelYear)
+      shouldAutoSelect({
+        availableOptions: allModelYears,
+        selectedValue: selectedModelYear,
+        userCleared: userClearedModelYear
+      })
     ) {
-      onChange([createVehicleRecord(selectedProject, allModelYears[0])]);
+      onChange([
+        createVehicleRecord({
+          gate: "",
+          modelYear: allModelYears[0],
+          projectCode: selectedProject,
+          variant: ""
+        })
+      ]);
     }
 
     // Auto-select Variant when there's exactly one option and the field hasn't been cleared.
@@ -112,12 +123,12 @@ function VehicleSelector({
     ) {
       const autoVariant = allVariants[0];
       onChange(
-        filterVehicles(
-          variants,
-          selectedProject,
-          selectedModelYear,
-          autoVariant
-        ).map(v => ({
+        filterVehicles({
+          modelYear: selectedModelYear,
+          projectCode: selectedProject,
+          variant: autoVariant,
+          variants
+        }).map(v => ({
           _id: v._id,
           gate: "",
           modelYear: v.modelYear,
@@ -169,7 +180,14 @@ function VehicleSelector({
           onChange={(_event, value) => {
             const newProject = value === null ? "" : value;
             // when the project changes clear lower fields
-            onChange([createVehicleRecord(newProject, "")]);
+            onChange([
+              createVehicleRecord({
+                gate: "",
+                modelYear: "",
+                projectCode: newProject,
+                variant: ""
+              })
+            ]);
           }}
           size={size}
           value={selectedProject === "" ? null : selectedProject}
@@ -198,7 +216,14 @@ function VehicleSelector({
             const newModelYear = value === null ? "" : value;
             setUserClearedModelYear(newModelYear === "");
             // when model year changes clear variant and gate
-            onChange([createVehicleRecord(selectedProject, newModelYear)]);
+            onChange([
+              createVehicleRecord({
+                gate: "",
+                modelYear: newModelYear,
+                projectCode: selectedProject,
+                variant: ""
+              })
+            ]);
           }}
           size={size}
           value={selectedModelYear === "" ? null : selectedModelYear}
@@ -239,17 +264,21 @@ function VehicleSelector({
 
               // filter available vehicles based on the current project and model year
               // then narrow down to those variants in the new selection.
-              const newVehicles = filterVehicles(
-                variants,
-                selectedProject,
-                selectedModelYear
-              ).filter(v => newVariants.includes(v.variant));
+              const newVehicles = filterVehicles({
+                modelYear: selectedModelYear,
+                projectCode: selectedProject,
+                variants
+              }).filter(v => newVariants.includes(v.variant));
 
               // if no vehicles match the selected variant(s)
               // clear the variant and gate fields but keep the project and model year.
               if (newVehicles.length === 0) {
                 onChange([
-                  createVehicleRecord(selectedProject, selectedModelYear)
+                  createVehicleRecord({
+                    modelYear: selectedModelYear,
+                    projectCode: selectedProject,
+                    variant: ""
+                  })
                 ]);
               }
               // if vehicles match and no gates are selected
@@ -283,7 +312,12 @@ function VehicleSelector({
               // and reset the variant and gate fields while keeping the project and model year
               setUserClearedVariant(true);
               onChange([
-                createVehicleRecord(selectedProject, selectedModelYear)
+                createVehicleRecord({
+                  gate: "",
+                  modelYear: selectedModelYear,
+                  projectCode: selectedProject,
+                  variant: ""
+                })
               ]);
             }
           }}
@@ -321,11 +355,11 @@ function VehicleSelector({
             limitTags={limitTags}
             options={gates}
             onChange={(_event, value) => {
-              const newVehicles = filterVehicles(
-                variants,
-                selectedProject,
-                selectedModelYear
-              ).filter(v => selectedVariants.includes(v.variant));
+              const newVehicles = filterVehicles({
+                modelYear: selectedModelYear,
+                projectCode: selectedProject,
+                variants
+              }).filter(v => selectedVariants.includes(v.variant));
               // if no gates selected keep the project, model year and variant but clear the gate in value
               if (!value || (Array.isArray(value) && value.length === 0)) {
                 onChange(
