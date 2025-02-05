@@ -1,5 +1,10 @@
 import React, { useState } from "react";
 import { Vehicle, VehicleSelectorProps } from "./VehicleSelector.types";
+import {
+  createVehicleRecord,
+  filterVehicles,
+  shouldAutoSelect
+} from "./VehicleSelector.utils";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 import VehicleSelector from "./VehicleSelector";
@@ -293,6 +298,85 @@ describe("VehicleSelector", () => {
     await waitFor(() => {
       expect(screen.getByText("2015")).toBeInTheDocument();
       expect(screen.getByText("2016")).toBeInTheDocument();
+    });
+  });
+});
+
+describe("VehicleSelector utilities", () => {
+  describe("createVehicleRecord", () => {
+    it("should create a vehicle record with all provided values", () => {
+      const record = createVehicleRecord("911", "2015", "NN", "Gate 1");
+      expect(record).toEqual({
+        _id: "",
+        gate: "Gate 1",
+        modelYear: "2015",
+        projectCode: "911",
+        variant: "NN"
+      });
+    });
+
+    it("should default variant and gate to empty strings when not provided", () => {
+      const record = createVehicleRecord("911", "2015");
+      expect(record).toEqual({
+        _id: "",
+        gate: "",
+        modelYear: "2015",
+        projectCode: "911",
+        variant: ""
+      });
+    });
+  });
+
+  describe("shouldAutoSelect", () => {
+    it("returns true when selectedValue is empty, exactly one option is available, and userCleared is false", () => {
+      expect(shouldAutoSelect("", ["2015"], false)).toBe(true);
+    });
+
+    it("returns false when selectedValue is not empty", () => {
+      expect(shouldAutoSelect("2015", ["2015"], false)).toBe(false);
+    });
+
+    it("returns false when availableOptions length is not exactly 1", () => {
+      expect(shouldAutoSelect("", ["2015", "2016"], false)).toBe(false);
+    });
+
+    it("returns false when userCleared is true", () => {
+      expect(shouldAutoSelect("", ["2015"], true)).toBe(false);
+    });
+  });
+
+  describe("filterVehicles", () => {
+    const vehicles = [
+      { _id: "1", modelYear: "2015", projectCode: "911", variant: "NN" },
+      { _id: "2", modelYear: "2015", projectCode: "911", variant: "JS" },
+      { _id: "3", modelYear: "2016", projectCode: "911", variant: "DB" },
+      { _id: "4", modelYear: "2016", projectCode: "911", variant: "MC" },
+      {
+        _id: "5",
+        modelYear: "2019",
+        projectCode: "CrossoverEV",
+        variant: "Option A"
+      }
+    ];
+
+    it("filters vehicles by projectCode and modelYear", () => {
+      const filtered = filterVehicles(vehicles, "911", "2015");
+      expect(filtered).toEqual([
+        { _id: "1", modelYear: "2015", projectCode: "911", variant: "NN" },
+        { _id: "2", modelYear: "2015", projectCode: "911", variant: "JS" }
+      ]);
+    });
+
+    it("filters vehicles by projectCode, modelYear, and variant", () => {
+      const filtered = filterVehicles(vehicles, "911", "2015", "NN");
+      expect(filtered).toEqual([
+        { _id: "1", modelYear: "2015", projectCode: "911", variant: "NN" }
+      ]);
+    });
+
+    it("returns an empty array when no vehicles match the criteria", () => {
+      const filtered = filterVehicles(vehicles, "911", "2015", "NonExistent");
+      expect(filtered).toEqual([]);
     });
   });
 });
