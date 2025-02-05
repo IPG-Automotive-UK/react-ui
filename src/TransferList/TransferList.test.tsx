@@ -958,4 +958,73 @@ describe("TransferList", () => {
     expect(screen.getByText("3 selected")).toBeTruthy();
     expect(selectAllTarget).toHaveProperty("checked", true);
   });
+
+  test("select two items from each list independently", async () => {
+    // array with more items
+    const itemsArray = [
+      { key: "Apples", primaryLabel: "Apples" },
+      { key: "Pears", primaryLabel: "Pears", secondaryLabel: "Conference" },
+      { key: "Oranges", primaryLabel: "Oranges" },
+      { key: "Pineapple", primaryLabel: "Pineapple" }
+    ];
+
+    // render the component
+    const user = userEvent.setup();
+
+    render(
+      <TransferList
+        items={itemsArray}
+        sourceListLabel="Source List Label"
+        targetListLabel="Target List Label"
+      />
+    );
+
+    // get source and target lists
+    const sourceList = screen.getByLabelText("Source List Label");
+    const targetList = screen.getByLabelText("Target List Label");
+
+    // verify source list has items
+    const sourceItems = within(sourceList).getAllByRole("listitem");
+    expect(sourceItems.length).toBe(4);
+
+    // select first two items in the source list
+    const sourceCheckboxes = within(sourceList).getAllByRole(
+      "checkbox"
+    ) as HTMLInputElement[];
+    await user.click(sourceCheckboxes[0]);
+    await user.click(sourceCheckboxes[1]);
+
+    // verify two items are selected in source
+    expect(screen.getByText("2 selected")).toBeTruthy();
+
+    // move selected items to target list
+    const transferButton = screen.getByLabelText("transfer to target list");
+    await user.click(transferButton);
+
+    // verify target list now has 2 items
+    const targetItems = within(targetList).getAllByRole("listitem");
+    expect(targetItems.length).toBe(2);
+
+    // ensure source still has the remaining items
+    const updatedSourceItems = within(sourceList).getAllByRole("listitem");
+    expect(updatedSourceItems.length).toBe(2);
+
+    // select first two items in the source list again
+    const sourceCheckboxesAgain = within(sourceList).getAllByRole(
+      "checkbox"
+    ) as HTMLInputElement[];
+    await user.click(sourceCheckboxesAgain[0]);
+    await user.click(sourceCheckboxesAgain[1]);
+
+    // select first two items in the target list
+    const targetCheckboxes = within(targetList).getAllByRole(
+      "checkbox"
+    ) as HTMLInputElement[];
+    await user.click(targetCheckboxes[0]);
+    await user.click(targetCheckboxes[1]);
+
+    // verify two items are selected in source and in target
+    const selectedItems = screen.getAllByText("2 selected");
+    expect(selectedItems.length).toBe(2);
+  });
 });
