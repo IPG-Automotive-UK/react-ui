@@ -7,12 +7,13 @@ import {
   ListItemText,
   Typography
 } from "@mui/material";
-import React, { useLayoutEffect, useState } from "react";
 import {
+  HandleCheckProps,
   SingleListProps,
   TransferListItem,
   TransferListProps
 } from "./TransferList.types";
+import React, { useLayoutEffect, useState } from "react";
 
 import SearchBar from "../SearchBar";
 
@@ -113,52 +114,46 @@ export default function TransferList({
   const targetItemsToTransfer = checked.filter(item => keys.includes(item));
 
   /**
-   * Handle check all items in the source list
+   * Handle checking all items in a list (source or target)
    */
-  const handleCheckAllSource = () => {
-    // Get the items depending on if there is a search
-    const sourceItemsToCheck = sourceFilter
-      ? filteredSourceItems
-      : allSourceItems;
+  const handleCheckAll = ({
+    isFiltered,
+    allItems,
+    filteredItems
+  }: HandleCheckProps) => {
+    // Determine which items to check
+    const itemsToCheck = isFiltered ? filteredItems : allItems;
 
-    // Get the items keys
-    const sourceItemKeys = sourceItemsToCheck.map(item => filterKey(item));
+    // Extract the keys of the items
+    const itemKeys = itemsToCheck.map(item => filterKey(item));
 
-    if (sourceItemKeys.every(item => checked.includes(item))) {
+    if (itemKeys.every(item => checked.includes(item))) {
       // If all filtered items are checked, uncheck only those
-      setChecked(checked.filter(item => !sourceItemKeys.includes(item)));
+      setChecked(checked.filter(item => !itemKeys.includes(item)));
     } else {
       // Otherwise, check all filtered items
       setChecked([
         ...checked,
-        ...sourceItemKeys.filter(item => !checked.includes(item))
+        ...itemKeys.filter(item => !checked.includes(item))
       ]);
     }
   };
 
-  /**
-   * Handle check all items in the target list
-   */
-  const handleCheckAllTarget = () => {
-    // Get the items depending on if there is a search
-    const targetItemsToCheck = targetFilter
-      ? filteredTargetItems
-      : allTargetItems;
+  // Usage for source
+  const handleCheckAllSource = () =>
+    handleCheckAll({
+      allItems: allSourceItems,
+      filteredItems: filteredSourceItems,
+      isFiltered: !!sourceFilter // Convert filter string to boolean
+    });
 
-    // Get the items keys
-    const targetItemKeys = targetItemsToCheck.map(item => filterKey(item));
-
-    if (targetItemKeys.every(item => checked.includes(item))) {
-      // If all filtered items are checked, uncheck only those
-      setChecked(checked.filter(item => !targetItemKeys.includes(item)));
-    } else {
-      // Otherwise, check all filtered items
-      setChecked([
-        ...checked,
-        ...targetItemKeys.filter(item => !checked.includes(item))
-      ]);
-    }
-  };
+  // Usage for target
+  const handleCheckAllTarget = () =>
+    handleCheckAll({
+      allItems: allTargetItems,
+      filteredItems: filteredTargetItems,
+      isFiltered: !!targetFilter // Convert filter string to boolean
+    });
 
   /**
    * Determine with items are an array of objects or strings

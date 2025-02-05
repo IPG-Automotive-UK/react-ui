@@ -239,6 +239,10 @@ describe("TransferList", () => {
     // test subheading is correct
     expect(screen.getByText("2 selected"));
 
+    // make sure target shows 0 selected
+    const zeroSelectedHeading = screen.getAllByText("0 selected");
+    expect(zeroSelectedHeading.length).toBe(1);
+
     // click first two items in list for a second time
     await user.click(items[0]);
     await user.click(items[1]);
@@ -806,5 +810,152 @@ describe("TransferList", () => {
         expect(checkbox).toHaveProperty("checked", false);
       }
     });
+  });
+
+  test("user selects an item, searches another, selects it, transfers both", async () => {
+    // render component
+    const user = userEvent.setup();
+
+    render(
+      <TransferList
+        items={defaultItemArray}
+        sourceListLabel="Source List"
+        targetListLabel="Target List"
+      />
+    );
+
+    const sourceList = screen.getByLabelText("Source List");
+    const sourceItems = within(sourceList).getAllByRole("listitem");
+
+    // select first item
+    await user.click(sourceItems[0]);
+
+    // get search input
+    const searchInput = screen.getByLabelText("Search");
+    await user.type(searchInput, "Pears");
+
+    // select the searched item
+    const filteredItems = within(sourceList).getAllByRole("listitem");
+    await user.click(filteredItems[0]);
+
+    // ensure label shows correct selected count
+    const selected = screen.getByText("2 selected");
+    expect(selected).not.toBeNull();
+
+    // transfer items
+    await user.click(screen.getByLabelText("transfer to target list"));
+
+    // verify items moved to target list
+    const targetList = screen.getByLabelText("Target List");
+    const targetItems = within(targetList).getAllByRole("listitem");
+    expect(targetItems.length).toBe(2);
+  });
+
+  test("select all toggles correctly with search", async () => {
+    // render component
+    const user = userEvent.setup();
+
+    render(
+      <TransferList
+        items={defaultItemArray}
+        sourceListLabel="Source List"
+        targetListLabel="Target List"
+      />
+    );
+
+    const sourceList = screen.getByLabelText("Source List");
+
+    // select 'Oranges'
+    await user.click(within(sourceList).getByText("Oranges"));
+
+    // get search input
+    const searchInput = screen.getByLabelText("Search");
+    await user.type(searchInput, "Apples");
+
+    // select all and check if we have 2 selected("Oranges" and "Apples")
+    const selectAllCheckbox = screen.getByLabelText(
+      "select all source list items"
+    );
+    await user.click(selectAllCheckbox);
+    expect(screen.getByText("2 selected")).not.toBeNull();
+
+    // deselect all
+    await user.click(selectAllCheckbox);
+
+    // check if now only one have been left as selected("Oranges")
+    expect(screen.getByText("1 selected")).not.toBeNull();
+
+    // select all again and clear search
+    await user.click(selectAllCheckbox);
+    await user.type(searchInput, "{selectall}{backspace}");
+
+    // assert that after the search is cleared we still have both "Apples" and "Oranges" selected
+    expect(screen.getByText("2 selected")).not.toBeNull();
+
+    // deselect all
+    await user.click(selectAllCheckbox);
+
+    // make sure both source target shows 0 selected after the diselection
+    const zeroSelectedHeadings = screen.getAllByText("0 selected");
+    expect(zeroSelectedHeadings.length).toBe(1);
+  });
+
+  test("select all only affects its own list", async () => {
+    const user = userEvent.setup();
+
+    render(
+      <TransferList
+        items={defaultItemArray}
+        sourceListLabel="Source List Label"
+        targetListLabel="Target List Label"
+      />
+    );
+
+    // get source and target lists
+    const sourceList = screen.getByLabelText("Source List Label");
+    const targetList = screen.getByLabelText("Target List Label");
+
+    // verify source list has items
+    const sourceItems = within(sourceList).getAllByRole("listitem");
+    expect(sourceItems.length).toBe(3);
+
+    // select all checkboxes for source
+    const selectAllSource = within(
+      screen.getByLabelText("select all source list items")
+    ).getByRole("checkbox") as HTMLInputElement;
+
+    // select all checkboxes for target
+    const selectAllTarget = within(
+      screen.getByLabelText("select all target list items")
+    ).getByRole("checkbox") as HTMLInputElement;
+
+    // ensure source select all is enabled and target select all is disabled
+    expect(selectAllSource.disabled).toBe(false);
+    expect(selectAllTarget.disabled).toBe(true);
+
+    // select all in source list
+    await user.click(selectAllSource);
+    expect(screen.getByText("3 selected")).toBeTruthy();
+    expect(selectAllSource).toHaveProperty("checked", true);
+
+    // get transfer button and move items to target list
+    const transferButton = screen.getByLabelText("transfer to target list");
+    await user.click(transferButton);
+
+    // verify target list now has items
+    const targetItems = within(targetList).getAllByRole("listitem");
+    expect(targetItems.length).toBe(3);
+
+    // ensure target select all is now enabled and source is disabled
+    expect(selectAllSource.disabled).toBe(true);
+    expect(selectAllTarget.disabled).toBe(false);
+
+    // verify source list select all is unchecked and unaffected by the target check
+    expect(selectAllSource).toHaveProperty("checked", false);
+
+    // select all in target list
+    await user.click(selectAllTarget);
+    expect(screen.getByText("3 selected")).toBeTruthy();
+    expect(selectAllTarget).toHaveProperty("checked", true);
   });
 });
