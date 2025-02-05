@@ -4,14 +4,15 @@ import React from "react";
 import { TextFieldProps } from "./TextField.types";
 
 // masked input
-const MaskedTextField = React.forwardRef((props, ref) => (
-  <MaskedInput
-    {...props}
-    mask={[/[1-9]/, /\d/, /\d/, "/", /[1-9]/, /\d/, "R", /[1-9]/, /\d/]}
-    keepCharPositions={true}
-  />
-));
-MaskedTextField.displayName = "MaskedTextField";
+const MaskedTextField = React.forwardRef(function MaskedTextField(props, ref) {
+  return (
+    <MaskedInput
+      {...props}
+      mask={[/[1-9]/, /\d/, /\d/, "/", /[1-9]/, /\d/, "R", /[1-9]/, /\d/]}
+      keepCharPositions={true}
+    />
+  );
+});
 
 /**
  * TextField components are used for collecting user provided information as a string.
@@ -55,12 +56,14 @@ export default function TextField({
       onBlur={onBlur}
       onChange={onChange}
       placeholder={placeholder}
-      InputProps={!isFieldMasked ? undefined : InputProps}
       required={required}
       size={size}
       type="string"
       value={value}
       variant={variant}
+      slotProps={{
+        input: !isFieldMasked ? undefined : InputProps
+      }}
     />
   );
 }

@@ -108,15 +108,29 @@ export default function ImageUploader({
         <input {...getInputProps()} />
         {isUploading ? (
           <Stack className="dropzoneText">
-            <Typography fontSize="14px">Uploading Image</Typography>
-            <Box width={200}>
+            <Typography
+              sx={{
+                fontSize: "14px"
+              }}
+            >
+              Uploading Image
+            </Typography>
+            <Box
+              sx={{
+                width: 200
+              }}
+            >
               <LinearProgress />
             </Box>
           </Stack>
         ) : selectedFiles.length === 0 ? (
           <Stack className="dropzoneText">
             <FileUploadIcon />
-            <Typography fontSize="15px">
+            <Typography
+              sx={{
+                fontSize: "15px"
+              }}
+            >
               {rejectionMessage ?? dropzoneText}
             </Typography>
           </Stack>

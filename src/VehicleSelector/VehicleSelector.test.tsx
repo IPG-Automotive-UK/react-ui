@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Vehicle, VehicleSelectorProps } from "./VehicleSelector.types";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 import VehicleSelector from "./VehicleSelector";
 
@@ -234,5 +234,65 @@ describe("VehicleSelector", () => {
     ).toBeDisabled();
     expect(screen.getByRole("combobox", { name: /variant/i })).toBeDisabled();
     expect(screen.getByRole("combobox", { name: /gate/i })).toBeDisabled();
+  });
+
+  it("removes clear button when variant is deselected in single selection mode", async () => {
+    const value = [
+      {
+        _id: "64c8c4cccc8d6f00130b366b",
+        gate: "Gate 1",
+        modelYear: "2015",
+        projectCode: "911",
+        variant: "NN"
+      }
+    ];
+
+    render(
+      <VehicleSelectorWithState
+        {...defaultProps}
+        value={value}
+        multipleSelection={false}
+      />
+    );
+
+    expect(screen.getByRole("combobox", { name: /variant/i })).toHaveValue(
+      "NN"
+    );
+
+    const variantField = screen.getByRole("combobox", { name: /variant/i });
+    const clearButton = variantField.parentElement?.querySelector(
+      '[aria-label="Clear"]'
+    );
+
+    expect(clearButton).toBeInTheDocument();
+    (clearButton as HTMLElement)?.click();
+
+    await waitFor(() =>
+      expect(
+        variantField.parentElement?.querySelector('[aria-label="Clear"]')
+      ).not.toBeInTheDocument()
+    );
+
+    expect(variantField).toHaveValue("");
+  });
+
+  it("filters model years based on selected project", async () => {
+    render(<VehicleSelectorWithState {...defaultProps} />);
+
+    const projectInput = screen.getByRole("combobox", {
+      name: /project code/i
+    });
+    fireEvent.mouseDown(projectInput);
+    fireEvent.click(screen.getByText("911"));
+
+    const modelYearInput = screen.getByRole("combobox", {
+      name: /model year/i
+    });
+    fireEvent.mouseDown(modelYearInput);
+
+    await waitFor(() => {
+      expect(screen.getByText("2015")).toBeInTheDocument();
+      expect(screen.getByText("2016")).toBeInTheDocument();
+    });
   });
 });

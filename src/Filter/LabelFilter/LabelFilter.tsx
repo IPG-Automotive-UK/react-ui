@@ -5,13 +5,14 @@ import {
   AutocompleteRenderGetTagProps,
   Checkbox,
   Stack,
-  TextField
+  TextField,
+  Typography
 } from "@mui/material";
 
 import { Label } from "../../LabelSelector/Label.types";
 import LabelChip from "../../LabelSelector/LabelChip/LabelChip";
 import { LabelFilterProps } from "./LabelFilter.types";
-import NoWrapTypography from "../../NoWrapTypography";
+import TruncatedTooltip from "../../TruncatedTooltip/TruncatedTooltip";
 import { VirtualizedAutocomplete } from "../../Autocomplete/Autocomplete";
 import { sortLabelOptions } from "../sortLabelOptions";
 
@@ -120,10 +121,12 @@ function Option(
         }}
       />
       <Stack direction="column" flexGrow={1} overflow="hidden">
-        <NoWrapTypography>{option.name}</NoWrapTypography>
-        <NoWrapTypography variant="caption">
+        <TruncatedTooltip component={Typography}>
+          {option.name}
+        </TruncatedTooltip>
+        <TruncatedTooltip component={Typography} variant="caption">
           {option.description || "No description"}
-        </NoWrapTypography>
+        </TruncatedTooltip>
       </Stack>
     </li>
   );

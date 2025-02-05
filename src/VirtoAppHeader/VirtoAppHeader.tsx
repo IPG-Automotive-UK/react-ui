@@ -5,31 +5,31 @@ import {
   IconButton,
   Link,
   Toolbar,
-  Typography
+  Typography,
+  useColorScheme
 } from "@mui/material";
 import React, { Fragment, useState } from "react";
 
 import AppLauncher from "../AppLauncher";
 import AppsIcon from "@mui/icons-material/Apps";
 import Menu from "@mui/icons-material/Menu";
-import { Theme } from "@mui/material/styles";
 import ToggleColorMode from "../ToggleColorMode";
 import UserMenu from "../UserMenu";
 import { VirtoAppHeaderProps } from "./VirtoAppHeader.types";
-import VirtoLogo from "../SvgIcons/VirtoLogo";
+import { VirtoLogo } from "../SvgIcons/VirtoLogo";
 
 // appbar component
 function Header({
   appName,
-  mode,
   onAppClick,
-  onColourModeChange,
   onChangePassword,
   onLogout,
   onMenuClick,
   username,
   virtoLogoLinkUrl
 }: VirtoAppHeaderProps) {
+  // use hook from MUI to get and set the theme mode
+  const { mode, setMode } = useColorScheme();
   return (
     <AppBar
       sx={theme => ({
@@ -37,7 +37,12 @@ function Header({
       })}
     >
       <Toolbar style={{ justifyContent: "space-between" }}>
-        <Box display="flex" alignItems="center">
+        <Box
+          sx={{
+            alignItems: "center",
+            display: "flex"
+          }}
+        >
           <IconButton sx={{ pl: 0 }} onClick={onAppClick} disableRipple>
             <AppsIcon
               sx={theme => ({
@@ -67,37 +72,53 @@ function Header({
               })}
             />
           </IconButton>
-          <Box ml={1} display="flex" alignItems="center">
-            <Link href={virtoLogoLinkUrl} underline="none" display="flex">
+          <Box
+            sx={{
+              alignItems: "center",
+              display: "flex",
+              ml: 1
+            }}
+          >
+            <Link
+              href={virtoLogoLinkUrl}
+              underline="none"
+              sx={{
+                display: "flex"
+              }}
+            >
               <VirtoLogo
                 data-testid="virto-logo"
-                sx={{
-                  color: (theme: Theme) =>
-                    theme.palette.mode === "dark" ? "#003063" : "white",
+                sx={theme => ({
+                  color: theme.palette.primary.contrastText,
                   height: 22,
                   mr: 0.4,
                   width: 110
-                }}
+                })}
               />
             </Link>
             <Typography
               variant="h6"
-              fontSize="28px"
-              lineHeight="34px"
-              letterSpacing="0.05em"
-              textTransform="uppercase"
-              fontWeight="700"
-              color={theme =>
-                theme.palette.mode === "dark" ? "#003063" : "white"
-              }
+              sx={theme => ({
+                color: theme.palette.primary.contrastText,
+                fontSize: "28px",
+                fontWeight: "700",
+                letterSpacing: "0.05em",
+                lineHeight: "34px",
+                textTransform: "uppercase"
+              })}
             >
               {`.`}
               <span style={{ marginLeft: "7px" }}>{appName}</span>
             </Typography>
           </Box>
         </Box>
-        <Box display="flex" alignItems="center">
-          <ToggleColorMode mode={mode} onChange={onColourModeChange} />
+        <Box
+          sx={{
+            alignItems: "center",
+            display: "flex"
+          }}
+        >
+          <ToggleColorMode mode={mode} onChange={mode => setMode(mode)} />
           <UserMenu
             username={username}
             onChangePassword={onChangePassword}
@@ -113,11 +134,9 @@ function Header({
 function VirtoAppHeader({
   appName,
   baseUrl,
-  mode,
   onChangePassword,
   onLogout,
   onMenuClick,
-  onColourModeChange,
   username,
   virtoLogoLinkUrl = ""
 }: VirtoAppHeaderProps) {
@@ -138,9 +157,7 @@ function VirtoAppHeader({
     <Fragment>
       <Header
         appName={appName}
-        mode={mode}
         onAppClick={() => setAppOpen(!appOpen)}
-        onColourModeChange={onColourModeChange}
         onChangePassword={onChangePassword}
         onLogout={onLogout}
         onMenuClick={handleMenuClick(onMenuClick)}
@@ -153,13 +170,13 @@ function VirtoAppHeader({
         data-testid="app-launcher"
         open={appOpen}
         onClose={() => setAppOpen(false)}
-        sx={{
+        sx={theme => ({
           "& .MuiDrawer-paper": {
-            height: theme => `calc(100% - ${theme.mixins.toolbar.minHeight}px)`,
-            top: theme => theme.mixins.toolbar.minHeight,
+            height: `calc(100vh - ${theme.mixins.toolbar.minHeight}px)`,
+            top: theme.mixins.toolbar.minHeight,
             width: applancherWidth
           }
-        }}
+        })}
       >
         <AppLauncher
           baseUrl={baseUrl}

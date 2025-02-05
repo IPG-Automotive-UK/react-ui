@@ -60,7 +60,7 @@ export const Default = {
     isOpen: false,
     label: {
       _id: "",
-      color: "#005FA8",
+      color: "#003063",
       description: "",
       name: ""
     },
@@ -76,7 +76,7 @@ export const EditLabel = {
     ...Default.args,
     label: {
       _id: "1",
-      color: "#005FA8",
+      color: "#003063",
       description: "This is a description",
       name: "Label Name"
     },

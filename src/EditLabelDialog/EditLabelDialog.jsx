@@ -1,12 +1,10 @@
-import "./colorSelector.css";
-
 import {
   Box,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
-  Grid,
+  Grid2 as Grid,
   TextField,
   Typography
 } from "@mui/material";
@@ -25,13 +23,13 @@ export default function EditLabelDialog({
   onEdit = () => {},
   onClose = () => {},
   title,
-  label = { _id: "", color: "#005FA8", description: "", name: "" },
+  label = { _id: "", color: "#003063", description: "", name: "" },
   nameMaxLength = 50
 }) {
   // define label states for user input
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [color, setColor] = useState("#005FA8");
+  const [color, setColor] = useState("#003063");
 
   // check if label is new and not being edited
   const isNew = label._id === "" && label.name === "";
@@ -44,7 +42,7 @@ export default function EditLabelDialog({
     // reset all the states
     setName("");
     setDescription("");
-    setColor("#005FA8");
+    setColor("#003063");
   };
 
   // if the label changes, update the dependent states
@@ -116,7 +114,7 @@ export default function EditLabelDialog({
     // reset all the states
     setName("");
     setDescription("");
-    setColor("#005FA8");
+    setColor("#003063");
 
     onClose(event, "save");
   };
@@ -133,7 +131,7 @@ export default function EditLabelDialog({
     // reset all the states
     setName("");
     setDescription("");
-    setColor("#005FA8");
+    setColor("#003063");
     onClose();
   };
 
@@ -143,54 +141,56 @@ export default function EditLabelDialog({
       <DialogTitle onClose={handleClose}>{title}</DialogTitle>
       <DialogContent dividers>
         <Grid container spacing={2}>
-          <Grid item xs={12}>
+          <Grid size={12}>
             <TextField
               label="Label Name"
               variant="outlined"
               required
               fullWidth
-              InputLabelProps={{
-                shrink: true
-              }}
+              slotProps={{ inputLabel: { shrink: true } }}
               value={name}
               onChange={event => setName(event.target.value)}
               error={!isLabelNameValid || !isLabelLengthValid}
               helperText={nameErrorMessage()}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid size={12}>
             <TextField
               label="Label Description"
               variant="outlined"
               fullWidth
-              InputLabelProps={{
-                shrink: true
-              }}
+              slotProps={{ inputLabel: { shrink: true } }}
               value={description}
               onChange={event => setDescription(event.target.value)}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid size={12}>
             <Typography
-              sx={{
-                color: theme => theme.palette.text.secondary,
+              sx={theme => ({
+                color: theme.palette.text.secondary,
                 fontSize: "12px",
                 fontWeight: 400,
                 marginLeft: "14px"
-              }}
+              })}
             >
               Label Color *
             </Typography>
           </Grid>
-          <Grid item xs={12}>
+          <Grid size={12}>
             <Color
               value={color}
               onChange={color => setColor(color)}
               showNoColor={false}
             />
           </Grid>
-          <Grid item xs={12}>
-            <Box width="100%" display="flex" justifyContent="center">
+          <Grid size={12}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                width: "100%"
+              }}
+            >
               {name ? (
                 <LabelChip label={name} color={color} size="small" />
               ) : null}

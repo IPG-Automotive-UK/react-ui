@@ -4,10 +4,11 @@ import {
   CircularProgress,
   FormControl,
   FormHelperText,
-  Grid,
+  Grid2 as Grid,
   MenuItem,
   TextField
 } from "@mui/material";
+
 import { Controller } from "react-hook-form";
 import PropTypes from "prop-types";
 import React from "react";
@@ -49,7 +50,12 @@ export default function RegistrationForm({
   return (
     <form onSubmit={handleSubmit(onRegister)} noValidate>
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={6}>
+        <Grid
+          size={{
+            sm: 6,
+            xs: 12
+          }}
+        >
           <TextField
             id="firstName"
             autoComplete="fname"
@@ -59,13 +65,18 @@ export default function RegistrationForm({
             fullWidth
             label="First Name"
             autoFocus={!loading}
-            inputProps={{ "aria-label": "firstName" }}
+            slotProps={{ input: { "aria-label": "firstName" } }}
             error={Boolean(errors.firstName)}
             disabled={loading}
             {...register("firstName", { required: true })}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid
+          size={{
+            sm: 6,
+            xs: 12
+          }}
+        >
           <TextField
             id="lastName"
             variant="outlined"
@@ -73,13 +84,13 @@ export default function RegistrationForm({
             fullWidth
             label="Last Name"
             autoComplete="lname"
-            inputProps={{ "aria-label": "lastName" }}
+            slotProps={{ input: { "aria-label": "lastName" } }}
             error={Boolean(errors.lastName)}
             disabled={loading}
             {...register("lastName", { required: true })}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>
           <TextField
             id="email"
             variant="outlined"
@@ -87,7 +98,7 @@ export default function RegistrationForm({
             fullWidth
             label="Email Address"
             autoComplete="username"
-            inputProps={{ "aria-label": "email" }}
+            slotProps={{ input: { "aria-label": "email" } }}
             error={Boolean(errors.email)}
             helperText={errors?.email?.message}
             disabled={loading}
@@ -101,7 +112,7 @@ export default function RegistrationForm({
             })}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>
           <FormControl
             required
             variant="outlined"
@@ -138,7 +149,7 @@ export default function RegistrationForm({
             />
           </FormControl>
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>
           <TextField
             variant="outlined"
             required
@@ -147,7 +158,7 @@ export default function RegistrationForm({
             label="Password"
             type="password"
             autoComplete="new-password"
-            inputProps={{ "aria-label": "password" }}
+            slotProps={{ input: { "aria-label": "password" } }}
             error={Boolean(errors.password)}
             helperText={errors?.password?.message}
             disabled={loading}
@@ -174,7 +185,7 @@ export default function RegistrationForm({
             </FormHelperText>
           )}
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>
           <TextField
             variant="outlined"
             required
@@ -183,7 +194,7 @@ export default function RegistrationForm({
             label="Confirm Password"
             type="password"
             autoComplete="new-password"
-            inputProps={{ "aria-label": "passwordRepeat" }}
+            slotProps={{ input: { "aria-label": "passwordRepeat" } }}
             error={Boolean(errors.passwordRepeat)}
             helperText={errors?.passwordRepeat?.message}
             disabled={loading}
@@ -195,7 +206,12 @@ export default function RegistrationForm({
           />
         </Grid>
       </Grid>
-      <Box mt={2} mb={1}>
+      <Box
+        sx={{
+          mb: 1,
+          mt: 2
+        }}
+      >
         <Button
           type="submit"
           fullWidth

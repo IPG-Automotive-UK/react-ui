@@ -8,7 +8,7 @@ import React from "react";
 import SearchBar from "../SearchBar";
 import ThemeProvider from "../ThemeProvider";
 import ToggleColorMode from "../ToggleColorMode";
-import VirtoLogo from "../SvgIcons/VirtoLogo";
+import { VirtoLogo } from "../SvgIcons/VirtoLogo";
 import { fixedPositionComponentDecorator } from "../../.storybook/decorators";
 import { useDarkMode } from "storybook-dark-mode";
 
@@ -84,10 +84,11 @@ export const MultipleChildrenAndLogo = {
   args: {
     appLogo: (
       <VirtoLogo
-        sx={{
+        sx={theme => ({
+          color: theme.palette.primary.contrastText,
           height: 50,
           width: 140
-        }}
+        })}
       />
     ),
     children: (

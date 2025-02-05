@@ -50,11 +50,13 @@ const LinePlot = ({
       dialogTitle={fullscreenTitle}
     >
       <Box
-        display="flex"
-        flexDirection="column"
-        overflow="hidden"
-        height="100%"
-        width="100%"
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          height: "100%",
+          overflow: "hidden",
+          width: "100%"
+        }}
       >
         {!isFullscreen && showTitle ? (
           <Typography
@@ -84,12 +86,12 @@ const LinePlot = ({
               family: "Montserrat, sans-serif"
             },
             margin: { b: 35, l: 80, r: 10, t: 30 },
-            paper_bgcolor: "rgba(0,0,0,0)",
-            plot_bgcolor: "rgba(0,0,0,0)",
+            paper_bgcolor: "transparent",
+            plot_bgcolor: "transparent",
             xaxis: {
-              color: theme.palette.mode === "light" ? "" : "white",
+              color: theme.palette.text.primary,
               exponentformat: "E",
-              gridcolor: theme.palette.mode === "light" ? "" : "grey",
+              gridcolor: theme.palette.divider,
               showgrid: showGrid,
               title: {
                 font: {
@@ -99,9 +101,9 @@ const LinePlot = ({
               }
             },
             yaxis: {
-              color: theme.palette.mode === "light" ? "black" : "white",
+              color: theme.palette.text.primary,
               exponentformat: "E",
-              gridcolor: theme.palette.mode === "light" ? "" : "grey",
+              gridcolor: theme.palette.divider,
               showgrid: showGrid,
               ticksuffix: " ",
               title: {

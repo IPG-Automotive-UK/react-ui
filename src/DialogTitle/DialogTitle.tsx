@@ -31,7 +31,6 @@ const DialogTitle = ({ children, onClose, ...other }: DialogTitleProps) => {
           aria-label="close"
           onClick={onClose}
           sx={{
-            color: theme => theme.palette.grey[500],
             flexGrow: 0,
             height: 35,
             marginTop: -0.3,

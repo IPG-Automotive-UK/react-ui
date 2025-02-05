@@ -15,7 +15,7 @@ export default function DeleteLabelDialog({
   isOpen = false,
   onDelete = () => {},
   onClose = () => {},
-  label = { _id: "", color: "#005FA8", description: "", name: "" }
+  label = { _id: "", color: "#003063", description: "", name: "" }
 }) {
   // handle close button click and close the dialog box
   const handleClose = (event, reason) => {

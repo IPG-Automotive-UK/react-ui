@@ -1,4 +1,11 @@
-import { Box, Button, CircularProgress, Grid, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Grid2 as Grid,
+  TextField
+} from "@mui/material";
+
 import PropTypes from "prop-types";
 import React from "react";
 import { useMaterialForm } from "../utils/form";
@@ -19,7 +26,7 @@ export default function PasswordResetForm({ loading, onSubmit }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <Grid container spacing={2}>
-        <Grid item xs={12}>
+        <Grid size={12}>
           <TextField
             variant="outlined"
             required
@@ -27,7 +34,7 @@ export default function PasswordResetForm({ loading, onSubmit }) {
             label="Email Address"
             autoComplete="email"
             autoFocus={!loading}
-            inputProps={{ "aria-label": "email" }}
+            slotProps={{ input: { "aria-label": "email" } }}
             error={Boolean(errors.email)}
             helperText={errors.email && errors.email.message}
             disabled={loading}
@@ -42,7 +49,12 @@ export default function PasswordResetForm({ loading, onSubmit }) {
           />
         </Grid>
       </Grid>
-      <Box mt={2} mb={1}>
+      <Box
+        sx={{
+          mb: 1,
+          mt: 2
+        }}
+      >
         <Button
           type="submit"
           fullWidth

@@ -1,3 +1,3 @@
 import { SvgIconProps } from "../SvgIcons.types";
 
-export type RoadOutlinedProps = SvgIconProps;
+export type VirtoLogoProps = SvgIconProps;
