@@ -96,19 +96,8 @@ export type FilterVehiclesProps = {
    * The complete list of vehicles.
    */
   variants: Vehicle[];
-  /**
-   * The selected project code.
-   */
-  projectCode: string;
-  /**
-   * The selected model year.
-   */
-  modelYear: string;
-  /**
-   * (Optional) The variant to filter on.
-   */
-  variant?: string;
-};
+} & Pick<Vehicle, "projectCode" | "modelYear"> &
+  Partial<Pick<Vehicle, "variant">>;
 
 /**
  * Props for creating a vehicle record.
