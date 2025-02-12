@@ -53,29 +53,34 @@ export default function useUploader({
       }))
     );
 
+    // create a Set, of selected file names
+    const selectedFilesNamesSet = new Set(
+      selectedFiles.map(file => file.file.name)
+    );
+
     // filter out files that are not duplicates
-    const uniqueFiles = fileWithPreview.filter(
-      f => !selectedFiles.some(sf => sf.file.name === f.file.name)
+    const newUniqueFiles = fileWithPreview.filter(
+      file => !selectedFilesNamesSet.has(file.file.name)
     );
 
     // check if there are any duplicate files
-    if (uniqueFiles.length !== fileWithPreview.length) {
+    if (newUniqueFiles.length !== fileWithPreview.length) {
       // get names of duplicate files
-      const duplicateNames = fileWithPreview
-        .filter(f => !uniqueFiles.includes(f))
-        .map(f => f.file.name)
+      const duplicateFileNames = fileWithPreview
+        .filter(file => selectedFilesNamesSet.has(file.file.name))
+        .map(file => file.file.name)
         .join(" , ");
 
       // if there are duplicates, show error message
       setRejectionMessage(
-        `'${duplicateNames}' has already been selected. Try a different file.`
+        `'${duplicateFileNames}' has already been selected. Try a different file.`
       );
     }
 
     // if multiple files are allowed, append to existing selection otherwise replace it
     const newSelection = multiple
-      ? [...selectedFiles, ...uniqueFiles]
-      : uniqueFiles;
+      ? [...selectedFiles, ...newUniqueFiles]
+      : newUniqueFiles;
 
     // if the number of files exceeds the limit, show error message
     if (newSelection.length > filesLimit) {
