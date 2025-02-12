@@ -35,3 +35,21 @@ export type LinePlotProps = {
    */
   ylabel: string;
 };
+
+/**
+ * This type defines the props for the Config component.
+ */
+export type ConfigProps = {
+  isFullscreen: boolean;
+  handleClickFullscreen: () => void;
+};
+
+/**
+ * This type defines the props for the ConditionalDialog component.
+ */
+export type ConditionalDialogProps = {
+  condition: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+  dialogTitle?: string;
+};

@@ -5,10 +5,14 @@ import {
   Typography,
   useTheme
 } from "@mui/material";
+import {
+  ConditionalDialogProps,
+  ConfigProps,
+  LinePlotProps
+} from "./LinePlot.types";
 import React, { useEffect, useRef, useState } from "react";
 
 import DialogTitle from "../DialogTitle";
-import { LinePlotProps } from "./LinePlot.types";
 import Plotly from "react-plotly.js";
 
 const LinePlot = ({
@@ -36,16 +40,15 @@ const LinePlot = ({
   // effect to update the size of the plot div on window resize
   useEffect(() => {
     const updateSize = () => {
-      if (plotRef.current) {
-        const boundingBox = plotRef.current.getBoundingClientRect();
-        setAxisSize({ height: boundingBox.height, width: boundingBox.width });
-      }
+      if (!plotRef.current) return;
+      const boundingBox = plotRef.current.getBoundingClientRect();
+      setAxisSize({ height: boundingBox.height, width: boundingBox.width });
     };
 
     updateSize();
     window.addEventListener("resize", updateSize);
     return () => window.removeEventListener("resize", updateSize);
-  }, [xdata, ydata]);
+  });
 
   // helper function to get the maximum number of characters that can fit in the axis label
   const getMaxChars = (axisLength: number) => Math.floor(axisLength / 7);
@@ -167,12 +170,6 @@ const fullscreenIcon = {
   width: 1792
 };
 
-// interface for config props
-interface ConfigProps {
-  isFullscreen: boolean;
-  handleClickFullscreen: () => void;
-}
-
 /**
  * Returns a plotly config function with provided callback for clicking fullscreen
  */
@@ -192,14 +189,6 @@ const getConfig = ({ isFullscreen, handleClickFullscreen }: ConfigProps) => {
       : []
   };
 };
-
-// interface for conditional dialog props
-interface ConditionalDialogProps {
-  condition: boolean;
-  onClose: () => void;
-  children: React.ReactNode;
-  dialogTitle?: string;
-}
 
 /**
  * Returns children in a fullscreen dialog if condition is true, otherwise just returns children
