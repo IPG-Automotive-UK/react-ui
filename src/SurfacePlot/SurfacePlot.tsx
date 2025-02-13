@@ -6,6 +6,7 @@ import Plotly from "react-plotly.js";
 import { SurfacePlotProps } from "./SurfacePlot.types";
 import { getConfig } from "../utils/plotlyConfig";
 
+// The `SurfacePlot` component renders a 3D surface plot using Plotly.
 const SurfacePlot = ({
   fullscreenTitle = "",
   xdata = [],
@@ -20,7 +21,7 @@ const SurfacePlot = ({
   // theme hook
   const theme = useTheme();
 
-  // state to keep track of whether the plot is in fullscreen mode
+  // state for fullscreen
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   // state to keep track of the wrapped axis labels for the plot
@@ -45,13 +46,13 @@ const SurfacePlot = ({
     setWrappedZLabel(wrapText(zlabel, maxLabelLength));
   }, [xlabel, ylabel, zlabel]);
 
-  // event handler to open the plot in fullscreen mode
+  // callback for fullscreen button
   const handleClickFullscreen = () => setIsFullscreen(true);
-  // event handler to close the plot in fullscreen mode
+  // callback for closing fullscreen
   const handleClose = () => setIsFullscreen(false);
-  // get the plotly config based on the fullscreen state
+  // get config for plotly
   const config = getConfig({ handleClickFullscreen, isFullscreen });
-  // check if the title is not empty
+  // determine whether to show title
   const showTitle = title !== "";
 
   return (
@@ -86,7 +87,7 @@ const SurfacePlot = ({
                   family: "Montserrat, sans-serif",
                   shadow: "none",
                   size: 12,
-                  weight: 100
+                  weight: 400
                 }
               },
               type: "surface",
@@ -104,6 +105,7 @@ const SurfacePlot = ({
               camera: { eye: { x: 2 } },
               xaxis: {
                 color: theme.palette.text.primary,
+                exponentformat: "E",
                 gridcolor: theme.palette.divider,
                 showgrid: showGrid,
                 tickangle: 45,
@@ -111,6 +113,7 @@ const SurfacePlot = ({
               },
               yaxis: {
                 color: theme.palette.text.primary,
+                exponentformat: "E",
                 gridcolor: theme.palette.divider,
                 showgrid: showGrid,
                 tickangle: -45,
@@ -118,6 +121,7 @@ const SurfacePlot = ({
               },
               zaxis: {
                 color: theme.palette.text.primary,
+                exponentformat: "E",
                 gridcolor: theme.palette.divider,
                 showgrid: showGrid,
                 title: { font: { size: 12 }, text: wrappedZLabel }
