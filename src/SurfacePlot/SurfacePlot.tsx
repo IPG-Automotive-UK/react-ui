@@ -1,12 +1,11 @@
 import { Box, Typography, useTheme } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import ConditionalDialog from "../ConditionalDialog";
 import Plotly from "react-plotly.js";
 import { SurfacePlotProps } from "./SurfacePlot.types";
 import { getConfig } from "../utils/plotlyConfig";
 
-// The `SurfacePlot` component renders a 3D surface plot using Plotly.
 const SurfacePlot = ({
   fullscreenTitle = "",
   xdata = [],
@@ -21,23 +20,38 @@ const SurfacePlot = ({
   // theme hook
   const theme = useTheme();
 
-  // state for fullscreen
+  // state to keep track of whether the plot is in fullscreen mode
   const [isFullscreen, setIsFullscreen] = useState(false);
 
-  // callback for fullscreen button
-  const handleClickFullscreen = () => {
-    setIsFullscreen(true);
+  // state to keep track of the wrapped axis labels for the plot
+  const [wrappedXLabel, setWrappedXLabel] = useState(xlabel);
+  const [wrappedYLabel, setWrappedYLabel] = useState(ylabel);
+  const [wrappedZLabel, setWrappedZLabel] = useState(zlabel);
+
+  // helper function to wrap text in axis labels
+  const wrapText = (text: string, maxLength: number) => {
+    if (!text) return "";
+    if (text.length <= maxLength) return text;
+    const matches = text.match(new RegExp(`.{1,${maxLength}}`, "g"));
+    return matches ? matches.join("<br>") : text;
   };
 
-  // callback for closing fullscreen
-  const handleClose = () => {
-    setIsFullscreen(false);
-  };
+  // effect to wrap axis labels when the axis labels change
+  useEffect(() => {
+    const maxWidth = Math.max(window.innerWidth * 0.1, 50);
+    const maxLabelLength = Math.floor(maxWidth / 6);
+    setWrappedXLabel(wrapText(xlabel, maxLabelLength));
+    setWrappedYLabel(wrapText(ylabel, maxLabelLength));
+    setWrappedZLabel(wrapText(zlabel, maxLabelLength));
+  }, [xlabel, ylabel, zlabel]);
 
-  // get config for plotly
+  // event handler to open the plot in fullscreen mode
+  const handleClickFullscreen = () => setIsFullscreen(true);
+  // event handler to close the plot in fullscreen mode
+  const handleClose = () => setIsFullscreen(false);
+  // get the plotly config based on the fullscreen state
   const config = getConfig({ handleClickFullscreen, isFullscreen });
-
-  // determine whether to show title
+  // check if the title is not empty
   const showTitle = title !== "";
 
   return (
@@ -72,7 +86,7 @@ const SurfacePlot = ({
                   family: "Montserrat, sans-serif",
                   shadow: "none",
                   size: 12,
-                  weight: 400
+                  weight: 100
                 }
               },
               type: "surface",
@@ -83,61 +97,34 @@ const SurfacePlot = ({
           ]}
           layout={{
             autosize: true,
-            font: {
-              family: "Montserrat, sans-serif"
-            },
-            margin: {
-              b: 5,
-              l: 5,
-              r: 5,
-              t: 20
-            },
+            font: { family: "Montserrat, sans-serif" },
+            margin: { b: 15, l: 15, r: 15, t: 15 },
             paper_bgcolor: "transparent",
             scene: {
               camera: { eye: { x: 2 } },
               xaxis: {
                 color: theme.palette.text.primary,
-                exponentformat: "E",
                 gridcolor: theme.palette.divider,
                 showgrid: showGrid,
-                title: {
-                  font: {
-                    size: 12
-                  },
-                  text: xlabel || ""
-                }
+                tickangle: 45,
+                title: { font: { size: 12 }, text: wrappedXLabel }
               },
               yaxis: {
                 color: theme.palette.text.primary,
-                exponentformat: "E",
                 gridcolor: theme.palette.divider,
                 showgrid: showGrid,
-                title: {
-                  font: {
-                    size: 12
-                  },
-                  text: ylabel || ""
-                }
+                tickangle: -45,
+                title: { font: { size: 12 }, text: wrappedYLabel }
               },
               zaxis: {
                 color: theme.palette.text.primary,
-                exponentformat: "E",
                 gridcolor: theme.palette.divider,
                 showgrid: showGrid,
-                title: {
-                  font: {
-                    size: 12
-                  },
-                  text: zlabel || ""
-                }
+                title: { font: { size: 12 }, text: wrappedZLabel }
               }
             }
           }}
-          style={{
-            flexGrow: 1,
-            height: "100%",
-            width: "100%"
-          }}
+          style={{ flexGrow: 1, height: "100%", width: "100%" }}
           useResizeHandler={true}
           config={config}
         />
