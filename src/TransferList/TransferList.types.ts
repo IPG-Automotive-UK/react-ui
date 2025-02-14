@@ -71,21 +71,3 @@ export type SingleListProps = {
    */
   handleToggle: (key: string) => void;
 };
-
-/**
- * Type representing the check state for the transfer list.
- */
-export type HandleCheckProps = {
-  /**
-   * Indicates whether the list is filtered.
-   */
-  isFiltered: boolean;
-  /**
-   * Array of all items in the list (can be strings or TransferListItem objects).
-   */
-  allItems: (TransferListItem | string)[];
-  /**
-   * Array of filtered items based on the search input.
-   */
-  filteredItems: (TransferListItem | string)[];
-};
