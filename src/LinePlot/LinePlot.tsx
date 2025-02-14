@@ -40,13 +40,16 @@ const LinePlot = ({
   // effect to update the size of the plot div on window resize
   useEffect(() => {
     const updateSize = () => {
+      // if plotRef is not set, return early to avoid errors
       if (!plotRef.current) return;
+      // get the bounding box of the plot div and set the axis size state
       const boundingBox = plotRef.current.getBoundingClientRect();
       setAxisSize({ height: boundingBox.height, width: boundingBox.width });
     };
-
+    // add event listener for window resize event and call updateSize on mount
     updateSize();
     window.addEventListener("resize", updateSize);
+    // cleanup event listener on unmount and resize
     return () => window.removeEventListener("resize", updateSize);
   });
 

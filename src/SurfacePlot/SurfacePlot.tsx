@@ -25,9 +25,11 @@ const SurfacePlot = ({
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   // state to keep track of the wrapped axis labels for the plot
-  const [wrappedXLabel, setWrappedXLabel] = useState(xlabel);
-  const [wrappedYLabel, setWrappedYLabel] = useState(ylabel);
-  const [wrappedZLabel, setWrappedZLabel] = useState(zlabel);
+  const [wrappedLabel, setWrappedLabel] = useState({
+    x: xlabel,
+    y: ylabel,
+    z: zlabel
+  });
 
   // helper function to wrap text in axis labels
   const wrapText = (text: string, maxLength: number) => {
@@ -39,11 +41,16 @@ const SurfacePlot = ({
 
   // effect to wrap axis labels when the axis labels change
   useEffect(() => {
+    // get the maximum width of the window
     const maxWidth = Math.max(window.innerWidth * 0.1, 50);
+    // get the maximum number of characters that can fit in the axis label
     const maxLabelLength = Math.floor(maxWidth / 6);
-    setWrappedXLabel(wrapText(xlabel, maxLabelLength));
-    setWrappedYLabel(wrapText(ylabel, maxLabelLength));
-    setWrappedZLabel(wrapText(zlabel, maxLabelLength));
+    // set wrapped axis labels
+    setWrappedLabel({
+      x: wrapText(xlabel, maxLabelLength),
+      y: wrapText(ylabel, maxLabelLength),
+      z: wrapText(zlabel, maxLabelLength)
+    });
   }, [xlabel, ylabel, zlabel]);
 
   // callback for fullscreen button
@@ -109,7 +116,7 @@ const SurfacePlot = ({
                 gridcolor: theme.palette.divider,
                 showgrid: showGrid,
                 tickangle: 45,
-                title: { font: { size: 12 }, text: wrappedXLabel }
+                title: { font: { size: 12 }, text: wrappedLabel.x }
               },
               yaxis: {
                 color: theme.palette.text.primary,
@@ -117,14 +124,14 @@ const SurfacePlot = ({
                 gridcolor: theme.palette.divider,
                 showgrid: showGrid,
                 tickangle: -45,
-                title: { font: { size: 12 }, text: wrappedYLabel }
+                title: { font: { size: 12 }, text: wrappedLabel.y }
               },
               zaxis: {
                 color: theme.palette.text.primary,
                 exponentformat: "E",
                 gridcolor: theme.palette.divider,
                 showgrid: showGrid,
-                title: { font: { size: 12 }, text: wrappedZLabel }
+                title: { font: { size: 12 }, text: wrappedLabel.z }
               }
             }
           }}

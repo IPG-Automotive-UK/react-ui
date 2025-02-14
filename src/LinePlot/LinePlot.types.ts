@@ -40,7 +40,13 @@ export type LinePlotProps = {
  * This type defines the props for the Config component.
  */
 export type ConfigProps = {
+  /**
+   * Boolean that determines whether or not the fullscreen button is shown.
+   */
   isFullscreen: boolean;
+  /**
+   * Function that handles the click event on the fullscreen button.
+   */
   handleClickFullscreen: () => void;
 };
 
@@ -48,8 +54,20 @@ export type ConfigProps = {
  * This type defines the props for the ConditionalDialog component.
  */
 export type ConditionalDialogProps = {
+  /**
+   * Boolean that determines whether or not the dialog is open.
+   */
   condition: boolean;
+  /**
+   * Function that handles the close event of the dialog.
+   */
   onClose: () => void;
+  /**
+   * Children of the dialog.
+   */
   children: React.ReactNode;
+  /**
+   * Title of the dialog.
+   */
   dialogTitle?: string;
 };
