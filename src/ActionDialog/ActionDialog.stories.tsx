@@ -57,6 +57,7 @@ const Template: StoryFn<ActionDialogProps> = args => {
 
 export const Default = {
   args: {
+    cancelDisabled: false,
     cancelText: "cancel",
     content: <Typography>Content goes here</Typography>,
     onCancelClick: () => {},

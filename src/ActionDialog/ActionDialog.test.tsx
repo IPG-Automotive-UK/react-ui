@@ -47,6 +47,12 @@ describe("ActionDialog", () => {
     render(<ActionDialog {...defaultInputs} open={true} saveDisabled={true} />);
     expect(screen.getByText("Save")).toBeDisabled();
   });
+  test("test dialog cancel button disabled", () => {
+    render(
+      <ActionDialog {...defaultInputs} open={true} cancelDisabled={true} />
+    );
+    expect(screen.getByText("cancel")).toBeDisabled();
+  });
   test("test dialog save button enabled", () => {
     render(
       <ActionDialog {...defaultInputs} open={true} saveDisabled={false} />
