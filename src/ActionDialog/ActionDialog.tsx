@@ -58,6 +58,7 @@ export default function ActionDialog({
               right: 8,
               top: 8
             }}
+            disabled={cancelDisabled}
           >
             <CloseIcon />
           </IconButton>
