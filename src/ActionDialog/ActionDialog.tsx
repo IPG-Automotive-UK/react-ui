@@ -20,6 +20,7 @@ export default function ActionDialog({
   onCancelClick,
   onSaveClick,
   title = "Some title",
+  cancelDisabled = false,
   cancelText = "cancel",
   saveText = "Save",
   open = true,
@@ -57,6 +58,7 @@ export default function ActionDialog({
               right: 8,
               top: 8
             }}
+            disabled={cancelDisabled}
           >
             <CloseIcon />
           </IconButton>
@@ -66,7 +68,9 @@ export default function ActionDialog({
         <Stack spacing={3}>{content}</Stack>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onCancelClick}>{cancelText}</Button>
+        <Button onClick={onCancelClick} disabled={cancelDisabled}>
+          {cancelText}
+        </Button>
         <Button
           variant="contained"
           onClick={onSaveClick}

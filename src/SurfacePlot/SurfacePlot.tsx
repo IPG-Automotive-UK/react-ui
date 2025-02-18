@@ -1,5 +1,5 @@
 import { Box, Typography, useTheme } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import ConditionalDialog from "../ConditionalDialog";
 import Plotly from "react-plotly.js";
@@ -24,19 +24,41 @@ const SurfacePlot = ({
   // state for fullscreen
   const [isFullscreen, setIsFullscreen] = useState(false);
 
+  // state to keep track of the wrapped axis labels for the plot
+  const [wrappedLabel, setWrappedLabel] = useState({
+    x: xlabel,
+    y: ylabel,
+    z: zlabel
+  });
+
+  // helper function to wrap text in axis labels
+  const wrapText = (text: string, maxLength: number) => {
+    if (!text) return "";
+    if (text.length <= maxLength) return text;
+    const matches = text.match(new RegExp(`.{1,${maxLength}}`, "g"));
+    return matches ? matches.join("<br>") : text;
+  };
+
+  // effect to wrap axis labels when the axis labels change
+  useEffect(() => {
+    // get the maximum width of the window
+    const maxWidth = Math.max(window.innerWidth * 0.1, 50);
+    // get the maximum number of characters that can fit in the axis label
+    const maxLabelLength = Math.floor(maxWidth / 6);
+    // set wrapped axis labels
+    setWrappedLabel({
+      x: wrapText(xlabel, maxLabelLength),
+      y: wrapText(ylabel, maxLabelLength),
+      z: wrapText(zlabel, maxLabelLength)
+    });
+  }, [xlabel, ylabel, zlabel]);
+
   // callback for fullscreen button
-  const handleClickFullscreen = () => {
-    setIsFullscreen(true);
-  };
-
+  const handleClickFullscreen = () => setIsFullscreen(true);
   // callback for closing fullscreen
-  const handleClose = () => {
-    setIsFullscreen(false);
-  };
-
+  const handleClose = () => setIsFullscreen(false);
   // get config for plotly
   const config = getConfig({ handleClickFullscreen, isFullscreen });
-
   // determine whether to show title
   const showTitle = title !== "";
 
@@ -83,15 +105,8 @@ const SurfacePlot = ({
           ]}
           layout={{
             autosize: true,
-            font: {
-              family: "Montserrat, sans-serif"
-            },
-            margin: {
-              b: 5,
-              l: 5,
-              r: 5,
-              t: 20
-            },
+            font: { family: "Montserrat, sans-serif" },
+            margin: { b: 15, l: 15, r: 15, t: 15 },
             paper_bgcolor: "transparent",
             scene: {
               camera: { eye: { x: 2 } },
@@ -100,44 +115,27 @@ const SurfacePlot = ({
                 exponentformat: "E",
                 gridcolor: theme.palette.divider,
                 showgrid: showGrid,
-                title: {
-                  font: {
-                    size: 12
-                  },
-                  text: xlabel || ""
-                }
+                tickangle: 45,
+                title: { font: { size: 12 }, text: wrappedLabel.x }
               },
               yaxis: {
                 color: theme.palette.text.primary,
                 exponentformat: "E",
                 gridcolor: theme.palette.divider,
                 showgrid: showGrid,
-                title: {
-                  font: {
-                    size: 12
-                  },
-                  text: ylabel || ""
-                }
+                tickangle: -45,
+                title: { font: { size: 12 }, text: wrappedLabel.y }
               },
               zaxis: {
                 color: theme.palette.text.primary,
                 exponentformat: "E",
                 gridcolor: theme.palette.divider,
                 showgrid: showGrid,
-                title: {
-                  font: {
-                    size: 12
-                  },
-                  text: zlabel || ""
-                }
+                title: { font: { size: 12 }, text: wrappedLabel.z }
               }
             }
           }}
-          style={{
-            flexGrow: 1,
-            height: "100%",
-            width: "100%"
-          }}
+          style={{ flexGrow: 1, height: "100%", width: "100%" }}
           useResizeHandler={true}
           config={config}
         />

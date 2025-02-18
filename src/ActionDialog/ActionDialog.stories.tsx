@@ -57,6 +57,7 @@ const Template: StoryFn<ActionDialogProps> = args => {
 
 export const Default = {
   args: {
+    cancelDisabled: false,
     cancelText: "cancel",
     content: <Typography>Content goes here</Typography>,
     onCancelClick: () => {},
@@ -66,6 +67,43 @@ export const Default = {
     showCloseIcon: true,
     title: "Some title",
     width: "400px"
+  },
+  render: Template
+};
+
+// cancel button and close icon disabled
+export const CancelDisabled = {
+  args: {
+    ...Default.args,
+    cancelDisabled: true
+  },
+  render: Template
+};
+
+// save button disabled
+export const SaveDisabled = {
+  args: {
+    ...Default.args,
+    saveDisabled: true
+  },
+  render: Template
+};
+
+// Both buttons disabled
+export const BothButtonsDisabled = {
+  args: {
+    ...Default.args,
+    cancelDisabled: true,
+    saveDisabled: true
+  },
+  render: Template
+};
+
+// dialog without close icon
+export const NoCloseIcon = {
+  args: {
+    ...Default.args,
+    showCloseIcon: false
   },
   render: Template
 };
