@@ -43,9 +43,27 @@ describe("ActionDialog", () => {
     render(<ActionDialog {...defaultInputs} open={true} saveText="Save" />);
     expect(screen.getByText("Save")).toBeInTheDocument();
   });
+  test("test dialog cancel button disabled", () => {
+    render(
+      <ActionDialog {...defaultInputs} open={true} cancelDisabled={true} />
+    );
+    const closeIcon = screen.getByTestId("close-icon");
+    expect(closeIcon).toBeInTheDocument();
+    expect(closeIcon).toBeDisabled();
+    expect(screen.getByText("cancel")).toBeDisabled();
+  });
   test("test dialog save button disabled", () => {
     render(<ActionDialog {...defaultInputs} open={true} saveDisabled={true} />);
     expect(screen.getByText("Save")).toBeDisabled();
+  });
+  test("test dialog cancel button enabled", () => {
+    render(
+      <ActionDialog {...defaultInputs} open={true} cancelDisabled={false} />
+    );
+    const closeIcon = screen.getByTestId("close-icon");
+    expect(closeIcon).toBeInTheDocument();
+    expect(closeIcon).toBeEnabled();
+    expect(screen.getByText("cancel")).toBeEnabled();
   });
   test("test dialog save button enabled", () => {
     render(
