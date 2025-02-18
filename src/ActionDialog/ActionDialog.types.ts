@@ -1,5 +1,9 @@
 export type ActionDialogProps = {
   /**
+   * If true, cancel button will be disabled.
+   */
+  cancelDisabled?: boolean;
+  /**
    * The text of the cancel button.
    * */
   cancelText?: string;
