@@ -90,6 +90,24 @@ describe("TextField", () => {
     expect(input).toHaveValue("2256666");
   });
 
+  test("can shrink label when value is present", () => {
+    const onChangeMock = vi.fn();
+    const { getByRole } = render(
+      <TextField
+        label="Test Field"
+        onChange={onChangeMock}
+        InputProps={{ inputComponent: MaskedTextField }}
+        isFieldMasked={false}
+      />
+    );
+    const input = getByRole("textbox") as HTMLInputElement;
+    fireEvent.change(input, { target: { value: "2256666" } });
+
+    // check data-shrink is true when value is present
+    const label = document.querySelector(".MuiInputLabel-root");
+    expect(label).toHaveAttribute("data-shrink", "true");
+  });
+
   it("can type multiline text", async () => {
     render(<TextField multiline={true} minRows={2} maxRows={4} />);
 

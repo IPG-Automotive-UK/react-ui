@@ -62,7 +62,8 @@ export default function TextField({
       value={value}
       variant={variant}
       slotProps={{
-        input: !isFieldMasked ? undefined : InputProps
+        input: !isFieldMasked ? undefined : InputProps,
+        inputLabel: { shrink: value ? true : undefined }
       }}
     />
   );

@@ -43,34 +43,40 @@ export const Default = {
     value: [],
     variants: [
       {
-        _id: "64c8c4cccc8d6f00130b366b",
+        _id: "1",
         modelYear: "2015",
         projectCode: "911",
         variant: "MP - 3.6 l6 - 397kW - 7MT - R20"
       },
       {
-        _id: "64c8c4cccc8d6f00130b367e",
-        modelYear: "2015",
-        projectCode: "911",
-        variant: "JS - 3.6 l6 - 397kW - 7MT - R20"
-      },
-      {
-        _id: "64c8c4cccc8d6f00130b3691",
-        modelYear: "2016",
-        projectCode: "911",
-        variant: "DB - 3.6 l6 - 397kW - 7MT - R20"
-      },
-      {
-        _id: "64c8c4cccc8d6f00130b36a4",
-        modelYear: "2016",
-        projectCode: "911",
-        variant: "MC - 397kW - 7MT - R20"
-      },
-      {
-        _id: "64c8c4cccc8d6f00130b36a4",
+        _id: "2",
         modelYear: "2019",
         projectCode: "CrossoverEV",
         variant: "Nicolas - FWD - BEV - 150KW - R17"
+      },
+      {
+        _id: "3",
+        modelYear: "2020",
+        projectCode: "CrossoverEV",
+        variant: "Option A"
+      },
+      {
+        _id: "4",
+        modelYear: "2020",
+        projectCode: "CrossoverEV",
+        variant: "Option B"
+      },
+      {
+        _id: "5",
+        modelYear: "2020",
+        projectCode: "CrossoverEV",
+        variant: "Option C"
+      },
+      {
+        _id: "6",
+        modelYear: "2018",
+        projectCode: "Mustang",
+        variant: "GT 5.0 V8"
       }
     ]
   },
