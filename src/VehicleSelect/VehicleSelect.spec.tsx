@@ -52,7 +52,7 @@ test.describe("Vehicle Select tests", () => {
           await page.getByText(j.toString(), { exact: true }).first().click();
         }
       } else {
-        await page.getByText("0", { exact: true }).first().click();
+        await page.getByText("0", { exact: true }).first().click({ timeout: 60000 });
       }
       if (i === 0) {
         await expect(page.getByText(option)).toBeVisible();

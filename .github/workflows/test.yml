@@ -29,13 +29,12 @@ jobs:
       - name: Run tests
         run: pnpm run test:docker
 
-      # Remove Playwright report upload step.
-      # - name: Upload Playwright Report
-      #   uses: actions/upload-artifact@v4
-      #   if: always()
-      #   with:
-      #     name: playwright-report-${{ github.sha }}-${{matrix.os}}-${{ matrix.node-version }}
-      #     path: ./test-artifacts/playwright
+      - name: Upload Playwright Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-${{ github.sha }}-${{matrix.os}}-${{ matrix.node-version }}
+          path: ./test-artifacts/playwright
 
       - name: Upload Coverage Report
         uses: actions/upload-artifact@v4

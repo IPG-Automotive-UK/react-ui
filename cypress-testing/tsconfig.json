@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "types": ["cypress", "@testing-library/cypress"]
+  },
+  "include": [
+    "cypress/**/*.ts",
+    "cypress/**/*.js",
+    "src/**/*.ts", // Include source files if needed
+    "src/**/*.tsx"
+  ]
+}
