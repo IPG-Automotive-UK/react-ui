@@ -197,6 +197,12 @@ export default function TransferList({
     // Remove the target search string on transfer
     setTargetFilter("");
 
+    // Remove the source search string on transfer
+    setSourceFilter("");
+
+    // Remove the target search string on transfer
+    setTargetFilter("");
+
     // Updated target list keys
     const updatedTargetList = [...keys, ...sourceItemsToTransfer];
 

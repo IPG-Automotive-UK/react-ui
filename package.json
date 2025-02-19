@@ -1,6 +1,6 @@
 {
   "name": "@ipguk/react-ui",
-  "version": "11.1.0-0",
+  "version": "11.3.0-0",
   "description": "React UI component library for IPG web applications",
   "author": {
     "name": "IPG-Automotive-UK"
@@ -27,7 +27,7 @@
     "build:esm": "tsc --project ./tsconfig.esm.json",
     "clean": "rimraf dist",
     "copy-files": "copyfiles -e '**/*.test.**' -e '**/*.spec.**' -e '**/*.stories.**' -u 1 src/**/*.html src/**/*.css src/**/*/*.svg dist/esm/ && copyfiles -e '**/*.test.**' -e '**/*.spec.**' -e '**/*.stories.**' -u 1 src/**/*.html src/**/*.css src/**/*/*.svg dist/cjs/",
-    "prepublishOnly": "pnpm run build",
+    "prepare": "node -e \"if (require('fs').existsSync('src')) { require('child_process').execSync('pnpm run build', { stdio: 'inherit' }); }\"",
     "start": "microbundle-crl watch --no-compress --format modern,cjs --jsxFragment React.Fragment",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
