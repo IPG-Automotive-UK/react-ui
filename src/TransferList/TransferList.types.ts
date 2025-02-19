@@ -23,9 +23,17 @@ export type TransferListProps = {
    */
   items: string[] | TransferListItem[];
   /**
-   * Callback fired when the items are transferred.
+   * Callback fired when the items are added to target list(transferred) and removed from source list.
+   */
+  onAdd?: (value: string[] | TransferListItem[]) => void;
+  /**
+   * Callback fired when the items are moved from one list to another.
    */
   onChange?: (value: string[] | TransferListItem[]) => void;
+  /**
+   * Callback fired when the items are removed from target list(transferred) and added to the source list.
+   */
+  onRemove?: (value: string[] | TransferListItem[]) => void;
   /**
    * Array of keys for the items on the right side for controlled use
    */
