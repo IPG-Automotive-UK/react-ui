@@ -191,18 +191,6 @@ export default function TransferList({
    * Transfer items to the target list
    */
   const transferToTarget = () => {
-    // Remove the source search string on transfer
-    setSourceFilter("");
-
-    // Remove the target search string on transfer
-    setTargetFilter("");
-
-    // Remove the source search string on transfer
-    setSourceFilter("");
-
-    // Remove the target search string on transfer
-    setTargetFilter("");
-
     // Updated target list keys
     const updatedTargetList = [...keys, ...sourceItemsToTransfer];
 
@@ -214,6 +202,12 @@ export default function TransferList({
 
     // Call onAdd when adding items
     onAdd && onAdd(updatedSelectedItems);
+
+    // Remove the source search string on transfer
+    setSourceFilter("");
+
+    // Remove the target search string on transfer
+    setTargetFilter("");
 
     // If component is controlled, end the function
     if (selectedItems) {
@@ -236,12 +230,6 @@ export default function TransferList({
       item => !targetItemsToTransfer.includes(item)
     );
 
-    // Remove the source search string on transfer
-    setSourceFilter("");
-
-    // Remove the target search string on transfer
-    setTargetFilter("");
-
     // Get the items that have been transferred
     const updatedSelectedItems = getTransferredItems(items, newTargetSelection);
 
@@ -250,6 +238,12 @@ export default function TransferList({
 
     // Call onRemove when adding items
     onRemove && onRemove(updatedSelectedItems);
+
+    // Remove the source search string on transfer
+    setSourceFilter("");
+
+    // Remove the target search string on transfer
+    setTargetFilter("");
 
     // If component is controlled, end the function
     if (selectedItems) {
