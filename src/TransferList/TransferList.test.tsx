@@ -1027,4 +1027,78 @@ describe("TransferList", () => {
     const selectedItems = screen.getAllByText("2 selected");
     expect(selectedItems.length).toBe(2);
   });
+
+  test("calls onAdd when items are transferred to the target list", async () => {
+    const user = userEvent.setup();
+    const onAddMock = vi.fn();
+
+    // render the transfer list component with onAdd mock function
+    render(
+      <TransferList
+        items={defaultItemArray}
+        onAdd={onAddMock}
+        sourceListLabel="Source"
+        targetListLabel="Target"
+      />
+    );
+
+    // get the select all checkbox for the source list
+    const selectAllSourceCheckbox = within(
+      screen.getByLabelText("select all source list items")
+    ).getByRole("checkbox");
+
+    // select all items in the source list
+    await user.click(selectAllSourceCheckbox);
+
+    // get the transfer to target button
+    const transferToTargetButton = screen.getByLabelText(
+      "transfer to target list"
+    );
+
+    // click the transfer button to move items to the target list
+    await user.click(transferToTargetButton);
+
+    // check that onAdd was called with the correct items
+    expect(onAddMock).toHaveBeenCalledWith([
+      { key: "Apples", primaryLabel: "Apples" },
+      { key: "Pears", primaryLabel: "Pears", secondaryLabel: "Conference" },
+      { key: "Oranges", primaryLabel: "Oranges" }
+    ]);
+  });
+
+  test("calls onRemove when some items are transferred back to the source list", async () => {
+    const user = userEvent.setup();
+    const onRemoveMock = vi.fn();
+
+    // render the transfer list component with selected items and onRemove mock function
+    render(
+      <TransferList
+        items={defaultItemArray}
+        selectedItems={["Apples", "Pears", "Oranges"]}
+        onRemove={onRemoveMock}
+        sourceListLabel="Source"
+        targetListLabel="Target"
+      />
+    );
+
+    // get the target list
+    const targetList = screen.getByLabelText("Target");
+
+    // select only 'Apples' in the list
+    await user.click(within(targetList).getByText("Apples"));
+
+    // get the transfer to source button
+    const transferToSourceButton = screen.getByLabelText(
+      "transfer to source list"
+    );
+
+    // click the transfer button to move "Apples" back to the source list
+    await user.click(transferToSourceButton);
+
+    // check that onRemove was called with the remaining items in the target list
+    expect(onRemoveMock).toHaveBeenCalledWith([
+      { key: "Pears", primaryLabel: "Pears", secondaryLabel: "Conference" },
+      { key: "Oranges", primaryLabel: "Oranges" }
+    ]);
+  });
 });
