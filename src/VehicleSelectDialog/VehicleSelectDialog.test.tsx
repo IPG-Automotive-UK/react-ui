@@ -10,6 +10,7 @@ const defaultProps = {
   flexDirection: "column",
   flexWrap: "nowrap",
   gates: ["Gate 1", "Gate 2", "Gate 3"],
+  multipleSelection: true,
   onCancelClick: vi.fn(),
   onSaveClick: vi.fn(),
   open: true,
