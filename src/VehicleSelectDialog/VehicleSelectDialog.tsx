@@ -22,6 +22,7 @@ const VehicleSelectDialog = ({
   errorMessage = "",
   title = "Some title",
   cancelText = "cancel",
+  multipleSelection = true,
   saveText = "Save",
   open = true,
   width = "400px",
@@ -100,6 +101,7 @@ const VehicleSelectDialog = ({
           flexWrap={flexWrap}
           gates={gates}
           onChange={setValue}
+          multipleSelection={multipleSelection}
         />
         {errorMessage ? (
           <Box
