@@ -46,6 +46,21 @@ const TransferListWithState: StoryFn<TransferListProps> = args => {
   );
 };
 
+// set up state for controlled stories with onAdd and onRemove
+const TransferListWithAddAndRemove: StoryFn<TransferListProps> = args => {
+  // call of the add action
+  const handleAdd: TransferListProps["onAdd"] = value => {
+    action("handleAdd")(value);
+  };
+
+  // call of the remove action
+  const handleRemove: TransferListProps["onRemove"] = value => {
+    action("handleRemove")(value);
+  };
+
+  return <TransferList {...args} onAdd={handleAdd} onRemove={handleRemove} />;
+};
+
 // use an object array to render the transfer list
 export const WithDefaultObjectArray: StoryObj<typeof TransferList> = {
   args: {
@@ -132,4 +147,28 @@ export const Controlled: StoryObj<typeof TransferList> = {
     ]
   },
   render: TransferListWithState
+};
+
+// controlled component that calls the handleAdd and handleRemove callbacks with data
+export const ControlledWithAddAndRemove: StoryObj<typeof TransferList> = {
+  args: {
+    ...defaultArgs,
+    items: [
+      { key: "Apples", primaryLabel: "Apples" },
+      { key: "Pears", primaryLabel: "Pears", secondaryLabel: "Conference" },
+      { key: "Oranges", primaryLabel: "Oranges" },
+      {
+        key: "Bananas",
+        primaryLabel: "Bananas",
+        secondaryLabel: "Blue Java"
+      },
+      { key: "Mangoes", primaryLabel: "Mangoes" },
+      { key: "Kiwi", primaryLabel: "Kiwi" },
+      { key: "Dragonfruit", primaryLabel: "Dragonfruit" },
+      { key: "Plum", primaryLabel: "Plum" },
+      { key: "Grapes", primaryLabel: "Grapes" },
+      { key: "Cherry", primaryLabel: "Cherry" }
+    ]
+  },
+  render: TransferListWithAddAndRemove
 };
