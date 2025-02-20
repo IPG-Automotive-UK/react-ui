@@ -9,13 +9,11 @@ import {
   Divider,
   IconButton
 } from "@mui/material";
-import {
-  CombinedVehicleProps,
-  SelectedVehicle
-} from "./VehicleSelectDialog.types";
 import React, { useEffect, useState } from "react";
 
 import CloseIcon from "@mui/icons-material/Close";
+import { CombinedVehicleProps } from "./VehicleSelectDialog.types";
+import type { Vehicle } from "../VehicleSelector/VehicleSelector.types";
 import VehicleSelector from "../VehicleSelector/VehicleSelector";
 
 const VehicleSelectDialog = ({
@@ -34,7 +32,7 @@ const VehicleSelectDialog = ({
   gates = []
 }: CombinedVehicleProps) => {
   // internal state to manage selected vehicles
-  const [value, setValue] = useState<SelectedVehicle[]>([]);
+  const [value, setValue] = useState<Vehicle[]>([]);
 
   // check if all fields are filled for each selected vehicle
   const isSaveDisabled =
