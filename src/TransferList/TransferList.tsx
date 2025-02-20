@@ -191,14 +191,14 @@ export default function TransferList({
    * Transfer items to the target list
    */
   const transferToTarget = () => {
-    // filter checked items that are not already in the selectedItemKeys list
-    const newItems = checked.filter(item => !selectedItemKeys.includes(item));
+    // filter checked items that are not already in the keys list
+    const newItems = checked.filter(item => !keys.includes(item));
     if (newItems.length === 0) {
       return;
     }
 
     // create a new target list including newly added items
-    const updatedTargetList = [...selectedItemKeys, ...newItems];
+    const updatedTargetList = [...keys, ...newItems];
     const newAddedItems = getTransferredItems(items, newItems);
 
     // trigger onChange and onAdd callbacks if they exist
@@ -209,7 +209,7 @@ export default function TransferList({
     setSourceFilter("");
     setTargetFilter("");
 
-    // if selectedItems is provided, do not update selectedItemKeys
+    // if selectedItems is provided, do not update keys
     if (selectedItems) {
       return;
     }
@@ -223,16 +223,11 @@ export default function TransferList({
    * Transfer items to the source list
    */
   const transferToSource = () => {
-    // filter checked items that are in the selectedItemKeys list
-    const newItems = checked.filter(item => selectedItemKeys.includes(item));
-    if (newItems.length === 0) {
-      return;
-    }
+    // filter checked items that are in the keys list
+    const newItems = checked.filter(item => keys.includes(item));
 
     // create a new target list excluding the removed items
-    const updatedTargetList = selectedItemKeys.filter(
-      item => !newItems.includes(item)
-    );
+    const updatedTargetList = keys.filter(item => !newItems.includes(item));
     const newRemovedItems = getTransferredItems(items, newItems);
 
     // trigger onChange and onRemove callbacks if they exist

@@ -1068,6 +1068,7 @@ describe("TransferList", () => {
 
   test("calls onRemove when some items are transferred back to the source list", async () => {
     const user = userEvent.setup();
+    const onChangeMock = vi.fn();
     const onRemoveMock = vi.fn();
 
     // render the transfer list component with selected items and onRemove mock function
@@ -1075,6 +1076,7 @@ describe("TransferList", () => {
       <TransferList
         items={defaultItemArray}
         selectedItems={["Apples", "Pears", "Oranges"]}
+        onChange={onChangeMock}
         onRemove={onRemoveMock}
         sourceListLabel="Source"
         targetListLabel="Target"
@@ -1095,10 +1097,18 @@ describe("TransferList", () => {
     // click the transfer button to move "Apples" back to the source list
     await user.click(transferToSourceButton);
 
-    // check that onRemove was called with the remaining items in the target list
-    expect(onRemoveMock).toHaveBeenCalledWith([
+    // check that onChange was called with the remaining items in the target list
+    expect(onChangeMock).toHaveBeenCalledWith([
       { key: "Pears", primaryLabel: "Pears", secondaryLabel: "Conference" },
       { key: "Oranges", primaryLabel: "Oranges" }
+    ]);
+
+    // check that onRemove was called with the correct items
+    expect(onRemoveMock).toHaveBeenCalledWith([
+      {
+        key: "Apples",
+        primaryLabel: "Apples"
+      }
     ]);
   });
 });
