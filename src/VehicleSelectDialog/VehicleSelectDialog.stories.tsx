@@ -1,9 +1,11 @@
+import {
+  CombinedVehicleProps,
+  SelectedVehicle
+} from "./VehicleSelectDialog.types";
 import { Meta, StoryFn } from "@storybook/react";
 import React, { MouseEventHandler } from "react";
 
 import { Button } from "@mui/material";
-import { CombinedVehicleProps } from "./VehicleSelectDialog.types";
-import { SelectedVehicle } from "../VehicleSelect/VehicleSelect.types";
 import VehicleSelectDialog from "./VehicleSelectDialog";
 import { action } from "@storybook/addon-actions";
 

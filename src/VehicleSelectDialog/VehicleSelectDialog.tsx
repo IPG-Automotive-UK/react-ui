@@ -9,12 +9,14 @@ import {
   Divider,
   IconButton
 } from "@mui/material";
+import {
+  CombinedVehicleProps,
+  SelectedVehicle
+} from "./VehicleSelectDialog.types";
 import React, { useEffect, useState } from "react";
 
 import CloseIcon from "@mui/icons-material/Close";
-import { CombinedVehicleProps } from "./VehicleSelectDialog.types";
-import type { SelectedVehicle } from "../VehicleSelect/VehicleSelect.types";
-import VehicleSelect from "../VehicleSelect/VehicleSelect";
+import VehicleSelector from "../VehicleSelector/VehicleSelector";
 
 const VehicleSelectDialog = ({
   onCancelClick = () => {},
@@ -93,7 +95,7 @@ const VehicleSelectDialog = ({
       </DialogTitle>
       <Divider />
       <DialogContent sx={{ pt: 1 }}>
-        <VehicleSelect
+        <VehicleSelector
           variants={variants}
           value={value}
           flexDirection={flexDirection}
