@@ -125,8 +125,12 @@ export default function TransferList({
   }: HandleCheckProps) => {
     // Determine items to check/uncheck
     const itemsToCheck = isFiltered ? filteredItems : allItems;
-    const itemKeys = new Set(itemsToCheck.map(filterKey)); // Convert to Set for faster lookups
-    const currentCheckedSet = new Set(checked); // Convert checked items into a Set
+
+    // Convert to Set for faster lookups
+    const itemKeys = new Set(itemsToCheck.map(filterKey));
+
+    // Convert checked items into a Set
+    const currentCheckedSet = new Set(checked);
 
     // Check if all items are already selected
     const allSelected = Array.from(itemKeys).every(key =>
