@@ -229,6 +229,9 @@ export default function TransferList({
   const transferToSource = () => {
     // filter checked items that are in the keys list
     const newItems = checked.filter(item => keys.includes(item));
+    if (newItems.length === 0) {
+      return;
+    }
 
     // create a new target list excluding the removed items
     const updatedTargetList = keys.filter(item => !newItems.includes(item));
