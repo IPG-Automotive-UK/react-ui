@@ -71,7 +71,7 @@ describe("ThemeProvider", () => {
   );
   test.each(["light", "dark"])("renders %s theme from local storage", mode => {
     // set the theme in local storage
-    window.localStorage.setItem("mui-mode", mode);
+    window.localStorage.setItem("theme", mode);
 
     // render the component
     render(
@@ -89,10 +89,7 @@ describe("ThemeProvider", () => {
     "renders %s theme when theme toggled",
     async mode => {
       // first set the theme to the opposite of the mode we want to test
-      window.localStorage.setItem(
-        "mui-mode",
-        mode === "light" ? "dark" : "light"
-      );
+      window.localStorage.setItem("theme", mode === "light" ? "dark" : "light");
 
       // render the toggle button
       render(
