@@ -1082,7 +1082,7 @@ describe("TransferList", () => {
 
     // check that onAdd was called with the correct items
     expect(onAddMock).toHaveBeenCalledWith([
-      { key: "Apples", primaryLabel: "Apples" }
+      { key: "Oranges", primaryLabel: "Oranges" }
     ]);
   });
 
