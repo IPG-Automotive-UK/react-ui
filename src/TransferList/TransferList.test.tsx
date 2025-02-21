@@ -1030,6 +1030,7 @@ describe("TransferList", () => {
 
   test("calls onAdd when items are transferred to the target list", async () => {
     const user = userEvent.setup();
+    const onChangeMock = vi.fn();
     const onAddMock = vi.fn();
 
     // render the transfer list component with onAdd mock function
@@ -1037,18 +1038,17 @@ describe("TransferList", () => {
       <TransferList
         items={defaultItemArray}
         onAdd={onAddMock}
+        onChange={onChangeMock}
         sourceListLabel="Source"
         targetListLabel="Target"
       />
     );
 
-    // get the select all checkbox for the source list
-    const selectAllSourceCheckbox = within(
-      screen.getByLabelText("select all source list items")
-    ).getByRole("checkbox");
+    // get the source list
+    const sourceList = screen.getByLabelText("Source");
 
-    // select all items in the source list
-    await user.click(selectAllSourceCheckbox);
+    // select only 'Apples' in the list
+    await user.click(within(sourceList).getByText("Apples"));
 
     // get the transfer to target button
     const transferToTargetButton = screen.getByLabelText(
@@ -1058,11 +1058,31 @@ describe("TransferList", () => {
     // click the transfer button to move items to the target list
     await user.click(transferToTargetButton);
 
+    // check that onChange was called with the correct items in the target list
+    expect(onChangeMock).toHaveBeenCalledWith([
+      { key: "Apples", primaryLabel: "Apples" }
+    ]);
+
     // check that onAdd was called with the correct items
     expect(onAddMock).toHaveBeenCalledWith([
+      { key: "Apples", primaryLabel: "Apples" }
+    ]);
+
+    // select only 'Oranges' in the list
+    await user.click(within(sourceList).getByText("Oranges"));
+
+    // click the transfer button to move items to the target list
+    await user.click(transferToTargetButton);
+
+    // check that onChange was called with the correct items in the target list
+    expect(onChangeMock).toHaveBeenCalledWith([
       { key: "Apples", primaryLabel: "Apples" },
-      { key: "Pears", primaryLabel: "Pears", secondaryLabel: "Conference" },
       { key: "Oranges", primaryLabel: "Oranges" }
+    ]);
+
+    // check that onAdd was called with the correct items
+    expect(onAddMock).toHaveBeenCalledWith([
+      { key: "Apples", primaryLabel: "Apples" }
     ]);
   });
 
