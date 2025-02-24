@@ -26,7 +26,9 @@ const DefaultTemplate: StoryFn<UserMenuProps> = args => (
 );
 
 export const Default = {
-  args: { username: "Ruud van Nistelrooy" },
+  args: {
+    user: { email: "marleyschleifer416@gmail.com", name: "Ruud van Nistelrooy" }
+  },
   parameters: {
     backgrounds: {
       default: "dark"
@@ -59,6 +61,6 @@ const AppBarTemplate: StoryFn<UserMenuProps> = args => {
 };
 
 export const InAppBar = {
-  args: { username: "Ruud van Nistelrooy" },
+  ...Default.args,
   render: AppBarTemplate
 };
