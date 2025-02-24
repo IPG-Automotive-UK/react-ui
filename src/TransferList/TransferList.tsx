@@ -20,7 +20,9 @@ import SearchBar from "../SearchBar";
 export default function TransferList({
   defaultSelectedItems,
   items = [],
+  onAdd,
   onChange,
+  onRemove,
   selectedItems,
   sourceListLabel,
   targetListLabel
@@ -121,21 +123,31 @@ export default function TransferList({
     allItems,
     filteredItems
   }: HandleCheckProps) => {
-    // Determine which items to check
+    // Determine items to check/uncheck
     const itemsToCheck = isFiltered ? filteredItems : allItems;
 
-    // Extract the keys of the items
-    const itemKeys = itemsToCheck.map(item => filterKey(item));
+    // Convert to Set for faster lookups
+    const itemKeys = new Set(itemsToCheck.map(filterKey));
 
-    if (itemKeys.every(item => checked.includes(item))) {
-      // If all filtered items are checked, uncheck only those
-      setChecked(checked.filter(item => !itemKeys.includes(item)));
-    } else {
-      // Otherwise, check all filtered items
-      setChecked([
-        ...checked,
-        ...itemKeys.filter(item => !checked.includes(item))
-      ]);
+    // Convert checked items into a Set
+    const currentCheckedSet = new Set(checked);
+
+    // Check if all items are already selected
+    const allSelected = Array.from(itemKeys).every(key =>
+      currentCheckedSet.has(key)
+    );
+
+    // Determine new checked state
+    const newChecked = allSelected
+      ? checked.filter(key => !itemKeys.has(key)) // Uncheck all if already selected
+      : [
+          ...checked,
+          ...Array.from(itemKeys).filter(key => !currentCheckedSet.has(key))
+        ]; // Add unchecked items
+
+    // Only update state if there's a change
+    if (newChecked.length !== checked.length) {
+      setChecked(newChecked);
     }
   };
 
@@ -183,33 +195,31 @@ export default function TransferList({
    * Transfer items to the target list
    */
   const transferToTarget = () => {
-    // Get checked source items
-    const checkedSourceItems = checked.filter(item => !keys.includes(item));
+    // filter checked items that are not already in the keys list
+    const newItems = checked.filter(item => !keys.includes(item));
+    if (newItems.length === 0) {
+      return;
+    }
 
-    // Remove the source search string on transfer
+    // create a new target list including newly added items
+    const updatedTargetList = [...keys, ...newItems];
+    const newAddedItems = getTransferredItems(items, newItems);
+
+    // trigger onChange and onAdd callbacks if they exist
+    onChange && onChange(getTransferredItems(items, updatedTargetList));
+    onAdd && onAdd(newAddedItems);
+
+    // reset filters
     setSourceFilter("");
-
-    // Remove the target search string on transfer
     setTargetFilter("");
 
-    // Updated target list keys
-    const updatedTargetList = [...keys, ...checkedSourceItems];
-
-    // Get the items that have been transferred
-    const updatedSelectedItems = getTransferredItems(items, updatedTargetList);
-
-    // Call the onChange callback
-    onChange && onChange(updatedSelectedItems);
-
-    // If component is controlled, end the function
+    // if selectedItems is provided, do not update keys
     if (selectedItems) {
       return;
     }
 
-    // Add the checked items to the target list
+    // update state with new selected item keys and clear checked items
     setSelectedItemKeys(updatedTargetList);
-
-    // Uncheck all items
     setChecked([]);
   };
 
@@ -217,32 +227,31 @@ export default function TransferList({
    * Transfer items to the source list
    */
   const transferToSource = () => {
-    // Target item selection
-    const newTargetSelection = keys.filter(
-      item => !targetItemsToTransfer.includes(item)
-    );
+    // filter checked items that are in the keys list
+    const newItems = checked.filter(item => keys.includes(item));
+    if (newItems.length === 0) {
+      return;
+    }
 
-    // Remove the source search string on transfer
+    // create a new target list excluding the removed items
+    const updatedTargetList = keys.filter(item => !newItems.includes(item));
+    const newRemovedItems = getTransferredItems(items, newItems);
+
+    // trigger onChange and onRemove callbacks if they exist
+    onChange && onChange(getTransferredItems(items, updatedTargetList));
+    onRemove && onRemove(newRemovedItems);
+
+    // reset filters
     setSourceFilter("");
-
-    // Remove the target search string on transfer
     setTargetFilter("");
 
-    // Get the items that have been transferred
-    const updatedSelectedItems = getTransferredItems(items, newTargetSelection);
-
-    // Call the onChange callback
-    onChange && onChange(updatedSelectedItems);
-
-    // If component is controlled, end the function
+    // if selectedItems is provided, do not update selectedItemKeys
     if (selectedItems) {
       return;
     }
 
-    // Remove the checked items from the target list
-    setSelectedItemKeys(newTargetSelection);
-
-    // Uncheck all items
+    // update state with new selected item keys and clear checked items
+    setSelectedItemKeys(updatedTargetList);
     setChecked([]);
   };
 
