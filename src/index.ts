@@ -18,8 +18,6 @@ export {
   default as VirtoAppLayout,
   type VirtoAppLayoutProps
 } from "./VirtoAppLayout";
-export { default as AppHeader, type AppHeaderProps } from "./AppHeader";
-export { default as AppLayout, type AppLayoutProps } from "./AppLayout";
 export {
   default as Autocomplete,
   type AutocompleteProps
