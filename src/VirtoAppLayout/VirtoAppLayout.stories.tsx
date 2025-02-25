@@ -78,7 +78,7 @@ export const Default = {
 export const WithCustomerLogo = {
   args: {
     ...Default.args,
-    customerLogo: "https://picsum.photos/320/80/"
+    customerLogo: "https://picsum.photos/160/40/"
   },
   parameters: {
     layout: "fullscreen"

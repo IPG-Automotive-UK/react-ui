@@ -138,7 +138,7 @@ describe("VirtoAppLayout", () => {
     ).toBeInTheDocument();
   });
   test("should display customer logo when provided", () => {
-    const customerLogoUrl = "/static/DEVEL-dark.svg";
+    const customerLogoUrl = "https://picsum.photos/160/40/";
     render(
       <VirtoAppLayout {...defaultInputs} customerLogo={customerLogoUrl} />
     );
