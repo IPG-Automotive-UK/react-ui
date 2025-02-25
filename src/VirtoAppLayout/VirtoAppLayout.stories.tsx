@@ -78,9 +78,8 @@ export const Default = {
 export const WithCustomerLogo = {
   args: {
     ...Default.args,
-    customerLogo: "/static/Devel-logo.svg"
+    customerLogo: "https://picsum.photos/320/80/"
   },
-
   parameters: {
     layout: "fullscreen"
   },

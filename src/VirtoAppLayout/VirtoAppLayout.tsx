@@ -123,16 +123,23 @@ function Header({
         >
           {customerLogo ? (
             <Box
-              component="img"
-              src={customerLogo}
-              alt="Customer Logo"
               sx={{
                 height: 40,
                 mr: 2,
-                objectFit: "contain",
                 width: 160
               }}
-            />
+            >
+              <Box
+                component="img"
+                src={customerLogo}
+                alt="Customer Logo"
+                sx={{
+                  height: "100%",
+                  objectFit: "contain",
+                  width: "100%"
+                }}
+              />
+            </Box>
           ) : null}
           <UserMenu
             username={username}
