@@ -74,3 +74,15 @@ export const Default = {
 
   render: Template
 };
+
+export const WithCustomerLogo = {
+  args: {
+    ...Default.args,
+    customerLogo: "https://picsum.photos/160/40/"
+  },
+  parameters: {
+    layout: "fullscreen"
+  },
+
+  render: Template
+};

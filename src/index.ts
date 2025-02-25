@@ -11,10 +11,6 @@ export {
   type AlignVerticalProps
 } from "./AlignVertical";
 export {
-  default as VirtoAppHeader,
-  type VirtoAppHeaderProps
-} from "./VirtoAppHeader";
-export {
   default as VirtoAppLayout,
   type VirtoAppLayoutProps
 } from "./VirtoAppLayout";
