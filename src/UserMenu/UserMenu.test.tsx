@@ -73,10 +73,18 @@ describe("User Menu", () => {
     test("shows user email", async () => {
       const user = userEvent.setup();
       render(<UserMenu {...defaultInputs} />);
-      await user.click(screen.getByRole("button", { name: /jd/i }));
+      await user.click(screen.getByRole("button", { name: /JD/i }));
       expect(
         screen.getByText(/marleyschleifer416@gmail.com/i)
       ).toBeInTheDocument();
+    });
+    test("shows Unknown if falsy email", async () => {
+      const user = userEvent.setup();
+      render(
+        <UserMenu {...defaultInputs} user={{ email: "", name: "Test Name" }} />
+      );
+      await user.click(screen.getByRole("button", { name: /TN/i }));
+      expect(screen.getByText(/Unknown/i)).toBeInTheDocument();
     });
   });
   describe("Menu item", () => {
@@ -118,8 +126,8 @@ describe("User Menu", () => {
         );
 
         const user = userEvent.setup();
-        await user.click(screen.getByRole("button")); // Open menu
-        await user.click(screen.getByLabelText(new RegExp(label, "i"))); // Select mode based on label
+        await user.click(screen.getByRole("button"));
+        await user.click(screen.getByLabelText(new RegExp(label, "i")));
 
         expect(setModeMock).toHaveBeenCalledWith(expectedMode);
       }

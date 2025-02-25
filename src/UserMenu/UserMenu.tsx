@@ -123,7 +123,7 @@ export default function UserMenu({
             })}
             variant="caption"
           >
-            {email}
+            {!email ? "Unknown" : email}
           </Typography>
         </Box>
         <Divider sx={sx.divider} />
