@@ -74,3 +74,16 @@ export const Default = {
 
   render: Template
 };
+
+export const WithCustomerLogo = {
+  args: {
+    ...Default.args,
+    customerLogo: "/static/Devel-logo.svg"
+  },
+
+  parameters: {
+    layout: "fullscreen"
+  },
+
+  render: Template
+};

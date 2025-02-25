@@ -21,6 +21,7 @@ const defaultInputs = {
   content: <div>App Content goes here</div>,
   onChangePassword: vi.fn(),
   onLogout: vi.fn(),
+  onMenuClick: vi.fn(),
   sidebarContent: (
     <>
       <SidebarItem {...SidebarItemDefault.args} />
@@ -118,6 +119,13 @@ describe("VirtoAppLayout", () => {
     await user.click(screen.getByRole("menuitem", { name: /Logout/i }));
     expect(onLogout).toHaveBeenCalled();
   });
+  test("should call onMenuClick when menu button is clicked", async () => {
+    const onMenuClick = vi.fn();
+    render(<VirtoAppLayout {...defaultInputs} onMenuClick={onMenuClick} />);
+    const launcherButton = screen.getByTestId("launcher-button");
+    await userEvent.click(launcherButton);
+    expect(onMenuClick).toHaveBeenCalled();
+  });
   test("has a valid logo link href if a string is provided", () => {
     const { container } = render(
       <VirtoAppLayout
@@ -128,5 +136,22 @@ describe("VirtoAppLayout", () => {
     expect(
       container.querySelector("a[href='https://www.some.url/']")
     ).toBeInTheDocument();
+  });
+  test("should display customer logo when provided", () => {
+    const customerLogoUrl = "/static/DEVEL-dark.svg";
+    render(
+      <VirtoAppLayout {...defaultInputs} customerLogo={customerLogoUrl} />
+    );
+
+    const logoImg = screen.getByAltText("Customer Logo");
+    expect(logoImg).toBeInTheDocument();
+    expect(logoImg).toHaveAttribute("src", customerLogoUrl);
+  });
+
+  test("should not display customer logo when not provided", () => {
+    render(<VirtoAppLayout {...defaultInputs} customerLogo={undefined} />);
+
+    const logoImg = screen.queryByAltText("Customer Logo");
+    expect(logoImg).not.toBeInTheDocument();
   });
 });
