@@ -33,7 +33,7 @@ const defaultInputs = {
       <SidebarItem {...SidebarItemNested.args} />
     </>
   ),
-  username: "Joe Bloggs"
+  user: { email: "marleyschleifer416@gmail.com", name: "Joe Bloggs" }
 };
 
 // implementation of matchMedia for testing
@@ -57,10 +57,8 @@ describe("VirtoAppLayout", () => {
     window.matchMedia = createMatchMedia(window.innerWidth);
   });
   test("shows first and last initial of username", () => {
-    render(
-      <VirtoAppLayout {...defaultInputs} username="Ruud van Nistelrooy" />
-    );
-    expect(screen.getByText(/RN/i)).toBeInTheDocument();
+    render(<VirtoAppLayout {...defaultInputs} />);
+    expect(screen.getByText(/JB/i)).toBeInTheDocument();
   });
   test("should show app name", () => {
     render(<VirtoAppLayout {...defaultInputs} appName="APP NAME" />);

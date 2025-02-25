@@ -1,3 +1,5 @@
+import { User } from "../UserMenu/UserMenu.types";
+
 export type VirtoAppLayoutProps = {
   /**
    * App name to display in header.
@@ -48,9 +50,9 @@ export type VirtoAppLayoutProps = {
    */
   sidebarContent: React.ReactNode;
   /**
-   * Name of currently logged in user.
+   * The user details.
    */
-  username: string;
+  user: User;
   /**
    * A String of the href URL for the Link of the VIRTO Logo, default is null (link disabled)
    */
@@ -79,9 +81,9 @@ export type HeaderProps = {
    */
   onLogout: (event: React.MouseEvent<HTMLElement>) => void;
   /**
-   * Name of currently logged in user.
+   * The user details.
    */
-  username: string;
+  user: User;
   /**
    * A String of the href URL for the Link of the VIRTO Logo
    */

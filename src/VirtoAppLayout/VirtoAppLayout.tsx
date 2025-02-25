@@ -29,7 +29,7 @@ function Header({
   onChangePassword,
   onLogout,
   onMenuClick,
-  username,
+  user,
   virtoLogoLinkUrl,
   customerLogo
 }: HeaderProps) {
@@ -142,7 +142,7 @@ function Header({
             </Box>
           ) : null}
           <UserMenu
-            username={username}
+            user={user}
             onChangePassword={onChangePassword}
             onLogout={onLogout}
           />
@@ -162,7 +162,7 @@ function Layout({
   onChangePassword,
   onLogout,
   onMenuClick,
-  username,
+  user,
   content,
   customerLogo
 }: VirtoAppLayoutProps) {
@@ -202,7 +202,7 @@ function Layout({
           onChangePassword={onChangePassword}
           onLogout={onLogout}
           onMenuClick={handleMenuClick(onMenuClick)}
-          username={username}
+          user={user}
           virtoLogoLinkUrl={virtoLogoLinkUrl}
           customerLogo={customerLogo}
         />
@@ -291,7 +291,7 @@ function VirtoAppLayout({
   onChangePassword,
   onLogout,
   onMenuClick,
-  username,
+  user,
   content,
   customerLogo
 }: VirtoAppLayoutProps) {
@@ -307,7 +307,7 @@ function VirtoAppLayout({
           onChangePassword={onChangePassword}
           onLogout={onLogout}
           onMenuClick={onMenuClick}
-          username={username}
+          user={user}
           content={content}
           customerLogo={customerLogo}
         />

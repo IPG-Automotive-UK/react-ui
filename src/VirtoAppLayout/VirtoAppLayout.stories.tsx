@@ -65,7 +65,7 @@ export const Default = {
         <SidebarItem {...SidebarItemNested.args} />
       </>
     ),
-    username: "Ruud van Nistelrooy"
+    user: { email: "marleyschleifer416@gmail.com", name: "Ruud van Nistelrooy" }
   },
 
   parameters: {
