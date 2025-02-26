@@ -13,8 +13,8 @@ import React, { useEffect, useState } from "react";
 
 import CloseIcon from "@mui/icons-material/Close";
 import { CombinedVehicleProps } from "./VehicleSelectDialog.types";
-import type { SelectedVehicle } from "../VehicleSelect/VehicleSelect.types";
-import VehicleSelect from "../VehicleSelect/VehicleSelect";
+import type { Vehicle } from "../VehicleSelector/VehicleSelector.types";
+import VehicleSelector from "../VehicleSelector/VehicleSelector";
 
 const VehicleSelectDialog = ({
   onCancelClick = () => {},
@@ -22,6 +22,7 @@ const VehicleSelectDialog = ({
   errorMessage = "",
   title = "Some title",
   cancelText = "cancel",
+  multipleSelection = true,
   saveText = "Save",
   open = true,
   width = "400px",
@@ -32,7 +33,7 @@ const VehicleSelectDialog = ({
   gates = []
 }: CombinedVehicleProps) => {
   // internal state to manage selected vehicles
-  const [value, setValue] = useState<SelectedVehicle[]>([]);
+  const [value, setValue] = useState<Vehicle[]>([]);
 
   // check if all fields are filled for each selected vehicle
   const isSaveDisabled =
@@ -93,13 +94,14 @@ const VehicleSelectDialog = ({
       </DialogTitle>
       <Divider />
       <DialogContent sx={{ pt: 1 }}>
-        <VehicleSelect
+        <VehicleSelector
           variants={variants}
           value={value}
           flexDirection={flexDirection}
           flexWrap={flexWrap}
           gates={gates}
           onChange={setValue}
+          multipleSelection={multipleSelection}
         />
         {errorMessage ? (
           <Box

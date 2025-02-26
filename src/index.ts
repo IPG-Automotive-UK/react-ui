@@ -254,10 +254,6 @@ export {
   type AsamLogoProps
 } from "./SvgIcons";
 export {
-  default as VehicleSelect,
-  type VehicleSelectProps
-} from "./VehicleSelect";
-export {
   default as VehicleSelector,
   type VehicleSelectorProps
 } from "./VehicleSelector";
