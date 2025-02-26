@@ -124,7 +124,10 @@ function Header({
           {customerLogo ? (
             <Box
               sx={{
+                alignItems: "center",
+                display: "flex",
                 height: 40,
+                justifyContent: "flex-end",
                 mr: 2,
                 width: 160
               }}
@@ -134,9 +137,9 @@ function Header({
                 src={customerLogo}
                 alt="Customer Logo"
                 sx={{
-                  height: "100%",
-                  objectFit: "contain",
-                  width: "100%"
+                  maxHeight: "100%",
+                  maxWidth: "100%",
+                  objectFit: "contain"
                 }}
               />
             </Box>
