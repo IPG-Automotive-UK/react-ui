@@ -38,7 +38,8 @@ export const Default = {
   args: {
     href: "https://example.com",
     icon: <CarMakerLogo />,
-    label: "Example"
+    label: "Example",
+    tooltip: "Random text"
   },
   render: Template
 };

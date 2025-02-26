@@ -21,7 +21,8 @@ const Template: StoryFn<DateLabelProps> = args => {
 // Default
 export const Default = {
   args: {
-    label: "10-09-24 10:24:08"
+    label: "10-09-24 10:24:08",
+    tooltip: ""
   },
   render: Template
 };

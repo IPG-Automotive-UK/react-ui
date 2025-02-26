@@ -1,4 +1,12 @@
-import { Box, Link, Stack, Theme, Typography, alpha } from "@mui/material";
+import {
+  Box,
+  Link,
+  Stack,
+  Theme,
+  Tooltip,
+  Typography,
+  alpha
+} from "@mui/material";
 import React, { cloneElement } from "react";
 
 import { IconWithLabelProps } from "./IconWithLabel.types";
@@ -8,11 +16,13 @@ import { IconWithLabelProps } from "./IconWithLabel.types";
  * @param icon The icon to be displayed
  * @param label The label to render alongside the icon
  * @param href When defined the label is a clickable link to this url
+ * @param tooltip When defined it shows tooltip over the icon
  */
 export default function IconWithLabel({
   icon,
   label,
-  href
+  href,
+  tooltip = ""
 }: IconWithLabelProps) {
   const iconProps = {
     sx: (theme: Theme) => ({
@@ -33,13 +43,15 @@ export default function IconWithLabel({
         gap: "4px"
       }}
     >
-      <Box
-        sx={{
-          display: "flex"
-        }}
-      >
-        {customizedIcon}
-      </Box>
+      <Tooltip data-testid="icon-tooltip" title={tooltip}>
+        <Box
+          sx={{
+            display: "flex"
+          }}
+        >
+          {customizedIcon}
+        </Box>
+      </Tooltip>
       <Box
         sx={{
           minWidth: 0
