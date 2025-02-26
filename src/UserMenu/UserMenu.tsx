@@ -67,6 +67,7 @@ export default function UserMenu({
   // use the popup state hook to manage the state of the popup
   const popupState = usePopupState({ popupId: "userMenu", variant: "popover" });
 
+  // function to handle the click event of the menu items and close the popup
   const handleClick =
     (cb: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void) =>
     (event: React.MouseEvent<HTMLElement, MouseEvent>) => {

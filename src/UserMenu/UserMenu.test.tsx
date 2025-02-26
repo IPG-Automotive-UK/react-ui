@@ -8,7 +8,6 @@ import { vi } from "vitest";
 
 // Mock useColorScheme
 const setModeMock = vi.fn();
-
 vi.mock("@mui/material", async () => {
   const actual =
     await vi.importActual<typeof import("@mui/material")>("@mui/material");
