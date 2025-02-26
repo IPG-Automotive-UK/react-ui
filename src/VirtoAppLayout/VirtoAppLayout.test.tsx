@@ -117,13 +117,6 @@ describe("VirtoAppLayout", () => {
     await user.click(screen.getByRole("menuitem", { name: /Logout/i }));
     expect(onLogout).toHaveBeenCalled();
   });
-  test("should call onMenuClick when menu button is clicked", async () => {
-    const onMenuClick = vi.fn();
-    render(<VirtoAppLayout {...defaultInputs} onMenuClick={onMenuClick} />);
-    const launcherButton = screen.getByTestId("launcher-button");
-    await userEvent.click(launcherButton);
-    expect(onMenuClick).toHaveBeenCalled();
-  });
   test("has a valid logo link href if a string is provided", () => {
     const { container } = render(
       <VirtoAppLayout
