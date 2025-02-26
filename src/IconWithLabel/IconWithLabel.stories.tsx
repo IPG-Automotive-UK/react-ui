@@ -61,3 +61,13 @@ export const TruncatesLabel = {
   },
   render: Template
 };
+
+// Without tooltip
+export const WithoutTooltip = {
+  args: {
+    href: "https://example.com",
+    icon: <CarMakerLogo />,
+    label: "Example"
+  },
+  render: Template
+};

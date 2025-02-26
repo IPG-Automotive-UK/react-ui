@@ -31,7 +31,7 @@ const Template: StoryFn<UserLabelProps> = args => {
 export const Default = {
   args: {
     label: "James Harper",
-    tooltip: ""
+    tooltip: "Updated at"
   },
   render: Template
 };
@@ -54,11 +54,10 @@ export const LongName = {
   render: Template
 };
 
-// With Tooltip
-export const WithTooltip = {
+// Without Tooltip
+export const WithoutTooltip = {
   args: {
-    label: "John Doe",
-    tooltip: "Created by"
+    label: "John Doe"
   },
   render: Template
 };

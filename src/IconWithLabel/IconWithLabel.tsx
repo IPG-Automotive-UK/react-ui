@@ -2,12 +2,13 @@ import {
   Box,
   Link,
   Stack,
+  SxProps,
   Theme,
   Tooltip,
   Typography,
   alpha
 } from "@mui/material";
-import React, { cloneElement } from "react";
+import React, { ReactElement, cloneElement } from "react";
 
 import { IconWithLabelProps } from "./IconWithLabel.types";
 
@@ -22,7 +23,7 @@ export default function IconWithLabel({
   icon,
   label,
   href,
-  tooltip = ""
+  tooltip = undefined
 }: IconWithLabelProps) {
   const iconProps = {
     sx: (theme: Theme) => ({
@@ -43,15 +44,13 @@ export default function IconWithLabel({
         gap: "4px"
       }}
     >
-      <Tooltip data-testid="icon-tooltip" title={tooltip}>
-        <Box
-          sx={{
-            display: "flex"
-          }}
-        >
-          {customizedIcon}
-        </Box>
-      </Tooltip>
+      {tooltip ? (
+        <Tooltip data-testid="icon-tooltip" title={tooltip}>
+          <Box sx={{ display: "flex" }}>{customizedIcon}</Box>
+        </Tooltip>
+      ) : (
+        <Box sx={{ display: "flex" }}>{customizedIcon}</Box>
+      )}
       <Box
         sx={{
           minWidth: 0
