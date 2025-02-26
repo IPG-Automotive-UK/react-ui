@@ -110,7 +110,7 @@ export default function UserMenu({
       >
         <Box sx={{ px: 2, py: 1 }}>
           <Typography
-            variant="body2"
+            variant="body1"
             sx={{
               fontWeight: 500
             }}
