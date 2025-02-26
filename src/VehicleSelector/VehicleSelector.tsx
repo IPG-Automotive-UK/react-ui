@@ -149,6 +149,44 @@ function VehicleSelector({
     onChange
   ]);
 
+  // auto selecting a gate if applicable.
+  useEffect(() => {
+    // Only auto-select if there are gate options available, one gate, one selected variant
+    if (
+      gates &&
+      gates.length === 1 &&
+      selectedVariants.length > 0 &&
+      selectedGates.length === 0
+    ) {
+      const autoGate = gates[0];
+      // Filter the vehicles based on the current selections.
+      const newVehicles = filterVehicles({
+        modelYear: selectedModelYear,
+        projectCode: selectedProject,
+        variants
+      }).filter(v => selectedVariants.includes(v.variant));
+
+      // Update each vehicle record with the auto-selected gate.
+      onChange(
+        newVehicles.map(v => ({
+          _id: v._id,
+          gate: autoGate,
+          modelYear: v.modelYear,
+          projectCode: v.projectCode,
+          variant: v.variant
+        }))
+      );
+    }
+  }, [
+    gates,
+    selectedVariants,
+    selectedGates,
+    selectedModelYear,
+    selectedProject,
+    variants,
+    onChange
+  ]);
+
   // create the selector components for project, model year, variant and gate with single select for project and model year and multi select for variant and gate
   return (
     <Box

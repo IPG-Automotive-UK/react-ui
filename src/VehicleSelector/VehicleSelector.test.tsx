@@ -615,3 +615,64 @@ describe("VehicleSelector Auto-Selection Additional Scenarios", () => {
     });
   });
 });
+
+describe("VehicleSelector Gate Auto-Selection", () => {
+  it("auto-selects gate when there is exactly one gate option", async () => {
+    // Provide a single variant so both model year and variant auto-select can occur.
+    const autoGateVariants: VehicleSelectorProps["variants"] = [
+      { _id: "1", modelYear: "2015", projectCode: "911", variant: "NN" }
+    ];
+    // Set the gates prop to a single option.
+    const autoGateProps: VehicleSelectorProps = {
+      flexDirection: "column",
+      flexWrap: "nowrap",
+      gates: ["Gate 1"],
+      onChange: () => {},
+      value: [],
+      variants: autoGateVariants
+    };
+
+    // Create a mock change handler to capture changes.
+    const handleChange = vi.fn();
+    await act(async () => {
+      render(
+        <VehicleSelectorWithState {...autoGateProps} onChange={handleChange} />
+      );
+      await Promise.resolve();
+    });
+
+    // Open the Project Code dropdown and select "911".
+    const projectInput = screen.getByRole("combobox", {
+      name: /project code/i
+    });
+    await act(async () => {
+      fireEvent.mouseDown(projectInput);
+      await Promise.resolve();
+    });
+    const option911 = await screen.findByRole("option", { name: "911" });
+    await act(async () => {
+      fireEvent.click(option911);
+      await Promise.resolve();
+    });
+
+    // Wait for auto-selection of the model year.
+    await waitFor(() => {
+      const modelYearInput = screen.getByRole("combobox", {
+        name: /model year/i
+      });
+      expect(modelYearInput).toHaveValue("2015");
+    });
+
+    // Wait for auto-selection of the variant.
+    await waitFor(() => {
+      const variantInput = screen.getByRole("combobox", { name: /variant/i });
+      expect(variantInput).toHaveValue("NN");
+    });
+
+    // Finally, wait for auto-selection of the gate.
+    await waitFor(() => {
+      const gateInput = screen.getByRole("combobox", { name: /gate/i });
+      expect(gateInput).toHaveValue("Gate 1");
+    });
+  });
+});
