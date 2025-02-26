@@ -9,7 +9,7 @@ import {
   Typography,
   useColorScheme
 } from "@mui/material";
-import { ExitToApp, VpnKey } from "@mui/icons-material";
+import { Key, Logout } from "@mui/icons-material";
 import React, { Fragment } from "react";
 import {
   bindMenu,
@@ -129,7 +129,7 @@ export default function UserMenu({
         <Divider sx={sx.divider} />
         <MenuItem onClick={handleClick(onChangePassword)}>
           <ListItemIcon>
-            <VpnKey />
+            <Key />
           </ListItemIcon>
           <ListItemText>Change password</ListItemText>
         </MenuItem>
@@ -147,7 +147,7 @@ export default function UserMenu({
         <Divider sx={sx.divider} />
         <MenuItem onClick={handleClick(onLogout)}>
           <ListItemIcon>
-            <ExitToApp />
+            <Logout />
           </ListItemIcon>
           <ListItemText>Logout</ListItemText>
         </MenuItem>
