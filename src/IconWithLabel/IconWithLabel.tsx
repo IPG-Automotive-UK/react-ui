@@ -2,13 +2,12 @@ import {
   Box,
   Link,
   Stack,
-  SxProps,
   Theme,
   Tooltip,
   Typography,
   alpha
 } from "@mui/material";
-import React, { ReactElement, cloneElement } from "react";
+import React, { cloneElement } from "react";
 
 import { IconWithLabelProps } from "./IconWithLabel.types";
 
