@@ -47,16 +47,55 @@ declare module "@mui/material/styles" {
 }
 
 // primary main light
-const primaryLightMain = "#003063";
+const primaryLightMain = "#3D5A75";
 
 // primary main dark
-const primaryDarkMain = "#87A5D2";
+const primaryDarkMain = "#5E8AB4";
+
+// primary light light
+const primaryLightLight = "#637B90";
+
+// primary light dark
+const primaryLightDark = "#7EA1C3";
+
+// primary dark light
+const primaryDarkLight = "#2A3E51";
+
+// primary dark dark
+const primaryDarkDark = "#41607D";
+
+// secondary main light
+const secondaryLightMain = "#FFAF2C";
 
 // secondary main dark
-const secondaryDarkMain = "#005FA8";
+const secondaryDarkMain = "#FFAF2C";
+
+// secondary light light
+const secondaryLightLight = "#FFBF56";
+
+// secondary light dark
+const secondaryLightDark = "#FFBF56";
+
+// secondary dark light
+const secondaryDarkLight = "#B27A1E";
+
+// secondary dark dark
+const secondaryDarkDark = "#B27A1E";
 
 // palette default background light
-const paletteDefaultBackgroundLight = "#fafafa";
+const paletteDefaultBackgroundLight = "#FAFAFA";
+
+// palette default background dark
+const paletteDefaultBackgroundDark = "#121B24";
+
+// palette default background paper light
+const paletteDefaultBackgroundPaperLight = "#FFFFFF";
+
+// palette default background paper dark
+const paletteDefaultBackgroundPaperDark = "#182533";
+
+// palette tooltip color light mode or dark mode
+const paletteTooltipColor = "#3C4F67";
 
 // 0.08 % of the primary light main
 const primaryLightColor08 = alpha(primaryLightMain, 0.08);
@@ -130,6 +169,7 @@ const defaultComponents = {
   MuiTooltip: {
     styleOverrides: {
       tooltip: {
+        color: paletteTooltipColor,
         fontFamily: "Montserrat, Arial, sans-serif",
         fontSize: "12px",
         fontWeight: 400
@@ -172,7 +212,20 @@ const mainTheme: ThemeOptions = {
         }
       },
       palette: {
-        primary: { main: primaryDarkMain }
+        background: {
+          default: paletteDefaultBackgroundDark,
+          paper: paletteDefaultBackgroundPaperDark
+        },
+        primary: {
+          dark: primaryDarkDark,
+          light: primaryDarkLight,
+          main: primaryDarkMain
+        },
+        secondary: {
+          dark: secondaryDarkDark,
+          light: secondaryDarkLight,
+          main: secondaryDarkMain
+        }
       }
     },
     light: {
@@ -210,10 +263,19 @@ const mainTheme: ThemeOptions = {
           selected: primaryLightColor08
         },
         background: {
-          default: paletteDefaultBackgroundLight
+          default: paletteDefaultBackgroundLight,
+          paper: paletteDefaultBackgroundPaperLight
         },
-        primary: { main: primaryLightMain },
-        secondary: { main: secondaryDarkMain }
+        primary: {
+          dark: primaryLightDark,
+          light: primaryLightLight,
+          main: primaryLightMain
+        },
+        secondary: {
+          dark: secondaryLightDark,
+          light: secondaryLightLight,
+          main: secondaryLightMain
+        }
       }
     }
   },
