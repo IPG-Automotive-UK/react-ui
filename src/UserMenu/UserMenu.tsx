@@ -54,6 +54,9 @@ export default function UserMenu({
   // use hook from MUI to get and set the theme mode
   const { mode, setMode } = useColorScheme();
 
+  // get the name and email from the user object
+  const { name, email } = user;
+
   // format the mode to have the first letter capitalized to match the radio button value
   const formattedMode = mode
     ? mode === "system"
@@ -63,7 +66,7 @@ export default function UserMenu({
 
   // use the popup state hook to manage the state of the popup
   const popupState = usePopupState({ popupId: "userMenu", variant: "popover" });
-  const { name, email } = user;
+
   const handleClick =
     (cb: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void) =>
     (event: React.MouseEvent<HTMLElement, MouseEvent>) => {

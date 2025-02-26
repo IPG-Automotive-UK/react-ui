@@ -61,6 +61,8 @@ const AppBarTemplate: StoryFn<UserMenuProps> = args => {
 };
 
 export const InAppBar = {
-  ...Default.args,
+  args: {
+    ...Default.args
+  },
   render: AppBarTemplate
 };
