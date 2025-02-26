@@ -161,7 +161,6 @@ function Layout({
   appName,
   onChangePassword,
   onLogout,
-  onMenuClick,
   username,
   content,
   customerLogo
@@ -180,13 +179,6 @@ function Layout({
   // check if screen is medium
   const isMediumScreen = useMediaQuery(theme => theme.breakpoints.down("md"));
 
-  // handle click event
-  const handleMenuClick =
-    (cb: (event: React.MouseEvent<HTMLElement>) => void) =>
-    (event: React.MouseEvent<HTMLElement>) => {
-      cb(event);
-    };
-
   return (
     <Fragment>
       <Box
@@ -201,7 +193,7 @@ function Layout({
           onAppClick={() => setAppOpen(!appOpen)}
           onChangePassword={onChangePassword}
           onLogout={onLogout}
-          onMenuClick={handleMenuClick(onMenuClick)}
+          onMenuClick={() => setMobileOpen(!mobileOpen)}
           username={username}
           virtoLogoLinkUrl={virtoLogoLinkUrl}
           customerLogo={customerLogo}
@@ -290,7 +282,6 @@ function VirtoAppLayout({
   appName,
   onChangePassword,
   onLogout,
-  onMenuClick,
   username,
   content,
   customerLogo
@@ -306,7 +297,6 @@ function VirtoAppLayout({
           appName={appName}
           onChangePassword={onChangePassword}
           onLogout={onLogout}
-          onMenuClick={onMenuClick}
           username={username}
           content={content}
           customerLogo={customerLogo}

@@ -30,10 +30,6 @@ export type VirtoAppLayoutProps = {
    */
   onChangePassword: (event: React.MouseEvent<HTMLElement>) => void;
   /**
-   * callback is fired when user clicks on "menu"
-   */
-  onMenuClick: (event: React.MouseEvent<HTMLElement>) => void;
-  /**
    * Callback fired when the user clicks on "Logout".
    *
    * **Signature**
