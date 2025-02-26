@@ -1027,4 +1027,108 @@ describe("TransferList", () => {
     const selectedItems = screen.getAllByText("2 selected");
     expect(selectedItems.length).toBe(2);
   });
+
+  test("calls onAdd when items are transferred to the target list", async () => {
+    const user = userEvent.setup();
+    const onChangeMock = vi.fn();
+    const onAddMock = vi.fn();
+
+    // render the transfer list component with onAdd mock function
+    render(
+      <TransferList
+        items={defaultItemArray}
+        onAdd={onAddMock}
+        onChange={onChangeMock}
+        sourceListLabel="Source"
+        targetListLabel="Target"
+      />
+    );
+
+    // get the source list
+    const sourceList = screen.getByLabelText("Source");
+
+    // select only 'Apples' in the list
+    await user.click(within(sourceList).getByText("Apples"));
+
+    // get the transfer to target button
+    const transferToTargetButton = screen.getByLabelText(
+      "transfer to target list"
+    );
+
+    // click the transfer button to move items to the target list
+    await user.click(transferToTargetButton);
+
+    // check that onChange was called with the correct items in the target list
+    expect(onChangeMock).toHaveBeenCalledWith([
+      { key: "Apples", primaryLabel: "Apples" }
+    ]);
+
+    // check that onAdd was called with the correct items
+    expect(onAddMock).toHaveBeenCalledWith([
+      { key: "Apples", primaryLabel: "Apples" }
+    ]);
+
+    // select only 'Oranges' in the list
+    await user.click(within(sourceList).getByText("Oranges"));
+
+    // click the transfer button to move items to the target list
+    await user.click(transferToTargetButton);
+
+    // check that onChange was called with the correct items in the target list
+    expect(onChangeMock).toHaveBeenCalledWith([
+      { key: "Apples", primaryLabel: "Apples" },
+      { key: "Oranges", primaryLabel: "Oranges" }
+    ]);
+
+    // check that onAdd was called with the correct items
+    expect(onAddMock).toHaveBeenCalledWith([
+      { key: "Oranges", primaryLabel: "Oranges" }
+    ]);
+  });
+
+  test("calls onRemove when some items are transferred back to the source list", async () => {
+    const user = userEvent.setup();
+    const onChangeMock = vi.fn();
+    const onRemoveMock = vi.fn();
+
+    // render the transfer list component with selected items and onRemove mock function
+    render(
+      <TransferList
+        items={defaultItemArray}
+        selectedItems={["Apples", "Pears", "Oranges"]}
+        onChange={onChangeMock}
+        onRemove={onRemoveMock}
+        sourceListLabel="Source"
+        targetListLabel="Target"
+      />
+    );
+
+    // get the target list
+    const targetList = screen.getByLabelText("Target");
+
+    // select only 'Apples' in the list
+    await user.click(within(targetList).getByText("Apples"));
+
+    // get the transfer to source button
+    const transferToSourceButton = screen.getByLabelText(
+      "transfer to source list"
+    );
+
+    // click the transfer button to move "Apples" back to the source list
+    await user.click(transferToSourceButton);
+
+    // check that onChange was called with the remaining items in the target list
+    expect(onChangeMock).toHaveBeenCalledWith([
+      { key: "Pears", primaryLabel: "Pears", secondaryLabel: "Conference" },
+      { key: "Oranges", primaryLabel: "Oranges" }
+    ]);
+
+    // check that onRemove was called with the correct items
+    expect(onRemoveMock).toHaveBeenCalledWith([
+      {
+        key: "Apples",
+        primaryLabel: "Apples"
+      }
+    ]);
+  });
 });

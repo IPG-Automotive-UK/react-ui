@@ -3,7 +3,7 @@ import React, { MouseEventHandler } from "react";
 
 import { Button } from "@mui/material";
 import { CombinedVehicleProps } from "./VehicleSelectDialog.types";
-import { SelectedVehicle } from "../VehicleSelect/VehicleSelect.types";
+import type { Vehicle } from "../VehicleSelector/VehicleSelector.types";
 import VehicleSelectDialog from "./VehicleSelectDialog";
 import { action } from "@storybook/addon-actions";
 
@@ -25,7 +25,7 @@ const Template: StoryFn<CombinedVehicleProps> = args => {
     setOpen(false);
     action("onCancelClick")(args);
   };
-  const handleSave: (vehicle: SelectedVehicle[]) => void = args => {
+  const handleSave: (vehicle: Vehicle[]) => void = args => {
     setOpen(false);
     action("onSaveClick")(args);
   };
@@ -52,6 +52,7 @@ export const Default = {
     flexDirection: "column",
     flexWrap: "nowrap",
     gates: ["Gate 1", "Gate 2", "Gate 3"],
+    multipleSelection: true,
     saveText: "ADD VEHICLE",
     showCloseIcon: true,
     title: "Add Vehicle",
@@ -93,6 +94,7 @@ export const withErrorMessage = {
     flexDirection: "column",
     flexWrap: "nowrap",
     gates: ["Gate 1", "Gate 2", "Gate 3"],
+    multipleSelection: true,
     saveText: "ADD VEHICLE",
     showCloseIcon: true,
     title: "Add Vehicle",

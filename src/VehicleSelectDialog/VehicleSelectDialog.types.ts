@@ -1,7 +1,7 @@
-import {
-  SelectedVehicle,
-  VehicleSelectProps
-} from "../VehicleSelect/VehicleSelect.types";
+import type {
+  Vehicle,
+  VehicleSelectorProps
+} from "../VehicleSelector/VehicleSelector.types";
 
 export type VehicleSelectDialogProps = {
   /**
@@ -19,7 +19,7 @@ export type VehicleSelectDialogProps = {
   /**
    * Callback fired when save button clicked.
    */
-  onSaveClick: (vehicle: SelectedVehicle[]) => void;
+  onSaveClick: (vehicle: Vehicle[]) => void;
   /**
    * If true, the dialog is open.
    */
@@ -44,7 +44,7 @@ export type VehicleSelectDialogProps = {
 
 // Create a new type that merges VehicleSelectProps and VehicleSelectDialogProps
 export type CombinedVehicleProps = Omit<
-  VehicleSelectProps,
+  VehicleSelectorProps,
   "onChange" | "value"
 > &
   VehicleSelectDialogProps;
