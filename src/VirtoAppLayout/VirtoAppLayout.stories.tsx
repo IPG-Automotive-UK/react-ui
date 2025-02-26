@@ -7,6 +7,7 @@ import {
   WithCount as SidebarItemWithCount
 } from "../Sidebar/SidebarItem/SidebarItem.stories";
 
+import DevelLogo from "../../static/DevelLogo.svg";
 import React from "react";
 import SidebarDivider from "../Sidebar/SidebarDivider";
 import SidebarItem from "../Sidebar/SidebarItem";
@@ -78,7 +79,7 @@ export const Default = {
 export const WithCustomerLogo = {
   args: {
     ...Default.args,
-    customerLogo: "https://picsum.photos/160/40/"
+    customerLogo: DevelLogo
   },
   parameters: {
     layout: "fullscreen"
