@@ -80,7 +80,7 @@ export default function UserMenu({
     // get the value from the event
     let value = event.target.value;
 
-    // if the value is "System Preference", set it to "system
+    // if the value is "System Preference", set it to "system" to match the useColorScheme hook
     if (value === "System Preference") {
       value = "system";
     }
