@@ -175,7 +175,7 @@ const defaultComponents = {
   MuiTooltip: {
     styleOverrides: {
       tooltip: {
-        color: paletteTooltipColor,
+        background: paletteTooltipColor,
         fontFamily: "Montserrat, Arial, sans-serif",
         fontSize: "12px",
         fontWeight: 400
@@ -244,6 +244,15 @@ const mainTheme: ThemeOptions = {
             }
           }
         },
+        MuiButton: {
+          styleOverrides: {
+            root: ({ theme }) => ({
+              "&.MuiButton-containedPrimary": {
+                color: theme.palette.background.default
+              }
+            })
+          }
+        },
         MuiCssBaseline: {
           styleOverrides: {
             body: darkScrollbar({
@@ -253,7 +262,6 @@ const mainTheme: ThemeOptions = {
             })
           }
         },
-
         MuiStepper: {
           styleOverrides: {
             root: ({ theme }) => ({
