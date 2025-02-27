@@ -26,3 +26,11 @@ export const Default = {
   },
   render: Template
 };
+
+// Without Tooltip
+export const WithoutTooltip = {
+  args: {
+    label: "10-09-24 10:24:08"
+  },
+  render: Template
+};

@@ -33,6 +33,9 @@ export default function IconWithLabel({
   };
   const customizedIcon = cloneElement(icon, iconProps);
 
+  // define icon with wrapper
+  const wrapperIcon = <Box sx={{ display: "flex" }}>{customizedIcon}</Box>;
+
   return (
     <Stack
       data-testid="icon-with-label"
@@ -45,10 +48,10 @@ export default function IconWithLabel({
     >
       {tooltip ? (
         <Tooltip data-testid="icon-tooltip" title={tooltip}>
-          <Box sx={{ display: "flex" }}>{customizedIcon}</Box>
+          {wrapperIcon}
         </Tooltip>
       ) : (
-        <Box sx={{ display: "flex" }}>{customizedIcon}</Box>
+        wrapperIcon
       )}
       <Box
         sx={{
