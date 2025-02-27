@@ -32,9 +32,11 @@ function Header({
   const { mode, setMode } = useColorScheme();
   return (
     <AppBar
-      sx={theme => ({
-        backgroundColor: theme.palette.primary.main
-      })}
+      sx={{
+        borderBottom: theme => `1px solid ${theme.palette.divider}`,
+        boxShadow: 0,
+        zIndex: 1606
+      }}
     >
       <Toolbar style={{ justifyContent: "space-between" }}>
         <Box
@@ -46,7 +48,7 @@ function Header({
           <IconButton sx={{ pl: 0 }} onClick={onAppClick} disableRipple>
             <AppsIcon
               sx={theme => ({
-                color: theme.palette.background.paper,
+                color: theme.palette.primary.main,
                 fontSize: "30px"
               })}
             />
@@ -89,7 +91,7 @@ function Header({
               <VirtoLogo
                 data-testid="virto-logo"
                 sx={theme => ({
-                  color: theme.palette.primary.contrastText,
+                  color: theme.palette.primary.main,
                   height: 22,
                   mr: 0.4,
                   width: 110
@@ -99,7 +101,7 @@ function Header({
             <Typography
               variant="h6"
               sx={theme => ({
-                color: theme.palette.primary.contrastText,
+                color: theme.palette.primary.main,
                 fontSize: "28px",
                 fontWeight: "700",
                 letterSpacing: "0.05em",

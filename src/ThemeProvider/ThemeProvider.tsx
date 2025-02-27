@@ -193,9 +193,9 @@ const mainTheme: ThemeOptions = {
         },
         MuiAppBar: {
           styleOverrides: {
-            root: ({ theme }) => ({
-              "--ipg-palette-AppBar-darkBg": theme.palette.primary.main
-            })
+            root: {
+              backgroundColor: `${paletteDefaultBackgroundPaperDark}`
+            }
           }
         },
         MuiCssBaseline: {
@@ -231,6 +231,13 @@ const mainTheme: ThemeOptions = {
     light: {
       components: {
         ...defaultComponents,
+        MuiAppBar: {
+          styleOverrides: {
+            root: {
+              backgroundColor: `${paletteDefaultBackgroundPaperLight}`
+            }
+          }
+        },
         MuiCssBaseline: {
           styleOverrides: {
             body: darkScrollbar({
