@@ -163,6 +163,7 @@ function VehicleSelector({
       !userClearedGate
     ) {
       const autoGate = gates[0];
+
       // Filter the vehicles based on the current selections.
       const newVehicles = filterVehicles({
         modelYear: selectedModelYear,
@@ -401,11 +402,13 @@ function VehicleSelector({
               // Normalize and update userClearedGate flag accordingly.
               if (!value || (Array.isArray(value) && value.length === 0)) {
                 setUserClearedGate(true);
+
                 const newVehicles = filterVehicles({
                   modelYear: selectedModelYear,
                   projectCode: selectedProject,
                   variants
                 }).filter(v => selectedVariants.includes(v.variant));
+
                 // if no gates selected keep the project, model year and variant but clear the gate in value
                 onChange(
                   newVehicles.map(v => ({

@@ -645,6 +645,7 @@ describe("VehicleSelector Gate Auto-Selection", () => {
     const projectInput = screen.getByRole("combobox", {
       name: /project code/i
     });
+
     await act(async () => {
       fireEvent.mouseDown(projectInput);
       await Promise.resolve();
