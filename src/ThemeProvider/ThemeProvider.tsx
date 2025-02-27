@@ -138,7 +138,10 @@ const defaultComponents = {
         backgroundColor: theme.palette.common.background
       }),
       main: ({ theme }: MuiTheme) => ({
-        backgroundColor: theme.palette.common.background
+        backgroundColor:
+          theme.palette.mode === "dark"
+            ? paletteDefaultBackgroundPaperDark
+            : paletteDefaultBackgroundPaperLight
       }),
       root: ({ theme }: MuiTheme) => ({
         "& .MuiDataGrid-cell:focus, .MuiDataGrid-cell:focus-within, .MuiDataGrid-columnHeader:focus, .MuiDataGrid-columnHeader:focus-within":
@@ -147,7 +150,10 @@ const defaultComponents = {
           },
         "& .MuiDataGrid-container--top [role='row'], & .MuiDataGrid-container--bottom [role='row']":
           {
-            backgroundColor: theme.palette.common.background
+            backgroundColor:
+              theme.palette.mode === "dark"
+                ? paletteDefaultBackgroundPaperDark
+                : paletteDefaultBackgroundPaperLight
           }
       })
     }
@@ -194,7 +200,7 @@ const mainTheme: ThemeOptions = {
         MuiAppBar: {
           styleOverrides: {
             root: {
-              backgroundColor: `${paletteDefaultBackgroundPaperDark}`
+              backgroundColor: paletteDefaultBackgroundPaperDark
             }
           }
         },
@@ -234,7 +240,7 @@ const mainTheme: ThemeOptions = {
         MuiAppBar: {
           styleOverrides: {
             root: {
-              backgroundColor: `${paletteDefaultBackgroundPaperLight}`
+              backgroundColor: paletteDefaultBackgroundPaperLight
             }
           }
         },
