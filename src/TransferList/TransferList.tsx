@@ -293,6 +293,9 @@ export default function TransferList({
           width: "100%"
         })}
       >
+        <Box sx={{ px: 3 }}>
+          <Search value={sourceFilter} onChange={setSourceFilter} />
+        </Box>
         <Box
           sx={theme => ({
             alignItems: "center",
@@ -328,16 +331,9 @@ export default function TransferList({
             <Typography
               variant="body2"
               sx={{ color: "text.secondary" }}
-            >{`${sourceItemsToTransfer.length} selected`}</Typography>
+            >{`${sourceItemsToTransfer.length} Selected`}</Typography>
           </Box>
         </Box>
-
-        {allSourceItems.length > 0 ? (
-          <Box sx={{ px: 3 }}>
-            <Search value={sourceFilter} onChange={setSourceFilter} />
-          </Box>
-        ) : null}
-
         <Box
           sx={{
             height: "100%",
@@ -401,6 +397,9 @@ export default function TransferList({
           width: "100%"
         })}
       >
+        <Box sx={{ px: 3 }}>
+          <Search value={targetFilter} onChange={setTargetFilter} />
+        </Box>
         <Box
           sx={theme => ({
             alignItems: "center",
@@ -436,16 +435,9 @@ export default function TransferList({
             <Typography
               variant="body2"
               sx={{ color: "text.secondary" }}
-            >{`${targetItemsToTransfer.length} selected`}</Typography>
+            >{`${targetItemsToTransfer.length} Selected`}</Typography>
           </Box>
         </Box>
-
-        {allTargetItems.length > 0 ? (
-          <Box sx={{ px: 3 }}>
-            <Search value={targetFilter} onChange={setTargetFilter} />
-          </Box>
-        ) : null}
-
         <Box
           sx={{
             height: "100%",
