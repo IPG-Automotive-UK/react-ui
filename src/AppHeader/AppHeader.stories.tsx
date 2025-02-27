@@ -7,7 +7,6 @@ import { Notifications } from "@mui/icons-material";
 import React from "react";
 import SearchBar from "../SearchBar";
 import ThemeProvider from "../ThemeProvider";
-import ToggleColorMode from "../ToggleColorMode";
 import { VirtoLogo } from "../SvgIcons/VirtoLogo";
 import { fixedPositionComponentDecorator } from "../../.storybook/decorators";
 import { useDarkMode } from "storybook-dark-mode";
@@ -70,7 +69,6 @@ export const MultipleChildren = {
     children: (
       <>
         <SearchBar />
-        <ToggleColorMode mode={"light"} onChange={() => {}} />
       </>
     ),
     mode: "light",
@@ -94,7 +92,6 @@ export const MultipleChildrenAndLogo = {
     children: (
       <>
         <SearchBar />
-        <ToggleColorMode mode={"light"} onChange={() => {}} />
       </>
     ),
     mode: "light",

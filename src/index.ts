@@ -190,10 +190,6 @@ export { default as SwitchField, type SwitchFieldProps } from "./SwitchField";
 export { default as TextField, type TextFieldProps } from "./TextField";
 export { theme, ThemeProvider, type ThemeProviderProps } from "./ThemeProvider";
 export {
-  default as ToggleColorMode,
-  type ToggleColorModeProps
-} from "./ToggleColorMode";
-export {
   default as TransferList,
   type TransferListProps,
   type TransferListItem
