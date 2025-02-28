@@ -269,6 +269,18 @@ const mainTheme: ThemeOptions = {
             })
           }
         },
+        MuiTableCell: {
+          styleOverrides: {
+            root: ({ theme }) => ({
+              "&.MuiTableCell-head": {
+                backgroundColor:
+                  theme.palette.mode === "dark"
+                    ? paletteDefaultBackgroundPaperDark
+                    : "inherit"
+              }
+            })
+          }
+        },
         MuiTableRow: {
           styleOverrides: {
             root: ({ theme }) => ({
