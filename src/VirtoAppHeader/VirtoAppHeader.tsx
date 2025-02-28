@@ -69,7 +69,7 @@ function Header({
           >
             <Menu
               sx={theme => ({
-                color: theme.palette.background.paper,
+                color: theme.palette.primary.main,
                 fontSize: "30px"
               })}
             />
