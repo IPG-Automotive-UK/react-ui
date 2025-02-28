@@ -10,7 +10,7 @@ import {
   ConfigProps,
   LinePlotProps
 } from "./LinePlot.types";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
 import DialogTitle from "../DialogTitle";
 import Plotly from "react-plotly.js";
@@ -32,26 +32,26 @@ const LinePlot = ({
   const plotRef = useRef<HTMLDivElement>(null);
 
   // state to keep track of the size of the plot div
-  const [axisSize, setAxisSize] = useState({ height: 300, width: 400 });
+  const [axisSize] = useState({ height: 300, width: 400 });
 
   // state to keep track of whether the plot is in fullscreen mode
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   // effect to update the size of the plot div on window resize
-  useEffect(() => {
-    const updateSize = () => {
-      // if plotRef is not set, return early to avoid errors
-      if (!plotRef.current) return;
-      // get the bounding box of the plot div and set the axis size state
-      const boundingBox = plotRef.current.getBoundingClientRect();
-      setAxisSize({ height: boundingBox.height, width: boundingBox.width });
-    };
-    // add event listener for window resize event and call updateSize on mount
-    updateSize();
-    window.addEventListener("resize", updateSize);
-    // cleanup event listener on unmount and resize
-    return () => window.removeEventListener("resize", updateSize);
-  });
+  // useEffect(() => {
+  //   const updateSize = () => {
+  //     // if plotRef is not set, return early to avoid errors
+  //     if (!plotRef.current) return;
+  //     // get the bounding box of the plot div and set the axis size state
+  //     const boundingBox = plotRef.current.getBoundingClientRect();
+  //     setAxisSize({ height: boundingBox.height, width: boundingBox.width });
+  //   };
+  //   // add event listener for window resize event and call updateSize on mount
+  //   updateSize();
+  //   window.addEventListener("resize", updateSize);
+  //   // cleanup event listener on unmount and resize
+  //   return () => window.removeEventListener("resize", updateSize);
+  // });
 
   // helper function to get the maximum number of characters that can fit in the axis label
   const getMaxChars = (axisLength: number) => Math.floor(axisLength / 7);
