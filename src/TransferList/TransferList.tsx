@@ -308,7 +308,9 @@ export default function TransferList({
           <Checkbox
             aria-label="select all source list items"
             checked={sourceItemsToTransfer.length > 0}
-            disabled={allSourceItems.length === 0}
+            disabled={
+              allSourceItems.length === 0 || filteredSourceItems.length === 0
+            }
             disableRipple
             indeterminate={
               sourceItemsToTransfer.length > 0 &&
@@ -412,7 +414,9 @@ export default function TransferList({
           <Checkbox
             aria-label="select all target list items"
             checked={targetItemsToTransfer.length > 0}
-            disabled={allTargetItems.length === 0}
+            disabled={
+              allTargetItems.length === 0 || filteredTargetItems.length === 0
+            }
             disableRipple
             indeterminate={
               targetItemsToTransfer.length > 0 &&
