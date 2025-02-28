@@ -7,6 +7,7 @@ import {
   WithCount as SidebarItemWithCount
 } from "../Sidebar/SidebarItem/SidebarItem.stories";
 
+import DevelLogo from "../../static/DevelLogo.svg";
 import React from "react";
 import SidebarDivider from "../Sidebar/SidebarDivider";
 import SidebarItem from "../Sidebar/SidebarItem";
@@ -70,6 +71,18 @@ export const Default = {
 
   parameters: {
     layout: "fullscreen" // removes the padding from the story iframe for this story
+  },
+
+  render: Template
+};
+
+export const WithCustomerLogo = {
+  args: {
+    ...Default.args,
+    customerLogo: DevelLogo
+  },
+  parameters: {
+    layout: "fullscreen"
   },
 
   render: Template

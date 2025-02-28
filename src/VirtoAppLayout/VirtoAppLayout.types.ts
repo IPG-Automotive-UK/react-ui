@@ -16,6 +16,10 @@ export type VirtoAppLayoutProps = {
    */
   content: React.ReactNode;
   /**
+   * A String of the href URL for the Link of the Customer Logo, default is null (link disabled)
+   */
+  customerLogo?: string;
+  /**
    * Callback fired when the user clicks on "Change password".
    *
    * **Signature**
@@ -47,4 +51,43 @@ export type VirtoAppLayoutProps = {
    * A String of the href URL for the Link of the VIRTO Logo, default is null (link disabled)
    */
   virtoLogoLinkUrl?: string;
+};
+
+export type HeaderProps = {
+  /**
+   * App name to display in header.
+   */
+  appName: string;
+  /**
+   * Base URL for VIRTO home page.
+   */
+  baseUrl?: string;
+  /**
+   * A String of the href URL for the Link of the Customer Logo, default is null (link disabled)
+   */
+  customerLogo?: string;
+  /**
+   * Callback fired when the user clicks on "Change password".
+   */
+  onChangePassword: (event: React.MouseEvent<HTMLElement>) => void;
+  /**
+   * Callback fired when the user clicks on "Logout".
+   */
+  onLogout: (event: React.MouseEvent<HTMLElement>) => void;
+  /**
+   * Name of currently logged in user.
+   */
+  username: string;
+  /**
+   * A String of the href URL for the Link of the VIRTO Logo
+   */
+  virtoLogoLinkUrl?: string;
+  /**
+   * callback is fired when user clicks on "menu"
+   */
+  onMenuClick: (event: React.MouseEvent<HTMLElement>) => void;
+  /**
+   * callback is fired when user clicks on "App"
+   */
+  onAppClick: (event: React.MouseEvent<HTMLElement>) => void;
 };

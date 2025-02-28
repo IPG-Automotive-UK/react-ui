@@ -11,10 +11,6 @@ export {
   type AlignVerticalProps
 } from "./AlignVertical";
 export {
-  default as VirtoAppHeader,
-  type VirtoAppHeaderProps
-} from "./VirtoAppHeader";
-export {
   default as VirtoAppLayout,
   type VirtoAppLayoutProps
 } from "./VirtoAppLayout";
@@ -193,10 +189,6 @@ export {
 export { default as SwitchField, type SwitchFieldProps } from "./SwitchField";
 export { default as TextField, type TextFieldProps } from "./TextField";
 export { theme, ThemeProvider, type ThemeProviderProps } from "./ThemeProvider";
-export {
-  default as ToggleColorMode,
-  type ToggleColorModeProps
-} from "./ToggleColorMode";
 export {
   default as TransferList,
   type TransferListProps,
