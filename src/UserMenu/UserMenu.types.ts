@@ -1,3 +1,17 @@
+/**
+ * Type of user
+ */
+export type User = {
+  /**
+   * The name of the user
+   */
+  name: string;
+  /**
+   * The email of the user
+   */
+  email: string;
+};
+
 export type UserMenuProps = {
   /**
    * Callback fired when the user clicks on "Change password".
@@ -8,9 +22,9 @@ export type UserMenuProps = {
    */
   onLogout: (event: React.MouseEvent<HTMLElement>) => void;
   /**
-   * Name of currently logged in user.
+   * The user details.
    */
-  username: string;
+  user: User;
 };
 // type definitions for UserAvatar
 export type UserAvatarProps = {

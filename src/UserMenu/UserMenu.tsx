@@ -1,13 +1,15 @@
 import {
+  Box,
   Divider,
   IconButton,
   ListItemIcon,
   ListItemText,
   Menu,
   MenuItem,
-  Typography
+  Typography,
+  useColorScheme
 } from "@mui/material";
-import { ExitToApp, VpnKey } from "@mui/icons-material";
+import { Key, Logout } from "@mui/icons-material";
 import React, { Fragment } from "react";
 import {
   bindMenu,
@@ -15,7 +17,7 @@ import {
   usePopupState
 } from "material-ui-popup-state/hooks";
 
-import { Theme } from "@mui/material/styles";
+import RadioButtons from "../RadioButtons";
 import { UserAvatar } from "../UserAvatar";
 import { UserMenuProps } from "./UserMenu.types";
 
@@ -26,17 +28,18 @@ const sx = {
     width: 34
   },
   divider: {
-    marginBottom: (theme: Theme) => theme.spacing(1),
-    marginTop: (theme: Theme) => theme.spacing(1)
+    marginBottom: 1,
+    marginTop: 1
   },
   loggedInAs: {
     "&:focus": {
       outline: "none"
     },
-    padding: (theme: Theme) => theme.spacing(1, 2)
+    px: 2,
+    py: 1
   },
   menu: {
-    marginTop: (theme: Theme) => theme.spacing(1)
+    marginTop: 1
   }
 };
 
@@ -44,22 +47,57 @@ const sx = {
  * User menu avatar and dropdown menu
  */
 export default function UserMenu({
-  username,
+  user,
   onChangePassword,
   onLogout
 }: UserMenuProps) {
+  // use hook from MUI to get and set the theme mode
+  const { mode, setMode } = useColorScheme();
+
+  // get the name and email from the user object
+  const { name, email } = user;
+
+  // format the mode to have the first letter capitalized to match the radio button value
+  const formattedMode = mode
+    ? mode === "system"
+      ? "System Preference"
+      : mode.charAt(0).toUpperCase() + mode.slice(1)
+    : "Light";
+
+  // use the popup state hook to manage the state of the popup
   const popupState = usePopupState({ popupId: "userMenu", variant: "popover" });
+
+  // function to handle the click event of the menu items and close the popup
   const handleClick =
     (cb: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void) =>
     (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
       popupState.close();
       cb && cb(event);
     };
+
+  // function to handle the theme change on click of the radio button
+  const onThemeChange = () => (event: React.ChangeEvent<HTMLInputElement>) => {
+    // get the value from the event
+    let value = event.target.value;
+
+    // if the value is "System Preference", set it to "system" to match the useColorScheme hook
+    if (value === "System Preference") {
+      value = "system";
+    }
+
+    // convert the value to lowercase and set the mode
+    const valueForLocalStorage = value.toLowerCase() as
+      | "light"
+      | "dark"
+      | "system";
+
+    setMode(valueForLocalStorage);
+  };
   return (
     <Fragment>
       <IconButton {...bindTrigger(popupState)} size="large" sx={sx.button}>
         <UserAvatar
-          name={username}
+          name={name}
           sx={theme => ({
             backgroundColor: theme.palette.grey[400],
             height: 34,
@@ -72,20 +110,48 @@ export default function UserMenu({
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         sx={sx.menu}
+        slotProps={{ paper: { sx: { width: 350 } } }}
       >
-        <Typography sx={sx.loggedInAs} variant="body2">
-          Logged in as <strong>{!username ? "Unknown" : username}</strong>
-        </Typography>
+        <Box sx={{ px: 2, py: 1 }}>
+          <Typography
+            variant="body1"
+            sx={{
+              fontWeight: 500
+            }}
+          >
+            {!name ? "Unknown" : name}
+          </Typography>
+          <Typography
+            sx={theme => ({
+              color: theme.palette.text.secondary
+            })}
+            variant="caption"
+          >
+            {!email ? "Unknown" : email}
+          </Typography>
+        </Box>
         <Divider sx={sx.divider} />
         <MenuItem onClick={handleClick(onChangePassword)}>
           <ListItemIcon>
-            <VpnKey />
+            <Key />
           </ListItemIcon>
           <ListItemText>Change password</ListItemText>
         </MenuItem>
+        <Box sx={{ mt: 1.5, px: 2 }}>
+          <RadioButtons
+            value={formattedMode}
+            onChange={onThemeChange()}
+            title="Theme"
+            options={["Light", "Dark", "System Preference"]}
+            style={{
+              ml: 1.5
+            }}
+          />
+        </Box>
+        <Divider sx={sx.divider} />
         <MenuItem onClick={handleClick(onLogout)}>
           <ListItemIcon>
-            <ExitToApp />
+            <Logout />
           </ListItemIcon>
           <ListItemText>Logout</ListItemText>
         </MenuItem>
