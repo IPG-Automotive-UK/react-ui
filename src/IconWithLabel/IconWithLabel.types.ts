@@ -16,4 +16,8 @@ export type IconWithLabelProps = {
    * The url to which the user will be navigated in a new tab to on clicking the label
    */
   href?: string;
+  /**
+   * The tooltip showing additional text on icon hover
+   */
+  tooltip?: string;
 };

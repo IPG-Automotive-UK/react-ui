@@ -4,6 +4,7 @@ import { render, screen } from "@testing-library/react";
 import { CarMakerLogo } from "../SvgIcons";
 import IconWithLabel from "./IconWithLabel";
 import React from "react";
+import userEvent from "@testing-library/user-event";
 
 const defaultInputs = {
   icon: <CarMakerLogo />,
@@ -55,5 +56,35 @@ describe("IconWithLabel tests", () => {
     expect(textStyle.overflow).toBe("hidden");
     expect(textStyle.textOverflow).toBe("ellipsis");
     expect(parentStyle.minWidth).toBe("0");
+  });
+  test("renders `IconWithLabel` component with optional tooltip. Should show and hide tooltip on hover and hover leave respectively", async () => {
+    render(
+      <IconWithLabel
+        icon={<CarMakerLogo />}
+        label="Example"
+        tooltip="Tooltip Text"
+      />
+    );
+
+    // find the trigger element
+    const tooltipTriggerElement = screen.getByTestId("icon-tooltip");
+
+    // find the elements of interest
+    let tooltip = screen.queryByRole("tooltip");
+
+    // simulate hover effect
+    await userEvent.hover(tooltipTriggerElement);
+
+    // check if tooltip appears and is visible
+    tooltip = await screen.findByRole("tooltip");
+    expect(tooltip).toBeInTheDocument();
+    expect(tooltip.firstChild).toHaveTextContent("Tooltip Text");
+    expect(getComputedStyle(tooltip.children[0]).opacity).toBe("1");
+
+    // unhover the trigger element
+    await userEvent.unhover(tooltipTriggerElement);
+
+    // ensure tooltip still exists but is not visible
+    expect(getComputedStyle(tooltip.children[0]).opacity).toBe("0");
   });
 });
