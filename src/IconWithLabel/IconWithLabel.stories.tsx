@@ -38,7 +38,8 @@ export const Default = {
   args: {
     href: "https://example.com",
     icon: <CarMakerLogo />,
-    label: "Example"
+    label: "Example",
+    tooltip: "Random text"
   },
   render: Template
 };
@@ -57,6 +58,16 @@ export const TruncatesLabel = {
   args: {
     icon: <CarMakerLogo />,
     label: "Very Long Label That Needs to be Truncated"
+  },
+  render: Template
+};
+
+// Without tooltip
+export const WithoutTooltip = {
+  args: {
+    href: "https://example.com",
+    icon: <CarMakerLogo />,
+    label: "Example"
   },
   render: Template
 };

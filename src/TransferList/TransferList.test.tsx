@@ -56,7 +56,7 @@ describe("TransferList", () => {
     expect(screen.getByText("Target List Label"));
 
     // test the subheadings under the two headings
-    const zeroSelectedHeadings = screen.getAllByText("0 selected");
+    const zeroSelectedHeadings = screen.getAllByText("0 Selected");
     expect(zeroSelectedHeadings.length).toBe(2);
   });
 
@@ -113,7 +113,7 @@ describe("TransferList", () => {
     expect(filteredItems[2]).toBeUndefined();
   });
 
-  test("search bar only appears when the list has entries", () => {
+  test("search bar appears awlays both when the list has entries and when the list is empty", () => {
     render(
       <TransferList
         items={defaultItemArray}
@@ -127,7 +127,7 @@ describe("TransferList", () => {
     const inputs = screen.getAllByLabelText("Search");
 
     // Check that only one search bar is rendered
-    expect(inputs.length).toBe(1);
+    expect(inputs.length).toBe(2);
   });
 
   test("clearing the source filter brings back the full source list", async () => {
@@ -184,7 +184,7 @@ describe("TransferList", () => {
     expect(sourceItems[1].textContent).toBe("Oranges");
 
     // test selected items heading remains the same and both headings for source and target are present
-    const zeroSelectedHeadings = screen.getAllByText("0 selected");
+    const zeroSelectedHeadings = screen.getAllByText("0 Selected");
     expect(zeroSelectedHeadings.length).toBe(2);
 
     // get target list
@@ -237,10 +237,10 @@ describe("TransferList", () => {
     );
 
     // test subheading is correct
-    expect(screen.getByText("2 selected"));
+    expect(screen.getByText("2 Selected"));
 
     // make sure target shows 0 selected
-    const zeroSelectedHeading = screen.getAllByText("0 selected");
+    const zeroSelectedHeading = screen.getAllByText("0 Selected");
     expect(zeroSelectedHeading.length).toBe(1);
 
     // click first two items in list for a second time
@@ -262,7 +262,7 @@ describe("TransferList", () => {
     );
 
     // test selected items heading are both the same for source and target with all items unselected
-    const zeroSelectedHeadings = screen.getAllByText("0 selected");
+    const zeroSelectedHeadings = screen.getAllByText("0 Selected");
     expect(zeroSelectedHeadings.length).toBe(2);
   });
 
@@ -767,10 +767,10 @@ describe("TransferList", () => {
     );
 
     // get search input
-    const searchInput = screen.getByLabelText("Search");
+    const searchInput = screen.getAllByLabelText("Search");
 
     // search for "Pears"
-    await user.type(searchInput, "Pears");
+    await user.type(searchInput[0], "Pears");
 
     // get filtered list
     const sourceList = screen.getByLabelText("Source List Label");
@@ -831,15 +831,15 @@ describe("TransferList", () => {
     await user.click(sourceItems[0]);
 
     // get search input
-    const searchInput = screen.getByLabelText("Search");
-    await user.type(searchInput, "Pears");
+    const searchInput = screen.getAllByLabelText("Search");
+    await user.type(searchInput[0], "Pears");
 
     // select the searched item
     const filteredItems = within(sourceList).getAllByRole("listitem");
     await user.click(filteredItems[0]);
 
     // ensure label shows correct selected count
-    const selected = screen.getByText("2 selected");
+    const selected = screen.getByText("2 Selected");
     expect(selected).not.toBeNull();
 
     // transfer items
@@ -869,34 +869,34 @@ describe("TransferList", () => {
     await user.click(within(sourceList).getByText("Oranges"));
 
     // get search input
-    const searchInput = screen.getByLabelText("Search");
-    await user.type(searchInput, "Apples");
+    const searchInput = screen.getAllByLabelText("Search");
+    await user.type(searchInput[0], "Apples");
 
     // select all and check if we have 2 selected("Oranges" and "Apples")
     const selectAllCheckbox = screen.getByLabelText(
       "select all source list items"
     );
     await user.click(selectAllCheckbox);
-    expect(screen.getByText("2 selected")).not.toBeNull();
+    expect(screen.getByText("2 Selected")).not.toBeNull();
 
     // deselect all
     await user.click(selectAllCheckbox);
 
     // check if now only one have been left as selected("Oranges")
-    expect(screen.getByText("1 selected")).not.toBeNull();
+    expect(screen.getByText("1 Selected")).not.toBeNull();
 
     // select all again and clear search
     await user.click(selectAllCheckbox);
-    await user.type(searchInput, "{selectall}{backspace}");
+    await user.type(searchInput[0], "{selectall}{backspace}");
 
     // assert that after the search is cleared we still have both "Apples" and "Oranges" selected
-    expect(screen.getByText("2 selected")).not.toBeNull();
+    expect(screen.getByText("2 Selected")).not.toBeNull();
 
     // deselect all
     await user.click(selectAllCheckbox);
 
     // make sure both source target shows 0 selected after the diselection
-    const zeroSelectedHeadings = screen.getAllByText("0 selected");
+    const zeroSelectedHeadings = screen.getAllByText("0 Selected");
     expect(zeroSelectedHeadings.length).toBe(1);
   });
 
@@ -935,7 +935,7 @@ describe("TransferList", () => {
 
     // select all in source list
     await user.click(selectAllSource);
-    expect(screen.getByText("3 selected")).toBeTruthy();
+    expect(screen.getByText("3 Selected")).toBeTruthy();
     expect(selectAllSource).toHaveProperty("checked", true);
 
     // get transfer button and move items to target list
@@ -955,7 +955,7 @@ describe("TransferList", () => {
 
     // select all in target list
     await user.click(selectAllTarget);
-    expect(screen.getByText("3 selected")).toBeTruthy();
+    expect(screen.getByText("3 Selected")).toBeTruthy();
     expect(selectAllTarget).toHaveProperty("checked", true);
   });
 
@@ -995,7 +995,7 @@ describe("TransferList", () => {
     await user.click(sourceCheckboxes[1]);
 
     // verify two items are selected in source
-    expect(screen.getByText("2 selected")).toBeTruthy();
+    expect(screen.getByText("2 Selected")).toBeTruthy();
 
     // move selected items to target list
     const transferButton = screen.getByLabelText("transfer to target list");
@@ -1024,7 +1024,7 @@ describe("TransferList", () => {
     await user.click(targetCheckboxes[1]);
 
     // verify two items are selected in source and in target
-    const selectedItems = screen.getAllByText("2 selected");
+    const selectedItems = screen.getAllByText("2 Selected");
     expect(selectedItems.length).toBe(2);
   });
 

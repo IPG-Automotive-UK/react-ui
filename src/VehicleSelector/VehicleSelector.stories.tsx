@@ -250,3 +250,30 @@ export const Disabled = {
 
   render: Template
 };
+
+export const AutoSelectionWithGate = {
+  args: {
+    flexDirection: "column",
+    flexWrap: "nowrap",
+    gates: ["Gate 1"],
+    value: [
+      {
+        _id: "",
+        gate: "",
+        modelYear: "",
+        projectCode: "911",
+        variant: ""
+      }
+    ],
+    variants: [
+      {
+        _id: "1",
+        modelYear: "2015",
+        projectCode: "911",
+        variant: "Variant 1"
+      }
+    ]
+  },
+
+  render: Template
+};

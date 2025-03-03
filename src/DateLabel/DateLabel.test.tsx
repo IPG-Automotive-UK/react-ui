@@ -19,4 +19,13 @@ describe("`DateLabel` tests", () => {
     expect(iconElement).toBeInTheDocument();
     expect(anchorElement).not.toBeInTheDocument();
   });
+  test("should render `DateLabel` component with tooltip component if 'tooltip' prop is present", () => {
+    render(<DateLabel label="10-09-24 10:24:08" tooltip="Tooltip Text" />);
+
+    // find the element of interest
+    const tooltip = screen.getByTestId("icon-tooltip");
+
+    // check if tooltip appears
+    expect(tooltip).toBeInTheDocument();
+  });
 });
