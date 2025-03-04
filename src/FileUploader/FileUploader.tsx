@@ -98,7 +98,7 @@ export default function FileUploader({
                   ? theme.palette.text.primary
                   : theme.palette.text.secondary
           },
-          background: theme.palette.background.default,
+          background: theme.palette.background.paper,
           borderColor: error ? theme.palette.error.main : theme.palette.divider,
           borderStyle: "dashed",
           borderWidth: 1,

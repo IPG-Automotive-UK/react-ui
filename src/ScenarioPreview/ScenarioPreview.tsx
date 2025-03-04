@@ -40,6 +40,7 @@ export function ScenarioPreview({
     <Box
       data-testid="scenario-preview-wrapper"
       sx={{
+        background: theme => theme.palette.background.paper,
         display: "flex",
         flexDirection: "column",
         gap: 1,

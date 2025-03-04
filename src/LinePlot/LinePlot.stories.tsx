@@ -25,7 +25,7 @@ const CardTemplate: StoryFn<LinePlotProps> = args => {
     <Box
       sx={theme => ({
         alignItems: "flex-start",
-        background: "#1e1e1e",
+        background: "theme.palette.primary.main",
         border: "none",
         borderRadius: "6px",
         display: "flex",

@@ -47,16 +47,52 @@ declare module "@mui/material/styles" {
 }
 
 // primary main light
-const primaryLightMain = "#003063";
+const primaryLightMain = "#3D5A75";
 
 // primary main dark
-const primaryDarkMain = "#87A5D2";
+const primaryDarkMain = "#5E8AB4";
+
+// primary light light
+const primaryLightLight = "#637B90";
+
+// primary light dark
+const primaryLightDark = "#7EA1C3";
+
+// primary dark light
+const primaryDarkLight = "#2A3E51";
+
+// primary dark dark
+const primaryDarkDark = "#41607D";
+
+// secondary main light
+const secondaryLightMain = "#FFAF2C";
 
 // secondary main dark
-const secondaryDarkMain = "#005FA8";
+const secondaryDarkMain = "#FFAF2C";
+
+// secondary light light and secondary light dark
+const secondaryLightColor = "#FFBF56";
+
+// secondary dark light
+const secondaryDarkLight = "#B27A1E";
+
+// secondary dark dark
+const secondaryDarkDark = "#B27A1E";
 
 // palette default background light
-const paletteDefaultBackgroundLight = "#fafafa";
+const paletteDefaultBackgroundLight = "#FAFAFA";
+
+// palette default background dark
+const paletteDefaultBackgroundDark = "#121B24";
+
+// palette default background paper light
+const paletteDefaultBackgroundPaperLight = "#FFFFFF";
+
+// palette default background paper dark
+const paletteDefaultBackgroundPaperDark = "#182533";
+
+// palette tooltip color light mode or dark mode
+const paletteTooltipColor = "#3C4F67";
 
 // 0.08 % of the primary light main
 const primaryLightColor08 = alpha(primaryLightMain, 0.08);
@@ -96,10 +132,10 @@ const defaultComponents = {
   MuiDataGrid: {
     styleOverrides: {
       footerContainer: ({ theme }: MuiTheme) => ({
-        backgroundColor: theme.palette.common.background
+        backgroundColor: theme.palette.background.paper
       }),
       main: ({ theme }: MuiTheme) => ({
-        backgroundColor: theme.palette.common.background
+        backgroundColor: theme.palette.background.paper
       }),
       root: ({ theme }: MuiTheme) => ({
         "& .MuiDataGrid-cell:focus, .MuiDataGrid-cell:focus-within, .MuiDataGrid-columnHeader:focus, .MuiDataGrid-columnHeader:focus-within":
@@ -108,7 +144,7 @@ const defaultComponents = {
           },
         "& .MuiDataGrid-container--top [role='row'], & .MuiDataGrid-container--bottom [role='row']":
           {
-            backgroundColor: theme.palette.common.background
+            backgroundColor: theme.palette.background.paper
           }
       })
     }
@@ -130,6 +166,7 @@ const defaultComponents = {
   MuiTooltip: {
     styleOverrides: {
       tooltip: {
+        background: paletteTooltipColor,
         fontFamily: "Montserrat, Arial, sans-serif",
         fontSize: "12px",
         fontWeight: 400
@@ -153,8 +190,20 @@ const mainTheme: ThemeOptions = {
         },
         MuiAppBar: {
           styleOverrides: {
+            root: {
+              backgroundColor: paletteDefaultBackgroundPaperDark
+            }
+          }
+        },
+        MuiButton: {
+          styleOverrides: {
             root: ({ theme }) => ({
-              "--ipg-palette-AppBar-darkBg": theme.palette.primary.main
+              "&.MuiButton-containedPrimary": {
+                "&.Mui-disabled": {
+                  color: `${theme.palette.text.disabled} !important`
+                },
+                color: theme.palette.background.default
+              }
             })
           }
         },
@@ -169,15 +218,56 @@ const mainTheme: ThemeOptions = {
               backgroundColor: alpha(theme.palette.primary.main, 0.08)
             })
           }
+        },
+        MuiTableCell: {
+          styleOverrides: {
+            root: ({ theme }) => ({
+              "&.MuiTableCell-head": {
+                backgroundColor: paletteDefaultBackgroundPaperDark
+              }
+            })
+          }
         }
       },
       palette: {
-        primary: { main: primaryDarkMain }
+        background: {
+          default: paletteDefaultBackgroundDark,
+          paper: paletteDefaultBackgroundPaperDark
+        },
+        primary: {
+          dark: primaryDarkDark,
+          light: primaryDarkLight,
+          main: primaryDarkMain
+        },
+        secondary: {
+          dark: secondaryDarkDark,
+          light: secondaryDarkLight,
+          main: secondaryDarkMain
+        }
       }
     },
     light: {
       components: {
         ...defaultComponents,
+        MuiAppBar: {
+          styleOverrides: {
+            root: {
+              backgroundColor: paletteDefaultBackgroundPaperLight
+            }
+          }
+        },
+        // MuiButton: {
+        //   styleOverrides: {
+        //     root: ({ theme }) => ({
+        //       "&.Mui-disabled": {
+        //         color: "inherit"
+        //       },
+        //       "&.MuiButton-containedPrimary": {
+        //         color: theme.palette.background.default
+        //       }
+        //     })
+        //   }
+        // },
         MuiCssBaseline: {
           styleOverrides: {
             body: darkScrollbar({
@@ -187,7 +277,6 @@ const mainTheme: ThemeOptions = {
             })
           }
         },
-
         MuiStepper: {
           styleOverrides: {
             root: ({ theme }) => ({
@@ -210,10 +299,19 @@ const mainTheme: ThemeOptions = {
           selected: primaryLightColor08
         },
         background: {
-          default: paletteDefaultBackgroundLight
+          default: paletteDefaultBackgroundLight,
+          paper: paletteDefaultBackgroundPaperLight
         },
-        primary: { main: primaryLightMain },
-        secondary: { main: secondaryDarkMain }
+        primary: {
+          dark: primaryLightDark,
+          light: primaryLightLight,
+          main: primaryLightMain
+        },
+        secondary: {
+          dark: secondaryLightColor,
+          light: secondaryLightColor,
+          main: secondaryLightMain
+        }
       }
     }
   },
