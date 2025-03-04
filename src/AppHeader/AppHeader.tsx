@@ -9,7 +9,6 @@ import UserMenu from "../UserMenu";
 function AppHeader({
   appLogo,
   appName,
-  mode = "light",
   onChangePassword,
   onLogout,
   username,
@@ -29,7 +28,6 @@ function AppHeader({
           }}
         >
           <IpgLogo
-            textColour={mode === "light" ? "white" : "black"}
             sx={{
               height: 33,
               width: 119

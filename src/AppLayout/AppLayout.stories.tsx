@@ -62,7 +62,6 @@ export const Default = {
         App Content goes here
       </div>
     ),
-    mode: "light",
     sidebarContent: (
       <>
         <SidebarItem {...SidebarItemSelected.args} display="stacked" />

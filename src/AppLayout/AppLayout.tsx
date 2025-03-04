@@ -17,8 +17,7 @@ function Layout({
   onLogout,
   username,
   content,
-  headerChildren,
-  mode = "light"
+  headerChildren
 }: AppLayoutProps) {
   // sidebar styling
   const sidebarWidth = 100;
@@ -43,7 +42,6 @@ function Layout({
           onChangePassword={onChangePassword}
           onLogout={onLogout}
           username={username}
-          mode={mode}
         >
           {headerChildren}
         </AppHeader>

@@ -20,11 +20,6 @@ export type AppLayoutProps = {
    */
   headerChildren?: React.ReactNode;
   /**
-   * The color mode selection
-   * @default "light"
-   */
-  mode?: "light" | "dark";
-  /**
    * Callback fired when the user clicks on "Change password".
    */
   onChangePassword: (event: React.MouseEvent<HTMLElement>) => void;
