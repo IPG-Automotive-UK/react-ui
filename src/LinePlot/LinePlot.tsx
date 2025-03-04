@@ -28,7 +28,7 @@ const LinePlot = ({
   // theme hook
   const theme = useTheme();
 
-  // ref to get the size of the plot div for axis labels wrapping and resizing plot on window resize event listener
+  // ref to get the size of the plot div for axis labels wrapping
   const plotRef = useRef<HTMLDivElement>(null);
 
   // state to keep track of the size of the plot div
@@ -37,21 +37,13 @@ const LinePlot = ({
   // state to keep track of whether the plot is in fullscreen mode
   const [isFullscreen, setIsFullscreen] = useState(false);
 
-  // effect to update the size of the plot div on window resize
+  // effect to set the initial size of the plot div
   useEffect(() => {
-    const updateSize = () => {
-      // if plotRef is not set, return early to avoid errors
-      if (!plotRef.current) return;
-      // get the bounding box of the plot div and set the axis size state
+    if (plotRef.current) {
       const boundingBox = plotRef.current.getBoundingClientRect();
       setAxisSize({ height: boundingBox.height, width: boundingBox.width });
-    };
-    // add event listener for window resize event and call updateSize on mount
-    updateSize();
-    window.addEventListener("resize", updateSize);
-    // cleanup event listener on unmount and resize
-    return () => window.removeEventListener("resize", updateSize);
-  });
+    }
+  }, []);
 
   // helper function to get the maximum number of characters that can fit in the axis label
   const getMaxChars = (axisLength: number) => Math.floor(axisLength / 7);
