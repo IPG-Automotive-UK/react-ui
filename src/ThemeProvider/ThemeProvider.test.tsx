@@ -2,7 +2,6 @@ import React, { act } from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 
 import ThemeProvider from ".";
-import { createTheme } from "@mui/material/styles";
 import { useColorScheme } from "@mui/material";
 import { userEvent } from "@testing-library/user-event";
 

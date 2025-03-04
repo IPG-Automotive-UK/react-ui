@@ -195,6 +195,18 @@ const mainTheme: ThemeOptions = {
             }
           }
         },
+        MuiButton: {
+          styleOverrides: {
+            root: ({ theme }) => ({
+              "&.MuiButton-containedPrimary": {
+                "&.Mui-disabled": {
+                  color: `${theme.palette.text.disabled} !important`
+                },
+                color: theme.palette.background.default
+              }
+            })
+          }
+        },
         MuiCssBaseline: {
           styleOverrides: {
             body: darkScrollbar()
@@ -244,18 +256,18 @@ const mainTheme: ThemeOptions = {
             }
           }
         },
-        MuiButton: {
-          styleOverrides: {
-            root: ({ theme }) => ({
-              "&.Mui-disabled": {
-                color: "inherit"
-              },
-              "&.MuiButton-containedPrimary": {
-                color: theme.palette.background.default
-              }
-            })
-          }
-        },
+        // MuiButton: {
+        //   styleOverrides: {
+        //     root: ({ theme }) => ({
+        //       "&.Mui-disabled": {
+        //         color: "inherit"
+        //       },
+        //       "&.MuiButton-containedPrimary": {
+        //         color: theme.palette.background.default
+        //       }
+        //     })
+        //   }
+        // },
         MuiCssBaseline: {
           styleOverrides: {
             body: darkScrollbar({
