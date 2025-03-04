@@ -70,11 +70,8 @@ const secondaryLightMain = "#FFAF2C";
 // secondary main dark
 const secondaryDarkMain = "#FFAF2C";
 
-// secondary light light
-const secondaryLightLight = "#FFBF56";
-
-// secondary light dark
-const secondaryLightDark = "#FFBF56";
+// secondary light light and secondary light dark
+const secondaryLightColor = "#FFBF56";
 
 // secondary dark light
 const secondaryDarkLight = "#B27A1E";
@@ -135,13 +132,10 @@ const defaultComponents = {
   MuiDataGrid: {
     styleOverrides: {
       footerContainer: ({ theme }: MuiTheme) => ({
-        backgroundColor: theme.palette.common.background
+        backgroundColor: theme.palette.background.paper
       }),
       main: ({ theme }: MuiTheme) => ({
-        backgroundColor:
-          theme.palette.mode === "dark"
-            ? paletteDefaultBackgroundPaperDark
-            : paletteDefaultBackgroundPaperLight
+        backgroundColor: theme.palette.background.paper
       }),
       root: ({ theme }: MuiTheme) => ({
         "& .MuiDataGrid-cell:focus, .MuiDataGrid-cell:focus-within, .MuiDataGrid-columnHeader:focus, .MuiDataGrid-columnHeader:focus-within":
@@ -150,10 +144,7 @@ const defaultComponents = {
           },
         "& .MuiDataGrid-container--top [role='row'], & .MuiDataGrid-container--bottom [role='row']":
           {
-            backgroundColor:
-              theme.palette.mode === "dark"
-                ? paletteDefaultBackgroundPaperDark
-                : paletteDefaultBackgroundPaperLight
+            backgroundColor: theme.palette.background.paper
           }
       })
     }
@@ -215,6 +206,15 @@ const mainTheme: ThemeOptions = {
               backgroundColor: alpha(theme.palette.primary.main, 0.08)
             })
           }
+        },
+        MuiTableCell: {
+          styleOverrides: {
+            root: ({ theme }) => ({
+              "&.MuiTableCell-head": {
+                backgroundColor: paletteDefaultBackgroundPaperDark
+              }
+            })
+          }
         }
       },
       palette: {
@@ -247,6 +247,9 @@ const mainTheme: ThemeOptions = {
         MuiButton: {
           styleOverrides: {
             root: ({ theme }) => ({
+              "&.Mui-disabled": {
+                color: "inherit"
+              },
               "&.MuiButton-containedPrimary": {
                 color: theme.palette.background.default
               }
@@ -266,18 +269,6 @@ const mainTheme: ThemeOptions = {
           styleOverrides: {
             root: ({ theme }) => ({
               backgroundColor: alpha(theme.palette.primary.main, 0.08)
-            })
-          }
-        },
-        MuiTableCell: {
-          styleOverrides: {
-            root: ({ theme }) => ({
-              "&.MuiTableCell-head": {
-                backgroundColor:
-                  theme.palette.mode === "dark"
-                    ? paletteDefaultBackgroundPaperDark
-                    : "inherit"
-              }
             })
           }
         },
@@ -305,8 +296,8 @@ const mainTheme: ThemeOptions = {
           main: primaryLightMain
         },
         secondary: {
-          dark: secondaryLightDark,
-          light: secondaryLightLight,
+          dark: secondaryLightColor,
+          light: secondaryLightColor,
           main: secondaryLightMain
         }
       }

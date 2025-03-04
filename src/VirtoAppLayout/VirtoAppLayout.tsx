@@ -35,11 +35,11 @@ function Header({
 }: HeaderProps) {
   return (
     <AppBar
-      sx={{
-        borderBottom: theme => `1px solid ${theme.palette.divider}`,
+      sx={theme => ({
+        borderBottom: `1px solid ${theme.palette.divider}`,
         boxShadow: 0,
         zIndex: 1606
-      }}
+      })}
     >
       <Toolbar style={{ justifyContent: "space-between" }}>
         <Box
