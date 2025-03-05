@@ -92,10 +92,7 @@ function AppLauncher({
           sx={theme => ({
             color: theme.palette.primary.main,
             height: 40,
-            width: 160,
-            ...theme.applyStyles("dark", {
-              color: theme.palette.common.white
-            })
+            width: 160
           })}
         />
       </Box>

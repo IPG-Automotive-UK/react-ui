@@ -37,8 +37,7 @@ function Header({
     <AppBar
       sx={theme => ({
         borderBottom: `1px solid ${theme.palette.divider}`,
-        boxShadow: 0,
-        zIndex: 1606
+        boxShadow: 0
       })}
     >
       <Toolbar style={{ justifyContent: "space-between" }}>
@@ -236,14 +235,23 @@ function Layout({
             anchor="left"
             open={isMediumScreen ? mobileOpen : true}
             onClose={isMediumScreen ? () => setMobileOpen(false) : undefined}
-            sx={theme => ({
-              "& .MuiDrawer-paper": {
-                height: `calc(100vh - ${theme.mixins.toolbar.minHeight}px)`,
-                paddingTop: "8px",
-                top: theme.mixins.toolbar.minHeight,
-                width: sidebarWidth
-              }
-            })}
+            sx={theme => {
+              // get toolbar height
+              const toolbarHeight =
+                typeof theme?.mixins?.toolbar?.minHeight === "number"
+                  ? theme.mixins.toolbar.minHeight
+                  : 65;
+
+              return {
+                "& .MuiDrawer-paper": {
+                  height: `calc(100vh - ${toolbarHeight + 1}px)`,
+                  marginTop: "1px",
+                  paddingTop: "8px",
+                  top: toolbarHeight,
+                  width: sidebarWidth
+                }
+              };
+            }}
           >
             <Sidebar appVersion={appVersion}>{sidebarContent}</Sidebar>
           </Drawer>
