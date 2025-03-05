@@ -33,6 +33,11 @@ export type VehicleSelectorProps = {
    */
   disabled?: boolean;
   /**
+   * The field errors if setting errors is required externally
+   * Errors will be set whether field has a value or not
+   */
+  errors?: ("projectCode" | "modelYear" | "variant" | "gate")[];
+  /**
    * FlexDirection of the component
    */
   flexDirection?: string;

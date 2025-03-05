@@ -13,6 +13,7 @@ import { uniqueSortedArray } from "../utils/common";
 // component to select a vehicle
 function VehicleSelector({
   disabled = false,
+  errors,
   flexDirection = "column",
   limitTags = 1,
   flexWrap = "nowrap",
@@ -23,10 +24,30 @@ function VehicleSelector({
   value = [],
   variants = []
 }: VehicleSelectorProps) {
+  // state to track errors
+  const projectCodeExternalError = errors && errors.includes("projectCode");
+  const modelYearExternalError = errors && errors.includes("modelYear");
+  const variantExternalError = errors && errors.includes("variant");
+  const gateExternalError = errors && errors.includes("gate");
+
   // flags indicating whether the user has manually cleared a field.
   const [userClearedModelYear, setUserClearedModelYear] = useState(false);
   const [userClearedVariant, setUserClearedVariant] = useState(false);
   const [userClearedGate, setUserClearedGate] = useState(false);
+
+  // state to track errors
+  const [gateError, setGateError] = useState<boolean | undefined>(
+    gateExternalError
+  );
+  const [variantError, setVariantError] = useState<boolean | undefined>(
+    variantExternalError
+  );
+  const [modelYearError, setModelYearError] = useState<boolean | undefined>(
+    modelYearExternalError
+  );
+  const [projectCodeError, setProjectCodeError] = useState<boolean | undefined>(
+    projectCodeExternalError
+  );
 
   // derive state for selected project
   const selectedProjects = uniqueSortedArray(
@@ -193,6 +214,42 @@ function VehicleSelector({
     userClearedGate
   ]);
 
+  // set the error state for project code
+  useEffect(() => {
+    if (projectCodeError === undefined) return;
+    setProjectCodeError(!selectedProject || projectCodeExternalError);
+  }, [projectCodeExternalError, projectCodeError, selectedProject]);
+
+  // set the error state for model year
+  useEffect(() => {
+    if (modelYearError === undefined) return;
+    setModelYearError(!selectedModelYear || modelYearExternalError);
+  }, [modelYearError, modelYearExternalError, selectedModelYear]);
+
+  // set the error state for variant
+  useEffect(() => {
+    if (variantError === undefined) return;
+    setVariantError(
+      !selectedVariants || selectedVariants.length === 0 || variantExternalError
+    );
+  }, [selectedVariants, variantError, variantExternalError]);
+
+  // set the error for gate
+  useEffect(() => {
+    if (gateError === undefined) return;
+    setGateError(
+      !selectedGates || selectedGates.length === 0 || gateExternalError
+    );
+  }, [gateError, gateExternalError, selectedGates]);
+
+  // check if the project, model year or variant fields are disabled
+  const modelYearIsDisabled =
+    selectedProject === null || selectedProject === "" || disabled;
+  const variantIsDisabled =
+    selectedModelYear === null || selectedModelYear === "" || disabled;
+  const gateIsDisabled =
+    selectedVariants === null || selectedVariants.length === 0 || disabled;
+
   // create the selector components for project, model year, variant and gate with single select for project and model year and multi select for variant and gate
   return (
     <Box
@@ -216,11 +273,17 @@ function VehicleSelector({
         })}
       >
         <Autocomplete
+          error={!disabled && projectCodeError}
           label="Project Code"
           required
           multiple={false}
           options={allProjects}
           disabled={disabled}
+          onBlur={() =>
+            !selectedProject
+              ? setProjectCodeError(true)
+              : setProjectCodeError(false)
+          }
           onChange={(_event, value) => {
             const newProject = value === null ? "" : value;
             // when the project changes clear lower fields
@@ -249,13 +312,17 @@ function VehicleSelector({
         })}
       >
         <Autocomplete
-          disabled={
-            selectedProject === null || selectedProject === "" || disabled
-          }
+          error={!modelYearIsDisabled && modelYearError}
+          disabled={modelYearIsDisabled}
           label="Model Year"
           required
           multiple={false}
           options={allModelYears}
+          onBlur={() =>
+            !selectedModelYear
+              ? setModelYearError(true)
+              : setModelYearError(false)
+          }
           onChange={(_event, value) => {
             const newModelYear = value === null ? "" : value;
             setUserClearedModelYear(newModelYear === "");
@@ -286,15 +353,19 @@ function VehicleSelector({
         })}
       >
         <Autocomplete
+          error={!variantIsDisabled && variantError}
           disableCloseOnSelect={multipleSelection}
           limitTags={limitTags}
-          disabled={
-            selectedModelYear === null || selectedModelYear === "" || disabled
-          }
+          disabled={variantIsDisabled}
           label="Variant"
           multiple={multipleSelection}
           required
           options={allVariants}
+          onBlur={() =>
+            !selectedVariants || selectedVariants.length === 0
+              ? setVariantError(true)
+              : setVariantError(false)
+          }
           onChange={(_event, value) => {
             // initialize an empty array for the new variant(s) selected
             let newVariants: string[] = [];
@@ -387,17 +458,19 @@ function VehicleSelector({
           })}
         >
           <Autocomplete
+            error={!gateIsDisabled && gateError}
             disableCloseOnSelect={multipleSelection}
-            disabled={
-              selectedVariants === null ||
-              selectedVariants.length === 0 ||
-              disabled
-            }
+            disabled={gateIsDisabled}
             required={gates.length > 0}
             multiple={multipleSelection}
             label="Gate"
             limitTags={limitTags}
             options={gates}
+            onBlur={() =>
+              !selectedGates || selectedGates.length === 0
+                ? setGateError(true)
+                : setGateError(false)
+            }
             onChange={(_event, value) => {
               // Normalize and update userClearedGate flag accordingly.
               if (!value || (Array.isArray(value) && value.length === 0)) {
