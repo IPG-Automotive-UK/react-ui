@@ -56,28 +56,22 @@ const primaryDarkMain = "#5E8AB4";
 const primaryLightLight = "#637B90";
 
 // primary light dark
-const primaryLightDark = "#7EA1C3";
+const primaryLightDark = "#2A3E51";
 
 // primary dark light
-const primaryDarkLight = "#2A3E51";
+const primaryDarkLight = "#7EA1C3";
 
 // primary dark dark
 const primaryDarkDark = "#41607D";
 
-// secondary main light
-const secondaryLightMain = "#FFAF2C";
-
-// secondary main dark
-const secondaryDarkMain = "#FFAF2C";
+// secondary main light and secondary main dark
+const secondaryColorMain = "#FFAF2C";
 
 // secondary light light and secondary light dark
-const secondaryLightColor = "#FFBF56";
+const secondaryColorLight = "#FFBF56";
 
-// secondary dark light
-const secondaryDarkLight = "#B27A1E";
-
-// secondary dark dark
-const secondaryDarkDark = "#B27A1E";
+// secondary dark light and secondary dark dark
+const secondaryColorDark = "#B27A1E";
 
 // palette default background light
 const paletteDefaultBackgroundLight = "#FAFAFA";
@@ -191,6 +185,7 @@ const mainTheme: ThemeOptions = {
         MuiAppBar: {
           styleOverrides: {
             root: {
+              "--Paper-overlay": "none !important",
               backgroundColor: paletteDefaultBackgroundPaperDark
             }
           }
@@ -240,9 +235,9 @@ const mainTheme: ThemeOptions = {
           main: primaryDarkMain
         },
         secondary: {
-          dark: secondaryDarkDark,
-          light: secondaryDarkLight,
-          main: secondaryDarkMain
+          dark: secondaryColorDark,
+          light: secondaryColorLight,
+          main: secondaryColorMain
         }
       }
     },
@@ -252,22 +247,11 @@ const mainTheme: ThemeOptions = {
         MuiAppBar: {
           styleOverrides: {
             root: {
+              "--Paper-overlay": "none !important",
               backgroundColor: paletteDefaultBackgroundPaperLight
             }
           }
         },
-        // MuiButton: {
-        //   styleOverrides: {
-        //     root: ({ theme }) => ({
-        //       "&.Mui-disabled": {
-        //         color: "inherit"
-        //       },
-        //       "&.MuiButton-containedPrimary": {
-        //         color: theme.palette.background.default
-        //       }
-        //     })
-        //   }
-        // },
         MuiCssBaseline: {
           styleOverrides: {
             body: darkScrollbar({
@@ -308,9 +292,9 @@ const mainTheme: ThemeOptions = {
           main: primaryLightMain
         },
         secondary: {
-          dark: secondaryLightColor,
-          light: secondaryLightColor,
-          main: secondaryLightMain
+          dark: secondaryColorDark,
+          light: secondaryColorLight,
+          main: secondaryColorMain
         }
       }
     }
