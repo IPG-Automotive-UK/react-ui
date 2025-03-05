@@ -10,6 +10,7 @@ export {
   default as AlignVertical,
   type AlignVerticalProps
 } from "./AlignVertical";
+export { default as EmptyState } from "./EmptyState";
 export {
   default as VirtoAppLayout,
   type VirtoAppLayoutProps
