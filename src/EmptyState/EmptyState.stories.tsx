@@ -1,15 +1,21 @@
-import { Avatar, Button } from "@mui/material";
+import { AddOutlined, AddToQueue } from "@mui/icons-material";
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
-import { AddToQueue } from "@mui/icons-material";
+
+import BuildImage from "../../static/BuildImage.svg";
+import { Button } from "@mui/material";
+import CarImage from "../../static/CarImage.svg";
 import EmptyState from "./EmptyState";
 import React from "react";
+import ResultImage from "../../static/ResultImage.svg";
 
 export default {
   component: EmptyState,
   title: "Layout/EmptyState"
 } satisfies Meta<typeof EmptyState>;
 
-const Template: StoryFn<typeof EmptyState> = args => <EmptyState {...args} />;
+const Template: StoryFn<typeof EmptyState> = args => {
+  return <EmptyState {...args} />;
+};
 
 export const Default: StoryObj<typeof EmptyState> = {
   args: {
@@ -18,14 +24,14 @@ export const Default: StoryObj<typeof EmptyState> = {
         Action
       </Button>
     ],
-    icon: <Avatar />,
+    icon: <AddToQueue />,
     subtitle: "Subtitle",
     title: "Title"
   },
   render: Template
 };
 
-export const VirtoBuild: StoryObj<typeof EmptyState> = {
+export const WithMultipleActions: StoryObj<typeof EmptyState> = {
   args: {
     actions: [
       <Button key="upload-prototype" variant="outlined" size="large">
@@ -35,7 +41,7 @@ export const VirtoBuild: StoryObj<typeof EmptyState> = {
         BUILD PROTOTYPE
       </Button>
     ],
-    icon: <AddToQueue />,
+    icon: <img src={CarImage} alt="Icon" />,
     subtitle:
       "Build your virtual vehicle or upload a design to view the prototypes.",
     title: "Let's Start Building"
@@ -43,7 +49,7 @@ export const VirtoBuild: StoryObj<typeof EmptyState> = {
   render: Template
 };
 
-export const VirtoTest: StoryObj<typeof EmptyState> = {
+export const WithSingleAction: StoryObj<typeof EmptyState> = {
   args: {
     actions: [
       <Button key="setup-test" variant="contained" size="large">
@@ -57,31 +63,25 @@ export const VirtoTest: StoryObj<typeof EmptyState> = {
   render: Template
 };
 
-export const NoIcon: StoryObj<typeof EmptyState> = {
+export const WithoutActions: StoryObj<typeof EmptyState> = {
   args: {
-    actions: [
-      <Button key="add-item" variant="outlined" size="medium">
-        Add New Item
-      </Button>
-    ],
-    subtitle: "There are currently no items to display.",
-    title: "No Data Available"
+    icon: <img src={ResultImage} alt="Icon" />,
+    subtitle: "Run a test to view results here o upload existing result",
+    title: "No Results Found"
   },
   render: Template
 };
 
-export const MultipleActions: StoryObj<typeof EmptyState> = {
+export const WithoutTitle: StoryObj<typeof EmptyState> = {
   args: {
     actions: [
-      <Button key="primary-action" variant="contained" size="medium">
-        Primary Action
-      </Button>,
-      <Button key="secondary-action" variant="outlined" size="medium">
-        Secondary Action
+      <Button key="add-model" variant="outlined" size="large">
+        <AddOutlined sx={{ mr: 1 }} />
+        ADD MODEL
       </Button>
     ],
-    subtitle: "You can add multiple action buttons",
-    title: "Multiple Actions"
+    icon: <img src={BuildImage} alt="Icon" />,
+    subtitle: "No Vehicle Control Unit is available"
   },
   render: Template
 };

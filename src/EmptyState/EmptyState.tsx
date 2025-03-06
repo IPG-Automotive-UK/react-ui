@@ -3,6 +3,16 @@ import { Box, Stack, Theme, Typography } from "@mui/material";
 import { EmptyStateProps } from "./EmptyState.types";
 import React from "react";
 
+/**
+ * EmptyState Component
+ * Displays a customizable empty state UI with optional icon, title, subtitle, and action buttons
+ * Used when there's no data to display or to guide users to take action
+ *
+ * @param {string} title - Main heading text
+ * @param {string} subtitle - Secondary descriptive text
+ * @param {React.ReactElement} icon - Icon element
+ * @param {React.ReactElement[]} actions - Array of action elements (typically buttons)
+ */
 function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
   return (
     <Box
