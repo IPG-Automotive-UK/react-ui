@@ -37,7 +37,7 @@ function Sidebar({
               display: "flex"
             }}
           >
-            <IpgLogo sx={{ height: 40, width: 120 }} />
+            <IpgLogo sx={{ height: 40, width: 105 }} />
           </Link>
         ) : null}
         {showVersion ? (

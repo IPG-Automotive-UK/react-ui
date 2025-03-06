@@ -43,24 +43,27 @@ const LoadErrorMessage = ({
       {image === "virto-thinking" && (
         <VirtoThinking
           sx={{
-            height: "150px",
-            width: "100%"
+            height: "200px",
+            my: -2,
+            width: "200px"
           }}
         />
       )}
       {image === "virto-shrugging" && (
         <VirtoShrugging
           sx={{
-            height: "150px",
-            width: "100%"
+            height: "200px",
+            my: -2,
+            width: "200px"
           }}
         />
       )}
       {image === "virto-head-scratching" && (
         <VirtoHeadScratching
           sx={{
-            height: "150px",
-            width: "100%"
+            height: "200px",
+            my: -2,
+            width: "200px"
           }}
         />
       )}
