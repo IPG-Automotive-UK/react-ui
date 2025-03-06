@@ -21,6 +21,7 @@ const defaultInputs = {
   content: <div>App Content goes here</div>,
   onChangePassword: vi.fn(),
   onLogout: vi.fn(),
+  onMenuClick: vi.fn(),
   sidebarContent: (
     <>
       <SidebarItem {...SidebarItemDefault.args} />
@@ -32,7 +33,7 @@ const defaultInputs = {
       <SidebarItem {...SidebarItemNested.args} />
     </>
   ),
-  username: "Joe Bloggs"
+  user: { email: "marleyschleifer416@gmail.com", name: "Joe Bloggs" }
 };
 
 // implementation of matchMedia for testing
@@ -56,10 +57,8 @@ describe("VirtoAppLayout", () => {
     window.matchMedia = createMatchMedia(window.innerWidth);
   });
   test("shows first and last initial of username", () => {
-    render(
-      <VirtoAppLayout {...defaultInputs} username="Ruud van Nistelrooy" />
-    );
-    expect(screen.getByText(/RN/i)).toBeInTheDocument();
+    render(<VirtoAppLayout {...defaultInputs} />);
+    expect(screen.getByText(/JB/i)).toBeInTheDocument();
   });
   test("should show app name", () => {
     render(<VirtoAppLayout {...defaultInputs} appName="APP NAME" />);
@@ -128,5 +127,22 @@ describe("VirtoAppLayout", () => {
     expect(
       container.querySelector("a[href='https://www.some.url/']")
     ).toBeInTheDocument();
+  });
+  test("should display customer logo when provided", () => {
+    const customerLogoUrl = "https://picsum.photos/160/40/";
+    render(
+      <VirtoAppLayout {...defaultInputs} customerLogo={customerLogoUrl} />
+    );
+
+    const logoImg = screen.getByAltText("Customer Logo");
+    expect(logoImg).toBeInTheDocument();
+    expect(logoImg).toHaveAttribute("src", customerLogoUrl);
+  });
+
+  test("should not display customer logo when not provided", () => {
+    render(<VirtoAppLayout {...defaultInputs} customerLogo={undefined} />);
+
+    const logoImg = screen.queryByAltText("Customer Logo");
+    expect(logoImg).not.toBeInTheDocument();
   });
 });
