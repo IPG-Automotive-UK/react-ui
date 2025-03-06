@@ -7,7 +7,7 @@ import { UserLabelProps } from "./UserLabel.types";
  * Component that renders a user avatar and the name of the user to the right
  * @param label The name of the user to be displayed
  */
-export default function UserLabel({ label, color }: UserLabelProps) {
+export default function UserLabel({ label, color, tooltip }: UserLabelProps) {
   return IconWithLabel({
     icon: (
       <div>
@@ -18,6 +18,7 @@ export default function UserLabel({ label, color }: UserLabelProps) {
         />
       </div>
     ),
-    label
+    label,
+    tooltip
   });
 }

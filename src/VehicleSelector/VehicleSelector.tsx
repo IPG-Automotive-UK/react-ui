@@ -13,6 +13,7 @@ import { uniqueSortedArray } from "../utils/common";
 // component to select a vehicle
 function VehicleSelector({
   disabled = false,
+  errors,
   flexDirection = "column",
   limitTags = 1,
   flexWrap = "nowrap",
@@ -23,9 +24,30 @@ function VehicleSelector({
   value = [],
   variants = []
 }: VehicleSelectorProps) {
+  // state to track errors
+  const projectCodeExternalError = errors && errors.includes("projectCode");
+  const modelYearExternalError = errors && errors.includes("modelYear");
+  const variantExternalError = errors && errors.includes("variant");
+  const gateExternalError = errors && errors.includes("gate");
+
   // flags indicating whether the user has manually cleared a field.
   const [userClearedModelYear, setUserClearedModelYear] = useState(false);
   const [userClearedVariant, setUserClearedVariant] = useState(false);
+  const [userClearedGate, setUserClearedGate] = useState(false);
+
+  // state to track errors
+  const [gateError, setGateError] = useState<boolean | undefined>(
+    gateExternalError
+  );
+  const [variantError, setVariantError] = useState<boolean | undefined>(
+    variantExternalError
+  );
+  const [modelYearError, setModelYearError] = useState<boolean | undefined>(
+    modelYearExternalError
+  );
+  const [projectCodeError, setProjectCodeError] = useState<boolean | undefined>(
+    projectCodeExternalError
+  );
 
   // derive state for selected project
   const selectedProjects = uniqueSortedArray(
@@ -85,6 +107,7 @@ function VehicleSelector({
   useEffect(() => {
     setUserClearedModelYear(false);
     setUserClearedVariant(false);
+    setUserClearedGate(false);
   }, [selectedProject]);
 
   // reset the variant cleared flag whenever the selected model year changes
@@ -149,6 +172,84 @@ function VehicleSelector({
     onChange
   ]);
 
+  // auto selecting a gate if applicable.
+  useEffect(() => {
+    // Only auto-select if there are gate options available, one gate, one selected variant,
+    // no gate is currently selected and the gate hasn't been manually cleared.
+    if (
+      gates &&
+      gates.length === 1 &&
+      selectedVariants.length > 0 &&
+      selectedGates.length === 0 &&
+      !userClearedGate
+    ) {
+      const autoGate = gates[0];
+
+      // Filter the vehicles based on the current selections.
+      const newVehicles = filterVehicles({
+        modelYear: selectedModelYear,
+        projectCode: selectedProject,
+        variants
+      }).filter(v => selectedVariants.includes(v.variant));
+
+      // Update each vehicle record with the auto-selected gate.
+      onChange(
+        newVehicles.map(v => ({
+          _id: v._id,
+          gate: autoGate,
+          modelYear: v.modelYear,
+          projectCode: v.projectCode,
+          variant: v.variant
+        }))
+      );
+    }
+  }, [
+    gates,
+    selectedVariants,
+    selectedGates,
+    selectedModelYear,
+    selectedProject,
+    variants,
+    onChange,
+    userClearedGate
+  ]);
+
+  // set the error state for project code
+  useEffect(() => {
+    if (projectCodeError === undefined) return;
+    setProjectCodeError(!selectedProject || projectCodeExternalError);
+  }, [projectCodeExternalError, projectCodeError, selectedProject]);
+
+  // set the error state for model year
+  useEffect(() => {
+    if (modelYearError === undefined) return;
+    setModelYearError(!selectedModelYear || modelYearExternalError);
+  }, [modelYearError, modelYearExternalError, selectedModelYear]);
+
+  // set the error state for variant
+  useEffect(() => {
+    if (variantError === undefined) return;
+    setVariantError(
+      !selectedVariants || selectedVariants.length === 0 || variantExternalError
+    );
+  }, [selectedVariants, variantError, variantExternalError]);
+
+  // set the error for gate
+  useEffect(() => {
+    if (gateError === undefined) return;
+    setGateError(
+      !selectedGates || selectedGates.length === 0 || gateExternalError
+    );
+  }, [gateError, gateExternalError, selectedGates]);
+
+  // check if the project, model year or variant fields are disabled
+  const modelYearIsDisabled =
+    selectedProject === null || selectedProject === "" || disabled;
+  const variantIsDisabled =
+    selectedModelYear === null || selectedModelYear === "" || disabled;
+  const gateIsDisabled =
+    selectedVariants === null || selectedVariants.length === 0 || disabled;
+
   // create the selector components for project, model year, variant and gate with single select for project and model year and multi select for variant and gate
   return (
     <Box
@@ -172,11 +273,17 @@ function VehicleSelector({
         })}
       >
         <Autocomplete
+          error={!disabled && projectCodeError}
           label="Project Code"
           required
           multiple={false}
           options={allProjects}
           disabled={disabled}
+          onBlur={() =>
+            !selectedProject
+              ? setProjectCodeError(true)
+              : setProjectCodeError(false)
+          }
           onChange={(_event, value) => {
             const newProject = value === null ? "" : value;
             // when the project changes clear lower fields
@@ -205,13 +312,17 @@ function VehicleSelector({
         })}
       >
         <Autocomplete
-          disabled={
-            selectedProject === null || selectedProject === "" || disabled
-          }
+          error={!modelYearIsDisabled && modelYearError}
+          disabled={modelYearIsDisabled}
           label="Model Year"
           required
           multiple={false}
           options={allModelYears}
+          onBlur={() =>
+            !selectedModelYear
+              ? setModelYearError(true)
+              : setModelYearError(false)
+          }
           onChange={(_event, value) => {
             const newModelYear = value === null ? "" : value;
             setUserClearedModelYear(newModelYear === "");
@@ -242,15 +353,19 @@ function VehicleSelector({
         })}
       >
         <Autocomplete
+          error={!variantIsDisabled && variantError}
           disableCloseOnSelect={multipleSelection}
           limitTags={limitTags}
-          disabled={
-            selectedModelYear === null || selectedModelYear === "" || disabled
-          }
+          disabled={variantIsDisabled}
           label="Variant"
           multiple={multipleSelection}
           required
           options={allVariants}
+          onBlur={() =>
+            !selectedVariants || selectedVariants.length === 0
+              ? setVariantError(true)
+              : setVariantError(false)
+          }
           onChange={(_event, value) => {
             // initialize an empty array for the new variant(s) selected
             let newVariants: string[] = [];
@@ -343,25 +458,31 @@ function VehicleSelector({
           })}
         >
           <Autocomplete
+            error={!gateIsDisabled && gateError}
             disableCloseOnSelect={multipleSelection}
-            disabled={
-              selectedVariants === null ||
-              selectedVariants.length === 0 ||
-              disabled
-            }
+            disabled={gateIsDisabled}
             required={gates.length > 0}
             multiple={multipleSelection}
             label="Gate"
             limitTags={limitTags}
             options={gates}
+            onBlur={() =>
+              !selectedGates || selectedGates.length === 0
+                ? setGateError(true)
+                : setGateError(false)
+            }
             onChange={(_event, value) => {
-              const newVehicles = filterVehicles({
-                modelYear: selectedModelYear,
-                projectCode: selectedProject,
-                variants
-              }).filter(v => selectedVariants.includes(v.variant));
-              // if no gates selected keep the project, model year and variant but clear the gate in value
+              // Normalize and update userClearedGate flag accordingly.
               if (!value || (Array.isArray(value) && value.length === 0)) {
+                setUserClearedGate(true);
+
+                const newVehicles = filterVehicles({
+                  modelYear: selectedModelYear,
+                  projectCode: selectedProject,
+                  variants
+                }).filter(v => selectedVariants.includes(v.variant));
+
+                // if no gates selected keep the project, model year and variant but clear the gate in value
                 onChange(
                   newVehicles.map(v => ({
                     _id: v._id,
@@ -372,7 +493,15 @@ function VehicleSelector({
                   }))
                 );
                 return;
+              } else {
+                setUserClearedGate(false);
               }
+
+              const newVehicles = filterVehicles({
+                modelYear: selectedModelYear,
+                projectCode: selectedProject,
+                variants
+              }).filter(v => selectedVariants.includes(v.variant));
 
               // if multiple selection is enabled, update the value with the new vehicles and gates
               if (multipleSelection && Array.isArray(value)) {
@@ -400,7 +529,7 @@ function VehicleSelector({
               }
             }}
             size={size}
-            value={selectedGates}
+            value={multipleSelection ? selectedGates : selectedGates[0] || null}
           />
         </Box>
       )}
