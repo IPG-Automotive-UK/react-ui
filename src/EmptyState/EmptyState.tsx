@@ -13,7 +13,13 @@ import React from "react";
  * @param {React.ReactElement} icon - Icon element
  * @param {React.ReactElement[]} actions - Array of action elements (typically buttons)
  */
-function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
+function EmptyState({
+  title,
+  subtitle,
+  icon,
+  actions,
+  hideIconBackground
+}: EmptyStateProps) {
   return (
     <Box
       sx={theme => ({
@@ -32,8 +38,10 @@ function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
         <Box
           sx={{
             alignItems: "center",
-            backgroundColor: (theme: Theme) => theme.palette.action.hover,
-            borderRadius: 300,
+            backgroundColor: hideIconBackground
+              ? "transparent"
+              : (theme: Theme) => theme.palette.action.hover,
+            borderRadius: hideIconBackground ? 0 : 300,
             display: "flex",
             gap: "10px",
             height: 180,

@@ -41,6 +41,7 @@ export const WithMultipleActions: StoryObj<typeof EmptyState> = {
         BUILD PROTOTYPE
       </Button>
     ],
+    hideIconBackground: true,
     icon: <img src={CarImage} alt="Icon" />,
     subtitle:
       "Build your virtual vehicle or upload a design to view the prototypes.",
