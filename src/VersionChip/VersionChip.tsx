@@ -7,10 +7,7 @@ import { VersionChipProps } from "./VersionChip.types";
 const VersionChip = ({ version, selected = false }: VersionChipProps) => {
   // text and color for selected chip is a different category based on light vs. dark mode
   const theme = useTheme();
-  const selectedColor =
-    theme.palette.mode === "dark"
-      ? theme.palette.primary.light
-      : theme.palette.primary.dark;
+  const selectedColor = theme.palette.primary.main;
 
   // decide if version major or minor
   const minorVersion = getMinorVersion(version);
@@ -47,7 +44,7 @@ const VersionChip = ({ version, selected = false }: VersionChipProps) => {
               : theme.palette.background.default,
           border: theme =>
             selected
-              ? `1px solid ${theme.palette.primary.light}`
+              ? `1px solid ${theme.palette.primary.main}`
               : `1px solid ${alpha(theme.palette.divider, 0.23)}`,
           gap: "2px",
           height: 24,

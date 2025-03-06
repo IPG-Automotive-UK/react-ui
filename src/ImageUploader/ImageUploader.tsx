@@ -85,7 +85,7 @@ export default function ImageUploader({
                 ? theme.palette.text.primary
                 : theme.palette.text.secondary
           },
-          backgroundColor: theme.palette.background.default,
+          backgroundColor: theme.palette.background.paper,
           borderColor: theme.palette.divider,
           borderStyle: "dashed",
           borderWidth: 1,
