@@ -33,6 +33,6 @@ function Icon({ sx, ...props }: VirtoLogoProps) {
 }
 
 // Virto logo component
-export function VirtoLogo({ sx }: VirtoLogoProps) {
-  return <Icon sx={sx} />;
+export function VirtoLogo(props: VirtoLogoProps) {
+  return <Icon {...props} />;
 }
