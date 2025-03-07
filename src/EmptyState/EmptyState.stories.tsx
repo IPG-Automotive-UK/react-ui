@@ -1,12 +1,13 @@
-import { AddOutlined, AddToQueue } from "@mui/icons-material";
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
 
+import { AddOutlined } from "@mui/icons-material";
 import BuildImage from "../../static/BuildImage.svg";
 import { Button } from "@mui/material";
 import CarImage from "../../static/CarImage.svg";
 import EmptyState from "./EmptyState";
 import React from "react";
 import ResultImage from "../../static/ResultImage.svg";
+import TestLogo from "../../static/TestLogo.svg";
 
 export default {
   component: EmptyState,
@@ -24,7 +25,7 @@ export const Default: StoryObj<typeof EmptyState> = {
         Action
       </Button>
     ],
-    icon: <AddToQueue />,
+    icon: <img src={TestLogo} alt="Icon" />,
     subtitle: "Subtitle",
     title: "Title"
   },
@@ -41,7 +42,6 @@ export const WithMultipleActions: StoryObj<typeof EmptyState> = {
         BUILD PROTOTYPE
       </Button>
     ],
-    hideIconBackground: true,
     icon: <img src={CarImage} alt="Icon" />,
     subtitle:
       "Build your virtual vehicle or upload a design to view the prototypes.",
@@ -57,7 +57,7 @@ export const WithSingleAction: StoryObj<typeof EmptyState> = {
         Setup Test
       </Button>
     ],
-    icon: <AddToQueue />,
+    icon: <img src={TestLogo} alt="Icon" />,
     subtitle: "Set up tests to view the results here.",
     title: "Setup Test"
   },

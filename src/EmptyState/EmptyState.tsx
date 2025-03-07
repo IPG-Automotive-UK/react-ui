@@ -7,19 +7,12 @@ import React from "react";
  * EmptyState Component
  * Displays a customizable empty state UI with optional icon, title, subtitle, and action buttons
  * Used when there's no data to display or to guide users to take action
- *
  * @param {string} title - Main heading text
  * @param {string} subtitle - Secondary descriptive text
  * @param {React.ReactElement} icon - Icon element
  * @param {React.ReactElement[]} actions - Array of action elements (typically buttons)
  */
-function EmptyState({
-  title,
-  subtitle,
-  icon,
-  actions,
-  hideIconBackground
-}: EmptyStateProps) {
+function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
   return (
     <Box
       sx={theme => ({
@@ -34,20 +27,21 @@ function EmptyState({
         p: 2
       })}
     >
-      {icon && (
+      {icon ? (
         <Box
-          sx={{
+          sx={theme => ({
             alignItems: "center",
-            backgroundColor: hideIconBackground
-              ? "transparent"
-              : (theme: Theme) => theme.palette.action.hover,
-            borderRadius: hideIconBackground ? 0 : 300,
+            backgroundColor: "white",
+            ...theme.applyStyles("dark", {
+              backgroundColor: theme.palette.action.hover
+            }),
+            borderRadius: 300,
             display: "flex",
             gap: "10px",
             height: 180,
             justifyContent: "center",
             width: 180
-          }}
+          })}
         >
           {React.cloneElement(icon, {
             sx: (theme: Theme) => ({
@@ -58,9 +52,9 @@ function EmptyState({
             })
           })}
         </Box>
-      )}
+      ) : null}
       <Stack sx={{ alignItems: "center", gap: 1, mb: 1, mt: icon ? 4 : 0 }}>
-        {title && (
+        {title ? (
           <Typography
             variant="h6"
             sx={{
@@ -70,9 +64,9 @@ function EmptyState({
           >
             {title}
           </Typography>
-        )}
+        ) : null}
 
-        {subtitle && (
+        {subtitle ? (
           <Typography
             variant="body2"
             sx={{
@@ -82,10 +76,10 @@ function EmptyState({
           >
             {subtitle}
           </Typography>
-        )}
+        ) : null}
       </Stack>
 
-      {actions && actions.length > 0 && (
+      {actions && actions.length > 0 ? (
         <Stack
           direction="row"
           spacing={1}
@@ -98,7 +92,7 @@ function EmptyState({
             React.cloneElement(action, { key: index })
           )}
         </Stack>
-      )}
+      ) : null}
     </Box>
   );
 }

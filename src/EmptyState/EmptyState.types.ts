@@ -1,3 +1,6 @@
+/**
+ * This type defines the props for the EmptyState component.
+ */
 export type EmptyStateProps = {
   /**
    * Optional title for the empty state
@@ -15,9 +18,4 @@ export type EmptyStateProps = {
    * Optional actions (buttons or other interactive elements)
    */
   actions?: React.ReactElement[];
-  /**
-   * If true, hides the circular background behind the icon
-   * @default false
-   */
-  hideIconBackground?: boolean;
 };
