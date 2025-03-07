@@ -18,6 +18,8 @@ function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
       sx={theme => ({
         alignItems: "center",
         background: theme.palette.background.paper,
+        border: `1px solid ${theme.palette.divider}`,
+        borderRadius: "4px",
         display: "flex",
         flexDirection: "column",
         flexGrow: 1,
