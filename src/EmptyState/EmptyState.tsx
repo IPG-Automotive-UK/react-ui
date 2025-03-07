@@ -31,7 +31,7 @@ function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
         <Box
           sx={theme => ({
             alignItems: "center",
-            backgroundColor: "white",
+            backgroundColor: theme.palette.background.paper,
             ...theme.applyStyles("dark", {
               backgroundColor: theme.palette.action.hover
             }),
@@ -53,7 +53,14 @@ function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
           })}
         </Box>
       ) : null}
-      <Stack sx={{ alignItems: "center", gap: 1, mb: 1, mt: icon ? 4 : 0 }}>
+      <Stack
+        sx={{
+          alignItems: "center",
+          gap: 1,
+          mb: 1,
+          mt: icon ? (title ? 4 : 0) : 0
+        }}
+      >
         {title ? (
           <Typography
             variant="h6"
