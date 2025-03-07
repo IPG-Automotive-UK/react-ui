@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { uniqueSortedArray } from "./common";
 
-// item array using an object array structure
+// array of strings in random order
 const defaultArray = [
   "banana",
   "apple",
@@ -13,15 +13,15 @@ const defaultArray = [
 ];
 
 describe("uniqueSortedArray utility function", () => {
-  it("should sort ascending by default and dupes removed", () => {
-    // get list
+  it("should sort in ascending order by default and remove dupes", () => {
+    // sort and dedupe the array
     const list = uniqueSortedArray(defaultArray);
 
     expect(list).toEqual(["apple", "banana", "cantaloupe"]);
   });
 
-  it("should sort descending and dupes removed", () => {
-    // get list
+  it("should sort in descending order and remove dupes", () => {
+    // sort and dedupe the array
     const list = uniqueSortedArray(defaultArray, "desc");
 
     expect(list).toEqual(["cantaloupe", "banana", "apple"]);
