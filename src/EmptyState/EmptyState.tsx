@@ -21,6 +21,7 @@ function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
         display: "flex",
         flexDirection: "column",
         flexGrow: 1,
+        gap: 2,
         height: "100%",
         justifyContent: "center",
         p: 2
@@ -54,9 +55,8 @@ function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
       ) : null}
       <Stack
         sx={{
-          alignItems: "center",
-          mb: 1,
-          mt: icon ? 2 : 0
+          gap: 1,
+          textAlign: "center"
         }}
       >
         {title ? (
@@ -64,8 +64,7 @@ function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
             variant="h6"
             sx={{
               color: theme => theme.palette.text.primary,
-              fontWeight: 700,
-              mb: 1
+              fontWeight: 700
             }}
           >
             {title}
@@ -77,8 +76,7 @@ function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
             variant="body2"
             sx={{
               color: theme => theme.palette.text.secondary,
-              fontSize: "16px",
-              mb: 1
+              fontSize: "16px"
             }}
           >
             {subtitle}
