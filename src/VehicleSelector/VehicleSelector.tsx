@@ -26,6 +26,7 @@ function VehicleSelector({
   // flags indicating whether the user has manually cleared a field.
   const [userClearedModelYear, setUserClearedModelYear] = useState(false);
   const [userClearedVariant, setUserClearedVariant] = useState(false);
+  const [userClearedGate, setUserClearedGate] = useState(false);
 
   // derive state for selected project
   const selectedProjects = uniqueSortedArray(
@@ -85,6 +86,7 @@ function VehicleSelector({
   useEffect(() => {
     setUserClearedModelYear(false);
     setUserClearedVariant(false);
+    setUserClearedGate(false);
   }, [selectedProject]);
 
   // reset the variant cleared flag whenever the selected model year changes
@@ -147,6 +149,48 @@ function VehicleSelector({
     userClearedVariant,
     variants,
     onChange
+  ]);
+
+  // auto selecting a gate if applicable.
+  useEffect(() => {
+    // Only auto-select if there are gate options available, one gate, one selected variant,
+    // no gate is currently selected and the gate hasn't been manually cleared.
+    if (
+      gates &&
+      gates.length === 1 &&
+      selectedVariants.length > 0 &&
+      selectedGates.length === 0 &&
+      !userClearedGate
+    ) {
+      const autoGate = gates[0];
+
+      // Filter the vehicles based on the current selections.
+      const newVehicles = filterVehicles({
+        modelYear: selectedModelYear,
+        projectCode: selectedProject,
+        variants
+      }).filter(v => selectedVariants.includes(v.variant));
+
+      // Update each vehicle record with the auto-selected gate.
+      onChange(
+        newVehicles.map(v => ({
+          _id: v._id,
+          gate: autoGate,
+          modelYear: v.modelYear,
+          projectCode: v.projectCode,
+          variant: v.variant
+        }))
+      );
+    }
+  }, [
+    gates,
+    selectedVariants,
+    selectedGates,
+    selectedModelYear,
+    selectedProject,
+    variants,
+    onChange,
+    userClearedGate
   ]);
 
   // create the selector components for project, model year, variant and gate with single select for project and model year and multi select for variant and gate
@@ -355,13 +399,17 @@ function VehicleSelector({
             limitTags={limitTags}
             options={gates}
             onChange={(_event, value) => {
-              const newVehicles = filterVehicles({
-                modelYear: selectedModelYear,
-                projectCode: selectedProject,
-                variants
-              }).filter(v => selectedVariants.includes(v.variant));
-              // if no gates selected keep the project, model year and variant but clear the gate in value
+              // Normalize and update userClearedGate flag accordingly.
               if (!value || (Array.isArray(value) && value.length === 0)) {
+                setUserClearedGate(true);
+
+                const newVehicles = filterVehicles({
+                  modelYear: selectedModelYear,
+                  projectCode: selectedProject,
+                  variants
+                }).filter(v => selectedVariants.includes(v.variant));
+
+                // if no gates selected keep the project, model year and variant but clear the gate in value
                 onChange(
                   newVehicles.map(v => ({
                     _id: v._id,
@@ -372,7 +420,15 @@ function VehicleSelector({
                   }))
                 );
                 return;
+              } else {
+                setUserClearedGate(false);
               }
+
+              const newVehicles = filterVehicles({
+                modelYear: selectedModelYear,
+                projectCode: selectedProject,
+                variants
+              }).filter(v => selectedVariants.includes(v.variant));
 
               // if multiple selection is enabled, update the value with the new vehicles and gates
               if (multipleSelection && Array.isArray(value)) {
@@ -400,7 +456,7 @@ function VehicleSelector({
               }
             }}
             size={size}
-            value={selectedGates}
+            value={multipleSelection ? selectedGates : selectedGates[0] || null}
           />
         </Box>
       )}
