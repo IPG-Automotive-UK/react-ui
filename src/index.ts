@@ -10,6 +10,7 @@ export {
   default as AlignVertical,
   type AlignVerticalProps
 } from "./AlignVertical";
+export { default as EmptyState, type EmptyStateProps } from "./EmptyState";
 export {
   default as VirtoAppLayout,
   type VirtoAppLayoutProps
@@ -216,6 +217,7 @@ export {
 export {
   IpgLogo,
   RoadOutlined,
+  VirtoBadge,
   VirtoBuild,
   VirtoData,
   VirtoFleet,
@@ -233,6 +235,7 @@ export {
   AsamLogo,
   type IpgLogoProps,
   type RoadOutlinedProps,
+  type VirtoBadgeProps,
   type VirtoBuildProps,
   type VirtoDataProps,
   type VirtoFleetProps,

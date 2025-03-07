@@ -36,7 +36,8 @@ function Header({
   return (
     <AppBar
       sx={theme => ({
-        backgroundColor: theme.palette.primary.main
+        borderBottom: `1px solid ${theme.palette.divider}`,
+        boxShadow: 0
       })}
     >
       <Toolbar style={{ justifyContent: "space-between" }}>
@@ -49,7 +50,7 @@ function Header({
           <IconButton sx={{ pl: 0 }} onClick={onAppClick} disableRipple>
             <AppsIcon
               sx={theme => ({
-                color: theme.palette.background.paper,
+                color: theme.palette.primary.main,
                 fontSize: "30px"
               })}
             />
@@ -70,7 +71,7 @@ function Header({
           >
             <Menu
               sx={theme => ({
-                color: theme.palette.background.paper,
+                color: theme.palette.primary.main,
                 fontSize: "30px"
               })}
             />
@@ -92,7 +93,7 @@ function Header({
               <VirtoLogo
                 data-testid="virto-logo"
                 sx={theme => ({
-                  color: theme.palette.primary.contrastText,
+                  color: theme.palette.primary.main,
                   height: 22,
                   mr: 0.4,
                   width: 110
@@ -102,7 +103,7 @@ function Header({
             <Typography
               variant="h6"
               sx={theme => ({
-                color: theme.palette.primary.contrastText,
+                color: theme.palette.primary.main,
                 fontSize: "28px",
                 fontWeight: "700",
                 letterSpacing: "0.05em",
@@ -234,14 +235,23 @@ function Layout({
             anchor="left"
             open={isMediumScreen ? mobileOpen : true}
             onClose={isMediumScreen ? () => setMobileOpen(false) : undefined}
-            sx={theme => ({
-              "& .MuiDrawer-paper": {
-                height: `calc(100vh - ${theme.mixins.toolbar.minHeight}px)`,
-                paddingTop: "8px",
-                top: theme.mixins.toolbar.minHeight,
-                width: sidebarWidth
-              }
-            })}
+            sx={theme => {
+              // get toolbar height
+              const toolbarHeight =
+                typeof theme?.mixins?.toolbar?.minHeight === "number"
+                  ? theme.mixins.toolbar.minHeight
+                  : 65;
+
+              return {
+                "& .MuiDrawer-paper": {
+                  height: `calc(100vh - ${toolbarHeight + 1}px)`,
+                  marginTop: "1px",
+                  paddingTop: "8px",
+                  top: toolbarHeight,
+                  width: sidebarWidth
+                }
+              };
+            }}
           >
             <Sidebar appVersion={appVersion}>{sidebarContent}</Sidebar>
           </Drawer>
