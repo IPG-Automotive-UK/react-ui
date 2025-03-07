@@ -3,8 +3,8 @@ import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import { AddOutlined } from "@mui/icons-material";
 import BuildImage from "../../static/BuildImage.svg";
 import { Button } from "@mui/material";
-import CarImage from "../../static/CarImage.svg";
 import EmptyState from "./EmptyState";
+import Layer1 from "../../static/Layer1.svg";
 import React from "react";
 import ResultImage from "../../static/ResultImage.svg";
 import TestLogo from "../../static/TestLogo.svg";
@@ -42,7 +42,17 @@ export const WithMultipleActions: StoryObj<typeof EmptyState> = {
         BUILD PROTOTYPE
       </Button>
     ],
-    icon: <img src={CarImage} alt="Icon" />,
+    icon: (
+      <img
+        src={Layer1}
+        alt="Icon"
+        style={{
+          marginBottom: 31,
+          marginRight: 35,
+          marginTop: 36
+        }}
+      />
+    ),
     subtitle:
       "Build your virtual vehicle or upload a design to view the prototypes.",
     title: "Let's Start Building"

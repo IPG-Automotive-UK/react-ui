@@ -1,4 +1,4 @@
-import { Box, Stack, Theme, Typography } from "@mui/material";
+import { Box, Stack, Theme, Typography, alpha } from "@mui/material";
 
 import { EmptyStateProps } from "./EmptyState.types";
 import React from "react";
@@ -21,7 +21,6 @@ function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
         display: "flex",
         flexDirection: "column",
         flexGrow: 1,
-        gap: 2,
         height: "100%",
         justifyContent: "center",
         p: 2
@@ -31,13 +30,13 @@ function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
         <Box
           sx={theme => ({
             alignItems: "center",
-            backgroundColor: theme.palette.background.paper,
+            backgroundColor: alpha(theme.palette.primary.main, 0.04),
             ...theme.applyStyles("dark", {
-              backgroundColor: theme.palette.action.hover
+              backgroundColor: alpha(theme.palette.primary.main, 0.08)
             }),
             borderRadius: 300,
             display: "flex",
-            gap: "10px",
+            gap: 2,
             height: 180,
             justifyContent: "center",
             width: 180
@@ -56,9 +55,8 @@ function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
       <Stack
         sx={{
           alignItems: "center",
-          gap: 1,
           mb: 1,
-          mt: icon ? (title ? 4 : 0) : 0
+          mt: icon ? 2 : 0
         }}
       >
         {title ? (
@@ -66,7 +64,8 @@ function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
             variant="h6"
             sx={{
               color: theme => theme.palette.text.primary,
-              fontWeight: 700
+              fontWeight: 700,
+              mb: 1
             }}
           >
             {title}
@@ -78,7 +77,8 @@ function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
             variant="body2"
             sx={{
               color: theme => theme.palette.text.secondary,
-              fontSize: "16px"
+              fontSize: "16px",
+              mb: 1
             }}
           >
             {subtitle}
