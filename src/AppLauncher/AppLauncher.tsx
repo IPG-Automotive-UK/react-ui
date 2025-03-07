@@ -89,11 +89,10 @@ function AppLauncher({
         }}
       >
         <VirtoLogo
-          sx={theme => ({
-            color: theme.palette.primary.main,
+          sx={{
             height: 40,
             width: 160
-          })}
+          }}
         />
       </Box>
       <Divider

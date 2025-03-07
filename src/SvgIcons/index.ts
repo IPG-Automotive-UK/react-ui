@@ -1,4 +1,5 @@
 export { default as IpgLogo, type IpgLogoProps } from "./IpgLogo";
+export { VirtoBadge, type VirtoBadgeProps } from "./VirtoBadge";
 export { default as VirtoBuild, type VirtoBuildProps } from "./VirtoBuild";
 export { default as VirtoData, type VirtoDataProps } from "./VirtoData";
 export { default as VirtoFleet, type VirtoFleetProps } from "./VirtoFleet";

@@ -1,8 +1,5 @@
-import { Meta, StoryFn } from "@storybook/react";
-
-import React from "react";
+import { Meta } from "@storybook/react";
 import { VirtoLogo } from "./VirtoLogo";
-import { VirtoLogoProps } from "./VirtoLogo.types";
 
 /**
  * Story metadata
@@ -13,14 +10,26 @@ const meta: Meta<typeof VirtoLogo> = {
 };
 export default meta;
 
-const Template: StoryFn<VirtoLogoProps> = args => {
-  return <VirtoLogo {...args} />;
-};
-
+/**
+ * Story showing the default colour behaviour syncs with the current colour mode
+ */
 export const Default = {
   args: {
     sx: { height: 40, width: 160 }
   },
+  render: VirtoLogo
+};
 
-  render: Template
+/**
+ * Story showing that colours can be overridden
+ */
+export const CustomColour = {
+  args: {
+    sx: {
+      color: "#fd216a",
+      height: 40,
+      width: 160
+    }
+  },
+  render: VirtoLogo
 };
