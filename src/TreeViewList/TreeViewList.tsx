@@ -38,12 +38,10 @@ const TreeViewList = ({
     useState<TreeViewListProps["items"]>(items);
 
   // state for selected node
-  const [selectedNode, setSelectedNode] = useState(selected ?? "");
+  const [selectedNode, setSelectedNode] = useState<string>(selected ?? "");
 
   // local state for selected node
   const [currentSelection, setCurrentSelection] = useState(selected ?? "");
-
-  console.log(currentSelection);
 
   // state for search input value
   const [searchValue, setSearchValue] = useState("");
@@ -274,9 +272,11 @@ const TreeViewList = ({
             }}
             slots={{ collapseIcon: RemoveIcon, expandIcon: AddIcon }}
             expandedItems={expandedNodes}
-            selectedItems={currentSelection as string}
+            selectedItems={currentSelection}
             onSelectedItemsChange={(event, nodeId) => {
               if (!nodeId) return;
+
+              let ids: string[] = [];
 
               const node = getNodeById(treeDisplayItems, nodeId);
               if (!node) return;
@@ -287,11 +287,16 @@ const TreeViewList = ({
 
                 // Store only the leaf nodes in the backend
                 const leafIds = getAllLeafDescendantIds(node);
-                setCurrentSelection(leafIds);
+
+                ids = [...leafIds];
               } else {
                 // If a leaf node is clicked, highlight and select it
                 setSelectedNode(nodeId);
-                setCurrentSelection([nodeId]);
+                setCurrentSelection(nodeId);
+              }
+
+              if (onNodeSelect) {
+                onNodeSelect(event, nodeId, ids);
               }
             }}
             onExpandedItemsChange={(event, nodeId) => {

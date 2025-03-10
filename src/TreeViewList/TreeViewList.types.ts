@@ -36,9 +36,7 @@ export type TreeNodeItem = {
 type OnNodeSelect = (
   event: React.SyntheticEvent,
   nodeId: string,
-  nodeDetails: {
-    isChild: boolean;
-  }
+  nodes: string[]
 ) => void;
 
 /**
@@ -78,7 +76,7 @@ export type TreeViewListProps = {
   /**
    * The ID of the currently selected node.
    */
-  selected: TreeViewProps<true>["selectedItems"];
+  selected: TreeViewProps<false>["selectedItems"];
 
   /**
    * The display height of the tree view list. This is optional.
