@@ -78,7 +78,7 @@ export type TreeViewListProps = {
   /**
    * The ID of the currently selected node.
    */
-  selected: TreeViewProps<false>["selectedItems"];
+  selected: TreeViewProps<true>["selectedItems"];
 
   /**
    * The display height of the tree view list. This is optional.

@@ -38,10 +38,12 @@ const TreeViewList = ({
     useState<TreeViewListProps["items"]>(items);
 
   // state for selected node
-  const [selectedNode, setSelectedNode] = useState<string>(selected ?? "");
+  const [selectedNode, setSelectedNode] = useState(selected ?? "");
 
   // local state for selected node
   const [currentSelection, setCurrentSelection] = useState(selected ?? "");
+
+  console.log(currentSelection);
 
   // state for search input value
   const [searchValue, setSearchValue] = useState("");
@@ -209,7 +211,7 @@ const TreeViewList = ({
         label={node.label}
         nodeId={node.nodeId}
         setHoveredNode={setHoveredNode}
-        tooltip={node.tooltip}
+        // tooltip={node.tooltip}
       >
         {Array.isArray(node.children) && node.children.length > 0
           ? renderTree(node.children)
@@ -272,22 +274,24 @@ const TreeViewList = ({
             }}
             slots={{ collapseIcon: RemoveIcon, expandIcon: AddIcon }}
             expandedItems={expandedNodes}
-            selectedItems={currentSelection}
+            selectedItems={currentSelection as string}
             onSelectedItemsChange={(event, nodeId) => {
-              if (nodeId) {
-                const node = getNodeById(treeDisplayItems, nodeId);
-                const isChild = Boolean(
-                  node && (!node.children || node.children.length === 0)
-                );
-                if (onNodeSelect) {
-                  const nodeDetails = { isChild };
-                  // update the selected node when a node is selected and it is a child
-                  if (isChild) {
-                    setCurrentSelection(nodeId);
-                    setSelectedNode(nodeId);
-                  }
-                  onNodeSelect(event, nodeId, nodeDetails);
-                }
+              if (!nodeId) return;
+
+              const node = getNodeById(treeDisplayItems, nodeId);
+              if (!node) return;
+
+              if (node.children?.length) {
+                // If parent is clicked, highlight ONLY the parent
+                setSelectedNode(nodeId);
+
+                // Store only the leaf nodes in the backend
+                const leafIds = getAllLeafDescendantIds(node);
+                setCurrentSelection(leafIds);
+              } else {
+                // If a leaf node is clicked, highlight and select it
+                setSelectedNode(nodeId);
+                setCurrentSelection([nodeId]);
               }
             }}
             onExpandedItemsChange={(event, nodeId) => {
@@ -488,7 +492,10 @@ const filterBySearchTerm = (items: TreeNodeItem[], searchTerm: string) => {
  * @returns The path from the root to the node id.
  * @example findPathToNodeId(items, "node_id");
  */
-const findPathToNodeId = (items: TreeNodeItem[], nodeId: string): string[] => {
+const findPathToNodeId = (
+  items: TreeNodeItem[],
+  nodeId: string | string[]
+): string[] => {
   for (const item of items) {
     if (item.nodeId === nodeId) {
       // if the current item is the one we're looking for, return an array containing only its id
@@ -508,6 +515,15 @@ const findPathToNodeId = (items: TreeNodeItem[], nodeId: string): string[] => {
 
   // if no node found, return an empty array
   return [];
+};
+
+const getAllLeafDescendantIds = (node: TreeNodeItem): string[] => {
+  if (!node.children || node.children.length === 0) {
+    // return only if it's a leaf node
+    return [node.nodeId];
+  }
+
+  return node.children.flatMap(getAllLeafDescendantIds);
 };
 
 export default TreeViewList;
