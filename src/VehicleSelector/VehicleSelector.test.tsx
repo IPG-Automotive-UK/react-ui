@@ -246,6 +246,26 @@ describe("VehicleSelector", () => {
     expect(gateInput.closest("div")).toHaveClass("Mui-error");
   });
 
+  it("shows a project code error on initial render when initWithError prop is provided", async () => {
+    render(
+      <VehicleSelectorWithState {...defaultProps} validateOnInit={true} />
+    );
+
+    // Test the project code field error is always visible when set externally
+    const projectCodeInput = screen.getByRole("combobox", {
+      name: /project code/i
+    });
+
+    expect(projectCodeInput.closest("div")).toHaveClass("Mui-error");
+
+    await userEvent.click(projectCodeInput);
+
+    const option911 = await screen.findByRole("option", { name: "911" });
+    await userEvent.click(option911);
+
+    expect(projectCodeInput.closest("div")).not.toHaveClass("Mui-error");
+  });
+
   it("applies flex direction and wrap styles", () => {
     render(
       <VehicleSelectorWithState

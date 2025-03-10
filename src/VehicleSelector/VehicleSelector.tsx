@@ -15,6 +15,7 @@ function VehicleSelector({
   disabled = false,
   errors,
   flexDirection = "column",
+  validateOnInit,
   limitTags = 1,
   flexWrap = "nowrap",
   gates = [],
@@ -24,11 +25,13 @@ function VehicleSelector({
   value = [],
   variants = []
 }: VehicleSelectorProps) {
+  // selector has errors
+  const hasErrors = errors && errors.length > 0;
   // state to track errors
-  const projectCodeExternalError = errors && errors.includes("projectCode");
-  const modelYearExternalError = errors && errors.includes("modelYear");
-  const variantExternalError = errors && errors.includes("variant");
-  const gateExternalError = errors && errors.includes("gate");
+  const projectCodeExternalError = hasErrors && errors.includes("projectCode");
+  const modelYearExternalError = hasErrors && errors.includes("modelYear");
+  const variantExternalError = hasErrors && errors.includes("variant");
+  const gateExternalError = hasErrors && errors.includes("gate");
 
   // flags indicating whether the user has manually cleared a field.
   const [userClearedModelYear, setUserClearedModelYear] = useState(false);
@@ -46,7 +49,7 @@ function VehicleSelector({
     modelYearExternalError
   );
   const [projectCodeError, setProjectCodeError] = useState<boolean | undefined>(
-    projectCodeExternalError
+    validateOnInit || projectCodeExternalError
   );
 
   // derive state for selected project

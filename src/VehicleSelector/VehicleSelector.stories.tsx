@@ -327,3 +327,53 @@ export const WithExternalErrors = {
 
   render: Template
 };
+
+export const InitWithError = {
+  args: {
+    flexDirection: "column",
+    flexWrap: "nowrap",
+    gates: [],
+    validateOnInit: true,
+    value: [],
+    variants: [
+      {
+        _id: "1",
+        modelYear: "2015",
+        projectCode: "911",
+        variant: "MP - 3.6 l6 - 397kW - 7MT - R20"
+      },
+      {
+        _id: "2",
+        modelYear: "2019",
+        projectCode: "CrossoverEV",
+        variant: "Nicolas - FWD - BEV - 150KW - R17"
+      },
+      {
+        _id: "3",
+        modelYear: "2020",
+        projectCode: "CrossoverEV",
+        variant: "Option A"
+      },
+      {
+        _id: "4",
+        modelYear: "2020",
+        projectCode: "CrossoverEV",
+        variant: "Option B"
+      },
+      {
+        _id: "5",
+        modelYear: "2020",
+        projectCode: "CrossoverEV",
+        variant: "Option C"
+      },
+      {
+        _id: "6",
+        modelYear: "2018",
+        projectCode: "Mustang",
+        variant: "GT 5.0 V8"
+      }
+    ]
+  },
+
+  render: Template
+};
