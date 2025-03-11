@@ -25,7 +25,7 @@ import SearchBar from "../SearchBar/SearchBar";
 const TreeViewList = ({
   enableSearch = false,
   expandSearchResults = false,
-  expandItems = 1,
+  expandItems = 0,
   items,
   onNodeSelect,
   onNodeToggle,
@@ -47,7 +47,7 @@ const TreeViewList = ({
   const [searchValue, setSearchValue] = useState("");
 
   // state for expanded nodes
-  const [expandedNodes, setExpandedNodes] = useState<string[]>([]);
+  const [, setExpandedNodes] = useState<string[]>([]);
 
   // state for user expanded nodes
   const [userExpanded, setUserExpanded] = useState<string[]>([]);
@@ -209,7 +209,7 @@ const TreeViewList = ({
         label={node.label}
         nodeId={node.nodeId}
         setHoveredNode={setHoveredNode}
-        // tooltip={node.tooltip}
+        tooltip={node.tooltip}
       >
         {Array.isArray(node.children) && node.children.length > 0
           ? renderTree(node.children)
@@ -270,31 +270,38 @@ const TreeViewList = ({
                 width: boxWidth <= 280 ? "auto" : "100%"
               }
             }}
+            expansionTrigger="iconContainer"
             slots={{ collapseIcon: RemoveIcon, expandIcon: AddIcon }}
-            expandedItems={expandedNodes}
+            // expandedItems={expandedNodes}
             selectedItems={currentSelection}
             onSelectedItemsChange={(event, nodeId) => {
+              // exit early if nodeId is not provided
               if (!nodeId) return;
 
+              // initialize an empty array to store selected node IDs
               let ids: string[] = [];
 
+              // find the clicked node using its ID
               const node = getNodeById(treeDisplayItems, nodeId);
+              // exit if the node is not found
               if (!node) return;
 
+              // if the clicked node has children (i.e., it's not a leaf node)
               if (node.children?.length) {
-                // If parent is clicked, highlight ONLY the parent
+                // set the selected node
                 setSelectedNode(nodeId);
-
-                // Store only the leaf nodes in the backend
+                // set the current selection
+                setCurrentSelection(nodeId);
+                // get all leaf descendants of the node (includes multi-level children)
                 const leafIds = getAllLeafDescendantIds(node);
-
                 ids = [...leafIds];
               } else {
-                // If a leaf node is clicked, highlight and select it
+                // if the clicked node is a leaf node (no children)
                 setSelectedNode(nodeId);
                 setCurrentSelection(nodeId);
+                ids = [nodeId];
               }
-
+              // if an external onNodeSelect callback is provided, call it with the selected node data
               if (onNodeSelect) {
                 onNodeSelect(event, nodeId, ids);
               }
@@ -400,6 +407,9 @@ const TooltipTreeItem = (
             marginLeft: "4px"
           }
         })}
+        onClick={event => {
+          event.stopPropagation(); // Prevent label click from expanding/collapsing
+        }}
         onMouseOver={event => {
           event.stopPropagation();
 
@@ -522,6 +532,14 @@ const findPathToNodeId = (
   return [];
 };
 
+/**
+ * Recursively retrieves all leaf node IDs from a given tree node.
+ *
+ * A leaf node is defined as a node that has no children.
+ *
+ * @param {TreeNodeItem} node - The tree node from which to collect leaf descendant IDs.
+ * @returns {string[]} An array of leaf node IDs.
+ */
 const getAllLeafDescendantIds = (node: TreeNodeItem): string[] => {
   if (!node.children || node.children.length === 0) {
     // return only if it's a leaf node
