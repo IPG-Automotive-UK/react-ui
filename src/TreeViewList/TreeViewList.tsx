@@ -25,7 +25,7 @@ import SearchBar from "../SearchBar/SearchBar";
 const TreeViewList = ({
   enableSearch = false,
   expandSearchResults = false,
-  expandItems = 0,
+  expandItems = 1,
   items,
   onNodeSelect,
   onNodeToggle,
@@ -407,9 +407,6 @@ const TooltipTreeItem = (
             marginLeft: "4px"
           }
         })}
-        onClick={event => {
-          event.stopPropagation(); // Prevent label click from expanding/collapsing
-        }}
         onMouseOver={event => {
           event.stopPropagation();
 
