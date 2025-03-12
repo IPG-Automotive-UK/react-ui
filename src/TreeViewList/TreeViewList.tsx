@@ -1,4 +1,4 @@
-import { Box, Tooltip, Typography, alpha, debounce } from "@mui/material";
+import { Box, Typography, alpha, debounce } from "@mui/material";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { SimpleTreeView, TreeItem } from "@mui/x-tree-view";
 import { TreeNodeItem, TreeViewListProps } from "./TreeViewList.types";
@@ -209,7 +209,6 @@ const TreeViewList = ({
         label={node.label}
         nodeId={node.nodeId}
         setHoveredNode={setHoveredNode}
-        tooltip={node.tooltip}
       >
         {Array.isArray(node.children) && node.children.length > 0
           ? renderTree(node.children)
@@ -379,49 +378,42 @@ const getNodeById = (
  * @returns The tree item wrapped in a tooltip.
  */
 const TooltipTreeItem = (
-  props: Pick<TreeNodeItem, "disabled" | "label" | "nodeId" | "tooltip"> & {
+  props: Pick<TreeNodeItem, "disabled" | "label" | "nodeId"> & {
     children?: React.ReactNode;
     hoveredNode: string;
     setHoveredNode: (nodeId: string) => void;
   }
 ) => {
   // Destructure the nodeId and the other props
-  const { hoveredNode, setHoveredNode, nodeId, tooltip, ...rest } = props;
+  const { hoveredNode, setHoveredNode, nodeId, ...rest } = props;
   return (
-    <Tooltip
-      title={tooltip ? <>{tooltip}</> : ""}
-      placement="right-start"
-      open={hoveredNode === nodeId}
-      disableFocusListener
-    >
-      <TreeItem
-        {...rest}
-        itemId={nodeId}
-        sx={theme => ({
-          "& .MuiTreeItem-label": {
-            margin: 0,
-            padding: "2px 2px"
-          },
-          "& .MuiTreeItem-root": {
-            borderLeft: `1px solid ${alpha(theme.palette.text.primary, 0.1)}`,
-            marginLeft: "4px"
-          }
-        })}
-        onMouseOver={event => {
-          event.stopPropagation();
+    <TreeItem
+      {...rest}
+      itemId={nodeId}
+      sx={theme => ({
+        "& .MuiTreeItem-label": {
+          margin: 0,
+          padding: "2px 2px"
+        },
+        "& .MuiTreeItem-root": {
+          borderLeft: `1px solid ${alpha(theme.palette.text.primary, 0.1)}`,
+          marginLeft: "4px"
+        }
+      })}
+      onMouseOver={event => {
+        event.stopPropagation();
 
-          const target = event.target as Element;
+        const target = event.target as Element;
 
-          if (target.classList.contains("MuiTreeItem-label")) {
-            setHoveredNode(nodeId);
-          }
-        }}
-        onMouseOut={event => {
-          event.stopPropagation();
-          setHoveredNode("");
-        }}
-      />
-    </Tooltip>
+        if (target.classList.contains("MuiTreeItem-label")) {
+          setHoveredNode(nodeId);
+        }
+      }}
+      onMouseOut={event => {
+        event.stopPropagation();
+        setHoveredNode("");
+      }}
+    />
   );
 };
 
