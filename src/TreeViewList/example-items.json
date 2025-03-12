@@ -6,24 +6,20 @@
     "children": [
       {
         "label": "ConsiderationPointPosition",
-        "nodeId": "AER.ConsiderationPointPosition",
-        "tooltip": "When the vehicle is gripped by side wind, the wind starts to take effect only from a certain point on, e.g. if only the bumper is attacked by side wind the driver will usually not recognize the effects. Ahead of this point, the vehicle body does not offer enough contact surface to the wind to take effect."
+        "nodeId": "AER.ConsiderationPointPosition"
       },
       {
         "label": "DragCoefficient",
-        "nodeId": "AER.DragCoefficient1D",
-        "tooltip": "Defines the drag coefficient of the entire vehicle as a function of wind angle of attack (tau)"
+        "nodeId": "AER.DragCoefficient1D"
       },
       {
         "disabled": true,
         "label": "FrontalArea",
-        "nodeId": "AER.FrontalArea",
-        "tooltip": "The vehicle reference area is the projected frontal area including tires and underbody parts"
+        "nodeId": "AER.FrontalArea"
       },
       {
         "label": "ReferenceLength",
-        "nodeId": "AER.ReferenceLength",
-        "tooltip": "This is the length between VEHICLE.AERODYNAMIC.CONSIDERATION POINT XYZ and the vehicle's rearmost point. It is used to calculate the torques applied to VEHICLE.AERODYNAMIC.RESULTANT FORCE POINT XYZ"
+        "nodeId": "AER.ReferenceLength"
       }
     ]
   },
@@ -37,8 +33,7 @@
         "children": [
           {
             "label": "Wheelbase",
-            "nodeId": "SUS.Axle.WheelBase",
-            "tooltip": "This is the vehicle wheelbase measured tire contact patch to tire contact patch"
+            "nodeId": "SUS.Axle.WheelBase"
           },
           {
             "label": "Front",
@@ -46,13 +41,11 @@
             "children": [
               {
                 "label": "Load",
-                "nodeId": "SUS.Axle.Front.Load",
-                "tooltip": "Preload of Front Suspension with gravity Amesim Parameter: Front SUSP Axle load"
+                "nodeId": "SUS.Axle.Front.Load"
               },
               {
                 "label": "Track Width",
-                "nodeId": "SUS.Axle.Front.TrackWidth",
-                "tooltip": "Vehicle front track width measured at the tire contact patch"
+                "nodeId": "SUS.Axle.Front.TrackWidth"
               }
             ]
           }
@@ -68,13 +61,11 @@
             "children": [
               {
                 "label": "Damping",
-                "nodeId": "SUS.Damper.Front.Damping1D",
-                "tooltip": "Shock absorber damping force characteristic in a 1D table - front suspension"
+                "nodeId": "SUS.Damper.Front.Damping1D"
               },
               {
                 "label": "Mass",
-                "nodeId": "SUS.Damper.Front.Mass",
-                "tooltip": "This is the front mass of the shock absorber"
+                "nodeId": "SUS.Damper.Front.Mass"
               }
             ]
           },
@@ -84,13 +75,11 @@
             "children": [
               {
                 "label": "Damping",
-                "nodeId": "SUS.Damper.Rear.Damping1D",
-                "tooltip": "Shock absorber damping characteristic in a 1D table - rear suspension"
+                "nodeId": "SUS.Damper.Rear.Damping1D"
               },
               {
                 "label": "Mass",
-                "nodeId": "SUS.Damper.Rear.Mass",
-                "tooltip": "This is the rear mass of the shock absorber"
+                "nodeId": "SUS.Damper.Rear.Mass"
               }
             ]
           }
