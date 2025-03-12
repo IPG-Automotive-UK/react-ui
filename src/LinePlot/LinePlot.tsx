@@ -130,6 +130,7 @@ const LinePlot = ({
             plot_bgcolor: "transparent",
             xaxis: {
               color: theme.palette.text.primary,
+              gridcolor: theme.palette.divider,
               showgrid: showGrid,
               title: {
                 font: { size: 12 },
@@ -139,6 +140,7 @@ const LinePlot = ({
             },
             yaxis: {
               color: theme.palette.text.primary,
+              gridcolor: theme.palette.divider,
               showgrid: showGrid,
               title: {
                 font: { size: 12 },
