@@ -54,9 +54,9 @@ export type VehicleSelectorProps = {
    */
   onChange: (value: Vehicle[]) => void;
   /**
-   * Validate the field on initialization
+   * Validate the fields
    */
-  validateOnInit: boolean;
+  validate: boolean;
   /**
    * The currently selected vehicles
    */
