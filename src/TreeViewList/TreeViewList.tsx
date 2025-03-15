@@ -1,4 +1,4 @@
-import { Box, Tooltip, Typography, alpha, debounce } from "@mui/material";
+import { Box, Typography, alpha, debounce } from "@mui/material";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { SimpleTreeView, TreeItem } from "@mui/x-tree-view";
 import { TreeNodeItem, TreeViewListProps } from "./TreeViewList.types";
@@ -128,7 +128,7 @@ const TreeViewList = ({
         for (const item of items) {
           // if the node has children, expand it and call the function on its children
           if (item.children) {
-            searchedNodes.add(item.nodeId);
+            searchedNodes.add(item.id);
             expandChildNodes(item.children);
           }
         }
@@ -190,14 +190,14 @@ const TreeViewList = ({
 
   // update the expanded nodes when the selected node changes
   useEffect(() => {
-    if (selectedNode) {
+    if (selectedNode && searchValue !== "") {
       // update the expanded nodes when the selected node changes
       const parentNodeIds = findPathToNodeId(items, selectedNode);
 
       // update the expanded nodes with the parent node ids
       setExpandedNodes(prev => [...prev, ...parentNodeIds]);
     }
-  }, [items, selectedNode]);
+  }, [items, selectedNode, searchValue]);
 
   // render the tree nodes with optional tooltips
   const renderTree = (nodes: TreeNodeItem[]) =>
@@ -205,11 +205,10 @@ const TreeViewList = ({
       <TooltipTreeItem
         disabled={node.disabled}
         hoveredNode={hoveredNode}
-        key={node.nodeId}
-        label={node.label}
-        nodeId={node.nodeId}
+        key={node.id}
+        name={node.name}
+        id={node.id}
         setHoveredNode={setHoveredNode}
-        tooltip={node.tooltip}
       >
         {Array.isArray(node.children) && node.children.length > 0
           ? renderTree(node.children)
@@ -270,24 +269,46 @@ const TreeViewList = ({
                 width: boxWidth <= 280 ? "auto" : "100%"
               }
             }}
+            expansionTrigger="iconContainer"
             slots={{ collapseIcon: RemoveIcon, expandIcon: AddIcon }}
             expandedItems={expandedNodes}
             selectedItems={currentSelection}
             onSelectedItemsChange={(event, nodeId) => {
-              if (nodeId) {
-                const node = getNodeById(treeDisplayItems, nodeId);
+              // exit early if nodeId is not provided
+              if (!nodeId) return;
+
+              // initialize an empty array to store selected node IDs
+              let ids: string[] = [];
+
+              // find the clicked node using its ID
+              const node = getNodeById(treeDisplayItems, nodeId);
+
+              // exit if the node is not found
+              if (!node) return;
+
+              // if the clicked node has children (i.e., it's not a leaf node)
+              if (node.children?.length) {
+                // set the selected node
+                setSelectedNode(nodeId);
+                // set the current selection
+                setCurrentSelection(nodeId);
+                // get all leaf descendants of the node (includes multi-level children)
+                const leafIds = getAllLeafDescendantIds(node);
+                ids = [...leafIds];
+              } else {
+                // if the clicked node is a leaf node (no children)
+                setSelectedNode(nodeId);
+                setCurrentSelection(nodeId);
+                ids = [nodeId];
+              }
+              // if an external onNodeSelect callback is provided, call it with the selected node data
+              if (onNodeSelect) {
+                // update the selected node when a node is selected and it is a child
                 const isChild = Boolean(
                   node && (!node.children || node.children.length === 0)
                 );
-                if (onNodeSelect) {
-                  const nodeDetails = { isChild };
-                  // update the selected node when a node is selected and it is a child
-                  if (isChild) {
-                    setCurrentSelection(nodeId);
-                    setSelectedNode(nodeId);
-                  }
-                  onNodeSelect(event, nodeId, nodeDetails);
-                }
+                const nodeDetails = { isChild };
+                onNodeSelect(event, ids, nodeDetails);
               }
             }}
             onExpandedItemsChange={(event, nodeId) => {
@@ -340,7 +361,7 @@ const getNodeById = (
   nodeId: string
 ): TreeNodeItem | null => {
   for (const node of nodes) {
-    if (node.nodeId === nodeId) {
+    if (node.id === nodeId) {
       return node;
     } else if (node.children) {
       const result = getNodeById(node.children, nodeId);
@@ -363,49 +384,30 @@ const getNodeById = (
  * @returns The tree item wrapped in a tooltip.
  */
 const TooltipTreeItem = (
-  props: Pick<TreeNodeItem, "disabled" | "label" | "nodeId" | "tooltip"> & {
+  props: Pick<TreeNodeItem, "disabled" | "name" | "id"> & {
     children?: React.ReactNode;
     hoveredNode: string;
     setHoveredNode: (nodeId: string) => void;
   }
 ) => {
   // Destructure the nodeId and the other props
-  const { hoveredNode, setHoveredNode, nodeId, tooltip, ...rest } = props;
+  const { hoveredNode, setHoveredNode, id, name, ...rest } = props;
   return (
-    <Tooltip
-      title={tooltip ? <>{tooltip}</> : ""}
-      placement="right-start"
-      open={hoveredNode === nodeId}
-      disableFocusListener
-    >
-      <TreeItem
-        {...rest}
-        itemId={nodeId}
-        sx={theme => ({
-          "& .MuiTreeItem-label": {
-            margin: 0,
-            padding: "2px 2px"
-          },
-          "& .MuiTreeItem-root": {
-            borderLeft: `1px solid ${alpha(theme.palette.text.primary, 0.1)}`,
-            marginLeft: "4px"
-          }
-        })}
-        onMouseOver={event => {
-          event.stopPropagation();
-
-          const target = event.target as Element;
-
-          if (target.classList.contains("MuiTreeItem-label")) {
-            setHoveredNode(nodeId);
-          }
-        }}
-        onMouseOut={event => {
-          event.stopPropagation();
-          setHoveredNode("");
-        }}
-      />
-    </Tooltip>
+    <TreeItem
+      {...rest}
+      label={name}
+      itemId={id}
+      sx={theme => ({
+        "& .MuiTreeItem-label": {
+          margin: 0,
+          padding: "2px 2px"
+        },
+        "& .MuiTreeItem-root": {
+          borderLeft: `1px solid ${alpha(theme.palette.text.primary, 0.1)}`,
+          marginLeft: "4px"
+        }
+      })}
+    />
   );
 };
 
@@ -422,7 +424,7 @@ const filterBySearchTerm = (items: TreeNodeItem[], searchTerm: string) => {
 
   // function to check if a node item matches the search term
   const matchesSearch = (node: TreeNodeItem, searchTerm: string) => {
-    return node.label.toLowerCase().includes(searchTerm.toLowerCase());
+    return node.name.toLowerCase().includes(searchTerm.toLowerCase());
   };
 
   // interim type to add the active property to the node item
@@ -488,11 +490,14 @@ const filterBySearchTerm = (items: TreeNodeItem[], searchTerm: string) => {
  * @returns The path from the root to the node id.
  * @example findPathToNodeId(items, "node_id");
  */
-const findPathToNodeId = (items: TreeNodeItem[], nodeId: string): string[] => {
+const findPathToNodeId = (
+  items: TreeNodeItem[],
+  nodeId: string | string[]
+): string[] => {
   for (const item of items) {
-    if (item.nodeId === nodeId) {
+    if (item.id === nodeId) {
       // if the current item is the one we're looking for, return an array containing only its id
-      return [item.nodeId];
+      return [item.id];
     }
 
     if (item.children) {
@@ -501,13 +506,31 @@ const findPathToNodeId = (items: TreeNodeItem[], nodeId: string): string[] => {
 
       if (pathFromChild.length > 0) {
         // if we found the node in the children, return an array containing the id of the current item and the path from the child
-        return [item.nodeId, ...pathFromChild];
+        return [item.id, ...pathFromChild];
       }
     }
   }
 
   // if no node found, return an empty array
   return [];
+};
+
+/**
+ * Recursively retrieves all leaf node IDs from a given tree node.
+ *
+ * A leaf node is defined as a node that has no children.
+ *
+ * @param {TreeNodeItem} node - The tree node from which to collect leaf descendant IDs.
+ * @returns {string[]} An array of leaf node IDs.
+ */
+const getAllLeafDescendantIds = (node: TreeNodeItem): string[] => {
+  if (!node.children || node.children.length === 0) {
+    // return only if it's a leaf node
+    return [node.id];
+  }
+
+  // recursive case: flatten results from all child nodes.
+  return node.children.flatMap(getAllLeafDescendantIds);
 };
 
 export default TreeViewList;
