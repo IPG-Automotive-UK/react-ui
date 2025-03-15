@@ -1,85 +1,84 @@
 [
   {
-    "label": "Aerodynamics",
-    "nodeId": "AER",
-    "tooltip": "Aerodynamics description goes here",
+    "name": "Aerodynamics",
+    "id": "AER",
     "children": [
       {
-        "label": "ConsiderationPointPosition",
-        "nodeId": "AER.ConsiderationPointPosition"
+        "name": "ConsiderationPointPosition",
+        "id": "AER.ConsiderationPointPosition"
       },
       {
-        "label": "DragCoefficient",
-        "nodeId": "AER.DragCoefficient1D"
+        "name": "DragCoefficient",
+        "id": "AER.DragCoefficient1D"
       },
       {
         "disabled": true,
-        "label": "FrontalArea",
-        "nodeId": "AER.FrontalArea"
+        "name": "FrontalArea",
+        "id": "AER.FrontalArea"
       },
       {
-        "label": "ReferenceLength",
-        "nodeId": "AER.ReferenceLength"
+        "name": "ReferenceLength",
+        "id": "AER.ReferenceLength"
       }
     ]
   },
   {
-    "label": "Suspension",
-    "nodeId": "SUS",
+    "name": "Suspension",
+    "id": "SUS",
     "children": [
       {
-        "label": "Axle",
-        "nodeId": "SUS.Axle",
+        "name": "Axle",
+        "id": "SUS.Axle",
         "children": [
           {
-            "label": "Wheelbase",
-            "nodeId": "SUS.Axle.WheelBase"
+            "name": "Wheelbase",
+            "id": "SUS.Axle.WheelBase"
           },
           {
-            "label": "Front",
-            "nodeId": "SUS.Axle.Front",
+            "name": "Front",
+            "id": "SUS.Axle.Front",
             "children": [
               {
-                "label": "Load",
-                "nodeId": "SUS.Axle.Front.Load"
+                "name": "Load",
+                "id": "SUS.Axle.Front.Load"
               },
               {
-                "label": "Track Width",
-                "nodeId": "SUS.Axle.Front.TrackWidth"
+                "name": "Track Width",
+                "id": "SUS.Axle.Front.TrackWidth"
               }
             ]
           }
         ]
       },
       {
-        "label": "Damper",
-        "nodeId": "SUS.Damper",
+        "name": "Damper",
+        "id": "SUS.Damper",
         "children": [
           {
-            "label": "Front",
-            "nodeId": "SUS.Damper.Front",
+            "name": "Front",
+            "id": "SUS.Damper.Front",
             "children": [
               {
-                "label": "Damping",
-                "nodeId": "SUS.Damper.Front.Damping1D"
+                "name": "Damping",
+                "id": "SUS.Damper.Front.Damping1D"
               },
               {
-                "label": "Mass",
-                "nodeId": "SUS.Damper.Front.Mass"
+                "name": "Mass",
+                "id": "SUS.Damper.Front.Mass"
               }
             ]
           },
           {
-            "label": "Rear",
-            "nodeId": "SUS.Damper.Rear",
+            "name": "Rear",
+            "id": "SUS.Damper.Rear",
             "children": [
               {
-                "label": "Damping",
-                "nodeId": "SUS.Damper.Rear.Damping1D"
+                "name": "Damping",
+                "id": "SUS.Damper.Rear.Damping1D"
               },
               {
-                "label": "Mass",
-                "nodeId": "SUS.Damper.Rear.Mass"
+                "name": "Mass",
+                "id": "SUS.Damper.Rear.Mass"
               }
             ]
           }

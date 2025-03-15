@@ -47,7 +47,7 @@ const TreeViewList = ({
   const [searchValue, setSearchValue] = useState("");
 
   // state for expanded nodes
-  const [, setExpandedNodes] = useState<string[]>([]);
+  const [expandedNodes, setExpandedNodes] = useState<string[]>([]);
 
   // state for user expanded nodes
   const [userExpanded, setUserExpanded] = useState<string[]>([]);
@@ -128,7 +128,7 @@ const TreeViewList = ({
         for (const item of items) {
           // if the node has children, expand it and call the function on its children
           if (item.children) {
-            searchedNodes.add(item.nodeId);
+            searchedNodes.add(item.id);
             expandChildNodes(item.children);
           }
         }
@@ -190,14 +190,14 @@ const TreeViewList = ({
 
   // update the expanded nodes when the selected node changes
   useEffect(() => {
-    if (selectedNode) {
+    if (selectedNode && searchValue !== "") {
       // update the expanded nodes when the selected node changes
       const parentNodeIds = findPathToNodeId(items, selectedNode);
 
       // update the expanded nodes with the parent node ids
       setExpandedNodes(prev => [...prev, ...parentNodeIds]);
     }
-  }, [items, selectedNode]);
+  }, [items, selectedNode, searchValue]);
 
   // render the tree nodes with optional tooltips
   const renderTree = (nodes: TreeNodeItem[]) =>
@@ -205,9 +205,9 @@ const TreeViewList = ({
       <TooltipTreeItem
         disabled={node.disabled}
         hoveredNode={hoveredNode}
-        key={node.nodeId}
-        label={node.label}
-        nodeId={node.nodeId}
+        key={node.id}
+        name={node.name}
+        id={node.id}
         setHoveredNode={setHoveredNode}
       >
         {Array.isArray(node.children) && node.children.length > 0
@@ -271,7 +271,7 @@ const TreeViewList = ({
             }}
             expansionTrigger="iconContainer"
             slots={{ collapseIcon: RemoveIcon, expandIcon: AddIcon }}
-            // expandedItems={expandedNodes}
+            expandedItems={expandedNodes}
             selectedItems={currentSelection}
             onSelectedItemsChange={(event, nodeId) => {
               // exit early if nodeId is not provided
@@ -282,6 +282,7 @@ const TreeViewList = ({
 
               // find the clicked node using its ID
               const node = getNodeById(treeDisplayItems, nodeId);
+
               // exit if the node is not found
               if (!node) return;
 
@@ -302,7 +303,12 @@ const TreeViewList = ({
               }
               // if an external onNodeSelect callback is provided, call it with the selected node data
               if (onNodeSelect) {
-                onNodeSelect(event, nodeId, ids);
+                // update the selected node when a node is selected and it is a child
+                const isChild = Boolean(
+                  node && (!node.children || node.children.length === 0)
+                );
+                const nodeDetails = { isChild };
+                onNodeSelect(event, ids, nodeDetails);
               }
             }}
             onExpandedItemsChange={(event, nodeId) => {
@@ -355,7 +361,7 @@ const getNodeById = (
   nodeId: string
 ): TreeNodeItem | null => {
   for (const node of nodes) {
-    if (node.nodeId === nodeId) {
+    if (node.id === nodeId) {
       return node;
     } else if (node.children) {
       const result = getNodeById(node.children, nodeId);
@@ -378,18 +384,19 @@ const getNodeById = (
  * @returns The tree item wrapped in a tooltip.
  */
 const TooltipTreeItem = (
-  props: Pick<TreeNodeItem, "disabled" | "label" | "nodeId"> & {
+  props: Pick<TreeNodeItem, "disabled" | "name" | "id"> & {
     children?: React.ReactNode;
     hoveredNode: string;
     setHoveredNode: (nodeId: string) => void;
   }
 ) => {
   // Destructure the nodeId and the other props
-  const { hoveredNode, setHoveredNode, nodeId, ...rest } = props;
+  const { hoveredNode, setHoveredNode, id, name, ...rest } = props;
   return (
     <TreeItem
       {...rest}
-      itemId={nodeId}
+      label={name}
+      itemId={id}
       sx={theme => ({
         "& .MuiTreeItem-label": {
           margin: 0,
@@ -400,19 +407,6 @@ const TooltipTreeItem = (
           marginLeft: "4px"
         }
       })}
-      onMouseOver={event => {
-        event.stopPropagation();
-
-        const target = event.target as Element;
-
-        if (target.classList.contains("MuiTreeItem-label")) {
-          setHoveredNode(nodeId);
-        }
-      }}
-      onMouseOut={event => {
-        event.stopPropagation();
-        setHoveredNode("");
-      }}
     />
   );
 };
@@ -430,7 +424,7 @@ const filterBySearchTerm = (items: TreeNodeItem[], searchTerm: string) => {
 
   // function to check if a node item matches the search term
   const matchesSearch = (node: TreeNodeItem, searchTerm: string) => {
-    return node.label.toLowerCase().includes(searchTerm.toLowerCase());
+    return node.name.toLowerCase().includes(searchTerm.toLowerCase());
   };
 
   // interim type to add the active property to the node item
@@ -501,9 +495,9 @@ const findPathToNodeId = (
   nodeId: string | string[]
 ): string[] => {
   for (const item of items) {
-    if (item.nodeId === nodeId) {
+    if (item.id === nodeId) {
       // if the current item is the one we're looking for, return an array containing only its id
-      return [item.nodeId];
+      return [item.id];
     }
 
     if (item.children) {
@@ -512,7 +506,7 @@ const findPathToNodeId = (
 
       if (pathFromChild.length > 0) {
         // if we found the node in the children, return an array containing the id of the current item and the path from the child
-        return [item.nodeId, ...pathFromChild];
+        return [item.id, ...pathFromChild];
       }
     }
   }
@@ -532,9 +526,10 @@ const findPathToNodeId = (
 const getAllLeafDescendantIds = (node: TreeNodeItem): string[] => {
   if (!node.children || node.children.length === 0) {
     // return only if it's a leaf node
-    return [node.nodeId];
+    return [node.id];
   }
 
+  // recursive case: flatten results from all child nodes.
   return node.children.flatMap(getAllLeafDescendantIds);
 };
 

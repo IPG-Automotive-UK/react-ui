@@ -17,17 +17,12 @@ export type TreeNodeItem = {
   /**
    * The tree node label.
    */
-  label: string;
+  name: string;
 
   /**
    * The ID of the node.
    */
-  nodeId: string;
-
-  /**
-   * The tooltip of the node.
-   */
-  tooltip?: string;
+  id: string;
 };
 
 /**
@@ -35,8 +30,10 @@ export type TreeNodeItem = {
  */
 type OnNodeSelect = (
   event: React.SyntheticEvent,
-  nodeId: string,
-  nodes: string[]
+  nodes: string[],
+  nodeDetails: {
+    isChild: boolean;
+  }
 ) => void;
 
 /**
