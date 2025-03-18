@@ -336,16 +336,8 @@ export default function ThemeProvider({
   // wrap mui theme provider and children in theme context
   return (
     <>
-      <InitColorSchemeScript
-        modeStorageKey="theme-mode"
-        attribute="class"
-        defaultMode="light"
-      />
-      <MuiThemeProvider
-        modeStorageKey="theme-mode"
-        theme={theme}
-        defaultMode="light"
-      >
+      <InitColorSchemeScript attribute="class" defaultMode="light" />
+      <MuiThemeProvider theme={theme} defaultMode="light">
         <ControlledThemeWrapper theme={controlledTheme}>
           {children}
         </ControlledThemeWrapper>
