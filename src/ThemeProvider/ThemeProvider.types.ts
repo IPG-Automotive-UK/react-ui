@@ -4,7 +4,7 @@ export type ThemeProviderProps = {
   /**
    * The appearance of the theme.
    */
-  theme?: "light" | "dark";
+  theme?: "light" | "dark" | "system";
   /**
    * The children to render inside the theme provider.
    */

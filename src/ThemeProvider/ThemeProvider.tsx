@@ -9,6 +9,7 @@ import {
   ThemeOptions,
   alpha,
   createTheme,
+  getInitColorSchemeScript,
   useColorScheme
 } from "@mui/material/styles";
 import React, { useEffect } from "react";
@@ -334,11 +335,16 @@ export default function ThemeProvider({
 }: ThemeProviderProps) {
   // wrap mui theme provider and children in theme context
   return (
-    <MuiThemeProvider theme={theme}>
-      <ControlledThemeWrapper theme={controlledTheme}>
-        {children}
-      </ControlledThemeWrapper>
-    </MuiThemeProvider>
+    <>
+      {getInitColorSchemeScript({
+        attribute: "class"
+      })}
+      <MuiThemeProvider theme={theme} defaultMode="light">
+        <ControlledThemeWrapper theme={controlledTheme}>
+          {children}
+        </ControlledThemeWrapper>
+      </MuiThemeProvider>
+    </>
   );
 }
 
@@ -367,8 +373,7 @@ function ControlledThemeWrapper({
     if (controlledTheme && mode !== controlledTheme) {
       setMode(controlledTheme);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [controlledTheme]);
+  }, [controlledTheme, mode, setMode]);
 
   return children;
 }
