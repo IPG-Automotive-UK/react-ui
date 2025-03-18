@@ -23,7 +23,6 @@ const defaultProps: VehicleSelectorProps = {
   flexWrap: "nowrap",
   gates: ["Gate 1", "Gate 2", "Gate 3"],
   onChange: () => {},
-  validate: false,
   value: [],
   variants: [
     {
@@ -535,7 +534,6 @@ describe("VehicleSelector Auto-Selection", () => {
     flexWrap: "nowrap",
     gates: [],
     onChange: () => {},
-    validate: false,
     value: [],
     variants: autoSelectVariants
   };
@@ -594,7 +592,6 @@ describe("VehicleSelector Auto-Selection Additional Scenarios", () => {
       flexWrap: "nowrap",
       gates: [],
       onChange: () => {},
-      validate: false,
       value: [],
       variants: variantsMultipleVariants
     };
@@ -647,7 +644,6 @@ describe("VehicleSelector Auto-Selection Additional Scenarios", () => {
       flexWrap: "nowrap",
       gates: [],
       onChange: () => {},
-      validate: false,
       value: [],
       variants: variantsMixed
     };
@@ -731,7 +727,6 @@ describe("VehicleSelector Gate Auto-Selection", () => {
       flexWrap: "nowrap",
       gates: ["Gate 1"],
       onChange: () => {},
-      validate: false,
       value: [],
       variants: autoGateVariants
     };
