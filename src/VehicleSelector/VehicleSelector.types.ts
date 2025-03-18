@@ -56,7 +56,7 @@ export type VehicleSelectorProps = {
   /**
    * Validate the fields
    */
-  validate: boolean;
+  validate?: boolean;
   /**
    * The currently selected vehicles
    */
