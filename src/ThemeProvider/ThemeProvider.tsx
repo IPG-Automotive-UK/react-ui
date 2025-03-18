@@ -9,11 +9,11 @@ import {
   ThemeOptions,
   alpha,
   createTheme,
-  getInitColorSchemeScript,
   useColorScheme
 } from "@mui/material/styles";
 import React, { useEffect } from "react";
 
+import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
 import PropTypes from "prop-types";
 import darkScrollbar from "@mui/material/darkScrollbar";
 
@@ -336,10 +336,16 @@ export default function ThemeProvider({
   // wrap mui theme provider and children in theme context
   return (
     <>
-      {getInitColorSchemeScript({
-        attribute: "class"
-      })}
-      <MuiThemeProvider theme={theme} defaultMode="light">
+      <InitColorSchemeScript
+        modeStorageKey="theme-mode"
+        attribute="class"
+        defaultMode="light"
+      />
+      <MuiThemeProvider
+        modeStorageKey="theme-mode"
+        theme={theme}
+        defaultMode="light"
+      >
         <ControlledThemeWrapper theme={controlledTheme}>
           {children}
         </ControlledThemeWrapper>
