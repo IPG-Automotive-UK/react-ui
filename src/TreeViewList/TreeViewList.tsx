@@ -55,6 +55,9 @@ const TreeViewList = ({
   // state for the node we are hovered over
   const [hoveredNode, setHoveredNode] = useState<string>("");
 
+  // state for the selectedChilds
+  const [selectedChildIds, setSelectedChildIds] = useState<string[]>([]);
+
   // reference to the box element
   const boxRef = useRef<HTMLDivElement>(null);
   const [boxWidth, setBoxWidth] = useState(0);
@@ -190,16 +193,16 @@ const TreeViewList = ({
 
   // update the expanded nodes when the selected node changes
   useEffect(() => {
-    if (selectedNode && searchValue !== "") {
+    if ((selectedNode && searchValue !== "") || selected === selectedNode) {
       // update the expanded nodes when the selected node changes
       const parentNodeIds = findPathToNodeId(items, selectedNode);
 
       // update the expanded nodes with the parent node ids
       setExpandedNodes(prev => [...prev, ...parentNodeIds]);
     }
-  }, [items, selectedNode, searchValue]);
+  }, [items, selectedNode, searchValue, selected]);
 
-  // render the tree nodes with optional tooltips
+  // render the tree nodes
   const renderTree = (nodes: TreeNodeItem[]) =>
     nodes.map(node => (
       <TooltipTreeItem
@@ -215,6 +218,14 @@ const TreeViewList = ({
           : null}
       </TooltipTreeItem>
     ));
+
+  // Function to check if the click happened on the expand/collapse icon
+  const isClickOnExpandIcon = (target: HTMLElement): boolean => {
+    return (
+      target.closest(".MuiTreeItem-iconContainer") !== null ||
+      target.classList.contains("MuiTreeItem-iconContainer")
+    );
+  };
 
   return (
     <>
@@ -262,7 +273,10 @@ const TreeViewList = ({
             ) : null}
           </Box>
         </Box>
-        <Box sx={{ flexGrow: 1, overflowY: "auto" }}>
+        <Box
+          sx={{ flexGrow: 1, overflowY: "auto" }}
+          data-selected-ids={JSON.stringify(selectedChildIds)}
+        >
           <SimpleTreeView
             sx={{
               "& .css-9l5vo-MuiCollapse-wrapperInner": {
@@ -274,6 +288,11 @@ const TreeViewList = ({
             expandedItems={expandedNodes}
             selectedItems={currentSelection}
             onSelectedItemsChange={(event, nodeId) => {
+              const target = event.target as HTMLElement;
+
+              // prevent selection if clicking on the expand/collapse icon
+              if (isClickOnExpandIcon(target)) return;
+
               // exit early if nodeId is not provided
               if (!nodeId) return;
 
@@ -290,8 +309,10 @@ const TreeViewList = ({
               if (node.children?.length) {
                 // set the selected node
                 setSelectedNode(nodeId);
+
                 // set the current selection
                 setCurrentSelection(nodeId);
+
                 // get all leaf descendants of the node (includes multi-level children)
                 const leafIds = getAllLeafDescendantIds(node);
                 ids = [...leafIds];
@@ -301,6 +322,7 @@ const TreeViewList = ({
                 setCurrentSelection(nodeId);
                 ids = [nodeId];
               }
+
               // if an external onNodeSelect callback is provided, call it with the selected node data
               if (onNodeSelect) {
                 // update the selected node when a node is selected and it is a child
@@ -309,6 +331,9 @@ const TreeViewList = ({
                 );
                 const nodeDetails = { isChild };
                 onNodeSelect(event, ids, nodeDetails);
+
+                // update the state with the selected child IDs
+                setSelectedChildIds(ids);
               }
             }}
             onExpandedItemsChange={(event, nodeId) => {
@@ -517,13 +542,11 @@ const findPathToNodeId = (
 
 /**
  * Recursively retrieves all leaf node IDs from a given tree node.
- *
  * A leaf node is defined as a node that has no children.
- *
  * @param {TreeNodeItem} node - The tree node from which to collect leaf descendant IDs.
  * @returns {string[]} An array of leaf node IDs.
  */
-const getAllLeafDescendantIds = (node: TreeNodeItem): string[] => {
+export const getAllLeafDescendantIds = (node: TreeNodeItem): string[] => {
   if (!node.children || node.children.length === 0) {
     // return only if it's a leaf node
     return [node.id];

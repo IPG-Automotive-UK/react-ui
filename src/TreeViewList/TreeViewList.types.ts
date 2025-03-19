@@ -15,7 +15,7 @@ export type TreeNodeItem = {
   disabled?: boolean;
 
   /**
-   * The tree node label.
+   * The name of the tree node.
    */
   name: string;
 
