@@ -209,17 +209,20 @@ test("should show no search results message when no search results are found", a
   ).toContainText("No search results.");
 });
 
-// Helper function to get selected IDs from state
+/**
+ * Helper function to get selected IDs from state.
+ *
+ * @param {FrameLocator} frame - The frame locator to interact with the Storybook iframe.
+ * @returns {Promise<string[]>} A promise that resolves to an array of selected IDs.
+ */
 const getSelectedIds = async (frame: FrameLocator): Promise<string[]> => {
   return await frame
     .locator("[data-selected-ids]")
     .evaluate(el => JSON.parse(el.getAttribute("data-selected-ids") || "[]"));
 };
 
-/**
- * This test verifies that selecting the topmost element while it is in a collapsed state
- * correctly marks it as selected and returns all its leaf child IDs.
- */
+// this test verifies that selecting the topmost element while it is in a collapsed state
+// correctly marks it as selected and returns all its leaf child IDs.
 test("should select the topmost element and return all leaf child IDs when collapsed", async ({
   page
 }) => {
@@ -255,10 +258,7 @@ test("should select the topmost element and return all leaf child IDs when colla
   expect(selectedIds.sort()).toEqual(expectedLeafIds.sort());
 });
 
-/**
- * This test verifies that selecting the topmost element while it is in an expanded state
- * correctly marks it as selected and returns all its leaf child IDs.
- */
+// this test verifies that selecting the topmost element while it is in an expanded state correctly marks it as selected and returns all its leaf child IDs.
 test("should select the topmost element and return all leaf child IDs when expanded", async ({
   page
 }) => {
@@ -294,11 +294,8 @@ test("should select the topmost element and return all leaf child IDs when expan
   expect(selectedIds.sort()).toEqual(expectedLeafIds.sort());
 });
 
-/**
- * This test verifies that clicking on the expand/collapse icon of the topmost element
- * correctly expands and collapses its child elements.
- */
-test("should expand and collapse the topmost element when clicking the icon", async ({
+// this test verifies that clicking on the expand/collapse icon of the topmost element correctly expands and collapses its child elements
+test("should expand and collapse the topmost element without selecting it when clicking the icon", async ({
   page
 }) => {
   // navigate to the Storybook page with the TreeView component
@@ -306,22 +303,22 @@ test("should expand and collapse the topmost element when clicking the icon", as
     "http://localhost:6006/?path=/story/lists-treeviewlist--default"
   );
 
-  // locate the iframe where Storybook renders the preview
+  // locate the iframe where Storybook renders the preview of the component
   const frame = page.frameLocator('iframe[title="storybook-preview-iframe"]');
 
-  // find the tree item with the name "Aerodynamics"
+  // find the tree item with the name "Aerodynamics" in the TreeView
   const treeItem = frame.getByRole("treeitem", { name: "Aerodynamics" });
 
   // find the expand/collapse icon within the "Aerodynamics" tree item
   const expandIcon = treeItem.locator(".MuiTreeItem-iconContainer").first();
 
-  // click the expand icon to expand the node
+  // click the expand icon to expand the node in the TreeView
   await expandIcon.click();
 
-  // wait briefly to allow the expansion animation to complete
+  // wait briefly (500ms) to allow the expansion animation to complete
   await page.waitForTimeout(500);
 
-  // verify that the expected child nodes are now visible
+  // verify that the expected child nodes are now visible after expansion
   await expect(
     frame.getByRole("treeitem", { name: "DragCoefficient" })
   ).toBeVisible();
@@ -329,25 +326,34 @@ test("should expand and collapse the topmost element when clicking the icon", as
     frame.getByRole("treeitem", { name: "ConsiderationPointPosition" })
   ).toBeVisible();
 
-  // click the collapse icon to collapse the node
+  // retrieve the list of selected leaf node IDs after expanding the tree item
+  const selectedIdsAfterExpand = await getSelectedIds(frame);
+
+  // ensure that no leaf nodes are selected after expanding the tree item
+  expect(selectedIdsAfterExpand).toEqual([]);
+
+  // click the collapse icon to collapse the node again in the TreeView
   await expandIcon.click();
 
-  // wait briefly to allow the collapse animation to complete
+  // wait briefly (500ms) to allow the collapse animation to complete
   await page.waitForTimeout(500);
 
-  // verify that the expected child nodes are now hidden
+  // verify that the expected child nodes are now hidden after collapse
   await expect(
     frame.getByRole("treeitem", { name: "DragCoefficient" })
   ).toBeHidden();
   await expect(
     frame.getByRole("treeitem", { name: "ConsiderationPointPosition" })
   ).toBeHidden();
+
+  // retrieve the list of selected leaf node IDs after collapsing the tree item
+  const selectedIdsAfterCollapse = await getSelectedIds(frame);
+
+  // ensure that no leaf nodes are selected after collapsing the tree item
+  expect(selectedIdsAfterCollapse).toEqual([]);
 });
 
-/**
- * This test verifies that selecting a child element (which has its own children)
- * correctly marks it as selected and returns all of its child IDs while keeping it collapsed.
- */
+// this test verifies that selecting a child element (which has its own children) correctly marks it as selected and returns all of its child IDs while keeping it collapsed
 test("should select a child element with children (collapsed state) and return all child IDs", async ({
   page
 }) => {
@@ -403,14 +409,12 @@ test("should select a child element with children (collapsed state) and return a
   expect(selectedIds.sort()).toEqual(expectedChildIds.sort());
 });
 
-/**
- * This test verifies that selecting a child element (which has its own children)
- * correctly marks it as selected and returns all of its child IDs while keeping it expanded.
- */
+// this test verifies that selecting a child element (which has its own children) correctly marks it as selected and returns all of its child IDs while keeping it expanded
 test("should select a child element with children (expanded state) and return all child IDs", async ({
   page
 }) => {
-  test.setTimeout(60000); // increase timeout to 60 seconds to accommodate loading delays
+  // increase timeout to 60 seconds to accommodate loading delays
+  test.setTimeout(60000);
 
   // navigate to the Storybook page with the TreeView component
   await page.goto(

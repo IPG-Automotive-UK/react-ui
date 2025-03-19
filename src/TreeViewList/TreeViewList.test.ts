@@ -142,7 +142,26 @@ describe("getAllLeafDescendantIds", () => {
 
   // test case for when the input is an empty array
   test("should return an empty array for an empty array input", () => {
-    // no input data, so it should return an empty array
-    expect([].flatMap(getAllLeafDescendantIds)).toEqual([]);
+    const node = {
+      children: [],
+      id: "CHILD",
+      name: "Child"
+    };
+
+    expect(getAllLeafDescendantIds(node)).toEqual(["CHILD"]);
+  });
+
+  // test case to verify that the function returns the node's ID when the node has no children
+  test("should return the node's ID when the node has no children", () => {
+    // a node object with an empty children array.
+    const node = {
+      children: [],
+      id: "CHILD",
+      name: "Child"
+    };
+
+    // expect that the function `getAllLeafDescendantIds` will return an array with the node's ID
+    // since the node has no children, it is treated as a leaf node itself
+    expect(getAllLeafDescendantIds(node)).toEqual(["CHILD"]);
   });
 });
