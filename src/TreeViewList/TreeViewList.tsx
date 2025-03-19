@@ -330,7 +330,7 @@ const TreeViewList = ({
                   node && (!node.children || node.children.length === 0)
                 );
                 const nodeDetails = { isChild };
-                onNodeSelect(event, ids, nodeDetails);
+                onNodeSelect(event, ids, nodeDetails, node);
 
                 // update the state with the selected child IDs
                 setSelectedChildIds(ids);

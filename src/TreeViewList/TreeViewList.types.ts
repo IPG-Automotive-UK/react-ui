@@ -33,7 +33,8 @@ type OnNodeSelect = (
   nodes: string[],
   nodeDetails: {
     isChild: boolean;
-  }
+  },
+  node: TreeNodeItem
 ) => void;
 
 /**
