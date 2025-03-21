@@ -15,19 +15,14 @@ export type TreeNodeItem = {
   disabled?: boolean;
 
   /**
-   * The tree node label.
+   * The name of the tree node.
    */
-  label: string;
+  name: string;
 
   /**
    * The ID of the node.
    */
-  nodeId: string;
-
-  /**
-   * The tooltip of the node.
-   */
-  tooltip?: string;
+  id: string;
 };
 
 /**
@@ -35,10 +30,11 @@ export type TreeNodeItem = {
  */
 type OnNodeSelect = (
   event: React.SyntheticEvent,
-  nodeId: string,
+  nodes: string[],
   nodeDetails: {
     isChild: boolean;
-  }
+  },
+  node: TreeNodeItem
 ) => void;
 
 /**
@@ -89,4 +85,22 @@ export type TreeViewListProps = {
    * The display width of the tree view list. This is optional.
    */
   width?: string;
+};
+
+/**
+ * Input type for the isParentOrSelfDisabled function
+ */
+export type IsParentOrSelfDisabledInput = {
+  /**
+   * An array of `TreeNodeItem` objects representing the tree of nodes.
+   */
+  nodes: TreeNodeItem[];
+  /**
+   * The ID of the node to check.
+   */
+  nodeId: string;
+  /**
+   * A boolean indicating whether the parent node is disabled. Optional, defaults to `false`.
+   */
+  parentDisabled?: boolean;
 };
