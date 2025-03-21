@@ -250,7 +250,6 @@ test("should select the topmost element and return all leaf child IDs when colla
   const expectedLeafIds = [
     "AER.ConsiderationPointPosition",
     "AER.DragCoefficient1D",
-    "AER.FrontalArea",
     "AER.ReferenceLength"
   ];
 
@@ -258,23 +257,31 @@ test("should select the topmost element and return all leaf child IDs when colla
   expect(selectedIds.sort()).toEqual(expectedLeafIds.sort());
 });
 
-// this test verifies that selecting the topmost element while it is in an expanded state correctly marks it as selected and returns all its leaf child IDs.
-test("should select the topmost element and return all leaf child IDs when expanded", async ({
+test("should select the topmost element and return all enabled leaf child IDs when expanded", async ({
   page
 }) => {
-  // navigate to the Storybook page with the TreeView component, ensuring items are expanded to level 2
+  // navigate to the Storybook page with expanded items
   await page.goto(
     "http://localhost:6006/?path=/story/lists-treeviewlist--default&args=expandItems:2"
   );
 
-  // locate the iframe where Storybook renders the preview
+  // locate the Storybook iframe
   const frame = page.frameLocator('iframe[title="storybook-preview-iframe"]');
 
-  // find the tree item with the name "Aerodynamics"
+  // find the "Aerodynamics" tree item and ensure it's visible before interacting
   const treeItem = frame.getByRole("treeitem", { name: "Aerodynamics" });
 
-  // click on the "Aerodynamics" tree item to select it
+  // wait for the tree item to be attached
+  await treeItem.waitFor({ state: "attached" });
+
+  // wait for the tree item to be visible
+  await treeItem.waitFor({ state: "visible" });
+
+  // click on the "Aerodynamics" tree item
   await treeItem.click();
+
+  // wait for the selection update before asserting
+  await page.waitForTimeout(500);
 
   // verify that the tree item has been marked as selected
   await expect(treeItem).toHaveAttribute("aria-selected", "true");
@@ -282,15 +289,14 @@ test("should select the topmost element and return all leaf child IDs when expan
   // retrieve the list of selected leaf node IDs
   const selectedIds = await getSelectedIds(frame);
 
-  // define the expected list of leaf node IDs when "Aerodynamics" is selected
+  // define the expected list of enabled leaf node IDs
   const expectedLeafIds = [
     "AER.ConsiderationPointPosition",
     "AER.DragCoefficient1D",
-    "AER.FrontalArea",
     "AER.ReferenceLength"
   ];
 
-  // compare the actual selected leaf node IDs with the expected ones (ignoring order)
+  // compare the actual and expected leaf node IDs (ignoring order)
   expect(selectedIds.sort()).toEqual(expectedLeafIds.sort());
 });
 
@@ -353,143 +359,146 @@ test("should expand and collapse the topmost element without selecting it when c
   expect(selectedIdsAfterCollapse).toEqual([]);
 });
 
-// this test verifies that selecting a child element (which has its own children) correctly marks it as selected and returns all of its child IDs while keeping it collapsed
-test("should select a child element with children (collapsed state) and return all child IDs", async ({
+// test case to verify that a disabled parent and all its children cannot be selected
+test("should not select a disabled parent or any of its children", async ({
   page
 }) => {
-  // increase timeout to 60 seconds to accommodate loading delays
+  // set timeout to 60 seconds to ensure enough time for execution
   test.setTimeout(60000);
 
-  // navigate to the Storybook page with the TreeView component
+  // navigate to the Storybook page
   await page.goto(
     "http://localhost:6006/?path=/story/lists-treeviewlist--default"
   );
 
-  // locate the iframe where Storybook renders the preview
+  // locate the iframe where the tree view is rendered
   const frame = page.frameLocator('iframe[title="storybook-preview-iframe"]');
 
-  // ensure iframe content is fully loaded
+  // wait for the iframe content to load completely
   await frame.locator("body").waitFor();
-
-  // find the root tree item "Suspension" and ensure it is visible
-  const rootItem = frame.getByRole("treeitem", { name: "Suspension" });
-  await expect(rootItem).toBeVisible();
-
-  // locate and click the expand icon for "Suspension" to reveal its child elements
-  const rootExpandIcon = rootItem.locator(".MuiTreeItem-iconContainer").first();
-  await rootExpandIcon.click();
-
-  // verify that the "Axle" child element becomes visible
-  await expect(frame.getByRole("treeitem", { name: "Axle" })).toBeVisible();
-
-  // locate the "Axle" tree item and ensure it is visible
-  const subParentItem = frame.getByRole("treeitem", { name: "Axle" });
-  await expect(subParentItem).toBeVisible();
-
-  // click on the "Axle" tree item to select it without expanding it further
-  await subParentItem.click();
-
-  // verify that the "Axle" item is selected but remains collapsed
-  await expect(subParentItem).toHaveAttribute("aria-selected", "true");
-  await expect(subParentItem).toHaveAttribute("aria-expanded", "false");
-
-  // retrieve the list of selected node IDs
-  const selectedIds = await frame
-    .locator("[data-selected-ids]")
-    .evaluate(el => JSON.parse(el.getAttribute("data-selected-ids") || "[]"));
-
-  // define the expected list of child IDs associated with "Axle"
-  const expectedChildIds = [
-    "SUS.Axle.WheelBase",
-    "SUS.Axle.Front.Load",
-    "SUS.Axle.Front.TrackWidth"
-  ];
-
-  // compare the actual selected child node IDs with the expected ones (ignoring order)
-  expect(selectedIds.sort()).toEqual(expectedChildIds.sort());
-});
-
-// this test verifies that selecting a child element (which has its own children) correctly marks it as selected and returns all of its child IDs while keeping it expanded
-test("should select a child element with children (expanded state) and return all child IDs", async ({
-  page
-}) => {
-  // increase timeout to 60 seconds to accommodate loading delays
-  test.setTimeout(60000);
-
-  // navigate to the Storybook page with the TreeView component
-  await page.goto(
-    "http://localhost:6006/?path=/story/lists-treeviewlist--default"
-  );
-
-  // locate the iframe where Storybook renders the preview
-  const frame = page.frameLocator('iframe[title="storybook-preview-iframe"]');
-
-  // ensure iframe content is fully loaded
-  await frame.locator("body").waitFor();
-
-  // wait until at least one tree item is present
-  await frame.locator('[role="treeitem"]').first().waitFor();
-  // allow UI to fully render
   await page.waitForTimeout(500);
 
-  // find the root tree item "Suspension" and ensure it is visible
-  const rootItem = frame.getByRole("treeitem", { name: "Suspension" });
-  await expect(rootItem).toBeVisible();
+  // expand the "Suspension" tree item to reveal its child elements
+  const suspensionItem = frame.getByRole("treeitem", { name: "Suspension" });
+  await expect(suspensionItem).toBeVisible();
 
-  // locate and click the expand icon (SVG) for "Suspension" to reveal its child elements
-  const rootExpandIcon = rootItem
+  // locate the expand icon for "Suspension" and click to expand it
+  const suspensionExpandIcon = suspensionItem
     .locator(".MuiTreeItem-iconContainer svg")
     .first();
+  await suspensionExpandIcon.scrollIntoViewIfNeeded();
+  await suspensionExpandIcon.waitFor({ state: "visible" });
+  await suspensionExpandIcon.click();
 
-  // ensure the expand icon is visible and scroll into view if needed
-  await rootExpandIcon.scrollIntoViewIfNeeded();
-  await rootExpandIcon.waitFor({ state: "visible" });
-  await rootExpandIcon.click();
+  // verify that "Axle" is now visible in the tree
+  const axleItem = frame.getByRole("treeitem", { name: "Axle" });
+  await expect(axleItem).toBeVisible();
 
-  // verify that the "Axle" child element becomes visible
-  await expect(frame.getByRole("treeitem", { name: "Axle" })).toBeVisible();
+  // click on "Axle" and ensure it does not get selected
+  await axleItem.click();
+  await page.waitForTimeout(300);
+  await expect(axleItem).not.toHaveAttribute("aria-selected", "true");
 
-  // find the "Axle" tree item and ensure it is visible
-  const subParentItem = frame.getByRole("treeitem", { name: "Axle" });
-  await expect(subParentItem).toBeVisible();
-
-  // locate and click the expand icon (SVG) for "Axle" to reveal its child elements
-  const subParentExpandIcon = subParentItem
-    .locator(".MuiTreeItem-iconContainer svg")
-    .first();
-  await subParentExpandIcon.waitFor({ state: "visible" });
-  await subParentExpandIcon.click();
-
-  // verify that "Axle" is expanded and "Front" child element is visible
-  await expect(subParentItem).toHaveAttribute("aria-expanded", "true", {
-    timeout: 10000
-  });
-  await expect(frame.getByRole("treeitem", { name: "Front" })).toBeVisible();
-
-  // click on the label of the "Axle" tree item to select it
-  const subParentLabel = subParentItem.locator(".MuiTreeItem-label").first();
-  await subParentLabel.waitFor({ state: "visible" });
-  await subParentLabel.click();
-
-  // verify that "Axle" is selected and remains expanded
-  await expect(subParentItem).toHaveAttribute("aria-selected", "true");
-  await expect(subParentItem).toHaveAttribute("aria-expanded", "true");
-
-  // retrieve the list of selected node IDs
-  const selectedIds = await frame
+  // retrieve the list of selected node IDs after clicking "Axle"
+  const selectedIdsAfterAxleClick = await frame
     .locator("[data-selected-ids]")
     .evaluate(el => JSON.parse(el.getAttribute("data-selected-ids") || "[]"));
 
-  // allow time for IDs to update
-  await page.waitForTimeout(1000);
+  // ensure no selection occurs for a disabled node or any of its children
+  expect(selectedIdsAfterAxleClick).toEqual([]);
 
-  // define the expected list of child IDs associated with "Axle"
-  const expectedChildIds = [
-    "SUS.Axle.WheelBase",
-    "SUS.Axle.Front.Load",
-    "SUS.Axle.Front.TrackWidth"
-  ];
+  // check if any child of "Axle" is selectable, which should not happen
+  const frontLoadItem = frame.getByRole("treeitem", { name: "Load" });
 
-  // compare the actual selected child node IDs with the expected ones (ignoring order)
-  expect(selectedIds.sort()).toEqual(expectedChildIds.sort());
+  // verify that "Load" (child of "Axle") cannot be selected
+  if (await frontLoadItem.isVisible()) {
+    await frontLoadItem.click();
+    await page.waitForTimeout(300);
+
+    // retrieve the list of selected IDs after clicking "Load"
+    const selectedAfterChildClick = await frame
+      .locator("[data-selected-ids]")
+      .evaluate(el => JSON.parse(el.getAttribute("data-selected-ids") || "[]"));
+
+    // ensure that clicking any child of a disabled parent does not result in selection
+    expect(selectedAfterChildClick).toEqual([]);
+  }
+});
+
+// this test verifies that only enabled child elements are selected while disabled elements are ignored
+test("should select only enabled child elements and ignore disabled ones", async ({
+  page
+}) => {
+  // set timeout to 60 seconds to ensure enough time for execution
+  test.setTimeout(60000);
+
+  // navigate to the Storybook page
+  await page.goto(
+    "http://localhost:6006/?path=/story/lists-treeviewlist--default"
+  );
+
+  // locate the iframe where the tree view is rendered
+  const frame = page.frameLocator('iframe[title="storybook-preview-iframe"]');
+
+  // ensure iframe content is fully loaded
+  await frame.locator("body").waitFor();
+  await page.waitForTimeout(500);
+
+  // helper function to retrieve selected node ids
+  const getSelectedIds = async () => {
+    return await frame
+      .locator("[data-selected-ids]")
+      .evaluate(el => JSON.parse(el.getAttribute("data-selected-ids") || "[]"));
+  };
+
+  // click on the "Aerodynamics" tree item and verify the selected ids
+  const aeroItem = frame.getByRole("treeitem", { name: "Aerodynamics" });
+  await expect(aeroItem).toBeVisible();
+  await aeroItem.click();
+
+  // wait for the selection update
+  await expect.poll(getSelectedIds).toContain("AER.ConsiderationPointPosition");
+
+  // verify selected ids after clicking "Aerodynamics"
+  const selectedIdsBefore = await getSelectedIds();
+  expect(selectedIdsBefore.sort()).toEqual(
+    [
+      "AER.ConsiderationPointPosition",
+      "AER.DragCoefficient1D",
+      "AER.ReferenceLength"
+    ].sort()
+  );
+
+  // expand the "Suspension" tree item before interacting with its children
+  const suspensionItem = frame.getByRole("treeitem", { name: "Suspension" });
+  await expect(suspensionItem).toBeVisible();
+
+  const suspensionExpandIcon = suspensionItem
+    .locator(".MuiTreeItem-iconContainer svg")
+    .first();
+  await suspensionExpandIcon.scrollIntoViewIfNeeded();
+  await suspensionExpandIcon.waitFor({ state: "visible" });
+  await suspensionExpandIcon.click();
+
+  // wait for the "Axle" tree item to become visible
+  const axleItem = frame.getByRole("treeitem", { name: "Axle" });
+  await axleItem.waitFor({ state: "attached" });
+  await axleItem.waitFor({ state: "visible" });
+
+  // click on the "Damper" tree item and check the selected ids
+  const damperItem = frame.getByRole("treeitem", { name: "Damper" });
+  await expect(damperItem).toBeVisible();
+  await damperItem.click();
+  await page.waitForTimeout(300);
+
+  // verify selected ids after clicking "Damper"
+  const selectedIdsAfter = await getSelectedIds();
+  expect(selectedIdsAfter.sort()).toEqual(
+    [
+      "SUS.Damper.Front.Damping1D",
+      "SUS.Damper.Front.Mass",
+      "SUS.Damper.Rear.Damping1D",
+      "SUS.Damper.Rear.Mass"
+    ].sort()
+  );
 });

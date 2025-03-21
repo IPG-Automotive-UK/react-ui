@@ -1,68 +1,71 @@
 import { describe, expect, test } from "vitest";
+import {
+  getAllLeafDescendantIds,
+  isParentOrSelfDisabled
+} from "./TreeViewList";
 
-import { getAllLeafDescendantIds } from "./TreeViewList";
+// sample hierarchical test data representing a tree structure
+
+const sampleData = [
+  {
+    children: [
+      {
+        id: "AER.ConsiderationPointPosition",
+        name: "ConsiderationPointPosition"
+      },
+      { id: "AER.DragCoefficient1D", name: "DragCoefficient" },
+      { disabled: true, id: "AER.FrontalArea", name: "FrontalArea" },
+      { id: "AER.ReferenceLength", name: "ReferenceLength" }
+    ],
+    id: "AER",
+    name: "Aerodynamics"
+  },
+  {
+    children: [
+      {
+        children: [
+          { id: "SUS.Axle.WheelBase", name: "Wheelbase" },
+          {
+            children: [
+              { id: "SUS.Axle.Front.Load", name: "Load" },
+              { id: "SUS.Axle.Front.TrackWidth", name: "Track Width" }
+            ],
+            id: "SUS.Axle.Front",
+            name: "Front"
+          }
+        ],
+        id: "SUS.Axle",
+        name: "Axle"
+      },
+      {
+        children: [
+          {
+            children: [
+              { id: "SUS.Damper.Front.Damping1D", name: "Damping" },
+              { id: "SUS.Damper.Front.Mass", name: "Mass" }
+            ],
+            id: "SUS.Damper.Front",
+            name: "Front"
+          },
+          {
+            children: [
+              { id: "SUS.Damper.Rear.Damping1D", name: "Damping" },
+              { id: "SUS.Damper.Rear.Mass", name: "Mass" }
+            ],
+            id: "SUS.Damper.Rear",
+            name: "Rear"
+          }
+        ],
+        id: "SUS.Damper",
+        name: "Damper"
+      }
+    ],
+    id: "SUS",
+    name: "Suspension"
+  }
+];
 
 describe("getAllLeafDescendantIds", () => {
-  // sample hierarchical test data representing a tree structure
-  const sampleData = [
-    {
-      children: [
-        {
-          id: "AER.ConsiderationPointPosition",
-          name: "ConsiderationPointPosition"
-        },
-        { id: "AER.DragCoefficient1D", name: "DragCoefficient" },
-        { disabled: true, id: "AER.FrontalArea", name: "FrontalArea" },
-        { id: "AER.ReferenceLength", name: "ReferenceLength" }
-      ],
-      id: "AER",
-      name: "Aerodynamics"
-    },
-    {
-      children: [
-        {
-          children: [
-            { id: "SUS.Axle.WheelBase", name: "Wheelbase" },
-            {
-              children: [
-                { id: "SUS.Axle.Front.Load", name: "Load" },
-                { id: "SUS.Axle.Front.TrackWidth", name: "Track Width" }
-              ],
-              id: "SUS.Axle.Front",
-              name: "Front"
-            }
-          ],
-          id: "SUS.Axle",
-          name: "Axle"
-        },
-        {
-          children: [
-            {
-              children: [
-                { id: "SUS.Damper.Front.Damping1D", name: "Damping" },
-                { id: "SUS.Damper.Front.Mass", name: "Mass" }
-              ],
-              id: "SUS.Damper.Front",
-              name: "Front"
-            },
-            {
-              children: [
-                { id: "SUS.Damper.Rear.Damping1D", name: "Damping" },
-                { id: "SUS.Damper.Rear.Mass", name: "Mass" }
-              ],
-              id: "SUS.Damper.Rear",
-              name: "Rear"
-            }
-          ],
-          id: "SUS.Damper",
-          name: "Damper"
-        }
-      ],
-      id: "SUS",
-      name: "Suspension"
-    }
-  ];
-
   // test case to check if all leaf node IDs are correctly returned
   test("should return all leaf node IDs", () => {
     const expectedLeafIds = [
@@ -152,5 +155,32 @@ describe("getAllLeafDescendantIds", () => {
     // expect that the function `getAllLeafDescendantIds` will return an array with the node's ID
     // since the node has no children, it is treated as a leaf node itself
     expect(getAllLeafDescendantIds(node)).toEqual(["CHILD"]);
+  });
+});
+
+// test cases to check if a node or its ancestors are disabled: checks non-disabled node, directly disabled node, node with no disabled ancestors, and non-existent node
+describe("isParentOrSelfDisabled", () => {
+  // test case to check if the function returns false for an enabled node
+  test("should return false for an enabled node", () => {
+    expect(
+      isParentOrSelfDisabled(sampleData, "AER.ConsiderationPointPosition")
+    ).toBe(false);
+  });
+
+  // test case to check if the function returns true for a directly disabled node
+  test("should return true for a directly disabled node", () => {
+    expect(isParentOrSelfDisabled(sampleData, "AER.FrontalArea")).toBe(true);
+  });
+
+  // test case to check if the function returns false for a node with no disabled ancestors
+  test("should return false for a node with no disabled ancestors", () => {
+    expect(isParentOrSelfDisabled(sampleData, "AER.ReferenceLength")).toBe(
+      false
+    );
+  });
+
+  // test case to check if the function handles non-existent nodes and returns false
+  test("should return false for a non-existent node", () => {
+    expect(isParentOrSelfDisabled(sampleData, "UNKNOWN.Node")).toBe(false);
   });
 });

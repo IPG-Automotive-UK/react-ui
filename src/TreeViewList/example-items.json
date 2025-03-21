@@ -29,6 +29,7 @@
       {
         "name": "Axle",
         "id": "SUS.Axle",
+        "disabled": true,
         "children": [
           {
             "name": "Wheelbase",

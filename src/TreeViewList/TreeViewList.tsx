@@ -219,7 +219,7 @@ const TreeViewList = ({
       </TooltipTreeItem>
     ));
 
-  // Function to check if the click happened on the expand/collapse icon
+  // function to check if the click happened on the expand/collapse icon
   const isClickOnExpandIcon = (target: HTMLElement): boolean => {
     return (
       target.closest(".MuiTreeItem-iconContainer") !== null ||
@@ -296,39 +296,41 @@ const TreeViewList = ({
               // exit early if nodeId is not provided
               if (!nodeId) return;
 
-              // initialize an empty array to store selected node IDs
-              let ids: string[] = [];
-
               // find the clicked node using its ID
               const node = getNodeById(treeDisplayItems, nodeId);
 
-              // exit if the node is not found
-              if (!node) return;
+              // return if the node itself is disabled OR has a disabled parent
+              if (
+                !node ||
+                node.disabled ||
+                isParentOrSelfDisabled(treeDisplayItems, nodeId)
+              ) {
+                event.preventDefault();
+                event.stopPropagation();
+                return;
+              }
 
-              // if the clicked node has children (i.e., it's not a leaf node)
+              // initialize an empty array to store selected node IDs
+              let ids: string[] = [];
+
+              // if the clicked node has children, get only enabled descendant IDs
               if (node.children?.length) {
-                // set the selected node
-                setSelectedNode(nodeId);
-
-                // set the current selection
-                setCurrentSelection(nodeId);
-
-                // get all leaf descendants of the node (includes multi-level children)
-                const leafIds = getAllLeafDescendantIds(node);
-                ids = [...leafIds];
+                ids = getAllLeafDescendantIds(node).filter(
+                  // Ensures no disabled IDs get selected
+                  childId => !isParentOrSelfDisabled(treeDisplayItems, childId)
+                );
               } else {
-                // if the clicked node is a leaf node (no children)
-                setSelectedNode(nodeId);
-                setCurrentSelection(nodeId);
+                // selects only if it's an enabled leaf node
                 ids = [nodeId];
               }
 
-              // if an external onNodeSelect callback is provided, call it with the selected node data
+              // set selectedNode
+              setSelectedNode(nodeId);
+              setCurrentSelection(nodeId);
+
+              // call external selection handler with only valid IDs
               if (onNodeSelect) {
-                // update the selected node when a node is selected and it is a child
-                const isChild = Boolean(
-                  node && (!node.children || node.children.length === 0)
-                );
+                const isChild = !node.children || node.children.length === 0;
                 const nodeDetails = { isChild };
                 onNodeSelect(event, ids, nodeDetails, node);
 
@@ -408,6 +410,7 @@ const getNodeById = (
  * @property props.tooltip - The tooltip to display.
  * @returns The tree item wrapped in a tooltip.
  */
+
 const TooltipTreeItem = (
   props: Pick<TreeNodeItem, "disabled" | "name" | "id"> & {
     children?: React.ReactNode;
@@ -415,18 +418,31 @@ const TooltipTreeItem = (
     setHoveredNode: (nodeId: string) => void;
   }
 ) => {
-  // Destructure the nodeId and the other props
-  const { hoveredNode, setHoveredNode, id, name, ...rest } = props;
+  const { hoveredNode, setHoveredNode, id, name, disabled, ...rest } = props;
+
   return (
     <TreeItem
       {...rest}
       label={name}
       itemId={id}
       sx={theme => ({
+        // apply color change to icon when disabled
+        "& .MuiTreeItem-iconContainer": {
+          color: disabled
+            ? theme.palette.text.disabled
+            : theme.palette.text.primary,
+          pointerEvents: "auto"
+        },
         "& .MuiTreeItem-label": {
+          color: disabled
+            ? theme.palette.text.disabled
+            : theme.palette.text.primary,
+          cursor: disabled ? "" : "pointer",
           margin: 0,
+          opacity: disabled ? 0.6 : 1,
           padding: "2px 2px"
         },
+
         "& .MuiTreeItem-root": {
           borderLeft: `1px solid ${alpha(theme.palette.text.primary, 0.1)}`,
           marginLeft: "4px"
@@ -554,6 +570,43 @@ export const getAllLeafDescendantIds = (node: TreeNodeItem): string[] => {
 
   // recursive case: flatten results from all child nodes.
   return node.children.flatMap(getAllLeafDescendantIds);
+};
+
+/**
+ * Recursively checks whether a node or any of its ancestors are disabled.
+ *
+ * This function traverses through the tree of nodes to determine if a given node
+ * (identified by its `nodeId`) or any of its ancestor nodes has the `disabled` property set to `true`.
+ * It considers the `parentDisabled` flag which propagates the disabled state through parent nodes.
+ *
+ * @param nodes - An array of `TreeNodeItem` objects representing the tree of nodes.
+ * @param nodeId - The ID of the node to check.
+ * @param parentDisabled - A boolean indicating whether the parent node is disabled. Defaults to `false`.
+ * @returns A boolean indicating whether the specified node or any of its ancestors is disabled.
+ */
+export const isParentOrSelfDisabled = (
+  nodes: TreeNodeItem[],
+  nodeId: string,
+  parentDisabled = false
+): boolean => {
+  for (const node of nodes) {
+    // if the current node matches, return whether it's disabled or has a disabled ancestor
+    if (node.id === nodeId) return parentDisabled || !!node.disabled;
+
+    // if the node has children, recursively check them
+    if (node.children?.length) {
+      if (
+        isParentOrSelfDisabled(
+          node.children,
+          nodeId,
+          parentDisabled || !!node.disabled
+        )
+      ) {
+        return true;
+      }
+    }
+  }
+  return false;
 };
 
 export default TreeViewList;
