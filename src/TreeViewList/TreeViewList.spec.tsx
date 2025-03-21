@@ -223,7 +223,7 @@ const getSelectedIds = async (frame: FrameLocator): Promise<string[]> => {
 
 // this test verifies that selecting the topmost element while it is in a collapsed state
 // correctly marks it as selected and returns all its leaf child IDs.
-test("should select the topmost element and return all leaf child IDs when collapsed", async ({
+test("should select the topmost element and return all enabled leaf child IDs when the element is in collapsed state and it gets selected", async ({
   page
 }) => {
   // navigate to the Storybook page with the TreeView component
@@ -257,7 +257,7 @@ test("should select the topmost element and return all leaf child IDs when colla
   expect(selectedIds.sort()).toEqual(expectedLeafIds.sort());
 });
 
-test("should select the topmost element and return all enabled leaf child IDs when expanded", async ({
+test("should select the topmost element and return all enabled leaf child IDs when the element is expanded and it gets selected", async ({
   page
 }) => {
   // navigate to the Storybook page with expanded items
@@ -378,7 +378,7 @@ test("should not select a disabled parent or any of its children", async ({
   await frame.locator("body").waitFor();
   await page.waitForTimeout(500);
 
-  // expand the "Suspension" tree item to reveal its child elements
+  // locate the "Suspension" item
   const suspensionItem = frame.getByRole("treeitem", { name: "Suspension" });
   await expect(suspensionItem).toBeVisible();
 

@@ -86,3 +86,9 @@ export type TreeViewListProps = {
    */
   width?: string;
 };
+
+export type IsParentOrSelfDisabledInput = {
+  nodes: TreeNodeItem[];
+  nodeId: string;
+  parentDisabled?: boolean;
+};

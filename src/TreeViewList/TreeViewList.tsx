@@ -1,7 +1,11 @@
 import { Box, Typography, alpha, debounce } from "@mui/material";
+import {
+  IsParentOrSelfDisabledInput,
+  TreeNodeItem,
+  TreeViewListProps
+} from "./TreeViewList.types";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { SimpleTreeView, TreeItem } from "@mui/x-tree-view";
-import { TreeNodeItem, TreeViewListProps } from "./TreeViewList.types";
 
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -303,7 +307,11 @@ const TreeViewList = ({
               if (
                 !node ||
                 node.disabled ||
-                isParentOrSelfDisabled(treeDisplayItems, nodeId)
+                // isParentOrSelfDisabled(treeDisplayItems, nodeId)
+                isParentOrSelfDisabled({
+                  nodeId,
+                  nodes: treeDisplayItems
+                })
               ) {
                 event.preventDefault();
                 event.stopPropagation();
@@ -317,7 +325,11 @@ const TreeViewList = ({
               if (node.children?.length) {
                 ids = getAllLeafDescendantIds(node).filter(
                   // Ensures no disabled IDs get selected
-                  childId => !isParentOrSelfDisabled(treeDisplayItems, childId)
+                  childId =>
+                    !isParentOrSelfDisabled({
+                      nodeId: childId,
+                      nodes: treeDisplayItems
+                    })
                 );
               } else {
                 // selects only if it's an enabled leaf node
@@ -333,6 +345,7 @@ const TreeViewList = ({
                 const isChild = !node.children || node.children.length === 0;
                 const nodeDetails = { isChild };
                 onNodeSelect(event, ids, nodeDetails, node);
+                console.log(ids, "ids...");
 
                 // update the state with the selected child IDs
                 setSelectedChildIds(ids);
@@ -584,11 +597,11 @@ export const getAllLeafDescendantIds = (node: TreeNodeItem): string[] => {
  * @param parentDisabled - A boolean indicating whether the parent node is disabled. Defaults to `false`.
  * @returns A boolean indicating whether the specified node or any of its ancestors is disabled.
  */
-export const isParentOrSelfDisabled = (
-  nodes: TreeNodeItem[],
-  nodeId: string,
+export const isParentOrSelfDisabled = ({
+  nodes,
+  nodeId,
   parentDisabled = false
-): boolean => {
+}: IsParentOrSelfDisabledInput): boolean => {
   for (const node of nodes) {
     // if the current node matches, return whether it's disabled or has a disabled ancestor
     if (node.id === nodeId) return parentDisabled || !!node.disabled;
@@ -596,11 +609,11 @@ export const isParentOrSelfDisabled = (
     // if the node has children, recursively check them
     if (node.children?.length) {
       if (
-        isParentOrSelfDisabled(
-          node.children,
+        isParentOrSelfDisabled({
           nodeId,
-          parentDisabled || !!node.disabled
-        )
+          nodes: node.children,
+          parentDisabled: parentDisabled || !!node.disabled
+        })
       ) {
         return true;
       }

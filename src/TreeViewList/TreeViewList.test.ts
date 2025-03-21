@@ -158,29 +158,39 @@ describe("getAllLeafDescendantIds", () => {
   });
 });
 
-// test cases to check if a node or its ancestors are disabled: checks non-disabled node, directly disabled node, node with no disabled ancestors, and non-existent node
+// tests the isParentOrSelfDisabled function to verify if a node or any of its parents is disabled.
 describe("isParentOrSelfDisabled", () => {
-  // test case to check if the function returns false for an enabled node
-  test("should return false for an enabled node", () => {
-    expect(
-      isParentOrSelfDisabled(sampleData, "AER.ConsiderationPointPosition")
-    ).toBe(false);
-  });
-
-  // test case to check if the function returns true for a directly disabled node
-  test("should return true for a directly disabled node", () => {
-    expect(isParentOrSelfDisabled(sampleData, "AER.FrontalArea")).toBe(true);
-  });
-
-  // test case to check if the function returns false for a node with no disabled ancestors
-  test("should return false for a node with no disabled ancestors", () => {
-    expect(isParentOrSelfDisabled(sampleData, "AER.ReferenceLength")).toBe(
+  test.each([
+    ["parent is not disabled -> return false", "AER", false],
+    ["parent is disabled -> return true", "AER.FrontalArea", true],
+    [
+      "child node which also has children is enabled -> return false",
+      "SUS.Axle",
       false
+    ],
+    [
+      "child node which also has children is disabled -> return true",
+      "AER.FrontalArea",
+      true
+    ],
+    [
+      "leaf is enabled, and its parents also enabled -> return false",
+      "SUS.Axle.Front.Load",
+      false
+    ],
+    [
+      "leaf is disabled, parent enabled -> return true",
+      "AER.FrontalArea",
+      true
+    ],
+    [
+      "leaf is disabled, parent disabled -> return true",
+      "AER.FrontalArea",
+      true
+    ]
+  ])("%s", (_, nodeId, expected) => {
+    expect(isParentOrSelfDisabled({ nodeId, nodes: sampleData })).toBe(
+      expected
     );
-  });
-
-  // test case to check if the function handles non-existent nodes and returns false
-  test("should return false for a non-existent node", () => {
-    expect(isParentOrSelfDisabled(sampleData, "UNKNOWN.Node")).toBe(false);
   });
 });
