@@ -34,6 +34,7 @@ const sampleData = [
             name: "Front"
           }
         ],
+        disabled: true,
         id: "SUS.Axle",
         name: "Axle"
       },
@@ -164,18 +165,18 @@ describe("isParentOrSelfDisabled", () => {
     ["parent is not disabled -> return false", "AER", false],
     ["parent is disabled -> return true", "AER.FrontalArea", true],
     [
-      "child node which also has children is enabled -> return false",
-      "SUS.Axle",
-      false
-    ],
-    [
       "child node which also has children is disabled -> return true",
-      "AER.FrontalArea",
+      "SUS.Axle",
       true
     ],
     [
+      "child node which also has children is enabled -> return false",
+      "SUS.Damper",
+      false
+    ],
+    [
       "leaf is enabled, and its parents also enabled -> return false",
-      "SUS.Axle.Front.Load",
+      "SUS.Damper.Rear.Mass",
       false
     ],
     [

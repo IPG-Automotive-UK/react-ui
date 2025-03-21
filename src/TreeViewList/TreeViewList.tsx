@@ -307,7 +307,6 @@ const TreeViewList = ({
               if (
                 !node ||
                 node.disabled ||
-                // isParentOrSelfDisabled(treeDisplayItems, nodeId)
                 isParentOrSelfDisabled({
                   nodeId,
                   nodes: treeDisplayItems
@@ -345,7 +344,6 @@ const TreeViewList = ({
                 const isChild = !node.children || node.children.length === 0;
                 const nodeDetails = { isChild };
                 onNodeSelect(event, ids, nodeDetails, node);
-                console.log(ids, "ids...");
 
                 // update the state with the selected child IDs
                 setSelectedChildIds(ids);

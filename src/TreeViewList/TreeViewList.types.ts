@@ -87,8 +87,20 @@ export type TreeViewListProps = {
   width?: string;
 };
 
+/**
+ * Input type for the isParentOrSelfDisabled function
+ */
 export type IsParentOrSelfDisabledInput = {
+  /**
+   * An array of `TreeNodeItem` objects representing the tree of nodes.
+   */
   nodes: TreeNodeItem[];
+  /**
+   * The ID of the node to check.
+   */
   nodeId: string;
+  /**
+   * A boolean indicating whether the parent node is disabled. Optional, defaults to `false`.
+   */
   parentDisabled?: boolean;
 };
