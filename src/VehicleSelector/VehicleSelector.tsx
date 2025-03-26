@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import {
   createVehicleRecord,
   filterVehicles,
@@ -231,7 +231,7 @@ function VehicleSelector({
   }, [gateError, selectedGates]);
 
   // validate fields when validate is true
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (validate) {
       setProjectCodeError(!selectedProject);
       setModelYearError(!selectedModelYear);
