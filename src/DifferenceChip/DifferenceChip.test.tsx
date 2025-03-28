@@ -16,7 +16,7 @@ describe("DifferenceChip Component", () => {
 
   test("renders with negative value and ArrowDropDown icon", () => {
     renderComponent(-5);
-    expect(screen.getByText("-5")).toBeInTheDocument();
+    expect(screen.getByText("5")).toBeInTheDocument();
     expect(screen.getByTestId("ArrowDropDownIcon")).toBeInTheDocument();
   });
 
@@ -27,6 +27,18 @@ describe("DifferenceChip Component", () => {
 
   test("render with negative value and unit", () => {
     renderComponent(-5, "ms");
-    expect(screen.getByText("-5ms")).toBeInTheDocument();
+    expect(screen.getByText("5ms")).toBeInTheDocument();
+  });
+
+  test("applies correct styles for positive value", () => {
+    renderComponent(10, "%");
+    const chip = screen.getByText("10%").closest(".MuiChip-root");
+    expect(chip).toHaveStyle("background-color: rgba(46, 125, 50, 0.12)");
+  });
+
+  test("applies correct styles for negative value", () => {
+    renderComponent(-5, "ms");
+    const chip = screen.getByText("5ms").closest(".MuiChip-root");
+    expect(chip).toHaveStyle("background-color: rgba(211, 47, 47, 0.12)");
   });
 });

@@ -25,11 +25,14 @@ function DifferenceChip({ value, unit = "" }: DifferenceChipProps) {
     ? theme.palette.success.main
     : theme.palette.error.main;
 
+  // format the value with the unit if provided and remove the sign if positive / negative
+  const formattedValue = `${Math.abs(value)}${unit}`;
+
   // render the chip with the value and icon
   return (
     <Chip
       icon={isPositive ? <ArrowDropUp /> : <ArrowDropDown />}
-      label={`${value}${unit}`}
+      label={formattedValue}
       variant="filled"
       sx={{
         [`& .${chipClasses.icon}`]: {
