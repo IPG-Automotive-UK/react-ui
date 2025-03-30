@@ -26,10 +26,28 @@ export const Default = {
   render: Template
 };
 
+export const WholeNumber = {
+  args: {
+    selected: false,
+    version: "1"
+  },
+
+  render: Template
+};
+
 export const MinorVersion = {
   args: {
     selected: false,
     version: "1.1"
+  },
+
+  render: Template
+};
+
+export const WholeNumberSelected = {
+  args: {
+    selected: true,
+    version: "1"
   },
 
   render: Template
