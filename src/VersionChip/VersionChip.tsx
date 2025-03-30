@@ -68,7 +68,6 @@ export default VersionChip;
 const getMinorVersion = (version: string) => {
   // allow whole numbers or "major.minor" format (e.g., "1" or "1.0")
   const regex = /^\d+(\.\d+)?$/;
-  console.log("Version being tested:", version);
 
   // validate format
   if (!regex.test(version)) {
