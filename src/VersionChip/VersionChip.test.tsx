@@ -6,9 +6,19 @@ import VersionChip from "./VersionChip";
 
 describe("VersionChip", () => {
   // test that the version chip renders
+  it("renders when version is single digit", () => {
+    render(<VersionChip version="1"></VersionChip>);
+    expect(screen.getByText("1")).toBeInTheDocument();
+  });
+  // test that the version chip renders
   it("renders VersionChip", () => {
     render(<VersionChip version="1.0"></VersionChip>);
     expect(screen.getByText("1.0")).toBeInTheDocument();
+  });
+  // check single digit major version has correct svg
+  it("renders major svg", () => {
+    render(<VersionChip version="1"></VersionChip>);
+    expect(screen.getByTestId("LayersIcon")).toBeInTheDocument();
   });
   // check major version has correct svg
   it("renders major svg", () => {
