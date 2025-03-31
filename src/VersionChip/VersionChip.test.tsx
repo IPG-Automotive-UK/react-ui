@@ -76,7 +76,7 @@ describe("VersionChip", () => {
 
   // Check if warning is logged for invalid version format
   it("logs a warning for an invalid version format", async () => {
-    render(<VersionChip version="ab" />);
+    render(<VersionChip version="invalid-version" />);
 
     await waitFor(() => {
       expect(consoleWarnMock).toHaveBeenCalledWith(
