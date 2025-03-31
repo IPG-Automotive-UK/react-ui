@@ -45,7 +45,7 @@ describe("VersionChip", () => {
     const styles = window.getComputedStyle(chipElement);
     // passing resolved color from alpha(theme.palette.info.main, 0.12) and theme.palette.primary.main
     expect(styles.backgroundColor).toBe("rgba(2, 136, 209, 0.12)");
-    expect(styles.border).toBe("1px solid #1976d2"); //
+    expect(styles.border).toBe("1px solid #1976d2");
   });
 
   // check background color when the `selected` prop is false
@@ -58,7 +58,6 @@ describe("VersionChip", () => {
     expect(styles.border).toBe("1px solid rgba(0, 0, 0, 0.23)");
   });
 
-  // Check if warning is logged for invalid version format
   // mock console.warn to suppress warnings in test output
   const consoleWarnMock = vi
     .spyOn(console, "warn")
@@ -75,8 +74,9 @@ describe("VersionChip", () => {
     consoleWarnMock.mockRestore();
   });
 
+  // Check if warning is logged for invalid version format
   it("logs a warning for an invalid version format", async () => {
-    render(<VersionChip version="invalid-version" />);
+    render(<VersionChip version="ab" />);
 
     await waitFor(() => {
       expect(consoleWarnMock).toHaveBeenCalledWith(
