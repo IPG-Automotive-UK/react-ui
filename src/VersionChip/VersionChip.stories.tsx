@@ -26,7 +26,7 @@ export const Default = {
   render: Template
 };
 
-export const WholeNumber = {
+export const SingleDigit = {
   args: {
     selected: false,
     version: "1"
@@ -44,7 +44,7 @@ export const MinorVersion = {
   render: Template
 };
 
-export const WholeNumberSelected = {
+export const SingleDigitSelected = {
   args: {
     selected: true,
     version: "1"

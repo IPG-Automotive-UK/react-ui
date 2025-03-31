@@ -22,6 +22,7 @@ const VersionChip = ({ version, selected = false }: VersionChipProps) => {
     // return VersionChip component
     return (
       <Chip
+        data-testid="version-chip"
         icon={versionType === "major" ? <Layers /> : <AccountTree />}
         label={version}
         variant="filled"
@@ -66,7 +67,7 @@ export default VersionChip;
  * Accepts formats like "1" or "1.0" but not "1.1.1".
  */
 const getMinorVersion = (version: string) => {
-  // allow whole numbers or "major.minor" format (e.g., "1" or "1.0")
+  // allow single digit or "major.minor" format (e.g., "1" or "1.0")
   const regex = /^\d+(\.\d+)?$/;
 
   // validate format
