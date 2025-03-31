@@ -91,3 +91,22 @@ export const ScientificNotation = {
   },
   render: Template
 };
+
+// Overlay Plots
+export const OverlayPlots = {
+  args: {
+    fullscreenTitle: "A plot in fullscreen mode",
+    legendName1: "First Line Plot",
+    legendName2: "Second Line Plot",
+    showGrid: false,
+    showMarkers: true,
+    title: "",
+    xdata: [0, 1, 2, 3, 4, 5],
+    xdata2: [0, 1, 2, 3, 4, 5],
+    xlabel: "X label (rad)",
+    ydata: [0, 3, 6, 4, 5, 2],
+    ydata2: [0, 4, 7, 8, 3, 6],
+    ylabel: "Y label (Nm)"
+  },
+  render: Template
+};
