@@ -72,7 +72,10 @@ const getMinorVersion = (version: string) => {
 
   // validate format
   if (!regex.test(version)) {
-    if (process.env.NODE_ENV === "development") {
+    if (
+      process.env.NODE_ENV === "development" ||
+      process.env.NODE_ENV === "test"
+    ) {
       console.warn(
         `Invalid version format: "${version}". Expected format is "<major>" or <major>.<minor>" (e.g., "1" or "1.0").`
       );

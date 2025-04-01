@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 
-import { afterAll, beforeEach, describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 
 import React from "react";
@@ -58,24 +58,13 @@ describe("VersionChip", () => {
     expect(styles.border).toBe("1px solid rgba(0, 0, 0, 0.23)");
   });
 
-  // mock console.warn to suppress warnings in test output
-  const consoleWarnMock = vi
-    .spyOn(console, "warn")
-    .mockImplementation(() => {});
-
-  // Clear mock before each test
-  beforeEach(() => {
-    process.env.NODE_ENV = "development";
-    consoleWarnMock.mockClear();
-  });
-
-  // restore console.warn after all tests
-  afterAll(() => {
-    consoleWarnMock.mockRestore();
-  });
-
-  // Check if warning is logged for invalid version format
+  // check if warning is logged for invalid version format
   it("logs a warning for an invalid version format", async () => {
+    // mock console.warn to detect if a warning is logged
+    const consoleWarnMock = vi
+      .spyOn(console, "warn")
+      .mockImplementation(() => {});
+
     render(<VersionChip version="invalid-version" />);
 
     await waitFor(() => {
@@ -83,5 +72,6 @@ describe("VersionChip", () => {
         'Invalid version format: "invalid-version". Expected format is "<major>" or <major>.<minor>" (e.g., "1" or "1.0").'
       );
     });
+    consoleWarnMock.mockRestore();
   });
 });
