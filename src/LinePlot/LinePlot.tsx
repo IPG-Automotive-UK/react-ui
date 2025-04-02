@@ -18,12 +18,12 @@ import Plotly from "react-plotly.js";
 const LinePlot = ({
   fullscreenTitle = "",
   title = "",
-  legendName1 = "",
-  legendName2 = "",
+  legendNameFirst = "",
+  legendNameSecond = "",
   xdata = [],
   ydata = [],
-  xdata2 = [],
-  ydata2 = [],
+  xdataSecond = [],
+  ydataSecond = [],
   xlabel = "",
   ylabel = "",
   showMarkers = true,
@@ -121,21 +121,21 @@ const LinePlot = ({
               line: { color: theme.palette.primary.main, width: 2 },
               marker: { color: theme.palette.primary.dark, size: 7 },
               mode: showMarkers ? "lines+markers" : "lines",
-              name: legendName1 || "",
+              name: legendNameFirst || "",
               type: "scatter",
               x: xdata,
               y: ydata
             },
-            ...(xdata2.length > 0 && ydata2.length > 0
+            ...(xdataSecond.length > 0 && ydataSecond.length > 0
               ? ([
                   {
                     line: { color: theme.palette.secondary.main, width: 2 },
                     marker: { color: theme.palette.secondary.dark, size: 7 },
                     mode: showMarkers ? "lines+markers" : "lines",
-                    name: legendName2 || "",
+                    name: legendNameSecond || "",
                     type: "scatter",
-                    x: xdata2,
-                    y: ydata2
+                    x: xdataSecond,
+                    y: ydataSecond
                   }
                 ] as Plotly.Data[])
               : [])
@@ -157,7 +157,7 @@ const LinePlot = ({
             margin: { b: 60, l: 100, r: 10, t: 30 },
             paper_bgcolor: "transparent",
             plot_bgcolor: "transparent",
-            showlegend: !!(legendName1 !== "" && legendName2 !== ""),
+            showlegend: !!(legendNameFirst !== "" && legendNameSecond !== ""),
             xaxis: {
               color: theme.palette.text.primary,
               gridcolor: theme.palette.divider,
