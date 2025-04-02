@@ -157,8 +157,7 @@ const LinePlot = ({
             margin: { b: 60, l: 100, r: 10, t: 30 },
             paper_bgcolor: "transparent",
             plot_bgcolor: "transparent",
-            // only show legend if there are multiple traces
-            showlegend: !!(xdata2.length > 0 && ydata2.length > 0),
+            showlegend: !!(legendName1 !== "" && legendName2 !== ""),
             xaxis: {
               color: theme.palette.text.primary,
               gridcolor: theme.palette.divider,
