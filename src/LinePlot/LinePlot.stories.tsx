@@ -98,7 +98,6 @@ export const OverlayPlots = {
     fullscreenTitle: "A plot in fullscreen mode",
     legendNameFirst: "First Line Plot",
     legendNameSecond: "Second Line Plot",
-    showGrid: false,
     showMarkers: true,
     title: "",
     xdata: [0, 1, 2, 3, 4, 5],
