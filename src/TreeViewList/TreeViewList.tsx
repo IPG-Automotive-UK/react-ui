@@ -1,7 +1,11 @@
-import { Box, Tooltip, Typography, alpha, debounce } from "@mui/material";
+import { Box, Typography, alpha, debounce } from "@mui/material";
+import {
+  IsParentOrSelfDisabledInput,
+  TreeNodeItem,
+  TreeViewListProps
+} from "./TreeViewList.types";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { SimpleTreeView, TreeItem } from "@mui/x-tree-view";
-import { TreeNodeItem, TreeViewListProps } from "./TreeViewList.types";
 
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -54,6 +58,9 @@ const TreeViewList = ({
 
   // state for the node we are hovered over
   const [hoveredNode, setHoveredNode] = useState<string>("");
+
+  // state for the selectedChilds
+  const [selectedChildIds, setSelectedChildIds] = useState<string[]>([]);
 
   // reference to the box element
   const boxRef = useRef<HTMLDivElement>(null);
@@ -128,7 +135,7 @@ const TreeViewList = ({
         for (const item of items) {
           // if the node has children, expand it and call the function on its children
           if (item.children) {
-            searchedNodes.add(item.nodeId);
+            searchedNodes.add(item.id);
             expandChildNodes(item.children);
           }
         }
@@ -190,32 +197,39 @@ const TreeViewList = ({
 
   // update the expanded nodes when the selected node changes
   useEffect(() => {
-    if (selectedNode) {
+    if ((selectedNode && searchValue !== "") || selected === selectedNode) {
       // update the expanded nodes when the selected node changes
       const parentNodeIds = findPathToNodeId(items, selectedNode);
 
       // update the expanded nodes with the parent node ids
       setExpandedNodes(prev => [...prev, ...parentNodeIds]);
     }
-  }, [items, selectedNode]);
+  }, [items, selectedNode, searchValue, selected]);
 
-  // render the tree nodes with optional tooltips
+  // render the tree nodes
   const renderTree = (nodes: TreeNodeItem[]) =>
     nodes.map(node => (
       <TooltipTreeItem
         disabled={node.disabled}
         hoveredNode={hoveredNode}
-        key={node.nodeId}
-        label={node.label}
-        nodeId={node.nodeId}
+        key={node.id}
+        name={node.name}
+        id={node.id}
         setHoveredNode={setHoveredNode}
-        tooltip={node.tooltip}
       >
         {Array.isArray(node.children) && node.children.length > 0
           ? renderTree(node.children)
           : null}
       </TooltipTreeItem>
     ));
+
+  // function to check if the click happened on the expand/collapse icon
+  const isClickOnExpandIcon = (target: HTMLElement): boolean => {
+    return (
+      target.closest(".MuiTreeItem-iconContainer") !== null ||
+      target.classList.contains("MuiTreeItem-iconContainer")
+    );
+  };
 
   return (
     <>
@@ -263,31 +277,76 @@ const TreeViewList = ({
             ) : null}
           </Box>
         </Box>
-        <Box sx={{ flexGrow: 1, overflowY: "auto" }}>
+        <Box
+          sx={{ flexGrow: 1, overflowY: "auto" }}
+          data-selected-ids={JSON.stringify(selectedChildIds)}
+        >
           <SimpleTreeView
             sx={{
               "& .css-9l5vo-MuiCollapse-wrapperInner": {
                 width: boxWidth <= 280 ? "auto" : "100%"
               }
             }}
+            expansionTrigger="iconContainer"
             slots={{ collapseIcon: RemoveIcon, expandIcon: AddIcon }}
             expandedItems={expandedNodes}
             selectedItems={currentSelection}
             onSelectedItemsChange={(event, nodeId) => {
-              if (nodeId) {
-                const node = getNodeById(treeDisplayItems, nodeId);
-                const isChild = Boolean(
-                  node && (!node.children || node.children.length === 0)
+              const target = event.target as HTMLElement;
+
+              // prevent selection if clicking on the expand/collapse icon
+              if (isClickOnExpandIcon(target)) return;
+
+              // exit early if nodeId is not provided
+              if (!nodeId) return;
+
+              // find the clicked node using its ID
+              const node = getNodeById(treeDisplayItems, nodeId);
+
+              // return if the node itself is disabled OR has a disabled parent
+              if (
+                !node ||
+                node.disabled ||
+                isParentOrSelfDisabled({
+                  nodeId,
+                  nodes: treeDisplayItems
+                })
+              ) {
+                event.preventDefault();
+                event.stopPropagation();
+                return;
+              }
+
+              // initialize an empty array to store selected node IDs
+              let ids: string[] = [];
+
+              // if the clicked node has children, get only enabled descendant IDs
+              if (node.children?.length) {
+                ids = getAllLeafDescendantIds(node).filter(
+                  // Ensures no disabled IDs get selected
+                  childId =>
+                    !isParentOrSelfDisabled({
+                      nodeId: childId,
+                      nodes: treeDisplayItems
+                    })
                 );
-                if (onNodeSelect) {
-                  const nodeDetails = { isChild };
-                  // update the selected node when a node is selected and it is a child
-                  if (isChild) {
-                    setCurrentSelection(nodeId);
-                    setSelectedNode(nodeId);
-                  }
-                  onNodeSelect(event, nodeId, nodeDetails);
-                }
+              } else {
+                // selects only if it's an enabled leaf node
+                ids = [nodeId];
+              }
+
+              // set selectedNode
+              setSelectedNode(nodeId);
+              setCurrentSelection(nodeId);
+
+              // call external selection handler with only valid IDs
+              if (onNodeSelect) {
+                const isChild = !node.children || node.children.length === 0;
+                const nodeDetails = { isChild };
+                onNodeSelect(event, ids, nodeDetails, node);
+
+                // update the state with the selected child IDs
+                setSelectedChildIds(ids);
               }
             }}
             onExpandedItemsChange={(event, nodeId) => {
@@ -340,7 +399,7 @@ const getNodeById = (
   nodeId: string
 ): TreeNodeItem | null => {
   for (const node of nodes) {
-    if (node.nodeId === nodeId) {
+    if (node.id === nodeId) {
       return node;
     } else if (node.children) {
       const result = getNodeById(node.children, nodeId);
@@ -362,50 +421,45 @@ const getNodeById = (
  * @property props.tooltip - The tooltip to display.
  * @returns The tree item wrapped in a tooltip.
  */
+
 const TooltipTreeItem = (
-  props: Pick<TreeNodeItem, "disabled" | "label" | "nodeId" | "tooltip"> & {
+  props: Pick<TreeNodeItem, "disabled" | "name" | "id"> & {
     children?: React.ReactNode;
     hoveredNode: string;
     setHoveredNode: (nodeId: string) => void;
   }
 ) => {
-  // Destructure the nodeId and the other props
-  const { hoveredNode, setHoveredNode, nodeId, tooltip, ...rest } = props;
+  const { hoveredNode, setHoveredNode, id, name, disabled, ...rest } = props;
+
   return (
-    <Tooltip
-      title={tooltip ? <>{tooltip}</> : ""}
-      placement="right-start"
-      open={hoveredNode === nodeId}
-      disableFocusListener
-    >
-      <TreeItem
-        {...rest}
-        itemId={nodeId}
-        sx={theme => ({
-          "& .MuiTreeItem-label": {
-            margin: 0,
-            padding: "2px 2px"
-          },
-          "& .MuiTreeItem-root": {
-            borderLeft: `1px solid ${alpha(theme.palette.text.primary, 0.1)}`,
-            marginLeft: "4px"
-          }
-        })}
-        onMouseOver={event => {
-          event.stopPropagation();
+    <TreeItem
+      {...rest}
+      label={name}
+      itemId={id}
+      sx={theme => ({
+        // apply color change to icon when disabled
+        "& .MuiTreeItem-iconContainer": {
+          color: disabled
+            ? theme.palette.text.disabled
+            : theme.palette.text.primary,
+          pointerEvents: "auto"
+        },
+        "& .MuiTreeItem-label": {
+          color: disabled
+            ? theme.palette.text.disabled
+            : theme.palette.text.primary,
+          cursor: disabled ? "" : "pointer",
+          margin: 0,
+          opacity: disabled ? 0.6 : 1,
+          padding: "2px 2px"
+        },
 
-          const target = event.target as Element;
-
-          if (target.classList.contains("MuiTreeItem-label")) {
-            setHoveredNode(nodeId);
-          }
-        }}
-        onMouseOut={event => {
-          event.stopPropagation();
-          setHoveredNode("");
-        }}
-      />
-    </Tooltip>
+        "& .MuiTreeItem-root": {
+          borderLeft: `1px solid ${alpha(theme.palette.text.primary, 0.1)}`,
+          marginLeft: "4px"
+        }
+      })}
+    />
   );
 };
 
@@ -422,7 +476,7 @@ const filterBySearchTerm = (items: TreeNodeItem[], searchTerm: string) => {
 
   // function to check if a node item matches the search term
   const matchesSearch = (node: TreeNodeItem, searchTerm: string) => {
-    return node.label.toLowerCase().includes(searchTerm.toLowerCase());
+    return node.name.toLowerCase().includes(searchTerm.toLowerCase());
   };
 
   // interim type to add the active property to the node item
@@ -488,11 +542,14 @@ const filterBySearchTerm = (items: TreeNodeItem[], searchTerm: string) => {
  * @returns The path from the root to the node id.
  * @example findPathToNodeId(items, "node_id");
  */
-const findPathToNodeId = (items: TreeNodeItem[], nodeId: string): string[] => {
+const findPathToNodeId = (
+  items: TreeNodeItem[],
+  nodeId: string | string[]
+): string[] => {
   for (const item of items) {
-    if (item.nodeId === nodeId) {
+    if (item.id === nodeId) {
       // if the current item is the one we're looking for, return an array containing only its id
-      return [item.nodeId];
+      return [item.id];
     }
 
     if (item.children) {
@@ -501,13 +558,66 @@ const findPathToNodeId = (items: TreeNodeItem[], nodeId: string): string[] => {
 
       if (pathFromChild.length > 0) {
         // if we found the node in the children, return an array containing the id of the current item and the path from the child
-        return [item.nodeId, ...pathFromChild];
+        return [item.id, ...pathFromChild];
       }
     }
   }
 
   // if no node found, return an empty array
   return [];
+};
+
+/**
+ * Recursively retrieves all leaf node IDs from a given tree node.
+ * A leaf node is defined as a node that has no children.
+ * @param {TreeNodeItem} node - The tree node from which to collect leaf descendant IDs.
+ * @returns {string[]} An array of leaf node IDs.
+ */
+export const getAllLeafDescendantIds = (node: TreeNodeItem): string[] => {
+  if (!node.children || node.children.length === 0) {
+    // return only if it's a leaf node
+    return [node.id];
+  }
+
+  // recursive case: flatten results from all child nodes.
+  return node.children.flatMap(getAllLeafDescendantIds);
+};
+
+/**
+ * Recursively checks whether a node or any of its ancestors are disabled.
+ *
+ * This function traverses through the tree of nodes to determine if a given node
+ * (identified by its `nodeId`) or any of its ancestor nodes has the `disabled` property set to `true`.
+ * It considers the `parentDisabled` flag which propagates the disabled state through parent nodes.
+ *
+ * @param nodes - An array of `TreeNodeItem` objects representing the tree of nodes.
+ * @param nodeId - The ID of the node to check.
+ * @param parentDisabled - A boolean indicating whether the parent node is disabled. Defaults to `false`.
+ * @returns A boolean indicating whether the specified node or any of its ancestors is disabled.
+ */
+export const isParentOrSelfDisabled = ({
+  nodes,
+  nodeId,
+  parentDisabled = false
+}: IsParentOrSelfDisabledInput): boolean => {
+  for (const node of nodes) {
+    // if the current node matches, return whether it's disabled or has a disabled ancestor
+    if (node.id === nodeId) return parentDisabled || !!node.disabled;
+
+    // if the node has children, recursively check them
+    if (node.children?.length) {
+      if (
+        isParentOrSelfDisabled({
+          nodeId,
+          nodes: node.children,
+          parentDisabled: parentDisabled || !!node.disabled
+        })
+      ) {
+        return true;
+      }
+    }
+  }
+  return false;
 };
 
 export default TreeViewList;
