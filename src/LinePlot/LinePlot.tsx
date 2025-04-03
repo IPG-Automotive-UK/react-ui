@@ -157,7 +157,7 @@ const LinePlot = ({
             margin: { b: 60, l: 100, r: 10, t: 30 },
             paper_bgcolor: "transparent",
             plot_bgcolor: "transparent",
-            showlegend: !!(legendNameFirst !== "" && legendNameSecond !== ""),
+            showlegend: !!(legendNameFirst && legendNameSecond),
             xaxis: {
               color: theme.palette.text.primary,
               gridcolor: theme.palette.divider,
