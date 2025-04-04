@@ -56,7 +56,7 @@ export const Default = {
     title: "",
     xdata: [0, 1, 2, 3, 4, 5],
     xlabel: "X label (rad)",
-    ydata: [0, 20, 30, 40, 50],
+    ydata: [0, 20, 30, 40, 50, 60],
     ylabel: "Y label (Nm)"
   },
   render: Template
@@ -87,6 +87,24 @@ export const ScientificNotation = {
     xdata: [0, 0.0001, 0.0002, 0.0003, 0.0004, 0.0005],
     xlabel: "X label (rad)",
     ydata: [0, 1, 200, 3000, 40000, 50000],
+    ylabel: "Y label (Nm)"
+  },
+  render: Template
+};
+
+// Overlay Plots
+export const OverlayPlots = {
+  args: {
+    fullscreenTitle: "A plot in fullscreen mode",
+    legendNameFirst: "First Line Plot",
+    legendNameSecond: "Second Line Plot",
+    showMarkers: true,
+    title: "",
+    xdata: [0, 1, 2, 3, 4, 5],
+    xdataSecond: [0, 1, 2, 3, 4, 5],
+    xlabel: "X label (rad)",
+    ydata: [0, 3, 6, 4, 5, 2],
+    ydataSecond: [0, 4, 7, 8, 3, 6],
     ylabel: "Y label (Nm)"
   },
   render: Template
