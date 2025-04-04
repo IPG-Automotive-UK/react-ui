@@ -19,9 +19,21 @@ export type LinePlotProps = {
    */
   title?: string;
   /**
+   * Legend name for the first plot.
+   */
+  legendNameFirst?: string;
+  /**
+   * Legend name for the second plot.
+   */
+  legendNameSecond?: string;
+  /**
    * Arrays of numbers that represent the X coordinates of the points to be plotted.
    */
   xdata: number[];
+  /**
+   * Arrays of numbers that represent the second X coordinates of the points to be plotted.
+   */
+  xdataSecond?: number[];
   /**
    * Label for the X axis.
    */
@@ -30,6 +42,10 @@ export type LinePlotProps = {
    * Arrays of numbers that represent the Y coordinates of the points to be plotted.
    */
   ydata: number[];
+  /**
+   * Arrays of numbers that represent the second Y coordinates of the points to be plotted.
+   */
+  ydataSecond?: number[];
   /**
    * Label for the Y axis.
    */
