@@ -118,6 +118,7 @@ const LinePlot = ({
         <Plotly
           data={[
             {
+              hoverinfo: "x+y",
               line: { color: theme.palette.primary.main, width: 2 },
               marker: { color: theme.palette.primary.dark, size: 7 },
               mode: showMarkers ? "lines+markers" : "lines",
@@ -129,6 +130,7 @@ const LinePlot = ({
             ...(xdataSecond.length > 0 && ydataSecond.length > 0
               ? ([
                   {
+                    hoverinfo: "x+y",
                     line: { color: theme.palette.secondary.main, width: 2 },
                     marker: { color: theme.palette.secondary.dark, size: 7 },
                     mode: showMarkers ? "lines+markers" : "lines",
