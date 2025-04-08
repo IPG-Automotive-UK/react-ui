@@ -267,13 +267,20 @@ const TreeViewList = ({
               })}
             ></Box>
             {enableSearch ? (
-              <SearchBar
-                value={searchValue}
-                onChange={event => {
-                  setSelectedNode("");
-                  setSearchValue(event.target.value);
-                }}
-              />
+              <Box
+                sx={theme => ({
+                  marginBottom: theme.spacing(2),
+                  marginTop: theme.spacing(2)
+                })}
+              >
+                <SearchBar
+                  value={searchValue}
+                  onChange={event => {
+                    setSelectedNode("");
+                    setSearchValue(event.target.value);
+                  }}
+                />
+              </Box>
             ) : null}
           </Box>
         </Box>

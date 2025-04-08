@@ -16,13 +16,11 @@ export default function SearchBar({
   return (
     <Paper
       variant="outlined"
-      sx={theme => ({
+      sx={{
         alignItems: "center",
         display: "flex",
-        marginBottom: theme.spacing(2),
-        marginTop: theme.spacing(2),
         width
-      })}
+      }}
     >
       <InputBase
         aria-label={"Search"}
