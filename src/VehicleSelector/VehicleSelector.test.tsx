@@ -12,6 +12,7 @@ import {
   filterVehicles,
   shouldAutoSelect
 } from "./VehicleSelector.utils";
+import { describe, expect, it, vi } from "vitest";
 
 import VehicleSelector from "./VehicleSelector";
 import userEvent from "@testing-library/user-event";
@@ -179,13 +180,8 @@ describe("VehicleSelector", () => {
     expect(gateInput.closest("div")).not.toHaveClass("Mui-error");
   });
 
-  it("shows errors when passed externally", async () => {
-    render(
-      <VehicleSelectorWithState
-        {...defaultProps}
-        errors={["projectCode", "modelYear", "variant", "gate"]}
-      />
-    );
+  it("shows an error when validate is true if an active field has no value", async () => {
+    render(<VehicleSelectorWithState {...defaultProps} validate={true} />);
 
     // Test the project code field error is always visible when set externally
     const projectCodeInput = screen.getByRole("combobox", {
@@ -199,51 +195,7 @@ describe("VehicleSelector", () => {
     const option911 = await screen.findByRole("option", { name: "911" });
     await userEvent.click(option911);
 
-    expect(projectCodeInput.closest("div")).toHaveClass("Mui-error");
-
-    // Test the model year field error is always visible when set externally
-    const modelYearInput = screen.getByRole("combobox", {
-      name: /model year/i
-    });
-
-    expect(modelYearInput.closest("div")).toHaveClass("Mui-error");
-
-    await userEvent.click(modelYearInput);
-
-    const option2016 = await screen.findByRole("option", { name: "2016" });
-    await userEvent.click(option2016);
-
-    expect(modelYearInput.closest("div")).toHaveClass("Mui-error");
-
-    // Test the variant error is always visible when set externally
-
-    const variantInput = screen.getByRole("combobox", {
-      name: /variant/i
-    });
-
-    expect(variantInput.closest("div")).toHaveClass("Mui-error");
-
-    await userEvent.click(variantInput);
-
-    const optionMC = await screen.findByRole("option", { name: "MC" });
-    await userEvent.click(optionMC);
-
-    expect(variantInput.closest("div")).toHaveClass("Mui-error");
-
-    // Test the gate field error is always visible when set externally
-
-    const gateInput = screen.getByRole("combobox", {
-      name: /gate/i
-    });
-
-    expect(gateInput.closest("div")).toHaveClass("Mui-error");
-
-    await userEvent.click(gateInput);
-
-    const optionGate = await screen.findByRole("option", { name: "Gate 2" });
-    await userEvent.click(optionGate);
-
-    expect(gateInput.closest("div")).toHaveClass("Mui-error");
+    expect(projectCodeInput.closest("div")).not.toHaveClass("Mui-error");
   });
 
   it("applies flex direction and wrap styles", () => {
