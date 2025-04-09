@@ -267,12 +267,7 @@ const TreeViewList = ({
               })}
             ></Box>
             {enableSearch ? (
-              <Box
-                sx={theme => ({
-                  marginBottom: theme.spacing(2),
-                  marginTop: theme.spacing(2)
-                })}
-              >
+              <Box sx={{ py: 2 }}>
                 <SearchBar
                   value={searchValue}
                   onChange={event => {
