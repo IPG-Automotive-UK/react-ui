@@ -478,7 +478,7 @@ const Search = ({
   value: string;
   onChange: (value: string) => void;
 }) => (
-  <Box sx={{ alignItems: "center", display: "flex", width: "100%" }}>
+  <Box sx={{ alignItems: "center", display: "flex", py: 2, width: "100%" }}>
     <SearchBar value={value} onChange={e => onChange(e.target.value)} />
   </Box>
 );
