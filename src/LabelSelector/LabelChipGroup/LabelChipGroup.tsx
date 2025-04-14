@@ -11,11 +11,12 @@ import { sortLabelChips } from "./sortLabelChips";
  * The LabelChipGroup component. This component displays a group of LabelChip components in a row. If any of the chips overflow the parent container width, they will be hidden and a popover will be used to show the hidden chips. The chips are sorted by length first, then alphabetically.
  */
 export default function LabelChipGroup({ chips }: LabelChipGroupProps) {
-  // take a copy of the chips prop so we can sort them without mutating the original
-  chips = [...chips];
-
   // sort the chips, shortest first, then alphabetically
-  chips = sortLabelChips(chips);
+  const sortedChips = sortLabelChips(chips);
+
+  const cachedSortedChips = React.useMemo(() => {
+    return sortedChips;
+  }, [sortedChips]);
 
   // store a ref to the parent container so we can check size information and calculate if the chips overflow
   const parentRef = React.useRef<HTMLDivElement>(null);
@@ -87,7 +88,7 @@ export default function LabelChipGroup({ chips }: LabelChipGroupProps) {
         resizeObserver.disconnect();
       };
     }
-  }, [chips, moreItemsRef, parentRef]);
+  }, [cachedSortedChips, moreItemsRef, parentRef]);
 
   // custom onClick event handler for label chips shown in the popper to close the popper on click
   const handleOverflowingChipClick = (
