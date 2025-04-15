@@ -21,6 +21,8 @@ import darkScrollbar from "@mui/material/darkScrollbar";
 declare module "@mui/material/styles" {
   // allow configuration using `createTheme`
   // eslint-disable-next-line no-unused-vars
+
+  export type PlotlyColorScale = [number, string];
   interface ThemeOptions {
     layout?: {
       content?: {
@@ -31,6 +33,7 @@ declare module "@mui/material/styles" {
       dark?: ThemeOptions;
       light?: ThemeOptions;
     };
+    plotlyColorScales?: PlotlyColorScale[];
   }
   // eslint-disable-next-line no-unused-vars
   interface Theme {
@@ -43,6 +46,7 @@ declare module "@mui/material/styles" {
       dark?: ThemeOptions;
       light?: ThemeOptions;
     };
+    plotlyColorScales: PlotlyColorScale[];
   }
 }
 
@@ -309,6 +313,11 @@ const mainTheme: ThemeOptions = {
       minHeight: 64
     }
   },
+  plotlyColorScales: [
+    [0, "#3D5A75"],
+    [0.5, "#FFFFFF"],
+    [1, "#FFAF2C"]
+  ],
   typography: {
     allVariants: {
       fontFamily: "Montserrat, Arial, sans-serif"

@@ -21,6 +21,9 @@ const SurfacePlot = ({
   // theme hook
   const theme = useTheme();
 
+  // chooses the color scale based on the theme mode
+  const colorScale = theme.plotlyColorScales;
+
   // state for fullscreen
   const [isFullscreen, setIsFullscreen] = useState(false);
 
@@ -97,6 +100,7 @@ const SurfacePlot = ({
                   weight: 400
                 }
               },
+              colorscale: colorScale,
               type: "surface",
               x: xdata,
               y: ydata,
