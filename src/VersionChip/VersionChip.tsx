@@ -22,6 +22,7 @@ const VersionChip = ({ version, selected = false }: VersionChipProps) => {
     // return VersionChip component
     return (
       <Chip
+        data-testid="version-chip"
         icon={versionType === "major" ? <Layers /> : <AccountTree />}
         label={version}
         variant="filled"
@@ -61,23 +62,28 @@ const VersionChip = ({ version, selected = false }: VersionChipProps) => {
 export default VersionChip;
 
 /**
- * A function that returns the minor version, will return `undefined` if format doesn't match number.number
+ * A function that returns the minor version,
+ * Returns `undefined` if the format is invalid.
+ * Accepts formats like "1" or "1.0" but not "1.1.1".
  */
 const getMinorVersion = (version: string) => {
-  // check format is number.number
-  const regex = /^\d+\.\d+$/;
+  // allow single digit or "major.minor" format (e.g., "1" or "1.0")
+  const regex = /^\d+(\.\d+)?$/;
 
-  // Check if the input matches the "number.number" format
+  // validate format
   if (!regex.test(version)) {
-    // check if dev environment and log warning
-    if (process.env.NODE_ENV === "development") {
+    if (
+      process.env.NODE_ENV === "development" ||
+      process.env.NODE_ENV === "test"
+    ) {
       console.warn(
-        `Version: ${version} is of a wrong format. Format expected is "<major>.<minor>" (e.g., "1.0").`
+        `Invalid version format: "${version}". Expected format is "<major>" or <major>.<minor>" (e.g., "1" or "1.0").`
       );
     }
-    // undefined indicates error (minor version could not be extracted)
+    // return undefined for invalid input
     return undefined;
   }
-  // return minor version
-  return version.split(".")[1];
+
+  // return minor version or "0" if missing
+  return version.split(".")[1] ?? "0";
 };
