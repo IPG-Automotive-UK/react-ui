@@ -97,6 +97,7 @@ const SurfacePlot = ({
                   weight: 400
                 }
               },
+              colorscale: theme.plotlyColorScales,
               type: "surface",
               x: xdata,
               y: ydata,
