@@ -278,12 +278,12 @@ export const AutoSelectionWithGate = {
   render: Template
 };
 
-export const WithExternalErrors = {
+export const Validate = {
   args: {
-    errors: ["projectCode", "modelYear", "variant", "gate"],
     flexDirection: "column",
     flexWrap: "nowrap",
     gates: [],
+    validate: true,
     value: [],
     variants: [
       {

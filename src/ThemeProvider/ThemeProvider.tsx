@@ -343,7 +343,7 @@ export default function ThemeProvider({
 }: ThemeProviderProps) {
   // wrap mui theme provider and children in theme context
   return (
-    <MuiThemeProvider theme={theme} defaultMode="light" modeStorageKey="theme">
+    <MuiThemeProvider theme={theme} defaultMode="light">
       <ControlledThemeWrapper theme={controlledTheme}>
         {children}
       </ControlledThemeWrapper>

@@ -13,8 +13,8 @@ import { uniqueSortedArray } from "../utils/common";
 // component to select a vehicle
 function VehicleSelector({
   disabled = false,
-  errors,
   flexDirection = "column",
+  validate = false,
   limitTags = 1,
   flexWrap = "nowrap",
   gates = [],
@@ -24,29 +24,21 @@ function VehicleSelector({
   value = [],
   variants = []
 }: VehicleSelectorProps) {
-  // state to track errors
-  const projectCodeExternalError = errors && errors.includes("projectCode");
-  const modelYearExternalError = errors && errors.includes("modelYear");
-  const variantExternalError = errors && errors.includes("variant");
-  const gateExternalError = errors && errors.includes("gate");
-
   // flags indicating whether the user has manually cleared a field.
   const [userClearedModelYear, setUserClearedModelYear] = useState(false);
   const [userClearedVariant, setUserClearedVariant] = useState(false);
   const [userClearedGate, setUserClearedGate] = useState(false);
 
-  // state to track errors
-  const [gateError, setGateError] = useState<boolean | undefined>(
-    gateExternalError
-  );
+  // state to track errors - undefined is used to avoid setting errors on initial render
+  const [gateError, setGateError] = useState<boolean | undefined>(undefined);
   const [variantError, setVariantError] = useState<boolean | undefined>(
-    variantExternalError
+    undefined
   );
   const [modelYearError, setModelYearError] = useState<boolean | undefined>(
-    modelYearExternalError
+    undefined
   );
   const [projectCodeError, setProjectCodeError] = useState<boolean | undefined>(
-    projectCodeExternalError
+    undefined
   );
 
   // derive state for selected project
@@ -217,30 +209,42 @@ function VehicleSelector({
   // set the error state for project code
   useEffect(() => {
     if (projectCodeError === undefined) return;
-    setProjectCodeError(!selectedProject || projectCodeExternalError);
-  }, [projectCodeExternalError, projectCodeError, selectedProject]);
+    setProjectCodeError(!selectedProject);
+  }, [projectCodeError, selectedProject]);
 
   // set the error state for model year
   useEffect(() => {
     if (modelYearError === undefined) return;
-    setModelYearError(!selectedModelYear || modelYearExternalError);
-  }, [modelYearError, modelYearExternalError, selectedModelYear]);
+    setModelYearError(!selectedModelYear);
+  }, [modelYearError, selectedModelYear]);
 
   // set the error state for variant
   useEffect(() => {
     if (variantError === undefined) return;
-    setVariantError(
-      !selectedVariants || selectedVariants.length === 0 || variantExternalError
-    );
-  }, [selectedVariants, variantError, variantExternalError]);
+    setVariantError(!selectedVariants || selectedVariants.length === 0);
+  }, [selectedVariants, variantError]);
 
   // set the error for gate
   useEffect(() => {
     if (gateError === undefined) return;
-    setGateError(
-      !selectedGates || selectedGates.length === 0 || gateExternalError
-    );
-  }, [gateError, gateExternalError, selectedGates]);
+    setGateError(!selectedGates || selectedGates.length === 0);
+  }, [gateError, selectedGates]);
+
+  // validate fields when validate is true
+  useEffect(() => {
+    if (validate) {
+      setProjectCodeError(!selectedProject);
+      setModelYearError(!selectedModelYear);
+      setVariantError(!selectedVariants || selectedVariants.length === 0);
+      setGateError(!selectedGates || selectedGates.length === 0);
+    }
+  }, [
+    selectedGates,
+    selectedModelYear,
+    selectedProject,
+    selectedVariants,
+    validate
+  ]);
 
   // check if the project, model year or variant fields are disabled
   const modelYearIsDisabled =

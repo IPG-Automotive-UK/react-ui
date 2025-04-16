@@ -265,6 +265,10 @@ export {
   type ViewToggleButtonProps
 } from "./ViewToggleButton";
 export {
+  default as DifferenceChip,
+  type DifferenceChipProps
+} from "./DifferenceChip";
+export {
   BackButton,
   CancelButton,
   NextButton,
