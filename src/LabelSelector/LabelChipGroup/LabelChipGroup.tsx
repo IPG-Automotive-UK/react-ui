@@ -11,11 +11,8 @@ import { sortLabelChips } from "./sortLabelChips";
  * The LabelChipGroup component. This component displays a group of LabelChip components in a row. If any of the chips overflow the parent container width, they will be hidden and a popover will be used to show the hidden chips. The chips are sorted by length first, then alphabetically.
  */
 export default function LabelChipGroup({ chips }: LabelChipGroupProps) {
-  // take a copy of the chips prop so we can sort them without mutating the original
-  chips = [...chips];
-
-  // sort the chips, shortest first, then alphabetically
-  chips = sortLabelChips(chips);
+  // memoize the sorted chips to ensure stable reference across renders and avoid re-sorting unless the input changes, a copy is made before sorting to prevent mutating the original 'chips' prop.
+  const sortedChips = React.useMemo(() => sortLabelChips([...chips]), [chips]);
 
   // store a ref to the parent container so we can check size information and calculate if the chips overflow
   const parentRef = React.useRef<HTMLDivElement>(null);
@@ -25,11 +22,13 @@ export default function LabelChipGroup({ chips }: LabelChipGroupProps) {
 
   // store array of booleans to flag if each chip is overflowing or not
   const [isChipOverflowing, setIsChipOverflowing] = React.useState<boolean[]>(
-    Array(chips.length).fill(false)
+    Array(sortedChips.length).fill(false)
   );
 
   // filter all available chips to find only those that are overflowing so we can show them in the popover
-  const overflowingChips = chips.filter((_, index) => isChipOverflowing[index]);
+  const overflowingChips = sortedChips.filter(
+    (_, index) => isChipOverflowing[index]
+  );
 
   // state to store if the popover is open and the anchor element for the popover
   const [popoverOpen, setPopoverOpen] = React.useState(false);
@@ -87,7 +86,7 @@ export default function LabelChipGroup({ chips }: LabelChipGroupProps) {
         resizeObserver.disconnect();
       };
     }
-  }, [chips, moreItemsRef, parentRef]);
+  }, [sortedChips, moreItemsRef, parentRef]);
 
   // custom onClick event handler for label chips shown in the popper to close the popper on click
   const handleOverflowingChipClick = (
@@ -114,7 +113,7 @@ export default function LabelChipGroup({ chips }: LabelChipGroupProps) {
       spacing={`${chipGap}px`}
       sx={{ overflow: "hidden", width: "100%" }}
     >
-      {chips.map((chip, index) => (
+      {sortedChips.map((chip, index) => (
         <LabelChip key={index} {...chip} visible={false} />
       ))}
       {overflowingChips.length > 0 ? (
