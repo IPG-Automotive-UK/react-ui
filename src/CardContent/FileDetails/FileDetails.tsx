@@ -149,8 +149,7 @@ function FileDetails({
       </Box>
       <Box
         sx={{
-          pl: 2,
-          pr: 2
+          p: 2
         }}
       >
         <SearchBar
