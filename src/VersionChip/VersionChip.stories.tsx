@@ -26,10 +26,28 @@ export const Default = {
   render: Template
 };
 
+export const SingleDigit = {
+  args: {
+    selected: false,
+    version: "1"
+  },
+
+  render: Template
+};
+
 export const MinorVersion = {
   args: {
     selected: false,
     version: "1.1"
+  },
+
+  render: Template
+};
+
+export const SingleDigitSelected = {
+  args: {
+    selected: true,
+    version: "1"
   },
 
   render: Template
