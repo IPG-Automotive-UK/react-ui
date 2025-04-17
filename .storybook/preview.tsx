@@ -6,8 +6,9 @@ import React from "react";
 import { addons } from "@storybook/preview-api";
 import { themeProviderDecorator } from "./decorators";
 import { themes } from "@storybook/theming";
+import { withPerformance } from "storybook-addon-performance";
 
-export const decorators = [themeProviderDecorator];
+export const decorators = [themeProviderDecorator, withPerformance];
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
