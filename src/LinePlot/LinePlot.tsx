@@ -12,6 +12,7 @@ import {
 } from "./LinePlot.types";
 import React, { useEffect, useRef, useState } from "react";
 
+import { Config } from "plotly.js";
 import DialogTitle from "../DialogTitle";
 import Plotly from "react-plotly.js";
 
@@ -27,7 +28,8 @@ const LinePlot = ({
   xlabel = "",
   ylabel = "",
   showMarkers = true,
-  showGrid = true
+  showGrid = true,
+  isStatic = false
 }: LinePlotProps) => {
   // theme hook
   const theme = useTheme();
@@ -86,7 +88,7 @@ const LinePlot = ({
   };
 
   // get config for plotly
-  const config = getConfig({ handleClickFullscreen, isFullscreen });
+  const config = getConfig({ handleClickFullscreen, isFullscreen, isStatic });
 
   // determine whether to show plot title
   const showTitle = title !== "";
@@ -202,20 +204,24 @@ const fullscreenIcon = {
 /**
  * Returns a plotly config function with provided callback for clicking fullscreen
  */
-const getConfig = ({ isFullscreen, handleClickFullscreen }: ConfigProps) => {
+const getConfig = ({
+  isFullscreen,
+  handleClickFullscreen,
+  isStatic
+}: ConfigProps): Partial<Config> => {
   return {
     displaylogo: false, // never display plotly logo
     modeBarButtonsToAdd: !isFullscreen // if we are not in full screen, show a button to launch to fullscreen
       ? [
           {
             click: handleClickFullscreen,
-            direction: "up",
             icon: fullscreenIcon,
             name: "Fullscreen",
             title: "Fullscreen"
           }
         ]
-      : []
+      : [],
+    staticPlot: isStatic // always allow for interactivity
   };
 };
 

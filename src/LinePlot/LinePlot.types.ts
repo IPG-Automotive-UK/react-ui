@@ -7,6 +7,10 @@ export type LinePlotProps = {
    */
   fullscreenTitle?: string;
   /**
+   * Boolean that determines whether or not the plot is static.
+   */
+  isStatic?: boolean;
+  /**
    * Boolean that determines whether or not the grid is shown.
    */
   showGrid?: boolean;
@@ -64,6 +68,10 @@ export type ConfigProps = {
    * Function that handles the click event on the fullscreen button.
    */
   handleClickFullscreen: () => void;
+  /**
+   * Boolean that determines whether or not the plot is static.
+   */
+  isStatic: boolean;
 };
 
 /**
