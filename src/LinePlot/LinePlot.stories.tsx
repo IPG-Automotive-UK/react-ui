@@ -109,3 +109,19 @@ export const OverlayPlots = {
   },
   render: Template
 };
+
+// Overlay Plots
+export const Static = {
+  args: {
+    fullscreenTitle: "",
+    isStatic: true,
+    showGrid: true,
+    showMarkers: true,
+    title: "",
+    xdata: [0, 1, 2, 3, 4, 5],
+    xlabel: "X label (rad)",
+    ydata: [0, 20, 30, 40, 50, 60],
+    ylabel: "Y label (Nm)"
+  },
+  render: Template
+};
