@@ -102,6 +102,7 @@ export {
   type LabelChipGroupProps,
   type LabelSelectorProps
 } from "./LabelSelector";
+export { default as LazyRender, type LazyRenderProps } from "./LazyRender";
 export {
   default as LazyLoadImage,
   type LazyLoadImageProps
