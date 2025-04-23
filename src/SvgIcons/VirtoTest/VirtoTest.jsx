@@ -16,7 +16,8 @@ function Icon(props) {
           height="67"
           rx="12"
           fill={teal[800]}
-          shapeRendering="crispEdges"
+          shapeRendering="geometricPrecision"
+          preserveAspectRatio="xMidYMid meet"
         />
         <path
           fillRule="evenodd"
@@ -62,7 +63,6 @@ function Icon(props) {
           />
           <feOffset dy="1" />
           <feGaussianBlur stdDeviation="1.5" />
-          <feComposite in2="hardAlpha" operator="out" />
           <feColorMatrix
             type="matrix"
             values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0"
@@ -80,7 +80,6 @@ function Icon(props) {
           />
           <feOffset dy="1" />
           <feGaussianBlur stdDeviation="0.5" />
-          <feComposite in2="hardAlpha" operator="out" />
           <feColorMatrix
             type="matrix"
             values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.14 0"
@@ -104,7 +103,6 @@ function Icon(props) {
           />
           <feOffset dy="2" />
           <feGaussianBlur stdDeviation="0.5" />
-          <feComposite in2="hardAlpha" operator="out" />
           <feColorMatrix
             type="matrix"
             values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"

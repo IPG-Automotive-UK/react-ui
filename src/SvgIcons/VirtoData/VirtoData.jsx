@@ -16,7 +16,8 @@ function Icon(props) {
           height="67"
           rx="12"
           fill={blue[800]}
-          shapeRendering="crispEdges"
+          shapeRendering="geometricPrecision"
+          preserveAspectRatio="xMidYMid meet"
         />
         <path
           d="M33.5833 24.3333H24.8333C23.2291 24.3333 21.9312 25.6458 21.9312 27.2499L21.9166 44.7499C21.9166 46.3541 23.2291 47.6666 24.8333 47.6666H48.1666C49.7708 47.6666 51.0833 46.3541 51.0833 44.7499V30.1666C51.0833 28.5624 49.7708 27.2499 48.1666 27.2499H36.5L33.5833 24.3333Z"
@@ -42,7 +43,6 @@ function Icon(props) {
           />
           <feOffset dy="1" />
           <feGaussianBlur stdDeviation="1.5" />
-          <feComposite in2="hardAlpha" operator="out" />
           <feColorMatrix
             type="matrix"
             values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0"
@@ -60,7 +60,6 @@ function Icon(props) {
           />
           <feOffset dy="1" />
           <feGaussianBlur stdDeviation="0.5" />
-          <feComposite in2="hardAlpha" operator="out" />
           <feColorMatrix
             type="matrix"
             values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.14 0"
@@ -84,7 +83,6 @@ function Icon(props) {
           />
           <feOffset dy="2" />
           <feGaussianBlur stdDeviation="0.5" />
-          <feComposite in2="hardAlpha" operator="out" />
           <feColorMatrix
             type="matrix"
             values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"

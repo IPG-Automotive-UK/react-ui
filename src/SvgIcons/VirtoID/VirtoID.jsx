@@ -16,7 +16,8 @@ function Icon(props) {
           height="67"
           rx="12"
           fill={purple[800]}
-          shapeRendering="crispEdges"
+          shapeRendering="geometricPrecision"
+          preserveAspectRatio="xMidYMid meet"
         />
         <path
           d="M42.3334 34.5417C44.7542 34.5417 46.6938 32.5876 46.6938 30.1667C46.6938 27.7459 44.7542 25.7917 42.3334 25.7917C39.9125 25.7917 37.9584 27.7459 37.9584 30.1667C37.9584 32.5876 39.9125 34.5417 42.3334 34.5417ZM30.6667 34.5417C33.0875 34.5417 35.0271 32.5876 35.0271 30.1667C35.0271 27.7459 33.0875 25.7917 30.6667 25.7917C28.2459 25.7917 26.2917 27.7459 26.2917 30.1667C26.2917 32.5876 28.2459 34.5417 30.6667 34.5417ZM30.6667 37.4584C27.2688 37.4584 20.4584 39.1647 20.4584 42.5626V46.2084H40.875V42.5626C40.875 39.1647 34.0646 37.4584 30.6667 37.4584ZM42.3334 37.4584C41.9105 37.4584 41.4292 37.4876 40.9188 37.5313C42.6105 38.7563 43.7917 40.4042 43.7917 42.5626V46.2084H52.5417V42.5626C52.5417 39.1647 45.7313 37.4584 42.3334 37.4584Z"
@@ -42,7 +43,6 @@ function Icon(props) {
           />
           <feOffset dy="1" />
           <feGaussianBlur stdDeviation="1.5" />
-          <feComposite in2="hardAlpha" operator="out" />
           <feColorMatrix
             type="matrix"
             values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0"
@@ -60,7 +60,6 @@ function Icon(props) {
           />
           <feOffset dy="1" />
           <feGaussianBlur stdDeviation="0.5" />
-          <feComposite in2="hardAlpha" operator="out" />
           <feColorMatrix
             type="matrix"
             values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.14 0"
@@ -84,7 +83,6 @@ function Icon(props) {
           />
           <feOffset dy="2" />
           <feGaussianBlur stdDeviation="0.5" />
-          <feComposite in2="hardAlpha" operator="out" />
           <feColorMatrix
             type="matrix"
             values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"

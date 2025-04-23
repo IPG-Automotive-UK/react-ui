@@ -16,7 +16,8 @@ function Icon(props) {
           height="67"
           rx="12"
           fill={lightGreen[800]}
-          shapeRendering="crispEdges"
+          shapeRendering="geometricPrecision"
+          preserveAspectRatio="xMidYMid meet"
         />
         <g clipPath="url(#clip0_1329_9359)">
           <path
@@ -44,7 +45,6 @@ function Icon(props) {
           />
           <feOffset dy="1" />
           <feGaussianBlur stdDeviation="1.5" />
-          <feComposite in2="hardAlpha" operator="out" />
           <feColorMatrix
             type="matrix"
             values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0"
@@ -62,7 +62,6 @@ function Icon(props) {
           />
           <feOffset dy="1" />
           <feGaussianBlur stdDeviation="0.5" />
-          <feComposite in2="hardAlpha" operator="out" />
           <feColorMatrix
             type="matrix"
             values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.14 0"
@@ -86,7 +85,6 @@ function Icon(props) {
           />
           <feOffset dy="2" />
           <feGaussianBlur stdDeviation="0.5" />
-          <feComposite in2="hardAlpha" operator="out" />
           <feColorMatrix
             type="matrix"
             values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"
