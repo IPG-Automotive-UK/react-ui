@@ -92,6 +92,12 @@ const paletteDefaultBackgroundPaperDark = "#182533";
 // palette tooltip color light mode or dark mode
 const paletteTooltipColor = "#3C4F67";
 
+// palette default divider color light mode
+const paletteDefaultDividerColorLight = "#E0E0E0";
+
+// palette default divider color dark mode
+const paletteDefaultDividerColorDark = "#343F4B";
+
 // 0.08 % of the primary light main
 const primaryLightColor08 = alpha(primaryLightMain, 0.08);
 
@@ -235,6 +241,7 @@ const mainTheme: ThemeOptions = {
           default: paletteDefaultBackgroundDark,
           paper: paletteDefaultBackgroundPaperDark
         },
+        divider: paletteDefaultDividerColorDark,
         primary: {
           dark: primaryDarkDark,
           light: primaryDarkLight,
@@ -292,6 +299,7 @@ const mainTheme: ThemeOptions = {
           default: paletteDefaultBackgroundLight,
           paper: paletteDefaultBackgroundPaperLight
         },
+        divider: paletteDefaultDividerColorLight,
         primary: {
           dark: primaryLightDark,
           light: primaryLightLight,
