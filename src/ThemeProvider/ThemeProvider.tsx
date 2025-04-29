@@ -150,6 +150,9 @@ const defaultComponents = {
           {
             backgroundColor: theme.palette.background.paper
           },
+        "& .MuiDataGrid-withBorderColor": {
+          borderColor: theme.palette.divider
+        },
         "--DataGrid-rowBorderColor": theme.palette.divider,
         borderColor: theme.palette.divider
       })
