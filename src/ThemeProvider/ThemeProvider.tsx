@@ -143,7 +143,9 @@ const defaultComponents = {
         "& .MuiDataGrid-container--top [role='row'], & .MuiDataGrid-container--bottom [role='row']":
           {
             backgroundColor: theme.palette.background.paper
-          }
+          },
+        "--DataGrid-rowBorderColor": theme.palette.divider,
+        borderColor: theme.palette.divider
       })
     }
   },
