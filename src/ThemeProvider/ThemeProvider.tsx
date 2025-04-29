@@ -146,6 +146,9 @@ const defaultComponents = {
           {
             outline: "none"
           },
+        "& .MuiDataGrid-columnSeparator": {
+          color: theme.palette.divider
+        },
         "& .MuiDataGrid-container--top [role='row'], & .MuiDataGrid-container--bottom [role='row']":
           {
             backgroundColor: theme.palette.background.paper
