@@ -56,3 +56,12 @@ export const WithErrorAndHelperText: Story = {
 
   render: Template
 };
+
+export const WithTooltipAndHelperText: Story = {
+  args: {
+    ...Default.args,
+    helperText: "This is a long helper text that should be truncated"
+  },
+
+  render: Template
+};

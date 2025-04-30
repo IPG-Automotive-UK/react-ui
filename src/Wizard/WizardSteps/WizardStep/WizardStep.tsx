@@ -5,6 +5,7 @@ import {
   StepLabel,
   StepLabelProps,
   SvgIcon,
+  Tooltip,
   Typography,
   useStepContext
 } from "@mui/material";
@@ -64,10 +65,27 @@ function WizardStepLabel({
       textColor = "textPrimary";
     }
 
+    // Set helpertext character limit to 30 characters
+    const helperTextMaxLimit = 30;
+    // Trim helper text and replace multiple spaces with a single space
+    const trimmedHelperText = helperText?.trim().replace(/\s+/g, " ");
+
+    // Truncate helper text if it more than 30 characters
+    const truncateHelperText = () => {
+      return trimmedHelperText.length > helperTextMaxLimit
+        ? trimmedHelperText.slice(0, helperTextMaxLimit) + "..."
+        : trimmedHelperText;
+    };
+
     stepLabelProps.optional = (
-      <Typography variant="caption" color={textColor}>
-        {helperText}
-      </Typography>
+      <Tooltip
+        title={helperText}
+        disableHoverListener={trimmedHelperText.length < helperTextMaxLimit}
+      >
+        <Typography variant="caption" color={textColor}>
+          {truncateHelperText()}
+        </Typography>
+      </Tooltip>
     );
   }
 
