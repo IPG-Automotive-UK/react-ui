@@ -40,7 +40,7 @@ function WizardStepLabel({
   helperText,
   error
 }: Pick<WizardStepProps, "label" | "helperText" | "error">) {
-  // get context state
+  // Get context state
   const stepContext = useStepContext();
   let active: boolean, completed: boolean;
   if ("completed" in stepContext && "active" in stepContext) {

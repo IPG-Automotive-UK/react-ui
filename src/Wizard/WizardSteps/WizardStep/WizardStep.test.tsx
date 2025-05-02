@@ -42,4 +42,19 @@ describe("WizardStep", () => {
       longHelperText
     );
   });
+  it("should not show tooltip when helperText is less than 30 characters", async () => {
+    const shortHelperText = "Short helper text.";
+    render(<WizardStep label="Step 1" helperText={shortHelperText} />);
+
+    // Helper text should be in the document
+    expect(screen.getByText(shortHelperText)).toBeInTheDocument();
+
+    const tooltipTrigger = screen.getByText(shortHelperText);
+
+    // Simulate hover
+    await userEvent.hover(tooltipTrigger);
+
+    // Tooltip should not be in the document
+    expect(screen.queryByRole("tooltip")).not.toBeInTheDocument();
+  });
 });
