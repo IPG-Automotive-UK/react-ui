@@ -1,5 +1,12 @@
 import { AcceptedFiles, ImageUploaderProps } from "./ImageUploader.types";
-import { Box, LinearProgress, Stack, Typography, alpha } from "@mui/material";
+import {
+  Box,
+  LinearProgress,
+  Stack,
+  Typography,
+  alpha,
+  useColorScheme
+} from "@mui/material";
 
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import React from "react";
@@ -38,6 +45,7 @@ export default function ImageUploader({
       onDelete,
       selectedFiles
     });
+  const { mode } = useColorScheme();
 
   // are we rendering an error state?
   const isError = rejectionMessage;
@@ -60,16 +68,16 @@ export default function ImageUploader({
           "&:hover": {
             ".dropzoneText": {
               color: isError
-                ? theme.palette.error.main
-                : theme.palette.primary.main
+                ? theme.vars.palette.error.main
+                : theme.vars.palette.primary.main
             },
             background: isError
               ? "inherit"
               : alpha(theme.palette.primary.main, 0.04),
             borderColor: isError
-              ? theme.palette.error.main
-              : theme.palette.primary.main,
-            color: theme.palette.primary.main
+              ? theme.vars.palette.error.main
+              : theme.vars.palette.primary.main,
+            color: theme.vars.palette.primary.main
           },
           ".dropzoneText": {
             alignItems: "center",
@@ -81,12 +89,12 @@ export default function ImageUploader({
           ".dropzoneText > *": {
             color: isError
               ? theme.palette.error.main
-              : theme.palette.mode === "dark"
-                ? theme.palette.text.primary
-                : theme.palette.text.secondary
+              : mode === "dark"
+                ? theme.vars.palette.text.primary
+                : theme.vars.palette.text.secondary
           },
-          backgroundColor: theme.palette.background.paper,
-          borderColor: theme.palette.divider,
+          backgroundColor: theme.vars.palette.background.paper,
+          borderColor: theme.vars.palette.divider,
           borderStyle: "dashed",
           borderWidth: 1,
           boxSizing: "border-box",

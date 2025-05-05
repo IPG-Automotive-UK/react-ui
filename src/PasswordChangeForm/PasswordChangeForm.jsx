@@ -3,7 +3,7 @@ import {
   Button,
   CircularProgress,
   FormHelperText,
-  Grid2 as Grid,
+  Grid,
   TextField
 } from "@mui/material";
 

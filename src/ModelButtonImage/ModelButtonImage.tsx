@@ -1,4 +1,4 @@
-import { Box, useTheme } from "@mui/material";
+import { Box, useColorScheme, useTheme } from "@mui/material";
 
 import { ModelButtonImageProps } from "./ModelButtonImage.types";
 import React from "react";
@@ -12,10 +12,9 @@ export default function ModelButtonImage({
 }: ModelButtonImageProps) {
   // convert color to CSS filter
   const theme = useTheme();
+  const { mode } = useColorScheme();
   const defaultColor =
-    theme.palette.mode === "light"
-      ? theme.palette.common.black
-      : theme.palette.common.white;
+    mode === "light" ? theme.palette.common.black : theme.palette.common.white;
   const filter = solve(colord(color ?? defaultColor).toRgb());
 
   // render
