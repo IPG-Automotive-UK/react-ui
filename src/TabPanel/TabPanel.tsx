@@ -54,7 +54,7 @@ const TabPanel = ({
           width: 1
         },
         theme => ({
-          border: `1px solid ${theme.palette.divider}`,
+          border: `1px solid ${theme.vars.palette.divider}`,
           borderRadius: "4px"
         })
       ]}

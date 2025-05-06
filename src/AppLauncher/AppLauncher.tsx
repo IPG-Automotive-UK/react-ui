@@ -150,7 +150,7 @@ function AppLauncher({
                   backgroundColor: "white",
                   boxShadow: theme.shadows[2],
                   ...theme.applyStyles("dark", {
-                    backgroundColor: theme.palette.action.hover
+                    backgroundColor: theme.vars.palette.action.hover
                   })
                 },
                 background: "transparent",

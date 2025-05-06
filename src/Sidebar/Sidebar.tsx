@@ -41,7 +41,7 @@ function Sidebar({
           </Link>
         ) : null}
         {showVersion ? (
-          <Typography sx={{ color: theme => theme.palette.text.primary }}>
+          <Typography sx={{ color: theme => theme.vars.palette.text.primary }}>
             {appVersion}
           </Typography>
         ) : null}

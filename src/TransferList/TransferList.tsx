@@ -285,7 +285,7 @@ export default function TransferList({
       <Box
         sx={theme => ({
           backgroundColor: "background.paper",
-          border: `1px solid ${theme.palette.divider}`,
+          border: `1px solid ${theme.vars.palette.divider}`,
           borderRadius: 1,
           display: "flex",
           flexDirection: "column",
@@ -299,7 +299,7 @@ export default function TransferList({
         <Box
           sx={theme => ({
             alignItems: "center",
-            borderBottom: `1px solid ${theme.palette.divider}`,
+            borderBottom: `1px solid ${theme.vars.palette.divider}`,
             display: "flex",
             px: 2,
             py: 1.5
@@ -391,7 +391,7 @@ export default function TransferList({
       <Box
         sx={theme => ({
           backgroundColor: "background.paper",
-          border: `1px solid ${theme.palette.divider}`,
+          border: `1px solid ${theme.vars.palette.divider}`,
           borderRadius: 1,
           display: "flex",
           flexDirection: "column",
@@ -405,7 +405,7 @@ export default function TransferList({
         <Box
           sx={theme => ({
             alignItems: "center",
-            borderBottom: `1px solid ${theme.palette.divider}`,
+            borderBottom: `1px solid ${theme.vars.palette.divider}`,
             display: "flex",
             px: 2,
             py: 1.5

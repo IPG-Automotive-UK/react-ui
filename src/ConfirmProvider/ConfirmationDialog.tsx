@@ -72,7 +72,7 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
             <DialogContent sx={{ p: 2 }}>
               <DialogContentText
                 sx={theme => ({
-                  color: theme.palette.text.primary
+                  color: theme.vars.palette.text.primary
                 })}
               >
                 {content}
@@ -84,7 +84,7 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
               <DialogContent sx={{ p: 2 }}>
                 <DialogContentText
                   sx={theme => ({
-                    color: theme.palette.text.primary
+                    color: theme.vars.palette.text.primary
                   })}
                 >
                   {description}

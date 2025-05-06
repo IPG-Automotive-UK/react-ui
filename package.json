@@ -43,7 +43,7 @@
   "devDependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
-    "@mui/material": "^7.0.2",
+    "@mui/material": "^7.0.0",
     "@mui/x-data-grid-generator": "^7.10.0",
     "@playwright/test": "^1.45.2",
     "@storybook/addon-actions": "^8.2.6",

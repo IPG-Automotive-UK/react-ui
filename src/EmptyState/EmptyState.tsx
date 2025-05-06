@@ -17,7 +17,7 @@ function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
     <Box
       sx={theme => ({
         alignItems: "center",
-        background: theme.palette.background.paper,
+        background: theme.vars.palette.background.paper,
         display: "flex",
         flexDirection: "column",
         flexGrow: 1,
@@ -45,7 +45,7 @@ function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
         >
           {React.cloneElement(icon, {
             sx: (theme: Theme) => ({
-              color: theme.palette.primary.main,
+              color: theme.vars.palette.primary.main,
               height: 100,
               width: 100,
               ...(icon.props.sx || {})
@@ -63,7 +63,7 @@ function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
           <Typography
             variant="h6"
             sx={{
-              color: theme => theme.palette.text.primary,
+              color: theme => theme.vars.palette.text.primary,
               fontWeight: 700
             }}
           >
@@ -75,7 +75,7 @@ function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
           <Typography
             variant="body2"
             sx={{
-              color: theme => theme.palette.text.secondary,
+              color: theme => theme.vars.palette.text.secondary,
               fontSize: "16px"
             }}
           >
