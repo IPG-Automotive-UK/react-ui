@@ -10,13 +10,13 @@ import { UserLabelProps } from "./UserLabel.types";
 export default function UserLabel({ label, color, tooltip }: UserLabelProps) {
   return IconWithLabel({
     icon: (
-      <div>
+      <React.Fragment>
         <UserAvatar
           sx={{ fontSize: "10px", height: "24px", width: "24px" }}
           color={color}
           name={label}
         />
-      </div>
+      </React.Fragment>
     ),
     label,
     tooltip

@@ -29,6 +29,7 @@ describe("VersionChip", () => {
   });
   // check nothing is rendered if version format is wrong
   it("doesn't render when version is wrong format", () => {
+    vi.spyOn(console, "warn").mockImplementation(() => {});
     render(<VersionChip version="1.1.1"></VersionChip>);
     expect(screen.queryByText("1.1.1")).not.toBeInTheDocument();
   });

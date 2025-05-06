@@ -68,20 +68,9 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
             </DialogTitle>
           )}
           <Divider />
-          {content ? (
-            <DialogContent sx={{ p: 2 }}>
-              <DialogContentText
-                sx={theme => ({
-                  color: theme.palette.text.primary
-                })}
-              >
-                {content}
-                <DialogContentText />
-              </DialogContentText>
-            </DialogContent>
-          ) : (
-            description && (
-              <DialogContent sx={{ p: 2 }}>
+          <DialogContent sx={{ p: 2 }}>
+            {content ||
+              (description && (
                 <DialogContentText
                   sx={theme => ({
                     color: theme.palette.text.primary
@@ -89,9 +78,8 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
                 >
                   {description}
                 </DialogContentText>
-              </DialogContent>
-            )
-          )}
+              ))}
+          </DialogContent>
           <Divider />
           <DialogActions
             sx={{ justifyContent: "flex-end", padding: "16px" }}
