@@ -13,7 +13,7 @@ import {
   TransferListItem,
   TransferListProps
 } from "./TransferList.types";
-import React, { useLayoutEffect, useState } from "react";
+import React, { useState } from "react";
 
 import SearchBar from "../SearchBar";
 
@@ -40,13 +40,6 @@ export default function TransferList({
   const [selectedItemKeys, setSelectedItemKeys] = useState<string[]>(
     defaultSelectedItems || []
   );
-
-  /**
-   * useEffect unselects items in the controlled component
-   */
-  useLayoutEffect(() => {
-    setChecked([]);
-  }, [selectedItems]);
 
   /**
    * Get primary label from item
