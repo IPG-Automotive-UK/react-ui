@@ -8,7 +8,11 @@
  *      be undefined, preventing runtime errors in tests.
  */
 
-import { RenderOptions, render as rtlRender } from "@testing-library/react";
+import {
+  RenderOptions,
+  RenderResult,
+  render as rtlRender
+} from "@testing-library/react";
 
 import React from "react";
 import ThemeProvider from "./ThemeProvider";
@@ -33,7 +37,7 @@ function AllProviders({ children }: { children: React.ReactNode }) {
 function render(
   ui: React.ReactElement,
   options?: Omit<RenderOptions, "wrapper">
-) {
+): RenderResult {
   return rtlRender(ui, { wrapper: AllProviders, ...options });
 }
 
