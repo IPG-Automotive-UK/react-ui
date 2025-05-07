@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "../../TestUtils";
 
 import React from "react";
 import WizardActions from "./WizardActions";

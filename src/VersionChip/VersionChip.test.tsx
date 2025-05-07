@@ -1,10 +1,11 @@
 import "@testing-library/jest-dom";
 
 import { describe, expect, it, vi } from "vitest";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "../TestUtils";
 
 import React from "react";
 import VersionChip from "./VersionChip";
+import { waitFor } from "@testing-library/react";
 
 describe("VersionChip", () => {
   // test that the version chip renders
