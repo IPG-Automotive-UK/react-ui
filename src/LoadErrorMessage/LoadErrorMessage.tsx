@@ -1,4 +1,4 @@
-import { Alert, Button, Link, Paper, Typography, lighten } from "@mui/material";
+import { Alert, Button, Link, Paper, Typography } from "@mui/material";
 import React, { useState } from "react";
 
 import { LoadErrorMessageProps } from "./LoadErrorMessage.types";
@@ -76,7 +76,7 @@ const LoadErrorMessage = ({
             textAlign: "center"
           },
           theme => ({
-            color: theme.palette.error.main
+            color: theme.vars.palette.error.main
           })
         ]}
       >
@@ -90,9 +90,9 @@ const LoadErrorMessage = ({
             textAlign: "center"
           },
           theme => ({
-            color: theme.palette.text.primary,
+            color: theme.vars.palette.text.primary,
             ...theme.applyStyles("dark", {
-              color: lighten(theme.palette.text.secondary, 0.7)
+              color: `color-mix(in srgb, ${theme.vars.palette.text.secondary} 70%)`
             })
           })
         ]}
@@ -112,7 +112,7 @@ const LoadErrorMessage = ({
           <Typography
             variant="body2"
             sx={theme => ({
-              color: theme.palette.primary.main,
+              color: theme.vars.palette.primary.main,
               cursor: "pointer"
             })}
             onClick={handleDetailsClick}
@@ -130,7 +130,7 @@ const LoadErrorMessage = ({
         <Typography
           variant="body2"
           sx={theme => ({
-            color: theme.palette.primary.main,
+            color: theme.vars.palette.primary.main,
             cursor: "pointer"
           })}
           onClick={handleDetailsClick}
@@ -143,9 +143,9 @@ const LoadErrorMessage = ({
         <Typography
           variant="caption"
           sx={theme => ({
-            color: theme.palette.text.primary,
+            color: theme.vars.palette.text.primary,
             ...theme.applyStyles("dark", {
-              color: lighten(theme.palette.text.secondary, 0.7)
+              color: `color-mix(in srgb, ${theme.vars.palette.common.white} 70%, ${theme.vars.palette.text.secondary} 30%)`
             })
           })}
         >

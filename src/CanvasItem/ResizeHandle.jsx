@@ -73,10 +73,10 @@ export default function ResizeHandle({ onResize, direction, rotateAngle }) {
   return (
     <Box
       sx={theme => ({
-        background: theme.palette.primary.main,
+        background: theme.vars.palette.primary.main,
         cursor: `${cursor}-resize`,
         height: "10px",
-        outline: `2px solid ${theme.palette.background.paper}`,
+        outline: `2px solid ${theme.vars.palette.background.paper}`,
         position: "absolute",
         width: "10px",
         ...getOffset(direction)

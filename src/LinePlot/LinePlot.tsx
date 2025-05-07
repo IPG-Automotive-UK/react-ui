@@ -149,7 +149,7 @@ const LinePlot = ({
             font: { family: "Montserrat, sans-serif" },
             legend: {
               font: {
-                color: theme.palette.text.primary,
+                color: theme.vars.palette.text.primary,
                 size: 12
               },
               orientation: "v",
@@ -163,8 +163,8 @@ const LinePlot = ({
             plot_bgcolor: "transparent",
             showlegend: !!(legendNameFirst && legendNameSecond),
             xaxis: {
-              color: theme.palette.text.primary,
-              gridcolor: theme.palette.divider,
+              color: theme.vars.palette.text.primary,
+              gridcolor: theme.vars.palette.divider,
               showgrid: showGrid,
               title: {
                 font: { size: 12 },
@@ -173,8 +173,8 @@ const LinePlot = ({
               }
             },
             yaxis: {
-              color: theme.palette.text.primary,
-              gridcolor: theme.palette.divider,
+              color: theme.vars.palette.text.primary,
+              gridcolor: theme.vars.palette.divider,
               showgrid: showGrid,
               title: {
                 font: { size: 12 },
