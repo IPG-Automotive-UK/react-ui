@@ -1,5 +1,5 @@
 import { describe, test } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "../TestUtils";
 
 import React from "react";
 import UploaderHeader from "./UploaderHeader";

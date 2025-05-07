@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "../TestUtils";
 
 import FormatVersionLabel from "./FormatVersionLabel";
 import React from "react";

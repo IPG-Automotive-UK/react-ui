@@ -1,9 +1,10 @@
 import { describe, expect, test, vi } from "vitest";
-import { render, screen, within } from "@testing-library/react";
+import { render, screen } from "../TestUtils";
 
 import React from "react";
 import TransferList from ".";
 import userEvent from "@testing-library/user-event";
+import { within } from "@testing-library/react";
 
 // item array using an object array structure
 const defaultItemArray = [

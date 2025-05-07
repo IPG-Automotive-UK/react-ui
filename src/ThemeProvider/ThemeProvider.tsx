@@ -350,8 +350,6 @@ export const theme = createTheme({
   ...mainTheme
 });
 
-// right after your createTheme call
-theme.palette = theme.vars.palette as any;
 /**
  * IPG Material-ui theme provider and hook.
  */

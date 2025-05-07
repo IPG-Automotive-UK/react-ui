@@ -15,7 +15,7 @@ import {
   Typography,
   iconButtonClasses
 } from "@mui/material";
-import { alpha, useColorScheme, useTheme } from "@mui/material/styles";
+import { alpha, useTheme } from "@mui/material/styles";
 
 import CancelIcon from "@mui/icons-material/Cancel";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
@@ -102,29 +102,28 @@ export default function ModelButton({
 }: ModelButtonProps) {
   // use theme hook
   const theme = useTheme();
-  const { mode } = useColorScheme();
 
   // is button being hovered over
   const [isHover, setIsHover] = React.useState(false);
 
   // set default border color based
-  let borderColor = theme.vars.palette.text.secondary;
+  let borderColor = theme.palette.text.secondary;
 
   // set default border color on hover
-  let borderColorHover = theme.vars.palette.primary.main;
+  let borderColorHover = theme.palette.primary.main;
 
   if (disabled) {
-    borderColor = theme.vars.palette.text.disabled;
+    borderColor = theme.palette.text.disabled;
     borderColorHover = borderColor;
   } else if (status === "error") {
-    borderColor = theme.vars.palette.error.main;
-    borderColorHover = theme.vars.palette.error.dark;
+    borderColor = theme.palette.error.main;
+    borderColorHover = theme.palette.error.dark;
   } else if (status === "warning") {
-    borderColor = theme.vars.palette.warning.main;
-    borderColorHover = theme.vars.palette.warning.dark;
+    borderColor = theme.palette.warning.main;
+    borderColorHover = theme.palette.warning.dark;
   } else if (status === "success") {
-    borderColor = theme.vars.palette.success.main;
-    borderColorHover = theme.vars.palette.success.dark;
+    borderColor = theme.palette.success.main;
+    borderColorHover = theme.palette.success.dark;
   }
 
   // ensure children are always an array
@@ -159,7 +158,7 @@ export default function ModelButton({
   /** Get the correct image icon color default and on hover, according to the condition if there is a status and where is rendered  */
   const getCurrentIconImageColor = () => {
     const iconColor =
-      mode === "light"
+      theme.palette.mode === "light"
         ? theme.palette.common.black
         : theme.palette.common.white;
     if (status !== "none") {
@@ -198,7 +197,7 @@ export default function ModelButton({
             borderRadius: 0,
             bottom: "30.56%",
             boxSizing: "border-box",
-            color: theme.vars.palette.common.white,
+            color: theme.palette.common.white,
             display: "flex",
             flexDirection: "row",
             fontSize: "40px",
@@ -210,7 +209,7 @@ export default function ModelButton({
             top: "0%",
             width: "100%",
             ...theme.applyStyles("light", {
-              color: theme.vars.palette.common.black
+              color: theme.palette.common.black
             })
           })}
           onMouseOver={() => {
@@ -240,8 +239,8 @@ export default function ModelButton({
             alignItems: "center",
             bottom: "0%",
             color: disabled
-              ? theme.vars.palette.text.disabled
-              : theme.vars.palette.text.secondary,
+              ? theme.palette.text.disabled
+              : theme.palette.text.secondary,
             display: "flex",
             flexDirection: "row",
             fontSize: "13px",
