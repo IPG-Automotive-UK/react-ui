@@ -1,5 +1,5 @@
 import { AddOutlined, AddToQueue } from "@mui/icons-material";
-import { render, screen } from "../TestUtils";
+import { render, screen } from "@testing-library/react";
 
 import { Button } from "@mui/material";
 import EmptyState from "./EmptyState";

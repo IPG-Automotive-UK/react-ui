@@ -1,8 +1,7 @@
-import { useColorScheme, useTheme } from "@mui/material";
-
 import { BulletGaugeProps } from "./BulletGauge.types";
 import Plotly from "react-plotly.js";
 import React from "react";
+import { useTheme } from "@mui/material";
 
 /**
  * This component displays a bullet gauge progress indicator.
@@ -14,7 +13,6 @@ const BulletGauge = ({ title, value, suffix }: BulletGaugeProps) => {
   // Limit value to 100
   const limitedValue = Math.min(value, 100);
 
-  const { mode } = useColorScheme();
   return (
     <Plotly
       data={[
@@ -24,10 +22,7 @@ const BulletGauge = ({ title, value, suffix }: BulletGaugeProps) => {
             axis: {
               range: [null, 100],
               tickfont: {
-                color:
-                  mode === "dark"
-                    ? theme.palette.common.white
-                    : theme.vars.palette.text.primary,
+                color: theme.palette.text.primary,
                 size: 12
               }
             },
@@ -44,10 +39,7 @@ const BulletGauge = ({ title, value, suffix }: BulletGaugeProps) => {
           mode: "gauge+number",
           number: {
             font: {
-              color:
-                mode === "dark"
-                  ? theme.palette.common.white
-                  : theme.vars.palette.text.primary,
+              color: theme.palette.text.primary,
               size: 20
             },
             suffix: suffix || ""

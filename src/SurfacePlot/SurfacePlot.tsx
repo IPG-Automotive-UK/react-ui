@@ -21,6 +21,9 @@ const SurfacePlot = ({
   // theme hook
   const theme = useTheme();
 
+  // get the current theme mode
+  const { mode } = useColorScheme();
+
   // state for fullscreen
   const [isFullscreen, setIsFullscreen] = useState(false);
 
@@ -61,8 +64,6 @@ const SurfacePlot = ({
   const config = getConfig({ handleClickFullscreen, isFullscreen });
   // determine whether to show title
   const showTitle = title !== "";
-
-  const { mode } = useColorScheme();
 
   return (
     <ConditionalDialog

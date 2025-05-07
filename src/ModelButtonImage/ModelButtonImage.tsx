@@ -12,7 +12,10 @@ export default function ModelButtonImage({
 }: ModelButtonImageProps) {
   // convert color to CSS filter
   const theme = useTheme();
+
+  // get the current theme mode
   const { mode } = useColorScheme();
+
   const defaultColor =
     mode === "light" ? theme.palette.common.black : theme.palette.common.white;
   const filter = solve(colord(color ?? defaultColor).toRgb());

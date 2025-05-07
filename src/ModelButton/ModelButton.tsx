@@ -15,7 +15,7 @@ import {
   Typography,
   iconButtonClasses
 } from "@mui/material";
-import { alpha, useColorScheme, useTheme } from "@mui/material/styles";
+import { alpha, useTheme } from "@mui/material/styles";
 
 import CancelIcon from "@mui/icons-material/Cancel";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
@@ -102,7 +102,6 @@ export default function ModelButton({
 }: ModelButtonProps) {
   // use theme hook
   const theme = useTheme();
-  const { mode } = useColorScheme();
 
   // is button being hovered over
   const [isHover, setIsHover] = React.useState(false);
@@ -159,7 +158,7 @@ export default function ModelButton({
   /** Get the correct image icon color default and on hover, according to the condition if there is a status and where is rendered  */
   const getCurrentIconImageColor = () => {
     const iconColor =
-      mode === "light"
+      theme.palette.mode === "light"
         ? theme.palette.common.black
         : theme.palette.common.white;
     if (status !== "none") {
