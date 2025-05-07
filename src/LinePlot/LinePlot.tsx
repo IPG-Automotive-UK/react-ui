@@ -93,6 +93,20 @@ const LinePlot = ({
   // determine whether to show plot title
   const showTitle = title !== "";
 
+  // legend character limit
+  const legendCharLimit = 30;
+
+  // truncate legend names if they exceed 30 characters
+  const truncateLegend = (str: string) => {
+    // trim whitespace and replace multiple spaces with a single space
+    const trimmedLegend = str?.trim().replace(/\s+/g, " ");
+
+    // truncate legend name if it exceeds the character limit
+    return trimmedLegend.length > legendCharLimit
+      ? trimmedLegend.slice(0, legendCharLimit) + "..."
+      : trimmedLegend;
+  };
+
   return (
     <ConditionalDialog
       condition={isFullscreen}
@@ -124,7 +138,7 @@ const LinePlot = ({
               line: { color: theme.palette.primary.main, width: 2 },
               marker: { color: theme.palette.primary.dark, size: 7 },
               mode: showMarkers ? "lines+markers" : "lines",
-              name: legendNameFirst || "",
+              name: legendNameFirst ? truncateLegend(legendNameFirst) : "",
               type: "scatter",
               x: xdata,
               y: ydata
@@ -136,7 +150,9 @@ const LinePlot = ({
                     line: { color: theme.palette.secondary.main, width: 2 },
                     marker: { color: theme.palette.secondary.dark, size: 7 },
                     mode: showMarkers ? "lines+markers" : "lines",
-                    name: legendNameSecond || "",
+                    name: legendNameSecond
+                      ? truncateLegend(legendNameSecond)
+                      : "",
                     type: "scatter",
                     x: xdataSecond,
                     y: ydataSecond
