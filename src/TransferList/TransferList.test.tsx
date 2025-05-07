@@ -386,6 +386,7 @@ describe("TransferList", () => {
     expect(unchangedSourceItems.length).toBe(3);
     expect(unchangedTargetItems.length).toBe(0);
 
+    // rerender with selectedItems as ["Apples", "Pears"]
     rerender(
       <TransferList
         items={defaultItemArray}
@@ -417,6 +418,10 @@ describe("TransferList", () => {
       "checked",
       false
     );
+
+    // Check that no transfer occurred, since the selectedItems list is directly controlled
+    // (no re-selection and transfer should happen unless selectedItems is updated)
+    expect(transferFn).toHaveBeenCalledTimes(1); // onChange should only be called once (on initial transfer)
   });
 
   test("select all checkboxes are disabled unless the relevant list has entries", () => {

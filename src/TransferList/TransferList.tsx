@@ -13,7 +13,7 @@ import {
   TransferListItem,
   TransferListProps
 } from "./TransferList.types";
-import React, { useState } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 
 import SearchBar from "../SearchBar";
 
@@ -40,6 +40,32 @@ export default function TransferList({
   const [selectedItemKeys, setSelectedItemKeys] = useState<string[]>(
     defaultSelectedItems || []
   );
+
+  // Keep track of the previous selected items
+  const prevSelectedItemsRef = useRef<string[]>();
+
+  useLayoutEffect(() => {
+    const prev = prevSelectedItemsRef.current;
+
+    // Utility function to convert an array to a Set
+    const toSet = (arr: string[] | undefined) => new Set(arr || []);
+
+    // Convert selectedItems and prev to Sets for easier comparison
+    const currentSet = toSet(selectedItems);
+    const prevSet = toSet(prev);
+
+    // Check if the selected items have changed
+    const hasChanged =
+      currentSet.size !== prevSet.size ||
+      [...currentSet].some(item => !prevSet.has(item));
+
+    if (hasChanged) {
+      setChecked([]);
+    }
+
+    // Update the selected item keys if selectedItems is provided
+    prevSelectedItemsRef.current = selectedItems;
+  }, [selectedItems]);
 
   /**
    * Get primary label from item
