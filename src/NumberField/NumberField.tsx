@@ -106,7 +106,7 @@ export default function NumberField(props: NumberFieldProps) {
             }
       }
       type="number"
-      value={currentValue}
+      value={currentValue ?? ""}
       slotProps={{
         input: {
           ...(endAdornment && {

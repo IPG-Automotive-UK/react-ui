@@ -48,7 +48,7 @@ describe("NumberField", () => {
     expect(inputBase.value).toBe("123");
   });
   test("Numberfield has a default value", () => {
-    const { container } = render(<NumberField defaultValue={22} />);
+    const { container } = render(<NumberField value={22} />);
 
     const input = container.querySelector(".MuiInputBase-input");
 
