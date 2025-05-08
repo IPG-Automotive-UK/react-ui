@@ -80,7 +80,10 @@ export default function IconWithLabel({
             component="p"
             variant="caption"
             sx={theme => ({
-              color: `color-mix(in srgb, ${theme.vars.palette.text.secondary} 60%, transparent)`,
+              color: theme.vars.palette.text.secondary,
+              ...theme.applyStyles("dark", {
+                opacity: 0.8
+              }),
               fontWeight: 400
             })}
           >

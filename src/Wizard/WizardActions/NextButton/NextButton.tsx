@@ -15,7 +15,9 @@ export default function NextButton({
     <Button
       onClick={onClick}
       variant="contained"
-      color="primary"
+      sx={theme => ({
+        color: theme.vars.palette.success.contrastText
+      })}
       size="large"
       disabled={disabled}
     >

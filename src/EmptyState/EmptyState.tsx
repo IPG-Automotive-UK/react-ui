@@ -1,4 +1,4 @@
-import { Box, Stack, Theme, Typography, alpha } from "@mui/material";
+import { Box, Stack, Theme, Typography, useColorScheme } from "@mui/material";
 
 import { EmptyStateProps } from "./EmptyState.types";
 import React from "react";
@@ -13,11 +13,13 @@ import React from "react";
  * @param {React.ReactElement[]} actions - Array of action elements (typically buttons)
  */
 function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
+  // get theme mode
+  const { mode } = useColorScheme();
   return (
     <Box
       sx={theme => ({
         alignItems: "center",
-        background: theme.palette.background.paper,
+        background: theme.vars.palette.background.paper,
         display: "flex",
         flexDirection: "column",
         flexGrow: 1,
@@ -31,9 +33,9 @@ function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
         <Box
           sx={theme => ({
             alignItems: "center",
-            backgroundColor: alpha(theme.palette.primary.main, 0.04),
+            backgroundColor: `color-mix(in srgb, ${theme.vars.palette.primary.main} 4%, transparent)`,
             ...theme.applyStyles("dark", {
-              backgroundColor: alpha(theme.palette.primary.main, 0.08)
+              backgroundColor: `color-mix(in srgb, ${theme.vars.palette.primary.main} 8%, transparent)`
             }),
             borderRadius: 300,
             display: "flex",
@@ -45,7 +47,7 @@ function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
         >
           {React.cloneElement(icon, {
             sx: (theme: Theme) => ({
-              color: theme.palette.primary.main,
+              color: theme.vars.palette.primary.main,
               height: 100,
               width: 100,
               ...(icon.props.sx || {})
@@ -63,7 +65,7 @@ function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
           <Typography
             variant="h6"
             sx={{
-              color: theme => theme.palette.text.primary,
+              color: theme => theme.vars.palette.text.primary,
               fontWeight: 700
             }}
           >
@@ -75,7 +77,7 @@ function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
           <Typography
             variant="body2"
             sx={{
-              color: theme => theme.palette.text.secondary,
+              color: theme => theme.vars.palette.text.secondary,
               fontSize: "16px"
             }}
           >
@@ -83,7 +85,6 @@ function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
           </Typography>
         ) : null}
       </Stack>
-
       {actions && actions.length > 0 ? (
         <Stack
           direction="row"
@@ -94,7 +95,15 @@ function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
           }}
         >
           {actions.map((action, index) =>
-            React.cloneElement(action, { key: index })
+            React.cloneElement(action, {
+              key: index,
+              sx: (theme: Theme) => ({
+                color:
+                  mode === "light"
+                    ? theme.vars.palette.common.white
+                    : theme.vars.palette.common.black
+              })
+            })
           )}
         </Stack>
       ) : null}

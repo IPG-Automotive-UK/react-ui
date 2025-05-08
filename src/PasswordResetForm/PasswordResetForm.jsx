@@ -54,7 +54,9 @@ export default function PasswordResetForm({ loading, onSubmit }) {
           fullWidth
           id="submit"
           variant="contained"
-          color="primary"
+          sx={theme => ({
+            color: theme.vars.palette.success.contrastText
+          })}
           disabled={loading}
           endIcon={loading ? <CircularProgress size={24} /> : null}
         >

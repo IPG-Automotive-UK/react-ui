@@ -86,13 +86,11 @@ const LoadErrorMessage = ({
       <Typography
         variant="body2"
         sx={[
-          {
-            textAlign: "center"
-          },
+          { textAlign: "center" },
           theme => ({
             color: theme.vars.palette.text.primary,
             ...theme.applyStyles("dark", {
-              color: `color-mix(in srgb, ${theme.vars.palette.text.secondary} 70%)`
+              opacity: 0.7
             })
           })
         ]}
@@ -101,7 +99,14 @@ const LoadErrorMessage = ({
       </Typography>
       {/* Render the action button if actionButtonText prop is provided */}
       {actionButtonText && (
-        <Button variant="contained" size="small" onClick={onButtonClick}>
+        <Button
+          sx={theme => ({
+            color: theme.vars.palette.success.contrastText
+          })}
+          variant="contained"
+          size="small"
+          onClick={onButtonClick}
+        >
           {actionButtonText}
         </Button>
       )}
@@ -145,7 +150,7 @@ const LoadErrorMessage = ({
           sx={theme => ({
             color: theme.vars.palette.text.primary,
             ...theme.applyStyles("dark", {
-              color: `color-mix(in srgb, ${theme.vars.palette.common.white} 70%, ${theme.vars.palette.text.secondary} 30%)`
+              opacity: 0.7
             })
           })}
         >

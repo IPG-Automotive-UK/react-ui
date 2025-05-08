@@ -217,7 +217,9 @@ export default function RegistrationForm({
           fullWidth
           id="submit"
           variant="contained"
-          color="primary"
+          sx={theme => ({
+            color: theme.vars.palette.success.contrastText
+          })}
           disabled={loading}
           endIcon={loading ? <CircularProgress size={24} /> : null}
         >

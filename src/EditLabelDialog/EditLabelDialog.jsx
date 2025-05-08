@@ -205,7 +205,6 @@ export default function EditLabelDialog({
         <Button
           variant="contained"
           onClick={handleSave}
-          color="primary"
           disabled={
             name.trim().length === 0 ||
             color.length === 0 ||
@@ -213,6 +212,9 @@ export default function EditLabelDialog({
             !hasChanged ||
             !isLabelLengthValid
           }
+          sx={theme => ({
+            color: theme.vars.palette.success.contrastText
+          })}
         >
           {isNew ? "Add" : "Save"}
         </Button>

@@ -5,8 +5,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Typography,
-  alpha
+  Typography
 } from "@mui/material";
 
 import React from "react";
@@ -28,7 +27,7 @@ export function StatusCountTable({ title, count }: StatusCountTableProps) {
   return (
     <TableContainer
       sx={theme => ({
-        backgroundColor: theme.palette.background.default,
+        backgroundColor: theme.vars.palette.background.default,
         borderRadius: "4px",
         boxShadow: 8,
         maxWidth: "280px"
@@ -42,10 +41,10 @@ export function StatusCountTable({ title, count }: StatusCountTableProps) {
             }}
           >
             <TableCell
-              sx={{
-                background: theme => alpha(theme.palette.primary.main, 0.05),
+              sx={theme => ({
+                background: `color-mix(in srgb, ${theme.vars.palette.primary.main} 5%, transparent)`,
                 pl: 2
-              }}
+              })}
             >
               <Typography variant="subtitle2" data-testid="status-count-title">
                 {title}
@@ -53,10 +52,10 @@ export function StatusCountTable({ title, count }: StatusCountTableProps) {
             </TableCell>
             <TableCell
               align="right"
-              sx={{
-                background: theme => alpha(theme.palette.primary.main, 0.05),
+              sx={theme => ({
+                background: `color-mix(in srgb, ${theme.vars.palette.primary.main} 5%, transparent)`,
                 pr: 2
-              }}
+              })}
             >
               <Typography
                 variant="subtitle2"
@@ -78,7 +77,7 @@ export function StatusCountTable({ title, count }: StatusCountTableProps) {
             >
               <TableCell
                 sx={theme => ({
-                  backgroundColor: theme.palette.background.default,
+                  backgroundColor: theme.vars.palette.background.default,
                   pl: 2
                 })}
                 component="th"
@@ -99,7 +98,7 @@ export function StatusCountTable({ title, count }: StatusCountTableProps) {
               <TableCell
                 align="right"
                 sx={theme => ({
-                  backgroundColor: theme.palette.background.default,
+                  backgroundColor: theme.vars.palette.background.default,
                   pr: 2
                 })}
               >
