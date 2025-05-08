@@ -59,7 +59,7 @@ function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
                     color: theme.palette.primary.main,
                     height: 100,
                     width: 100,
-                    ...((icon.props.sx as object) || {})
+                    ...(icon.props.sx || {})
                   })
                 }))}
         </Box>
