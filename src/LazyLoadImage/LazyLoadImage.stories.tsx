@@ -1,4 +1,4 @@
-import { Box, Grid2 as Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import { Meta, StoryFn } from "@storybook/react";
 
 import LazyLoadImage from "./LazyLoadImage";

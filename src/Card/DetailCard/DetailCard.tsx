@@ -156,7 +156,7 @@ function DetailCardHeader({
           <TruncatedTooltip
             component={Typography}
             sx={theme => ({
-              color: theme.palette.text.secondary,
+              color: theme.vars.palette.text.secondary,
               fontSize: 14,
               fontWeight: 400
             })}

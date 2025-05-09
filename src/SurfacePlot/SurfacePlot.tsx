@@ -1,4 +1,4 @@
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Typography, useColorScheme, useTheme } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
 import ConditionalDialog from "../ConditionalDialog";
@@ -20,6 +20,9 @@ const SurfacePlot = ({
 }: SurfacePlotProps) => {
   // theme hook
   const theme = useTheme();
+
+  // get the current theme mode
+  const { mode } = useColorScheme();
 
   // state for fullscreen
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -90,7 +93,10 @@ const SurfacePlot = ({
             {
               colorbar: {
                 tickfont: {
-                  color: theme.palette.mode === "light" ? "" : "white",
+                  color:
+                    mode === "light"
+                      ? theme.palette.text.primary
+                      : theme.palette.common.white,
                   family: "Montserrat, sans-serif",
                   shadow: "none",
                   size: 12,
@@ -112,25 +118,34 @@ const SurfacePlot = ({
             scene: {
               camera: { eye: { x: 2 } },
               xaxis: {
-                color: theme.palette.text.primary,
+                color:
+                  mode === "light"
+                    ? theme.palette.text.primary
+                    : theme.palette.common.white,
                 exponentformat: "E",
-                gridcolor: theme.palette.divider,
+                gridcolor: theme.vars.palette.divider,
                 showgrid: showGrid,
                 tickangle: 45,
                 title: { font: { size: 12 }, text: wrappedLabel.x }
               },
               yaxis: {
-                color: theme.palette.text.primary,
+                color:
+                  mode === "light"
+                    ? theme.palette.text.primary
+                    : theme.palette.common.white,
                 exponentformat: "E",
-                gridcolor: theme.palette.divider,
+                gridcolor: theme.vars.palette.divider,
                 showgrid: showGrid,
                 tickangle: -45,
                 title: { font: { size: 12 }, text: wrappedLabel.y }
               },
               zaxis: {
-                color: theme.palette.text.primary,
+                color:
+                  mode === "light"
+                    ? theme.palette.text.primary
+                    : theme.palette.common.white,
                 exponentformat: "E",
-                gridcolor: theme.palette.divider,
+                gridcolor: theme.vars.palette.divider,
                 showgrid: showGrid,
                 title: { font: { size: 12 }, text: wrappedLabel.z }
               }

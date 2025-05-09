@@ -1,4 +1,4 @@
-import { Box, Typography, alpha, debounce } from "@mui/material";
+import { Box, Typography, debounce } from "@mui/material";
 import {
   IsParentOrSelfDisabledInput,
   TreeNodeItem,
@@ -236,7 +236,7 @@ const TreeViewList = ({
       <Box
         ref={boxRef}
         sx={theme => ({
-          background: theme.palette.background.paper,
+          background: theme.vars.palette.background.paper,
           display: "flex",
           flexDirection: "column",
           height,
@@ -247,7 +247,7 @@ const TreeViewList = ({
         <Box sx={{ flexShrink: 0 }}>
           <Box
             sx={theme => ({
-              background: theme.palette.background.paper,
+              background: theme.vars.palette.background.paper,
               marginRight: 0.2,
               position: "sticky",
               top: 0,
@@ -257,7 +257,7 @@ const TreeViewList = ({
             {/* Additional layer to block content behind */}
             <Box
               sx={theme => ({
-                background: theme.palette.background.paper, // Matching background color
+                background: theme.vars.palette.background.paper, // Matching background color
                 height: "100%",
                 left: 0,
                 position: "absolute",
@@ -369,7 +369,7 @@ const TreeViewList = ({
             {items.length > 0 && treeDisplayItems.length === 0 && (
               <Typography
                 data-testid="none-selected"
-                sx={{ color: theme => theme.palette.grey[500], pl: 0.5 }}
+                sx={{ color: theme => theme.vars.palette.grey[500], pl: 0.5 }}
               >
                 No search results.
               </Typography>
@@ -377,7 +377,7 @@ const TreeViewList = ({
             {items.length === 0 && (
               <Typography
                 data-testid="none-selected"
-                sx={{ color: theme => theme.palette.grey[500], pl: 0.5 }}
+                sx={{ color: theme => theme.vars.palette.grey[500], pl: 0.5 }}
               >
                 No data is available.
               </Typography>
@@ -442,14 +442,14 @@ const TooltipTreeItem = (
         // apply color change to icon when disabled
         "& .MuiTreeItem-iconContainer": {
           color: disabled
-            ? theme.palette.text.disabled
-            : theme.palette.text.primary,
+            ? theme.vars.palette.text.disabled
+            : theme.vars.palette.text.primary,
           pointerEvents: "auto"
         },
         "& .MuiTreeItem-label": {
           color: disabled
-            ? theme.palette.text.disabled
-            : theme.palette.text.primary,
+            ? theme.vars.palette.text.disabled
+            : theme.vars.palette.text.primary,
           cursor: disabled ? "" : "pointer",
           margin: 0,
           opacity: disabled ? 0.6 : 1,
@@ -457,7 +457,7 @@ const TooltipTreeItem = (
         },
 
         "& .MuiTreeItem-root": {
-          borderLeft: `1px solid ${alpha(theme.palette.text.primary, 0.1)}`,
+          borderLeft: `1px solid color-mix(in srgb, ${theme.vars.palette.text.primary} 10%, transparent)`,
           marginLeft: "4px"
         }
       })}

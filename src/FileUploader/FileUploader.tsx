@@ -1,11 +1,12 @@
 import {
   Box,
   Chip,
-  Grid2 as Grid,
+  Grid,
   LinearProgress,
   Stack,
   Typography,
-  alpha
+  alpha,
+  useColorScheme
 } from "@mui/material";
 
 import FileUploadIcon from "@mui/icons-material/FileUpload";
@@ -47,6 +48,8 @@ export default function FileUploader({
   // are we rendering an error state?
   const isError = rejectionMessage || error;
 
+  const { mode } = useColorScheme();
+
   // render
   return (
     <Box data-testid="dropzone-base">
@@ -66,21 +69,21 @@ export default function FileUploader({
           "&:hover": {
             "& .dropzoneText": {
               color: isError
-                ? theme.palette.error.main
-                : theme.palette.primary.main
+                ? theme.vars.palette.error.main
+                : theme.vars.palette.primary.main
             },
             background: isError
               ? "inherit"
               : alpha(theme.palette.primary.main, 0.04),
             borderColor: isError
-              ? theme.palette.error.main
-              : theme.palette.primary.main,
-            color: theme.palette.primary.main
+              ? theme.vars.palette.error.main
+              : theme.vars.palette.primary.main,
+            color: theme.vars.palette.primary.main
           },
           ".dropzoneSingleFile, .dropzoneSingleFile > *": {
             color: disabled
-              ? theme.palette.text.disabled
-              : theme.palette.primary.main
+              ? theme.vars.palette.text.disabled
+              : theme.vars.palette.primary.main
           },
           ".dropzoneSingleFile, .dropzoneText": {
             alignItems: "center",
@@ -91,15 +94,17 @@ export default function FileUploader({
           },
           ".dropzoneText, .dropzoneText > *": {
             color: isError
-              ? theme.palette.error.main
+              ? theme.vars.palette.error.main
               : disabled
-                ? theme.palette.text.disabled
-                : theme.palette.mode === "dark"
-                  ? theme.palette.text.primary
-                  : theme.palette.text.secondary
+                ? theme.vars.palette.text.disabled
+                : mode === "dark"
+                  ? theme.vars.palette.text.primary
+                  : theme.vars.palette.text.secondary
           },
-          background: theme.palette.background.paper,
-          borderColor: error ? theme.palette.error.main : theme.palette.divider,
+          background: theme.vars.palette.background.paper,
+          borderColor: error
+            ? theme.vars.palette.error.main
+            : theme.vars.palette.divider,
           borderStyle: "dashed",
           borderWidth: 1,
           boxSizing: "border-box",

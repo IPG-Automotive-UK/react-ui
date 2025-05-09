@@ -15,12 +15,12 @@ export default function SelectorButton({
       onClick={onClick}
       sx={theme => ({
         "&:hover": {
-          boxShadow: `0 1px 5px 1px ${theme.palette.action.focus}`
+          boxShadow: `0 1px 5px 1px ${theme.vars.palette.action.focus}`
         },
 
         alignItems: "center",
-        background: theme.palette.background.paper,
-        border: `1px solid ${theme.palette.divider}`,
+        background: theme.vars.palette.background.paper,
+        border: `1px solid ${theme.vars.palette.divider}`,
         borderRadius: 4,
         display: "flex",
         flexDirection: "column",

@@ -1,10 +1,11 @@
 import * as React from "react";
 
 import { describe, expect, test, vi } from "vitest";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "../../TestUtils";
 
 import { SidebarFilter } from "./SidebarFilter";
 import userEvent from "@testing-library/user-event";
+import { waitFor } from "@testing-library/react";
 
 // Default props
 const defaultProps = {
