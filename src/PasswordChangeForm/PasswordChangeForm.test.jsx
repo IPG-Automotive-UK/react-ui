@@ -1,8 +1,9 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "../TestUtils";
 
 import PasswordChangeForm from "./";
 import React from "react";
 import userEvent from "@testing-library/user-event";
+import { waitFor } from "@testing-library/react";
 
 /**
  * Test setup function that renders component and returns elements for testing

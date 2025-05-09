@@ -3,6 +3,8 @@ import {
   Dialog,
   DialogContent,
   Typography,
+  alpha,
+  useColorScheme,
   useTheme
 } from "@mui/material";
 import {
@@ -33,6 +35,8 @@ const LinePlot = ({
 }: LinePlotProps) => {
   // theme hook
   const theme = useTheme();
+
+  const { mode } = useColorScheme();
 
   // ref to get the size of the plot div for axis labels wrapping
   const plotRef = useRef<HTMLDivElement>(null);
@@ -149,7 +153,10 @@ const LinePlot = ({
             font: { family: "Montserrat, sans-serif" },
             legend: {
               font: {
-                color: theme.vars.palette.text.primary,
+                color:
+                  mode === "light"
+                    ? theme.palette.text.primary
+                    : theme.palette.common.white,
                 size: 12
               },
               orientation: "v",
@@ -163,8 +170,14 @@ const LinePlot = ({
             plot_bgcolor: "transparent",
             showlegend: !!(legendNameFirst && legendNameSecond),
             xaxis: {
-              color: theme.vars.palette.text.primary,
-              gridcolor: theme.vars.palette.divider,
+              color:
+                mode === "light"
+                  ? theme.palette.common.black
+                  : theme.palette.common.white,
+              gridcolor:
+                mode === "light"
+                  ? theme.palette.divider
+                  : alpha(theme.palette.divider, 0.15),
               showgrid: showGrid,
               title: {
                 font: { size: 12 },
@@ -173,8 +186,15 @@ const LinePlot = ({
               }
             },
             yaxis: {
-              color: theme.vars.palette.text.primary,
-              gridcolor: theme.vars.palette.divider,
+              color:
+                mode === "light"
+                  ? theme.palette.common.black
+                  : theme.palette.common.white,
+              gridcolor:
+                mode === "light"
+                  ? theme.vars.palette.divider
+                  : alpha(theme.palette.divider, 0.15),
+
               showgrid: showGrid,
               title: {
                 font: { size: 12 },

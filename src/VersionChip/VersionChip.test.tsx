@@ -56,7 +56,6 @@ describe("VersionChip", () => {
     const styles = window.getComputedStyle(chipElement);
     // resolved color from alpha(theme.palette.divider, 0.23) and theme.palette.background.default
     expect(styles.backgroundColor).toBe("rgb(255, 255, 255)");
-    console.log(styles.backgroundColor, "backgroundcolor");
     expect(styles.border).toBe("1px solid rgba(0, 0, 0, 0.23)");
   });
 
