@@ -33,12 +33,20 @@ describe("DifferenceChip Component", () => {
   test("applies correct styles for positive value", () => {
     renderComponent(10, "%");
     const chip = screen.getByText("10%").closest(".MuiChip-root");
-    expect(chip).toHaveStyle("background-color: rgba(46, 125, 50, 0.12)");
+    expect(chip).toHaveStyle({
+      backgroundColor: expect.stringContaining(
+        "color-mix(in srgb, var(--ipg-palette-success-main) 12%, transparent)"
+      )
+    });
   });
 
   test("applies correct styles for negative value", () => {
     renderComponent(-5, "ms");
     const chip = screen.getByText("5ms").closest(".MuiChip-root");
-    expect(chip).toHaveStyle("background-color: rgba(211, 47, 47, 0.12)");
+    expect(chip).toHaveStyle({
+      backgroundColor: expect.stringContaining(
+        "color-mix(in srgb, var(--ipg-palette-error-main) 12%, transparent)"
+      )
+    });
   });
 });

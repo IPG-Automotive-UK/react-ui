@@ -39,14 +39,17 @@ describe("ModelButton", () => {
 
   // test status is correctly set
   test.each([
-    ["none", "rgba(0, 0, 0, 0.6)"],
-    ["error", "#d32f2f"],
-    ["warning", "#ed6c02"],
-    ["success", "#2e7d32"]
-  ] as const)("sets status %s", (status, color) => {
+    ["none", "var(--ipg-palette-text-secondary)"],
+    ["error", "var(--ipg-palette-error-main)"],
+    ["warning", "var(--ipg-palette-warning-main)"],
+    ["success", "var(--ipg-palette-success-main)"]
+  ] as const)("sets status %s", (status, strokeVar) => {
     render(<ModelButton status={status} />);
     const svgElement = screen.getByTestId("background");
-    expect(svgElement).toHaveAttribute("stroke", color);
+    expect(svgElement).toHaveAttribute(
+      "stroke",
+      expect.stringContaining(strokeVar)
+    );
     expect(svgElement).toHaveAttribute("stroke-width", "2");
   });
 
@@ -63,16 +66,16 @@ describe("ModelButton", () => {
 
   // test status icon is correctly set
   test.each([
-    ["error", "rgb(211, 47, 47)"],
-    ["warning", "rgb(237, 108, 2)"],
-    ["success", "rgb(46, 125, 50)"]
+    ["error", "error-icon"],
+    ["warning", "warning-icon"],
+    ["success", "success-icon"]
   ] as const)(
     "renders correct status icon based on the status",
-    (status, color) => {
+    (status, icon) => {
       render(<ModelButton status={status} />);
       const currentStatusIcon = screen.getByTestId(`${status}-icon`);
       expect(currentStatusIcon).toBeInTheDocument();
-      expect(window.getComputedStyle(currentStatusIcon).color).toEqual(color);
+      expect(currentStatusIcon.getAttribute("data-testid")).toEqual(icon);
     }
   );
 

@@ -136,10 +136,10 @@ const defaultComponents = {
   MuiDataGrid: {
     styleOverrides: {
       footerContainer: ({ theme }: MuiTheme) => ({
-        backgroundColor: theme.palette.background.paper
+        backgroundColor: theme.vars.palette.background.paper
       }),
       main: ({ theme }: MuiTheme) => ({
-        backgroundColor: theme.palette.background.paper
+        backgroundColor: theme.vars.palette.background.paper
       }),
       root: ({ theme }: MuiTheme) => ({
         "& .MuiDataGrid-cell:focus, .MuiDataGrid-cell:focus-within, .MuiDataGrid-columnHeader:focus, .MuiDataGrid-columnHeader:focus-within":
@@ -147,24 +147,25 @@ const defaultComponents = {
             outline: "none"
           },
         "& .MuiDataGrid-columnSeparator": {
-          color: theme.palette.divider
+          color: theme.vars.palette.divider
         },
         "& .MuiDataGrid-container--top [role='row'], & .MuiDataGrid-container--bottom [role='row']":
           {
-            backgroundColor: theme.palette.background.paper
+            backgroundColor: theme.vars.palette.background.paper
           },
         "& .MuiDataGrid-withBorderColor": {
-          borderColor: theme.palette.divider
+          borderColor: theme.vars.palette.divider
         },
-        "--DataGrid-rowBorderColor": theme.palette.divider,
-        borderColor: theme.palette.divider
+        "--DataGrid-rowBorderColor": theme.vars.palette.divider,
+        borderColor: theme.vars.palette.divider
       })
     }
   },
+
   MuiFormLabel: {
     styleOverrides: {
       asterisk: ({ theme }: MuiTheme) => ({
-        color: theme.palette.error.main
+        color: theme.vars.palette.error.main
       })
     }
   },
@@ -173,6 +174,13 @@ const defaultComponents = {
       text: {
         fontFamily: "Montserrat, Arial, sans-serif"
       }
+    }
+  },
+  MuiTableCell: {
+    styleOverrides: {
+      root: ({ theme }: MuiTheme) => ({
+        borderBottom: `1px solid ${theme.vars.palette.divider}`
+      })
     }
   },
   MuiTooltip: {
@@ -213,9 +221,9 @@ const mainTheme: ThemeOptions = {
             root: ({ theme }) => ({
               "&.MuiButton-containedPrimary": {
                 "&.Mui-disabled": {
-                  color: `${theme.palette.text.disabled} !important`
+                  color: `${theme.vars.palette.text.disabled} !important`
                 },
-                color: theme.palette.background.default
+                color: theme.vars.palette.background.default
               }
             })
           }

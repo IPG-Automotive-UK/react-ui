@@ -48,7 +48,7 @@ export function PrototypePreview({
     <Box
       data-testid="prototype-preview-wrapper"
       sx={{
-        background: theme => theme.palette.background.paper,
+        background: theme => theme.vars.palette.background.paper,
         display: "flex",
         flexDirection: "column",
         gap: 1,

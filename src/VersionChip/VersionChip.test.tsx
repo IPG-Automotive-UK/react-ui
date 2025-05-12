@@ -43,20 +43,30 @@ describe("VersionChip", () => {
   it("applies correct background color when `selected` is true", () => {
     render(<VersionChip version="1.0" selected={true} />);
     const chipElement = screen.getByTestId("version-chip");
-    const styles = window.getComputedStyle(chipElement);
-    // passing resolved color from alpha(theme.palette.info.main, 0.12) and theme.palette.primary.main
-    expect(styles.backgroundColor).toBe("rgba(2, 136, 209, 0.12)");
-    expect(styles.border).toBe("1px solid #1976d2");
+    expect(chipElement).toHaveStyle({
+      borderColor: expect.stringContaining("var(--ipg-palette-primary-main)")
+    });
+    expect(chipElement).toHaveStyle({
+      backgroundColor: expect.stringContaining(
+        "color-mix(in srgb, var(--ipg-palette-info) 12%, transparent)"
+      )
+    });
   });
 
   // check background color when the `selected` prop is false
   it("applies correct background color when `selected` is false", () => {
     render(<VersionChip version="1.0" selected={false} />);
     const chipElement = screen.getByTestId("version-chip");
-    const styles = window.getComputedStyle(chipElement);
-    // resolved color from alpha(theme.palette.divider, 0.23) and theme.palette.background.default
-    expect(styles.backgroundColor).toBe("rgb(255, 255, 255)");
-    expect(styles.border).toBe("1px solid rgba(0, 0, 0, 0.23)");
+    expect(chipElement).toHaveStyle({
+      borderColor: expect.stringContaining(
+        "color-mix(in srgb, var(--ipg-palette-divider) 23%, transparent)"
+      )
+    });
+    expect(chipElement).toHaveStyle({
+      backgroundColor: expect.stringContaining(
+        "var(--ipg-palette-background-default)"
+      )
+    });
   });
 
   // check if warning is logged for invalid version format
