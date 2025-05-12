@@ -53,5 +53,4 @@ export type NumberFieldProps = Omit<
    * The numeric value of the input.
    */
   value?: number | null;
-  defaultValue?: number | null;
 };

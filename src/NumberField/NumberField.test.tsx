@@ -47,13 +47,6 @@ describe("NumberField", () => {
     await user.type(inputBase, "123");
     expect(inputBase.value).toBe("123");
   });
-  test("Numberfield has a default value", () => {
-    const { container } = render(<NumberField defaultValue={22} />);
-
-    const input = container.querySelector(".MuiInputBase-input");
-
-    expect(input).toHaveValue(22);
-  });
   // This test is not a true reflection of behaviour on all browsers
   // Safari will still allow the user to type in letters
   test("Numberfield does not allow typing of letters", async () => {

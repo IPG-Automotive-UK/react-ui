@@ -10,7 +10,6 @@ export default function NumberField(props: NumberFieldProps) {
   // destructure custom props and create defaults different from the MUI TextField component
   // spread the rest of the mui component props
   const {
-    defaultValue,
     endAdornment,
     error,
     helperText,
@@ -27,20 +26,12 @@ export default function NumberField(props: NumberFieldProps) {
     ...rest
   } = props;
 
-  // determine if this is a controlled or uncontrolled component
-  const isControlled = value !== undefined;
-
   // state to keep track of the value of the number field even when invalid
-  const [currentValue, setCurrentValue] = useState<number | null>(
-    isControlled ? (value ?? null) : (defaultValue ?? null)
-  );
+  const [currentValue, setCurrentValue] = useState(value);
 
   useEffect(() => {
-    // only update internal state from props if this is a controlled component
-    if (isControlled) {
-      setCurrentValue(value);
-    }
-  }, [value, min, max, isControlled]);
+    setCurrentValue(value);
+  }, [value, min, max]);
 
   // method to return value validity and error message
   const isValidValue = (value?: number | null) => {
@@ -91,11 +82,6 @@ export default function NumberField(props: NumberFieldProps) {
     }
   };
 
-  // determine input props based on controlled/uncontrolled status
-  const inputProps = isControlled
-    ? { value: currentValue ?? "" }
-    : { defaultValue: defaultValue ?? "" };
-
   // return a MUI TextField component
   // explicitly declare custom props and defaults
   // spread the rest of the mui component props
@@ -120,7 +106,7 @@ export default function NumberField(props: NumberFieldProps) {
             }
       }
       type="number"
-      {...inputProps}
+      value={currentValue ?? ""}
       slotProps={{
         input: {
           ...(endAdornment && {
@@ -134,6 +120,7 @@ export default function NumberField(props: NumberFieldProps) {
             )
           })
         },
+
         inputLabel: { shrink: true }
       }}
     />
