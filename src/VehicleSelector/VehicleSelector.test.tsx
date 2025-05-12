@@ -366,10 +366,7 @@ describe("VehicleSelector", () => {
     );
 
     expect(clearButton).toBeInTheDocument();
-    await act(() => {
-      (clearButton as HTMLElement)?.click();
-    });
-
+    await userEvent.click(clearButton as HTMLElement);
     await waitFor(() =>
       expect(
         variantField.parentElement?.querySelector('[aria-label="Clear"]')

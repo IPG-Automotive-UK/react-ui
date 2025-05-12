@@ -29,9 +29,13 @@ describe("VersionChip", () => {
   });
   // check nothing is rendered if version format is wrong
   it("doesn't render when version is wrong format", () => {
-    // suppress expected console warning during test for invalid version format
-    vi.spyOn(console, "warn").mockImplementation(() => {});
+    // set up spy to intercept and silence console warnings while allowing test verification
+    const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
     render(<VersionChip version="1.1.1"></VersionChip>);
+    // verify that invalid version format triggered a console warning
+    expect(warnSpy).toHaveBeenCalled();
+    // restore original console.warn to prevent affecting other tests
+    warnSpy.mockRestore();
     expect(screen.queryByText("1.1.1")).not.toBeInTheDocument();
   });
   // check minor version has correct svg
