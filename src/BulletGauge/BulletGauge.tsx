@@ -14,8 +14,8 @@ const BulletGauge = ({ title, value, suffix }: BulletGaugeProps) => {
   // Limit value to 100
   const limitedValue = Math.min(value, 100);
 
+  // get the current theme mode
   const { mode } = useColorScheme();
-
   return (
     <Plotly
       data={[

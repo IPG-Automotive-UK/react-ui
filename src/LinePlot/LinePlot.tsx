@@ -36,6 +36,7 @@ const LinePlot = ({
   // theme hook
   const theme = useTheme();
 
+  // get the current theme mode
   const { mode } = useColorScheme();
 
   // ref to get the size of the plot div for axis labels wrapping

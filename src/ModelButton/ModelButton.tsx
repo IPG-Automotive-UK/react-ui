@@ -104,6 +104,7 @@ export default function ModelButton({
   // use theme hook
   const theme = useTheme();
 
+  // get the current theme mode
   const { mode } = useColorScheme();
 
   // is button being hovered over

@@ -33,15 +33,17 @@ const config: StorybookConfig = {
       }
     }
   },
-  // Storybook’s Vite build will otherwise pull in the CJS entry of hoist-non-react-statics (which has no default export) and blow up. Point it explicitly at the ESM bundle so MUI v7 work.
-  viteFinal: async viteConfig => {
-    viteConfig.resolve = viteConfig.resolve || {};
-    viteConfig.resolve.alias = {
-      ...(viteConfig.resolve.alias || {}),
-      "hoist-non-react-statics":
-        "hoist-non-react-statics/dist/hoist-non-react-statics.esm.js"
-    };
-    return viteConfig;
+  // Ensure Vite pre-bundles MUI 7 and Emotion dependencies
+  // Fixes dynamic import errors in Storybook
+  viteFinal: async config => {
+    config.optimizeDeps ??= { include: [] };
+    config.optimizeDeps.include = [
+      ...(config.optimizeDeps.include || []),
+      "@mui/material",
+      "@emotion/react",
+      "@emotion/styled"
+    ];
+    return config;
   }
 };
 

@@ -240,9 +240,6 @@ export const WithImageAndVersionChip = {
 const sx = {
   headerTableCell: {
     color: (theme: Theme) => theme.vars.palette.text.secondary,
-    // theme.palette.mode === "light"
-    //   ? "rgba(0, 0, 0, 0.6)"
-    //   : "rgba(255, 255, 255, 0.7)",
     fontSize: "16px"
   },
   tableCell: {
