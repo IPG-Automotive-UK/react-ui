@@ -346,13 +346,15 @@ describe("VehicleSelector", () => {
       }
     ];
 
-    render(
-      <VehicleSelectorWithState
-        {...defaultProps}
-        value={value}
-        multipleSelection={false}
-      />
-    );
+    await act(() => {
+      render(
+        <VehicleSelectorWithState
+          {...defaultProps}
+          value={value}
+          multipleSelection={false}
+        />
+      );
+    });
 
     expect(screen.getByRole("combobox", { name: /variant/i })).toHaveValue(
       "NN"
@@ -364,8 +366,7 @@ describe("VehicleSelector", () => {
     );
 
     expect(clearButton).toBeInTheDocument();
-    (clearButton as HTMLElement)?.click();
-
+    await userEvent.click(clearButton as HTMLElement);
     await waitFor(() =>
       expect(
         variantField.parentElement?.querySelector('[aria-label="Clear"]')
