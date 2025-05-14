@@ -1,6 +1,6 @@
 {
   "name": "@ipguk/react-ui",
-  "version": "12.6.3",
+  "version": "12.7.1",
   "description": "React UI component library for IPG web applications",
   "author": {
     "name": "IPG-Automotive-UK"
@@ -108,6 +108,7 @@
     "vite": "^5.3.4",
     "vite-plugin-eslint": "^1.8.1",
     "vitest": "^2.0.3",
+    "vitest-fail-on-console": "^0.7.1",
     "zxcvbn": "^4.4.2"
   },
   "dependencies": {

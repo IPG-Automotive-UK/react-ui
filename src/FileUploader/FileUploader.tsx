@@ -48,6 +48,7 @@ export default function FileUploader({
   // are we rendering an error state?
   const isError = rejectionMessage || error;
 
+  // get the current color scheme mode
   const { mode } = useColorScheme();
 
   // render

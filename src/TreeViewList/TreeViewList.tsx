@@ -257,7 +257,7 @@ const TreeViewList = ({
             {/* Additional layer to block content behind */}
             <Box
               sx={theme => ({
-                background: theme.vars.palette.background.paper, // Matching background color
+                background: theme.vars.palette.background.paper,
                 height: "100%",
                 left: 0,
                 position: "absolute",

@@ -15,6 +15,14 @@ import React from "react";
 function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
   // get theme mode
   const { mode } = useColorScheme();
+  // returns true if the element is an <img> tag
+  const isImgElement = (element: React.ReactElement): boolean => {
+    return (
+      element.type === "img" ||
+      (typeof element.type === "string" && element.type.toLowerCase() === "img")
+    );
+  };
+
   return (
     <Box
       sx={theme => ({
@@ -45,14 +53,17 @@ function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
             width: 180
           })}
         >
-          {React.cloneElement(icon, {
-            sx: (theme: Theme) => ({
-              color: theme.vars.palette.primary.main,
-              height: 100,
-              width: 100,
-              ...(icon.props.sx || {})
-            })
-          })}
+          {icon &&
+            (isImgElement(icon)
+              ? icon
+              : React.cloneElement(icon, {
+                  sx: (theme: Theme) => ({
+                    color: theme.palette.primary.main,
+                    height: 100,
+                    width: 100,
+                    ...(icon.props.sx || {})
+                  })
+                }))}
         </Box>
       ) : null}
       <Stack

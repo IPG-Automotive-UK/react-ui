@@ -14,10 +14,15 @@ export default function ModelButtonImage({
   const theme = useTheme();
 
   // get the current theme mode
-  const { mode } = useColorScheme();
+  const { mode, systemMode } = useColorScheme();
+
+  // resolve the actual mode: fallback to systemMode if mode is set to "system".
+  const effectiveMode = mode === "system" ? systemMode : mode;
 
   const defaultColor =
-    mode === "light" ? theme.palette.common.black : theme.palette.common.white;
+    effectiveMode === "light"
+      ? theme.palette.common.black
+      : theme.palette.common.white;
   const filter = solve(colord(color ?? defaultColor).toRgb());
 
   // render
