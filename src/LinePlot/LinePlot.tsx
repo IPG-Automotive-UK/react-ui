@@ -93,6 +93,7 @@ const LinePlot = ({
   // determine whether to show plot title
   const showTitle = title !== "";
 
+  console.log(theme.palette.mode, "mode..");
   return (
     <ConditionalDialog
       condition={isFullscreen}

@@ -215,7 +215,7 @@ const mainTheme: ThemeOptions = {
                 "&.Mui-disabled": {
                   color: `${theme.palette.text.disabled} !important`
                 },
-                color: theme.palette.background.default
+                color: theme.palette.common.black
               }
             })
           }

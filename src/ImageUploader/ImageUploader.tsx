@@ -45,6 +45,8 @@ export default function ImageUploader({
       onDelete,
       selectedFiles
     });
+
+  // get the current color scheme mode
   const { mode } = useColorScheme();
 
   // are we rendering an error state?
