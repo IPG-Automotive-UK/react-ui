@@ -3,7 +3,6 @@ import {
   Dialog,
   DialogContent,
   Typography,
-  alpha,
   useColorScheme,
   useTheme
 } from "@mui/material";
@@ -200,8 +199,8 @@ const LinePlot = ({
                   : theme.palette.common.white,
               gridcolor:
                 mode === "light"
-                  ? theme.palette.divider
-                  : alpha(theme.palette.divider, 0.15),
+                  ? theme?.colorSchemes?.light?.palette.divider
+                  : theme?.colorSchemes?.dark?.palette.divider,
               showgrid: showGrid,
               title: {
                 font: { size: 12 },
@@ -216,8 +215,8 @@ const LinePlot = ({
                   : theme.palette.common.white,
               gridcolor:
                 mode === "light"
-                  ? theme.palette.divider
-                  : alpha(theme.palette.divider, 0.15),
+                  ? theme?.colorSchemes?.light?.palette.divider
+                  : theme?.colorSchemes?.dark?.palette.divider,
               showgrid: showGrid,
               title: {
                 font: { size: 12 },
