@@ -153,11 +153,12 @@ const LinePlot = ({
                   {
                     hoverinfo: "x+y",
                     line: {
-                      color: theme.vars.palette.secondary.main,
+                      color:
+                        mode === "dark" ? theme.palette.secondary.main : "",
                       width: 2
                     },
                     marker: {
-                      color: theme.vars.palette.secondary.dark,
+                      color: theme.palette.secondary.dark,
                       size: 7
                     },
                     mode: showMarkers ? "lines+markers" : "lines",
@@ -215,9 +216,8 @@ const LinePlot = ({
                   : theme.palette.common.white,
               gridcolor:
                 mode === "light"
-                  ? theme.vars.palette.divider
+                  ? theme.palette.divider
                   : alpha(theme.palette.divider, 0.15),
-
               showgrid: showGrid,
               title: {
                 font: { size: 12 },

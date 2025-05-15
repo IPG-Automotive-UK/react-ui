@@ -1,5 +1,5 @@
 import { AccountTree, Layers } from "@mui/icons-material";
-import { Chip, chipClasses, useTheme } from "@mui/material";
+import { Chip, alpha, chipClasses, useTheme } from "@mui/material";
 
 import React from "react";
 import { VersionChipProps } from "./VersionChip.types";
@@ -41,12 +41,12 @@ const VersionChip = ({ version, selected = false }: VersionChipProps) => {
           },
           backgroundColor: theme =>
             selected
-              ? `color-mix(in srgb, ${theme.vars.palette.info} 12%, transparent)`
+              ? alpha(theme.palette.info.main, 0.12)
               : theme.vars.palette.background.default,
           border: theme =>
             selected
               ? `1px solid ${theme.vars.palette.primary.main}`
-              : `1px solid color-mix(in srgb, ${theme.vars.palette.divider} 23%, transparent)`,
+              : `1px solid ${alpha(theme.palette.divider, 0.23)}`,
           gap: "2px",
           height: 24,
           justifyContent: "center",

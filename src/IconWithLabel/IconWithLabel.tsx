@@ -1,7 +1,8 @@
-import { Box, Link, Stack, Theme, Tooltip, Typography } from "@mui/material";
+import { Box, Link, Stack, Tooltip, Typography, alpha } from "@mui/material";
 import React, { cloneElement } from "react";
 
 import { IconWithLabelProps } from "./IconWithLabel.types";
+import { Theme } from "@mui/material/styles";
 
 /**
  * A component to display an image with a label to the right
@@ -18,7 +19,7 @@ export default function IconWithLabel({
 }: IconWithLabelProps) {
   const iconProps = {
     sx: (theme: Theme) => ({
-      color: `color-mix(in srgb, ${theme.vars.palette.action.active} 54%, transparent)`,
+      color: alpha(theme.palette.action.active, 0.54),
       height: "20px",
       width: "20px"
     })
@@ -58,7 +59,7 @@ export default function IconWithLabel({
             underline="hover"
             sx={theme => ({
               "&:hover": {
-                color: theme.vars.palette.primary.main
+                color: theme.palette.primary.main
               }
             })}
           >
@@ -67,7 +68,7 @@ export default function IconWithLabel({
               component="p"
               variant="caption"
               sx={theme => ({
-                color: theme.vars.palette.primary.main,
+                color: theme.palette.primary.main,
                 fontWeight: 400
               })}
             >
@@ -80,10 +81,7 @@ export default function IconWithLabel({
             component="p"
             variant="caption"
             sx={theme => ({
-              color: theme.vars.palette.text.secondary,
-              ...theme.applyStyles("dark", {
-                opacity: 0.8
-              }),
+              color: alpha(theme.palette.text.secondary, 0.6),
               fontWeight: 400
             })}
           >

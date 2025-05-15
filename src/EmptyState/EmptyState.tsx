@@ -1,4 +1,4 @@
-import { Box, Stack, Theme, Typography, useColorScheme } from "@mui/material";
+import { Box, Stack, Theme, Typography } from "@mui/material";
 
 import { EmptyStateProps } from "./EmptyState.types";
 import React from "react";
@@ -13,8 +13,6 @@ import React from "react";
  * @param {React.ReactElement[]} actions - Array of action elements (typically buttons)
  */
 function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
-  // get theme mode
-  const { mode } = useColorScheme();
   // returns true if the element is an <img> tag
   const isImgElement = (element: React.ReactElement): boolean => {
     return (
@@ -105,17 +103,20 @@ function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
             justifyContent: "center"
           }}
         >
-          {actions.map((action, index) =>
-            React.cloneElement(action, {
-              key: index,
-              sx: (theme: Theme) => ({
-                color:
-                  mode === "light"
-                    ? theme.vars.palette.common.white
-                    : theme.vars.palette.common.black
-              })
-            })
-          )}
+          {actions && actions.length > 0 ? (
+            <Stack
+              direction="row"
+              spacing={1}
+              sx={{
+                alignItems: "center",
+                justifyContent: "center"
+              }}
+            >
+              {actions.map((action, index) =>
+                React.cloneElement(action, { key: index })
+              )}
+            </Stack>
+          ) : null}
         </Stack>
       ) : null}
     </Box>

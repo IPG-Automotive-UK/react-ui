@@ -100,9 +100,7 @@ const LoadErrorMessage = ({
       {/* Render the action button if actionButtonText prop is provided */}
       {actionButtonText && (
         <Button
-          sx={theme => ({
-            color: theme.vars.palette.success.contrastText
-          })}
+          color="primary"
           variant="contained"
           size="small"
           onClick={onButtonClick}
