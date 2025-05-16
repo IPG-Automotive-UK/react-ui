@@ -119,22 +119,28 @@ const SurfacePlot = ({
               camera: { eye: { x: 2 } },
               xaxis: {
                 color:
-                  mode === "light"
-                    ? theme.palette.text.primary
-                    : theme.palette.common.white,
+                  mode === "dark"
+                    ? theme.colorSchemes.dark.palette.text.primary
+                    : theme.colorSchemes.light.palette.text.primary,
                 exponentformat: "E",
-                gridcolor: theme.vars.palette.divider,
+                gridcolor:
+                  mode === "dark"
+                    ? theme.colorSchemes.dark.palette.divider
+                    : theme.colorSchemes.light.palette.divider,
                 showgrid: showGrid,
                 tickangle: 45,
                 title: { font: { size: 12 }, text: wrappedLabel.x }
               },
               yaxis: {
                 color:
-                  mode === "light"
-                    ? theme.palette.text.primary
-                    : theme.palette.common.white,
+                  mode === "dark"
+                    ? theme.colorSchemes.dark.palette.text.primary
+                    : theme.colorSchemes.light.palette.text.primary,
                 exponentformat: "E",
-                gridcolor: theme.vars.palette.divider,
+                gridcolor:
+                  mode === "dark"
+                    ? theme.colorSchemes.dark.palette.divider
+                    : theme.colorSchemes.light.palette.divider,
                 showgrid: showGrid,
                 tickangle: -45,
                 title: { font: { size: 12 }, text: wrappedLabel.y }
@@ -145,7 +151,10 @@ const SurfacePlot = ({
                     ? theme.palette.text.primary
                     : theme.palette.common.white,
                 exponentformat: "E",
-                gridcolor: theme.vars.palette.divider,
+                gridcolor:
+                  mode === "dark"
+                    ? theme.colorSchemes.dark.palette.divider
+                    : theme.colorSchemes.light.palette.divider,
                 showgrid: showGrid,
                 title: { font: { size: 12 }, text: wrappedLabel.z }
               }

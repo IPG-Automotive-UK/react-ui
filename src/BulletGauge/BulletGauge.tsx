@@ -1,7 +1,8 @@
+import { useColorScheme, useTheme } from "@mui/material";
+
 import { BulletGaugeProps } from "./BulletGauge.types";
 import Plotly from "react-plotly.js";
 import React from "react";
-import { useTheme } from "@mui/material";
 
 /**
  * This component displays a bullet gauge progress indicator.
@@ -13,6 +14,9 @@ const BulletGauge = ({ title, value, suffix }: BulletGaugeProps) => {
   // Limit value to 100
   const limitedValue = Math.min(value, 100);
 
+  // get current mode
+  const { mode } = useColorScheme();
+
   return (
     <Plotly
       data={[
@@ -22,24 +26,36 @@ const BulletGauge = ({ title, value, suffix }: BulletGaugeProps) => {
             axis: {
               range: [null, 100],
               tickfont: {
-                color: theme.palette.text.primary,
+                color:
+                  mode === "dark"
+                    ? theme.colorSchemes.dark.palette.text.primary
+                    : theme.colorSchemes.light.palette.text.primary,
                 size: 12
               }
             },
             bar: {
               color:
                 limitedValue < 30
-                  ? theme.palette.error.main
+                  ? mode === "dark"
+                    ? theme.colorSchemes.dark.palette.error.main
+                    : theme.colorSchemes.light.palette.error.main
                   : value > 70
-                    ? theme.palette.success.main
-                    : theme.palette.warning.main
+                    ? mode === "dark"
+                      ? theme.colorSchemes.dark.palette.success.main
+                      : theme.colorSchemes.light.palette.success.main
+                    : mode === "dark"
+                      ? theme.colorSchemes.dark.palette.warning.main
+                      : theme.colorSchemes.light.palette.warning.main
             },
             shape: "bullet"
           },
           mode: "gauge+number",
           number: {
             font: {
-              color: theme.palette.text.primary,
+              color:
+                mode === "dark"
+                  ? theme.colorSchemes.dark.palette.text.primary
+                  : theme.colorSchemes.light.palette.text.primary,
               size: 20
             },
             suffix: suffix || ""
@@ -59,7 +75,10 @@ const BulletGauge = ({ title, value, suffix }: BulletGaugeProps) => {
         plot_bgcolor: "transparent",
         title: {
           font: {
-            color: theme.palette.text.secondary,
+            color:
+              mode === "dark"
+                ? theme.colorSchemes.dark.palette.text.secondary
+                : theme.colorSchemes.light.palette.text.secondary,
             size: 12
           },
           pad: {

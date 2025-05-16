@@ -3,6 +3,7 @@ import {
   Dialog,
   DialogContent,
   Typography,
+  useColorScheme,
   useTheme
 } from "@mui/material";
 import {
@@ -33,6 +34,9 @@ const LinePlot = ({
 }: LinePlotProps) => {
   // theme hook
   const theme = useTheme();
+
+  // get current mode
+  const { mode } = useColorScheme();
 
   // ref to get the size of the plot div for axis labels wrapping
   const plotRef = useRef<HTMLDivElement>(null);
@@ -135,8 +139,20 @@ const LinePlot = ({
           data={[
             {
               hoverinfo: "x+y",
-              line: { color: theme.palette.primary.main, width: 2 },
-              marker: { color: theme.palette.primary.dark, size: 7 },
+              line: {
+                color:
+                  mode === "dark"
+                    ? theme.colorSchemes.dark.palette.primary.main
+                    : theme.colorSchemes.light.palette.primary.main,
+                width: 2
+              },
+              marker: {
+                color:
+                  mode === "dark"
+                    ? theme.colorSchemes.dark.palette.primary.dark
+                    : theme.colorSchemes.light.palette.primary.dark,
+                size: 7
+              },
               mode: showMarkers ? "lines+markers" : "lines",
               name: legendNameFirst ? truncateLegend(legendNameFirst) : "",
               type: "scatter",
@@ -148,11 +164,17 @@ const LinePlot = ({
                   {
                     hoverinfo: "x+y",
                     line: {
-                      color: theme.vars.palette.secondary.main,
+                      color:
+                        mode === "dark"
+                          ? theme.colorSchemes.dark.palette.secondary.main
+                          : theme.colorSchemes.light.palette.secondary.main,
                       width: 2
                     },
                     marker: {
-                      color: theme.vars.palette.secondary.dark,
+                      color:
+                        mode === "dark"
+                          ? theme.colorSchemes.dark.palette.secondary.dark
+                          : theme.colorSchemes.light.palette.secondary.dark,
                       size: 7
                     },
                     mode: showMarkers ? "lines+markers" : "lines",
@@ -171,7 +193,10 @@ const LinePlot = ({
             font: { family: "Montserrat, sans-serif" },
             legend: {
               font: {
-                color: theme.vars.palette.text.primary,
+                color:
+                  mode === "dark"
+                    ? theme.colorSchemes.dark.palette.text.primary
+                    : theme.colorSchemes.light.palette.text.primary,
                 size: 12
               },
               orientation: "v",
@@ -185,8 +210,14 @@ const LinePlot = ({
             plot_bgcolor: "transparent",
             showlegend: !!(legendNameFirst && legendNameSecond),
             xaxis: {
-              color: theme.vars.palette.text.primary,
-              gridcolor: theme.vars.palette.divider,
+              color:
+                mode === "dark"
+                  ? theme.colorSchemes.dark.palette.text.primary
+                  : theme.colorSchemes.light.palette.text.primary,
+              gridcolor:
+                mode === "dark"
+                  ? theme.colorSchemes.dark.palette.divider
+                  : theme.colorSchemes.light.palette.divider,
               showgrid: showGrid,
               title: {
                 font: { size: 12 },
@@ -195,8 +226,14 @@ const LinePlot = ({
               }
             },
             yaxis: {
-              color: theme.vars.palette.text.primary,
-              gridcolor: theme.vars.palette.divider,
+              color:
+                mode === "dark"
+                  ? theme.colorSchemes.dark.palette.text.primary
+                  : theme.colorSchemes.light.palette.text.primary,
+              gridcolor:
+                mode === "dark"
+                  ? theme.colorSchemes.dark.palette.divider
+                  : theme.colorSchemes.light.palette.divider,
               showgrid: showGrid,
               title: {
                 font: { size: 12 },
