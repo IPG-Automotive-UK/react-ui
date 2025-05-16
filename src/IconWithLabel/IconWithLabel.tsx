@@ -1,4 +1,12 @@
-import { Box, Link, Stack, Theme, Tooltip, Typography } from "@mui/material";
+import {
+  Box,
+  Link,
+  Stack,
+  Theme,
+  Tooltip,
+  Typography,
+  alpha
+} from "@mui/material";
 import React, { cloneElement } from "react";
 
 import { IconWithLabelProps } from "./IconWithLabel.types";
@@ -18,7 +26,10 @@ export default function IconWithLabel({
 }: IconWithLabelProps) {
   const iconProps = {
     sx: (theme: Theme) => ({
-      color: `color-mix(in srgb, ${theme.vars.palette.action.active} 54%, transparent)`,
+      color: alpha(theme.colorSchemes.light.palette.action.active, 0.54),
+      ...theme.applyStyles("dark", {
+        color: alpha(theme.colorSchemes.dark.palette.action.active, 0.54)
+      }),
       height: "20px",
       width: "20px"
     })
@@ -80,9 +91,15 @@ export default function IconWithLabel({
             component="p"
             variant="caption"
             sx={theme => ({
-              color: theme.vars.palette.text.secondary,
+              color: alpha(
+                theme.colorSchemes.light.palette.text.secondary,
+                0.6
+              ),
               ...theme.applyStyles("dark", {
-                opacity: 0.8
+                color: alpha(
+                  theme.colorSchemes.dark.palette.text.secondary,
+                  0.6
+                )
               }),
               fontWeight: 400
             })}
