@@ -1,4 +1,4 @@
-import { Alert, Button, Link, Paper, Typography } from "@mui/material";
+import { Alert, Button, Link, Paper, Typography, lighten } from "@mui/material";
 import React, { useState } from "react";
 
 import { LoadErrorMessageProps } from "./LoadErrorMessage.types";
@@ -143,7 +143,7 @@ const LoadErrorMessage = ({
           sx={theme => ({
             color: theme.vars.palette.text.primary,
             ...theme.applyStyles("dark", {
-              opacity: 0.7
+              color: lighten(theme.palette.text.secondary, 0.7)
             })
           })}
         >
