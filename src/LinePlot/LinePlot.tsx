@@ -36,7 +36,10 @@ const LinePlot = ({
   const theme = useTheme();
 
   // get current mode
-  const { mode } = useColorScheme();
+  const { mode, systemMode } = useColorScheme();
+
+  // resolve the actual mode: fallback to systemMode if mode is set to "system".
+  const currentMode = mode === "system" ? systemMode : mode;
 
   // ref to get the size of the plot div for axis labels wrapping
   const plotRef = useRef<HTMLDivElement>(null);
@@ -141,16 +144,16 @@ const LinePlot = ({
               hoverinfo: "x+y",
               line: {
                 color:
-                  mode === "dark"
-                    ? theme.colorSchemes.dark.palette.primary.main
-                    : theme.colorSchemes.light.palette.primary.main,
+                  currentMode === "dark"
+                    ? theme?.colorSchemes?.dark?.palette.primary.main
+                    : theme?.colorSchemes?.light?.palette.primary.main,
                 width: 2
               },
               marker: {
                 color:
-                  mode === "dark"
-                    ? theme.colorSchemes.dark.palette.primary.dark
-                    : theme.colorSchemes.light.palette.primary.dark,
+                  currentMode === "dark"
+                    ? theme?.colorSchemes?.dark?.palette.primary.dark
+                    : theme?.colorSchemes?.light?.palette.primary.dark,
                 size: 7
               },
               mode: showMarkers ? "lines+markers" : "lines",
@@ -165,16 +168,16 @@ const LinePlot = ({
                     hoverinfo: "x+y",
                     line: {
                       color:
-                        mode === "dark"
-                          ? theme.colorSchemes.dark.palette.secondary.main
-                          : theme.colorSchemes.light.palette.secondary.main,
+                        currentMode === "dark"
+                          ? theme?.colorSchemes?.dark?.palette.secondary.main
+                          : theme?.colorSchemes?.light?.palette.secondary.main,
                       width: 2
                     },
                     marker: {
                       color:
-                        mode === "dark"
-                          ? theme.colorSchemes.dark.palette.secondary.dark
-                          : theme.colorSchemes.light.palette.secondary.dark,
+                        currentMode === "dark"
+                          ? theme?.colorSchemes?.dark?.palette.secondary.dark
+                          : theme?.colorSchemes?.light?.palette.secondary.dark,
                       size: 7
                     },
                     mode: showMarkers ? "lines+markers" : "lines",
@@ -194,9 +197,9 @@ const LinePlot = ({
             legend: {
               font: {
                 color:
-                  mode === "dark"
-                    ? theme.colorSchemes.dark.palette.text.primary
-                    : theme.colorSchemes.light.palette.text.primary,
+                  currentMode === "dark"
+                    ? theme?.colorSchemes?.dark?.palette.text.primary
+                    : theme?.colorSchemes?.light?.palette.text.primary,
                 size: 12
               },
               orientation: "v",
@@ -211,13 +214,13 @@ const LinePlot = ({
             showlegend: !!(legendNameFirst && legendNameSecond),
             xaxis: {
               color:
-                mode === "dark"
-                  ? theme.colorSchemes.dark.palette.text.primary
-                  : theme.colorSchemes.light.palette.text.primary,
+                currentMode === "dark"
+                  ? theme?.colorSchemes?.dark?.palette.text.primary
+                  : theme?.colorSchemes?.light?.palette.text.primary,
               gridcolor:
-                mode === "dark"
-                  ? theme.colorSchemes.dark.palette.divider
-                  : theme.colorSchemes.light.palette.divider,
+                currentMode === "dark"
+                  ? theme?.colorSchemes?.dark?.palette.divider
+                  : theme?.colorSchemes?.light?.palette.divider,
               showgrid: showGrid,
               title: {
                 font: { size: 12 },
@@ -227,13 +230,13 @@ const LinePlot = ({
             },
             yaxis: {
               color:
-                mode === "dark"
-                  ? theme.colorSchemes.dark.palette.text.primary
-                  : theme.colorSchemes.light.palette.text.primary,
+                currentMode === "dark"
+                  ? theme?.colorSchemes?.dark?.palette.text.primary
+                  : theme?.colorSchemes?.light?.palette.text.primary,
               gridcolor:
-                mode === "dark"
-                  ? theme.colorSchemes.dark.palette.divider
-                  : theme.colorSchemes.light.palette.divider,
+                currentMode === "dark"
+                  ? theme?.colorSchemes?.dark?.palette.divider
+                  : theme?.colorSchemes?.light?.palette.divider,
               showgrid: showGrid,
               title: {
                 font: { size: 12 },

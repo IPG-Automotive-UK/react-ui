@@ -3,7 +3,6 @@
 import type {} from "@mui/x-data-grid/themeAugmentation";
 import type {} from "@mui/material/themeCssVarsAugmentation";
 
-import { ColorSystem, darkScrollbar } from "@mui/material";
 import {
   ThemeProvider as MuiThemeProvider,
   Theme,
@@ -14,6 +13,7 @@ import {
 import React, { useEffect } from "react";
 
 import { ThemeProviderProps } from "./ThemeProvider.types";
+import { darkScrollbar } from "@mui/material";
 
 // extend the theme to include custom properties
 // https://mui.com/material-ui/customization/theming/#custom-variables
@@ -25,10 +25,6 @@ declare module "@mui/material/styles" {
 
   // eslint-disable-next-line no-unused-vars
   interface Theme {
-    colorSchemes: {
-      light: ColorSystem;
-      dark: ColorSystem;
-    };
     layout: {
       content: {
         maxWidth: number;
@@ -183,8 +179,8 @@ export const theme: Theme = (() => {
       },
       MuiCssBaseline: {
         styleOverrides: {
-          ".dark body": darkScrollbar(),
-          ".light body": darkScrollbar({
+          "[data-dark] body": darkScrollbar(),
+          "[data-light] body": darkScrollbar({
             active: "var(--ipg-palette-grey-400)",
             thumb: "var(--ipg-palette-grey-400)",
             track: "var(--ipg-palette-grey-200)"
@@ -216,9 +212,9 @@ export const theme: Theme = (() => {
             },
             "--DataGrid-rowBorderColor": theme.vars.palette.divider,
             // If the theme is dark, set the border color to the dataGridDarkBorderColor
-            ...(theme.palette.mode === "dark" && {
+            "[data-dark] &": {
               borderColor: dataGridDarkBorderColor
-            })
+            }
           })
         }
       },
@@ -273,7 +269,7 @@ export const theme: Theme = (() => {
       }
     },
     cssVariables: {
-      colorSchemeSelector: "class",
+      colorSchemeSelector: "data",
       cssVarPrefix: "ipg"
     },
     mixins: {
@@ -304,6 +300,9 @@ export const theme: Theme = (() => {
   };
 })();
 
+/**
+ * IPG Material-ui theme provider and hook.
+ */
 export default function ThemeProvider({
   children,
   theme: controlledTheme
@@ -318,6 +317,19 @@ export default function ThemeProvider({
   );
 }
 
+/**
+ * ControlledThemeWrapper Component
+ *
+ * This component is used to enforce a specific theme mode (`light` or `dark`)
+ * for its child components based on the `controlledTheme` prop. It synchronizes
+ * the theme mode with the provided value and ensures the children use the correct
+ * theme. The wrapper relies on MuI's `useColorScheme` hook for theme mode management.
+ *
+ * @param props.children - The child components to render inside the wrapper.
+ * @param props.theme - The desired theme mode (`light` or `dark`) to enforce.
+ *
+ * @returns The wrapped children with the enforced theme mode.
+ */
 function ControlledThemeWrapper({
   children,
   theme: controlledTheme
