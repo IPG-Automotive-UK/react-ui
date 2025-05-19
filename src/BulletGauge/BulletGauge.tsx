@@ -14,8 +14,11 @@ const BulletGauge = ({ title, value, suffix }: BulletGaugeProps) => {
   // Limit value to 100
   const limitedValue = Math.min(value, 100);
 
-  // get the current theme mode
-  const { mode } = useColorScheme();
+  // get current mode
+  const { mode, systemMode } = useColorScheme();
+
+  // resolve the actual mode: fallback to systemMode if mode is set to "system".
+  const currentMode = mode === "system" ? systemMode : mode;
 
   return (
     <Plotly
@@ -27,25 +30,25 @@ const BulletGauge = ({ title, value, suffix }: BulletGaugeProps) => {
               range: [null, 100],
               tickfont: {
                 color:
-                  mode === "dark"
-                    ? theme.colorSchemes.dark.palette.text.primary
-                    : theme.colorSchemes.light.palette.text.primary,
+                  currentMode === "dark"
+                    ? theme?.colorSchemes?.dark?.palette.text.primary
+                    : theme?.colorSchemes?.light?.palette.text.primary,
                 size: 12
               }
             },
             bar: {
               color:
                 limitedValue < 30
-                  ? mode === "dark"
-                    ? theme.colorSchemes.dark.palette.error.main
-                    : theme.colorSchemes.light.palette.error.main
+                  ? currentMode === "dark"
+                    ? theme?.colorSchemes?.dark?.palette.error.main
+                    : theme?.colorSchemes?.light?.palette.error.main
                   : value > 70
-                    ? mode === "dark"
-                      ? theme.colorSchemes.dark.palette.success.main
-                      : theme.colorSchemes.light.palette.success.main
-                    : mode === "dark"
-                      ? theme.colorSchemes.dark.palette.warning.main
-                      : theme.colorSchemes.light.palette.warning.main
+                    ? currentMode === "dark"
+                      ? theme?.colorSchemes?.dark?.palette.success.main
+                      : theme?.colorSchemes?.light?.palette.success.main
+                    : currentMode === "dark"
+                      ? theme?.colorSchemes?.dark?.palette.warning.main
+                      : theme?.colorSchemes?.light?.palette.warning.main
             },
             shape: "bullet"
           },
@@ -53,9 +56,9 @@ const BulletGauge = ({ title, value, suffix }: BulletGaugeProps) => {
           number: {
             font: {
               color:
-                mode === "dark"
-                  ? theme.colorSchemes.dark.palette.text.primary
-                  : theme.colorSchemes.light.palette.text.primary,
+                currentMode === "dark"
+                  ? theme?.colorSchemes?.dark?.palette.text.primary
+                  : theme?.colorSchemes?.light?.palette.text.primary,
               size: 20
             },
             suffix: suffix || ""
@@ -76,9 +79,9 @@ const BulletGauge = ({ title, value, suffix }: BulletGaugeProps) => {
         title: {
           font: {
             color:
-              mode === "dark"
-                ? theme.colorSchemes.dark.palette.text.secondary
-                : theme.colorSchemes.light.palette.text.secondary,
+              currentMode === "dark"
+                ? theme?.colorSchemes?.dark?.palette.text.secondary
+                : theme?.colorSchemes?.light?.palette.text.secondary,
             size: 12
           },
           pad: {

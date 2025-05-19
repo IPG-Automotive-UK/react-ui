@@ -191,7 +191,7 @@ function Layout({
           height: "100vh"
         }}
       >
-        <CssBaseline enableColorScheme={true} />
+        <CssBaseline />
         <Header
           appName={appName}
           onAppClick={() => setAppOpen(!appOpen)}
