@@ -105,7 +105,10 @@ export default function ModelButton({
   const theme = useTheme();
 
   // get the current theme mode
-  const { mode } = useColorScheme();
+  const { mode, systemMode } = useColorScheme();
+
+  // resolve the actual mode: fallback to systemMode if mode is set to "system".
+  const currentMode = mode === "system" ? systemMode : mode;
 
   // is button being hovered over
   const [isHover, setIsHover] = React.useState(false);
@@ -162,7 +165,7 @@ export default function ModelButton({
   /** Get the correct image icon color default and on hover, according to the condition if there is a status and where is rendered  */
   const getCurrentIconImageColor = () => {
     const iconColor =
-      mode === "light"
+      currentMode === "light"
         ? theme.palette.common.black
         : theme.palette.common.white;
     if (status !== "none") {

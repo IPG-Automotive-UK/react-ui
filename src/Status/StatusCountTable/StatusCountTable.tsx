@@ -5,7 +5,8 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Typography
+  Typography,
+  alpha
 } from "@mui/material";
 
 import React from "react";
@@ -42,7 +43,17 @@ export function StatusCountTable({ title, count }: StatusCountTableProps) {
           >
             <TableCell
               sx={theme => ({
-                background: `color-mix(in srgb, ${theme.vars.palette.primary.main} 5%, transparent)`,
+                background: theme =>
+                  alpha(
+                    theme?.colorSchemes?.light?.palette.primary.main as string,
+                    0.05
+                  ),
+                ...theme.applyStyles("dark", {
+                  background: alpha(
+                    theme?.colorSchemes?.dark?.palette.primary.main as string,
+                    0.05
+                  )
+                }),
                 pl: 2
               })}
             >
@@ -53,7 +64,17 @@ export function StatusCountTable({ title, count }: StatusCountTableProps) {
             <TableCell
               align="right"
               sx={theme => ({
-                background: `color-mix(in srgb, ${theme.vars.palette.primary.main} 5%, transparent)`,
+                background: theme =>
+                  alpha(
+                    theme?.colorSchemes?.light?.palette.primary.main as string,
+                    0.05
+                  ),
+                ...theme.applyStyles("dark", {
+                  background: alpha(
+                    theme?.colorSchemes?.dark?.palette.primary.main as string,
+                    0.05
+                  )
+                }),
                 pr: 2
               })}
             >

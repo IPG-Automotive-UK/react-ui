@@ -242,7 +242,7 @@ export const theme: Theme = (() => {
       MuiTableCell: {
         styleOverrides: {
           root: () => ({
-            "&.MuiTableCell-head": {
+            "[data-dark] &.MuiTableCell-head": {
               backgroundColor: paletteDefaultBackgroundPaperDark
             }
           })
@@ -269,7 +269,7 @@ export const theme: Theme = (() => {
       }
     },
     cssVariables: {
-      colorSchemeSelector: "class",
+      colorSchemeSelector: "data",
       cssVarPrefix: "ipg"
     },
     mixins: {
@@ -309,13 +309,11 @@ export default function ThemeProvider({
 }: ThemeProviderProps) {
   // wrap mui theme provider and children in theme context
   return (
-    <>
-      <MuiThemeProvider theme={theme} defaultMode="light">
-        <ControlledThemeWrapper theme={controlledTheme}>
-          {children}
-        </ControlledThemeWrapper>
-      </MuiThemeProvider>
-    </>
+    <MuiThemeProvider theme={theme} defaultMode="light">
+      <ControlledThemeWrapper theme={controlledTheme}>
+        {children}
+      </ControlledThemeWrapper>
+    </MuiThemeProvider>
   );
 }
 

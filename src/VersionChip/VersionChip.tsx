@@ -46,11 +46,11 @@ const VersionChip = ({ version, selected = false }: VersionChipProps) => {
           border: theme =>
             selected
               ? `1px solid ${theme.vars.palette.primary.main}`
-              : `1px solid ${alpha(theme.colorSchemes.light.palette.divider, 0.23)}`,
+              : `1px solid ${alpha(theme?.colorSchemes?.light?.palette.divider as string, 0.23)}`,
           ...theme.applyStyles("dark", {
             border: selected
               ? `1px solid ${theme.vars.palette.primary.main}`
-              : `1px solid ${alpha(theme.colorSchemes.dark.palette.divider, 0.23)}`
+              : `1px solid ${alpha(theme?.colorSchemes?.dark?.palette.divider as string, 0.23)}`
           }),
           gap: "2px",
           height: 24,

@@ -143,7 +143,10 @@ const LoadErrorMessage = ({
           sx={theme => ({
             color: theme.vars.palette.text.primary,
             ...theme.applyStyles("dark", {
-              color: lighten(theme.palette.text.secondary, 0.7)
+              color: lighten(
+                theme.colorSchemes?.dark?.palette.text.secondary as string,
+                0.7
+              )
             })
           })}
         >
