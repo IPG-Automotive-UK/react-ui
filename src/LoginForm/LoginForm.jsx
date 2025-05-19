@@ -64,11 +64,9 @@ export default function LoginForm({ loading = false, onLogin = () => {} }) {
       >
         <Button
           type="submit"
+          color="primary"
           fullWidth
           variant="contained"
-          sx={theme => ({
-            color: theme.vars.palette.success.contrastText
-          })}
           disabled={loading}
           endIcon={loading ? <CircularProgress size={24} /> : null}
         >

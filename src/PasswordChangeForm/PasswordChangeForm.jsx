@@ -110,9 +110,7 @@ export default function PasswordChangeForm({ loading, onSubmit }) {
           fullWidth
           id="submit"
           variant="contained"
-          sx={theme => ({
-            color: theme.vars.palette.success.contrastText
-          })}
+          color="primary"
           disabled={loading}
           endIcon={loading ? <CircularProgress size={24} /> : null}
         >
