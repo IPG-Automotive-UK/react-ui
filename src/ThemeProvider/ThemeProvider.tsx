@@ -183,13 +183,11 @@ export const theme: Theme = (() => {
       },
       MuiCssBaseline: {
         styleOverrides: {
-          body: {
-            ...darkScrollbar()
-          },
-          "html[data-color-scheme='light'] body": darkScrollbar({
-            active: `var(--ipg-palette-grey-400)`,
-            thumb: `var(--ipg-palette-grey-400)`,
-            track: `var(--ipg-palette-grey-200)`
+          ".dark body": darkScrollbar(),
+          ".light body": darkScrollbar({
+            active: "var(--ipg-palette-grey-400)",
+            thumb: "var(--ipg-palette-grey-400)",
+            track: "var(--ipg-palette-grey-200)"
           })
         }
       },
@@ -275,7 +273,7 @@ export const theme: Theme = (() => {
       }
     },
     cssVariables: {
-      colorSchemeSelector: "data",
+      colorSchemeSelector: "class",
       cssVarPrefix: "ipg"
     },
     mixins: {
