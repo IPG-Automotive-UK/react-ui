@@ -32,18 +32,6 @@ const config: StorybookConfig = {
           : true;
       }
     }
-  },
-  // Ensure Vite pre-bundles MUI 7 and Emotion dependencies
-  // Fixes dynamic import errors in Storybook
-  viteFinal: async config => {
-    config.optimizeDeps ??= { include: [] };
-    config.optimizeDeps.include = [
-      ...(config.optimizeDeps.include || []),
-      "@mui/material",
-      "@emotion/react",
-      "@emotion/styled"
-    ];
-    return config;
   }
 };
 
