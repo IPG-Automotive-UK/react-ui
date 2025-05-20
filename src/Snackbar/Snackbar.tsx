@@ -22,14 +22,14 @@ const icons = {
 // styling
 const sx = {
   action: {
-    color: (theme: Theme) => theme.palette.common.white
+    color: (theme: Theme) => theme.vars.palette.common.white
   },
   close: {
     fontSize: 15
   },
   error: {
-    backgroundColor: (theme: Theme) => theme.palette.error.dark,
-    color: (theme: Theme) => theme.palette.common.white,
+    backgroundColor: (theme: Theme) => theme.vars.palette.error.dark,
+    color: (theme: Theme) => theme.vars.palette.common.white,
     flexWrap: "nowrap"
   },
   icon: {
@@ -39,18 +39,18 @@ const sx = {
     opacity: 0.9
   },
   info: {
-    backgroundColor: (theme: Theme) => theme.palette.primary.main,
-    color: (theme: Theme) => theme.palette.common.white,
+    backgroundColor: (theme: Theme) => theme.vars.palette.primary.main,
+    color: (theme: Theme) => theme.vars.palette.common.white,
     flexWrap: "nowrap"
   },
   success: {
     backgroundColor: green[600],
-    color: (theme: Theme) => theme.palette.common.white,
+    color: (theme: Theme) => theme.vars.palette.common.white,
     flexWrap: "nowrap"
   },
   warning: {
     backgroundColor: amber[700],
-    color: (theme: Theme) => theme.palette.common.white,
+    color: (theme: Theme) => theme.vars.palette.common.white,
     flexWrap: "nowrap"
   }
 };

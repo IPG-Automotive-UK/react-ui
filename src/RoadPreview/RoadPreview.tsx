@@ -46,7 +46,7 @@ export function RoadPreview({
     <Box
       data-testid="road-preview-wrapper"
       sx={{
-        background: theme => theme.palette.background.paper,
+        background: theme => theme.vars.palette.background.paper,
         display: "flex",
         flexDirection: "column",
         gap: 1,

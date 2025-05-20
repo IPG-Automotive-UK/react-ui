@@ -76,7 +76,7 @@ const LoadErrorMessage = ({
             textAlign: "center"
           },
           theme => ({
-            color: theme.palette.error.main
+            color: theme.vars.palette.error.main
           })
         ]}
       >
@@ -86,13 +86,11 @@ const LoadErrorMessage = ({
       <Typography
         variant="body2"
         sx={[
-          {
-            textAlign: "center"
-          },
+          { textAlign: "center" },
           theme => ({
-            color: theme.palette.text.primary,
+            color: theme.vars.palette.text.primary,
             ...theme.applyStyles("dark", {
-              color: lighten(theme.palette.text.secondary, 0.7)
+              opacity: 0.7
             })
           })
         ]}
@@ -112,7 +110,7 @@ const LoadErrorMessage = ({
           <Typography
             variant="body2"
             sx={theme => ({
-              color: theme.palette.primary.main,
+              color: theme.vars.palette.primary.main,
               cursor: "pointer"
             })}
             onClick={handleDetailsClick}
@@ -130,7 +128,7 @@ const LoadErrorMessage = ({
         <Typography
           variant="body2"
           sx={theme => ({
-            color: theme.palette.primary.main,
+            color: theme.vars.palette.primary.main,
             cursor: "pointer"
           })}
           onClick={handleDetailsClick}
@@ -143,9 +141,12 @@ const LoadErrorMessage = ({
         <Typography
           variant="caption"
           sx={theme => ({
-            color: theme.palette.text.primary,
+            color: theme.vars.palette.text.primary,
             ...theme.applyStyles("dark", {
-              color: lighten(theme.palette.text.secondary, 0.7)
+              color: lighten(
+                theme.colorSchemes?.dark?.palette.text.secondary as string,
+                0.7
+              )
             })
           })}
         >

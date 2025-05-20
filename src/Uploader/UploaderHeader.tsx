@@ -43,7 +43,9 @@ export default function UploaderHeader({
   }
   titleTypographyProps.sx = {
     color: theme =>
-      disabled ? theme.palette.text.disabled : theme.palette.text.primary
+      disabled
+        ? theme.vars.palette.text.disabled
+        : theme.vars.palette.text.primary
   };
 
   return (
@@ -64,7 +66,7 @@ export default function UploaderHeader({
             <Typography
               component="span"
               sx={{
-                color: theme => theme.palette.error.main,
+                color: theme => theme.vars.palette.error.main,
                 lineHeight: "inherit",
                 marginLeft: "4px",
                 verticalAlign: "text-top"

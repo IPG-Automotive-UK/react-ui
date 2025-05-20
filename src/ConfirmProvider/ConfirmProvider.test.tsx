@@ -2,10 +2,11 @@ import "@testing-library/jest-dom";
 
 import React, { useState } from "react";
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { fireEvent, render, renderHook, waitFor } from "@testing-library/react";
+import { fireEvent, renderHook, waitFor } from "@testing-library/react";
 
 import ConfirmProvider from "./ConfirmProvider";
 import { ThemeProvider } from "../ThemeProvider";
+import { render } from "../TestUtils";
 import useConfirm from "./useConfirm";
 
 describe("useConfirm", () => {

@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "../TestUtils";
 
 import { Default } from "./PrototypePreview.stories";
 import { PrototypePreview } from "./PrototypePreview";

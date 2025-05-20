@@ -161,7 +161,7 @@ export default function SidebarItem({
           ...(selected === true && display === "stacked"
             ? {
                 borderRight: "2px solid",
-                borderRightColor: theme => theme.palette.primary.main
+                borderRightColor: theme => theme.vars.palette.primary.main
               }
             : {})
         }}

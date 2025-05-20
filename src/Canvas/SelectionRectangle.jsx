@@ -20,7 +20,7 @@ export default function SelectionRectangle({
         cursor: "crosshair",
         height: `${height}px`,
         left,
-        outline: `1px solid ${theme.palette.primary.main}`,
+        outline: `1px solid ${theme.vars.palette.primary.main}`,
         position: "absolute",
         top,
         width: `${width}px`

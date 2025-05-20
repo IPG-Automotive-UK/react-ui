@@ -1,6 +1,7 @@
 import { MultipleFiles, SingleFile } from "./__data__/uploaderTestFiles";
 import { describe, expect, test, vi } from "vitest";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, waitFor } from "@testing-library/react";
+import { render, screen } from "../TestUtils";
 
 import FileUploader from "./FileUploader";
 import React from "react";
@@ -87,13 +88,15 @@ describe("FileUploader", () => {
     const dropzoneText = screen.getByText("There is an error");
 
     // expect the dropzone box to have a 1px dashed red border
-    expect(dropzoneBox).toHaveStyle("border: 1px dashed #d32f2f");
+    expect(dropzoneBox).toHaveStyle(
+      "border: 1px dashed var(--ipg-palette-error-main)"
+    );
 
     // expect the icon to be red
-    expect(fileUploadIcon).toHaveStyle("color: #d32f2f");
+    expect(fileUploadIcon).toHaveStyle("color: var(--ipg-palette-error-main)");
 
     // expect the dropzone text to be red
-    expect(dropzoneText).toHaveStyle("color: #d32f2f");
+    expect(dropzoneText).toHaveStyle("color: var(--ipg-palette-error-main)");
   });
 
   test("display error uploading multiple files where limit is 1", async () => {

@@ -4,7 +4,7 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  Grid2 as Grid,
+  Grid,
   TextField,
   Typography
 } from "@mui/material";
@@ -167,7 +167,7 @@ export default function EditLabelDialog({
           <Grid size={12}>
             <Typography
               sx={theme => ({
-                color: theme.palette.text.secondary,
+                color: theme.vars.palette.text.secondary,
                 fontSize: "12px",
                 fontWeight: 400,
                 marginLeft: "14px"

@@ -243,7 +243,7 @@ export default function Rect({
         height: `${Math.abs(height)}px`,
         left: `${centerX - Math.abs(width) / 2}px`,
         outline: theme =>
-          selected ? `1px solid ${theme.palette.primary.main}` : 0,
+          selected ? `1px solid ${theme.vars.palette.primary.main}` : 0,
         position: "absolute",
         top: `${centerY - Math.abs(height) / 2}px`,
         transform: `rotate(${rotateAngle}deg)`,

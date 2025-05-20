@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "../TestUtils";
 
 import AddHomeIcon from "@mui/icons-material/AddHome";
 import React from "react";

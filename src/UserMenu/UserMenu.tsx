@@ -99,7 +99,7 @@ export default function UserMenu({
         <UserAvatar
           name={name}
           sx={theme => ({
-            backgroundColor: theme.palette.grey[400],
+            backgroundColor: theme.vars.palette.grey[400],
             height: 34,
             width: 34
           })}
@@ -123,7 +123,7 @@ export default function UserMenu({
           </Typography>
           <Typography
             sx={theme => ({
-              color: theme.palette.text.secondary
+              color: theme.vars.palette.text.secondary
             })}
             variant="caption"
           >

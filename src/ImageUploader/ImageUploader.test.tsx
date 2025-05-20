@@ -1,7 +1,8 @@
 import "@testing-library/jest-dom/vitest";
 
 import { describe, expect, test, vi } from "vitest";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, waitFor } from "@testing-library/react";
+import { render, screen } from "../TestUtils";
 
 import { FileWithData } from "../Uploader/Uploader.types";
 import ImageUploader from ".";

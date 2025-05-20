@@ -13,7 +13,7 @@ export default function WizardActions({ children }: WizardActionsProps) {
       direction="row"
       spacing={2}
       sx={{
-        backgroundColor: theme => theme.palette.background.paper,
+        backgroundColor: theme => theme.vars.palette.background.paper,
         justifyContent: "flex-end",
         mx: -3,
         p: 3

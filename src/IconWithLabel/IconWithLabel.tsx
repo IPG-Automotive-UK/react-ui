@@ -26,7 +26,16 @@ export default function IconWithLabel({
 }: IconWithLabelProps) {
   const iconProps = {
     sx: (theme: Theme) => ({
-      color: alpha(theme.palette.action.active, 0.54),
+      color: alpha(
+        theme?.colorSchemes?.light?.palette.action.active as string,
+        0.54
+      ),
+      ...theme.applyStyles("dark", {
+        color: alpha(
+          theme?.colorSchemes?.dark?.palette.action.active as string,
+          0.54
+        )
+      }),
       height: "20px",
       width: "20px"
     })
@@ -66,7 +75,7 @@ export default function IconWithLabel({
             underline="hover"
             sx={theme => ({
               "&:hover": {
-                color: theme.palette.primary.main
+                color: theme.vars.palette.primary.main
               }
             })}
           >
@@ -75,7 +84,7 @@ export default function IconWithLabel({
               component="p"
               variant="caption"
               sx={theme => ({
-                color: theme.palette.primary.main,
+                color: theme.vars.palette.primary.main,
                 fontWeight: 400
               })}
             >
@@ -88,7 +97,16 @@ export default function IconWithLabel({
             component="p"
             variant="caption"
             sx={theme => ({
-              color: alpha(theme.palette.text.secondary, 0.6),
+              color: alpha(
+                theme?.colorSchemes?.light?.palette.text.secondary as string,
+                0.6
+              ),
+              ...theme.applyStyles("dark", {
+                color: alpha(
+                  theme?.colorSchemes?.dark?.palette.text.secondary as string,
+                  0.6
+                )
+              }),
               fontWeight: 400
             })}
           >

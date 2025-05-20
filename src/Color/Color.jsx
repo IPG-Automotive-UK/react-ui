@@ -129,7 +129,7 @@ export default function Color({
           {noColorChecked ? (
             <Box
               sx={theme => ({
-                border: `1px solid ${theme.palette.divider}`,
+                border: `1px solid ${theme.vars.palette.divider}`,
                 borderRadius: "4px",
                 height: "238px"
               })}

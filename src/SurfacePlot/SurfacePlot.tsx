@@ -1,4 +1,4 @@
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Typography, useColorScheme, useTheme } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
 import ConditionalDialog from "../ConditionalDialog";
@@ -20,6 +20,12 @@ const SurfacePlot = ({
 }: SurfacePlotProps) => {
   // theme hook
   const theme = useTheme();
+
+  // get the current theme mode
+  const { mode, systemMode } = useColorScheme();
+
+  // resolve the actual mode: fallback to systemMode if mode is set to "system".
+  const currentMode = mode === "system" ? systemMode : mode;
 
   // state for fullscreen
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -90,7 +96,12 @@ const SurfacePlot = ({
             {
               colorbar: {
                 tickfont: {
-                  color: theme.palette.mode === "light" ? "" : "white",
+                  color:
+                    currentMode === "dark"
+                      ? (theme?.colorSchemes?.dark?.palette.text
+                          .primary as string)
+                      : (theme?.colorSchemes?.light?.palette.text
+                          .primary as string),
                   family: "Montserrat, sans-serif",
                   shadow: "none",
                   size: 12,
@@ -112,25 +123,43 @@ const SurfacePlot = ({
             scene: {
               camera: { eye: { x: 2 } },
               xaxis: {
-                color: theme.palette.text.primary,
+                color:
+                  currentMode === "dark"
+                    ? theme?.colorSchemes?.dark?.palette.text.primary
+                    : theme?.colorSchemes?.light?.palette.text.primary,
                 exponentformat: "E",
-                gridcolor: theme.palette.divider,
+                gridcolor:
+                  currentMode === "dark"
+                    ? theme?.colorSchemes?.dark?.palette.divider
+                    : theme?.colorSchemes?.light?.palette.divider,
                 showgrid: showGrid,
                 tickangle: 45,
                 title: { font: { size: 12 }, text: wrappedLabel.x }
               },
               yaxis: {
-                color: theme.palette.text.primary,
+                color:
+                  currentMode === "dark"
+                    ? theme?.colorSchemes?.dark?.palette.text.primary
+                    : theme?.colorSchemes?.light?.palette.text.primary,
                 exponentformat: "E",
-                gridcolor: theme.palette.divider,
+                gridcolor:
+                  currentMode === "dark"
+                    ? theme?.colorSchemes?.dark?.palette.divider
+                    : theme?.colorSchemes?.light?.palette.divider,
                 showgrid: showGrid,
                 tickangle: -45,
                 title: { font: { size: 12 }, text: wrappedLabel.y }
               },
               zaxis: {
-                color: theme.palette.text.primary,
+                color:
+                  currentMode === "dark"
+                    ? theme?.colorSchemes?.dark?.palette.text.primary
+                    : theme?.colorSchemes?.light?.palette.text.primary,
                 exponentformat: "E",
-                gridcolor: theme.palette.divider,
+                gridcolor:
+                  currentMode === "dark"
+                    ? theme?.colorSchemes?.dark?.palette.divider
+                    : theme?.colorSchemes?.light?.palette.divider,
                 showgrid: showGrid,
                 title: { font: { size: 12 }, text: wrappedLabel.z }
               }

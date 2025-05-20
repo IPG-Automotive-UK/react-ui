@@ -8,7 +8,7 @@ import {
   DialogActions,
   DialogContent,
   FormHelperText,
-  Grid2 as Grid,
+  Grid,
   IconButton,
   DialogTitle as MuiDialogTitle,
   TextField,

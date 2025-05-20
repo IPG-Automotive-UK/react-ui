@@ -3,7 +3,7 @@ import {
   WithOverflowText,
   WithoutOptionalProps
 } from "./ScenarioPreview.stories";
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "../TestUtils";
 
 import React from "react";
 import { ScenarioPreview } from "./ScenarioPreview";
