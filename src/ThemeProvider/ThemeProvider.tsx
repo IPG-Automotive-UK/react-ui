@@ -242,7 +242,7 @@ export const theme: Theme = (() => {
       MuiTableCell: {
         styleOverrides: {
           root: () => ({
-            "&.MuiTableCell-head": {
+            "[data-dark] &.MuiTableCell-head": {
               backgroundColor: paletteDefaultBackgroundPaperDark
             }
           })

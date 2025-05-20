@@ -1,3 +1,5 @@
+import type {} from "@mui/material/themeCssVarsAugmentation";
+
 import { Box, Grid, Typography } from "@mui/material";
 import { Meta, StoryFn } from "@storybook/react";
 
@@ -116,17 +118,17 @@ const FlexSizeComponent: StoryFn<LazyLoadImageProps> = args => {
       key={"Example project code"}
       sx={theme => ({
         "&:active": {
-          border: `2px solid ${theme.palette.primary.main}`
+          border: `2px solid ${theme.vars.palette.primary.main}`
         },
         "&:hover": {
-          borderColor: theme.palette.primary.main
+          borderColor: theme.vars.palette.primary.main
         },
         "&:hover > div > h5": {
-          color: theme.palette.primary.main,
+          color: theme.vars.palette.primary.main,
           transition: "color 0.1s"
         },
-        backgroundColor: theme.palette.background.paper,
-        border: `1px solid ${theme.palette.divider}`,
+        backgroundColor: theme.vars.palette.background.paper,
+        border: `1px solid ${theme.vars.palette.divider}`,
         borderRadius: "6px",
         cursor: "pointer",
         height: "238px",

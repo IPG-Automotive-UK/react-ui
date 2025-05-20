@@ -1,4 +1,4 @@
-import { Box, Stack, Theme, Typography, alpha } from "@mui/material";
+import { Box, Stack, Theme, Typography } from "@mui/material";
 
 import { EmptyStateProps } from "./EmptyState.types";
 import React from "react";
@@ -25,7 +25,7 @@ function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
     <Box
       sx={theme => ({
         alignItems: "center",
-        background: theme.palette.background.paper,
+        background: theme.vars.palette.background.paper,
         display: "flex",
         flexDirection: "column",
         flexGrow: 1,
@@ -39,9 +39,9 @@ function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
         <Box
           sx={theme => ({
             alignItems: "center",
-            backgroundColor: alpha(theme.palette.primary.main, 0.04),
+            backgroundColor: `color-mix(in srgb, ${theme.vars.palette.primary.main} 4%, transparent)`,
             ...theme.applyStyles("dark", {
-              backgroundColor: alpha(theme.palette.primary.main, 0.08)
+              backgroundColor: `color-mix(in srgb, ${theme.vars.palette.primary.main} 8%, transparent)`
             }),
             borderRadius: 300,
             display: "flex",
@@ -74,7 +74,7 @@ function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
           <Typography
             variant="h6"
             sx={{
-              color: theme => theme.palette.text.primary,
+              color: theme => theme.vars.palette.text.primary,
               fontWeight: 700
             }}
           >
@@ -86,7 +86,7 @@ function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
           <Typography
             variant="body2"
             sx={{
-              color: theme => theme.palette.text.secondary,
+              color: theme => theme.vars.palette.text.secondary,
               fontSize: "16px"
             }}
           >
@@ -94,7 +94,6 @@ function EmptyState({ title, subtitle, icon, actions }: EmptyStateProps) {
           </Typography>
         ) : null}
       </Stack>
-
       {actions && actions.length > 0 ? (
         <Stack
           direction="row"

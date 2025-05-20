@@ -1,5 +1,5 @@
 import { ArrowDropDown, ArrowDropUp } from "@mui/icons-material";
-import { Chip, alpha, chipClasses, useTheme } from "@mui/material";
+import { Chip, chipClasses, useTheme } from "@mui/material";
 
 import { DifferenceChipProps } from "./DifferenceChip.types";
 import React from "react";
@@ -18,12 +18,12 @@ function DifferenceChip({ value, unit = "" }: DifferenceChipProps) {
 
   // set the color and border color based on the value
   const chipBorderColor = isPositive
-    ? theme.palette.success.dark
-    : theme.palette.error.main;
+    ? theme.vars.palette.success.dark
+    : theme.vars.palette.error.main;
 
   const chipColor = isPositive
-    ? theme.palette.success.main
-    : theme.palette.error.main;
+    ? theme.vars.palette.success.main
+    : theme.vars.palette.error.main;
 
   // format the value with the unit if provided and remove the sign if positive / negative
   const formattedValue = `${Math.abs(value)}${unit}`;
@@ -47,7 +47,7 @@ function DifferenceChip({ value, unit = "" }: DifferenceChipProps) {
           fontWeight: 600,
           p: "0"
         },
-        backgroundColor: alpha(chipColor, 0.12),
+        backgroundColor: `color-mix(in srgb, ${chipColor} 12%, transparent)`,
         border: `0.3px solid ${chipBorderColor}`,
         borderRadius: "100px",
         gap: "2px",

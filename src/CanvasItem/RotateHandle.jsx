@@ -23,7 +23,7 @@ export default function RotateHandle({ onRotate }) {
     >
       <Box
         sx={theme => ({
-          background: theme.palette.primary.main,
+          background: theme.vars.palette.primary.main,
           height: "100%",
           left: "50%",
           position: "absolute",
@@ -32,12 +32,12 @@ export default function RotateHandle({ onRotate }) {
       ></Box>
       <Box
         sx={theme => ({
-          background: theme.palette.primary.main,
+          background: theme.vars.palette.primary.main,
           borderRadius: "50%",
           cursor: "grab",
           height: "10px",
           left: "0px",
-          outline: `2px solid ${theme.palette.background.paper}`,
+          outline: `2px solid ${theme.vars.palette.background.paper}`,
           position: "absolute",
           top: "0px",
           width: "10px"
